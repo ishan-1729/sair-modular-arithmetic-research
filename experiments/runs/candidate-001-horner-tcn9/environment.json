@@ -1,0 +1,19 @@
+{
+  "captured_at": "2026-07-11T19:16:00Z",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.5",
+  "pytorch": "2.12.1+cpu",
+  "numpy": "2.3.3",
+  "safetensors": "0.8.0",
+  "device": "cpu",
+  "training_torch_threads": 4,
+  "official_reference_runtime": {
+    "python": "3.12",
+    "pytorch": "2.5.1+cpu",
+    "cpus": 4,
+    "memory_gib": 8,
+    "verified": true,
+    "container_engine": "podman 5.8.2",
+    "image_digest": "sha256:26fefe8ff2d0d910c23f8bf0669b0632711162f8f6e59e04a22b0cb375a304cc"
+  }
+}

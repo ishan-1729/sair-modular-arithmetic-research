@@ -1,0 +1,37 @@
+{
+  "run_id": "candidate-001-horner-tcn9",
+  "status": "completed",
+  "created_at": "2026-07-11T19:16:00Z",
+  "hypothesis": "A modulus-conditioned nine-bit learned Horner transition can exceed 90% exact accuracy across the complete Tier-2 prime range while remaining a small deterministic CPU submission.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": null,
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "training_script_sha256": "951b3d7545f0ffcbc9d34d353f59b51dcd2ba47db8cd6b1807b42d7b06b0e72a",
+    "transition_model_sha256": "bae2af637d9c15a55123267e29fa80fe289e3b241aceb685c73d726d19cebab5"
+  },
+  "config": "configs/candidate_001_horner_tcn9.yaml",
+  "environment": "experiments/runs/candidate-001-horner-tcn9/environment.json",
+  "training": {
+    "steps": 2400,
+    "batch_size": 768,
+    "measured_seconds": 327.01833340000303,
+    "parameters": 85021,
+    "public_expected_field_used": false,
+    "tier2_public_reduced_pairs_excluded": 99
+  },
+  "artifacts": {
+    "checkpoint": "submission/weights.safetensors",
+    "checkpoint_sha256": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+    "metrics": "evals/results/candidate-001-horner-tcn9/metrics.json",
+    "training_metrics": "experiments/runs/candidate-001-horner-tcn9/training-metrics.json",
+    "benchmark_diagnostics": "experiments/runs/candidate-001-horner-tcn9/benchmark-diagnostics.json"
+  },
+  "notes": [
+    "The model was selected on synthetic held-out transitions and rollouts before the official public benchmark was evaluated.",
+    "Tier-2 public input pairs, but never their expected fields, were read only to construct an exclusion denylist.",
+    "Pairwise operand reductions at inference follow the explicit allowance in the pinned rules.",
+    "The pinned official Dockerfile passed under Podman 5.8.2 using the published isolation and resource flags; the upstream CLI itself could not be used because it hard-codes a docker executable."
+  ]
+}

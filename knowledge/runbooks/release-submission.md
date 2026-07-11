@@ -9,6 +9,8 @@ timestamp: "2026-07-11T23:15:00+05:30"
 
 # Release a submission candidate
 
+Candidate 001 has completed steps 1-10 locally, including the full public benchmark, independent seed, randomized-weight control, and pinned sandbox. Steps 11-12 remain pending because they publish externally and require the owner's Hugging Face identity and release decision. See the [candidate evaluation runbook](evaluate-candidate.md) and [model card](../submissions/candidate-001-horner-tcn9.md).
+
 1. Freeze the source commit, evaluator commit, Docker image digest, configuration, and checkpoint.
 2. Create a fresh directory under `submission/candidates/<candidate-id>/`.
 3. Copy only `manifest.json`, inference `model.py`, weights, and required inference assets.

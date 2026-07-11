@@ -54,7 +54,7 @@ The trainer uses arithmetic to produce labels; the inference cell does not conta
 - Composite augmentation was chosen after earlier pilots; these are development results, not a pristine confirmatory evaluation.
 - A full-width receptive field does not prove width extrapolation.
 - Excellent step accuracy may still be insufficient for thousands of rollout steps.
-- No official-interface adapter is promoted into `submission/` yet.
+- This fixed-width POC has been superseded by the wider, independently trained [Candidate 001](../submissions/candidate-001-horner-tcn9.md); its limitations remain relevant historical evidence.
 
 ## Artifacts
 

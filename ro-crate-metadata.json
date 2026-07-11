@@ -11,8 +11,9 @@
       "@id": "./",
       "@type": "Dataset",
       "name": "SAIR Modular Arithmetic Research",
-      "description": "Private research workspace, evidence bundle, benchmark snapshot, evaluation contracts, and learned-transition proofs of concept for the SAIR Modular Arithmetic Challenge.",
+      "description": "Private research workspace, evidence bundle, benchmark snapshot, evaluation contracts, learned-transition experiments, and a sandbox-validated submission candidate for the SAIR Modular Arithmetic Challenge.",
       "datePublished": "2026-07-11",
+      "dateModified": "2026-07-12",
       "author": { "@id": "https://github.com/ishan-1729" },
       "hasPart": [
         { "@id": "knowledge/" },
@@ -24,7 +25,14 @@
         { "@id": "configs/poc_horner_tcn_smoke.yaml" },
         { "@id": "experiments/runs/poc-001-horner-tcn-smoke/run.json" },
         { "@id": "evals/results/poc-001-horner-tcn-smoke/metrics.json" },
-        { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+        { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" },
+        { "@id": "submission/" },
+        { "@id": "knowledge/submissions/candidate-001-horner-tcn9.md" },
+        { "@id": "configs/candidate_001_horner_tcn9.yaml" },
+        { "@id": "experiments/runs/candidate-001-horner-tcn9/run.json" },
+        { "@id": "evals/results/candidate-001-horner-tcn9/metrics.json" },
+        { "@id": "evals/results/candidate-001-horner-tcn9/checked-public-1100.json" },
+        { "@id": "evals/results/candidate-001-horner-tcn9/sandbox-public-1100.json" }
       ]
     },
     {
@@ -171,6 +179,123 @@
         { "@id": "#pytorch-2.12.1-cpu" }
       ],
       "result": { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+    },
+    {
+      "@id": "submission/",
+      "@type": "Dataset",
+      "name": "Candidate 001 official submission artifact",
+      "description": "Clean three-file, sandbox-validated Hugging Face release artifact.",
+      "about": { "@id": "knowledge/submissions/candidate-001-horner-tcn9.md" },
+      "hasPart": [
+        { "@id": "submission/manifest.json" },
+        { "@id": "submission/model.py" },
+        { "@id": "submission/weights.safetensors" }
+      ]
+    },
+    {
+      "@id": "knowledge/submissions/candidate-001-horner-tcn9.md",
+      "@type": "CreativeWork",
+      "name": "Candidate 001 model card",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "submission/manifest.json",
+      "@type": "File",
+      "name": "Official submission manifest",
+      "encodingFormat": "application/json",
+      "identifier": "sha256:53d37db02c6d91343531a52006ca2f4815ae65ed69f1de84d2f9b1acdf23364c"
+    },
+    {
+      "@id": "submission/model.py",
+      "@type": ["File", "SoftwareSourceCode"],
+      "name": "Candidate 001 inference-only adapter",
+      "encodingFormat": "text/x-python",
+      "programmingLanguage": { "@id": "#python-3.12" },
+      "identifier": "sha256:370d43b16eb55f5d141a8071c6c702c5794154d0e6c659999e98ec994e3c721c"
+    },
+    {
+      "@id": "submission/weights.safetensors",
+      "@type": "File",
+      "name": "Candidate 001 learned weights",
+      "encodingFormat": "application/x-safetensors",
+      "contentSize": "345772 B",
+      "identifier": "sha256:22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585"
+    },
+    {
+      "@id": "configs/candidate_001_horner_tcn9.yaml",
+      "@type": "File",
+      "name": "Candidate 001 training and release configuration",
+      "encodingFormat": "application/yaml"
+    },
+    {
+      "@id": "experiments/runs/candidate-001-horner-tcn9/run.json",
+      "@type": "File",
+      "name": "Candidate 001 experiment record",
+      "encodingFormat": "application/json",
+      "about": { "@id": "#candidate-001-training" }
+    },
+    {
+      "@id": "evals/results/candidate-001-horner-tcn9/metrics.json",
+      "@type": "File",
+      "name": "Candidate 001 canonical evaluation summary",
+      "encodingFormat": "application/json",
+      "about": { "@id": "submission/weights.safetensors" }
+    },
+    {
+      "@id": "evals/results/candidate-001-horner-tcn9/checked-public-1100.json",
+      "@type": "File",
+      "name": "Candidate 001 exact checked public evaluation",
+      "encodingFormat": "application/json",
+      "about": { "@id": "#candidate-001-evaluation" }
+    },
+    {
+      "@id": "evals/results/candidate-001-horner-tcn9/sandbox-public-1100.json",
+      "@type": "File",
+      "name": "Candidate 001 official-container evaluation",
+      "encodingFormat": "application/json",
+      "about": { "@id": "#candidate-001-evaluation" }
+    },
+    {
+      "@id": "#candidate-001-training",
+      "@type": "CreateAction",
+      "name": "Train Candidate 001 width-9 Horner TCN",
+      "agent": { "@id": "https://github.com/ishan-1729" },
+      "object": { "@id": "configs/candidate_001_horner_tcn9.yaml" },
+      "instrument": [
+        { "@id": "experiments/runs/candidate-001-horner-tcn9/train.py" },
+        { "@id": "#pytorch-2.12.1-cpu" }
+      ],
+      "result": { "@id": "submission/weights.safetensors" }
+    },
+    {
+      "@id": "#candidate-001-evaluation",
+      "@type": "AssessAction",
+      "name": "Evaluate Candidate 001 on the full public set and sandbox",
+      "agent": { "@id": "https://github.com/ishan-1729" },
+      "object": { "@id": "submission/" },
+      "instrument": [
+        { "@id": "sources/github/modular-arithmetic-challenge/" },
+        { "@id": "#python-3.12" },
+        { "@id": "#pytorch-2.5.1-cpu" }
+      ],
+      "result": [
+        { "@id": "evals/results/candidate-001-horner-tcn9/checked-public-1100.json" },
+        { "@id": "evals/results/candidate-001-horner-tcn9/sandbox-public-1100.json" }
+      ]
+    },
+    {
+      "@id": "#python-3.12",
+      "@type": "SoftwareApplication",
+      "name": "CPython sandbox runtime",
+      "version": "3.12",
+      "url": "https://www.python.org/"
+    },
+    {
+      "@id": "#pytorch-2.5.1-cpu",
+      "@type": "SoftwareApplication",
+      "name": "PyTorch official sandbox CPU runtime",
+      "version": "2.5.1+cpu",
+      "url": "https://pytorch.org/"
     },
     {
       "@id": "#python-3.13.5",

@@ -33,3 +33,16 @@ poc:
   run_id: poc-001-horner-tcn-smoke
   status: working-research-poc
   checkpoint_sha256: 1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc
+candidate:
+  selected: candidate-001-horner-tcn9
+  status: sandbox-validated-release-candidate
+  artifact: submission
+  parameters: 85021
+  checkpoint_sha256: 22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585
+  checked_public_overall_accuracy: 0.215
+  checked_public_tier_1_accuracy: 1.0
+  checked_public_tier_2_accuracy: 0.99
+  independent_overall_accuracy: 0.213
+  highest_tier_above_90: 2
+  sandbox_verified: true
+  ranked_publication_status: pending

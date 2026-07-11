@@ -1,0 +1,38 @@
+run_id: candidate-001-horner-tcn9
+seed: 20260712
+model:
+  architecture: learned-width9-horner-tcn
+  width: 9
+  hidden_channels: 48
+  residual_blocks: 7
+  dilations: [1, 2, 4, 8, 1, 2, 4]
+  parameters: 85021
+training:
+  steps: 2400
+  batch_size: 768
+  optimizer: AdamW
+  learning_rate: 0.0025
+  minimum_learning_rate: 0.00012
+  weight_decay: 0.00002
+  worst_bit_loss_weight: 0.45
+  quotient_auxiliary_loss_weight: 0.10
+  random_state_fraction: 0.15
+  composite_modulus_fraction: 0.15
+  torch_threads: 4
+data:
+  source: independently-generated-local-horner-transitions
+  modulus_range: 2..257
+  tier2_public_reduced_pairs_excluded: true
+  public_expected_field_used: false
+evaluation:
+  heldout_transition_cases: 100000
+  tier2_rollout_cases: 50000
+  official_cases: 1100
+  official_timeout_seconds: 300
+release:
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  output_base: p
+  artifact: submission/
+  weights_sha256: 22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585
+  sandbox_image_digest: sha256:26fefe8ff2d0d910c23f8bf0669b0632711162f8f6e59e04a22b0cb375a304cc
+  sandbox_verified: true

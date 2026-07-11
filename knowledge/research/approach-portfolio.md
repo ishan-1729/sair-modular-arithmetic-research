@@ -9,6 +9,10 @@ timestamp: "2026-07-11T23:15:00+05:30"
 
 # Approach portfolio
 
+## Measured promotion
+
+The Rank-1 direction has now produced [Candidate 001](../submissions/candidate-001-horner-tcn9.md): 99% exact Tier-2 accuracy on the checked public set and 97% on a full independent seed, with `highest_tier_above_90 = 2`. A bounded random-init phase/DLP probe at `p=251` remained at chance (0.286%-0.414%) and was stopped, reinforcing learned Horner as the active family.
+
 Scores are relative planning judgments from 1 (poor) to 5 (strong), not measured results.
 
 | Rank | Approach | Promise | CPU fit | Compliance clarity | Main risk |
@@ -20,7 +24,7 @@ Scores are relative planning judgments from 1 (poor) to 5 (strong), not measured
 | 5 | Trace-supervised relative-position Transformer | 2 | 2 | 5 | Direct arithmetic length generalization remains weak. |
 | 6 | End-to-end decoder-only Transformer | 1 | 2 | 5 | Known baseline already collapses on unseen primes. |
 
-## Selected POC
+## Selected family
 
 Implement Rank 1 at small fixed widths with:
 

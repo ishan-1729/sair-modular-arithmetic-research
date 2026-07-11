@@ -20,6 +20,8 @@ jobs:
           cache: pip
       - name: Install project
         run: python -m pip install -e ".[dev]"
+      - name: Install pinned official evaluator
+        run: python -m pip install -e sources/github/modular-arithmetic-challenge
       - name: Validate formats and provenance
         run: python tools/validate_project.py
       - name: Run fast tests

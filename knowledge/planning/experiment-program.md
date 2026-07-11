@@ -27,6 +27,10 @@ Every run records a configuration, seed, prime split, source commit, environment
 | EXP-070 | A small-prime expert improves rank efficiently. | Router off/on | Shared high-width model | Low-tier gain with negligible artifact/runtime cost. |
 | EXP-080 | Exhaustive Tier-2 residue training can clear the first unseen-prime barrier. | Specialist with all 995,400 legal triples | Prime-disjoint and secret-seed tests | At least 90% on unseen Tier-2 primes without public-prime tuning. |
 
+## Current result
+
+`candidate-001-horner-tcn9` clears EXP-080's practical objective without an answer-table specialist: 99% checked-public Tier 2, 97% on a full independent seed, and 98.4% across five additional Tier-2 seeds. The next bottleneck is width scaling beyond 257, not Tier-2 fitting.
+
 ## Dataset splits
 
 - Split by prime value before generating trajectories.

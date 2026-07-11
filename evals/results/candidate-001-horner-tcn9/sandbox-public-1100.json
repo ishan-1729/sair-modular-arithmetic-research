@@ -1,0 +1,52 @@
+{
+  "status": "completed",
+  "executed_at": "2026-07-11T19:23:58Z",
+  "engine": {
+    "name": "podman",
+    "version": "5.8.2",
+    "compatibility_note": "Built the pinned official Dockerfile unchanged and used the official evaluate-sandboxed run flags directly because the upstream CLI hard-codes a docker executable."
+  },
+  "image": {
+    "tag": "localhost/modchallenge-sandbox:latest",
+    "id": "1f5eb8be73079574d32d97d446214b1bb186f8c763df6753f5fb2fcecb2a1643",
+    "digest": "sha256:26fefe8ff2d0d910c23f8bf0669b0632711162f8f6e59e04a22b0cb375a304cc",
+    "dockerfile": "sources/github/modular-arithmetic-challenge/docker/Dockerfile",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "python": "3.12",
+    "pytorch": "2.5.1+cpu",
+    "safetensors": "0.4.5"
+  },
+  "isolation": {
+    "network": "none",
+    "root_filesystem": "read-only",
+    "submission_mount": "read-only",
+    "tmpfs": "/tmp:size=2g,mode=1777",
+    "memory": "8g",
+    "cpus": 4
+  },
+  "seed_hex": "6d6f646368616c6c656e67652d7075626c69632d62656e63686d61726b2d7631",
+  "cases": 1100,
+  "timing_seconds": {
+    "load": 2.0,
+    "determinism": 0.3,
+    "inference": 0.4
+  },
+  "result": {
+    "overall_accuracy": 0.215,
+    "highest_tier_above_90": 2,
+    "deterministic": true,
+    "tiers": [
+      {"tier_id": 0, "total": 100, "correct": 10, "accuracy": 0.10, "completed": true},
+      {"tier_id": 1, "total": 100, "correct": 100, "accuracy": 1.00, "completed": true},
+      {"tier_id": 2, "total": 100, "correct": 99, "accuracy": 0.99, "completed": true},
+      {"tier_id": 3, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 4, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 5, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 6, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 7, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 8, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 9, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 10, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true}
+    ]
+  }
+}

@@ -18,6 +18,11 @@ from jsonschema import Draft202012Validator, FormatChecker
 ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+CANDIDATE_SHA256 = {
+    "manifest.json": "53d37db02c6d91343531a52006ca2f4815ae65ed69f1de84d2f9b1acdf23364c",
+    "model.py": "370d43b16eb55f5d141a8071c6c702c5794154d0e6c659999e98ec994e3c721c",
+    "weights.safetensors": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+}
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 REQUIRED_DIRS = (
     "knowledge",
@@ -219,6 +224,46 @@ def validate_release_boundary() -> list[str]:
     return errors
 
 
+def validate_submission_artifact() -> list[str]:
+    errors: list[str] = []
+    submission = ROOT / "submission"
+    required = {"manifest.json", "model.py", "weights.safetensors"}
+    actual = {path.name for path in submission.iterdir() if path.is_file()}
+    if actual != required:
+        errors.append(
+            "submission: expected exactly manifest.json, model.py, and "
+            f"weights.safetensors; found {sorted(actual)}"
+        )
+    unexpected_dirs = [
+        path.name
+        for path in submission.iterdir()
+        if path.is_dir() and path.name != "__pycache__"
+    ]
+    if unexpected_dirs:
+        errors.append(f"submission: unexpected directories {sorted(unexpected_dirs)}")
+
+    manifest_path = submission / "manifest.json"
+    if manifest_path.is_file():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            errors.append(f"submission/manifest.json: cannot parse: {exc}")
+        else:
+            if manifest.get("entry_class") != "model.Tier2HornerModel":
+                errors.append("submission/manifest.json: unexpected entry_class")
+            if manifest.get("output_base") != "p":
+                errors.append("submission/manifest.json: expected output_base 'p'")
+
+    for name, expected_hash in CANDIDATE_SHA256.items():
+        path = submission / name
+        if path.is_file() and sha256(path) != expected_hash:
+            errors.append(f"submission/{name}: candidate hash mismatch")
+    clean_bytes = sum((submission / name).stat().st_size for name in required if (submission / name).is_file())
+    if clean_bytes != 352_254:
+        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 352254")
+    return errors
+
+
 def collect_errors() -> list[str]:
     errors = [f"missing required directory: {name}" for name in REQUIRED_DIRS if not (ROOT / name).is_dir()]
     errors.extend(validate_knowledge())
@@ -226,6 +271,7 @@ def collect_errors() -> list[str]:
     errors.extend(validate_checksum_file())
     errors.extend(validate_upstream_snapshot())
     errors.extend(validate_release_boundary())
+    errors.extend(validate_submission_artifact())
     errors.extend(
         validate_json_instances(
             "evals/results/*/metrics.json",
