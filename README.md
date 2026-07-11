@@ -2,7 +2,7 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository now has a reproducible research scaffold and a deliberately small proof of concept for the most promising direction found in the supplied research: a trajectory-trained, learned Horner transition. On five held-out primes, the 21,441-parameter CPU POC reached 98.205% exact one-step accuracy and 92.10% / 85.275% / 76.95% autonomous final accuracy at 8 / 16 / 32 scan bits. It proves the workflow and exposes rollout degradation; it is not yet a competition submission.
+The repository now contains a sandbox-validated submission candidate, not just a POC. The 85,021-parameter width-9 learned Horner TCN passes the pinned official interface, static scanner, isolation check, determinism check, decoder, scorer, and Python 3.12/PyTorch 2.5.1 container. Across the exact 1,100-row public set it scores **21.5% overall**, with **Tier 1 at 100% and Tier 2 at 99%**; a full independently seeded set scores 21.3%, with Tier 2 at 97%. Randomizing the weights collapses Tier 2 to 1%.
 
 ## Start here
 
@@ -10,14 +10,17 @@ The repository now has a reproducible research scaffold and a deliberately small
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
+- [Submission candidate](knowledge/submissions/candidate-001-horner-tcn9.md) — model card, compliance rationale, release state, and hashes.
+- [Full-set evaluation](knowledge/evals/candidate-001-results.md) — checked, independent-seed, sandbox, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
-- [Reproduction runbook](knowledge/runbooks/reproduce-poc.md) — exact validation and POC commands.
+- [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
 
 ## Quick validation
 
 ```powershell
 python tools/validate_project.py
 python -m pytest
+python -m modchallenge.cli check submission
 ```
 
 The POC training and evaluation commands are recorded in the reproduction runbook and in its immutable experiment record.
@@ -30,7 +33,7 @@ data/            immutable external data, generated/interim/processed zones, Cro
 evals/           evaluation configs, result schemas, and durable result artifacts
 experiments/     machine-readable registry and one directory per run
 pocs/            executable proofs of concept and reference checkpoints
-submission/      clean-room staging area for a future Hugging Face artifact
+submission/      clean three-file Hugging Face release artifact
 sources/         captured SAIR pages, research memo, and pinned official-repo submodule
 tests/           fast contract and regression tests
 tools/           project, metadata, and provenance validators
@@ -40,7 +43,7 @@ This is intentionally a hybrid rather than an attempt to encode every file as OK
 
 ## Two publication targets
 
-This private GitHub repository is the development and research workspace. It is not the ranked submission target. Under the current competition rules, the eventual ranked artifact must be a **public Hugging Face repository** identified by repository ID and immutable 40-character commit hash. Release material must be copied deliberately into `submission/` and pass static, deterministic, sandbox, runtime, and provenance gates before publication.
+This private GitHub repository is the development and research workspace. It is not the ranked submission target. The clean [`submission/`](submission/) artifact has passed local and sandbox gates and is ready to copy, but ranked entry still requires a **public Hugging Face repository** identified by repository ID and immutable 40-character commit hash. That external publication and final submission have not been performed.
 
 ## Source snapshot
 

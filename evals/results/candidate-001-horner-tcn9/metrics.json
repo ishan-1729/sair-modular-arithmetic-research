@@ -1,0 +1,84 @@
+{
+  "run_id": "candidate-001-horner-tcn9",
+  "created_at": "2026-07-11T19:16:00Z",
+  "checkpoint_sha256": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+  "model": {
+    "architecture": "modulus-conditioned width-9 residual Horner TCN",
+    "parameters": 85021,
+    "output_base": "p"
+  },
+  "evaluation": {
+    "transition": {
+      "synthetic_heldout": {
+        "cases": 100000,
+        "correct": 99465,
+        "exact_accuracy": 0.99465,
+        "bit_accuracy": 0.9991811111111111
+      }
+    },
+    "rollout": {
+      "synthetic_tier2_8step": {
+        "cases": 50000,
+        "correct": 48744,
+        "exact_accuracy": 0.97488
+      },
+      "checked_public_scored_tiers": {
+        "cases": 1000,
+        "correct": 215,
+        "exact_accuracy": 0.215
+      },
+      "independent_generated_scored_tiers": {
+        "cases": 1000,
+        "correct": 213,
+        "exact_accuracy": 0.213
+      }
+    },
+    "competition": {
+      "checked_public": {
+        "cases": 1100,
+        "overall_accuracy": 0.215,
+        "highest_tier_above_90": 2,
+        "tier_1_accuracy": 1.0,
+        "tier_2_accuracy": 0.99
+      },
+      "independent_seed": {
+        "seed_hex": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "cases": 1100,
+        "overall_accuracy": 0.213,
+        "highest_tier_above_90": 2,
+        "tier_1_accuracy": 1.0,
+        "tier_2_accuracy": 0.97
+      }
+    }
+  },
+  "controls": {
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true,
+    "randomized_weights": {
+      "seed": 20260712,
+      "weights_sha256": "f00e7e151a56ec08826fd3750a1a498d15cb60dbe4ca0e5dfce1015a16570733",
+      "checked_public_overall_accuracy": 0.079,
+      "checked_public_tier_1_accuracy": 0.62,
+      "checked_public_tier_2_accuracy": 0.01
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "checked_public_load_seconds": 2.1384846000000834,
+    "checked_public_inference_seconds": 0.2150244000076782,
+    "artifact_bytes_clean": 352254,
+    "official_budget_seconds": 300,
+    "sandbox_python": "3.12",
+    "sandbox_pytorch": "2.5.1+cpu",
+    "sandbox_inference_seconds": 0.4,
+    "sandbox_passed": true,
+    "sandbox_image_digest": "sha256:26fefe8ff2d0d910c23f8bf0669b0632711162f8f6e59e04a22b0cb375a304cc"
+  },
+  "limitations": [
+    "The trained regime ends at modulus 257; larger moduli use an explicit zero fallback.",
+    "Tier 0 is diagnostic pure multiplication and is not an intended capability.",
+    "The pinned Dockerfile was run through Podman rather than the upstream Docker-only CLI; the image contents and isolation/resource flags were unchanged.",
+    "The final Hugging Face publication and immutable remote-commit evaluation have not yet been performed."
+  ]
+}

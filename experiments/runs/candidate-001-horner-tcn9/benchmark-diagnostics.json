@@ -1,0 +1,493 @@
+{
+  "checkpoint": {
+    "pytorch_path": "run_v1\\horner_tcn9.pt",
+    "pytorch_sha256": "110dfc004058e65d6d8db0c6f201f6a21fc885c70c93679cc60e0a345614f304",
+    "safetensors_path": "run_v1\\horner_tcn9.safetensors",
+    "safetensors_sha256": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+    "safetensors_bytes": 345772
+  },
+  "public_checked": {
+    "tier_1": {
+      "source": "data\\external\\public_benchmark\\tier_1.jsonl",
+      "source_sha256": "09f02e38d4c56d78bad92f2db4496a85c3c07767bae232f8b5a00e052439bbdb",
+      "cases": 100,
+      "correct": 100,
+      "exact_accuracy": 1.0,
+      "inference_seconds": 0.0831183999980567,
+      "problems_per_second": 1203.1030433975868,
+      "per_prime": {
+        "2": {
+          "correct": 49,
+          "cases": 49,
+          "exact_accuracy": 1.0
+        },
+        "3": {
+          "correct": 19,
+          "cases": 19,
+          "exact_accuracy": 1.0
+        },
+        "5": {
+          "correct": 19,
+          "cases": 19,
+          "exact_accuracy": 1.0
+        },
+        "7": {
+          "correct": 13,
+          "cases": 13,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": []
+    },
+    "tier_2": {
+      "source": "data\\external\\public_benchmark\\tier_2.jsonl",
+      "source_sha256": "ae169d3acf554fdff4b8c4b13a3e518303f94d6b6d67aa5161ead327a9332fdf",
+      "cases": 100,
+      "correct": 99,
+      "exact_accuracy": 0.9900000095367432,
+      "inference_seconds": 0.05046280000533443,
+      "problems_per_second": 1981.6577754192988,
+      "per_prime": {
+        "41": {
+          "correct": 19,
+          "cases": 20,
+          "exact_accuracy": 0.95
+        },
+        "97": {
+          "correct": 22,
+          "cases": 22,
+          "exact_accuracy": 1.0
+        },
+        "127": {
+          "correct": 18,
+          "cases": 18,
+          "exact_accuracy": 1.0
+        },
+        "191": {
+          "correct": 23,
+          "cases": 23,
+          "exact_accuracy": 1.0
+        },
+        "193": {
+          "correct": 17,
+          "cases": 17,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": [
+        {
+          "index": 24,
+          "p": 41,
+          "predicted": 48,
+          "expected": 32
+        }
+      ]
+    }
+  },
+  "independent_generator_seeds": {
+    "b53ced7e0c6deaae": {
+      "seed_sha256": "b53ced7e0c6deaaee15a3a627f966b8bbd5233d633fb4b60b12482c568d4f2ec",
+      "tier_1": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.06652219999523368,
+        "problems_per_second": 1503.2575592383446,
+        "per_prime": {
+          "2": {
+            "correct": 42,
+            "cases": 42,
+            "exact_accuracy": 1.0
+          },
+          "3": {
+            "correct": 23,
+            "cases": 23,
+            "exact_accuracy": 1.0
+          },
+          "5": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          },
+          "7": {
+            "correct": 16,
+            "cases": 16,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      },
+      "tier_2": {
+        "cases": 100,
+        "correct": 99,
+        "exact_accuracy": 0.9900000095367432,
+        "inference_seconds": 0.0596298000018578,
+        "problems_per_second": 1677.0138420200042,
+        "per_prime": {
+          "53": {
+            "correct": 16,
+            "cases": 16,
+            "exact_accuracy": 1.0
+          },
+          "103": {
+            "correct": 20,
+            "cases": 20,
+            "exact_accuracy": 1.0
+          },
+          "113": {
+            "correct": 23,
+            "cases": 23,
+            "exact_accuracy": 1.0
+          },
+          "223": {
+            "correct": 21,
+            "cases": 21,
+            "exact_accuracy": 1.0
+          },
+          "241": {
+            "correct": 19,
+            "cases": 20,
+            "exact_accuracy": 0.95
+          }
+        },
+        "errors": [
+          {
+            "index": 98,
+            "p": 241,
+            "predicted": 235,
+            "expected": 220
+          }
+        ]
+      }
+    },
+    "80bf33158102c0e3": {
+      "seed_sha256": "80bf33158102c0e33981fd0ee2fcb69eecff9f230969954d078f50d15068ebb7",
+      "tier_1": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.06996739999158308,
+        "problems_per_second": 1429.2370448527424,
+        "per_prime": {
+          "2": {
+            "correct": 48,
+            "cases": 48,
+            "exact_accuracy": 1.0
+          },
+          "3": {
+            "correct": 22,
+            "cases": 22,
+            "exact_accuracy": 1.0
+          },
+          "5": {
+            "correct": 21,
+            "cases": 21,
+            "exact_accuracy": 1.0
+          },
+          "7": {
+            "correct": 9,
+            "cases": 9,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      },
+      "tier_2": {
+        "cases": 100,
+        "correct": 97,
+        "exact_accuracy": 0.9700000286102295,
+        "inference_seconds": 0.05659670000022743,
+        "problems_per_second": 1766.8874686969057,
+        "per_prime": {
+          "17": {
+            "correct": 26,
+            "cases": 26,
+            "exact_accuracy": 1.0
+          },
+          "37": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          },
+          "131": {
+            "correct": 15,
+            "cases": 16,
+            "exact_accuracy": 0.9375
+          },
+          "223": {
+            "correct": 18,
+            "cases": 20,
+            "exact_accuracy": 0.9
+          },
+          "251": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": [
+          {
+            "index": 21,
+            "p": 223,
+            "predicted": 105,
+            "expected": 41
+          },
+          {
+            "index": 32,
+            "p": 223,
+            "predicted": 9,
+            "expected": 199
+          },
+          {
+            "index": 35,
+            "p": 131,
+            "predicted": 51,
+            "expected": 19
+          }
+        ]
+      }
+    },
+    "4d294ed99e47c560": {
+      "seed_sha256": "4d294ed99e47c5606c58db925cf97d8c781f7faba41a7c1ac9f43e568213c237",
+      "tier_1": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.06495559999893885,
+        "problems_per_second": 1539.5131443883768,
+        "per_prime": {
+          "2": {
+            "correct": 39,
+            "cases": 39,
+            "exact_accuracy": 1.0
+          },
+          "3": {
+            "correct": 16,
+            "cases": 16,
+            "exact_accuracy": 1.0
+          },
+          "5": {
+            "correct": 22,
+            "cases": 22,
+            "exact_accuracy": 1.0
+          },
+          "7": {
+            "correct": 23,
+            "cases": 23,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      },
+      "tier_2": {
+        "cases": 100,
+        "correct": 99,
+        "exact_accuracy": 0.9900000095367432,
+        "inference_seconds": 0.07563850001315586,
+        "problems_per_second": 1322.0780420368849,
+        "per_prime": {
+          "59": {
+            "correct": 20,
+            "cases": 20,
+            "exact_accuracy": 1.0
+          },
+          "137": {
+            "correct": 18,
+            "cases": 19,
+            "exact_accuracy": 0.9473684210526315
+          },
+          "151": {
+            "correct": 21,
+            "cases": 21,
+            "exact_accuracy": 1.0
+          },
+          "167": {
+            "correct": 18,
+            "cases": 18,
+            "exact_accuracy": 1.0
+          },
+          "251": {
+            "correct": 22,
+            "cases": 22,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": [
+          {
+            "index": 77,
+            "p": 137,
+            "predicted": 108,
+            "expected": 44
+          }
+        ]
+      }
+    },
+    "016312aa85a4f6b7": {
+      "seed_sha256": "016312aa85a4f6b7f25b2ebea57dcaf522229d254508363bbef709626bb3851e",
+      "tier_1": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.06420269999944139,
+        "problems_per_second": 1557.5668936177149,
+        "per_prime": {
+          "2": {
+            "correct": 48,
+            "cases": 48,
+            "exact_accuracy": 1.0
+          },
+          "3": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          },
+          "5": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          },
+          "7": {
+            "correct": 14,
+            "cases": 14,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      },
+      "tier_2": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.062123100011376664,
+        "problems_per_second": 1609.7071778724323,
+        "per_prime": {
+          "17": {
+            "correct": 17,
+            "cases": 17,
+            "exact_accuracy": 1.0
+          },
+          "37": {
+            "correct": 16,
+            "cases": 16,
+            "exact_accuracy": 1.0
+          },
+          "67": {
+            "correct": 26,
+            "cases": 26,
+            "exact_accuracy": 1.0
+          },
+          "103": {
+            "correct": 20,
+            "cases": 20,
+            "exact_accuracy": 1.0
+          },
+          "179": {
+            "correct": 21,
+            "cases": 21,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      }
+    },
+    "bc3be11b684f572a": {
+      "seed_sha256": "bc3be11b684f572a5afcc152d44e89be236113eda84ee3b928b69d39038b704e",
+      "tier_1": {
+        "cases": 100,
+        "correct": 100,
+        "exact_accuracy": 1.0,
+        "inference_seconds": 0.06340529999579303,
+        "problems_per_second": 1577.1552221444429,
+        "per_prime": {
+          "2": {
+            "correct": 37,
+            "cases": 37,
+            "exact_accuracy": 1.0
+          },
+          "3": {
+            "correct": 21,
+            "cases": 21,
+            "exact_accuracy": 1.0
+          },
+          "5": {
+            "correct": 17,
+            "cases": 17,
+            "exact_accuracy": 1.0
+          },
+          "7": {
+            "correct": 25,
+            "cases": 25,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": []
+      },
+      "tier_2": {
+        "cases": 100,
+        "correct": 97,
+        "exact_accuracy": 0.9700000286102295,
+        "inference_seconds": 0.06442510000488255,
+        "problems_per_second": 1552.1900624511463,
+        "per_prime": {
+          "107": {
+            "correct": 13,
+            "cases": 13,
+            "exact_accuracy": 1.0
+          },
+          "113": {
+            "correct": 29,
+            "cases": 30,
+            "exact_accuracy": 0.9666666666666667
+          },
+          "137": {
+            "correct": 16,
+            "cases": 18,
+            "exact_accuracy": 0.8888888888888888
+          },
+          "163": {
+            "correct": 20,
+            "cases": 20,
+            "exact_accuracy": 1.0
+          },
+          "223": {
+            "correct": 19,
+            "cases": 19,
+            "exact_accuracy": 1.0
+          }
+        },
+        "errors": [
+          {
+            "index": 12,
+            "p": 137,
+            "predicted": 12,
+            "expected": 21
+          },
+          {
+            "index": 28,
+            "p": 137,
+            "predicted": 56,
+            "expected": 121
+          },
+          {
+            "index": 84,
+            "p": 113,
+            "predicted": 6,
+            "expected": 38
+          }
+        ]
+      }
+    }
+  },
+  "independent_aggregate": {
+    "tier_1": {
+      "cases": 500,
+      "correct": 500,
+      "exact_accuracy": 1.0
+    },
+    "tier_2": {
+      "cases": 500,
+      "correct": 492,
+      "exact_accuracy": 0.984
+    }
+  }
+}

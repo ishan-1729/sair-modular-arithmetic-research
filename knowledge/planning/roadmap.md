@@ -9,6 +9,10 @@ timestamp: "2026-07-11T23:15:00+05:30"
 
 # Execution roadmap
 
+## Current state - 2026-07-12
+
+The project has moved beyond the foundation POC ahead of schedule. [Candidate 001](../submissions/candidate-001-horner-tcn9.md) is a minimal official-interface artifact that passes the full 1,100-case evaluator and pinned sandbox, clearing Tiers 1 and 2 at 100% and 99%. Publication is not yet performed, and scaling beyond the nine-bit regime remains the main research program.
+
 The live competition page was observed as active on 2026-07-11 with a deadline of **2026-08-12 23:59 AoE**. Internal freeze dates intentionally precede it.
 
 | Phase | Target dates | Exit criteria |
@@ -30,4 +34,4 @@ The live competition page was observed as active on 2026-07-11 with a deadline o
 
 ## Definition of competition-ready
 
-The current POC is not competition-ready. A candidate becomes ready only when it implements the official interface, covers all evaluation widths without an out-of-regime fallback dominating, passes the published sandbox, and has a complete immutable release record.
+Candidate 001 is submission-format and sandbox ready, but it is not a frozen ranked release until it has an immutable public Hugging Face commit and remote re-evaluation. It is also not a full-width solver: Tiers 3-10 still use an explicit fallback. Competitive scaling and mechanical release readiness are tracked separately so a valid artifact is not confused with a solved research frontier.

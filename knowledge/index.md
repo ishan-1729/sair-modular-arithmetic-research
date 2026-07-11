@@ -14,6 +14,7 @@ This bundle is the human- and agent-readable control plane for the project. It f
 - [Data](data/) — benchmark Data Card and data lifecycle policy.
 - [Evaluations](evals/) — metric contract, validation gates, and result interpretation.
 - [POCs](pocs/) — model cards and proof-of-concept status.
+- [Submission candidates](submissions/) — promoted official-interface artifacts and release state.
 - [Decisions](decisions/) — architectural decision records.
 - [Runbooks](runbooks/) — exact reproduction and release procedures.
 - [Bundle log](log.md) — chronological knowledge updates.

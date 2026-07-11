@@ -6,3 +6,10 @@ runs:
     run_record: experiments/runs/poc-001-horner-tcn-smoke/run.json
     metrics: evals/results/poc-001-horner-tcn-smoke/metrics.json
     checkpoint: pocs/learned_horner_tcn/artifacts/poc_weights.pt
+  - run_id: candidate-001-horner-tcn9
+    status: completed
+    approach: learned-width9-horner-tcn
+    config: configs/candidate_001_horner_tcn9.yaml
+    run_record: experiments/runs/candidate-001-horner-tcn9/run.json
+    metrics: evals/results/candidate-001-horner-tcn9/metrics.json
+    checkpoint: submission/weights.safetensors
