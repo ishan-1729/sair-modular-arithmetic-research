@@ -1,0 +1,8 @@
+runs:
+  - run_id: poc-001-horner-tcn-smoke
+    status: completed
+    approach: learned-horner-tcn
+    config: configs/poc_horner_tcn_smoke.yaml
+    run_record: experiments/runs/poc-001-horner-tcn-smoke/run.json
+    metrics: evals/results/poc-001-horner-tcn-smoke/metrics.json
+    checkpoint: pocs/learned_horner_tcn/artifacts/poc_weights.pt

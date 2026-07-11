@@ -1,0 +1,35 @@
+project:
+  id: sair-modular-arithmetic-research
+  title: SAIR Modular Arithmetic Research
+  status: active
+  visibility: private
+  owner_github: ishan-1729
+  created: 2026-07-11
+competition:
+  name: SAIR Modular Arithmetic Challenge
+  status_observed: active
+  status_observed_at: 2026-07-11T23:00:00+05:30
+  deadline: 2026-08-12T23:59:00-12:00
+  ranked_submission_target: public-hugging-face-repository
+  reference_runtime:
+    python: "3.12"
+    pytorch: "2.5.1-cpu"
+    cpus: 4
+    memory_gib: 8
+    inference_timeout_seconds: 300
+source_snapshot:
+  repository: https://github.com/SAIRcompetition/modular-arithmetic-challenge
+  commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  commit_date: 2026-07-05T00:14:53-07:00
+knowledge:
+  format: OKF
+  version: "0.1"
+  bundle_root: knowledge
+metadata:
+  research_object: RO-Crate-1.3
+  dataset: Croissant-1.1
+poc:
+  selected: learned-horner-tcn
+  run_id: poc-001-horner-tcn-smoke
+  status: working-research-poc
+  checkpoint_sha256: 1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc

@@ -1,0 +1,38 @@
+{
+  "run_id": "poc-001-horner-tcn-smoke",
+  "status": "completed",
+  "created_at": "2026-07-11T17:45:00Z",
+  "hypothesis": "A local neural transition trained on true Horner states can compose into non-trivial exact modular multiplication on prime identities excluded from training.",
+  "seed": 20260711,
+  "source": {
+    "repository_commit": null,
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "note": "The reference checkpoint was trained before the outer research repository was initialized; the exact training script is retained with this run."
+  },
+  "config": "configs/poc_horner_tcn_smoke.yaml",
+  "environment": "experiments/runs/poc-001-horner-tcn-smoke/environment.json",
+  "training": {
+    "steps": 1400,
+    "batch_size": 256,
+    "measured_seconds": 164.61450019999756,
+    "total_train_and_initial_eval_seconds": 173.82571979999193,
+    "parameters": 21441,
+    "training_moduli": "all integers from 8 through 63 except held-out primes 11, 23, 29, 37, and 61"
+  },
+  "artifacts": {
+    "checkpoint": "pocs/learned_horner_tcn/artifacts/poc_weights.pt",
+    "checkpoint_sha256": "1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc",
+    "metrics": "evals/results/poc-001-horner-tcn-smoke/metrics.json",
+    "training_summary": "experiments/runs/poc-001-horner-tcn-smoke/training-summary.json",
+    "exact_training_script": "experiments/runs/poc-001-horner-tcn-smoke/reference_train_script.py",
+    "exact_training_script_sha256": "fe15efa4803dbd598e903822acc3d92cdf25a731dbf81bfb333087ae7ed48fdf"
+  },
+  "notes": [
+    "Public benchmark rows were not used for training or checkpoint selection.",
+    "Composite augmentation was selected after earlier prime-only pilots, so this is development evidence rather than a pristine confirmatory test.",
+    "The promoted modular implementation is behaviorally compatible; the immutable exact training script is retained to eliminate refactor ambiguity.",
+    "GroupNorm spans the fixed bit canvas, so the POC is not a strictly local width-independent cellular rule.",
+    "This run is not an official-interface or competition-scale submission."
+  ]
+}

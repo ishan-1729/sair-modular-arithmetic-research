@@ -1,0 +1,7 @@
+interface:
+  display_name: "Playwright Chromium Web"
+  short_description: "Managed Chromium testing and web research"
+  default_prompt: "Use $playwright-chromium-web to inspect these pages in isolated managed Chromium and report evidence."
+
+policy:
+  allow_implicit_invocation: true

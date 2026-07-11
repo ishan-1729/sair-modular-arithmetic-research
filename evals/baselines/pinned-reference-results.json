@@ -1,0 +1,29 @@
+{
+  "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+  "benchmark": "data/external/public_benchmark",
+  "records": 1100,
+  "models": [
+    {
+      "id": "always_zero",
+      "parameters": 0,
+      "tier_accuracy": { "1": 0.62, "2": 0.04 },
+      "overall_accuracy": 0.082,
+      "local_cpu_seconds": 0.027
+    },
+    {
+      "id": "digit_transformer",
+      "parameters": 544256,
+      "tier_accuracy": { "1": 1.0, "2": 0.07 },
+      "overall_accuracy": 0.121,
+      "local_cpu_seconds": 33.3
+    },
+    {
+      "id": "dlp_grokking",
+      "parameters": 3008818,
+      "tier_accuracy": { "1": 1.0, "2": 0.12 },
+      "overall_accuracy": 0.127,
+      "local_cpu_seconds": 1.36
+    }
+  ],
+  "timing_note": "Local comparative timing includes determinism/isolation plus inference and is not an official hardware measurement."
+}

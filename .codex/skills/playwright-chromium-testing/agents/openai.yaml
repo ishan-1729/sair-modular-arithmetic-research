@@ -1,0 +1,7 @@
+interface:
+  display_name: "Playwright Chromium Testing"
+  short_description: "Explicit-only Playwright Chromium web QA"
+  default_prompt: "Use $playwright-chromium-testing to validate this web app with repository-local Playwright and managed Chromium."
+
+policy:
+  allow_implicit_invocation: false

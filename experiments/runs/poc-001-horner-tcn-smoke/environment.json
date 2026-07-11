@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-07-11T17:57:56Z",
+  "operating_system": "Windows 11 10.0.26200",
+  "architecture": "x86_64",
+  "processor": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+  "python": "3.13.5",
+  "python_implementation": "CPython",
+  "pytorch": "2.12.1+cpu",
+  "cuda_available": false,
+  "training_device": "cpu",
+  "configured_torch_threads": 4,
+  "deterministic_algorithms": true
+}

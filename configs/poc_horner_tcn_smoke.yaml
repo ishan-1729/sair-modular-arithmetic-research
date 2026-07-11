@@ -1,0 +1,28 @@
+run:
+  id: poc-001-horner-tcn-smoke
+  seed: 20260711
+  deterministic: true
+model:
+  width: 8
+  channels: 32
+  residual_blocks: 5
+  kernel_size: 3
+  dropout: 0.0
+data:
+  min_prime_bits: 4
+  max_prime_bits: 6
+  heldout_prime_fraction: 0.25
+  augment_composite_moduli: true
+  train_operand_bits: 16
+  one_bit_probability: 0.70
+  transition_cases: 20000
+  rollout_cases: 4000
+training:
+  steps: 1400
+  batch_size: 256
+  learning_rate: 0.0025
+  weight_decay: 0.00002
+  worst_bit_weight: 0.35
+runtime:
+  device: cpu
+  torch_threads: 4

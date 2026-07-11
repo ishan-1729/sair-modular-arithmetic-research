@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sair-modular-arithmetic-research"
+version = "0.1.0"
+description = "Research workspace and learned-recurrence POCs for the SAIR Modular Arithmetic Challenge"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "jsonschema>=4.23,<5",
+  "PyYAML>=6,<7",
+  "torch>=2.2,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pocs*", "sair_mod*"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "slow: training or long-running evaluation",
+]

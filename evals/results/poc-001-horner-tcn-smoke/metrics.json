@@ -1,0 +1,458 @@
+{
+  "run_id": "poc-001-horner-tcn-smoke",
+  "created_at": "2026-07-11T17:57:56.211039+00:00",
+  "checkpoint_sha256": "1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc",
+  "model": {
+    "architecture": "non-causal dilated residual TCN",
+    "parameters": 21441,
+    "width": 8,
+    "dilations": [
+      1,
+      2,
+      4,
+      1,
+      2
+    ],
+    "hard_binary_feedback": true
+  },
+  "split": {
+    "strategy": "seeded width-stratified prime identity holdout",
+    "train_moduli": [
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      62,
+      63
+    ],
+    "heldout_primes": [
+      11,
+      23,
+      29,
+      37,
+      61
+    ],
+    "composite_augmentation": true
+  },
+  "evaluation": {
+    "transition": {
+      "seen_primes": {
+        "cases": 20000,
+        "correct": 19703,
+        "exact_accuracy": 0.98515,
+        "bit_accuracy": 0.99788125,
+        "valid_residue_rate": 0.9984
+      },
+      "heldout_primes": {
+        "cases": 20000,
+        "correct": 19641,
+        "exact_accuracy": 0.98205,
+        "bit_accuracy": 0.99734375,
+        "valid_residue_rate": 0.9964
+      }
+    },
+    "rollout": {
+      "seen_primes_16bit": {
+        "cases": 4000,
+        "correct": 3548,
+        "exact_accuracy": 0.887,
+        "all_steps_correct": 3537,
+        "all_steps_exact_accuracy": 0.88425,
+        "any_invalid_residue_rate": 0.0195,
+        "operand_bits": 16,
+        "first_error_by_step": [
+          0,
+          58,
+          33,
+          50,
+          39,
+          40,
+          24,
+          40,
+          26,
+          19,
+          20,
+          32,
+          19,
+          19,
+          24,
+          20
+        ]
+      },
+      "heldout_primes_8bit": {
+        "cases": 4000,
+        "correct": 3684,
+        "exact_accuracy": 0.921,
+        "all_steps_correct": 3677,
+        "all_steps_exact_accuracy": 0.91925,
+        "any_invalid_residue_rate": 0.016,
+        "operand_bits": 8,
+        "first_error_by_step": [
+          0,
+          55,
+          49,
+          52,
+          40,
+          38,
+          39,
+          50
+        ]
+      },
+      "heldout_primes_16bit": {
+        "cases": 4000,
+        "correct": 3411,
+        "exact_accuracy": 0.85275,
+        "all_steps_correct": 3391,
+        "all_steps_exact_accuracy": 0.84775,
+        "any_invalid_residue_rate": 0.032,
+        "operand_bits": 16,
+        "first_error_by_step": [
+          0,
+          48,
+          35,
+          44,
+          57,
+          44,
+          57,
+          39,
+          38,
+          38,
+          46,
+          28,
+          29,
+          36,
+          36,
+          34
+        ]
+      },
+      "heldout_primes_32bit": {
+        "cases": 4000,
+        "correct": 3078,
+        "exact_accuracy": 0.7695,
+        "all_steps_correct": 3054,
+        "all_steps_exact_accuracy": 0.7635,
+        "any_invalid_residue_rate": 0.054,
+        "operand_bits": 32,
+        "first_error_by_step": [
+          0,
+          56,
+          37,
+          66,
+          52,
+          33,
+          39,
+          41,
+          38,
+          48,
+          34,
+          26,
+          26,
+          36,
+          34,
+          21,
+          41,
+          31,
+          22,
+          23,
+          24,
+          27,
+          18,
+          19,
+          25,
+          24,
+          14,
+          17,
+          21,
+          18,
+          18,
+          17
+        ]
+      }
+    },
+    "heldout_per_prime": {
+      "11": {
+        "transition": {
+          "cases": 4000,
+          "correct": 4000,
+          "exact_accuracy": 1.0,
+          "bit_accuracy": 1.0,
+          "valid_residue_rate": 1.0
+        },
+        "rollout_16bit": {
+          "cases": 1000,
+          "correct": 1000,
+          "exact_accuracy": 1.0,
+          "all_steps_correct": 1000,
+          "all_steps_exact_accuracy": 1.0,
+          "any_invalid_residue_rate": 0.0,
+          "operand_bits": 16,
+          "first_error_by_step": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "23": {
+        "transition": {
+          "cases": 4000,
+          "correct": 3956,
+          "exact_accuracy": 0.989,
+          "bit_accuracy": 0.998625,
+          "valid_residue_rate": 0.999
+        },
+        "rollout_16bit": {
+          "cases": 1000,
+          "correct": 908,
+          "exact_accuracy": 0.908,
+          "all_steps_correct": 908,
+          "all_steps_exact_accuracy": 0.908,
+          "any_invalid_residue_rate": 0.01,
+          "operand_bits": 16,
+          "first_error_by_step": [
+            0,
+            10,
+            4,
+            5,
+            9,
+            7,
+            5,
+            8,
+            4,
+            5,
+            10,
+            3,
+            4,
+            6,
+            9,
+            3
+          ]
+        }
+      },
+      "29": {
+        "transition": {
+          "cases": 4000,
+          "correct": 3985,
+          "exact_accuracy": 0.99625,
+          "bit_accuracy": 0.99953125,
+          "valid_residue_rate": 0.99925
+        },
+        "rollout_16bit": {
+          "cases": 1000,
+          "correct": 932,
+          "exact_accuracy": 0.932,
+          "all_steps_correct": 932,
+          "all_steps_exact_accuracy": 0.932,
+          "any_invalid_residue_rate": 0.015,
+          "operand_bits": 16,
+          "first_error_by_step": [
+            0,
+            0,
+            14,
+            10,
+            3,
+            8,
+            3,
+            1,
+            5,
+            3,
+            3,
+            10,
+            5,
+            2,
+            1,
+            0
+          ]
+        }
+      },
+      "37": {
+        "transition": {
+          "cases": 4000,
+          "correct": 3800,
+          "exact_accuracy": 0.95,
+          "bit_accuracy": 0.99178125,
+          "valid_residue_rate": 0.98525
+        },
+        "rollout_16bit": {
+          "cases": 1000,
+          "correct": 662,
+          "exact_accuracy": 0.662,
+          "all_steps_correct": 649,
+          "all_steps_exact_accuracy": 0.649,
+          "any_invalid_residue_rate": 0.11,
+          "operand_bits": 16,
+          "first_error_by_step": [
+            0,
+            25,
+            21,
+            31,
+            31,
+            26,
+            22,
+            22,
+            22,
+            27,
+            23,
+            29,
+            18,
+            28,
+            13,
+            13
+          ]
+        }
+      },
+      "61": {
+        "transition": {
+          "cases": 4000,
+          "correct": 3906,
+          "exact_accuracy": 0.9765,
+          "bit_accuracy": 0.99665625,
+          "valid_residue_rate": 0.99875
+        },
+        "rollout_16bit": {
+          "cases": 1000,
+          "correct": 786,
+          "exact_accuracy": 0.786,
+          "all_steps_correct": 777,
+          "all_steps_exact_accuracy": 0.777,
+          "any_invalid_residue_rate": 0.013,
+          "operand_bits": 16,
+          "first_error_by_step": [
+            0,
+            17,
+            19,
+            24,
+            14,
+            16,
+            21,
+            11,
+            10,
+            11,
+            10,
+            14,
+            14,
+            15,
+            14,
+            13
+          ]
+        }
+      }
+    }
+  },
+  "controls": {
+    "deterministic_repeat_agreement": 1.0,
+    "randomized_weights": {
+      "transition_heldout_primes": {
+        "cases": 4000,
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "bit_accuracy": 0.27515625,
+        "valid_residue_rate": 0.0
+      },
+      "rollout_heldout_primes_16bit": {
+        "cases": 2000,
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "all_steps_correct": 0,
+        "all_steps_exact_accuracy": 0.0,
+        "any_invalid_residue_rate": 1.0,
+        "operand_bits": 16,
+        "first_error_by_step": [
+          2000,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "constant_zero": {
+      "rollout_heldout_primes_16bit": {
+        "cases": 2000,
+        "correct": 161,
+        "exact_accuracy": 0.0805,
+        "operand_bits": 16
+      }
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "evaluation_seconds": 19.435926099991775
+  },
+  "limitations": [
+    "Fixed eight-bit state canvas with training moduli limited to four through six bits.",
+    "This is a research POC, not an official-interface or competition-scale submission.",
+    "Public benchmark data was not used in training or checkpoint selection.",
+    "Held-out-prime rollout degradation shows that one-step accuracy is not sufficient."
+  ]
+}

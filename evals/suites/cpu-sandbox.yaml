@@ -1,0 +1,19 @@
+suite:
+  id: official-cpu-sandbox-gate
+  status: planned-for-submission-candidates
+  source: sources/github/modular-arithmetic-challenge/docker
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  resources:
+    cpus: 4
+    memory_gib: 8
+    tmpfs_gib: 2
+    gpu: false
+    stated_inference_timeout_seconds: 300
+    internal_target_seconds: 240
+  checks:
+    - static_analysis
+    - preprocess_isolation
+    - determinism
+    - full_checked_public_benchmark
+    - artifact_size
+    - release_contents

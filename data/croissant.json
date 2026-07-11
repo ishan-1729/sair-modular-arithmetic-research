@@ -1,0 +1,209 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "dct": "http://purl.org/dc/terms/"
+  },
+  "@type": "sc:Dataset",
+  "name": "SAIR Modular Arithmetic Challenge Public Benchmark",
+  "description": "Pinned 1,100-case public evaluation benchmark for exact multiplication and modular multiplication across tiers 0 through 10.",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+  "datePublished": "2026-07-05",
+  "url": "https://github.com/SAIRcompetition/modular-arithmetic-challenge/tree/82510bba00a1126649bd76dd1a451f14d0b3eb60/public_benchmark",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "citeAs": "SAIRcompetition/modular-arithmetic-challenge public_benchmark at commit 82510bba00a1126649bd76dd1a451f14d0b3eb60",
+  "keywords": [
+    "modular arithmetic",
+    "modular multiplication",
+    "neural algorithmic reasoning",
+    "evaluation benchmark"
+  ],
+  "isLiveDataset": false,
+  "distribution": [
+    {
+      "@type": "cr:FileSet",
+      "@id": "tier-files",
+      "name": "All tier JSONL files",
+      "encodingFormat": "application/x-ndjson",
+      "includes": "external/public_benchmark/tier_*.jsonl"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-0",
+      "name": "Tier 0 multiplication diagnostic",
+      "contentUrl": "external/public_benchmark/tier_0.jsonl",
+      "contentSize": "153699 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "7f6501c35ad1687dcac4086dd74eac5863ae149b68dccf970ab0d4cd22a5f062"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-1",
+      "name": "Tier 1",
+      "contentUrl": "external/public_benchmark/tier_1.jsonl",
+      "contentSize": "8020 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "09f02e38d4c56d78bad92f2db4496a85c3c07767bae232f8b5a00e052439bbdb"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-2",
+      "name": "Tier 2",
+      "contentUrl": "external/public_benchmark/tier_2.jsonl",
+      "contentSize": "9238 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "ae169d3acf554fdff4b8c4b13a3e518303f94d6b6d67aa5161ead327a9332fdf"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-3",
+      "name": "Tier 3",
+      "contentUrl": "external/public_benchmark/tier_3.jsonl",
+      "contentSize": "10575 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "7bdffc28e83cb97a9777fe36a89b16d2abe29b5562cab523097ea1b4d6988bef"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-4",
+      "name": "Tier 4",
+      "contentUrl": "external/public_benchmark/tier_4.jsonl",
+      "contentSize": "13489 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "cb4fcd9bf0498e374e1b46851c17228690d9d7d34f429ec060bbbf1c1359d54d"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-5",
+      "name": "Tier 5",
+      "contentUrl": "external/public_benchmark/tier_5.jsonl",
+      "contentSize": "17277 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "42eb90d3912cda7e52972f0ebd273c124f19ea403f3ef4b3aa3ee33f5742a15a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-6",
+      "name": "Tier 6",
+      "contentUrl": "external/public_benchmark/tier_6.jsonl",
+      "contentSize": "28604 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "1c271263a2abcc35ba2d8b6c1850e015e5c8e4fc9b299626e44e4dbf0b848455"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-7",
+      "name": "Tier 7",
+      "contentUrl": "external/public_benchmark/tier_7.jsonl",
+      "contentSize": "51298 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "20eaf3f3dc3d33259c51c30e9512eb22a8d22a95972e258f3a2e36b4de60c0bc"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-8",
+      "name": "Tier 8",
+      "contentUrl": "external/public_benchmark/tier_8.jsonl",
+      "contentSize": "96808 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "4c1cc8e1ffc8c7d7199f18a65f58d688a8ebdc885ed73d443f17ba1d497b45a8"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-9",
+      "name": "Tier 9",
+      "contentUrl": "external/public_benchmark/tier_9.jsonl",
+      "contentSize": "187758 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "c06cb31074b62b078575f3fd5c188886dde03ce7b9de3420ea7257f737c70502"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "tier-10",
+      "name": "Tier 10",
+      "contentUrl": "external/public_benchmark/tier_10.jsonl",
+      "contentSize": "369759 B",
+      "encodingFormat": "application/x-ndjson",
+      "sha256": "d8cdfe0daea5d50da7c1285582329cd525c1b59564db70c4f60796a020743f4e"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "problems",
+      "name": "Modular arithmetic problems",
+      "description": "Homogeneous problem records extracted one JSON object per line from all tier files.",
+      "key": [
+        { "@id": "problems/tier_id" },
+        { "@id": "problems/a" },
+        { "@id": "problems/b" },
+        { "@id": "problems/p" }
+      ],
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "problems/a",
+          "name": "a",
+          "description": "First non-negative operand encoded as a canonical decimal string.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": { "@id": "tier-files" },
+            "extract": { "fileProperty": "lines" },
+            "transform": { "jsonQuery": "a" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "problems/b",
+          "name": "b",
+          "description": "Second non-negative operand encoded as a canonical decimal string.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": { "@id": "tier-files" },
+            "extract": { "fileProperty": "lines" },
+            "transform": { "jsonQuery": "b" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "problems/p",
+          "name": "p",
+          "description": "Prime modulus on scored tiers, encoded as a canonical decimal string.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": { "@id": "tier-files" },
+            "extract": { "fileProperty": "lines" },
+            "transform": { "jsonQuery": "p" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "problems/expected",
+          "name": "expected",
+          "description": "Exact expected answer encoded as a canonical decimal string; evaluation-only.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": { "@id": "tier-files" },
+            "extract": { "fileProperty": "lines" },
+            "transform": { "jsonQuery": "expected" }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "problems/tier_id",
+          "name": "tier_id",
+          "description": "Evaluation tier from 0 through 10.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": { "@id": "tier-files" },
+            "extract": { "fileProperty": "lines" },
+            "transform": { "jsonQuery": "tier_id" }
+          }
+        }
+      ]
+    }
+  ]
+}

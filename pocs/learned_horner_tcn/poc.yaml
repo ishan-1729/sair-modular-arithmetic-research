@@ -1,0 +1,46 @@
+poc:
+  id: poc-001-horner-tcn-smoke
+  title: Learned Horner TCN
+  status: working-research-poc
+  hypothesis: A learned local transition can compose exact modular states across held-out primes.
+  decision: knowledge/decisions/0002-poc-selection.md
+implementation:
+  architecture: non-causal dilated residual TCN
+  parameters: 21441
+  state_width_bits: 8
+  input_channels: [state_bits, multiplicand_bits, modulus_bits, multiplier_bit, lsb_marker, msb_marker]
+  hard_binary_feedback: true
+  entrypoints:
+    train: pocs.learned_horner_tcn.train
+    evaluate: pocs.learned_horner_tcn.evaluate
+  config: configs/poc_horner_tcn_smoke.yaml
+training:
+  seed: 20260711
+  true_trajectory_states: true
+  composite_modulus_augmentation: true
+  heldout_primes: [11, 23, 29, 37, 61]
+  steps: 1400
+artifacts:
+  checkpoint: pocs/learned_horner_tcn/artifacts/poc_weights.pt
+  checkpoint_sha256: 1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc
+  metrics: evals/results/poc-001-horner-tcn-smoke/metrics.json
+  run_record: experiments/runs/poc-001-horner-tcn-smoke/run.json
+observed_reference_metrics:
+  heldout_transition_exact_accuracy: 0.98205
+  heldout_rollout_exact_accuracy:
+    8_bits: 0.921
+    16_bits: 0.85275
+    32_bits: 0.7695
+  deterministic_repeat_agreement: 1.0
+  randomized_weight_rollout_accuracy_16_bits: 0.0
+success_criteria:
+  - Beats the constant-zero and randomized-weight controls on held-out-prime autonomous rollout.
+  - Demonstrates deterministic end-to-end training, checkpointing, evaluation, and provenance.
+kill_or_redesign_criteria:
+  - Held-out-prime rollout remains below 90% after the next sampling and loss ablations.
+  - Projected official CPU runtime exceeds 240 seconds after width scaling.
+  - Perturbing weights does not collapse behavior.
+limitations:
+  - Fixed small canvas; no evidence of 2048-bit modulus scaling.
+  - Per-prime 16-bit rollout ranges from 66.2% to 100%.
+  - Not wired to the official ModularMultiplicationModel interface.

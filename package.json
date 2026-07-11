@@ -1,0 +1,14 @@
+{
+  "name": "sair-mod-challenge-tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Repository-local browser tooling for SAIR research and evidence collection.",
+  "scripts": {
+    "web:check": "node .codex/skills/playwright-chromium-web/scripts/check-web-access.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.61.1",
+    "turndown": "7.2.4",
+    "turndown-plugin-gfm": "1.0.2"
+  }
+}

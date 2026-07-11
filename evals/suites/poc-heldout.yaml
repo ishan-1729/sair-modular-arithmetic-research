@@ -1,0 +1,25 @@
+suite:
+  id: poc-heldout-v1
+  purpose: Evaluate learned transition composition without public benchmark leakage.
+  config: configs/poc_horner_tcn_smoke.yaml
+  splits:
+    identity: prime
+    heldout_primes: [11, 23, 29, 37, 61]
+  transition_cases: 20000
+  rollouts:
+    - operand_bits: 8
+      cases: 4000
+    - operand_bits: 16
+      cases: 4000
+    - operand_bits: 32
+      cases: 4000
+  metrics:
+    - exact_transition_accuracy
+    - bit_accuracy
+    - valid_residue_rate
+    - exact_final_rollout_accuracy
+    - all_steps_exact_accuracy
+  controls:
+    - deterministic_repeat
+    - reinitialized_weights
+    - constant_zero

@@ -1,0 +1,325 @@
+{
+  "checkpoint": "D:\\Projects\\SAIR_mod_challenge\\.scratch\\poc_lab\\run_composite_aug\\horner_tcn.pt",
+  "checkpoint_bytes": 98421,
+  "seed": 20260711,
+  "balanced_heldout_transition": {
+    "samples": 20000,
+    "exact_accuracy": 0.98605,
+    "bit_accuracy": 0.99790625,
+    "valid_residue_rate": 0.99715,
+    "exact_bit_0": 1.0,
+    "exact_bit_1": 0.9720412867020743,
+    "worst_bit_margin_mean": 7.6925458908081055,
+    "worst_bit_margin_p01": -0.3909716308116913
+  },
+  "heldout_rollouts": {
+    "8": {
+      "samples": 4000,
+      "a_bits": 8,
+      "final_exact_accuracy": 0.91925,
+      "all_steps_exact_accuracy": 0.91775,
+      "any_invalid_residue_rate": 0.0145,
+      "first_error_by_step": [
+        0,
+        51,
+        51,
+        43,
+        44,
+        49,
+        39,
+        52
+      ]
+    },
+    "16": {
+      "samples": 4000,
+      "a_bits": 16,
+      "final_exact_accuracy": 0.8555,
+      "all_steps_exact_accuracy": 0.8515,
+      "any_invalid_residue_rate": 0.02975,
+      "first_error_by_step": [
+        0,
+        60,
+        47,
+        37,
+        46,
+        33,
+        46,
+        38,
+        35,
+        41,
+        37,
+        32,
+        34,
+        39,
+        32,
+        37
+      ]
+    },
+    "32": {
+      "samples": 4000,
+      "a_bits": 32,
+      "final_exact_accuracy": 0.77725,
+      "all_steps_exact_accuracy": 0.769,
+      "any_invalid_residue_rate": 0.056,
+      "first_error_by_step": [
+        0,
+        47,
+        44,
+        46,
+        35,
+        38,
+        47,
+        32,
+        32,
+        27,
+        39,
+        35,
+        35,
+        28,
+        26,
+        27,
+        34,
+        31,
+        35,
+        26,
+        29,
+        19,
+        25,
+        32,
+        22,
+        22,
+        17,
+        17,
+        17,
+        20,
+        19,
+        21
+      ]
+    }
+  },
+  "heldout_per_prime": {
+    "11": {
+      "transition": {
+        "samples": 4000,
+        "exact_accuracy": 1.0,
+        "bit_accuracy": 1.0,
+        "valid_residue_rate": 1.0,
+        "exact_bit_0": 1.0,
+        "exact_bit_1": 1.0,
+        "worst_bit_margin_mean": 8.947054862976074,
+        "worst_bit_margin_p01": 2.7769882678985596
+      },
+      "rollout_16": {
+        "samples": 1000,
+        "a_bits": 16,
+        "final_exact_accuracy": 1.0,
+        "all_steps_exact_accuracy": 1.0,
+        "any_invalid_residue_rate": 0.0,
+        "first_error_by_step": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "23": {
+      "transition": {
+        "samples": 4000,
+        "exact_accuracy": 0.992,
+        "bit_accuracy": 0.999,
+        "valid_residue_rate": 0.99925,
+        "exact_bit_0": 1.0,
+        "exact_bit_1": 0.9843060323688082,
+        "worst_bit_margin_mean": 7.676111698150635,
+        "worst_bit_margin_p01": 0.5408462882041931
+      },
+      "rollout_16": {
+        "samples": 1000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.88,
+        "all_steps_exact_accuracy": 0.88,
+        "any_invalid_residue_rate": 0.009,
+        "first_error_by_step": [
+          0,
+          11,
+          5,
+          6,
+          12,
+          5,
+          4,
+          6,
+          11,
+          11,
+          10,
+          6,
+          8,
+          11,
+          8,
+          6
+        ]
+      }
+    },
+    "29": {
+      "transition": {
+        "samples": 4000,
+        "exact_accuracy": 0.995,
+        "bit_accuracy": 0.999375,
+        "valid_residue_rate": 0.99875,
+        "exact_bit_0": 1.0,
+        "exact_bit_1": 0.9899497487437185,
+        "worst_bit_margin_mean": 7.987601280212402,
+        "worst_bit_margin_p01": 0.8201664686203003
+      },
+      "rollout_16": {
+        "samples": 1000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.942,
+        "all_steps_exact_accuracy": 0.941,
+        "any_invalid_residue_rate": 0.016,
+        "first_error_by_step": [
+          0,
+          0,
+          7,
+          6,
+          7,
+          4,
+          7,
+          3,
+          2,
+          5,
+          3,
+          7,
+          1,
+          5,
+          1,
+          1
+        ]
+      }
+    },
+    "37": {
+      "transition": {
+        "samples": 4000,
+        "exact_accuracy": 0.96775,
+        "bit_accuracy": 0.99534375,
+        "valid_residue_rate": 0.98975,
+        "exact_bit_0": 1.0,
+        "exact_bit_1": 0.9351106639839034,
+        "worst_bit_margin_mean": 6.9777913093566895,
+        "worst_bit_margin_p01": -1.2113951444625854
+      },
+      "rollout_16": {
+        "samples": 1000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.667,
+        "all_steps_exact_accuracy": 0.658,
+        "any_invalid_residue_rate": 0.097,
+        "first_error_by_step": [
+          0,
+          27,
+          21,
+          17,
+          22,
+          34,
+          23,
+          28,
+          26,
+          15,
+          23,
+          28,
+          22,
+          15,
+          23,
+          18
+        ]
+      }
+    },
+    "61": {
+      "transition": {
+        "samples": 4000,
+        "exact_accuracy": 0.982,
+        "bit_accuracy": 0.9969375,
+        "valid_residue_rate": 0.99875,
+        "exact_bit_0": 1.0,
+        "exact_bit_1": 0.9641076769690927,
+        "worst_bit_margin_mean": 6.820749282836914,
+        "worst_bit_margin_p01": -0.9351592063903809
+      },
+      "rollout_16": {
+        "samples": 1000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.791,
+        "all_steps_exact_accuracy": 0.784,
+        "any_invalid_residue_rate": 0.009,
+        "first_error_by_step": [
+          0,
+          29,
+          10,
+          17,
+          11,
+          10,
+          24,
+          16,
+          7,
+          9,
+          15,
+          13,
+          7,
+          16,
+          16,
+          16
+        ]
+      }
+    }
+  },
+  "fresh_weight_ablation": {
+    "transition": {
+      "samples": 5000,
+      "exact_accuracy": 0.1276,
+      "bit_accuracy": 0.72695,
+      "valid_residue_rate": 1.0,
+      "exact_bit_0": 0.17494949494949494,
+      "exact_bit_1": 0.08118811881188119,
+      "worst_bit_margin_mean": -0.43904614448547363,
+      "worst_bit_margin_p01": -0.9549165368080139
+    },
+    "rollout_16": {
+      "samples": 1000,
+      "a_bits": 16,
+      "final_exact_accuracy": 0.09,
+      "all_steps_exact_accuracy": 0.046,
+      "any_invalid_residue_rate": 0.0,
+      "first_error_by_step": [
+        469,
+        242,
+        121,
+        60,
+        29,
+        20,
+        6,
+        3,
+        2,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "eval_wall_seconds": 15.658108799994807
+}

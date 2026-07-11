@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ishan-1729/sair-modular-arithmetic-research/schemas/experiment-run.schema.json",
+  "title": "SAIR experiment run",
+  "type": "object",
+  "required": ["run_id", "status", "hypothesis", "seed", "source", "config", "artifacts"],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["planned", "running", "completed", "failed"] },
+    "hypothesis": { "type": "string", "minLength": 1 },
+    "seed": { "type": "integer", "minimum": 0 },
+    "source": {
+      "type": "object",
+      "required": ["challenge_commit"],
+      "properties": {
+        "repository_commit": { "type": ["string", "null"] },
+        "dirty": { "type": "boolean" },
+        "challenge_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      },
+      "additionalProperties": true
+    },
+    "config": { "type": "string", "minLength": 1 },
+    "artifacts": {
+      "type": "object",
+      "required": ["checkpoint", "metrics"],
+      "properties": {
+        "checkpoint": { "type": "string" },
+        "metrics": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

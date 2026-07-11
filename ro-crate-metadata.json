@@ -1,0 +1,190 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.3/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": { "@id": "./" },
+      "conformsTo": { "@id": "https://w3id.org/ro/crate/1.3" }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "SAIR Modular Arithmetic Research",
+      "description": "Private research workspace, evidence bundle, benchmark snapshot, evaluation contracts, and learned-transition proofs of concept for the SAIR Modular Arithmetic Challenge.",
+      "datePublished": "2026-07-11",
+      "author": { "@id": "https://github.com/ishan-1729" },
+      "hasPart": [
+        { "@id": "knowledge/" },
+        { "@id": "data/croissant.json" },
+        { "@id": "data/external/public_benchmark/" },
+        { "@id": "sources/research/modular_arithmetic_challenge_deep_research.md" },
+        { "@id": "sources/github/modular-arithmetic-challenge/" },
+        { "@id": "pocs/learned_horner_tcn/" },
+        { "@id": "configs/poc_horner_tcn_smoke.yaml" },
+        { "@id": "experiments/runs/poc-001-horner-tcn-smoke/run.json" },
+        { "@id": "evals/results/poc-001-horner-tcn-smoke/metrics.json" },
+        { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+      ]
+    },
+    {
+      "@id": "https://github.com/ishan-1729",
+      "@type": "Person",
+      "name": "Ishan"
+    },
+    {
+      "@id": "knowledge/",
+      "@type": "Dataset",
+      "name": "SAIR Modular Arithmetic OKF knowledge bundle",
+      "conformsTo": { "@id": "https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md" },
+      "hasPart": { "@id": "knowledge/index.md" }
+    },
+    {
+      "@id": "knowledge/index.md",
+      "@type": "File",
+      "name": "Knowledge bundle index",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "data/croissant.json",
+      "@type": "File",
+      "name": "Croissant 1.1 public benchmark metadata",
+      "encodingFormat": "application/ld+json",
+      "conformsTo": { "@id": "http://mlcommons.org/croissant/1.1" },
+      "about": { "@id": "data/external/public_benchmark/" }
+    },
+    {
+      "@id": "data/external/public_benchmark/",
+      "@type": "Dataset",
+      "name": "Pinned SAIR public benchmark",
+      "version": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+      "license": { "@id": "https://www.apache.org/licenses/LICENSE-2.0" },
+      "isBasedOn": { "@id": "https://github.com/SAIRcompetition/modular-arithmetic-challenge" },
+      "hasPart": [
+        { "@id": "data/external/public_benchmark/tier_0.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_1.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_2.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_3.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_4.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_5.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_6.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_7.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_8.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_9.jsonl" },
+        { "@id": "data/external/public_benchmark/tier_10.jsonl" }
+      ]
+    },
+    {
+      "@id": "https://github.com/SAIRcompetition/modular-arithmetic-challenge",
+      "@type": "SoftwareSourceCode",
+      "name": "Official SAIR Modular Arithmetic Challenge repository",
+      "version": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+      "codeRepository": "https://github.com/SAIRcompetition/modular-arithmetic-challenge"
+    },
+    {
+      "@id": "sources/github/modular-arithmetic-challenge/",
+      "@type": "Dataset",
+      "name": "Pinned official challenge Git submodule",
+      "isBasedOn": { "@id": "https://github.com/SAIRcompetition/modular-arithmetic-challenge" },
+      "version": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+    },
+    {
+      "@id": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "@type": "File",
+      "name": "Supplied deep research memo",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "pocs/learned_horner_tcn/",
+      "@type": "Dataset",
+      "name": "Learned Horner TCN proof of concept",
+      "about": { "@id": "knowledge/pocs/learned-horner-tcn.md" },
+      "hasPart": [
+        { "@id": "pocs/learned_horner_tcn/model.py" },
+        { "@id": "pocs/learned_horner_tcn/poc.yaml" },
+        { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+      ]
+    },
+    {
+      "@id": "knowledge/pocs/learned-horner-tcn.md",
+      "@type": "CreativeWork",
+      "name": "Learned Horner TCN model card",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "configs/poc_horner_tcn_smoke.yaml",
+      "@type": "File",
+      "name": "POC smoke configuration",
+      "encodingFormat": "application/yaml"
+    },
+    {
+      "@id": "pocs/learned_horner_tcn/model.py",
+      "@type": ["File", "SoftwareSourceCode"],
+      "name": "Learned Horner TCN inference architecture",
+      "encodingFormat": "text/x-python",
+      "programmingLanguage": { "@id": "#python-3.13.5" }
+    },
+    {
+      "@id": "pocs/learned_horner_tcn/poc.yaml",
+      "@type": "File",
+      "name": "POC machine-readable manifest",
+      "encodingFormat": "application/yaml"
+    },
+    {
+      "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt",
+      "@type": "File",
+      "name": "Reference learned Horner TCN checkpoint",
+      "encodingFormat": "application/x-pytorch",
+      "contentSize": "98421 B",
+      "identifier": "sha256:1ebee3ae0042bb76995221f582ee200685c10d18ec7612928dfc2e23126f09fc"
+    },
+    {
+      "@id": "experiments/runs/poc-001-horner-tcn-smoke/run.json",
+      "@type": "File",
+      "name": "POC-001 experiment record",
+      "encodingFormat": "application/json",
+      "about": { "@id": "#poc-001-training" }
+    },
+    {
+      "@id": "experiments/runs/poc-001-horner-tcn-smoke/reference_train_script.py",
+      "@type": ["File", "SoftwareSourceCode"],
+      "name": "Exact POC-001 training script",
+      "encodingFormat": "text/x-python",
+      "programmingLanguage": { "@id": "#python-3.13.5" },
+      "identifier": "sha256:fe15efa4803dbd598e903822acc3d92cdf25a731dbf81bfb333087ae7ed48fdf"
+    },
+    {
+      "@id": "evals/results/poc-001-horner-tcn-smoke/metrics.json",
+      "@type": "File",
+      "name": "POC-001 canonical evaluation metrics",
+      "encodingFormat": "application/json",
+      "about": { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+    },
+    {
+      "@id": "#poc-001-training",
+      "@type": "CreateAction",
+      "name": "Train POC-001 learned Horner TCN",
+      "agent": { "@id": "https://github.com/ishan-1729" },
+      "object": { "@id": "configs/poc_horner_tcn_smoke.yaml" },
+      "instrument": [
+        { "@id": "experiments/runs/poc-001-horner-tcn-smoke/reference_train_script.py" },
+        { "@id": "#pytorch-2.12.1-cpu" }
+      ],
+      "result": { "@id": "pocs/learned_horner_tcn/artifacts/poc_weights.pt" }
+    },
+    {
+      "@id": "#python-3.13.5",
+      "@type": "SoftwareApplication",
+      "name": "CPython",
+      "version": "3.13.5",
+      "url": "https://www.python.org/"
+    },
+    {
+      "@id": "#pytorch-2.12.1-cpu",
+      "@type": "SoftwareApplication",
+      "name": "PyTorch CPU",
+      "version": "2.12.1+cpu",
+      "url": "https://pytorch.org/"
+    }
+  ]
+}

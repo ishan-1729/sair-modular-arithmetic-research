@@ -1,0 +1,3 @@
+[submodule "sources/github/modular-arithmetic-challenge"]
+	path = sources/github/modular-arithmetic-challenge
+	url = https://github.com/SAIRcompetition/modular-arithmetic-challenge.git

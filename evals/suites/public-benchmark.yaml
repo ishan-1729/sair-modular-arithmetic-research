@@ -1,0 +1,14 @@
+suite:
+  id: sair-public-benchmark-82510bb
+  purpose: Release regression only; never training or checkpoint selection.
+  source: data/external/public_benchmark
+  croissant: data/croissant.json
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  records: 1100
+  authority: checked-jsonl
+  regeneration_note: Tiers 1-10 reproduce; the final 50 Tier-0 modulus fields drift at the pinned generator revision.
+  metrics:
+    - per_tier_exact_accuracy
+    - overall_equal_tier_accuracy
+    - highest_individual_tier_at_or_above_90_percent
+    - wall_time_seconds

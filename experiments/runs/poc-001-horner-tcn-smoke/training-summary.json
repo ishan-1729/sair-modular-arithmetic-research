@@ -1,0 +1,401 @@
+{
+  "status": "research_poc_not_competition_ready",
+  "config": {
+    "seed": 20260711,
+    "width": 8,
+    "min_prime_bits": 4,
+    "max_prime_bits": 6,
+    "holdout_fraction": 0.25,
+    "augment_composite_moduli": true,
+    "hidden": 32,
+    "blocks": 5,
+    "steps": 1400,
+    "batch_size": 256,
+    "lr": 0.0025,
+    "weight_decay": 2e-05,
+    "worst_bit_weight": 0.35,
+    "one_bit_probability": 0.7,
+    "train_a_bits": 16,
+    "eval_transitions": 10000,
+    "eval_rollouts": 2000,
+    "threads": 4
+  },
+  "architecture": {
+    "name": "noncausal_dilated_residual_tcn",
+    "input_channels": [
+      "t_bits",
+      "b_bits",
+      "p_bits",
+      "multiplier_bit",
+      "lsb_marker",
+      "msb_marker"
+    ],
+    "dilations": [
+      1,
+      2,
+      4,
+      1,
+      2
+    ],
+    "parameters": 21441,
+    "hard_binary_feedback": true,
+    "forward_path_uses_symbolic_arithmetic": false
+  },
+  "split": {
+    "strategy": "seeded_width_stratified_holdout",
+    "train_moduli": [
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      62,
+      63
+    ],
+    "composite_augmentation": true,
+    "heldout_primes": [
+      11,
+      23,
+      29,
+      37,
+      61
+    ]
+  },
+  "timing_seconds": {
+    "train": 164.61450019999756,
+    "eval": 5.552564800003893,
+    "total": 173.82571979999193
+  },
+  "transition": {
+    "seen_primes": {
+      "samples": 10000,
+      "exact_accuracy": 0.9844,
+      "bit_accuracy": 0.9977125,
+      "valid_residue_rate": 0.9981,
+      "exact_bit_0": 0.9996621621621622,
+      "exact_bit_1": 0.9779829545454546,
+      "worst_bit_margin_mean": 7.481522560119629,
+      "worst_bit_margin_p01": -0.305441677570343
+    },
+    "heldout_primes": {
+      "samples": 10000,
+      "exact_accuracy": 0.9818,
+      "bit_accuracy": 0.9973625,
+      "valid_residue_rate": 0.9968,
+      "exact_bit_0": 1.0,
+      "exact_bit_1": 0.9741293532338309,
+      "worst_bit_margin_mean": 7.159686088562012,
+      "worst_bit_margin_p01": -0.5939175486564636
+    }
+  },
+  "rollout": {
+    "seen_primes": {
+      "16": {
+        "samples": 2000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.8825,
+        "all_steps_exact_accuracy": 0.8775,
+        "any_invalid_residue_rate": 0.022,
+        "first_error_by_step": [
+          0,
+          29,
+          19,
+          30,
+          25,
+          21,
+          16,
+          23,
+          19,
+          16,
+          6,
+          9,
+          9,
+          4,
+          12,
+          7
+        ]
+      }
+    },
+    "heldout_primes": {
+      "8": {
+        "samples": 2000,
+        "a_bits": 8,
+        "final_exact_accuracy": 0.9245,
+        "all_steps_exact_accuracy": 0.9225,
+        "any_invalid_residue_rate": 0.014,
+        "first_error_by_step": [
+          0,
+          21,
+          22,
+          21,
+          26,
+          19,
+          28,
+          18
+        ]
+      },
+      "16": {
+        "samples": 2000,
+        "a_bits": 16,
+        "final_exact_accuracy": 0.852,
+        "all_steps_exact_accuracy": 0.8475,
+        "any_invalid_residue_rate": 0.0255,
+        "first_error_by_step": [
+          0,
+          29,
+          25,
+          24,
+          23,
+          21,
+          26,
+          17,
+          17,
+          16,
+          19,
+          18,
+          17,
+          13,
+          22,
+          18
+        ]
+      },
+      "32": {
+        "samples": 2000,
+        "a_bits": 32,
+        "final_exact_accuracy": 0.7675,
+        "all_steps_exact_accuracy": 0.7615,
+        "any_invalid_residue_rate": 0.049,
+        "first_error_by_step": [
+          0,
+          33,
+          15,
+          28,
+          20,
+          15,
+          23,
+          22,
+          17,
+          24,
+          16,
+          15,
+          14,
+          17,
+          22,
+          12,
+          19,
+          19,
+          11,
+          12,
+          12,
+          6,
+          9,
+          8,
+          12,
+          17,
+          12,
+          14,
+          10,
+          8,
+          7,
+          8
+        ]
+      }
+    }
+  },
+  "history": [
+    {
+      "step": 1,
+      "lr": 0.0024999971045815564,
+      "elapsed_seconds": 0.15370519999123644,
+      "loss": 0.929506242275238,
+      "mean_bce": 0.6189930438995361,
+      "worst_bit_bce": 0.8871805667877197,
+      "batch_exact": 0.13671875,
+      "batch_bit_acc": 0.7626953125
+    },
+    {
+      "step": 100,
+      "lr": 0.0024711670990090976,
+      "elapsed_seconds": 5.7843693000031635,
+      "loss": 0.27516475319862366,
+      "mean_bce": 0.13461068272590637,
+      "worst_bit_bce": 0.4015830457210541,
+      "batch_exact": 0.66796875,
+      "batch_bit_acc": 0.93359375
+    },
+    {
+      "step": 200,
+      "lr": 0.0023861141980877827,
+      "elapsed_seconds": 21.363344500001404,
+      "loss": 0.28037333488464355,
+      "mean_bce": 0.14958766102790833,
+      "worst_bit_bce": 0.37367334961891174,
+      "batch_exact": 0.68359375,
+      "batch_bit_acc": 0.9326171875
+    },
+    {
+      "step": 300,
+      "lr": 0.0022491062048382326,
+      "elapsed_seconds": 43.539618099996005,
+      "loss": 0.31308621168136597,
+      "mean_bce": 0.1639770269393921,
+      "worst_bit_bce": 0.42602622509002686,
+      "batch_exact": 0.65234375,
+      "batch_bit_acc": 0.92431640625
+    },
+    {
+      "step": 400,
+      "lr": 0.002067013272137538,
+      "elapsed_seconds": 57.106389699998545,
+      "loss": 0.19868499040603638,
+      "mean_bce": 0.09861930459737778,
+      "worst_bit_bce": 0.2859019637107849,
+      "batch_exact": 0.80859375,
+      "batch_bit_acc": 0.95556640625
+    },
+    {
+      "step": 500,
+      "lr": 0.0018489662999851802,
+      "elapsed_seconds": 68.22370299999602,
+      "loss": 0.09718284755945206,
+      "mean_bce": 0.04030419886112213,
+      "worst_bit_bce": 0.16251042485237122,
+      "batch_exact": 0.8984375,
+      "batch_bit_acc": 0.98046875
+    },
+    {
+      "step": 600,
+      "lr": 0.00160589907404975,
+      "elapsed_seconds": 75.37145029999374,
+      "loss": 0.08519218862056732,
+      "mean_bce": 0.034909937530756,
+      "worst_bit_bce": 0.14366357028484344,
+      "batch_exact": 0.94140625,
+      "batch_bit_acc": 0.98779296875
+    },
+    {
+      "step": 700,
+      "lr": 0.0013499999999999914,
+      "elapsed_seconds": 82.68388090000371,
+      "loss": 0.08850965648889542,
+      "mean_bce": 0.03391706570982933,
+      "worst_bit_bce": 0.15597882866859436,
+      "batch_exact": 0.92578125,
+      "batch_bit_acc": 0.98583984375
+    },
+    {
+      "step": 800,
+      "lr": 0.0010941009259502327,
+      "elapsed_seconds": 99.98936890000186,
+      "loss": 0.050237007439136505,
+      "mean_bce": 0.018203865736722946,
+      "worst_bit_bce": 0.09152325987815857,
+      "batch_exact": 0.9609375,
+      "batch_bit_acc": 0.994140625
+    },
+    {
+      "step": 900,
+      "lr": 0.0008510337000148061,
+      "elapsed_seconds": 119.48739169999317,
+      "loss": 0.039604708552360535,
+      "mean_bce": 0.013973592780530453,
+      "worst_bit_bce": 0.0732317641377449,
+      "batch_exact": 0.96484375,
+      "batch_bit_acc": 0.994140625
+    },
+    {
+      "step": 1000,
+      "lr": 0.0006329867278624557,
+      "elapsed_seconds": 132.29687039999408,
+      "loss": 0.038733094930648804,
+      "mean_bce": 0.014704905450344086,
+      "worst_bit_bce": 0.06865197420120239,
+      "batch_exact": 0.97265625,
+      "batch_bit_acc": 0.99658203125
+    },
+    {
+      "step": 1100,
+      "lr": 0.00045089379516176744,
+      "elapsed_seconds": 146.19472729999688,
+      "loss": 0.030938271433115005,
+      "mean_bce": 0.011749599128961563,
+      "worst_bit_bce": 0.05482477694749832,
+      "batch_exact": 0.9765625,
+      "batch_bit_acc": 0.99560546875
+    },
+    {
+      "step": 1200,
+      "lr": 0.0003138858019122189,
+      "elapsed_seconds": 152.6323443000001,
+      "loss": 0.025691837072372437,
+      "mean_bce": 0.00857579242438078,
+      "worst_bit_bce": 0.04890298470854759,
+      "batch_exact": 0.98046875,
+      "batch_bit_acc": 0.99755859375
+    },
+    {
+      "step": 1300,
+      "lr": 0.00022883290099090314,
+      "elapsed_seconds": 158.69404639999266,
+      "loss": 0.02216777764260769,
+      "mean_bce": 0.0074745239689946175,
+      "worst_bit_bce": 0.04198072478175163,
+      "batch_exact": 0.98828125,
+      "batch_bit_acc": 0.99853515625
+    },
+    {
+      "step": 1400,
+      "lr": 0.0002,
+      "elapsed_seconds": 164.6143718999956,
+      "loss": 0.016767453402280807,
+      "mean_bce": 0.0060178134590387344,
+      "worst_bit_bce": 0.030713258311152458,
+      "batch_exact": 0.984375,
+      "batch_bit_acc": 0.998046875
+    }
+  ]
+}

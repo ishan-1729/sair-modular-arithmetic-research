@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ishan-1729/sair-modular-arithmetic-research/schemas/eval-result.schema.json",
+  "title": "SAIR evaluation result",
+  "type": "object",
+  "required": ["run_id", "created_at", "checkpoint_sha256", "evaluation", "controls", "limitations"],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "checkpoint_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "evaluation": {
+      "type": "object",
+      "required": ["transition", "rollout"],
+      "properties": {
+        "transition": { "$ref": "#/$defs/splitMetricsMap" },
+        "rollout": { "$ref": "#/$defs/splitMetricsMap" }
+      },
+      "additionalProperties": true
+    },
+    "controls": { "type": "object" },
+    "runtime": { "type": "object" },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "required": ["cases", "correct", "exact_accuracy"],
+      "properties": {
+        "cases": { "type": "integer", "minimum": 1 },
+        "correct": { "type": "integer", "minimum": 0 },
+        "exact_accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+        "bit_accuracy": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": true
+    },
+    "splitMetricsMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/metrics" }
+    }
+  },
+  "additionalProperties": true
+}
