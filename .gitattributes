@@ -9,6 +9,9 @@
 *.pth binary
 *.safetensors binary
 
+# Public benchmark hashes describe the exact upstream snapshot bytes.
+data/external/public_benchmark/*.jsonl -text
+
 # Immutable captures retain source formatting verbatim.
 sources/sair-competition/** -whitespace
 sources/research/** -whitespace
