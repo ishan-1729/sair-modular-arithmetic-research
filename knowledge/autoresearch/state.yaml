@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-320-cellular-width64-curriculum
-  statement: The validated mixed-width cellular curriculum scales through widths 40-56 and transfers into a bigint-backed width-64 training stage.
-  promotion_gate: Preserve width-32 readiness while demonstrating strong width-48 rollout and nontrivial zero-shot width-64 learning before a full Tier-5 run.
+  run_id: exp-321-cellular-official-width64
+  statement: Direct official-numeric width-64 continuation raises the cellular model above the Tier-5 independent-readiness gate.
+  promotion_gate: Retain 85 percent width-56 rollout and reach 99.8/93 percent width-64 transition/rollout with an eight-point gain.
   status: preregistered
-next_action: Run the bigint-backed progressive cellular curriculum and zero-shot width-64 gate; retain Candidate 003 as incumbent.
+next_action: Run direct width-56/64 continuation on fresh official-numeric identities; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

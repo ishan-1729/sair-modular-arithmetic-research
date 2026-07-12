@@ -29,3 +29,4 @@
 - [EXP-315 cellular independent Tier 4](exp-315-cellular-independent-tier4.md) - five untouched official-generator seeds for the frozen checkpoint.
 - [Candidate 003 integration gate](candidate-003-integration-gate.md) - frozen full-artifact independent and release checks.
 - [EXP-320 cellular width-64 curriculum](exp-320-cellular-width64-curriculum.md) - bigint-backed progressive Tier-5-length training.
+- [EXP-321 cellular official width 64](exp-321-cellular-official-width64.md) - direct Tier-5 distribution continuation before independent evaluation.

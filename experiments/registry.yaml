@@ -216,3 +216,10 @@ runs:
     run_record: experiments/runs/candidate-003-tier4-cellular-hybrid/run.json
     metrics: evals/results/candidate-003-tier4-cellular-hybrid/metrics.json
     checkpoint: submission/weights.safetensors
+  - run_id: exp-320-cellular-width64-curriculum
+    status: completed
+    approach: bigint-progressive-cellular-width64-curriculum
+    config: configs/exp_320_cellular_width64_curriculum.yaml
+    run_record: experiments/runs/exp-320-cellular-width64-curriculum/run.json
+    metrics: evals/results/exp-320-cellular-width64-curriculum/metrics.json
+    checkpoint: .scratch/exp-320-cellular-width64-curriculum/weights.safetensors

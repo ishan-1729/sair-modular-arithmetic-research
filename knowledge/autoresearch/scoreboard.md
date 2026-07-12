@@ -55,3 +55,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-313 cellular direct width32 | 24/32 | 100 partial | invalid | invalid | invalid | 99,824 | stopped by projection | killed; resource projection |
 | EXP-314 cellular width32 smoke | 24/32 | 600 | 99.91% | 94.567% | 0.30% | 99,824 | 249.0 train | pass -> independent Tier4 |
 | EXP-315 cellular five-seed Tier4 | 32 | frozen | n/a | 96.6% | 0% observed | 99,824 | 11.4 wall | pass -> integration |
+| EXP-320 cellular Tier5 curriculum | 32-56 -> 64 | 800 | 99.8% width56 / 99.68% width64 | 89.0% / 82.2% | 0.4% / 0.2% | 99,824 | 306.3 train | pass -> direct width64 |
