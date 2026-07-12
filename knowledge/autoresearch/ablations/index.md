@@ -40,3 +40,4 @@
 - [EXP-329 cellular width-64 autonomous-state recovery](exp-329-cellular-width64-autonomous-state-recovery.md) - matched teacher-forced versus learner-state recovery training.
 - [EXP-400 graph message-passing smoke](exp-400-graph-message-passing-smoke.md) - cellular, GCN, GAT, and typed max-MPNN successive-halving rung.
 - [EXP-401 PyG graph message passing](exp-401-pyg-graph-message-passing.md) - proper library-backed full-training GCNConv, GATv2Conv, and MessagePassing comparison.
+- [EXP-500 cellular grokking probe](exp-500-cellular-grokking-probe.md) - three-seed finite-data weight-decay delayed-generalization study.

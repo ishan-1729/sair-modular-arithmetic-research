@@ -29,9 +29,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-500-cellular-grokking-probe
   statement: Extended regularized training may reveal delayed exact generalization in the promoted cellular transition family.
-  promotion_gate: Complete Playwright-verified grokking primary research and preregister a dense-curve multi-seed probe with a calibrated budget.
-  status: planned
-next_action: Research and design the required grokking probe without reopening rejected graph formulations; retain Candidate 003 as incumbent.
+  promotion_gate: Require the full predeclared delayed-generalization signature in at least two of three decay seeds and more often than control.
+  status: preregistered
+next_action: Run the dynamically budgeted six-arm EXP-500 cellular grokking probe; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

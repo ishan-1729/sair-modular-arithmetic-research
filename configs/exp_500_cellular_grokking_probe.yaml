@@ -1,0 +1,68 @@
+run_id: exp-500-cellular-grokking-probe
+hypothesis: finite-data weight-decayed cellular training exhibits reproducible delayed exact generalization after memorization
+preregistration: knowledge/autoresearch/ablations/exp-500-cellular-grokking-probe.md
+seeds: [20260719, 20260720, 20260721]
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model: {width: 9, hidden: 92, cycles: 2}
+data:
+  prime_bits_min: 5
+  prime_bits_max: 9
+  train_examples: 2048
+  heldout_examples: 4096
+  random_state_fraction: 0.25
+  composite_fraction: 0.0
+training:
+  steps: 8000
+  batch_size: 128
+  learning_rate: 0.001
+  warmup_steps: 10
+  betas: [0.9, 0.98]
+  epsilon: 0.00000001
+  weight_decays: {no-decay-control: 0.0, decay-1e-2: 0.01}
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+evaluation:
+  curve_interval_steps: 200
+  rollout_interval_steps: 1000
+  rollout_cases: 500
+  checkpoint_interval_steps: 500
+  evaluation_batch_size: 512
+signature:
+  minimum_train_exact_at_memorization: 0.99
+  maximum_heldout_exact_at_memorization: 0.80
+  minimum_train_heldout_gap_at_memorization: 0.15
+  minimum_delay_after_memorization_steps: 1000
+  minimum_late_train_exact: 0.99
+  minimum_late_heldout_exact: 0.95
+  minimum_heldout_gain_after_memorization: 0.15
+  minimum_late_rollout_exact: 0.80
+  minimum_rollout_gain_from_initial: 0.20
+  minimum_reproducing_seeds: 2
+gates:
+  decay_signature_must_exceed_control_count: true
+  minimum_decay_signature_seeds: 2
+resource_budget:
+  limit_unit: wall_seconds
+  profile_width: 9
+  profile_batch_size: 128
+  profile_train_steps: 100
+  profile_train_wall_seconds: 11.854957876999833
+  profile_train_aggregate_cpu_seconds: 43.108534495
+  profile_transition_cases: 2048
+  profile_transition_wall_seconds: 0.6635671699987142
+  profile_transition_aggregate_cpu_seconds: 2.318496708000005
+  profile_rollout_cases: 500
+  profile_rollout_wall_seconds: 1.223773434998293
+  profile_rollout_aggregate_cpu_seconds: 4.450664408999998
+  projected_training_wall_seconds: 5690.37978095992
+  projected_dense_transition_eval_wall_seconds: 489.7125714590511
+  projected_rollout_eval_wall_seconds: 66.08376548990782
+  projected_checkpoint_and_setup_wall_seconds: 60
+  projected_total_wall_seconds: 6306.176117908879
+  soft_budget_wall_seconds: 9000
+  hard_runaway_ceiling_wall_seconds: 12000
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 800
+  cache_completed_arms: true

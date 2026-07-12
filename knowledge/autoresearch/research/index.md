@@ -4,3 +4,4 @@ Dated primary-source research notes are indexed here when online evidence materi
 
 - [Width-independent neural arithmetic architectures](2026-07-12-width-independent-arithmetic.md) - Playwright-verified primary sources and EXP-220 design implications.
 - [Graph algorithmic reasoning for modular reduction](2026-07-12-graph-algorithmic-reasoning.md) - Playwright-verified GCN, GAT, Graph Network, neural-execution, and CLRS implications for EXP-400.
+- [Grokking and delayed generalization](2026-07-12-grokking-delayed-generalization.md) - Playwright-verified primary sources, operational signature, and EXP-500 design.
