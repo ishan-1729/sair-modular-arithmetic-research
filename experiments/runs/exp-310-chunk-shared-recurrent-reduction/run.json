@@ -1,0 +1,25 @@
+{
+  "run_id": "exp-310-chunk-shared-recurrent-reduction",
+  "status": "completed",
+  "created_at": "2026-07-12T05:10:00Z",
+  "hypothesis": "Chunk-shared recurrent global context learns modular transitions and extrapolates across sequence length better than the dilated cellular control.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "d869bd4318ca38a378f5dc6b5742be8b1ed1b918",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "16970c4066cb6f172587ae3245443e46b76b6865668de6085f9990929b44c237",
+    "model_sha256": "277f5fa3fe7dcbe5cca63e7ca0ea2a0215da78bc9c44186cc0a533085c5204a4",
+    "config_sha256": "0ccd16298fbc2fd4e049e218def7bedc87c6381681776670e4198b81ddc7375d"
+  },
+  "config": "configs/exp_310_chunk_shared_recurrent.yaml",
+  "environment": "experiments/runs/exp-310-chunk-shared-recurrent-reduction/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "c318058c395448cbad9fb341ce0981e6", "control_run_id": "e90dc5221ecf4356a05fb6c0b179f700", "challenger_run_id": "1e93dfa065f74e0e87cb32d7493efe92"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-310-chunk-shared-recurrent/cellular-control/weights.safetensors",
+    "checkpoint_sha256": "1c3487c83aed4a581a8552e7d7274c9cb1d8057144906f3ccd48aa95db824925",
+    "metrics": "evals/results/exp-310-chunk-shared-recurrent-reduction/metrics.json"
+  },
+  "decision": "reject-chunk-shared-bidirectional-gru-advance-mixed-width-cellular-control",
+  "notes": ["The chunk-GRU failed every accuracy gate.", "The matched cellular control reached 91.19 percent width-16 transition, 28.2 percent rollout, and 75.115 percent zero-shot width-32 transition.", "Mixed-width curriculum, not the chunk representation, caused the useful gain."]
+}

@@ -167,3 +167,10 @@ runs:
     run_record: experiments/runs/exp-301-width64-hard-mining/run.json
     metrics: evals/results/exp-301-width64-hard-mining/metrics.json
     checkpoint: .scratch/exp-301-width64-hard-mining/weights.safetensors
+  - run_id: exp-310-chunk-shared-recurrent-reduction
+    status: completed
+    approach: matched-mixed-width-cellular-vs-chunk-gru
+    config: configs/exp_310_chunk_shared_recurrent.yaml
+    run_record: experiments/runs/exp-310-chunk-shared-recurrent-reduction/run.json
+    metrics: evals/results/exp-310-chunk-shared-recurrent-reduction/metrics.json
+    checkpoint: .scratch/exp-310-chunk-shared-recurrent/cellular-control/weights.safetensors

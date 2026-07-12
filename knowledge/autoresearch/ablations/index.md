@@ -22,3 +22,4 @@
 - [EXP-300 width-64 bit-tensor transfer](exp-300-width64-bit-tensor-transfer.md) - matched random-versus-transfer smoke beyond signed `int64`.
 - [EXP-301 width-64 hard-mined continuation](exp-301-width64-hard-mining.md) - full-budget reduction curriculum for autonomous rollout.
 - [EXP-310 chunk-shared recurrent reduction](exp-310-chunk-shared-recurrent-reduction.md) - matched mixed-width recurrent architecture and length-transfer test.
+- [EXP-311 expanded-width cellular curriculum](exp-311-cellular-expanded-width-curriculum.md) - continue the rescued cellular control through width 24.

@@ -47,3 +47,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-260 low-rate continuation | 32 | +600 | 99.826% | 92.795% | n/a | 126,276 | 43.2 train | reject; +0.63 rollout |
 | EXP-300 width64 random / transfer | 64 | 400 | 22.48% / 82.38% | 0% / 0% | 23.85% / 17.15% | 281,444 | 44.4 / 45.2 train | reject smoke; transfer +59.9 transition |
 | EXP-301 width64 hard mining | 64 | +1,200 | 93.53% | 2.30% | 5.94% | 281,444 | 142.7 train | reject; close fixed-width width64 |
+| EXP-310 cellular mixed-width control | 8/12/16 -> 32 | 1,200 | 91.19% / 75.115% zero-shot | 28.20% / 0.20% | 9.48% / 52.12% | 99,824 | 163.3 train | advance curriculum intervention |
+| EXP-310 chunk-GRU challenger | 8/12/16 -> 32 | 1,200 | 38.335% / 44.435% | 0% / 0% | 35.4% / 89.9% | 72,903 | 27.1 train | reject architecture |
