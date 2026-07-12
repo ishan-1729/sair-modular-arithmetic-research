@@ -76,16 +76,18 @@ def main() -> int:
                 for row in range(batch):
                     count = 1 if corruption_rng.random() < corruption["one_bit_probability"] else 2
                     for position in corruption_rng.sample(range(width), count): state_plane[row, position] = 1.0 - state_plane[row, position]
-            losses = []; exact = []; casewise = []; model.width = width
+            losses = []; exact = []; casewise = []; trajectory_vectors = []; model.width = width
             for offset in range(chunk):
-                positions = [start + offset for start in starts]; bit = [(left >> (width - 1 - position)) & 1 for left, position in zip(multiplier, positions)]; raw = [2 * state + flag * value for state, flag, value in zip(teacher, bit, right)]; target = [value % prime for value, prime in zip(raw, modulus)]; quotient = torch.tensor([value // prime for value, prime in zip(raw, modulus)], dtype=torch.long); logits, qlogits = model(soft_features(state_plane, right, modulus, bit, width)); part, stats = transition_objective(logits, qlogits, target, quotient, width, 0.0); losses.append(part); exact.append(stats["batch_exact"]); casewise.append(stats["casewise_worst_bit_bce"])
+                positions = [start + offset for start in starts]; bit = [(left >> (width - 1 - position)) & 1 for left, position in zip(multiplier, positions)]; raw = [2 * state + flag * value for state, flag, value in zip(teacher, bit, right)]; target = [value % prime for value, prime in zip(raw, modulus)]; quotient = torch.tensor([value // prime for value, prime in zip(raw, modulus)], dtype=torch.long); logits, qlogits = model(soft_features(state_plane, right, modulus, bit, width)); part, stats = transition_objective(logits, qlogits, target, quotient, width, 0.0); losses.append(part); exact.append(stats["batch_exact"]); casewise.append(stats["casewise_worst_bit_bce"]); trajectory_vectors.append(torch.nn.functional.binary_cross_entropy_with_logits(logits, exp300.bits(target, width), reduction="none").amax(dim=1))
                 state_mode = arm.get("state_mode", "soft" if arm["differentiable_soft_state"] else "detached"); probabilities = torch.sigmoid(logits)
                 if state_mode == "soft": state_plane = probabilities
                 elif state_mode == "detached": state_plane = logits.ge(0).float().detach()
                 elif state_mode == "straight_through": state_plane = logits.ge(0).float() + probabilities - probabilities.detach()
                 else: raise ValueError(f"unknown state mode {state_mode}")
                 teacher = target
-            loss = torch.stack(losses).mean(); return loss, {"loss": float(loss.detach()), "batch_exact": sum(exact) / len(exact), "casewise_worst_bit_bce": sum(casewise) / len(casewise)}
+            loss = torch.stack(losses).mean(); trajectory_worst = torch.stack(trajectory_vectors).amax(dim=0); fraction = float(arm.get("trajectory_cvar_fraction", 0.25)); tail_count = max(1, int(np.ceil(batch * fraction))); trajectory_cvar = torch.topk(trajectory_worst, tail_count).values.mean(); trajectory_weight = float(arm.get("trajectory_cvar_weight", 0.0))
+            if trajectory_weight: loss = loss + trajectory_weight * trajectory_cvar
+            return loss, {"loss": float(loss.detach()), "batch_exact": sum(exact) / len(exact), "casewise_worst_bit_bce": sum(casewise) / len(casewise), "trajectory_cvar": float(trajectory_cvar.detach()), "trajectory_cvar_weight": trajectory_weight}
         model.train(); schedule = config["training"]["mode_schedule"]
         for step in (range(1, config["training"]["steps"] + 1) if arm.get("train", True) else ()):
             mode = schedule[(step - 1) % len(schedule)]
