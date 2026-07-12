@@ -21,6 +21,8 @@ dev = [
 ]
 research = [
   "mlflow==3.14.0",
+  "psutil==7.0.0",
+  "sympy==1.13.1",
 ]
 
 [tool.setuptools.packages.find]

@@ -62,3 +62,38 @@ runs:
     run_record: experiments/runs/candidate-002-tier3-hybrid/run.json
     metrics: evals/results/candidate-002-tier3-hybrid/metrics.json
     checkpoint: submission/weights.safetensors
+  - run_id: exp-200-width32-transfer-ab
+    status: completed
+    approach: matched-width32-transfer-hard-mining
+    config: configs/exp_200_width32_transfer_ab.yaml
+    run_record: experiments/runs/exp-200-width32-transfer-ab/run.json
+    metrics: evals/results/exp-200-width32-transfer-ab/metrics.json
+    checkpoint: .scratch/exp-200-width32-transfer-ab/width32-transfer-hard-mining/weights.safetensors
+  - run_id: exp-201-width32-full-budget
+    status: completed
+    approach: full-budget-width32-transfer-hard-mining
+    config: configs/exp_201_width32_full_budget.yaml
+    run_record: experiments/runs/exp-201-width32-full-budget/run.json
+    metrics: evals/results/exp-201-width32-full-budget/metrics.json
+    checkpoint: .scratch/exp-201-width32-full-budget/width32-transfer-hard-mining/weights.safetensors
+  - run_id: exp-202-width32-2400
+    status: completed
+    approach: confirmed-width32-transfer-hard-mining
+    config: configs/exp_202_width32_2400.yaml
+    run_record: experiments/runs/exp-202-width32-2400/run.json
+    metrics: evals/results/exp-202-width32-2400/metrics.json
+    checkpoint: .scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors
+  - run_id: exp-203-independent-tier4-five-seed
+    status: completed
+    approach: frozen-official-generator-tier4-gate
+    config: configs/exp_203_independent_tier4.yaml
+    run_record: experiments/runs/exp-203-independent-tier4-five-seed/run.json
+    metrics: evals/results/exp-203-independent-tier4-five-seed/metrics.json
+    checkpoint: .scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors
+  - run_id: exp-204-official-distribution-finetune
+    status: completed
+    approach: paired-official-distribution-finetune
+    config: configs/exp_204_official_distribution_finetune.yaml
+    run_record: experiments/runs/exp-204-official-distribution-finetune/run.json
+    metrics: evals/results/exp-204-official-distribution-finetune/metrics.json
+    checkpoint: .scratch/exp-204-official-distribution-finetune/width32-official-distribution-finetune/weights.safetensors

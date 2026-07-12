@@ -1,0 +1,586 @@
+{
+  "run_id": "exp-203-independent-tier4-five-seed",
+  "status": "completed",
+  "checkpoint": {
+    "path": ".scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors",
+    "sha256": "047cbfb0599b2ea12af9aeed5171cf832f0c4ec179a09596518b668b14644eed"
+  },
+  "generator": {
+    "implementation": "modchallenge.testgen.generator._generate_tier_cases",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "checked_public_used": false,
+  "tier": 4,
+  "seeds": {
+    "50f36ea35c8e5d34": {
+      "seed_sha256": "50f36ea35c8e5d342899982ff89c3aef75a5cce17d5cd8acb248e9088d0778f3",
+      "cases": 100,
+      "correct": 87,
+      "exact_accuracy": 0.8700000047683716,
+      "invalid_residues": 0,
+      "inference_seconds": 0.6662295010000001,
+      "per_prime": {
+        "2237484539": {
+          "cases": 20,
+          "correct": 17,
+          "exact_accuracy": 0.85
+        },
+        "2415065651": {
+          "cases": 33,
+          "correct": 29,
+          "exact_accuracy": 0.8787878787878788
+        },
+        "2539515931": {
+          "cases": 16,
+          "correct": 13,
+          "exact_accuracy": 0.8125
+        },
+        "2840812459": {
+          "cases": 19,
+          "correct": 17,
+          "exact_accuracy": 0.8947368421052632
+        },
+        "4056992573": {
+          "cases": 12,
+          "correct": 11,
+          "exact_accuracy": 0.9166666666666666
+        }
+      },
+      "errors": [
+        {
+          "index": 5,
+          "p": 2415065651,
+          "predicted": 638823748,
+          "expected": 1358204335
+        },
+        {
+          "index": 24,
+          "p": 2539515931,
+          "predicted": 477407348,
+          "expected": 629953947
+        },
+        {
+          "index": 33,
+          "p": 4056992573,
+          "predicted": 1714365767,
+          "expected": 3489444466
+        },
+        {
+          "index": 36,
+          "p": 2415065651,
+          "predicted": 2175350140,
+          "expected": 295448495
+        },
+        {
+          "index": 37,
+          "p": 2237484539,
+          "predicted": 1866570766,
+          "expected": 1799461902
+        },
+        {
+          "index": 39,
+          "p": 2539515931,
+          "predicted": 771439365,
+          "expected": 618892766
+        },
+        {
+          "index": 41,
+          "p": 2237484539,
+          "predicted": 759594989,
+          "expected": 944434834
+        },
+        {
+          "index": 50,
+          "p": 2840812459,
+          "predicted": 2561198714,
+          "expected": 2831187574
+        },
+        {
+          "index": 67,
+          "p": 2539515931,
+          "predicted": 919106497,
+          "expected": 2089811124
+        },
+        {
+          "index": 75,
+          "p": 2840812459,
+          "predicted": 1158524236,
+          "expected": 2142912775
+        },
+        {
+          "index": 76,
+          "p": 2415065651,
+          "predicted": 1063029761,
+          "expected": 527865755
+        },
+        {
+          "index": 79,
+          "p": 2237484539,
+          "predicted": 626061742,
+          "expected": 266058178
+        },
+        {
+          "index": 91,
+          "p": 2415065651,
+          "predicted": 2364963626,
+          "expected": 224307602
+        }
+      ]
+    },
+    "eb1b18b948664ac1": {
+      "seed_sha256": "eb1b18b948664ac1fc2d2c3671588dac6ccab8f496c035739c9e19157d7e00f4",
+      "cases": 100,
+      "correct": 91,
+      "exact_accuracy": 0.9100000262260437,
+      "invalid_residues": 0,
+      "inference_seconds": 0.5349297779999986,
+      "per_prime": {
+        "720454697": {
+          "cases": 20,
+          "correct": 18,
+          "exact_accuracy": 0.9
+        },
+        "987668797": {
+          "cases": 24,
+          "correct": 23,
+          "exact_accuracy": 0.9583333333333334
+        },
+        "1790879971": {
+          "cases": 14,
+          "correct": 12,
+          "exact_accuracy": 0.8571428571428571
+        },
+        "3559483439": {
+          "cases": 20,
+          "correct": 17,
+          "exact_accuracy": 0.85
+        },
+        "4214392799": {
+          "cases": 22,
+          "correct": 21,
+          "exact_accuracy": 0.9545454545454546
+        }
+      },
+      "errors": [
+        {
+          "index": 16,
+          "p": 4214392799,
+          "predicted": 700936725,
+          "expected": 700934677
+        },
+        {
+          "index": 27,
+          "p": 720454697,
+          "predicted": 3038329,
+          "expected": 3036281
+        },
+        {
+          "index": 34,
+          "p": 987668797,
+          "predicted": 324456463,
+          "expected": 320262159
+        },
+        {
+          "index": 36,
+          "p": 1790879971,
+          "predicted": 534194968,
+          "expected": 538389272
+        },
+        {
+          "index": 37,
+          "p": 3559483439,
+          "predicted": 2637769438,
+          "expected": 1516063755
+        },
+        {
+          "index": 47,
+          "p": 3559483439,
+          "predicted": 1064355932,
+          "expected": 1799839789
+        },
+        {
+          "index": 66,
+          "p": 720454697,
+          "predicted": 301010010,
+          "expected": 267455578
+        },
+        {
+          "index": 72,
+          "p": 3559483439,
+          "predicted": 3501380554,
+          "expected": 1875218247
+        },
+        {
+          "index": 79,
+          "p": 1790879971,
+          "predicted": 1753381038,
+          "expected": 1250064558
+        }
+      ]
+    },
+    "cd0482700d19c103": {
+      "seed_sha256": "cd0482700d19c1035207cac1576a5d7463a7dcf35069ed7dc69c5b0236a9325a",
+      "cases": 100,
+      "correct": 88,
+      "exact_accuracy": 0.8799999952316284,
+      "invalid_residues": 0,
+      "inference_seconds": 0.589488137,
+      "per_prime": {
+        "104427259": {
+          "cases": 19,
+          "correct": 18,
+          "exact_accuracy": 0.9473684210526315
+        },
+        "1352938163": {
+          "cases": 21,
+          "correct": 17,
+          "exact_accuracy": 0.8095238095238095
+        },
+        "2432828527": {
+          "cases": 22,
+          "correct": 20,
+          "exact_accuracy": 0.9090909090909091
+        },
+        "3413425933": {
+          "cases": 17,
+          "correct": 15,
+          "exact_accuracy": 0.8823529411764706
+        },
+        "3758873749": {
+          "cases": 21,
+          "correct": 18,
+          "exact_accuracy": 0.8571428571428571
+        }
+      },
+      "errors": [
+        {
+          "index": 14,
+          "p": 3758873749,
+          "predicted": 2197272326,
+          "expected": 2196223750
+        },
+        {
+          "index": 22,
+          "p": 1352938163,
+          "predicted": 1325884686,
+          "expected": 794075903
+        },
+        {
+          "index": 25,
+          "p": 2432828527,
+          "predicted": 805461386,
+          "expected": 805461497
+        },
+        {
+          "index": 44,
+          "p": 104427259,
+          "predicted": 29305144,
+          "expected": 58790762
+        },
+        {
+          "index": 45,
+          "p": 1352938163,
+          "predicted": 549521026,
+          "expected": 482412162
+        },
+        {
+          "index": 49,
+          "p": 1352938163,
+          "predicted": 121537592,
+          "expected": 312969937
+        },
+        {
+          "index": 51,
+          "p": 1352938163,
+          "predicted": 1350179488,
+          "expected": 1345999524
+        },
+        {
+          "index": 70,
+          "p": 2432828527,
+          "predicted": 1344615424,
+          "expected": 807744512
+        },
+        {
+          "index": 82,
+          "p": 3758873749,
+          "predicted": 1792130205,
+          "expected": 749769603
+        },
+        {
+          "index": 84,
+          "p": 3758873749,
+          "predicted": 2034722487,
+          "expected": 468696633
+        },
+        {
+          "index": 85,
+          "p": 3413425933,
+          "predicted": 595835788,
+          "expected": 821314826
+        },
+        {
+          "index": 87,
+          "p": 3413425933,
+          "predicted": 1057030183,
+          "expected": 1061224487
+        }
+      ]
+    },
+    "c7ba3e47282cdbe8": {
+      "seed_sha256": "c7ba3e47282cdbe899d2af8788bdb3eddd7d58e08297ca6f12531079a17ebb5d",
+      "cases": 100,
+      "correct": 87,
+      "exact_accuracy": 0.8700000047683716,
+      "invalid_residues": 0,
+      "inference_seconds": 0.5549611580000011,
+      "per_prime": {
+        "42218321": {
+          "cases": 24,
+          "correct": 21,
+          "exact_accuracy": 0.875
+        },
+        "955935241": {
+          "cases": 22,
+          "correct": 19,
+          "exact_accuracy": 0.8636363636363636
+        },
+        "980610793": {
+          "cases": 20,
+          "correct": 17,
+          "exact_accuracy": 0.85
+        },
+        "1186076867": {
+          "cases": 15,
+          "correct": 13,
+          "exact_accuracy": 0.8666666666666667
+        },
+        "1553255239": {
+          "cases": 19,
+          "correct": 17,
+          "exact_accuracy": 0.8947368421052632
+        }
+      },
+      "errors": [
+        {
+          "index": 5,
+          "p": 955935241,
+          "predicted": 659869995,
+          "expected": 651481387
+        },
+        {
+          "index": 31,
+          "p": 980610793,
+          "predicted": 574283753,
+          "expected": 545865757
+        },
+        {
+          "index": 37,
+          "p": 955935241,
+          "predicted": 699790054,
+          "expected": 463685368
+        },
+        {
+          "index": 41,
+          "p": 980610793,
+          "predicted": 740932345,
+          "expected": 204061433
+        },
+        {
+          "index": 47,
+          "p": 955935241,
+          "predicted": 398354350,
+          "expected": 935225262
+        },
+        {
+          "index": 53,
+          "p": 980610793,
+          "predicted": 96820374,
+          "expected": 963759183
+        },
+        {
+          "index": 59,
+          "p": 42218321,
+          "predicted": 41924095,
+          "expected": 36343008
+        },
+        {
+          "index": 60,
+          "p": 42218321,
+          "predicted": 38629573,
+          "expected": 32978850
+        },
+        {
+          "index": 63,
+          "p": 1186076867,
+          "predicted": 974908358,
+          "expected": 349997642
+        },
+        {
+          "index": 65,
+          "p": 42218321,
+          "predicted": 3508090,
+          "expected": 3512185
+        },
+        {
+          "index": 70,
+          "p": 1186076867,
+          "predicted": 968715210,
+          "expected": 111104871
+        },
+        {
+          "index": 86,
+          "p": 1553255239,
+          "predicted": 811558405,
+          "expected": 39232661
+        },
+        {
+          "index": 95,
+          "p": 1553255239,
+          "predicted": 1515332085,
+          "expected": 1513234933
+        }
+      ]
+    },
+    "51f07d3f18a8d1a3": {
+      "seed_sha256": "51f07d3f18a8d1a36ff26e67f8deb762505a773a96b71392e31b22a108247c0f",
+      "cases": 100,
+      "correct": 88,
+      "exact_accuracy": 0.8799999952316284,
+      "invalid_residues": 0,
+      "inference_seconds": 0.6151643769999993,
+      "per_prime": {
+        "742938121": {
+          "cases": 18,
+          "correct": 16,
+          "exact_accuracy": 0.8888888888888888
+        },
+        "2315659859": {
+          "cases": 25,
+          "correct": 21,
+          "exact_accuracy": 0.84
+        },
+        "2511643259": {
+          "cases": 16,
+          "correct": 14,
+          "exact_accuracy": 0.875
+        },
+        "3263921363": {
+          "cases": 18,
+          "correct": 17,
+          "exact_accuracy": 0.9444444444444444
+        },
+        "3812327989": {
+          "cases": 23,
+          "correct": 20,
+          "exact_accuracy": 0.8695652173913043
+        }
+      },
+      "errors": [
+        {
+          "index": 4,
+          "p": 2315659859,
+          "predicted": 672475719,
+          "expected": 1008828141
+        },
+        {
+          "index": 15,
+          "p": 742938121,
+          "predicted": 550843770,
+          "expected": 349517178
+        },
+        {
+          "index": 24,
+          "p": 3812327989,
+          "predicted": 81778637,
+          "expected": 1047057251
+        },
+        {
+          "index": 32,
+          "p": 742938121,
+          "predicted": 146259117,
+          "expected": 704612436
+        },
+        {
+          "index": 45,
+          "p": 3812327989,
+          "predicted": 2868031555,
+          "expected": 289149335
+        },
+        {
+          "index": 50,
+          "p": 3812327989,
+          "predicted": 70542819,
+          "expected": 3400231501
+        },
+        {
+          "index": 53,
+          "p": 2315659859,
+          "predicted": 471472278,
+          "expected": 1972110346
+        },
+        {
+          "index": 57,
+          "p": 2511643259,
+          "predicted": 52466912,
+          "expected": 17476651
+        },
+        {
+          "index": 60,
+          "p": 3263921363,
+          "predicted": 2641324932,
+          "expected": 2238671748
+        },
+        {
+          "index": 65,
+          "p": 2511643259,
+          "predicted": 1556833917,
+          "expected": 100195473
+        },
+        {
+          "index": 95,
+          "p": 2315659859,
+          "predicted": 703783131,
+          "expected": 1777524955
+        },
+        {
+          "index": 98,
+          "p": 2315659859,
+          "predicted": 1270039870,
+          "expected": 894880353
+        }
+      ]
+    }
+  },
+  "aggregate": {
+    "cases": 500,
+    "correct": 441,
+    "exact_accuracy": 0.882,
+    "passing_seeds": 1,
+    "minimum_seed_accuracy": 0.8700000047683716
+  },
+  "gates": {
+    "minimum_aggregate_accuracy": 0.9,
+    "minimum_passing_seeds": 4,
+    "per_seed_passing_accuracy": 0.9,
+    "minimum_single_seed_accuracy": 0.85,
+    "passed": false
+  },
+  "decision": "retain-candidate002",
+  "runtime": {
+    "wall_seconds": 4.042764203000001,
+    "device": "cpu",
+    "torch_threads": 4
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "6461f87fbe2c435994a90497a8cdb9dc"
+  },
+  "limitations": [
+    "Five independent seeds cannot reproduce the unknowable private seed.",
+    "Tier 4 only; full integration evaluation remains required.",
+    "Checked public Tier-4 answers were not read."
+  ]
+}

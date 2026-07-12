@@ -1,0 +1,1136 @@
+{
+  "run_id": "exp-202-width32-2400",
+  "status": "completed",
+  "hypothesis": "extending the validated width-32 transfer curriculum to 2400 steps clears the unchanged independent-evaluation gate",
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "917806511746470f92a3bed459c555e1",
+    "arm_run_id": "d6e7171c133e4f8ea357a0ed2ea55196"
+  },
+  "source": {
+    "repository_commit": "05ccc758ddb838927818bfa705a46052dff20d48",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "854e4e17c1221164c8dc4078606e61823f40fb9645b53c09c732b15b83195dfa",
+    "runner_sha256": "7673ea405aec19c2c76f84f32bd5031860edc7f5b4117ac86164ada3a8d60040",
+    "source_checkpoint_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94"
+  },
+  "transfer": {
+    "source_width": 16,
+    "target_width": 32,
+    "exact_tensor_count": 66,
+    "exact_tensors": [
+      "body.0.conv1.bias",
+      "body.0.conv1.weight",
+      "body.0.conv2.bias",
+      "body.0.conv2.weight",
+      "body.0.norm1.bias",
+      "body.0.norm1.weight",
+      "body.0.norm2.bias",
+      "body.0.norm2.weight",
+      "body.1.conv1.bias",
+      "body.1.conv1.weight",
+      "body.1.conv2.bias",
+      "body.1.conv2.weight",
+      "body.1.norm1.bias",
+      "body.1.norm1.weight",
+      "body.1.norm2.bias",
+      "body.1.norm2.weight",
+      "body.2.conv1.bias",
+      "body.2.conv1.weight",
+      "body.2.conv2.bias",
+      "body.2.conv2.weight",
+      "body.2.norm1.bias",
+      "body.2.norm1.weight",
+      "body.2.norm2.bias",
+      "body.2.norm2.weight",
+      "body.3.conv1.bias",
+      "body.3.conv1.weight",
+      "body.3.conv2.bias",
+      "body.3.conv2.weight",
+      "body.3.norm1.bias",
+      "body.3.norm1.weight",
+      "body.3.norm2.bias",
+      "body.3.norm2.weight",
+      "body.4.conv1.bias",
+      "body.4.conv1.weight",
+      "body.4.conv2.bias",
+      "body.4.conv2.weight",
+      "body.4.norm1.bias",
+      "body.4.norm1.weight",
+      "body.4.norm2.bias",
+      "body.4.norm2.weight",
+      "body.5.conv1.bias",
+      "body.5.conv1.weight",
+      "body.5.conv2.bias",
+      "body.5.conv2.weight",
+      "body.5.norm1.bias",
+      "body.5.norm1.weight",
+      "body.5.norm2.bias",
+      "body.5.norm2.weight",
+      "body.6.conv1.bias",
+      "body.6.conv1.weight",
+      "body.6.conv2.bias",
+      "body.6.conv2.weight",
+      "body.6.norm1.bias",
+      "body.6.norm1.weight",
+      "body.6.norm2.bias",
+      "body.6.norm2.weight",
+      "head_norm.bias",
+      "head_norm.weight",
+      "local_head.bias",
+      "local_head.weight",
+      "modulus_context.0.bias",
+      "modulus_context.2.bias",
+      "modulus_context.2.weight",
+      "quotient_head.bias",
+      "stem.bias",
+      "stem.weight"
+    ],
+    "overlap_tensors": [
+      "position",
+      "modulus_context.0.weight",
+      "global_head.weight",
+      "global_head.bias",
+      "quotient_head.weight"
+    ],
+    "source_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94"
+  },
+  "result": {
+    "arm": {
+      "width": 32,
+      "prime_bits_min": 17,
+      "prime_bits_max": 32,
+      "name": "width32-transfer-hard-mining"
+    },
+    "parameters": 126276,
+    "prime_split": {
+      "train": 2048,
+      "validation": 512,
+      "test": 512,
+      "sha256": "36f3da98bc9c54ab628e978f2033c2ec8961e2650dd56b4d9fe407a7790d688b"
+    },
+    "training": {
+      "steps": 2400,
+      "examples": 614400,
+      "seconds": 395.31107975300006,
+      "peak_rss_bytes": 620212224,
+      "final_100_step_batch_exact_delta": -0.00390625,
+      "history": [
+        {
+          "step": 1,
+          "elapsed_seconds": 0.2520209150000028,
+          "learning_rate": 0.0024999989804837188,
+          "gradient_norm": 27.559377670288086,
+          "loss": 4.687829971313477,
+          "mean_bce": 1.1723315715789795,
+          "worst_bit_bce": 7.143331050872803,
+          "quotient_ce": 3.0099973678588867,
+          "batch_exact": 0.18359375
+        },
+        {
+          "step": 50,
+          "elapsed_seconds": 5.649364214999991,
+          "learning_rate": 0.002497452118653939,
+          "gradient_norm": 7.579314708709717,
+          "loss": 0.3301038146018982,
+          "mean_bce": 0.07888173311948776,
+          "worst_bit_bce": 0.5260118842124939,
+          "quotient_ce": 0.1451675146818161,
+          "batch_exact": 0.75390625
+        },
+        {
+          "step": 100,
+          "elapsed_seconds": 11.471830476999912,
+          "learning_rate": 0.0024898193850348355,
+          "gradient_norm": 2.8869071006774902,
+          "loss": 0.2112777829170227,
+          "mean_bce": 0.049318455159664154,
+          "worst_bit_bce": 0.34778469800949097,
+          "quotient_ce": 0.054562054574489594,
+          "batch_exact": 0.859375
+        },
+        {
+          "step": 150,
+          "elapsed_seconds": 17.51206192199993,
+          "learning_rate": 0.0024771344836798464,
+          "gradient_norm": 8.684986114501953,
+          "loss": 0.24187561869621277,
+          "mean_bce": 0.058531805872917175,
+          "worst_bit_bce": 0.3847208619117737,
+          "quotient_ce": 0.10219431668519974,
+          "batch_exact": 0.859375
+        },
+        {
+          "step": 200,
+          "elapsed_seconds": 23.283229605999963,
+          "learning_rate": 0.002459451733283994,
+          "gradient_norm": 5.280178546905518,
+          "loss": 0.13564692437648773,
+          "mean_bce": 0.02323223277926445,
+          "worst_bit_bce": 0.2455873191356659,
+          "quotient_ce": 0.019004086032509804,
+          "batch_exact": 0.90625
+        },
+        {
+          "step": 250,
+          "elapsed_seconds": 28.734713177999993,
+          "learning_rate": 0.002436846854099178,
+          "gradient_norm": 7.636641979217529,
+          "loss": 0.11091474443674088,
+          "mean_bce": 0.01924373395740986,
+          "worst_bit_bce": 0.19927507638931274,
+          "quotient_ce": 0.019972318783402443,
+          "batch_exact": 0.921875
+        },
+        {
+          "step": 300,
+          "elapsed_seconds": 34.837127481999914,
+          "learning_rate": 0.0024094166436884343,
+          "gradient_norm": 7.6162848472595215,
+          "loss": 0.21390540897846222,
+          "mean_bce": 0.04438910633325577,
+          "worst_bit_bce": 0.358938992023468,
+          "quotient_ce": 0.0799376592040062,
+          "batch_exact": 0.859375
+        },
+        {
+          "step": 350,
+          "elapsed_seconds": 40.12550751200001,
+          "learning_rate": 0.0023772785624239013,
+          "gradient_norm": 3.651601552963257,
+          "loss": 0.09665311127901077,
+          "mean_bce": 0.016282659024000168,
+          "worst_bit_bce": 0.1774565875530243,
+          "quotient_ce": 0.00514994328841567,
+          "batch_exact": 0.92578125
+        },
+        {
+          "step": 400,
+          "elapsed_seconds": 45.78475963899996,
+          "learning_rate": 0.0023405702305034845,
+          "gradient_norm": 1.7177505493164062,
+          "loss": 0.060287848114967346,
+          "mean_bce": 0.011960066854953766,
+          "worst_bit_bce": 0.10532436519861221,
+          "quotient_ce": 0.009318177588284016,
+          "batch_exact": 0.9609375
+        },
+        {
+          "step": 450,
+          "elapsed_seconds": 51.931221403999984,
+          "learning_rate": 0.002299448838640033,
+          "gradient_norm": 3.2001030445098877,
+          "loss": 0.09559541195631027,
+          "mean_bce": 0.020410077646374702,
+          "worst_bit_bce": 0.16196714341640472,
+          "quotient_ce": 0.02300124056637287,
+          "batch_exact": 0.953125
+        },
+        {
+          "step": 500,
+          "elapsed_seconds": 57.83881024999994,
+          "learning_rate": 0.0022540904749465728,
+          "gradient_norm": 3.1921894550323486,
+          "loss": 0.09040872752666473,
+          "mean_bce": 0.01518956571817398,
+          "worst_bit_bce": 0.16649137437343597,
+          "quotient_ce": 0.0029804734513163567,
+          "batch_exact": 0.9375
+        },
+        {
+          "step": 550,
+          "elapsed_seconds": 63.228404566999984,
+          "learning_rate": 0.0022046893708999858,
+          "gradient_norm": 2.635282516479492,
+          "loss": 0.08391909301280975,
+          "mean_bce": 0.014655674807727337,
+          "worst_bit_bce": 0.15302716195583344,
+          "quotient_ce": 0.004011983051896095,
+          "batch_exact": 0.94921875
+        },
+        {
+          "step": 600,
+          "elapsed_seconds": 68.71275684299997,
+          "learning_rate": 0.0021514570696119944,
+          "gradient_norm": 1.6243401765823364,
+          "loss": 0.08678603917360306,
+          "mean_bce": 0.016681699082255363,
+          "worst_bit_bce": 0.14934296905994415,
+          "quotient_ce": 0.02900003455579281,
+          "batch_exact": 0.94921875
+        },
+        {
+          "step": 650,
+          "elapsed_seconds": 74.95773649099999,
+          "learning_rate": 0.0020946215199690852,
+          "gradient_norm": 3.868161916732788,
+          "loss": 0.09793174266815186,
+          "mean_bce": 0.031509313732385635,
+          "worst_bit_bce": 0.14193867146968842,
+          "quotient_ce": 0.025500383228063583,
+          "batch_exact": 0.95703125
+        },
+        {
+          "step": 700,
+          "elapsed_seconds": 85.28918480799996,
+          "learning_rate": 0.0020344261005203774,
+          "gradient_norm": 4.365445137023926,
+          "loss": 0.11434957385063171,
+          "mean_bce": 0.024322647601366043,
+          "worst_bit_bce": 0.19803357124328613,
+          "quotient_ce": 0.009118184447288513,
+          "batch_exact": 0.94140625
+        },
+        {
+          "step": 750,
+          "elapsed_seconds": 96.85379361100001,
+          "learning_rate": 0.0019711285772933207,
+          "gradient_norm": 1.4181277751922607,
+          "loss": 0.07637041062116623,
+          "mean_bce": 0.01841605268418789,
+          "worst_bit_bce": 0.11955852061510086,
+          "quotient_ce": 0.04153027758002281,
+          "batch_exact": 0.96875
+        },
+        {
+          "step": 800,
+          "elapsed_seconds": 109.25619423800003,
+          "learning_rate": 0.001904999999999992,
+          "gradient_norm": 1.4188237190246582,
+          "loss": 0.041256681084632874,
+          "mean_bce": 0.005490598268806934,
+          "worst_bit_bce": 0.07932458817958832,
+          "quotient_ce": 0.0007001924095675349,
+          "batch_exact": 0.96484375
+        },
+        {
+          "step": 850,
+          "elapsed_seconds": 121.54401923299997,
+          "learning_rate": 0.0018363235413606032,
+          "gradient_norm": 2.029487133026123,
+          "loss": 0.04921043664216995,
+          "mean_bce": 0.008806386031210423,
+          "worst_bit_bce": 0.08811961859464645,
+          "quotient_ce": 0.0075022452510893345,
+          "batch_exact": 0.9765625
+        },
+        {
+          "step": 900,
+          "elapsed_seconds": 138.16466586499996,
+          "learning_rate": 0.0017653932845144483,
+          "gradient_norm": 1.1747709512710571,
+          "loss": 0.032561905682086945,
+          "mean_bce": 0.006318008527159691,
+          "worst_bit_bce": 0.057931575924158096,
+          "quotient_ce": 0.0017468782607465982,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 950,
+          "elapsed_seconds": 149.48350015899996,
+          "learning_rate": 0.0016925129637107542,
+          "gradient_norm": 0.8016172647476196,
+          "loss": 0.03366931155323982,
+          "mean_bce": 0.003986279480159283,
+          "worst_bit_bce": 0.0658225566148758,
+          "quotient_ce": 0.0006288255099207163,
+          "batch_exact": 0.97265625
+        },
+        {
+          "step": 1000,
+          "elapsed_seconds": 157.22542095699987,
+          "learning_rate": 0.0016179946636719917,
+          "gradient_norm": 1.5868816375732422,
+          "loss": 0.04229595139622688,
+          "mean_bce": 0.005432674661278725,
+          "worst_bit_bce": 0.08166589587926865,
+          "quotient_ce": 0.0011362571967765689,
+          "batch_exact": 0.9765625
+        },
+        {
+          "step": 1050,
+          "elapsed_seconds": 166.22718082100005,
+          "learning_rate": 0.0015421574831991861,
+          "gradient_norm": 0.3760327398777008,
+          "loss": 0.010997500270605087,
+          "mean_bce": 0.0020383226219564676,
+          "worst_bit_bce": 0.019831113517284393,
+          "quotient_ce": 0.00035176542587578297,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 1100,
+          "elapsed_seconds": 176.1476035139999,
+          "learning_rate": 0.0014653261687418548,
+          "gradient_norm": 0.6779934167861938,
+          "loss": 0.014458611607551575,
+          "mean_bce": 0.002247509779408574,
+          "worst_bit_bce": 0.02709062397480011,
+          "quotient_ce": 0.00020321020565461367,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 1150,
+          "elapsed_seconds": 189.44056869399992,
+          "learning_rate": 0.001387829723783864,
+          "gradient_norm": 0.9978150725364685,
+          "loss": 0.023680146783590317,
+          "mean_bce": 0.004786294884979725,
+          "worst_bit_bce": 0.041751597076654434,
+          "quotient_ce": 0.001056336099281907,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 1200,
+          "elapsed_seconds": 204.01248186399994,
+          "learning_rate": 0.0013099999999999945,
+          "gradient_norm": 2.9753289222717285,
+          "loss": 0.026441406458616257,
+          "mean_bce": 0.0037358831614255905,
+          "worst_bit_bce": 0.04789581894874573,
+          "quotient_ce": 0.011524063535034657,
+          "batch_exact": 0.984375
+        },
+        {
+          "step": 1250,
+          "elapsed_seconds": 214.2026045519999,
+          "learning_rate": 0.001232170276216125,
+          "gradient_norm": 1.480892539024353,
+          "loss": 0.029481664299964905,
+          "mean_bce": 0.00610488373786211,
+          "worst_bit_bce": 0.04914538189768791,
+          "quotient_ce": 0.012613601051270962,
+          "batch_exact": 0.9765625
+        },
+        {
+          "step": 1300,
+          "elapsed_seconds": 224.56104622299995,
+          "learning_rate": 0.0011546738312581354,
+          "gradient_norm": 1.8614370822906494,
+          "loss": 0.03379135951399803,
+          "mean_bce": 0.006010521203279495,
+          "worst_bit_bce": 0.06103268265724182,
+          "quotient_ce": 0.003161318600177765,
+          "batch_exact": 0.9765625
+        },
+        {
+          "step": 1350,
+          "elapsed_seconds": 234.0190147809999,
+          "learning_rate": 0.0010778425168008051,
+          "gradient_norm": 0.3580269515514374,
+          "loss": 0.00600865762680769,
+          "mean_bce": 0.0008830538135953248,
+          "worst_bit_bce": 0.011350201442837715,
+          "quotient_ce": 0.00018013188673648983,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 1400,
+          "elapsed_seconds": 244.20450551,
+          "learning_rate": 0.0010020053363280006,
+          "gradient_norm": 1.405448317527771,
+          "loss": 0.013580967672169209,
+          "mean_bce": 0.0024472663644701242,
+          "worst_bit_bce": 0.024650510400533676,
+          "quotient_ce": 0.0004097223572898656,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 1450,
+          "elapsed_seconds": 260.02656003699985,
+          "learning_rate": 0.0009274870362892385,
+          "gradient_norm": 0.8617599606513977,
+          "loss": 0.019964473322033882,
+          "mean_bce": 0.0028829555958509445,
+          "worst_bit_bce": 0.03792935237288475,
+          "quotient_ce": 0.00013309725909493864,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 1500,
+          "elapsed_seconds": 273.43361023500006,
+          "learning_rate": 0.0008546067154855441,
+          "gradient_norm": 2.287108898162842,
+          "loss": 0.023697523400187492,
+          "mean_bce": 0.004101772792637348,
+          "worst_bit_bce": 0.042981985956430435,
+          "quotient_ce": 0.002538576489314437,
+          "batch_exact": 0.984375
+        },
+        {
+          "step": 1550,
+          "elapsed_seconds": 288.77332894899996,
+          "learning_rate": 0.0007836764586393896,
+          "gradient_norm": 0.5245752930641174,
+          "loss": 0.008392300456762314,
+          "mean_bce": 0.001574374851770699,
+          "worst_bit_bce": 0.01511429250240326,
+          "quotient_ce": 0.00016493555449414998,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 1600,
+          "elapsed_seconds": 301.5325194289999,
+          "learning_rate": 0.0007150000000000008,
+          "gradient_norm": 1.8373430967330933,
+          "loss": 0.026174873113632202,
+          "mean_bce": 0.005584404803812504,
+          "worst_bit_bce": 0.04420231282711029,
+          "quotient_ce": 0.006994262803345919,
+          "batch_exact": 0.984375
+        },
+        {
+          "step": 1650,
+          "elapsed_seconds": 310.45878421099997,
+          "learning_rate": 0.000648871422706674,
+          "gradient_norm": 1.3317701816558838,
+          "loss": 0.01871759258210659,
+          "mean_bce": 0.002390543930232525,
+          "worst_bit_bce": 0.03608793765306473,
+          "quotient_ce": 0.0008747558458708227,
+          "batch_exact": 0.9765625
+        },
+        {
+          "step": 1700,
+          "elapsed_seconds": 317.93814181699986,
+          "learning_rate": 0.0005855738994796242,
+          "gradient_norm": 0.6204504370689392,
+          "loss": 0.007972770370543003,
+          "mean_bce": 0.0012959017185494304,
+          "worst_bit_bce": 0.01475012581795454,
+          "quotient_ce": 0.0003931236278731376,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 1750,
+          "elapsed_seconds": 323.809411727,
+          "learning_rate": 0.0005253784800309207,
+          "gradient_norm": 0.6027101278305054,
+          "loss": 0.005382815841585398,
+          "mean_bce": 0.0005267948727123439,
+          "worst_bit_bce": 0.010777114890515804,
+          "quotient_ce": 6.319666135823354e-05,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 1800,
+          "elapsed_seconds": 329.59242615799985,
+          "learning_rate": 0.0004685429303880111,
+          "gradient_norm": 0.408674955368042,
+          "loss": 0.003836474847048521,
+          "mean_bce": 0.0003348204481881112,
+          "worst_bit_bce": 0.007777656894177198,
+          "quotient_ce": 1.7087242667912506e-05,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 1850,
+          "elapsed_seconds": 335.509321367,
+          "learning_rate": 0.00041531062910001905,
+          "gradient_norm": 0.16878871619701385,
+          "loss": 0.003666577162221074,
+          "mean_bce": 0.00040468937368132174,
+          "worst_bit_bce": 0.007196845952421427,
+          "quotient_ce": 0.00023306980438064784,
+          "batch_exact": 1.0
+        },
+        {
+          "step": 1900,
+          "elapsed_seconds": 341.2062607329999,
+          "learning_rate": 0.00036590952505343187,
+          "gradient_norm": 1.7280205488204956,
+          "loss": 0.019176825881004333,
+          "mean_bce": 0.0017827951814979315,
+          "worst_bit_bce": 0.03864669054746628,
+          "quotient_ce": 3.0199245884432457e-05,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 1950,
+          "elapsed_seconds": 347.029860892,
+          "learning_rate": 0.0003205511613599729,
+          "gradient_norm": 1.1942533254623413,
+          "loss": 0.00960772018879652,
+          "mean_bce": 0.001968204043805599,
+          "worst_bit_bce": 0.016871590167284012,
+          "quotient_ce": 0.00047300924779847264,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 2000,
+          "elapsed_seconds": 353.12572011,
+          "learning_rate": 0.0002794297694965202,
+          "gradient_norm": 1.2394728660583496,
+          "loss": 0.01782161183655262,
+          "mean_bce": 0.002052165102213621,
+          "worst_bit_bce": 0.03502678498625755,
+          "quotient_ce": 7.393483974738047e-05,
+          "batch_exact": 0.98828125
+        },
+        {
+          "step": 2050,
+          "elapsed_seconds": 358.182345685,
+          "learning_rate": 0.00024272143757610311,
+          "gradient_norm": 0.1658364236354828,
+          "loss": 0.002597218845039606,
+          "mean_bce": 0.0003159671032335609,
+          "worst_bit_bce": 0.005056512076407671,
+          "quotient_ce": 5.821375088999048e-05,
+          "batch_exact": 1.0
+        },
+        {
+          "step": 2100,
+          "elapsed_seconds": 363.245780923,
+          "learning_rate": 0.0002105833563115703,
+          "gradient_norm": 0.9073929786682129,
+          "loss": 0.005447761155664921,
+          "mean_bce": 0.0005705980001948774,
+          "worst_bit_bce": 0.010833801701664925,
+          "quotient_ce": 1.952544153027702e-05,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 2150,
+          "elapsed_seconds": 369.42724494999993,
+          "learning_rate": 0.00018315314590082536,
+          "gradient_norm": 0.2969101071357727,
+          "loss": 0.0035540282260626554,
+          "mean_bce": 0.0003789510519709438,
+          "worst_bit_bce": 0.007019100245088339,
+          "quotient_ce": 0.00016482215141877532,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 2200,
+          "elapsed_seconds": 374.375824275,
+          "learning_rate": 0.00016054826671600938,
+          "gradient_norm": 0.3055768609046936,
+          "loss": 0.0031357447151094675,
+          "mean_bce": 0.00032101507531479,
+          "worst_bit_bce": 0.006250460632145405,
+          "quotient_ce": 2.0225386833772063e-05,
+          "batch_exact": 0.99609375
+        },
+        {
+          "step": 2250,
+          "elapsed_seconds": 379.47421477500006,
+          "learning_rate": 0.00014286551632015617,
+          "gradient_norm": 0.11826668679714203,
+          "loss": 0.0009202928049489856,
+          "mean_bce": 0.00010253972141072154,
+          "worst_bit_bce": 0.0018102030735462904,
+          "quotient_ce": 3.161709173582494e-05,
+          "batch_exact": 1.0
+        },
+        {
+          "step": 2300,
+          "elapsed_seconds": 385.06521124999995,
+          "learning_rate": 0.00013018061496516576,
+          "gradient_norm": 0.028155332431197166,
+          "loss": 0.0004261347057763487,
+          "mean_bce": 4.798448208021e-05,
+          "worst_bit_bce": 0.0008375096949748695,
+          "quotient_ce": 1.2708806025329977e-05,
+          "batch_exact": 1.0
+        },
+        {
+          "step": 2350,
+          "elapsed_seconds": 390.12625511500005,
+          "learning_rate": 0.00012254788134606186,
+          "gradient_norm": 0.42533382773399353,
+          "loss": 0.007248071953654289,
+          "mean_bce": 0.0011911684414371848,
+          "worst_bit_bce": 0.013385354541242123,
+          "quotient_ce": 0.00033494210219942033,
+          "batch_exact": 0.9921875
+        },
+        {
+          "step": 2400,
+          "elapsed_seconds": 395.20710533400006,
+          "learning_rate": 0.00012,
+          "gradient_norm": 0.6615219712257385,
+          "loss": 0.006364461500197649,
+          "mean_bce": 0.001986378338187933,
+          "worst_bit_bce": 0.009336055256426334,
+          "quotient_ce": 0.0017685859929770231,
+          "batch_exact": 0.99609375
+        }
+      ]
+    },
+    "controls": {
+      "untrained_transition": {
+        "cases": 2000,
+        "correct": 698,
+        "exact_accuracy": 0.349,
+        "bit_accuracy": 0.867546875,
+        "valid_residue_rate": 0.556,
+        "by_modulus_bits": {
+          "17": {
+            "correct": 76,
+            "cases": 135,
+            "exact_accuracy": 0.562962962962963
+          },
+          "18": {
+            "correct": 65,
+            "cases": 125,
+            "exact_accuracy": 0.52
+          },
+          "19": {
+            "correct": 67,
+            "cases": 127,
+            "exact_accuracy": 0.5275590551181102
+          },
+          "20": {
+            "correct": 66,
+            "cases": 125,
+            "exact_accuracy": 0.528
+          },
+          "21": {
+            "correct": 51,
+            "cases": 127,
+            "exact_accuracy": 0.4015748031496063
+          },
+          "22": {
+            "correct": 54,
+            "cases": 131,
+            "exact_accuracy": 0.4122137404580153
+          },
+          "23": {
+            "correct": 47,
+            "cases": 141,
+            "exact_accuracy": 0.3333333333333333
+          },
+          "24": {
+            "correct": 38,
+            "cases": 123,
+            "exact_accuracy": 0.3089430894308943
+          },
+          "25": {
+            "correct": 37,
+            "cases": 118,
+            "exact_accuracy": 0.3135593220338983
+          },
+          "26": {
+            "correct": 46,
+            "cases": 122,
+            "exact_accuracy": 0.3770491803278688
+          },
+          "27": {
+            "correct": 25,
+            "cases": 119,
+            "exact_accuracy": 0.21008403361344538
+          },
+          "28": {
+            "correct": 29,
+            "cases": 112,
+            "exact_accuracy": 0.25892857142857145
+          },
+          "29": {
+            "correct": 28,
+            "cases": 130,
+            "exact_accuracy": 0.2153846153846154
+          },
+          "30": {
+            "correct": 19,
+            "cases": 131,
+            "exact_accuracy": 0.1450381679389313
+          },
+          "31": {
+            "correct": 28,
+            "cases": 126,
+            "exact_accuracy": 0.2222222222222222
+          },
+          "32": {
+            "correct": 22,
+            "cases": 108,
+            "exact_accuracy": 0.2037037037037037
+          }
+        }
+      },
+      "untrained_rollout": {
+        "cases": 1000,
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "all_steps_correct": 0,
+        "all_steps_exact_accuracy": 0.0,
+        "any_invalid_residue_rate": 1.0,
+        "first_error_by_step": [
+          19,
+          35,
+          50,
+          61,
+          51,
+          62,
+          71,
+          65,
+          61,
+          73,
+          53,
+          72,
+          49,
+          72,
+          60,
+          66,
+          38,
+          15,
+          14,
+          5,
+          4,
+          1,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "by_modulus_bits": {
+          "17": {
+            "correct": 0,
+            "cases": 59,
+            "exact_accuracy": 0.0
+          },
+          "18": {
+            "correct": 0,
+            "cases": 53,
+            "exact_accuracy": 0.0
+          },
+          "19": {
+            "correct": 0,
+            "cases": 71,
+            "exact_accuracy": 0.0
+          },
+          "20": {
+            "correct": 0,
+            "cases": 54,
+            "exact_accuracy": 0.0
+          },
+          "21": {
+            "correct": 0,
+            "cases": 63,
+            "exact_accuracy": 0.0
+          },
+          "22": {
+            "correct": 0,
+            "cases": 68,
+            "exact_accuracy": 0.0
+          },
+          "23": {
+            "correct": 0,
+            "cases": 51,
+            "exact_accuracy": 0.0
+          },
+          "24": {
+            "correct": 0,
+            "cases": 68,
+            "exact_accuracy": 0.0
+          },
+          "25": {
+            "correct": 0,
+            "cases": 60,
+            "exact_accuracy": 0.0
+          },
+          "26": {
+            "correct": 0,
+            "cases": 85,
+            "exact_accuracy": 0.0
+          },
+          "27": {
+            "correct": 0,
+            "cases": 69,
+            "exact_accuracy": 0.0
+          },
+          "28": {
+            "correct": 0,
+            "cases": 70,
+            "exact_accuracy": 0.0
+          },
+          "29": {
+            "correct": 0,
+            "cases": 55,
+            "exact_accuracy": 0.0
+          },
+          "30": {
+            "correct": 0,
+            "cases": 55,
+            "exact_accuracy": 0.0
+          },
+          "31": {
+            "correct": 0,
+            "cases": 59,
+            "exact_accuracy": 0.0
+          },
+          "32": {
+            "correct": 0,
+            "cases": 60,
+            "exact_accuracy": 0.0
+          }
+        }
+      }
+    },
+    "evaluation": {
+      "heldout_transition": {
+        "cases": 50000,
+        "correct": 49907,
+        "exact_accuracy": 0.99814,
+        "bit_accuracy": 0.999894375,
+        "valid_residue_rate": 0.99986,
+        "by_modulus_bits": {
+          "17": {
+            "correct": 3142,
+            "cases": 3145,
+            "exact_accuracy": 0.9990461049284579
+          },
+          "18": {
+            "correct": 3152,
+            "cases": 3157,
+            "exact_accuracy": 0.9984162179284131
+          },
+          "19": {
+            "correct": 3158,
+            "cases": 3159,
+            "exact_accuracy": 0.9996834441278886
+          },
+          "20": {
+            "correct": 3017,
+            "cases": 3021,
+            "exact_accuracy": 0.9986759351208209
+          },
+          "21": {
+            "correct": 3113,
+            "cases": 3116,
+            "exact_accuracy": 0.9990372272143774
+          },
+          "22": {
+            "correct": 3108,
+            "cases": 3111,
+            "exact_accuracy": 0.9990356798457087
+          },
+          "23": {
+            "correct": 3178,
+            "cases": 3182,
+            "exact_accuracy": 0.9987429289754871
+          },
+          "24": {
+            "correct": 3163,
+            "cases": 3168,
+            "exact_accuracy": 0.9984217171717171
+          },
+          "25": {
+            "correct": 3028,
+            "cases": 3032,
+            "exact_accuracy": 0.9986807387862797
+          },
+          "26": {
+            "correct": 3129,
+            "cases": 3137,
+            "exact_accuracy": 0.9974497927956647
+          },
+          "27": {
+            "correct": 3072,
+            "cases": 3076,
+            "exact_accuracy": 0.9986996098829649
+          },
+          "28": {
+            "correct": 3072,
+            "cases": 3084,
+            "exact_accuracy": 0.9961089494163424
+          },
+          "29": {
+            "correct": 3158,
+            "cases": 3169,
+            "exact_accuracy": 0.9965288734616599
+          },
+          "30": {
+            "correct": 3117,
+            "cases": 3127,
+            "exact_accuracy": 0.9968020466901183
+          },
+          "31": {
+            "correct": 3147,
+            "cases": 3151,
+            "exact_accuracy": 0.998730561726436
+          },
+          "32": {
+            "correct": 3153,
+            "cases": 3165,
+            "exact_accuracy": 0.9962085308056872
+          }
+        }
+      },
+      "heldout_rollout": {
+        "cases": 20000,
+        "correct": 18898,
+        "exact_accuracy": 0.9449,
+        "all_steps_correct": 18942,
+        "all_steps_exact_accuracy": 0.9471,
+        "any_invalid_residue_rate": 0.0015,
+        "first_error_by_step": [
+          0,
+          1,
+          5,
+          10,
+          16,
+          22,
+          27,
+          23,
+          28,
+          25,
+          36,
+          26,
+          29,
+          27,
+          37,
+          47,
+          40,
+          45,
+          65,
+          43,
+          52,
+          43,
+          39,
+          46,
+          42,
+          41,
+          35,
+          39,
+          40,
+          46,
+          38,
+          45
+        ],
+        "by_modulus_bits": {
+          "17": {
+            "correct": 1271,
+            "cases": 1285,
+            "exact_accuracy": 0.9891050583657588
+          },
+          "18": {
+            "correct": 1226,
+            "cases": 1248,
+            "exact_accuracy": 0.9823717948717948
+          },
+          "19": {
+            "correct": 1273,
+            "cases": 1299,
+            "exact_accuracy": 0.9799846035411856
+          },
+          "20": {
+            "correct": 1208,
+            "cases": 1237,
+            "exact_accuracy": 0.9765561843168957
+          },
+          "21": {
+            "correct": 1173,
+            "cases": 1206,
+            "exact_accuracy": 0.972636815920398
+          },
+          "22": {
+            "correct": 1219,
+            "cases": 1265,
+            "exact_accuracy": 0.9636363636363636
+          },
+          "23": {
+            "correct": 1233,
+            "cases": 1276,
+            "exact_accuracy": 0.9663009404388715
+          },
+          "24": {
+            "correct": 1212,
+            "cases": 1275,
+            "exact_accuracy": 0.9505882352941176
+          },
+          "25": {
+            "correct": 1196,
+            "cases": 1257,
+            "exact_accuracy": 0.9514717581543357
+          },
+          "26": {
+            "correct": 1181,
+            "cases": 1242,
+            "exact_accuracy": 0.9508856682769726
+          },
+          "27": {
+            "correct": 1186,
+            "cases": 1256,
+            "exact_accuracy": 0.9442675159235668
+          },
+          "28": {
+            "correct": 1146,
+            "cases": 1244,
+            "exact_accuracy": 0.9212218649517685
+          },
+          "29": {
+            "correct": 1151,
+            "cases": 1247,
+            "exact_accuracy": 0.9230152365677626
+          },
+          "30": {
+            "correct": 1073,
+            "cases": 1186,
+            "exact_accuracy": 0.9047217537942664
+          },
+          "31": {
+            "correct": 1093,
+            "cases": 1223,
+            "exact_accuracy": 0.8937040065412919
+          },
+          "32": {
+            "correct": 1057,
+            "cases": 1254,
+            "exact_accuracy": 0.8429027113237639
+          }
+        }
+      }
+    },
+    "checkpoint": {
+      "path": ".scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors",
+      "sha256": "047cbfb0599b2ea12af9aeed5171cf832f0c4ec179a09596518b668b14644eed",
+      "bytes": 511008
+    },
+    "limitations": [
+      "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+      "No checked public expected answers were read or evaluated.",
+      "The width bands differ by construction; this tests scaling, not equal task difficulty."
+    ],
+    "hard_mining": {
+      "selected_total": 614400,
+      "selected_quotient2": 218524,
+      "selected_boundary": 118785,
+      "selected_quotient2_fraction": 0.35567057291666665,
+      "selected_boundary_fraction": 0.1933349609375,
+      "candidate_pool_factor": 4
+    }
+  },
+  "hard_mining": {
+    "selected_total": 614400,
+    "selected_quotient2": 218524,
+    "selected_boundary": 118785,
+    "selected_quotient2_fraction": 0.35567057291666665,
+    "selected_boundary_fraction": 0.1933349609375,
+    "candidate_pool_factor": 4
+  },
+  "gates": {
+    "minimum_transition_accuracy": 0.997,
+    "minimum_rollout_accuracy": 0.9,
+    "maximum_invalid_rollout_rate": 0.01,
+    "passed": true
+  },
+  "decision": "advance-five-independent-tier4-seeds",
+  "resource": {
+    "wall_seconds": 482.10324247699987,
+    "cpu_minute_cap": 12
+  },
+  "limitations": [
+    "Heldout-prime full-budget gate; no official Tier-4 score was produced.",
+    "Passing authorizes independent seeds, not candidate promotion.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

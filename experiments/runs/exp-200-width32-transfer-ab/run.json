@@ -1,0 +1,40 @@
+{
+  "run_id": "exp-200-width32-transfer-ab",
+  "status": "completed",
+  "created_at": "2026-07-12T02:01:00Z",
+  "hypothesis": "Learned width-16 initialization materially improves width-32 exact rollout under the validated hard-mining curriculum.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "05ccc758ddb838927818bfa705a46052dff20d48",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "f666f5a597dae9c4497a628c1c57bd0039c1dbc9e27d5f45bd6c64fa9044486f",
+    "config_sha256": "ca27cf3961ac82199b0e577ab1e1a287faf05191304cd01077318f99b6836b5f"
+  },
+  "config": "configs/exp_200_width32_transfer_ab.yaml",
+  "environment": "experiments/runs/exp-200-width32-transfer-ab/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "4428b14d3e5140538fa4a8f3ee279f4f",
+    "random_arm_run_id": "522a571906f74aa9859ad87b954e1150",
+    "transfer_arm_run_id": "082e842b6d004c8ebcf59ffa1e666d74",
+    "killed_infrastructure_parent_run_id": "356bd3374fe843d683ff40beb3405697",
+    "killed_infrastructure_arm_run_id": "97fe930543a74a0f9e4cc966484750f6"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-200-width32-transfer-ab/width32-transfer-hard-mining/weights.safetensors",
+    "checkpoint_sha256": "6696fdac23eb52fc0a183b4c24f8cb41e609cd676acfa671c83e5c1bc972b40a",
+    "metrics": "evals/results/exp-200-width32-transfer-ab/metrics.json",
+    "raw_summary": "experiments/runs/exp-200-width32-transfer-ab/raw-summary.json",
+    "random_arm_metrics": "experiments/runs/exp-200-width32-transfer-ab/random-arm-metrics.json",
+    "transfer_arm_metrics": "experiments/runs/exp-200-width32-transfer-ab/transfer-arm-metrics.json"
+  },
+  "decision": "advance-width32-full-budget",
+  "notes": [
+    "The first attempt was OOM-killed before training by inherited exhaustive 2^32 enumeration; its MLflow runs are marked KILLED and invalid for model comparison.",
+    "The retry changed only bounded prime/composite enumeration infrastructure, not the preregistered A/B variable, model, training, evaluation, or gates.",
+    "Transfer improved heldout rollout by 61.68 points and passed every paired and absolute gate.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

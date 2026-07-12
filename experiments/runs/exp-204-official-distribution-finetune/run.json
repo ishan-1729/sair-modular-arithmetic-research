@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-204-official-distribution-finetune",
+  "status": "completed",
+  "created_at": "2026-07-12T02:36:00Z",
+  "hypothesis": "Fine-tuning on the official numeric prime distribution closes the high-bit Tier-4 generalization gap.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "05ccc758ddb838927818bfa705a46052dff20d48",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "0729659f146a68976ff3f2640d2c01377e8a49e2b2369ea9fe21872fc89ac128",
+    "config_sha256": "c0dc3242f8cde009c3f67838ed70216c31060a3ae30a151555ebb4eb353101b3"
+  },
+  "config": "configs/exp_204_official_distribution_finetune.yaml",
+  "environment": "experiments/runs/exp-204-official-distribution-finetune/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "8160e9e314bc4a5f86088f5a09a36395", "arm_run_id": "aa2d2bfdfc1a46afb4e90f86a16cf98c"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-204-official-distribution-finetune/width32-official-distribution-finetune/weights.safetensors",
+    "checkpoint_sha256": "a685d8d6f37de7e7ef9f28075d0779256d31330a834a1a69dd26b56eb2d62c85",
+    "metrics": "evals/results/exp-204-official-distribution-finetune/metrics.json",
+    "raw_summary": "experiments/runs/exp-204-official-distribution-finetune/raw-summary.json",
+    "arm_metrics": "experiments/runs/exp-204-official-distribution-finetune/arm-metrics.json"
+  },
+  "decision": "reject-simple-distribution-correction",
+  "notes": [
+    "On paired fresh heldout identities, rollout improved by 5.37 points but remained below the frozen 94 percent gate.",
+    "Transition also remained below its 99.8 percent gate; the intervention is rejected without fresh independent evaluation.",
+    "No EXP-203 seed or checked public answer was reused."
+  ]
+}

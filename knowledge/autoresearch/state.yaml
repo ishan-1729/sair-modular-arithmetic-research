@@ -25,22 +25,22 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: candidate-002-tier3-hybrid
-  statement: The promoted hybrid advances the ranking boundary through Tier 3 without regressing Tier 1 or Tier 2.
-  promotion_gate: Independent full 1,100-case official evaluation has highest_tier_above_90 >= 3, deterministic inference, clean static analysis, and runtime below 300 seconds.
-  status: passed
-next_action: Finish Git durability for Candidate 002, then begin a preregistered Tier-4 research cycle toward the mandatory 85% exact-overall threshold; do not tune on checked public answers.
+  run_id: exp-210-rollout-aware-width32
+  statement: Scheduled learned-state training improves exact width-32 rollout beyond distribution-only fine-tuning.
+  promotion_gate: Preregister a matched paired intervention with fresh official-like heldout identities before execution.
+  status: planned
+next_action: Implement and preregister EXP-210 scheduled learned-state training; keep EXP-203 seeds and checked Tier-4 answers locked.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
   artifact_root: .scratch/mlflow/artifacts
-  experiment_name: sair-modular-arithmetic
-  experiment_id: "1"
+  experiment_name: sair-modular-arithmetic-wsl
+  experiment_id: "2"
   registered_model: sair-modular-arithmetic-candidate
   incumbent_model_version: "2"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 669a27c8c1bc8aa6e5755b4d46474e46a661cf1a
+  last_validated_commit: 05ccc758ddb838927818bfa705a46052dff20d48
   dirty: true
 risks:
   - Tier 4 remains unsolved and requires a width-32 generalization path.

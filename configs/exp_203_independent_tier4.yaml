@@ -1,0 +1,28 @@
+run_id: exp-203-independent-tier4-five-seed
+hypothesis: the frozen EXP-202 checkpoint generalizes to unseen official-generator Tier-4 test sets
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+checkpoint: .scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors
+checkpoint_sha256: 047cbfb0599b2ea12af9aeed5171cf832f0c4ec179a09596518b668b14644eed
+architecture:
+  width: 32
+  hidden: 48
+  blocks: 7
+evaluation:
+  tier_id: 4
+  seeds:
+    - exp203-tier4-20260712-a
+    - exp203-tier4-20260712-b
+    - exp203-tier4-20260712-c
+    - exp203-tier4-20260712-d
+    - exp203-tier4-20260712-e
+  cases_per_seed: 100
+  primes_per_seed: 5
+  edge_cases_per_seed: 4
+gates:
+  minimum_aggregate_accuracy: 0.90
+  minimum_passing_seeds: 4
+  per_seed_passing_accuracy: 0.90
+  minimum_single_seed_accuracy: 0.85
+resource_cap:
+  cpu_minutes: 3

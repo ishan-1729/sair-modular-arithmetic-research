@@ -1,0 +1,41 @@
+{
+  "run_id": "exp-204-official-distribution-finetune",
+  "created_at": "2026-07-12T02:36:00Z",
+  "checkpoint_sha256": "a685d8d6f37de7e7ef9f28075d0779256d31330a834a1a69dd26b56eb2d62c85",
+  "evaluation": {
+    "transition": {
+      "prefinetune_official_like_heldout": {"cases": 2000, "correct": 1991, "exact_accuracy": 0.9955},
+      "postfinetune_official_like_heldout": {"cases": 50000, "correct": 49833, "exact_accuracy": 0.99666, "bit_accuracy": 0.99980375}
+    },
+    "rollout": {
+      "prefinetune_official_like_heldout": {"cases": 1000, "correct": 846, "exact_accuracy": 0.846},
+      "postfinetune_official_like_heldout": {"cases": 20000, "correct": 17994, "exact_accuracy": 0.8997}
+    }
+  },
+  "controls": {
+    "paired_source_checkpoint": true,
+    "transition_gain": 0.00116,
+    "rollout_gain": 0.0537,
+    "post_invalid_rollout_rate": 0.003,
+    "post_all_steps_exact_accuracy": 0.9173,
+    "post_32bit_rollout_accuracy": 0.8768081686678643,
+    "selected_quotient2_fraction": 0.3715087890625,
+    "selected_boundary_fraction": 0.2011767578125
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 217.94606820200002,
+    "training_seconds": 82.84608162899997,
+    "network_training_examples": 204800,
+    "offline_candidate_examples": 819200,
+    "peak_rss_bytes": 631128064,
+    "parameters": 126276
+  },
+  "decision": "reject-simple-distribution-correction",
+  "limitations": [
+    "The pre-fine-tune control used smaller evaluation counts but identical heldout identities and seeds.",
+    "The intervention improved but did not close the 32-bit rollout gap.",
+    "No consumed independent seed or checked public answer was used."
+  ]
+}
