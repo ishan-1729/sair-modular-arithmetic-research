@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-605 Tier-6 Long-Horizon Retention
 description: Eight-step recovery continuation with increased width-64 allocation and higher-fidelity fresh evaluation.
-status: preregistered
+status: completed
 tags: [autoresearch, Tier-6, cellular, recovery-horizon, retention]
 timestamp: "2026-07-13T03:50:00+05:30"
 ---
@@ -16,3 +16,9 @@ Pass only if width-128 rollout reaches at least 90%, gains at least three points
 ## Dynamic resource budget
 
 EXP-604's eight-step 200-update arm took 333.977 wall seconds including 201.051 seconds through its final training milestone. Doubling training projects 402.102 seconds; EXP-602's paired 300-rollout evaluation/setup phase measured 452.608 seconds. Total projected wall time is 854.710 seconds. Allocate 1,500 wall seconds soft and a 2,400-wall-second hard runaway ceiling, with a separate conservative 160 aggregate CPU-minute ceiling at four threads. Reuse the validated EXP-602 runner and cache only exact-hash source evidence.
+
+## Result
+
+Reject and close this continuation. On matched fresh evidence, width-64 rollout improves from 95.0% to 96.67%, but width-128 decreases from 82.67% to 82.33%. Width-128 transition remains 99.87% and invalid rollouts 0.33%. Internal wall time is 791.004 seconds and aggregate CPU is 3,130.059 seconds; external wall time is 797.78 seconds, within budget. The checkpoint is preserved but is not promotion-eligible.
+
+Further schedule tuning is not justified. Analyze fresh per-case complementarity among the preserved four-step and eight-step checkpoints before deciding whether a weight-space merge or logit ensemble has ranking value and acceptable inference cost.

@@ -1,0 +1,7 @@
+{
+  "run_id":"exp-605-tier6-long-horizon-retention","status":"completed","created_at":"2026-07-12T16:25:00Z","hypothesis":"Increasing width-64 recovery allocation while retaining the supported eight-step horizon clears both Tier-5 retention and Tier-6 absolute gates.","seed":20260801,
+  "source":{"repository_commit":"68d71b9a94cd9b24480acb4d933548637ff14ac2","dirty":false,"challenge_commit":"82510bba00a1126649bd76dd1a451f14d0b3eb60","runner_sha256":"c4b968a721b8d092b03a4ac1e880338ff4d97c41e8db46cede5f2be978a269bf","config_sha256":"e1562c1dd4ff5cde6299fd5192190c8bd788af90151d8b14509937cc9ffdf609"},
+  "config":"configs/exp_605_tier6_long_horizon_retention.yaml","environment":"experiments/runs/exp-605-tier6-long-horizon-retention/environment.json","mlflow":{"experiment_name":"sair-modular-arithmetic-wsl","experiment_id":"2","run_id":"175c431e4e964eaf84b0026e64f29607"},
+  "artifacts":{"checkpoint":".scratch/exp-605-tier6-long-horizon-retention/weights.safetensors","checkpoint_sha256":"31c07b2d498d69c1f93d2f30b0fd815ea167e9ae1f1e9253597b0e5ebb1db367","metrics":"evals/results/exp-605-tier6-long-horizon-retention/metrics.json","summary_sha256":"d9884419ba87d222f6f533aaf95637c3bf0392532ff098bdcb327817b8fbd0c6"},
+  "decision":"reject-tier6-long-horizon-retention","notes":["Width-64 rollout improves to 96.67 percent.","Width-128 rollout regresses from 82.67 to 82.33 percent.","The retention-adjusted continuation is closed and independent Tier-6 remains unauthorized."]
+}

@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-605-tier6-long-horizon-retention
-  statement: Increasing width-64 recovery allocation while retaining the causally supported eight-step horizon clears both Tier-5 retention and Tier-6 absolute gates.
-  promotion_gate: Require at least 90 percent width-128 and 94 percent width-64 rollout on fresh evidence before independent Tier-6.
+  run_id: exp-606-tier6-checkpoint-complementarity
+  statement: Four-step and eight-step recovery checkpoints make complementary width-128 errors that justify a trained-weight merge or logit ensemble.
+  promotion_gate: Require a fresh per-case oracle union above 92 percent and a realizable fixed combination above 90 percent with acceptable projected inference time.
   status: planning
-next_action: Preregister one eight-step continuation from EXP-604 with a 60/40 width-64/128 update allocation and fresh identities; keep independent Tier-6 closed.
+next_action: Preregister fresh per-case checkpoint complementarity and fixed-combination analysis before any ensemble integration; keep Candidate 004 incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

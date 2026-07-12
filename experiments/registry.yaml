@@ -370,3 +370,10 @@ runs:
     run_record: experiments/runs/exp-604-tier6-long-horizon-recovery/run.json
     metrics: evals/results/exp-604-tier6-long-horizon-recovery/metrics.json
     checkpoint: .scratch/exp-604-tier6-long-horizon-recovery/eight_step_challenger/weights.safetensors
+  - run_id: exp-605-tier6-long-horizon-retention
+    status: completed
+    approach: retention-adjusted-eight-step-recovery
+    config: configs/exp_605_tier6_long_horizon_retention.yaml
+    run_record: experiments/runs/exp-605-tier6-long-horizon-retention/run.json
+    metrics: evals/results/exp-605-tier6-long-horizon-retention/metrics.json
+    checkpoint: .scratch/exp-605-tier6-long-horizon-retention/weights.safetensors

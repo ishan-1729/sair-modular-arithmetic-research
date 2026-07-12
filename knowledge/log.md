@@ -27,3 +27,4 @@
 - **Tier-6 full budget**: Higher-fidelity recovery reaches 79.33% width-128 and 93.33% retained width-64 rollout, missing the 85% independent-authorization gate but supporting one continuation.
 - **Tier-6 continuation**: Lower-rate continuation reaches 84.67% width-128 rollout but misses the exact gate by one case; the four-step schedule is closed.
 - **Tier-6 horizon A/B**: Eight-step learner-state recovery improves matched width-128 rollout by 2.5 points over four steps, reaching 86.5%, but misses retention and absolute promotion gates.
+- **Tier-6 retention follow-up**: A 60/40 retention schedule improves width 64 but regresses width 128, closing further recovery-schedule tuning.
