@@ -29,9 +29,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-400-graph-message-passing-smoke
   statement: Typed recurrent message passing over bit positions improves width transfer and exact rollout beyond a parameter-matched local cellular control.
-  promotion_gate: Complete primary-source graph research, then preregister matched GCN, GAT, and general message-passing smoke gates.
-  status: planned
-next_action: Use the repository Playwright workflow for graph-algorithmic-reasoning research and design the matched graph architecture track; retain Candidate 003 as incumbent.
+  promotion_gate: Advance a graph arm only after the frozen exact-rollout or zero-shot transition gain gate passes against the matched cellular control.
+  status: preregistered
+next_action: Run the dynamically budgeted four-arm EXP-400 graph successive-halving rung; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
