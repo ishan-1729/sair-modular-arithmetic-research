@@ -33,3 +33,4 @@
 - [EXP-322 cellular width-64 smoke](exp-322-cellular-width64-smoke.md) - compute-bounded retry after EXP-321's runtime projection.
 - [EXP-323 diverse width-64 cellular continuation](exp-323-cellular-width64-diverse.md) - 16x prime-identity diversity at lower learning rate.
 - [EXP-324 width-64 cellular second stage](exp-324-cellular-width64-second-stage.md) - fresh-identity lower-rate Tier-5 continuation.
+- [EXP-325 width-64 cellular weight soup](exp-325-cellular-width64-weight-soup.md) - no-cost interpolation of consecutive diverse checkpoints.

@@ -244,3 +244,10 @@ runs:
     run_record: experiments/runs/exp-323-cellular-width64-diverse/run.json
     metrics: evals/results/exp-323-cellular-width64-diverse/metrics.json
     checkpoint: .scratch/exp-323-cellular-width64-diverse/weights.safetensors
+  - run_id: exp-324-cellular-width64-second-stage
+    status: completed
+    approach: fresh-identity-cellular-width64-second-stage
+    config: configs/exp_324_cellular_width64_second_stage.yaml
+    run_record: experiments/runs/exp-324-cellular-width64-second-stage/run.json
+    metrics: evals/results/exp-324-cellular-width64-second-stage/metrics.json
+    checkpoint: .scratch/exp-324-cellular-width64-second-stage/weights.safetensors

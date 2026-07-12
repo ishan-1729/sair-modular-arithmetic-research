@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-324-cellular-width64-second-stage
-  statement: A fresh-identity lower-rate second stage converts the diverse width-64 checkpoint into Tier-5 independent readiness.
-  promotion_gate: Retain 90 percent width-56 rollout and reach 99.8/92 percent width-64 transition/rollout with a three-point gain.
+  run_id: exp-325-cellular-width64-weight-soup
+  statement: Interpolating consecutive diverse width-64 checkpoints reduces rare transition variance without inference cost.
+  promotion_gate: Reach 99.8/93 percent transition/rollout and improve one point over the better endpoint on fresh paired data.
   status: preregistered
-next_action: Run the single authorized fresh-identity width-64 second stage; retain Candidate 003 as incumbent.
+next_action: Evaluate preregistered cellular checkpoint interpolations on fresh identities; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

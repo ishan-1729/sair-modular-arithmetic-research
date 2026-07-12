@@ -59,3 +59,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-321 cellular direct width64 | 56/64 | no updates | invalid | invalid | invalid | 99,824 | stopped by projection | invalid resource projection |
 | EXP-322 cellular width64 smoke | 56/64 | 400 | 99.68% | 83.0% | 0.667% | 99,824 | 207.6 train | reject; -1.0 rollout |
 | EXP-323 diverse cellular width64 | 56/64 | 400 | 99.78% | 88.533% | 0.533% | 99,824 | 311.4 train | narrow reject; +3.333 rollout |
+| EXP-324 cellular width64 stage2 | 56/64 | +400 | 99.88% | 91.867% | 0.467% | 99,824 | 284.6 train | narrow reject; soup next |
