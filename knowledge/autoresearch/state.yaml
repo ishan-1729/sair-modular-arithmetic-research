@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T04:20:00+05:30
+updated_at: 2026-07-13T04:40:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-616-tier6-trajectory-tail-cvar
-  statement: A trajectory-level CVaR surrogate over the hardest examples and steps can target rare autonomous failures that bitwise and per-transition average losses dilute.
-  promotion_gate: Require a matched trajectory-loss A/B to reach at least 90 percent width-128 rollout with a three-point gain, width-64 retention, and transition/validity gates.
+  run_id: exp-617-tier6-recurrent-core-lora
+  statement: Exact-initialized low-rank updates to the shared recurrent gate and candidate kernels can adapt distributed Tier-6 computation more effectively than output adapters, extra passes, or loss reweighting.
+  promotion_gate: Require an exact-init matched recurrent-core adaptation smoke to reach at least 90 percent width-128 rollout with a three-point gain, retention, transition, and validity gates.
   status: planning
-next_action: Implement and preregister a trajectory-tail CVaR loss over eight-step straight-through recovery chunks; keep Candidate 004 incumbent.
+next_action: Implement and test low-rank recurrent-kernel adaptation, then profile and preregister a matched smoke; keep Candidate 004 incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: c84b5c927df7f89d54b8d8020402fdac683878ed
+  last_validated_commit: 59c9215f6265a3216181b949efe16745b2070ec1
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.

@@ -447,3 +447,10 @@ runs:
     run_record: experiments/runs/exp-615-tier6-casewise-exactness-loss/run.json
     metrics: evals/results/exp-615-tier6-casewise-exactness-loss/metrics.json
     checkpoint: .scratch/exp-615-tier6-casewise-exactness-loss/casewise_exactness_challenger/weights.safetensors
+  - run_id: exp-616-tier6-trajectory-tail-cvar
+    status: completed
+    approach: matched-trajectory-tail-cvar-loss
+    config: configs/exp_616_tier6_trajectory_tail_cvar.yaml
+    run_record: experiments/runs/exp-616-tier6-trajectory-tail-cvar/run.json
+    metrics: evals/results/exp-616-tier6-trajectory-tail-cvar/metrics.json
+    checkpoint: .scratch/exp-616-tier6-trajectory-tail-cvar/trajectory_cvar_challenger/weights.safetensors

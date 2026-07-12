@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-616 Tier-6 Trajectory-Tail CVaR
 description: Loss-only A/B of mean eight-step recovery against a top-quartile worst-step, worst-bit trajectory surrogate.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, cvar, trajectory-loss, straight-through]
 timestamp: "2026-07-13T04:30:00+05:30"
 ---
@@ -34,3 +34,9 @@ The planning budget is 1,650 wall seconds and the hard runaway ceiling is 2,450 
 ## Boundaries
 
 Checked and private answers remain unread. Exact arithmetic remains confined to offline labels and evaluation. The loss is training-only; inference is unchanged, tensor-native, and trained-weight dependent. Native PyTorch BCE, maximum, and top-k operations are sufficient.
+
+## Result and decision
+
+The control scored 86.5% width-128 rollout and the CVaR challenger 86.0%, a −0.5-point change. Both reached only 99.65% width-128 transition, below the 99.8% gate, with zero invalid width-128 rollouts. Width-64 rollout improved from 96.0% to 96.5% but cannot offset the primary regression.
+
+Reject and close this fixed trajectory-tail objective; do not tune its coefficient or fraction on this selection set. The run completed in 972.40 wall seconds and 3,725.77 aggregate CPU seconds, within budget. Further averaging/reweighting objectives are low value; intervene inside the recurrent core next.
