@@ -1,0 +1,25 @@
+run_id: exp-240-channel-causal-analysis
+hypothesis: a small hidden-channel subset causally controls high-bit and quotient-2 transition failures
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+checkpoint: .scratch/exp-230-quotient-routed-experts/single-head-control/weights.safetensors
+checkpoint_sha256: c26e34af9581b6b0f3d26e72715c512823b07250bee48a56ae63cf32cffe5baa
+model:
+  width: 32
+  hidden: 48
+  blocks: 7
+evaluation:
+  prime_bits_min: 17
+  prime_bits_max: 32
+  baseline_transition_cases: 20000
+  activation_cases: 20000
+  cases_per_channel_ablation: 5000
+  combined_ablation_channels: 4
+selection:
+  critical_overall_drop: 0.005
+  critical_quotient2_drop: 0.02
+  maximum_sparse_critical_channels: 8
+resource_cap:
+  cpu_minutes: 6
+

@@ -111,3 +111,17 @@ runs:
     run_record: experiments/runs/exp-220-width-independent-cellular/run.json
     metrics: evals/results/exp-220-width-independent-cellular/metrics.json
     checkpoint: .scratch/exp-220-width-independent-cellular/shared-cellular-challenger/weights.safetensors
+  - run_id: exp-230-quotient-routed-experts
+    status: completed
+    approach: matched-learned-quotient-routed-experts
+    config: configs/exp_230_quotient_routed_experts.yaml
+    run_record: experiments/runs/exp-230-quotient-routed-experts/run.json
+    metrics: evals/results/exp-230-quotient-routed-experts/metrics.json
+    checkpoint: .scratch/exp-230-quotient-routed-experts/routed-expert-challenger/weights.safetensors
+  - run_id: exp-240-channel-causal-analysis
+    status: completed
+    approach: paired-final-channel-causal-ablation
+    config: configs/exp_240_channel_causal_analysis.yaml
+    run_record: experiments/runs/exp-240-channel-causal-analysis/run.json
+    metrics: evals/results/exp-240-channel-causal-analysis/metrics.json
+    checkpoint: .scratch/exp-230-quotient-routed-experts/single-head-control/weights.safetensors
