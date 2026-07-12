@@ -29,9 +29,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-510-multiarchitecture-grokking-feasibility
   statement: A graph model or materially different sequence model may exhibit delayed generalization even though the cellular family does not.
-  promotion_gate: Preregister finite-data graph and non-cellular control probes using the same operational signature and calibrated budgets.
-  status: planned
-next_action: Implement the required graph-family and materially different-control grokking feasibility comparison; retain Candidate 003 as incumbent.
+  promotion_gate: Require the unchanged delayed-generalization signature in at least two of three seeds for either non-cellular architecture.
+  status: preregistered
+next_action: Run the dynamically budgeted EXP-510 PyG max-MPNN and TCN grokking feasibility comparison; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
