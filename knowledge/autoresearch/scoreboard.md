@@ -36,3 +36,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-204 official-distribution fine-tune | 32 | +800 | 99.666% | 89.97% | 0.30% | 126,276 | 82.8 | reject; rollout-aware next |
 | EXP-210 one-step continuation | 32 | +400 | 99.794% | 90.72% | n/a | 126,276 | 63.4 | control |
 | EXP-210 scheduled learned-state | 32 | +400 | 99.828% | 91.425% | 0.175% | 126,276 | 113.1 | reject; +0.705 rollout |
+| EXP-220 full-canvas random control | 16 | 800 | 61.94% | 0.17% | 11.61% | 85,556 | 52.8 | control |
+| EXP-220 shared dilated ConvGRU | 16 -> 32 zero-shot | 800 | 60.245% / 61.935% | 0.11% / 0% | 21.28% / 68.7% | 99,824 | 244.2 | reject |

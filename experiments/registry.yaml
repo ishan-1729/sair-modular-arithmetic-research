@@ -104,3 +104,10 @@ runs:
     run_record: experiments/runs/exp-210-rollout-aware-width32/run.json
     metrics: evals/results/exp-210-rollout-aware-width32/metrics.json
     checkpoint: .scratch/exp-210-rollout-aware/scheduled-state-challenger/weights.safetensors
+  - run_id: exp-220-width-independent-cellular
+    status: completed
+    approach: matched-width-independent-dilated-convgru
+    config: configs/exp_220_width_independent_cellular.yaml
+    run_record: experiments/runs/exp-220-width-independent-cellular/run.json
+    metrics: evals/results/exp-220-width-independent-cellular/metrics.json
+    checkpoint: .scratch/exp-220-width-independent-cellular/shared-cellular-challenger/weights.safetensors

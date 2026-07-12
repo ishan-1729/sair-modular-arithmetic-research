@@ -1,0 +1,50 @@
+run_id: exp-220-width-independent-cellular
+hypothesis: a shared dilated ConvGRU learns width-16 modular transitions and transfers nontrivially to width 32 without width-specific parameters
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+control:
+  architecture: shared-context-full-canvas-tcn
+  hidden: 48
+  blocks: 7
+challenger:
+  architecture: shared-dilated-convgru
+  hidden: 92
+  cycles: 2
+training:
+  width: 16
+  prime_bits_min: 9
+  prime_bits_max: 16
+  steps: 800
+  batch_size: 256
+  learning_rate: 0.002
+  minimum_learning_rate: 0.0001
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  random_state_fraction: 0.15
+  composite_fraction: 0.15
+  torch_threads: 4
+hard_mining:
+  candidate_pool_factor: 4
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+evaluation:
+  width16_transition_cases: 20000
+  width16_rollout_cases: 10000
+  width32_transition_cases: 20000
+  width32_rollout_cases: 10000
+  width32_prime_bits_min: 17
+  width32_prime_bits_max: 32
+gates:
+  minimum_challenger_width16_transition: 0.90
+  minimum_challenger_width16_rollout: 0.25
+  maximum_width16_rollout_deficit_to_control: 0.15
+  minimum_zero_shot_width32_transition: 0.50
+  minimum_zero_shot_width32_rollout: 0.005
+  maximum_parameter_ratio: 1.25
+  maximum_training_time_ratio: 2.0
+resource_cap:
+  cpu_minutes: 12

@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-220-width-independent-cellular
-  statement: A local recurrent cellular architecture transfers learned modular state updates across widths without width-specific global heads.
-  promotion_gate: Preregister a matched width-16 control and width-32 length-transfer smoke test before execution.
+  run_id: exp-230-quotient-routed-experts
+  statement: Learned quotient routing among learned residue experts improves exact high-bit transition and Tier-4 rollout without symbolic arithmetic.
+  promotion_gate: Preregister a matched neuro-symbolic routing A/B on fresh official-like identities before execution.
   status: planned
-next_action: Implement and preregister EXP-220 materially different width-independent recurrent cellular model; retain Candidate 002.
+next_action: Design EXP-230 compliant learned quotient router and learned candidate heads; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

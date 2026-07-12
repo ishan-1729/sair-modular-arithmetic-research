@@ -12,3 +12,4 @@
 - [EXP-203 independent Tier 4](exp-203-independent-tier4.md) - frozen five-seed official-generator gate before integration.
 - [EXP-204 official-distribution fine-tune](exp-204-official-distribution-finetune.md) - paired correction of the high-bit Tier-4 distribution mismatch.
 - [EXP-210 rollout-aware width-32 A/B](exp-210-rollout-aware-width32.md) - matched scheduled learned-state intervention.
+- [EXP-220 width-independent cellular architecture](exp-220-width-independent-cellular.md) - matched width-16 learning and zero-shot width-32 transfer.
