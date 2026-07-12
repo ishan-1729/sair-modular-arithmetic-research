@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-12T23:20:00+05:30
+updated_at: 2026-07-12T23:55:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-521-tier5-recovery-independent-five-seed
-  statement: The unchanged full recovery checkpoint has robust Tier-5 exact rollout across untouched official-generator seeds.
-  promotion_gate: Require every one of five untouched Tier-5 seeds >= 90 percent and aggregate >= 92 percent before integration.
-  status: preregistered
-next_action: Run the frozen full recovery checkpoint on five untouched Tier-5 official-generator seeds; retain Candidate 003 as incumbent.
+  run_id: candidate-004-tier5-cellular-hybrid
+  statement: Adding the independently validated Tier-5 recovery specialist preserves Tier-1 through Tier-4 performance and raises full-test exact accuracy by about nine points.
+  promotion_gate: Freeze one combined artifact and pass independent full-1100, deterministic repeat, weight-dependence, compliance, checked regression, and official sandbox gates.
+  status: integration-authorized
+next_action: Build Candidate 004 from the unchanged Candidate 003 and EXP-521 artifacts, then evaluate the exact frozen artifact on the complete release gate.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -50,7 +50,7 @@ risks:
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
-  - The strongest Tier-5 selection checkpoint reaches 94.267 percent but missed its preregistered causal gain gate and is not independently validated.
+  - The strongest Tier-5 checkpoint is independently validated at 96.0 percent across five seeds, but is not yet integrated or full-release tested.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
   - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.

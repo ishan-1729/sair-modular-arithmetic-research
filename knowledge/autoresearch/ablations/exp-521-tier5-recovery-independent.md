@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-521 Tier-5 Recovery Independent Gate
 description: Five untouched official-generator Tier-5 seeds for the frozen full recovery checkpoint.
-status: preregistered
+status: completed
 tags: [autoresearch, Tier-5, independent, official-generator, cellular]
 timestamp: "2026-07-12T23:40:00+05:30"
 ---
@@ -16,3 +16,9 @@ This is a new confirmation authorized by two separate fresh selection sets: EXP-
 ## Dynamic resource budget
 
 EXP-520's full challenger evaluates 500 width-64 rollouts in 45.523 wall seconds. EXP-521 also evaluates 500 total rollouts; add 60 seconds for official generation and setup for 105.523 projected wall seconds. Allocate a 300-wall-second soft budget and 600-wall-second hard runaway ceiling. These are wall limits; four threads imply a conservative 40 aggregate CPU-minute upper bound.
+
+## Result
+
+The frozen checkpoint passed: 480/500 exact (96.0%) across five untouched official-generator seeds, with per-seed scores of 96%, 96%, 97%, 97%, and 94%. Every seed cleared 90%, the aggregate cleared 92%, and no invalid residue was observed. Inference consumed 45.677 wall seconds and 179.333 aggregate CPU seconds; external measurement was 52.29 wall seconds, 178.70 user CPU seconds, and 8.51 system CPU seconds. These are distinct resource measures and both fit the preregistered dynamic budget.
+
+Decision: authorize integration of the unchanged checkpoint into Candidate 004 beside Candidate 003's Tier-1–4 specialists. This is Tier-5 evidence, not evidence that the 85% full-test completion gate has been met.

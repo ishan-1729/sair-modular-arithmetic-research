@@ -321,3 +321,10 @@ runs:
     run_record: experiments/runs/exp-520-tier5-recovery-delta-patching/run.json
     metrics: evals/results/exp-520-tier5-recovery-delta-patching/metrics.json
     checkpoint: .scratch/exp-520-tier5-recovery-delta-patching/full-challenger/weights.safetensors
+  - run_id: exp-521-tier5-recovery-independent-five-seed
+    status: completed
+    approach: frozen-tier5-recovery-independent-confirmation
+    config: configs/exp_521_tier5_recovery_independent.yaml
+    run_record: experiments/runs/exp-521-tier5-recovery-independent-five-seed/run.json
+    metrics: evals/results/exp-521-tier5-recovery-independent-five-seed/metrics.json
+    checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors

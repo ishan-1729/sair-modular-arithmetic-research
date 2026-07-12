@@ -75,3 +75,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-510 shared-context TCN grokking | width9 finite | 8,000 x3 | 100% train / 77.759% heldout mean | 23.067% mean | n/a | 75,469 | 0 signatures | reject memorization plateau |
 | EXP-510 PyG max-MPNN grokking | width9 finite | 8,000 x3 | 99.512% train / 83.748% heldout mean | 30.533% mean | n/a | 72,484 | 0 signatures | reject concurrent learning, no delay |
 | EXP-520 Tier5 recovery patches | width64 | frozen | 99.7% | 94.0-96.4% | 0-0.2% | 99,824 | 425.1 wall total | reject subsets; full endpoint best |
+| EXP-521 Tier5 recovery five-seed | width64 | frozen | n/a | 96.0% (min 94%) | 0% observed | 99,824 | 45.7 wall / 179.3 CPU s | pass -> integration |

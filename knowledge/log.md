@@ -20,3 +20,4 @@
 - **Tier-3 promotion**: Promoted the 170,577-parameter Tier-2/Tier-3 Horner ensemble after 99.8% across five independent Tier-3 seeds and 99% Tier 3 on a full independent official 1,100-case evaluation.
 - **Release validation**: Full checked regression scored 31.3% overall with `highest_tier_above_90 = 3`; static analysis, isolation, determinism, timeout, and randomized-weight controls passed.
 - **Tier-4 promotion**: Mixed-width cellular training produced 96.6% across five independent Tier-4 seeds. Candidate 003 scores 40.4% independent and 40.9% checked overall, clears Tier 4, passes the official sandbox, and becomes the intermediate incumbent.
+- **Tier-5 confirmation**: The frozen width-64 recovery checkpoint scored 96.0% across five independent official-generator Tier-5 seeds, with a 94% minimum and zero invalid residues, authorizing Candidate 004 integration.
