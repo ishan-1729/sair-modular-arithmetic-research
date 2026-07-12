@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T00:25:00+05:30
+updated_at: 2026-07-13T01:05:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-600-tier6-cellular-curriculum
-  statement: The width-independent cellular checkpoint can extend from 64-bit Tier 5 toward 128-bit Tier 6 through a progressive bigint bit-tensor curriculum.
-  promotion_gate: Preregister a throughput-calibrated smoke comparison before any independent or checked Tier-6 evaluation.
+  run_id: exp-601-tier6-autonomous-state-recovery
+  statement: Direct width-128 autonomous-state recovery improves the frozen source's 57 percent zero-shot rollout where progressive teacher-forced transition training regressed it.
+  promotion_gate: Run a matched source/control/recovery smoke with fresh identities and a measured dynamic budget before any independent Tier-6 evaluation.
   status: planning
-next_action: Design and preregister a measured-throughput width-64-to-128 cellular curriculum with fresh identities and Candidate 004 retained as incumbent.
+next_action: Preregister a matched width-128 autonomous-state-recovery smoke from the unchanged Tier-5 checkpoint; reuse valid EXP-600 source evidence only when dataset hashes match.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -53,6 +53,7 @@ risks:
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
   - Candidate 004 clears Tier 5 but remains only 49.5 to 50.1 percent overall, far below the 85 percent goal.
+  - Progressive teacher-forced width scaling regresses width-128 rollout from 57 to 49 percent despite 99.7 percent transition accuracy, indicating autonomous state drift.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
   - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.

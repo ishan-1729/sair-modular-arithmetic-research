@@ -77,3 +77,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-510 PyG max-MPNN grokking | width9 finite | 8,000 x3 | 99.512% train / 83.748% heldout mean | 30.533% mean | n/a | 72,484 | 0 signatures | reject concurrent learning, no delay |
 | EXP-520 Tier5 recovery patches | width64 | frozen | 99.7% | 94.0-96.4% | 0-0.2% | 99,824 | 425.1 wall total | reject subsets; full endpoint best |
 | EXP-521 Tier5 recovery five-seed | width64 | frozen | n/a | 96.0% (min 94%) | 0% observed | 99,824 | 45.7 wall / 179.3 CPU s | pass -> integration |
+| EXP-600 Tier6 progressive curriculum | 64/80/96/112 -> 128 | 200 | 99.7% width128 | 57% source / 49% challenger | 1% / 2% | 99,824 | 297.3 wall / 19.3 CPU min | reject; transition training regresses rollout |

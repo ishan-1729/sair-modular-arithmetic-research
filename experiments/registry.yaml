@@ -335,3 +335,10 @@ runs:
     run_record: experiments/runs/candidate-004-tier5-cellular-hybrid/run.json
     metrics: evals/results/candidate-004-tier5-cellular-hybrid/metrics.json
     checkpoint: submission/weights.safetensors
+  - run_id: exp-600-tier6-cellular-curriculum
+    status: completed
+    approach: progressive-cellular-width128-smoke
+    config: configs/exp_600_tier6_cellular_curriculum.yaml
+    run_record: experiments/runs/exp-600-tier6-cellular-curriculum/run.json
+    metrics: evals/results/exp-600-tier6-cellular-curriculum/metrics.json
+    checkpoint: .scratch/exp-600-tier6-cellular-curriculum/weights.safetensors
