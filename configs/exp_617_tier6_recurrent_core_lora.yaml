@@ -1,0 +1,55 @@
+run_id: exp-617-tier6-recurrent-core-lora
+hypothesis: exact-initialized rank-8 updates to the recurrent gate and candidate kernels improve fresh width-128 exact rollout by at least three points to at least 90 percent over full-base continuation
+seed: 20260813
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-617-tier6-recurrent-core-lora.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+exact_initialization_cases: 1000
+training:
+  steps: 200
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+arms:
+  full_base_continuation_control: {differentiable_soft_state: true, state_mode: straight_through, train: true}
+  recurrent_core_lora_challenger: {differentiable_soft_state: true, state_mode: straight_through, train: true, recurrent_lora_rank: 8, recurrent_lora_alpha: 8, lora_learning_rate: 0.001, minimum_lora_learning_rate: 0.0001}
+comparison: {control_arm: full_base_continuation_control, challenger_arm: recurrent_core_lora_challenger}
+pass_decision: advance-tier6-recurrent-core-lora
+fail_decision: reject-tier6-recurrent-core-lora
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation: {transition_cases: 2000, rollout_cases: 200}
+gates:
+  minimum_challenger_width128_rollout: 0.90
+  minimum_width128_gain_over_control: 0.03
+  minimum_challenger_width64_rollout: 0.95
+  minimum_challenger_width128_transition: 0.998
+  maximum_challenger_width128_invalid_rollout_rate: 0.01
+  minimum_challenger_gate_delta_rms: 0.0001
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-617-representative-eight-step-profile
+  profile_control_updates: 10
+  profile_control_wall_seconds: 20.82963293499779
+  profile_control_aggregate_cpu_seconds: 80.701390352
+  profile_lora_updates: 10
+  profile_lora_wall_seconds: 19.766340154004865
+  profile_lora_aggregate_cpu_seconds: 76.597342779
+  projected_two_arm_training_wall_seconds: 812
+  projected_evaluation_merge_setup_wall_seconds: 390
+  projected_total_wall_seconds: 1202
+  soft_budget_wall_seconds: 1900
+  hard_runaway_ceiling_wall_seconds: 2800
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 186.67
+  torch_threads: 4
+  cache_completed_arms: true
