@@ -28,8 +28,8 @@ current_hypothesis:
   run_id: exp-250-online-failure-mining
   statement: Model-dependent mining of rare exact transition failures, mixed with uniform replay, raises width-32 transition accuracy enough to prevent autonomous error accumulation.
   promotion_gate: Require at least 99.9 percent fresh transition accuracy and a two-point rollout gain over a matched continuation control before independent Tier-4 evaluation.
-  status: planned
-next_action: Preregister and run EXP-250 from the frozen EXP-230 single-head control; retain Candidate 002.
+  status: preregistered
+next_action: Run the matched EXP-250 A/B from the frozen EXP-230 single-head control; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
