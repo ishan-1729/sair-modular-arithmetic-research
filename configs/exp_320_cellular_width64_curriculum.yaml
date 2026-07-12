@@ -1,0 +1,48 @@
+run_id: exp-320-cellular-width64-curriculum
+hypothesis: the validated width-independent cellular model learns progressively wider bigint-labeled transitions and transfers nontrivially to width 64
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+source_checkpoint: .scratch/exp-314-cellular-width32-smoke/weights.safetensors
+source_checkpoint_sha256: a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241
+model:
+  hidden: 92
+  cycles: 2
+training:
+  widths: [32, 40, 48, 56]
+  prime_bit_span: 4
+  steps: 800
+  batch_size: 128
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+hard_mining:
+  candidate_pool_factor: 2
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+data:
+  train_prime_identities: 128
+  test_prime_identities: 32
+evaluation:
+  source_width64_transition_cases: 2000
+  source_width64_rollout_cases: 500
+  width32_transition_cases: 2000
+  width32_rollout_cases: 500
+  width56_transition_cases: 5000
+  width56_rollout_cases: 1000
+  width64_transition_cases: 5000
+  width64_rollout_cases: 1000
+gates:
+  minimum_retained_width32_rollout: 0.90
+  minimum_width56_transition: 0.85
+  minimum_width56_rollout: 0.10
+  minimum_zero_width64_transition: 0.55
+  minimum_zero_width64_rollout: 0.002
+  maximum_zero_width64_invalid_rollout_rate: 0.50
+resource_cap:
+  cpu_minutes: 12
