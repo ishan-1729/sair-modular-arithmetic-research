@@ -237,3 +237,10 @@ runs:
     run_record: experiments/runs/exp-322-cellular-width64-smoke/run.json
     metrics: evals/results/exp-322-cellular-width64-smoke/metrics.json
     checkpoint: .scratch/exp-322-cellular-width64-smoke/weights.safetensors
+  - run_id: exp-323-cellular-width64-diverse
+    status: completed
+    approach: diverse-low-rate-cellular-width64
+    config: configs/exp_323_cellular_width64_diverse.yaml
+    run_record: experiments/runs/exp-323-cellular-width64-diverse/run.json
+    metrics: evals/results/exp-323-cellular-width64-diverse/metrics.json
+    checkpoint: .scratch/exp-323-cellular-width64-diverse/weights.safetensors

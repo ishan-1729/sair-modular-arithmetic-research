@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-323-cellular-width64-diverse
-  statement: Higher modulus-identity diversity and lower-rate continuation improve width-64 generalization without eroding the transferred algorithm.
-  promotion_gate: Retain 85 percent width-56 rollout and reach 99.75/90 percent width-64 transition/rollout with a five-point gain.
+  run_id: exp-324-cellular-width64-second-stage
+  statement: A fresh-identity lower-rate second stage converts the diverse width-64 checkpoint into Tier-5 independent readiness.
+  promotion_gate: Retain 90 percent width-56 rollout and reach 99.8/92 percent width-64 transition/rollout with a three-point gain.
   status: preregistered
-next_action: Run the diverse lower-rate width-64 continuation; retain Candidate 003 as incumbent.
+next_action: Run the single authorized fresh-identity width-64 second stage; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

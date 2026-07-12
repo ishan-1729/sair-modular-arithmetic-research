@@ -88,14 +88,24 @@ Repeat while the Goal is active:
 
 1. **Reproduce:** validate the repository and re-establish the incumbent's exact score, tier results, determinism, runtime, artifact size, and hashes.
 2. **Diagnose:** analyze errors by tier, modulus/operand width, prime, sequence length, reduction boundary, first-error step, state drift, invalid residue, confidence, and relevant internal features. Separate observations from hypotheses.
-3. **Choose:** select one falsifiable experiment by expected ranking value relative to compute and time. Pre-register the changed variable, matched controls, resource cap, falsification rule, and promotion threshold.
-4. **Test cheaply:** start with the smallest discriminating smoke test. Promote to full runs and multiple seeds only after its gate passes; stop weak directions early.
+3. **Choose:** select one falsifiable experiment by expected ranking value relative to compute and time. Pre-register the changed variable, matched controls, calibrated resource budget and hard safety ceiling, falsification rule, and promotion threshold.
+4. **Test cheaply:** start with the smallest discriminating smoke test. Promote to full runs and multiple seeds only after its gate passes; stop weak directions early, but give promoted confirmation runs enough budget to complete their declared training and evaluation.
 5. **Compare fairly:** use paired or matched A/B tests. Match data, seeds, steps, parameter count, compute, or wall time as appropriate and disclose unmatched variables. Use confidence intervals or paired significance analysis for close results.
 6. **Evaluate independently:** select on held-out primes and untouched official-generator-style seeds. Consult the checked public benchmark sparingly as a logged release regression, not a tuning set.
 7. **Decide:** promote, reject, or continue from the evidence. Update MLflow, canonical run records, the registry, scoreboard, state, decision log, and research synthesis immediately.
 8. **Integrate:** turn a winner into a candidate only after interface, static, deterministic, CPU, artifact-size, leakage, provenance, and weight-dependence gates pass. Preserve the prior incumbent until the challenger dominates under the declared contract.
 
 Do not run an indiscriminate Cartesian grid. Prefer staged hypothesis tests, multi-fidelity search, successive halving/ASHA, Bayesian search, or another compute-aware strategy. Change one interpretable factor at a time for causal ablations; use broader search only after defining a stable evaluation surface.
+
+### Resource-budget policy
+
+Do not impose one fixed 10- or 12-minute wall-clock cap on heterogeneous experiments. A fixed budget is appropriate within a declared successive-halving rung or matched A/B comparison, but each rung must be calibrated to the architecture, width, training work, evaluation fidelity, measured hardware throughput, and expected information value. Profile a short representative segment, estimate setup plus training plus evaluation time, apply documented safety headroom, and retain a hard runaway ceiling. Record whether every limit means wall-clock time, aggregate CPU time, accelerator time, updates, examples, or another compute unit; never label wall minutes as CPU minutes or compare unlike units silently.
+
+Use small, statistically discriminating evaluations for early screening and increase fidelity for promoted or close candidates. Prefer batched sequential evaluation with preregistered confidence or futility rules when it can stop decisively without weakening the claim. Do not reduce both training budget and evaluation fidelity while describing the retry as only an evaluation-fidelity change; register it as a distinct lower-resource rung and disclose both changes. A smoke result does not falsify the corresponding full-budget hypothesis unless the preregistered rung rule says that it does.
+
+Cache and reuse deterministic frozen-checkpoint baselines, evaluation inputs, predictions, and metrics by checkpoint, evaluator, dataset, config, and seed hash. Recompute them only when an input to that evidence changes or an integrity check fails. Save and hash a recoverable checkpoint before any long evaluation so completed training is not discarded merely because evaluation reaches a safety ceiling. If an otherwise valid run overruns only during evaluation, preserve the checkpoint and mark the missing evidence explicitly; do not treat the model as having failed.
+
+The competition's 300-second CPU limit is a final submission-inference constraint, not a universal limit on offline training, diagnostics, mechanistic analysis, or statistically powered evaluation. Confirmation runs may therefore exceed an early-rung wall-time budget when their preregistered dynamic budget justifies it. Continue to measure projected submission runtime throughout research and require the official isolated runtime gate before promotion.
 
 ## Research portfolio
 
