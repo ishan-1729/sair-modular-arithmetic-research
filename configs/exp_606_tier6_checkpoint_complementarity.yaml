@@ -1,0 +1,28 @@
+run_id: exp-606-tier6-checkpoint-complementarity
+hypothesis: four-step and eight-step recovery checkpoints make complementary width-128 errors that a fixed weight-space or logit combination can convert into at least 90 percent rollout
+seed: 20260802
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-606-tier6-checkpoint-complementarity.md
+checkpoint_a: .scratch/exp-603-tier6-recovery-continuation/weights.safetensors
+checkpoint_a_sha256: 4cf8f959761c43d23f157acf6d4a4b7e1ce0ed0c0f94f73f5863e97e13a046ca
+checkpoint_b: .scratch/exp-604-tier6-long-horizon-recovery/eight_step_challenger/weights.safetensors
+checkpoint_b_sha256: 08826453c45bacb9f72e4fb2ada0911fb0eeb6bed80eb1fc9735505cc4aea6c5
+architecture: {hidden: 92, cycles: 2}
+combination: {weight_soup_alpha_b: 0.5, logit_ensemble_alpha_b: 0.5}
+data: {prime_bit_span: 8, test_prime_identities: 128}
+evaluation: {transition_cases: 1000, rollout_cases: 200, widths: [64, 128]}
+gates:
+  minimum_oracle_union_width128_rollout: 0.92
+  minimum_fixed_combination_width128_rollout: 0.90
+  minimum_fixed_combination_width64_rollout: 0.94
+  minimum_fixed_combination_width128_transition: 0.998
+  maximum_fixed_combination_width128_invalid_rate: 0.01
+  maximum_projected_full_candidate_inference_seconds: 240
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-604-two-arm-frozen-evaluation-and-exp605
+  projected_total_wall_seconds: 650
+  soft_budget_wall_seconds: 1200
+  hard_runaway_ceiling_wall_seconds: 1800
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 120
