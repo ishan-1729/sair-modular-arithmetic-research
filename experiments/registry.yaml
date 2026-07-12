@@ -349,3 +349,10 @@ runs:
     run_record: experiments/runs/exp-601-tier6-autonomous-state-recovery/run.json
     metrics: evals/results/exp-601-tier6-autonomous-state-recovery/metrics.json
     checkpoint: .scratch/exp-601-tier6-autonomous-state-recovery/weights.safetensors
+  - run_id: exp-602-tier6-recovery-full-budget
+    status: completed
+    approach: higher-fidelity-width64-width128-state-recovery
+    config: configs/exp_602_tier6_recovery_full_budget.yaml
+    run_record: experiments/runs/exp-602-tier6-recovery-full-budget/run.json
+    metrics: evals/results/exp-602-tier6-recovery-full-budget/metrics.json
+    checkpoint: .scratch/exp-602-tier6-recovery-full-budget/weights.safetensors

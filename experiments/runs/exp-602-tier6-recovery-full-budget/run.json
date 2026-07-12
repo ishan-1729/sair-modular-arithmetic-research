@@ -1,0 +1,7 @@
+{
+  "run_id":"exp-602-tier6-recovery-full-budget","status":"completed","created_at":"2026-07-12T14:35:00Z","hypothesis":"Continued width-128 learner-state recovery plus explicit width-64 learner-state retention raises width-128 rollout above 85 percent without sacrificing the Tier-5 boundary.","seed":20260729,
+  "source":{"repository_commit":"60937b60eac8e00f96d384f0de7a16b2b40babbe","dirty":false,"challenge_commit":"82510bba00a1126649bd76dd1a451f14d0b3eb60","runner_sha256":"c4b968a721b8d092b03a4ac1e880338ff4d97c41e8db46cede5f2be978a269bf","config_sha256":"9dfd58c8d45dcba1ddd675c2e698ee4c99c9da3746863820481ae6db74c29a92"},
+  "config":"configs/exp_602_tier6_recovery_full_budget.yaml","environment":"experiments/runs/exp-602-tier6-recovery-full-budget/environment.json","mlflow":{"experiment_name":"sair-modular-arithmetic-wsl","experiment_id":"2","run_id":"8fbd06ec07cb406989f3060d6b8c7289"},
+  "artifacts":{"checkpoint":".scratch/exp-602-tier6-recovery-full-budget/weights.safetensors","checkpoint_sha256":"eaeece8bf81a28818083f306f0882ef403f885dd7b6821bb1aafe0120d9a59fa","metrics":"evals/results/exp-602-tier6-recovery-full-budget/metrics.json","summary_sha256":"8d7de46193c01fb107eccac87046b035efff7f626e7ecb3f500741442f779772"},
+  "decision":"reject-tier6-recovery-full-budget","notes":["Width-128 rollout improves from 70.67 to 79.33 percent but misses the 85 percent gate.","Width-64 retention improves to 93.33 percent.","The checkpoint is preserved for one preregistered continuation; independent Tier-6 remains unauthorized."]
+}

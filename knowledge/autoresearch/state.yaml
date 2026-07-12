@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-602-tier6-recovery-full-budget
-  statement: More width-128 autonomous recovery with explicit width-64 retention can raise Tier-6 rollout toward 90 percent on higher-fidelity fresh evidence.
-  promotion_gate: Require a preregistered full-budget run to reach at least 85 percent width-128 rollout and preserve at least 92 percent width-64 before any independent Tier-6 gate.
+  run_id: exp-603-tier6-recovery-continuation
+  statement: A lower-rate continuation from the EXP-602 checkpoint converts the monotonic recovery gain into at least 85 percent width-128 rollout while retaining Tier 5.
+  promotion_gate: Require at least 85 percent width-128 and 92 percent width-64 rollout on fresh matched evidence before independent Tier-6.
   status: planning
-next_action: Calibrate and preregister EXP-602 from observed EXP-601 throughput, preserving Candidate 004 and all completed evidence.
+next_action: Preregister one fresh-identity lower-rate continuation from EXP-602 using its observed phase throughput; retain Candidate 004 and keep independent Tier-6 closed.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
