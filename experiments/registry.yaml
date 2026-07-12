@@ -153,3 +153,10 @@ runs:
     run_record: experiments/runs/exp-260-low-rate-continuation/run.json
     metrics: evals/results/exp-260-low-rate-continuation/metrics.json
     checkpoint: .scratch/exp-260-low-rate-continuation/trained/weights.safetensors
+  - run_id: exp-300-width64-bit-tensor-transfer
+    status: completed
+    approach: matched-width64-bit-tensor-transfer
+    config: configs/exp_300_width64_bit_tensor_transfer.yaml
+    run_record: experiments/runs/exp-300-width64-bit-tensor-transfer/run.json
+    metrics: evals/results/exp-300-width64-bit-tensor-transfer/metrics.json
+    checkpoint: .scratch/exp-300-width64-bit-tensor-transfer/width64-transfer/weights.safetensors

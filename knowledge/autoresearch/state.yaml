@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-300-width64-bit-tensor-transfer
-  statement: A Python-bigint offline sampler plus learned bit-tensor TCN permits width-64 training and benefits from width-32 learned transfer.
-  promotion_gate: Demonstrate valid width-64 transition and rollout learning with a material matched transfer gain before a full Tier-5 budget.
+  run_id: exp-301-width64-hard-mining
+  statement: Reduction-boundary hard mining converts the transferred width-64 transition model into a viable autonomous rollout model.
+  promotion_gate: Require a twelve-point transition gain, 95 percent transition, 15 percent rollout, and below 10 percent invalid rollouts.
   status: preregistered
-next_action: Run matched random-versus-transfer width-64 bit-tensor smoke training; retain Candidate 002.
+next_action: Run one full-budget width-64 hard-mined continuation; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
