@@ -1,0 +1,56 @@
+run_id: exp-614-tier6-global-recurrent-refinement
+hypothesis: an exactly gated, separately parameterized global recurrent refinement pass improves fresh width-128 exact rollout by at least three points to at least 90 percent over a matched base continuation
+seed: 20260810
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-614-tier6-global-recurrent-refinement.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+exact_initialization_cases: 1000
+activation_diagnostic_cases: 1000
+training:
+  steps: 200
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+arms:
+  base_continuation_control: {differentiable_soft_state: true, state_mode: straight_through, train: true}
+  global_refinement_challenger: {differentiable_soft_state: true, state_mode: straight_through, train: true, global_refinement_passes: 2, refinement_learning_rate: 0.001, minimum_refinement_learning_rate: 0.0001}
+comparison: {control_arm: base_continuation_control, challenger_arm: global_refinement_challenger}
+pass_decision: advance-tier6-global-recurrent-refinement
+fail_decision: reject-tier6-global-recurrent-refinement
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation: {transition_cases: 2000, rollout_cases: 200}
+gates:
+  minimum_challenger_width128_rollout: 0.90
+  minimum_width128_gain_over_control: 0.03
+  minimum_challenger_width64_rollout: 0.95
+  minimum_challenger_width128_transition: 0.998
+  maximum_challenger_width128_invalid_rollout_rate: 0.01
+  minimum_challenger_blend_rms: 0.01
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-614-representative-eight-step-profile
+  profile_control_updates: 10
+  profile_control_wall_seconds: 27.255286430001433
+  profile_control_aggregate_cpu_seconds: 105.88747713
+  profile_challenger_updates: 10
+  profile_challenger_wall_seconds: 40.65440293300344
+  profile_challenger_aggregate_cpu_seconds: 157.918592889
+  projected_two_arm_training_wall_seconds: 1359
+  projected_evaluation_setup_wall_seconds: 465
+  projected_total_wall_seconds: 1824
+  soft_budget_wall_seconds: 2800
+  hard_runaway_ceiling_wall_seconds: 4200
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 280
+  torch_threads: 4
+  cache_completed_arms: true
