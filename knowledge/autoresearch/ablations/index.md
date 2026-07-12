@@ -42,3 +42,4 @@
 - [EXP-401 PyG graph message passing](exp-401-pyg-graph-message-passing.md) - proper library-backed full-training GCNConv, GATv2Conv, and MessagePassing comparison.
 - [EXP-500 cellular grokking probe](exp-500-cellular-grokking-probe.md) - three-seed finite-data weight-decay delayed-generalization study.
 - [EXP-510 multi-architecture grokking feasibility](exp-510-multiarchitecture-grokking-feasibility.md) - proper PyG graph and materially different TCN delayed-generalization probes.
+- [EXP-520 Tier-5 recovery delta patching](exp-520-tier5-recovery-delta-patching.md) - causal tensor-group transplants for the strongest Tier-5 pair.
