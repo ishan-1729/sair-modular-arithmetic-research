@@ -356,3 +356,10 @@ runs:
     run_record: experiments/runs/exp-602-tier6-recovery-full-budget/run.json
     metrics: evals/results/exp-602-tier6-recovery-full-budget/metrics.json
     checkpoint: .scratch/exp-602-tier6-recovery-full-budget/weights.safetensors
+  - run_id: exp-603-tier6-recovery-continuation
+    status: completed
+    approach: lower-rate-tier6-recovery-continuation
+    config: configs/exp_603_tier6_recovery_continuation.yaml
+    run_record: experiments/runs/exp-603-tier6-recovery-continuation/run.json
+    metrics: evals/results/exp-603-tier6-recovery-continuation/metrics.json
+    checkpoint: .scratch/exp-603-tier6-recovery-continuation/weights.safetensors

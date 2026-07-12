@@ -25,3 +25,4 @@
 - **Tier-6 smoke**: The frozen Tier-5 cellular checkpoint transfers to 57% width-128 rollout, but progressive transition training regresses it to 49%; autonomous-state recovery is the next test.
 - **Tier-6 recovery**: A matched learner-state recovery smoke improves width-128 rollout from 62% to 76%, authorizing higher-fidelity confirmation while Candidate 004 remains incumbent.
 - **Tier-6 full budget**: Higher-fidelity recovery reaches 79.33% width-128 and 93.33% retained width-64 rollout, missing the 85% independent-authorization gate but supporting one continuation.
+- **Tier-6 continuation**: Lower-rate continuation reaches 84.67% width-128 rollout but misses the exact gate by one case; the four-step schedule is closed.

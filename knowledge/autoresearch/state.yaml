@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-603-tier6-recovery-continuation
-  statement: A lower-rate continuation from the EXP-602 checkpoint converts the monotonic recovery gain into at least 85 percent width-128 rollout while retaining Tier 5.
-  promotion_gate: Require at least 85 percent width-128 and 92 percent width-64 rollout on fresh matched evidence before independent Tier-6.
+  run_id: exp-604-tier6-long-horizon-recovery
+  statement: Extending learner-state recovery from four to eight consecutive steps reduces the remaining long-horizon drift that four-step continuation cannot fix.
+  promotion_gate: Require at least 88 percent width-128 and 94 percent width-64 rollout on fresh matched evidence before independent Tier-6.
   status: planning
-next_action: Preregister one fresh-identity lower-rate continuation from EXP-602 using its observed phase throughput; retain Candidate 004 and keep independent Tier-6 closed.
+next_action: Profile and preregister an eight-step recovery-horizon A/B from the preserved EXP-603 checkpoint; retain Candidate 004 and keep independent Tier-6 closed.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
