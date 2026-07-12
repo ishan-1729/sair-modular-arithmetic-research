@@ -223,3 +223,10 @@ runs:
     run_record: experiments/runs/exp-320-cellular-width64-curriculum/run.json
     metrics: evals/results/exp-320-cellular-width64-curriculum/metrics.json
     checkpoint: .scratch/exp-320-cellular-width64-curriculum/weights.safetensors
+  - run_id: exp-321-cellular-official-width64
+    status: failed
+    approach: cellular-official-width64-continuation
+    config: configs/exp_321_cellular_official_width64.yaml
+    run_record: experiments/runs/exp-321-cellular-official-width64/run.json
+    metrics: null
+    checkpoint: null

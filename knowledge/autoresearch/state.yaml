@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-321-cellular-official-width64
-  statement: Direct official-numeric width-64 continuation raises the cellular model above the Tier-5 independent-readiness gate.
-  promotion_gate: Retain 85 percent width-56 rollout and reach 99.8/93 percent width-64 transition/rollout with an eight-point gain.
+  run_id: exp-322-cellular-width64-smoke
+  statement: Compute-bounded official-numeric width-64 continuation improves the cellular model enough to justify Tier-5 confirmation.
+  promotion_gate: Retain 85 percent width-56 rollout and reach 99.7/90 percent width-64 transition/rollout with an eight-point gain.
   status: preregistered
-next_action: Run direct width-56/64 continuation on fresh official-numeric identities; retain Candidate 003 as incumbent.
+next_action: Run the 400-step width-64 smoke gate; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
