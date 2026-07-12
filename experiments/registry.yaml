@@ -412,3 +412,10 @@ runs:
     run_record: experiments/runs/exp-610-tier6-state-corruption-robustness/run.json
     metrics: evals/results/exp-610-tier6-state-corruption-robustness/metrics.json
     checkpoint: .scratch/exp-610-tier6-state-corruption-robustness/corrupted_straight_through/weights.safetensors
+  - run_id: exp-611-tier6-function-preserving-widening
+    status: completed
+    approach: exact-residual-widening-low-rate-ab
+    config: configs/exp_611_tier6_function_preserving_widening.yaml
+    run_record: experiments/runs/exp-611-tier6-function-preserving-widening/run.json
+    metrics: evals/results/exp-611-tier6-function-preserving-widening/metrics.json
+    checkpoint: .scratch/exp-611-tier6-function-preserving-widening/residual_92_plus_36/weights.safetensors

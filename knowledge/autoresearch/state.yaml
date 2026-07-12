@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T01:45:00+05:30
+updated_at: 2026-07-13T02:25:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-611-tier6-function-preserving-widening
-  statement: Function-preserving widening from 92 to 128 recurrent channels adds capacity for the shared Tier-6 error tail without discarding the learned algorithm.
-  promotion_gate: Require widened initialization to reproduce the source exactly before a matched 92-versus-128-channel training comparison can advance.
+  run_id: exp-612-tier6-adapter-activation
+  statement: A differential learning rate can behaviorally activate the exactly initialized 36-channel residual adapter while preserving the trained 92-channel base and improve Tier-6 rollout.
+  promotion_gate: Require material adapter outputs or prediction changes plus at least 90 percent width-128 rollout and a three-point matched gain before higher fidelity.
   status: planning
-next_action: Design and verify an exact function-preserving channel-widening transform, then preregister matched capacity training; keep Candidate 004 incumbent.
+next_action: Preregister one optimizer-parameter-group activation test for the dormant residual adapter; keep Candidate 004 incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,8 +44,8 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 2cc48476736606fc2604bf63ae4b17047e7acb96
-  dirty: false
+  last_validated_commit: 5c4f407fd21c50c396ae2068e651674c616f9b0a
+  dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
   - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
