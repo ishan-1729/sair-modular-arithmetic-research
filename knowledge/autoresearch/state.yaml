@@ -30,8 +30,8 @@ current_hypothesis:
   run_id: exp-521-tier5-recovery-independent-five-seed
   statement: The unchanged full recovery checkpoint has robust Tier-5 exact rollout across untouched official-generator seeds.
   promotion_gate: Require every one of five untouched Tier-5 seeds >= 90 percent and aggregate >= 92 percent before integration.
-  status: planned
-next_action: Preregister and run the frozen full recovery checkpoint on five untouched Tier-5 official-generator seeds; retain Candidate 003 as incumbent.
+  status: preregistered
+next_action: Run the frozen full recovery checkpoint on five untouched Tier-5 official-generator seeds; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
