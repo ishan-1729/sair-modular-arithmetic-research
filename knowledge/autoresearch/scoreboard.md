@@ -44,3 +44,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-250 online failure mining | 32 | 400 control only | invalid | invalid | invalid | 126,276 | stopped at 10 min | killed; resource cap |
 | EXP-251 online mining smoke | 32 | +100 | 99.77% | 92.86% | 0.22% | 126,276 | 47.6 train | reject; +0.96 rollout |
 | EXP-252 replay-heavy mining | 32 | +200 | 99.815% | 93.62% | 0.14% | 126,276 | 25.5 train | reject; +0.36 rollout |
+| EXP-260 low-rate continuation | 32 | +600 | 99.826% | 92.795% | n/a | 126,276 | 43.2 train | reject; +0.63 rollout |

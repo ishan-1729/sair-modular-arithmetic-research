@@ -146,3 +146,10 @@ runs:
     run_record: experiments/runs/exp-252-replay-heavy-failure-mining/run.json
     metrics: evals/results/exp-252-replay-heavy-failure-mining/metrics.json
     checkpoint: .scratch/exp-252-replay-heavy-failure-mining/online-failure-mining-challenger/weights.safetensors
+  - run_id: exp-260-low-rate-continuation
+    status: completed
+    approach: fresh-split-low-rate-uniform-continuation
+    config: configs/exp_260_low_rate_continuation.yaml
+    run_record: experiments/runs/exp-260-low-rate-continuation/run.json
+    metrics: evals/results/exp-260-low-rate-continuation/metrics.json
+    checkpoint: .scratch/exp-260-low-rate-continuation/trained/weights.safetensors

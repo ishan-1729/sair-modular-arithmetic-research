@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-260-low-rate-continuation
-  statement: Longer low-rate uniform continuation removes the remaining width-32 transition tail without curriculum distortion.
-  promotion_gate: Require a one-point rollout gain, 99.85 percent transition, and 94 percent rollout before independent Tier-4 evaluation.
+  run_id: exp-300-width64-bit-tensor-transfer
+  statement: A Python-bigint offline sampler plus learned bit-tensor TCN permits width-64 training and benefits from width-32 learned transfer.
+  promotion_gate: Demonstrate valid width-64 transition and rollout learning with a material matched transfer gain before a full Tier-5 budget.
   status: preregistered
-next_action: Run the final fixed-width Tier-4 continuation on a fresh split; retain Candidate 002.
+next_action: Run matched random-versus-transfer width-64 bit-tensor smoke training; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -47,3 +47,4 @@ risks:
   - A fixed-width full-canvas model may learn modulus identities rather than a shared reduction rule.
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
+  - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.

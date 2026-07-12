@@ -19,3 +19,4 @@
 - [EXP-251 online failure-mining smoke](exp-251-online-failure-mining-smoke.md) - compute-bounded successive-halving retry after EXP-250 exceeded its cap.
 - [EXP-252 replay-heavy failure mining](exp-252-replay-heavy-failure-mining.md) - lower-intensity confirmation of the narrow EXP-251 rollout gain.
 - [EXP-260 low-rate continuation](exp-260-low-rate-continuation.md) - clean fresh-split continuation after closing online ranking.
+- [EXP-300 width-64 bit-tensor transfer](exp-300-width64-bit-tensor-transfer.md) - matched random-versus-transfer smoke beyond signed `int64`.

@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-260-low-rate-continuation",
+  "created_at": "2026-07-12T04:38:00Z",
+  "checkpoint_sha256": "591c2ca0bfa070b73836d73f5882fcc068c5a7d31523be38a025f2337ca09e94",
+  "evaluation": {
+    "transition": {"frozen_source": {"cases": 50000, "correct": 49899, "exact_accuracy": 0.99798}, "trained": {"cases": 50000, "correct": 49913, "exact_accuracy": 0.99826}},
+    "rollout": {"frozen_source": {"cases": 20000, "correct": 18433, "exact_accuracy": 0.92165}, "trained": {"cases": 20000, "correct": 18559, "exact_accuracy": 0.92795}}
+  },
+  "controls": {"transition_change": 0.00028, "rollout_gain": 0.0063, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 144.442675715},
+  "decision": "reject-further-fixed-width-continuation",
+  "limitations": ["Fresh official-like identities only; no consumed independent or checked answer was read."]
+}
