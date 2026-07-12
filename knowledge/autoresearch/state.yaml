@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-252-replay-heavy-failure-mining
-  statement: Lower-intensity online mining retains the observed rollout gain without reducing transition accuracy.
-  promotion_gate: Require nonnegative transition change, a one-point rollout gain, 99.8 percent transition, and 93 percent rollout.
+  run_id: exp-260-low-rate-continuation
+  statement: Longer low-rate uniform continuation removes the remaining width-32 transition tail without curriculum distortion.
+  promotion_gate: Require a one-point rollout gain, 99.85 percent transition, and 94 percent rollout before independent Tier-4 evaluation.
   status: preregistered
-next_action: Run the single authorized replay-heavy confirmation within six wall minutes; retain Candidate 002.
+next_action: Run the final fixed-width Tier-4 continuation on a fresh split; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

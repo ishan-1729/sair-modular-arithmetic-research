@@ -139,3 +139,10 @@ runs:
     run_record: experiments/runs/exp-251-online-failure-mining-smoke/run.json
     metrics: evals/results/exp-251-online-failure-mining-smoke/metrics.json
     checkpoint: .scratch/exp-251-online-failure-mining-smoke/online-failure-mining-challenger/weights.safetensors
+  - run_id: exp-252-replay-heavy-failure-mining
+    status: completed
+    approach: matched-replay-heavy-online-mining
+    config: configs/exp_252_replay_heavy_failure_mining.yaml
+    run_record: experiments/runs/exp-252-replay-heavy-failure-mining/run.json
+    metrics: evals/results/exp-252-replay-heavy-failure-mining/metrics.json
+    checkpoint: .scratch/exp-252-replay-heavy-failure-mining/online-failure-mining-challenger/weights.safetensors

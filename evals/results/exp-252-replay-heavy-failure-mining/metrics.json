@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-252-replay-heavy-failure-mining",
+  "created_at": "2026-07-12T04:31:00Z",
+  "checkpoint_sha256": "f6fde8325c1a0556098f6855b40dcb0396b15de5274af13314a4740617377803",
+  "evaluation": {
+    "transition": {"uniform_control": {"cases": 20000, "correct": 19962, "exact_accuracy": 0.9981}, "online_mining": {"cases": 20000, "correct": 19963, "exact_accuracy": 0.99815}},
+    "rollout": {"uniform_control": {"cases": 5000, "correct": 4663, "exact_accuracy": 0.9326}, "online_mining": {"cases": 5000, "correct": 4681, "exact_accuracy": 0.9362}}
+  },
+  "controls": {"transition_gain": 0.00005, "rollout_gain": 0.0036, "challenger_invalid_rollout_rate": 0.0014, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 113.84663140800012},
+  "decision": "reject-online-failure-mining",
+  "limitations": ["The 5,000-case rollout comparison is a selection surface, not an independent gate.", "No consumed independent or checked-public answer was read."]
+}
