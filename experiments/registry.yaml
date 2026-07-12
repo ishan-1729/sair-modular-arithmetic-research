@@ -132,3 +132,10 @@ runs:
     run_record: experiments/runs/exp-250-online-failure-mining/run.json
     metrics: null
     checkpoint: null
+  - run_id: exp-251-online-failure-mining-smoke
+    status: completed
+    approach: matched-online-failure-mining-smoke
+    config: configs/exp_251_online_failure_mining_smoke.yaml
+    run_record: experiments/runs/exp-251-online-failure-mining-smoke/run.json
+    metrics: evals/results/exp-251-online-failure-mining-smoke/metrics.json
+    checkpoint: .scratch/exp-251-online-failure-mining-smoke/online-failure-mining-challenger/weights.safetensors

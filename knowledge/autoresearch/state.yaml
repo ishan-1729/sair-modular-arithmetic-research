@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-251-online-failure-mining-smoke
-  statement: A compute-bounded dose of model-dependent failure mining improves fresh width-32 rollout over matched uniform replay.
-  promotion_gate: Require a one-point rollout gain and 99.8 percent transition accuracy before a larger confirmation.
+  run_id: exp-252-replay-heavy-failure-mining
+  statement: Lower-intensity online mining retains the observed rollout gain without reducing transition accuracy.
+  promotion_gate: Require nonnegative transition change, a one-point rollout gain, 99.8 percent transition, and 93 percent rollout.
   status: preregistered
-next_action: Run EXP-251 within six wall minutes; retain Candidate 002.
+next_action: Run the single authorized replay-heavy confirmation within six wall minutes; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

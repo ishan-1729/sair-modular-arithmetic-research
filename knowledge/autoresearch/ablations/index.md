@@ -17,3 +17,4 @@
 - [EXP-240 causal channel analysis](exp-240-channel-causal-analysis.md) - activation stratification and single-channel interventions.
 - [EXP-250 online exact-failure mining](exp-250-online-failure-mining.md) - matched model-dependent failure-tail training with uniform replay.
 - [EXP-251 online failure-mining smoke](exp-251-online-failure-mining-smoke.md) - compute-bounded successive-halving retry after EXP-250 exceeded its cap.
+- [EXP-252 replay-heavy failure mining](exp-252-replay-heavy-failure-mining.md) - lower-intensity confirmation of the narrow EXP-251 rollout gain.
