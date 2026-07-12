@@ -384,3 +384,10 @@ runs:
     run_record: experiments/runs/exp-606-tier6-checkpoint-complementarity/run.json
     metrics: evals/results/exp-606-tier6-checkpoint-complementarity/metrics.json
     checkpoint: .scratch/exp-606-tier6-checkpoint-complementarity/weight-soup.safetensors
+  - run_id: exp-607-tier6-differentiable-soft-state
+    status: completed
+    approach: matched-detached-versus-differentiable-soft-state
+    config: configs/exp_607_tier6_differentiable_soft_state.yaml
+    run_record: experiments/runs/exp-607-tier6-differentiable-soft-state/run.json
+    metrics: evals/results/exp-607-tier6-differentiable-soft-state/metrics.json
+    checkpoint: .scratch/exp-607-tier6-differentiable-soft-state/differentiable_soft_state/weights.safetensors
