@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-12T10:30:00+05:30
+updated_at: 2026-07-12T19:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -42,8 +42,8 @@ tracking:
   incumbent_model_version: "3"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 2dea57d5dabd05351953013054523c916af83564
-  dirty: true
+  last_validated_commit: 7148cbeeb046c03a1dd1d93aca5dd053bf840d25
+  dirty: false
 risks:
   - Tier 5 remains unsolved and requires a width-64 generalization path.
   - Width-64 labels and evaluation require Python big integers while inference must remain tensor-native.
