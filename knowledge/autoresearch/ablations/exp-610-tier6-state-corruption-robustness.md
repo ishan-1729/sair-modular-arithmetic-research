@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-610 Tier-6 State-Corruption Robustness
 description: Matched clean versus diagnosis-derived one-/two-bit corruption recovery A/B.
-status: preregistered
+status: completed
 tags: [autoresearch, Tier-6, state-corruption, robustness, matched-ab]
 timestamp: "2026-07-13T06:50:00+05:30"
 ---
@@ -16,3 +16,9 @@ Pass only if the challenger reaches at least 90% width-128 rollout, gains at lea
 ## Dynamic resource budget
 
 EXP-608/609 show roughly 390–625 wall seconds for straight-through arms at 200–400 updates and 200–300 rollout evaluations. Two 200-update/200-rollout arms project 800 wall seconds plus 25 seconds setup, or 825 seconds total. Allocate 1,500 wall seconds soft and a 2,400-wall-second hard runaway ceiling, tracking aggregate CPU separately under a conservative 170 CPU-minute ceiling at four threads. Cache completed arms and save checkpoints before evaluation.
+
+## Result
+
+Reject decisively. Clean straight-through control scores 87.5% width-128 rollout; corruption training collapses to 75.0% (-12.5 points), with 95.5% width-64, 99.85% transition, and 0.5% invalid rollouts. Corrupted recovery batches reach 0–6.25% exactness with losses around 0.9–1.25, showing that arbitrary residue perturbations do not admit the intended one-step correction mapping. Runtime is 735.396 wall seconds and 2,898.177 aggregate CPU seconds; external wall is 740.14 seconds, within budget.
+
+Close generic state corruption. The fixed 92-channel cell has now exhausted transition continuation, detached recovery, longer horizons, continuous/straight-through credit, checkpoint combination, and corruption robustness. Test function-preserving hidden-channel widening next.

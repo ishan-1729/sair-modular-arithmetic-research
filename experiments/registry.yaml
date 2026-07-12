@@ -405,3 +405,10 @@ runs:
     run_record: experiments/runs/exp-609-tier6-straight-through-confirmation/run.json
     metrics: evals/results/exp-609-tier6-straight-through-confirmation/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-610-tier6-state-corruption-robustness
+    status: completed
+    approach: matched-clean-versus-bit-corrupted-state-recovery
+    config: configs/exp_610_tier6_state_corruption_robustness.yaml
+    run_record: experiments/runs/exp-610-tier6-state-corruption-robustness/run.json
+    metrics: evals/results/exp-610-tier6-state-corruption-robustness/metrics.json
+    checkpoint: .scratch/exp-610-tier6-state-corruption-robustness/corrupted_straight_through/weights.safetensors

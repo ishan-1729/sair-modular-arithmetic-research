@@ -32,3 +32,4 @@
 - **Tier-6 soft state**: Differentiable continuous states reach 89.5% versus 88% detached control but miss the causal gain gate, motivating a straight-through discrete-forward formulation.
 - **Tier-6 straight-through**: Hard-forward/sigmoid-backward state training gains 2.5 points over continuous soft state, reaching 87%, and advances to higher-fidelity confirmation.
 - **Tier-6 straight-through confirmation**: Higher-fidelity continuation reaches 86.33% and misses its gain and absolute gates, closing estimator continuation.
+- **Tier-6 corruption robustness**: Generic one-/two-bit corruption training collapses rollout to 75%, closing fixed-cell schedule interventions and motivating capacity expansion.
