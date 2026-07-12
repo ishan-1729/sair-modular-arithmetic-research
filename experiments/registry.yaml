@@ -300,3 +300,10 @@ runs:
     run_record: experiments/runs/exp-401-pyg-graph-message-passing/run.json
     metrics: evals/results/exp-401-pyg-graph-message-passing/metrics.json
     checkpoint: .scratch/exp-401-pyg-graph-message-passing/pyg-max-mpnn/weights.safetensors
+  - run_id: exp-500-cellular-grokking-probe
+    status: completed
+    approach: finite-data-cellular-grokking-multi-seed
+    config: configs/exp_500_cellular_grokking_probe.yaml
+    run_record: experiments/runs/exp-500-cellular-grokking-probe/run.json
+    metrics: evals/results/exp-500-cellular-grokking-probe/metrics.json
+    checkpoint: .scratch/exp-500-cellular-grokking-probe/20260721/decay-1e-2/weights.safetensors

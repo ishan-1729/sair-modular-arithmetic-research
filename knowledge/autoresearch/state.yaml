@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-500-cellular-grokking-probe
-  statement: Extended regularized training may reveal delayed exact generalization in the promoted cellular transition family.
-  promotion_gate: Require the full predeclared delayed-generalization signature in at least two of three decay seeds and more often than control.
-  status: preregistered
-next_action: Run the dynamically budgeted six-arm EXP-500 cellular grokking probe; retain Candidate 003 as incumbent.
+  run_id: exp-510-multiarchitecture-grokking-feasibility
+  statement: A graph model or materially different sequence model may exhibit delayed generalization even though the cellular family does not.
+  promotion_gate: Preregister finite-data graph and non-cellular control probes using the same operational signature and calibrated budgets.
+  status: planned
+next_action: Implement the required graph-family and materially different-control grokking feasibility comparison; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -52,3 +52,4 @@ risks:
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
   - The strongest Tier-5 selection checkpoint reaches 94.267 percent but missed its preregistered causal gain gate and is not independently validated.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
+  - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.

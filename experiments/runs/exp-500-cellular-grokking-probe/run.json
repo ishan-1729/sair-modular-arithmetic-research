@@ -1,0 +1,15 @@
+{
+  "run_id": "exp-500-cellular-grokking-probe",
+  "status": "completed",
+  "created_at": "2026-07-12T11:10:00Z",
+  "hypothesis": "Finite-data weight-decayed cellular training exhibits reproducible delayed exact generalization after memorization.",
+  "seed": 20260719,
+  "seeds": [20260719, 20260720, 20260721],
+  "source": {"repository_commit": "504667df98308c992e5ad02106603b508353f829", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "98649b2d9479f83d275a70d8b3d03f1f26f6162083a0d062aebb89bab5549d6b", "config_sha256": "f359fc2c887dabd9ade1b8548c56c755659cf4be4b0b11e7d055826a469789d7", "cellular_model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc"},
+  "config": "configs/exp_500_cellular_grokking_probe.yaml",
+  "environment": "experiments/runs/exp-500-cellular-grokking-probe/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "a18f24acb65b4210899f5e18f8b61b4c"},
+  "artifacts": {"checkpoint": ".scratch/exp-500-cellular-grokking-probe/20260721/decay-1e-2/weights.safetensors", "checkpoint_sha256": "79baacb88c3642031ac8ccf7e485214a34638024d117f239b5a48daea3f2e858", "metrics": "evals/results/exp-500-cellular-grokking-probe/metrics.json", "summary_sha256": "6bfeb82138489b1db58f0cbb6dae403d9b049b4784be96cd24d254103da12106"},
+  "decision": "reject-cellular-grokking-signature",
+  "notes": ["No control or decay seed satisfies the complete preregistered signature.", "Two seeds memorize with the required gap, but later heldout gains are far below 15 points and final rollouts remain below 40 percent.", "The decay effect is inconsistent across paired seeds and does not authorize Tier-5 transfer."]
+}
