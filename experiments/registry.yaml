@@ -377,3 +377,10 @@ runs:
     run_record: experiments/runs/exp-605-tier6-long-horizon-retention/run.json
     metrics: evals/results/exp-605-tier6-long-horizon-retention/metrics.json
     checkpoint: .scratch/exp-605-tier6-long-horizon-retention/weights.safetensors
+  - run_id: exp-606-tier6-checkpoint-complementarity
+    status: completed
+    approach: frozen-checkpoint-overlap-soup-logit-ensemble
+    config: configs/exp_606_tier6_checkpoint_complementarity.yaml
+    run_record: experiments/runs/exp-606-tier6-checkpoint-complementarity/run.json
+    metrics: evals/results/exp-606-tier6-checkpoint-complementarity/metrics.json
+    checkpoint: .scratch/exp-606-tier6-checkpoint-complementarity/weight-soup.safetensors

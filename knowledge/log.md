@@ -28,3 +28,4 @@
 - **Tier-6 continuation**: Lower-rate continuation reaches 84.67% width-128 rollout but misses the exact gate by one case; the four-step schedule is closed.
 - **Tier-6 horizon A/B**: Eight-step learner-state recovery improves matched width-128 rollout by 2.5 points over four steps, reaching 86.5%, but misses retention and absolute promotion gates.
 - **Tier-6 retention follow-up**: A 60/40 retention schedule improves width 64 but regresses width 128, closing further recovery-schedule tuning.
+- **Tier-6 complementarity**: Endpoint oracle union is only 84.5% and fixed combinations reach 83%, closing checkpoint combination and motivating soft-state credit assignment.

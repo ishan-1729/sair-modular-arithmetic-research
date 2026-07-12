@@ -83,3 +83,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-603 Tier6 recovery continuation | 64/128 | +600 | 99.97% width128 | 84.0% source / 84.67% challenger | 0.67% challenger | 99,824 | 1268.7 wall / 83.8 CPU min | reject; close four-step continuation |
 | EXP-604 recovery horizon A/B | 64/128 | 200 x2 | 99.70% / 99.75% | 84.0% four-step / 86.5% eight-step | 1% both | 99,824 | 760.6 wall / 50.0 CPU min | reject promotion; horizon supported |
 | EXP-605 long-horizon retention | 64/128 | +400 | 99.87% width128 | 82.67% source / 82.33% challenger | 0.33% | 99,824 | 791.0 wall / 52.2 CPU min | reject; close schedule tuning |
+| EXP-606 checkpoint combination | 64/128 | frozen | 100% fixed arms | 82% endpoints / 83% soup+ensemble / 84.5% oracle | 0% width128 | 99,824-199,648 | 657.9 wall / 43.1 CPU min | reject; shared errors dominate |
