@@ -454,3 +454,10 @@ runs:
     run_record: experiments/runs/exp-616-tier6-trajectory-tail-cvar/run.json
     metrics: evals/results/exp-616-tier6-trajectory-tail-cvar/metrics.json
     checkpoint: .scratch/exp-616-tier6-trajectory-tail-cvar/trajectory_cvar_challenger/weights.safetensors
+  - run_id: exp-617-tier6-recurrent-core-lora
+    status: completed
+    approach: exact-mergeable-recurrent-core-lora
+    config: configs/exp_617_tier6_recurrent_core_lora.yaml
+    run_record: experiments/runs/exp-617-tier6-recurrent-core-lora/run.json
+    metrics: evals/results/exp-617-tier6-recurrent-core-lora/metrics.json
+    checkpoint: .scratch/exp-617-tier6-recurrent-core-lora/recurrent_core_lora_challenger/merged-weights.safetensors

@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-617 Tier-6 Recurrent-Core LoRA
 description: Matched test of exact-initialized mergeable low-rank recurrent-kernel adaptation against full-base continuation.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, lora, recurrent-core, straight-through]
 timestamp: "2026-07-13T05:00:00+05:30"
 ---
@@ -38,3 +38,9 @@ The planning budget is 1,900 wall seconds and the hard runaway ceiling is 2,800 
 ## Boundaries and library choice
 
 Checked and private answers remain unread. Exact arithmetic remains offline-only. LoRA inference is entirely trained tensor computation, and the merged artifact uses the existing compliant cellular architecture. PyTorch is used directly because the adapted objects are custom raw recurrent convolution parameters; general PEFT packages target module-level linear/convolution layers and would require a less faithful wrapper. This is a considered library choice, not avoidance of external dependencies.
+
+## Result and decision
+
+Exact initialization passed at both widths. The LoRA kernel deltas activated strongly relative to the `1e-4` gate: gate RMS `0.000789` and candidate RMS `0.000765`. The merged 400,584-byte checkpoint reproduced adapter logits and quotient logits with zero maximum difference and identical predictions on 256 cases per width.
+
+Despite valid activation and merging, width-128 rollout improved only 86.5% -> 87.0%, width-64 slipped 96.5% -> 96.0%, and both arms reached only 99.7% width-128 transition, below gate. Reject rank-8 recurrent-core LoRA and do not sweep rank or alpha. Runtime was 927.33 wall seconds and 3,544.15 aggregate CPU seconds, within budget. Preserve mergeable LoRA infrastructure for future use but change the intermediate inference representation next.
