@@ -251,3 +251,10 @@ runs:
     run_record: experiments/runs/exp-324-cellular-width64-second-stage/run.json
     metrics: evals/results/exp-324-cellular-width64-second-stage/metrics.json
     checkpoint: .scratch/exp-324-cellular-width64-second-stage/weights.safetensors
+  - run_id: exp-325-cellular-width64-weight-soup
+    status: failed
+    approach: cellular-width64-checkpoint-interpolation
+    config: configs/exp_325_cellular_width64_soup.yaml
+    run_record: experiments/runs/exp-325-cellular-width64-weight-soup/run.json
+    metrics: null
+    checkpoint: null

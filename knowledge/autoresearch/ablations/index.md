@@ -34,3 +34,4 @@
 - [EXP-323 diverse width-64 cellular continuation](exp-323-cellular-width64-diverse.md) - 16x prime-identity diversity at lower learning rate.
 - [EXP-324 width-64 cellular second stage](exp-324-cellular-width64-second-stage.md) - fresh-identity lower-rate Tier-5 continuation.
 - [EXP-325 width-64 cellular weight soup](exp-325-cellular-width64-weight-soup.md) - no-cost interpolation of consecutive diverse checkpoints.
+- [EXP-326 cellular weight-soup retry](exp-326-cellular-width64-soup-retry.md) - resource-corrected five-alpha comparison.
