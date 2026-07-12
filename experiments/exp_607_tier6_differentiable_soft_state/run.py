@@ -55,7 +55,7 @@ def main() -> int:
                 teacher = target
             loss = torch.stack(losses).mean(); return loss, {"loss": float(loss.detach()), "batch_exact": sum(exact) / len(exact)}
         model.train(); schedule = config["training"]["mode_schedule"]
-        for step in range(1, config["training"]["steps"] + 1):
+        for step in (range(1, config["training"]["steps"] + 1) if arm.get("train", True) else ()):
             mode = schedule[(step - 1) % len(schedule)]
             if mode == "transition64":
                 values = transition_sampler.transitions(pool_size); state, right, modulus, bit, target, quotient = exp320.mine(values, config["training"]["batch_size"], config, selector); model.width = 64; logits, qlogits = model(exp300.features(state, right, modulus, bit, 64)); loss, full_stats = exp300.transition_loss(logits, qlogits, target, quotient, 64, config["training"]["worst_bit_weight"], config["training"]["quotient_weight"]); stats = {"loss": full_stats["loss"], "batch_exact": full_stats["batch_exact"]}

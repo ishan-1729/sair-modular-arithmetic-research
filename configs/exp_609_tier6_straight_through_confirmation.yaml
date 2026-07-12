@@ -1,0 +1,46 @@
+run_id: exp-609-tier6-straight-through-confirmation
+hypothesis: lower-rate continuation of the causally supported straight-through checkpoint exceeds 90 percent width-128 rollout on higher-fidelity fresh evidence
+seed: 20260805
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-609-tier6-straight-through-confirmation.md
+source_checkpoint: .scratch/exp-608-tier6-straight-through-state/straight_through_state/weights.safetensors
+source_checkpoint_sha256: a87f4ec48b21dccadaa7e53ac034e0c26c3e48bff60ba7b53da5f04febcda793
+model: {hidden: 92, cycles: 2}
+training:
+  steps: 400
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+arms:
+  frozen_source: {differentiable_soft_state: false, state_mode: detached, train: false}
+  straight_through_continuation: {differentiable_soft_state: true, state_mode: straight_through, train: true}
+comparison: {control_arm: frozen_source, challenger_arm: straight_through_continuation}
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation: {transition_cases: 3000, rollout_cases: 300}
+gates:
+  minimum_challenger_width128_rollout: 0.90
+  minimum_width128_gain_over_control: 0.02
+  minimum_challenger_width64_rollout: 0.95
+  minimum_challenger_width128_transition: 0.998
+  maximum_challenger_width128_invalid_rollout_rate: 0.01
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-608-observed-arm-throughput-and-exp602-evaluation
+  exp608_straight_through_200_update_arm_wall_seconds: 389.444992933
+  projected_challenger_400_update_wall_seconds: 638
+  projected_frozen_source_evaluation_wall_seconds: 150
+  projected_total_wall_seconds: 788
+  soft_budget_wall_seconds: 1500
+  hard_runaway_ceiling_wall_seconds: 2400
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 160
+  cache_completed_arms: true
