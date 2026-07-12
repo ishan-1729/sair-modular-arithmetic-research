@@ -63,6 +63,11 @@ def main() -> int:
         else:
             optimizer = torch.optim.AdamW(model.parameters(), lr=config["training"]["learning_rate"], weight_decay=config["training"]["weight_decay"]); scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=config["training"]["steps"], eta_min=config["training"]["minimum_learning_rate"])
         pool_size = config["training"]["batch_size"] * config["hard_mining"]["candidate_pool_factor"]; history = []; arm_started = time.perf_counter(); arm_cpu = time.process_time(); peak = process.memory_info().rss
+        def transition_objective(logits, qlogits, target, quotient, width, quotient_weight):
+            loss, stats = exp300.transition_loss(logits, qlogits, target, quotient, width, config["training"]["worst_bit_weight"], quotient_weight)
+            casewise_weight = float(arm.get("casewise_worst_bit_weight", 0.0)); target_bits = exp300.bits(target, width); casewise = torch.nn.functional.binary_cross_entropy_with_logits(logits, target_bits, reduction="none").amax(dim=1).mean()
+            if casewise_weight: loss = loss + casewise_weight * casewise
+            stats["casewise_worst_bit_bce"] = float(casewise.detach()); stats["casewise_worst_bit_weight"] = casewise_weight; stats["loss"] = float(loss.detach()); return loss, stats
         def recovery_loss(width):
             batch = config["training"]["recovery_batch_size"]; chunk = config["training"]["recovery_chunk_steps"]; multiplier, right, modulus = recovery_samplers[width].pairs(batch); starts = [rng.randrange(0, width - chunk + 1) for _ in range(batch)]; teacher = exp329.teacher_states_before(multiplier, right, modulus, starts, width); state_plane = exp300.bits(teacher, width)
             corruption = arm.get("initial_state_corruption")
@@ -71,21 +76,21 @@ def main() -> int:
                 for row in range(batch):
                     count = 1 if corruption_rng.random() < corruption["one_bit_probability"] else 2
                     for position in corruption_rng.sample(range(width), count): state_plane[row, position] = 1.0 - state_plane[row, position]
-            losses = []; exact = []; model.width = width
+            losses = []; exact = []; casewise = []; model.width = width
             for offset in range(chunk):
-                positions = [start + offset for start in starts]; bit = [(left >> (width - 1 - position)) & 1 for left, position in zip(multiplier, positions)]; raw = [2 * state + flag * value for state, flag, value in zip(teacher, bit, right)]; target = [value % prime for value, prime in zip(raw, modulus)]; quotient = torch.tensor([value // prime for value, prime in zip(raw, modulus)], dtype=torch.long); logits, qlogits = model(soft_features(state_plane, right, modulus, bit, width)); part, stats = exp300.transition_loss(logits, qlogits, target, quotient, width, config["training"]["worst_bit_weight"], 0.0); losses.append(part); exact.append(stats["batch_exact"])
+                positions = [start + offset for start in starts]; bit = [(left >> (width - 1 - position)) & 1 for left, position in zip(multiplier, positions)]; raw = [2 * state + flag * value for state, flag, value in zip(teacher, bit, right)]; target = [value % prime for value, prime in zip(raw, modulus)]; quotient = torch.tensor([value // prime for value, prime in zip(raw, modulus)], dtype=torch.long); logits, qlogits = model(soft_features(state_plane, right, modulus, bit, width)); part, stats = transition_objective(logits, qlogits, target, quotient, width, 0.0); losses.append(part); exact.append(stats["batch_exact"]); casewise.append(stats["casewise_worst_bit_bce"])
                 state_mode = arm.get("state_mode", "soft" if arm["differentiable_soft_state"] else "detached"); probabilities = torch.sigmoid(logits)
                 if state_mode == "soft": state_plane = probabilities
                 elif state_mode == "detached": state_plane = logits.ge(0).float().detach()
                 elif state_mode == "straight_through": state_plane = logits.ge(0).float() + probabilities - probabilities.detach()
                 else: raise ValueError(f"unknown state mode {state_mode}")
                 teacher = target
-            loss = torch.stack(losses).mean(); return loss, {"loss": float(loss.detach()), "batch_exact": sum(exact) / len(exact)}
+            loss = torch.stack(losses).mean(); return loss, {"loss": float(loss.detach()), "batch_exact": sum(exact) / len(exact), "casewise_worst_bit_bce": sum(casewise) / len(casewise)}
         model.train(); schedule = config["training"]["mode_schedule"]
         for step in (range(1, config["training"]["steps"] + 1) if arm.get("train", True) else ()):
             mode = schedule[(step - 1) % len(schedule)]
             if mode == "transition64":
-                values = transition_sampler.transitions(pool_size); state, right, modulus, bit, target, quotient = exp320.mine(values, config["training"]["batch_size"], config, selector); model.width = 64; logits, qlogits = model(exp300.features(state, right, modulus, bit, 64)); loss, full_stats = exp300.transition_loss(logits, qlogits, target, quotient, 64, config["training"]["worst_bit_weight"], config["training"]["quotient_weight"]); stats = {"loss": full_stats["loss"], "batch_exact": full_stats["batch_exact"]}
+                values = transition_sampler.transitions(pool_size); state, right, modulus, bit, target, quotient = exp320.mine(values, config["training"]["batch_size"], config, selector); model.width = 64; logits, qlogits = model(exp300.features(state, right, modulus, bit, 64)); loss, full_stats = transition_objective(logits, qlogits, target, quotient, 64, config["training"]["quotient_weight"]); stats = {"loss": full_stats["loss"], "batch_exact": full_stats["batch_exact"], "casewise_worst_bit_bce": full_stats["casewise_worst_bit_bce"]}
             else: loss, stats = recovery_loss(int(mode.removeprefix("recovery")))
             optimizer.zero_grad(set_to_none=True); loss.backward(); gradient = float(nn.utils.clip_grad_norm_(model.parameters(), config["training"]["gradient_clip"])); optimizer.step(); scheduler.step()
             if step == 1 or step % 50 == 0 or step == config["training"]["steps"]:
