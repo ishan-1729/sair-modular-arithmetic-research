@@ -23,3 +23,4 @@
 - **Tier-5 confirmation**: The frozen width-64 recovery checkpoint scored 96.0% across five independent official-generator Tier-5 seeds, with a 94% minimum and zero invalid residues, authorizing Candidate 004 integration.
 - **Tier-5 promotion**: Candidate 004 scores 49.5% on an untouched full 1,100-case official-generator set and 50.1% checked, clears Tiers 1–5, passes the pinned official sandbox and weight-dependence controls, and becomes the intermediate incumbent.
 - **Tier-6 smoke**: The frozen Tier-5 cellular checkpoint transfers to 57% width-128 rollout, but progressive transition training regresses it to 49%; autonomous-state recovery is the next test.
+- **Tier-6 recovery**: A matched learner-state recovery smoke improves width-128 rollout from 62% to 76%, authorizing higher-fidelity confirmation while Candidate 004 remains incumbent.

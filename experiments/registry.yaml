@@ -342,3 +342,10 @@ runs:
     run_record: experiments/runs/exp-600-tier6-cellular-curriculum/run.json
     metrics: evals/results/exp-600-tier6-cellular-curriculum/metrics.json
     checkpoint: .scratch/exp-600-tier6-cellular-curriculum/weights.safetensors
+  - run_id: exp-601-tier6-autonomous-state-recovery
+    status: completed
+    approach: matched-width128-autonomous-state-recovery-smoke
+    config: configs/exp_601_tier6_autonomous_state_recovery.yaml
+    run_record: experiments/runs/exp-601-tier6-autonomous-state-recovery/run.json
+    metrics: evals/results/exp-601-tier6-autonomous-state-recovery/metrics.json
+    checkpoint: .scratch/exp-601-tier6-autonomous-state-recovery/weights.safetensors

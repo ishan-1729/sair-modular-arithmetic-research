@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T01:05:00+05:30
+updated_at: 2026-07-13T01:45:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-601-tier6-autonomous-state-recovery
-  statement: Direct width-128 autonomous-state recovery improves the frozen source's 57 percent zero-shot rollout where progressive teacher-forced transition training regressed it.
-  promotion_gate: Run a matched source/control/recovery smoke with fresh identities and a measured dynamic budget before any independent Tier-6 evaluation.
+  run_id: exp-602-tier6-recovery-full-budget
+  statement: More width-128 autonomous recovery with explicit width-64 retention can raise Tier-6 rollout toward 90 percent on higher-fidelity fresh evidence.
+  promotion_gate: Require a preregistered full-budget run to reach at least 85 percent width-128 rollout and preserve at least 92 percent width-64 before any independent Tier-6 gate.
   status: planning
-next_action: Preregister a matched width-128 autonomous-state-recovery smoke from the unchanged Tier-5 checkpoint; reuse valid EXP-600 source evidence only when dataset hashes match.
+next_action: Calibrate and preregister EXP-602 from observed EXP-601 throughput, preserving Candidate 004 and all completed evidence.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
