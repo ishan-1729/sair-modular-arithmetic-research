@@ -328,3 +328,10 @@ runs:
     run_record: experiments/runs/exp-521-tier5-recovery-independent-five-seed/run.json
     metrics: evals/results/exp-521-tier5-recovery-independent-five-seed/metrics.json
     checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors
+  - run_id: candidate-004-tier5-cellular-hybrid
+    status: completed
+    approach: learned-tier2-tier3-tcn-tier4-tier5-cellular-ensemble
+    config: configs/candidate_004_release_gate.yaml
+    run_record: experiments/runs/candidate-004-tier5-cellular-hybrid/run.json
+    metrics: evals/results/candidate-004-tier5-cellular-hybrid/metrics.json
+    checkpoint: submission/weights.safetensors

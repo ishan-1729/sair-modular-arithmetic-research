@@ -21,3 +21,4 @@
 - **Release validation**: Full checked regression scored 31.3% overall with `highest_tier_above_90 = 3`; static analysis, isolation, determinism, timeout, and randomized-weight controls passed.
 - **Tier-4 promotion**: Mixed-width cellular training produced 96.6% across five independent Tier-4 seeds. Candidate 003 scores 40.4% independent and 40.9% checked overall, clears Tier 4, passes the official sandbox, and becomes the intermediate incumbent.
 - **Tier-5 confirmation**: The frozen width-64 recovery checkpoint scored 96.0% across five independent official-generator Tier-5 seeds, with a 94% minimum and zero invalid residues, authorizing Candidate 004 integration.
+- **Tier-5 promotion**: Candidate 004 scores 49.5% on an untouched full 1,100-case official-generator set and 50.1% checked, clears Tiers 1–5, passes the pinned official sandbox and weight-dependence controls, and becomes the intermediate incumbent.

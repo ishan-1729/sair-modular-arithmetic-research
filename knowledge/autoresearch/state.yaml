@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-12T23:55:00+05:30
+updated_at: 2026-07-13T00:25:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -10,28 +10,30 @@ success_threshold:
   achieved: false
 completion_eligible: false
 incumbent:
-  run_id: candidate-003-tier4-cellular-hybrid
-  checkpoint_sha256: a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514
-  checked_public_overall_accuracy: 0.409
-  independent_overall_accuracy: 0.404
+  run_id: candidate-004-tier5-cellular-hybrid
+  checkpoint_sha256: fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4
+  checked_public_overall_accuracy: 0.501
+  independent_overall_accuracy: 0.495
   checked_public_tier_1_accuracy: 1.0
   checked_public_tier_2_accuracy: 0.99
-  independent_tier_2_accuracy: 0.98
+  independent_tier_2_accuracy: 0.96
   checked_public_tier_3_accuracy: 1.0
   independent_tier_3_accuracy: 0.99
   checked_public_tier_4_accuracy: 0.98
   independent_tier_4_accuracy: 0.95
-  highest_tier_above_90: 4
-  artifact_bytes: 1109234
-  sandbox_inference_seconds: 7.9
-  mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
-  mlflow_model_version: "3"
+  checked_public_tier_5_accuracy: 0.94
+  independent_tier_5_accuracy: 0.95
+  highest_tier_above_90: 5
+  artifact_bytes: 1512567
+  sandbox_inference_seconds: 36.9
+  mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
+  mlflow_model_version: "4"
 current_hypothesis:
-  run_id: candidate-004-tier5-cellular-hybrid
-  statement: Adding the independently validated Tier-5 recovery specialist preserves Tier-1 through Tier-4 performance and raises full-test exact accuracy by about nine points.
-  promotion_gate: Freeze one combined artifact and pass independent full-1100, deterministic repeat, weight-dependence, compliance, checked regression, and official sandbox gates.
-  status: integration-authorized
-next_action: Build Candidate 004 from the unchanged Candidate 003 and EXP-521 artifacts, then evaluate the exact frozen artifact on the complete release gate.
+  run_id: exp-600-tier6-cellular-curriculum
+  statement: The width-independent cellular checkpoint can extend from 64-bit Tier 5 toward 128-bit Tier 6 through a progressive bigint bit-tensor curriculum.
+  promotion_gate: Preregister a throughput-calibrated smoke comparison before any independent or checked Tier-6 evaluation.
+  status: planning
+next_action: Design and preregister a measured-throughput width-64-to-128 cellular curriculum with fresh identities and Candidate 004 retained as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -39,18 +41,18 @@ tracking:
   experiment_name: sair-modular-arithmetic-wsl
   experiment_id: "2"
   registered_model: sair-modular-arithmetic-candidate
-  incumbent_model_version: "3"
+  incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 1e80e6f83f2067652cd877fee25f654023c684ee
+  last_validated_commit: 2cc48476736606fc2604bf63ae4b17047e7acb96
   dirty: false
 risks:
-  - Tier 5 remains unsolved and requires a width-64 generalization path.
-  - Width-64 labels and evaluation require Python big integers while inference must remain tensor-native.
+  - Tier 6 remains unsolved and requires a width-128 generalization path.
+  - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
-  - The strongest Tier-5 checkpoint is independently validated at 96.0 percent across five seeds, but is not yet integrated or full-release tested.
+  - Candidate 004 clears Tier 5 but remains only 49.5 to 50.1 percent overall, far below the 85 percent goal.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
   - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.

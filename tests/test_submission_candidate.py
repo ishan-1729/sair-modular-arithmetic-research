@@ -105,6 +105,23 @@ def test_checked_public_tier4_release_regression(candidate) -> None:
     assert correct == 98
 
 
+def test_checked_public_tier5_release_regression(candidate) -> None:
+    _, model = candidate
+    records = [
+        json.loads(line)
+        for line in (
+            ROOT / "data" / "external" / "public_benchmark" / "tier_5.jsonl"
+        ).read_text(encoding="utf-8").splitlines()
+    ]
+    rows = [(row["a"], row["b"], row["p"]) for row in records]
+    outputs = model.predict_digits_batch(rows)
+    correct = sum(
+        digits == [int(row["expected"])]
+        for digits, row in zip(outputs, records, strict=True)
+    )
+    assert correct == 94
+
+
 def test_mixed_batch_contract_and_determinism(candidate) -> None:
     _, model = candidate
     rows = [

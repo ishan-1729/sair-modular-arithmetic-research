@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "kind": "untouched-official-generator-full-1100",
+  "seed_sha256": "c4b8ddcfd37a2b32e0b8ac6a02981bc783682ed2f09b3740c0615d7ff850ddd9",
+  "overall_accuracy": 0.495,
+  "highest_tier_above_90": 5,
+  "deterministic": true,
+  "tiers": [
+    {"tier_id": 0, "total": 100, "correct": 29, "accuracy": 0.29},
+    {"tier_id": 1, "total": 100, "correct": 100, "accuracy": 1.0},
+    {"tier_id": 2, "total": 100, "correct": 96, "accuracy": 0.96},
+    {"tier_id": 3, "total": 100, "correct": 99, "accuracy": 0.99},
+    {"tier_id": 4, "total": 100, "correct": 95, "accuracy": 0.95},
+    {"tier_id": 5, "total": 100, "correct": 95, "accuracy": 0.95},
+    {"tier_id": 6, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 7, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 8, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 9, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 10, "total": 100, "correct": 2, "accuracy": 0.02}
+  ],
+  "result_sha256": "6c8bbb91f934f3b38492ae060e8a9b96e990d69f36b2a43d2c2e304a94efa2a8"
+}

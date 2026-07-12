@@ -5,3 +5,4 @@
 - [Candidate 001 results](candidate-001-results.md) - full public, independent-seed, sandbox, and weight-control evidence.
 - [Candidate 002 results](candidate-002-results.md) - five-seed Tier-3 gate, full official evaluation, pinned runtime, and weight-control evidence.
 - [Candidate 003 results](candidate-003-results.md) - five-seed Tier-4 gate, full independent and checked evaluations, weight control, and official sandbox.
+- [Candidate 004 results](candidate-004-results.md) - five-seed Tier-5 gate, full independent and checked evaluations, weight control, and official sandbox.

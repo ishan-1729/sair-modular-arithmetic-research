@@ -2,7 +2,7 @@
 type: Candidate Preregistration
 title: Candidate 004 Tier-5 Cellular Hybrid Release Gate
 description: Frozen-artifact complete release gate for the Tier-1 through Tier-5 learned ensemble.
-status: preregistered
+status: completed
 tags: [autoresearch, candidate, Tier-5, release, full-test]
 timestamp: "2026-07-13T00:10:00+05:30"
 ---
@@ -16,3 +16,9 @@ Evaluate the frozen artifact once on the preregistered untouched official-genera
 ## Dynamic resource budget
 
 Candidate 003's pinned full container gate consumed 34.284 wall seconds including startup. The slowest EXP-521 Tier-5 100-case inference consumed 9.973 wall seconds, projecting 44.257 wall seconds for Candidate 004. Allocate 120 wall seconds as the soft budget and the official 300 wall seconds as the hard runaway ceiling for each full evaluation. Wall time is distinct from aggregate CPU time; with four threads the conservative upper ceiling is 20 aggregate CPU minutes per evaluation. Reuse the frozen EXP-521 five-seed evidence rather than rerunning it.
+
+## Result
+
+Pass. The untouched official full set scores 49.5% overall with Tiers 1–5 at 100%, 96%, 99%, 95%, and 95%; the checked post-selection regression scores 50.1% with Tiers 1–5 at 100%, 99%, 100%, 98%, and 94%. Randomized weights collapse Tier 5 to 0%. Static analysis, preprocessing isolation, deterministic repeat, and the pinned container pass. The observed 75.49-second container wall time and 36.9-second inference time remain within the calibrated 120/300-second budget.
+
+Decision: promote Candidate 004 as the intermediate incumbent. Continue at Tier 6; the 85% overall completion gate remains unmet.
