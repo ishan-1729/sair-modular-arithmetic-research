@@ -12,7 +12,7 @@ from safetensors.torch import load_file
 
 ROOT = Path(__file__).resolve().parents[1]
 SUBMISSION = ROOT / "submission"
-WEIGHTS_SHA256 = "69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157"
+WEIGHTS_SHA256 = "a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514"
 
 
 @pytest.fixture(scope="module")
@@ -29,7 +29,7 @@ def test_submission_is_the_clean_three_file_artifact() -> None:
     }
     weights = SUBMISSION / "weights.safetensors"
     assert hashlib.sha256(weights.read_bytes()).hexdigest() == WEIGHTS_SHA256
-    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 170_577
+    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 270_401
 
 
 def test_submission_passes_official_manifest_and_static_checks(candidate) -> None:

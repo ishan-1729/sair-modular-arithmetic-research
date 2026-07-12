@@ -2,6 +2,6 @@
   "entry_class": "model.Tier2HornerModel",
   "output_base": "p",
   "framework": "pytorch",
-  "model_description": "Learned Horner ensemble with an 85,021-parameter width-9 Tier-2 TCN and an 85,556-parameter shared-context width-16 Tier-3 TCN. Each scans a sanctioned pairwise-reduced operand through a learned hard recurrent state and emits one base-p digit. Inputs above the learned width receive a deterministic zero fallback.",
-  "training_description": "The Tier-2 model was trained for 2,400 AdamW steps on synthetic Horner transitions through modulus 257. The Tier-3 model was initialized by learned width transfer and trained for 2,400 steps with quotient-2 and reduction-boundary hard mining. It passed a frozen five-seed official-generator Tier-3 gate at 499/500 exact. Checked public Tier-3 answers were not used for training or model selection. Seed 20260712."
+  "model_description": "Learned Horner ensemble with width-9 and width-16 TCN specialists for Tiers 2-3 plus a 99,824-parameter width-independent cellular specialist through Tier 4. Each scans a sanctioned pairwise-reduced operand through a trained recurrent state and emits one base-p digit. Inputs above the learned boundary receive a deterministic zero fallback.",
+  "training_description": "The Tier-2/3 specialists were trained for 2,400 AdamW steps using learned width transfer and quotient-2/boundary mining. The cellular specialist used an 8/12/16/20/24-bit mixed-width curriculum followed by direct width-32 official-distribution continuation. Frozen five-seed gates scored 499/500 on Tier 3 and 483/500 on Tier 4. Checked Tier-3/4 answers were not used for training or selection. Seed 20260712."
 }

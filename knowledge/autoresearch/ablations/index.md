@@ -27,3 +27,4 @@
 - [EXP-313 cellular official width 32](exp-313-cellular-official-width32.md) - direct fresh official-distribution continuation before the independent Tier-4 gate.
 - [EXP-314 cellular width-32 smoke](exp-314-cellular-width32-smoke.md) - compute-bounded retry after EXP-313's throughput projection.
 - [EXP-315 cellular independent Tier 4](exp-315-cellular-independent-tier4.md) - five untouched official-generator seeds for the frozen checkpoint.
+- [Candidate 003 integration gate](candidate-003-integration-gate.md) - frozen full-artifact independent and release checks.
