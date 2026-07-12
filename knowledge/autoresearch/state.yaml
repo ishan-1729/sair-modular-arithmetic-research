@@ -29,9 +29,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-329-cellular-width64-autonomous-state-recovery
   statement: Training on learner-induced rollout states improves exact width-64 recovery beyond one-step teacher-forced continuation.
-  promotion_gate: Preregister a matched full-fidelity control with a throughput-calibrated budget before execution.
-  status: planned
-next_action: Implement and preregister the matched Tier-5 autonomous-state-recovery experiment; retain Candidate 003 as incumbent.
+  promotion_gate: Reach 99.8/93 percent width-64 transition/rollout, gain 1.5 points over matched control, and retain width 56 under a calibrated dynamic budget.
+  status: preregistered
+next_action: Run the matched full-fidelity Tier-5 autonomous-state-recovery experiment; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
