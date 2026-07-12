@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-250-online-failure-mining
-  statement: Model-dependent mining of rare exact transition failures, mixed with uniform replay, raises width-32 transition accuracy enough to prevent autonomous error accumulation.
-  promotion_gate: Require at least 99.9 percent fresh transition accuracy and a two-point rollout gain over a matched continuation control before independent Tier-4 evaluation.
+  run_id: exp-251-online-failure-mining-smoke
+  statement: A compute-bounded dose of model-dependent failure mining improves fresh width-32 rollout over matched uniform replay.
+  promotion_gate: Require a one-point rollout gain and 99.8 percent transition accuracy before a larger confirmation.
   status: preregistered
-next_action: Run the matched EXP-250 A/B from the frozen EXP-230 single-head control; retain Candidate 002.
+next_action: Run EXP-251 within six wall minutes; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

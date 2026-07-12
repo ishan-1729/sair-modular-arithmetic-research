@@ -41,3 +41,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-230 single-head continuation | 32 | +800 | n/a | 91.98% | n/a | 126,276 | 84.7 | control |
 | EXP-230 learned quotient-routed experts | 32 | +800 | 99.786% | 92.17% | 0.265% | 224,742 | 96.6 | reject; +0.19 rollout |
 | EXP-240 paired channel ablations | 32 | frozen | 99.77% | 91.98% contextual | n/a | 126,276 | 69.9 analysis | reject narrow surgery; distributed |
+| EXP-250 online failure mining | 32 | 400 control only | invalid | invalid | invalid | 126,276 | stopped at 10 min | killed; resource cap |

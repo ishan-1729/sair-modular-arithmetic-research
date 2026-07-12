@@ -125,3 +125,10 @@ runs:
     run_record: experiments/runs/exp-240-channel-causal-analysis/run.json
     metrics: evals/results/exp-240-channel-causal-analysis/metrics.json
     checkpoint: .scratch/exp-230-quotient-routed-experts/single-head-control/weights.safetensors
+  - run_id: exp-250-online-failure-mining
+    status: failed
+    approach: matched-online-exact-failure-mining
+    config: configs/exp_250_online_failure_mining.yaml
+    run_record: experiments/runs/exp-250-online-failure-mining/run.json
+    metrics: null
+    checkpoint: null

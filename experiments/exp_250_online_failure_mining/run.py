@@ -164,7 +164,8 @@ def main() -> int:
         mlflow.set_tags({"canonical_run_id": config["run_id"], "hypothesis": config["hypothesis"], "status": "running", "role": "online-failure-mining-matched-ab", "repository_commit": repository_commit, "repository_dirty": str(repository_dirty).lower(), "challenge_commit": exp100.CHALLENGE_COMMIT})
         mlflow.log_params({"seed": config["seed"], "steps": config["training"]["steps"], "batch_size": config["training"]["batch_size"], "candidate_pool_factor": config["training"]["candidate_pool_factor"], "source_checkpoint_sha256": sha256(source), "config_sha256": sha256(config_path), "runner_sha256": sha256(Path(__file__)), "python": platform.python_version(), "pytorch": torch.__version__})
         mlflow.log_artifact(str(config_path), artifact_path="preregistration")
-        mlflow.log_artifact(str(ROOT / "knowledge/autoresearch/ablations/exp-250-online-failure-mining.md"), artifact_path="preregistration")
+        preregistration = ROOT / config.get("preregistration", "knowledge/autoresearch/ablations/exp-250-online-failure-mining.md")
+        mlflow.log_artifact(str(preregistration), artifact_path="preregistration")
         run_ids = {}
         for name, online in (("uniform-replay-control", False), ("online-failure-mining-challenger", True)):
             with mlflow.start_run(run_name=name, nested=True) as nested:
