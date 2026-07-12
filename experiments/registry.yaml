@@ -433,3 +433,10 @@ runs:
     run_record: experiments/runs/exp-613-tier6-model-conditioned-error-corrector/run.json
     metrics: evals/results/exp-613-tier6-model-conditioned-error-corrector/metrics.json
     checkpoint: .scratch/exp-613-tier6-model-conditioned-error-corrector/first_error_corrector/weights.safetensors
+  - run_id: exp-614-tier6-global-recurrent-refinement
+    status: completed
+    approach: exact-gated-global-hidden-state-refinement
+    config: configs/exp_614_tier6_global_recurrent_refinement.yaml
+    run_record: experiments/runs/exp-614-tier6-global-recurrent-refinement/run.json
+    metrics: evals/results/exp-614-tier6-global-recurrent-refinement/metrics.json
+    checkpoint: .scratch/exp-614-tier6-global-recurrent-refinement/global_refinement_challenger/weights.safetensors

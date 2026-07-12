@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-614 Tier-6 Global Recurrent Refinement
 description: Matched test of an exactly gated independent global hidden-state refinement pass against base continuation.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, recurrent-computation, refinement, straight-through]
 timestamp: "2026-07-13T03:30:00+05:30"
 ---
@@ -41,3 +41,9 @@ The planning budget is 2,800 wall seconds (53% headroom). The hard runaway ceili
 ## Boundaries
 
 Checked and private answers remain unread. Python big integers are confined to offline generation and evaluation. Inference uses only trained tensor operations and contains no exact reduction, correction rule, or fallback. Native PyTorch provides the required recurrent convolution and optimizer support; a graph library is not applicable to this global hidden-state intervention.
+
+## Result and decision
+
+Exact initialization passed at both widths. The control scored 87.5% width-128 rollout and the refinement challenger 86.5% (−1 point); both reached 99.95% width-128 transition, zero invalid width-128 rollouts, and 96% width-64 rollout. All 92 blend channels moved, with maximum magnitude `0.02384`, but RMS magnitude was only `0.00723`, below the `0.01` activation gate.
+
+Reject this global-refinement recipe. Its partial activation moves accuracy in the wrong direction, so increasing blend strength after seeing the result is not justified. The run completed in 1,365.15 wall seconds and 5,251.86 aggregate CPU seconds, below both resource limits. Preserve the exact-gated architecture as infrastructure, but move to an objective intervention aligned with sparse one-bit failures.
