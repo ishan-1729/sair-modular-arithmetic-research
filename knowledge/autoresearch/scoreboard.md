@@ -46,3 +46,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-252 replay-heavy mining | 32 | +200 | 99.815% | 93.62% | 0.14% | 126,276 | 25.5 train | reject; +0.36 rollout |
 | EXP-260 low-rate continuation | 32 | +600 | 99.826% | 92.795% | n/a | 126,276 | 43.2 train | reject; +0.63 rollout |
 | EXP-300 width64 random / transfer | 64 | 400 | 22.48% / 82.38% | 0% / 0% | 23.85% / 17.15% | 281,444 | 44.4 / 45.2 train | reject smoke; transfer +59.9 transition |
+| EXP-301 width64 hard mining | 64 | +1,200 | 93.53% | 2.30% | 5.94% | 281,444 | 142.7 train | reject; close fixed-width width64 |

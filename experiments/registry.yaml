@@ -160,3 +160,10 @@ runs:
     run_record: experiments/runs/exp-300-width64-bit-tensor-transfer/run.json
     metrics: evals/results/exp-300-width64-bit-tensor-transfer/metrics.json
     checkpoint: .scratch/exp-300-width64-bit-tensor-transfer/width64-transfer/weights.safetensors
+  - run_id: exp-301-width64-hard-mining
+    status: completed
+    approach: width64-bit-tensor-hard-mined-continuation
+    config: configs/exp_301_width64_hard_mining.yaml
+    run_record: experiments/runs/exp-301-width64-hard-mining/run.json
+    metrics: evals/results/exp-301-width64-hard-mining/metrics.json
+    checkpoint: .scratch/exp-301-width64-hard-mining/weights.safetensors

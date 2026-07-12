@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-12T09:20:00+05:30
+updated_at: 2026-07-12T10:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-301-width64-hard-mining
-  statement: Reduction-boundary hard mining converts the transferred width-64 transition model into a viable autonomous rollout model.
-  promotion_gate: Require a twelve-point transition gain, 95 percent transition, 15 percent rollout, and below 10 percent invalid rollouts.
-  status: preregistered
-next_action: Run one full-budget width-64 hard-mined continuation; retain Candidate 002.
+  run_id: exp-310-chunk-shared-recurrent-reduction
+  statement: A chunk-shared recurrent representation can reuse learned local reduction across widths without width-specific global output heads.
+  promotion_gate: Preregister a matched width-16 learning and width-32 transfer test that materially exceeds the rejected EXP-220 cellular baseline.
+  status: planned
+next_action: Design a tensor-native chunk-shared recurrent model using EXP-300 infrastructure; retain Candidate 002 and do not alter submission.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
