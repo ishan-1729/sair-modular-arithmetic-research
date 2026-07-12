@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-604 Tier-6 Long-Horizon Recovery
 description: Matched four-step versus eight-step learner-state recovery comparison at width 128.
-status: preregistered
+status: completed
 tags: [autoresearch, Tier-6, cellular, recovery-horizon, matched-ab]
 timestamp: "2026-07-13T03:20:00+05:30"
 ---
@@ -16,3 +16,9 @@ Run 200 updates and evaluate each frozen arm on 2,000 transitions plus 200 rollo
 ## Dynamic resource budget
 
 A ten-update eight-step/batch-16 profile took 19.928 wall seconds and 79.757 aggregate CPU seconds with 1,322,336 KiB peak RSS. Combining that measurement with EXP-601/602 phase throughput projects 535 wall seconds for both training arms and 302 seconds for matched evaluation/setup, or 837 seconds total. Allocate 1,500 wall seconds soft and a 2,400-wall-second hard runaway ceiling, with a separate conservative 160 aggregate CPU-minute ceiling at four threads. Cache completed arms by source/config/dataset/arm hashes and save each checkpoint before evaluation.
+
+## Result
+
+Reject for promotion, but support the horizon mechanism. The matched four-step control scores 84.0% width-128 rollout and the eight-step challenger scores 86.5%, a +2.5-point gain that clears the causal gain gate. The challenger reaches 99.75% transition with 1% invalid rollouts, but width-64 rollout is 92.5% versus 94% required and width-128 misses the 88% absolute gate. Internal wall time is 760.650 seconds and aggregate CPU is 2,999.207 seconds; external wall time is 767.58 seconds, inside budget.
+
+Preserve checkpoint `088264...a6c5`. One preregistered follow-up may increase the width-64 recovery allocation while retaining the supported eight-step horizon; independent Tier-6 remains closed.

@@ -81,3 +81,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-601 Tier6 state recovery | 64/128 | 200 | 99.8% width128 | 62% source / 76% challenger | 0% challenger | 99,824 | 356.5 wall / 23.2 CPU min | pass -> full-budget confirmation |
 | EXP-602 Tier6 recovery full budget | 64/128 | +400 | 99.83% width128 | 70.67% source / 79.33% challenger | 0.33% challenger | 99,824 | 1087.1 wall / 71.7 CPU min | reject independent; one continuation |
 | EXP-603 Tier6 recovery continuation | 64/128 | +600 | 99.97% width128 | 84.0% source / 84.67% challenger | 0.67% challenger | 99,824 | 1268.7 wall / 83.8 CPU min | reject; close four-step continuation |
+| EXP-604 recovery horizon A/B | 64/128 | 200 x2 | 99.70% / 99.75% | 84.0% four-step / 86.5% eight-step | 1% both | 99,824 | 760.6 wall / 50.0 CPU min | reject promotion; horizon supported |

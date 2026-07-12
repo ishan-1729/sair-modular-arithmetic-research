@@ -363,3 +363,10 @@ runs:
     run_record: experiments/runs/exp-603-tier6-recovery-continuation/run.json
     metrics: evals/results/exp-603-tier6-recovery-continuation/metrics.json
     checkpoint: .scratch/exp-603-tier6-recovery-continuation/weights.safetensors
+  - run_id: exp-604-tier6-long-horizon-recovery
+    status: completed
+    approach: matched-four-versus-eight-step-recovery
+    config: configs/exp_604_tier6_long_horizon_recovery.yaml
+    run_record: experiments/runs/exp-604-tier6-long-horizon-recovery/run.json
+    metrics: evals/results/exp-604-tier6-long-horizon-recovery/metrics.json
+    checkpoint: .scratch/exp-604-tier6-long-horizon-recovery/eight_step_challenger/weights.safetensors
