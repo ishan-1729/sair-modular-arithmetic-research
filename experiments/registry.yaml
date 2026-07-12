@@ -230,3 +230,10 @@ runs:
     run_record: experiments/runs/exp-321-cellular-official-width64/run.json
     metrics: null
     checkpoint: null
+  - run_id: exp-322-cellular-width64-smoke
+    status: completed
+    approach: cellular-official-width64-smoke
+    config: configs/exp_322_cellular_width64_smoke.yaml
+    run_record: experiments/runs/exp-322-cellular-width64-smoke/run.json
+    metrics: evals/results/exp-322-cellular-width64-smoke/metrics.json
+    checkpoint: .scratch/exp-322-cellular-width64-smoke/weights.safetensors

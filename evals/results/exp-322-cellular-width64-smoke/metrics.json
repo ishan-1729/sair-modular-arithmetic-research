@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-322-cellular-width64-smoke",
+  "created_at": "2026-07-12T06:35:00Z",
+  "checkpoint_sha256": "c128c9b75bc3114f84511f892bbb5ec76e737ec01b14a55788ccdc10e55819ec",
+  "evaluation": {
+    "transition": {"source_width64": {"cases": 2000, "correct": 1995, "exact_accuracy": 0.9975}, "trained_width56": {"cases": 1000, "correct": 998, "exact_accuracy": 0.998}, "trained_width64": {"cases": 5000, "correct": 4984, "exact_accuracy": 0.9968}},
+    "rollout": {"source_width64": {"cases": 500, "correct": 420, "exact_accuracy": 0.84}, "trained_width56": {"cases": 300, "correct": 264, "exact_accuracy": 0.88}, "trained_width64": {"cases": 1500, "correct": 1245, "exact_accuracy": 0.83}}
+  },
+  "controls": {"width64_rollout_gain": -0.01, "width64_invalid_rollout_rate": 0.006666666666666667, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 397.04281280600026, "parameters": 99824},
+  "decision": "reject-cellular-official-width64",
+  "limitations": ["Only 128 training prime identities per width were used.", "No checked, consumed independent, or private answers were read."]
+}

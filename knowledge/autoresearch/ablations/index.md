@@ -31,3 +31,4 @@
 - [EXP-320 cellular width-64 curriculum](exp-320-cellular-width64-curriculum.md) - bigint-backed progressive Tier-5-length training.
 - [EXP-321 cellular official width 64](exp-321-cellular-official-width64.md) - direct Tier-5 distribution continuation before independent evaluation.
 - [EXP-322 cellular width-64 smoke](exp-322-cellular-width64-smoke.md) - compute-bounded retry after EXP-321's runtime projection.
+- [EXP-323 diverse width-64 cellular continuation](exp-323-cellular-width64-diverse.md) - 16x prime-identity diversity at lower learning rate.
