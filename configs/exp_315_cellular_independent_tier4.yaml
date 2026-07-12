@@ -1,0 +1,28 @@
+run_id: exp-315-cellular-independent-tier4-five-seed
+hypothesis: the frozen width-independent cellular checkpoint exceeds 90 percent Tier-4 exact accuracy on every untouched official-generator seed
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+checkpoint: .scratch/exp-314-cellular-width32-smoke/weights.safetensors
+checkpoint_sha256: a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241
+architecture:
+  width: 32
+  hidden: 92
+  cycles: 2
+evaluation:
+  tier_id: 4
+  seeds:
+    - exp315-cellular-tier4-20260712-a
+    - exp315-cellular-tier4-20260712-b
+    - exp315-cellular-tier4-20260712-c
+    - exp315-cellular-tier4-20260712-d
+    - exp315-cellular-tier4-20260712-e
+  cases_per_seed: 100
+  primes_per_seed: 5
+  edge_cases_per_seed: 4
+gates:
+  minimum_aggregate_accuracy: 0.90
+  minimum_passing_seeds: 5
+  per_seed_passing_accuracy: 0.90
+  minimum_single_seed_accuracy: 0.90
+resource_cap:
+  cpu_minutes: 3
