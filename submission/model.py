@@ -1,4 +1,4 @@
-"""Submission adapter for the promoted Tier-2/Tier-3 learned Horner ensemble."""
+"""Submission adapter for the promoted learned Horner/cellular ensemble."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ from torch import Tensor, nn
 WIDTH = 9
 TIER3_WIDTH = 16
 TIER4_WIDTH = 32
+TIER5_WIDTH = 64
 HIDDEN = 48
 TIER4_HIDDEN = 92
 DILATIONS = (1, 2, 4, 8, 1, 2, 4)
@@ -50,6 +51,38 @@ def _features(
         dim=1,
     )
     return planes.mul(2.0).sub(1.0)
+
+
+def _bigint_features(
+    state: list[int],
+    multiplicand: list[int],
+    modulus: list[int],
+    bit: list[int],
+    width: int,
+) -> Tensor:
+    """Encode Python big integers without routing them through signed int64."""
+    batch = len(state)
+    planes = torch.empty((batch, 6, width), dtype=torch.float32)
+    for row, (state_value, multiplicand_value, modulus_value, input_bit) in enumerate(
+        zip(state, multiplicand, modulus, bit, strict=True)
+    ):
+        for position in range(width):
+            planes[row, 0, position] = (state_value >> position) & 1
+            planes[row, 1, position] = (multiplicand_value >> position) & 1
+            planes[row, 2, position] = (modulus_value >> position) & 1
+        planes[row, 3, :] = input_bit
+        planes[row, 4, :] = 0
+        planes[row, 5, :] = 0
+        planes[row, 4, 0] = 1
+        planes[row, 5, -1] = 1
+    return planes.mul_(2.0).sub_(1.0)
+
+
+def _decode_bigint_logits(logits: Tensor) -> list[int]:
+    return [
+        sum(int(bit) << position for position, bit in enumerate(row))
+        for row in logits.ge(0).tolist()
+    ]
 
 
 class _ResidualBlock(nn.Module):
@@ -191,6 +224,7 @@ class Tier2HornerModel(ModularMultiplicationModel):
         self.network: _HornerTCN9 | None = None
         self.tier3_network: _SharedContextHornerTCN16 | None = None
         self.tier4_network: _SharedDilatedConvGRU32 | None = None
+        self.tier5_network: _SharedDilatedConvGRU32 | None = None
 
     def load(self, model_dir: str) -> None:
         weights = load_file(str(Path(model_dir) / "weights.safetensors"))
@@ -216,6 +250,16 @@ class Tier2HornerModel(ModularMultiplicationModel):
         )
         tier4_network.eval()
         self.tier4_network = tier4_network
+        tier5_network = _SharedDilatedConvGRU32()
+        tier5_network.load_state_dict(
+            {
+                key.removeprefix("tier5."): value
+                for key, value in weights.items()
+                if key.startswith("tier5.")
+            }
+        )
+        tier5_network.eval()
+        self.tier5_network = tier5_network
 
     def preprocess_a(self, a: str) -> str:
         return a
@@ -238,15 +282,17 @@ class Tier2HornerModel(ModularMultiplicationModel):
             self.network is None
             or self.tier3_network is None
             or self.tier4_network is None
+            or self.tier5_network is None
         ):
             raise RuntimeError("model has not been loaded")
         outputs = [[0] for _ in inputs]
         groups: dict[int, list[tuple[int, int, int, int]]] = {7: [], 8: []}
         tier3_group: list[tuple[int, int, int, int]] = []
         tier4_group: list[tuple[int, int, int, int]] = []
+        tier5_group: list[tuple[int, int, int, int]] = []
         for index, (a_enc, b_enc, p_enc) in enumerate(inputs):
             modulus_value = int(p_enc)
-            if modulus_value > (1 << TIER4_WIDTH) - 1:
+            if modulus_value > (1 << TIER5_WIDTH) - 1:
                 continue
             # Pairwise reductions are explicitly sanctioned by the challenge.
             # Only the trained recurrence produces the final product/remainder.
@@ -258,8 +304,10 @@ class Tier2HornerModel(ModularMultiplicationModel):
                 groups[first_bit].append(item)
             elif modulus_value <= 65535:
                 tier3_group.append(item)
-            else:
+            elif modulus_value <= (1 << TIER4_WIDTH) - 1:
                 tier4_group.append(item)
+            else:
+                tier5_group.append(item)
 
         weights = 1 << torch.arange(WIDTH, dtype=torch.int64)
         for first_bit, group in groups.items():
@@ -317,6 +365,22 @@ class Tier2HornerModel(ModularMultiplicationModel):
                     (logits >= 0).to(torch.int64) * tier4_weights[None, :]
                 ).sum(1)
             for item, predicted in zip(tier4_group, state.tolist(), strict=True):
+                outputs[item[0]] = [predicted if predicted < item[3] else 0]
+
+        if tier5_group:
+            multiplier = [item[1] for item in tier5_group]
+            multiplicand = [item[2] for item in tier5_group]
+            modulus = [item[3] for item in tier5_group]
+            state = [0] * len(tier5_group)
+            for bit_index in range(TIER5_WIDTH - 1, -1, -1):
+                bit = [(value >> bit_index) & 1 for value in multiplier]
+                logits, _ = self.tier5_network(
+                    _bigint_features(
+                        state, multiplicand, modulus, bit, TIER5_WIDTH
+                    )
+                )
+                state = _decode_bigint_logits(logits)
+            for item, predicted in zip(tier5_group, state, strict=True):
                 outputs[item[0]] = [predicted if predicted < item[3] else 0]
         return outputs
 
