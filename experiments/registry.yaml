@@ -391,3 +391,10 @@ runs:
     run_record: experiments/runs/exp-607-tier6-differentiable-soft-state/run.json
     metrics: evals/results/exp-607-tier6-differentiable-soft-state/metrics.json
     checkpoint: .scratch/exp-607-tier6-differentiable-soft-state/differentiable_soft_state/weights.safetensors
+  - run_id: exp-608-tier6-straight-through-state
+    status: completed
+    approach: matched-continuous-soft-versus-straight-through
+    config: configs/exp_608_tier6_straight_through_state.yaml
+    run_record: experiments/runs/exp-608-tier6-straight-through-state/run.json
+    metrics: evals/results/exp-608-tier6-straight-through-state/metrics.json
+    checkpoint: .scratch/exp-608-tier6-straight-through-state/straight_through_state/weights.safetensors

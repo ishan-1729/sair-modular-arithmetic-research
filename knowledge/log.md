@@ -30,3 +30,4 @@
 - **Tier-6 retention follow-up**: A 60/40 retention schedule improves width 64 but regresses width 128, closing further recovery-schedule tuning.
 - **Tier-6 complementarity**: Endpoint oracle union is only 84.5% and fixed combinations reach 83%, closing checkpoint combination and motivating soft-state credit assignment.
 - **Tier-6 soft state**: Differentiable continuous states reach 89.5% versus 88% detached control but miss the causal gain gate, motivating a straight-through discrete-forward formulation.
+- **Tier-6 straight-through**: Hard-forward/sigmoid-backward state training gains 2.5 points over continuous soft state, reaching 87%, and advances to higher-fidelity confirmation.

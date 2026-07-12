@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-608 Tier-6 Straight-Through State
 description: Matched continuous-soft versus hard-forward sigmoid-backward state-credit A/B.
-status: preregistered
+status: completed
 tags: [autoresearch, Tier-6, straight-through, credit-assignment, matched-ab]
 timestamp: "2026-07-13T05:40:00+05:30"
 ---
@@ -16,3 +16,9 @@ Pass only if the challenger reaches at least 90% width-128 rollout, gains at lea
 ## Dynamic resource budget
 
 EXP-607's soft arm took 486.049 wall seconds including training and evaluation. Two matched differentiable arms project 972.099 seconds plus 25 seconds setup, or 997.099 seconds total. Allocate 1,600 wall seconds soft and a 2,400-wall-second hard runaway ceiling, with a separate conservative 180 aggregate CPU-minute ceiling at four threads. Cache completed arms and save checkpoints before evaluation.
+
+## Result
+
+Reject for absolute promotion but support straight-through credit assignment. Continuous-soft control scores 84.5% width-128 rollout; straight-through scores 87.0%, a +2.5-point gain that passes the causal gate. The challenger retains 96.5% width-64, 99.9% width-128 transition, and zero invalid rollouts, but misses 90% absolute. Runtime is 787.595 wall seconds and 3,106.227 aggregate CPU seconds; external wall is 794.31 seconds, within budget.
+
+Preserve checkpoint `a87f4e...a793`. Authorize a preregistered lower-rate higher-fidelity straight-through continuation on fresh identities; do not run independent Tier-6 yet.

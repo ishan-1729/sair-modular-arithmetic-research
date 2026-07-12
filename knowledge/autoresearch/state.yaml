@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-608-tier6-straight-through-state
-  statement: A hard-forward sigmoid-backward straight-through state plane preserves discrete trajectory distribution while propagating multi-step credit.
-  promotion_gate: Require at least 90 percent width-128 rollout and a two-point gain over matched continuous-soft control before independent Tier-6.
+  run_id: exp-609-tier6-straight-through-confirmation
+  statement: Lower-rate continuation of the causally supported straight-through checkpoint exceeds 90 percent width-128 on higher-fidelity fresh evidence.
+  promotion_gate: Require at least 90 percent width-128 and 95 percent width-64 rollout on 300 fresh cases before five-seed independent Tier-6.
   status: planning
-next_action: Preregister a matched continuous-soft versus straight-through state A/B from the preserved EXP-607 checkpoint; keep Candidate 004 incumbent.
+next_action: Preregister one lower-rate straight-through continuation from EXP-608 with 300-case fresh evaluation; keep Candidate 004 incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
