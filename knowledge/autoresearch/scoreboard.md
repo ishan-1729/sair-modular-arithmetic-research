@@ -68,3 +68,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-329 autonomous-state recovery | 56/64 | +400 | 99.92% width64 | 94.267% width64 | 0.133% | 99,824 | 452 wall arm | narrow reject; +1.133 < +1.5 |
 | EXP-400 cellular control | 8/12/16 -> 32 | 200 | 37.48% / 44.74% | 0% / 0% | n/a | 99,824 | 84.2 train | reference control |
 | EXP-400 minimal GCN/GAT/MPNN | 8/12/16 -> 32 | 200 | 16.6-16.9% / 24.4-26.7% | 0% / 0% | n/a | 72,828-94,951 | 80.7-138.7 train | reject reference operators; PyG next |
+| EXP-401 cellular control | 8/12/16 -> 32 | 1,200 | 72.92% / 70.14% | 0.8% / 0% | n/a | 99,824 | 390.5 train | matched control |
+| EXP-401 PyG GCN/GATv2/max-MPNN | 8/12/16 -> 32 | 1,200 | 18.24-38.40% / 25.92-44.80% | 0% / 0% | n/a | 72,484-95,684 | 185.0-193.8 train | reject proper library formulations |

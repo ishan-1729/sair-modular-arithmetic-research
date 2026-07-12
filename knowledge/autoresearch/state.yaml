@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-401-pyg-graph-message-passing
-  statement: Canonical PyG normalization, dynamic GATv2 attention, or tested max MessagePassing materially improves graph algorithm learning over minimal reference operators.
-  promotion_gate: Advance only a PyG arm that passes the frozen exact-rollout or zero-shot transition gain gate against the matched cellular control.
-  status: preregistered
-next_action: Run the dynamically budgeted full-training EXP-401 PyG comparison; retain Candidate 003 as incumbent.
+  run_id: exp-500-cellular-grokking-probe
+  statement: Extended regularized training may reveal delayed exact generalization in the promoted cellular transition family.
+  promotion_gate: Complete Playwright-verified grokking primary research and preregister a dense-curve multi-seed probe with a calibrated budget.
+  status: planned
+next_action: Research and design the required grokking probe without reopening rejected graph formulations; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -51,3 +51,4 @@ risks:
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
   - The strongest Tier-5 selection checkpoint reaches 94.267 percent but missed its preregistered causal gain gate and is not independently validated.
+  - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.

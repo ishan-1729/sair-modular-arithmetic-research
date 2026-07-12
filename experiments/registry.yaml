@@ -293,3 +293,10 @@ runs:
     run_record: experiments/runs/exp-400-graph-message-passing-smoke/run.json
     metrics: evals/results/exp-400-graph-message-passing-smoke/metrics.json
     checkpoint: .scratch/exp-400-graph-message-passing-smoke
+  - run_id: exp-401-pyg-graph-message-passing
+    status: completed
+    approach: proper-pyg-gcn-gatv2-max-message-passing
+    config: configs/exp_401_pyg_graph_message_passing.yaml
+    run_record: experiments/runs/exp-401-pyg-graph-message-passing/run.json
+    metrics: evals/results/exp-401-pyg-graph-message-passing/metrics.json
+    checkpoint: .scratch/exp-401-pyg-graph-message-passing/pyg-max-mpnn/weights.safetensors
