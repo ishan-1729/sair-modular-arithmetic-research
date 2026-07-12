@@ -28,8 +28,8 @@ current_hypothesis:
   run_id: exp-310-chunk-shared-recurrent-reduction
   statement: A chunk-shared recurrent representation can reuse learned local reduction across widths without width-specific global output heads.
   promotion_gate: Preregister a matched width-16 learning and width-32 transfer test that materially exceeds the rejected EXP-220 cellular baseline.
-  status: planned
-next_action: Design a tensor-native chunk-shared recurrent model using EXP-300 infrastructure; retain Candidate 002 and do not alter submission.
+  status: preregistered
+next_action: Run the matched mixed-width cellular-versus-chunk-GRU experiment; retain Candidate 002 and do not alter submission.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -40,7 +40,7 @@ tracking:
   incumbent_model_version: "2"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 70e83bbc366fac1700b8ca02a288b336b7dd7b65
+  last_validated_commit: 2dea57d5dabd05351953013054523c916af83564
   dirty: true
 risks:
   - Tier 4 remains unsolved and requires a width-32 generalization path.
