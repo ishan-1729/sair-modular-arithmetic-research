@@ -1,0 +1,45 @@
+{
+  "run_id": "exp-328-cellular-width64-logit-ensemble-retry",
+  "created_at": "2026-07-12T07:55:00Z",
+  "checkpoint_sha256": "0a2c0dcde627aee3edcc0c33a27960e0c9931e093660892099ebf05b8e39cc1a",
+  "evaluation": {
+    "transition": {
+      "endpoint_a": {"cases": 1000, "correct": 1000, "exact_accuracy": 1.0},
+      "endpoint_b": {"cases": 1000, "correct": 1000, "exact_accuracy": 1.0},
+      "logit_ensemble": {"cases": 1000, "correct": 1000, "exact_accuracy": 1.0}
+    },
+    "rollout": {
+      "endpoint_a": {"cases": 500, "correct": 430, "exact_accuracy": 0.86, "invalid_rate": 0.006},
+      "endpoint_b": {"cases": 500, "correct": 449, "exact_accuracy": 0.898, "invalid_rate": 0.002},
+      "logit_ensemble": {"cases": 500, "correct": 454, "exact_accuracy": 0.908, "invalid_rate": 0.0}
+    }
+  },
+  "controls": {
+    "gain_over_best_endpoint": 0.01,
+    "gates_passed": false,
+    "parameters": 199648
+  },
+  "runtime": {
+    "runner_wall_seconds": 673.568248095,
+    "runner_aggregate_cpu_seconds": 2407.666221804,
+    "external_elapsed_wall_seconds": 634.67,
+    "external_user_cpu_seconds": 2419.10,
+    "external_system_cpu_seconds": 7.16,
+    "external_percent_cpu": 382,
+    "maximum_resident_set_kib": 659336,
+    "device": "cpu",
+    "torch_threads": 4
+  },
+  "resource_budget": {
+    "projected_wall_seconds": 474.5903743792005,
+    "soft_budget_wall_seconds": 1200,
+    "hard_runaway_ceiling_wall_seconds": 1800,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 120
+  },
+  "decision": "reject-cellular-width64-logit-ensemble",
+  "limitations": [
+    "Generated selection evidence only; no checked, consumed independent, or private answers were read.",
+    "The external time utility and in-process monotonic timer differ by 38.9 seconds; both raw observations are retained.",
+    "The ensemble doubles Tier-5 specialist parameters and forward compute."
+  ]
+}

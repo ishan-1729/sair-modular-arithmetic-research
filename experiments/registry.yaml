@@ -272,3 +272,10 @@ runs:
     run_record: experiments/runs/exp-327-cellular-width64-logit-ensemble/run.json
     metrics: null
     checkpoint: null
+  - run_id: exp-328-cellular-width64-logit-ensemble-retry
+    status: completed
+    approach: cellular-width64-checkpoint-logit-ensemble-retry
+    config: configs/exp_328_cellular_width64_logit_ensemble_retry.yaml
+    run_record: experiments/runs/exp-328-cellular-width64-logit-ensemble-retry/run.json
+    metrics: evals/results/exp-328-cellular-width64-logit-ensemble-retry/metrics.json
+    checkpoint: .scratch/exp-328-cellular-width64-logit-ensemble-retry/weights.safetensors

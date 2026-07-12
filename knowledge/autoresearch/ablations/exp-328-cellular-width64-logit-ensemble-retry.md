@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-328 Cellular Width-64 Logit-Ensemble Retry
 description: Full-fidelity paired two-checkpoint logit-ensemble comparison with a throughput-calibrated dynamic budget.
-status: preregistered
+status: completed
 tags: [autoresearch, cellular, width-64, ensemble, retry, Tier-5]
 timestamp: "2026-07-12T15:15:00+05:30"
 ---
@@ -18,3 +18,7 @@ EXP-326 measured 593.238 wall seconds for five single-model-equivalent arms at t
 Write each completed arm's deterministic metrics immediately to a cache keyed by checkpoint(s), alpha, evaluator hash, dataset/split hash, seed, and evaluation counts. Reuse a cached arm only when that complete key matches. This prevents a later interruption from discarding valid completed evidence without mixing unmatched inputs.
 
 Require the ensemble to reach at least 99.8% transition accuracy, 93% rollout accuracy, improve at least one point over the better paired endpoint, and keep invalid rollouts at or below 0.5%. Passing authorizes five untouched Tier-5 official-generator seeds; failure closes checkpoint ensembling. Do not read checked, consumed independent, or private answers. Give the full matched comparison enough time to finish; stop only for the documented hard runaway ceiling or a genuine execution failure.
+
+## Outcome
+
+Rejected at full fidelity. Endpoint A scores 86.0% rollout, endpoint B scores 89.8%, and the logit ensemble scores 90.8% (454/500). The ensemble reaches 100% transition accuracy, improves exactly one point over the better endpoint, and has no invalid rollout, but misses the frozen 93% absolute gate by 2.2 points. The runner records 673.6 wall seconds and 2,407.7 aggregate CPU seconds; external `/usr/bin/time` records 634.7 elapsed seconds, 2,426.3 user-plus-system CPU seconds, 382% CPU utilization, and 644 MiB peak RSS. Both timing observations are preserved because their 38.9-second discrepancy is unexplained. The run completes well inside the 1,200/1,800-second soft/hard wall budgets. Close checkpoint ensembling and target autonomous-state error recovery directly.
