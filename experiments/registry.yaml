@@ -426,3 +426,10 @@ runs:
     run_record: experiments/runs/exp-612-tier6-adapter-activation/run.json
     metrics: evals/results/exp-612-tier6-adapter-activation/metrics.json
     checkpoint: .scratch/exp-612-tier6-adapter-activation/differential_rate_residual/weights.safetensors
+  - run_id: exp-613-tier6-model-conditioned-error-corrector
+    status: completed
+    approach: frozen-base-model-conditioned-error-corrector
+    config: configs/exp_613_tier6_model_conditioned_error_corrector.yaml
+    run_record: experiments/runs/exp-613-tier6-model-conditioned-error-corrector/run.json
+    metrics: evals/results/exp-613-tier6-model-conditioned-error-corrector/metrics.json
+    checkpoint: .scratch/exp-613-tier6-model-conditioned-error-corrector/first_error_corrector/weights.safetensors

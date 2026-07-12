@@ -90,3 +90,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-610 state corruption | 64/128 | 200 x2 | 99.9% / 99.85% | 87.5% clean / 75.0% corrupted | 0% / 0.5% | 99,824 | 735.4 wall / 48.3 CPU min | reject; corruption collapses |
 | EXP-611 residual widening | 64/128 | 200 x2 | 99.8% both | 87.0% control / 87.0% 92+36 | 0.5% both | 99,824 / 116,712 | 1071.1 wall / 68.8 CPU min | reject low-rate recipe; adapter dormant |
 | EXP-612 adapter activation | 64/128 | 200 x2 | 99.85% both | 85.5% low-rate / 87.0% differential-rate | 0.5% both | 116,712 each | 1312.7 wall / 84.5 CPU min | reject and close residual widening; +1.5 |
+| EXP-613 conditioned corrector | 64/128 | 300 x2 | 100% width128 both | 85.5% uniform / 77.5% first-error | 0.5% / 2% | 129,636 (29,812 trainable) | 1290.6 wall / 82.9 CPU min | reject and close; targeted correction −8.0 |
