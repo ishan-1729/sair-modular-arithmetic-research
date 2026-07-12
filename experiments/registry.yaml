@@ -307,3 +307,10 @@ runs:
     run_record: experiments/runs/exp-500-cellular-grokking-probe/run.json
     metrics: evals/results/exp-500-cellular-grokking-probe/metrics.json
     checkpoint: .scratch/exp-500-cellular-grokking-probe/20260721/decay-1e-2/weights.safetensors
+  - run_id: exp-510-multiarchitecture-grokking-feasibility
+    status: completed
+    approach: finite-data-pyg-mpnn-tcn-grokking-multi-seed
+    config: configs/exp_510_multiarchitecture_grokking_feasibility.yaml
+    run_record: experiments/runs/exp-510-multiarchitecture-grokking-feasibility/run.json
+    metrics: evals/results/exp-510-multiarchitecture-grokking-feasibility/metrics.json
+    checkpoint: .scratch/exp-510-multiarchitecture-grokking-feasibility/20260722/pyg-max-mpnn/weights.safetensors

@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-510-multiarchitecture-grokking-feasibility
-  statement: A graph model or materially different sequence model may exhibit delayed generalization even though the cellular family does not.
-  promotion_gate: Require the unchanged delayed-generalization signature in at least two of three seeds for either non-cellular architecture.
-  status: preregistered
-next_action: Run the dynamically budgeted EXP-510 PyG max-MPNN and TCN grokking feasibility comparison; retain Candidate 003 as incumbent.
+  run_id: exp-520-tier5-recovery-delta-patching
+  statement: A localized subset of the recovery-trained parameter delta causally provides Tier-5 rollout gain without the full checkpoint's countervailing changes.
+  promotion_gate: Analyze frozen EXP-329 control/challenger deltas, preregister tensor-group patches on fresh data, and require an absolute plus paired exact-rollout gain.
+  status: planned
+next_action: Perform causal parameter-delta localization on the strongest Tier-5 selection pair and design the matched patching test; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -53,3 +53,4 @@ risks:
   - The strongest Tier-5 selection checkpoint reaches 94.267 percent but missed its preregistered causal gain gate and is not independently validated.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
+  - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.

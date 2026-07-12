@@ -72,3 +72,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-401 PyG GCN/GATv2/max-MPNN | 8/12/16 -> 32 | 1,200 | 18.24-38.40% / 25.92-44.80% | 0% / 0% | n/a | 72,484-95,684 | 185.0-193.8 train | reject proper library formulations |
 | EXP-500 cellular no-decay grokking control | width9 finite | 8,000 x3 | 100% train / 82.959% heldout mean | 30.667% mean | n/a | 99,824 | 0 signatures | reject delayed-generalization signature |
 | EXP-500 cellular decay 1e-2 | width9 finite | 8,000 x3 | 99.837% train / 83.586% heldout mean | 32.467% mean | n/a | 99,824 | 0 signatures | reject; inconsistent paired effect |
+| EXP-510 shared-context TCN grokking | width9 finite | 8,000 x3 | 100% train / 77.759% heldout mean | 23.067% mean | n/a | 75,469 | 0 signatures | reject memorization plateau |
+| EXP-510 PyG max-MPNN grokking | width9 finite | 8,000 x3 | 99.512% train / 83.748% heldout mean | 30.533% mean | n/a | 72,484 | 0 signatures | reject concurrent learning, no delay |
