@@ -39,3 +39,4 @@
 - [EXP-328 cellular width-64 logit-ensemble retry](exp-328-cellular-width64-logit-ensemble-retry.md) - resource-corrected paired ensemble screen.
 - [EXP-329 cellular width-64 autonomous-state recovery](exp-329-cellular-width64-autonomous-state-recovery.md) - matched teacher-forced versus learner-state recovery training.
 - [EXP-400 graph message-passing smoke](exp-400-graph-message-passing-smoke.md) - cellular, GCN, GAT, and typed max-MPNN successive-halving rung.
+- [EXP-401 PyG graph message passing](exp-401-pyg-graph-message-passing.md) - proper library-backed full-training GCNConv, GATv2Conv, and MessagePassing comparison.

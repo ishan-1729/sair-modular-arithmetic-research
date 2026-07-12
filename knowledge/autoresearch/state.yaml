@@ -29,9 +29,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-401-pyg-graph-message-passing
   statement: Canonical PyG normalization, dynamic GATv2 attention, or tested max MessagePassing materially improves graph algorithm learning over minimal reference operators.
-  promotion_gate: Profile pinned PyG operators, then preregister a matched library-backed confirmation with the cellular control.
-  status: planned
-next_action: Implement and profile PyG 2.8.0 GCNConv, GATv2Conv, and MessagePassing models before freezing EXP-401; retain Candidate 003 as incumbent.
+  promotion_gate: Advance only a PyG arm that passes the frozen exact-rollout or zero-shot transition gain gate against the matched cellular control.
+  status: preregistered
+next_action: Run the dynamically budgeted full-training EXP-401 PyG comparison; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
