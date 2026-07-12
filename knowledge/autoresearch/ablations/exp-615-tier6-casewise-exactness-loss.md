@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-615 Tier-6 Casewise Exactness Loss
 description: Loss-only A/B of the existing bit-position objective against a per-example worst-bit exactness surrogate.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, exactness-loss, straight-through, causal-ablation]
 timestamp: "2026-07-13T04:10:00+05:30"
 ---
@@ -34,3 +34,9 @@ The planning budget is 1,600 wall seconds (60% headroom), and the hard runaway c
 ## Boundaries
 
 Checked and private answers remain unread. Exact arithmetic remains confined to offline labels and evaluation truth. The inference architecture is unchanged, tensor-native, and trained-weight dependent; the new term is training-only. Native PyTorch BCE and reductions are the appropriate implementation.
+
+## Result and decision
+
+The control scored 85.0% width-128 rollout and the casewise challenger 85.5%, a +0.5-point gain. Both scored 100% on 2,000 sampled width-128 transitions with zero invalid rollouts. Width-64 rollout was 94.5% control and exactly 95.0% challenger. The casewise term therefore slightly improves both widths but misses the 90% absolute and +3-point causal gates decisively.
+
+Reject the `0.05` casewise term and do not sweep its weight on this selection surface. The run finished in 984.17 wall seconds and 3,771.71 aggregate CPU seconds, within budget. The remaining mismatch is likely across trajectory steps/examples rather than only across bits within a transition; test a preregistered trajectory-tail objective next.

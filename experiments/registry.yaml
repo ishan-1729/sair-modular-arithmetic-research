@@ -440,3 +440,10 @@ runs:
     run_record: experiments/runs/exp-614-tier6-global-recurrent-refinement/run.json
     metrics: evals/results/exp-614-tier6-global-recurrent-refinement/metrics.json
     checkpoint: .scratch/exp-614-tier6-global-recurrent-refinement/global_refinement_challenger/weights.safetensors
+  - run_id: exp-615-tier6-casewise-exactness-loss
+    status: completed
+    approach: matched-casewise-worst-bit-exactness-loss
+    config: configs/exp_615_tier6_casewise_exactness_loss.yaml
+    run_record: experiments/runs/exp-615-tier6-casewise-exactness-loss/run.json
+    metrics: evals/results/exp-615-tier6-casewise-exactness-loss/metrics.json
+    checkpoint: .scratch/exp-615-tier6-casewise-exactness-loss/casewise_exactness_challenger/weights.safetensors
