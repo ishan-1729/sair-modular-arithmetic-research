@@ -398,3 +398,10 @@ runs:
     run_record: experiments/runs/exp-608-tier6-straight-through-state/run.json
     metrics: evals/results/exp-608-tier6-straight-through-state/metrics.json
     checkpoint: .scratch/exp-608-tier6-straight-through-state/straight_through_state/weights.safetensors
+  - run_id: exp-609-tier6-straight-through-confirmation
+    status: completed
+    approach: higher-fidelity-straight-through-continuation
+    config: configs/exp_609_tier6_straight_through_confirmation.yaml
+    run_record: experiments/runs/exp-609-tier6-straight-through-confirmation/run.json
+    metrics: evals/results/exp-609-tier6-straight-through-confirmation/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

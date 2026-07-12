@@ -86,3 +86,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-606 checkpoint combination | 64/128 | frozen | 100% fixed arms | 82% endpoints / 83% soup+ensemble / 84.5% oracle | 0% width128 | 99,824-199,648 | 657.9 wall / 43.1 CPU min | reject; shared errors dominate |
 | EXP-607 differentiable soft state | 64/128 | 200 x2 | 99.95% both | 88.0% detached / 89.5% soft | 0% | 99,824 | 936.4 wall / 61.6 CPU min | reject gain; test straight-through |
 | EXP-608 straight-through state | 64/128 | 200 x2 | 99.9% both | 84.5% soft / 87.0% straight-through | 0% | 99,824 | 787.6 wall / 51.8 CPU min | causal pass; absolute miss |
+| EXP-609 straight-through confirmation | 64/128 | +400 | 99.93% | 84.67% source / 86.33% challenger | 0% challenger | 99,824 | 831.0 wall / 54.7 CPU min | reject; close estimator continuation |
