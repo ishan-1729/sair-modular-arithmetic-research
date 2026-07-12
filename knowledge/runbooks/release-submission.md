@@ -2,14 +2,14 @@
 type: Release Runbook
 title: Release a Hugging Face Submission Candidate
 description: Clean-room checklist for staging, sandboxing, hashing, publishing, and locking the ranked artifact.
-status: draft
+status: active
 tags: [runbook, release, hugging-face, submission]
 timestamp: "2026-07-11T23:15:00+05:30"
 ---
 
 # Release a submission candidate
 
-Candidate 001 has completed steps 1-10 locally, including the full public benchmark, independent seed, randomized-weight control, and pinned sandbox. Steps 11-12 remain pending because they publish externally and require the owner's Hugging Face identity and release decision. See the [candidate evaluation runbook](evaluate-candidate.md) and [model card](../submissions/candidate-001-horner-tcn9.md).
+Candidate 002 has completed steps 1-10 locally, including five independent Tier-3 seeds, a full independent official-generator set, checked release regression, randomized-weight control, exact pinned-runtime reproduction, and the pinned official container through the documented Podman compatibility path. Steps 11-12 remain pending because they publish externally and require the owner's explicit release decision. See the [candidate evaluation runbook](evaluate-candidate.md), [container runbook](sandbox-candidate.md), and [model card](../submissions/candidate-002-tier3-hybrid.md).
 
 1. Freeze the source commit, evaluator commit, Docker image digest, configuration, and checkpoint.
 2. Create a fresh directory under `submission/candidates/<candidate-id>/`.

@@ -12,7 +12,7 @@ from safetensors.torch import load_file
 
 ROOT = Path(__file__).resolve().parents[1]
 SUBMISSION = ROOT / "submission"
-WEIGHTS_SHA256 = "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585"
+WEIGHTS_SHA256 = "69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157"
 
 
 @pytest.fixture(scope="module")
@@ -29,7 +29,7 @@ def test_submission_is_the_clean_three_file_artifact() -> None:
     }
     weights = SUBMISSION / "weights.safetensors"
     assert hashlib.sha256(weights.read_bytes()).hexdigest() == WEIGHTS_SHA256
-    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 85_021
+    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 170_577
 
 
 def test_submission_passes_official_manifest_and_static_checks(candidate) -> None:
@@ -71,6 +71,23 @@ def test_checked_public_tier2_release_regression(candidate) -> None:
     assert correct == 99
 
 
+def test_checked_public_tier3_release_regression(candidate) -> None:
+    _, model = candidate
+    records = [
+        json.loads(line)
+        for line in (
+            ROOT / "data" / "external" / "public_benchmark" / "tier_3.jsonl"
+        ).read_text(encoding="utf-8").splitlines()
+    ]
+    rows = [(row["a"], row["b"], row["p"]) for row in records]
+    outputs = model.predict_digits_batch(rows)
+    correct = sum(
+        digits == [int(row["expected"])]
+        for digits, row in zip(outputs, records, strict=True)
+    )
+    assert correct == 100
+
+
 def test_mixed_batch_contract_and_determinism(candidate) -> None:
     _, model = candidate
     rows = [
@@ -87,4 +104,4 @@ def test_mixed_batch_contract_and_determinism(candidate) -> None:
         assert isinstance(digits, list) and len(digits) == 1
         assert type(digits[0]) is int
         assert 0 <= digits[0] < int(modulus)
-    assert first[-1] == [0]
+    assert first[-1] == [(999 * 888) % 9923]

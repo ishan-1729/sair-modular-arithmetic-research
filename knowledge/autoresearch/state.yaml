@@ -1,0 +1,49 @@
+program_status: active
+updated_at: 2026-07-12T08:00:00+05:30
+success_threshold:
+  metric: exact_overall_accuracy
+  minimum: 0.85
+  checked_public_required: true
+  independent_full_seeds_required: 5
+  minimum_each_independent_seed: 0.85
+  official_required_when_available: true
+  achieved: false
+completion_eligible: false
+incumbent:
+  run_id: candidate-002-tier3-hybrid
+  checkpoint_sha256: 69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157
+  checked_public_overall_accuracy: 0.313
+  independent_overall_accuracy: 0.31
+  checked_public_tier_1_accuracy: 1.0
+  checked_public_tier_2_accuracy: 0.99
+  independent_tier_2_accuracy: 0.97
+  checked_public_tier_3_accuracy: 1.0
+  independent_tier_3_accuracy: 0.99
+  highest_tier_above_90: 3
+  artifact_bytes: 704185
+  sandbox_inference_seconds: 1.8
+  mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
+  mlflow_model_version: "2"
+current_hypothesis:
+  run_id: candidate-002-tier3-hybrid
+  statement: The promoted hybrid advances the ranking boundary through Tier 3 without regressing Tier 1 or Tier 2.
+  promotion_gate: Independent full 1,100-case official evaluation has highest_tier_above_90 >= 3, deterministic inference, clean static analysis, and runtime below 300 seconds.
+  status: passed
+next_action: Finish Git durability for Candidate 002, then begin a preregistered Tier-4 research cycle toward the mandatory 85% exact-overall threshold; do not tune on checked public answers.
+tracking:
+  backend: sqlite
+  tracking_uri: .scratch/mlflow/mlflow.db
+  artifact_root: .scratch/mlflow/artifacts
+  experiment_name: sair-modular-arithmetic
+  experiment_id: "1"
+  registered_model: sair-modular-arithmetic-candidate
+  incumbent_model_version: "2"
+git:
+  branch: agent/submission-ready-horner-tcn9
+  last_validated_commit: 669a27c8c1bc8aa6e5755b4d46474e46a661cf1a
+  dirty: true
+risks:
+  - Tier 4 remains unsolved and requires a width-32 generalization path.
+  - A fixed-width full-canvas model may learn modulus identities rather than a shared reduction rule.
+  - CPU-only training makes indiscriminate sweeps infeasible.
+  - Public benchmark inputs must not become a model-selection surface.

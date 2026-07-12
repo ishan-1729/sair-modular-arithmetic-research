@@ -19,6 +19,9 @@ dependencies = [
 dev = [
   "pytest>=8,<10",
 ]
+research = [
+  "mlflow==3.14.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]

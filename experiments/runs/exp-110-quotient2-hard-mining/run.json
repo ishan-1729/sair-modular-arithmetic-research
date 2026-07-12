@@ -1,0 +1,38 @@
+{
+  "run_id": "exp-110-quotient2-hard-mining",
+  "status": "completed",
+  "created_at": "2026-07-11T20:48:00Z",
+  "hypothesis": "Quotient-2 and boundary hard mining closes the dominant width-16 transition error mode.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "61bb9d21581ce970c8fe9544cacd739914822e7d1e859499bfae53324c8a84b7",
+    "config_sha256": "fa3fe94b774c146d4cfe442c50c2b45d092484381019c3795283da3b465f3539",
+    "transfer_checkpoint_sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192"
+  },
+  "config": "configs/exp_110_quotient2_hard_mining.yaml",
+  "environment": "experiments/runs/exp-110-quotient2-hard-mining/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "parent_run_id": "d5e644cc0ec348b7895a9436a05ce1b4",
+    "arm_run_id": "e36612c7513b459f87da51db8c64d710",
+    "baseline_run_id": "27ceefcd6d6649aea9130226de831fcb"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-110-quotient2-hard-mining/width16-transfer-hard-mining/weights.safetensors",
+    "checkpoint_sha256": "98e5e008a556e2a3b0d7b75aedb7727e011d8852c90d6cb6345b6b861a7fbdd7",
+    "metrics": "evals/results/exp-110-quotient2-hard-mining/metrics.json",
+    "raw_summary": "experiments/runs/exp-110-quotient2-hard-mining/raw-summary.json",
+    "arm_metrics": "experiments/runs/exp-110-quotient2-hard-mining/arm-metrics.json"
+  },
+  "decision": "advance-hard-mining-to-2400",
+  "notes": [
+    "The hard-mined arm passed every preregistered A/B and absolute full-budget gate.",
+    "Network training examples and optimizer steps match EXP-106; the offline candidate pool is 4x larger.",
+    "Heldout rollout remains below the 90% independent-seed gate, so public Tier 3 remains untouched.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

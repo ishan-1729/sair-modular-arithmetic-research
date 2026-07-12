@@ -13,3 +13,52 @@ runs:
     run_record: experiments/runs/candidate-001-horner-tcn9/run.json
     metrics: evals/results/candidate-001-horner-tcn9/metrics.json
     checkpoint: submission/weights.safetensors
+  - run_id: exp-100-width16-shared-context-smoke
+    status: completed
+    approach: shared-context-width-scaling
+    config: configs/exp_100_width16_shared_context_smoke.yaml
+    run_record: experiments/runs/exp-100-width16-shared-context-smoke/run.json
+    metrics: evals/results/exp-100-width16-shared-context-smoke/metrics.json
+    checkpoint: .scratch/exp-100-width16-shared-context-smoke/width16-challenger/weights.safetensors
+  - run_id: exp-105-width-transfer-smoke
+    status: completed
+    approach: learned-width-transfer
+    config: configs/exp_105_width_transfer_smoke.yaml
+    run_record: experiments/runs/exp-105-width-transfer-smoke/run.json
+    metrics: evals/results/exp-105-width-transfer-smoke/metrics.json
+    checkpoint: .scratch/exp-105-width-transfer-smoke/width16-transfer/weights.safetensors
+  - run_id: exp-106-width-transfer-1200
+    status: completed
+    approach: matched-learned-width-transfer
+    config: configs/exp_106_width_transfer_1200.yaml
+    run_record: experiments/runs/exp-106-width-transfer-1200/run.json
+    metrics: evals/results/exp-106-width-transfer-1200/metrics.json
+    checkpoint: .scratch/exp-106-width-transfer-1200/width16-transfer/weights.safetensors
+  - run_id: exp-110-quotient2-hard-mining
+    status: completed
+    approach: quotient2-boundary-hard-mining
+    config: configs/exp_110_quotient2_hard_mining.yaml
+    run_record: experiments/runs/exp-110-quotient2-hard-mining/run.json
+    metrics: evals/results/exp-110-quotient2-hard-mining/metrics.json
+    checkpoint: .scratch/exp-110-quotient2-hard-mining/width16-transfer-hard-mining/weights.safetensors
+  - run_id: exp-111-quotient2-hard-mining-2400
+    status: completed
+    approach: full-budget-quotient2-boundary-hard-mining
+    config: configs/exp_111_hard_mining_2400.yaml
+    run_record: experiments/runs/exp-111-quotient2-hard-mining-2400/run.json
+    metrics: evals/results/exp-111-quotient2-hard-mining-2400/metrics.json
+    checkpoint: .scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors
+  - run_id: exp-112-independent-tier3-five-seed
+    status: completed
+    approach: frozen-official-generator-tier3-gate
+    config: configs/exp_112_independent_tier3.yaml
+    run_record: experiments/runs/exp-112-independent-tier3-five-seed/run.json
+    metrics: evals/results/exp-112-independent-tier3-five-seed/metrics.json
+    checkpoint: .scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors
+  - run_id: candidate-002-tier3-hybrid
+    status: completed
+    approach: learned-tier2-tier3-horner-ensemble
+    config: configs/exp_112_independent_tier3.yaml
+    run_record: experiments/runs/candidate-002-tier3-hybrid/run.json
+    metrics: evals/results/candidate-002-tier3-hybrid/metrics.json
+    checkpoint: submission/weights.safetensors

@@ -19,9 +19,9 @@ ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
 CANDIDATE_SHA256 = {
-    "manifest.json": "53d37db02c6d91343531a52006ca2f4815ae65ed69f1de84d2f9b1acdf23364c",
-    "model.py": "370d43b16eb55f5d141a8071c6c702c5794154d0e6c659999e98ec994e3c721c",
-    "weights.safetensors": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+    "manifest.json": "6ffa04b8af9e677106e653dc4a999136cf3fafccf4181abc8ed4fae807699e8c",
+    "model.py": "1d308bfd0a85cf9a729eed2e78ddda4f29d42244665821f4aa356846c4233f2a",
+    "weights.safetensors": "69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157",
 }
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 REQUIRED_DIRS = (
@@ -259,8 +259,8 @@ def validate_submission_artifact() -> list[str]:
         if path.is_file() and sha256(path) != expected_hash:
             errors.append(f"submission/{name}: candidate hash mismatch")
     clean_bytes = sum((submission / name).stat().st_size for name in required if (submission / name).is_file())
-    if clean_bytes != 352_254:
-        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 352254")
+    if clean_bytes != 704_185:
+        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 704185")
     return errors
 
 

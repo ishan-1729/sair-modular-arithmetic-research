@@ -2,7 +2,7 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository now contains a sandbox-validated submission candidate, not just a POC. The 85,021-parameter width-9 learned Horner TCN passes the pinned official interface, static scanner, isolation check, determinism check, decoder, scorer, and Python 3.12/PyTorch 2.5.1 container. Across the exact 1,100-row public set it scores **21.5% overall**, with **Tier 1 at 100% and Tier 2 at 99%**; a full independently seeded set scores 21.3%, with Tier 2 at 97%. Randomizing the weights collapses Tier 2 to 1%.
+The repository contains a submission-ready 170,577-parameter learned Horner ensemble. On a full independent official 1,100-case set it scores **31.0% overall**, with **Tier 1 at 100%, Tier 2 at 97%, and Tier 3 at 99%**, advancing `highest_tier_above_90` to 3. The checked post-selection regression scores 31.3%, and randomized weights collapse Tier 3 to 2%. The exact Python 3.12/PyTorch 2.5.1 runtime reproduces the independent result with 2.1-second inference.
 
 ## Start here
 
@@ -10,8 +10,8 @@ The repository now contains a sandbox-validated submission candidate, not just a
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
-- [Submission candidate](knowledge/submissions/candidate-001-horner-tcn9.md) — model card, compliance rationale, release state, and hashes.
-- [Full-set evaluation](knowledge/evals/candidate-001-results.md) — checked, independent-seed, sandbox, and perturbation results.
+- [Submission candidate](knowledge/submissions/candidate-002-tier3-hybrid.md) — current model card, compliance rationale, release state, and hashes.
+- [Full-set evaluation](knowledge/evals/candidate-002-results.md) — independent, checked, pinned-runtime, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
 - [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
 

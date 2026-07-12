@@ -1,0 +1,26 @@
+run_id: exp-112-independent-tier3-five-seed
+hypothesis: the frozen EXP-111 checkpoint generalizes to unseen official-generator Tier 3 test sets
+checkpoint: .scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors
+checkpoint_sha256: f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94
+architecture:
+  width: 16
+  hidden: 48
+  blocks: 7
+evaluation:
+  tier_id: 3
+  seeds:
+    - exp112-tier3-20260712-a
+    - exp112-tier3-20260712-b
+    - exp112-tier3-20260712-c
+    - exp112-tier3-20260712-d
+    - exp112-tier3-20260712-e
+  cases_per_seed: 100
+  primes_per_seed: 5
+  edge_cases_per_seed: 4
+gates:
+  minimum_aggregate_accuracy: 0.90
+  minimum_passing_seeds: 4
+  per_seed_passing_accuracy: 0.90
+  minimum_single_seed_accuracy: 0.85
+resource_cap:
+  cpu_minutes: 3

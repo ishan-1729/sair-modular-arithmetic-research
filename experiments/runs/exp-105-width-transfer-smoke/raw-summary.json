@@ -1,0 +1,870 @@
+{
+  "run_id": "exp-105-width-transfer-smoke",
+  "status": "completed",
+  "hypothesis": "learned width-9 transition features accelerate width-16 learning",
+  "mlflow": {
+    "tracking_uri": "sqlite:///D:/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic",
+    "parent_run_id": "081f07e1684d469ca4d8ba3cafc46784",
+    "arm_run_id": "8657b531685944f39d63ae15a8ea46bb"
+  },
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "70106c8c906c4c9a8f049924ebc1f8e7dd91808c6a8301b7ce7e953f9d2b7e05",
+    "config_sha256": "9adfd1508188951744e949257aa534316e8ec740d2ea4e21583997d598c8fb59",
+    "base_config_sha256": "52d2c45b1accce10302522bdf289ee4367f071f456932f1cf1092cab5c6c255c"
+  },
+  "baseline": {
+    "config": {
+      "run_id": "exp-100-width16-shared-context-smoke",
+      "mlflow_run_id": "f065353fb10f435da8867936d8327cf4",
+      "checkpoint_sha256": "556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0",
+      "transition_accuracy": 0.6431,
+      "rollout_accuracy": 0.0052,
+      "invalid_rollout_rate": 0.5482
+    },
+    "metrics_path": "experiments\\runs\\exp-100-width16-shared-context-smoke\\width16-challenger-metrics.json",
+    "metrics": {
+      "arm": {
+        "name": "width16-challenger",
+        "width": 16,
+        "prime_bits_min": 9,
+        "prime_bits_max": 16
+      },
+      "parameters": 85556,
+      "prime_split": {
+        "train": 5190,
+        "validation": 649,
+        "test": 649,
+        "sha256": "8906190d5a46a87606e618a65d8d86c3902d3da4da88543caeb2e32313cab07e"
+      },
+      "training": {
+        "steps": 400,
+        "examples": 204800,
+        "seconds": 41.19736009999178,
+        "peak_rss_bytes": 554209280,
+        "final_100_step_batch_exact_delta": 0.0546875,
+        "history": [
+          {
+            "step": 1,
+            "elapsed_seconds": 0.11558919999515638,
+            "learning_rate": 0.0024999959219366217,
+            "gradient_norm": 1.413325309753418,
+            "loss": 1.1864402294158936,
+            "mean_bce": 0.6600372195243835,
+            "worst_bit_bce": 0.9376225471496582,
+            "quotient_ce": 1.0447287559509277,
+            "batch_exact": 0.060546875
+          },
+          {
+            "step": 50,
+            "elapsed_seconds": 4.9609299000003375,
+            "learning_rate": 0.0024898193850348346,
+            "gradient_norm": 0.5472050905227661,
+            "loss": 0.9045078754425049,
+            "mean_bce": 0.5361016392707825,
+            "worst_bit_bce": 0.7008711099624634,
+            "quotient_ce": 0.5301429033279419,
+            "batch_exact": 0.34765625
+          },
+          {
+            "step": 100,
+            "elapsed_seconds": 10.023975000003702,
+            "learning_rate": 0.0024594517332839918,
+            "gradient_norm": 0.7793105244636536,
+            "loss": 0.6712377071380615,
+            "mean_bce": 0.40788698196411133,
+            "worst_bit_bce": 0.5159363746643066,
+            "quotient_ce": 0.31179338693618774,
+            "batch_exact": 0.40625
+          },
+          {
+            "step": 150,
+            "elapsed_seconds": 15.656578499998432,
+            "learning_rate": 0.002409416643688433,
+            "gradient_norm": 1.1425143480300903,
+            "loss": 0.636910080909729,
+            "mean_bce": 0.38979923725128174,
+            "worst_bit_bce": 0.5065131187438965,
+            "quotient_ce": 0.19179965555667877,
+            "batch_exact": 0.400390625
+          },
+          {
+            "step": 200,
+            "elapsed_seconds": 20.498735200002557,
+            "learning_rate": 0.0023405702305034854,
+            "gradient_norm": 0.7558242678642273,
+            "loss": 0.5951896905899048,
+            "mean_bce": 0.36553746461868286,
+            "worst_bit_bce": 0.4820990562438965,
+            "quotient_ce": 0.12707646191120148,
+            "batch_exact": 0.4140625
+          },
+          {
+            "step": 250,
+            "elapsed_seconds": 26.175656199993682,
+            "learning_rate": 0.002254090474946574,
+            "gradient_norm": 1.4576525688171387,
+            "loss": 0.5748239159584045,
+            "mean_bce": 0.3239430785179138,
+            "worst_bit_bce": 0.5231738090515137,
+            "quotient_ce": 0.15452609956264496,
+            "batch_exact": 0.45703125
+          },
+          {
+            "step": 300,
+            "elapsed_seconds": 31.22332849999657,
+            "learning_rate": 0.002151457069611994,
+            "gradient_norm": 0.4595468044281006,
+            "loss": 0.38924095034599304,
+            "mean_bce": 0.2400730401277542,
+            "worst_bit_bce": 0.3131900131702423,
+            "quotient_ce": 0.08232427388429642,
+            "batch_exact": 0.623046875
+          },
+          {
+            "step": 350,
+            "elapsed_seconds": 36.06089399999473,
+            "learning_rate": 0.002034426100520378,
+            "gradient_norm": 0.6328660845756531,
+            "loss": 0.40508031845092773,
+            "mean_bce": 0.23743869364261627,
+            "worst_bit_bce": 0.34624379873275757,
+            "quotient_ce": 0.11831924319267273,
+            "batch_exact": 0.623046875
+          },
+          {
+            "step": 400,
+            "elapsed_seconds": 41.18689209999866,
+            "learning_rate": 0.0019049999999999983,
+            "gradient_norm": 0.5431163907051086,
+            "loss": 0.3508184850215912,
+            "mean_bce": 0.2088547646999359,
+            "worst_bit_bce": 0.29691702127456665,
+            "quotient_ce": 0.08351053297519684,
+            "batch_exact": 0.677734375
+          }
+        ]
+      },
+      "controls": {
+        "untrained_transition": {
+          "cases": 2000,
+          "correct": 128,
+          "exact_accuracy": 0.064,
+          "bit_accuracy": 0.6049375,
+          "valid_residue_rate": 0.9985,
+          "by_modulus_bits": {
+            "9": {
+              "correct": 2,
+              "cases": 11,
+              "exact_accuracy": 0.18181818181818182
+            },
+            "10": {
+              "correct": 6,
+              "cases": 18,
+              "exact_accuracy": 0.3333333333333333
+            },
+            "11": {
+              "correct": 6,
+              "cases": 40,
+              "exact_accuracy": 0.15
+            },
+            "12": {
+              "correct": 10,
+              "cases": 87,
+              "exact_accuracy": 0.11494252873563218
+            },
+            "13": {
+              "correct": 12,
+              "cases": 154,
+              "exact_accuracy": 0.07792207792207792
+            },
+            "14": {
+              "correct": 27,
+              "cases": 250,
+              "exact_accuracy": 0.108
+            },
+            "15": {
+              "correct": 33,
+              "cases": 501,
+              "exact_accuracy": 0.0658682634730539
+            },
+            "16": {
+              "correct": 32,
+              "cases": 939,
+              "exact_accuracy": 0.03407880724174654
+            }
+          }
+        },
+        "untrained_rollout": {
+          "cases": 1000,
+          "correct": 1,
+          "exact_accuracy": 0.001,
+          "all_steps_correct": 1,
+          "all_steps_exact_accuracy": 0.001,
+          "any_invalid_residue_rate": 0.0,
+          "first_error_by_step": [
+            510,
+            140,
+            125,
+            81,
+            55,
+            34,
+            21,
+            21,
+            5,
+            3,
+            2,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "by_modulus_bits": {
+            "9": {
+              "correct": 1,
+              "cases": 8,
+              "exact_accuracy": 0.125
+            },
+            "10": {
+              "correct": 0,
+              "cases": 20,
+              "exact_accuracy": 0.0
+            },
+            "11": {
+              "correct": 0,
+              "cases": 21,
+              "exact_accuracy": 0.0
+            },
+            "12": {
+              "correct": 0,
+              "cases": 43,
+              "exact_accuracy": 0.0
+            },
+            "13": {
+              "correct": 0,
+              "cases": 55,
+              "exact_accuracy": 0.0
+            },
+            "14": {
+              "correct": 0,
+              "cases": 144,
+              "exact_accuracy": 0.0
+            },
+            "15": {
+              "correct": 0,
+              "cases": 224,
+              "exact_accuracy": 0.0
+            },
+            "16": {
+              "correct": 0,
+              "cases": 485,
+              "exact_accuracy": 0.0
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "heldout_transition": {
+          "cases": 10000,
+          "correct": 6431,
+          "exact_accuracy": 0.6431,
+          "bit_accuracy": 0.8733,
+          "valid_residue_rate": 0.9355,
+          "by_modulus_bits": {
+            "9": {
+              "correct": 46,
+              "cases": 61,
+              "exact_accuracy": 0.7540983606557377
+            },
+            "10": {
+              "correct": 94,
+              "cases": 129,
+              "exact_accuracy": 0.7286821705426356
+            },
+            "11": {
+              "correct": 148,
+              "cases": 204,
+              "exact_accuracy": 0.7254901960784313
+            },
+            "12": {
+              "correct": 285,
+              "cases": 390,
+              "exact_accuracy": 0.7307692307692307
+            },
+            "13": {
+              "correct": 506,
+              "cases": 722,
+              "exact_accuracy": 0.7008310249307479
+            },
+            "14": {
+              "correct": 920,
+              "cases": 1360,
+              "exact_accuracy": 0.6764705882352942
+            },
+            "15": {
+              "correct": 1525,
+              "cases": 2427,
+              "exact_accuracy": 0.6283477544293367
+            },
+            "16": {
+              "correct": 2907,
+              "cases": 4707,
+              "exact_accuracy": 0.6175908221797323
+            }
+          }
+        },
+        "heldout_rollout": {
+          "cases": 5000,
+          "correct": 26,
+          "exact_accuracy": 0.0052,
+          "all_steps_correct": 26,
+          "all_steps_exact_accuracy": 0.0052,
+          "any_invalid_residue_rate": 0.5482,
+          "first_error_by_step": [
+            0,
+            115,
+            550,
+            853,
+            862,
+            735,
+            539,
+            458,
+            296,
+            226,
+            155,
+            72,
+            48,
+            36,
+            18,
+            11
+          ],
+          "by_modulus_bits": {
+            "9": {
+              "correct": 1,
+              "cases": 31,
+              "exact_accuracy": 0.03225806451612903
+            },
+            "10": {
+              "correct": 4,
+              "cases": 89,
+              "exact_accuracy": 0.0449438202247191
+            },
+            "11": {
+              "correct": 1,
+              "cases": 100,
+              "exact_accuracy": 0.01
+            },
+            "12": {
+              "correct": 4,
+              "cases": 210,
+              "exact_accuracy": 0.01904761904761905
+            },
+            "13": {
+              "correct": 5,
+              "cases": 340,
+              "exact_accuracy": 0.014705882352941176
+            },
+            "14": {
+              "correct": 2,
+              "cases": 672,
+              "exact_accuracy": 0.002976190476190476
+            },
+            "15": {
+              "correct": 2,
+              "cases": 1192,
+              "exact_accuracy": 0.0016778523489932886
+            },
+            "16": {
+              "correct": 7,
+              "cases": 2366,
+              "exact_accuracy": 0.0029585798816568047
+            }
+          }
+        }
+      },
+      "checkpoint": {
+        "path": ".scratch\\exp-100-width16-shared-context-smoke\\width16-challenger\\weights.safetensors",
+        "sha256": "556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0",
+        "bytes": 348128
+      },
+      "limitations": [
+        "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+        "No checked public expected answers were read or evaluated.",
+        "The width bands differ by construction; this tests scaling, not equal task difficulty."
+      ]
+    }
+  },
+  "transfer": {
+    "source_width": 9,
+    "target_width": 16,
+    "exact_tensor_count": 66,
+    "exact_tensors": [
+      "body.0.conv1.bias",
+      "body.0.conv1.weight",
+      "body.0.conv2.bias",
+      "body.0.conv2.weight",
+      "body.0.norm1.bias",
+      "body.0.norm1.weight",
+      "body.0.norm2.bias",
+      "body.0.norm2.weight",
+      "body.1.conv1.bias",
+      "body.1.conv1.weight",
+      "body.1.conv2.bias",
+      "body.1.conv2.weight",
+      "body.1.norm1.bias",
+      "body.1.norm1.weight",
+      "body.1.norm2.bias",
+      "body.1.norm2.weight",
+      "body.2.conv1.bias",
+      "body.2.conv1.weight",
+      "body.2.conv2.bias",
+      "body.2.conv2.weight",
+      "body.2.norm1.bias",
+      "body.2.norm1.weight",
+      "body.2.norm2.bias",
+      "body.2.norm2.weight",
+      "body.3.conv1.bias",
+      "body.3.conv1.weight",
+      "body.3.conv2.bias",
+      "body.3.conv2.weight",
+      "body.3.norm1.bias",
+      "body.3.norm1.weight",
+      "body.3.norm2.bias",
+      "body.3.norm2.weight",
+      "body.4.conv1.bias",
+      "body.4.conv1.weight",
+      "body.4.conv2.bias",
+      "body.4.conv2.weight",
+      "body.4.norm1.bias",
+      "body.4.norm1.weight",
+      "body.4.norm2.bias",
+      "body.4.norm2.weight",
+      "body.5.conv1.bias",
+      "body.5.conv1.weight",
+      "body.5.conv2.bias",
+      "body.5.conv2.weight",
+      "body.5.norm1.bias",
+      "body.5.norm1.weight",
+      "body.5.norm2.bias",
+      "body.5.norm2.weight",
+      "body.6.conv1.bias",
+      "body.6.conv1.weight",
+      "body.6.conv2.bias",
+      "body.6.conv2.weight",
+      "body.6.norm1.bias",
+      "body.6.norm1.weight",
+      "body.6.norm2.bias",
+      "body.6.norm2.weight",
+      "head_norm.bias",
+      "head_norm.weight",
+      "local_head.bias",
+      "local_head.weight",
+      "modulus_context.0.bias",
+      "modulus_context.2.bias",
+      "modulus_context.2.weight",
+      "quotient_head.bias",
+      "stem.bias",
+      "stem.weight"
+    ],
+    "overlap_tensors": [
+      "position",
+      "modulus_context.0.weight",
+      "global_head.weight",
+      "global_head.bias",
+      "quotient_head.weight"
+    ],
+    "source_sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192"
+  },
+  "challenger": {
+    "arm": {
+      "name": "width16-challenger",
+      "width": 16,
+      "prime_bits_min": 9,
+      "prime_bits_max": 16
+    },
+    "parameters": 85556,
+    "prime_split": {
+      "train": 5190,
+      "validation": 649,
+      "test": 649,
+      "sha256": "8906190d5a46a87606e618a65d8d86c3902d3da4da88543caeb2e32313cab07e"
+    },
+    "training": {
+      "steps": 400,
+      "examples": 204800,
+      "seconds": 53.345792399995844,
+      "peak_rss_bytes": 577507328,
+      "final_100_step_batch_exact_delta": 0.0234375,
+      "history": [
+        {
+          "step": 1,
+          "elapsed_seconds": 0.15420089999679476,
+          "learning_rate": 0.0024999959219366217,
+          "gradient_norm": 3.8405697345733643,
+          "loss": 2.6997854709625244,
+          "mean_bce": 0.7300212383270264,
+          "worst_bit_bce": 3.859593152999878,
+          "quotient_ce": 2.3294737339019775,
+          "batch_exact": 0.271484375
+        },
+        {
+          "step": 50,
+          "elapsed_seconds": 6.801350099995034,
+          "learning_rate": 0.0024898193850348346,
+          "gradient_norm": 0.575817883014679,
+          "loss": 0.42674532532691956,
+          "mean_bce": 0.2252865880727768,
+          "worst_bit_bce": 0.4126010835170746,
+          "quotient_ce": 0.1578826606273651,
+          "batch_exact": 0.626953125
+        },
+        {
+          "step": 100,
+          "elapsed_seconds": 13.149452800003928,
+          "learning_rate": 0.0024594517332839918,
+          "gradient_norm": 2.3922455310821533,
+          "loss": 0.3353042006492615,
+          "mean_bce": 0.15806573629379272,
+          "worst_bit_bce": 0.3717186450958252,
+          "quotient_ce": 0.09965071082115173,
+          "batch_exact": 0.69921875
+        },
+        {
+          "step": 150,
+          "elapsed_seconds": 19.633352599994396,
+          "learning_rate": 0.002409416643688433,
+          "gradient_norm": 1.6133548021316528,
+          "loss": 0.25488850474357605,
+          "mean_bce": 0.1190667599439621,
+          "worst_bit_bce": 0.2906273901462555,
+          "quotient_ce": 0.050394199788570404,
+          "batch_exact": 0.787109375
+        },
+        {
+          "step": 200,
+          "elapsed_seconds": 27.28883190000488,
+          "learning_rate": 0.0023405702305034854,
+          "gradient_norm": 1.9387105703353882,
+          "loss": 0.2177184671163559,
+          "mean_bce": 0.09254954755306244,
+          "worst_bit_bce": 0.26685425639152527,
+          "quotient_ce": 0.0508449412882328,
+          "batch_exact": 0.83984375
+        },
+        {
+          "step": 250,
+          "elapsed_seconds": 33.999198200006504,
+          "learning_rate": 0.002254090474946574,
+          "gradient_norm": 1.5521266460418701,
+          "loss": 0.17926307022571564,
+          "mean_bce": 0.07992052286863327,
+          "worst_bit_bce": 0.2136262059211731,
+          "quotient_ce": 0.03210770711302757,
+          "batch_exact": 0.857421875
+        },
+        {
+          "step": 300,
+          "elapsed_seconds": 41.00261429999955,
+          "learning_rate": 0.002151457069611994,
+          "gradient_norm": 1.129422664642334,
+          "loss": 0.16780659556388855,
+          "mean_bce": 0.08505704998970032,
+          "worst_bit_bce": 0.1771678626537323,
+          "quotient_ce": 0.030240191146731377,
+          "batch_exact": 0.85546875
+        },
+        {
+          "step": 350,
+          "elapsed_seconds": 47.57500369999616,
+          "learning_rate": 0.002034426100520378,
+          "gradient_norm": 3.1706302165985107,
+          "loss": 0.18288244307041168,
+          "mean_bce": 0.08327246457338333,
+          "worst_bit_bce": 0.20986604690551758,
+          "quotient_ce": 0.05170271918177605,
+          "batch_exact": 0.861328125
+        },
+        {
+          "step": 400,
+          "elapsed_seconds": 53.33325120000518,
+          "learning_rate": 0.0019049999999999983,
+          "gradient_norm": 0.957234799861908,
+          "loss": 0.13280527293682098,
+          "mean_bce": 0.06872683763504028,
+          "worst_bit_bce": 0.13649892807006836,
+          "quotient_ce": 0.02653917483985424,
+          "batch_exact": 0.87890625
+        }
+      ]
+    },
+    "controls": {
+      "untrained_transition": {
+        "cases": 2000,
+        "correct": 460,
+        "exact_accuracy": 0.23,
+        "bit_accuracy": 0.75096875,
+        "valid_residue_rate": 0.8985,
+        "by_modulus_bits": {
+          "9": {
+            "correct": 6,
+            "cases": 11,
+            "exact_accuracy": 0.5454545454545454
+          },
+          "10": {
+            "correct": 9,
+            "cases": 18,
+            "exact_accuracy": 0.5
+          },
+          "11": {
+            "correct": 19,
+            "cases": 40,
+            "exact_accuracy": 0.475
+          },
+          "12": {
+            "correct": 32,
+            "cases": 87,
+            "exact_accuracy": 0.367816091954023
+          },
+          "13": {
+            "correct": 48,
+            "cases": 154,
+            "exact_accuracy": 0.3116883116883117
+          },
+          "14": {
+            "correct": 85,
+            "cases": 250,
+            "exact_accuracy": 0.34
+          },
+          "15": {
+            "correct": 106,
+            "cases": 501,
+            "exact_accuracy": 0.21157684630738524
+          },
+          "16": {
+            "correct": 155,
+            "cases": 939,
+            "exact_accuracy": 0.1650692225772098
+          }
+        }
+      },
+      "untrained_rollout": {
+        "cases": 1000,
+        "correct": 1,
+        "exact_accuracy": 0.001,
+        "all_steps_correct": 1,
+        "all_steps_exact_accuracy": 0.001,
+        "any_invalid_residue_rate": 0.663,
+        "first_error_by_step": [
+          34,
+          154,
+          226,
+          194,
+          125,
+          102,
+          56,
+          53,
+          20,
+          19,
+          10,
+          1,
+          1,
+          2,
+          0,
+          2
+        ],
+        "by_modulus_bits": {
+          "9": {
+            "correct": 1,
+            "cases": 8,
+            "exact_accuracy": 0.125
+          },
+          "10": {
+            "correct": 0,
+            "cases": 20,
+            "exact_accuracy": 0.0
+          },
+          "11": {
+            "correct": 0,
+            "cases": 21,
+            "exact_accuracy": 0.0
+          },
+          "12": {
+            "correct": 0,
+            "cases": 43,
+            "exact_accuracy": 0.0
+          },
+          "13": {
+            "correct": 0,
+            "cases": 55,
+            "exact_accuracy": 0.0
+          },
+          "14": {
+            "correct": 0,
+            "cases": 144,
+            "exact_accuracy": 0.0
+          },
+          "15": {
+            "correct": 0,
+            "cases": 224,
+            "exact_accuracy": 0.0
+          },
+          "16": {
+            "correct": 0,
+            "cases": 485,
+            "exact_accuracy": 0.0
+          }
+        }
+      },
+      "control_semantics": "The keys named untrained_* are pre-finetune transferred-model metrics in EXP-105."
+    },
+    "evaluation": {
+      "heldout_transition": {
+        "cases": 10000,
+        "correct": 8725,
+        "exact_accuracy": 0.8725,
+        "bit_accuracy": 0.964125,
+        "valid_residue_rate": 0.9915,
+        "by_modulus_bits": {
+          "9": {
+            "correct": 56,
+            "cases": 61,
+            "exact_accuracy": 0.9180327868852459
+          },
+          "10": {
+            "correct": 116,
+            "cases": 129,
+            "exact_accuracy": 0.8992248062015504
+          },
+          "11": {
+            "correct": 181,
+            "cases": 204,
+            "exact_accuracy": 0.8872549019607843
+          },
+          "12": {
+            "correct": 357,
+            "cases": 390,
+            "exact_accuracy": 0.9153846153846154
+          },
+          "13": {
+            "correct": 651,
+            "cases": 722,
+            "exact_accuracy": 0.9016620498614959
+          },
+          "14": {
+            "correct": 1215,
+            "cases": 1360,
+            "exact_accuracy": 0.8933823529411765
+          },
+          "15": {
+            "correct": 2101,
+            "cases": 2427,
+            "exact_accuracy": 0.865677791512155
+          },
+          "16": {
+            "correct": 4048,
+            "cases": 4707,
+            "exact_accuracy": 0.8599957510091353
+          }
+        }
+      },
+      "heldout_rollout": {
+        "cases": 5000,
+        "correct": 1206,
+        "exact_accuracy": 0.2412,
+        "all_steps_correct": 1205,
+        "all_steps_exact_accuracy": 0.241,
+        "any_invalid_residue_rate": 0.1118,
+        "first_error_by_step": [
+          0,
+          58,
+          262,
+          424,
+          441,
+          421,
+          388,
+          334,
+          310,
+          244,
+          215,
+          190,
+          174,
+          142,
+          102,
+          90
+        ],
+        "by_modulus_bits": {
+          "9": {
+            "correct": 15,
+            "cases": 31,
+            "exact_accuracy": 0.4838709677419355
+          },
+          "10": {
+            "correct": 34,
+            "cases": 89,
+            "exact_accuracy": 0.38202247191011235
+          },
+          "11": {
+            "correct": 36,
+            "cases": 100,
+            "exact_accuracy": 0.36
+          },
+          "12": {
+            "correct": 67,
+            "cases": 210,
+            "exact_accuracy": 0.319047619047619
+          },
+          "13": {
+            "correct": 95,
+            "cases": 340,
+            "exact_accuracy": 0.27941176470588236
+          },
+          "14": {
+            "correct": 182,
+            "cases": 672,
+            "exact_accuracy": 0.2708333333333333
+          },
+          "15": {
+            "correct": 278,
+            "cases": 1192,
+            "exact_accuracy": 0.2332214765100671
+          },
+          "16": {
+            "correct": 499,
+            "cases": 2366,
+            "exact_accuracy": 0.21090448013524937
+          }
+        }
+      }
+    },
+    "checkpoint": {
+      "path": ".scratch\\exp-105-width-transfer-smoke\\width16-transfer\\weights.safetensors",
+      "sha256": "0bf544d958a82ace1b35eda9701389efa6b5f1246b3cbe15672da6c088954974",
+      "bytes": 348128
+    },
+    "limitations": [
+      "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+      "No checked public expected answers were read or evaluated.",
+      "The width bands differ by construction; this tests scaling, not equal task difficulty."
+    ]
+  },
+  "comparison": {
+    "transition_gain": 0.22940000000000005,
+    "rollout_gain": 0.236,
+    "invalid_rate_change": -0.4364,
+    "positive_final_slope": true
+  },
+  "decision": "pass-continue-matched-1200",
+  "resource": {
+    "wall_seconds": 62.64533080000547,
+    "cap_cpu_minutes": 3
+  },
+  "limitations": [
+    "Smoke-scale initialization A/B only; not a candidate result.",
+    "The random baseline is reused from deterministic EXP-100 rather than recomputed.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

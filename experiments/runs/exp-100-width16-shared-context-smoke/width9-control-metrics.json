@@ -1,0 +1,297 @@
+{
+  "arm": {
+    "name": "width9-control",
+    "width": 9,
+    "prime_bits_min": 4,
+    "prime_bits_max": 8
+  },
+  "parameters": 75469,
+  "prime_split": {
+    "train": 39,
+    "validation": 5,
+    "test": 6,
+    "sha256": "41dce3a899a1f4820f229f3fce8a759ca610ffa159396d001409bc4479cfc40f"
+  },
+  "training": {
+    "steps": 400,
+    "examples": 204800,
+    "seconds": 32.28302909999911,
+    "peak_rss_bytes": 531812352,
+    "final_100_step_batch_exact_delta": 0.06640625,
+    "history": [
+      {
+        "step": 1,
+        "elapsed_seconds": 0.09390320000238717,
+        "learning_rate": 0.0024999959219366217,
+        "gradient_norm": 2.2043275833129883,
+        "loss": 1.1608434915542603,
+        "mean_bce": 0.6595234870910645,
+        "worst_bit_bce": 0.8236294388771057,
+        "quotient_ce": 1.3068674802780151,
+        "batch_exact": 0.083984375
+      },
+      {
+        "step": 50,
+        "elapsed_seconds": 3.6511132000014186,
+        "learning_rate": 0.0024898193850348346,
+        "gradient_norm": 0.3681749999523163,
+        "loss": 0.48431503772735596,
+        "mean_bce": 0.2676747739315033,
+        "worst_bit_bce": 0.41918766498565674,
+        "quotient_ce": 0.28005847334861755,
+        "batch_exact": 0.61328125
+      },
+      {
+        "step": 100,
+        "elapsed_seconds": 7.705334199999925,
+        "learning_rate": 0.0024594517332839918,
+        "gradient_norm": 0.4863971173763275,
+        "loss": 0.42086195945739746,
+        "mean_bce": 0.23514291644096375,
+        "worst_bit_bce": 0.3754311501979828,
+        "quotient_ce": 0.16775019466876984,
+        "batch_exact": 0.603515625
+      },
+      {
+        "step": 150,
+        "elapsed_seconds": 11.899439899993013,
+        "learning_rate": 0.002409416643688433,
+        "gradient_norm": 0.36756768822669983,
+        "loss": 0.296207994222641,
+        "mean_bce": 0.15761345624923706,
+        "worst_bit_bce": 0.28755536675453186,
+        "quotient_ce": 0.0919463038444519,
+        "batch_exact": 0.73828125
+      },
+      {
+        "step": 200,
+        "elapsed_seconds": 15.807380199999898,
+        "learning_rate": 0.0023405702305034854,
+        "gradient_norm": 0.6531344652175903,
+        "loss": 0.23215216398239136,
+        "mean_bce": 0.11844643205404282,
+        "worst_bit_bce": 0.23476287722587585,
+        "quotient_ce": 0.08062432706356049,
+        "batch_exact": 0.77734375
+      },
+      {
+        "step": 250,
+        "elapsed_seconds": 20.346301700003096,
+        "learning_rate": 0.002254090474946574,
+        "gradient_norm": 0.42958468198776245,
+        "loss": 0.18298682570457458,
+        "mean_bce": 0.09050021320581436,
+        "worst_bit_bce": 0.19353020191192627,
+        "quotient_ce": 0.05398040637373924,
+        "batch_exact": 0.837890625
+      },
+      {
+        "step": 300,
+        "elapsed_seconds": 24.14053769999009,
+        "learning_rate": 0.002151457069611994,
+        "gradient_norm": 0.7531769275665283,
+        "loss": 0.18561333417892456,
+        "mean_bce": 0.08885162323713303,
+        "worst_bit_bce": 0.20407281816005707,
+        "quotient_ce": 0.04928944632411003,
+        "batch_exact": 0.85546875
+      },
+      {
+        "step": 350,
+        "elapsed_seconds": 28.240705599993817,
+        "learning_rate": 0.002034426100520378,
+        "gradient_norm": 0.8816952109336853,
+        "loss": 0.13753430545330048,
+        "mean_bce": 0.057290978729724884,
+        "worst_bit_bce": 0.174172043800354,
+        "quotient_ce": 0.018659016117453575,
+        "batch_exact": 0.88671875
+      },
+      {
+        "step": 400,
+        "elapsed_seconds": 32.269210700003896,
+        "learning_rate": 0.0019049999999999983,
+        "gradient_norm": 1.0711232423782349,
+        "loss": 0.09619760513305664,
+        "mean_bce": 0.041860200464725494,
+        "worst_bit_bce": 0.11678947508335114,
+        "quotient_ce": 0.01782139576971531,
+        "batch_exact": 0.921875
+      }
+    ]
+  },
+  "controls": {
+    "untrained_transition": {
+      "cases": 2000,
+      "correct": 248,
+      "exact_accuracy": 0.124,
+      "bit_accuracy": 0.6747222222222222,
+      "valid_residue_rate": 0.585,
+      "by_modulus_bits": {
+        "4": {
+          "correct": 60,
+          "cases": 344,
+          "exact_accuracy": 0.1744186046511628
+        },
+        "5": {
+          "correct": 146,
+          "cases": 335,
+          "exact_accuracy": 0.43582089552238806
+        },
+        "6": {
+          "correct": 4,
+          "cases": 375,
+          "exact_accuracy": 0.010666666666666666
+        },
+        "7": {
+          "correct": 25,
+          "cases": 294,
+          "exact_accuracy": 0.08503401360544217
+        },
+        "8": {
+          "correct": 13,
+          "cases": 652,
+          "exact_accuracy": 0.019938650306748466
+        }
+      }
+    },
+    "untrained_rollout": {
+      "cases": 1000,
+      "correct": 39,
+      "exact_accuracy": 0.039,
+      "all_steps_correct": 13,
+      "all_steps_exact_accuracy": 0.013,
+      "any_invalid_residue_rate": 0.755,
+      "first_error_by_step": [
+        761,
+        10,
+        25,
+        27,
+        14,
+        74,
+        53,
+        15,
+        8
+      ],
+      "by_modulus_bits": {
+        "4": {
+          "correct": 18,
+          "cases": 166,
+          "exact_accuracy": 0.10843373493975904
+        },
+        "5": {
+          "correct": 14,
+          "cases": 175,
+          "exact_accuracy": 0.08
+        },
+        "6": {
+          "correct": 1,
+          "cases": 150,
+          "exact_accuracy": 0.006666666666666667
+        },
+        "7": {
+          "correct": 3,
+          "cases": 176,
+          "exact_accuracy": 0.017045454545454544
+        },
+        "8": {
+          "correct": 3,
+          "cases": 333,
+          "exact_accuracy": 0.009009009009009009
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "heldout_transition": {
+      "cases": 10000,
+      "correct": 9177,
+      "exact_accuracy": 0.9177,
+      "bit_accuracy": 0.9804333333333334,
+      "valid_residue_rate": 0.9874,
+      "by_modulus_bits": {
+        "4": {
+          "correct": 1659,
+          "cases": 1712,
+          "exact_accuracy": 0.9690420560747663
+        },
+        "5": {
+          "correct": 1648,
+          "cases": 1747,
+          "exact_accuracy": 0.9433314253005152
+        },
+        "6": {
+          "correct": 1565,
+          "cases": 1677,
+          "exact_accuracy": 0.9332140727489565
+        },
+        "7": {
+          "correct": 1439,
+          "cases": 1591,
+          "exact_accuracy": 0.9044626021370208
+        },
+        "8": {
+          "correct": 2866,
+          "cases": 3273,
+          "exact_accuracy": 0.8756492514512679
+        }
+      }
+    },
+    "heldout_rollout": {
+      "cases": 5000,
+      "correct": 2840,
+      "exact_accuracy": 0.568,
+      "all_steps_correct": 2834,
+      "all_steps_exact_accuracy": 0.5668,
+      "any_invalid_residue_rate": 0.0722,
+      "first_error_by_step": [
+        0,
+        0,
+        69,
+        207,
+        342,
+        345,
+        400,
+        414,
+        389
+      ],
+      "by_modulus_bits": {
+        "4": {
+          "correct": 709,
+          "cases": 816,
+          "exact_accuracy": 0.8688725490196079
+        },
+        "5": {
+          "correct": 604,
+          "cases": 850,
+          "exact_accuracy": 0.7105882352941176
+        },
+        "6": {
+          "correct": 522,
+          "cases": 827,
+          "exact_accuracy": 0.6311970979443773
+        },
+        "7": {
+          "correct": 402,
+          "cases": 852,
+          "exact_accuracy": 0.47183098591549294
+        },
+        "8": {
+          "correct": 603,
+          "cases": 1655,
+          "exact_accuracy": 0.36435045317220544
+        }
+      }
+    }
+  },
+  "checkpoint": {
+    "path": ".scratch\\exp-100-width16-shared-context-smoke\\width9-control\\weights.safetensors",
+    "sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192",
+    "bytes": 307772
+  },
+  "limitations": [
+    "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+    "No checked public expected answers were read or evaluated.",
+    "The width bands differ by construction; this tests scaling, not equal task difficulty."
+  ]
+}

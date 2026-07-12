@@ -1,0 +1,49 @@
+run_id: exp-100-width16-shared-context-smoke
+hypothesis: shared bit-conditioned Horner transitions remain learnable at width 16
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic
+  backend: .scratch/mlflow/mlflow.db
+  artifact_root: .scratch/mlflow/artifacts
+comparison:
+  arms:
+    - name: width9-control
+      width: 9
+      prime_bits_min: 4
+      prime_bits_max: 8
+    - name: width16-challenger
+      width: 16
+      prime_bits_min: 9
+      prime_bits_max: 16
+model:
+  hidden: 48
+  blocks: 7
+  shared_modulus_context: true
+training:
+  steps: 400
+  batch_size: 512
+  learning_rate: 0.0025
+  minimum_learning_rate: 0.00012
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  random_state_fraction: 0.15
+  composite_fraction: 0.15
+  torch_threads: 4
+evaluation:
+  heldout_transition_cases: 10000
+  rollout_cases: 5000
+  prime_split: [0.8, 0.1, 0.1]
+gates:
+  width9_valid_transition: 0.60
+  width9_valid_rollout: 0.10
+  width16_strong_transition: 0.90
+  width16_strong_rollout: 0.25
+  width16_continue_transition: 0.35
+  width16_continue_rollout: 0.01
+  width16_falsify_transition: 0.20
+  width16_falsify_rollout: 0.005
+resource_cap:
+  aggregate_cpu_minutes: 5
+  continuation_steps: 1200

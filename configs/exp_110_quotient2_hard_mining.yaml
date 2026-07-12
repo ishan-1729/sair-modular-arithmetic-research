@@ -1,0 +1,32 @@
+run_id: exp-110-quotient2-hard-mining
+hypothesis: quotient-2 and boundary hard mining closes the dominant width-16 transition error mode
+seed: 20260712
+base_config: configs/exp_100_width16_shared_context_smoke.yaml
+transfer_checkpoint: .scratch/exp-100-width16-shared-context-smoke/width9-control/weights.safetensors
+transfer_checkpoint_sha256: 6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192
+baseline:
+  run_id: exp-106-width-transfer-1200
+  mlflow_run_id: 27ceefcd6d6649aea9130226de831fcb
+  checkpoint_sha256: e22363be39f57d81ab827ed232f6ee7f27a6f49e54cc2be2e40c3e1536cef6a4
+  transition_accuracy: 0.94335
+  rollout_accuracy: 0.4707
+  invalid_rollout_rate: 0.029
+training:
+  steps: 1200
+  candidate_pool_factor: 4
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+evaluation:
+  heldout_transition_cases: 20000
+  rollout_cases: 10000
+gates:
+  minimum_transition_gain: 0.02
+  minimum_rollout_gain: 0.10
+  maximum_invalid_rate_change: 0.0
+  full_budget_transition: 0.97
+  full_budget_rollout: 0.60
+  independent_gate_rollout: 0.90
+resource_cap:
+  cpu_minutes: 6
+  next_full_steps: 2400

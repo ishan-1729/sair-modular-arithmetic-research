@@ -1,0 +1,228 @@
+{
+  "trajectory": {
+    "cases": 50000,
+    "correct": 47257,
+    "exact_accuracy": 0.94514,
+    "invalid_rate": 0.00138,
+    "categories": {
+      "bit:0": {
+        "correct": 27753,
+        "cases": 27753,
+        "accuracy": 1.0
+      },
+      "bit:1": {
+        "correct": 19504,
+        "cases": 22247,
+        "accuracy": 0.8767024767384366
+      },
+      "pbits:10": {
+        "correct": 627,
+        "cases": 643,
+        "accuracy": 0.9751166407465007
+      },
+      "pbits:11": {
+        "correct": 1050,
+        "cases": 1071,
+        "accuracy": 0.9803921568627451
+      },
+      "pbits:12": {
+        "correct": 1915,
+        "cases": 1980,
+        "accuracy": 0.9671717171717171
+      },
+      "pbits:13": {
+        "correct": 3466,
+        "cases": 3626,
+        "accuracy": 0.9558742415885273
+      },
+      "pbits:14": {
+        "correct": 6380,
+        "cases": 6655,
+        "accuracy": 0.9586776859504132
+      },
+      "pbits:15": {
+        "correct": 11585,
+        "cases": 12235,
+        "accuracy": 0.9468737229260319
+      },
+      "pbits:16": {
+        "correct": 21957,
+        "cases": 23509,
+        "accuracy": 0.9339827300182909
+      },
+      "pbits:9": {
+        "correct": 277,
+        "cases": 281,
+        "accuracy": 0.9857651245551602
+      },
+      "quotient:0": {
+        "correct": 25859,
+        "cases": 25923,
+        "accuracy": 0.9975311499440651
+      },
+      "quotient:1": {
+        "correct": 18918,
+        "cases": 19126,
+        "accuracy": 0.9891247516469727
+      },
+      "quotient:2": {
+        "correct": 2480,
+        "cases": 4951,
+        "accuracy": 0.5009089072914563
+      },
+      "reduction_margin_bin:0": {
+        "correct": 589,
+        "cases": 722,
+        "accuracy": 0.8157894736842105
+      },
+      "reduction_margin_bin:1": {
+        "correct": 2482,
+        "cases": 2764,
+        "accuracy": 0.8979739507959479
+      },
+      "reduction_margin_bin:2": {
+        "correct": 9640,
+        "cases": 10274,
+        "accuracy": 0.9382908312244501
+      },
+      "reduction_margin_bin:3": {
+        "correct": 34546,
+        "cases": 36240,
+        "accuracy": 0.9532560706401766
+      },
+      "target_edge_bin:0": {
+        "correct": 8562,
+        "cases": 8700,
+        "accuracy": 0.9841379310344828
+      },
+      "target_edge_bin:1": {
+        "correct": 3059,
+        "cases": 3364,
+        "accuracy": 0.9093341260404281
+      },
+      "target_edge_bin:2": {
+        "correct": 12104,
+        "cases": 12882,
+        "accuracy": 0.9396056512963825
+      },
+      "target_edge_bin:3": {
+        "correct": 23532,
+        "cases": 25054,
+        "accuracy": 0.9392512173704798
+      }
+    }
+  },
+  "random_state": {
+    "cases": 50000,
+    "correct": 46703,
+    "exact_accuracy": 0.93406,
+    "invalid_rate": 0.00214,
+    "categories": {
+      "bit:0": {
+        "correct": 25173,
+        "cases": 25175,
+        "accuracy": 0.9999205561072493
+      },
+      "bit:1": {
+        "correct": 21530,
+        "cases": 24825,
+        "accuracy": 0.8672708962739174
+      },
+      "pbits:10": {
+        "correct": 567,
+        "cases": 599,
+        "accuracy": 0.9465776293823038
+      },
+      "pbits:11": {
+        "correct": 1002,
+        "cases": 1040,
+        "accuracy": 0.9634615384615385
+      },
+      "pbits:12": {
+        "correct": 1889,
+        "cases": 2000,
+        "accuracy": 0.9445
+      },
+      "pbits:13": {
+        "correct": 3375,
+        "cases": 3580,
+        "accuracy": 0.9427374301675978
+      },
+      "pbits:14": {
+        "correct": 6235,
+        "cases": 6618,
+        "accuracy": 0.9421275309761257
+      },
+      "pbits:15": {
+        "correct": 11540,
+        "cases": 12317,
+        "accuracy": 0.9369164569294471
+      },
+      "pbits:16": {
+        "correct": 21842,
+        "cases": 23583,
+        "accuracy": 0.9261756349913073
+      },
+      "pbits:9": {
+        "correct": 253,
+        "cases": 263,
+        "accuracy": 0.9619771863117871
+      },
+      "quotient:0": {
+        "correct": 18794,
+        "cases": 18869,
+        "accuracy": 0.9960252265620859
+      },
+      "quotient:1": {
+        "correct": 24750,
+        "cases": 25000,
+        "accuracy": 0.99
+      },
+      "quotient:2": {
+        "correct": 3159,
+        "cases": 6131,
+        "accuracy": 0.5152503669874409
+      },
+      "reduction_margin_bin:0": {
+        "correct": 666,
+        "cases": 850,
+        "accuracy": 0.7835294117647059
+      },
+      "reduction_margin_bin:1": {
+        "correct": 3138,
+        "cases": 3485,
+        "accuracy": 0.9004304160688665
+      },
+      "reduction_margin_bin:2": {
+        "correct": 11809,
+        "cases": 12605,
+        "accuracy": 0.9368504561681872
+      },
+      "reduction_margin_bin:3": {
+        "correct": 31090,
+        "cases": 33060,
+        "accuracy": 0.9404113732607381
+      },
+      "target_edge_bin:0": {
+        "correct": 791,
+        "cases": 977,
+        "accuracy": 0.8096212896622313
+      },
+      "target_edge_bin:1": {
+        "correct": 3697,
+        "cases": 4046,
+        "accuracy": 0.9137419673751853
+      },
+      "target_edge_bin:2": {
+        "correct": 14019,
+        "cases": 14891,
+        "accuracy": 0.9414411389429856
+      },
+      "target_edge_bin:3": {
+        "correct": 28196,
+        "cases": 30086,
+        "accuracy": 0.9371800837598884
+      }
+    }
+  }
+}

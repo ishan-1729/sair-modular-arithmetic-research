@@ -1,0 +1,51 @@
+{
+  "run_id": "exp-110-quotient2-hard-mining",
+  "created_at": "2026-07-11T20:48:00Z",
+  "checkpoint_sha256": "98e5e008a556e2a3b0d7b75aedb7727e011d8852c90d6cb6345b6b861a7fbdd7",
+  "evaluation": {
+    "transition": {
+      "width16_hard_mined_heldout_primes": {
+        "cases": 20000,
+        "correct": 19819,
+        "exact_accuracy": 0.99095,
+        "bit_accuracy": 0.99908125
+      }
+    },
+    "rollout": {
+      "width16_hard_mined_heldout_primes": {
+        "cases": 10000,
+        "correct": 8741,
+        "exact_accuracy": 0.8741
+      }
+    }
+  },
+  "controls": {
+    "matched_uniform_transition_accuracy": 0.94335,
+    "matched_uniform_rollout_accuracy": 0.4707,
+    "matched_uniform_invalid_rollout_rate": 0.029,
+    "hard_mined_valid_residue_rate": 0.99945,
+    "hard_mined_invalid_rollout_rate": 0.0072,
+    "transition_gain": 0.0476,
+    "rollout_gain": 0.4034,
+    "invalid_rate_change": -0.0218,
+    "selected_quotient2_fraction": 0.3618522135416667,
+    "selected_boundary_fraction": 0.19701171875
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 161.24738640000578,
+    "training_seconds": 146.89447759999894,
+    "network_training_examples": 614400,
+    "offline_candidate_examples": 2457600,
+    "peak_rss_bytes": 554242048,
+    "parameters": 85556
+  },
+  "decision": "advance-hard-mining-to-2400",
+  "limitations": [
+    "Heldout-prime curriculum A/B; no official tier score was produced.",
+    "The intervention uses a 4x offline candidate-generation pool.",
+    "Rollout remains below the preregistered independent-seed gate.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

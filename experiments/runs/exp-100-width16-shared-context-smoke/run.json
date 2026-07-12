@@ -1,0 +1,41 @@
+{
+  "run_id": "exp-100-width16-shared-context-smoke",
+  "status": "completed",
+  "created_at": "2026-07-11T20:18:00Z",
+  "hypothesis": "A shared bit-conditioned Horner TCN can learn 16-bit transitions well enough to justify a full Tier-3 training run.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "model_sha256": "182614346a5ea9f5ab207395a351af0ac96a11ff56a0cd87ed6ea3550fb96c6e",
+    "runner_sha256": "25e2b8e1a888d31bbcb85bcbd030839595bdb3fe4af23bdc5036a234c1d1cf5d",
+    "config_sha256": "52d2c45b1accce10302522bdf289ee4367f071f456932f1cf1092cab5c6c255c"
+  },
+  "config": "configs/exp_100_width16_shared_context_smoke.yaml",
+  "environment": "experiments/runs/exp-100-width16-shared-context-smoke/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "parent_run_id": "5a831506933a41e1803bcffa79c6a24c",
+    "arm_run_ids": {
+      "width9-control": "7b3639d380e1458a944195129eefdd01",
+      "width16-challenger": "f065353fb10f435da8867936d8327cf4"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-100-width16-shared-context-smoke/width16-challenger/weights.safetensors",
+    "checkpoint_sha256": "556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0",
+    "metrics": "evals/results/exp-100-width16-shared-context-smoke/metrics.json",
+    "raw_summary": "experiments/runs/exp-100-width16-shared-context-smoke/raw-summary.json",
+    "width9_metrics": "experiments/runs/exp-100-width16-shared-context-smoke/width9-control-metrics.json",
+    "width16_metrics": "experiments/runs/exp-100-width16-shared-context-smoke/width16-challenger-metrics.json"
+  },
+  "decision": "inconclusive-revise",
+  "notes": [
+    "The matched width-9 control passed the preregistered validity gate.",
+    "Width 16 learned substantially above its untrained control but missed the continuation rollout gate by 0.48 percentage points.",
+    "No checked public expected answers were read or evaluated.",
+    "The next test isolates learned width-transfer initialization rather than granting an unearned continuation."
+  ]
+}

@@ -17,6 +17,7 @@ This bundle is the human- and agent-readable control plane for the project. It f
 - [Submission candidates](submissions/) — promoted official-interface artifacts and release state.
 - [Decisions](decisions/) — architectural decision records.
 - [Runbooks](runbooks/) — exact reproduction and release procedures.
+- [Autoresearch](autoresearch/) — persistent Principal ML experiment, tracking, and promotion contract.
 - [Bundle log](log.md) — chronological knowledge updates.
 
 ## Scope boundary

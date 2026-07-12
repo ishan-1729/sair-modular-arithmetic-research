@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-112-independent-tier3-five-seed",
+  "status": "completed",
+  "created_at": "2026-07-12T02:26:00Z",
+  "hypothesis": "The frozen EXP-111 checkpoint generalizes to unseen official-generator Tier 3 test sets.",
+  "seed": 20260712,
+  "config": "configs/exp_112_independent_tier3.yaml",
+  "environment": "experiments/runs/exp-112-independent-tier3-five-seed/environment.json",
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checked_public_used": false
+  },
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "run_id": "ca531d66bb0b4d03a60de2550d9ec67d"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors",
+    "checkpoint_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94",
+    "metrics": "evals/results/exp-112-independent-tier3-five-seed/metrics.json",
+    "raw_summary": "experiments/runs/exp-112-independent-tier3-five-seed/raw-summary.json"
+  },
+  "decision": "promote-to-submission-integration",
+  "notes": [
+    "The frozen model scored 499/500 over five official-generator Tier-3 seeds.",
+    "Every seed passed; the minimum seed accuracy was 99%.",
+    "Checked public Tier-3 answers remained untouched during model selection."
+  ]
+}

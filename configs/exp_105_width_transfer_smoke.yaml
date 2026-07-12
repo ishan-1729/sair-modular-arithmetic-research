@@ -1,0 +1,24 @@
+run_id: exp-105-width-transfer-smoke
+hypothesis: learned width-9 transition features accelerate width-16 learning
+seed: 20260712
+baseline:
+  run_id: exp-100-width16-shared-context-smoke
+  mlflow_run_id: f065353fb10f435da8867936d8327cf4
+  checkpoint_sha256: 556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0
+  transition_accuracy: 0.6431
+  rollout_accuracy: 0.0052
+  invalid_rollout_rate: 0.5482
+transfer_source:
+  run_id: exp-100-width16-shared-context-smoke
+  arm: width9-control
+  checkpoint: .scratch/exp-100-width16-shared-context-smoke/width9-control/weights.safetensors
+  checkpoint_sha256: 6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192
+matched_training_config: configs/exp_100_width16_shared_context_smoke.yaml
+gates:
+  minimum_transition_gain: 0.05
+  minimum_rollout_accuracy: 0.01
+  maximum_invalid_rollout_rate: 0.5482
+  require_positive_final_slope: true
+resource_cap:
+  cpu_minutes: 3
+  next_steps_if_passed: 1200

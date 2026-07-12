@@ -1,0 +1,44 @@
+{
+  "run_id": "candidate-002-tier3-hybrid",
+  "status": "completed",
+  "created_at": "2026-07-12T02:28:00Z",
+  "hypothesis": "The promoted hybrid advances the exact-accuracy boundary through Tier 3 without regressing Tier 1 or Tier 2.",
+  "seed": 20260712,
+  "config": "configs/exp_112_independent_tier3.yaml",
+  "environment": "experiments/runs/candidate-002-tier3-hybrid/environment.json",
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "run_id": "886b045e4d71465aaf60aea1aa909f58",
+    "registered_model": "sair-modular-arithmetic-candidate",
+    "model_version": "2",
+    "aliases": ["incumbent", "validated"]
+  },
+  "artifacts": {
+    "checkpoint": "submission/weights.safetensors",
+    "checkpoint_sha256": "69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157",
+    "metrics": "evals/results/candidate-002-tier3-hybrid/metrics.json",
+    "independent_full": "experiments/runs/candidate-002-tier3-hybrid/independent-full.json",
+    "checked_full": "experiments/runs/candidate-002-tier3-hybrid/checked-full.json",
+    "pinned_runtime_full": "experiments/runs/candidate-002-tier3-hybrid/pinned-runtime-full.json",
+    "randomized_control": "experiments/runs/candidate-002-tier3-hybrid/randomized-control.json",
+    "sandbox_public": "experiments/runs/candidate-002-tier3-hybrid/sandbox-public.json",
+    "sandbox_independent_full": "experiments/runs/candidate-002-tier3-hybrid/sandbox-independent-full.json",
+    "sandbox_run": "experiments/runs/candidate-002-tier3-hybrid/sandbox-run.json",
+    "sandbox_ubuntu_run": "experiments/runs/candidate-002-tier3-hybrid/sandbox-ubuntu-run.json"
+  },
+  "decision": "promote",
+  "notes": [
+    "The full independent 1,100-case official evaluation passed highest tier 3 at 99%.",
+    "The checked full benchmark was consulted only after the frozen independent promotion gate.",
+    "Python 3.12.11, PyTorch 2.5.1+cpu, and safetensors 0.4.5 reproduced the independent full score exactly.",
+    "The pinned official container also reproduced the independent full score under the documented Podman isolation contract.",
+    "Randomized learned weights collapse Tier 3 from 100% to 2%.",
+    "The unmodified pinned official image passed through native rootless Podman 4.9.3 on Ubuntu 24.04 WSL2 with network disabled, a read-only root and submission mount, four CPUs, 8 GiB memory, and the 300-second timeout."
+  ]
+}

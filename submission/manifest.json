@@ -2,6 +2,6 @@
   "entry_class": "model.Tier2HornerModel",
   "output_base": "p",
   "framework": "pytorch",
-  "model_description": "85,021-parameter width-9 non-causal dilated residual TCN. The model scans the bits of a sanctioned pairwise-reduced operand through a hard recurrent state and emits one base-p digit. It uses eight learned transitions for p<256, nine for p=257, and a deterministic zero fallback outside its trained width.",
-  "training_description": "Trained from random initialization for 2,400 AdamW steps on independently generated synthetic Horner trajectory transitions over every prime through 257, with 15% composite-modulus augmentation and 15% random-state recovery examples. Official public expected answers were never used; Tier-2 public reduced operand pairs were explicitly excluded from training sampling. Seed 20260712."
+  "model_description": "Learned Horner ensemble with an 85,021-parameter width-9 Tier-2 TCN and an 85,556-parameter shared-context width-16 Tier-3 TCN. Each scans a sanctioned pairwise-reduced operand through a learned hard recurrent state and emits one base-p digit. Inputs above the learned width receive a deterministic zero fallback.",
+  "training_description": "The Tier-2 model was trained for 2,400 AdamW steps on synthetic Horner transitions through modulus 257. The Tier-3 model was initialized by learned width transfer and trained for 2,400 steps with quotient-2 and reduction-boundary hard mining. It passed a frozen five-seed official-generator Tier-3 gate at 499/500 exact. Checked public Tier-3 answers were not used for training or model selection. Seed 20260712."
 }

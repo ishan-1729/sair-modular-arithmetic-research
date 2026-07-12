@@ -1,0 +1,24 @@
+run_id: exp-111-quotient2-hard-mining-2400
+hypothesis: full-budget transferred hard mining crosses 90 percent width-16 heldout rollout
+seed: 20260712
+base_config: configs/exp_100_width16_shared_context_smoke.yaml
+transfer_checkpoint: .scratch/exp-100-width16-shared-context-smoke/width9-control/weights.safetensors
+transfer_checkpoint_sha256: 6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192
+hard_mining:
+  candidate_pool_factor: 4
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+training:
+  steps: 2400
+  schedule_steps: 2400
+evaluation:
+  heldout_transition_cases: 50000
+  rollout_cases: 20000
+gates:
+  minimum_transition_accuracy: 0.995
+  minimum_rollout_accuracy: 0.90
+  maximum_invalid_rollout_rate: 0.01
+resource_cap:
+  cpu_minutes: 10
+  independent_seeds_if_passed: 5
