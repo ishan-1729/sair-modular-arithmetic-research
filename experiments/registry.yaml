@@ -174,3 +174,10 @@ runs:
     run_record: experiments/runs/exp-310-chunk-shared-recurrent-reduction/run.json
     metrics: evals/results/exp-310-chunk-shared-recurrent-reduction/metrics.json
     checkpoint: .scratch/exp-310-chunk-shared-recurrent/cellular-control/weights.safetensors
+  - run_id: exp-311-cellular-expanded-width-curriculum
+    status: failed
+    approach: expanded-width-cellular-curriculum
+    config: configs/exp_311_cellular_expanded_width_curriculum.yaml
+    run_record: experiments/runs/exp-311-cellular-expanded-width-curriculum/run.json
+    metrics: null
+    checkpoint: null

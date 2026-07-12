@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-311-cellular-expanded-width-curriculum
+  run_id: exp-312-cellular-expanded-width-retry
   statement: Extending the successful mixed-width cellular curriculum through width 24 improves width-32 length transfer while retaining width-16 rollout.
   promotion_gate: Retain 25 percent width-16 rollout, reach 90/10 percent width-24 transition/rollout, and gain ten width-32 transition points with at least one percent rollout.
   status: preregistered
-next_action: Run the expanded-width cellular curriculum; retain Candidate 002 and do not alter submission.
+next_action: Rerun identical expanded-width training with checkpoint-before-evaluation and reduced evaluation counts; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
