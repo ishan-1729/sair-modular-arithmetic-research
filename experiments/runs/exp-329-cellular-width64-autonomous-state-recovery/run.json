@@ -1,0 +1,37 @@
+{
+  "run_id": "exp-329-cellular-width64-autonomous-state-recovery",
+  "status": "completed",
+  "created_at": "2026-07-12T08:40:00Z",
+  "hypothesis": "Learner-induced state recovery updates improve exact width-64 rollout beyond matched teacher-forced continuation.",
+  "seed": 20260716,
+  "source": {
+    "repository_commit": "824b42dd3eebd8604eaf389e5b384ffbe11848af",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "a921ee8702dd274ccc8bad3f0135615d52acff17a620188bd43feff1cd81db96",
+    "config_sha256": "adb6cb3e3451d0e668f37945b51854d7971a632a604352cbb88e4ca60942fa51",
+    "dataset_sha256": "3adb632c77f230a52566ad83d090379db7b53b5385e33a9cc72da19ffe223324"
+  },
+  "config": "configs/exp_329_cellular_width64_autonomous_state_recovery.yaml",
+  "environment": "experiments/runs/exp-329-cellular-width64-autonomous-state-recovery/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "62594c2f0ae74e2fa9a97854739c4a9c",
+    "control_run_id": "7f0e46c2d76e4ad491998dc530af54bf",
+    "challenger_run_id": "417187f0ff324159853a7ee80aee692b"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors",
+    "checkpoint_sha256": "050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7",
+    "control_checkpoint_sha256": "b741fdcb4b55446ad5f2aadf0f5b0bf15b184679ed782474d6481d124fcd8560",
+    "metrics": "evals/results/exp-329-cellular-width64-autonomous-state-recovery/metrics.json",
+    "summary_sha256": "1aa4ea368a9a39baa4acf7ebf0acda8d7990273d03a62a750834290aacf9c304"
+  },
+  "decision": "reject-cellular-autonomous-state-recovery",
+  "notes": [
+    "The challenger passes every absolute accuracy, retention, transition, and invalid-state gate.",
+    "Its 1.133-point paired rollout gain misses the frozen 1.5-point causal gate.",
+    "No independent Tier-5 evaluation is authorized from this missed gate."
+  ]
+}

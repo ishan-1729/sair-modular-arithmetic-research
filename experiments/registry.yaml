@@ -279,3 +279,10 @@ runs:
     run_record: experiments/runs/exp-328-cellular-width64-logit-ensemble-retry/run.json
     metrics: evals/results/exp-328-cellular-width64-logit-ensemble-retry/metrics.json
     checkpoint: .scratch/exp-328-cellular-width64-logit-ensemble-retry/weights.safetensors
+  - run_id: exp-329-cellular-width64-autonomous-state-recovery
+    status: completed
+    approach: matched-cellular-autonomous-state-recovery
+    config: configs/exp_329_cellular_width64_autonomous_state_recovery.yaml
+    run_record: experiments/runs/exp-329-cellular-width64-autonomous-state-recovery/run.json
+    metrics: evals/results/exp-329-cellular-width64-autonomous-state-recovery/metrics.json
+    checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors

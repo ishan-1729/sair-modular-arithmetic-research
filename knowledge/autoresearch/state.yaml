@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-329-cellular-width64-autonomous-state-recovery
-  statement: Training on learner-induced rollout states improves exact width-64 recovery beyond one-step teacher-forced continuation.
-  promotion_gate: Reach 99.8/93 percent width-64 transition/rollout, gain 1.5 points over matched control, and retain width 56 under a calibrated dynamic budget.
-  status: preregistered
-next_action: Run the matched full-fidelity Tier-5 autonomous-state-recovery experiment; retain Candidate 003 as incumbent.
+  run_id: exp-400-graph-message-passing-smoke
+  statement: Typed recurrent message passing over bit positions improves width transfer and exact rollout beyond a parameter-matched local cellular control.
+  promotion_gate: Complete primary-source graph research, then preregister matched GCN, GAT, and general message-passing smoke gates.
+  status: planned
+next_action: Use the repository Playwright workflow for graph-algorithmic-reasoning research and design the matched graph architecture track; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -50,3 +50,4 @@ risks:
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
+  - The strongest Tier-5 selection checkpoint reaches 94.267 percent but missed its preregistered causal gain gate and is not independently validated.
