@@ -2,7 +2,7 @@
 type: Mechanistic Analysis
 title: EXP-520 Tier-5 Recovery Delta Localization
 description: Static tensor-delta audit and causal patching groups for the EXP-329 control/challenger pair.
-status: preregistered-follow-up
+status: completed
 tags: [autoresearch, mechanistic, causal-patching, Tier-5, cellular]
 timestamp: "2026-07-12T23:00:00+05:30"
 ---
@@ -24,3 +24,7 @@ Quotient-head output is ignored by residue decoding and autonomous rollout, so t
 - endpoints: unchanged control and full challenger.
 
 EXP-520 transplants exact challenger tensors into the control for each group, saves every hybrid before evaluation, and evaluates every arm on identical fresh width-64 cases. This is a causal weight intervention: if a subset exceeds the full challenger, omitted recovery updates were countervailing; if only the full checkpoint wins, the mechanism is distributed. Exact trained tensors remain the source of predictions, and no symbolic arithmetic is added to inference.
+
+## Causal result
+
+The quotient negative control is exactly identical, validating the intervention. Gate and candidate patches independently reach 95.8% rollout; their recurrent-core union reaches 96.2%; full challenger reaches 96.4%. Input/state and readout alone reach only 94.6% and 94.2%. Thus the effect is distributed across both recurrent subcomputations, with a smaller complementary contribution outside the core. This supports the full checkpoint, not a localized transplant, as the next frozen object to confirm.

@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-520-tier5-recovery-delta-patching
-  statement: A localized subset of the recovery-trained parameter delta causally provides Tier-5 rollout gain without the full checkpoint's countervailing changes.
-  promotion_gate: Require 99.8/94 percent transition/rollout, +1 point over the full challenger, low invalidity, and paired McNemar p <= 0.10.
-  status: preregistered
-next_action: Run the dynamically budgeted eight-arm EXP-520 causal patching comparison; retain Candidate 003 as incumbent.
+  run_id: exp-521-tier5-recovery-independent-five-seed
+  statement: The unchanged full recovery checkpoint has robust Tier-5 exact rollout across untouched official-generator seeds.
+  promotion_gate: Require every one of five untouched Tier-5 seeds >= 90 percent and aggregate >= 92 percent before integration.
+  status: planned
+next_action: Preregister and run the frozen full recovery checkpoint on five untouched Tier-5 official-generator seeds; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

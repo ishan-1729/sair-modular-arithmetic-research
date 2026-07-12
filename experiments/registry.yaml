@@ -314,3 +314,10 @@ runs:
     run_record: experiments/runs/exp-510-multiarchitecture-grokking-feasibility/run.json
     metrics: evals/results/exp-510-multiarchitecture-grokking-feasibility/metrics.json
     checkpoint: .scratch/exp-510-multiarchitecture-grokking-feasibility/20260722/pyg-max-mpnn/weights.safetensors
+  - run_id: exp-520-tier5-recovery-delta-patching
+    status: completed
+    approach: causal-tier5-recovery-parameter-patching
+    config: configs/exp_520_tier5_recovery_delta_patching.yaml
+    run_record: experiments/runs/exp-520-tier5-recovery-delta-patching/run.json
+    metrics: evals/results/exp-520-tier5-recovery-delta-patching/metrics.json
+    checkpoint: .scratch/exp-520-tier5-recovery-delta-patching/full-challenger/weights.safetensors

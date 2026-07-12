@@ -74,3 +74,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-500 cellular decay 1e-2 | width9 finite | 8,000 x3 | 99.837% train / 83.586% heldout mean | 32.467% mean | n/a | 99,824 | 0 signatures | reject; inconsistent paired effect |
 | EXP-510 shared-context TCN grokking | width9 finite | 8,000 x3 | 100% train / 77.759% heldout mean | 23.067% mean | n/a | 75,469 | 0 signatures | reject memorization plateau |
 | EXP-510 PyG max-MPNN grokking | width9 finite | 8,000 x3 | 99.512% train / 83.748% heldout mean | 30.533% mean | n/a | 72,484 | 0 signatures | reject concurrent learning, no delay |
+| EXP-520 Tier5 recovery patches | width64 | frozen | 99.7% | 94.0-96.4% | 0-0.2% | 99,824 | 425.1 wall total | reject subsets; full endpoint best |
