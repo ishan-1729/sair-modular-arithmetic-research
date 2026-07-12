@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-315-cellular-independent-tier4-five-seed",
+  "status": "completed",
+  "created_at": "2026-07-12T06:02:00Z",
+  "hypothesis": "The frozen width-independent cellular checkpoint exceeds 90 percent Tier-4 exact accuracy on every untouched official-generator seed.",
+  "seed": 20260712,
+  "source": {"repository_commit": "3fbfb6918468b86072013af7fdede19d4734c95e", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "c0140ebfe1551bc867ebb30f65ebd45e033f075a2a84e782b2809f9ce59990b7", "config_sha256": "96640e01b8f790c73293e1a41b1f4e886bcdb6224db14d64b34e6ea81c03ea29"},
+  "config": "configs/exp_315_cellular_independent_tier4.yaml",
+  "environment": "experiments/runs/exp-315-cellular-independent-tier4-five-seed/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "4ba31e7df52f4a40897f86ba986ca3c0"},
+  "artifacts": {"checkpoint": ".scratch/exp-314-cellular-width32-smoke/weights.safetensors", "checkpoint_sha256": "a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241", "metrics": "evals/results/exp-315-cellular-independent-tier4-five-seed/metrics.json", "raw_summary": "experiments/runs/exp-315-cellular-independent-tier4-five-seed/raw-summary.json"},
+  "decision": "promote-cellular-tier4-integration",
+  "notes": ["Aggregate Tier-4 accuracy is 483/500 = 96.6 percent.", "Every seed exceeds 90 percent; the minimum seed is 96 percent.", "Checked-public answers remained untouched during selection."]
+}

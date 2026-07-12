@@ -202,3 +202,10 @@ runs:
     run_record: experiments/runs/exp-314-cellular-width32-smoke/run.json
     metrics: evals/results/exp-314-cellular-width32-smoke/metrics.json
     checkpoint: .scratch/exp-314-cellular-width32-smoke/weights.safetensors
+  - run_id: exp-315-cellular-independent-tier4-five-seed
+    status: completed
+    approach: frozen-cellular-official-generator-tier4-gate
+    config: configs/exp_315_cellular_independent_tier4.yaml
+    run_record: experiments/runs/exp-315-cellular-independent-tier4-five-seed/run.json
+    metrics: evals/results/exp-315-cellular-independent-tier4-five-seed/metrics.json
+    checkpoint: .scratch/exp-314-cellular-width32-smoke/weights.safetensors

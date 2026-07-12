@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-315-cellular-independent-tier4-five-seed
-  statement: The frozen width-independent cellular checkpoint exceeds 90 percent Tier-4 exact accuracy on every untouched official-generator seed.
-  promotion_gate: Require at least 90 percent aggregate and on every one of five seeds before integration.
-  status: preregistered
-next_action: Evaluate five untouched Tier-4 seeds without consulting checked-public answers; retain Candidate 002 pending the result.
+  run_id: candidate-003-tier4-cellular-hybrid
+  statement: The independently validated cellular Tier-4 specialist integrates without regressing lower tiers or violating compliance and runtime gates.
+  promotion_gate: Pass full independent and checked 1,100-case exact evaluation, weight dependence, determinism, static, artifact, and official sandbox gates.
+  status: integration-authorized
+next_action: Build Candidate 003 from exact frozen specialist hashes and run the complete release gate; retain Candidate 002 until all gates pass.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
