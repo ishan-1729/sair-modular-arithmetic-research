@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-612 Tier-6 Residual Adapter Activation
 description: Matched optimizer parameter-group test of low-rate versus active-rate training for an exactly initialized recurrent adapter.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, widening, optimization, straight-through]
 timestamp: "2026-07-13T02:30:00+05:30"
 ---
@@ -39,3 +39,9 @@ The directly matched EXP-611 run took 1,071.11 wall seconds and 4,126.14 aggrega
 ## Boundaries
 
 Checked and private answers remain unread. Exact arithmetic is offline-only for generation and evaluation. Both inference paths are tensor-native and trained-parameter dependent. Native PyTorch optimizer parameter groups are the appropriate library facility; no graph operator is implicated.
+
+## Result and decision
+
+Exact initialization again passed at both widths. The differential-rate adapter reached `0.08365` RMS local logits at width 128 versus `0.000795` for the low-rate control, so the optimizer intervention activated substantial continuous corrections. Neither arm changed an isolated bit or quotient prediction across the 1,000-transition diagnostic, but autonomous rollout outcomes diverged: the challenger scored 174/200 (87.0%) at width 128 versus 171/200 (85.5%) control, a +1.5-point gain. Width-64 rollout was 96.5% challenger versus 97.0% control; both width-128 transition scores were 99.85% and both invalid rates were 0.5%.
+
+The activation-magnitude gate passed, but the isolated prediction-change, 90% absolute, and +3-point gain gates failed. Reject and close this residual-widening formulation. The active branch is mildly useful but insufficient, and the preregistration explicitly forbids extending it after such a result. The run completed in 1,312.68 wall seconds and 5,070.86 aggregate CPU seconds, below the 1,700-second planning budget and 2,600-second hard ceiling.

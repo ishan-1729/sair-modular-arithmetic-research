@@ -419,3 +419,10 @@ runs:
     run_record: experiments/runs/exp-611-tier6-function-preserving-widening/run.json
     metrics: evals/results/exp-611-tier6-function-preserving-widening/metrics.json
     checkpoint: .scratch/exp-611-tier6-function-preserving-widening/residual_92_plus_36/weights.safetensors
+  - run_id: exp-612-tier6-adapter-activation
+    status: completed
+    approach: differential-learning-rate-residual-adapter-ab
+    config: configs/exp_612_tier6_adapter_activation.yaml
+    run_record: experiments/runs/exp-612-tier6-adapter-activation/run.json
+    metrics: evals/results/exp-612-tier6-adapter-activation/metrics.json
+    checkpoint: .scratch/exp-612-tier6-adapter-activation/differential_rate_residual/weights.safetensors
