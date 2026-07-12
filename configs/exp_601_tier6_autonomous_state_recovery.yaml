@@ -1,0 +1,46 @@
+run_id: exp-601-tier6-autonomous-state-recovery
+hypothesis: direct learner-state recovery at width 128 improves autonomous rollout over the unchanged Tier-5 source while interleaved width-64 transitions preserve the incumbent boundary
+seed: 20260728
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-601-tier6-autonomous-state-recovery.md
+source_checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors
+source_checkpoint_sha256: 050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7
+model: {hidden: 92, cycles: 2}
+training:
+  steps: 200
+  transition_width: 64
+  recovery_width: 128
+  batch_size: 128
+  recovery_batch_size: 32
+  recovery_chunk_steps: 4
+  recovery_update_period: 2
+  scheduled_prediction_probability_start: 0.5
+  scheduled_prediction_probability_end: 1.0
+  learning_rate: 0.0001
+  minimum_learning_rate: 0.00001
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 128, test_prime_identities: 32}
+evaluation: {transition_cases: 1000, rollout_cases: 100}
+gates:
+  minimum_width128_rollout: 0.68
+  minimum_width128_gain_over_source: 0.10
+  minimum_retained_width64_rollout: 0.90
+  minimum_width128_transition: 0.995
+  maximum_width128_invalid_rollout_rate: 0.02
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-600-observed-plus-exp-329-recovery-overhead
+  exp600_training_wall_seconds: 155.732196186
+  recovery_training_overhead_factor: 1.25
+  projected_training_wall_seconds: 194.665245233
+  projected_paired_evaluation_and_setup_wall_seconds: 105
+  projected_total_wall_seconds: 299.665245233
+  soft_budget_wall_seconds: 600
+  hard_runaway_ceiling_wall_seconds: 900
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 60
