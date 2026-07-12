@@ -1,0 +1,24 @@
+{
+  "run_id": "exp-312-cellular-expanded-width-retry",
+  "status": "completed",
+  "created_at": "2026-07-12T05:35:00Z",
+  "hypothesis": "Extending the successful mixed-width cellular curriculum through width 24 improves width-32 transfer while retaining width-16 rollout.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "b8d4b67cef72ca3a2d00c7bb2f516bde2bbfaa36",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "2fa7cefc09cc4b71643fca9f2d77182bdfdf375b4008138328f12eb5289c8c82",
+    "config_sha256": "8c0c104e3c0d80ff86e223b3eb5f7295faef620ff35bdcafa78cdebc1d681c63"
+  },
+  "config": "configs/exp_312_cellular_expanded_width_retry.yaml",
+  "environment": "experiments/runs/exp-312-cellular-expanded-width-retry/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "60faa377a1c24239b1e39cb6eb83bffd"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-312-cellular-expanded-width-retry/weights.safetensors",
+    "checkpoint_sha256": "d1f2bbd22ca944aa49fb6bcedc57d1c4738fd44d4c30c27095d7794a57de1029",
+    "metrics": "evals/results/exp-312-cellular-expanded-width-retry/metrics.json"
+  },
+  "decision": "advance-cellular-direct-width32",
+  "notes": ["All preregistered gates passed.", "Width-24 rollout reached 96.2 percent.", "Zero-shot width-32 rollout reached 85 percent with 0.15 percent invalid rollouts."]
+}

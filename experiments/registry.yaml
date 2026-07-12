@@ -181,3 +181,10 @@ runs:
     run_record: experiments/runs/exp-311-cellular-expanded-width-curriculum/run.json
     metrics: null
     checkpoint: null
+  - run_id: exp-312-cellular-expanded-width-retry
+    status: completed
+    approach: expanded-width-cellular-curriculum-retry
+    config: configs/exp_312_cellular_expanded_width_retry.yaml
+    run_record: experiments/runs/exp-312-cellular-expanded-width-retry/run.json
+    metrics: evals/results/exp-312-cellular-expanded-width-retry/metrics.json
+    checkpoint: .scratch/exp-312-cellular-expanded-width-retry/weights.safetensors
