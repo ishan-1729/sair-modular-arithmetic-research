@@ -13,6 +13,7 @@ timestamp: "2026-07-12T02:20:00+05:30"
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
 | `candidate-001-horner-tcn9` | retained baseline | 21.3% | 100% | 97% | 2% | 2 | 85,021 | 0.4 s sandbox | superseded |
 | `candidate-002-tier3-hybrid` | promoted | 31.0% | 100% | 97% | 99% | 3 | 170,577 | 1.8 s official sandbox | incumbent |
+| `candidate-003-tier4-cellular-hybrid` | promoted | 40.4% | 100% | 98% | 99% (Tier 4: 95%) | 4 | 270,401 | 7.9 s official sandbox | incumbent |
 
 The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generator seeds plus 97/100 on the retained full independent seed. Candidate comparisons must report all scored tiers and preserve this row even after promotion.
 

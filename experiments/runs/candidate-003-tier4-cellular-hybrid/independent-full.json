@@ -1,0 +1,87 @@
+{
+  "overall_accuracy": 0.404,
+  "highest_tier_above_90": 4,
+  "deterministic": true,
+  "tiers": [
+    {
+      "tier_id": 0,
+      "total": 100,
+      "correct": 20,
+      "accuracy": 0.2,
+      "completed": true
+    },
+    {
+      "tier_id": 1,
+      "total": 100,
+      "correct": 100,
+      "accuracy": 1.0,
+      "completed": true
+    },
+    {
+      "tier_id": 2,
+      "total": 100,
+      "correct": 98,
+      "accuracy": 0.98,
+      "completed": true
+    },
+    {
+      "tier_id": 3,
+      "total": 100,
+      "correct": 99,
+      "accuracy": 0.99,
+      "completed": true
+    },
+    {
+      "tier_id": 4,
+      "total": 100,
+      "correct": 95,
+      "accuracy": 0.95,
+      "completed": true
+    },
+    {
+      "tier_id": 5,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    },
+    {
+      "tier_id": 6,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    },
+    {
+      "tier_id": 7,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    },
+    {
+      "tier_id": 8,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    },
+    {
+      "tier_id": 9,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    },
+    {
+      "tier_id": 10,
+      "total": 100,
+      "correct": 2,
+      "accuracy": 0.02,
+      "completed": true
+    }
+  ],
+  "repo_id": "",
+  "revision": "",
+  "eval_period": ""
+}

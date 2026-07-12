@@ -10,26 +10,28 @@ success_threshold:
   achieved: false
 completion_eligible: false
 incumbent:
-  run_id: candidate-002-tier3-hybrid
-  checkpoint_sha256: 69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157
-  checked_public_overall_accuracy: 0.313
-  independent_overall_accuracy: 0.31
+  run_id: candidate-003-tier4-cellular-hybrid
+  checkpoint_sha256: a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514
+  checked_public_overall_accuracy: 0.409
+  independent_overall_accuracy: 0.404
   checked_public_tier_1_accuracy: 1.0
   checked_public_tier_2_accuracy: 0.99
-  independent_tier_2_accuracy: 0.97
+  independent_tier_2_accuracy: 0.98
   checked_public_tier_3_accuracy: 1.0
   independent_tier_3_accuracy: 0.99
-  highest_tier_above_90: 3
-  artifact_bytes: 704185
-  sandbox_inference_seconds: 1.8
-  mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
-  mlflow_model_version: "2"
+  checked_public_tier_4_accuracy: 0.98
+  independent_tier_4_accuracy: 0.95
+  highest_tier_above_90: 4
+  artifact_bytes: 1109234
+  sandbox_inference_seconds: 7.9
+  mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
+  mlflow_model_version: "3"
 current_hypothesis:
-  run_id: candidate-003-tier4-cellular-hybrid
-  statement: The independently validated cellular Tier-4 specialist integrates without regressing lower tiers or violating compliance and runtime gates.
-  promotion_gate: Pass full independent and checked 1,100-case exact evaluation, weight dependence, determinism, static, artifact, and official sandbox gates.
-  status: integration-authorized
-next_action: Build Candidate 003 from exact frozen specialist hashes and run the complete release gate; retain Candidate 002 until all gates pass.
+  run_id: exp-320-cellular-width64-curriculum
+  statement: The validated mixed-width cellular curriculum scales through widths 40-56 and transfers into a bigint-backed width-64 training stage.
+  promotion_gate: Preserve width-32 readiness while demonstrating strong width-48 rollout and nontrivial zero-shot width-64 learning before a full Tier-5 run.
+  status: planned
+next_action: Extend the tensor-native cellular curriculum toward Tier 5; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -37,14 +39,14 @@ tracking:
   experiment_name: sair-modular-arithmetic-wsl
   experiment_id: "2"
   registered_model: sair-modular-arithmetic-candidate
-  incumbent_model_version: "2"
+  incumbent_model_version: "3"
 git:
   branch: agent/submission-ready-horner-tcn9
   last_validated_commit: 2dea57d5dabd05351953013054523c916af83564
   dirty: true
 risks:
-  - Tier 4 remains unsolved and requires a width-32 generalization path.
-  - A fixed-width full-canvas model may learn modulus identities rather than a shared reduction rule.
+  - Tier 5 remains unsolved and requires a width-64 generalization path.
+  - Width-64 labels and evaluation require Python big integers while inference must remain tensor-native.
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.

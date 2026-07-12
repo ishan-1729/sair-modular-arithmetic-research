@@ -2,7 +2,7 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository contains a submission-ready 170,577-parameter learned Horner ensemble. On a full independent official 1,100-case set it scores **31.0% overall**, with **Tier 1 at 100%, Tier 2 at 97%, and Tier 3 at 99%**, advancing `highest_tier_above_90` to 3. The checked post-selection regression scores 31.3%, and randomized weights collapse Tier 3 to 2%. The exact Python 3.12/PyTorch 2.5.1 runtime reproduces the independent result with 2.1-second inference.
+The repository contains a submission-ready 270,401-parameter learned TCN/cellular ensemble. On a full independent official 1,100-case set it scores **40.4% overall**, with **Tier 1 at 100%, Tier 2 at 98%, Tier 3 at 99%, and Tier 4 at 95%**, advancing `highest_tier_above_90` to 4. The checked post-selection regression scores 40.9%, randomized weights collapse Tier 4 to 0%, and the pinned official container reproduces the independent score with 7.9-second inference.
 
 ## Start here
 
@@ -10,8 +10,8 @@ The repository contains a submission-ready 170,577-parameter learned Horner ense
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
-- [Submission candidate](knowledge/submissions/candidate-002-tier3-hybrid.md) — current model card, compliance rationale, release state, and hashes.
-- [Full-set evaluation](knowledge/evals/candidate-002-results.md) — independent, checked, pinned-runtime, and perturbation results.
+- [Submission candidate](knowledge/submissions/candidate-003-tier4-cellular-hybrid.md) — current model card, compliance rationale, release state, and hashes.
+- [Full-set evaluation](knowledge/evals/candidate-003-results.md) — independent, checked, pinned-runtime, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
 - [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
 

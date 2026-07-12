@@ -1,4 +1,5 @@
 # Submission Candidates
 
 - [Candidate 001: Width-9 Horner TCN](candidate-001-horner-tcn9.md) - sandbox-validated three-file release candidate that clears Tiers 1 and 2.
-- [Candidate 002: Tier-3 Horner hybrid](candidate-002-tier3-hybrid.md) - current three-file incumbent that independently clears Tiers 1 through 3.
+- [Candidate 002: Tier-3 Horner hybrid](candidate-002-tier3-hybrid.md) - superseded three-file candidate that independently clears Tiers 1 through 3.
+- [Candidate 003: Tier-4 cellular hybrid](candidate-003-tier4-cellular-hybrid.md) - current three-file incumbent that independently clears Tiers 1 through 4.

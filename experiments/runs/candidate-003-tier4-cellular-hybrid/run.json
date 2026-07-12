@@ -1,0 +1,29 @@
+{
+  "run_id": "candidate-003-tier4-cellular-hybrid",
+  "status": "completed",
+  "created_at": "2026-07-12T05:41:00Z",
+  "hypothesis": "The independently validated cellular Tier-4 specialist integrates without regressing lower tiers or violating compliance and runtime gates.",
+  "seed": 20260712,
+  "config": "configs/candidate_003_release_gate.yaml",
+  "environment": "experiments/runs/candidate-003-tier4-cellular-hybrid/environment.json",
+  "source": {"repository_commit": "af3e16c", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"},
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "046a04ea53864925b8cfa244881f60c4", "registered_model": "sair-modular-arithmetic-candidate", "model_version": "3", "aliases": ["incumbent", "validated"]},
+  "artifacts": {
+    "checkpoint": "submission/weights.safetensors",
+    "checkpoint_sha256": "a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514",
+    "metrics": "evals/results/candidate-003-tier4-cellular-hybrid/metrics.json",
+    "independent_full": "experiments/runs/candidate-003-tier4-cellular-hybrid/independent-full.json",
+    "checked_full": "experiments/runs/candidate-003-tier4-cellular-hybrid/checked-full.json",
+    "randomized_control": "experiments/runs/candidate-003-tier4-cellular-hybrid/randomized-control.json",
+    "sandbox_independent_full": "experiments/runs/candidate-003-tier4-cellular-hybrid/sandbox-independent-full.json",
+    "sandbox_run": "experiments/runs/candidate-003-tier4-cellular-hybrid/sandbox-run.json"
+  },
+  "decision": "promote",
+  "notes": [
+    "Independent full accuracy is 40.4 percent with Tier 4 at 95 percent.",
+    "Checked post-selection accuracy is 40.9 percent with Tier 4 at 98 percent.",
+    "Randomized weights collapse Tier 4 to zero percent.",
+    "The isolated official container reproduces the independent score in 7.9 seconds of inference.",
+    "Candidate 003 remains below the binding 85 percent full-overall completion threshold."
+  ]
+}

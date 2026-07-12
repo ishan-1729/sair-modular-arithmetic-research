@@ -19,3 +19,4 @@
 - **WSL environment**: Established Ubuntu 24.04 WSL2 as the default agent terminal environment with native rootless Podman, CPU PyTorch/MLflow project tooling, managed Chromium, and a byte-identical official-container reproduction.
 - **Tier-3 promotion**: Promoted the 170,577-parameter Tier-2/Tier-3 Horner ensemble after 99.8% across five independent Tier-3 seeds and 99% Tier 3 on a full independent official 1,100-case evaluation.
 - **Release validation**: Full checked regression scored 31.3% overall with `highest_tier_above_90 = 3`; static analysis, isolation, determinism, timeout, and randomized-weight controls passed.
+- **Tier-4 promotion**: Mixed-width cellular training produced 96.6% across five independent Tier-4 seeds. Candidate 003 scores 40.4% independent and 40.9% checked overall, clears Tier 4, passes the official sandbox, and becomes the intermediate incumbent.

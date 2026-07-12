@@ -2,7 +2,7 @@
 type: Candidate Preregistration
 title: Candidate 003 Tier-4 Cellular Hybrid Integration Gate
 description: Frozen full-artifact release gate for the independently validated Tier-4 cellular specialist.
-status: preregistered
+status: completed
 tags: [autoresearch, candidate, integration, Tier-4, release]
 timestamp: "2026-07-12T12:10:00+05:30"
 ---
@@ -14,3 +14,7 @@ Freeze the three-file submission artifact with combined weights SHA-256 `a991c38
 First evaluate all 1,100 cases with independent seed `a791075e4357a6bc629b8753d1e1b05fcc9003c3038c72d9becca9cc5e4d41c2`. Require at least 40% overall, Tier 1/2/3/4 at 99%/95%/95%/90%, `highest_tier_above_90 = 4`, and inference below 240 seconds. Only after those gates pass may the checked-public release regression be read.
 
 The exact artifact must then pass manifest/static checks, repeated determinism, a randomized-weight dependence control that collapses Tier 4, pinned-runtime evaluation, the official isolated container, artifact-size audit, and submission-boundary review. Candidate 002 remains incumbent until every gate passes. Candidate 003 is still only an intermediate checkpoint under the 85% full-overall program requirement.
+
+## Outcome
+
+Passed and promoted as the intermediate incumbent. Independent overall is 40.4% with Tier 4 at 95%; checked overall is 40.9% with Tier 4 at 98%. Randomized Tier 4 is 0%. Static, isolation, determinism, artifact, runtime, and official-container gates pass. The 85% overall completion gate remains false.
