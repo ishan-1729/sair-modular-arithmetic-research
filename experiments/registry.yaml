@@ -188,3 +188,10 @@ runs:
     run_record: experiments/runs/exp-312-cellular-expanded-width-retry/run.json
     metrics: evals/results/exp-312-cellular-expanded-width-retry/metrics.json
     checkpoint: .scratch/exp-312-cellular-expanded-width-retry/weights.safetensors
+  - run_id: exp-313-cellular-official-width32
+    status: failed
+    approach: cellular-official-width32-continuation
+    config: configs/exp_313_cellular_official_width32.yaml
+    run_record: experiments/runs/exp-313-cellular-official-width32/run.json
+    metrics: null
+    checkpoint: null

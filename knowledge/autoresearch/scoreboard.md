@@ -51,3 +51,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-310 chunk-GRU challenger | 8/12/16 -> 32 | 1,200 | 38.335% / 44.435% | 0% / 0% | 35.4% / 89.9% | 72,903 | 27.1 train | reject architecture |
 | EXP-311 expanded cellular | 8-24 -> 32 | 1,600 | invalid | invalid | invalid | 99,824 | stopped at 10 min | killed during evaluation |
 | EXP-312 expanded cellular retry | 8-24 -> 32 | 1,600 | 99.88% width24 / 99.4% width32 | 96.2% / 85.0% | 0.10% / 0.15% | 99,824 | 464.0 train | pass -> direct width32 |
+| EXP-313 cellular direct width32 | 24/32 | 100 partial | invalid | invalid | invalid | 99,824 | stopped by projection | killed; resource projection |

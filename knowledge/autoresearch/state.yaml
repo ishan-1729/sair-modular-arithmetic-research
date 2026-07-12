@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-313-cellular-official-width32
-  statement: Direct official-distribution width-32 continuation raises the width-independent cellular model above the Tier-4 independent-readiness gate.
-  promotion_gate: Retain 90 percent width-24 rollout and reach 99.8/93 percent width-32 transition/rollout with a five-point rollout gain.
+  run_id: exp-314-cellular-width32-smoke
+  statement: A compute-bounded direct width-32 continuation improves the frozen cellular checkpoint enough to justify confirmation.
+  promotion_gate: Retain 90 percent width-24 rollout and reach 99.7/90 percent width-32 transition/rollout with a three-point rollout gain.
   status: preregistered
-next_action: Run direct width-24/32 continuation on fresh official-numeric identities; retain Candidate 002.
+next_action: Run the 600-step, 2x-pool official-width32 smoke gate; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

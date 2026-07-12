@@ -25,3 +25,4 @@
 - [EXP-311 expanded-width cellular curriculum](exp-311-cellular-expanded-width-curriculum.md) - continue the rescued cellular control through width 24.
 - [EXP-312 expanded-width cellular retry](exp-312-cellular-expanded-width-retry.md) - resource-corrected identical-training retry.
 - [EXP-313 cellular official width 32](exp-313-cellular-official-width32.md) - direct fresh official-distribution continuation before the independent Tier-4 gate.
+- [EXP-314 cellular width-32 smoke](exp-314-cellular-width32-smoke.md) - compute-bounded retry after EXP-313's throughput projection.
