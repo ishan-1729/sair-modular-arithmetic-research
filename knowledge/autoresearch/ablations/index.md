@@ -11,3 +11,4 @@
 - [EXP-202 width-32 2,400-step confirmation](exp-202-width32-2400.md) - unchanged-gate confirmation after EXP-201's narrow miss.
 - [EXP-203 independent Tier 4](exp-203-independent-tier4.md) - frozen five-seed official-generator gate before integration.
 - [EXP-204 official-distribution fine-tune](exp-204-official-distribution-finetune.md) - paired correction of the high-bit Tier-4 distribution mismatch.
+- [EXP-210 rollout-aware width-32 A/B](exp-210-rollout-aware-width32.md) - matched scheduled learned-state intervention.

@@ -34,3 +34,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-202 width32 transfer + hard mining | 32 | 2,400 | 99.814% | 94.49% | 0.15% | 126,276 | 395.3 | pass -> independent |
 | EXP-203 five official-generator Tier-4 seeds | 32 | frozen | n/a | 88.20% Tier 4 | 0% observed | 126,276 | 4.0 wall | fail; retain incumbent |
 | EXP-204 official-distribution fine-tune | 32 | +800 | 99.666% | 89.97% | 0.30% | 126,276 | 82.8 | reject; rollout-aware next |
+| EXP-210 one-step continuation | 32 | +400 | 99.794% | 90.72% | n/a | 126,276 | 63.4 | control |
+| EXP-210 scheduled learned-state | 32 | +400 | 99.828% | 91.425% | 0.175% | 126,276 | 113.1 | reject; +0.705 rollout |

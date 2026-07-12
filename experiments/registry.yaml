@@ -97,3 +97,10 @@ runs:
     run_record: experiments/runs/exp-204-official-distribution-finetune/run.json
     metrics: evals/results/exp-204-official-distribution-finetune/metrics.json
     checkpoint: .scratch/exp-204-official-distribution-finetune/width32-official-distribution-finetune/weights.safetensors
+  - run_id: exp-210-rollout-aware-width32
+    status: completed
+    approach: matched-scheduled-learned-state-training
+    config: configs/exp_210_rollout_aware_ab.yaml
+    run_record: experiments/runs/exp-210-rollout-aware-width32/run.json
+    metrics: evals/results/exp-210-rollout-aware-width32/metrics.json
+    checkpoint: .scratch/exp-210-rollout-aware/scheduled-state-challenger/weights.safetensors

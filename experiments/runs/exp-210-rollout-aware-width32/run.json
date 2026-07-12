@@ -1,0 +1,29 @@
+{
+  "run_id": "exp-210-rollout-aware-width32",
+  "status": "completed",
+  "created_at": "2026-07-12T02:48:00Z",
+  "hypothesis": "Scheduled learned-state chunks improve official-like width-32 rollout beyond matched one-step continuation.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "70e83bbc366fac1700b8ca02a288b336b7dd7b65",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "d3b3ce695ca81fd7f894744e292728f43c0a8a9666f57fb865fac26a6d19b80c",
+    "config_sha256": "bd68d814206cdb84db7ccb107dc93ff4b5d08e5cf4a42619394357de91474866"
+  },
+  "config": "configs/exp_210_rollout_aware_ab.yaml",
+  "environment": "experiments/runs/exp-210-rollout-aware-width32/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "60e99e01a7844ba982ec307c7b8e45e8", "control_run_id": "d1b93b7e11244e20a6b5385d5afa6265", "challenger_run_id": "b21a6637c0824ab197ecafa695b2baa5"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-210-rollout-aware/scheduled-state-challenger/weights.safetensors",
+    "checkpoint_sha256": "02870c160e6c5e089b6370425b7e4a587236f730f1e27497537d2d7032b5c0ff",
+    "metrics": "evals/results/exp-210-rollout-aware-width32/metrics.json",
+    "raw_summary": "experiments/runs/exp-210-rollout-aware-width32/raw-summary.json"
+  },
+  "decision": "reject-scheduled-state-formulation",
+  "notes": [
+    "The challenger improved rollout by 0.705 points but missed the preregistered two-point paired gate and 92 percent absolute gate.",
+    "Transition and validity did not regress materially, so the formulation was stable but insufficient.",
+    "No consumed independent seed or checked public answer was used."
+  ]
+}

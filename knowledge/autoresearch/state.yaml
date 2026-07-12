@@ -25,11 +25,11 @@ incumbent:
   mlflow_run_id: 886b045e4d71465aaf60aea1aa909f58
   mlflow_model_version: "2"
 current_hypothesis:
-  run_id: exp-210-rollout-aware-width32
-  statement: Scheduled learned-state training improves exact width-32 rollout beyond distribution-only fine-tuning.
-  promotion_gate: Preregister a matched paired intervention with fresh official-like heldout identities before execution.
+  run_id: exp-220-width-independent-cellular
+  statement: A local recurrent cellular architecture transfers learned modular state updates across widths without width-specific global heads.
+  promotion_gate: Preregister a matched width-16 control and width-32 length-transfer smoke test before execution.
   status: planned
-next_action: Implement and preregister EXP-210 scheduled learned-state training; keep EXP-203 seeds and checked Tier-4 answers locked.
+next_action: Implement and preregister EXP-220 materially different width-independent recurrent cellular model; retain Candidate 002.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -40,7 +40,7 @@ tracking:
   incumbent_model_version: "2"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 05ccc758ddb838927818bfa705a46052dff20d48
+  last_validated_commit: 70e83bbc366fac1700b8ca02a288b336b7dd7b65
   dirty: true
 risks:
   - Tier 4 remains unsolved and requires a width-32 generalization path.

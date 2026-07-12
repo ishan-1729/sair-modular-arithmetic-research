@@ -1,0 +1,609 @@
+{
+  "run_id": "exp-210-rollout-aware-width32",
+  "status": "completed",
+  "hypothesis": "scheduled learned-state chunks improve official-like width-32 rollout beyond matched one-step continuation",
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "60e99e01a7844ba982ec307c7b8e45e8",
+    "arm_run_ids": {
+      "one-step-control": "d1b93b7e11244e20a6b5385d5afa6265",
+      "scheduled-state-challenger": "b21a6637c0824ab197ecafa695b2baa5"
+    }
+  },
+  "source": {
+    "repository_commit": "70e83bbc366fac1700b8ca02a288b336b7dd7b65",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "bd68d814206cdb84db7ccb107dc93ff4b5d08e5cf4a42619394357de91474866",
+    "runner_sha256": "d3b3ce695ca81fd7f894744e292728f43c0a8a9666f57fb865fac26a6d19b80c",
+    "source_checkpoint_sha256": "a685d8d6f37de7e7ef9f28075d0779256d31330a834a1a69dd26b56eb2d62c85"
+  },
+  "arms": {
+    "one-step-control": {
+      "arm": "one-step-control",
+      "rollout_aware": false,
+      "parameters": 126276,
+      "training": {
+        "steps": 400,
+        "transition_equivalent_examples": 102400,
+        "seconds": 63.42524490599999,
+        "peak_rss_bytes": 624852992,
+        "history": [
+          {
+            "step": 1,
+            "elapsed_seconds": 0.3361969689999569,
+            "learning_rate": 0.0002999958362820466,
+            "gradient_norm": 0.3520570397377014,
+            "mode": "transition",
+            "loss": 0.002355585340410471,
+            "mean_bce": 0.0002113890222972259,
+            "worst_bit_bce": 0.004762676544487476,
+            "quotient_ce": 9.918683645082638e-06,
+            "batch_exact": 0.99609375
+          },
+          {
+            "step": 50,
+            "elapsed_seconds": 8.40738834299998,
+            "learning_rate": 0.0002897237368890237,
+            "gradient_norm": 0.26211273670196533,
+            "mode": "transition",
+            "loss": 0.002737934235483408,
+            "mean_bce": 0.00026846511173062027,
+            "worst_bit_bce": 0.005480939522385597,
+            "quotient_ce": 3.0462961149169132e-05,
+            "batch_exact": 1.0
+          },
+          {
+            "step": 100,
+            "elapsed_seconds": 14.953645703999996,
+            "learning_rate": 0.000260459415460184,
+            "gradient_norm": 0.6259518265724182,
+            "mode": "transition",
+            "loss": 0.014555060304701328,
+            "mean_bce": 0.0021849244367331266,
+            "worst_bit_bce": 0.027439551427960396,
+            "quotient_ce": 0.00022337744303513318,
+            "batch_exact": 0.98828125
+          },
+          {
+            "step": 150,
+            "elapsed_seconds": 21.845519593000063,
+            "learning_rate": 0.0002166622633692875,
+            "gradient_norm": 0.5980518460273743,
+            "mode": "transition",
+            "loss": 0.006871245801448822,
+            "mean_bce": 0.0008452479960396886,
+            "worst_bit_bce": 0.01338926050812006,
+            "quotient_ce": 8.306309609906748e-06,
+            "batch_exact": 0.99609375
+          },
+          {
+            "step": 200,
+            "elapsed_seconds": 29.629482381999992,
+            "learning_rate": 0.00016500000000000035,
+            "gradient_norm": 0.3940563201904297,
+            "mode": "transition",
+            "loss": 0.005494406912475824,
+            "mean_bce": 0.0006025072070769966,
+            "worst_bit_bce": 0.010859736241400242,
+            "quotient_ce": 5.018697265768424e-05,
+            "batch_exact": 0.99609375
+          },
+          {
+            "step": 250,
+            "elapsed_seconds": 38.830461552999964,
+            "learning_rate": 0.00011333773663071333,
+            "gradient_norm": 1.473902702331543,
+            "mode": "transition",
+            "loss": 0.011872898787260056,
+            "mean_bce": 0.002456037327647209,
+            "worst_bit_bce": 0.020769767463207245,
+            "quotient_ce": 0.0007046648534014821,
+            "batch_exact": 0.9921875
+          },
+          {
+            "step": 300,
+            "elapsed_seconds": 46.24471577099996,
+            "learning_rate": 6.954058453981633e-05,
+            "gradient_norm": 0.0692845955491066,
+            "mode": "transition",
+            "loss": 0.000736285699531436,
+            "mean_bce": 7.877769530750811e-05,
+            "worst_bit_bce": 0.001426940318197012,
+            "quotient_ce": 0.0001538487122161314,
+            "batch_exact": 1.0
+          },
+          {
+            "step": 350,
+            "elapsed_seconds": 54.05688779800005,
+            "learning_rate": 4.027626311097637e-05,
+            "gradient_norm": 0.026848873123526573,
+            "mode": "transition",
+            "loss": 0.00033770743175409734,
+            "mean_bce": 3.565211591194384e-05,
+            "worst_bit_bce": 0.0006649860879406333,
+            "quotient_ce": 2.8116046451032162e-05,
+            "batch_exact": 1.0
+          },
+          {
+            "step": 400,
+            "elapsed_seconds": 63.32150538999997,
+            "learning_rate": 3e-05,
+            "gradient_norm": 0.9096819162368774,
+            "mode": "transition",
+            "loss": 0.008696069940924644,
+            "mean_bce": 0.0018053731182590127,
+            "worst_bit_bce": 0.015292522497475147,
+            "quotient_ce": 9.061819582711905e-05,
+            "batch_exact": 0.99609375
+          }
+        ]
+      },
+      "evaluation": {
+        "heldout_transition": {
+          "cases": 50000,
+          "correct": 49897,
+          "exact_accuracy": 0.99794,
+          "bit_accuracy": 0.999871875,
+          "valid_residue_rate": 1.0,
+          "by_modulus_bits": {
+            "23": {
+              "correct": 101,
+              "cases": 101,
+              "exact_accuracy": 1.0
+            },
+            "25": {
+              "correct": 207,
+              "cases": 207,
+              "exact_accuracy": 1.0
+            },
+            "26": {
+              "correct": 712,
+              "cases": 716,
+              "exact_accuracy": 0.994413407821229
+            },
+            "27": {
+              "correct": 384,
+              "cases": 384,
+              "exact_accuracy": 1.0
+            },
+            "28": {
+              "correct": 1501,
+              "cases": 1506,
+              "exact_accuracy": 0.9966799468791501
+            },
+            "29": {
+              "correct": 2310,
+              "cases": 2314,
+              "exact_accuracy": 0.9982713915298185
+            },
+            "30": {
+              "correct": 6753,
+              "cases": 6759,
+              "exact_accuracy": 0.9991122947181535
+            },
+            "31": {
+              "correct": 11595,
+              "cases": 11620,
+              "exact_accuracy": 0.9978485370051635
+            },
+            "32": {
+              "correct": 26334,
+              "cases": 26393,
+              "exact_accuracy": 0.9977645587845262
+            }
+          }
+        },
+        "heldout_rollout": {
+          "cases": 20000,
+          "correct": 18144,
+          "exact_accuracy": 0.9072,
+          "all_steps_correct": 18504,
+          "all_steps_exact_accuracy": 0.9252,
+          "any_invalid_residue_rate": 0.0023,
+          "first_error_by_step": [
+            0,
+            7,
+            38,
+            41,
+            39,
+            62,
+            38,
+            47,
+            51,
+            59,
+            46,
+            58,
+            63,
+            57,
+            47,
+            69,
+            49,
+            39,
+            50,
+            44,
+            56,
+            49,
+            52,
+            48,
+            52,
+            53,
+            48,
+            54,
+            47,
+            38,
+            48,
+            47
+          ],
+          "by_modulus_bits": {
+            "23": {
+              "correct": 33,
+              "cases": 33,
+              "exact_accuracy": 1.0
+            },
+            "25": {
+              "correct": 76,
+              "cases": 78,
+              "exact_accuracy": 0.9743589743589743
+            },
+            "26": {
+              "correct": 250,
+              "cases": 264,
+              "exact_accuracy": 0.946969696969697
+            },
+            "27": {
+              "correct": 133,
+              "cases": 140,
+              "exact_accuracy": 0.95
+            },
+            "28": {
+              "correct": 572,
+              "cases": 605,
+              "exact_accuracy": 0.9454545454545454
+            },
+            "29": {
+              "correct": 855,
+              "cases": 919,
+              "exact_accuracy": 0.9303590859630033
+            },
+            "30": {
+              "correct": 2541,
+              "cases": 2723,
+              "exact_accuracy": 0.9331619537275064
+            },
+            "31": {
+              "correct": 4319,
+              "cases": 4658,
+              "exact_accuracy": 0.9272219836839846
+            },
+            "32": {
+              "correct": 9365,
+              "cases": 10580,
+              "exact_accuracy": 0.8851606805293005
+            }
+          }
+        }
+      },
+      "hard_mining": {
+        "selected_total": 102400,
+        "selected_quotient2": 38062,
+        "selected_boundary": 20613,
+        "selected_quotient2_fraction": 0.37169921875,
+        "selected_boundary_fraction": 0.201298828125,
+        "candidate_pool_factor": 4
+      },
+      "checkpoint": {
+        "path": ".scratch/exp-210-rollout-aware/one-step-control/weights.safetensors",
+        "sha256": "cfde68e83072a2c601059272f20339e134155789e8ada260c0784e7d7cd00d65",
+        "bytes": 510904
+      }
+    },
+    "scheduled-state-challenger": {
+      "arm": "scheduled-state-challenger",
+      "rollout_aware": true,
+      "parameters": 126276,
+      "training": {
+        "steps": 400,
+        "transition_equivalent_examples": 102400,
+        "seconds": 113.12019570900009,
+        "peak_rss_bytes": 667885568,
+        "history": [
+          {
+            "step": 1,
+            "elapsed_seconds": 0.1609196530000645,
+            "learning_rate": 0.0002999958362820466,
+            "gradient_norm": 0.3520570397377014,
+            "mode": "transition",
+            "loss": 0.002355585340410471,
+            "mean_bce": 0.0002113890222972259,
+            "worst_bit_bce": 0.004762676544487476,
+            "quotient_ce": 9.918683645082638e-06,
+            "batch_exact": 0.99609375
+          },
+          {
+            "step": 50,
+            "elapsed_seconds": 13.663795476000018,
+            "learning_rate": 0.0002897237368890237,
+            "gradient_norm": 0.7299183011054993,
+            "mode": "rollout",
+            "loss": 0.00910196267068386,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 0.99609375
+          },
+          {
+            "step": 100,
+            "elapsed_seconds": 31.83192025400001,
+            "learning_rate": 0.000260459415460184,
+            "gradient_norm": 1.4077398777008057,
+            "mode": "rollout",
+            "loss": 0.015588325448334217,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 0.9921875
+          },
+          {
+            "step": 150,
+            "elapsed_seconds": 49.95085281200011,
+            "learning_rate": 0.0002166622633692875,
+            "gradient_norm": 1.8128993511199951,
+            "mode": "rollout",
+            "loss": 0.01454615592956543,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 0.98828125
+          },
+          {
+            "step": 200,
+            "elapsed_seconds": 66.36322566399997,
+            "learning_rate": 0.00016500000000000035,
+            "gradient_norm": 0.4089212119579315,
+            "mode": "rollout",
+            "loss": 0.04898915812373161,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 0.98828125
+          },
+          {
+            "step": 250,
+            "elapsed_seconds": 80.191036972,
+            "learning_rate": 0.00011333773663071333,
+            "gradient_norm": 0.07726020365953445,
+            "mode": "rollout",
+            "loss": 0.0014603713061660528,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 1.0
+          },
+          {
+            "step": 300,
+            "elapsed_seconds": 93.97308601399993,
+            "learning_rate": 6.954058453981633e-05,
+            "gradient_norm": 0.8416001796722412,
+            "mode": "rollout",
+            "loss": 0.006057825870811939,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 0.9921875
+          },
+          {
+            "step": 350,
+            "elapsed_seconds": 103.69694551999999,
+            "learning_rate": 4.027626311097637e-05,
+            "gradient_norm": 0.22177688777446747,
+            "mode": "rollout",
+            "loss": 0.002646187786012888,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 1.0
+          },
+          {
+            "step": 400,
+            "elapsed_seconds": 113.04065418700009,
+            "learning_rate": 3e-05,
+            "gradient_norm": 0.22907701134681702,
+            "mode": "rollout",
+            "loss": 0.0023404741659760475,
+            "mean_bce": NaN,
+            "worst_bit_bce": NaN,
+            "quotient_ce": 0.0,
+            "batch_exact": 1.0
+          }
+        ]
+      },
+      "evaluation": {
+        "heldout_transition": {
+          "cases": 50000,
+          "correct": 49914,
+          "exact_accuracy": 0.99828,
+          "bit_accuracy": 0.9999,
+          "valid_residue_rate": 0.99996,
+          "by_modulus_bits": {
+            "23": {
+              "correct": 101,
+              "cases": 101,
+              "exact_accuracy": 1.0
+            },
+            "25": {
+              "correct": 207,
+              "cases": 207,
+              "exact_accuracy": 1.0
+            },
+            "26": {
+              "correct": 711,
+              "cases": 716,
+              "exact_accuracy": 0.9930167597765364
+            },
+            "27": {
+              "correct": 384,
+              "cases": 384,
+              "exact_accuracy": 1.0
+            },
+            "28": {
+              "correct": 1503,
+              "cases": 1506,
+              "exact_accuracy": 0.99800796812749
+            },
+            "29": {
+              "correct": 2308,
+              "cases": 2314,
+              "exact_accuracy": 0.9974070872947277
+            },
+            "30": {
+              "correct": 6755,
+              "cases": 6759,
+              "exact_accuracy": 0.999408196478769
+            },
+            "31": {
+              "correct": 11603,
+              "cases": 11620,
+              "exact_accuracy": 0.9985370051635112
+            },
+            "32": {
+              "correct": 26342,
+              "cases": 26393,
+              "exact_accuracy": 0.9980676694578108
+            }
+          }
+        },
+        "heldout_rollout": {
+          "cases": 20000,
+          "correct": 18285,
+          "exact_accuracy": 0.91425,
+          "all_steps_correct": 18647,
+          "all_steps_exact_accuracy": 0.93235,
+          "any_invalid_residue_rate": 0.00175,
+          "first_error_by_step": [
+            0,
+            5,
+            33,
+            35,
+            38,
+            55,
+            42,
+            44,
+            50,
+            62,
+            47,
+            47,
+            65,
+            54,
+            51,
+            60,
+            45,
+            41,
+            45,
+            35,
+            48,
+            42,
+            44,
+            44,
+            42,
+            33,
+            38,
+            43,
+            45,
+            30,
+            45,
+            45
+          ],
+          "by_modulus_bits": {
+            "23": {
+              "correct": 32,
+              "cases": 33,
+              "exact_accuracy": 0.9696969696969697
+            },
+            "25": {
+              "correct": 76,
+              "cases": 78,
+              "exact_accuracy": 0.9743589743589743
+            },
+            "26": {
+              "correct": 251,
+              "cases": 264,
+              "exact_accuracy": 0.9507575757575758
+            },
+            "27": {
+              "correct": 135,
+              "cases": 140,
+              "exact_accuracy": 0.9642857142857143
+            },
+            "28": {
+              "correct": 576,
+              "cases": 605,
+              "exact_accuracy": 0.9520661157024793
+            },
+            "29": {
+              "correct": 855,
+              "cases": 919,
+              "exact_accuracy": 0.9303590859630033
+            },
+            "30": {
+              "correct": 2563,
+              "cases": 2723,
+              "exact_accuracy": 0.9412412780022035
+            },
+            "31": {
+              "correct": 4356,
+              "cases": 4658,
+              "exact_accuracy": 0.9351653069987119
+            },
+            "32": {
+              "correct": 9441,
+              "cases": 10580,
+              "exact_accuracy": 0.89234404536862
+            }
+          }
+        }
+      },
+      "hard_mining": {
+        "selected_total": 51200,
+        "selected_quotient2": 19040,
+        "selected_boundary": 10296,
+        "selected_quotient2_fraction": 0.371875,
+        "selected_boundary_fraction": 0.20109375,
+        "candidate_pool_factor": 4
+      },
+      "checkpoint": {
+        "path": ".scratch/exp-210-rollout-aware/scheduled-state-challenger/weights.safetensors",
+        "sha256": "02870c160e6c5e089b6370425b7e4a587236f730f1e27497537d2d7032b5c0ff",
+        "bytes": 510904
+      }
+    }
+  },
+  "comparison": {
+    "control_transition": 0.99794,
+    "control_rollout": 0.9072,
+    "challenger_transition": 0.99828,
+    "challenger_rollout": 0.91425,
+    "transition_change": 0.00033999999999989594,
+    "rollout_gain": 0.007050000000000001,
+    "challenger_invalid_rollout": 0.00175
+  },
+  "gates": {
+    "minimum_rollout_gain_over_control": 0.02,
+    "minimum_challenger_rollout": 0.92,
+    "minimum_challenger_transition": 0.996,
+    "maximum_transition_regression": 0.001,
+    "maximum_invalid_rollout_rate": 0.005,
+    "passed": false
+  },
+  "decision": "reject-scheduled-state-formulation",
+  "resource": {
+    "wall_seconds": 447.41893513800017,
+    "cpu_minute_cap": 10
+  },
+  "limitations": [
+    "Matched official-like heldout identities; no consumed independent seed or checked answer was used.",
+    "Hard scheduled predictions are detached, so learning occurs through recovery targets rather than backpropagation through time."
+  ]
+}
