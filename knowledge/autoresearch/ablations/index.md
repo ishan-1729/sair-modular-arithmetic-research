@@ -36,3 +36,4 @@
 - [EXP-325 width-64 cellular weight soup](exp-325-cellular-width64-weight-soup.md) - no-cost interpolation of consecutive diverse checkpoints.
 - [EXP-326 cellular weight-soup retry](exp-326-cellular-width64-soup-retry.md) - resource-corrected five-alpha comparison.
 - [EXP-327 cellular width-64 logit ensemble](exp-327-cellular-width64-logit-ensemble.md) - paired complementary-checkpoint ensemble test.
+- [EXP-328 cellular width-64 logit-ensemble retry](exp-328-cellular-width64-logit-ensemble-retry.md) - resource-corrected paired ensemble screen.

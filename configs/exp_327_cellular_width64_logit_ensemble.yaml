@@ -1,4 +1,5 @@
 run_id: exp-327-cellular-width64-logit-ensemble
+preregistration: knowledge/autoresearch/ablations/exp-327-cellular-width64-logit-ensemble.md
 hypothesis: averaging logits from complementary diverse cellular checkpoints improves width-64 exact rollout beyond either endpoint
 seed: 20260715
 tracking:

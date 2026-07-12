@@ -62,3 +62,4 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-324 cellular width64 stage2 | 56/64 | +400 | 99.88% | 91.867% | 0.467% | 99,824 | 284.6 train | narrow reject; soup next |
 | EXP-325 cellular width64 soup | 64 | frozen | invalid | invalid | invalid | 99,824 | stopped by projection | invalid resource projection |
 | EXP-326 cellular width64 soup retry | 64 | frozen | 99.9% | 91.2% | 0.2% | 99,824 | 593.2 analysis | reject; +1.0 over endpoint |
+| EXP-327 cellular width64 logit ensemble | 64 | frozen | invalid | invalid | invalid | 199,648 | procedurally interrupted | no metrics; budget-policy error |
