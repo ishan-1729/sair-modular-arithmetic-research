@@ -27,11 +27,11 @@ incumbent:
   mlflow_run_id: 046a04ea53864925b8cfa244881f60c4
   mlflow_model_version: "3"
 current_hypothesis:
-  run_id: exp-400-graph-message-passing-smoke
-  statement: Typed recurrent message passing over bit positions improves width transfer and exact rollout beyond a parameter-matched local cellular control.
-  promotion_gate: Advance a graph arm only after the frozen exact-rollout or zero-shot transition gain gate passes against the matched cellular control.
-  status: preregistered
-next_action: Run the dynamically budgeted four-arm EXP-400 graph successive-halving rung; retain Candidate 003 as incumbent.
+  run_id: exp-401-pyg-graph-message-passing
+  statement: Canonical PyG normalization, dynamic GATv2 attention, or tested max MessagePassing materially improves graph algorithm learning over minimal reference operators.
+  promotion_gate: Profile pinned PyG operators, then preregister a matched library-backed confirmation with the cellular control.
+  status: planned
+next_action: Implement and profile PyG 2.8.0 GCNConv, GATv2Conv, and MessagePassing models before freezing EXP-401; retain Candidate 003 as incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

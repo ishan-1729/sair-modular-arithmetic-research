@@ -1,0 +1,21 @@
+{
+  "run_id": "exp-400-graph-message-passing-smoke",
+  "status": "completed",
+  "created_at": "2026-07-12T09:15:00Z",
+  "hypothesis": "Explicit bit-position graph relations improve width transfer and exact rollout beyond a matched local cellular control.",
+  "seed": 20260717,
+  "source": {
+    "repository_commit": "5877f90470b74aac952d3f1eaac7540dd1563385",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "b2ba79c15afb8ce9f21751f3619b5006d3c8f94ea530c52bcbab1e149699ca5b",
+    "config_sha256": "d1196f2e9db72952270baa43fe8fc8fb14a863d406910c24402268acc2f03962",
+    "model_sha256": "763137c2e396f45082a6d122ae84925948cd02e6286dbcdbf5c311eb1233c66f"
+  },
+  "config": "configs/exp_400_graph_message_passing_smoke.yaml",
+  "environment": "experiments/runs/exp-400-graph-message-passing-smoke/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "84916e90835d43f29fc444cae5821054"},
+  "artifacts": {"checkpoint": ".scratch/exp-400-graph-message-passing-smoke/cellular-control/weights.safetensors", "checkpoint_sha256": "24d925b723cba15e88c24c091bf66bb20efff1fd383fb81d01c5fc9ac7c927db", "gcn_checkpoint_sha256": "4f0db1ad3ca98b9f4313c4aab794df2def3d4cb17b63f4b400741246fff9c101", "gat_checkpoint_sha256": "4d794f245cac7e2ce376c49871486b7127a57fdfa8850244d15a932f993a1750", "mpnn_checkpoint_sha256": "4936b8b70d4ff917fa00ced2ce6be641ad0ae60160b9082c9fb9ac817a2afbb9", "metrics": "evals/results/exp-400-graph-message-passing-smoke/metrics.json", "summary_sha256": "4f15e30f231fe3d9f7deb3f8545e1afddf8b40553ff233566ff907ea8287db57"},
+  "decision": "reject-minimal-reference-operators-continue-library-backed-graph-track",
+  "notes": ["No minimal graph arm passes the 200-update rung.", "This result does not close mature library-backed GCN, GATv2, or MessagePassing implementations.", "PyG 2.8.0 was subsequently selected for EXP-401 after official-documentation compatibility review."]
+}

@@ -286,3 +286,10 @@ runs:
     run_record: experiments/runs/exp-329-cellular-width64-autonomous-state-recovery/run.json
     metrics: evals/results/exp-329-cellular-width64-autonomous-state-recovery/metrics.json
     checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors
+  - run_id: exp-400-graph-message-passing-smoke
+    status: completed
+    approach: minimal-reference-gcn-gat-mpnn-smoke
+    config: configs/exp_400_graph_message_passing_smoke.yaml
+    run_record: experiments/runs/exp-400-graph-message-passing-smoke/run.json
+    metrics: evals/results/exp-400-graph-message-passing-smoke/metrics.json
+    checkpoint: .scratch/exp-400-graph-message-passing-smoke

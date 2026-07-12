@@ -66,3 +66,5 @@ The incumbent Tier-2 estimate is 492/500 (98.4%) across five additional generato
 | EXP-328 cellular width64 logit ensemble retry | 64 | frozen | 100% | 90.8% | 0% | 199,648 | 635-674 wall / 40.4 CPU min | reject; +1.0, below 93% |
 | EXP-329 teacher-forced control | 56/64 | +400 | 99.86% width64 | 93.133% width64 | 0.267% | 99,824 | 1,293 wall arm | control |
 | EXP-329 autonomous-state recovery | 56/64 | +400 | 99.92% width64 | 94.267% width64 | 0.133% | 99,824 | 452 wall arm | narrow reject; +1.133 < +1.5 |
+| EXP-400 cellular control | 8/12/16 -> 32 | 200 | 37.48% / 44.74% | 0% / 0% | n/a | 99,824 | 84.2 train | reference control |
+| EXP-400 minimal GCN/GAT/MPNN | 8/12/16 -> 32 | 200 | 16.6-16.9% / 24.4-26.7% | 0% / 0% | n/a | 72,828-94,951 | 80.7-138.7 train | reject reference operators; PyG next |
