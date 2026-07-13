@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-629 Tier-6 Balanced First-Error Replay
 description: Matched low-rate full-cell continuation with uniform or model-mined exact first-error replay.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, hard-mining, replay, autonomous-rollout]
 timestamp: "2026-07-13T12:05:00+05:30"
 ---
@@ -48,3 +48,11 @@ No checked, consumed independent, or private answer is used. The inference archi
 ## Infrastructure attempt
 
 MLflow run `39cd3ebbef1c4da28d5204f7b922557c` failed before mining because the runner's 15-second `git status` provenance timeout was too short under host filesystem contention. It produced no dataset, checkpoint, or metric. The timeout alone was raised to 120 seconds before evidence generation; the hypothesis, data, training, evaluation, gates, and resource budget remain unchanged.
+
+## Result and decision
+
+Mining produced 153 unique first errors from 1,200 fresh training trajectories (12.75%) and passed the minimum-128 feasibility gate. The matched uniform-replay control reached 263/300 (87.67%) width-128 rollout, 2,994/3,000 (99.8%) width-128 transition, 292/300 (97.33%) width-64 rollout, and 1% invalid width-128 rollouts.
+
+Balanced first-error replay regressed width-128 rollout to 259/300 (86.33%, −1.33 points), missed the transition gate at 2,993/3,000 (99.767%), and reduced width-64 rollout to 289/300 (96.33%). Its 0.33% invalid rate and width-64 absolute retention passed, but the primary absolute, causal-gain, and transition gates failed.
+
+Reject and close this formulation. Exact pre-error replay remains genuinely difficult—the hard-mixed batches stayed around 78–86% exact with frequent clipped gradients—but concentrating 25% of width-128 batches on 153 model-selected transitions harms fresh autonomous behavior even when the full cell and majority uniform replay are used. Do not tune the replay ratio on this observed set. The complete run took 5,193.61 runner wall seconds and 19,440.43 aggregate CPU seconds, within the 6,500-second hard ceiling; externally measured elapsed time was 4,959 seconds under contended WSL scheduling.

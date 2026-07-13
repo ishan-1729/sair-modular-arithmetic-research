@@ -531,3 +531,10 @@ runs:
     run_record: experiments/runs/exp-627-tier6-trajectory-feature-reranker/run.json
     metrics: evals/results/exp-627-tier6-trajectory-feature-reranker/metrics.json
     checkpoint: .scratch/exp-627-tier6-trajectory-feature-reranker/reranker.safetensors
+  - run_id: exp-629-tier6-balanced-first-error-replay
+    status: completed
+    approach: matched-balanced-first-error-replay
+    config: configs/exp_629_tier6_balanced_first_error_replay.yaml
+    run_record: experiments/runs/exp-629-tier6-balanced-first-error-replay/run.json
+    metrics: evals/results/exp-629-tier6-balanced-first-error-replay/metrics.json
+    checkpoint: .scratch/exp-629-tier6-balanced-first-error-replay/first_error_replay/weights.safetensors

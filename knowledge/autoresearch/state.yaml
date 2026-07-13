@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T12:12:00+05:30
+updated_at: 2026-07-13T13:38:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-629-tier6-balanced-first-error-replay
-  statement: Low-rate full-cell continuation with a minority of training-only, model-mined first-error transitions and majority uniform replay can reduce sparse autonomous width-128 failures without the instability of a separate additive corrector.
-  promotion_gate: Preregister a matched uniform-replay control after throughput and hard-example-yield profiling; require at least 90 percent fresh width-128 rollout, at least three points paired gain, at least 95 percent retained width-64 rollout, at least 99.8 percent width-128 transition accuracy, and at most one percent invalid width-128 rollouts.
-  status: preregistered
-next_action: Run the resumable EXP-629 matched comparison at the declared 300 updates and full 3,000-transition/300-rollout fidelity, preserving the mined replay cache and each 25-step arm checkpoint.
+  run_id: exp-630-radix4-cellular-transition
+  statement: A learned radix-4 transition that consumes two multiplier bits per recurrent step can reduce autonomous error accumulation enough to offset its harder seven-class reduction transition and halve Tier-6 rollout horizon.
+  promotion_gate: Profile and preregister a matched viability rung against the radix-2 cellular control; require competitive exact rollout at the trained width, useful width transfer, deterministic valid states, and a measured inference-call/runtime advantage before higher-width scaling.
+  status: planning
+next_action: Implement and unit-test legal radix-4 bit-tensor features, seven-class quotient supervision, exact offline labels, and transferred cellular initialization; profile a matched small-width viability rung before preregistration.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 40196de7fd52ddcd4a5d21c73a948560b154687f
+  last_validated_commit: e960273ef36b080e15df9549b244f06c8bdeb85a
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
@@ -57,3 +57,4 @@ risks:
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
   - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.
+  - Balanced replay of exact model-mined first-error transitions regresses fresh width-128 rollout by 1.33 points and slightly misses transition accuracy despite majority uniform replay.
