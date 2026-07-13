@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-622 Tier-6 Width-4 Beam Coverage
 description: Fresh frozen-checkpoint feasibility test for wider learned-beam coverage and candidate-shaped runtime.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, beam-search, coverage, runtime]
 timestamp: "2026-07-13T08:40:00+05:30"
 ---
@@ -34,3 +34,9 @@ Candidate runtime is projected from the actual 100-case profile, not the smaller
 ## Compliance and limitations
 
 Beam expansion uses only trained logits and generic state search. Exact bigint arithmetic is confined to generated truth and post-inference scoring. The experiment is a generated-seed feasibility test, not checked-public, official-private, or official-sandbox evidence. The 100-case timing profile is closer to the submission shape than per-case extrapolation but does not replace the pinned isolated container gate.
+
+## Result and decision
+
+The complete run finished unchanged in 948.63 wall seconds and 3,584.10 aggregate CPU seconds. On 200 fresh width-128 cases, greedy scored 178/200 (89.0%), the likelihood-selected width-4 output scored 173/200 (86.5%), and the correct answer occurred anywhere in the final beam for 188/200 (94.0%). There were seven greedy-only selected outcomes, two beam-only selected outcomes, and twenty cases absent from both selected outputs. Final selected residues were all valid, and repeated predictions, full beam states, and paired counts were exactly deterministic.
+
+Coverage passes, but the combined gate fails because the candidate-shaped runtime projection remains 291.52 seconds against the frozen 285-second maximum. Reject the current width-4 implementation and do not train a reranker yet. Preserve the 94% coverage signal and test one frozen, exact-output inference optimization; only a deterministic optimization that reduces the same 100-case workload enough to restore headroom may reopen reranker training.

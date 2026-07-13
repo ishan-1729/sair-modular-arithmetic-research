@@ -489,3 +489,10 @@ runs:
     run_record: experiments/runs/exp-621-tier6-learned-beam-decoding/run.json
     metrics: evals/results/exp-621-tier6-learned-beam-decoding/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-622-tier6-width4-beam-coverage
+    status: completed
+    approach: frozen-width4-learned-beam-coverage
+    config: configs/exp_622_tier6_width4_beam_coverage.yaml
+    run_record: experiments/runs/exp-622-tier6-width4-beam-coverage/run.json
+    metrics: evals/results/exp-622-tier6-width4-beam-coverage/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
