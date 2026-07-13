@@ -538,3 +538,10 @@ runs:
     run_record: experiments/runs/exp-629-tier6-balanced-first-error-replay/run.json
     metrics: evals/results/exp-629-tier6-balanced-first-error-replay/metrics.json
     checkpoint: .scratch/exp-629-tier6-balanced-first-error-replay/first_error_replay/weights.safetensors
+  - run_id: exp-630-radix4-cellular-transition
+    status: completed
+    approach: progressive-radix4-cellular-viability
+    config: configs/exp_630_radix4_cellular_transition.yaml
+    run_record: experiments/runs/exp-630-radix4-cellular-transition/run.json
+    metrics: evals/results/exp-630-radix4-cellular-transition/metrics.json
+    checkpoint: .scratch/exp-630-radix4-cellular-transition/weights.safetensors

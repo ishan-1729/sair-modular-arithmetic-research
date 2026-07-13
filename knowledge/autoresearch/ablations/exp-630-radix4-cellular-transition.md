@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-630 Radix-4 Cellular Transition
 description: Progressive viability test of a learned two-bit-per-step cellular modular transition against the frozen radix-2 control.
-status: preregistered
+status: completed
 tags: [autoresearch, radix4, cellular, tier6, horizon, architecture]
 timestamp: "2026-07-13T14:10:00+05:30"
 ---
@@ -51,3 +51,8 @@ Transferred radix-4 initialization is not function preserving: before training i
 
 No checked, consumed independent, or private answer is used. The rung changes representation, quotient-head size, training data, and autonomous step count together as an architecture test. Later causal ablations are required before attributing any gain specifically to horizon length.
 
+## Result and decision
+
+After all 1,600 updates, radix-4 transition accuracy is 37.5%, 22.9%, and 13.95% at widths 16, 32, and 64. All three 200-case rollout sets score 0%; invalid-trajectory rates rise from 19.5% to 35.5% to 52%. By contrast, the frozen radix-2 control scores 97.5%, 96.5%, and 93.5% rollouts.
+
+The speed and determinism mechanisms pass: radix-4 wall ratios are 0.472, 0.553, and 0.496, and repeated predictions are exact. Accuracy viability fails every gate, however. Reject and close this formulation; do not scale it above width 32 or extend training after seeing the result. Runtime was 1,272.34 runner wall seconds and 4,675.52 aggregate CPU seconds, within budget.

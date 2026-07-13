@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T14:12:00+05:30
+updated_at: 2026-07-13T14:47:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-630-radix4-cellular-transition
-  statement: A learned radix-4 transition that consumes two multiplier bits per recurrent step can reduce autonomous error accumulation enough to offset its harder seven-class reduction transition and halve Tier-6 rollout horizon.
-  promotion_gate: Require at least 90 percent width-16 rollout, 70 percent width-32 rollout, 20 percent zero-shot width-64 rollout, 98/80 percent width-32/64 transition, no more than 10 percent invalid width-64 rollouts, deterministic predictions, and radix-4 wall time no more than 65 percent of radix-2.
-  status: preregistered
-next_action: Run the resumable 1,600-update EXP-630 progressive curriculum and full paired width-16/32/64 viability evaluation under the measured 3,000-second planning and 4,800-second hard wall budgets.
+  run_id: exp-631-tier6-modulus-feature-failure-stratification
+  statement: Training-only failure probability may concentrate in stable, target-free modulus and operand feature groups that support robust group-balanced recovery without replaying individual first-error transitions.
+  promotion_gate: Analyze only preserved training caches first; preregister training only if a stable feature group has at least twofold failure enrichment with sufficient support and an untouched validation split confirms the association.
+  status: planning
+next_action: Stratify preserved EXP-627 training and validation greedy outcomes by modulus bit length, normalized magnitude, Hamming weight, and operand ratios, then test whether any training-derived grouping replicates before designing another model update.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: e960273ef36b080e15df9549b244f06c8bdeb85a
+  last_validated_commit: 384afbe805949c62354dc6719630b84f84dd96a5
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
