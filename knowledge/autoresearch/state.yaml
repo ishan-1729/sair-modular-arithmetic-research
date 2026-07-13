@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T05:50:00+05:30
+updated_at: 2026-07-13T06:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-619-tier6-confidence-augmented-state
-  statement: Retaining hard intermediate bits while supplying previous signed confidence and magnitude as additional learned feature channels can repair uncertain transitions without destabilizing correct hard trajectories.
-  promotion_gate: Require exact source reproduction at zero confidence weights, then a matched confidence-channel smoke reaching at least 90 percent width-128 rollout with a three-point gain and all retention/validity gates.
+  run_id: exp-620-persistent-latent-neural-gpu
+  statement: A persistent latent spatial state updated across multiplier bits can avoid threshold-error accumulation and learn a width-shared modular algorithm more robustly than decoded residue recurrence.
+  promotion_gate: Implement and profile a compliant persistent-state Neural GPU, then preregister a staged width-curriculum smoke with an explicit cellular control and exact rollout gates.
   status: planning
-next_action: Implement an exact-expanded eight-channel cellular model and confidence-carrying rollout training/evaluation, then profile and preregister EXP-619; keep Candidate 004 incumbent.
+next_action: Design and test a persistent latent-state Neural GPU with final-only decoding and a compute-aware staged curriculum; keep Candidate 004 incumbent.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 78445af30c5702c151df5eb533e0448d64fad1f2
+  last_validated_commit: 708b9b923c95a6bc90864a55e57afeb1894b103b
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.

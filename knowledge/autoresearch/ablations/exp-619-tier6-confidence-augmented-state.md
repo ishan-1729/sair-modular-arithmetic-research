@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-619 Tier-6 Confidence-Augmented State
 description: Matched test of hard residue state augmented by persistent prior-logit confidence features.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, confidence, persistent-state, straight-through]
 timestamp: "2026-07-13T06:10:00+05:30"
 ---
@@ -38,3 +38,9 @@ The planning budget is 1,650 wall seconds and the hard runaway ceiling is 2,450 
 ## Boundaries
 
 Checked and private answers remain unread. Exact arithmetic remains confined to offline labels and evaluation truth. Confidence features and all corrections are learned tensor computations; there is no arithmetic fallback or rule-based output repair. Native PyTorch convolution and recurrent primitives are appropriate.
+
+## Result and decision
+
+Exact initialization passed at both widths. Confidence weights activated well above gate: stem RMS `0.00553`, gate RMS `0.00916`, and candidate RMS `0.00867`. Nevertheless, width-128 rollout fell from 82.0% control to 78.0% challenger, width-64 fell 97.5% -> 97.0%, and transition remained 99.9% with valid residues.
+
+Reject and close the two-plane confidence formulation. Learned confidence is not merely inactive; it materially worsens autonomous dynamics. The run completed in 948.94 wall seconds and 3,616.53 aggregate CPU seconds. Do not tune confidence transforms or channel count. Replace decoded-state recurrence with a materially different persistent latent-state architecture.

@@ -468,3 +468,10 @@ runs:
     run_record: experiments/runs/exp-618-tier6-continuous-state-inference/run.json
     metrics: evals/results/exp-618-tier6-continuous-state-inference/metrics.json
     checkpoint: .scratch/exp-607-tier6-differentiable-soft-state/differentiable_soft_state/weights.safetensors
+  - run_id: exp-619-tier6-confidence-augmented-state
+    status: completed
+    approach: exact-expanded-persistent-confidence-state
+    config: configs/exp_619_tier6_confidence_augmented_state.yaml
+    run_record: experiments/runs/exp-619-tier6-confidence-augmented-state/run.json
+    metrics: evals/results/exp-619-tier6-confidence-augmented-state/metrics.json
+    checkpoint: .scratch/exp-619-tier6-confidence-augmented-state/confidence_state_challenger/weights.safetensors
