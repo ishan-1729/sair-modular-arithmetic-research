@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T15:33:01+05:30
+updated_at: 2026-07-13T16:05:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-633-hierarchical-learned-composition-feasibility
   statement: A width-shared learned binary composition tree can replace the 128-step autonomous Horner chain with logarithmic-depth composition, reducing exposure to sparse recurrent transition errors without using exact arithmetic in inference.
   promotion_gate: First require a preregistered matched feasibility rung at trained widths to demonstrate nonzero autonomous exactness, clear learning beyond randomized weights, deterministic valid outputs, and materially better length scaling than an update- and parameter-aware sequential control before authorizing Tier-6 training.
-  status: planning
-next_action: Design and preregister EXP-633 as a small-width hierarchical learned-composition feasibility comparison, calibrate its dynamic resource budget from measured throughput, and stop at the viability rung unless all frozen learning and length-transfer gates pass.
+  status: preregistered
+next_action: Commit the tested EXP-633 implementation and measured dynamic budget, then run the frozen resumable 2,400-update matched feasibility rung and full 300-case width-16/32 evaluation.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

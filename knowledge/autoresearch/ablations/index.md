@@ -47,3 +47,4 @@
 - [EXP-629 Tier-6 balanced first-error replay](exp-629-tier6-balanced-first-error-replay.md) - matched low-rate full-cell continuation with paired ordinary or model-mined first-error replay.
 - [EXP-630 radix-4 cellular transition](exp-630-radix4-cellular-transition.md) - progressive learned two-bit-per-step transition viability test with a frozen radix-2 control.
 - [EXP-632 shared-core diverse output heads](exp-632-tier6-shared-core-diverse-output-heads.md) - exact-initialized complementary bootstrap head ensemble over the frozen core.
+- [EXP-633 hierarchical learned composition](exp-633-hierarchical-learned-composition-feasibility.md) - matched viability test of a shared binary latent-composition tree against sequential recurrence.
