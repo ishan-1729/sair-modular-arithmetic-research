@@ -482,3 +482,10 @@ runs:
     run_record: experiments/runs/exp-620-persistent-latent-neural-gpu/run.json
     metrics: evals/results/exp-620-persistent-latent-neural-gpu/metrics.json
     checkpoint: .scratch/exp-620-persistent-latent-neural-gpu/persistent_neural_gpu/weights.safetensors
+  - run_id: exp-621-tier6-learned-beam-decoding
+    status: completed
+    approach: frozen-width2-learned-likelihood-beam
+    config: configs/exp_621_tier6_learned_beam_decoding.yaml
+    run_record: experiments/runs/exp-621-tier6-learned-beam-decoding/run.json
+    metrics: evals/results/exp-621-tier6-learned-beam-decoding/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

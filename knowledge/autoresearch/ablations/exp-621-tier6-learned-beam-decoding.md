@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-621 Tier-6 Learned Beam Decoding
 description: Frozen paired test of greedy state decoding against width-2 learned-likelihood search over one-bit alternatives.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, beam-search, confidence, neuro-symbolic]
 timestamp: "2026-07-13T07:20:00+05:30"
 ---
@@ -34,3 +34,9 @@ The projected candidate gate uses measured width-128 beam seconds per case, 100 
 ## Boundaries and library choice
 
 Exact arithmetic is confined to generated-case truth and post-inference scoring. Beam decoding is learned-parameter dependent and supplies generic search/routing rather than modular arithmetic. Native PyTorch logits and log-sigmoid scoring are sufficient; a general beam-search package would add sequence-token assumptions without improving this state-space decoder.
+
+## Result and decision
+
+At width 128, greedy scores 165/200 (82.5%) and selected beam output 164/200 (82.0%): 163 both correct, two greedy-only, one beam-only, and 34 neither. However, the correct answer appears somewhere in the final width-2 beam for 172/200 (86.0%), demonstrating improved search coverage but failed ranking. Width 64 is exactly tied at 95%, while oracle beam containment is 98%.
+
+Reject accumulated independent-bit likelihood as the beam selector. Determinism, final validity, and projected integrated runtime (167.42 seconds) pass. Runtime was 634.35 wall seconds and 2,355.05 aggregate CPU seconds. Preserve the generic beam decoder and raw states. The next staged question is whether a wider beam covers at least 92% within the 300-second envelope, which would justify a separately trained reranker; do not tune scoring on this selection set.
