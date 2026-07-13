@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-627 Tier-6 Trajectory-Feature Reranker
 description: Generated-data training and untouched evaluation of a compact legal selector for confidence-routed width-4 candidates.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, reranker, conditional-compute, trained-selector]
 timestamp: "2026-07-13T10:15:00+05:30"
 ---
@@ -42,3 +42,11 @@ The only expensive missing generation is width-4 search for 80 selected cases. T
 ## Compliance and limitations
 
 Exact bigint arithmetic is confined to generated labels and scoring. Trained parameters materially select the answer among generic learned-search states. Equality and bit-statistic features do not repair or compute a modular product. Generated selection evidence is not checked-public, five-seed independent, official-private, or isolated-sandbox evidence. The official inference package remains unchanged unless all later promotion gates pass.
+
+## Result and decision
+
+The recovered run completes all original cases and gates. Training generation yields 390 beam-contained routed cases from 480; validation yields 54/80; untouched selection yields 56/80. The best checkpoint occurs at epoch 25 and early stopping completes at epoch 65.
+
+On untouched selection, greedy is 162/200 (81.0%), likelihood-routed output is 163/200 (81.5%), the trained reranker is 162/200 (81.0%), and the initialized-weight control is also 162/200. The routed oracle ceiling is only 175/200 (87.5%), so no selector can satisfy the 90% gate on this surface. The trained model is deterministic and valid but shows zero exact gain and no selected weight dependence. Reject and close this scalar feature reranker.
+
+Across the preserved generation phases plus training, observed work is 5,423.58 wall seconds and 20,445.58 aggregate CPU seconds. This total spans the initial hard-ceiling stop and separately preregistered 570-second continuation; no single phase silently exceeded its declared hard ceiling. Reranker inference itself is negligible and projects the integrated path at 187.19 seconds, but runtime cannot rescue the failed accuracy and oracle gates.

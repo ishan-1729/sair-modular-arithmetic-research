@@ -1,0 +1,1 @@
+{"captured_at":"2026-07-13T05:48:50Z","platform":"Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39","distribution":"Ubuntu-24.04 WSL2","python":"3.12.3","pytorch":"2.5.1+cpu","mlflow":"3.14.0","device":"cpu","torch_threads":4,"peak_rss_bytes":461070336}

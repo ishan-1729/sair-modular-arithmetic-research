@@ -1,0 +1,10 @@
+{
+  "run_id":"exp-627-tier6-trajectory-feature-reranker","created_at":"2026-07-13T05:48:50Z","checkpoint_sha256":"57108b67a338e2ef3df39b1d6f4cbd0d0f2f7e11d4fe482247f2ef0ce2b343bd",
+  "evaluation":{"transition":{"width128":{"cases":5000,"correct":4988,"exact_accuracy":0.9976,"valid_residue_rate":1.0,"evidence_source":"exp-621-tier6-learned-beam-decoding"}},"rollout":{"greedy_width128":{"cases":200,"correct":162,"exact_accuracy":0.81,"invalid_rate":0.0},"likelihood_routed_width128":{"cases":200,"correct":163,"exact_accuracy":0.815,"invalid_rate":0.0},"trained_reranker_width128":{"cases":200,"correct":162,"exact_accuracy":0.81,"invalid_rate":0.0},"oracle_routed_width128":{"cases":200,"correct":175,"exact_accuracy":0.875,"invalid_rate":0.0}}},
+  "training":{"train_cases":1200,"routed_train_cases":480,"contained_train_cases":390,"validation_cases":200,"contained_validation_routed_cases":54,"epochs_completed":65,"best_epoch":25,"best_validation_accuracy":0.82},
+  "controls":{"greedy_accuracy":0.81,"initialized_weight_accuracy":0.81,"trained_weight_accuracy":0.81,"likelihood_accuracy":0.815,"oracle_accuracy":0.875,"projected_integrated_seconds":187.19257067510947,"all_gates_passed":false},
+  "determinism":{"passed":true,"scores_equal":true,"choices_equal":true,"predictions_equal":true},
+  "runtime":{"cumulative_generation_and_training_wall_seconds":5423.584280314011,"cumulative_generation_and_training_aggregate_cpu_seconds":20445.575651829004,"continuation_process_wall_seconds":36.747221804995206,"continuation_process_aggregate_cpu_seconds":21.016241242,"torch_threads":4,"peak_rss_bytes":461070336},
+  "decision":"reject-tier6-trajectory-feature-reranker",
+  "limitations":["Fresh generated selection evidence only; checked and private answers were not read.","The untouched routed oracle ceiling is below the absolute gate.","The scalar feature reranker shows no exact selected weight dependence.","No candidate or submission package was changed."]
+}

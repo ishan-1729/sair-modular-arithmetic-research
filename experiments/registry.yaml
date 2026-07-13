@@ -524,3 +524,10 @@ runs:
     run_record: experiments/runs/exp-626-tier6-minimum-margin-routing-confirmation/run.json
     metrics: evals/results/exp-626-tier6-minimum-margin-routing-confirmation/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-627-tier6-trajectory-feature-reranker
+    status: completed
+    approach: trained-trajectory-feature-reranker
+    config: configs/exp_627_tier6_trajectory_feature_reranker.yaml
+    run_record: experiments/runs/exp-627-tier6-trajectory-feature-reranker/run.json
+    metrics: evals/results/exp-627-tier6-trajectory-feature-reranker/metrics.json
+    checkpoint: .scratch/exp-627-tier6-trajectory-feature-reranker/reranker.safetensors

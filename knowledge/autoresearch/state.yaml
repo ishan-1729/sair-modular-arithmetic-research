@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-627-tier6-trajectory-feature-reranker
-  statement: A compact trained reranker using only learned beam trajectory statistics can select the correct final state often enough for minimum-margin routed inference to reach at least 90 percent exact Tier-6 accuracy.
-  promotion_gate: Train only on new generated identities; require fresh selected routed accuracy at least 90 percent, at least three points over greedy, width-64 retention at least 95 percent when applicable, determinism, weight dependence, validity, and projected integrated runtime no greater than 260 seconds before independent confirmation.
+  run_id: exp-628-tier6-top2-bit-branch-coverage
+  statement: Expanding hard, each of the two least-confident one-bit alternatives, and their two-bit combination can improve width-4 routed oracle coverage without additional transition-model calls.
+  promotion_gate: Require fresh 200-case minimum-margin-routed oracle coverage at least 92 percent, at least four points above the one-bit branch control on identical cases, deterministic valid states, and projected Tier-6 runtime no greater than 240 seconds before any selector training.
   status: planning
-next_action: Instrument per-hypothesis branch and margin trajectories, profile cached training-data generation, and preregister a compact PyTorch reranker with generated train/validation identities and untouched selection evidence.
+next_action: Implement and unit-test top-two individual/combined bit branching, profile it at the frozen 40 percent route, and preregister a paired coverage comparison against the one-bit branch control.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 8fdf9536b3c712390ceca2206560a787fd6a50e7
+  last_validated_commit: 7b51ec5c9e4331ccbdfb82c17098550d74df34c9
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
