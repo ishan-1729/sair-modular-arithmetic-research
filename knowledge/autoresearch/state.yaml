@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T11:38:00+05:30
+updated_at: 2026-07-13T12:12:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-629-tier6-balanced-first-error-replay
   statement: Low-rate full-cell continuation with a minority of training-only, model-mined first-error transitions and majority uniform replay can reduce sparse autonomous width-128 failures without the instability of a separate additive corrector.
   promotion_gate: Preregister a matched uniform-replay control after throughput and hard-example-yield profiling; require at least 90 percent fresh width-128 rollout, at least three points paired gain, at least 95 percent retained width-64 rollout, at least 99.8 percent width-128 transition accuracy, and at most one percent invalid width-128 rollouts.
-  status: planning
-next_action: Profile fresh training-only first-error yield and full-cell update throughput, then document a dynamic matched budget and preregister balanced first-error replay against an update- and example-matched uniform continuation.
+  status: preregistered
+next_action: Run the resumable EXP-629 matched comparison at the declared 300 updates and full 3,000-transition/300-rollout fidelity, preserving the mined replay cache and each 25-step arm checkpoint.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

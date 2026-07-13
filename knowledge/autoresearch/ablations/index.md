@@ -44,3 +44,4 @@
 - [EXP-510 multi-architecture grokking feasibility](exp-510-multiarchitecture-grokking-feasibility.md) - proper PyG graph and materially different TCN delayed-generalization probes.
 - [EXP-520 Tier-5 recovery delta patching](exp-520-tier5-recovery-delta-patching.md) - causal tensor-group transplants for the strongest Tier-5 pair.
 - [EXP-521 Tier-5 recovery independent gate](exp-521-tier5-recovery-independent.md) - five untouched official-generator seeds for the full recovery checkpoint.
+- [EXP-629 Tier-6 balanced first-error replay](exp-629-tier6-balanced-first-error-replay.md) - matched low-rate full-cell continuation with paired ordinary or model-mined first-error replay.
