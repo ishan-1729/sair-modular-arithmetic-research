@@ -31,6 +31,19 @@ def test_expansion_flips_only_least_confident_bit_and_scores_it() -> None:
     assert torch.allclose(hard_score - alternate_score, torch.tensor([0.1, 0.2]))
 
 
+def test_top_two_expansion_returns_individual_and_combined_flips() -> None:
+    beam = load_module(
+        "learned_beam_top_two_test_decoder",
+        ROOT / "experiments/exp_621_tier6_learned_beam_decoding/decoder.py",
+    )
+    logits = torch.tensor([[3.0, -0.1, 0.2, -4.0]])
+    values, scores = beam.expand_two_least_confident_bits(logits)
+    assert values == [[5, 7, 1, 3]]
+    assert torch.allclose(scores[:, 0] - scores[:, 1], torch.tensor([0.1]))
+    assert torch.allclose(scores[:, 0] - scores[:, 2], torch.tensor([0.2]))
+    assert torch.allclose(scores[:, 0] - scores[:, 3], torch.tensor([0.3]))
+
+
 def test_decoder_deduplicates_states_and_uses_only_model_scores() -> None:
     beam = load_module(
         "learned_beam_rollout_test_decoder",

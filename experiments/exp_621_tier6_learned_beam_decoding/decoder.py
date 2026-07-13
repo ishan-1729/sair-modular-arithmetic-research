@@ -39,6 +39,36 @@ def expand_least_confident_bit(logits: Tensor) -> tuple[list[int], list[int], Te
     )
 
 
+def expand_two_least_confident_bits(logits: Tensor) -> tuple[list[list[int]], Tensor]:
+    """Return hard, two individual flips, and their combined flip with scores."""
+    if logits.shape[1] < 2:
+        raise ValueError("two-bit branching requires at least two output bits")
+    hard_bits = logits.ge(0)
+    least = logits.abs().topk(k=2, dim=1, largest=False, sorted=True).indices
+    variants = hard_bits[:, None, :].expand(-1, 4, -1).clone()
+    rows = torch.arange(len(logits), device=logits.device)
+    variants[rows, 1, least[:, 0]] ^= True
+    variants[rows, 2, least[:, 1]] ^= True
+    variants[rows, 3, least[:, 0]] ^= True
+    variants[rows, 3, least[:, 1]] ^= True
+    values = [
+        decode_rows(variants[:, variant]) for variant in range(variants.shape[1])
+    ]
+    values_by_row = [list(row) for row in zip(*values)]
+    hard_score = F.logsigmoid(logits.abs()).sum(dim=1)
+    flip_costs = logits.abs().gather(1, least)
+    scores = torch.stack(
+        (
+            hard_score,
+            hard_score - flip_costs[:, 0],
+            hard_score - flip_costs[:, 1],
+            hard_score - flip_costs.sum(dim=1),
+        ),
+        dim=1,
+    )
+    return values_by_row, scores
+
+
 class LearnedLikelihoodBeamDecoder:
     """Retain top unique learned state hypotheses across Horner steps."""
 
@@ -50,6 +80,7 @@ class LearnedLikelihoodBeamDecoder:
         *,
         initial_beam_width: int | None = None,
         widen_at_position: int = 0,
+        branch_bits: int = 1,
     ) -> None:
         if beam_width < 1:
             raise ValueError("beam_width must be positive")
@@ -59,11 +90,14 @@ class LearnedLikelihoodBeamDecoder:
             raise ValueError("initial_beam_width must be between one and beam_width")
         if not 0 <= widen_at_position <= width:
             raise ValueError("widen_at_position must be between zero and width")
+        if branch_bits not in (1, 2):
+            raise ValueError("branch_bits must be one or two")
         self.model = model
         self.width = int(width)
         self.beam_width = int(beam_width)
         self.initial_beam_width = int(initial_beam_width)
         self.widen_at_position = int(widen_at_position)
+        self.branch_bits = int(branch_bits)
 
     @torch.inference_mode()
     def rollout(
@@ -99,16 +133,27 @@ class LearnedLikelihoodBeamDecoder:
             logits, _ = self.model(
                 feature_builder(states, rights, moduli, bits, self.width)
             )
-            hard, alternate, hard_score, alternate_score = expand_least_confident_bit(
-                logits
-            )
             candidates: list[list[tuple[int, float]]] = [[] for _ in range(batch)]
-            for index, owner in enumerate(owners):
-                parent = parent_scores[index]
-                candidates[owner].append((hard[index], parent + float(hard_score[index])))
-                candidates[owner].append(
-                    (alternate[index], parent + float(alternate_score[index]))
+            if self.branch_bits == 1:
+                hard, alternate, hard_score, alternate_score = (
+                    expand_least_confident_bit(logits)
                 )
+                for index, owner in enumerate(owners):
+                    parent = parent_scores[index]
+                    candidates[owner].append(
+                        (hard[index], parent + float(hard_score[index]))
+                    )
+                    candidates[owner].append(
+                        (alternate[index], parent + float(alternate_score[index]))
+                    )
+            else:
+                values, scores = expand_two_least_confident_bits(logits)
+                for index, owner in enumerate(owners):
+                    parent = parent_scores[index]
+                    candidates[owner].extend(
+                        (state, parent + float(score))
+                        for state, score in zip(values[index], scores[index])
+                    )
             retained_width = (
                 self.initial_beam_width
                 if position < self.widen_at_position
