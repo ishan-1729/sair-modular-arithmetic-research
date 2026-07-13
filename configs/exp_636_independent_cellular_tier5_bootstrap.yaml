@@ -1,0 +1,79 @@
+run_id: exp-636-independent-cellular-tier5-bootstrap
+hypothesis: The EXP-635 independent width-16 cellular learner can traverse a matched progressive curriculum to width 64 while preserving error diversity that target-free margin routing can exploit.
+preregistration: knowledge/autoresearch/ablations/exp-636-independent-cellular-tier5-bootstrap.md
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+source:
+  independent_checkpoint: .scratch/exp-635-independent-cellular-diversity-feasibility/challenger/weights.safetensors
+  independent_checkpoint_sha256: 3cce3160c405c68fd71223ed31a6a9be0995a7162de9e23d231c8b55e0e22dc4
+  incumbent_checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors
+  incumbent_checkpoint_sha256: 050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7
+seed: 20260832
+model: {hidden: 92, cycles: 2}
+data:
+  prime_bit_span: 4
+  train_prime_identities: 2048
+  test_prime_identities: 128
+training:
+  batch_size: 128
+  torch_threads: 4
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  checkpoint_every_steps: 100
+  stages:
+    - {name: bridge, widths: [16, 24, 32], steps: 1200, learning_rate: 0.001, minimum_learning_rate: 0.00005}
+    - {name: wide, widths: [32, 40, 48, 56], steps: 800, learning_rate: 0.0005, minimum_learning_rate: 0.000025}
+    - {name: tier5, widths: [56, 64], steps: 800, learning_rate: 0.0002, minimum_learning_rate: 0.00002}
+    - {name: recovery, widths: [56, 64], steps: 400, learning_rate: 0.00015, minimum_learning_rate: 0.000015}
+  recovery:
+    update_period: 4
+    batch_size: 32
+    chunk_steps: 4
+    scheduled_prediction_probability_start: 0.5
+    scheduled_prediction_probability_end: 1.0
+hard_mining:
+  candidate_pool_factor: 2
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+evaluation:
+  width32_rollout_cases: 300
+  width64_transition_cases: 3000
+  width64_rollout_cases: 600
+  source_dependence_width64_cases: 100
+  determinism_cases: 20
+  case_seed: 20261636
+routing:
+  rule: choose_independent_only_when_trajectory_minimum_absolute_logit_margin_is_higher
+  ties: incumbent
+gates:
+  minimum_independent_width32_rollout: 0.90
+  minimum_independent_width64_transition: 0.998
+  minimum_independent_width64_rollout: 0.90
+  minimum_trained_gain_over_width16_source_at_width64: 0.50
+  minimum_oracle_union_width64: 0.96
+  minimum_oracle_union_gain_over_best_arm: 0.03
+  minimum_routed_gain_over_best_arm: 0.015
+  maximum_independent_invalid_rate: 0.01
+  maximum_paired_width64_wall_seconds: 180
+  require_exact_determinism: true
+resource_budget:
+  status: calibrated
+  limit_unit: wall_seconds
+  calibration_updates_per_stage: 10
+  calibration_inference_cases: 10
+  hard_ceiling_check_cadence_steps: 100
+  measured_stage_wall_seconds: {bridge: 7.888584286003606, wide: 13.19985025099595, tier5: 18.799939464006457, recovery: 18.12048087999574}
+  measured_stage_aggregate_cpu_seconds: {bridge: 29.451542558000003, wide: 49.437137938999996, tier5: 70.419251137, recovery: 67.90495023699998}
+  projected_training_wall_seconds: 4231.432526720455
+  projected_training_aggregate_cpu_seconds: 15838.89424252
+  projected_evaluation_wall_seconds: 741.5368611861777
+  projected_evaluation_aggregate_cpu_seconds: 2776.980767159001
+  setup_serialization_tracking_allowance_wall_seconds: 180
+  expected_total_wall_seconds: 5153
+  expected_total_aggregate_cpu_minutes: 323
+  soft_budget_wall_seconds: 6960
+  hard_runaway_ceiling_wall_seconds: 10320
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 688.0
+  calibration_json_sha256: f0bac70be63590586aefd7fbb2c26b0ae7cb54cbee5f69d3677a6faede50ecd6
