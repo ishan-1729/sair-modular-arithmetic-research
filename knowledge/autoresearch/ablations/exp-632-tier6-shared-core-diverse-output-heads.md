@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-632 Tier-6 Shared-Core Diverse Output Heads
 description: Fresh matched screen of bootstrap-trained complementary residual heads over the frozen recurrent core.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, ensemble, output-heads, bootstrap, exact-initialization]
 timestamp: "2026-07-13T15:15:00+05:30"
 ---
@@ -46,3 +46,10 @@ The planning budget is 2,100 wall seconds and the hard runaway ceiling 3,400 wal
 
 Majority voting over learned logits is allowed trained inference, not exact arithmetic or output repair. Exact bigint operations remain offline for labels and evaluation truth. The feasibility calibration on preserved training errors corrected 11/153 by majority and demonstrated 43 disagreements; it is not selection evidence.
 
+## Result and decision
+
+The complete preregistered comparison finished without reducing fidelity. The runner recorded 2,019.689 wall seconds and 7,487.578 aggregate CPU seconds. External `/usr/bin/time` recorded 1,926.31 wall seconds, 7,506.44 user-plus-system CPU seconds, and 389% CPU utilization. The runner wall clock remained below the measured-throughput 2,100-second soft budget and far below the 3,400-second hard runaway ceiling; the differing WSL wall clocks are both preserved rather than silently conflated with CPU time.
+
+The challenger regressed width-128 exact rollout from 251/300 (83.67%) to 246/300 (82.00%), a -1.67-point change. Width-64 regressed from 289/300 (96.33%) to 283/300 (94.33%). Width-128 transition was 2,997/3,000 (99.9%), invalid rollout rate was 0.33%, and deterministic repetition passed, but the primary accuracy and retention gates failed. Heads disagreed on 9.67% of width-128 rollouts, showing that the branch was active; nevertheless, trained heads scored 83/100 on the matched diagnostic while randomized heads scored 84/100.
+
+Decision: reject and close this complementary-mask bootstrap majority formulation. Do not tune masks, bootstrap sampling, or vote rules on the observed fresh set. No independent, checked-public, official, or private answer was read, and Candidate 004 remains unchanged.

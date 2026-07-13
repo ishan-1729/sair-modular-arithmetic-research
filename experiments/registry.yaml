@@ -545,3 +545,10 @@ runs:
     run_record: experiments/runs/exp-630-radix4-cellular-transition/run.json
     metrics: evals/results/exp-630-radix4-cellular-transition/metrics.json
     checkpoint: .scratch/exp-630-radix4-cellular-transition/weights.safetensors
+  - run_id: exp-632-tier6-shared-core-diverse-output-heads
+    status: completed
+    approach: frozen-shared-core-complementary-bootstrap-output-heads
+    config: configs/exp_632_tier6_shared_core_diverse_output_heads.yaml
+    run_record: experiments/runs/exp-632-tier6-shared-core-diverse-output-heads/run.json
+    metrics: evals/results/exp-632-tier6-shared-core-diverse-output-heads/metrics.json
+    checkpoint: .scratch/exp-632-tier6-shared-core-diverse-output-heads/weights.safetensors

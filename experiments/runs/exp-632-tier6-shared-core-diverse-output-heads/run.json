@@ -1,0 +1,64 @@
+{
+  "run_id": "exp-632-tier6-shared-core-diverse-output-heads",
+  "status": "completed",
+  "created_at": "2026-07-13T10:03:01Z",
+  "hypothesis": "Complementary bootstrap-trained residual output heads improve width-128 exact rollout by at least three points over the frozen shared single-head control with negligible recurrent overhead.",
+  "seed": 20260829,
+  "source": {
+    "repository_commit": "4d291c7955d194cf7bc274c15c5d0585b19cfce8",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "e0058eaac412cc1743cc1fb1745f5d2c836e2daeb875f2bdf3027b6f88d26905",
+    "runner_sha256": "797db1e963ffa800df6010d9d750134b918cdf8c7be868fa15722bb55126f25f",
+    "model_sha256": "dd5468ed98bdcc6b2aff14f9c97643f3e7be7bbec7857d1bbeaa6c6bbc2d1216",
+    "split_sha256": "aa82688bda86c0dd7adca9448236cffe7c91cb313b6aa0329005ca80e02358cb",
+    "dataset_sha256": "40cd1f3a3cddf4b2cac1f32841a917bce66625103439b7d3cfde3bcfe4740972",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "config": "configs/exp_632_tier6_shared_core_diverse_output_heads.yaml",
+  "environment": "experiments/runs/exp-632-tier6-shared-core-diverse-output-heads/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "19beb2f5a6f549e19dd1c89ace6b794e"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-632-tier6-shared-core-diverse-output-heads/weights.safetensors",
+    "checkpoint_sha256": "9b57bde42e3f7f2184a0fb724a7f2599941fadbbc96e8fdcb43f558c75fd2fb8",
+    "metrics": "evals/results/exp-632-tier6-shared-core-diverse-output-heads/metrics.json",
+    "scratch_summary": ".scratch/exp-632-tier6-shared-core-diverse-output-heads/summary.json",
+    "scratch_summary_sha256": "23230bb373e0190b88d0c36ea3526c90967c7aed51fea1acb64ad76436a5d5e2",
+    "console_log": ".scratch/exp-632-tier6-shared-core-diverse-output-heads/console.log",
+    "console_log_sha256": "7bd49ef75b334e878c1c94edb1ddf54e258e9f084f38e6ae0fd564adeac13df6"
+  },
+  "controls": {
+    "exact_initialization": true,
+    "frozen_shared_core": true,
+    "matched_fresh_cases": true,
+    "randomized_head_control": true,
+    "determinism_passed": true,
+    "all_gates_passed": false
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "measured_profile_wall_seconds": 31.023413230999722,
+    "measured_profile_aggregate_cpu_seconds": 117.105633987,
+    "expected_total_wall_seconds": 1331,
+    "expected_total_aggregate_cpu_minutes": 85,
+    "soft_budget_wall_seconds": 2100,
+    "hard_runaway_ceiling_wall_seconds": 3400,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 226.67,
+    "observed_wall_seconds": 2019.688826491998,
+    "observed_aggregate_cpu_seconds": 7487.578100262,
+    "fidelity_reduced": false,
+    "cache_reused": true
+  },
+  "decision": "reject-tier6-diverse-heads",
+  "notes": [
+    "The challenger regressed width-128 exact rollout from 83.67 to 82.00 percent and width-64 from 96.33 to 94.33 percent.",
+    "The trained challenger was one point worse than the randomized-head control on the matched 100-case diagnostic.",
+    "Head disagreement was present on 9.67 percent of width-128 rollouts but only 0.1 percent of isolated transitions, so diversity did not translate into correct ranking.",
+    "The complete matched evaluation finished under both the measured-throughput soft budget and hard runaway ceiling; no fidelity was shortened.",
+    "Close this complementary output-head formulation and do not tune bootstrap masks or voting on the observed set."
+  ]
+}
