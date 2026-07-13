@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T15:06:00+05:30
+updated_at: 2026-07-13T15:16:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-632-tier6-shared-core-diverse-output-heads
   statement: Multiple learned output heads with fixed complementary hidden-channel masks and bootstrap training can correct sparse, head-specific bit errors by majority vote without repeating the expensive recurrent core.
   promotion_gate: Require a fresh matched screen to reach at least 90 percent width-128 rollout, improve by at least three points over the shared single-head control, retain at least 95 percent width-64 rollout and 99.8 percent width-128 transition, keep invalid rollouts at or below one percent, demonstrate nontrivial head disagreement and randomized-head dependence, and remain within candidate runtime headroom.
-  status: feasibility-passed
-next_action: Preregister a fresh prime-disjoint matched screen that trains only the 279 residual-head parameters on balanced preserved hard/control records, then evaluates initialized, trained, and randomized-head controls at full width-64/128 transition and rollout fidelity.
+  status: preregistered
+next_action: Implement the resumable EXP-632 runner, verify initialized/trained/randomized controls procedurally, then run the frozen 300-update and full fresh width-64/128 matched evaluation.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
