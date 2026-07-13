@@ -517,3 +517,10 @@ runs:
     run_record: experiments/runs/exp-625-tier6-confidence-routed-width4-search/run.json
     metrics: evals/results/exp-625-tier6-confidence-routed-width4-search/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-626-tier6-minimum-margin-routing-confirmation
+    status: completed
+    approach: frozen-minimum-margin-routed-width4-confirmation
+    config: configs/exp_626_tier6_minimum_margin_routing_confirmation.yaml
+    run_record: experiments/runs/exp-626-tier6-minimum-margin-routing-confirmation/run.json
+    metrics: evals/results/exp-626-tier6-minimum-margin-routing-confirmation/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

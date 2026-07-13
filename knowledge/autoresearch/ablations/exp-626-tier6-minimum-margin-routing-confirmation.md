@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-626 Tier-6 Minimum-Margin Routing Confirmation
 description: Untouched confirmation of the frozen target-free confidence score selected from EXP-625 secondary diagnostics.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, conditional-compute, confidence, confirmation]
 timestamp: "2026-07-13T09:40:00+05:30"
 ---
@@ -30,3 +30,9 @@ Expected diagnostic total is 980 wall seconds, soft budget 1,300 wall seconds, a
 ## Compliance and limitations
 
 Routing depends only on learned logit magnitude. It uses no target, expected answer, benchmark identity, modulus filter, or exact arithmetic. Exact bigint operations are offline truth and evaluation only. Generated confirmation is not checked-public or official-private evidence, and projected runtime is not the isolated sandbox gate.
+
+## Result and decision
+
+Greedy scores 173/200 (86.5%), width-4 oracle containment and unrestricted union both score 185/200 (92.5%), and the frozen minimum-margin 40% allocation also scores 185/200. It routes all 27 greedy failures, captures all twelve beam-recoverable failures, and incurs zero greedy losses. Confidence, predictions, complete beam states, and routing counts are exactly deterministic; selected beam invalid rate is zero.
+
+All gates pass. The full diagnostic completes in 865.75 wall seconds and 3,251.84 aggregate CPU seconds, while the candidate-shaped conditional projection remains 135.29 Tier-6 / 187.19 integrated wall seconds. Advance to a compact trained reranker on newly generated training identities. This result authorizes research only: 92.5% remains an oracle containment ceiling until trained parameters select the candidate state without expected-answer access.
