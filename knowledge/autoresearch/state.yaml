@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T17:12:49+05:30
+updated_at: 2026-07-13T17:32:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-634-direct-relative-attention-feasibility
   statement: A width-shared recurrent-depth attention model with fixed relative bit-position features can predict the modular product directly, avoiding both the 128-step autonomous state chain and the lossy multi-level latent composition bottleneck.
   promotion_gate: Require a preregistered matched small-width feasibility rung to learn nonzero exact products, exceed randomized weights, preserve validity and determinism, and show materially better zero-shot width scaling than the sequential control before authorizing Tier-6 compute.
-  status: planning
-next_action: Use the existing Playwright-verified Universal Transformer and relative-position evidence to design EXP-634 with direct root supervision, then freeze its matched gates and calibrate wall versus aggregate CPU throughput before any formal run.
+  status: preregistered
+next_action: Commit the tested EXP-634 implementation and measured resource budget, then run the frozen resumable 4,000-update matched direct-product rung and full width-12/24 evaluation.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
