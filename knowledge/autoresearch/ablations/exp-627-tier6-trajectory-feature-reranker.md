@@ -33,6 +33,12 @@ The candidate-shaped profile measured greedy-100 at 45.69 wall / 175.31 aggregat
 
 The soft budget is 3,200 wall seconds and the hard runaway ceiling is 4,600 wall seconds, with a conservative four-thread ceiling of 306.67 aggregate CPU minutes. Wall and aggregate CPU are recorded separately. Every completed generation batch and split is recoverably cached; a later interruption or phase overrun cannot invalidate prior batches. Fidelity, data counts, and epochs will not be reduced to fit a shorter cap.
 
+### Continuation budget after the generation ceiling
+
+The first full process reached its declared 4,600-second hard ceiling before a final summary and was stopped without interpreting model evidence. Batch recovery preserved the complete 1,200-case training split (3,946.06 wall / 14,874.51 aggregate CPU seconds), complete 200-case validation split (765.84 wall / 2,892.68 aggregate CPU seconds), and greedy inference for all 200 selection cases (289.54 cumulative wall seconds). The selection beam has zero completed cases, so no selection label or metric has been opened.
+
+The only expensive missing generation is width-4 search for 80 selected cases. The matched validation beam-80 phase measured 439.75 wall / 1,656.61 aggregate CPU seconds. Adding 130 seconds for MLP training, checkpointing, controls, and logging gives a 570-second expected continuation. The continuation soft budget is 850 wall seconds and its hard runaway ceiling is 1,250 wall seconds, with a conservative four-thread upper bound of 83.34 aggregate CPU minutes. The runner will reuse the hashed train/validation caches and selection greedy partial exactly; no completed evidence is recomputed and all original counts, seeds, gates, and fidelity remain frozen.
+
 ## Compliance and limitations
 
 Exact bigint arithmetic is confined to generated labels and scoring. Trained parameters materially select the answer among generic learned-search states. Equality and bit-statistic features do not repair or compute a modular product. Generated selection evidence is not checked-public, five-seed independent, official-private, or isolated-sandbox evidence. The official inference package remains unchanged unless all later promotion gates pass.
