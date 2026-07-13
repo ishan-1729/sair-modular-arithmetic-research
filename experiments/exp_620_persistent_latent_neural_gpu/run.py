@@ -40,7 +40,7 @@ def main() -> int:
             prefix_targets.append(rows)
         multiplier_bits = persistent.PersistentLatentNeuralGPU.bits(left, width).flip(1); target_bits = torch.tensor(prefix_targets, dtype=torch.float32); return {"left": left, "right": right, "modulus": modulus, "multiplier_bits": multiplier_bits, "target_bits": target_bits, "states": states, "repeated_right": repeated_right, "repeated_modulus": repeated_modulus, "input_bits": input_bits, "flat_targets": flat_targets}
     def bit_loss(logits, targets):
-        per = F.binary_cross_entropy_with_logits(logits, targets, reduction="none"); mean = per.mean(); worst = per.flatten(0, -2).mean(0).max(); loss = mean + config["training"]["worst_bit_weight"] * worst; exact = (logits.ge(0) == targets.bool()).all(-1).float(); return loss, {"loss": float(loss.detach()), "mean_bce": float(mean.detach()), "worst_bit_bce": float(worst.detach()), "prefix_exact": float(exact.mean()), "final_exact": float(exact[:, -1].mean())}
+        per = F.binary_cross_entropy_with_logits(logits, targets, reduction="none"); mean = per.mean(); worst = per.flatten(0, -2).mean(0).max(); loss = mean + config["training"]["worst_bit_weight"] * worst; exact = (logits.ge(0) == targets.bool()).all(-1).float(); final_exact = exact[:, -1].mean() if exact.ndim == 2 else exact.mean(); return loss, {"loss": float(loss.detach()), "mean_bce": float(mean.detach()), "worst_bit_bce": float(worst.detach()), "prefix_exact": float(exact.mean()), "final_exact": float(final_exact)}
     @torch.inference_mode()
     def evaluate_persistent(model, width, cases):
         model.width = width; sampler = exp300.BigIntSampler(splits[width]["test"], seed + 62400 + width); seen = correct = all_prefix = invalid = 0
