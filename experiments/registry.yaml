@@ -496,3 +496,10 @@ runs:
     run_record: experiments/runs/exp-622-tier6-width4-beam-coverage/run.json
     metrics: evals/results/exp-622-tier6-width4-beam-coverage/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-623-tier6-staged-beam-runtime
+    status: completed
+    approach: frozen-width2-to-width4-late-beam
+    config: configs/exp_623_tier6_staged_beam_runtime.yaml
+    run_record: experiments/runs/exp-623-tier6-staged-beam-runtime/run.json
+    metrics: evals/results/exp-623-tier6-staged-beam-runtime/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

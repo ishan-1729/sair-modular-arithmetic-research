@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-623 Tier-6 Staged Beam Runtime
 description: Fresh confirmation of a generic late-widening beam schedule that may preserve coverage with substantial CPU headroom.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, beam-search, runtime, staged-search]
 timestamp: "2026-07-13T08:10:00+05:30"
 ---
@@ -34,3 +34,9 @@ The expected total is 500 wall seconds. The soft budget is 700 wall seconds and 
 ## Compliance and limitations
 
 The schedule depends only on public position and width, not modulus values, expected answers, benchmark identity, or exact arithmetic. Exact bigint arithmetic is confined to generated truth and post-inference scoring. Generated confirmation and projected runtime are not checked-public, private, or pinned official-sandbox evidence. A passing run authorizes reranker research only, not candidate promotion.
+
+## Result and decision
+
+On the complete fresh 200-case set, greedy scored 160/200 (80.0%), the staged likelihood-selected output scored 161/200 (80.5%), and the correct answer appeared anywhere in the final staged beam for only 168/200 (84.0%). Selected residues were all valid and the paired predictions, complete beam states, and counts were exactly deterministic. The run completed in 559.43 wall seconds and 2,093.99 aggregate CPU seconds.
+
+Runtime passes decisively at a 187.12-second integrated projection, but coverage misses the 92% gate by eight points. Reject and close late widening: the apparent 18/20 calibration retention did not generalize to the untouched seed. Do not train a reranker from this search surface. A width-3 beam is the remaining untested fixed-width compute/coverage point between EXP-621 and EXP-622 and must earn its own fresh coverage gate.

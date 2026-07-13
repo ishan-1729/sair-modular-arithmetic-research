@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-623-tier6-frozen-inference-optimization
-  statement: A supported PyTorch CPU inference optimization can preserve exact width-4 beam states while reducing the measured 100-case Tier-6 path enough to restore material reranker headroom.
-  promotion_gate: Require exact logits, predictions, and beam-state equivalence on paired cases, deterministic repeats, a candidate-shaped 100-case wall time no greater than 210 seconds, and no prohibited or unpinned dependency before reopening reranker training.
+  run_id: exp-624-tier6-width3-beam-coverage
+  statement: A fixed width-3 learned beam can retain at least 92 percent of correct Tier-6 final states while fitting the 210-second Tier-6 runtime allowance needed for a later trained reranker.
+  promotion_gate: Require fresh width-3 oracle containment of at least 92 percent, deterministic valid states, and a candidate-shaped 100-case wall time no greater than 210 seconds before any reranker training.
   status: planning
-next_action: Compare supported PyTorch JIT/freeze inference against eager on exact paired width-4 states; preregister a candidate-shaped timing gate from measured warm throughput; keep Candidate 004 incumbent and do not train a reranker yet.
+next_action: Profile fixed width-3 at the candidate 100-case batch shape, then preregister fresh full coverage only if runtime passes; close learned beam search if width 3 misses either gate.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: a4f63bdaef5968e07c66c38cc4e1554e8f8c4e33
+  last_validated_commit: 27ec6fbdc36cd25a482caa31432472ceab351c57
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
