@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-633 Hierarchical Learned Composition Feasibility
 description: Matched small-width test of a shared learned binary composition tree against sequential decoded-state cellular recurrence.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, hierarchical-composition, tree-reduction, length-generalization]
 timestamp: "2026-07-13T15:45:00+05:30"
 ---
@@ -55,3 +55,11 @@ Including randomized/determinism controls and 180 seconds of setup/artifact allo
 ## Limitations
 
 Success at widths 16/32 would show only that hierarchical learned composition is viable enough for a higher-width program. Failure would reject this shared latent operator and training prescription, not all tree, transformer, or parallel-prefix neural arithmetic architectures.
+
+## Result and decision
+
+The full frozen comparison completed without reducing training or evaluation fidelity. The runner recorded 4,044.222 wall seconds and 15,147.538 aggregate CPU seconds; external `/usr/bin/time` recorded exactly 1:04:00 wall, 15,171.88 user-plus-system CPU seconds, and 395% CPU utilization. This is below the 4,462-second expected wall budget, 6,060-second soft budget, and 8,940-second hard runaway ceiling. Both wall clocks are retained because WSL scheduling made them differ by about 204 seconds.
+
+The sequential control scored 260/300 (86.67%) exact at width 16 and 3/300 (1.0%) at width 32. The tree scored 0/300 at both widths. It produced valid residues on every evaluated case and was deterministic, but trained and randomized trees both scored 0/100 on the matched width-32 dependence diagnostic. The tree's best logged width-16 batch reached 60.83% exact internal nodes, yet no logged batch at any of 25 checkpoints contained one exact root. This localizes the failure to composing imperfect learned segment states across depth rather than inactivity or invalid decoding.
+
+Decision: reject and close this shared latent binary-composition formulation at 94,025 parameters and 2,400 updates. Do not extend its budget or tune node/root loss weights on the observed evaluation identities. The result does not reject a one-shot relative-attention architecture, whose global communication and direct root supervision are materially different.

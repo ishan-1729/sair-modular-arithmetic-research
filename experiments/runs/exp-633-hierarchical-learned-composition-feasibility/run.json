@@ -1,0 +1,66 @@
+{
+  "run_id": "exp-633-hierarchical-learned-composition-feasibility",
+  "status": "completed",
+  "created_at": "2026-07-13T11:42:49Z",
+  "hypothesis": "A width-shared learned binary composition tree reduces serial state drift and length-generalizes better than decoded-state sequential recurrence.",
+  "seed": 20260830,
+  "source": {
+    "repository_commit": "58837136885c85902e7f9d7fad398d9754fd4356",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "3cc168eb4394df40af61e7030f94d10a894680397085a96313a08f65f18bb04d",
+    "runner_sha256": "281416883a51fe62138b141e20edb152f03632c7df6e747bfdb25fe36dbd4760",
+    "model_sha256": "84a10273e6e360910cdbe2fd9c6d6ed2ff939a5dc07ad1b675c24250d179025d",
+    "dataset_sha256": "1e36d8acd7c54b28c48111aa6fd103cba19cdf4431549a76ec00cd15da6baf6d"
+  },
+  "config": "configs/exp_633_hierarchical_learned_composition_feasibility.yaml",
+  "environment": "experiments/runs/exp-633-hierarchical-learned-composition-feasibility/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "587de68848b64203ac6f58283224111a",
+    "arm_run_ids": {
+      "control": "ab7308526a5d499d932a3c369f83693f",
+      "tree": "82e4f41a314a48fd92a3442ee9f54014"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-633-hierarchical-learned-composition-feasibility/tree/weights.safetensors",
+    "checkpoint_sha256": "473828b7e9c0760abf8205b1eb11cd0a438ceae5987bfe56ab63a24c884e6028",
+    "control_checkpoint": ".scratch/exp-633-hierarchical-learned-composition-feasibility/control/weights.safetensors",
+    "control_checkpoint_sha256": "9b94b7eff85caf779598d9fff13a6598db3c195ffd66408545d23a1745af1b6c",
+    "metrics": "evals/results/exp-633-hierarchical-learned-composition-feasibility/metrics.json",
+    "scratch_summary": ".scratch/exp-633-hierarchical-learned-composition-feasibility/summary.json",
+    "scratch_summary_sha256": "407bea94c985d2f3b70e5cc9153d07918ac9688d45551e557d8eddb829736f02",
+    "console_log": ".scratch/exp-633-hierarchical-learned-composition-feasibility/formal-console.log",
+    "console_log_sha256": "0e4b4763e6976a7dbc309e3bb90aee7310fa8559a010f098e11d7989b072caff"
+  },
+  "controls": {
+    "matched_updates": 2400,
+    "matched_trajectory_examples": 76800,
+    "prime_disjoint_evaluation": true,
+    "randomized_weight_control": true,
+    "determinism_passed": true,
+    "all_gates_passed": false
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 4462,
+    "expected_total_aggregate_cpu_minutes": 268,
+    "soft_budget_wall_seconds": 6060,
+    "hard_runaway_ceiling_wall_seconds": 8940,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 596.0,
+    "observed_wall_seconds": 4044.2216743019962,
+    "observed_aggregate_cpu_seconds": 15147.537987308,
+    "fidelity_reduced": false,
+    "valid_arm_caches_preserved": true
+  },
+  "decision": "reject-hierarchical-composition-feasibility",
+  "notes": [
+    "The tree scored 0/300 at both widths 16 and 32; the matched sequential control scored 260/300 and 3/300 respectively.",
+    "The tree reached 60.83 percent internal-node exactness on its best logged width-16 training batch but never produced an exact root in any logged training batch.",
+    "Trained and randomized trees both scored 0/100 on the matched width-32 dependence diagnostic.",
+    "Validity, determinism, parameter count, projected runtime, and resource-budget gates passed, while every exactness and trained-dependence gate failed.",
+    "Close this shared latent binary-composition formulation at the declared capacity and training rung."
+  ]
+}

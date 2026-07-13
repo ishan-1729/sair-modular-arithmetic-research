@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T16:05:00+05:30
+updated_at: 2026-07-13T17:12:49+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-633-hierarchical-learned-composition-feasibility
-  statement: A width-shared learned binary composition tree can replace the 128-step autonomous Horner chain with logarithmic-depth composition, reducing exposure to sparse recurrent transition errors without using exact arithmetic in inference.
-  promotion_gate: First require a preregistered matched feasibility rung at trained widths to demonstrate nonzero autonomous exactness, clear learning beyond randomized weights, deterministic valid outputs, and materially better length scaling than an update- and parameter-aware sequential control before authorizing Tier-6 training.
-  status: preregistered
-next_action: Commit the tested EXP-633 implementation and measured dynamic budget, then run the frozen resumable 2,400-update matched feasibility rung and full 300-case width-16/32 evaluation.
+  run_id: exp-634-direct-relative-attention-feasibility
+  statement: A width-shared recurrent-depth attention model with fixed relative bit-position features can predict the modular product directly, avoiding both the 128-step autonomous state chain and the lossy multi-level latent composition bottleneck.
+  promotion_gate: Require a preregistered matched small-width feasibility rung to learn nonzero exact products, exceed randomized weights, preserve validity and determinism, and show materially better zero-shot width scaling than the sequential control before authorizing Tier-6 compute.
+  status: planning
+next_action: Use the existing Playwright-verified Universal Transformer and relative-position evidence to design EXP-634 with direct root supervision, then freeze its matched gates and calibrate wall versus aggregate CPU throughput before any formal run.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -60,3 +60,4 @@ risks:
   - Balanced replay of exact model-mined first-error transitions regresses fresh width-128 rollout by 1.33 points and slightly misses transition accuracy despite majority uniform replay.
   - Coarse target-free modulus and operand groups show at most 1.30x training and 1.43x validation failure enrichment, below the twofold authorization gate.
   - Complementary bootstrap-trained output heads create trajectory disagreement but regress width-128 exact rollout by 1.67 points and perform one point below randomized heads.
+  - The hierarchical composition tree learns up to 60.83 percent exact internal nodes but zero exact roots at width 16 and zero exact width-32 products after 2,400 updates.

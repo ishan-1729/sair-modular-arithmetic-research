@@ -552,3 +552,10 @@ runs:
     run_record: experiments/runs/exp-632-tier6-shared-core-diverse-output-heads/run.json
     metrics: evals/results/exp-632-tier6-shared-core-diverse-output-heads/metrics.json
     checkpoint: .scratch/exp-632-tier6-shared-core-diverse-output-heads/weights.safetensors
+  - run_id: exp-633-hierarchical-learned-composition-feasibility
+    status: completed
+    approach: matched-shared-binary-latent-composition-tree
+    config: configs/exp_633_hierarchical_learned_composition_feasibility.yaml
+    run_record: experiments/runs/exp-633-hierarchical-learned-composition-feasibility/run.json
+    metrics: evals/results/exp-633-hierarchical-learned-composition-feasibility/metrics.json
+    checkpoint: .scratch/exp-633-hierarchical-learned-composition-feasibility/tree/weights.safetensors
