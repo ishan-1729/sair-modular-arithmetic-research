@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T13:38:00+05:30
+updated_at: 2026-07-13T14:12:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -31,9 +31,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-630-radix4-cellular-transition
   statement: A learned radix-4 transition that consumes two multiplier bits per recurrent step can reduce autonomous error accumulation enough to offset its harder seven-class reduction transition and halve Tier-6 rollout horizon.
-  promotion_gate: Profile and preregister a matched viability rung against the radix-2 cellular control; require competitive exact rollout at the trained width, useful width transfer, deterministic valid states, and a measured inference-call/runtime advantage before higher-width scaling.
-  status: planning
-next_action: Implement and unit-test legal radix-4 bit-tensor features, seven-class quotient supervision, exact offline labels, and transferred cellular initialization; profile a matched small-width viability rung before preregistration.
+  promotion_gate: Require at least 90 percent width-16 rollout, 70 percent width-32 rollout, 20 percent zero-shot width-64 rollout, 98/80 percent width-32/64 transition, no more than 10 percent invalid width-64 rollouts, deterministic predictions, and radix-4 wall time no more than 65 percent of radix-2.
+  status: preregistered
+next_action: Run the resumable 1,600-update EXP-630 progressive curriculum and full paired width-16/32/64 viability evaluation under the measured 3,000-second planning and 4,800-second hard wall budgets.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
