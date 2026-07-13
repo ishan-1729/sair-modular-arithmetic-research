@@ -1,0 +1,44 @@
+run_id: exp-626-tier6-minimum-margin-routing-confirmation
+hypothesis: the frozen lowest-trajectory-margin score reproducibly routes a 40 percent width-4 compute budget to achieve at least 92 percent Tier-6 evaluation-only coverage
+seed: 20260822
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-626-tier6-minimum-margin-routing-confirmation.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation:
+  width: 128
+  cases: 200
+  routed_fraction: 0.40
+  primary_confidence: negative_trajectory_min_margin
+  determinism_cases: 20
+  torch_threads: 4
+runtime_projection:
+  incumbent_sandbox_seconds: 36.9
+  integration_overhead_seconds: 15
+  greedy_100_wall_seconds: 45.690763473001425
+  beam_40_wall_seconds: 89.60107192699797
+  tier6_wall_seconds: 135.2918353999994
+  integrated_wall_seconds: 187.1918353999994
+gates:
+  minimum_unrestricted_union_coverage: 0.92
+  minimum_oracle_allocated_coverage: 0.92
+  minimum_primary_confidence_allocated_coverage: 0.92
+  maximum_tier6_wall_seconds: 240
+  maximum_beam_invalid_rate: 0.01
+decisions:
+  advance: advance-tier6-minimum-margin-routing-to-trained-reranker
+  reject: reject-and-close-tier6-confidence-routing
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-625-conditional-compute-candidate-batch
+  profile_seed: 20260928
+  expected_main_greedy_and_full_beam_wall_seconds: 830
+  expected_determinism_setup_logging_wall_seconds: 150
+  expected_total_wall_seconds: 980
+  soft_budget_wall_seconds: 1300
+  hard_runaway_ceiling_wall_seconds: 1850
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 123.34
+  torch_threads: 4
+  cache_raw_predictions_and_confidence: true
