@@ -461,3 +461,10 @@ runs:
     run_record: experiments/runs/exp-617-tier6-recurrent-core-lora/run.json
     metrics: evals/results/exp-617-tier6-recurrent-core-lora/metrics.json
     checkpoint: .scratch/exp-617-tier6-recurrent-core-lora/recurrent_core_lora_challenger/merged-weights.safetensors
+  - run_id: exp-618-tier6-continuous-state-inference
+    status: completed
+    approach: frozen-hard-versus-continuous-state-inference
+    config: configs/exp_618_tier6_continuous_state_inference.yaml
+    run_record: experiments/runs/exp-618-tier6-continuous-state-inference/run.json
+    metrics: evals/results/exp-618-tier6-continuous-state-inference/metrics.json
+    checkpoint: .scratch/exp-607-tier6-differentiable-soft-state/differentiable_soft_state/weights.safetensors

@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-618 Tier-6 Continuous-State Inference
 description: Frozen paired evaluation of hard intermediate residues versus continuous probability state for the differentiable-soft checkpoint.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, continuous-state, inference, paired-evaluation]
 timestamp: "2026-07-13T05:30:00+05:30"
 ---
@@ -32,3 +32,9 @@ The planning budget is 1,700 wall seconds and the hard runaway ceiling is 2,500 
 ## Boundaries
 
 Checked and private answers remain unread. Exact arithmetic is used only to generate cases and score outputs. Continuous inference is a learned floating-point state trajectory with no modular multiplication, division, reduction, correction rule, or fallback. Native PyTorch sigmoid and tensor operations are sufficient.
+
+## Result and decision
+
+On 500 paired width-128 cases, hard inference scored 422/500 (84.4%) and continuous inference 409/500 (81.8%), a −2.6-point change. The paired table contains 404 both-correct, 18 hard-only, 5 continuous-only, and 73 neither. At width 64, continuous falls from 96.6% to 95.2%, with seven hard-only and zero continuous-only cases. Both modes are deterministic and have zero invalid final residues.
+
+Reject continuous-state inference. Carrying probabilities changes useful hard trajectories more often than it repairs failures, despite matching the differentiable training representation. The run completed in 973.32 wall seconds and 3,727.11 aggregate CPU seconds. Preserve raw paired evidence and move to an architecture that retains hard state while exposing confidence as additional learned features.

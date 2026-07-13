@@ -95,3 +95,4 @@ Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent gener
 | EXP-615 casewise exactness loss | 64/128 | 200 x2 | 100% both | 85.0% control / 85.5% casewise | 0% | 99,824 each | 984.2 wall / 62.9 CPU min | reject; +0.5, close coefficient |
 | EXP-616 trajectory-tail CVaR | 64/128 | 200 x2 | 99.65% width128 both | 86.5% control / 86.0% CVaR | 0% width128 | 99,824 each | 972.4 wall / 62.1 CPU min | reject; −0.5, close loss reweighting |
 | EXP-617 recurrent-core LoRA | 64/128 | 200 x2 | 99.7% width128 both | 86.5% control / 87.0% LoRA | 0% | 99,824 / 106,736 (merged 99,824) | 927.3 wall / 59.1 CPU min | reject; +0.5, merge exact |
+| EXP-618 continuous inference | 64/128 | frozen 500 paired | 99.92% width128 | 84.4% hard / 81.8% continuous | 0% final | 99,824 | 973.3 wall / 62.1 CPU min | reject; −2.6, hard-only 18 vs soft-only 5 |
