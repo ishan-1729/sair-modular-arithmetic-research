@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-624 Tier-6 Width-3 Beam Coverage
 description: Final fixed-width learned-beam feasibility test between the insufficient width-2 coverage and expensive width-4 search.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, beam-search, coverage, runtime]
 timestamp: "2026-07-13T08:40:00+05:30"
 ---
@@ -30,3 +30,9 @@ The expected total is 560 wall seconds: approximately 450 for the matched main e
 ## Compliance and limitations
 
 Search uses only trained logits, generic bit branching, and learned scores. It contains no modulus filter, target feedback, exact arithmetic circuit, or benchmark lookup. Exact bigint arithmetic is confined to generated truth and scoring. Generated evidence and projected runtime are not checked-public, official-private, or pinned sandbox results. A pass authorizes reranker research only.
+
+## Result and decision
+
+On 200 fresh cases, greedy scored 165/200 (82.5%), the likelihood-selected width-3 output scored 160/200 (80.0%), and the correct answer appeared anywhere in the final beam for 180/200 (90.0%). Final selected residues were valid and repeated predictions, complete states, and paired counts were exactly deterministic. The run completed in 530.90 wall seconds and 1,983.76 aggregate CPU seconds; the frozen candidate-shaped projection passes at 219.17 seconds.
+
+Reject on coverage and close unconditional learned beam search. Width 2 lacks coverage, width 3 misses the 92% gate, full width 4 lacks runtime/reranker headroom, and late widening fails untouched coverage. The next materially different question is conditional compute: whether target-free confidence can route only uncertain cases through a wider learned search while easy cases retain greedy output. This requires a fresh routing/coverage diagnostic and a trained selector; it must not reuse oracle membership at inference.

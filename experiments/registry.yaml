@@ -503,3 +503,10 @@ runs:
     run_record: experiments/runs/exp-623-tier6-staged-beam-runtime/run.json
     metrics: evals/results/exp-623-tier6-staged-beam-runtime/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-624-tier6-width3-beam-coverage
+    status: completed
+    approach: frozen-width3-learned-beam-coverage
+    config: configs/exp_624_tier6_width3_beam_coverage.yaml
+    run_record: experiments/runs/exp-624-tier6-width3-beam-coverage/run.json
+    metrics: evals/results/exp-624-tier6-width3-beam-coverage/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

@@ -1,0 +1,117 @@
+{
+  "run_id": "exp-624-tier6-width3-beam-coverage",
+  "status": "completed",
+  "hypothesis": "a fixed width-3 learned beam retains the correct width-128 final state in at least 92 percent of fresh cases while leaving sufficient measured runtime headroom for a compact trained reranker",
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "dc065253fd904e7693acf12551cdf855"
+  },
+  "source": {
+    "repository_commit": "e120d70e38a78a956b9c0bfacf4f200ed70f0d74",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "142e1d116cb56123d5db36e4ccdeb72fe396dda5f43a5c19fb0b650e16df47a1",
+    "runner_sha256": "00f79a47758510b5be4065eaa17097b04812a074dd091ad8aa81652090683012",
+    "dataset_sha256": "a4f2087465ca684f03e0f941d839ff98ac1eb39786e0dea7a5e2283847ab44d5",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "transition": {},
+  "rollouts": {
+    "128": {
+      "greedy": {
+        "cases": 200,
+        "correct": 165,
+        "exact_accuracy": 0.825,
+        "all_steps_exact_accuracy": 0.825,
+        "any_invalid_rate": 0.005,
+        "runtime": {
+          "wall_seconds": 111.72274789199582,
+          "aggregate_cpu_seconds": 422.859297401
+        }
+      },
+      "beam": {
+        "cases": 200,
+        "correct": 160,
+        "exact_accuracy": 0.8,
+        "final_invalid_rate": 0.0,
+        "runtime": {
+          "wall_seconds": 317.976388665993,
+          "aggregate_cpu_seconds": 1207.205940913
+        }
+      },
+      "paired": {
+        "both_correct": 159,
+        "greedy_only": 6,
+        "beam_only": 1,
+        "neither_correct": 34,
+        "accuracy_gain": -0.025,
+        "oracle_beam_contains_correct": 180,
+        "oracle_beam_contains_rate": 0.9
+      }
+    }
+  },
+  "determinism": {
+    "128": {
+      "greedy_predictions_equal": true,
+      "beam_predictions_equal": true,
+      "beam_states_equal": true,
+      "paired_counts_equal": true
+    }
+  },
+  "runtime_projection": {
+    "width128_beam_wall_seconds_per_case": 1.6726674660400023,
+    "projected_candidate_seconds": 219.16674660400022,
+    "incumbent_sandbox_seconds": 36.9,
+    "tier6_cases": 100,
+    "integration_overhead_seconds": 15,
+    "measured_tier6_batch_wall_seconds": 167.26674660400022
+  },
+  "paired_predictions": {
+    "path": ".scratch/exp-624-tier6-width3-beam-coverage/paired-beam-predictions.json",
+    "sha256": "7a11db5d4a7450cc327c89f4da97fa87bb26a1752579b0ece36bffe1b7250034"
+  },
+  "gates": {
+    "minimum_oracle_width128_containment": 0.92,
+    "maximum_beam_invalid_rate": 0.01,
+    "maximum_projected_candidate_seconds": 262,
+    "passed": false
+  },
+  "decision": "reject-and-close-tier6-learned-beam-search",
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "calibration_source": "exp-624-width3-candidate-batch-profile",
+    "candidate_profile": {
+      "seed": 20260927,
+      "cases": 100,
+      "wall_seconds": 167.26674660400022,
+      "aggregate_process_cpu_seconds": 639.1375415
+    },
+    "expected_main_greedy_and_beam_wall_seconds": 450,
+    "expected_determinism_setup_logging_wall_seconds": 110,
+    "expected_total_wall_seconds": 560,
+    "soft_budget_wall_seconds": 780,
+    "hard_runaway_ceiling_wall_seconds": 1150,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 76.67,
+    "torch_threads": 4,
+    "cached_transition_evidence": "evals/results/exp-621-tier6-learned-beam-decoding/metrics.json",
+    "cache_paired_predictions": true
+  },
+  "runtime": {
+    "wall_seconds": 530.9005437830056,
+    "aggregate_cpu_seconds": 1983.761141711,
+    "evaluation": {
+      "wall_seconds": 521.3806663629948,
+      "aggregate_cpu_seconds": 1982.240560917,
+      "peak_rss_bytes": 582541312
+    },
+    "torch_threads": 4
+  },
+  "limitations": [
+    "Frozen fresh generated selection evidence only; checked and private answers were not read.",
+    "Beam expansion and ranking use only learned logits; oracle beam containment is evaluation-only and never affects output.",
+    "Projected candidate runtime is not a substitute for the official isolated container gate.",
+    "Exact bigint arithmetic is confined to generated cases and evaluation truth."
+  ]
+}
