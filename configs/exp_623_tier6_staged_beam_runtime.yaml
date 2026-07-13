@@ -1,0 +1,46 @@
+run_id: exp-623-tier6-staged-beam-runtime
+hypothesis: retaining two learned beam states for the first 96 Horner positions and four thereafter preserves at least 92 percent width-128 oracle containment while restoring material candidate runtime headroom
+seed: 20260819
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+role: tier6-frozen-staged-beam-runtime
+preregistration: knowledge/autoresearch/ablations/exp-623-tier6-staged-beam-runtime.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation:
+  widths: [128]
+  beam_width: 4
+  initial_beam_width: 2
+  widen_at_position: 96
+  rollout_cases: 200
+  transition_cases: 0
+  determinism_cases: 20
+  torch_threads: 4
+runtime_projection:
+  incumbent_sandbox_seconds: 36.9
+  tier6_cases: 100
+  integration_overhead_seconds: 15
+  measured_tier6_batch_wall_seconds: 135.2223558849946
+gates:
+  minimum_oracle_width128_containment: 0.92
+  maximum_beam_invalid_rate: 0.01
+  maximum_projected_candidate_seconds: 262
+decisions:
+  advance: advance-tier6-staged-beam-to-trained-reranker
+  reject: reject-tier6-staged-beam-coverage-or-runtime
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-623-staged-beam-profiles
+  jit_screen: {seed: 20260924, cases: 20, eager_wall_seconds: 42.14766494600917, jit_wall_seconds: 41.816738898007316, exact_beam_states: true}
+  schedule_screen_seed: 20260925
+  candidate_profile: {seed: 20260926, cases: 100, wall_seconds: 135.2223558849946, aggregate_process_cpu_seconds: 512.965598364}
+  expected_main_greedy_and_beam_wall_seconds: 400
+  expected_determinism_setup_logging_wall_seconds: 100
+  expected_total_wall_seconds: 500
+  soft_budget_wall_seconds: 700
+  hard_runaway_ceiling_wall_seconds: 1100
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 73.34
+  torch_threads: 4
+  cached_transition_evidence: evals/results/exp-621-tier6-learned-beam-decoding/metrics.json
+  cache_paired_predictions: true

@@ -69,3 +69,40 @@ def test_decoder_contains_no_modulus_filter_or_exact_answer_feedback() -> None:
     assert "%" not in rollout_body
     assert "expected" not in rollout_body
     assert "target" not in rollout_body
+
+
+def test_staged_beam_widens_after_declared_position() -> None:
+    beam = load_module(
+        "learned_beam_staged_test_decoder",
+        ROOT / "experiments/exp_621_tier6_learned_beam_decoding/decoder.py",
+    )
+
+    class FixedModel(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.width = 2
+
+        def forward(self, features: torch.Tensor):
+            first = torch.where(features[:, 0, 0] > 1, 2.0, -2.0)
+            logits = torch.stack((first, torch.full_like(first, 0.5)), dim=1)
+            batch = len(logits)
+            return logits, torch.zeros((batch, 3))
+
+    decoder = beam.LearnedLikelihoodBeamDecoder(
+        FixedModel(),
+        width=2,
+        beam_width=4,
+        initial_beam_width=2,
+        widen_at_position=1,
+    )
+    result = decoder.rollout(
+        [0],
+        [0],
+        [3],
+        lambda states, rights, moduli, bits, width: torch.tensor(
+            states, dtype=torch.float32
+        )[:, None, None].expand(len(states), 6, width),
+    )
+
+    assert len(result["beam_states"][0]) == 4
+    assert len(set(result["beam_states"][0])) == 4

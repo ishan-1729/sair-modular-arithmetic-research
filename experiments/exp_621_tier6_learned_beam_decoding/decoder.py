@@ -42,12 +42,28 @@ def expand_least_confident_bit(logits: Tensor) -> tuple[list[int], list[int], Te
 class LearnedLikelihoodBeamDecoder:
     """Retain top unique learned state hypotheses across Horner steps."""
 
-    def __init__(self, model: nn.Module, width: int, beam_width: int = 2) -> None:
+    def __init__(
+        self,
+        model: nn.Module,
+        width: int,
+        beam_width: int = 2,
+        *,
+        initial_beam_width: int | None = None,
+        widen_at_position: int = 0,
+    ) -> None:
         if beam_width < 1:
             raise ValueError("beam_width must be positive")
+        if initial_beam_width is None:
+            initial_beam_width = beam_width
+        if not 1 <= initial_beam_width <= beam_width:
+            raise ValueError("initial_beam_width must be between one and beam_width")
+        if not 0 <= widen_at_position <= width:
+            raise ValueError("widen_at_position must be between zero and width")
         self.model = model
         self.width = int(width)
         self.beam_width = int(beam_width)
+        self.initial_beam_width = int(initial_beam_width)
+        self.widen_at_position = int(widen_at_position)
 
     @torch.inference_mode()
     def rollout(
@@ -93,6 +109,11 @@ class LearnedLikelihoodBeamDecoder:
                 candidates[owner].append(
                     (alternate[index], parent + float(alternate_score[index]))
                 )
+            retained_width = (
+                self.initial_beam_width
+                if position < self.widen_at_position
+                else self.beam_width
+            )
             next_beams = []
             for row_candidates in candidates:
                 best_by_state: dict[int, float] = {}
@@ -100,7 +121,7 @@ class LearnedLikelihoodBeamDecoder:
                     best_by_state[state] = max(score, best_by_state.get(state, -torch.inf))
                 ranked = sorted(
                     best_by_state.items(), key=lambda item: item[1], reverse=True
-                )[: self.beam_width]
+                )[:retained_width]
                 next_beams.append([(state, score) for state, score in ranked])
             beams = next_beams
         predictions = [hypotheses[0][0] for hypotheses in beams]
