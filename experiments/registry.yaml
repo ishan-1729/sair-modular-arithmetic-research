@@ -510,3 +510,10 @@ runs:
     run_record: experiments/runs/exp-624-tier6-width3-beam-coverage/run.json
     metrics: evals/results/exp-624-tier6-width3-beam-coverage/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-625-tier6-confidence-routed-width4-search
+    status: completed
+    approach: frozen-confidence-routed-width4-search-diagnostic
+    config: configs/exp_625_tier6_confidence_routed_width4_search.yaml
+    run_record: experiments/runs/exp-625-tier6-confidence-routed-width4-search/run.json
+    metrics: evals/results/exp-625-tier6-confidence-routed-width4-search/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

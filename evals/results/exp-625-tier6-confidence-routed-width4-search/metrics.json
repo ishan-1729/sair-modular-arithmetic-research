@@ -1,0 +1,10 @@
+{
+  "run_id":"exp-625-tier6-confidence-routed-width4-search","created_at":"2026-07-13T03:21:27Z","checkpoint_sha256":"cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evaluation":{"transition":{"width128":{"cases":5000,"correct":4988,"exact_accuracy":0.9976,"valid_residue_rate":1.0,"evidence_source":"exp-621-tier6-learned-beam-decoding"}},"rollout":{"greedy_width128":{"cases":200,"correct":172,"exact_accuracy":0.86,"invalid_rate":0.0},"width4_oracle":{"cases":200,"correct":185,"exact_accuracy":0.925,"invalid_rate":0.0},"primary_mean_bit_nll_route":{"cases":200,"correct":182,"exact_accuracy":0.91,"invalid_rate":0.0},"secondary_minimum_margin_route":{"cases":200,"correct":185,"exact_accuracy":0.925,"invalid_rate":0.0}}},
+  "routing":{"fraction":0.4,"route_count":80,"unrestricted_union_coverage":0.925,"oracle_allocated_coverage":0.925,"primary_allocated_coverage":0.91,"minimum_margin_allocated_coverage":0.925,"minimum_margin_routed_greedy_errors":28,"minimum_margin_beam_recoveries":13,"minimum_margin_greedy_losses":0},
+  "controls":{"frozen_checkpoint":true,"paired_identical_cases":true,"target_free_primary":true,"oracle_is_evaluation_only":true,"tier6_projected_wall_seconds":135.2918353999994,"integrated_projected_wall_seconds":187.1918353999994,"surface_gate_passed":true,"primary_gate_passed":false,"all_gates_passed":false},
+  "determinism":{"passed":true,"confidence_equal":true,"predictions_equal":true,"beam_states_equal":true},
+  "runtime":{"wall_seconds":892.4860874079895,"aggregate_cpu_seconds":3341.064894013,"evaluation_wall_seconds":881.7329012780101,"evaluation_aggregate_cpu_seconds":3339.4078928219997,"torch_threads":4,"peak_rss_bytes":553037824},
+  "decision":"reject-tier6-confidence-routed-search",
+  "limitations":["Fresh generated diagnostic evidence only; checked and private answers were not read.","Beam containment and oracle allocation never select inference outputs.","The successful minimum-margin score was secondary and requires untouched confirmation.","No router or reranker was trained."]
+}

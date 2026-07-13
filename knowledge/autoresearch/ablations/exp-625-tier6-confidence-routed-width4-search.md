@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-625 Tier-6 Confidence-Routed Width-4 Search
 description: Fresh diagnostic separating conditional-search coverage ceilings from target-free confidence routing quality.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, conditional-compute, confidence, beam-search]
 timestamp: "2026-07-13T09:10:00+05:30"
 ---
@@ -40,3 +40,9 @@ Advance to separately trained routing/reranking only if unrestricted union, orac
 ## Compliance and limitations
 
 Confidence uses learned logits only. Exact bigint arithmetic is confined to generated truth and post-inference scoring. Oracle allocation and beam containment are explicitly evaluation-only upper bounds. The generated diagnostic is neither checked-public nor official-private evidence, and projected runtime does not replace the pinned isolated sandbox.
+
+## Result and decision
+
+Greedy scores 172/200 (86.0%), width-4 oracle containment is 185/200 (92.5%), and the unrestricted union is also 185/200. The oracle-best 40% route recovers thirteen greedy failures without losing a greedy success and reaches 92.5%, proving the conditional compute allocation ceiling is viable on this seed.
+
+The preregistered primary `mean_bit_nll` route reaches 182/200 (91.0%) and misses its 92% gate. Therefore EXP-625 rejects and does not authorize training. Secondary lowest-trajectory-margin routing reaches 185/200 (92.5%), routes all 28 greedy failures, recovers the same thirteen cases as the oracle allocation, and loses no greedy successes. Because that score was secondary, it cannot rescue this run; freeze it in advance for one untouched confirmation. Runtime, validity, and exact confidence/state determinism pass. Total runtime is 892.49 wall seconds and 3,341.06 aggregate CPU seconds.

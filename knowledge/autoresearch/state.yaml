@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-625-tier6-confidence-routed-width4-search
-  statement: A trained target-free confidence router can reserve width-4 learned search for uncertain trajectories, retain greedy outputs for easy cases, and create a higher-coverage surface within the CPU envelope.
-  promotion_gate: First require a fresh offline routing diagnostic to show that a fixed confidence-ranked compute fraction has at least 92 percent achievable union coverage and projects below 240 Tier-6 wall seconds; only then train a router/reranker on generated splits and confirm on untouched evidence.
+  run_id: exp-626-tier6-minimum-margin-routing-confirmation
+  statement: The frozen lowest-trajectory-margin score can reproducibly allocate a 40 percent width-4 compute budget and retain at least 92 percent of correct Tier-6 outcomes without target feedback.
+  promotion_gate: Require untouched 200-case minimum-margin allocated coverage of at least 92 percent, oracle allocation at least 92 percent, deterministic confidence and states, and the unchanged projected Tier-6 runtime no greater than 240 seconds before any router or reranker training.
   status: planning
-next_action: Instrument greedy trajectory confidence and width-4 alternatives on a fresh generated diagnostic split, preregister a fixed conditional-compute fraction, and reject without training if achievable target-free routing coverage is below 92 percent.
+next_action: Preregister and run one untouched minimum-trajectory-margin confirmation at the frozen 40 percent route fraction; train no selector unless it passes every gate.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: e120d70e38a78a956b9c0bfacf4f200ed70f0d74
+  last_validated_commit: 11e568f0cd2cb548143c32f3116e34700c61415f
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
