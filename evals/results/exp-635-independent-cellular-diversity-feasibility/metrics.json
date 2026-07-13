@@ -1,0 +1,35 @@
+{
+  "run_id": "exp-635-independent-cellular-diversity-feasibility",
+  "created_at": "2026-07-13T13:04:23Z",
+  "checkpoint_sha256": "3cce3160c405c68fd71223ed31a6a9be0995a7162de9e23d231c8b55e0e22dc4",
+  "source_checkpoint_sha256": "9b94b7eff85caf779598d9fff13a6598db3c195ffd66408545d23a1745af1b6c",
+  "evaluation": {
+    "transition": {
+      "autonomous_final_prediction_width16": {"cases": 600, "correct": 520, "exact_accuracy": 0.8666666666666667, "valid_residue_rate": 0.9866666666666667, "reason": "This diversity rung evaluates complete autonomous trajectories; the final challenger prediction is the applicable exact prediction unit."}
+    },
+    "rollout": {
+      "control_width16": {"cases": 600, "correct": 518, "exact_accuracy": 0.8633333333333333, "invalid_rate": 0.006666666666666667},
+      "challenger_width16": {"cases": 600, "correct": 520, "exact_accuracy": 0.8666666666666667, "invalid_rate": 0.013333333333333334},
+      "routed_width16": {"cases": 600, "correct": 558, "exact_accuracy": 0.93}
+    }
+  },
+  "controls": {
+    "randomized": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 1.0},
+    "determinism": {"cases_per_arm": 20, "predictions_and_margins_equal": true, "passed": true}
+  },
+  "comparison": {
+    "control_only": 52,
+    "challenger_only": 54,
+    "intersection": 466,
+    "prediction_disagreement": 130,
+    "oracle_union_correct": 572,
+    "oracle_union_exact_accuracy": 0.9533333333333334,
+    "oracle_union_gain_over_best_arm": 0.08666666666666667,
+    "routed_gain_over_best_arm": 0.06333333333333335,
+    "challenger_route_count": 310
+  },
+  "gates": {"challenger_exact": true, "oracle_absolute": true, "oracle_gain": true, "routed_gain": true, "trained_dependence": true, "validity": true, "runtime": true, "determinism": true, "passed": true},
+  "runtime": {"wall_seconds": 1705.6350639800075, "aggregate_cpu_seconds": 6355.015073656, "paired_evaluation_wall_seconds": 13.683438456995646},
+  "decision": "advance-independent-cellular-lineage-to-tier6",
+  "limitations": ["Fresh generated width-16 feasibility evidence only.", "Oracle union is not an inference result."]
+}

@@ -1,0 +1,32 @@
+{
+  "run_id": "exp-635-independent-cellular-diversity-feasibility",
+  "status": "completed",
+  "created_at": "2026-07-13T13:04:23Z",
+  "hypothesis": "A separately initialized cellular learner makes complementary exact-rollout errors that a target-free confidence rule can exploit.",
+  "seed": 20260831,
+  "source": {
+    "repository_commit": "e5492b2",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "7c9ee3e8f2ff3db06cb7c0e64b89e13b07f820936972fbc252881d6f3a092013",
+    "runner_sha256": "931d2836b34965dcbd6a409706cacc73bd971272bbb191b3100c8ab6a04eb70b",
+    "control_checkpoint_sha256": "9b94b7eff85caf779598d9fff13a6598db3c195ffd66408545d23a1745af1b6c"
+  },
+  "config": "configs/exp_635_independent_cellular_diversity_feasibility.yaml",
+  "environment": "experiments/runs/exp-635-independent-cellular-diversity-feasibility/environment.json",
+  "training": {"steps": 2400, "examples": 76800, "widths": [8, 16]},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-635-independent-cellular-diversity-feasibility/challenger/weights.safetensors",
+    "checkpoint_sha256": "3cce3160c405c68fd71223ed31a6a9be0995a7162de9e23d231c8b55e0e22dc4",
+    "checkpoint_bytes": 400584,
+    "metrics": "evals/results/exp-635-independent-cellular-diversity-feasibility/metrics.json",
+    "summary": {"path": ".scratch/exp-635-independent-cellular-diversity-feasibility/summary.json", "sha256": "91346bb455b07f22dd77f3ed498767d12a35fd47f4659fe491628e7cea83854f"},
+    "paired_evidence": {"path": ".scratch/exp-635-independent-cellular-diversity-feasibility/paired-evidence.json", "sha256": "eaf74b4a58e997df34675f7200c0527bb6d6544496f886ace2af921a6a730296"},
+    "console": {"path": ".scratch/exp-635-independent-cellular-diversity-feasibility/formal-console.log", "sha256": "0d96f0ee233b8639128a2f1e6a8943ea69c7cc1f2ebbc50dc3e3e9a11068b5e7"}
+  },
+  "mlflow": {"experiment_id": "2", "run_id": "578278439bc946a4a34441fb382377db"},
+  "runtime": {"wall_seconds": 1705.6350639800075, "aggregate_cpu_seconds": 6355.015073656, "external_wall_seconds": 1617.83, "external_user_cpu_seconds": 6331.91, "external_system_cpu_seconds": 37.02, "external_percent_cpu": 393},
+  "resource_budget": {"expected_wall_seconds": 1824, "soft_wall_seconds": 2520, "hard_wall_seconds": 3660, "aggregate_cpu_upper_minutes": 244, "fidelity_reduced": false},
+  "decision": "advance-independent-cellular-lineage-to-tier6",
+  "limitations": ["Small-width feasibility evidence only; no checked, full independent, official, or private answers were read.", "Oracle union is diagnostic, while 93 percent routed accuracy is the target-free inference result."]
+}

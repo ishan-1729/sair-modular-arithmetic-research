@@ -566,3 +566,10 @@ runs:
     run_record: experiments/runs/exp-634-direct-relative-attention-feasibility/run.json
     metrics: evals/results/exp-634-direct-relative-attention-feasibility/metrics.json
     checkpoint: .scratch/exp-634-direct-relative-attention-feasibility/attention/weights.safetensors
+  - run_id: exp-635-independent-cellular-diversity-feasibility
+    status: completed
+    approach: independent-cellular-seed-target-free-margin-routing
+    config: configs/exp_635_independent_cellular_diversity_feasibility.yaml
+    run_record: experiments/runs/exp-635-independent-cellular-diversity-feasibility/run.json
+    metrics: evals/results/exp-635-independent-cellular-diversity-feasibility/metrics.json
+    checkpoint: .scratch/exp-635-independent-cellular-diversity-feasibility/challenger/weights.safetensors

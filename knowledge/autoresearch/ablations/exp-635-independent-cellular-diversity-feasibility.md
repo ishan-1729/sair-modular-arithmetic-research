@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-635 Independent Cellular Diversity Feasibility
 description: Paired feasibility test of whether a separately initialized cellular learner supplies exploitable exact-rollout diversity.
-status: preregistered
+status: completed
 tags: [autoresearch, cellular, independent-seed, diversity, routing, paired-evaluation]
 timestamp: "2026-07-13T18:05:00+05:30"
 ---
@@ -54,3 +54,9 @@ With a separate 120-second setup, serialization, and tracking allowance, the fro
 ## Limitations
 
 Raw margin scales can differ between independently trained models, so failure of the fixed selector does not prove that no learned router could work. Conversely, a high small-width oracle union may disappear at width 128. Both limitations are captured by requiring a separate full-width preregistration after this feasibility rung.
+
+## Result and decision
+
+All gates pass on the untouched 600-case paired set. Control scores 518/600 (86.33%) and the independent challenger 520/600 (86.67%). Their oracle union is 572/600 (95.33%), 8.67 points above the better arm, with 52 control-only and 54 challenger-only successes. The frozen target-free minimum-margin rule selects the challenger on 310 cases and scores 558/600 (93.00%), a 6.33-point gain. Randomized weights score 0/100; validity, exact determinism, and the 13.68-second paired runtime pass.
+
+The complete run used 1,705.64 wall seconds and 6,355.02 aggregate CPU seconds, below the 1,824-second expected budget and far below both ceilings, with no fidelity reduction. This advances one separately budgeted Tier-6 independent-lineage confirmation; it does not promote a candidate or establish full-benchmark accuracy.
