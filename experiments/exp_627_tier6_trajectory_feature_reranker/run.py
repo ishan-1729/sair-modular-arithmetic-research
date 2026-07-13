@@ -203,6 +203,7 @@ def main() -> int:
             )
         )
         cache_path = cache_dir / f"{name}-{key}.pt"
+        partial_path = cache_dir / f"{name}-{key}.partial.pt"
         if cache_path.exists():
             return torch.load(cache_path, weights_only=False), True
         generated_started = time.perf_counter()
@@ -211,11 +212,26 @@ def main() -> int:
         left, right, modulus = sampler.pairs(cases)
         expected = [(a * b) % prime for a, b, prime in zip(left, right, modulus)]
         batch_size = config["data_generation"]["batch_cases"]
-        greedy_predictions = []
-        confidence = {key: [] for key in feature_module.CONFIDENCE_KEYS}
-        greedy_wall = 0.0
-        greedy_cpu = 0.0
-        for start in range(0, cases, batch_size):
+        partial = (
+            torch.load(partial_path, weights_only=False)
+            if partial_path.exists()
+            else {
+                "greedy_predictions": [],
+                "confidence": {key: [] for key in feature_module.CONFIDENCE_KEYS},
+                "greedy_wall_seconds": 0.0,
+                "greedy_aggregate_cpu_seconds": 0.0,
+                "beam_predictions": [],
+                "beam_states": [],
+                "beam_scores": [],
+                "beam_wall_seconds": 0.0,
+                "beam_aggregate_cpu_seconds": 0.0,
+            }
+        )
+        greedy_predictions = partial["greedy_predictions"]
+        confidence = partial["confidence"]
+        greedy_wall = partial["greedy_wall_seconds"]
+        greedy_cpu = partial["greedy_aggregate_cpu_seconds"]
+        for start in range(len(greedy_predictions), cases, batch_size):
             stop = min(cases, start + batch_size)
             wall = time.perf_counter()
             cpu = time.process_time()
@@ -227,6 +243,15 @@ def main() -> int:
             greedy_predictions.extend(result["predictions"])
             for key_name in confidence:
                 confidence[key_name].extend(result["confidence"][key_name])
+            partial.update(
+                {
+                    "greedy_predictions": greedy_predictions,
+                    "confidence": confidence,
+                    "greedy_wall_seconds": greedy_wall,
+                    "greedy_aggregate_cpu_seconds": greedy_cpu,
+                }
+            )
+            torch.save(partial, partial_path)
         route_count = round(cases * config["data_generation"]["routed_fraction"])
         route_score = confidence["negative_trajectory_min_margin"]
         routed_indices = sorted(
@@ -235,12 +260,12 @@ def main() -> int:
         routed_left = [left[index] for index in routed_indices]
         routed_right = [right[index] for index in routed_indices]
         routed_modulus = [modulus[index] for index in routed_indices]
-        beam_states = []
-        beam_scores = []
-        beam_predictions = []
-        beam_wall = 0.0
-        beam_cpu = 0.0
-        for start in range(0, route_count, batch_size):
+        beam_states = partial["beam_states"]
+        beam_scores = partial["beam_scores"]
+        beam_predictions = partial["beam_predictions"]
+        beam_wall = partial["beam_wall_seconds"]
+        beam_cpu = partial["beam_aggregate_cpu_seconds"]
+        for start in range(len(beam_predictions), route_count, batch_size):
             stop = min(route_count, start + batch_size)
             wall = time.perf_counter()
             cpu = time.process_time()
@@ -257,6 +282,16 @@ def main() -> int:
             beam_predictions.extend(result["predictions"])
             beam_states.extend(result["beam_states"])
             beam_scores.extend(result["beam_scores"])
+            partial.update(
+                {
+                    "beam_predictions": beam_predictions,
+                    "beam_states": beam_states,
+                    "beam_scores": beam_scores,
+                    "beam_wall_seconds": beam_wall,
+                    "beam_aggregate_cpu_seconds": beam_cpu,
+                }
+            )
+            torch.save(partial, partial_path)
         routed_confidence = {
             key_name: [values[index] for index in routed_indices]
             for key_name, values in confidence.items()
@@ -292,8 +327,8 @@ def main() -> int:
             "features": features,
             "targets": torch.tensor(targets, dtype=torch.long),
             "runtime": {
-                "wall_seconds": time.perf_counter() - generated_started,
-                "aggregate_cpu_seconds": time.process_time() - generated_cpu,
+                "wall_seconds": greedy_wall + beam_wall,
+                "aggregate_cpu_seconds": greedy_cpu + beam_cpu,
                 "greedy_wall_seconds": greedy_wall,
                 "greedy_aggregate_cpu_seconds": greedy_cpu,
                 "beam_wall_seconds": beam_wall,
@@ -301,6 +336,7 @@ def main() -> int:
             },
         }
         torch.save(data, cache_path)
+        partial_path.unlink(missing_ok=True)
         return data, False
 
     def evaluate_reranker(model, data):

@@ -19,7 +19,7 @@ Candidate features are frozen before data generation: learned beam rank and scor
 
 Generate 1,200 training cases from 512 training prime identities. Split the 128 held-out prime identities before sampling: the first 64 supply 200 validation cases and the remaining 64 supply 200 untouched selection cases. No checked-public, prior EXP-625/626 expected answer, or private answer enters training or model selection.
 
-For each split, compute greedy confidence for every case and full width-4 candidates only for the frozen 40% minimum-margin route. Cache each completed split immediately using checkpoint, runner, feature, prime-list, seed, and configuration hashes. Train listwise cross-entropy only on routed training cases whose correct state exists in the beam; beam-miss cases remain in validation and selection accuracy denominators. Select the checkpoint by complete conditional validation exact count, with 300 epochs and patience 40. The final selection set is opened once after checkpoint choice.
+For each split, compute greedy confidence for every case and full width-4 candidates only for the frozen 40% minimum-margin route. Cache every completed generation batch and each completed split using checkpoint, runner, feature, prime-list, seed, and configuration hashes. Train listwise cross-entropy only on routed training cases whose correct state exists in the beam; beam-miss cases remain in validation and selection accuracy denominators. Select the checkpoint by complete conditional validation exact count, with 300 epochs and patience 40. The final selection set is opened once after checkpoint choice.
 
 ## Controls and gates
 
@@ -31,7 +31,7 @@ A pass authorizes untouched multi-seed Tier-6 confirmation and weight-dependence
 
 The candidate-shaped profile measured greedy-100 at 45.69 wall / 175.31 aggregate CPU seconds and width-4 beam-40 at 89.60 wall / 340.87 aggregate CPU seconds. Linear workload projection gives approximately 1,625 wall seconds for 1,200-case training generation and 545 seconds for validation plus selection generation. Training, serialization, MLflow, and safety allowance add 130 seconds, for a 2,300-second expected total.
 
-The soft budget is 3,200 wall seconds and the hard runaway ceiling is 4,600 wall seconds, with a conservative four-thread ceiling of 306.67 aggregate CPU minutes. Wall and aggregate CPU are recorded separately. Each split is recoverably cached; a later phase overrun cannot invalidate completed generation. Fidelity, data counts, and epochs will not be reduced to fit a shorter cap.
+The soft budget is 3,200 wall seconds and the hard runaway ceiling is 4,600 wall seconds, with a conservative four-thread ceiling of 306.67 aggregate CPU minutes. Wall and aggregate CPU are recorded separately. Every completed generation batch and split is recoverably cached; a later interruption or phase overrun cannot invalidate prior batches. Fidelity, data counts, and epochs will not be reduced to fit a shorter cap.
 
 ## Compliance and limitations
 

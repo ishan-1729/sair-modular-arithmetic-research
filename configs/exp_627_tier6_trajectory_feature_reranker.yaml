@@ -56,4 +56,5 @@ resource_budget:
   hard_runaway_ceiling_wall_seconds: 4600
   hard_ceiling_aggregate_cpu_minutes_upper_bound: 306.67
   cache_each_split_immediately: true
+  cache_each_generation_batch: true
   torch_threads: 4
