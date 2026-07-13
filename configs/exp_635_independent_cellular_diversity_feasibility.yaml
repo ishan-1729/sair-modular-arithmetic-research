@@ -1,0 +1,78 @@
+run_id: exp-635-independent-cellular-diversity-feasibility
+hypothesis: A separately initialized and independently trained cellular learner makes complementary exact-rollout errors that a target-free confidence rule can exploit.
+preregistration: knowledge/autoresearch/ablations/exp-635-independent-cellular-diversity-feasibility.md
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+control:
+  source_run_id: exp-633-hierarchical-learned-composition-feasibility
+  checkpoint: .scratch/exp-633-hierarchical-learned-composition-feasibility/control/weights.safetensors
+  checkpoint_sha256: 9b94b7eff85caf779598d9fff13a6598db3c195ffd66408545d23a1745af1b6c
+  source_data_seed: 20260830
+  original_test_prime_identities_width16: 128
+challenger:
+  seed: 20260831
+data:
+  prime_bit_span: 4
+  train_prime_identities: 512
+  fresh_test_prime_identities_width16: 128
+  train_prime_identities_by_width: {8: 40}
+  test_prime_identities_by_width: {8: 8}
+training:
+  widths: [8, 16]
+  steps: 2400
+  batch_size: 32
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00002
+  weight_decay: 0.0001
+  worst_bit_weight: 0.05
+  gradient_clip: 1.0
+  torch_threads: 4
+  checkpoint_every_steps: 100
+model:
+  hidden: 92
+  cycles: 2
+evaluation:
+  width: 16
+  rollout_cases: 600
+  randomized_cases: 100
+  determinism_cases: 20
+  case_seed: 20261535
+routing:
+  rule: choose_challenger_only_when_trajectory_minimum_absolute_logit_margin_is_higher
+  ties: control
+gates:
+  minimum_challenger_exact_accuracy: 0.80
+  minimum_oracle_union_exact_accuracy: 0.92
+  minimum_oracle_union_gain_over_best_arm: 0.04
+  minimum_routed_gain_over_best_arm: 0.015
+  minimum_trained_gain_over_randomized: 0.50
+  maximum_invalid_rate: 0.05
+  maximum_paired_width16_wall_seconds: 120
+  require_exact_determinism: true
+resource_budget:
+  status: calibrated
+  limit_unit: wall_seconds
+  calibration_training_updates: 30
+  calibration_inference_cases: 20
+  formal_training_steps: 2400
+  formal_paired_rollout_cases: 600
+  hard_ceiling_check_cadence_steps: 100
+  measured_training_wall_seconds: 20.903662444005022
+  measured_training_aggregate_cpu_seconds: 77.974167057
+  measured_control_inference_wall_seconds: 0.40448157300124876
+  measured_control_inference_aggregate_cpu_seconds: 1.5202013669999985
+  measured_challenger_inference_wall_seconds: 0.4885168180044275
+  measured_challenger_inference_aggregate_cpu_seconds: 1.8364947470000033
+  measured_randomized_inference_wall_seconds: 0.4673053870064905
+  measured_randomized_inference_aggregate_cpu_seconds: 1.7601333029999893
+  projected_training_wall_seconds: 1672.292995520402
+  projected_training_aggregate_cpu_seconds: 6237.93336456
+  projected_evaluation_wall_seconds: 30.912475447214092
+  projected_evaluation_aggregate_cpu_seconds: 116.214942163
+  setup_serialization_tracking_allowance_wall_seconds: 120
+  expected_total_wall_seconds: 1824
+  expected_total_aggregate_cpu_minutes: 114
+  soft_budget_wall_seconds: 2520
+  hard_runaway_ceiling_wall_seconds: 3660
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 244.0
+  calibration_json_sha256: 22480ad1e80a6fdde17bdb23c60d1a7c73e6c6af3f679356c84946a03ee7da4e
