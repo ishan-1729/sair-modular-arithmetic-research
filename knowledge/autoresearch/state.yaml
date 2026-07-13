@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T17:32:00+05:30
+updated_at: 2026-07-13T17:50:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-634-direct-relative-attention-feasibility
-  statement: A width-shared recurrent-depth attention model with fixed relative bit-position features can predict the modular product directly, avoiding both the 128-step autonomous state chain and the lossy multi-level latent composition bottleneck.
-  promotion_gate: Require a preregistered matched small-width feasibility rung to learn nonzero exact products, exceed randomized weights, preserve validity and determinism, and show materially better zero-shot width scaling than the sequential control before authorizing Tier-6 compute.
-  status: preregistered
-next_action: Commit the tested EXP-634 implementation and measured resource budget, then run the frozen resumable 4,000-update matched direct-product rung and full width-12/24 evaluation.
+  run_id: exp-635-independent-cellular-diversity-feasibility
+  statement: A separately initialized and independently trained width-shared cellular learner may make sufficiently complementary exact-rollout errors to raise paired oracle coverage and enable target-free minimum-margin routing, unlike checkpoints from one continuation lineage or heads sharing one recurrent core.
+  promotion_gate: Planning only; preregister a fresh paired small-width comparison with identity-disjoint training and evaluation, cached-control reuse only when provenance and split match exactly, explicit oracle-union and target-free routing gates, a randomized or untrained dependence control, and measured-throughput budgets before execution.
+  status: planning
+next_action: Design and preregister EXP-635 around a separately initialized cellular seed, preserving paired case identities and measuring error overlap before authorizing any expensive Tier-6 diversity run.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -61,3 +61,4 @@ risks:
   - Coarse target-free modulus and operand groups show at most 1.30x training and 1.43x validation failure enrichment, below the twofold authorization gate.
   - Complementary bootstrap-trained output heads create trajectory disagreement but regress width-128 exact rollout by 1.67 points and perform one point below randomized heads.
   - The hierarchical composition tree learns up to 60.83 percent exact internal nodes but zero exact roots at width 16 and zero exact width-32 products after 2,400 updates.
+  - Compact recurrent relative attention ties direct dilated convolution at 0.667 percent exact width 12 and both have zero exact width-24 transfer; trained attention shows no exact-answer advantage over randomized weights.

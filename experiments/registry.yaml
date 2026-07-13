@@ -559,3 +559,10 @@ runs:
     run_record: experiments/runs/exp-633-hierarchical-learned-composition-feasibility/run.json
     metrics: evals/results/exp-633-hierarchical-learned-composition-feasibility/metrics.json
     checkpoint: .scratch/exp-633-hierarchical-learned-composition-feasibility/tree/weights.safetensors
+  - run_id: exp-634-direct-relative-attention-feasibility
+    status: completed
+    approach: matched-direct-recurrent-relative-attention
+    config: configs/exp_634_direct_relative_attention_feasibility.yaml
+    run_record: experiments/runs/exp-634-direct-relative-attention-feasibility/run.json
+    metrics: evals/results/exp-634-direct-relative-attention-feasibility/metrics.json
+    checkpoint: .scratch/exp-634-direct-relative-attention-feasibility/attention/weights.safetensors

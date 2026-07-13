@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-634 Direct Relative-Attention Feasibility
 description: Matched direct-product feasibility comparison of recurrent shared attention and dilated convolution with fixed relative bit-position features.
-status: preregistered
+status: completed
 tags: [autoresearch, direct-product, universal-transformer, relative-position, attention, length-generalization]
 timestamp: "2026-07-13T17:25:00+05:30"
 ---
@@ -50,3 +50,11 @@ Including randomized/determinism controls and 180 seconds of setup/artifact allo
 ## Limitations
 
 The direct control and attention arms are parameter- and data-matched but perform different operations. Failure would reject this recurrent shared-attention prescription, not all transformer arithmetic, scratchpad decoding, or larger pretrained sequence models.
+
+## Result and decision
+
+The complete frozen 4,000-update comparison rejects the hypothesis. The direct dilated-convolution control and recurrent-attention challenger each score `2/300` exact (`0.667%`) at trained width 12 and `0/300` at zero-shot width 24. All trained predictions are valid and deterministic, but trained attention also scores `0/100` on the matched width-24 dependence diagnostic, identical to its randomized-weight accuracy; randomized weights produce invalid residues in all 100 cases.
+
+The attention arm has 53,122 parameters versus 52,345 for control (`1.0148x`), and its measured scaling projects to 37.71 seconds in the integrated candidate, so parameter, validity, determinism, and runtime gates pass. The trained-width exactness, control-gain, zero-shot transfer, and trained-dependence gates all fail. This closes the compact direct recurrent-attention and direct-convolution surface at the declared capacity and rung without post-result tuning.
+
+The formal runner used 940.56 wall seconds and 3,474.38 aggregate CPU seconds (57.91 CPU minutes). External timing measured 900.52 wall seconds, 3,465.19 user seconds, and 21.99 system seconds at 387% CPU. The run therefore completed below the calibrated 1,463-second expected wall budget, 1,980-second soft budget, 2,940-second runaway ceiling, and 196 aggregate CPU-minute upper bound. No evaluation cases, updates, widths, controls, or fidelity were reduced.

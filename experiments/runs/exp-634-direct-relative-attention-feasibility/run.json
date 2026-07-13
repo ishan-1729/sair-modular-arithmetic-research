@@ -1,0 +1,65 @@
+{
+  "run_id": "exp-634-direct-relative-attention-feasibility",
+  "status": "completed",
+  "created_at": "2026-07-13T12:17:32Z",
+  "hypothesis": "Recurrently shared global attention with fixed relative position features learns direct modular products and zero-shot width transfer better than parameter-matched direct dilated convolution.",
+  "seed": 20260831,
+  "source": {
+    "repository_commit": "709f72e6ee83d48b527e067fc3160b01dc4308d5",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "5e9b2aa4bd7c2218abcfb84c4d6f385ea56dde4b6727e443e892ed8e62124d65",
+    "runner_sha256": "def742ae1d6491f1639a3359141f5282a9ede31dd519dc020a498d216454401b",
+    "model_sha256": "b42b625d60b5bdb8fa923a404cf46c9f5ee6d95089c1dedf63b7f9bcaab26536",
+    "dataset_sha256": "27c63a2f6440f353d247f704c4189933ed83eac2937f23a6f8a1d08538e060d5"
+  },
+  "config": "configs/exp_634_direct_relative_attention_feasibility.yaml",
+  "environment": "experiments/runs/exp-634-direct-relative-attention-feasibility/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "784577e0c7724cb4b8d77a1ae8225b83",
+    "arm_run_ids": {
+      "control": "e9648539985e4aa3bfe1d549e69cb62d",
+      "attention": "091e416183a248d3865d0f19af8b054b"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-634-direct-relative-attention-feasibility/attention/weights.safetensors",
+    "checkpoint_sha256": "6c821350b75bcd21bd3d9b2b00bae853bb0f7a7cf7b3561abd584b02b9e2e3ea",
+    "control_checkpoint": ".scratch/exp-634-direct-relative-attention-feasibility/control/weights.safetensors",
+    "control_checkpoint_sha256": "b7399188efcd84583497d19ff6b85baa8bfabc2a5d3d9f9311fbd8cb6a6fdd5e",
+    "metrics": "evals/results/exp-634-direct-relative-attention-feasibility/metrics.json",
+    "scratch_summary": ".scratch/exp-634-direct-relative-attention-feasibility/summary.json",
+    "scratch_summary_sha256": "011a3c24649c8f0ff924a483638dcdb05a6519e9a2c31346ee942f38295ed01c",
+    "console_log": ".scratch/exp-634-direct-relative-attention-feasibility/formal-console.log",
+    "console_log_sha256": "1dc86a1f16a3730d968b133e9bc1c3ac1beb838b6a0b0c208525e3a36bef7e7a"
+  },
+  "controls": {
+    "matched_updates": 4000,
+    "matched_examples": 256000,
+    "prime_disjoint_evaluation": true,
+    "randomized_weight_control": true,
+    "determinism_passed": true,
+    "all_gates_passed": false
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 1463,
+    "expected_total_aggregate_cpu_minutes": 81,
+    "soft_budget_wall_seconds": 1980,
+    "hard_runaway_ceiling_wall_seconds": 2940,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 196,
+    "observed_wall_seconds": 940.5570494690037,
+    "observed_aggregate_cpu_seconds": 3474.3753263040003,
+    "fidelity_reduced": false,
+    "valid_arm_caches_preserved": true
+  },
+  "decision": "reject-direct-relative-attention-feasibility",
+  "notes": [
+    "Attention and direct convolution both scored 2/300 at width 12 and 0/300 at zero-shot width 24.",
+    "Trained and randomized attention both scored 0/100 on the matched width-24 dependence diagnostic.",
+    "Both trained arms produced valid deterministic outputs, but every exactness, gain, transfer, and trained-dependence gate failed.",
+    "Close this direct recurrent-attention and direct-convolution surface at the declared capacity and rung."
+  ]
+}
