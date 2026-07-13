@@ -45,7 +45,7 @@ def sha256_text(value: str) -> str:
 
 def git_output(*args: str) -> str:
     return subprocess.run(
-        ["git", *args], cwd=ROOT, check=True, capture_output=True, text=True, timeout=15
+        ["git", *args], cwd=ROOT, check=True, capture_output=True, text=True, timeout=120
     ).stdout.strip()
 
 

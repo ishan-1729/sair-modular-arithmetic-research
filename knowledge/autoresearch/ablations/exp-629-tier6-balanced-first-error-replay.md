@@ -45,3 +45,6 @@ Including 150 wall seconds for setup and artifacts gives an expected 2,671 wall 
 
 No checked, consumed independent, or private answer is used. The inference architecture and parameter count are unchanged, so a winning checkpoint remains trained-weight-dependent and tensor-native with the incumbent runtime shape. This experiment tests one balanced replay ratio at a preregistered low rate; it does not establish that all hard-example curricula work or that prime-identity robustness is solved.
 
+## Infrastructure attempt
+
+MLflow run `39cd3ebbef1c4da28d5204f7b922557c` failed before mining because the runner's 15-second `git status` provenance timeout was too short under host filesystem contention. It produced no dataset, checkpoint, or metric. The timeout alone was raised to 120 seconds before evidence generation; the hypothesis, data, training, evaluation, gates, and resource budget remain unchanged.
