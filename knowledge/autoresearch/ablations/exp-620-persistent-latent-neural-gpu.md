@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-620 Persistent Latent Neural GPU
 description: Parameter-matched smoke test of persistent latent computation against decoded-state cellular recurrence.
-status: preregistered
+status: completed
 tags: [autoresearch, neural-gpu, persistent-state, architecture, curriculum]
 timestamp: "2026-07-13T06:50:00+05:30"
 ---
@@ -42,3 +42,9 @@ The planning budget is 1,200 wall seconds and the hard runaway ceiling is 1,800 
 ## Boundaries and library choice
 
 Exact arithmetic is restricted to offline prefix labels and evaluation truth. Inference is a trained tensor-only recurrent network with no modular multiplication, reduction, division, lookup, or fallback. PyTorch provides the required ConvGRU primitives directly; no mature specialized Neural GPU package offers a better-maintained implementation surface for this custom width-shared model.
+
+## Result and decision
+
+After 1,200 updates, the parameter-matched decoded control scored 4.5% autonomous width-16 rollout and zero at widths 24/32. The persistent Neural GPU scored zero at all three widths and its final width-16 training batch remained 0% exact, despite learning some early-prefix structure. Its final residues were valid, so failure is algorithm learning rather than output range.
+
+Reject the hidden-64, two-microstep persistent formulation and do not advance it to higher widths. The completed retry took 708.23 wall seconds and 2,675.74 aggregate CPU seconds. An earlier attempt stopped before its first optimizer update due to a diagnostic shape bug; the one-line fix was validated and the complete run restarted unchanged. Move to learned beam-state decoding of the already strong transition model.

@@ -475,3 +475,10 @@ runs:
     run_record: experiments/runs/exp-619-tier6-confidence-augmented-state/run.json
     metrics: evals/results/exp-619-tier6-confidence-augmented-state/metrics.json
     checkpoint: .scratch/exp-619-tier6-confidence-augmented-state/confidence_state_challenger/weights.safetensors
+  - run_id: exp-620-persistent-latent-neural-gpu
+    status: completed
+    approach: parameter-matched-persistent-latent-neural-gpu
+    config: configs/exp_620_persistent_latent_neural_gpu.yaml
+    run_record: experiments/runs/exp-620-persistent-latent-neural-gpu/run.json
+    metrics: evals/results/exp-620-persistent-latent-neural-gpu/metrics.json
+    checkpoint: .scratch/exp-620-persistent-latent-neural-gpu/persistent_neural_gpu/weights.safetensors
