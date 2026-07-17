@@ -5,6 +5,7 @@ description: Prioritized model families, evidence, compliance risk, and next exp
 status: active
 tags: [research-plan, architecture, prioritization]
 timestamp: "2026-07-11T23:15:00+05:30"
+last_updated: "2026-07-18T04:42:24+05:30"
 ---
 
 # Approach portfolio
@@ -19,10 +20,17 @@ Scores are relative planning judgments from 1 (poor) to 5 (strong), not measured
 |---:|---|:---:|:---:|:---:|---|
 | 1 | Trajectory-trained binary Horner TCN | 5 | 4 | 4 | Chained exactness requires extraordinarily low step error. |
 | 2 | ConvGRU / Neural-GPU transition | 4 | 3 | 4 | More recurrent iterations may exceed the runtime envelope. |
-| 3 | Learned 2–8 bit limb recurrence | 4 | 5 | 4 | Much harder carry and reduction transition per step. |
-| 4 | Small-prime DLP/additive expert | 2 | 4 | 5 | Official baseline suggests a low ceiling beyond Tier 1. |
-| 5 | Trace-supervised relative-position Transformer | 2 | 2 | 5 | Direct arithmetic length generalization remains weak. |
-| 6 | End-to-end decoder-only Transformer | 1 | 2 | 5 | Known baseline already collapses on unseen primes. |
+| 3 | Learned neural-RAM executor with addressable trace memory | 4 | 2 | 3 | Memory may be expensive or unnecessary, and programmed/compiled initialization would cross the provenance boundary. |
+| 4 | Learned 2–8 bit limb recurrence | 4 | 5 | 4 | Much harder carry and reduction transition per step. |
+| 5 | Small-prime DLP/additive expert | 2 | 4 | 5 | Official baseline suggests a low ceiling beyond Tier 1. |
+| 6 | Trace-supervised relative-position Transformer | 2 | 2 | 5 | Direct arithmetic length generalization remains weak. |
+| 7 | End-to-end decoder-only Transformer | 1 | 2 | 5 | Known baseline already collapses on unseen primes. |
+
+### Learned neural-execution challenger
+
+The neural-RAM entry borrows only the compliant mechanisms identified in the [Playwright-verified research note](../autoresearch/research/2026-07-18-learned-neural-execution.md): persistent trained registers, an append-only latent execution trace, learned read/write addressing, shared learned transitions, and low-dimensional attention as a possible fast retrieval bias. It does **not** borrow compiled interpreters, solver programs, hand-assigned instruction semantics, or generated execution weights.
+
+This is a high-upside challenger rather than a replacement for the cellular incumbent. Candidate 005 already carries a compact learned recurrent state, so trace memory must beat both a parameter-matched wider cell and a non-addressable workspace on exact autonomous width extrapolation. It must also prove causal memory use and fit the candidate-shaped CPU envelope. EXP-654 owns that comparison.
 
 ## Selected family
 

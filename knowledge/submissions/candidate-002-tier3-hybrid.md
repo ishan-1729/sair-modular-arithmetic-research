@@ -2,14 +2,14 @@
 type: Model Card
 title: Candidate 002 Tier-3 Horner Hybrid
 description: Submission-ready learned ensemble that independently clears Tiers 1 through 3.
-status: incumbent
+status: superseded
 tags: [submission, model-card, Tier-3, learned-horner]
 timestamp: "2026-07-12T08:15:00+05:30"
 ---
 
 # Candidate 002: Tier-3 Horner hybrid
 
-Candidate 002 is the current incumbent. It combines the retained 85,021-parameter width-9 Tier-2 network with the promoted 85,556-parameter shared-context width-16 network. Both produce residues through learned recurrent transitions after the challenge-sanctioned pairwise input reduction. Moduli above 65,535 receive the deterministic zero fallback; there is no hand-coded modular solver or output repair.
+Candidate 002 was the Tier-3 incumbent and is now superseded. It combines the retained 85,021-parameter width-9 Tier-2 network with the promoted 85,556-parameter shared-context width-16 network. Both produce residues through learned recurrent transitions after the challenge-sanctioned pairwise input reduction. Moduli above 65,535 receive the deterministic zero fallback; there is no hand-coded modular solver or output repair.
 
 | Evaluation | Scored cases | Overall | Tier 1 | Tier 2 | Tier 3 | Highest tier >=90% |
 |---|---:|---:|---:|---:|---:|---:|

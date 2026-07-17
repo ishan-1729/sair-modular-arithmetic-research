@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T17:00:00+05:30
+updated_at: 2026-07-18T05:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -10,30 +10,34 @@ success_threshold:
   achieved: false
 completion_eligible: false
 incumbent:
-  run_id: candidate-004-tier5-cellular-hybrid
-  checkpoint_sha256: fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4
-  checked_public_overall_accuracy: 0.501
-  independent_overall_accuracy: 0.495
+  run_id: candidate-005-tier6-conditional-commutative-integration
+  checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+  checked_public_overall_accuracy: 0.595
+  independent_overall_accuracy: 0.593
   checked_public_tier_1_accuracy: 1.0
   checked_public_tier_2_accuracy: 0.99
-  independent_tier_2_accuracy: 0.96
+  independent_tier_2_accuracy: 0.99
   checked_public_tier_3_accuracy: 1.0
-  independent_tier_3_accuracy: 0.99
+  independent_tier_3_accuracy: 0.97
   checked_public_tier_4_accuracy: 0.98
-  independent_tier_4_accuracy: 0.95
+  independent_tier_4_accuracy: 0.97
   checked_public_tier_5_accuracy: 0.94
-  independent_tier_5_accuracy: 0.95
-  highest_tier_above_90: 5
-  artifact_bytes: 1512567
-  sandbox_inference_seconds: 36.9
-  mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
-  mlflow_model_version: "4"
+  independent_tier_5_accuracy: 0.94
+  checked_public_tier_6_accuracy: 0.96
+  independent_tier_6_accuracy: 0.98
+  tier_6_five_seed_accuracy: 0.974
+  tier_6_minimum_seed_accuracy: 0.95
+  highest_tier_above_90: 6
+  artifact_bytes: 1915885
+  sandbox_inference_seconds: 156.0
+  mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
+  mlflow_model_version: "5"
 current_hypothesis:
-  run_id: candidate-005-tier6-conditional-commutative-integration
-  statement: A candidate-shaped artifact can add the frozen 97.2-percent Tier-6 conditional commutative specialist without regressing Tiers 1-5 and pass static, deterministic, weight-dependence, five-seed Tier-6, artifact, and isolated-runtime gates.
-  promotion_gate: Require no Tier1-5 regression, every one of five fresh Tier-6 seeds at least 90 percent, randomized Tier-6 collapse, valid deterministic outputs, clean three-file artifact, official static/interface checks, and isolated complete runtime at most 285 seconds before replacing Candidate 004.
-  status: local-gates-passed-awaiting-isolated-full-seed1
-next_action: Preserve and commit the four fresh Tier-6 seed passes, exact 500-case lower-tier equivalence, deterministic repeat, randomized-weight collapse, and measured wall/CPU evidence; then run the exact artifact on the complete 1,100-case seed 1 in the pinned official isolated container.
+  run_id: exp-643-tier7-recurrent-depth-stability-diagnostic
+  statement: Candidate 005's frozen width-shared cell fails at width 256 because recurrent-depth dynamics become unstable or overthink, which should be visible in visit-wise state/logit deltas, output flips, normalization statistics, and a tractable Jacobian spectral proxy.
+  promotion_gate: Advance exactly one matched stability intervention only if fresh width-256 failures correlate reproducibly with unstable visit dynamics across two preregistered seeds while width-128 controls reproduce; otherwise reject stability as the primary cause and move to a learned-memory or materially different architecture track.
+  status: preregistration-required
+next_action: Preserve Candidate 005's completed release evidence and then preregister EXP-643 with exact frozen inputs, two fresh width-256 seeds, width-128 retention controls, measured diagnostic throughput, separate wall/CPU budgets, and cached-checkpoint reuse before running the full diagnostic.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -41,18 +45,18 @@ tracking:
   experiment_name: sair-modular-arithmetic-wsl
   experiment_id: "2"
   registered_model: sair-modular-arithmetic-candidate
-  incumbent_model_version: "4"
+  incumbent_model_version: "5"
 git:
   branch: agent/submission-ready-horner-tcn9
   last_validated_commit: 765533e
   dirty: true
 risks:
-  - Tier 6 has strong fresh confirmation but remains unintegrated until Candidate 005 passes five-seed, lower-tier equivalence, trained-weight, and isolated-runtime gates.
+  - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
   - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
   - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
-  - Candidate 004 clears Tier 5 but remains only 49.5 to 50.1 percent overall, far below the 85 percent goal.
+  - Five complete independent 1,100-case seeds are not yet warranted because the current zero fallback above Tier 6 structurally prevents the 85 percent overall gate.
   - Progressive teacher-forced width scaling regresses width-128 rollout from 57 to 49 percent despite 99.7 percent transition accuracy, indicating autonomous state drift.
   - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
   - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.

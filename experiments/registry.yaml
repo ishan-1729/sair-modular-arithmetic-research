@@ -623,9 +623,9 @@ runs:
     metrics: evals/results/exp-642-fresh-conditional-commutative-confirmation/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
   - run_id: candidate-005-tier6-conditional-commutative-integration
-    status: running
+    status: completed
     approach: frozen-tier6-conditional-commutative-candidate-integration
     config: configs/candidate_005_tier6_conditional_integration.yaml
     run_record: experiments/runs/candidate-005-tier6-conditional-commutative-integration/run.json
     metrics: evals/results/candidate-005-tier6-conditional-commutative-integration/metrics.json
-    checkpoint: .scratch/candidate-005-tier6-conditional-commutative-integration/submission/weights.safetensors
+    checkpoint: submission/weights.safetensors

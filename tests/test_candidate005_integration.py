@@ -3,30 +3,26 @@ from __future__ import annotations
 import types
 from pathlib import Path
 
-import pytest
 import torch
-
-from tools.build_candidate005_artifact import candidate_model
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.fixture(scope="module")
 def candidate_module():
-    incumbent = (ROOT / "submission/model.py").read_text(encoding="utf-8")
-    source = candidate_model(incumbent)
+    source = (ROOT / "submission/model.py").read_text(encoding="utf-8")
     module = types.ModuleType("candidate005_test_model")
     exec(compile(source, "candidate005_test_model.py", "exec"), module.__dict__)
     return module
 
 
-def test_candidate005_bigint_encoder_is_bit_exact(candidate_module) -> None:
+def test_candidate005_bigint_encoder_is_bit_exact() -> None:
+    module = candidate_module()
     state = [0, (1 << 96) + 7]
     multiplicand = [(1 << 127) - 3, (1 << 65) + 11]
     modulus = [(1 << 127) + 51, (1 << 126) + 27]
     input_bit = [0, 1]
-    actual = candidate_module._bigint_features(
+    actual = module._bigint_features(
         state, multiplicand, modulus, input_bit, 128
     )
     expected = torch.empty((2, 6, 128), dtype=torch.float32)
@@ -44,9 +40,9 @@ def test_candidate005_bigint_encoder_is_bit_exact(candidate_module) -> None:
 
 
 def test_candidate005_routes_lowest_40_percent_and_uses_strict_margin(
-    candidate_module,
 ) -> None:
-    model = candidate_module.Tier2HornerModel()
+    module = candidate_module()
+    model = module.Tier2HornerModel()
     model.network = object()
     model.tier3_network = object()
     model.tier4_network = object()

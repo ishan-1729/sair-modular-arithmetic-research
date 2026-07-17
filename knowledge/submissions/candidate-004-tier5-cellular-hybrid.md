@@ -2,7 +2,7 @@
 type: Model Card
 title: Candidate 004 Tier-5 Cellular Hybrid
 description: Submission-ready Tier-2/3 TCN plus separate Tier-4 and Tier-5 cellular specialists.
-status: promoted-intermediate
+status: superseded
 tags: [submission, candidate, Tier-5, cellular, trained-model]
 timestamp: "2026-07-12T18:20:00+05:30"
 ---

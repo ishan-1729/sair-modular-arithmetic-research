@@ -1,7 +1,8 @@
 {
   "run_id": "candidate-005-tier6-conditional-commutative-integration",
-  "status": "running",
+  "status": "completed",
   "created_at": "2026-07-17T10:35:00Z",
+  "completed_at": "2026-07-17T18:21:50Z",
   "hypothesis": "The frozen 40 percent conditional commutative Tier-6 policy integrates into Candidate 004 without lower-tier prediction changes and clears five fresh Tier-6, static, deterministic, trained-weight, artifact, and isolated-runtime gates.",
   "seed": 20260843,
   "config": "configs/candidate_005_tier6_conditional_integration.yaml",
@@ -17,12 +18,21 @@
   "mlflow": {
     "experiment_name": "sair-modular-arithmetic-wsl",
     "experiment_id": "2",
-    "run_id": "d6faefe251054857aa8a24bb1b7f1594"
+    "run_id": "d6faefe251054857aa8a24bb1b7f1594",
+    "registered_model": "sair-modular-arithmetic-candidate",
+    "model_version": "5",
+    "aliases": ["incumbent", "validated"]
   },
   "artifacts": {
-    "checkpoint": ".scratch/candidate-005-tier6-conditional-commutative-integration/submission/weights.safetensors",
+    "checkpoint": "submission/weights.safetensors",
     "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
     "metrics": "evals/results/candidate-005-tier6-conditional-commutative-integration/metrics.json",
+    "independent_full": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/independent-full.json",
+    "independent_full_sha256": "0a8014f9c23c1961b2d720c89343fad31e80f805a39b2515adb7908661edb1be",
+    "checked_full": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/checked-full.json",
+    "checked_full_sha256": "335c29b76dc2e1cf883052a6bfbcaf25dd49a1946c68ff3b696bacbfb81d70d3",
+    "sandbox_run": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json",
+    "sandbox_run_sha256": "bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa",
     "scratch_summary": ".scratch/candidate-005-tier6-conditional-commutative-integration/summary.json",
     "scratch_summary_sha256": "2e7419743bb439d5fedbdff82f2d4a10267425ab33fd653ee367b1ccfbddecfc",
     "raw_local_evidence": ".scratch/candidate-005-tier6-conditional-commutative-integration/local-tier6-raw.json",
@@ -30,12 +40,14 @@
     "formal_console": ".scratch/candidate-005-tier6-conditional-commutative-integration/formal-console.log",
     "formal_console_sha256": "4d029a9ba1e57159efd23393a2f15003abbacb924a60774154c5470ec47efec2"
   },
-  "decision": "local-pass-await-isolated-full-seed1",
+  "decision": "promote-candidate005-intermediate",
   "notes": [
-    "Fresh local Tier-6 seeds 2 through 5 score 96, 95, 99, and 99 percent exact; every seed clears 90 percent.",
+    "Tier-6 seeds 1 through 5 score 98, 96, 95, 99, and 99 percent exact; all five clear 90 percent and aggregate to 487/500 (97.4 percent).",
     "Candidate 005 matches Candidate 004 on all 500 Tier 1-5 seed-1 predictions.",
     "Randomized Tier-6 weights collapse seed 2 to 2 percent; static, validity, and determinism gates pass.",
     "The local gate consumes 678.93 wall seconds and 42.58 aggregate CPU minutes, below all calibrated budgets.",
-    "The pinned isolated full seed-1 gate remains pending; Candidate 004 is still the incumbent."
+    "The pinned isolated full seed-1 run scores 59.3 percent overall with Tier 6 at 98 percent and completes inference in 156.0 seconds.",
+    "The post-selection checked regression scores 59.5 percent overall with Tier 6 at 96 percent.",
+    "Candidate 005 is the intermediate incumbent but remains far below the binding 85 percent overall completion threshold; the official private benchmark is unavailable."
   ]
 }

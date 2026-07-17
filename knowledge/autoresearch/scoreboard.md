@@ -12,11 +12,12 @@ timestamp: "2026-07-12T02:20:00+05:30"
 | Run | Role | Independent overall | Tier 1 | Tier 2 | Tier 3 | Highest >=90% | Parameters | CPU inference | Status |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
 | `candidate-001-horner-tcn9` | retained baseline | 21.3% | 100% | 97% | 2% | 2 | 85,021 | 0.4 s sandbox | superseded |
-| `candidate-002-tier3-hybrid` | promoted | 31.0% | 100% | 97% | 99% | 3 | 170,577 | 1.8 s official sandbox | incumbent |
+| `candidate-002-tier3-hybrid` | promoted | 31.0% | 100% | 97% | 99% | 3 | 170,577 | 1.8 s official sandbox | superseded |
 | `candidate-003-tier4-cellular-hybrid` | promoted | 40.4% | 100% | 98% | 99% (Tier 4: 95%) | 4 | 270,401 | 7.9 s official sandbox | superseded |
-| `candidate-004-tier5-cellular-hybrid` | promoted | 49.5% | 100% | 96% | 99% (Tier 4: 95%; Tier 5: 95%) | 5 | 370,225 | 36.9 s official sandbox | incumbent |
+| `candidate-004-tier5-cellular-hybrid` | promoted | 49.5% | 100% | 96% | 99% (Tier 4: 95%; Tier 5: 95%) | 5 | 370,225 | 36.9 s official sandbox | superseded |
+| `candidate-005-tier6-conditional-commutative-integration` | promoted | 59.3% | 100% | 99% | 97% (Tier 4: 97%; Tier 5: 94%; Tier 6: 98%) | 6 | 470,049 | 156.0 s official sandbox | incumbent |
 
-Candidate 004's Tier-5 estimate is 480/500 (96.0%) across five independent generator seeds plus 95/100 on the retained full independent seed. Candidate comparisons must report all scored tiers and preserve prior rows after promotion.
+Candidate 005's Tier-6 estimate is 487/500 (97.4%) across five preregistered generator seeds with a 95% minimum. Its checked overall accuracy is 59.5% and checked Tier 6 is 96%. Candidate comparisons must report all scored tiers and preserve prior rows after promotion.
 
 ## Research gates
 

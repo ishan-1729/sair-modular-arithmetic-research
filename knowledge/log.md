@@ -33,3 +33,11 @@
 - **Tier-6 straight-through**: Hard-forward/sigmoid-backward state training gains 2.5 points over continuous soft state, reaching 87%, and advances to higher-fidelity confirmation.
 - **Tier-6 straight-through confirmation**: Higher-fidelity continuation reaches 86.33% and misses its gain and absolute gates, closing estimator continuation.
 - **Tier-6 corruption robustness**: Generic one-/two-bit corruption training collapses rollout to 75%, closing fixed-cell schedule interventions and motivating capacity expansion.
+
+## 2026-07-18
+
+- **Research intake**: Incorporated the supplied Super Transformers synthesis into the live autoresearch backlog with mechanism-level relevance, exclusions, and falsifiable EXP-643–653 proposals.
+- **Neural execution**: Playwright-verified the primary programmable-Transformer paper and Percepta technical article, separated representational claims from reproduced evidence, and documented the trained-parameters provenance boundary.
+- **Architecture portfolio**: Promoted a compliant learned neural-RAM challenger using trained persistent registers, append-only latent traces, learned read/write addressing, and low-dimensional retrieval; compiled interpreters, solver programs, and constructed execution weights remain prohibited.
+- **Experiment queue**: Reserved EXP-654 for a matched neural-executor comparison against decoded cellular recurrence, a wider-state control, and a non-addressable workspace, with causal memory, exact rollout, provenance, and CPU gates.
+- **Tier-6 promotion**: Candidate 005 scores 59.3% on the complete independent set and 59.5% checked, with Tier 6 at 98%/96%; five Tier-6 seeds aggregate to 487/500 with a 95% minimum. Static, isolation, determinism, randomized-weight, artifact, and pinned-container gates pass at 156.0-second inference. Candidate 005 becomes the intermediate incumbent, while the 85% Goal remains unmet and Tier 7 becomes the active frontier.

@@ -2,7 +2,7 @@
 type: Candidate Preregistration
 title: Candidate 005 Tier-6 Conditional Commutative Integration
 description: Frozen-artifact release gate for integrating the confirmed width-128 conditional commutative specialist into Candidate 004.
-status: running
+status: completed
 tags: [autoresearch, candidate, Tier-6, commutativity, conditional-compute, release]
 timestamp: "2026-07-17T16:05:00+05:30"
 ---
@@ -45,4 +45,12 @@ Pass. Fresh official-generator Tier-6 seeds 2–5 score 96/100, 95/100, 99/100, 
 
 The local runner consumes 678.93 wall seconds and 2,554.60 aggregate CPU seconds (42.58 minutes), below the 896-second expectation, 1,350-second soft budget, 2,100-second hard ceiling, and 150-minute aggregate CPU upper bound. GNU time independently records 697.53 wall, 2,486.99 user CPU, 80.16 system CPU seconds, and 468,716 KiB maximum RSS. No fidelity was reduced.
 
-Decision: advance the exact frozen scratch artifact to the pinned isolated full seed-1 gate. Do not replace Candidate 004 or read the checked benchmark yet.
+Decision at the local gate: advance the exact frozen scratch artifact to the pinned isolated full seed-1 gate. Do not replace Candidate 004 or read the checked benchmark yet.
+
+## Isolated full-set and release-regression result
+
+Pass and promote as the intermediate incumbent. The exact hash-frozen artifact scores 59.3% on the complete independent seed-1 set, with Tiers 1–6 at 100%/99%/97%/97%/94%/98% and `highest_tier_above_90 = 6`. Together with local seeds 2–5, Tier 6 scores 98%/96%/95%/99%/99%: 487/500 (97.4%) aggregate with a 95% minimum.
+
+The pinned official Podman sandbox reproduces the independent score, passes static analysis, preprocessing isolation, and determinism, and completes inference in 156.0 seconds (178.41 seconds container wall), below the 285-second promotion ceiling and official 300-second limit. The post-selection complete checked regression scores 59.5%, with Tier 6 at 96% and all lower specialists retained. All evidence used the exact manifest/model/weights hashes frozen in the preregistration; no evaluation fidelity was reduced.
+
+Candidate 005 replaces Candidate 004 as the intermediate incumbent. It does not complete the program: checked and independent overall accuracy remain roughly 59%, five complete independent 1,100-case seeds cannot pass while Tiers 7–10 use the zero fallback, and no legitimate private-official result is available. Continue at the Tier-7 width-256 boundary.

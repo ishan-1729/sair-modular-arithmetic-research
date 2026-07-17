@@ -5,6 +5,7 @@ description: Evidence-driven operating contract for long-running SAIR model rese
 status: active
 tags: [autoresearch, mlflow, experiments, optimization, reproducibility]
 timestamp: "2026-07-12T02:00:00+05:30"
+last_updated: "2026-07-18T04:42:24+05:30"
 ---
 
 # Principal ML autoresearch program
@@ -119,6 +120,16 @@ Use evidence to prioritize, but consider:
 - prime/width-disjoint splits, boundary-heavy cases, length shifts, adversarial reductions, leakage audits, and data/compute scaling curves.
 
 Maintain a simple control beside every complex model.
+
+## Learned neural-execution track
+
+Treat learned execution as a distinct architecture track, not as permission to conceal a conventional solver in a network. The compliant target is a model trained from documented ordinary initialization to organize computation through persistent registers, append-only latent traces, learned read/write addressing, shared execution transitions, and learned residue readout. Low-dimensional attention or another indexed-memory primitive may be used when its parameters are trained and its sandbox CPU path is measured. See the [primary-source and compliance synthesis](research/2026-07-18-learned-neural-execution.md).
+
+Never initialize, prompt, or condition a submission with a compiled modular-multiplication, reduction, division, WebAssembly, or general interpreter program that supplies the answer procedure. Do not hand-assign instruction semantics, memory-update tables, attention weights, or a nearly complete execution circuit and then apply nominal fine-tuning. Randomized-weight collapse is necessary but not sufficient: record the provenance of every parameter tensor and demonstrate that the capability emerged through training.
+
+Test the track in stages against simple controls. First compare a small learned neural-RAM executor with the established decoded cellular recurrence, a parameter-matched wider-state recurrence, and a non-addressable persistent workspace on identical generated prefix trajectories. Require exact trained-width viability before width extrapolation, then require causal register/trace evidence through reset, permutation, addressing, and activation ablations. Measure exact autonomous rollout, first-error position, held-out-prime and width transfer, addressing collisions, runtime, aggregate CPU, peak memory, determinism, and weight dependence. Do not scale a trace architecture merely because it reconstructs one-step targets or because its memory is interpretable.
+
+An append-only trace is useful only if addressable memory raises exact generalization enough to justify its cost. Compact recurrence already carries state in constant memory; low-dimensional or logarithmic lookup is therefore an empirical challenger, not a presumed improvement. Retain a full candidate-shaped runtime projection with safety headroom at every promoted rung.
 
 ## Graph-neural architecture track
 

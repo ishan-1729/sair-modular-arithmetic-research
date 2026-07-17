@@ -2,7 +2,7 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository contains a submission-ready 270,401-parameter learned TCN/cellular ensemble. On a full independent official 1,100-case set it scores **40.4% overall**, with **Tier 1 at 100%, Tier 2 at 98%, Tier 3 at 99%, and Tier 4 at 95%**, advancing `highest_tier_above_90` to 4. The checked post-selection regression scores 40.9%, randomized weights collapse Tier 4 to 0%, and the pinned official container reproduces the independent score with 7.9-second inference.
+The repository contains a submission-ready 470,049-parameter learned TCN/cellular ensemble with target-free conditional commutative inference at Tier 6. On a complete independent official-generator 1,100-case set it scores **59.3% overall**, with **Tiers 1–6 at 100%/99%/97%/97%/94%/98%**, advancing `highest_tier_above_90` to 6. The checked post-selection regression scores 59.5%, randomized Tier-6 weights collapse to 2%, and the pinned official container reproduces the independent score with 156.0-second inference. This is an intermediate incumbent: it remains far below the binding 85% completion threshold.
 
 ## Start here
 
@@ -10,8 +10,8 @@ The repository contains a submission-ready 270,401-parameter learned TCN/cellula
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
-- [Submission candidate](knowledge/submissions/candidate-003-tier4-cellular-hybrid.md) — current model card, compliance rationale, release state, and hashes.
-- [Full-set evaluation](knowledge/evals/candidate-003-results.md) — independent, checked, pinned-runtime, and perturbation results.
+- [Submission candidate](knowledge/submissions/candidate-005-tier6-conditional-cellular.md) — current model card, compliance rationale, release state, and hashes.
+- [Full-set evaluation](knowledge/evals/candidate-005-results.md) — independent, checked, pinned-runtime, five-seed, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
 - [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
 

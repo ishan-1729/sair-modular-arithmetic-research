@@ -5,13 +5,14 @@ description: Dated work plan from the initial POC to a frozen public Hugging Fac
 status: active
 tags: [plan, milestones, deadline]
 timestamp: "2026-07-11T23:15:00+05:30"
+last_updated: "2026-07-18T05:30:00+05:30"
 ---
 
 # Execution roadmap
 
-## Current state - 2026-07-12
+## Current state - 2026-07-18
 
-The project has moved beyond the foundation POC ahead of schedule. [Candidate 001](../submissions/candidate-001-horner-tcn9.md) is a minimal official-interface artifact that passes the full 1,100-case evaluator and pinned sandbox, clearing Tiers 1 and 2 at 100% and 99%. Publication is not yet performed, and scaling beyond the nine-bit regime remains the main research program.
+The project has promoted [Candidate 005](../submissions/candidate-005-tier6-conditional-cellular.md), a 470,049-parameter official-interface artifact that clears the complete independent, checked, five-seed Tier-6, randomized-weight, deterministic, static, preprocessing-isolation, and pinned-sandbox gates. It scores 59.3% independent and 59.5% checked overall, with `highest_tier_above_90 = 6`. Publication is not performed. The 85% Goal remains unmet; the active frontier is width-256 Tier 7, beginning with EXP-643 recurrent-depth stability diagnosis before choosing between a matched stability intervention, learned memory/execution, or another materially different architecture.
 
 The live competition page was observed as active on 2026-07-11 with a deadline of **2026-08-12 23:59 AoE**. Internal freeze dates intentionally precede it.
 
@@ -34,4 +35,4 @@ The live competition page was observed as active on 2026-07-11 with a deadline o
 
 ## Definition of competition-ready
 
-Candidate 001 is submission-format and sandbox ready, but it is not a frozen ranked release until it has an immutable public Hugging Face commit and remote re-evaluation. It is also not a full-width solver: Tiers 3-10 still use an explicit fallback. Competitive scaling and mechanical release readiness are tracked separately so a valid artifact is not confused with a solved research frontier.
+Candidate 005 is submission-format and sandbox ready, but it is not a final ranked release until it has an immutable public Hugging Face commit and remote re-evaluation. It is also not a full-width solver: Tiers 7–10 still use an explicit fallback, and its roughly 59% overall accuracy is far below the 85% requirement. Competitive scaling and mechanical release readiness remain separate so an intermediate valid artifact is never confused with completion.
