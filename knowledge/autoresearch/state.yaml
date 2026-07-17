@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T13:55:00+05:30
+updated_at: 2026-07-17T14:25:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-640-commutative-operand-swap-diversity
-  statement: The frozen width-independent Horner cell makes sufficiently complementary errors when operand roles are swapped that a fixed target-free minimum-trajectory-margin selector can exceed 90 percent width-128 exact rollout within candidate runtime.
-  promotion_gate: On consumed EXP-639 cases first, require at least 92 percent original/swapped oracle union, 90 percent fixed-selector exact rollout, validity, exact determinism, and a calibrated integrated runtime path below the candidate ceiling before any fresh confirmation.
-  status: preregistered
-next_action: Validate and commit the tested EXP-640 implementation and measured wall/CPU budget, then reconstruct all 300 consumed EXP-639 pairs and both frozen orientations without reducing fidelity.
+  run_id: exp-641-conditional-commutative-swap-routing
+  statement: Routing the lowest-original-margin 40 percent of width-128 cases through swapped inference preserves at least 90 percent exact rollout from the EXP-640 commutative diversity while restoring the integrated candidate path below 285 seconds.
+  promotion_gate: On the hash-valid consumed EXP-640 cache and exact conditional execution, require at least 90 percent selected accuracy, 92 percent routed oracle coverage, validity, exact determinism/output reproduction, and at most 285 seconds integrated projection before fresh confirmation.
+  status: planning
+next_action: Register EXP-640 durable evidence, then preregister and execute the fixed 40 percent conditional swapped path using cached predictions and measured EXP-640 throughput without reading fresh or checked answers.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -66,3 +66,4 @@ risks:
   - Teacher distillation lifts compressed radix-4 transition accuracy only at widths 16/32 and regresses width 64; one-cycle phase 2 remains inaccurate even on exact intermediate states, causing zero rollout above width 16.
   - Full-depth continuous macro state is viable on training identities and gains only one net width-64 case over hard composition; held-out width-128 benefit remains unmeasured.
   - Full-depth continuous adaptation regresses fresh width-128 rollout from 82.67 percent hard-frozen to 80.67 percent trained and misses transition/runtime gates; close the soft-boundary training surface.
+  - Commutative operand swapping yields 97 percent fixed-selector accuracy and 98.33 percent oracle union on consumed width-128 cases, but unconditional double inference projects to 318.62 seconds and requires conditional routing.

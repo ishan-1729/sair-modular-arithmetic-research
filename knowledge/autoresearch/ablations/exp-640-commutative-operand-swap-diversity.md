@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-640 Commutative Operand-Swap Diversity
 description: Consumed-evidence feasibility test of original and operand-swapped frozen learned trajectories with one target-free selector.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, commutativity, symmetry, ensemble, confidence-routing]
 timestamp: "2026-07-17T13:45:00+05:30"
 ---
@@ -47,3 +47,11 @@ External calibration timing was 57.31 wall seconds, 172.17 user CPU seconds, and
 ## Limitations
 
 This diagnostic pays for both trajectories and may be limited by shared errors. Minimum margin was supported as a target-free uncertainty signal in EXP-626, but selecting between two complete predictions is a different task. The consumed surface can reject or authorize fresh confirmation only; it cannot establish generalization.
+
+## Result and decision
+
+The accuracy mechanism is strongly supported, but unconditional execution is rejected on its binding runtime gate. The original path exactly reproduces EXP-639 at 248/300 (82.67%). Swapping operands reaches 255/300 (85.0%). Their offline union is 295/300 (98.33%): 208 shared successes, 40 original-only, 47 swapped-only, and only five shared failures. The frozen higher-minimum-margin selector chooses swapped for 147 rows and scores 291/300 (97.0%), recovering 45 original failures while losing two original successes. Selected invalidity is zero and the complete prediction/margin/choice/validity repeat passes exactly.
+
+The measured original and swapped arms take 446.33 and 398.83 wall seconds for 300 cases. The preregistered conservative integration formula gives 318.62 seconds, missing the 285-second ceiling even though every accuracy gate passes. Runner timing is 959.85 wall seconds and 3,538.36 aggregate CPU seconds (58.97 minutes), below the 1,125-second/69-minute expectation, 1,620-second soft budget, 2,400-second hard ceiling, and 160-minute CPU upper bound. GNU time separately records 916.65 wall, 3,427.31 user, and 125.84 system seconds; both measurements are retained.
+
+Do not advance unconditional two-orientation inference or reinterpret the runtime gate. Preserve the 97% consumed accuracy and exact paired cache. The fixed 40% minimum-margin allocation already confirmed in EXP-626 is a justified distinct optimization: run original inference for every row, run swapped inference only for the lowest-original-margin 40%, then use the same higher-margin choice inside that routed subset. Preregister and measure that exact conditional path on this consumed cache before any fresh evidence.

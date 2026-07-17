@@ -601,3 +601,10 @@ runs:
     run_record: experiments/runs/exp-639-full-depth-soft-boundary-adaptation/run.json
     metrics: evals/results/exp-639-full-depth-soft-boundary-adaptation/metrics.json
     checkpoint: .scratch/exp-639-full-depth-soft-boundary-adaptation/weights.safetensors
+  - run_id: exp-640-commutative-operand-swap-diversity
+    status: completed
+    approach: frozen-commutative-operand-swap-margin-selection
+    config: configs/exp_640_commutative_operand_swap_diversity.yaml
+    run_record: experiments/runs/exp-640-commutative-operand-swap-diversity/run.json
+    metrics: evals/results/exp-640-commutative-operand-swap-diversity/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

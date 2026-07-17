@@ -1,0 +1,51 @@
+{
+  "run_id": "exp-640-commutative-operand-swap-diversity",
+  "created_at": "2026-07-17T08:47:06Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evidence_scope": "consumed-exp639-width128-cases",
+  "evaluation": {
+    "transition": {
+      "cached_exp639_hard_width128": {"cases": 3000, "correct": 2989, "exact_accuracy": 0.9963333333333333}
+    },
+    "rollout": {
+      "original_width128": {"cases": 300, "correct": 248, "exact_accuracy": 0.8266666666666667, "invalid_rate": 0.0},
+      "swapped_width128": {"cases": 300, "correct": 255, "exact_accuracy": 0.85, "invalid_rate": 0.0033333333333333335},
+      "selected_width128": {"cases": 300, "correct": 291, "exact_accuracy": 0.97, "invalid_rate": 0.0},
+      "oracle_union_width128": {"cases": 300, "correct": 295, "exact_accuracy": 0.9833333333333333}
+    }
+  },
+  "controls": {
+    "paired": {"intersection": 208, "original_only": 40, "swapped_only": 47, "neither": 5, "prediction_disagreement": 92},
+    "transition_evidence_reused_from_exp639": true,
+    "selector": {"selected_swapped": 147, "recoveries": 45, "losses": 2},
+    "original_reproduced": true,
+    "determinism": {"cases": 20, "passed": true},
+    "integrated_candidate_wall_seconds": 318.6204203576669
+  },
+  "gates": {
+    "oracle_union": true,
+    "selected_accuracy": true,
+    "validity": true,
+    "original_reproduction": true,
+    "runtime": false,
+    "determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "original_wall_seconds": 446.3278088060033,
+    "swapped_wall_seconds": 398.8334522669975,
+    "runner_wall_seconds": 959.8504352960008,
+    "runner_aggregate_cpu_seconds": 3538.355239868,
+    "external_wall_seconds": 916.65,
+    "external_user_cpu_seconds": 3427.31,
+    "external_system_cpu_seconds": 125.84,
+    "peak_rss_bytes": 585875456
+  },
+  "resource_budget": {"expected_total_wall_seconds": 1125, "soft_budget_wall_seconds": 1620, "hard_runaway_ceiling_wall_seconds": 2400, "fidelity_reduced": false},
+  "decision": "reject-unconditional-swap-runtime-authorize-conditional-routing",
+  "limitations": [
+    "Consumed EXP-639 cases only; no fresh generalization claim is supported.",
+    "The exact-answer oracle union is offline coverage only and cannot select inference outputs.",
+    "The runtime projection is conservative but binding for this rung; official isolation remains required."
+  ]
+}
