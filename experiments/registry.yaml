@@ -573,3 +573,10 @@ runs:
     run_record: experiments/runs/exp-635-independent-cellular-diversity-feasibility/run.json
     metrics: evals/results/exp-635-independent-cellular-diversity-feasibility/metrics.json
     checkpoint: .scratch/exp-635-independent-cellular-diversity-feasibility/challenger/weights.safetensors
+  - run_id: exp-636-independent-cellular-tier5-bootstrap
+    status: completed
+    approach: staged-independent-cellular-tier5-bootstrap-and-routing
+    config: configs/exp_636_independent_cellular_tier5_bootstrap.yaml
+    run_record: experiments/runs/exp-636-independent-cellular-tier5-bootstrap/run.json
+    metrics: evals/results/exp-636-independent-cellular-tier5-bootstrap/metrics.json
+    checkpoint: .scratch/exp-636-independent-cellular-tier5-bootstrap/stage-4-recovery/weights.safetensors

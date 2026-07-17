@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-636 Independent Cellular Tier-5 Bootstrap
 description: Staged progressive curriculum testing whether the EXP-635 independent lineage reaches width-64 readiness with exploitable paired diversity.
-status: preregistered
+status: completed
 tags: [autoresearch, cellular, independent-lineage, curriculum, autonomous-recovery, routing]
 timestamp: "2026-07-13T18:41:00+05:30"
 ---
@@ -64,3 +64,11 @@ With a distinct 180-second setup/tracking/serialization allowance, the frozen ex
 ## Limitations
 
 The curriculum is evidence-based but not update-for-update identical to every historical precursor; it matches the important width progression, architecture, hard-mining distribution, and recovery mechanism while giving the independent lineage a declared 3,200-update budget. Raw margins may be differently calibrated across lineages. Even a pass at width 64 does not prove diversity or accuracy at width 128.
+
+## Result and decision
+
+The complete rung rejects this bootstrap schedule. The independent model retains 250/300 width-32 rollouts (83.33%), scores 2,981/3,000 width-64 transitions (99.367%), and reaches 413/600 width-64 rollouts (68.83%) with 1.33% invalid trajectories. The frozen incumbent scores 564/600 (94.00%). The uncontinued width-16 source scores 0/100 at width 64, so trained continuation dependence passes.
+
+Errors retain a small useful tail but not the preregistered scale: incumbent-only/challenger-only successes are 163/12, oracle union is 576/600 (96.00%, only +2.0 points), and frozen target-free minimum-margin routing is 570/600 (95.00%, +1.0 point) while selecting the independent arm 62 times. Width-32 retention, transition, rollout, oracle-gain, routed-gain, validity, and paired-runtime gates fail. Close this exact 3,200-update independent bootstrap and do not advance it to width 128.
+
+All 3,200 updates and every evaluation/control/repeat completed. Two external orchestration wrappers ended after exact partial checkpoints; the runner reused the hash-valid bridge stage and restored wide/Tier-5 optimizer, scheduler, sampler, selector, and RNG state. The final detached invocation used 1,453.75 external wall seconds and 5,709.80 aggregate CPU seconds. Reconstructed cumulative active work is approximately 3,145.35 wall seconds and 12,046.89 aggregate CPU seconds (200.78 CPU minutes), below the 5,153-second expected and 323-CPU-minute expected budgets. Missing CPU for two interrupted segments is reconstructed from measured same-stage CPU/wall ratios and is labeled as such; no training or evaluation fidelity was reduced.

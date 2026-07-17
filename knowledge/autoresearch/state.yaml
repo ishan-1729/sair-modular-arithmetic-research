@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-13T18:47:00+05:30
+updated_at: 2026-07-17T11:17:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-636-independent-cellular-tier5-bootstrap
-  statement: The EXP-635 independent width-16 cellular learner can traverse a matched progressive curriculum to width 64 while preserving error diversity that target-free margin routing can exploit.
-  promotion_gate: Require width-32 retention, at least 99.8 percent width-64 transition and 90 percent rollout, trained continuation dependence, at least 96 percent oracle union with three points gain, at least 1.5 points target-free routing gain, validity, exact determinism, and measured runtime before authorizing Tier-6 training.
-  status: preregistered
-next_action: Commit the tested EXP-636 implementation and measured budget, then run all 3,200 resumable updates and the complete paired evaluation without reducing fidelity.
+  run_id: exp-637-teacher-distilled-macro-transition
+  statement: Distilling two exact radix-2 teacher transitions and intermediate teacher logits from the strong cellular checkpoint into one learned radix-4 macro-transition may preserve substantially more exactness than direct radix-4 transfer while halving autonomous horizon.
+  promotion_gate: Planning only; require a preregistered matched comparison against EXP-630 and a radix-2 control, training-identity-only calibration, exact macro-transition and rollout gates, trained-weight dependence, validity, deterministic behavior, and projected higher-tier runtime headroom before scale.
+  status: planning
+next_action: Inspect EXP-630 failure evidence and the strong radix-2 checkpoint interfaces, then design a teacher-distilled macro-transition feasibility rung without encoding exact reduction in inference.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -62,3 +62,4 @@ risks:
   - Complementary bootstrap-trained output heads create trajectory disagreement but regress width-128 exact rollout by 1.67 points and perform one point below randomized heads.
   - The hierarchical composition tree learns up to 60.83 percent exact internal nodes but zero exact roots at width 16 and zero exact width-32 products after 2,400 updates.
   - Compact recurrent relative attention ties direct dilated convolution at 0.667 percent exact width 12 and both have zero exact width-24 transfer; trained attention shows no exact-answer advantage over randomized weights.
+  - Independent cellular diversity is strong at width 16 but the staged width-64 lineage reaches only 68.83 percent rollout; target-free routing adds one point to the 94 percent incumbent and misses its gain/runtime gates.

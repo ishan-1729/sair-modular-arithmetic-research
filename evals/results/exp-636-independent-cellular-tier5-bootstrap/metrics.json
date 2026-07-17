@@ -1,0 +1,35 @@
+{
+  "run_id": "exp-636-independent-cellular-tier5-bootstrap",
+  "created_at": "2026-07-17T05:47:08Z",
+  "checkpoint_sha256": "fac8de3b124b13abb3111acb06457c42452d37d94116e3d55114be96ee01bf93",
+  "source_checkpoint_sha256": "3cce3160c405c68fd71223ed31a6a9be0995a7162de9e23d231c8b55e0e22dc4",
+  "evaluation": {
+    "transition": {"independent_width64": {"cases": 3000, "correct": 2981, "exact_accuracy": 0.9936666666666667, "valid_residue_rate": 1.0}},
+    "rollout": {
+      "independent_width32": {"cases": 300, "correct": 250, "exact_accuracy": 0.8333333333333334, "invalid_rate": 0.006666666666666667},
+      "incumbent_width64": {"cases": 600, "correct": 564, "exact_accuracy": 0.94, "invalid_rate": 0.0033333333333333335},
+      "independent_width64": {"cases": 600, "correct": 413, "exact_accuracy": 0.6883333333333334, "invalid_rate": 0.013333333333333334},
+      "source_width64": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.86},
+      "routed_width64": {"cases": 600, "correct": 570, "exact_accuracy": 0.95}
+    }
+  },
+  "controls": {"trained_gain_over_source": 0.6883333333333334, "determinism": {"cases_per_arm": 20, "predictions_and_margins_equal": true, "passed": true}},
+  "comparison": {
+    "control_only": 163,
+    "challenger_only": 12,
+    "intersection": 401,
+    "prediction_disagreement": 199,
+    "oracle_union_correct": 576,
+    "oracle_union_exact_accuracy": 0.96,
+    "oracle_union_gain_over_best_arm": 0.020000000000000018,
+    "routed_correct": 570,
+    "routed_exact_accuracy": 0.95,
+    "routed_gain_over_best_arm": 0.010000000000000009,
+    "challenger_route_count": 62
+  },
+  "gates": {"width32_retention": false, "width64_transition": false, "width64_rollout": false, "trained_dependence": true, "oracle_absolute": true, "oracle_gain": false, "routed_gain": false, "validity": false, "runtime": false, "determinism": true, "passed": false},
+  "runtime": {"final_resume_wall_seconds": 1521.063835377001, "final_resume_aggregate_cpu_seconds": 5693.97245366, "reconstructed_cumulative_active_wall_seconds": 3145.3497209469897, "reconstructed_cumulative_aggregate_cpu_seconds": 12046.892114754632, "paired_evaluation_wall_seconds": 442.660893414999},
+  "resource_budget": {"expected_total_wall_seconds": 5153, "soft_budget_wall_seconds": 6960, "hard_runaway_ceiling_wall_seconds": 10320, "fidelity_reduced": false},
+  "decision": "reject-independent-cellular-tier5-bootstrap",
+  "limitations": ["Fresh generated width-32/64 selection evidence only.", "Oracle union is diagnostic and not an inference result.", "Cumulative CPU includes explicitly labeled reconstruction for two interrupted wrapper segments; model/checkpoint evidence is exact."]
+}
