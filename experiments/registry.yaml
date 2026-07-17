@@ -629,3 +629,10 @@ runs:
     run_record: experiments/runs/candidate-005-tier6-conditional-commutative-integration/run.json
     metrics: evals/results/candidate-005-tier6-conditional-commutative-integration/metrics.json
     checkpoint: submission/weights.safetensors
+  - run_id: exp-643-tier7-recurrent-depth-stability-diagnostic
+    status: planned
+    approach: frozen-width128-width256-recurrent-depth-stability-diagnostic
+    config: configs/exp_643_tier7_recurrent_depth_stability_diagnostic.yaml
+    run_record: experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/run.json
+    metrics: evals/results/exp-643-tier7-recurrent-depth-stability-diagnostic/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
