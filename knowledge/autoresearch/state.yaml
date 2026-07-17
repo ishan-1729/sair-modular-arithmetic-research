@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T15:10:00+05:30
+updated_at: 2026-07-17T15:25:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-642-fresh-conditional-commutative-confirmation
-  statement: The exact fixed 40 percent conditional commutative policy reproduces at least 90 percent width-128 exact rollout and a five-point gain on 500 fresh cases while retaining transition, validity, determinism, and runtime gates.
-  promotion_gate: Require at least 90 percent selected rollout, five points over original, 92 percent routed oracle, 99.8 percent fresh transition, at most one percent invalidity, exact determinism, and at most 285 seconds integrated projection.
-  status: preregistered
-next_action: Validate and commit EXP-642's frozen 500-rollout/3,000-transition fresh stream and reused wall/CPU budget, then execute the exact 40 percent policy without checked or prior selection answers.
+  run_id: candidate-005-tier6-conditional-commutative-integration
+  statement: A candidate-shaped artifact can add the frozen 97.2-percent Tier-6 conditional commutative specialist without regressing Tiers 1-5 and pass static, deterministic, weight-dependence, five-seed Tier-6, artifact, and isolated-runtime gates.
+  promotion_gate: Require no Tier1-5 regression, every one of five fresh Tier-6 seeds at least 90 percent, randomized Tier-6 collapse, valid deterministic outputs, clean three-file artifact, official static/interface checks, and isolated complete runtime at most 285 seconds before replacing Candidate 004.
+  status: planning
+next_action: Register EXP-642 durable fresh pass evidence, then build Candidate 005 in scratch from the exact Candidate 004 artifact plus the frozen Tier-6 checkpoint and policy; calibrate and run all integration gates without reading checked answers.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -68,3 +68,4 @@ risks:
   - Full-depth continuous adaptation regresses fresh width-128 rollout from 82.67 percent hard-frozen to 80.67 percent trained and misses transition/runtime gates; close the soft-boundary training surface.
   - Commutative operand swapping yields 97 percent fixed-selector accuracy and 98.33 percent oracle union on consumed width-128 cases, but unconditional double inference projects to 318.62 seconds and requires conditional routing.
   - The fixed 40 percent conditional commutative route preserves 96.67 percent consumed accuracy with a 212.66-second projection; fresh confirmation is mandatory before integration.
+  - The exact conditional route confirms at 97.2 percent on 500 fresh width-128 cases with 99.933 percent transition and 113.81-second projection; full candidate and wider-width gates remain outstanding.

@@ -615,3 +615,10 @@ runs:
     run_record: experiments/runs/exp-641-conditional-commutative-swap-routing/run.json
     metrics: evals/results/exp-641-conditional-commutative-swap-routing/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-642-fresh-conditional-commutative-confirmation
+    status: completed
+    approach: fresh-fixed-conditional-commutative-confirmation
+    config: configs/exp_642_fresh_conditional_commutative_confirmation.yaml
+    run_record: experiments/runs/exp-642-fresh-conditional-commutative-confirmation/run.json
+    metrics: evals/results/exp-642-fresh-conditional-commutative-confirmation/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-642 Fresh Conditional Commutative Confirmation
 description: Fresh 500-rollout and 3,000-transition confirmation of the frozen 40 percent operand-swap policy.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, commutativity, conditional-compute, confirmation, fresh-evidence]
 timestamp: "2026-07-17T15:05:00+05:30"
 ---
@@ -42,3 +42,11 @@ The soft budget is 1,500 wall seconds. The hard runaway ceiling is 2,400 wall se
 ## Limitations
 
 One fresh seed is confirmation, not the required five independent full seeds. The runtime projection remains conservative rather than an official isolated candidate measurement. Widths beyond 128 remain untested by this mechanism.
+
+## Result and decision
+
+Passed every fresh confirmation gate. The frozen policy scores 486/500 (97.2%) versus 421/500 (84.2%) original, a thirteen-point gain. It routes exactly 200 cases, chooses swapped 161 times, recovers 66 original failures, and loses one original success. Fixed routed oracle coverage is 488/500 (97.6%), selected invalidity is zero, and both complete conditional repeats match exactly. Fresh transition exactness is 2,998/3,000 (99.933%) with 100% valid residues.
+
+Original-all and routed-swapped work measure 261.32 and 123.24 wall seconds. The frozen integration formula projects 113.81 seconds, comfortably below 285. Runner work is 438.95 wall seconds and 1,603.70 aggregate CPU seconds (26.73 minutes), below the reused 1,050-second/63-minute expectation, 1,500-second soft budget, 2,400-second hard ceiling, and 160-minute CPU upper bound. GNU time separately records 433.47 wall, 1,603.74 user, and 10.47 system seconds.
+
+Authorize candidate-shaped Tier-6 integration with this exact checkpoint/policy and a separate wider-width feasibility rung. Do not call this candidate promotion: five independent full seeds, checked release regression, official evaluation when available, artifact/static/interface/security/runtime/weight-dependence controls, and at least 85% full-overall accuracy are all still required.
