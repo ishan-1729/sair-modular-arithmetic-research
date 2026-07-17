@@ -1,0 +1,41 @@
+{
+  "run_id": "candidate-005-tier6-conditional-commutative-integration",
+  "status": "running",
+  "created_at": "2026-07-17T10:35:00Z",
+  "hypothesis": "The frozen 40 percent conditional commutative Tier-6 policy integrates into Candidate 004 without lower-tier prediction changes and clears five fresh Tier-6, static, deterministic, trained-weight, artifact, and isolated-runtime gates.",
+  "seed": 20260843,
+  "config": "configs/candidate_005_tier6_conditional_integration.yaml",
+  "environment": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/environment.json",
+  "source": {
+    "repository_commit": "765533e7b65599fd6d2c3437716c6b9f1852d23e",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "825e71aecf36de264e8b02eae5ea7a24ebf29c49689f3bba9744e080e4d7def8",
+    "runner_sha256": "5d650b10a49a3f5505aa25e207244b7b30a6cec6b50d91d12b91f0c297c89707",
+    "builder_sha256": "f612b4bd30805464a0e218ae39ae40f0ff2bc3f8718b6890a761fadd4adbd107"
+  },
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "d6faefe251054857aa8a24bb1b7f1594"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/candidate-005-tier6-conditional-commutative-integration/submission/weights.safetensors",
+    "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+    "metrics": "evals/results/candidate-005-tier6-conditional-commutative-integration/metrics.json",
+    "scratch_summary": ".scratch/candidate-005-tier6-conditional-commutative-integration/summary.json",
+    "scratch_summary_sha256": "2e7419743bb439d5fedbdff82f2d4a10267425ab33fd653ee367b1ccfbddecfc",
+    "raw_local_evidence": ".scratch/candidate-005-tier6-conditional-commutative-integration/local-tier6-raw.json",
+    "raw_local_evidence_sha256": "29669afb98358a39d6720857062686cf2a1f6dbf991c0a30c11fdba1e3f15c8f",
+    "formal_console": ".scratch/candidate-005-tier6-conditional-commutative-integration/formal-console.log",
+    "formal_console_sha256": "4d029a9ba1e57159efd23393a2f15003abbacb924a60774154c5470ec47efec2"
+  },
+  "decision": "local-pass-await-isolated-full-seed1",
+  "notes": [
+    "Fresh local Tier-6 seeds 2 through 5 score 96, 95, 99, and 99 percent exact; every seed clears 90 percent.",
+    "Candidate 005 matches Candidate 004 on all 500 Tier 1-5 seed-1 predictions.",
+    "Randomized Tier-6 weights collapse seed 2 to 2 percent; static, validity, and determinism gates pass.",
+    "The local gate consumes 678.93 wall seconds and 42.58 aggregate CPU minutes, below all calibrated budgets.",
+    "The pinned isolated full seed-1 gate remains pending; Candidate 004 is still the incumbent."
+  ]
+}

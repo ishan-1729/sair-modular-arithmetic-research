@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T16:22:00+05:30
+updated_at: 2026-07-17T17:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: candidate-005-tier6-conditional-commutative-integration
   statement: A candidate-shaped artifact can add the frozen 97.2-percent Tier-6 conditional commutative specialist without regressing Tiers 1-5 and pass static, deterministic, weight-dependence, five-seed Tier-6, artifact, and isolated-runtime gates.
   promotion_gate: Require no Tier1-5 regression, every one of five fresh Tier-6 seeds at least 90 percent, randomized Tier-6 collapse, valid deterministic outputs, clean three-file artifact, official static/interface checks, and isolated complete runtime at most 285 seconds before replacing Candidate 004.
-  status: exact-artifact-calibrated-formal-local-gate-ready
-next_action: Commit the exact-artifact calibration and revised 896-second expected, 1,350-second soft, 2,100-second hard, and 150 aggregate-CPU-minute upper budgets; then run the complete four-seed local Tier-6, lower-tier equivalence, determinism, and randomized-weight gates without reading checked answers.
+  status: local-gates-passed-awaiting-isolated-full-seed1
+next_action: Preserve and commit the four fresh Tier-6 seed passes, exact 500-case lower-tier equivalence, deterministic repeat, randomized-weight collapse, and measured wall/CPU evidence; then run the exact artifact on the complete 1,100-case seed 1 in the pinned official isolated container.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 5dc41b2
+  last_validated_commit: 765533e
   dirty: true
 risks:
   - Tier 6 has strong fresh confirmation but remains unintegrated until Candidate 005 passes five-seed, lower-tier equivalence, trained-weight, and isolated-runtime gates.

@@ -1,0 +1,56 @@
+{
+  "run_id": "candidate-005-tier6-conditional-commutative-integration",
+  "created_at": "2026-07-17T10:35:00Z",
+  "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+  "evidence_scope": "four-fresh-official-generator-tier6-seeds-plus-seed1-lower-tier-equivalence",
+  "evaluation": {
+    "transition": {
+      "frozen_artifact_load": {"cases": 1, "correct": 1, "exact_accuracy": 1.0}
+    },
+    "rollout": {
+      "independent_seed2_tier6": {"cases": 100, "correct": 96, "exact_accuracy": 0.96, "valid_output_rate": 1.0},
+      "independent_seed3_tier6": {"cases": 100, "correct": 95, "exact_accuracy": 0.95, "valid_output_rate": 1.0},
+      "independent_seed4_tier6": {"cases": 100, "correct": 99, "exact_accuracy": 0.99, "valid_output_rate": 1.0},
+      "independent_seed5_tier6": {"cases": 100, "correct": 99, "exact_accuracy": 0.99, "valid_output_rate": 1.0}
+    }
+  },
+  "controls": {
+    "minimum_local_tier6_accuracy": 0.95,
+    "aggregate_local_tier6_accuracy": 0.9725,
+    "lower_tier_prediction_equivalence": {"cases": 500, "equal": 500, "passed": true},
+    "determinism": {"cases": 20, "passed": true},
+    "static_analysis": "clean",
+    "valid_outputs": true,
+    "randomized_tier6": {"cases": 100, "correct": 2, "exact_accuracy": 0.02, "passed": true}
+  },
+  "gates": {
+    "every_local_tier6_seed": true,
+    "lower_tier_prediction_equivalence": true,
+    "determinism": true,
+    "trained_weight_dependence": true,
+    "static_and_artifact": true,
+    "passed": true,
+    "isolated_full_seed1_pending": true
+  },
+  "runtime": {
+    "runner_wall_seconds": 678.9334947539974,
+    "runner_aggregate_cpu_seconds": 2554.601245529,
+    "runner_aggregate_cpu_minutes": 42.57668768393333,
+    "external_wall_seconds": 697.53,
+    "external_user_cpu_seconds": 2486.99,
+    "external_system_cpu_seconds": 80.16,
+    "peak_rss_bytes": 479965184,
+    "expected_wall_seconds": 896,
+    "soft_budget_wall_seconds": 1350,
+    "hard_runaway_ceiling_wall_seconds": 2100,
+    "hard_cpu_upper_minutes": 150,
+    "fidelity_reduced": false
+  },
+  "decision": "advance-to-isolated-full-seed1-gate",
+  "limitations": [
+    "The full seed-1 accuracy, fifth Tier-6 seed, preprocessing isolation, and isolated runtime remain pending.",
+    "Checked and public benchmark answers were not read for Candidate 005 selection.",
+    "The legitimate official private benchmark is unavailable.",
+    "Even a Tier-6 promotion remains far below the binding 85 percent overall completion threshold."
+  ]
+}

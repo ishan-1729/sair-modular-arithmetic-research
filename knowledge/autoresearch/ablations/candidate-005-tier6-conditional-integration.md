@@ -2,7 +2,7 @@
 type: Candidate Preregistration
 title: Candidate 005 Tier-6 Conditional Commutative Integration
 description: Frozen-artifact release gate for integrating the confirmed width-128 conditional commutative specialist into Candidate 004.
-status: preregistered
+status: running
 tags: [autoresearch, candidate, Tier-6, commutativity, conditional-compute, release]
 timestamp: "2026-07-17T16:05:00+05:30"
 ---
@@ -38,3 +38,11 @@ Calibration completed on repository commit `5dc41b2` and the exact scratch artif
 The complete local gate contains 756 orientation-equivalents: four 100-case learned Tier-6 seeds, one 100-case randomized-weight control, and two 20-case determinism repeats. Small-batch calibration projects 775.85 wall seconds and 50.08 aggregate CPU minutes for those paths. Add 120 wall seconds and ten aggregate CPU minutes for generation, two complete Tier 1–5 prediction-equivalence passes, loading, static checks, tracking, serialization, and safety headroom. The revised expectation is therefore 896 wall seconds and 61 aggregate CPU minutes; the soft budget is 1,350 wall seconds; and the hard runaway ceiling is 2,100 wall seconds with a conservative 150 aggregate CPU-minute upper bound. These are distinct units.
 
 For the isolated full run, the same conservative small-batch rate projects 180.58 inference wall seconds and 219.17 total container wall seconds when added to Candidate 004's measured evidence. This leaves useful room below the 285-second inference promotion gate and the official 300-second inference constraint. EXP-642's valid higher-fidelity 500-case cache was materially faster than this projection, but it is retained as corroboration rather than used to shrink the budget. No evaluation fidelity changed.
+
+## Local gate result
+
+Pass. Fresh official-generator Tier-6 seeds 2–5 score 96/100, 95/100, 99/100, and 99/100 exact, with every output valid. The minimum seed accuracy is 95% and aggregate accuracy is 389/400 (97.25%). Candidate 005 and Candidate 004 predictions match exactly on all 500 Tier 1–5 rows from seed 1. Two complete 20-case conditional repeats match exactly. Deterministic distribution-matched randomization of Tier-6 tensors collapses seed 2 to 2/100, while both artifacts remain static-clean.
+
+The local runner consumes 678.93 wall seconds and 2,554.60 aggregate CPU seconds (42.58 minutes), below the 896-second expectation, 1,350-second soft budget, 2,100-second hard ceiling, and 150-minute aggregate CPU upper bound. GNU time independently records 697.53 wall, 2,486.99 user CPU, 80.16 system CPU seconds, and 468,716 KiB maximum RSS. No fidelity was reduced.
+
+Decision: advance the exact frozen scratch artifact to the pinned isolated full seed-1 gate. Do not replace Candidate 004 or read the checked benchmark yet.
