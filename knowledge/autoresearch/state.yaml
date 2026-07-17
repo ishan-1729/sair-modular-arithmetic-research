@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T14:25:00+05:30
+updated_at: 2026-07-17T14:35:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-641-conditional-commutative-swap-routing
   statement: Routing the lowest-original-margin 40 percent of width-128 cases through swapped inference preserves at least 90 percent exact rollout from the EXP-640 commutative diversity while restoring the integrated candidate path below 285 seconds.
   promotion_gate: On the hash-valid consumed EXP-640 cache and exact conditional execution, require at least 90 percent selected accuracy, 92 percent routed oracle coverage, validity, exact determinism/output reproduction, and at most 285 seconds integrated projection before fresh confirmation.
-  status: planning
-next_action: Register EXP-640 durable evidence, then preregister and execute the fixed 40 percent conditional swapped path using cached predictions and measured EXP-640 throughput without reading fresh or checked answers.
+  status: preregistered
+next_action: Validate and commit the EXP-641 fixed 40 percent route and its hash-reused wall/CPU budget, then execute original-all plus routed-swapped inference on the consumed EXP-640 cache without reducing fidelity.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
