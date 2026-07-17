@@ -1,0 +1,81 @@
+{
+  "run_id": "exp-637-teacher-distilled-macro-transition",
+  "status": "completed",
+  "created_at": "2026-07-17T06:42:28Z",
+  "hypothesis": "Two one-cycle learned phases with exact intermediate supervision and masked radix-2 teacher-logit distillation can form an accurate radix-4 macro-transition while retaining substantial recurrent-runtime savings.",
+  "seed": 20260826,
+  "source": {
+    "repository_commit": "4914b849e45ca13d7f4453c128963f09cb6decd7",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "37c6e6329eeb197be5da043614afd2ac8a1c07c100a55f08630ed9db6d17faca",
+    "runner_sha256": "f81b87edbdeadf7cf1b03c66708b11107b930029cd6de26a6e6129f514fc1fa4",
+    "model_sha256": "24d96fdead9b77079ba7ce6ca959035db13e386193340e09a9eecba3bb2dca41",
+    "data_sha256": "6a50a751f5d0b8a6c154c6bc2b6857b50982eedbed73bf4cae4fadf153b98ad1",
+    "split_sha256": "6ea063cd151f5f58edc0a33fc41a24cd55b0d0be4f8b2a3be4140f3348b7c231",
+    "teacher_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "direct_control_checkpoint_sha256": "eb756657c042287b9d2e2efd560c5c742ecdb63d3ce9787527bd98e2dfb2fae5"
+  },
+  "config": "configs/exp_637_teacher_distilled_macro_transition.yaml",
+  "environment": "experiments/runs/exp-637-teacher-distilled-macro-transition/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "263a0302ce4747339d1f143063fd79d9"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-637-teacher-distilled-macro-transition/weights.safetensors",
+    "checkpoint_sha256": "0e019b1e410cf89ccc434f8094dfe00a7b2143f9fc74dc1cb3ba7f7de6831a48",
+    "checkpoint_bytes": 801384,
+    "metrics": "evals/results/exp-637-teacher-distilled-macro-transition/metrics.json",
+    "scratch_summary": ".scratch/exp-637-teacher-distilled-macro-transition/summary.json",
+    "scratch_summary_sha256": "c6043f3857743f99c9708807bcf53d0313f3f4184547f9fb18593cb0315bb162",
+    "evaluation_cache": ".scratch/exp-637-teacher-distilled-macro-transition/evaluation-077f52e457a45d521246b6373b72a063ddb7ef65840d05232a76eca6d7f1ee4f.partial.json",
+    "evaluation_cache_sha256": "c310a4f18ebd8c87cf39bc57e350d65cb748533a1e25a2b4cba2fddc2c691c46",
+    "formal_console": ".scratch/exp-637-teacher-distilled-macro-transition/formal-console.log",
+    "formal_console_sha256": "d8fe99c5035a3b9cc0d6689ae8337a7596c51927e9849edfc33abaed94d256c4"
+  },
+  "models": {
+    "teacher_parameters": 99824,
+    "direct_control_parameters": 101116,
+    "student_parameters": 199648
+  },
+  "controls": {
+    "matched_exp630_checkpoint_reused": true,
+    "matched_radix2_checkpoint_reused": true,
+    "all_1600_updates_completed": true,
+    "full_evaluation_completed": true,
+    "trained_weight_dependence_observed": true,
+    "determinism_passed": true,
+    "all_gates_passed": false
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 2205,
+    "expected_total_aggregate_cpu_minutes": 133,
+    "soft_budget_wall_seconds": 3000,
+    "hard_runaway_ceiling_wall_seconds": 4440,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 296,
+    "training_wall_seconds": 1396.7286175810004,
+    "training_aggregate_cpu_seconds": 5212.492141819,
+    "evaluation_arm_wall_seconds": 254.0987651919968,
+    "evaluation_arm_aggregate_cpu_seconds": 944.3622882479985,
+    "runner_wall_seconds": 1672.6276630300017,
+    "runner_aggregate_cpu_seconds": 6200.740000272,
+    "runner_aggregate_cpu_minutes": 103.3456666712,
+    "external_wall_seconds": 1579.43,
+    "external_user_cpu_seconds": 6197.19,
+    "external_system_cpu_seconds": 17.52,
+    "external_percent_cpu": 393,
+    "measurement_note": "Runner component timers and GNU time are both preserved. Runner wall accounting is 93.20 seconds above GNU elapsed wall while aggregate CPU agrees closely; both are below every calibrated wall and CPU budget.",
+    "fidelity_reduced": false,
+    "valid_frozen_checkpoint_evidence_reused": true
+  },
+  "decision": "reject-teacher-distilled-macro-transition",
+  "notes": [
+    "Student macro-transition accuracy is 44.5, 25.9, and 10.55 percent at widths 16, 32, and 64.",
+    "Intermediate accuracy is much higher at 97.25, 93.2, and 81.95 percent, but the one-cycle final phase remains inadequate even with exact-conditioned supervision.",
+    "Student rollout is 0.5, 0, and 0 percent; width-64 invalidity is 50.5 percent.",
+    "Runtime and determinism pass, but every exactness, gain, and validity gate fails. Close this compressed formulation without tuning observed losses."
+  ]
+}

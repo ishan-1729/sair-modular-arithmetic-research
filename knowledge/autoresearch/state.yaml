@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T12:19:00+05:30
+updated_at: 2026-07-17T12:25:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-637-teacher-distilled-macro-transition
-  statement: Distilling two exact radix-2 teacher transitions and intermediate teacher logits from the strong cellular checkpoint into one learned radix-4 macro-transition may preserve substantially more exactness than direct radix-4 transfer while halving autonomous horizon.
-  promotion_gate: Require 90/70/20 percent rollout at widths 16/32/64, 98/80 percent macro-transition exactness at widths 32/64, 50-point width-64 transition gains over direct and initialized controls, at most 10 percent invalidity, at most 0.70 paired radix-2 wall ratio, and exact determinism.
-  status: preregistered
-next_action: Validate and commit the tested EXP-637 implementation and measured budget, then execute all 1,600 resumable updates and the complete matched evaluation without reducing fidelity.
+  run_id: exp-638-full-depth-soft-boundary-macro
+  statement: Restoring both macro phases to the teacher's full two-cycle depth while retaining a continuous intra-macro state may recover teacher-level transition accuracy and reveal whether halving hard-state boundaries, rather than halving compute, improves autonomous rollout.
+  promotion_gate: Planning only; first require a training-identity diagnostic comparing initialized full-depth continuous, hard-intermediate, and ordinary two-step teacher paths. Preregister a matched rung only if exactness and runtime justify it.
+  status: planning
+next_action: Implement a no-training full-depth macro diagnostic on training identities, measure continuous versus hard intermediate exactness and wall/CPU throughput, and use the result to decide whether EXP-638 merits a calibrated training rung.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 2b3cb65e627629f92d04eb9f4857e09e53d18fc0
+  last_validated_commit: 4914b849e45ca13d7f4453c128963f09cb6decd7
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
@@ -63,3 +63,4 @@ risks:
   - The hierarchical composition tree learns up to 60.83 percent exact internal nodes but zero exact roots at width 16 and zero exact width-32 products after 2,400 updates.
   - Compact recurrent relative attention ties direct dilated convolution at 0.667 percent exact width 12 and both have zero exact width-24 transfer; trained attention shows no exact-answer advantage over randomized weights.
   - Independent cellular diversity is strong at width 16 but the staged width-64 lineage reaches only 68.83 percent rollout; target-free routing adds one point to the 94 percent incumbent and misses its gain/runtime gates.
+  - Teacher distillation lifts compressed radix-4 transition accuracy only at widths 16/32 and regresses width 64; one-cycle phase 2 remains inaccurate even on exact intermediate states, causing zero rollout above width 16.

@@ -1,0 +1,71 @@
+{
+  "run_id": "exp-637-teacher-distilled-macro-transition",
+  "created_at": "2026-07-17T06:42:28Z",
+  "checkpoint_sha256": "0e019b1e410cf89ccc434f8094dfe00a7b2143f9fc74dc1cb3ba7f7de6831a48",
+  "evaluation": {
+    "transition": {
+      "student_width16": {"cases": 2000, "correct": 890, "exact_accuracy": 0.445, "intermediate_exact_accuracy": 0.9725, "valid_residue_rate": 0.97},
+      "direct_width16": {"cases": 2000, "correct": 750, "exact_accuracy": 0.375, "valid_residue_rate": 0.9755},
+      "radix2_width16": {"cases": 2000, "correct": 1994, "exact_accuracy": 0.997, "valid_residue_rate": 1.0},
+      "initialized_width16": {"cases": 400, "correct": 0, "exact_accuracy": 0.0},
+      "trained_matched_initialized_width16": {"cases": 400, "correct": 181, "exact_accuracy": 0.4525},
+      "student_width32": {"cases": 2000, "correct": 518, "exact_accuracy": 0.259, "intermediate_exact_accuracy": 0.932, "valid_residue_rate": 0.979},
+      "direct_width32": {"cases": 2000, "correct": 458, "exact_accuracy": 0.229, "valid_residue_rate": 0.9765},
+      "radix2_width32": {"cases": 2000, "correct": 1995, "exact_accuracy": 0.9975, "valid_residue_rate": 1.0},
+      "initialized_width32": {"cases": 400, "correct": 0, "exact_accuracy": 0.0},
+      "trained_matched_initialized_width32": {"cases": 400, "correct": 113, "exact_accuracy": 0.2825},
+      "student_width64": {"cases": 2000, "correct": 211, "exact_accuracy": 0.1055, "intermediate_exact_accuracy": 0.8195, "valid_residue_rate": 0.9775},
+      "direct_width64": {"cases": 2000, "correct": 279, "exact_accuracy": 0.1395, "valid_residue_rate": 0.967},
+      "radix2_width64": {"cases": 2000, "correct": 1997, "exact_accuracy": 0.9985, "valid_residue_rate": 1.0},
+      "initialized_width64": {"cases": 400, "correct": 0, "exact_accuracy": 0.0},
+      "trained_matched_initialized_width64": {"cases": 400, "correct": 46, "exact_accuracy": 0.115}
+    },
+    "rollout": {
+      "student_width16": {"cases": 200, "correct": 1, "exact_accuracy": 0.005, "invalid_rate": 0.185},
+      "direct_width16": {"cases": 200, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.195},
+      "radix2_width16": {"cases": 200, "correct": 195, "exact_accuracy": 0.975, "invalid_rate": 0.0},
+      "student_width32": {"cases": 200, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.325},
+      "direct_width32": {"cases": 200, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.355},
+      "radix2_width32": {"cases": 200, "correct": 193, "exact_accuracy": 0.965, "invalid_rate": 0.0},
+      "student_width64": {"cases": 200, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.505},
+      "direct_width64": {"cases": 200, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.52},
+      "radix2_width64": {"cases": 200, "correct": 187, "exact_accuracy": 0.935, "invalid_rate": 0.0}
+    }
+  },
+  "controls": {
+    "determinism": {"cases": 20, "predictions_equal": true, "logits_equal": true, "validity_equal": true, "passed": true},
+    "width64_transition_gain_over_direct": -0.034000000000000016,
+    "width64_transition_gain_over_initialized": 0.115,
+    "paired_width64_transition": {"student_only": 125, "direct_only": 193, "intersection": 86, "neither": 1596, "prediction_disagreement": 1912},
+    "student_to_radix2_wall_ratio": {"width16": 0.5382262023709348, "width32": 0.5027684980596422, "width64": 0.4854489499772433}
+  },
+  "gates": {
+    "width16_rollout": false,
+    "width32_rollout": false,
+    "width64_rollout": false,
+    "width32_transition": false,
+    "width64_transition": false,
+    "direct_gain": false,
+    "initialized_gain": false,
+    "validity": false,
+    "runtime": true,
+    "determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "runner_wall_seconds": 1672.6276630300017,
+    "runner_aggregate_cpu_seconds": 6200.740000272,
+    "external_wall_seconds": 1579.43,
+    "external_user_cpu_seconds": 6197.19,
+    "external_system_cpu_seconds": 17.52,
+    "evaluation_arm_wall_seconds": 254.0987651919968,
+    "evaluation_arm_aggregate_cpu_seconds": 944.3622882479985
+  },
+  "resource_budget": {"expected_total_wall_seconds": 2205, "soft_budget_wall_seconds": 3000, "hard_runaway_ceiling_wall_seconds": 4440, "fidelity_reduced": false},
+  "decision": "reject-teacher-distilled-macro-transition",
+  "limitations": [
+    "Matched EXP-630 selection streams only; no checked, independent-full, official, or private answers were read.",
+    "Architecture and supervision changed together; this run does not isolate individual auxiliary losses.",
+    "Runner and GNU wall measurements differ by 93.20 seconds and are both retained."
+  ]
+}

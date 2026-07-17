@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-637 Teacher-Distilled Macro Transition
 description: Matched viability test of a two-phase compressed radix-4 cellular transition with exact intermediate supervision and frozen-teacher logits.
-status: preregistered
+status: completed
 tags: [autoresearch, radix4, distillation, cellular, macro-transition, intermediate-supervision]
 timestamp: "2026-07-17T11:58:00+05:30"
 ---
@@ -53,3 +53,13 @@ External calibration timing was 49.31 wall seconds, 153.30 user CPU seconds, and
 ## Limitations
 
 The two untied phases double parameter storage relative to the radix-2 control even though compute is based on one dilation cycle per phase. Continuous intermediate state is intentionally different from two hard radix-2 transitions and may behave differently under width extrapolation. The test isolates the complete structured-distillation formulation, not each auxiliary loss. The deterministic test streams match EXP-630 for causal comparability and therefore are selection evidence, not new independent confirmation.
+
+## Result and decision
+
+Reject the compressed two-phase formulation after all 1,600 updates and the complete matched evaluation. Student macro-transition exactness is 890/2,000 (44.5%), 518/2,000 (25.9%), and 211/2,000 (10.55%) at widths 16, 32, and 64. This exceeds the frozen direct EXP-630 checkpoint at widths 16 and 32 by 7.0 and 3.0 points but regresses 3.4 points at width 64. Trained dependence is real: the transferred-but-untrained student scores 0/400 at every width, while the trained student scores 181/400, 113/400, and 46/400 on the matched subsets.
+
+The mechanistic split is decisive. Intermediate exactness remains 97.25%, 93.2%, and 81.95%, yet final macro exactness collapses. During training, autonomous final and exact-intermediate-conditioned phase-2 batch exactness track closely, showing that the one reverse dilation sweep is itself insufficient rather than merely receiving a noisy phase-1 state. Exact rollout is only 1/200 at width 16 and 0/200 at widths 32 and 64; width-64 invalidity is 50.5%.
+
+Runtime and determinism pass: the width-64 student/radix-2 wall ratio is 0.485, and two repeats preserve every prediction, intermediate/final logit, and validity result. Every exactness, gain, and validity gate fails. Close this exact one-cycle-per-phase architecture and its frozen loss weights; do not extend or tune it after observing the result.
+
+Training uses 1,396.73 runner wall seconds and 5,212.49 aggregate CPU seconds; complete arm evaluation uses 254.10 summed wall and 944.36 aggregate CPU seconds. The runner reports 1,672.63 wall / 6,200.74 aggregate CPU seconds overall, while GNU time reports 1,579.43 elapsed wall / 6,214.71 user-plus-system CPU seconds. The 93.20-second wall discrepancy is retained rather than silently reconciled; both measurement streams remain below the 2,205-second expected, 3,000-second soft, and 4,440-second hard wall budgets, and CPU remains below its separate limits. No fidelity was reduced.

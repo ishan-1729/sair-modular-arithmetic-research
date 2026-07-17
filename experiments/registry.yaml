@@ -580,3 +580,10 @@ runs:
     run_record: experiments/runs/exp-636-independent-cellular-tier5-bootstrap/run.json
     metrics: evals/results/exp-636-independent-cellular-tier5-bootstrap/metrics.json
     checkpoint: .scratch/exp-636-independent-cellular-tier5-bootstrap/stage-4-recovery/weights.safetensors
+  - run_id: exp-637-teacher-distilled-macro-transition
+    status: completed
+    approach: two-phase-teacher-distilled-radix4-macro-transition
+    config: configs/exp_637_teacher_distilled_macro_transition.yaml
+    run_record: experiments/runs/exp-637-teacher-distilled-macro-transition/run.json
+    metrics: evals/results/exp-637-teacher-distilled-macro-transition/metrics.json
+    checkpoint: .scratch/exp-637-teacher-distilled-macro-transition/weights.safetensors
