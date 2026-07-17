@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T14:50:00+05:30
+updated_at: 2026-07-17T15:10:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-642-fresh-conditional-commutative-confirmation
   statement: The exact fixed 40 percent conditional commutative policy reproduces at least 90 percent width-128 exact rollout and a five-point gain on 500 fresh cases while retaining transition, validity, determinism, and runtime gates.
   promotion_gate: Require at least 90 percent selected rollout, five points over original, 92 percent routed oracle, 99.8 percent fresh transition, at most one percent invalidity, exact determinism, and at most 285 seconds integrated projection.
-  status: planning
-next_action: Register EXP-641 durable pass evidence, then preregister a 500-rollout/3,000-transition fresh width-128 confirmation with the identical checkpoint, route fraction, margins, tie breaks, and measured-throughput budget.
+  status: preregistered
+next_action: Validate and commit EXP-642's frozen 500-rollout/3,000-transition fresh stream and reused wall/CPU budget, then execute the exact 40 percent policy without checked or prior selection answers.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
