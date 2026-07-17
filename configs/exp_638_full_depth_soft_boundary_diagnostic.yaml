@@ -1,0 +1,46 @@
+run_id: exp-638-full-depth-soft-boundary-diagnostic
+hypothesis: two full-depth radix2 teacher phases connected by a continuous intra-macro state preserve teacher-level exactness closely enough to justify training a half-hard-boundary macro model
+seed: 20260838
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-638-full-depth-soft-boundary-diagnostic.md
+source_config: configs/exp_637_teacher_distilled_macro_transition.yaml
+teacher_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+teacher_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model:
+  hidden: 92
+  cycles_per_phase: 2
+  intermediate_temperature: 1.0
+diagnostic:
+  transition_widths: [16, 32, 64]
+  transition_cases: 2000
+  rollout_width: 64
+  rollout_cases: 200
+  determinism_cases: 20
+gates:
+  minimum_width64_continuous_transition: 0.99
+  minimum_width64_continuous_rollout: 0.90
+  maximum_width64_transition_deficit_to_hard: 0.01
+  maximum_width64_rollout_deficit_to_hard: 0.03
+  maximum_continuous_to_hard_wall_ratio: 1.25
+  require_determinism: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-637-observed-full-depth-radix2-transition-and-rollout-throughput
+  measured_transition_wall_seconds: {width16: 3.880781203999504, width32: 6.297322995000286, width64: 21.405625733998022}
+  measured_transition_aggregate_cpu_seconds: {width16: 14.621157519999542, width32: 23.316186880000714, width64: 78.03845009299948}
+  measured_width64_rollout_wall_seconds: 75.98507965200042
+  measured_width64_rollout_aggregate_cpu_seconds: 283.5559057749997
+  projected_transition_wall_seconds: 94.75118879899344
+  projected_transition_aggregate_cpu_seconds: 347.9273834789972
+  projected_rollout_wall_seconds: 151.97015930400084
+  projected_rollout_aggregate_cpu_seconds: 567.1118115499994
+  projected_determinism_wall_seconds: 15.197015930400086
+  projected_determinism_aggregate_cpu_seconds: 56.711181155000005
+  setup_tracking_artifact_wall_seconds: 60
+  expected_total_wall_seconds: 322
+  expected_total_aggregate_cpu_minutes: 19
+  soft_budget_wall_seconds: 480
+  hard_runaway_ceiling_wall_seconds: 720
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 48
+  cache_completed_blocks: true
+  torch_threads: 4

@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T12:25:00+05:30
+updated_at: 2026-07-17T12:32:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -31,9 +31,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-638-full-depth-soft-boundary-macro
   statement: Restoring both macro phases to the teacher's full two-cycle depth while retaining a continuous intra-macro state may recover teacher-level transition accuracy and reveal whether halving hard-state boundaries, rather than halving compute, improves autonomous rollout.
-  promotion_gate: Planning only; first require a training-identity diagnostic comparing initialized full-depth continuous, hard-intermediate, and ordinary two-step teacher paths. Preregister a matched rung only if exactness and runtime justify it.
-  status: planning
-next_action: Implement a no-training full-depth macro diagnostic on training identities, measure continuous versus hard intermediate exactness and wall/CPU throughput, and use the result to decide whether EXP-638 merits a calibrated training rung.
+  promotion_gate: On training identities require at least 99 percent width-64 continuous transition, 90 percent rollout, at most one/three-point transition/rollout deficits to hard composition, at most 1.25 runtime ratio, and exact determinism before authorizing any training rung.
+  status: preregistered
+next_action: Validate and commit the frozen EXP-638 diagnostic, then run all declared training-identity transition, rollout, and determinism blocks under the EXP-637-throughput budget.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
