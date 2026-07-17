@@ -1,0 +1,55 @@
+{
+  "run_id": "exp-638-full-depth-soft-boundary-diagnostic",
+  "created_at": "2026-07-17T07:03:18Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evidence_scope": "training-prime-identities-only",
+  "evaluation": {
+    "transition": {
+      "hard_width16": {"cases": 2000, "correct": 1996, "exact_accuracy": 0.998},
+      "continuous_width16": {"cases": 2000, "correct": 1993, "exact_accuracy": 0.9965},
+      "exact_intermediate_width16": {"cases": 2000, "correct": 1996, "exact_accuracy": 0.998},
+      "hard_width32": {"cases": 2000, "correct": 1996, "exact_accuracy": 0.998},
+      "continuous_width32": {"cases": 2000, "correct": 1996, "exact_accuracy": 0.998},
+      "exact_intermediate_width32": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999},
+      "hard_width64": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999},
+      "continuous_width64": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999},
+      "exact_intermediate_width64": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999}
+    },
+    "rollout": {
+      "hard_width64": {"cases": 200, "correct": 190, "exact_accuracy": 0.95, "invalid_rate": 0.0},
+      "continuous_width64": {"cases": 200, "correct": 191, "exact_accuracy": 0.955, "invalid_rate": 0.0}
+    }
+  },
+  "controls": {
+    "paired_width64_rollout": {"continuous_only": 2, "hard_only": 1, "intersection": 189, "neither": 8, "prediction_disagreement": 3},
+    "width64_transition_deficit": 0.0,
+    "width64_rollout_deficit": -0.0050000000000000044,
+    "continuous_to_hard_wall_ratio": 0.9159200192646137,
+    "determinism": {"cases": 20, "predictions_equal": true, "logits_equal": true, "validity_equal": true, "passed": true}
+  },
+  "gates": {
+    "continuous_transition": true,
+    "continuous_rollout": true,
+    "transition_deficit": true,
+    "rollout_deficit": true,
+    "runtime": true,
+    "determinism": true,
+    "passed": true
+  },
+  "runtime": {
+    "runner_wall_seconds": 182.14197243200033,
+    "runner_aggregate_cpu_seconds": 640.607037436,
+    "external_wall_seconds": 180.33,
+    "external_user_cpu_seconds": 640.23,
+    "external_system_cpu_seconds": 10.42,
+    "hard_width64_rollout_wall_seconds": 52.95886515500024,
+    "continuous_width64_rollout_wall_seconds": 48.5060847929999
+  },
+  "resource_budget": {"expected_total_wall_seconds": 322, "soft_budget_wall_seconds": 480, "hard_runaway_ceiling_wall_seconds": 720, "fidelity_reduced": false},
+  "decision": "authorize-full-depth-soft-boundary-training-rung",
+  "limitations": [
+    "Training identities only; no held-out, checked, independent-full, official, or private answer was read.",
+    "No weights were trained or selected.",
+    "The exact-intermediate arm is a prohibited candidate path and is reported only as an offline diagnostic."
+  ]
+}

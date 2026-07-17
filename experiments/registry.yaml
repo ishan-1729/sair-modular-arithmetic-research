@@ -587,3 +587,10 @@ runs:
     run_record: experiments/runs/exp-637-teacher-distilled-macro-transition/run.json
     metrics: evals/results/exp-637-teacher-distilled-macro-transition/metrics.json
     checkpoint: .scratch/exp-637-teacher-distilled-macro-transition/weights.safetensors
+  - run_id: exp-638-full-depth-soft-boundary-diagnostic
+    status: completed
+    approach: frozen-full-depth-continuous-intra-macro-diagnostic
+    config: configs/exp_638_full_depth_soft_boundary_diagnostic.yaml
+    run_record: experiments/runs/exp-638-full-depth-soft-boundary-diagnostic/run.json
+    metrics: evals/results/exp-638-full-depth-soft-boundary-diagnostic/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

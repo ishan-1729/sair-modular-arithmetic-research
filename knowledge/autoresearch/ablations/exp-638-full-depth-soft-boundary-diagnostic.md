@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-638 Full-Depth Soft-Boundary Diagnostic
 description: No-training diagnostic of two full-depth teacher transitions joined by one continuous intra-macro state.
-status: preregistered
+status: completed
 tags: [autoresearch, cellular, macro-transition, continuous-state, diagnostic, training-identities]
 timestamp: "2026-07-17T12:32:00+05:30"
 ---
@@ -49,3 +49,13 @@ With 60 seconds for setup, MLflow, caching, and serialization, expected total is
 ## Limitations
 
 The diagnostic uses training identities and cannot support generalization claims. It changes only the intermediate representation, not weights. Continuous logits may be poorly calibrated even when their signs are correct. A pass would justify adaptation, not prove that full-depth macro training improves Tier-6 rollout or total submission runtime.
+
+## Result and decision
+
+Every frozen authorization gate passes. On 2,000 training-identity transitions, hard/continuous/exact-intermediate exactness is 99.8%/99.65%/99.8% at width 16, 99.8%/99.8%/99.9% at width 32, and 99.9%/99.9%/99.9% at width 64. Continuous state therefore preserves the full teacher transition surface and has zero width-64 deficit to hard composition.
+
+On 200 paired width-64 training-identity rollouts, hard composition scores 190/200 (95.0%) and continuous macro scores 191/200 (95.5%). Continuous recovers two hard failures and loses one hard success; 189 are common successes and eight common failures. Both arms have zero invalid trajectories. Continuous uses 48.506 wall seconds versus 52.959 for hard composition, a 0.916 ratio, and repeats every prediction, intermediate/final logit, and validity result exactly.
+
+Authorize a separately preregistered full-depth soft-boundary adaptation rung. Do not treat the 0.5-point training-identity gain as held-out evidence, do not promote a candidate, and do not inspect checked or independent-full benchmarks. The next rung must include fresh held-out paired hard/continuous controls, width-64 retention, width-128 transition/rollout, trained-weight dependence, deterministic/runtime gates, and its own measured full-objective budget.
+
+The complete diagnostic finishes in 182.142 runner wall seconds and 640.607 aggregate CPU seconds; GNU time reports 180.33 wall and 650.65 user-plus-system CPU seconds. This is below the 322-second expected, 480-second soft, 720-second hard wall limits and separate 19/48 aggregate CPU-minute expected/upper limits. All blocks completed and no fidelity was reduced.

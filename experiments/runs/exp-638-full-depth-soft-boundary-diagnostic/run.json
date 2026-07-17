@@ -1,0 +1,73 @@
+{
+  "run_id": "exp-638-full-depth-soft-boundary-diagnostic",
+  "status": "completed",
+  "created_at": "2026-07-17T07:03:18Z",
+  "hypothesis": "Two full-depth radix-2 teacher phases connected by a continuous intra-macro state preserve teacher-level exactness closely enough to justify training a half-hard-boundary macro model.",
+  "seed": 20260838,
+  "source": {
+    "repository_commit": "1efa0f920bba7ec2963d773ad7096689287c5df7",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "408e584901f2ac439696c1562cf31c97a2463193d3dc43d20c3e6c266b1e5473",
+    "runner_sha256": "04293ba1aa8a1cbf42f08c2aec3662e2d7f34aee18f6d6fac35801e170be68dd",
+    "source_runner_sha256": "f81b87edbdeadf7cf1b03c66708b11107b930029cd6de26a6e6129f514fc1fa4",
+    "source_model_sha256": "24d96fdead9b77079ba7ce6ca959035db13e386193340e09a9eecba3bb2dca41",
+    "source_data_sha256": "6a50a751f5d0b8a6c154c6bc2b6857b50982eedbed73bf4cae4fadf153b98ad1",
+    "split_sha256": "6ea063cd151f5f58edc0a33fc41a24cd55b0d0be4f8b2a3be4140f3348b7c231",
+    "teacher_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "config": "configs/exp_638_full_depth_soft_boundary_diagnostic.yaml",
+  "environment": "experiments/runs/exp-638-full-depth-soft-boundary-diagnostic/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "0cf92301bde24b7ca9575c27a783b3a0"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-638-full-depth-soft-boundary-diagnostic/metrics.json",
+    "scratch_summary": ".scratch/exp-638-full-depth-soft-boundary-diagnostic/summary.json",
+    "scratch_summary_sha256": "8caccd7aabfbdbe364173de41de6c862df13a15cf8b5820bd71289b2ebd31723",
+    "diagnostic_cache": ".scratch/exp-638-full-depth-soft-boundary-diagnostic/diagnostic-506f9e6901b4434cc557ca47b4759153e1d9fc5fdf30320bf47c3626296799e3.partial.json",
+    "diagnostic_cache_sha256": "464e7a7fcfbaeb36484f1a8f3580dbeea2e43f570f3571314ca80255da3c5992",
+    "formal_console": ".scratch/exp-638-full-depth-soft-boundary-diagnostic/formal-console.log",
+    "formal_console_sha256": "250ca6c1760f761edbcb40128e3f32b4811dcf663ea0245243e18da924c74032"
+  },
+  "evidence_scope": "training-prime-identities-only",
+  "controls": {
+    "weights_trained": false,
+    "hard_composition_matched": true,
+    "exact_intermediate_diagnostic_only": true,
+    "full_workload_completed": true,
+    "determinism_passed": true,
+    "all_gates_passed": true
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 322,
+    "expected_total_aggregate_cpu_minutes": 19,
+    "soft_budget_wall_seconds": 480,
+    "hard_runaway_ceiling_wall_seconds": 720,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 48,
+    "runner_wall_seconds": 182.14197243200033,
+    "runner_aggregate_cpu_seconds": 640.607037436,
+    "runner_aggregate_cpu_minutes": 10.676783957266666,
+    "active_cached_wall_seconds": 176.42932487500002,
+    "arm_wall_seconds": 169.72578799999974,
+    "arm_aggregate_cpu_seconds": 624.118223196,
+    "external_wall_seconds": 180.33,
+    "external_user_cpu_seconds": 640.23,
+    "external_system_cpu_seconds": 10.42,
+    "external_percent_cpu": 360,
+    "fidelity_reduced": false,
+    "valid_throughput_evidence_reused": true
+  },
+  "decision": "authorize-full-depth-soft-boundary-training-rung",
+  "notes": [
+    "Continuous full-depth transition exactness is 99.65, 99.8, and 99.9 percent at widths 16, 32, and 64.",
+    "On 200 width-64 training-identity rollouts, continuous macro scores 95.5 percent versus 95.0 percent hard composition, with two continuous-only and one hard-only success.",
+    "Continuous inference is valid, exactly deterministic, and uses 0.916 times the matched hard wall time.",
+    "This authorizes a separately preregistered training rung only; it is not held-out evidence or candidate promotion."
+  ]
+}
