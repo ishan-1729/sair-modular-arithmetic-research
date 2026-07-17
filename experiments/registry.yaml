@@ -608,3 +608,10 @@ runs:
     run_record: experiments/runs/exp-640-commutative-operand-swap-diversity/run.json
     metrics: evals/results/exp-640-commutative-operand-swap-diversity/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-641-conditional-commutative-swap-routing
+    status: completed
+    approach: fixed-low-margin-conditional-commutative-swap
+    config: configs/exp_641_conditional_commutative_swap_routing.yaml
+    run_record: experiments/runs/exp-641-conditional-commutative-swap-routing/run.json
+    metrics: evals/results/exp-641-conditional-commutative-swap-routing/metrics.json
+    checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors

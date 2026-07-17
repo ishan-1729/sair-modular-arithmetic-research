@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-641 Conditional Commutative Swap Routing
 description: Fixed 40 percent low-margin routing into operand-swapped frozen inference on the consumed EXP-640 surface.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, commutativity, conditional-compute, confidence-routing, runtime]
 timestamp: "2026-07-17T14:30:00+05:30"
 ---
@@ -43,3 +43,11 @@ The soft budget is 1,200 wall seconds. The hard runaway ceiling is 1,800 wall se
 ## Limitations
 
 This remains consumed evidence and can only authorize a fresh confirmation. Linear scaling from 300 to 100 cases is deliberately conservative but is not the official isolated runtime. The route relies on confidence ranking stability across distributions.
+
+## Result and decision
+
+Passed every consumed-evidence gate. The fixed 40% policy routes 120/300 cases, chooses swapped output for 99, and scores 290/300 (96.67%) versus 248/300 (82.67%) original. It recovers 44 original failures and loses two successes. The fixed routed oracle is 293/300 (97.67%), selected invalidity is zero, every rerun original and routed-swapped prediction/margin/validity exactly reproduces EXP-640, and both conditional repeats match exactly.
+
+Original-all and routed-swapped work measure 349.69 and 177.60 wall seconds. The preregistered integration formula yields 212.66 seconds, passing the 285-second ceiling with substantial headroom. Runner work is 593.87 wall seconds and 2,183.87 aggregate CPU seconds (36.40 minutes), below the reused-throughput 795-second/48-minute expectation, 1,200-second soft budget, 1,800-second hard ceiling, and 120-minute CPU upper bound. GNU time records 569.99 wall, 2,125.60 user, and 70.48 system seconds; both wall measures are preserved.
+
+Authorize one fresh generated width-128 confirmation with the exact 40% route, margin definitions, tie breaks, checkpoint, and runtime formula. Increase to 500 rollouts and add 3,000 fresh transitions. This is still not candidate promotion or full-goal evidence.
