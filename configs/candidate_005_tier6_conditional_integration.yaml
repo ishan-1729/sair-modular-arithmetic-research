@@ -79,20 +79,35 @@ gates:
   require_official_isolated_container: true
 resource_budget:
   limit_unit: wall_seconds
-  calibration_status: pending-exact-artifact-profile
+  calibration_status: complete-exact-artifact-profile
   calibration_path: .scratch/candidate-005-tier6-conditional-commutative-integration/calibration.json
-  calibration_sha256: pending
+  calibration_sha256: 575b94e686a205a713930a23ffc45e28df88296a44e6737b189d2a84e34ad918
+  calibration_console_path: .scratch/candidate-005-tier6-conditional-commutative-integration/calibration-console.log
+  calibration_console_sha256: ff742e13947aa3fdc3eee10cfb5377c55151a22c40df9b591541575f38de8617
   calibration_warmup_cases: 2
   calibration_profile_cases: 10
+  calibration_profile_wall_seconds: 14.367642338002042
+  calibration_profile_aggregate_cpu_seconds: 55.646356378
+  calibration_orientation_equivalent_cases: 14
+  measured_wall_seconds_per_orientation_equivalent: 1.0262601670001459
+  measured_aggregate_cpu_seconds_per_orientation_equivalent: 3.974739741285714
   formal_local_orientation_equivalent_cases: 756
-  expected_local_wall_seconds: pending
-  expected_local_aggregate_cpu_minutes: pending
-  soft_budget_wall_seconds: pending
-  hard_runaway_ceiling_wall_seconds: pending
-  hard_ceiling_aggregate_cpu_minutes_upper_bound: pending
+  projected_local_orientation_wall_seconds: 775.8526862521103
+  projected_local_orientation_aggregate_cpu_minutes: 50.0817207402
+  setup_generator_lower_tier_tracking_headroom_wall_seconds: 120
+  setup_generator_lower_tier_tracking_headroom_aggregate_cpu_minutes: 10
+  expected_local_wall_seconds: 896
+  expected_local_aggregate_cpu_minutes: 61
+  soft_budget_wall_seconds: 1350
+  hard_runaway_ceiling_wall_seconds: 2100
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 150
   official_isolated_timeout_seconds: 300
   official_isolated_promotion_ceiling_seconds: 285
   incumbent_container_wall_seconds: 75.49431246199674
   incumbent_inference_wall_seconds: 36.9
+  projected_candidate_inference_wall_seconds: 180.57642338002043
+  projected_candidate_container_wall_seconds: 219.17073584201717
+  higher_fidelity_confirmation_source: .scratch/exp-642-fresh-conditional-commutative-confirmation/summary.json
+  higher_fidelity_confirmation_source_sha256: 89230c00881a81ea346e32487d94b88e31c316c34d61483f11678dbbc69f5671
   cache_completed_seed_evidence: true
   fidelity_reduced: false
