@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T11:17:00+05:30
+updated_at: 2026-07-17T12:19:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -31,9 +31,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-637-teacher-distilled-macro-transition
   statement: Distilling two exact radix-2 teacher transitions and intermediate teacher logits from the strong cellular checkpoint into one learned radix-4 macro-transition may preserve substantially more exactness than direct radix-4 transfer while halving autonomous horizon.
-  promotion_gate: Planning only; require a preregistered matched comparison against EXP-630 and a radix-2 control, training-identity-only calibration, exact macro-transition and rollout gates, trained-weight dependence, validity, deterministic behavior, and projected higher-tier runtime headroom before scale.
-  status: planning
-next_action: Inspect EXP-630 failure evidence and the strong radix-2 checkpoint interfaces, then design a teacher-distilled macro-transition feasibility rung without encoding exact reduction in inference.
+  promotion_gate: Require 90/70/20 percent rollout at widths 16/32/64, 98/80 percent macro-transition exactness at widths 32/64, 50-point width-64 transition gains over direct and initialized controls, at most 10 percent invalidity, at most 0.70 paired radix-2 wall ratio, and exact determinism.
+  status: preregistered
+next_action: Validate and commit the tested EXP-637 implementation and measured budget, then execute all 1,600 resumable updates and the complete matched evaluation without reducing fidelity.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 384afbe805949c62354dc6719630b84f84dd96a5
+  last_validated_commit: 2b3cb65e627629f92d04eb9f4857e09e53d18fc0
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
