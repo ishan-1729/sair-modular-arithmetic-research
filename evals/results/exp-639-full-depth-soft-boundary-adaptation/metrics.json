@@ -1,0 +1,61 @@
+{
+  "run_id": "exp-639-full-depth-soft-boundary-adaptation",
+  "created_at": "2026-07-17T08:05:57Z",
+  "checkpoint_sha256": "a033ba8d5a2b013c432591422443c116960b16a72c44efb31f13c2c9105b61ac",
+  "evidence_scope": "fresh-generated-held-out-prime-identities",
+  "evaluation": {
+    "transition": {
+      "hard_frozen_width64": {"cases": 3000, "correct": 2995, "exact_accuracy": 0.9983333333333333},
+      "continuous_initialized_width64": {"cases": 3000, "correct": 2995, "exact_accuracy": 0.9983333333333333, "intermediate_correct": 2997},
+      "continuous_trained_width64": {"cases": 3000, "correct": 2995, "exact_accuracy": 0.9983333333333333, "intermediate_correct": 2997},
+      "hard_frozen_width128": {"cases": 3000, "correct": 2989, "exact_accuracy": 0.9963333333333333},
+      "continuous_initialized_width128": {"cases": 3000, "correct": 2991, "exact_accuracy": 0.997, "intermediate_correct": 2996},
+      "continuous_trained_width128": {"cases": 3000, "correct": 2992, "exact_accuracy": 0.9973333333333333, "intermediate_correct": 2996}
+    },
+    "rollout": {
+      "hard_frozen_width64": {"cases": 300, "correct": 286, "exact_accuracy": 0.9533333333333334, "invalid_rate": 0.0033333333333333335},
+      "continuous_initialized_width64": {"cases": 300, "correct": 287, "exact_accuracy": 0.9566666666666667, "invalid_rate": 0.0},
+      "continuous_trained_width64": {"cases": 300, "correct": 288, "exact_accuracy": 0.96, "invalid_rate": 0.0},
+      "hard_frozen_width128": {"cases": 300, "correct": 248, "exact_accuracy": 0.8266666666666667, "invalid_rate": 0.0},
+      "continuous_initialized_width128": {"cases": 300, "correct": 245, "exact_accuracy": 0.8166666666666667, "invalid_rate": 0.0033333333333333335},
+      "continuous_trained_width128": {"cases": 300, "correct": 242, "exact_accuracy": 0.8066666666666666, "invalid_rate": 0.0}
+    }
+  },
+  "controls": {
+    "width64_trained_vs_hard": {"trained_only": 4, "hard_only": 2, "intersection": 284, "neither": 10, "prediction_disagreement": 10},
+    "width128_trained_vs_hard": {"trained_only": 5, "hard_only": 11, "intersection": 237, "neither": 47, "prediction_disagreement": 37},
+    "width128_trained_vs_initialized": {"trained_only": 3, "initialized_only": 6, "intersection": 239, "neither": 52, "prediction_disagreement": 28},
+    "width128_gain_over_better_frozen": -0.020000000000000018,
+    "width128_trained_to_hard_wall_ratio": 1.5092508931540893
+  },
+  "gates": {
+    "width128_rollout": false,
+    "gain": false,
+    "width64_retention": true,
+    "width128_transition": false,
+    "validity": true,
+    "runtime": false,
+    "determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "runner_wall_seconds": 2312.411377114,
+    "runner_aggregate_cpu_seconds": 8531.040269695999,
+    "external_wall_seconds": 2174.28,
+    "external_user_cpu_seconds": 8520.47,
+    "external_system_cpu_seconds": 24.81,
+    "peak_rss_bytes": 1816391680
+  },
+  "resource_budget": {
+    "expected_total_wall_seconds": 3832,
+    "soft_budget_wall_seconds": 5220,
+    "hard_runaway_ceiling_wall_seconds": 7680,
+    "fidelity_reduced": false
+  },
+  "decision": "reject-full-depth-soft-boundary-adaptation",
+  "limitations": [
+    "Fresh generated selection evidence only; no checked, independent-full, official, or private answer was read.",
+    "Training changes the macro supervision and outer-state credit together.",
+    "The isolated trained-arm runtime ratio is retained as observed even though identical initialized/trained architectures imply scheduling noise may contribute."
+  ]
+}

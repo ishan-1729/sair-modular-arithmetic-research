@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T12:50:00+05:30
+updated_at: 2026-07-17T13:40:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -29,11 +29,11 @@ incumbent:
   mlflow_run_id: 221e15c677524f78a4cfadc8e82833ab
   mlflow_model_version: "4"
 current_hypothesis:
-  run_id: exp-639-full-depth-soft-boundary-adaptation
-  statement: Low-rate width-64/128 adaptation through a shared full-depth continuous intra-macro state can turn the EXP-638 viable initialization into at least 90 percent fresh width-128 rollout while retaining width 64 and unchanged parameter count.
-  promotion_gate: Require at least 90 percent fresh width-128 rollout, two points over the better frozen hard/continuous arm, 95 percent width-64 retention, 99.8 percent transition, at most one percent invalidity, at most 1.15 hard-runtime ratio, and exact determinism.
-  status: preregistered
-next_action: Validate and commit the tested EXP-639 implementation and measured budget, then run all 400 resumable updates and every three-arm evaluation case without reducing fidelity.
+  run_id: exp-640-commutative-operand-swap-diversity
+  statement: The frozen width-independent Horner cell makes sufficiently complementary errors when operand roles are swapped that a fixed target-free minimum-trajectory-margin selector can exceed 90 percent width-128 exact rollout within candidate runtime.
+  promotion_gate: On consumed EXP-639 cases first, require at least 92 percent original/swapped oracle union, 90 percent fixed-selector exact rollout, validity, exact determinism, and a calibrated integrated runtime path below the candidate ceiling before any fresh confirmation.
+  status: planning
+next_action: Register EXP-639 durable evidence, then implement and calibrate an EXP-640 consumed-evidence original-versus-swapped diagnostic with one preregistered minimum-margin selector and no checked or fresh selection answers.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -44,7 +44,7 @@ tracking:
   incumbent_model_version: "4"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 1efa0f920bba7ec2963d773ad7096689287c5df7
+  last_validated_commit: 8ab8fc6e5c3de50de0ed385a1cae8616379ebeba
   dirty: true
 risks:
   - Tier 6 remains unsolved and requires a width-128 generalization path.
@@ -65,3 +65,4 @@ risks:
   - Independent cellular diversity is strong at width 16 but the staged width-64 lineage reaches only 68.83 percent rollout; target-free routing adds one point to the 94 percent incumbent and misses its gain/runtime gates.
   - Teacher distillation lifts compressed radix-4 transition accuracy only at widths 16/32 and regresses width 64; one-cycle phase 2 remains inaccurate even on exact intermediate states, causing zero rollout above width 16.
   - Full-depth continuous macro state is viable on training identities and gains only one net width-64 case over hard composition; held-out width-128 benefit remains unmeasured.
+  - Full-depth continuous adaptation regresses fresh width-128 rollout from 82.67 percent hard-frozen to 80.67 percent trained and misses transition/runtime gates; close the soft-boundary training surface.

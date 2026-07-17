@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP-639 Full-Depth Soft-Boundary Adaptation
 description: Shared-weight width-64/128 macro-recovery continuation testing whether continuous intra-macro state crosses the Tier-6 boundary.
-status: preregistered
+status: completed
 tags: [autoresearch, tier6, cellular, macro-transition, continuous-state, straight-through, recovery]
 timestamp: "2026-07-17T12:44:00+05:30"
 ---
@@ -54,3 +54,11 @@ External calibration timing was 122.23 wall seconds, 442.60 user CPU seconds, an
 ## Limitations
 
 EXP-638's gain is one net training-identity case and may not generalize. Shared phase weights constrain specialization but preserve parameter count and causal clarity. Full-depth macro computation does not halve convolutional work; it halves only outer hard state boundaries and may gain modest Python overhead savings. Even a Tier-6 pass remains far below the binding full-overall completion target and requires independent confirmation.
+
+## Result and decision
+
+Rejected after the complete frozen run. At width 128, hard-frozen, initialized-continuous, and trained-continuous rollout score 248/300 (82.67%), 245/300 (81.67%), and 242/300 (80.67%). The trained arm therefore misses the 90% absolute gate and regresses two points versus the better frozen arm. Its 2,992/3,000 (99.733%) transition score is one case below the 99.8% gate. It is valid and exactly deterministic, but its isolated 1.509 hard-runtime ratio also misses. Width-64 retention passes at 288/300 (96.0%).
+
+All 400 updates and every declared case completed. Runner timing is 2,312.41 wall seconds and 8,531.04 aggregate CPU seconds (142.18 minutes), below the calibrated 3,832-second expectation, 5,220-second soft budget, 7,680-second hard ceiling, 234-minute expected CPU work, and 511-minute CPU upper bound. GNU time separately records 2,174.28 elapsed seconds, 8,520.47 user seconds, and 24.81 system seconds; the unexplained 138.13-second wall discrepancy is retained. No fidelity was reduced and the trained checkpoint/evaluation cache are hash-preserved.
+
+Close this shared-weight low-rate soft-boundary adaptation. Do not tune its schedule or loss weights after seeing the result. The frozen hard path remains stronger. A materially different next diagnostic may exploit the legal commutativity of multiplication to test whether operand-swapped learned trajectories provide complementary exact outputs; that hypothesis must use consumed evidence first and a fixed target-free selector.
