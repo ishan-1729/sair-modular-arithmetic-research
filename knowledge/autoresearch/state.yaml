@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T13:40:00+05:30
+updated_at: 2026-07-17T13:55:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -32,8 +32,8 @@ current_hypothesis:
   run_id: exp-640-commutative-operand-swap-diversity
   statement: The frozen width-independent Horner cell makes sufficiently complementary errors when operand roles are swapped that a fixed target-free minimum-trajectory-margin selector can exceed 90 percent width-128 exact rollout within candidate runtime.
   promotion_gate: On consumed EXP-639 cases first, require at least 92 percent original/swapped oracle union, 90 percent fixed-selector exact rollout, validity, exact determinism, and a calibrated integrated runtime path below the candidate ceiling before any fresh confirmation.
-  status: planning
-next_action: Register EXP-639 durable evidence, then implement and calibrate an EXP-640 consumed-evidence original-versus-swapped diagnostic with one preregistered minimum-margin selector and no checked or fresh selection answers.
+  status: preregistered
+next_action: Validate and commit the tested EXP-640 implementation and measured wall/CPU budget, then reconstruct all 300 consumed EXP-639 pairs and both frozen orientations without reducing fidelity.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
