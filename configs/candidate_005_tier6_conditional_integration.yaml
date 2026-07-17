@@ -1,0 +1,98 @@
+run_id: candidate-005-tier6-conditional-commutative-integration
+hypothesis: the frozen 40 percent conditional commutative Tier-6 policy integrates into Candidate 004 without lower-tier prediction changes and clears five fresh Tier-6, static, deterministic, trained-weight, artifact, and isolated-runtime gates
+seed: 20260843
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+preregistration: knowledge/autoresearch/ablations/candidate-005-tier6-conditional-integration.md
+incumbent:
+  directory: submission
+  model_sha256: 14b55ccb6443918d3b11000f8cc90e44ff249253bb72e0fd40ddfdbf0e0a70ea
+  manifest_sha256: fa293827cfe815a9325800b91c9ff8eac41257169af1efac0fcb73a2e4e16dcd
+  weights_sha256: fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4
+artifact:
+  directory: .scratch/candidate-005-tier6-conditional-commutative-integration/submission
+  model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
+  manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
+  weights_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+  parameters: 470049
+  bytes: 1915885
+sources:
+  candidate004_weights_sha256: fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4
+  tier6_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  tier6_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  builder: tools/build_candidate005_artifact.py
+routing:
+  fraction: 0.40
+  original_work: every Tier-6 row
+  routed_work: exactly the lowest-original-minimum-margin 40 percent per evaluator batch
+  route_score: minimum_trajectory_absolute_bit_logit_margin
+  route_tie_break: lowest_batch_index
+  orientation_selector: higher_minimum_trajectory_absolute_bit_logit_margin
+  orientation_tie_break: original
+seeds:
+  calibration: 648da6783e82b8bd148d1f05c8572d32d56192e14c423976676d13e5a12c28d9
+  full_sandbox_id: seed1
+  local_tier6_ids: [seed2, seed3, seed4, seed5]
+  independent:
+    seed1: 1c82674f2826d26d7c5de0bf1933457ddc9ce824c30acff4a8a37578b3a566e4
+    seed2: 1403884e85cca501b120d876d5201f834c29f0d40168a4583ddfcc38982b6f97
+    seed3: 4d32a14b735777fe4f932c9cdbd5863ff95be679026cf4bd12e89746323a1d9b
+    seed4: 24f3b9d065619641757027c7b97cb3c6e1b13f60cf355605279d02182ebf85b9
+    seed5: b72fe62eae8c8098bbcb9689adf544744bb10f5abc68d619f83f2e6683c34dc7
+evaluation:
+  official_generator_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  full_total_cases: 1100
+  tier6_cases: 100
+  primes_per_tier: 5
+  edge_cases_per_tier: 4
+  determinism_seed_id: seed2
+  determinism_cases: 20
+  torch_threads: 4
+  max_artifact_bytes: 21474836480
+randomized_control:
+  artifact_directory: .scratch/candidate-005-tier6-conditional-commutative-integration/randomized-submission
+  model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
+  manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
+  weights_sha256: 5741bcea5f553f04d3019ac414c1f657cea5577c6974b132f3c80716bf1df4b0
+  tier6_randomization_seed: 20260843
+  seed_id: seed2
+gates:
+  minimum_tier6_accuracy: 0.90
+  maximum_randomized_tier6_accuracy: 0.10
+  minimum_full_overall_accuracy: 0.58
+  minimum_tier1_accuracy: 0.99
+  minimum_tier2_accuracy: 0.95
+  minimum_tier3_accuracy: 0.95
+  minimum_tier4_accuracy: 0.90
+  minimum_tier5_accuracy: 0.90
+  minimum_full_tier6_accuracy: 0.90
+  minimum_highest_tier_above_90: 6
+  maximum_isolated_inference_wall_seconds: 285
+  require_every_seed: true
+  require_lower_tier_prediction_equivalence: true
+  require_valid_outputs: true
+  require_determinism: true
+  require_static_clean: true
+  require_preprocess_isolation: true
+  require_trained_weight_dependence: true
+  require_clean_three_file_artifact: true
+  require_official_isolated_container: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_status: pending-exact-artifact-profile
+  calibration_path: .scratch/candidate-005-tier6-conditional-commutative-integration/calibration.json
+  calibration_sha256: pending
+  calibration_warmup_cases: 2
+  calibration_profile_cases: 10
+  formal_local_orientation_equivalent_cases: 756
+  expected_local_wall_seconds: pending
+  expected_local_aggregate_cpu_minutes: pending
+  soft_budget_wall_seconds: pending
+  hard_runaway_ceiling_wall_seconds: pending
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: pending
+  official_isolated_timeout_seconds: 300
+  official_isolated_promotion_ceiling_seconds: 285
+  incumbent_container_wall_seconds: 75.49431246199674
+  incumbent_inference_wall_seconds: 36.9
+  cache_completed_seed_evidence: true
+  fidelity_reduced: false
