@@ -1,0 +1,66 @@
+run_id: exp-639-full-depth-soft-boundary-adaptation
+hypothesis: low-rate shared-weight macro recovery through a full-depth continuous intermediate state improves fresh width128 rollout beyond both frozen hard composition and frozen continuous initialization while retaining width64
+seed: 20260839
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-639-full-depth-soft-boundary-adaptation.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2, intermediate_temperature: 1.0}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+training:
+  steps: 400
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_macro_steps: 4
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  intermediate_loss_weight: 0.50
+  outer_state_mode: straight_through
+  torch_threads: 4
+  save_every_steps: 25
+evaluation:
+  widths: [64, 128]
+  transition_cases: 3000
+  rollout_cases: 300
+  determinism_cases: 20
+gates:
+  minimum_trained_width128_rollout: 0.90
+  minimum_width128_gain_over_better_frozen_arm: 0.02
+  minimum_trained_width64_rollout: 0.95
+  minimum_trained_width128_transition: 0.998
+  maximum_trained_width128_invalid_rollout_rate: 0.01
+  maximum_trained_to_hard_width128_wall_ratio: 1.15
+  require_determinism: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_status: complete
+  calibration_json: .scratch/exp-639-full-depth-soft-boundary-adaptation/calibration.json
+  calibration_json_sha256: 6976f4b654d254a1b03a442411d7a69edbdf51d698f9000d5778754dbb7c9df5
+  calibration_console: .scratch/exp-639-full-depth-soft-boundary-adaptation/calibration-console.log
+  calibration_console_sha256: 7aa5444b020513c1f42571b73ab463316cbeec924358715da6dc605c952b9d98
+  calibration_external_wall_seconds: 122.23
+  calibration_external_user_cpu_seconds: 442.60
+  calibration_external_system_cpu_seconds: 5.95
+  calibration_external_percent_cpu: 366
+  calibration_maximum_resident_set_kib: 1468168
+  profile_updates_per_mode: 5
+  profile_transition_cases_per_width: 96
+  profile_rollout_cases_per_width: 6
+  projected_training_wall_seconds: 1395.076508659913
+  projected_training_aggregate_cpu_seconds: 5216.3179258400005
+  projected_evaluation_wall_seconds: 2256.6911677412495
+  projected_evaluation_aggregate_cpu_seconds: 8432.151328854165
+  setup_tracking_artifact_wall_seconds: 180
+  expected_total_wall_seconds: 3832
+  expected_total_aggregate_cpu_minutes: 234
+  soft_budget_wall_seconds: 5220
+  hard_runaway_ceiling_wall_seconds: 7680
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 511
+  checkpoint_every_steps: 25
+  cache_completed_blocks: true
+  torch_threads: 4

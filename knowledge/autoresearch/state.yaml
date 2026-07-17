@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-17T12:35:00+05:30
+updated_at: 2026-07-17T12:50:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -31,9 +31,9 @@ incumbent:
 current_hypothesis:
   run_id: exp-639-full-depth-soft-boundary-adaptation
   statement: Low-rate width-64/128 adaptation through a shared full-depth continuous intra-macro state can turn the EXP-638 viable initialization into at least 90 percent fresh width-128 rollout while retaining width 64 and unchanged parameter count.
-  promotion_gate: Planning only; require a separately preregistered paired hard/continuous control with at least 90 percent width-128 rollout, two-point gain, 95 percent width-64 retention, 99.8 percent transition, validity, trained dependence, determinism, and candidate-runtime headroom.
-  status: planning
-next_action: Inspect the existing straight-through/recovery training interfaces, design the smallest matched EXP-639 shared-weight macro adaptation rung, then calibrate its complete objective and evaluation throughput on training identities before freezing it.
+  promotion_gate: Require at least 90 percent fresh width-128 rollout, two points over the better frozen hard/continuous arm, 95 percent width-64 retention, 99.8 percent transition, at most one percent invalidity, at most 1.15 hard-runtime ratio, and exact determinism.
+  status: preregistered
+next_action: Validate and commit the tested EXP-639 implementation and measured budget, then run all 400 resumable updates and every three-arm evaluation case without reducing fidelity.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
