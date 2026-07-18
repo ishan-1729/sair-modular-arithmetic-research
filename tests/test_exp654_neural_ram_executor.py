@@ -125,6 +125,7 @@ def test_parameter_matching_and_frozen_config() -> None:
     assert config["data"]["test_prime_identities"] == 16
     assert config["data"]["calibration_seed"] != config["data"]["formal_seed"]
     assert config["resource_budget"]["calibration_status"] in {"pending", "complete"}
+    assert len(config["resource_budget"]["calibration_reuse_partial_sha256"]) == 64
     assert config["resource_budget"]["fidelity_reduced"] is False
 
 

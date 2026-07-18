@@ -108,11 +108,15 @@ def make_split(
     low = 1 << (minimum_bits - 1)
     high = 1 << width
     requested = int(data["train_prime_identities"]) + int(data["test_prime_identities"])
-    available = int(primepi(high - 1) - primepi(low - 1))
-    if requested > available:
-        raise ValueError(
-            f"requested {requested} unique width-{width} primes but band contains {available}"
-        )
+    # Exact counting is useful for tiny bands but primepi is not a large-integer
+    # feasibility primitive. At research widths the requested count is trivially
+    # small relative to the band and generation itself remains bounded in practice.
+    if width <= 32:
+        available = int(primepi(high - 1) - primepi(low - 1))
+        if requested > available:
+            raise ValueError(
+                f"requested {requested} unique width-{width} primes but band contains {available}"
+            )
     local = {
         "data": {
             "prime_bits_min": minimum_bits,
@@ -744,23 +748,45 @@ class Experiment:
         }
 
     def run_all(self) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
-        results = {}
         partial_path = self.output / self.mode / "partial.json"
         partial_path.parent.mkdir(parents=True, exist_ok=True)
-        for arm in self.ARM_ORDER:
-            results[arm] = self.train_arm(arm)
+        reused = False
+        budget = self.config["resource_budget"]
+        reuse_value = budget.get("calibration_reuse_partial")
+        if self.mode == "calibration" and reuse_value:
+            reuse_path = (ROOT / reuse_value).resolve()
+            expected = budget["calibration_reuse_partial_sha256"]
+            if not reuse_path.exists() or sha256(reuse_path) != expected:
+                raise RuntimeError("calibration partial reuse hash mismatch")
+            payload = json.loads(reuse_path.read_text())
+            results = payload["arms"]
+            diagnostics = payload["diagnostics"]
+            if set(results) != set(self.ARM_ORDER):
+                raise RuntimeError("calibration partial does not contain every arm")
+            for result in results.values():
+                for artifact_key in ("initial_checkpoint", "checkpoint"):
+                    artifact = result[artifact_key]
+                    artifact_path = ROOT / artifact["path"]
+                    if not artifact_path.exists() or sha256(artifact_path) != artifact["sha256"]:
+                        raise RuntimeError(f"calibration {artifact_key} hash mismatch")
+            reused = True
+        else:
+            results = {}
+            for arm in self.ARM_ORDER:
+                results[arm] = self.train_arm(arm)
+                partial_path.write_text(
+                    json.dumps({"status": "partial", "arms": results}, indent=2) + "\n"
+                )
+            diagnostics = self.neural_ram_diagnostics(results["neural_ram"])
             partial_path.write_text(
-                json.dumps({"status": "partial", "arms": results}, indent=2) + "\n"
+                json.dumps(
+                    {"status": "partial", "arms": results, "diagnostics": diagnostics},
+                    indent=2,
+                )
+                + "\n"
             )
-        diagnostics = self.neural_ram_diagnostics(results["neural_ram"])
-        partial_path.write_text(
-            json.dumps(
-                {"status": "partial", "arms": results, "diagnostics": diagnostics},
-                indent=2,
-            )
-            + "\n"
-        )
         runtime = self.runtime_probe(results["neural_ram"])
+        self.reused_calibration_partial = reused
         return results, diagnostics, runtime
 
     def calibration(self) -> dict[str, Any]:
@@ -834,6 +860,16 @@ class Experiment:
             "status": "completed",
             "seed": self.seed,
             "source": self.source(),
+            "reused_completed_partial": {
+                "used": bool(getattr(self, "reused_calibration_partial", False)),
+                "path": self.config["resource_budget"].get("calibration_reuse_partial"),
+                "sha256": self.config["resource_budget"].get(
+                    "calibration_reuse_partial_sha256"
+                ),
+                "scope": self.config["resource_budget"].get(
+                    "calibration_reuse_scope"
+                ),
+            },
             "arms": results,
             "diagnostics": diagnostics,
             "runtime_probe": runtime,

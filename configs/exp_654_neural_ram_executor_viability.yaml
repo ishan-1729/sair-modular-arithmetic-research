@@ -70,6 +70,10 @@ resource_budget:
   limit_units: [wall_seconds, aggregate_cpu_seconds]
   calibration_status: pending
   calibration_output: .scratch/exp-654-neural-ram-executor-viability/calibration.json
+  calibration_reuse_partial: .scratch/exp-654-neural-ram-executor-viability/calibration/partial.json
+  calibration_reuse_partial_sha256: e7da9c6987c1c25a61968c8238f8111cedf23e34e6201943d1ddbe9bc1f5ebab
+  calibration_reuse_runner_sha256: 391f1715433e53f430bb48bcaaf6f2272b68f586e2365fd821ea310b6c16bdf1
+  calibration_reuse_scope: completed arm training, normal evaluation, memory ablations, and randomized dependence; width256 timing incomplete
   calibration_hard_runaway_ceiling_wall_seconds: 1800
   calibration_hard_runaway_ceiling_aggregate_cpu_seconds: 7200
   projected_formal_wall_seconds: null
