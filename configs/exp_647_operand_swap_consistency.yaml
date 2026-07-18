@@ -53,7 +53,7 @@ calibration:
   paired_rollout_cases_per_width_per_arm: 4
 resource_budget:
   limit_units: [wall_seconds, aggregate_cpu_seconds]
-  calibration_status: pending
+  calibration_status: complete
   calibration_output: .scratch/exp-647-operand-swap-consistency/calibration.json
   throughput_safety_multiplier: 1.50
   setup_and_serialization_headroom_wall_seconds: 300
@@ -63,4 +63,33 @@ resource_budget:
   cache_completed_evaluation: true
   preserve_completed_arms: true
   fidelity_reduced: false
-  resolved: null
+  resolved:
+    calibration_output_sha256: a76feb8f06b5f08d13a310b32b8db08e14ce5d3b528183a5f3fdd36cbf8acfde
+    calibration_repository_commit: 43e9e6c397b9de25619de8b6cdfd24466a5fd46a
+    calibration_runner_sha256: 308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326
+    calibration_scientific_config_sha256: 903e770466bcfd131cff4b6639bf2e0649957c6895b348751b09a871f9fb24fa
+    calibration_dataset_sha256: 886a8d286c1c1bf571966ff9cdd1ed3e0f0d510668e34501bec71c0af58d2b2e
+    calibration_wall_seconds: 278.0807529039994
+    calibration_aggregate_cpu_seconds: 1088.398703972
+    calibration_peak_rss_bytes: 2797797376
+    formal_update_counts_by_width_per_arm: {64: 60, 128: 120, 256: 60}
+    component_projection:
+      paired_rollout_control:
+        projected_wall_seconds: 9904.223617396086
+        projected_aggregate_cpu_seconds: 39592.05759949062
+      confidence_consistency:
+        projected_wall_seconds: 8599.216639259394
+        projected_aggregate_cpu_seconds: 34367.426269632524
+    projected_formal_wall_seconds: 18504
+    projected_formal_aggregate_cpu_seconds: 73960
+    setup_and_serialization_headroom_wall_seconds: 300
+    setup_and_serialization_headroom_aggregate_cpu_seconds: 600
+    throughput_safety_multiplier: 1.50
+    soft_budget_wall_seconds: 28056
+    soft_budget_aggregate_cpu_seconds: 111540
+    hard_runaway_ceiling_wall_seconds: 42084
+    hard_runaway_ceiling_aggregate_cpu_seconds: 167310
+    cache_completed_training: true
+    cache_completed_evaluation: true
+    preserve_completed_arms: true
+    fidelity_reduced: false

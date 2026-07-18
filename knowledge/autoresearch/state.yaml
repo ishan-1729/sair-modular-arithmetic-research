@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T08:25:00+05:30
+updated_at: 2026-07-18T08:52:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,8 +36,8 @@ current_hypothesis:
   run_id: exp-647-operand-swap-consistency
   statement: Training Candidate 005's learned transition to agree across commuted operand trajectories can distill the proven conditional two-orientation gain into a stronger single-orientation trajectory without adding inference work.
   promotion_gate: Advance only if a separately preregistered matched control/challenger comparison recovers at least half of the independently confirmed conditional-route gain in single-orientation exact rollout, preserves Tier-5 retention and transition validity, and improves width-256 rollout without increasing candidate-shaped inference cost.
-  status: calibration-pending
-next_action: Commit the frozen EXP-647 runner, config, tests, and preregistration; then profile both complete orientations at widths 64/128/256, resolve separate wall and aggregate-CPU budgets from measured throughput, and commit that budget before formal training.
+  status: formal-ready
+next_action: Commit EXP-647's measured dynamic budget, then run all 240 updates and full width-64/128/256 evaluation for both matched arms. Preserve each completed training checkpoint and evaluation cache; do not shorten the five-hour component projection or reduce fidelity.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
