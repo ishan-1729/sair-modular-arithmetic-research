@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T06:05:00+05:30
+updated_at: 2026-07-18T06:39:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,8 +36,8 @@ current_hypothesis:
   run_id: exp-654-neural-ram-executor-viability
   statement: A trained addressable neural-RAM executor can retain prefix information that Candidate 005 loses at hard residue boundaries and thereby improve exact width extrapolation beyond decoded, wider-state, and non-addressable-workspace controls.
   promotion_gate: Advance only if the ordinary-initialized executor learns the trained-width surface, produces nonzero and materially higher exact width-32 rollout than every matched control, proves learned addressing and persistent memory causally active, preserves parameter provenance, and has a candidate-shaped CPU projection with headroom.
-  status: preregistration-required
-next_action: Preregister EXP-654's exact neural-RAM architecture, three matched controls, initialization provenance, causal memory ablations, seed streams, training fidelity, and calibration-first wall/aggregate-CPU budget before consuming evaluation evidence.
+  status: formal-ready
+next_action: Commit EXP-654's resolved resource budget, then train and fully evaluate all four matched arms on the untouched formal seed while preserving each completed arm and initialization/final checkpoint hash.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

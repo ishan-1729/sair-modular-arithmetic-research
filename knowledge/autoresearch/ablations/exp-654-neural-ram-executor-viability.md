@@ -2,10 +2,10 @@
 type: Experiment Preregistration
 title: EXP-654 learned neural-RAM executor viability
 description: Matched width-16/32 viability test of trained addressable memory against decoded and non-addressable recurrent controls.
-status: calibration-pending
+status: formal-ready
 tags: [autoresearch, neural-execution, neural-ram, memory, attention, width-transfer]
 timestamp: "2026-07-18T06:20:00+05:30"
-last_updated: "2026-07-18T06:20:00+05:30"
+last_updated: "2026-07-18T06:39:00+05:30"
 ---
 
 # EXP-654 learned neural-RAM executor viability
@@ -69,3 +69,11 @@ The calibration's 1,800 wall / 7,200 aggregate-CPU-second limits are runaway gua
 The first calibration launch reached no optimizer update or evaluation: split construction requested 96 unique primes in the width-8 band, which contains only 48. The process was terminated during input construction. The identity count is corrected to the already established EXP-620 value of 32 training plus 16 held-out primes, preserving all model, update, example, evaluation, seed, and decision-rule fidelity. The runner now checks the exact band capacity with SymPy `primepi` and fails explicitly rather than looping when a future request is infeasible. No calibration or formal result was consumed before this correction.
 
 The corrected calibration then completed all four 40-update training profiles, all normal evaluations, all three memory ablations at both widths, and randomized dependence before the direct width-256 timing call. That call failed because the new guard attempted exact `primepi` counting at a 256-bit bound, which SymPy does not support. Preserve the completed partial at SHA-256 `e7da9c6987c1c25a61968c8238f8111cedf23e34e6201943d1ddbe9bc1f5ebab`; its four final checkpoint hashes are recorded inside it. Limit exact capacity counting to widths at most 32, where the guard is needed and tractable, and hash-reuse the completed partial so the next calibration invocation runs only the missing direct timing probe and budget calculation. This changes no model, optimizer, input, evaluation, or diagnostic computation.
+
+### Resolved budget before formal execution
+
+The hash-verified resume completed the missing direct timing and budget calculation from clean commit `cb7f8ea3fa5e7b0e580742aba7ce3166827332f4`. The final calibration artifact has SHA-256 `571fabcb986a47f3b2c8ed34b7acb3cfceb0e606d0e4fdf164a64f915748b7d1`; its runner SHA-256 is `8e09a99915720c3386ec6bd4567e05583d16415ba2e5ed4c94552e88aa8d4a12`. The resume itself consumed 4.8687 wall and 2.8 aggregate CPU seconds with 382,930,944 peak RSS; completed component timings remain embedded in the reused partial and final calibration artifact.
+
+Scaling each arm's measured training and evaluation components, all memory/dependence diagnostics, and the direct runtime probe to the frozen formal work projects 6,632 wall seconds and 26,503 aggregate CPU seconds. The resolved soft allowance is 10,279 wall and 40,284 aggregate CPU seconds: 1.50 times the component projection plus 332 wall and 531 CPU seconds of setup/serialization allowance. Hard runaway ceilings are 15,419 wall and 60,426 aggregate CPU seconds, another 50% beyond soft. No update, example, case, arm, ablation, or width is reduced.
+
+One directly measured width-256 neural-RAM case takes 0.3201 wall and 1.29 aggregate CPU seconds at calibration weights, projecting 32.01 wall seconds for 100 Tier-7 cases. This is only a throughput calibration; the formal trained checkpoint receives its own four-case direct measurement and must still pass the 100-second gate.
