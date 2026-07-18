@@ -37,7 +37,7 @@ Exact big integers are permitted only in offline pair/prefix generation and eval
 
 ## Training and untouched evaluation
 
-The formal training stream is seed `20261055`; calibration uses distinct seed `20261056`. Generate 64 training and 32 held-out prime identities per width from the top four bits of each width band. Train 800 updates at width 8, 1,200 at width 12, and 2,000 at width 16, with batch size 64, AdamW, cosine decay, all-prefix BCE, worst-bit loss, and an additional final-prefix term. Each arm sees the same deterministic pair sequence.
+The formal training stream is seed `20261055`; calibration uses distinct seed `20261056`. Generate 32 training and 16 held-out prime identities per width from the top four bits of each width band. Train 800 updates at width 8, 1,200 at width 12, and 2,000 at width 16, with batch size 64, AdamW, cosine decay, all-prefix BCE, worst-bit loss, and an additional final-prefix term. Each arm sees the same deterministic pair sequence.
 
 Evaluate exact autonomous rollout on 300 held-out width-16 cases and 200 each at widths 24 and 32. Report all-prefix exactness, final exactness, invalid residues, first-error position, initialization/final hashes, learning curves, parameters, wall time, aggregate CPU, and peak RSS. Checked-public and prior independent answers remain unread.
 
@@ -64,3 +64,6 @@ The formal resource budget is unset until a complete calibration profiles all fo
 
 The calibration's 1,800 wall / 7,200 aggregate-CPU-second limits are runaway guards for a representative 160-arm-update workload plus evaluation, not a formal short cap. Formal fidelity will not be reduced to fit an arbitrary duration.
 
+### Pre-calibration correction
+
+The first calibration launch reached no optimizer update or evaluation: split construction requested 96 unique primes in the width-8 band, which contains only 48. The process was terminated during input construction. The identity count is corrected to the already established EXP-620 value of 32 training plus 16 held-out primes, preserving all model, update, example, evaluation, seed, and decision-rule fidelity. The runner now checks the exact band capacity with SymPy `primepi` and fails explicitly rather than looping when a future request is infeasible. No calibration or formal result was consumed before this correction.

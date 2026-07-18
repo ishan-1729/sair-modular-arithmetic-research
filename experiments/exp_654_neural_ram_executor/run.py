@@ -23,6 +23,7 @@ import torch
 import torch.nn.functional as F
 import yaml
 from safetensors.torch import load_file, save_file
+from sympy import primepi
 from torch import nn
 
 
@@ -103,9 +104,18 @@ def make_split(
     config: dict[str, Any], exp300, width: int, seed: int
 ) -> dict[str, list[int]]:
     data = config["data"]
+    minimum_bits = max(3, width - int(data["prime_bit_span"]) + 1)
+    low = 1 << (minimum_bits - 1)
+    high = 1 << width
+    requested = int(data["train_prime_identities"]) + int(data["test_prime_identities"])
+    available = int(primepi(high - 1) - primepi(low - 1))
+    if requested > available:
+        raise ValueError(
+            f"requested {requested} unique width-{width} primes but band contains {available}"
+        )
     local = {
         "data": {
-            "prime_bits_min": max(3, width - int(data["prime_bit_span"]) + 1),
+            "prime_bits_min": minimum_bits,
             "prime_bits_max": width,
             "train_prime_identities": int(data["train_prime_identities"]),
             "test_prime_identities": int(data["test_prime_identities"]),

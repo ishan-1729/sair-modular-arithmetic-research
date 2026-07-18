@@ -31,8 +31,8 @@ training:
   torch_threads: 4
 data:
   prime_bit_span: 4
-  train_prime_identities: 64
-  test_prime_identities: 32
+  train_prime_identities: 32
+  test_prime_identities: 16
   split_seed_offset: 654000
   training_pair_seed_offset: 654100
   evaluation_pair_seed_offset: 654200
@@ -84,4 +84,3 @@ resource_budget:
   cache_completed_arms: true
   preserve_completed_arms: true
   fidelity_reduced: false
-

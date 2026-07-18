@@ -121,7 +121,26 @@ def test_parameter_matching_and_frozen_config() -> None:
         (ROOT / "configs/exp_654_neural_ram_executor_viability.yaml").read_text()
     )
     assert config["training"]["total_steps"] == 4000
+    assert config["data"]["train_prime_identities"] == 32
+    assert config["data"]["test_prime_identities"] == 16
     assert config["data"]["calibration_seed"] != config["data"]["formal_seed"]
     assert config["resource_budget"]["calibration_status"] in {"pending", "complete"}
     assert config["resource_budget"]["fidelity_reduced"] is False
 
+
+def test_infeasible_prime_identity_request_fails_explicitly() -> None:
+    runner = load_module(
+        "exp654_runner_capacity_test",
+        ROOT / "experiments/exp_654_neural_ram_executor/run.py",
+    )
+    config = yaml.safe_load(
+        (ROOT / "configs/exp_654_neural_ram_executor_viability.yaml").read_text()
+    )
+    config["data"]["train_prime_identities"] = 64
+    config["data"]["test_prime_identities"] = 32
+    try:
+        runner.make_split(config, runner.load_exp300(), 8, 654)
+    except ValueError as error:
+        assert "band contains 48" in str(error)
+    else:
+        raise AssertionError("infeasible unique-prime request must fail")
