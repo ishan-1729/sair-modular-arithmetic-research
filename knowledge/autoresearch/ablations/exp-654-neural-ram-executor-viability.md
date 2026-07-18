@@ -2,10 +2,10 @@
 type: Experiment Preregistration
 title: EXP-654 learned neural-RAM executor viability
 description: Matched width-16/32 viability test of trained addressable memory against decoded and non-addressable recurrent controls.
-status: formal-ready
+status: completed
 tags: [autoresearch, neural-execution, neural-ram, memory, attention, width-transfer]
 timestamp: "2026-07-18T06:20:00+05:30"
-last_updated: "2026-07-18T06:39:00+05:30"
+last_updated: "2026-07-18T08:10:54+05:30"
 ---
 
 # EXP-654 learned neural-RAM executor viability
@@ -77,3 +77,11 @@ The hash-verified resume completed the missing direct timing and budget calculat
 Scaling each arm's measured training and evaluation components, all memory/dependence diagnostics, and the direct runtime probe to the frozen formal work projects 6,632 wall seconds and 26,503 aggregate CPU seconds. The resolved soft allowance is 10,279 wall and 40,284 aggregate CPU seconds: 1.50 times the component projection plus 332 wall and 531 CPU seconds of setup/serialization allowance. Hard runaway ceilings are 15,419 wall and 60,426 aggregate CPU seconds, another 50% beyond soft. No update, example, case, arm, ablation, or width is reduced.
 
 One directly measured width-256 neural-RAM case takes 0.3201 wall and 1.29 aggregate CPU seconds at calibration weights, projecting 32.01 wall seconds for 100 Tier-7 cases. This is only a throughput calibration; the formal trained checkpoint receives its own four-case direct measurement and must still pass the 100-second gate.
+
+## Formal result
+
+Reject the current formulation before scale-up. All four arms completed the frozen 4,000-update curriculum and every evaluation/ablation. The decoded control reaches 85.33% exact at trained width 16, while the parameter-matched wider decoded arm reaches 94.33%; both score zero exact at transfer widths 24 and 32. The non-addressable workspace and neural-RAM arms score zero exact at widths 16, 24, and 32, including zero final-prefix exactness on their last width-16 training batches.
+
+The neural-RAM registers move, but allocation is nearly uniform: width-16 normalized write entropy is 0.9996, maximum write probability is 0.1336 versus the 0.125 uniform baseline, and register-delta RMS is 0.0173. Reset, permutation, and uniform-allocation ablations change no exact outcomes. Trained and fully randomized neural-RAM checkpoints both score zero exact on the dependence diagnostic. Parameter matching and direct runtime pass; trained-width, extrapolation, causal-memory, nonuniform-addressing, validity, and weight-dependence gates fail.
+
+The full run consumes 5,220.24 wall and 20,716.37 aggregate CPU seconds with 1,183,764,480 peak RSS. This is below the 6,632/26,503 calibrated projection and within the 10,279/40,284 soft and 15,419/60,426 hard budgets. No fidelity was reduced. See the [result analysis](../analysis/exp-654-neural-ram-executor-viability.md), [canonical run record](../../../experiments/runs/exp-654-neural-ram-executor-viability/run.json), and [raw formal summary](../../../experiments/runs/exp-654-neural-ram-executor-viability/formal-summary.json).

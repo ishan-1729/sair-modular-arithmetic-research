@@ -1,0 +1,100 @@
+{
+  "run_id": "exp-654-neural-ram-executor-viability",
+  "created_at": "2026-07-18T02:40:54Z",
+  "status": "completed",
+  "seed": 20261055,
+  "config": "configs/exp_654_neural_ram_executor_viability.yaml",
+  "hypothesis": "Trained addressable registers and an append-only latent trace retain prefix information lost at hard residue boundaries and improve exact width extrapolation beyond decoded wider-state and non-addressable controls.",
+  "parent_run": "exp-643-tier7-recurrent-depth-stability-diagnostic",
+  "ab_group": "ordinary-initialized-decoded-wider-nonaddressable-neural-ram-viability",
+  "source": {
+    "repository_commit": "e886eb0774e9336358c3a16f224b1de1e661db69",
+    "repository_dirty_at_start": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "2cd6fbf621d23c5abf4234f68a1d7538a68ac097676843bfc97daeffd7f4a213",
+    "runner_sha256": "8e09a99915720c3386ec6bd4567e05583d16415ba2e5ed4c94552e88aa8d4a12",
+    "model_sha256": "3a91bbaa890364fc9f4da1f450be6085fbcd0344c003fa094e4a1fd3f26497fe",
+    "preregistration_sha256": "992ec8b8d092363bfd1de137bbd3a28441682f99be5490c3b2e8ec4e08b1b9cd",
+    "dataset_sha256": "bdb0e7d93a81ca7de805da779157d321133b93ea9e9424be73422d6dcd4b517a"
+  },
+  "arms": {
+    "decoded_control": {
+      "parameters": 41242,
+      "initial_checkpoint_sha256": "b2bb5d6b6241f34fe45962ba5b6cd714a6c0f82ebe9d76f9a7b7e203328671e6",
+      "checkpoint_sha256": "d6b91babd30aa2edfec8b5180b63798a53fd6bcb040d740b7d86c64782135734",
+      "width16_exact_accuracy": 0.8533333333333334,
+      "width24_exact_accuracy": 0.0,
+      "width32_exact_accuracy": 0.0
+    },
+    "decoded_wider": {
+      "parameters": 76244,
+      "initial_checkpoint_sha256": "f300e54985d2e0219c8db4dc7915e3406ecf7a7d36718e6f03af3781384a85fb",
+      "checkpoint_sha256": "2eb240ff1392e985969625672289e8ed9335bf0796d2cea8df1616049848c6f5",
+      "width16_exact_accuracy": 0.9433333333333334,
+      "width24_exact_accuracy": 0.0,
+      "width32_exact_accuracy": 0.0
+    },
+    "nonaddressable_workspace": {
+      "parameters": 74801,
+      "initial_checkpoint_sha256": "9ebeed58bd4f24246b42f4d4e88bf873201ce9b30e2386ea670e990f9f017359",
+      "checkpoint_sha256": "0d7d7ea2f90b4ce1196111d794c754a0bde6ea1bbd5ec1a0d7ae3fba4d93d945",
+      "width16_exact_accuracy": 0.0,
+      "width24_exact_accuracy": 0.0,
+      "width32_exact_accuracy": 0.0
+    },
+    "neural_ram": {
+      "parameters": 74865,
+      "initial_checkpoint_sha256": "9188c31d283e78c36e1dd41015e4ddcbe365e5cb64e8e0e4bc1877fb8185a7c6",
+      "checkpoint_sha256": "767fa2b11a1137548bc4ea9304dc192c1f4b1b053b426cf009f82b724de37557",
+      "width16_exact_accuracy": 0.0,
+      "width24_exact_accuracy": 0.0,
+      "width32_exact_accuracy": 0.0
+    }
+  },
+  "decision": {
+    "gates_passed": false,
+    "outcome": "reject-current-neural-ram-formulation-before-scale-up",
+    "reason": "The addressable and non-addressable latent models did not learn exact trained-width execution; memory interventions changed no exact outcomes and learned allocation stayed nearly uniform. The parameter-matched decoded control reached 94.33% at width 16 but had zero exact transfer to widths 24 and 32."
+  },
+  "resource": {
+    "wall_seconds": 5220.237044682999,
+    "aggregate_cpu_seconds": 20716.370000000003,
+    "peak_rss_bytes": 1183764480,
+    "projected_formal_wall_seconds": 6632,
+    "projected_formal_aggregate_cpu_seconds": 26503,
+    "soft_budget_wall_seconds": 10279,
+    "soft_budget_aggregate_cpu_seconds": 40284,
+    "hard_ceiling_wall_seconds": 15419,
+    "hard_ceiling_aggregate_cpu_seconds": 60426,
+    "fidelity_reduced": false
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_id": "2",
+    "parent_run_id": "5fc6fa3b51c24ca4bc52363d73362bd2",
+    "arm_run_ids": {
+      "decoded_control": "471e179f4d2c4379b548223ee4b18035",
+      "decoded_wider": "ceefc06de5594c918d370e85d5284419",
+      "nonaddressable_workspace": "607230ddd3554b13a9be0a69aaaaeeea",
+      "neural_ram": "396e2bbba2fd40f6972528085933223a"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-654-neural-ram-executor-viability/formal/neural_ram/weights.safetensors",
+    "calibration": {
+      "path": "experiments/runs/exp-654-neural-ram-executor-viability/calibration.json",
+      "sha256": "571fabcb986a47f3b2c8ed34b7acb3cfceb0e606d0e4fdf164a64f915748b7d1"
+    },
+    "formal_summary": {
+      "path": "experiments/runs/exp-654-neural-ram-executor-viability/formal-summary.json",
+      "sha256": "589ed09d23d08205178578208e68a488baef859ad81986cc9dd4e285de5c2167"
+    },
+    "metrics": "evals/results/exp-654-neural-ram-executor-viability/metrics.json"
+  },
+  "limitations": [
+    "Single formal training seed viability rung; a positive result would have required independent training-seed confirmation.",
+    "Fresh generated widths 16, 24, and 32 only; checked and prior independent answers were not read.",
+    "Exact Python arithmetic was confined to offline prefix labels and evaluation.",
+    "The width-256 runtime probe measured throughput, not exact accuracy."
+  ]
+}

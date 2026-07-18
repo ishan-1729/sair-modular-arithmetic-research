@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T06:39:00+05:30
+updated_at: 2026-07-18T08:10:54+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,11 +33,11 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
-  run_id: exp-654-neural-ram-executor-viability
-  statement: A trained addressable neural-RAM executor can retain prefix information that Candidate 005 loses at hard residue boundaries and thereby improve exact width extrapolation beyond decoded, wider-state, and non-addressable-workspace controls.
-  promotion_gate: Advance only if the ordinary-initialized executor learns the trained-width surface, produces nonzero and materially higher exact width-32 rollout than every matched control, proves learned addressing and persistent memory causally active, preserves parameter provenance, and has a candidate-shaped CPU projection with headroom.
-  status: formal-ready
-next_action: Commit EXP-654's resolved resource budget, then train and fully evaluate all four matched arms on the untouched formal seed while preserving each completed arm and initialization/final checkpoint hash.
+  run_id: exp-647-operand-swap-consistency
+  statement: Training Candidate 005's learned transition to agree across commuted operand trajectories can distill the proven conditional two-orientation gain into a stronger single-orientation trajectory without adding inference work.
+  promotion_gate: Advance only if a separately preregistered matched control/challenger comparison recovers at least half of the independently confirmed conditional-route gain in single-orientation exact rollout, preserves Tier-5 retention and transition validity, and improves width-256 rollout without increasing candidate-shaped inference cost.
+  status: preregistration-required
+next_action: Preregister EXP-647 with one changed training variable, fresh width-128/256 identities, matched optimizer examples, direct single-orientation runtime, and a dynamic wall/aggregate-CPU budget calibrated from measured throughput before any formal training.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -48,7 +48,7 @@ tracking:
   incumbent_model_version: "5"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: bd5e0c5
+  last_validated_commit: e886eb0
   dirty: true
 risks:
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
@@ -74,3 +74,5 @@ risks:
   - The fixed 40 percent conditional commutative route preserves 96.67 percent consumed accuracy with a 212.66-second projection; fresh confirmation is mandatory before integration.
   - The exact conditional route confirms at 97.2 percent on 500 fresh width-128 cases with 99.933 percent transition and 113.81-second projection; full candidate and wider-width gates remain outstanding.
   - EXP-643 preserves 99.7 percent width-256 transition accuracy but reaches only 22 and 32 percent autonomous rollout across two seeds; zero overthinking and sub-0.81 late gain proxies reject recurrent-depth instability as the primary supported cause.
+  - EXP-654's addressable neural RAM and non-addressable workspace both score zero exact even at trained width 16 after 4,000 updates; nearly uniform addressing and zero ablation/dependence drops reject the current latent-executor formulation before scale-up.
+  - EXP-654's parameter-matched decoded wider control improves trained-width exactness from 85.33 to 94.33 percent but still scores zero exact at widths 24 and 32, so added state capacity alone does not transfer.

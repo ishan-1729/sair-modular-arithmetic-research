@@ -49,3 +49,5 @@
 - [EXP-632 shared-core diverse output heads](exp-632-tier6-shared-core-diverse-output-heads.md) - exact-initialized complementary bootstrap head ensemble over the frozen core.
 - [EXP-633 hierarchical learned composition](exp-633-hierarchical-learned-composition-feasibility.md) - matched viability test of a shared binary latent-composition tree against sequential recurrence.
 - [EXP-634 direct relative attention](exp-634-direct-relative-attention-feasibility.md) - matched direct-product test of recurrent shared attention and dilated convolution with fixed position features.
+- [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability-diagnostic.md) - frozen width-128/256 mechanistic diagnosis of overthinking and recurrent stability.
+- [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - matched ordinary-initialized addressable-memory viability rung and controls.
