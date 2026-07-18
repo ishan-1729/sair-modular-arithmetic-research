@@ -2,10 +2,10 @@
 type: Experiment Preregistration
 title: EXP-643 Tier-7 recurrent-depth stability diagnostic
 description: Preregistered frozen-cell diagnostic of visit-wise stability and overthinking at widths 128 and 256.
-status: calibration-pending
+status: formal-ready
 tags: [autoresearch, tier7, recurrent-depth, stability, mechanistic-analysis]
-timestamp: "2026-07-18T06:10:00+05:30"
-last_updated: "2026-07-18T06:10:00+05:30"
+timestamp: "2026-07-18T05:20:00+05:30"
+last_updated: "2026-07-18T05:33:00+05:30"
 ---
 
 # EXP-643 Tier-7 recurrent-depth stability diagnostic
@@ -45,7 +45,14 @@ The formal budget is intentionally unset before calibration. Run the complete ca
 
 Calibration has an 1,800-second wall and 7,200 aggregate-CPU-second emergency ceiling. These are runaway guards for a small representative workload, not a formal comparison cap. Formal evaluation fidelity will not be reduced to fit a short wall clock. Valid checkpoint, generator, and evaluation caches are reused by their hashed inputs; each completed width/seed cell is written to recoverable partial evidence before the next begins.
 
+### Resolved budget before formal execution
+
+Calibration completed from clean commit `57baa0041b85ce84bf2d47b751f9dc3b2bfbbcbb` in 55.5729 wall seconds and 188.86 aggregate process-CPU seconds, with peak RSS 527,339,520 bytes. The ignored raw calibration evidence has SHA-256 `f89cd5792cdc4f5a8abc73aa85be3b3e4a56ef755d609a9ff270e23ad9a64e70`. Component-wise scaling to both formal seeds projects 2,325 wall seconds and 9,287 aggregate CPU seconds without headroom.
+
+The resolved soft budget is 3,604 wall seconds and 14,116 aggregate CPU seconds: 1.50 times the measured component projection plus 117 wall and 186 CPU seconds for setup and serialization. The hard runaway ceilings are 5,406 wall seconds and 21,174 aggregate CPU seconds. They provide an additional 50% beyond the soft allowance and do not alter the preregistered case counts.
+
+After calibration, the runner received one non-computational guard so a positive-over-zero diagnostic ratio is serialized as canonical finite JSON rather than `Infinity`. Calibration used runner SHA-256 `273600fd7bdf313fd1827335a33a9542c31367a4e225963764fdd7f5f810da65`; formal uses `ca7ac1acf7e3a7f784492127dd6deda88fc5465f47f50a309c064e5e8007a8d1`. The model path, sampled work, instrumentation, timers, and throughput calculation are unchanged, so the measured calibration remains valid.
+
 ## Compliance and limitations
 
 Python big integers are confined to fresh offline input generation, teachers, and evaluation. The frozen learned model receives only bit planes. No inference artifact changes, no public answers are read, and this mechanistic experiment cannot promote a submission by itself. A width-256 failure without the preregistered dynamic signature supports insufficient computation or representation just as plausibly as a training-distribution mismatch.
-

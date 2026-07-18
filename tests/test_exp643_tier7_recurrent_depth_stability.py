@@ -67,3 +67,9 @@ def test_random_direction_jacobian_proxy_is_finite() -> None:
     assert all(item["maximum_random_direction_gain"] >= 0.0 for item in result)
     assert all(torch.isfinite(torch.tensor(item["maximum_random_direction_gain"])) for item in result)
 
+
+def test_zero_denominator_ratio_remains_canonical_json_safe() -> None:
+    runner = load_runner()
+    assert runner._safe_ratio(1.0, 0.0) is None
+    assert runner._safe_ratio(0.0, 0.0) is None
+    assert runner._safe_ratio(3.0, 2.0) == 1.5

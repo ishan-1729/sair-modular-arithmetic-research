@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T05:30:00+05:30
+updated_at: 2026-07-18T05:33:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,8 +36,8 @@ current_hypothesis:
   run_id: exp-643-tier7-recurrent-depth-stability-diagnostic
   statement: Candidate 005's frozen width-shared cell fails at width 256 because recurrent-depth dynamics become unstable or overthink, which should be visible in visit-wise state/logit deltas, output flips, normalization statistics, and a tractable Jacobian spectral proxy.
   promotion_gate: Advance exactly one matched stability intervention only if fresh width-256 failures correlate reproducibly with unstable visit dynamics across two preregistered seeds while width-128 controls reproduce; otherwise reject stability as the primary cause and move to a learned-memory or materially different architecture track.
-  status: calibration-pending
-next_action: Commit the frozen EXP-643 protocol and runner, run the complete width-128/256 calibration stream, then document its measured wall and aggregate-CPU throughput with safety headroom before formal execution.
+  status: formal-ready
+next_action: Commit the resolved EXP-643 budget, then run both untouched formal seeds at the full preregistered transition, rollout, instrumented-rollout, and spectral fidelity while preserving each completed width/seed cell.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

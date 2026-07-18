@@ -571,7 +571,8 @@ def _safe_ratio(numerator: float | None, denominator: float | None) -> float | N
     if numerator is None or denominator is None:
         return None
     if denominator == 0.0:
-        return math.inf if numerator > 0.0 else 1.0
+        # Keep canonical JSON finite; the caller handles a positive-over-zero gate.
+        return None
     return numerator / denominator
 
 
@@ -615,10 +616,16 @@ def diagnose(cells: dict[str, dict[str, Any]], config: dict[str, Any]) -> dict[s
             and control["rollout"]["exact_accuracy"]
             >= float(gates["width128_minimum_rollout_accuracy"])
         )
+        overthinking_ratio_pass = (
+            (control_overthink == 0.0 and target_overthink > 0.0)
+            or (
+                overthink_ratio is not None
+                and overthink_ratio >= float(gates["overthinking_minimum_width_ratio"])
+            )
+        )
         overthinking_axis = (
             target_overthink >= float(gates["overthinking_minimum_error_fraction"])
-            and overthink_ratio is not None
-            and overthink_ratio >= float(gates["overthinking_minimum_width_ratio"])
+            and overthinking_ratio_pass
         )
         dynamics_axis = any(
             ratio is not None
@@ -635,6 +642,7 @@ def diagnose(cells: dict[str, dict[str, Any]], config: dict[str, Any]) -> dict[s
             "width128_overthinking_fraction_of_errors": control_overthink,
             "width256_overthinking_fraction_of_errors": target_overthink,
             "overthinking_width_ratio": overthink_ratio,
+            "overthinking_ratio_pass": overthinking_ratio_pass,
             "failure_success_late_flip_ratio": flip_ratio,
             "failure_success_late_state_delta_ratio": delta_ratio,
             "width128_late_spectral_gain": control_spectral,
