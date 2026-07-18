@@ -51,3 +51,4 @@
 - [EXP-634 direct relative attention](exp-634-direct-relative-attention-feasibility.md) - matched direct-product test of recurrent shared attention and dilated convolution with fixed position features.
 - [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability-diagnostic.md) - frozen width-128/256 mechanistic diagnosis of overthinking and recurrent stability.
 - [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - matched ordinary-initialized addressable-memory viability rung and controls.
+- [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - matched full-rollout distillation of proven commutative trajectory diversity into one orientation.
