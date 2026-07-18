@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T05:33:00+05:30
+updated_at: 2026-07-18T06:05:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,11 +33,11 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
-  run_id: exp-643-tier7-recurrent-depth-stability-diagnostic
-  statement: Candidate 005's frozen width-shared cell fails at width 256 because recurrent-depth dynamics become unstable or overthink, which should be visible in visit-wise state/logit deltas, output flips, normalization statistics, and a tractable Jacobian spectral proxy.
-  promotion_gate: Advance exactly one matched stability intervention only if fresh width-256 failures correlate reproducibly with unstable visit dynamics across two preregistered seeds while width-128 controls reproduce; otherwise reject stability as the primary cause and move to a learned-memory or materially different architecture track.
-  status: formal-ready
-next_action: Commit the resolved EXP-643 budget, then run both untouched formal seeds at the full preregistered transition, rollout, instrumented-rollout, and spectral fidelity while preserving each completed width/seed cell.
+  run_id: exp-654-neural-ram-executor-viability
+  statement: A trained addressable neural-RAM executor can retain prefix information that Candidate 005 loses at hard residue boundaries and thereby improve exact width extrapolation beyond decoded, wider-state, and non-addressable-workspace controls.
+  promotion_gate: Advance only if the ordinary-initialized executor learns the trained-width surface, produces nonzero and materially higher exact width-32 rollout than every matched control, proves learned addressing and persistent memory causally active, preserves parameter provenance, and has a candidate-shaped CPU projection with headroom.
+  status: preregistration-required
+next_action: Preregister EXP-654's exact neural-RAM architecture, three matched controls, initialization provenance, causal memory ablations, seed streams, training fidelity, and calibration-first wall/aggregate-CPU budget before consuming evaluation evidence.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -48,7 +48,7 @@ tracking:
   incumbent_model_version: "5"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: 765533e
+  last_validated_commit: bd5e0c5
   dirty: true
 risks:
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
@@ -73,3 +73,4 @@ risks:
   - Commutative operand swapping yields 97 percent fixed-selector accuracy and 98.33 percent oracle union on consumed width-128 cases, but unconditional double inference projects to 318.62 seconds and requires conditional routing.
   - The fixed 40 percent conditional commutative route preserves 96.67 percent consumed accuracy with a 212.66-second projection; fresh confirmation is mandatory before integration.
   - The exact conditional route confirms at 97.2 percent on 500 fresh width-128 cases with 99.933 percent transition and 113.81-second projection; full candidate and wider-width gates remain outstanding.
+  - EXP-643 preserves 99.7 percent width-256 transition accuracy but reaches only 22 and 32 percent autonomous rollout across two seeds; zero overthinking and sub-0.81 late gain proxies reject recurrent-depth instability as the primary supported cause.

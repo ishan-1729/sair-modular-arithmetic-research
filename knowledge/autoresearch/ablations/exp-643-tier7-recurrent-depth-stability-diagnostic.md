@@ -2,10 +2,10 @@
 type: Experiment Preregistration
 title: EXP-643 Tier-7 recurrent-depth stability diagnostic
 description: Preregistered frozen-cell diagnostic of visit-wise stability and overthinking at widths 128 and 256.
-status: formal-ready
+status: completed
 tags: [autoresearch, tier7, recurrent-depth, stability, mechanistic-analysis]
 timestamp: "2026-07-18T05:20:00+05:30"
-last_updated: "2026-07-18T05:33:00+05:30"
+last_updated: "2026-07-18T06:05:00+05:30"
 ---
 
 # EXP-643 Tier-7 recurrent-depth stability diagnostic
@@ -56,3 +56,7 @@ After calibration, the runner received one non-computational guard so a positive
 ## Compliance and limitations
 
 Python big integers are confined to fresh offline input generation, teachers, and evaluation. The frozen learned model receives only bit planes. No inference artifact changes, no public answers are read, and this mechanistic experiment cannot promote a submission by itself. A width-256 failure without the preregistered dynamic signature supports insufficient computation or representation just as plausibly as a training-distribution mismatch.
+
+## Result
+
+The full two-seed diagnostic completed without reduced fidelity and rejects stability as the primary supported cause. Width-256 transition/rollout exact accuracy is 99.75%/22% and 99.70%/32%. No instrumented error in either seed is an overthinking event. Failed/successful late flip ratios are 1.0305 and 1.0517, failed/successful late state-delta ratios are 1.0051 and 1.0174, and late random-direction gains stay below 0.81. The second width-128 control also misses retention at 81% rollout. None of the frozen axes reproduces, so EXP-644 and EXP-645 are not authorized from this diagnosis. Continue with the materially different learned-memory test in EXP-654. See the [analysis](../analysis/exp-643-tier7-recurrent-depth-stability.md) and [raw evidence](../../../experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/formal-summary.json).
