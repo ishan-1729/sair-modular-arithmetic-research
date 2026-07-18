@@ -636,3 +636,10 @@ runs:
     run_record: experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/run.json
     metrics: evals/results/exp-643-tier7-recurrent-depth-stability-diagnostic/metrics.json
     checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  - run_id: exp-654-neural-ram-executor-viability
+    status: planned
+    approach: matched-ordinary-initialized-addressable-neural-ram-viability
+    config: configs/exp_654_neural_ram_executor_viability.yaml
+    run_record: experiments/runs/exp-654-neural-ram-executor-viability/run.json
+    metrics: evals/results/exp-654-neural-ram-executor-viability/metrics.json
+    checkpoint: .scratch/exp-654-neural-ram-executor-viability/neural_ram/weights.safetensors
