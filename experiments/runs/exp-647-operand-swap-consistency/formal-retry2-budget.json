@@ -1,0 +1,103 @@
+{
+  "run_id": "exp-647-operand-swap-consistency",
+  "recorded_at": "2026-07-19T16:54:37+00:00",
+  "role": "cumulative-resource-watchdog-for-host-interrupted-formal-retry",
+  "binding_policy": "knowledge/autoresearch/program.md#resource-budget-policy",
+  "scientific_evidence": false,
+  "committed_full_run_budget": {
+    "projected_wall_seconds": 18504,
+    "projected_aggregate_cpu_seconds": 73960,
+    "soft_wall_seconds": 28056,
+    "soft_aggregate_cpu_seconds": 111540,
+    "hard_wall_seconds": 42084,
+    "hard_aggregate_cpu_seconds": 167310
+  },
+  "preserved_prior_work": {
+    "control": {
+      "status": "complete-training-and-full-evaluation-cache-valid",
+      "observed_wall_seconds": 8381.43,
+      "observed_aggregate_cpu_seconds": 33157.54,
+      "checkpoint_sha256": "b3c8c3f247f42dfe82d28732d3474737ac621ddffc116573fbe0145d3c292ac0",
+      "training_cache_key": "9145dbe16314ed9e09d00145dbbb8ef874211cf93b3828daf69c5ab87c1878df",
+      "evaluation_cache_key": "09ddf4ca0d562425a4c32002281eb0ee4dcd547c22ac23ed413e65561e63f5ee"
+    },
+    "first_interrupted_challenger": {
+      "last_logged_step": 180,
+      "observed_wall_seconds": 4744.45,
+      "aggregate_cpu_seconds": "not-durably-logged",
+      "conservative_aggregate_cpu_reserve_seconds": 31152.46,
+      "checkpoint": "none-resumable",
+      "scientific_result": "none"
+    },
+    "tmux_retry": {
+      "last_logged_step": 20,
+      "last_logged_training_wall_seconds": 727.25,
+      "conservative_total_wall_charge_seconds": 820,
+      "last_observed_aggregate_cpu_seconds": 3147,
+      "conservative_aggregate_cpu_reserve_seconds": 5000,
+      "log_mtime": "2026-07-19T14:05:29.6379694+00:00",
+      "termination_classification": "host-lifecycle-interruption-no-traceback-no-exit-marker",
+      "checkpoint": "none-resumable",
+      "scientific_result": "none"
+    }
+  },
+  "cumulative_accounting_before_retry2": {
+    "charged_wall_seconds": 13945.88,
+    "charged_aggregate_cpu_seconds": 69310,
+    "remaining_soft_wall_seconds": 14110.12,
+    "remaining_soft_aggregate_cpu_seconds": 42230,
+    "remaining_hard_wall_seconds": 28138.12,
+    "remaining_hard_aggregate_cpu_seconds": 98000
+  },
+  "remaining_challenger_projection": {
+    "wall_seconds": 8599.22,
+    "aggregate_cpu_seconds": 34367.43,
+    "projected_cumulative_wall_seconds": 22545.10,
+    "projected_cumulative_aggregate_cpu_seconds": 103677.43,
+    "within_committed_soft_budget": true
+  },
+  "retry2_watchdog": {
+    "alert_wall_seconds": 12000,
+    "alert_aggregate_cpu_seconds": 42000,
+    "hard_wall_seconds": 24000,
+    "hard_aggregate_cpu_seconds": 95000,
+    "service_runtime_max_seconds": 24120,
+    "service_stop_grace_seconds": 90,
+    "cumulative_hard_headroom_after_retry_ceiling_wall_seconds": 4138.12,
+    "cumulative_hard_headroom_after_retry_ceiling_aggregate_cpu_seconds": 3000,
+    "derivation": "The retry ceilings are computed from the committed cumulative hard budget after conservative charges for the valid control and both host-interrupted challenger attempts. They provide 2.79x wall and 2.76x aggregate-CPU headroom over the calibrated remaining challenger projection. The 42000-second CPU alert is below the 42230 seconds remaining before the committed cumulative soft CPU budget."
+  },
+  "persistence": {
+    "mechanism": "transient-systemd-user-service",
+    "service_unit": "sair-exp647-formal-retry2.service",
+    "restart_policy": "no",
+    "kill_mode": "control-group",
+    "user_manager_control_group": "/user.slice/user-1000.slice/user@1000.service",
+    "linger_enabled": false,
+    "scope": "Protects against Codex turn/session process-tree reaping; does not claim survival across WSL shutdown or host reboot."
+  },
+  "fidelity": {
+    "reduced": false,
+    "control_reused_from_valid_cache": true,
+    "challenger_restarts_from_frozen_initial": true,
+    "training_updates": 240,
+    "width_schedule": [64, 128, 256, 128],
+    "transition_cases_by_width": {"64": 1000, "128": 3000, "256": 3000},
+    "paired_rollout_cases_by_width": {"64": 300, "128": 300, "256": 200},
+    "orientations": ["original", "swapped"],
+    "challenger_determinism_check": true
+  },
+  "integrity": {
+    "pre_retry_commit": "ad47e718abbe9ac5263c920164fc606c960e65aa",
+    "runner_sha256": "308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326",
+    "config_sha256": "d216ceaaedf2be11fbb4e3e82a3b841d1922913e87114beec77901dc052ac91f",
+    "scientific_config_sha256": "903e770466bcfd131cff4b6639bf2e0649957c6895b348751b09a871f9fb24fa",
+    "calibration_sha256": "a76feb8f06b5f08d13a310b32b8db08e14ce5d3b528183a5f3fdd36cbf8acfde",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "limitations": [
+    "The first interrupted challenger's aggregate CPU time was not durably logged, so it is charged conservatively.",
+    "Neither interrupted challenger produced a resumable checkpoint or scientific result; retry2 restarts all 240 updates from the frozen initial checkpoint.",
+    "The transient user service protects against terminal and Codex-turn process reaping, not a WSL shutdown or host reboot."
+  ]
+}
