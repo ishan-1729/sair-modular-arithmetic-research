@@ -2,6 +2,8 @@ name: Validate research workspace
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 permissions:
@@ -13,6 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          lfs: true
           submodules: recursive
       - uses: actions/setup-python@v5
         with:
