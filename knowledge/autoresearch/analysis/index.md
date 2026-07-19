@@ -7,3 +7,4 @@
 - [Tier-4 distribution gap](tier4-distribution-gap.md) - causal official-distribution correction and remaining rollout drift.
 - [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability.md) - two-seed evidence rejects recurrent-depth instability as the primary width-256 failure cause.
 - [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - full matched evidence rejects the current addressable and non-addressable latent formulations.
+- [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - full-fidelity matched evidence rejects the frozen consistency loss; only retention and determinism pass.

@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-18T08:52:00+05:30
+updated_at: 2026-07-20T01:45:47+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,8 +36,9 @@ current_hypothesis:
   run_id: exp-647-operand-swap-consistency
   statement: Training Candidate 005's learned transition to agree across commuted operand trajectories can distill the proven conditional two-orientation gain into a stronger single-orientation trajectory without adding inference work.
   promotion_gate: Advance only if a separately preregistered matched control/challenger comparison recovers at least half of the independently confirmed conditional-route gain in single-orientation exact rollout, preserves Tier-5 retention and transition validity, and improves width-256 rollout without increasing candidate-shaped inference cost.
-  status: formal-ready
-next_action: Commit EXP-647's measured dynamic budget, then run all 240 updates and full width-64/128/256 evaluation for both matched arms. Preserve each completed training checkpoint and evaluation cache; do not shorten the five-hour component projection or reduce fidelity.
+  status: completed-rejected
+  result: Confidence consistency regressed original rollout by 1.667 points at width 128 and 2.5 points at width 256; only width-64 retention and determinism passed. No Tier-7 or candidate promotion.
+next_action: PM evidence-driven selection of the next hypothesis; none is preregistered or authorized by EXP-647's negative result.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -48,8 +49,10 @@ tracking:
   incumbent_model_version: "5"
 git:
   branch: agent/submission-ready-horner-tcn9
-  last_validated_commit: e886eb0
-  dirty: true
+  formal_source_commit: 94a3f63d429ea5024852197bbf02eeedac25ae5c
+  formal_source_dirty: false
+  last_validated_commit: 94a3f63d429ea5024852197bbf02eeedac25ae5c
+  dirty: false
 risks:
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
   - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
@@ -76,3 +79,4 @@ risks:
   - EXP-643 preserves 99.7 percent width-256 transition accuracy but reaches only 22 and 32 percent autonomous rollout across two seeds; zero overthinking and sub-0.81 late gain proxies reject recurrent-depth instability as the primary supported cause.
   - EXP-654's addressable neural RAM and non-addressable workspace both score zero exact even at trained width 16 after 4,000 updates; nearly uniform addressing and zero ablation/dependence drops reject the current latent-executor formulation before scale-up.
   - EXP-654's parameter-matched decoded wider control improves trained-width exactness from 85.33 to 94.33 percent but still scores zero exact at widths 24 and 32, so added state capacity alone does not transfer.
+  - EXP-647's endpoint consistency retains width-64 and is deterministic but regresses original width-128/256 rollout by 1.67/2.5 points, misses transition, validity, and runtime gates, and does not authorize Tier-7 or candidate promotion.

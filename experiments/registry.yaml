@@ -644,7 +644,7 @@ runs:
     metrics: evals/results/exp-654-neural-ram-executor-viability/metrics.json
     checkpoint: .scratch/exp-654-neural-ram-executor-viability/formal/neural_ram/weights.safetensors
   - run_id: exp-647-operand-swap-consistency
-    status: planned
+    status: completed-rejected
     approach: matched-confidence-routed-commutative-endpoint-consistency
     config: configs/exp_647_operand_swap_consistency.yaml
     run_record: experiments/runs/exp-647-operand-swap-consistency/run.json

@@ -5,7 +5,7 @@ description: Ranking-aware, compute-bounded queue of falsifiable model experimen
 status: active
 tags: [autoresearch, backlog, hypotheses]
 timestamp: "2026-07-12T02:20:00+05:30"
-last_updated: "2026-07-18T08:10:54+05:30"
+last_updated: "2026-07-20T01:45:47+05:30"
 ---
 
 # Autoresearch hypothesis backlog
@@ -52,7 +52,7 @@ The user-supplied `super_transformers.md` synthesis adds a broad recurrent-depth
 
 ### Paper-derived experiment queue
 
-These IDs reserve hypotheses; each remains `planned` until its primary sources, exact changed variable, matched control, seeds, and dynamic resource budget are separately preregistered. EXP-643 rejected instability as the primary cause, so EXP-644/645 are closed unless new causal evidence reopens them. EXP-654 has now rejected its addressable and non-addressable latent formulations at the trained-width viability rung. EXP-647 is next because it operates on the strong incumbent lineage and targets an independently confirmed accuracy mechanism without extra inference work.
+These IDs reserve hypotheses; each remains `planned` until its primary sources, exact changed variable, matched control, seeds, and dynamic resource budget are separately preregistered. EXP-643 rejected instability as the primary cause, so EXP-644/645 are closed unless new causal evidence reopens them. EXP-654 rejected its addressable and non-addressable latent formulations at the trained-width viability rung. EXP-647 subsequently rejected the frozen endpoint-consistency formulation. The next hypothesis is deliberately unselected pending PM evidence-driven review.
 
 | Priority | ID | Falsifiable experiment | Matched control and primary measurements | Advance / stop rule |
 |---:|---|---|---|---|
@@ -61,7 +61,7 @@ These IDs reserve hypotheses; each remains `planned` until its primary sources, 
 | closed | EXP-645 | Test STARS-style spectral stability regularization during width-128/256 training as a separate A/B from residual scaling. | Same initialization, batches, optimizer work, and evaluation; log spectral proxy and gradient/activation norms. | Not authorized: EXP-643's spectral proxy stayed contractive and did not associate with failure. |
 | completed control | EXP-646 | Add an explicit width-independent latent workspace to the cellular transition and compare it with a parameter-matched wider hidden-state control. | Co-trained inside EXP-654 with identical prefix trajectories and optimizer work. | Rejected at zero exact width-16 rollout versus 94.33% for the wider decoded control. |
 | completed | EXP-654 | Train a neural-RAM executor with persistent learned registers, an append-only latent trace, and low-dimensional learned read/write attention from ordinary initialization at widths 16/32; compare it with Candidate-005-style decoded recurrence, a parameter-matched wider-state control, and a co-trained non-addressable EXP-646 workspace. | All four arms completed 4,000 updates and full width-16/24/32 evaluation, causal memory ablations, randomized dependence, and direct width-256 timing. | Rejected: neural RAM and workspace score zero exact at trained width; address allocation is nearly uniform and causal-memory/dependence gates fail. |
-| 1 | EXP-647 | Train operand-swap full-rollout consistency so one orientation distills the useful symmetry currently obtained by Candidate 005's conditional second pass. | Candidate 005 transition checkpoint with and without consistency loss; identical labels, pairs, steps, and fresh width-128/256 evaluation. | Require single-orientation accuracy to recover at least half the confirmed conditional-route gain, preserve Tier 5, improve width-256 rollout, and reduce projected inference work. |
+| completed-rejected | EXP-647 | Train operand-swap full-rollout consistency so one orientation distills the useful symmetry currently obtained by Candidate 005's conditional second pass. | Full matched seed-20261057 evidence: original gains +0.333/-1.667/-2.500 points at widths 64/128/256; selected 99.667%/93.667%/40.000%. | Rejected: only width-64 retention and determinism pass; no Tier-7 or candidate promotion. |
 | 3 | EXP-648 | Apply structured denoising/shortcut consistency to model-generated near-trajectory states rather than arbitrary bit corruption. | Clean-trajectory control, identical update count and mined source trajectories; report recovery and newly introduced drift separately. | Require +3 width-256 rollout points and no increase in first-error rate; stop on the direction of EXP-610's collapse. |
 | 3 | EXP-649 | Measure stochastic frozen-trajectory breadth using bounded latent/noise perturbations, then test a target-free convergence/margin selector only if oracle coverage is sufficient. | Greedy and commuted Candidate 005 paths on paired cases; identical checkpoint and fixed noise seeds. | Do not train a selector unless fresh oracle coverage exceeds 90% and the measured candidate-shaped path fits the 285-second envelope with headroom. |
 | 4 | EXP-650 | Compare the ConvGRU cell with a proper library-backed Mamba-2 or linear state-space hybrid at matched parameters and measured CPU. | Same bit planes, training pairs, optimizer examples, width bands, and exact rollout evaluation. | Continue only if the hybrid learns the trained-width surface and improves exact rollout per wall second; training loss alone cannot pass. |

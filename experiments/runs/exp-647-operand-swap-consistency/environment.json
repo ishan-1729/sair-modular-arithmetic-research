@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-07-19T20:15:47+00:00",
+  "capture_timing": "after-formal-completion",
+  "formal_completed_at": "2026-07-19T20:07:10+00:00",
+  "environment": "Ubuntu-24.04 under WSL2",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "cpu": "Intel(R) Core(TM) Ultra 7 155H",
+  "logical_cpus": 22,
+  "formal_configured_torch_threads": 4,
+  "formal_configured_torch_interop_threads": 1,
+  "post_run_capture_default_torch_threads": 11,
+  "post_run_capture_default_torch_interop_threads": 11,
+  "python": "3.12.3",
+  "pytorch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "safetensors": "0.8.0",
+  "numpy": "2.5.1",
+  "virtual_environment": "/home/ishan/.venvs/sair-mod-challenge",
+  "note": "Environment metadata was captured 8 minutes 37 seconds after the formal process exited; it describes the unchanged project venv used by the run. Runtime provenance is additionally bound by source and artifact hashes."
+}

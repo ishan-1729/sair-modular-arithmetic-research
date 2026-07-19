@@ -2,10 +2,10 @@
 type: Experiment Preregistration
 title: EXP-647 operand-swap endpoint consistency
 description: Matched full-rollout test of confidence-routed commutative consistency on the frozen Candidate-005 cellular lineage.
-status: formal-ready
+status: completed-rejected
 tags: [autoresearch, tier7, commutativity, consistency, distillation, full-rollout]
 timestamp: "2026-07-18T08:25:00+05:30"
-last_updated: "2026-07-18T08:52:00+05:30"
+last_updated: "2026-07-20T01:45:47+05:30"
 ---
 
 # EXP-647 operand-swap endpoint consistency
@@ -58,3 +58,11 @@ The clean calibration at repository commit `43e9e6c397b9de25619de8b6cdfd24466a5f
 Componentwise scaling to 60 width-64, 120 width-128, and 60 width-256 updates per arm plus every declared transition, paired rollout, and determinism case projects 18,504 wall seconds and 73,960 aggregate CPU seconds. The control contributes 9,904.22 projected wall / 39,592.06 CPU seconds and the consistency arm 8,599.22 / 34,367.43; the difference is measured throughput noise, not an unequal formal allowance.
 
 Applying 1.50 throughput headroom plus 300 wall and 600 aggregate-CPU seconds for setup, hashing, MLflow, checkpointing, and serialization gives soft budgets of 28,056 wall and 111,540 aggregate CPU seconds. The hard runaway ceilings are 42,084 wall and 167,310 aggregate CPU seconds, another 1.50 beyond soft. These limits are deliberately long enough for the matched five-hour projection to finish. No training step, batch row, width, orientation, transition, rollout, determinism case, or diagnostic is reduced.
+
+## Formal outcome
+
+The full-fidelity seed-`20261057` comparison completed successfully and rejects the frozen consistency formulation. Challenger original-orientation exact rollout is 96.333%/76.333%/25.000% at widths 64/128/256 versus 96.000%/78.000%/27.500% for the matched control: gains of +0.333/-1.667/-2.500 points. Challenger transition accuracy is 99.900%/99.7333%/99.5667%; original invalid rates are 0.333%/0.333%/1.500%. Selected exactness is 99.667%/93.667%/40.000%, oracle union is 99.667%/95.333%/47.500%, and exact determinism passes. Width-256 original inference projects to 131.313 seconds per 100 cases, above the 100-second gate.
+
+Only width-64 retention and determinism pass. No Tier-7 or candidate promotion is authorized. Candidate 005 remains the incumbent at 59.5% checked / 59.3% independent overall, and the program completion gate remains unmet. The [analysis](../analysis/exp-647-operand-swap-consistency.md) links the canonical full summary and paired case evidence.
+
+Retry 3 itself consumed 5,141.599420917999 wall / 20,465.856237935 aggregate process-CPU seconds. Cumulative accounting, including the valid frozen control cache and conservative charges for three host-interrupted attempts with no scientific result, is 20,337.479420917996 wall / 95,775.856237935 aggregate-CPU seconds. This leaves 7,718.520579082004 / 15,764.143762065 seconds of soft wall/CPU headroom. Evaluation fidelity was not reduced. Cross-run cached-control versus challenger timings are not a causal speed comparison; only the challenger's absolute runtime gate is interpreted.
