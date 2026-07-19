@@ -334,14 +334,24 @@ function Get-TaskStatusRecord {
         -ExpectedArguments $ExpectedArguments `
         -ExpectedLimit $ExpectedLimit
     $info = Get-ScheduledTaskInfo -TaskPath $TaskPath -TaskName $TaskName
+    $lastRunTime = if ($null -eq $info.LastRunTime) {
+        $null
+    } else {
+        $info.LastRunTime.ToString("o")
+    }
+    $nextRunTime = if ($null -eq $info.NextRunTime) {
+        $null
+    } else {
+        $info.NextRunTime.ToString("o")
+    }
     $record = [ordered]@{
         task_name = $TaskName
         task_path = $task.TaskPath
         kind = $Kind.ToLowerInvariant()
         state = [string]$task.State
-        last_run_time = $info.LastRunTime.ToString("o")
+        last_run_time = $lastRunTime
         last_task_result = [int64]$info.LastTaskResult
-        next_run_time = $info.NextRunTime.ToString("o")
+        next_run_time = $nextRunTime
         launcher_sha256 = Get-CurrentLauncherHash
         executable = $task.Actions[0].Execute
         arguments = $task.Actions[0].Arguments
