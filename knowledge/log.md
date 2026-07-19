@@ -41,3 +41,7 @@
 - **Architecture portfolio**: Promoted a compliant learned neural-RAM challenger using trained persistent registers, append-only latent traces, learned read/write addressing, and low-dimensional retrieval; compiled interpreters, solver programs, and constructed execution weights remain prohibited.
 - **Experiment queue**: Reserved EXP-654 for a matched neural-executor comparison against decoded cellular recurrence, a wider-state control, and a non-addressable workspace, with causal memory, exact rollout, provenance, and CPU gates.
 - **Tier-6 promotion**: Candidate 005 scores 59.3% on the complete independent set and 59.5% checked, with Tier 6 at 98%/96%; five Tier-6 seeds aggregate to 487/500 with a 95% minimum. Static, isolation, determinism, randomized-weight, artifact, and pinned-container gates pass at 156.0-second inference. Candidate 005 becomes the intermediate incumbent, while the 85% Goal remains unmet and Tier 7 becomes the active frontier.
+
+## 2026-07-19
+
+- **Paper library**: Added a deduplicated 86-PDF private corpus covering the Super Transformers core and extended references, the supplied deep-research memo, experiment-driving research, repository-design literature, and the official SAIR bibliography; all 2,053 pages and 303,535,487 bytes have managed-Chromium provenance, SHA-256 coverage, parser verification, and Poppler first-page renders.

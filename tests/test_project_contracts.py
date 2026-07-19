@@ -7,6 +7,7 @@ from tools.validate_project import (
     validate_dataset,
     validate_knowledge,
     validate_release_boundary,
+    validate_research_library,
     validate_submission_artifact,
     validate_upstream_snapshot,
 )
@@ -23,6 +24,10 @@ def test_okf_knowledge_bundle_is_valid() -> None:
 def test_public_benchmark_metadata_and_hashes_are_valid() -> None:
     assert validate_dataset() == []
     assert validate_checksum_file() == []
+
+
+def test_research_paper_library_is_frozen_and_verified() -> None:
+    assert validate_research_library() == []
 
 
 def test_official_source_is_pinned() -> None:

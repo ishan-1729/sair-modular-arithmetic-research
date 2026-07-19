@@ -18,3 +18,9 @@ The project-authored `knowledge/` hierarchy follows the structural conventions o
 ## Other standards
 
 RO-Crate, Croissant, Data Cards, Model Cards, Data Package, and Cookiecutter Data Science are used as design references. Their names and schemas remain subject to their respective projects' terms.
+
+## Research paper library
+
+The PDFs under `research/papers/` are third-party scholarly works retrieved from the primary arXiv, publisher, or scholarly-article pages recorded in `research/manifest.json`. They are retained for private research and provenance; copyright and license terms remain with each paper's authors and publisher. Public access to a source does not grant a blanket right to redistribute the complete corpus.
+
+`distill-2020-growing-neural-cellular-automata.pdf` is a managed-Chromium print rendering of the interactive Distill article at <https://distill.pub/2020/growing-ca/> because that publication does not expose a canonical article PDF. The manifest labels this exception as `browser_print`.

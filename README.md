@@ -9,6 +9,7 @@ The repository contains a submission-ready 470,049-parameter learned TCN/cellula
 - [Knowledge bundle](knowledge/index.md) — the OKF v0.1-compatible project map.
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
+- [Research paper library](knowledge/research/paper-library.md) — core reading order, complete PDF inventory, provenance, and verification.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
 - [Submission candidate](knowledge/submissions/candidate-005-tier6-conditional-cellular.md) — current model card, compliance rationale, release state, and hashes.
 - [Full-set evaluation](knowledge/evals/candidate-005-results.md) — independent, checked, pinned-runtime, five-seed, and perturbation results.
@@ -33,6 +34,7 @@ data/            immutable external data, generated/interim/processed zones, Cro
 evals/           evaluation configs, result schemas, and durable result artifacts
 experiments/     machine-readable registry and one directory per run
 pocs/            executable proofs of concept and reference checkpoints
+research/        versioned paper PDFs, source registry, hashes, and parser verification
 submission/      clean three-file Hugging Face release artifact
 sources/         captured SAIR pages, research memo, and pinned official-repo submodule
 tests/           fast contract and regression tests
