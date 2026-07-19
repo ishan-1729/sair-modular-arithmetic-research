@@ -45,6 +45,12 @@ def test_ci_hydrates_lfs_papers_without_duplicate_branch_runs() -> None:
     )
     assert checkout["with"]["lfs"] == "true"
     assert checkout["with"]["submodules"] == "recursive"
+    install = next(
+        step
+        for step in workflow["jobs"]["validate"]["steps"]
+        if step.get("name") == "Install project"
+    )
+    assert install["run"] == 'python -m pip install -e ".[dev,research]"'
 
 
 def test_official_source_is_pinned() -> None:
