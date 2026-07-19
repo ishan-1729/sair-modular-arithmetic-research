@@ -1,0 +1,127 @@
+{
+  "run_id": "exp-647-operand-swap-consistency",
+  "recorded_at": "2026-07-19T17:44:07+00:00",
+  "role": "cumulative-resource-watchdog-for-windows-owned-formal-retry",
+  "binding_policy": "knowledge/autoresearch/program.md#resource-budget-policy",
+  "scientific_evidence": false,
+  "committed_full_run_budget": {
+    "projected_wall_seconds": 18504,
+    "projected_aggregate_cpu_seconds": 73960,
+    "soft_wall_seconds": 28056,
+    "soft_aggregate_cpu_seconds": 111540,
+    "hard_wall_seconds": 42084,
+    "hard_aggregate_cpu_seconds": 167310
+  },
+  "preserved_prior_work": {
+    "control": {
+      "status": "complete-training-and-full-evaluation-cache-valid",
+      "observed_wall_seconds": 8381.43,
+      "observed_aggregate_cpu_seconds": 33157.54,
+      "checkpoint_sha256": "b3c8c3f247f42dfe82d28732d3474737ac621ddffc116573fbe0145d3c292ac0",
+      "training_cache_key": "9145dbe16314ed9e09d00145dbbb8ef874211cf93b3828daf69c5ab87c1878df",
+      "training_cache_sha256": "bb973255165e79e153e6d7540e60be16be1ec69847ee5691b76411355af955ba",
+      "evaluation_cache_key": "09ddf4ca0d562425a4c32002281eb0ee4dcd547c22ac23ed413e65561e63f5ee",
+      "evaluation_cache_sha256": "eaecdc2b168abb49e8db175f6d1845835e46bf02efec0572447b479d94216357"
+    },
+    "first_interrupted_challenger": {
+      "last_logged_step": 180,
+      "observed_wall_seconds": 4744.45,
+      "aggregate_cpu_seconds": "not-durably-logged",
+      "conservative_aggregate_cpu_reserve_seconds": 31152.46,
+      "checkpoint": "none-resumable",
+      "scientific_result": "none"
+    },
+    "tmux_retry": {
+      "last_logged_step": 20,
+      "conservative_total_wall_charge_seconds": 820,
+      "conservative_aggregate_cpu_reserve_seconds": 5000,
+      "termination_classification": "codex-turn-process-tree-reaping",
+      "checkpoint": "none-resumable",
+      "scientific_result": "none"
+    },
+    "systemd_user_service_retry": {
+      "last_logged_step": 40,
+      "last_logged_training_wall_seconds": 1051.08,
+      "conservative_total_wall_charge_seconds": 1250,
+      "last_observed_aggregate_cpu_seconds": 4555,
+      "conservative_aggregate_cpu_reserve_seconds": 6000,
+      "termination_classification": "wsl-instance-shutdown-removed-user-manager-and-transient-unit",
+      "checkpoint": "none-resumable",
+      "scientific_result": "none"
+    }
+  },
+  "cumulative_accounting_before_retry3": {
+    "charged_wall_seconds": 15195.88,
+    "charged_cpu_seconds": 75310,
+    "cpu_scope": "aggregate process CPU time across the runner's compute threads, plus conservative reserves for interrupted attempts"
+  },
+  "remaining_before_retry3": {
+    "soft_wall_seconds": 12860.12,
+    "soft_cpu_seconds": 36230,
+    "hard_wall_seconds": 26888.12,
+    "hard_cpu_seconds": 92000
+  },
+  "remaining_challenger_projection": {
+    "wall_seconds": 8599.22,
+    "cpu_seconds": 34367.43,
+    "within_committed_soft_budget": true
+  },
+  "projected_cumulative_at_completion": {
+    "wall_seconds": 23795.10,
+    "cpu_seconds": 109677.43
+  },
+  "retry3_limits": {
+    "alert_wall_seconds": 11000,
+    "alert_cpu_seconds": 36000,
+    "hard_wall_seconds": 22000,
+    "hard_cpu_seconds": 88000,
+    "termination_grace_seconds": 90,
+    "cumulative_hard_headroom_after_retry_ceiling_wall_seconds": 4888.12,
+    "cumulative_hard_headroom_after_retry_ceiling_cpu_seconds": 4000,
+    "derivation": "The retry ceilings are computed from the committed cumulative hard budget after conservative charges for the valid control and all three host-interrupted challenger attempts. They provide 2.56x wall and 2.56x process-CPU headroom over the calibrated remaining challenger projection. Alerts remain below the cumulative soft-budget remainder. The runner is a single compute process whose process CPU clock aggregates its PyTorch worker threads; its only subprocess is a bounded metadata-only Git query."
+  },
+  "persistence": {
+    "mechanism": "windows-task-scheduler-owned-wsl-client",
+    "formal_task_name": "SAIR-EXP647-Formal-Retry3",
+    "probe_task_name": "SAIR-EXP647-Persistence-Probe",
+    "principal_sid": "S-1-5-21-758172506-2016610370-2094743824-1001",
+    "logon_type": "Interactive",
+    "run_level": "Limited",
+    "stored_password": false,
+    "triggered": false,
+    "restart_count": 0,
+    "multiple_instances": "IgnoreNew",
+    "task_execution_limit_seconds": 22200,
+    "orchestration_headroom_seconds_after_timeout_and_kill_grace": 110,
+    "allow_start_on_battery": true,
+    "stop_on_battery_transition": false,
+    "executable": "C:\\Windows\\System32\\wsl.exe",
+    "arguments": "-d Ubuntu-24.04 -- bash /mnt/d/Projects/SAIR_mod_challenge/experiments/runs/exp-647-operand-swap-consistency/run-formal-retry3.sh",
+    "scope": "Task Scheduler owns the attached wsl.exe client so a Codex shell/turn exit cannot leave WSL without a Windows-side client. No survival claim is made for host reboot or user sign-out."
+  },
+  "full_fidelity": {
+    "reduced": false,
+    "control_reused_from_valid_cache": true,
+    "challenger_restarts_from_frozen_initial": true,
+    "steps": 240,
+    "width_schedule": [64, 128, 256, 128],
+    "transition_cases_by_width": {"64": 1000, "128": 3000, "256": 3000},
+    "paired_rollout_cases_by_width": {"64": 300, "128": 300, "256": 200},
+    "orientations": ["original", "swapped"],
+    "challenger_determinism_check": true
+  },
+  "integrity": {
+    "pre_retry_commit": "14ed4e50d00832ed88948cefadec20fe039a6cb3",
+    "runner_sha256": "308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326",
+    "config_sha256": "d216ceaaedf2be11fbb4e3e82a3b841d1922913e87114beec77901dc052ac91f",
+    "scientific_config_sha256": "903e770466bcfd131cff4b6639bf2e0649957c6895b348751b09a871f9fb24fa",
+    "calibration_sha256": "a76feb8f06b5f08d13a310b32b8db08e14ce5d3b528183a5f3fdd36cbf8acfde",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "limitations": [
+    "Interrupted attempts without durable CPU telemetry are charged conservatively.",
+    "No interrupted challenger produced a resumable checkpoint or scientific result; retry3 restarts all 240 updates from the frozen initial checkpoint.",
+    "The Task Scheduler design must pass a separate harmless cross-invocation persistence probe before formal registration or launch.",
+    "Interactive logon does not survive user sign-out or host reboot; those remain explicit external stop conditions."
+  ]
+}
