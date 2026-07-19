@@ -8,3 +8,4 @@
 - [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability.md) - two-seed evidence rejects recurrent-depth instability as the primary width-256 failure cause.
 - [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - full matched evidence rejects the current addressable and non-addressable latent formulations.
 - [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - full-fidelity matched evidence rejects the frozen consistency loss; only retention and determinism pass.
+- [EXP-649 calibration-seed retirement](exp-649-calibration-seed-retirement.md) - retires root 20261148 after a parity test computed labels in memory and records the audited replacement/root-role boundary.

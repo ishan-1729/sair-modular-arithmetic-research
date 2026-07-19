@@ -650,3 +650,8 @@ runs:
     run_record: experiments/runs/exp-647-operand-swap-consistency/run.json
     metrics: evals/results/exp-647-operand-swap-consistency/metrics.json
     checkpoint: .scratch/exp-647-operand-swap-consistency/formal/confidence_consistency/weights.safetensors
+  - run_id: exp-649-stochastic-trajectory-breadth
+    status: planned
+    approach: frozen-stochastic-width256-trajectory-breadth-gate
+    config: configs/exp_649_stochastic_trajectory_breadth.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-649-stochastic-trajectory-breadth.md

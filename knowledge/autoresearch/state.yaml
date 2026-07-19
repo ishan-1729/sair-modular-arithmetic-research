@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T01:45:47+05:30
+updated_at: 2026-07-20T04:38:30+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,12 +33,22 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
-  run_id: exp-647-operand-swap-consistency
-  statement: Training Candidate 005's learned transition to agree across commuted operand trajectories can distill the proven conditional two-orientation gain into a stronger single-orientation trajectory without adding inference work.
-  promotion_gate: Advance only if a separately preregistered matched control/challenger comparison recovers at least half of the independently confirmed conditional-route gain in single-orientation exact rollout, preserves Tier-5 retention and transition validity, and improves width-256 rollout without increasing candidate-shaped inference cost.
-  status: completed-rejected
-  result: Confidence consistency regressed original rollout by 1.667 points at width 128 and 2.5 points at width 256; only width-64 retention and determinism passed. No Tier-7 or candidate promotion.
-next_action: PM evidence-driven selection of the next hypothesis; none is preregistered or authorized by EXP-647's negative result.
+  run_id: exp-649-stochastic-trajectory-breadth
+  statement: Six fixed stochastic paths from the frozen raw Candidate-005 cellular checkpoint, paired with exact sigma-zero original and swapped controls, may expose strictly greater than 90 percent width-256 oracle breadth within the complete 285-second candidate-shaped wall envelope.
+  promotion_gate: This calibration-only phase advances to formal consideration only if the exact 1,100-row Candidate-005 plus eight-path-by-110-row workload passes the frozen same-environment runtime and integrity protocol; formal evidence then requires a separate Judge authorization, at least 181 of at most 200 untouched oracle-union successes, no more than four invalid cases per path, and an exact rerun. A pass cannot itself promote a candidate or authorize a selector.
+  status: selected-planned-pending-calibration
+  evidence_status: The first implementation-readiness audit blocked calibration on four scaffold gaps; the repaired runner then passed an independent calibration-only re-gate. No EXP-649 metric, run artifact, result checkpoint, formal authorization, selector authorization, or success claim exists.
+  authorization:
+    scaffolding: judge-approved
+    calibration: judge-approved-input-only-training-identities
+    formal: not-authorized
+    selector_or_vote: prohibited
+  seed_roles:
+    retired_calibration_root: 20261148
+    calibration_input_only_root: 20261150
+    formal_unopened_root: 20261149
+    scaffold_parity_test_only_root: 649900001
+next_action: Commit the validated EXP-649 scaffold, require an empty Git status and matching frozen describe hashes, then run only the full-fidelity input-only calibration rooted at 20261150 with complete warmup, three matched replicates, charged resume accounting, and no fidelity reduction. Formal root 20261149 remains unopened and unauthorized.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -55,6 +65,7 @@ git:
   dirty: false
 risks:
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
+  - Candidate 005 currently has no learned inference path above 128 bits; EXP-649 invokes the raw cellular checkpoint at width 256 only as a frozen research diagnostic.
   - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
   - CPU-only training makes indiscriminate sweeps infeasible.
   - Public benchmark inputs must not become a model-selection surface.
@@ -80,3 +91,7 @@ risks:
   - EXP-654's addressable neural RAM and non-addressable workspace both score zero exact even at trained width 16 after 4,000 updates; nearly uniform addressing and zero ablation/dependence drops reject the current latent-executor formulation before scale-up.
   - EXP-654's parameter-matched decoded wider control improves trained-width exactness from 85.33 to 94.33 percent but still scores zero exact at widths 24 and 32, so added state capacity alone does not transfer.
   - EXP-647's endpoint consistency retains width-64 and is deterministic but regresses original width-128/256 rollout by 1.67/2.5 points, misses transition, validity, and runtime gates, and does not authorize Tier-7 or candidate promotion.
+  - EXP-649's six-path choice comes only from a hypothetical independence calculation on the related EXP-647 challenger's 47.5 percent union; it is not matched Candidate-005 evidence and could miss breadth or runtime immediately.
+  - EXP-649 calibration root 20261148 is permanently retired because a scaffold parity test computed official-reference labels for its 1,100 identities in memory; no label was inspected or persisted, but only audited replacement root 20261150 may be used input-only after the clean scaffold gate.
+  - EXP-649's first implementation-readiness audit rejected calibration launch because sigma-zero controls did not retain every decoded prefix, runaway enforcement was only stage-end, formal compatibility omitted three provenance hashes, and retirement lacked a pinned machine-readable manifest; these are scaffold blockers, not experiment results.
+  - EXP-649 is calibration-only and pending; its formal root and cases are untouched, and no oracle, selector, voting, tuning, candidate promotion, or Goal-completion claim is authorized.
