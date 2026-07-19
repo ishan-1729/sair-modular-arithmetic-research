@@ -278,6 +278,22 @@ function Read-JsonMarker {
     return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
 }
 
+function ConvertTo-MarkerDateTimeOffset {
+    param([Parameter(Mandatory = $true)]$Value)
+
+    if ($Value -is [DateTimeOffset]) {
+        return $Value
+    }
+    if ($Value -is [DateTime]) {
+        return [DateTimeOffset]$Value
+    }
+    return [DateTimeOffset]::Parse(
+        [string]$Value,
+        [Globalization.CultureInfo]::InvariantCulture,
+        [Globalization.DateTimeStyles]::RoundtripKind
+    )
+}
+
 function Assert-CurrentProbeCompletion {
     $start = Read-JsonMarker -Path $ProbeStartMarker
     $completion = Read-JsonMarker -Path $ProbeCompletionMarker
@@ -312,8 +328,8 @@ function Assert-CurrentProbeCompletion {
         $completion.repository_commit -ne $repositoryCommit) {
         throw "Persistence-probe evidence has a stale repository commit"
     }
-    $startedAt = [DateTimeOffset]::Parse([string]$start.started_at)
-    $completedAt = [DateTimeOffset]::Parse([string]$completion.completed_at)
+    $startedAt = ConvertTo-MarkerDateTimeOffset -Value $start.started_at
+    $completedAt = ConvertTo-MarkerDateTimeOffset -Value $completion.completed_at
     $observedSeconds = ($completedAt - $startedAt).TotalSeconds
     if ($observedSeconds -lt 170 -or $observedSeconds -gt 600) {
         throw "Persistence-probe observed duration is outside [170, 600] seconds: $observedSeconds"
