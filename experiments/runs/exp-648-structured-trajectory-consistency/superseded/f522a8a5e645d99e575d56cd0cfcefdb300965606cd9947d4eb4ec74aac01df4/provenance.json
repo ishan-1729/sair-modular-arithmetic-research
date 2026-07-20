@@ -1,0 +1,31 @@
+{
+  "schema_version": "exp648-superseded-calibration-v1",
+  "status": "superseded-pre-launch-audit-repair-required",
+  "preserved_at_reason": "Two independent read-only audits found fail-closed integrity, dependency provenance, corpus verifier, root-boundary, RSS, setup-timing, and cache-validation defects before any corpus or scientific root was opened.",
+  "source_evidence": {
+    "calibration_path": ".scratch/exp-648-structured-trajectory-consistency/calibration.json",
+    "calibration_sha256": "f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+    "environment_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "resolved_config_sha256": "5d1e30bdb7dbf67c1a448b725976e9f83daf144079c7d5bcde43e74e6948a0e7",
+    "runner_sha256": "8dee04eaf6f45de2efe2a31d1a3d22031c11a35450d9930ce609a67f241c709b"
+  },
+  "prior_superseded_calibration_charge": {
+    "wall_seconds": 1478.023299573,
+    "aggregate_cpu_seconds": 6085.320000000001,
+    "eligible_for_new_projection_rates": false,
+    "classified_as_reused_repeat": false,
+    "charged_to_cumulative_planning_ceiling": true
+  },
+  "root_audit": {
+    "calibration_root_opened": 20261151,
+    "corpus_root_opened": false,
+    "screen_or_confirmation_root_opened": false,
+    "checked_independent_private_opened": false,
+    "exp649_formal_root_opened": false
+  },
+  "preservation": {
+    "calibration_byte_for_byte": true,
+    "environment_byte_for_byte": true,
+    "old_units_and_repeat_caches_deleted": false
+  }
+}

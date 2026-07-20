@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T10:20:00+05:30
+updated_at: 2026-07-20T14:22:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,24 +36,25 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: selected-preregistered-pending-implementation-calibration
-  evidence_status: Judge-selected preregistration only. Playwright-verified DRM and LoopFormer pages provide source claims; EXP-643 supplies the 99.70-99.75 percent transition versus 22/32 percent rollout diagnosis, and EXP-610 supplies the 87.5-to-75.0 percent arbitrary-corruption negative control. No EXP-648 corpus, training, evaluation, checkpoint, metric, or run evidence exists, and every experiment seed remains unopened.
+  status: implemented-calibrated-corpus-authorized-unopened
+  evidence_status: Implementation, static tests, and the audit-repaired full-fidelity resource calibration are complete. Calibration root 20261151 was consumed only for non-scientific timing, resource, provenance, and integrity evidence; no scientific accuracy, selection metric, corpus, screen, confirmation, candidate, or promotion evidence exists. The real corpus root and every scientific root remain unopened.
   authorization:
     preregistration: judge-approved
-    implementation: pending
-    calibration: pending-implementation-and-static-tests
-    screen: blocked-pending-corpus-hashes-measured-budgets-and-post-implementation-judge
+    implementation: complete
+    calibration: complete-non-scientific-resource-calibration
+    corpus: judge-authorized-but-unopened-after-commit
+    screen: blocked-pending-real-corpus-scientific-runner-hashes-and-judge
     confirmation: prohibited-until-screen-pass-and-separate-judge
     candidate_or_tier7_promotion: prohibited
   seed_roles:
-    calibration_root_unused_unopened: 20261151
-    corpus_root_unused_unopened: 20261152
-    screen_training_root_unused_unopened: 20261153
-    screen_evaluation_root_unused_unopened: 20261154
-    confirmation_1_training_root_unused_unopened: 20261155
-    confirmation_1_evaluation_root_unused_unopened: 20261156
-    confirmation_2_training_root_unused_unopened: 20261157
-    confirmation_2_evaluation_root_unused_unopened: 20261158
+    calibration_root_consumed_non_scientific: 20261151
+    corpus_root_authorized_unopened: 20261152
+    screen_training_root_unopened_blocked: 20261153
+    screen_evaluation_root_unopened_blocked: 20261154
+    confirmation_1_training_root_unopened_blocked: 20261155
+    confirmation_1_evaluation_root_unopened_blocked: 20261156
+    confirmation_2_training_root_unopened_blocked: 20261157
+    confirmation_2_evaluation_root_unopened_blocked: 20261158
     scaffold_test_only_root_reserved_unopened: 648900001
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
 locked_prior_hypotheses:
@@ -64,7 +65,7 @@ locked_prior_hypotheses:
     formal_root_status: unopened-permanently-locked-for-this-frozen-formulation
     prohibited: [formal-input-generation, collision-audit, scoring, selector, voting, tuning, promotion]
     incumbent_changed: false
-next_action: Implement the EXP-648 scaffold, build and freeze the corpus, run the full-fidelity dynamic resource calibration, and obtain a Judge launch gate before opening any screen root. Keep Candidate 005 unchanged and EXP-649 formal root 20261149 unopened and permanently locked for its frozen runtime-miss formulation.
+next_action: Commit this bookkeeping package, then execute only T-EXP648-CORPUS-FREEZE from the committed implementation/calibration state. Keep screen and confirmation roots unopened; a real frozen corpus, scientific runner and hashes, and a later Judge gate are mandatory before any screen. Keep Candidate 005 unchanged and EXP-649 formal root 20261149 permanently locked.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

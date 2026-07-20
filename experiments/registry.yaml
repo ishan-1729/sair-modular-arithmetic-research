@@ -664,3 +664,7 @@ runs:
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
+    calibration_artifact: experiments/runs/exp-648-structured-trajectory-consistency/calibration.json
+    environment: experiments/runs/exp-648-structured-trajectory-consistency/environment.json
+    executed_config: experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml
+    mlflow_receipt: experiments/runs/exp-648-structured-trajectory-consistency/mlflow.json
