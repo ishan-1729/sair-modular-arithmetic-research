@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: corpus-complete-readiness-implementation-approved-base-pending-commit-and-push
+    status: corpus-complete-readiness-chronology-repair-pending-renewed-judge
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -694,19 +694,44 @@ runs:
         aggregate_cpu_seconds: 10104.265504912
       scientific_evidence: none
     screen_readiness:
-      implementation: approved-base-pending-commit-and-push
+      implementation: chronology-repaired-base-pending-renewed-judge
       closure_audits:
         task: T-EXP648-SCREEN-READINESS
         results: [APPROVE, APPROVE]
-      sequential_judge_gate: T648-approved
+      prior_sequential_judge_gate: T648-approved-before-root-20261159-execution
+      post_execution_judge_gate: rejected-root-20261159-chronology-nonconforming
       historical_calibration_valid_for_launch: false
-      fresh_calibration_root: 20261159
-      fresh_calibration_root_status: authorized-pending-authentication-child-not-consumed
-      authorization_order: approved-base-commit-and-push -> sole-file-canonical-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-warmup-and-three-full-fidelity-repeats
+      consumed_rejected_calibration:
+        root: 20261159
+        status: consumed-complete-components-but-chronology-nonconforming
+        non_scientific: true
+        superseded: true
+        eligible_for_launch: false
+        eligible_for_projection_rates: false
+        eligible_for_cache_reuse: false
+        authorization_sha256: d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96
+        receipt_sha256: cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981
+        core_sha256: dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f
+        resource_completion_sha256: 9eeb228450ba8e684adbe34bb95ad057036ffdedc643fe3942a0aaf846cf1ab0
+        observed_pre_outer_seal:
+          wall_seconds: 3107.4547687239974
+          process_user_plus_system_aggregate_cpu_seconds: 12442.915271225
+          peak_rss_bytes: 2675752960
+        archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261159
+      next_calibration_root: 20261160
+      next_calibration_root_status: distinct-unopened-unconsumed-not-authorized-pending-repaired-base-judge
+      authorization_order: renewed-repaired-base-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261160-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-synchronous-augmented-warmup-and-three-synchronous-augmented-full-fidelity-repeats
       initial_resource_guards:
         wall_seconds: 14400
         process_user_plus_system_aggregate_cpu_seconds: 57600
-      cache_reuse: Only complete exact-provenance-matching units are reusable; partial, mismatched, or unverifiable units are prohibited, and valid reuse is charged to both wall and aggregate CPU.
+        role: cumulative-runaway-protection-only-never-a-fidelity-cap
+      cumulative_historical_and_superseded_charge:
+        wall_seconds: 9007.853947323996
+        process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996
+        charge_policy: apply-exactly-once-to-planning-guard-and-accounting
+      root_20261159_rate_policy: Preserved timings may inform conservative planning context only and are forbidden as projection rates.
+      chronology: Each warmup or repeat must synchronously execute base -> source replay -> MLflow probe -> readiness infrastructure -> validation -> atomic record -> seal, and the next start must authenticate the predecessor seal.
+      cache_reuse: Only complete augmented repeats sealed after full validation and exactly bound to root, authorization, runner, config, checkpoint, environment, evaluator, dependency, protocols, workload, frozen corpus, and chronology may be reused after a fresh augmented warmup; old base-only caches are forbidden, and valid reuse is charged to both wall and aggregate CPU.
       fresh_calibration_receipt: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration.json
       observed_pre_outer_seal_resource_completion: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-resource-completion.json
       scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
@@ -715,8 +740,9 @@ runs:
       scientific_evidence: none
       limitations:
         - Corpus construction and resource/provenance evidence only; no model update, accuracy metric, selection metric, candidate promotion, or Goal-completion evidence.
-        - Readiness approval is control/gate evidence, not an observed calibration result; root 20261159 remains unconsumed.
+        - Root 20261159 is consumed and preserved as non-scientific superseded evidence, but its post-hoc augmentation chronology forbids launch, projection-rate selection, and cache reuse.
+        - Root 20261160 is distinct, unopened, unconsumed, and not authorized; a renewed repaired-base Judge is required before an authentication child may exist.
         - Candidate 005 remains at observed 59.5 percent checked-public / 59.3 percent independent accuracy, and completion_eligible remains false.
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
-    screen_status: prohibited-pending-root-20261159-full-fidelity-calibration-and-separate-launch-judge
+    screen_status: prohibited-pending-repaired-base-judge-root-20261160-authenticated-synchronous-augmented-calibration-and-separate-launch-judge

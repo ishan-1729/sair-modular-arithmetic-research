@@ -52,6 +52,16 @@ Implement Rank 1 at small fixed widths with:
 6. Compare a ConvGRU cell under the identical data and evaluation contract.
 7. Add a small-prime specialist only if it improves the ranking metric without meaningful latency cost.
 
+## Super Transformers coverage program
+
+The [binding mechanism contract](../autoresearch/research/2026-07-21-super-transformers-coverage-contract.md) expands the portfolio without replacing evidence-based prioritization. It separates faithful mechanisms from bounded-faithful tests, SAIR analogues, supporting-only sources, and literal exclusions across exactly 42 stable records while preserving all 12 `super_transformers_main_papers.md` mappings. Tab-TRM is deduplicated into TRM application evidence, the HRM incorrect-attractor paper informs false-attractor diagnostics, and the ARC Prize technical report is supporting-only. Ordinary-initialized learned token execution is an analogue; literal hand-programmed execution remains excluded. T²MLR is likewise an analogue unless a justified autoregressive decoder exists.
+
+After EXP-648 resolves, the staged portfolio order is structural equivariance; shared recurrent depth, including LoopLM controls; explicit answer-plus-latent TRM/HRM/RIM/RSM models; separate LoopFormer, DRM, and LOTUS tests; visit/dilation adapters; proper-library Mamba/state-space recurrence; a materially new learned-memory mechanism; signature-gated stability/fixed points; runtime-qualified stochastic breadth and energy selection; winner-dependent adaptive compute; and conditional autoregressive/T²MLR work. These are sequential research families, not simultaneous authorizations.
+
+Mature authoritative libraries are the default for Mamba/selective-SSM, graph, attention, and other specialized kernels. Dependencies must be pinned, licensed, provenance-recorded, and parity-tested against tiny reference fixtures. CUDA may accelerate offline training, but the frozen submission still requires a deterministic CPU path, cross-device parity where applicable, and candidate-shaped runtime evidence. Hand implementations are justified only when no suitable maintained implementation exists and a Judge accepts the parity and maintenance risk.
+
+This program is queued, not active. EXP-648 remains the only active hypothesis; its unopened and unauthorized root `20261160` is unchanged. EXP-650 through EXP-653 retain their established meanings and prerequisites. Candidate 005 remains the incumbent until a challenger passes the complete promotion contract.
+
 ## Stop conditions
 
 Stop scaling a family if held-out-prime rollout remains near the trivial baseline after transition accuracy saturates, if perturbing weights does not collapse behavior, or if projected CPU latency cannot fit the official envelope with at least 25% headroom.

@@ -1,0 +1,65 @@
+{
+  "artifact_tree_digest_method": "SHA-256 of UTF-8 compact canonical JSON mapping artifact-root-relative POSIX paths to lowercase file SHA-256 values, followed by one LF",
+  "runs": [
+    {
+      "artifact_bytes": 222,
+      "artifact_count": 6,
+      "artifact_tree_sha256": "fb76334fda557e69e0b5219284bb9f0840675ae9d5354a203d1258f9a7973ee0",
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/80fdf14e207c451e8c27e81d33becc84/artifacts",
+      "end_time_ms": 1784559514957,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "80fdf14e207c451e8c27e81d33becc84",
+      "start_time_ms": 1784559514580,
+      "status": "FINISHED",
+      "unit": "warmup"
+    },
+    {
+      "artifact_bytes": 234,
+      "artifact_count": 6,
+      "artifact_tree_sha256": "6e0f8dc5f42f9d1c56d55d66da6da332257972a318aeede4b7959dcf13212cbf",
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/ad3665262ba4480882dbbdf22f3481f9/artifacts",
+      "end_time_ms": 1784559639345,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "ad3665262ba4480882dbbdf22f3481f9",
+      "start_time_ms": 1784559638982,
+      "status": "FINISHED",
+      "unit": "repeat-1"
+    },
+    {
+      "artifact_bytes": 234,
+      "artifact_count": 6,
+      "artifact_tree_sha256": "560db118423207e6cd8927f07685b62f452ec659c061426d861b7504cf151e6d",
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/25d8179afd8b48bba96a9caaa9103de9/artifacts",
+      "end_time_ms": 1784559823096,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "25d8179afd8b48bba96a9caaa9103de9",
+      "start_time_ms": 1784559822425,
+      "status": "FINISHED",
+      "unit": "repeat-2"
+    },
+    {
+      "artifact_bytes": 234,
+      "artifact_count": 6,
+      "artifact_tree_sha256": "4533fa2b54a2cca9ec231f32779aeb3fb6454edfd795f2cad024815aa736756b",
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/7633a4befe91490181844c157e7f7978/artifacts",
+      "end_time_ms": 1784559944201,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "7633a4befe91490181844c157e7f7978",
+      "start_time_ms": 1784559943376,
+      "status": "FINISHED",
+      "unit": "repeat-3"
+    },
+    {
+      "artifact_bytes": 234888,
+      "artifact_count": 3,
+      "artifact_tree_sha256": "367b62258358584ed0344749f72cf21d758cc00112a5467c2c6fc420ef3f43fc",
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/4dc1cef0b5ab4269a838bdc52eebcf48/artifacts",
+      "end_time_ms": 1784559952170,
+      "role": "screen-readiness-calibration-only",
+      "run_id": "4dc1cef0b5ab4269a838bdc52eebcf48",
+      "start_time_ms": 1784559951594,
+      "status": "FINISHED"
+    }
+  ],
+  "schema_version": "exp648-superseded-mlflow-runs-v1"
+}

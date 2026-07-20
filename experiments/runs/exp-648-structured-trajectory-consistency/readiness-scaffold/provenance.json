@@ -4,24 +4,215 @@
   "historical_executed_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
   "immutable_corpus_package_unchanged_from_historical_commit": true,
   "judge_gate": {
-    "outcome": "required-repair",
-    "renewed_audit": "pending",
-    "repair": "honest-observed-launch-to-pre-outer-seal-resource-boundary"
+    "current_status": "chronology-repair-applied-awaiting-renewed-evidence-audit-and-judge",
+    "renewed_evidence_audit": "pending",
+    "renewed_judge": "pending",
+    "repair_history": [
+      {
+        "finding": "The original outer resource receipt overstated an in-process pre-seal sample as end-to-end evidence.",
+        "outcome": "required-repair",
+        "repair": "honest-observed-launch-to-pre-outer-seal-resource-boundary-with-explicit-post-sample-tail",
+        "status": "applied-before-root-20261159-execution"
+      },
+      {
+        "finding": "After root 20261159 completed, the readiness additions were found to have been measured post hoc rather than synchronously validated and sealed with each base unit.",
+        "outcome": "required-repair",
+        "repair": "synchronous-base-replay-mlflow-infrastructure-validation-atomic-record-and-predecessor-linked-seal-with-augmented-only-cache",
+        "status": "applied-after-archiving-root-20261159"
+      },
+      {
+        "finding": "The renewed Judge found that authorization construction still rebuilt workload and semantic bindings through mutable live helpers and constants instead of treating the approved-base provenance blob as the frozen source of truth.",
+        "outcome": "required-repair",
+        "repair": "canonical-approved-base-workload-and-complete-static-authorization-template-with-direct-file-hash-bindings-and-only-root-plus-base-commit-dynamic",
+        "status": "applied-without-opening-or-authorizing-root-20261160"
+      },
+      {
+        "finding": "The renewed semantic audit found stale scientific-protocol, resource-protocol, and accepted-corpus-manifest hashes inside the otherwise static authorization template.",
+        "outcome": "required-repair",
+        "repair": "bind-the-static-template-to-current-config-derived-protocol-hashes-and-the-exact-accepted-corpus-manifest-bytes-with-direct-regression-assertions",
+        "status": "applied-without-opening-or-authorizing-root-20261160"
+      },
+      {
+        "finding": "The renewed attempt-lifecycle audit found that a repeated readiness launch could reuse and overwrite the same authorization-derived scratch attempt directory.",
+        "outcome": "required-repair",
+        "repair": "fail-closed-sealed-or-published-attempt-detection-plus-exclusive-monotonic-retry-directories-with-byte-preserved-prior-attempts",
+        "status": "applied-without-opening-or-authorizing-root-20261160"
+      },
+      {
+        "finding": "Closure audit B found that linked or replaced attempt/publication filesystem objects and a same-authorization launch race were not yet excluded by no-follow identity checks and an execution-duration lock.",
+        "outcome": "required-repair",
+        "repair": "no-follow-lstat-and-fstat-identity-validation-plus-authorization-scoped-nonblocking-interprocess-lock-held-through-the-entire-calibration-and-post-mkdir-terminal-recheck",
+        "status": "applied-without-opening-or-authorizing-root-20261160"
+      },
+      {
+        "finding": "The final Judge threat ruling required every live tracked readiness-output singleton to block launch regardless of matching, different, missing, or malformed embedded authorization.",
+        "outcome": "required-repair",
+        "repair": "unconditional-nine-singleton-presence-gate-before-attempt-allocation-with-authorization-manifest-explicitly-excluded-as-the-required-input",
+        "status": "applied-without-opening-or-authorizing-root-20261160"
+      }
+    ]
   },
   "live_scaffold": {
-    "focused_scientific_test_sha256": "79a9627eaea6b5d44bab59c5c9fc70fc45f8437aa4cc955ebd4b4136c682a4d6",
+    "focused_scientific_test_sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df",
     "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
-    "scientific_runner_sha256": "2b2a6d2241b784ef699b0947cd78554c6900208e3f125a9d40ebc8b13e633c49"
+    "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c"
   },
   "outer_resource_evidence_scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
+  "readiness_calibration_authorization_source": {
+    "approved_base_file_bindings": {
+      "calibration_runner": {
+        "path": "experiments/exp_648_structured_trajectory_consistency/run.py",
+        "sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672"
+      },
+      "executed_config": {
+        "path": "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml",
+        "sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127"
+      },
+      "resolved_config": {
+        "path": "configs/exp_648_structured_trajectory_consistency.yaml",
+        "sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263"
+      },
+      "runtime_environment": {
+        "path": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
+        "sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9"
+      },
+      "scientific_runner": {
+        "path": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
+        "sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c"
+      },
+      "scientific_test": {
+        "path": "tests/test_exp648_structured_trajectory_scientific.py",
+        "sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df"
+      }
+    },
+    "authorization_template": {
+      "approved_runtime_environment": {
+        "dependencies": {
+          "mlflow": "3.14.0",
+          "numpy": "2.5.1",
+          "psutil": "7.0.0",
+          "safetensors": "0.8.0",
+          "scipy": "1.18.0",
+          "sympy": "1.13.1",
+          "torch": "2.5.1+cpu"
+        },
+        "deterministic_algorithms": true,
+        "executable": "/home/ishan/.venvs/sair-mod-challenge/bin/python",
+        "machine": "x86_64",
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "processor": "x86_64",
+        "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+        "schema_version": "exp648-environment-v1",
+        "torch_device": "cpu",
+        "torch_interop_threads": 1,
+        "torch_threads": 4,
+        "torch_version": "2.5.1+cpu"
+      },
+      "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+      "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+      "decision": "authorize-non-scientific-screen-readiness-calibration-only",
+      "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+      "evaluator_sha256": "e9777e1d66ae1603a82fa9329b06cfa9112dfe674a790bc16b58bb8ed83cb800",
+      "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
+      "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+      "experiment_id": "exp-648-structured-trajectory-consistency",
+      "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+      "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+      "schema_version": "exp648-screen-readiness-calibration-authorization-v1",
+      "scientific_accuracy_or_selection_authorized": false,
+      "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
+      "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
+      "scientific_test_sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df",
+      "screen_roots_authorized": false,
+      "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee",
+      "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "authorization_template_sha256": "49938cc3b7fa56f21c4b1cbbba5882d2592f3b362bfca285b44fb57e787a5da7",
+    "schema_version": "exp648-readiness-authorization-source-v1",
+    "screen_workload": {
+      "checkpoint_before_evaluation": {
+        "reload_verify": true,
+        "writes": 2
+      },
+      "evaluation": {
+        "exact_repeat_cases": 20,
+        "exact_repeat_width": 256,
+        "full_rollout_cases": {
+          "128": 200,
+          "256": 200,
+          "64": 200
+        },
+        "paired_identical_inputs": true,
+        "report_outcome_transitions": [
+          "recovered-control-wrong-challenger-exact",
+          "introduced-drift-control-exact-challenger-wrong"
+        ],
+        "transition_cases": {
+          "128": 2000,
+          "256": 2000
+        }
+      },
+      "evidence_and_mlflow_verification": true,
+      "fidelity_reduction_allowed": false,
+      "frozen_corpus_semantic_replay": {
+        "full_source_replays": 1,
+        "identity_trajectories": 736
+      },
+      "recoverable_evaluation_unit_count": 7,
+      "recoverable_evaluation_units": "paired-arm-width-mode",
+      "schema_version": "exp648-screen-workload-v2",
+      "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
+      "successful_atomic_evidence_writes": 19,
+      "successful_attempt_ledger_atomic_writes": 213,
+      "training": {
+        "arms": 2,
+        "batch_size": 16,
+        "updates_per_arm": 200,
+        "window_length": 8
+      }
+    },
+    "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee"
+  },
+  "readiness_filesystem_threat_model": {
+    "bounded_protection": "The authorization-scoped flock, exclusive mkdir allocation, and no-follow identity checks protect ordinary and concurrent cooperative processes plus pre-existing symlink, broken-link, and non-regular path hazards.",
+    "outside_bounded_threat_model": "An actively malicious same-EUID process that unlinks, renames, or replaces workspace paths after validation is outside this bounded threat model.",
+    "schema_version": "exp648-readiness-filesystem-threat-model-v1",
+    "trusted_workspace_consequence": "Such active same-EUID replacement would also invalidate the repository's trusted-workspace assumption and all evidence produced in that compromised workspace."
+  },
+  "root_history": {
+    "repair_action": {
+      "opened_root": false,
+      "scope": "scaffold-provenance-and-executable-chronology-repair-only"
+    },
+    "root_20261159": {
+      "archive": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261159",
+      "classification": "consumed-complete-components-but-chronology-nonconforming",
+      "consumed": true,
+      "eligible_for_cache_reuse": false,
+      "eligible_for_launch": false,
+      "eligible_for_projection_rates": false,
+      "opened": true,
+      "root": 20261159,
+      "scientific_evidence": "none"
+    },
+    "root_20261160": {
+      "authorization_created": false,
+      "consumed": false,
+      "opened": false,
+      "root": 20261160,
+      "status": "distinct-unopened-unconsumed-unauthorized-pending-renewed-evidence-audit-and-judge"
+    }
+  },
   "schema_version": "exp648-readiness-scaffold-provenance-v1",
   "scope": {
     "candidate_changed": false,
+    "checked_independent_official_private_opened": false,
     "implementation_observations_only": true,
-    "root_opened": false,
+    "model_update_performed": false,
+    "root_opened_by_this_repair": false,
     "scientific_accuracy_or_selection_reported": false,
-    "training_or_evaluation_performed": false
+    "training_or_evaluation_performed_by_this_repair": false
   },
-  "screen_workload_sha256": "c928d60f431788da7e27c0e7bf2f63f4e550568f7eea513e833417689c53cae5",
-  "status": "required-repair-applied-awaiting-renewed-audit-and-distinct-calibration-root"
+  "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee",
+  "status": "chronology-repair-applied-awaiting-renewed-evidence-audit-and-judge"
 }

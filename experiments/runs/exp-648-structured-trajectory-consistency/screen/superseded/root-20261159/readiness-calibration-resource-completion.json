@@ -1,0 +1,99 @@
+{
+  "attempt_id": "cal-d3aa35008f646edf",
+  "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+  "inner_artifacts": {
+    "readiness-calibration-attempt-state.json": "d32295cc78e2e6bd86ce47a56be2520a54157dad98fab5dfe203bf10d7ffc9fa",
+    "readiness-calibration-completion.json": "ea64fd35a2d778f7fa25919bd4879eeaa80358ed12cabaf75a6da4e92aa9734a",
+    "readiness-calibration-core.json": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+    "readiness-calibration-environment.json": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "readiness-calibration-executed-config.yaml": "e5487e1f356381352208cf6661eb5272bc0594afe1ac67db503dfce317352160",
+    "readiness-calibration-launch-ledger.json": "d32295cc78e2e6bd86ce47a56be2520a54157dad98fab5dfe203bf10d7ffc9fa",
+    "readiness-calibration-mlflow.json": "adbae4cedcc7782e544d6e31d2f0cc50a9704c04e23ee6e3f102252533516890",
+    "readiness-calibration.json": "cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981"
+  },
+  "inner_lifecycle_complete_before_resource_sample": true,
+  "measurement_semantics": {
+    "aggregate_cpu_seconds": "process user seconds plus process system seconds elapsed",
+    "peak_rss_bytes": "Linux process high-water RSS bytes sampled separately",
+    "post_sample_operations_included_in_observed_totals": false,
+    "wall_and_cpu_are_not_interchangeable_or_combined": true,
+    "wall_seconds": "external monotonic perf-counter elapsed seconds"
+  },
+  "post_sample_operations": [
+    "construct recovery arithmetic from already captured samples",
+    "construct and validate the outer resource-completion payload",
+    "canonical JSON serialization of the outer payload",
+    "ensure the outer receipt parent directory exists",
+    "create and open the atomic temporary file",
+    "write the canonical outer payload bytes",
+    "flush the temporary file",
+    "fsync the temporary file",
+    "close the temporary file",
+    "atomically replace the outer receipt path with the temporary file",
+    "open the parent directory",
+    "fsync the parent directory",
+    "close the parent directory",
+    "return from write_readiness_resource_completion",
+    "return from execute_readiness_calibration",
+    "construct and serialize the CLI summary",
+    "stdout write and flush",
+    "return from main",
+    "SystemExit construction and stack unwind",
+    "Python interpreter teardown and process exit"
+  ],
+  "recovery_charges": {
+    "accounting_formula": "historical_prior_superseded + historical_accepted_active + observed_pre_outer_seal_active + current_reused",
+    "cumulative_historical_prior_accepted_observed_active_reused_aggregate_cpu_seconds": 36721.035879589996,
+    "cumulative_historical_prior_accepted_observed_active_reused_wall_seconds": 9007.853947323996,
+    "current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds": 12442.915271225,
+    "current_readiness_observed_pre_outer_seal_active_wall_seconds": 3107.4547687239974,
+    "current_readiness_reused_aggregate_cpu_seconds_charged": 0.0,
+    "current_readiness_reused_wall_seconds_charged": 0.0,
+    "historical_accepted_active_aggregate_cpu_seconds": 8516.110946256998,
+    "historical_accepted_active_wall_seconds": 2087.6300150939987,
+    "historical_completed_calibration_aggregate_cpu_seconds": 24278.120608365,
+    "historical_completed_calibration_wall_seconds": 5900.399178599999,
+    "historical_plus_observed_active_and_reused_aggregate_cpu_seconds": 36721.035879589996,
+    "historical_plus_observed_active_and_reused_wall_seconds": 9007.853947323996,
+    "historical_prior_superseded_aggregate_cpu_seconds_charged": 15762.009662108001,
+    "historical_prior_superseded_wall_seconds_charged": 3812.769163506,
+    "observed_pre_outer_seal_peak_rss_bytes": 2675752960,
+    "prior_superseded_calibrations": [
+      {
+        "aggregate_cpu_seconds": 6085.320000000001,
+        "classified_as_reused_repeat": false,
+        "eligible_for_projection_rates": false,
+        "evidence_sha256": "f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+        "wall_seconds": 1478.023299573
+      },
+      {
+        "aggregate_cpu_seconds": 9676.689662108,
+        "classified_as_reused_repeat": false,
+        "eligible_for_projection_rates": false,
+        "evidence_sha256": "d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6",
+        "executed_pre_resolution_config_bytes_preserved": false,
+        "executed_pre_resolution_config_recorded_sha256": "cbc50fd22333126db992c74de307b9f344be8e6769a7d8f46d0f954678c3f491",
+        "wall_seconds": 2334.745863933
+      }
+    ],
+    "scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit"
+  },
+  "resource_boundary": "observed launch-to-pre-outer-seal samples captured after inner MLflow verification, tracked publication, completion manifest, final sealed attempt state, and all feasible non-self-referential inner hashing and lifecycle validation; not through function return, CLI output, interpreter teardown, or process exit",
+  "resource_observation": {
+    "launch_process_user_plus_system_seconds": 0.16472877500000038,
+    "launch_wall_perf_counter": 17170.758037062,
+    "observed_aggregate_cpu_seconds": 12442.915271225,
+    "observed_peak_rss_bytes": 2675752960,
+    "observed_wall_seconds": 3107.4547687239974,
+    "process_system_seconds_at_sample": 113.5,
+    "process_user_seconds_at_sample": 12329.58,
+    "sampling_order": [
+      "process user/system CPU",
+      "process peak RSS",
+      "monotonic wall"
+    ],
+    "wall_sample_perf_counter": 20278.212805786
+  },
+  "schema_version": "exp648-readiness-resource-completion-v2",
+  "status": "complete-observed-launch-to-pre-outer-seal-sample-resource-evidence"
+}

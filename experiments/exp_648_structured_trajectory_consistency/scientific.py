@@ -16,7 +16,9 @@ _MODULE_PROCESS_CPU_STARTED = __import__("time").process_time()
 
 import argparse
 import ast
+import contextlib
 import copy
+import fcntl
 import gzip
 import hashlib
 import importlib.util
@@ -28,6 +30,7 @@ import random
 import re
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -45,6 +48,8 @@ SCREEN_TRAINING_ROOT = 20_261_153
 SCREEN_EVALUATION_ROOT = 20_261_154
 CONFIRMATION_ROOTS = frozenset((20_261_155, 20_261_156, 20_261_157, 20_261_158))
 EXP649_FORMAL_ROOT = 20_261_149
+CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS = frozenset((20_261_159,))
+
 
 CALIBRATION_RUNNER = ROOT / "experiments/exp_648_structured_trajectory_consistency/run.py"
 CALIBRATION_RUNNER_SHA256 = (
@@ -85,6 +90,36 @@ nn = cal.nn
 load_file = cal.load_file
 save_file = cal.save_file
 
+ROOT_20261159_SUPERSEDED_CHARGE = {
+    "root": 20_261_159,
+    "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+    "receipt_sha256": "cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981",
+    "core_sha256": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+    "resource_completion_sha256": "9eeb228450ba8e684adbe34bb95ad057036ffdedc643fe3942a0aaf846cf1ab0",
+    "wall_seconds": 3107.4547687239974,
+    "aggregate_cpu_seconds": 12442.915271225,
+    "eligible_for_projection_rates": False,
+    "eligible_for_launch": False,
+    "eligible_for_cache_reuse": False,
+    "classification": "consumed-complete-components-but-chronology-nonconforming",
+}
+READINESS_HISTORICAL_COMPLETED_CHARGE = {
+    "wall_seconds": 9007.853947323996,
+    "aggregate_cpu_seconds": 36721.035879589996,
+}
+READINESS_SUPERSEDED_CALIBRATIONS = (
+    *cal.PRIOR_SUPERSEDED_CALIBRATIONS,
+    ROOT_20261159_SUPERSEDED_CHARGE,
+)
+READINESS_SUPERSEDED_CALIBRATION_CHARGE = {
+    "wall_seconds": float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
+    + ROOT_20261159_SUPERSEDED_CHARGE["wall_seconds"],
+    "aggregate_cpu_seconds": float(
+        cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
+    )
+    + ROOT_20261159_SUPERSEDED_CHARGE["aggregate_cpu_seconds"],
+}
+
 CONFIG_PATH = ROOT / "configs/exp_648_structured_trajectory_consistency.yaml"
 EXECUTED_CONFIG_PATH = (
     ROOT / "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml"
@@ -120,6 +155,12 @@ READINESS_RESOURCE_COMPLETION_PATH = (
 READINESS_CALIBRATION_AUTHORIZATION_PATH = TRACKED_SCREEN_DIR / "readiness-calibration-authorization.json"
 READINESS_SCAFFOLD_PROVENANCE_PATH = (
     ROOT / "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json"
+)
+ROOT_20261159_SUPERSEDED_DIR = (
+    TRACKED_SCREEN_DIR / "superseded/root-20261159"
+)
+ROOT_20261159_CLASSIFICATION_PATH = (
+    ROOT_20261159_SUPERSEDED_DIR / "classification.json"
 )
 MAX_AUTHORIZATION_BYTES = 65_536
 
@@ -364,7 +405,7 @@ def screen_workload_payload(
     return {
         "schema_version": "exp648-screen-workload-v2",
         "training": {"updates_per_arm": 200, "arms": 2, "batch_size": 16, "window_length": 8},
-        "evaluation": copy.deepcopy(config["screen"]["evaluation"]),
+        "evaluation": json.loads(canonical_json(config["screen"]["evaluation"])),
         "frozen_corpus_semantic_replay": {"identity_trajectories": 736, "full_source_replays": 1},
         "checkpoint_before_evaluation": {"writes": 2, "reload_verify": True},
         "recoverable_evaluation_units": "paired-arm-width-mode",
@@ -472,46 +513,144 @@ def validate_one_child_authorization_lifecycle(
     return auth_commit
 
 
+def _validate_readiness_authorization_source(
+    provenance: dict[str, Any], approved_base_commit: str
+) -> dict[str, Any]:
+    """Validate the frozen approved-base source without rebuilding its semantics."""
+    source = provenance.get("readiness_calibration_authorization_source")
+    required_source_keys = {
+        "schema_version", "approved_base_file_bindings", "screen_workload",
+        "screen_workload_sha256", "authorization_template",
+        "authorization_template_sha256",
+    }
+    if not isinstance(source, dict) or set(source) != required_source_keys:
+        raise PermissionError("approved-base authorization source key schema mismatch")
+    if source["schema_version"] != "exp648-readiness-authorization-source-v1":
+        raise PermissionError("approved-base authorization source schema mismatch")
+
+    bindings = source["approved_base_file_bindings"]
+    expected_binding_names = {
+        "scientific_runner", "scientific_test", "resolved_config",
+        "calibration_runner", "executed_config", "runtime_environment",
+    }
+    if not isinstance(bindings, dict) or set(bindings) != expected_binding_names:
+        raise PermissionError("approved-base direct file binding schema mismatch")
+    expected_paths = {
+        "scientific_runner": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
+        "scientific_test": "tests/test_exp648_structured_trajectory_scientific.py",
+        "resolved_config": "configs/exp_648_structured_trajectory_consistency.yaml",
+        "calibration_runner": "experiments/exp_648_structured_trajectory_consistency/run.py",
+        "executed_config": "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml",
+        "runtime_environment": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
+    }
+    observed_blobs: dict[str, bytes] = {}
+    for name, expected_path in expected_paths.items():
+        binding = bindings.get(name)
+        if not isinstance(binding, dict) or set(binding) != {"path", "sha256"}:
+            raise PermissionError(f"approved-base {name} binding schema mismatch")
+        if binding["path"] != expected_path or not isinstance(binding["sha256"], str):
+            raise PermissionError(f"approved-base {name} binding path/hash mismatch")
+        raw = _git_blob(approved_base_commit, expected_path)
+        observed_blobs[name] = raw
+        if sha256_bytes(raw) != binding["sha256"]:
+            raise PermissionError(f"approved-base {name} direct hash mismatch")
+
+    workload = source["screen_workload"]
+    required_workload_keys = {
+        "schema_version", "training", "evaluation",
+        "frozen_corpus_semantic_replay", "checkpoint_before_evaluation",
+        "recoverable_evaluation_units", "recoverable_evaluation_unit_count",
+        "successful_attempt_ledger_atomic_writes",
+        "successful_atomic_evidence_writes", "evidence_and_mlflow_verification",
+        "fidelity_reduction_allowed", "scientific_runner_sha256",
+    }
+    if not isinstance(workload, dict) or set(workload) != required_workload_keys:
+        raise PermissionError("approved-base screen workload key schema mismatch")
+    if workload["schema_version"] != "exp648-screen-workload-v2":
+        raise PermissionError("approved-base screen workload schema mismatch")
+    workload_sha256 = sha256_bytes(canonical_json_bytes(workload))
+    if source["screen_workload_sha256"] != workload_sha256:
+        raise PermissionError("approved-base screen workload hash mismatch")
+    if provenance.get("screen_workload_sha256") != workload_sha256:
+        raise PermissionError("approved-base provenance workload binding mismatch")
+    if workload["scientific_runner_sha256"] != bindings["scientific_runner"]["sha256"]:
+        raise PermissionError("approved-base workload runner binding mismatch")
+
+    template = source["authorization_template"]
+    required_template_keys = {
+        "schema_version", "experiment_id", "decision", "scientific_runner_sha256",
+        "scientific_test_sha256", "calibration_runner_sha256",
+        "resolved_config_sha256", "executed_config_sha256",
+        "source_checkpoint_sha256", "dependency_manifest_sha256",
+        "approved_runtime_environment", "evaluator_sha256",
+        "exact_teacher_source_sha256", "scientific_protocol_sha256",
+        "resource_protocol_sha256", "screen_workload_sha256",
+        "corpus_manifest_sha256", "screen_roots_authorized",
+        "scientific_accuracy_or_selection_authorized",
+    }
+    if not isinstance(template, dict) or set(template) != required_template_keys:
+        raise PermissionError("approved-base authorization template key schema mismatch")
+    if template["schema_version"] != "exp648-screen-readiness-calibration-authorization-v1":
+        raise PermissionError("approved-base authorization template schema mismatch")
+    if template["decision"] != "authorize-non-scientific-screen-readiness-calibration-only":
+        raise PermissionError("approved-base authorization template decision mismatch")
+    if template["screen_roots_authorized"] is not False or template["scientific_accuracy_or_selection_authorized"] is not False:
+        raise PermissionError("approved-base authorization template scope expanded")
+    template_sha256 = sha256_bytes(canonical_json_bytes(template))
+    if source["authorization_template_sha256"] != template_sha256:
+        raise PermissionError("approved-base authorization template hash mismatch")
+
+    template_file_bindings = {
+        "scientific_runner_sha256": bindings["scientific_runner"]["sha256"],
+        "scientific_test_sha256": bindings["scientific_test"]["sha256"],
+        "calibration_runner_sha256": bindings["calibration_runner"]["sha256"],
+        "resolved_config_sha256": bindings["resolved_config"]["sha256"],
+        "executed_config_sha256": bindings["executed_config"]["sha256"],
+    }
+    for key, expected in template_file_bindings.items():
+        if template.get(key) != expected:
+            raise PermissionError(f"approved-base template/provenance binding mismatch for {key}")
+    if template.get("screen_workload_sha256") != workload_sha256:
+        raise PermissionError("approved-base template/provenance workload mismatch")
+    try:
+        environment = json.loads(observed_blobs["runtime_environment"])
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError("approved-base runtime environment is malformed") from error
+    if (
+        not isinstance(environment, dict)
+        or observed_blobs["runtime_environment"] != canonical_json_bytes(environment, pretty=True)
+        or template.get("approved_runtime_environment") != environment
+    ):
+        raise PermissionError("approved-base template/runtime environment binding mismatch")
+    if provenance.get("live_scaffold") != {
+        "focused_scientific_test_sha256": bindings["scientific_test"]["sha256"],
+        "resolved_config_sha256": bindings["resolved_config"]["sha256"],
+        "scientific_runner_sha256": bindings["scientific_runner"]["sha256"],
+    }:
+        raise PermissionError("approved-base template/live scaffold binding mismatch")
+    if template.get("experiment_id") != provenance.get("experiment_id"):
+        raise PermissionError("approved-base template/provenance experiment mismatch")
+    for key, value in template.items():
+        if key.endswith("_sha256") and (not isinstance(value, str) or len(value) != 64):
+            raise PermissionError(f"approved-base authorization template hash invalid for {key}")
+    return copy.deepcopy(template)
+
+
 def readiness_calibration_authorization_base(
     root_seed: int, approved_base_commit: str
 ) -> dict[str, Any]:
-    """Canonical Judge payload template; constructing it does not authorize a root."""
-    config_rel = CONFIG_PATH.relative_to(ROOT).as_posix()
-    config = yaml.safe_load(_git_blob(approved_base_commit, config_rel))
-    runner_rel = Path(__file__).resolve().relative_to(ROOT).as_posix()
-    test_rel = "tests/test_exp648_structured_trajectory_scientific.py"
-    scientific_hash, resource_hash = _base_protocol_hashes(approved_base_commit, config)
-    dependency_hash = config["executable_dependency_sources"]["manifest_sha256"]
-    environment = _git_json(
+    """Return one frozen approved-base template plus its only two dynamic values."""
+    provenance = _git_json(
         approved_base_commit,
-        CALIBRATION_ENVIRONMENT_PATH.relative_to(ROOT).as_posix(),
+        "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json",
     )
-    scaffold = _git_json(
-        approved_base_commit,
-        READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(ROOT).as_posix(),
+    template = _validate_readiness_authorization_source(
+        provenance, approved_base_commit
     )
     return {
-        "schema_version": "exp648-screen-readiness-calibration-authorization-v1",
-        "experiment_id": RUN_ID,
-        "decision": "authorize-non-scientific-screen-readiness-calibration-only",
+        **template,
         "calibration_root": int(root_seed),
         "approved_base_commit": approved_base_commit,
-        "scientific_runner_sha256": _git_blob_sha256(approved_base_commit, runner_rel),
-        "scientific_test_sha256": _git_blob_sha256(approved_base_commit, test_rel),
-        "calibration_runner_sha256": _git_blob_sha256(approved_base_commit, CALIBRATION_RUNNER.relative_to(ROOT).as_posix()),
-        "resolved_config_sha256": _git_blob_sha256(approved_base_commit, config_rel),
-        "executed_config_sha256": _git_blob_sha256(approved_base_commit, EXECUTED_CONFIG_PATH.relative_to(ROOT).as_posix()),
-        "source_checkpoint_sha256": config["source_checkpoint_sha256"],
-        "dependency_manifest_sha256": dependency_hash,
-        "approved_runtime_environment": environment,
-        "evaluator_sha256": _base_evaluator_hash(approved_base_commit, dependency_hash),
-        "exact_teacher_source_sha256": _base_exact_teacher_hash(approved_base_commit),
-        "scientific_protocol_sha256": scientific_hash,
-        "resource_protocol_sha256": resource_hash,
-        "screen_workload_sha256": scaffold["screen_workload_sha256"],
-        "corpus_manifest_sha256": FROZEN_CORPUS_FILES["data/corpus-manifest.json"],
-        "screen_roots_authorized": False,
-        "scientific_accuracy_or_selection_authorized": False,
     }
 
 
@@ -549,6 +688,59 @@ def _read_authenticated_committed_manifest(
     return payload, observed
 
 
+def readiness_calibration_publication_state(
+    *, live_receipt: Path = SCREEN_READINESS_CALIBRATION_PATH,
+    superseded_classification: Path = ROOT_20261159_CLASSIFICATION_PATH,
+) -> dict[str, Any]:
+    if live_receipt.is_file():
+        return {
+            "status": "live-receipt-present",
+            "live_receipt_sha256": sha256(live_receipt),
+            "superseded_root_20261159_preserved": superseded_classification.is_file(),
+        }
+    if not superseded_classification.is_file():
+        return {
+            "status": "no-live-receipt-and-no-superseded-classification",
+            "live_receipt_sha256": None,
+            "superseded_root_20261159_preserved": False,
+        }
+    raw = superseded_classification.read_bytes()
+    try:
+        classification = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError("superseded readiness classification is malformed") from error
+    if raw != canonical_json_bytes(classification, pretty=True):
+        raise PermissionError("superseded readiness classification is noncanonical")
+    required = {
+        "schema_version": "exp648-readiness-superseded-classification-v1",
+        "root": 20_261_159,
+        "status": "consumed-complete-components-but-chronology-nonconforming",
+        "superseded": True,
+        "eligible_for_launch": False,
+        "eligible_for_projection_rates": False,
+        "eligible_for_cache_reuse": False,
+    }
+    for key, expected in required.items():
+        if classification.get(key) != expected:
+            raise PermissionError(
+                f"superseded readiness classification mismatch for {key}"
+            )
+    archived_receipt = ROOT_20261159_SUPERSEDED_DIR / "readiness-calibration.json"
+    if (
+        not archived_receipt.is_file()
+        or sha256(archived_receipt)
+        != ROOT_20261159_SUPERSEDED_CHARGE["receipt_sha256"]
+    ):
+        raise PermissionError("superseded readiness receipt preservation mismatch")
+    return {
+        "status": "superseded-only-no-live-receipt",
+        "live_receipt_sha256": None,
+        "superseded_root_20261159_preserved": True,
+        "classification_sha256": sha256(superseded_classification),
+        "superseded_receipt_sha256": sha256(archived_receipt),
+    }
+
+
 def verify_readiness_calibration_authorization(
     path: Path = READINESS_CALIBRATION_AUTHORIZATION_PATH, *,
     committed_bytes: bytes | None = None, allow_test_root: bool = False,
@@ -576,6 +768,7 @@ def verify_readiness_calibration_authorization(
     prohibited = {
         CALIBRATION_ROOT, CORPUS_ROOT, SCREEN_TRAINING_ROOT, SCREEN_EVALUATION_ROOT,
         EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
+        *CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS,
     }
     if root in prohibited or root <= 0 or (root == TEST_ONLY_ROOT and not allow_test_root):
         raise PermissionError("calibration authorization root is reused, test-only, or prohibited")
@@ -599,7 +792,11 @@ def verify_screen_readiness_calibration(
     path: Path = SCREEN_READINESS_CALIBRATION_PATH,
 ) -> dict[str, Any]:
     if not path.is_file():
-        raise PermissionError("fresh post-repair full-fidelity screen calibration is absent")
+        lifecycle = readiness_calibration_publication_state(live_receipt=path)
+        raise PermissionError(
+            "fresh post-repair full-fidelity screen calibration is absent; "
+            f"publication lifecycle is {lifecycle['status']}"
+        )
     raw = path.read_bytes()
     payload = json.loads(raw)
     if raw != canonical_json_bytes(payload, pretty=True):
@@ -621,6 +818,7 @@ def verify_screen_readiness_calibration(
     if root <= 0 or root in {
         CALIBRATION_ROOT, CORPUS_ROOT, SCREEN_TRAINING_ROOT, SCREEN_EVALUATION_ROOT,
         EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
+        *CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS,
     }:
         raise PermissionError("fresh screen calibration root is absent, reused, or prohibited")
     if not isinstance(payload.get("calibration_authorization_sha256"), str) or len(payload["calibration_authorization_sha256"]) != 64:
@@ -840,6 +1038,22 @@ def resolve_readiness_screen_budgets(
         "rates": rates, "projected_components": components_by_resource,
         "rss_peak_inputs_bytes": peak_candidates,
         "rss_peak_max_bytes": peak,
+        "superseded_rate_exclusions": {
+            "root_20261159": {
+                "classification": ROOT_20261159_SUPERSEDED_CHARGE["classification"],
+                "receipt_sha256": ROOT_20261159_SUPERSEDED_CHARGE["receipt_sha256"],
+                "eligible_for_projection_rates": False,
+                "eligible_for_launch": False,
+                "eligible_for_cache_reuse": False,
+                "wall_seconds_preserved_for_conservative_planning_context_only": (
+                    ROOT_20261159_SUPERSEDED_CHARGE["wall_seconds"]
+                ),
+                "aggregate_cpu_seconds_preserved_for_conservative_planning_context_only": (
+                    ROOT_20261159_SUPERSEDED_CHARGE["aggregate_cpu_seconds"]
+                ),
+            },
+            "rate_source": "only the three chronology-conforming current-root augmented repeats",
+        },
         "timing_aggregation_contract": {
             "complete_unit_total": "base CalibrationExperiment total + actual source replay + MLflow probe + readiness infrastructure",
             "launcher": "excluded from each warmup/repeat total; charged once in projection and active process accounting",
@@ -857,6 +1071,7 @@ READINESS_RELEASE_CRITICAL_FIELDS = (
     "full_fidelity",
     "environment",
     "boundary",
+    "chronology",
 )
 
 
@@ -905,12 +1120,10 @@ def validate_core_receipt_release_equality(
 
 
 def readiness_historical_decomposition() -> dict[str, float]:
-    historical_wall = 5900.399178599999
-    historical_cpu = 24278.120608365
-    prior_wall = float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
-    prior_cpu = float(
-        cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
-    )
+    historical_wall = READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
+    historical_cpu = READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
+    prior_wall = READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
+    prior_cpu = READINESS_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
     return {
         "historical_completed_calibration_wall_seconds": historical_wall,
         "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
@@ -937,7 +1150,7 @@ def observed_readiness_recovery(
     return {
         "scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
         "accounting_formula": "historical_prior_superseded + historical_accepted_active + observed_pre_outer_seal_active + current_reused",
-        "prior_superseded_calibrations": list(cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+        "prior_superseded_calibrations": list(READINESS_SUPERSEDED_CALIBRATIONS),
         **historical,
         "current_readiness_observed_pre_outer_seal_active_wall_seconds": active_wall,
         "current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds": active_cpu,
@@ -954,7 +1167,7 @@ def observed_readiness_recovery(
 def validate_observed_readiness_recovery(recovery: dict[str, Any]) -> None:
     if recovery.get("scope") != "observed-launch-to-pre-outer-seal-sample-not-through-process-exit":
         raise RuntimeError("readiness observed recovery scope mismatch")
-    if recovery.get("prior_superseded_calibrations") != list(cal.PRIOR_SUPERSEDED_CALIBRATIONS):
+    if recovery.get("prior_superseded_calibrations") != list(READINESS_SUPERSEDED_CALIBRATIONS):
         raise RuntimeError("readiness observed superseded evidence mismatch")
     historical = readiness_historical_decomposition()
     for key, expected in historical.items():
@@ -1241,7 +1454,7 @@ def validate_readiness_calibration_receipt(
         "calibration_evidence_core_sha256", "environment_sha256", "mlflow_receipt_sha256",
         "warmups", "timed_repeats", "warmup", "repeats", "component_resolution",
         "resolved_screen_budgets", "recovery_charges", "full_fidelity",
-        "environment", "boundary",
+        "environment", "boundary", "chronology",
     }
     if set(payload) != required:
         raise RuntimeError("readiness calibration receipt key schema mismatch")
@@ -1250,6 +1463,7 @@ def validate_readiness_calibration_receipt(
     repeats = payload["repeats"]
     if len(repeats) != 3 or any(r.get("complete") is not True for r in repeats):
         raise RuntimeError("readiness calibration repeats incomplete")
+    validate_readiness_chronology(payload)
     for repeat in repeats:
         validate_complete_readiness_timing(repeat)
         components = repeat.get("components", {})
@@ -1315,12 +1529,33 @@ def validate_readiness_calibration_receipt(
     if payload["full_fidelity"] is not True or payload["boundary"] != expected_boundary:
         raise RuntimeError("readiness calibration fidelity/scientific boundary mismatch")
     recovery = payload["recovery_charges"]
-    if not math.isclose(float(recovery.get("historical_completed_calibration_wall_seconds", 0)), 5900.399178599999, abs_tol=1e-9) or not math.isclose(float(recovery.get("historical_completed_calibration_aggregate_cpu_seconds", 0)), 24278.120608365, abs_tol=1e-9):
+    if not math.isclose(float(recovery.get("historical_completed_calibration_wall_seconds", 0)), READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"], abs_tol=1e-9) or not math.isclose(float(recovery.get("historical_completed_calibration_aggregate_cpu_seconds", 0)), READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"], abs_tol=1e-9):
         raise RuntimeError("historical calibration charge mismatch")
     if recovery.get("scope") != "prepublication-provisional-snapshot-before-inner-publication":
         raise RuntimeError("readiness calibration provisional recovery scope mismatch")
-    if recovery.get("prior_superseded_calibrations") != list(cal.PRIOR_SUPERSEDED_CALIBRATIONS):
+    if recovery.get("prior_superseded_calibrations") != list(READINESS_SUPERSEDED_CALIBRATIONS):
         raise RuntimeError("readiness calibration superseded evidence list mismatch")
+    expected_orchestration = {
+        "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
+        "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
+        "old_base_only_cache_loaded_or_saved": False,
+        "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+        "historical_and_superseded_charge_applied_exactly_once": True,
+        "guard_historical_and_superseded_wall_seconds": (
+            READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
+        ),
+        "guard_historical_and_superseded_aggregate_cpu_seconds": (
+            READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
+        ),
+        "reused_complete_augmented_repeat_indices": [
+            int(record["repeat_index"])
+            for record in repeats
+            if record.get("reused_from_augmented_cache") is True
+        ],
+        "all_augmented_units_validated_and_sealed_before_next_start": True,
+    }
+    if recovery.get("augmented_unit_orchestration") != expected_orchestration:
+        raise RuntimeError("readiness augmented orchestration recovery mismatch")
     for resource in ("wall", "aggregate_cpu"):
         active = float(recovery.get(f"prepublication_provisional_active_{resource}_seconds", 0))
         reused = float(recovery.get(f"prepublication_provisional_reused_{resource}_seconds_charged", 0))
@@ -1572,21 +1807,830 @@ def measure_readiness_mlflow_probe(
     return {"complete": True, "run_id": run_id, "artifact_count": 6, "remote_verified": True, "timing": timing}
 
 
+READINESS_AUGMENTED_UNIT_ORDER = (
+    ("warmup", None),
+    ("repeat-1", 1),
+    ("repeat-2", 2),
+    ("repeat-3", 3),
+)
+READINESS_CHRONOLOGY_CONTRACT_SHA256 = sha256_bytes(canonical_json_bytes({
+    "schema_version": "exp648-readiness-augmented-chronology-contract-v1",
+    "order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
+    "unit_order": "base->source-replay->mlflow-probe->readiness-infrastructure->validate->atomic-record->seal",
+    "next_start_requires_predecessor_seal": True,
+    "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+    "old_base_only_cache_forbidden": True,
+}))
+READINESS_RECORD_METADATA_KEYS = frozenset((
+    "readiness_chronology", "reused_from_augmented_cache", "augmented_cache_path",
+))
+
+
+def _path_for_receipt(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return path.resolve().as_posix()
+
+
+def _bare_augmented_record(record: dict[str, Any]) -> dict[str, Any]:
+    result = copy.deepcopy(record)
+    for key in READINESS_RECORD_METADATA_KEYS:
+        result.pop(key, None)
+    return result
+
+
+def apply_readiness_historical_charge_once(guard: Any) -> None:
+    if getattr(guard, "readiness_historical_charge_applied", False):
+        raise RuntimeError("readiness cumulative historical charge applied more than once")
+    guard.prior_superseded_wall_seconds = READINESS_HISTORICAL_COMPLETED_CHARGE[
+        "wall_seconds"
+    ]
+    guard.prior_superseded_cpu_seconds = READINESS_HISTORICAL_COMPLETED_CHARGE[
+        "aggregate_cpu_seconds"
+    ]
+    guard.readiness_historical_charge_applied = True
+    guard("readiness:cumulative-historical-and-superseded-charge-applied-once")
+
+
+def readiness_augmented_cache_key_fields(
+    experiment: Any, *, authorization_sha256: str,
+) -> dict[str, Any]:
+    base = experiment.cache_key_fields()
+    return {
+        "schema_version": "exp648-readiness-augmented-cache-key-v1",
+        "root": int(experiment.root_seed),
+        "authorization_sha256": authorization_sha256,
+        "scientific_runner_sha256": sha256(Path(__file__)),
+        "calibration_runner_sha256": sha256(CALIBRATION_RUNNER),
+        "checkpoint_sha256": base["checkpoint_sha256"],
+        "environment_sha256": base["environment_sha256"],
+        "evaluator_sha256": base["evaluator_sha256"],
+        "dataset_sha256": base["dataset_sha256"],
+        "config_sha256": base["config_sha256"],
+        "seed": base["seed"],
+        "dependency_manifest_sha256": base["dependency_manifest_sha256"],
+        "scientific_protocol_sha256": base["scientific_protocol_sha256"],
+        "resource_protocol_sha256": base["resource_protocol_sha256"],
+        "workload_sha256": base["workload_sha256"],
+        "frozen_corpus_file_sha256": copy.deepcopy(FROZEN_CORPUS_FILES),
+        "corpus_provenance_amendment_sha256": sha256(
+            TRACKED_CORPUS_DIR / "provenance-amendment.json"
+        ),
+        "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
+    }
+
+
+def readiness_augmented_cache_key(
+    key_fields: dict[str, Any], repeat_index: int,
+) -> str:
+    return sha256_bytes(canonical_json_bytes({
+        "key_fields": key_fields, "repeat_index": int(repeat_index),
+    }))
+
+
+def base_calibration_cache_key_fields_from_augmented(
+    key_fields: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "checkpoint_sha256": key_fields["checkpoint_sha256"],
+        "evaluator_sha256": key_fields["evaluator_sha256"],
+        "dataset_sha256": key_fields["dataset_sha256"],
+        "config_sha256": key_fields["config_sha256"],
+        "seed": key_fields["seed"],
+        "environment_sha256": key_fields["environment_sha256"],
+        "runner_sha256": key_fields["calibration_runner_sha256"],
+        "scientific_protocol_sha256": key_fields["scientific_protocol_sha256"],
+        "resource_protocol_sha256": key_fields["resource_protocol_sha256"],
+        "workload_sha256": key_fields["workload_sha256"],
+        "dependency_manifest_sha256": key_fields["dependency_manifest_sha256"],
+    }
+
+
+def _validate_readiness_chronology_reference(
+    reference: dict[str, Any], record: dict[str, Any], *,
+    expected_root: int, expected_authorization_sha256: str,
+    expected_ordinal: int, expected_unit: str,
+    expected_repeat_index: int | None,
+    expected_predecessor_seal_sha256: str | None,
+) -> None:
+    if not isinstance(reference, dict):
+        raise RuntimeError("readiness chronology reference is not an object")
+    if set(reference) != {
+        "ordinal", "unit", "repeat_index", "start", "start_sha256",
+        "seal", "seal_sha256",
+    }:
+        raise RuntimeError("readiness chronology reference schema mismatch")
+    start = reference["start"]
+    seal = reference["seal"]
+    if not isinstance(start, dict) or set(start) != {
+        "schema_version", "event", "root", "authorization_sha256",
+        "ordinal", "unit", "repeat_index", "predecessor_seal_sha256",
+        "monotonic_ns", "complete",
+    }:
+        raise RuntimeError("readiness chronology start schema mismatch")
+    if not isinstance(seal, dict) or set(seal) != {
+        "schema_version", "event", "root", "authorization_sha256",
+        "ordinal", "unit", "repeat_index", "predecessor_seal_sha256",
+        "start_sha256", "augmented_record_sha256",
+        "reused_from_augmented_cache", "source_cache_sha256",
+        "monotonic_ns", "complete",
+    }:
+        raise RuntimeError("readiness chronology seal schema mismatch")
+    if reference["ordinal"] != expected_ordinal or reference["unit"] != expected_unit:
+        raise RuntimeError("readiness chronology ordinal/unit mismatch")
+    if reference["repeat_index"] != expected_repeat_index:
+        raise RuntimeError("readiness chronology repeat index mismatch")
+    if type(reference["ordinal"]) is not int:
+        raise RuntimeError("readiness chronology ordinal type mismatch")
+    if reference["start_sha256"] != sha256_bytes(canonical_json_bytes(start, pretty=True)):
+        raise RuntimeError("readiness chronology start hash mismatch")
+    if reference["seal_sha256"] != sha256_bytes(canonical_json_bytes(seal, pretty=True)):
+        raise RuntimeError("readiness chronology seal hash mismatch")
+    common = {
+        "root": expected_root,
+        "authorization_sha256": expected_authorization_sha256,
+        "ordinal": expected_ordinal,
+        "unit": expected_unit,
+        "repeat_index": expected_repeat_index,
+        "predecessor_seal_sha256": expected_predecessor_seal_sha256,
+    }
+    for key, value in common.items():
+        if start.get(key) != value or seal.get(key) != value:
+            raise RuntimeError(f"readiness chronology binding mismatch for {key}")
+    if start.get("schema_version") != "exp648-readiness-augmented-unit-start-v1" or start.get("event") != "start" or start.get("complete") is not False:
+        raise RuntimeError("readiness chronology start event mismatch")
+    if seal.get("schema_version") != "exp648-readiness-augmented-unit-seal-v1" or seal.get("event") != "seal" or seal.get("complete") is not True:
+        raise RuntimeError("readiness chronology seal event mismatch")
+    if seal.get("start_sha256") != reference["start_sha256"]:
+        raise RuntimeError("readiness chronology seal/start linkage mismatch")
+    reused = seal.get("reused_from_augmented_cache")
+    source_cache_sha256 = seal.get("source_cache_sha256")
+    if type(reused) is not bool:
+        raise RuntimeError("readiness chronology cache-reuse marker mismatch")
+    if reused:
+        if not isinstance(source_cache_sha256, str) or re.fullmatch(
+            r"[0-9a-f]{64}", source_cache_sha256
+        ) is None:
+            raise RuntimeError("readiness chronology reused cache hash is absent")
+    elif source_cache_sha256 is not None:
+        raise RuntimeError("readiness chronology fresh unit claims a source cache")
+    if "reused_from_augmented_cache" in record:
+        if record["reused_from_augmented_cache"] is not reused:
+            raise RuntimeError("readiness record/chronology cache-reuse mismatch")
+        cache_path = record.get("augmented_cache_path")
+        if reused and (not isinstance(cache_path, str) or not cache_path):
+            raise RuntimeError("readiness reused record lacks its augmented cache path")
+    if type(start.get("monotonic_ns")) is not int or type(
+        seal.get("monotonic_ns")
+    ) is not int:
+        raise RuntimeError("readiness chronology monotonic type mismatch")
+    start_ns = start["monotonic_ns"]
+    seal_ns = seal["monotonic_ns"]
+    if start_ns < 0 or seal_ns <= start_ns:
+        raise RuntimeError("readiness chronology monotonic start/seal order mismatch")
+    bare = _bare_augmented_record(record)
+    if seal.get("augmented_record_sha256") != sha256_bytes(
+        canonical_json_bytes(bare, pretty=True)
+    ):
+        raise RuntimeError("readiness chronology augmented record hash mismatch")
+    validate_complete_readiness_timing(bare)
+
+
+def validate_readiness_chronology(payload: dict[str, Any]) -> None:
+    chronology = payload.get("chronology")
+    if not isinstance(chronology, dict) or set(chronology) != {
+        "schema_version", "root", "authorization_sha256", "contract_sha256",
+        "order", "units", "complete",
+    }:
+        raise RuntimeError("readiness augmented chronology is absent or malformed")
+    if chronology.get("schema_version") != "exp648-readiness-augmented-chronology-v1" or chronology.get("complete") is not True:
+        raise RuntimeError("readiness augmented chronology is incomplete")
+    root = int(payload["calibration_root"])
+    authorization_sha256 = str(payload["calibration_authorization_sha256"])
+    if chronology.get("root") != root or chronology.get("authorization_sha256") != authorization_sha256:
+        raise RuntimeError("readiness augmented chronology root/auth mismatch")
+    if chronology.get("contract_sha256") != READINESS_CHRONOLOGY_CONTRACT_SHA256:
+        raise RuntimeError("readiness augmented chronology contract mismatch")
+    expected_order = [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER]
+    if chronology.get("order") != expected_order:
+        raise RuntimeError("readiness augmented chronology unit order mismatch")
+    records = [payload["warmup"], *payload["repeats"]]
+    units = chronology.get("units")
+    if not isinstance(units, list) or len(units) != len(READINESS_AUGMENTED_UNIT_ORDER):
+        raise RuntimeError("readiness augmented chronology unit count mismatch")
+    predecessor: str | None = None
+    predecessor_seal_ns = -1
+    for ordinal, ((unit, repeat_index), record, reference) in enumerate(
+        zip(READINESS_AUGMENTED_UNIT_ORDER, records, units, strict=True)
+    ):
+        if record.get("readiness_chronology") != reference:
+            raise RuntimeError("readiness record/top-level chronology mismatch")
+        _validate_readiness_chronology_reference(
+            reference, record,
+            expected_root=root,
+            expected_authorization_sha256=authorization_sha256,
+            expected_ordinal=ordinal,
+            expected_unit=unit,
+            expected_repeat_index=repeat_index,
+            expected_predecessor_seal_sha256=predecessor,
+        )
+        start_ns = int(reference["start"]["monotonic_ns"])
+        if ordinal and start_ns <= predecessor_seal_ns:
+            raise RuntimeError("readiness next augmented unit started before predecessor seal")
+        predecessor = reference["seal_sha256"]
+        predecessor_seal_ns = int(reference["seal"]["monotonic_ns"])
+
+
+def _write_readiness_chronology_start(
+    *, attempt: Path, root: int, authorization_sha256: str,
+    ordinal: int, unit: str, repeat_index: int | None,
+    predecessor: dict[str, Any] | None,
+) -> dict[str, Any]:
+    expected_unit, expected_repeat = READINESS_AUGMENTED_UNIT_ORDER[ordinal]
+    if (unit, repeat_index) != (expected_unit, expected_repeat):
+        raise RuntimeError("readiness chronology attempted an out-of-order unit")
+    predecessor_sha = None if predecessor is None else predecessor["seal_sha256"]
+    predecessor_ns = -1 if predecessor is None else int(predecessor["seal"]["monotonic_ns"])
+    if ordinal == 0 and predecessor is not None or ordinal > 0 and predecessor is None:
+        raise RuntimeError("readiness chronology predecessor presence mismatch")
+    if predecessor is not None and predecessor_sha != sha256_bytes(
+        canonical_json_bytes(predecessor["seal"], pretty=True)
+    ):
+        raise RuntimeError("readiness chronology predecessor seal hash mismatch")
+    started_ns = time.monotonic_ns()
+    if started_ns <= predecessor_ns:
+        raise RuntimeError("readiness next augmented unit started before predecessor seal")
+    payload = {
+        "schema_version": "exp648-readiness-augmented-unit-start-v1",
+        "event": "start", "root": root,
+        "authorization_sha256": authorization_sha256,
+        "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+        "predecessor_seal_sha256": predecessor_sha,
+        "monotonic_ns": started_ns, "complete": False,
+    }
+    path = attempt / "augmented-chronology" / f"{ordinal:02d}-{unit}-start.json"
+    _atomic_write(path, canonical_json_bytes(payload, pretty=True))
+    return {
+        "payload": payload,
+        "sha256": sha256(path),
+        "path": _path_for_receipt(path),
+    }
+
+
+def _write_readiness_chronology_seal(
+    *, attempt: Path, root: int, authorization_sha256: str,
+    ordinal: int, unit: str, repeat_index: int | None,
+    predecessor_seal_sha256: str | None,
+    start: dict[str, Any], record_path: Path,
+    reused_from_augmented_cache: bool,
+    source_cache_sha256: str | None,
+) -> dict[str, Any]:
+    sealed_ns = time.monotonic_ns()
+    if sealed_ns <= int(start["payload"]["monotonic_ns"]):
+        raise RuntimeError("readiness chronology seal did not follow start")
+    payload = {
+        "schema_version": "exp648-readiness-augmented-unit-seal-v1",
+        "event": "seal", "root": root,
+        "authorization_sha256": authorization_sha256,
+        "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+        "predecessor_seal_sha256": predecessor_seal_sha256,
+        "start_sha256": start["sha256"],
+        "augmented_record_sha256": sha256(record_path),
+        "reused_from_augmented_cache": reused_from_augmented_cache,
+        "source_cache_sha256": source_cache_sha256,
+        "monotonic_ns": sealed_ns, "complete": True,
+    }
+    path = attempt / "augmented-chronology" / f"{ordinal:02d}-{unit}-seal.json"
+    _atomic_write(path, canonical_json_bytes(payload, pretty=True))
+    reference = {
+        "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+        "start": start["payload"], "start_sha256": start["sha256"],
+        "seal": payload, "seal_sha256": sha256(path),
+    }
+    return reference
+
+
+def validate_augmented_repeat_cache_payload(
+    payload: dict[str, Any], *, expected_key_fields: dict[str, Any],
+    repeat_index: int, config: dict[str, Any],
+) -> None:
+    if set(payload) != {
+        "schema_version", "cache_key", "cache_key_fields", "repeat_index",
+        "record", "source_chronology", "source_seal_sha256",
+        "cache_created_monotonic_ns",
+    } or payload.get("schema_version") != "exp648-readiness-augmented-repeat-cache-v1":
+        raise RuntimeError("readiness augmented repeat cache schema mismatch")
+    if payload.get("cache_key_fields") != expected_key_fields or payload.get("repeat_index") != repeat_index:
+        raise RuntimeError("readiness augmented repeat cache binding mismatch")
+    expected_key = readiness_augmented_cache_key(expected_key_fields, repeat_index)
+    if payload.get("cache_key") != expected_key:
+        raise RuntimeError("readiness augmented repeat cache key mismatch")
+    record = payload.get("record")
+    reference = payload.get("source_chronology")
+    if not isinstance(record, dict) or record.get("complete") is not True:
+        raise RuntimeError("readiness augmented repeat cache is incomplete")
+    if record.get("reused_from_augmented_cache") is not None or record.get("readiness_chronology") is not None:
+        raise RuntimeError("readiness augmented cache stores a non-bare record")
+    if not isinstance(reference, dict):
+        raise RuntimeError("readiness augmented cache chronology is absent")
+    source_start = reference.get("start")
+    if not isinstance(source_start, dict):
+        raise RuntimeError("readiness augmented cache chronology start is absent")
+    _validate_readiness_chronology_reference(
+        reference, record,
+        expected_root=int(expected_key_fields["root"]),
+        expected_authorization_sha256=str(expected_key_fields["authorization_sha256"]),
+        expected_ordinal=repeat_index,
+        expected_unit=f"repeat-{repeat_index}",
+        expected_repeat_index=repeat_index,
+        expected_predecessor_seal_sha256=source_start.get(
+            "predecessor_seal_sha256"
+        ),
+    )
+    if reference["seal"].get("reused_from_augmented_cache") is not False:
+        raise RuntimeError("readiness augmented cache source was not freshly measured")
+    if payload.get("source_seal_sha256") != reference["seal_sha256"]:
+        raise RuntimeError("readiness augmented cache source seal mismatch")
+    if int(payload.get("cache_created_monotonic_ns", -1)) <= int(reference["seal"]["monotonic_ns"]):
+        raise RuntimeError("readiness augmented cache predates its source seal")
+    validate_complete_readiness_timing(record)
+    cal.validate_cached_repeat_record(
+        record,
+        config,
+        repeat_index=repeat_index,
+        expected_cache_key_fields=(
+            base_calibration_cache_key_fields_from_augmented(expected_key_fields)
+        ),
+    )
+
+
+def _augmented_repeat_cache_path(
+    *, root: int, repeat_index: int, key: str,
+) -> Path:
+    return (
+        SCRATCH_SCREEN_DIR / "augmented-repeat-cache" / f"root-{root}"
+        / f"repeat-{repeat_index}-{key}.json"
+    )
+
+
+def load_augmented_repeat_cache(
+    *, experiment: Any, authorization_sha256: str, repeat_index: int,
+    config: dict[str, Any],
+) -> tuple[dict[str, Any], Path, str] | None:
+    key_fields = readiness_augmented_cache_key_fields(
+        experiment, authorization_sha256=authorization_sha256
+    )
+    key = readiness_augmented_cache_key(key_fields, repeat_index)
+    path = _augmented_repeat_cache_path(
+        root=int(experiment.root_seed), repeat_index=repeat_index, key=key
+    )
+    if not path.is_file():
+        return None
+    raw = path.read_bytes()
+    try:
+        payload = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise RuntimeError("readiness augmented repeat cache is malformed") from error
+    if raw != canonical_json_bytes(payload, pretty=True):
+        raise RuntimeError("readiness augmented repeat cache is noncanonical")
+    validate_augmented_repeat_cache_payload(
+        payload, expected_key_fields=key_fields,
+        repeat_index=repeat_index, config=config,
+    )
+    return payload, path, sha256(path)
+
+
+def save_augmented_repeat_cache(
+    *, experiment: Any, authorization_sha256: str, repeat_index: int,
+    config: dict[str, Any], record: dict[str, Any],
+) -> tuple[Path, str]:
+    bare = _bare_augmented_record(record)
+    reference = record["readiness_chronology"]
+    key_fields = readiness_augmented_cache_key_fields(
+        experiment, authorization_sha256=authorization_sha256
+    )
+    key = readiness_augmented_cache_key(key_fields, repeat_index)
+    path = _augmented_repeat_cache_path(
+        root=int(experiment.root_seed), repeat_index=repeat_index, key=key
+    )
+    created_ns = time.monotonic_ns()
+    if created_ns <= int(reference["seal"]["monotonic_ns"]):
+        raise RuntimeError("readiness augmented cache write did not follow source seal")
+    payload = {
+        "schema_version": "exp648-readiness-augmented-repeat-cache-v1",
+        "cache_key": key, "cache_key_fields": key_fields,
+        "repeat_index": repeat_index, "record": bare,
+        "source_chronology": reference,
+        "source_seal_sha256": reference["seal_sha256"],
+        "cache_created_monotonic_ns": created_ns,
+    }
+    validate_augmented_repeat_cache_payload(
+        payload, expected_key_fields=key_fields,
+        repeat_index=repeat_index, config=config,
+    )
+    _atomic_write(path, canonical_json_bytes(payload, pretty=True))
+    return path, sha256(path)
+
+
+def _execute_one_augmented_readiness_unit(
+    *, experiment: Any, attempt: Path, authorization_sha256: str,
+    config: dict[str, Any], ordinal: int, unit: str,
+    repeat_index: int | None, predecessor: dict[str, Any] | None,
+    launcher_timing: dict[str, Any] | None,
+) -> dict[str, Any]:
+    start = _write_readiness_chronology_start(
+        attempt=attempt, root=int(experiment.root_seed),
+        authorization_sha256=authorization_sha256,
+        ordinal=ordinal, unit=unit, repeat_index=repeat_index,
+        predecessor=predecessor,
+    )
+    predecessor_sha = None if predecessor is None else predecessor["seal_sha256"]
+    output = attempt / "augmented-units" / f"{ordinal:02d}-{unit}"
+    record_path = output / "augmented-unit.json"
+    cached = None if repeat_index is None else load_augmented_repeat_cache(
+        experiment=experiment, authorization_sha256=authorization_sha256,
+        repeat_index=repeat_index, config=config,
+    )
+    if cached is not None:
+        cache_payload, cache_path, cache_sha = cached
+        record = copy.deepcopy(cache_payload["record"])
+        experiment.guard.add_reused(
+            float(record["total_timing"]["wall_seconds"]),
+            float(record["total_timing"]["aggregate_cpu_seconds"]),
+        )
+        experiment.guard(f"readiness:{unit}:complete-augmented-cache-accepted")
+        _atomic_write(record_path, canonical_json_bytes(record, pretty=True))
+        experiment.guard(f"readiness:{unit}:cached-augmented-record-published")
+        reference = _write_readiness_chronology_seal(
+            attempt=attempt, root=int(experiment.root_seed),
+            authorization_sha256=authorization_sha256,
+            ordinal=ordinal, unit=unit, repeat_index=repeat_index,
+            predecessor_seal_sha256=predecessor_sha,
+            start=start, record_path=record_path,
+            reused_from_augmented_cache=True,
+            source_cache_sha256=cache_sha,
+        )
+        experiment.guard(f"readiness:{unit}:reused-augmented-unit-sealed")
+        return {
+            **record,
+            "readiness_chronology": reference,
+            "reused_from_augmented_cache": True,
+            "augmented_cache_path": _path_for_receipt(cache_path),
+        }
+
+    base_name = f"readiness-{unit}-{time.time_ns()}"
+    record = copy.deepcopy(experiment.execute_complete_unit(
+        base_name, repeat_index=repeat_index
+    ))
+    experiment.guard(f"readiness:{unit}:base-complete")
+    record["base_total_timing_before_readiness_additions"] = copy.deepcopy(
+        record["total_timing"]
+    )
+    replay = measure_actual_source_replay_unit(
+        experiment, output / "source-replay", psutil.Process()
+    )
+    experiment.guard(f"readiness:{unit}:source-replay-complete")
+    probe = measure_readiness_mlflow_probe(
+        authorization_sha256=authorization_sha256, unit=unit,
+        output=output / "mlflow-probe", process=psutil.Process(),
+    )
+    experiment.guard(f"readiness:{unit}:mlflow-probe-complete")
+    infrastructure = measure_readiness_infrastructure_unit(
+        record, output / "readiness-infrastructure", psutil.Process()
+    )
+    experiment.guard(f"readiness:{unit}:infrastructure-complete")
+    if repeat_index is None:
+        record["actual_source_replay"] = replay
+        record["mlflow_probe"] = probe
+        record["readiness_infrastructure"] = infrastructure
+        if launcher_timing is None:
+            raise RuntimeError("readiness warmup lacks launcher timing")
+        record["launcher_timing"] = launcher_timing
+    else:
+        record["components"]["actual_source_replay"] = replay
+        record["components"]["mlflow_probe"] = probe
+        record["components"]["readiness_infrastructure"] = infrastructure
+    record["total_timing"] = aggregate_readiness_timing(
+        record["base_total_timing_before_readiness_additions"],
+        replay["timing"], probe["timing"], infrastructure["timing"],
+    )
+    validate_complete_readiness_timing(record)
+    cal.validate_calibration_repeat(record, config)
+    experiment.guard(f"readiness:{unit}:augmented-validation-complete")
+    _atomic_write(record_path, canonical_json_bytes(record, pretty=True))
+    experiment.guard(f"readiness:{unit}:augmented-record-published")
+    reference = _write_readiness_chronology_seal(
+        attempt=attempt, root=int(experiment.root_seed),
+        authorization_sha256=authorization_sha256,
+        ordinal=ordinal, unit=unit, repeat_index=repeat_index,
+        predecessor_seal_sha256=predecessor_sha,
+        start=start, record_path=record_path,
+        reused_from_augmented_cache=False, source_cache_sha256=None,
+    )
+    experiment.guard(f"readiness:{unit}:fresh-augmented-unit-sealed")
+    result = {
+        **record,
+        "readiness_chronology": reference,
+        "reused_from_augmented_cache": False,
+        "augmented_cache_path": None,
+    }
+    if repeat_index is not None:
+        cache_path, _cache_sha = save_augmented_repeat_cache(
+            experiment=experiment, authorization_sha256=authorization_sha256,
+            repeat_index=repeat_index, config=config, record=result,
+        )
+        result["augmented_cache_path"] = _path_for_receipt(cache_path)
+        experiment.guard(f"readiness:{unit}:augmented-cache-preserved-after-seal")
+    return result
+
+
+def execute_synchronous_augmented_readiness_units(
+    *, experiment: Any, attempt: Path, authorization_sha256: str,
+    config: dict[str, Any], launcher_timing: dict[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    predecessor = None
+    for ordinal, (unit, repeat_index) in enumerate(READINESS_AUGMENTED_UNIT_ORDER):
+        record = _execute_one_augmented_readiness_unit(
+            experiment=experiment, attempt=attempt,
+            authorization_sha256=authorization_sha256, config=config,
+            ordinal=ordinal, unit=unit, repeat_index=repeat_index,
+            predecessor=predecessor,
+            launcher_timing=launcher_timing if ordinal == 0 else None,
+        )
+        records.append(record)
+        predecessor = record["readiness_chronology"]
+    chronology = {
+        "schema_version": "exp648-readiness-augmented-chronology-v1",
+        "root": int(experiment.root_seed),
+        "authorization_sha256": authorization_sha256,
+        "contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
+        "order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
+        "units": [record["readiness_chronology"] for record in records],
+        "complete": True,
+    }
+    payload = {
+        "calibration_root": int(experiment.root_seed),
+        "calibration_authorization_sha256": authorization_sha256,
+        "warmup": records[0], "repeats": records[1:],
+        "chronology": chronology,
+    }
+    validate_readiness_chronology(payload)
+    experiment.guard("readiness:all-synchronous-augmented-units-sealed")
+    return records[0], records[1:], chronology
+
+
+def _read_regular_file_no_follow(path: Path, *, label: str) -> bytes:
+    if not os.path.lexists(path):
+        raise RuntimeError(f"{label} disappeared during validation")
+    before = os.lstat(path)
+    if stat.S_ISLNK(before.st_mode) or not stat.S_ISREG(before.st_mode):
+        raise RuntimeError(f"{label} is not a no-follow regular file")
+    flags = os.O_RDONLY | os.O_CLOEXEC
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as error:
+        raise RuntimeError(f"{label} cannot be opened without following links") from error
+    try:
+        observed = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(observed.st_mode)
+            or (observed.st_dev, observed.st_ino) != (before.st_dev, before.st_ino)
+        ):
+            raise RuntimeError(f"{label} filesystem identity changed")
+        chunks = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        return b"".join(chunks)
+    finally:
+        os.close(descriptor)
+
+
+def _verify_exclusive_readiness_attempt_directory(path: Path) -> None:
+    if not os.path.lexists(path):
+        raise RuntimeError("claimed readiness attempt directory disappeared")
+    observed = os.lstat(path)
+    if stat.S_ISLNK(observed.st_mode) or not stat.S_ISDIR(observed.st_mode):
+        raise RuntimeError("claimed readiness attempt path is not a no-follow directory")
+
+
+def _parsed_readiness_attempt_directories(root: Path, stem: str) -> list[tuple[int, Path]]:
+    if not os.path.lexists(root):
+        return []
+    root_state = os.lstat(root)
+    if stat.S_ISLNK(root_state.st_mode) or not stat.S_ISDIR(root_state.st_mode):
+        raise RuntimeError("readiness attempt root is not a no-follow directory")
+    pattern = re.compile(rf"^{re.escape(stem)}(?:-retry-(\d{{3,}}))?$")
+    parsed: list[tuple[int, Path]] = []
+    with os.scandir(root) as entries:
+        for entry in sorted(entries, key=lambda item: item.name):
+            if not entry.name.startswith(stem):
+                continue
+            match = pattern.fullmatch(entry.name)
+            if (
+                match is None
+                or entry.is_symlink()
+                or not entry.is_dir(follow_symlinks=False)
+            ):
+                raise RuntimeError("malformed, linked, or non-directory readiness attempt path")
+            suffix = 0 if match.group(1) is None else int(match.group(1))
+            parsed.append((suffix, root / entry.name))
+    if len({suffix for suffix, _ in parsed}) != len(parsed):
+        raise RuntimeError("colliding readiness attempt suffix")
+    return parsed
+
+
+def _read_readiness_attempt_state(path: Path) -> dict[str, Any]:
+    raw = _read_regular_file_no_follow(path, label="readiness attempt state")
+    try:
+        state = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise RuntimeError("existing readiness attempt state is malformed") from error
+    if not isinstance(state, dict) or raw != canonical_json_bytes(state, pretty=True):
+        raise RuntimeError("existing readiness attempt state is noncanonical")
+    base_keys = {
+        "schema_version", "attempt_id", "authorization_sha256", "phase", "complete",
+    }
+    allowed_keys = base_keys | {"completion_manifest_sha256"}
+    if not base_keys.issubset(state) or not set(state).issubset(allowed_keys):
+        raise RuntimeError("existing readiness attempt state key schema mismatch")
+    if state["schema_version"] != "exp648-readiness-calibration-attempt-v1":
+        raise RuntimeError("existing readiness attempt state schema mismatch")
+    if not isinstance(state["authorization_sha256"], str) or len(state["authorization_sha256"]) != 64:
+        raise RuntimeError("existing readiness attempt authorization binding is invalid")
+    if state["phase"] not in {"authorized", "sealed"} or not isinstance(state["complete"], bool):
+        raise RuntimeError("existing readiness attempt phase is invalid")
+    if (state["phase"] == "sealed") is not state["complete"]:
+        raise RuntimeError("existing readiness attempt terminal state is inconsistent")
+    if state["complete"]:
+        digest = state.get("completion_manifest_sha256")
+        if not isinstance(digest, str) or len(digest) != 64:
+            raise RuntimeError("sealed readiness attempt completion binding is invalid")
+    elif "completion_manifest_sha256" in state:
+        raise RuntimeError("incomplete readiness attempt has a completion binding")
+    return state
+
+
+def assert_readiness_authorization_not_sealed_or_published(
+    *, authorization_sha256: str, attempts_root: Path, tracked_root: Path,
+) -> list[Path]:
+    stem = f"cal-{authorization_sha256[:16]}"
+    prior = [item for _, item in _parsed_readiness_attempt_directories(attempts_root, stem)]
+    for directory in prior:
+        state_path = directory / "attempt-state.json"
+        if os.path.lexists(state_path):
+            state = _read_readiness_attempt_state(state_path)
+            if state["attempt_id"] != directory.name:
+                raise RuntimeError("existing readiness attempt ID binding mismatch")
+            if state["authorization_sha256"] != authorization_sha256:
+                raise RuntimeError("existing readiness attempt provenance mismatch")
+            if state["complete"] or state["phase"] == "sealed":
+                raise PermissionError(
+                    "sealed readiness calibration attempt cannot be relaunched"
+                )
+        seal_path = directory / "completion-seal.json"
+        if os.path.lexists(seal_path):
+            raw = _read_regular_file_no_follow(
+                seal_path, label="readiness attempt completion seal"
+            )
+            try:
+                seal = json.loads(raw)
+            except (json.JSONDecodeError, UnicodeDecodeError) as error:
+                raise RuntimeError("readiness attempt completion seal is malformed") from error
+            if not isinstance(seal, dict) or raw != canonical_json_bytes(seal, pretty=True):
+                raise RuntimeError("readiness attempt completion seal is noncanonical")
+            if seal.get("authorization_sha256") != authorization_sha256:
+                raise RuntimeError("readiness attempt completion seal binding mismatch")
+            raise PermissionError("sealed readiness calibration attempt cannot be relaunched")
+    tracked_names = (
+        "readiness-calibration.json",
+        "readiness-calibration-core.json",
+        "readiness-calibration-environment.json",
+        "readiness-calibration-mlflow.json",
+        "readiness-calibration-executed-config.yaml",
+        "readiness-calibration-completion.json",
+        "readiness-calibration-resource-completion.json",
+        "readiness-calibration-attempt-state.json",
+        "readiness-calibration-launch-ledger.json",
+    )
+    for name in tracked_names:
+        path = tracked_root / name
+        if os.path.lexists(path):
+            _read_regular_file_no_follow(path, label="tracked readiness publication")
+            raise PermissionError(
+                "live tracked readiness output singleton blocks calibration launch"
+            )
+    return prior
+
+
+def allocate_readiness_calibration_attempt(
+    *, authorization_sha256: str, attempts_root: Path, tracked_root: Path,
+) -> tuple[str, Path, list[Path]]:
+    prior = assert_readiness_authorization_not_sealed_or_published(
+        authorization_sha256=authorization_sha256,
+        attempts_root=attempts_root,
+        tracked_root=tracked_root,
+    )
+    stem = f"cal-{authorization_sha256[:16]}"
+    attempts_root.mkdir(parents=True, exist_ok=True)
+    parsed = _parsed_readiness_attempt_directories(attempts_root, stem)
+    suffix = 0 if not parsed else max(value for value, _ in parsed) + 1
+    while True:
+        attempt_id = stem if suffix == 0 else f"{stem}-retry-{suffix:03d}"
+        directory = attempts_root / attempt_id
+        try:
+            directory.mkdir(exist_ok=False)
+        except FileExistsError:
+            assert_readiness_authorization_not_sealed_or_published(
+                authorization_sha256=authorization_sha256,
+                attempts_root=attempts_root,
+                tracked_root=tracked_root,
+            )
+            parsed = _parsed_readiness_attempt_directories(attempts_root, stem)
+            suffix = max(value for value, _ in parsed) + 1
+            continue
+        _verify_exclusive_readiness_attempt_directory(directory)
+        assert_readiness_authorization_not_sealed_or_published(
+            authorization_sha256=authorization_sha256,
+            attempts_root=attempts_root,
+            tracked_root=tracked_root,
+        )
+        _verify_exclusive_readiness_attempt_directory(directory)
+        return attempt_id, directory, prior
+
+
+@contextlib.contextmanager
+def readiness_calibration_authorization_lock(
+    *, authorization_sha256: str, scratch_root: Path,
+):
+    lock_root = scratch_root / "readiness-calibration-locks"
+    lock_root.mkdir(parents=True, exist_ok=True)
+    root_state = os.lstat(lock_root)
+    if stat.S_ISLNK(root_state.st_mode) or not stat.S_ISDIR(root_state.st_mode):
+        raise RuntimeError("readiness lock root is not a no-follow directory")
+    lock_path = lock_root / f"cal-{authorization_sha256[:16]}.lock"
+    flags = os.O_RDWR | os.O_CREAT | os.O_CLOEXEC
+    if hasattr(os, "O_NOFOLLOW"):
+        flags |= os.O_NOFOLLOW
+    try:
+        descriptor = os.open(lock_path, flags, 0o600)
+    except OSError as error:
+        raise RuntimeError("readiness authorization lock is unsafe") from error
+    try:
+        observed = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(observed.st_mode)
+            or observed.st_uid != os.geteuid()
+            or observed.st_nlink != 1
+        ):
+            raise RuntimeError("readiness authorization lock identity is unsafe")
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise PermissionError(
+                "concurrent readiness calibration authorization is already active"
+            ) from error
+        yield
+    finally:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+
+
 def execute_readiness_calibration(
+    authorization: dict[str, Any], *, launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+) -> dict[str, Any]:
+    auth_sha = authorization["authorization_sha256"]
+    with readiness_calibration_authorization_lock(
+        authorization_sha256=auth_sha, scratch_root=SCRATCH_SCREEN_DIR,
+    ):
+        return _execute_readiness_calibration_locked(
+            authorization,
+            launch_wall_started=launch_wall_started,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=launch_peak_rss,
+        )
+
+
+def _execute_readiness_calibration_locked(
     authorization: dict[str, Any], *, launch_wall_started: float,
     launch_cpu_started: float, launch_peak_rss: int,
 ) -> dict[str, Any]:
     root_seed = int(authorization["calibration_root"])
     auth_sha = authorization["authorization_sha256"]
-    attempt_id = f"cal-{auth_sha[:16]}"
-    attempt = SCRATCH_SCREEN_DIR / "readiness-calibration-attempts" / attempt_id
-    if attempt.exists():
-        state_path = attempt / "attempt-state.json"
-        if state_path.is_file():
-            state = json.loads(state_path.read_text(encoding="utf-8"))
-            if state.get("authorization_sha256") != auth_sha:
-                raise RuntimeError("stale readiness calibration attempt binding mismatch")
-    attempt.mkdir(parents=True, exist_ok=True)
+    attempt_id, attempt, _prior_attempts = allocate_readiness_calibration_attempt(
+        authorization_sha256=auth_sha,
+        attempts_root=SCRATCH_SCREEN_DIR / "readiness-calibration-attempts",
+        tracked_root=TRACKED_SCREEN_DIR,
+    )
     _atomic_write(attempt / "attempt-state.json", canonical_json_bytes({
         "schema_version": "exp648-readiness-calibration-attempt-v1",
         "attempt_id": attempt_id, "authorization_sha256": auth_sha,
@@ -1613,6 +2657,7 @@ def execute_readiness_calibration(
         cal.ALLOWED_MODE_ROOTS["calibration"] = frozenset((root_seed,))
         cal.preserve_executed_config = preserve_local
         experiment = cal.CalibrationExperiment(config_path, attempt / "raw")
+        apply_readiness_historical_charge_once(experiment.guard)
         setup_process = psutil.Process()
         setup_cpu = setup_process.cpu_times()
         prewarmup_launcher = {
@@ -1621,85 +2666,66 @@ def execute_readiness_calibration(
             "peak_rss_bytes": max(launch_peak_rss, cal.process_peak_rss_bytes(setup_process)),
             "captured_before_warmup_and_repeats": True,
         }
-        base = experiment.run()
+        warmup, repeats, chronology = execute_synchronous_augmented_readiness_units(
+            experiment=experiment,
+            attempt=attempt,
+            authorization_sha256=auth_sha,
+            config=config,
+            launcher_timing=prewarmup_launcher,
+        )
     finally:
         cal.CALIBRATION_ROOT = original_root
         cal.ALLOWED_MODE_ROOTS["calibration"] = original_allowed
         cal.preserve_executed_config = original_preserve
-    repeats = copy.deepcopy(list(base["timed_repeats"]))
-    warmup = copy.deepcopy(base["warmup"])
-    warmup["base_total_timing_before_readiness_additions"] = copy.deepcopy(
-        warmup["total_timing"]
-    )
-    warmup_replay = measure_actual_source_replay_unit(
-        experiment, attempt / "readiness-source-replay" / "warmup", psutil.Process()
-    )
-    warmup_mlflow_probe = measure_readiness_mlflow_probe(
-        authorization_sha256=auth_sha, unit="warmup", output=attempt / "mlflow-probes" / "warmup", process=psutil.Process()
-    )
-    warmup_infrastructure = measure_readiness_infrastructure_unit(
-        warmup, attempt / "readiness-infrastructure" / "warmup", psutil.Process()
-    )
-    warmup["actual_source_replay"] = warmup_replay
-    warmup["mlflow_probe"] = warmup_mlflow_probe
-    warmup["readiness_infrastructure"] = warmup_infrastructure
-    warmup["launcher_timing"] = prewarmup_launcher
-    warmup["total_timing"] = aggregate_readiness_timing(
-        warmup["base_total_timing_before_readiness_additions"],
-        warmup_replay["timing"],
-        warmup_mlflow_probe["timing"],
-        warmup_infrastructure["timing"],
-    )
-    validate_complete_readiness_timing(warmup)
-    for index, repeat in enumerate(repeats, start=1):
-        repeat["base_total_timing_before_readiness_additions"] = copy.deepcopy(
-            repeat["total_timing"]
-        )
-        repeat["components"]["actual_source_replay"] = measure_actual_source_replay_unit(
-            experiment, attempt / "readiness-source-replay" / f"repeat-{index}", psutil.Process()
-        )
-        repeat["components"]["mlflow_probe"] = measure_readiness_mlflow_probe(
-            authorization_sha256=auth_sha, unit=f"repeat-{index}",
-            output=attempt / "mlflow-probes" / f"repeat-{index}", process=psutil.Process()
-        )
-        infrastructure = measure_readiness_infrastructure_unit(
-            repeat, attempt / "readiness-infrastructure" / f"repeat-{index}", psutil.Process()
-        )
-        repeat["components"]["readiness_infrastructure"] = infrastructure
-        repeat["total_timing"] = aggregate_readiness_timing(
-            repeat["base_total_timing_before_readiness_additions"],
-            repeat["components"]["actual_source_replay"]["timing"],
-            repeat["components"]["mlflow_probe"]["timing"],
-            infrastructure["timing"],
-        )
-        validate_complete_readiness_timing(repeat)
-        cal.validate_calibration_repeat(repeat, config)
     launcher = prewarmup_launcher
     budgets, component_resolution = resolve_readiness_screen_budgets(
         repeats, launcher, warmup
     )
-    environment = base["environment"]
+    environment = experiment.environment
     environment_path = attempt / "environment.json"
     _atomic_write(environment_path, canonical_json_bytes(environment, pretty=True))
-    base_recovery = copy.deepcopy(base["recovery"])
     final_process = psutil.Process()
     final_cpu = final_process.cpu_times()
     active_wall = time.perf_counter() - launch_wall_started
     active_cpu = float(final_cpu.user + final_cpu.system) - launch_cpu_started
     final_peak_rss = max(launch_peak_rss, cal.process_peak_rss_bytes(final_process))
-    historical_wall = 5900.399178599999
-    historical_cpu = 24278.120608365
-    prior_wall = float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
-    prior_cpu = float(
-        cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
-    )
-    reused_wall = float(base_recovery["reused_wall_seconds_charged"])
-    reused_cpu = float(base_recovery["reused_aggregate_cpu_seconds_charged"])
+    historical_wall = READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
+    historical_cpu = READINESS_HISTORICAL_COMPLETED_CHARGE[
+        "aggregate_cpu_seconds"
+    ]
+    prior_wall = READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
+    prior_cpu = READINESS_SUPERSEDED_CALIBRATION_CHARGE[
+        "aggregate_cpu_seconds"
+    ]
+    reused_wall = float(experiment.guard.reused_wall_seconds)
+    reused_cpu = float(experiment.guard.reused_cpu_seconds)
     recovery = {
         "scope": "prepublication-provisional-snapshot-before-inner-publication",
         "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
-        "base_calibration_experiment_snapshot_provisional": base_recovery,
-        "prior_superseded_calibrations": list(cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+        "augmented_unit_orchestration": {
+            "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
+            "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
+            "old_base_only_cache_loaded_or_saved": False,
+            "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+            "historical_and_superseded_charge_applied_exactly_once": bool(
+                getattr(
+                    experiment.guard, "readiness_historical_charge_applied", False
+                )
+            ),
+            "guard_historical_and_superseded_wall_seconds": float(
+                experiment.guard.prior_superseded_wall_seconds
+            ),
+            "guard_historical_and_superseded_aggregate_cpu_seconds": float(
+                experiment.guard.prior_superseded_cpu_seconds
+            ),
+            "reused_complete_augmented_repeat_indices": [
+                int(record["repeat_index"])
+                for record in repeats
+                if record.get("reused_from_augmented_cache") is True
+            ],
+            "all_augmented_units_validated_and_sealed_before_next_start": True,
+        },
+        "prior_superseded_calibrations": list(READINESS_SUPERSEDED_CALIBRATIONS),
         "historical_completed_calibration_wall_seconds": historical_wall,
         "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
         "historical_prior_superseded_wall_seconds_charged": prior_wall,
@@ -1715,7 +2741,7 @@ def execute_readiness_calibration(
         "prepublication_provisional_plus_historical_wall_seconds": historical_wall + active_wall + reused_wall,
         "prepublication_provisional_plus_historical_aggregate_cpu_seconds": historical_cpu + active_cpu + reused_cpu,
         "prepublication_provisional_process_peak_rss_bytes": final_peak_rss,
-        "active_snapshot_boundary": "after complete warmup and three repeats including actual replay, MLflow probes, readiness infrastructure, setup, and launcher; before immutable evidence publication",
+        "active_snapshot_boundary": "after synchronous base-to-augmentation validation and atomic chronology sealing for the warmup and all three repeats, including setup and launcher; before immutable evidence publication",
     }
     boundary = {
         "calibration_only": True,
@@ -1730,6 +2756,7 @@ def execute_readiness_calibration(
         "schema_version": "exp648-screen-readiness-calibration-core-v1",
         "authorization": authorization, "attempt_id": attempt_id,
         "warmup": warmup, "repeats": repeats,
+        "chronology": chronology,
         "component_resolution": component_resolution,
         "resolved_screen_budgets": budgets, "environment": environment,
         "recovery_charges": recovery,
@@ -1749,7 +2776,8 @@ def execute_readiness_calibration(
         "environment_sha256": sha256(environment_path), "mlflow_receipt_sha256": "pending",
         "warmups": 1, "timed_repeats": 3,
         "warmup": warmup,
-        "repeats": repeats, "component_resolution": component_resolution,
+        "repeats": repeats, "chronology": chronology,
+        "component_resolution": component_resolution,
         "resolved_screen_budgets": budgets, "recovery_charges": recovery,
         "full_fidelity": True, "environment": environment, "boundary": boundary,
     }

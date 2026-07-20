@@ -101,7 +101,12 @@ def test_historical_calibration_is_preserved_but_not_live_screen_calibration(mod
         "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672"
     )
     assert module.sha256(module.CALIBRATION_EVIDENCE_PATH) == module.PINNED["calibration_evidence_sha256"]
-    assert not module.SCREEN_READINESS_CALIBRATION_PATH.exists()
+    lifecycle = module.readiness_calibration_publication_state()
+    assert lifecycle["status"] == "superseded-only-no-live-receipt"
+    assert lifecycle["superseded_root_20261159_preserved"] is True
+    assert lifecycle["superseded_receipt_sha256"] == (
+        module.ROOT_20261159_SUPERSEDED_CHARGE["receipt_sha256"]
+    )
 
 
 def test_root_allowlist_uses_only_test_root_and_rejects_all_other_surfaces(module) -> None:
@@ -672,6 +677,63 @@ def fake_readiness_repeat(scale: float) -> dict:
     return record
 
 
+def attach_fake_readiness_chronology(module, payload: dict) -> None:
+    predecessor = None
+    units = []
+    for ordinal, ((unit, repeat_index), record) in enumerate(zip(
+        module.READINESS_AUGMENTED_UNIT_ORDER,
+        [payload["warmup"], *payload["repeats"]],
+        strict=True,
+    )):
+        start = {
+            "schema_version": "exp648-readiness-augmented-unit-start-v1",
+            "event": "start", "root": payload["calibration_root"],
+            "authorization_sha256": payload["calibration_authorization_sha256"],
+            "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+            "predecessor_seal_sha256": predecessor,
+            "monotonic_ns": 100 + ordinal * 10, "complete": False,
+        }
+        start_sha = module.sha256_bytes(
+            module.canonical_json_bytes(start, pretty=True)
+        )
+        bare = module._bare_augmented_record(record)
+        seal = {
+            "schema_version": "exp648-readiness-augmented-unit-seal-v1",
+            "event": "seal", "root": payload["calibration_root"],
+            "authorization_sha256": payload["calibration_authorization_sha256"],
+            "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+            "predecessor_seal_sha256": predecessor,
+            "start_sha256": start_sha,
+            "augmented_record_sha256": module.sha256_bytes(
+                module.canonical_json_bytes(bare, pretty=True)
+            ),
+            "reused_from_augmented_cache": False,
+            "source_cache_sha256": None,
+            "monotonic_ns": 101 + ordinal * 10, "complete": True,
+        }
+        reference = {
+            "ordinal": ordinal, "unit": unit, "repeat_index": repeat_index,
+            "start": start, "start_sha256": start_sha,
+            "seal": seal,
+            "seal_sha256": module.sha256_bytes(
+                module.canonical_json_bytes(seal, pretty=True)
+            ),
+        }
+        record["readiness_chronology"] = reference
+        record["reused_from_augmented_cache"] = False
+        record["augmented_cache_path"] = None
+        units.append(reference)
+        predecessor = reference["seal_sha256"]
+    payload["chronology"] = {
+        "schema_version": "exp648-readiness-augmented-chronology-v1",
+        "root": payload["calibration_root"],
+        "authorization_sha256": payload["calibration_authorization_sha256"],
+        "contract_sha256": module.READINESS_CHRONOLOGY_CONTRACT_SHA256,
+        "order": [name for name, _ in module.READINESS_AUGMENTED_UNIT_ORDER],
+        "units": units, "complete": True,
+    }
+
+
 def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> None:
     repeats = [fake_readiness_repeat(value) for value in (1.0, 1.1, 0.9)]
     launcher = {"wall_seconds": 2.0, "aggregate_cpu_seconds": 8.0, "peak_rss_bytes": 2_000_000}
@@ -683,10 +745,10 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
         "readiness_infrastructure": warmup["components"]["readiness_infrastructure"],
     })
     budgets, components = module.resolve_readiness_screen_budgets(repeats, launcher, warmup)
-    prior_wall = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
-    prior_cpu = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
-    historical_wall = 5900.399178599999
-    historical_cpu = 24278.120608365
+    prior_wall = module.READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
+    prior_cpu = module.READINESS_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
+    historical_wall = module.READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
+    historical_cpu = module.READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
     boundary = {
         "calibration_only": True, "screen_roots_opened": False,
         "confirmation_roots_opened": False,
@@ -706,8 +768,18 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
         "recovery_charges": {
             "scope": "prepublication-provisional-snapshot-before-inner-publication",
             "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
-            "base_calibration_experiment_snapshot_provisional": {},
-            "prior_superseded_calibrations": list(module.cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+            "augmented_unit_orchestration": {
+                "chronology_contract_sha256": module.READINESS_CHRONOLOGY_CONTRACT_SHA256,
+                "execution_order": [name for name, _ in module.READINESS_AUGMENTED_UNIT_ORDER],
+                "old_base_only_cache_loaded_or_saved": False,
+                "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+                "historical_and_superseded_charge_applied_exactly_once": True,
+                "guard_historical_and_superseded_wall_seconds": historical_wall,
+                "guard_historical_and_superseded_aggregate_cpu_seconds": historical_cpu,
+                "reused_complete_augmented_repeat_indices": [],
+                "all_augmented_units_validated_and_sealed_before_next_start": True,
+            },
+            "prior_superseded_calibrations": list(module.READINESS_SUPERSEDED_CALIBRATIONS),
             "historical_completed_calibration_wall_seconds": historical_wall,
             "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
             "historical_prior_superseded_wall_seconds_charged": prior_wall,
@@ -726,6 +798,7 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
             "active_snapshot_boundary": "test",
         }, "full_fidelity": True, "environment": {"test": True}, "boundary": boundary,
     }
+    attach_fake_readiness_chronology(module, payload)
     module.validate_readiness_calibration_receipt(payload)
     tampered = copy.deepcopy(payload)
     tampered["resolved_screen_budgets"]["wall_seconds"]["soft_budget_seconds"] += 1
@@ -742,7 +815,235 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
     omitted = copy.deepcopy(payload)
     omitted["repeats"][0]["total_timing"]["wall_seconds"] -= omitted["repeats"][0]["components"]["mlflow_probe"]["timing"]["wall_seconds"]
     with pytest.raises(RuntimeError, match="timing omission"):
+        module.validate_complete_readiness_timing(omitted["repeats"][0])
+    with pytest.raises(RuntimeError, match="chronology augmented record hash mismatch"):
         module.validate_readiness_calibration_receipt(omitted)
+
+
+def test_augmented_readiness_units_execute_validate_and_seal_in_order(
+    module, monkeypatch, tmp_path
+) -> None:
+    events = []
+
+    class FakeGuard:
+        reused_wall_seconds = 0.0
+        reused_cpu_seconds = 0.0
+
+        def __call__(self, stage):
+            events.append(f"guard:{stage}")
+
+        def add_reused(self, wall_seconds, cpu_seconds):
+            self.reused_wall_seconds += wall_seconds
+            self.reused_cpu_seconds += cpu_seconds
+
+    class FakeExperiment:
+        root_seed = TEST_ROOT + 11
+        guard = FakeGuard()
+
+        def execute_complete_unit(self, _name, *, repeat_index):
+            unit = "warmup" if repeat_index is None else f"repeat-{repeat_index}"
+            events.append(f"{unit}:base")
+            record = fake_readiness_repeat(1.0)
+            record["components"].pop("actual_source_replay")
+            record["components"].pop("mlflow_probe")
+            record["components"].pop("readiness_infrastructure")
+            record.pop("base_total_timing_before_readiness_additions")
+            record["total_timing"] = {
+                "wall_seconds": 431.0,
+                "aggregate_cpu_seconds": 1724.0,
+                "peak_rss_bytes": 1_000_000,
+            }
+            record["repeat_index"] = repeat_index
+            return record
+
+    original_start = module._write_readiness_chronology_start
+    original_seal = module._write_readiness_chronology_seal
+
+    def recording_start(**kwargs):
+        events.append(f"{kwargs['unit']}:start")
+        return original_start(**kwargs)
+
+    def recording_seal(**kwargs):
+        events.append(f"{kwargs['unit']}:seal")
+        return original_seal(**kwargs)
+
+    def replay(_experiment, output, _process):
+        unit = output.parent.name.split("-", 1)[1]
+        events.append(f"{unit}:replay")
+        return {
+            "complete_identities": 64, "steps_per_identity": 256,
+            "complete_steps": 16_384,
+            "actual_rollout_identity_batch_path": True, "complete": True,
+            "timing": {"wall_seconds": 64.0, "aggregate_cpu_seconds": 256.0,
+                       "peak_rss_bytes": 1_000_000},
+        }
+
+    def probe(*, unit, **_kwargs):
+        events.append(f"{unit}:mlflow")
+        return {
+            "complete": True, "artifact_count": 6, "remote_verified": True,
+            "timing": {"wall_seconds": 3.0, "aggregate_cpu_seconds": 12.0,
+                       "peak_rss_bytes": 1_000_000},
+        }
+
+    def infrastructure(record, _output, _process):
+        unit = "warmup" if record["repeat_index"] is None else f"repeat-{record['repeat_index']}"
+        events.append(f"{unit}:infrastructure")
+        return copy.deepcopy(fake_readiness_repeat(1.0)["components"]["readiness_infrastructure"])
+
+    def validate(record, _config):
+        unit = "warmup" if record["repeat_index"] is None else f"repeat-{record['repeat_index']}"
+        events.append(f"{unit}:validate")
+
+    def load_cache(*, repeat_index, **_kwargs):
+        events.append(f"repeat-{repeat_index}:cache-lookup")
+        return None
+
+    def save_cache(*, repeat_index, **_kwargs):
+        events.append(f"repeat-{repeat_index}:cache-save")
+        return tmp_path / f"repeat-{repeat_index}.json", "f" * 64
+
+    monkeypatch.setattr(module, "_write_readiness_chronology_start", recording_start)
+    monkeypatch.setattr(module, "_write_readiness_chronology_seal", recording_seal)
+    monkeypatch.setattr(module, "measure_actual_source_replay_unit", replay)
+    monkeypatch.setattr(module, "measure_readiness_mlflow_probe", probe)
+    monkeypatch.setattr(module, "measure_readiness_infrastructure_unit", infrastructure)
+    monkeypatch.setattr(module.cal, "validate_calibration_repeat", validate)
+    monkeypatch.setattr(module, "load_augmented_repeat_cache", load_cache)
+    monkeypatch.setattr(module, "save_augmented_repeat_cache", save_cache)
+
+    warmup, repeats, chronology = module.execute_synchronous_augmented_readiness_units(
+        experiment=FakeExperiment(), attempt=tmp_path / "attempt",
+        authorization_sha256="a" * 64, config={},
+        launcher_timing={"wall_seconds": 1.0, "aggregate_cpu_seconds": 4.0,
+                         "peak_rss_bytes": 1_000_000},
+    )
+    assert chronology["complete"] is True
+    assert len(repeats) == 3 and warmup["readiness_chronology"]["ordinal"] == 0
+    for unit, _repeat_index in module.READINESS_AUGMENTED_UNIT_ORDER:
+        expected = [
+            f"{unit}:start", f"{unit}:base", f"{unit}:replay",
+            f"{unit}:mlflow", f"{unit}:infrastructure",
+            f"{unit}:validate", f"{unit}:seal",
+        ]
+        positions = [events.index(event) for event in expected]
+        assert positions == sorted(positions)
+        for stage in (
+            "base-complete", "source-replay-complete", "mlflow-probe-complete",
+            "infrastructure-complete", "augmented-validation-complete",
+            "augmented-record-published", "fresh-augmented-unit-sealed",
+        ):
+            assert f"guard:readiness:{unit}:{stage}" in events
+    assert events.index("warmup:seal") < events.index("repeat-1:cache-lookup")
+    for repeat_index in range(1, 4):
+        assert events.index(f"repeat-{repeat_index}:seal") < events.index(
+            f"repeat-{repeat_index}:cache-save"
+        )
+
+
+def test_old_post_hoc_readiness_records_without_chronology_are_rejected(module) -> None:
+    payload = {
+        "calibration_root": TEST_ROOT + 12,
+        "calibration_authorization_sha256": "a" * 64,
+        "warmup": fake_readiness_repeat(1.0),
+        "repeats": [fake_readiness_repeat(1.0) for _ in range(3)],
+    }
+    with pytest.raises(RuntimeError, match="chronology is absent"):
+        module.validate_readiness_chronology(payload)
+
+
+def test_incomplete_and_tampered_augmented_repeat_cache_are_rejected(
+    module, monkeypatch
+) -> None:
+    root = TEST_ROOT + 13
+    authorization_sha256 = "a" * 64
+    source = {
+        "calibration_root": root,
+        "calibration_authorization_sha256": authorization_sha256,
+        "warmup": fake_readiness_repeat(1.0),
+        "repeats": [fake_readiness_repeat(1.0) for _ in range(3)],
+    }
+    attach_fake_readiness_chronology(module, source)
+    reference = source["repeats"][0]["readiness_chronology"]
+    record = module._bare_augmented_record(source["repeats"][0])
+    key_fields = {
+        "root": root, "authorization_sha256": authorization_sha256,
+        "checkpoint_sha256": "1" * 64, "evaluator_sha256": "2" * 64,
+        "dataset_sha256": "3" * 64, "config_sha256": "4" * 64,
+        "seed": root, "environment_sha256": "5" * 64,
+        "calibration_runner_sha256": "6" * 64,
+        "scientific_protocol_sha256": "7" * 64,
+        "resource_protocol_sha256": "8" * 64,
+        "workload_sha256": "9" * 64,
+        "dependency_manifest_sha256": "a" * 64,
+    }
+    payload = {
+        "schema_version": "exp648-readiness-augmented-repeat-cache-v1",
+        "cache_key": module.readiness_augmented_cache_key(key_fields, 1),
+        "cache_key_fields": key_fields,
+        "repeat_index": 1,
+        "record": record,
+        "source_chronology": reference,
+        "source_seal_sha256": reference["seal_sha256"],
+        "cache_created_monotonic_ns": reference["seal"]["monotonic_ns"] + 1,
+    }
+    base_validations = []
+    monkeypatch.setattr(
+        module.cal, "validate_cached_repeat_record",
+        lambda *_args, **kwargs: base_validations.append(kwargs),
+    )
+    module.validate_augmented_repeat_cache_payload(
+        payload, expected_key_fields=key_fields, repeat_index=1, config={}
+    )
+    assert base_validations[0]["repeat_index"] == 1
+    assert base_validations[0]["expected_cache_key_fields"]["runner_sha256"] == "6" * 64
+    incomplete = copy.deepcopy(payload)
+    incomplete["record"]["complete"] = False
+    with pytest.raises(RuntimeError, match="cache is incomplete"):
+        module.validate_augmented_repeat_cache_payload(
+            incomplete, expected_key_fields=key_fields, repeat_index=1, config={}
+        )
+    tampered = copy.deepcopy(payload)
+    tampered["source_chronology"]["seal"]["augmented_record_sha256"] = "0" * 64
+    with pytest.raises(RuntimeError, match="chronology seal hash mismatch"):
+        module.validate_augmented_repeat_cache_payload(
+            tampered, expected_key_fields=key_fields, repeat_index=1, config={}
+        )
+
+
+def test_consumed_readiness_root_is_denied_before_binding(module, monkeypatch) -> None:
+    path = module.ROOT_20261159_SUPERSEDED_DIR / "readiness-calibration-authorization.json"
+    raw = path.read_bytes()
+    monkeypatch.setattr(
+        module, "readiness_calibration_authorization_base",
+        lambda *_: (_ for _ in ()).throw(AssertionError("binding must not run")),
+    )
+    with pytest.raises(PermissionError, match="reused, test-only, or prohibited"):
+        module.verify_readiness_calibration_authorization(
+            path, committed_bytes=raw, allow_test_root=True
+        )
+
+
+def test_cumulative_historical_charge_is_exact_and_applied_once(module) -> None:
+    class Guard:
+        prior_superseded_wall_seconds = 0.0
+        prior_superseded_cpu_seconds = 0.0
+
+        def __init__(self):
+            self.events = []
+
+        def __call__(self, stage):
+            self.events.append(stage)
+
+    guard = Guard()
+    module.apply_readiness_historical_charge_once(guard)
+    assert guard.prior_superseded_wall_seconds == 9007.853947323996
+    assert guard.prior_superseded_cpu_seconds == 36721.035879589996
+    assert guard.events == [
+        "readiness:cumulative-historical-and-superseded-charge-applied-once"
+    ]
+    with pytest.raises(RuntimeError, match="more than once"):
+        module.apply_readiness_historical_charge_once(guard)
 
 
 def test_readiness_mlflow_expected_scope_excludes_scientific_and_candidate(module) -> None:
@@ -880,11 +1181,23 @@ def test_outer_readiness_resource_completion_is_final_bound_and_observed(module,
 
 
 def test_readiness_outer_seal_precedes_execute_return_and_cli_output(module, monkeypatch) -> None:
-    execute_source = inspect.getsource(module.execute_readiness_calibration)
+    wrapper_source = inspect.getsource(module.execute_readiness_calibration)
+    assert "with readiness_calibration_authorization_lock(" in wrapper_source
+    assert "return _execute_readiness_calibration_locked(" in wrapper_source
+    execute_source = inspect.getsource(module._execute_readiness_calibration_locked)
+    assert "experiment.run()" not in execute_source
+    assert "execute_synchronous_augmented_readiness_units(" in execute_source
     seal_position = execute_source.rindex("write_readiness_resource_completion(")
     return_position = execute_source.rindex("return receipt")
     assert seal_position < return_position
-    assert "_atomic_write(" not in execute_source[seal_position:return_position]
+    post_publication = execute_source[seal_position:return_position]
+    assert "_atomic_write(" not in post_publication
+    for forbidden in (
+        "execute_complete_unit(", "execute_synchronous_augmented_readiness_units(",
+        "save_augmented_repeat_cache(", "measure_actual_source_replay_unit(",
+        "measure_readiness_mlflow_probe(", "measure_readiness_infrastructure_unit(",
+    ):
+        assert forbidden not in post_publication
 
     main_source = inspect.getsource(module.main)
     execute_position = main_source.index("result = execute_readiness_calibration(")
@@ -935,28 +1248,153 @@ def test_authentication_rejects_bad_bytes_before_expensive_binding_actions(modul
     assert events == []
 
 
-def test_readiness_authorization_binding_uses_only_base_blobs(module, monkeypatch) -> None:
+def mocked_readiness_authorization_base_blobs(module):
+    provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
+    source = provenance["readiness_calibration_authorization_source"]
     paths = {
-        module.CONFIG_PATH.relative_to(module.ROOT).as_posix(): module.CONFIG_PATH.read_bytes(),
-        Path(module.__file__).resolve().relative_to(module.ROOT).as_posix(): Path(module.__file__).read_bytes(),
-        "tests/test_exp648_structured_trajectory_scientific.py": Path(__file__).read_bytes(),
-        module.CALIBRATION_RUNNER.relative_to(module.ROOT).as_posix(): module.CALIBRATION_RUNNER.read_bytes(),
-        module.EXECUTED_CONFIG_PATH.relative_to(module.ROOT).as_posix(): module.EXECUTED_CONFIG_PATH.read_bytes(),
-        module.CALIBRATION_ENVIRONMENT_PATH.relative_to(module.ROOT).as_posix(): module.CALIBRATION_ENVIRONMENT_PATH.read_bytes(),
-        module.READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(module.ROOT).as_posix(): module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_bytes(),
+        binding["path"]: (module.ROOT / binding["path"]).read_bytes()
+        for binding in source["approved_base_file_bindings"].values()
     }
+    provenance_path = (
+        "experiments/runs/exp-648-structured-trajectory-consistency/"
+        "readiness-scaffold/provenance.json"
+    )
+    paths[provenance_path] = module.canonical_json_bytes(provenance, pretty=True)
+    return paths, provenance
+
+
+def test_readiness_authorization_is_frozen_provenance_template_under_hostile_live_state(
+    module, monkeypatch
+) -> None:
+    paths, provenance = mocked_readiness_authorization_base_blobs(module)
     monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+
+    def hostile(name):
+        return lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError(f"live {name} used")
+        )
+
     for name in (
-        "environment_payload", "scientific_protocol_sha256",
-        "resource_protocol_sha256", "exact_teacher_source_sha256",
+        "screen_workload_payload", "_base_protocol_hashes", "_base_evaluator_hash",
+        "_base_exact_teacher_hash",
     ):
-        monkeypatch.setattr(module.cal, name, lambda *_args, _name=name, **_kwargs: (_ for _ in ()).throw(AssertionError(f"live {_name} used")))
-    monkeypatch.setattr(module, "scientific_evaluator_sha256", lambda: (_ for _ in ()).throw(AssertionError("live evaluator used")))
-    payload = module.readiness_calibration_authorization_base(TEST_ROOT + 7, "base-commit")
-    recorded_environment = json.loads(module.CALIBRATION_ENVIRONMENT_PATH.read_text())
-    assert payload["approved_runtime_environment"] == recorded_environment
-    assert payload["scientific_runner_sha256"] == module.sha256_bytes(paths[Path(module.__file__).resolve().relative_to(module.ROOT).as_posix()])
-    assert payload["source_checkpoint_sha256"] == "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+        monkeypatch.setattr(module, name, hostile(name))
+    monkeypatch.setattr(module, "RUN_ID", "hostile-run-id")
+    monkeypatch.setattr(module, "FROZEN_CORPUS_FILES", {"hostile": "state"})
+    monkeypatch.setattr(module, "CONFIG_PATH", Path("hostile-config"))
+    monkeypatch.setattr(module, "CALIBRATION_RUNNER", Path("hostile-runner"))
+    monkeypatch.setattr(module, "EXECUTED_CONFIG_PATH", Path("hostile-executed"))
+    monkeypatch.setattr(module, "CALIBRATION_ENVIRONMENT_PATH", Path("hostile-environment"))
+    monkeypatch.setattr(module, "READINESS_SCAFFOLD_PROVENANCE_PATH", Path("hostile-provenance"))
+    monkeypatch.setattr(module, "__file__", "hostile-scientific.py")
+    root = TEST_ROOT + 7
+    payload = module.readiness_calibration_authorization_base(root, "base-commit")
+    assert payload == {
+        **provenance["readiness_calibration_authorization_source"]["authorization_template"],
+        "calibration_root": root,
+        "approved_base_commit": "base-commit",
+    }
+
+
+@pytest.mark.parametrize(
+    ("tamper", "message"),
+    [
+        ("workload", "screen workload hash mismatch"),
+        ("template", "authorization template hash mismatch"),
+        ("runner_binding", "scientific_runner direct hash mismatch"),
+        ("environment", "template/runtime environment binding mismatch"),
+    ],
+)
+def test_authorization_source_tampering_fails_before_root_data_model_mlflow_or_lifecycle(
+    module, monkeypatch, tamper, message
+) -> None:
+    paths, provenance = mocked_readiness_authorization_base_blobs(module)
+    source = provenance["readiness_calibration_authorization_source"]
+    if tamper == "workload":
+        source["screen_workload"]["recoverable_evaluation_unit_count"] += 1
+    elif tamper == "template":
+        source["authorization_template"]["source_checkpoint_sha256"] = "0" * 64
+    elif tamper == "runner_binding":
+        source["approved_base_file_bindings"]["scientific_runner"]["sha256"] = "0" * 64
+    elif tamper == "environment":
+        source["authorization_template"]["approved_runtime_environment"] = {"hostile": True}
+        source["authorization_template_sha256"] = module.sha256_bytes(
+            module.canonical_json_bytes(source["authorization_template"])
+        )
+    provenance_path = (
+        "experiments/runs/exp-648-structured-trajectory-consistency/"
+        "readiness-scaffold/provenance.json"
+    )
+    paths[provenance_path] = module.canonical_json_bytes(provenance, pretty=True)
+    monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+    actions = []
+
+    def forbidden(name):
+        return lambda *_args, **_kwargs: actions.append(name) or (_ for _ in ()).throw(
+            AssertionError(f"{name} action occurred before source rejection")
+        )
+
+    monkeypatch.setattr(module, "authorize_root", forbidden("root"))
+    monkeypatch.setattr(module.cal, "authorize_root", forbidden("calibration-root"))
+    monkeypatch.setattr(module, "_read_data_artifacts", forbidden("data"))
+    monkeypatch.setattr(module.cal, "CalibrationExperiment", forbidden("model"))
+    monkeypatch.setattr(module.mlflow, "start_run", forbidden("mlflow"))
+    monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", forbidden("lifecycle"))
+    with pytest.raises(PermissionError, match=message):
+        module.readiness_calibration_authorization_base(TEST_ROOT + 8, "base-commit")
+    assert actions == []
+
+
+def test_readiness_scaffold_provenance_matches_current_code_and_workload(module) -> None:
+    provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
+    runner_sha256 = module.sha256(Path(module.__file__))
+    test_sha256 = module.sha256(Path(__file__))
+    config_sha256 = module.sha256(module.CONFIG_PATH)
+    config = module.yaml.safe_load(module.CONFIG_PATH.read_text())
+    expected_workload_sha256 = module.sha256_bytes(module.canonical_json_bytes(
+        module.screen_workload_payload(
+            scientific_runner_sha256=runner_sha256,
+            config_override=config,
+        )
+    ))
+    assert provenance["live_scaffold"] == {
+        "focused_scientific_test_sha256": test_sha256,
+        "resolved_config_sha256": config_sha256,
+        "scientific_runner_sha256": runner_sha256,
+    }
+    assert provenance["screen_workload_sha256"] == expected_workload_sha256
+    source = provenance["readiness_calibration_authorization_source"]
+    assert source["screen_workload"] == module.screen_workload_payload(
+        scientific_runner_sha256=runner_sha256,
+        config_override=config,
+    )
+    assert source["screen_workload_sha256"] == expected_workload_sha256
+    assert source["authorization_template_sha256"] == module.sha256_bytes(
+        module.canonical_json_bytes(source["authorization_template"])
+    )
+    template = source["authorization_template"]
+    assert "calibration_root" not in template
+    assert "approved_base_commit" not in template
+    assert template["screen_workload_sha256"] == expected_workload_sha256
+    assert template["scientific_runner_sha256"] == runner_sha256
+    assert template["scientific_test_sha256"] == test_sha256
+    assert template["scientific_protocol_sha256"] == module.cal.scientific_protocol_sha256(
+        config
+    )
+    assert template["resource_protocol_sha256"] == module.cal.resource_protocol_sha256(
+        config
+    )
+    accepted_corpus_manifest_bytes = (
+        module.DATA_DIR / "corpus-manifest.json"
+    ).read_bytes()
+    assert template["corpus_manifest_sha256"] == module.sha256_bytes(
+        accepted_corpus_manifest_bytes
+    )
+    assert template["corpus_manifest_sha256"] == module.FROZEN_CORPUS_FILES[
+        "data/corpus-manifest.json"
+    ]
+    for binding in source["approved_base_file_bindings"].values():
+        assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
 
 
 def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch) -> None:
@@ -1051,6 +1489,352 @@ def test_attempt_suffix_uses_parsed_max_and_exclusive_allocation(module, tmp_pat
     (root / "screen-b-retry-x").mkdir()
     with pytest.raises(RuntimeError, match="malformed"):
         module.allocate_exclusive_attempt_directory(root, "screen-b")
+
+
+def readiness_attempt_state(module, attempt_id, authorization_sha256, *, sealed=False):
+    state = {
+        "schema_version": "exp648-readiness-calibration-attempt-v1",
+        "attempt_id": attempt_id,
+        "authorization_sha256": authorization_sha256,
+        "phase": "sealed" if sealed else "authorized",
+        "complete": sealed,
+    }
+    if sealed:
+        state["completion_manifest_sha256"] = "f" * 64
+    return module.canonical_json_bytes(state, pretty=True)
+
+
+def tree_bytes(root):
+    return {
+        path.relative_to(root).as_posix(): path.read_bytes()
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+    }
+
+
+def test_readiness_attempt_normal_first_allocation_is_exclusive(module, tmp_path) -> None:
+    auth = "a" * 64
+    attempts = tmp_path / "attempts"
+    tracked = tmp_path / "tracked"
+    attempt_id, directory, prior = module.allocate_readiness_calibration_attempt(
+        authorization_sha256=auth, attempts_root=attempts, tracked_root=tracked,
+    )
+    assert attempt_id == f"cal-{auth[:16]}"
+    assert directory.is_dir()
+    assert prior == []
+
+
+def test_readiness_incomplete_attempt_uses_monotonic_retry_and_preserves_prior_bytes(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "b" * 64
+    stem = f"cal-{auth[:16]}"
+    attempts = tmp_path / "attempts"
+    tracked = tmp_path / "tracked"
+    base = attempts / stem
+    retry_two = attempts / f"{stem}-retry-002"
+    for directory in (base, retry_two):
+        directory.mkdir(parents=True)
+        (directory / "attempt-state.json").write_bytes(
+            readiness_attempt_state(module, directory.name, auth)
+        )
+        (directory / "preserved.bin").write_bytes(directory.name.encode())
+    before = tree_bytes(attempts)
+    attempt_id, directory, prior = module.allocate_readiness_calibration_attempt(
+        authorization_sha256=auth, attempts_root=attempts, tracked_root=tracked,
+    )
+    assert attempt_id == f"{stem}-retry-003"
+    assert directory.is_dir()
+    assert [path.name for path in prior] == [stem, f"{stem}-retry-002"]
+    assert {key: value for key, value in tree_bytes(attempts).items() if not key.startswith(f"{stem}-retry-003/")} == before
+
+    original_mkdir = Path.mkdir
+    collided = False
+
+    def collide_once(path, *args, **kwargs):
+        nonlocal collided
+        if path.name == f"{stem}-retry-004" and not collided:
+            collided = True
+            original_mkdir(path, *args, **kwargs)
+            raise FileExistsError(path)
+        return original_mkdir(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "mkdir", collide_once)
+    before_collision = tree_bytes(attempts)
+    next_id, next_directory, _ = module.allocate_readiness_calibration_attempt(
+        authorization_sha256=auth, attempts_root=attempts, tracked_root=tracked,
+    )
+    assert collided is True
+    assert next_id == f"{stem}-retry-005"
+    assert next_directory.is_dir()
+    after_collision = tree_bytes(attempts)
+    for key, value in before_collision.items():
+        assert after_collision[key] == value
+
+
+@pytest.mark.parametrize("published", [False, True])
+def test_sealed_or_published_readiness_attempt_cannot_relaunch_before_actions(
+    module, tmp_path, monkeypatch, published
+) -> None:
+    auth = "c" * 64
+    stem = f"cal-{auth[:16]}"
+    scratch = tmp_path / "scratch"
+    tracked = tmp_path / "tracked"
+    attempts = scratch / "readiness-calibration-attempts"
+    if published:
+        tracked.mkdir(parents=True)
+        (tracked / "readiness-calibration.json").write_bytes(
+            module.canonical_json_bytes(
+                {"calibration_authorization_sha256": auth}, pretty=True
+            )
+        )
+        expected = "live tracked readiness output singleton"
+    else:
+        sealed = attempts / stem
+        sealed.mkdir(parents=True)
+        (sealed / "attempt-state.json").write_bytes(
+            readiness_attempt_state(module, stem, auth, sealed=True)
+        )
+        expected = "sealed readiness calibration attempt"
+    before_scratch = tree_bytes(tmp_path)
+    actions = []
+
+    def forbidden(name):
+        return lambda *_args, **_kwargs: actions.append(name) or (_ for _ in ()).throw(
+            AssertionError(f"{name} action occurred before attempt rejection")
+        )
+
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tracked)
+    monkeypatch.setattr(module, "CONFIG_PATH", tmp_path / "must-not-read-config.yaml")
+    monkeypatch.setattr(module, "_atomic_write", forbidden("write"))
+    monkeypatch.setattr(module.cal, "CalibrationExperiment", forbidden("model/root/data"))
+    monkeypatch.setattr(module, "execute_synchronous_augmented_readiness_units", forbidden("evaluation"))
+    monkeypatch.setattr(module, "log_and_verify_readiness_calibration_mlflow", forbidden("mlflow"))
+    monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", forbidden("lifecycle"))
+    with pytest.raises(PermissionError, match=expected):
+        module.execute_readiness_calibration(
+            {"calibration_root": TEST_ROOT + 99, "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert actions == []
+    after_scratch = tree_bytes(tmp_path)
+    for key, value in before_scratch.items():
+        assert after_scratch[key] == value
+    assert set(after_scratch) - set(before_scratch) == {
+        f"scratch/readiness-calibration-locks/cal-{auth[:16]}.lock"
+    }
+
+
+def test_readiness_matching_attempt_symlink_fails_closed(module, tmp_path) -> None:
+    auth = "d" * 64
+    stem = f"cal-{auth[:16]}"
+    attempts = tmp_path / "attempts"
+    attempts.mkdir()
+    target = tmp_path / "outside"
+    target.mkdir()
+    (attempts / stem).symlink_to(target, target_is_directory=True)
+    before = tree_bytes(tmp_path)
+    with pytest.raises(RuntimeError, match="linked, or non-directory"):
+        module.allocate_readiness_calibration_attempt(
+            authorization_sha256=auth,
+            attempts_root=attempts,
+            tracked_root=tmp_path / "tracked",
+        )
+    assert tree_bytes(tmp_path) == before
+
+
+@pytest.mark.parametrize(
+    "surface", ["attempt-state.json", "completion-seal.json", "publication"]
+)
+def test_readiness_broken_evidence_symlink_fails_closed(
+    module, tmp_path, surface
+) -> None:
+    auth = "e" * 64
+    stem = f"cal-{auth[:16]}"
+    attempts = tmp_path / "attempts"
+    tracked = tmp_path / "tracked"
+    if surface == "publication":
+        tracked.mkdir()
+        (tracked / "readiness-calibration.json").symlink_to(
+            tmp_path / "absent-publication.json"
+        )
+    else:
+        attempt = attempts / stem
+        attempt.mkdir(parents=True)
+        (attempt / surface).symlink_to(tmp_path / f"absent-{surface}")
+    before = tree_bytes(tmp_path)
+    with pytest.raises(RuntimeError, match="no-follow regular file"):
+        module.allocate_readiness_calibration_attempt(
+            authorization_sha256=auth,
+            attempts_root=attempts,
+            tracked_root=tracked,
+        )
+    assert tree_bytes(tmp_path) == before
+
+
+@pytest.mark.parametrize(
+    "singleton_name",
+    (
+        "readiness-calibration.json",
+        "readiness-calibration-core.json",
+        "readiness-calibration-environment.json",
+        "readiness-calibration-mlflow.json",
+        "readiness-calibration-executed-config.yaml",
+        "readiness-calibration-completion.json",
+        "readiness-calibration-resource-completion.json",
+        "readiness-calibration-attempt-state.json",
+        "readiness-calibration-launch-ledger.json",
+    ),
+)
+@pytest.mark.parametrize("authorization_relation", ("matching", "different"))
+def test_any_live_readiness_singleton_blocks_before_allocation_and_actions(
+    module, tmp_path, monkeypatch, singleton_name, authorization_relation
+) -> None:
+    auth = "2" * 64
+    observed_auth = auth if authorization_relation == "matching" else "3" * 64
+    stem = f"cal-{auth[:16]}"
+    scratch = tmp_path / "scratch"
+    attempts = scratch / "readiness-calibration-attempts"
+    prior = attempts / stem
+    tracked = tmp_path / "tracked"
+    prior.mkdir(parents=True)
+    tracked.mkdir()
+    (prior / "attempt-state.json").write_bytes(
+        readiness_attempt_state(module, stem, auth)
+    )
+    (prior / "preserved.bin").write_bytes(b"prior-attempt-must-not-change")
+    (tracked / singleton_name).write_bytes(
+        module.canonical_json_bytes(
+            {"authorization_sha256": observed_auth}, pretty=True
+        )
+    )
+    prior_before = tree_bytes(prior)
+    tracked_before = tree_bytes(tracked)
+    actions = []
+
+    def forbidden(name):
+        return lambda *_args, **_kwargs: actions.append(name) or (_ for _ in ()).throw(
+            AssertionError(f"{name} action occurred before singleton rejection")
+        )
+
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tracked)
+    monkeypatch.setattr(module, "CONFIG_PATH", tmp_path / "must-not-read-config.yaml")
+    monkeypatch.setattr(module, "_atomic_write", forbidden("attempt/config/write"))
+    monkeypatch.setattr(module.cal, "CalibrationExperiment", forbidden("root/data/model"))
+    monkeypatch.setattr(module, "execute_synchronous_augmented_readiness_units", forbidden("evaluation"))
+    monkeypatch.setattr(module, "log_and_verify_readiness_calibration_mlflow", forbidden("mlflow"))
+    monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", forbidden("lifecycle"))
+    with pytest.raises(PermissionError, match="live tracked readiness output singleton"):
+        module.execute_readiness_calibration(
+            {"calibration_root": TEST_ROOT + 102, "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert actions == []
+    assert tree_bytes(prior) == prior_before
+    assert tree_bytes(tracked) == tracked_before
+    assert not (attempts / f"{stem}-retry-001").exists()
+
+
+def test_readiness_singleton_absence_allows_normal_allocation(module, tmp_path) -> None:
+    auth = "4" * 64
+    attempt_id, directory, prior = module.allocate_readiness_calibration_attempt(
+        authorization_sha256=auth,
+        attempts_root=tmp_path / "attempts",
+        tracked_root=tmp_path / "tracked",
+    )
+    assert attempt_id == f"cal-{auth[:16]}"
+    assert directory.is_dir()
+    assert prior == []
+
+
+def test_active_readiness_authorization_lock_blocks_concurrent_launch_before_actions(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "f" * 64
+    scratch = tmp_path / "scratch"
+    actions = []
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(
+        module, "_execute_readiness_calibration_locked",
+        lambda *_args, **_kwargs: actions.append("scientific") or {},
+    )
+    with module.readiness_calibration_authorization_lock(
+        authorization_sha256=auth, scratch_root=scratch,
+    ):
+        with pytest.raises(PermissionError, match="already active"):
+            module.execute_readiness_calibration(
+                {"calibration_root": TEST_ROOT + 100, "authorization_sha256": auth},
+                launch_wall_started=time.perf_counter(),
+                launch_cpu_started=0.0,
+                launch_peak_rss=0,
+            )
+    assert actions == []
+    assert not (scratch / "readiness-calibration-attempts").exists()
+
+
+def test_readiness_post_mkdir_publication_race_fails_before_state_or_scientific_actions(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "1" * 64
+    stem = f"cal-{auth[:16]}"
+    scratch = tmp_path / "scratch"
+    attempts = scratch / "readiness-calibration-attempts"
+    tracked = tmp_path / "tracked"
+    prior = attempts / stem
+    prior.mkdir(parents=True)
+    (prior / "attempt-state.json").write_bytes(
+        readiness_attempt_state(module, stem, auth)
+    )
+    (prior / "preserved.bin").write_bytes(b"preserve-me")
+    before_prior = tree_bytes(prior)
+    original_mkdir = Path.mkdir
+    injected = False
+
+    def inject_publication(path, *args, **kwargs):
+        nonlocal injected
+        result = original_mkdir(path, *args, **kwargs)
+        if path.name == f"{stem}-retry-001" and not injected:
+            injected = True
+            tracked.mkdir(parents=True, exist_ok=True)
+            (tracked / "readiness-calibration.json").write_bytes(
+                module.canonical_json_bytes(
+                    {"calibration_authorization_sha256": auth}, pretty=True
+                )
+            )
+        return result
+
+    actions = []
+
+    def forbidden(name):
+        return lambda *_args, **_kwargs: actions.append(name) or (_ for _ in ()).throw(
+            AssertionError(f"{name} action occurred after publication race")
+        )
+
+    monkeypatch.setattr(Path, "mkdir", inject_publication)
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tracked)
+    monkeypatch.setattr(module, "_atomic_write", forbidden("attempt-state/write"))
+    monkeypatch.setattr(module.cal, "CalibrationExperiment", forbidden("root/data/model"))
+    monkeypatch.setattr(module, "execute_synchronous_augmented_readiness_units", forbidden("evaluation"))
+    monkeypatch.setattr(module, "log_and_verify_readiness_calibration_mlflow", forbidden("mlflow"))
+    monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", forbidden("lifecycle"))
+    with pytest.raises(PermissionError, match="live tracked readiness output singleton"):
+        module.execute_readiness_calibration(
+            {"calibration_root": TEST_ROOT + 101, "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert injected is True
+    assert actions == []
+    assert tree_bytes(prior) == before_prior
+    assert (attempts / f"{stem}-retry-001").is_dir()
 
 
 def test_readiness_mlflow_duplicate_runs_fail_before_create(module, monkeypatch) -> None:

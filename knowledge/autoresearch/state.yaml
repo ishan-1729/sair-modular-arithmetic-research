@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T19:30:34+05:30
+updated_at: 2026-07-20T21:21:35+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,19 +36,19 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: corpus-complete-readiness-implementation-approved-base-pending-commit-and-push
-  evidence_status: The accepted immutable corpus remains unchanged. Both closure audits under T-EXP648-SCREEN-READINESS returned APPROVE, and sequential Judge gate T648 approved the repaired readiness implementation. This is observed control/gate evidence, not a calibration or scientific result. Calibration-only root 20261159 is authorized-pending-authentication-child and remains unconsumed. The implementation must first become the pushed approved base, then receive a canonical sole-file authorization child and clean-upstream verification before exactly one warmup and three full-fidelity repeats may run. No root was opened, no model was updated, and no accuracy or selection evidence was produced.
+  status: corpus-complete-readiness-chronology-repair-pending-renewed-judge
+  evidence_status: The accepted immutable corpus remains unchanged. Calibration root 20261159 is consumed and preserved as complete-component non-scientific evidence, but the post-execution Judge rejected its post-hoc readiness-addition chronology. It is superseded and forbidden for launch, projection rates, and cache reuse. The runner now implements synchronous augmented-unit validation and predecessor-linked sealing. Distinct root 20261160 remains unopened, unconsumed, and unauthorized pending a renewed repaired-base Judge. No model was updated and no accuracy or selection evidence was produced.
   readiness_gate:
     task: T-EXP648-SCREEN-READINESS
     closure_audits: [APPROVE, APPROVE]
     sequential_judge_gate: T648
-    status: approved
+    status: prior-approval-superseded-by-root-20261159-chronology-rejection-repaired-base-pending-renewed-judge
   authorization:
     preregistration: judge-approved
-    implementation: approved-base-pending-commit-and-push
-    calibration: root-20261159-authorized-pending-authentication-child-not-consumed
+    implementation: chronology-repaired-base-pending-renewed-judge
+    calibration: root-20261159-consumed-rejected-superseded-root-20261160-unopened-unconsumed-not-authorized
     corpus: consumed-complete
-    screen: prohibited-pending-root-20261159-full-fidelity-calibration-and-separate-launch-judge
+    screen: prohibited-pending-repaired-base-judge-root-20261160-authenticated-synchronous-augmented-calibration-and-separate-launch-judge
     confirmation: prohibited-until-screen-pass-and-separate-judge
     candidate_or_tier7_promotion: prohibited
   seed_roles:
@@ -60,17 +60,23 @@ current_hypothesis:
     confirmation_1_evaluation_root_unopened_blocked: 20261156
     confirmation_2_training_root_unopened_blocked: 20261157
     confirmation_2_evaluation_root_unopened_blocked: 20261158
-    fresh_calibration_root_authorized_pending_authentication_child_unconsumed: 20261159
+    rejected_readiness_calibration_root_consumed_superseded: 20261159
+    next_readiness_calibration_root_unopened_unconsumed_not_authorized: 20261160
     scaffold_test_only_root_reserved_unopened: 648900001
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
   calibration_protocol:
-    ordered_transition: approved-base-commit-and-push -> sole-file-canonical-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-warmup-and-three-full-fidelity-repeats
+    ordered_transition: renewed-repaired-base-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261160-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-synchronous-augmented-warmup-and-three-synchronous-augmented-full-fidelity-repeats
     warmups: 1
     timed_repeats: 3
     fidelity_reduction_allowed: false
     initial_wall_guard_seconds: 14400
     initial_process_user_plus_system_aggregate_cpu_guard_seconds: 57600
-    cache_reuse: Only complete units with exact checkpoint, evaluator, dataset/input, config, root/seed, environment, runner, dependency, scientific-protocol, resource-protocol, workload, and frozen-corpus provenance matches are reusable; partial, mismatched, or unverifiable units are prohibited, and valid reused work is charged to both wall and aggregate CPU.
+    carried_historical_and_superseded_wall_seconds: 9007.853947323996
+    carried_historical_and_superseded_process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996
+    carried_charge_policy: apply-exactly-once-to-planning-guard-and-accounting
+    root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
+    chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
+    cache_reuse: Only fully validated and sealed augmented repeats with exact root, authorization, checkpoint, evaluator, dataset/input, config, environment, runner, dependency, scientific-protocol, resource-protocol, workload, frozen-corpus, and chronology matches are reusable after a fresh augmented warmup; old base-only, partial, mismatched, tampered, or unverifiable units are prohibited, and valid reuse is charged to both wall and aggregate CPU.
 locked_prior_hypotheses:
   exp-649-stochastic-trajectory-breadth:
     status: planned-formal-blocked-runtime-gate-miss
@@ -79,7 +85,55 @@ locked_prior_hypotheses:
     formal_root_status: unopened-permanently-locked-for-this-frozen-formulation
     prohibited: [formal-input-generation, collision-audit, scoring, selector, voting, tuning, promotion]
     incumbent_changed: false
-next_action: Commit and push the approved readiness base. Then add only the canonical calibration-authorization manifest in its child commit, push it, and verify a clean worktree at upstream HEAD. Only then run exactly one complete warmup and three complete full-fidelity calibration repeats on unconsumed root 20261159 under independent 14400-wall-second and 57600-process-user-plus-system-aggregate-CPU-second guards, preserving exact matching-cache rules and all evidence. Screen, confirmation, checked, independent, official/private benchmark, candidate/Tier-7 promotion, Goal-completion, and EXP-649 formal surfaces remain prohibited. Candidate 005 stays at 59.5 percent checked / 59.3 percent independent and completion_eligible remains false.
+research_programs:
+  super_transformers:
+    contract: knowledge/autoresearch/research/2026-07-21-super-transformers-coverage-contract.md
+    source_documents:
+      - super_transformers.md
+      - super_transformers_main_papers.md
+    mechanism_count: 42
+    stable_id_range: 42-consecutive-ST-mechanism-identifiers
+    status: exhaustive-contract-queued-behind-exp-648
+    mandate_status: queued-binding
+    active_experiment: null
+    blocked_by: exp-648-structured-trajectory-consistency
+    next_family: structural-equivariance
+    coverage_completion_rule: Every one of the 42 stable mechanisms requires durable faithful or bounded-faithful evidence, or an explicit legal/non-applicability exclusion with every transferable analogue resolved; supporting-only papers do not create mechanism IDs or completion evidence.
+    library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
+    faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
+    sole_active_task_unchanged: exp-648-structured-trajectory-consistency
+    ordered_queue:
+      - structural-equivariance
+      - shared-recurrent-depth-including-looplm-controls
+      - trm-hrm-rim-rsm-answer-latent
+      - separated-loopformer-drm-lotus
+      - exp-651-visit-dilation-adapters
+      - exp-650-library-backed-mamba-linear-state-space
+      - materially-new-learned-memory-execution
+      - conditional-signature-gated-stability-fixed-points
+      - runtime-qualified-stochastic-breadth-energy-selection
+      - exp-653-winner-dependent-adaptive-compute
+      - conditional-autoregressive-t2mlr
+      - conditional-compact-structured-model-comparison
+    preserved_experiment_meanings:
+      EXP-650: library-backed-Mamba-or-linear-state-space-hybrid
+      EXP-651: exact-initialized-visit-or-dilation-specific-low-rank-adapters
+      EXP-652: answer-plus-latent-TRM-style-viability
+      EXP-653: convergence-based-adaptive-inner-recurrence-after-stable-winner
+    rules:
+      - one-active-task-only
+      - faithful-and-analogue-evidence-must-not-be-conflated
+      - literal-illegal-or-non-applicable-mechanisms-require-explicit-terminal-rationale
+      - mature-authoritative-libraries-preferred-with-pins-provenance-and-parity-tests
+      - cpu-submission-path-binding-cuda-training-only-with-cpu-and-cross-device-parity
+      - stochastic-reopen-requires-materially-different-formulation-new-roots-and-three-full-input-only-repeats
+      - stochastic-wall-gate-is-1.20-times-maximum-plus-5-at-most-225-seconds-with-separate-cpu-accounting
+      - oracle-breadth-never-promotes
+      - structural-operand-equivariance-is-legal-only-without-answer-benchmark-id-or-arithmetic-circuit-encoding
+      - lotus-exact-traces-are-training-only-and-forbidden-from-submission-inference
+    root_20261160_status: unopened-unconsumed-unauthorized-unchanged
+    experiments_authorized_by_contract: false
+next_action: Finish validation of the chronology-repaired readiness base and obtain a renewed Judge. Root 20261160 remains unopened, unconsumed, and unauthorized; do not create its authorization before that Judge. If approved, follow the approved-base and sole-file canonical authorization-child lifecycle, then execute one synchronous augmented warmup and three synchronous augmented full-fidelity repeats while charging exactly 9007.853947323996 wall / 36721.035879589996 aggregate-CPU historical and superseded seconds once. Screen, confirmation, checked, independent, official/private benchmark, candidate/Tier-7 promotion, Goal-completion, and EXP-649 formal surfaces remain prohibited. Candidate 005 stays at 59.5 percent checked / 59.3 percent independent and completion_eligible remains false.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -130,5 +184,5 @@ risks:
   - EXP-648 corpus construction succeeded with 512 exact start-index, modulus-bit-length, and normalized-band matches from 736 identities; those frozen strata and counts cannot be weakened or rematched after observing the corpus.
   - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
   - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
-  - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Judge gate T648 assigns distinct calibration-only root 20261159, but it remains unconsumed pending the pushed approved base, canonical sole-file authentication child, and clean-upstream verification; complete measured calibration evidence and a later launch Judge are still required before either screen root can open.
-  - EXP-648's prior readiness gate returned REQUIRED_REPAIR because the outer receipt overstated an in-process pre-seal sample. Both closure audits and Judge gate T648 now approve the honest observed-boundary repair, but root 20261159 remains unconsumed and cannot run until the pushed base plus sole-file authentication-child and clean-upstream checks are complete.
+  - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Root 20261159 is now consumed but rejected/superseded because additions were post hoc rather than synchronously validated and sealed; its timings may inform conservative planning only and cannot supply launch, rates, or caches.
+  - The chronology-repaired readiness base requires a renewed Judge. Root 20261160 is distinct, unopened, unconsumed, and unauthorized; complete matched calibration evidence and a later launch Judge are still required before either screen root can open.
