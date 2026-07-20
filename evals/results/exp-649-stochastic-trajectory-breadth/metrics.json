@@ -1,0 +1,293 @@
+{
+  "run_id": "exp-649-stochastic-trajectory-breadth",
+  "created_at": "2026-07-20T03:56:28+00:00",
+  "status": "runtime-gate-miss",
+  "seed": 20261150,
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "checkpoint_role": "frozen-source-checkpoint-no-new-result-checkpoint",
+  "seed_role": "generated-training-identities-input-only-calibration",
+  "evidence_scope": "complete full-fidelity training-identity input-only resource calibration; not model evidence",
+  "labels_or_oracle_present": false,
+  "fidelity_reduced": false,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The authorized calibration was input-only. Labels, oracle membership, transition truth, rollout truth, and formal cases were intentionally unavailable.",
+    "labels_or_oracle_present": false
+  },
+  "workload": {
+    "candidate": {
+      "artifact_role": "complete Candidate-005 production artifact",
+      "tier_order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "batch_sizes": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+      "total_rows": 1100
+    },
+    "portfolio": {
+      "width": 256,
+      "batches": [
+        {
+          "id": "tier0_width256_band",
+          "rows": 10
+        },
+        {
+          "id": "tier7",
+          "rows": 100
+        }
+      ],
+      "total_rows": 110,
+      "paths": [
+        {
+          "id": "control_original",
+          "orientation": "original",
+          "noise_seed": null,
+          "sigma": 0.0
+        },
+        {
+          "id": "control_swapped",
+          "orientation": "swapped",
+          "noise_seed": null,
+          "sigma": 0.0
+        },
+        {
+          "id": "noise_649001_original",
+          "orientation": "original",
+          "noise_seed": 649001,
+          "sigma": 0.2
+        },
+        {
+          "id": "noise_649002_swapped",
+          "orientation": "swapped",
+          "noise_seed": 649002,
+          "sigma": 0.2
+        },
+        {
+          "id": "noise_649003_original",
+          "orientation": "original",
+          "noise_seed": 649003,
+          "sigma": 0.2
+        },
+        {
+          "id": "noise_649004_swapped",
+          "orientation": "swapped",
+          "noise_seed": 649004,
+          "sigma": 0.2
+        },
+        {
+          "id": "noise_649005_original",
+          "orientation": "original",
+          "noise_seed": 649005,
+          "sigma": 0.2
+        },
+        {
+          "id": "noise_649006_swapped",
+          "orientation": "swapped",
+          "noise_seed": 649006,
+          "sigma": 0.2
+        }
+      ],
+      "path_count": 8,
+      "path_case_evaluations": 880,
+      "all_paths_vectorized": true
+    },
+    "complete_replicate": {
+      "same_process_end_to_end": true,
+      "candidate_rows": 1100,
+      "portfolio_rows_per_path": 110,
+      "portfolio_paths": 8,
+      "total_candidate_plus_path_case_evaluations": 1980
+    }
+  },
+  "identity_audit": {
+    "phase": "calibration",
+    "root_seed": 20261150,
+    "identity_count": 59,
+    "case_count": 1100,
+    "contains_labels_or_oracle": false,
+    "identity_and_case_arrays_omitted_from_canonical_record": true
+  },
+  "rng_contract": {
+    "root_seed_domain_fields": ["phase", "dataset_sha256", "path_noise_seed"],
+    "logical_coordinate_fields": ["case_index", "multiplier_bit", "injection_index"],
+    "coordinate_traversal": "multiplier_bit_msb_to_lsb_then_injection_0_to_16_then_case_channel_position",
+    "warmup_coordinate_batch_count": 2,
+    "replicate_coordinate_summary_count": 3,
+    "coordinate_arrays_omitted_from_canonical_record": true
+  },
+  "timing": {
+    "warmup": {
+      "total_wall_seconds": 3158.6668610849997,
+      "total_process_cpu_seconds": 12661.12,
+      "portfolio_wall_seconds": 3073.030690369,
+      "portfolio_process_cpu_seconds": 12305.01
+    },
+    "replicates": [
+      {
+        "replicate": 1,
+        "total_wall_seconds": 2165.354970311,
+        "total_process_cpu_seconds": 8283.569999999996,
+        "portfolio_wall_seconds": 2107.883802722001,
+        "portfolio_process_cpu_seconds": 8058.239999999998
+      },
+      {
+        "replicate": 2,
+        "total_wall_seconds": 2131.616994428001,
+        "total_process_cpu_seconds": 8131.460000000003,
+        "portfolio_wall_seconds": 2079.48520897,
+        "portfolio_process_cpu_seconds": 7927.370000000003
+      },
+      {
+        "replicate": 3,
+        "total_wall_seconds": 2621.5763023729996,
+        "total_process_cpu_seconds": 10619.470000000003,
+        "portfolio_wall_seconds": 2569.097302311,
+        "portfolio_process_cpu_seconds": 10397.740000000002
+      }
+    ]
+  },
+  "output_determinism": {
+    "compared_complete_runs": 4,
+    "candidate_output_sha256": "2af5898ce96768651ed6a546af7d64062b7312ca18144e29bba4f3a84abe25b0",
+    "portfolio_output_sha256": "cbdbc99011204d482b6e43fca355c559a7e2a8909a167c21192e5cf6e635c021",
+    "warmup_and_all_three_replicates_match": true
+  },
+  "legacy_sigma_zero_control_verification": {
+    "passed": true,
+    "prefix_residue_bitmatch_passed": true,
+    "final_output_bitmatch_passed": true,
+    "cases_per_orientation": 110,
+    "legacy_output_sha256": "c8ded56013842ff3944e88f4d08ae87c3164e9a373b66a5f476caac075a3bdde",
+    "observed_control_output_sha256": "c8ded56013842ff3944e88f4d08ae87c3164e9a373b66a5f476caac075a3bdde",
+    "wall_seconds": 382.5092722540003,
+    "process_cpu_seconds": 1605.4400000000023
+  },
+  "weights": {
+    "state_dict_sha256_before": "04848527ae5d161ca10e1d96106919468bc03e71b91221ce7c8ff7762f7bc5b8",
+    "state_dict_sha256_after": "04848527ae5d161ca10e1d96106919468bc03e71b91221ce7c8ff7762f7bc5b8",
+    "unchanged": true
+  },
+  "cache_recovery": {
+    "path": ".scratch/exp-649-stochastic-trajectory-breadth/calibration-partial.json",
+    "sha256": "df646286170cc773fa67cefc3e26a466d067d1921fe679a4b92b39868c83ffcc",
+    "cache_key": "2c36ebc2a7b43854381744a96afd710510b86ea4fa644e33a9dcb7e18ea1ee86",
+    "reused_completed_replicates": 2,
+    "reused_wall_seconds_charged_to_runaway_ceiling": 4296.971964739001,
+    "reused_process_cpu_seconds_charged_to_runaway_ceiling": 16415.03,
+    "active_session_wall_seconds": 6165.046206908,
+    "active_session_process_cpu_seconds": 24887.85,
+    "fresh_warmup_completed_on_this_process": true,
+    "repeated_interrupted_warmups_reconstructed": false,
+    "interruption_disclosure": "The first process was interrupted during an incomplete third replica after two complete replicas were durable. No incomplete unit entered the cache. The completing process performed a fresh full warmup, reused exactly two integrity-matched replicas, and charged both to the runaway ceilings."
+  },
+  "runtime_gate": {
+    "wall_formula": "1.20 * max(total_wall_seconds) + 5",
+    "maximum_observed_total_wall_seconds": 2621.5763023729996,
+    "multiplier": 1.2,
+    "additive_seconds": 5,
+    "projected_upper_seconds": 3150.8915628475993,
+    "threshold_seconds": 285,
+    "headroom_seconds": -2865.8915628475993,
+    "passed": false,
+    "process_cpu_formula_diagnostic_only": "1.20 * max(total_process_cpu_seconds) + 5",
+    "maximum_observed_total_process_cpu_seconds": 10619.470000000003,
+    "projected_process_cpu_upper_seconds_diagnostic": 12748.364000000003
+  },
+  "resource_guard": {
+    "charged_time_basis": "active_session_plus_reused_complete_replicates",
+    "active_session_wall_seconds": 6165.046206908,
+    "active_session_process_cpu_seconds": 24887.85,
+    "reused_wall_seconds": 4296.971964739001,
+    "reused_process_cpu_seconds": 16415.03,
+    "cumulative_charged_wall_seconds": 10462.018171647001,
+    "cumulative_charged_process_cpu_seconds": 41302.88,
+    "hard_ceiling_wall_seconds": 14400,
+    "hard_ceiling_process_cpu_seconds": 57600,
+    "hard_ceiling_wall_headroom_seconds": 3937.981828352999,
+    "hard_ceiling_process_cpu_headroom_seconds": 16297.12,
+    "ceiling_role": "generous-planning-runaway-protection-only",
+    "fidelity_reduced": false
+  },
+  "formal_projection": {
+    "formal_root_seed": 20261149,
+    "formal_root_opened": false,
+    "formal_authorized": false,
+    "projected_wall_seconds": 10037.759112947819,
+    "projected_process_cpu_seconds": 40729.01545454546,
+    "soft_multiplier": 1.5,
+    "soft_wall_seconds": 15056.638669421729,
+    "soft_process_cpu_seconds": 61093.523181818186,
+    "hard_multiplier": 2.0,
+    "hard_wall_seconds": 20075.518225895637,
+    "hard_process_cpu_seconds": 81458.03090909091,
+    "path_case_equivalents": 3600,
+    "vectorized_path_case_equivalents": 3200,
+    "legacy_path_case_equivalents": 400,
+    "vectorized_scale_from_8x110": 3.6363636363636362,
+    "legacy_scale_from_2x110": 1.8181818181818181,
+    "bookkeeping": {
+      "wall_seconds": 0.11570044600011897,
+      "process_cpu_seconds": 0.06999999999970896,
+      "artifact_path": ".scratch/exp-649-stochastic-trajectory-breadth/formal-bookkeeping-projection.json",
+      "artifact_sha256": "271d29c6266c555dd8c13432eeff07da9eb212b68719a616a4c994fda584c5ec",
+      "artifact_bytes": 3458256,
+      "cases": 200,
+      "paths": 8,
+      "prefixes_per_path_case": 256,
+      "contains_targets_or_labels": false
+    }
+  },
+  "controls": {
+    "full_fidelity": true,
+    "no_labels_or_oracle": true,
+    "formal_material_opened": false,
+    "output_deterministic": true,
+    "legacy_prefix_and_final_parity": true,
+    "weights_unchanged": true
+  },
+  "claims": {
+    "accuracy": false,
+    "oracle": false,
+    "validity": false,
+    "breadth": false,
+    "candidate_promotion": false
+  },
+  "gates": {
+    "input_only_boundary": true,
+    "output_determinism": true,
+    "legacy_sigma_zero_parity": true,
+    "weights_unchanged": true,
+    "full_fidelity": true,
+    "candidate_wall_runtime": false,
+    "formal_eligible": false
+  },
+  "decision": "blocked-from-exp-649-formal",
+  "decision_scope": "Calibration completed but missed only the binding resource gate. EXP-649 remains selected/planned and is not scientifically rejected; Candidate 005 remains incumbent.",
+  "mlflow": {
+    "experiment_id": "2",
+    "run_id": "261de553f426419ca3f83843e4fa2131"
+  },
+  "raw_evidence": {
+    "durable_calibration": {
+      "path": "experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json",
+      "sha256": "655e160539f72105da0ee5c809aaa7f716c8cad56c26f78d62e6ba207e44cbbf"
+    },
+    "calibration": {
+      "path": ".scratch/exp-649-stochastic-trajectory-breadth/calibration.json",
+      "sha256": "655e160539f72105da0ee5c809aaa7f716c8cad56c26f78d62e6ba207e44cbbf"
+    },
+    "calibration_partial": {
+      "path": ".scratch/exp-649-stochastic-trajectory-breadth/calibration-partial.json",
+      "sha256": "df646286170cc773fa67cefc3e26a466d067d1921fe679a4b92b39868c83ffcc"
+    },
+    "formal_bookkeeping_projection": {
+      "path": ".scratch/exp-649-stochastic-trajectory-breadth/formal-bookkeeping-projection.json",
+      "sha256": "271d29c6266c555dd8c13432eeff07da9eb212b68719a616a4c994fda584c5ec",
+      "contains_targets_or_labels": false
+    }
+  },
+  "limitations": [
+    "Calibration used generated training-identity inputs and no labels or oracle.",
+    "Each timing was a complete end-to-end replicate; resumed timings required the exact cache key and a fresh local warmup.",
+    "The first process was interrupted during an incomplete third replica after two replicas were durable. Recovery performed a fresh warmup, reused and charged the two complete replicas, and did not count the incomplete unit.",
+    "CPU upper-bound timing is diagnostic; the wall upper bound is the pass gate.",
+    "No formal identity, target, score, selector, or benchmark answer was constructed, and no accuracy, oracle, validity, or breadth claim is made."
+  ]
+}

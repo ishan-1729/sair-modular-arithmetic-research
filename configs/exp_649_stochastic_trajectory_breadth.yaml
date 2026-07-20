@@ -206,6 +206,42 @@ resource_protocol:
   formal_hard_multiplier_over_measured_projection: 2.0
   calibration_output: .scratch/exp-649-stochastic-trajectory-breadth/calibration.json
   resolved:
-    calibration_status: pending
-    formal_authorization_status: pending
-    formal_collision_audit_status: pending
+    lifecycle_status: planned-blocked-formal-runtime-gate-miss
+    calibration_status: runtime-gate-miss
+    calibration_output_sha256: 655e160539f72105da0ee5c809aaa7f716c8cad56c26f78d62e6ba207e44cbbf
+    calibration_partial_sha256: df646286170cc773fa67cefc3e26a466d067d1921fe679a4b92b39868c83ffcc
+    formal_bookkeeping_projection_sha256: 271d29c6266c555dd8c13432eeff07da9eb212b68719a616a4c994fda584c5ec
+    formal_authorization_status: blocked-runtime-gate-miss
+    formal_collision_audit_status: not-run-runtime-gate-locked
+    formal_root_status: unopened
+    fidelity_reduced: false
+    fresh_warmup_completed_on_final_process: true
+    timed_replicates_completed: 3
+    reused_completed_replicates: 2
+    warmup_total_wall_seconds: 3158.6668610849997
+    warmup_total_process_cpu_seconds: 12661.12
+    replicate_total_wall_seconds: [2165.354970311, 2131.616994428001, 2621.5763023729996]
+    replicate_total_process_cpu_seconds: [8283.569999999996, 8131.460000000003, 10619.470000000003]
+    candidate_total_wall_upper_seconds: 3150.8915628475993
+    candidate_total_process_cpu_upper_seconds_diagnostic: 12748.364000000003
+    candidate_wall_gate_passed: false
+    legacy_sigma_zero_wall_seconds: 382.5092722540003
+    legacy_sigma_zero_process_cpu_seconds: 1605.4400000000023
+    legacy_sigma_zero_prefix_and_final_bitmatch_passed: true
+    source_weights_unchanged: true
+    active_session_wall_seconds: 6165.046206908
+    active_session_process_cpu_seconds: 24887.85
+    reused_wall_seconds_charged_to_runaway_ceiling: 4296.971964739001
+    reused_process_cpu_seconds_charged_to_runaway_ceiling: 16415.03
+    cumulative_charged_wall_seconds: 10462.018171647
+    cumulative_charged_process_cpu_seconds: 41302.88
+    remaining_hard_wall_headroom_seconds: 3937.981828353
+    remaining_hard_process_cpu_headroom_seconds: 16297.12
+    projected_formal_wall_seconds: 10037.759112947819
+    projected_formal_process_cpu_seconds: 40729.01545454546
+    formal_soft_wall_seconds: 15056.638669421729
+    formal_soft_process_cpu_seconds: 61093.523181818186
+    formal_hard_wall_seconds: 20075.518225895637
+    formal_hard_process_cpu_seconds: 81458.03090909091
+    mlflow_experiment_id: "2"
+    mlflow_run_id: 261de553f426419ca3f83843e4fa2131

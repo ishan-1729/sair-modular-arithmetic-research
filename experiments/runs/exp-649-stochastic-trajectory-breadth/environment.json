@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-07-20T04:01:40+00:00",
+  "capture_timing": "after-calibration-completion",
+  "calibration_completed_at": "2026-07-20T03:56:28+00:00",
+  "environment": "Ubuntu-24.04 under WSL2",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "cpu": "Intel(R) Core(TM) Ultra 7 155H",
+  "logical_cpus": 22,
+  "configured_torch_threads": 4,
+  "configured_torch_interop_threads": 1,
+  "deterministic_algorithms": true,
+  "torch_config_sha256": "f2206ff92ea3ac8e15e5afcdf407db086c497c3924ceb58b606c1299a0635cac",
+  "environment_sha256": "84341a06440e956a70c3023ae7a914d522b0d7106a5c67ccf30cb2ed8301c8ff",
+  "python": "3.12.3",
+  "pytorch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "numpy": "2.5.1",
+  "safetensors": "0.8.0",
+  "psutil": "7.0.0",
+  "virtual_environment": "/home/ishan/.venvs/sair-mod-challenge",
+  "note": "Environment metadata was captured 5 minutes 12 seconds after calibration completed. Runtime provenance is bound to the environment and Torch configuration hashes above."
+}

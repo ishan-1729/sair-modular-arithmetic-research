@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T04:38:30+05:30
+updated_at: 2026-07-20T09:42:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,19 +36,19 @@ current_hypothesis:
   run_id: exp-649-stochastic-trajectory-breadth
   statement: Six fixed stochastic paths from the frozen raw Candidate-005 cellular checkpoint, paired with exact sigma-zero original and swapped controls, may expose strictly greater than 90 percent width-256 oracle breadth within the complete 285-second candidate-shaped wall envelope.
   promotion_gate: This calibration-only phase advances to formal consideration only if the exact 1,100-row Candidate-005 plus eight-path-by-110-row workload passes the frozen same-environment runtime and integrity protocol; formal evidence then requires a separate Judge authorization, at least 181 of at most 200 untouched oracle-union successes, no more than four invalid cases per path, and an exact rerun. A pass cannot itself promote a candidate or authorize a selector.
-  status: selected-planned-pending-calibration
-  evidence_status: The first implementation-readiness audit blocked calibration on four scaffold gaps; the repaired runner then passed an independent calibration-only re-gate. No EXP-649 metric, run artifact, result checkpoint, formal authorization, selector authorization, or success claim exists.
+  status: selected-planned-blocked-formal-runtime-gate-miss
+  evidence_status: The complete input-only calibration finished with three matched full-workload wall measurements of 2165.355, 2131.617, and 2621.576 seconds. The binding upper projection is 3150.892 seconds, so the 285-second wall gate misses. Legacy prefix/final parity and weight-integrity controls pass, no labels or oracle were read, and this creates no breadth or accuracy evidence. The exact machine verdict is runtime-gate-miss; EXP-649 remains planned but this frozen formal path is permanently locked.
   authorization:
     scaffolding: judge-approved
     calibration: judge-approved-input-only-training-identities
-    formal: not-authorized
+    formal: blocked-runtime-gate-miss
     selector_or_vote: prohibited
   seed_roles:
     retired_calibration_root: 20261148
-    calibration_input_only_root: 20261150
+    calibration_input_only_root_consumed: 20261150
     formal_unopened_root: 20261149
     scaffold_parity_test_only_root: 649900001
-next_action: Commit the validated EXP-649 scaffold, require an empty Git status and matching frozen describe hashes, then run only the full-fidelity input-only calibration rooted at 20261150 with complete warmup, three matched replicates, charged resume accounting, and no fidelity reduction. Formal root 20261149 remains unopened and unauthorized.
+next_action: Make the full-fidelity EXP-649 runtime-gate-miss durable, obtain the post-calibration Judge decision, verify and commit it, then select and preregister the next highest-value compliant experiment. Never generate, audit, or open formal root 20261149 for this frozen runtime-miss artifact.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -59,9 +59,9 @@ tracking:
   incumbent_model_version: "5"
 git:
   branch: agent/submission-ready-horner-tcn9
-  formal_source_commit: 94a3f63d429ea5024852197bbf02eeedac25ae5c
+  formal_source_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
   formal_source_dirty: false
-  last_validated_commit: 94a3f63d429ea5024852197bbf02eeedac25ae5c
+  last_validated_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
   dirty: false
 risks:
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
@@ -94,4 +94,4 @@ risks:
   - EXP-649's six-path choice comes only from a hypothetical independence calculation on the related EXP-647 challenger's 47.5 percent union; it is not matched Candidate-005 evidence and could miss breadth or runtime immediately.
   - EXP-649 calibration root 20261148 is permanently retired because a scaffold parity test computed official-reference labels for its 1,100 identities in memory; no label was inspected or persisted, but only audited replacement root 20261150 may be used input-only after the clean scaffold gate.
   - EXP-649's first implementation-readiness audit rejected calibration launch because sigma-zero controls did not retain every decoded prefix, runaway enforcement was only stage-end, formal compatibility omitted three provenance hashes, and retirement lacked a pinned machine-readable manifest; these are scaffold blockers, not experiment results.
-  - EXP-649 is calibration-only and pending; its formal root and cases are untouched, and no oracle, selector, voting, tuning, candidate promotion, or Goal-completion claim is authorized.
+  - EXP-649 completed its full-fidelity input-only calibration but misses the wall gate by more than an order of magnitude: 3150.892 seconds projected versus 285 seconds allowed. Formal root 20261149 remains unopened; no oracle, accuracy, breadth, selector, voting, tuning, candidate-promotion, or Goal-completion claim is authorized.

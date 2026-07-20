@@ -2,21 +2,21 @@
 type: Experiment Preregistration
 title: EXP-649 stochastic trajectory breadth
 description: Calibration-gated frozen width-256 oracle-breadth and candidate-shaped runtime test with six stochastic paths and two exact controls.
-status: planned-pending-calibration
+status: planned-blocked-formal-runtime-gate-miss
 tags: [autoresearch, tier7, stochastic-inference, trajectory-breadth, oracle-coverage, runtime]
 timestamp: "2026-07-20T03:07:13+05:30"
-last_updated: "2026-07-20T04:38:30+05:30"
+last_updated: "2026-07-20T09:42:00+05:30"
 ---
 
 # EXP-649 stochastic trajectory breadth
 
 ## Status and question
 
-EXP-649 is the selected next bounded Tier-7 gate. Only runner scaffolding and an input-only resource calibration are Judge-authorized. Status is **planned and pending calibration**, not running or successful. No EXP-649 metric, run artifact, result checkpoint, or formal authorization exists. Formal evidence stays locked until calibration passes and a later Judge explicitly authorizes it.
+EXP-649 remains a selected, planned Tier-7 research item, but its complete input-only calibration now has the exact machine verdict **`runtime-gate-miss`**. This frozen eight-path formulation is permanently blocked from formal work. The result is not `completed-rejected`: calibration measured resources and integrity without labels or oracle, so stochastic breadth, validity, and accuracy remain untested. Formal root `20261149` remains unopened.
 
 Candidate 005 remains the active incumbent at 59.5% checked-public and 59.3% independent overall accuracy. This is not Goal completion: the 85% overall gate remains unmet, and Candidate 005 currently has no learned inference path above 128 bits.
 
-The falsifiable question is whether six fixed stochastic trajectories plus exact original/swapped controls from the frozen raw cellular checkpoint contain the correct answer on strictly more than 90% of at most 200 untouched width-256 cases while their complete candidate-shaped CPU workload remains within 285 wall seconds. This phase measures breadth and runtime only. It does not select an output.
+The preregistered falsifiable question was whether six fixed stochastic trajectories plus exact original/swapped controls from the frozen raw cellular checkpoint contain the correct answer on strictly more than 90% of at most 200 untouched width-256 cases while their complete candidate-shaped CPU workload remains within 285 wall seconds. Calibration falsifies only the runtime conjunct. It does not select an output and provides no evidence about the unexecuted breadth conjunct.
 
 ## Evidence basis and K=6 planning rationale
 
@@ -103,3 +103,22 @@ Calibration must project the complete later formal workload from measured path g
 ## Decision boundary
 
 A calibration miss leaves EXP-649 planned but blocked from formal work. A later formal breadth, validity, determinism, or resource miss rejects this exact six-path, sigma-0.2, seventeen-site formulation without tuning on the observed cases. A formal pass would authorize only a new, separately preregistered target-free selection study after Judge review. It would not authorize voting, a selector, Candidate-005 modification, Tier-7 promotion, checked evaluation, private claims, or Goal completion.
+
+## Calibration result
+
+The clean-tree calibration executed from repository commit `5519b5173118e7a0166096e0d5fdbca13c4ef2b4` with frozen scientific hash `ea70a40c01e1c407be05ce7d5e7740862e670a0dd36715635614c521cae3415a`, resource hash `8d13c0f5d6a859a36d9360ad4209b492bc10dae42a6e6be80c0d9bdc5b3fb7cd`, executed config hash `99b22e87eb6a55c6d362ae350dc35c0de68d2f3c8ee99befcdff829d6056f134`, and runner hash `04321d39de730cc653535faa8928ba7a0e975868d274503a5e53714f41daecda`. The final label-free [calibration artifact](../../../experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json) has SHA-256 `655e160539f72105da0ee5c809aaa7f716c8cad56c26f78d62e6ba207e44cbbf`; its integrity-protected partial has SHA-256 `df646286170cc773fa67cefc3e26a466d067d1921fe679a4b92b39868c83ffcc`. The [canonical run record](../../../experiments/runs/exp-649-stochastic-trajectory-breadth/run.json) and [metrics](../../../evals/results/exp-649-stochastic-trajectory-breadth/metrics.json) preserve the compact provenance and verdict.
+
+Observed full-workload timing on the frozen four-thread WSL environment was:
+
+- warmup: `3158.666861` wall seconds and `12661.12` process-CPU seconds;
+- replicate 1: `2165.354970` wall seconds and `8283.57` process-CPU seconds;
+- replicate 2: `2131.616994` wall seconds and `8131.46` process-CPU seconds;
+- replicate 3: `2621.576302` wall seconds and `10619.47` process-CPU seconds.
+
+The three candidate and portfolio output hashes are identical to the warmup hashes. The source state dictionary is bit-identical before and after the run. Separately measured two-orientation legacy verification takes `382.509272` wall / `1605.44` process-CPU seconds and exactly matches both final outputs and every retained decoded prefix. Target-free schema-equivalent `200 x 8 x 256` bookkeeping takes `0.115700` wall / `0.07` process-CPU seconds. Calibration generated 1,100 input-only rows from audited root `20261150`; its artifact records `contains_labels_or_oracle: false`.
+
+The binding derived upper wall projection is `1.20 * 2621.576302 + 5 = 3150.891563` seconds. Because `3150.891563 > 285`, the candidate wall gate fails. The measured formal projection of `10037.759113` wall seconds is counterfactual resource planning only; it cannot authorize formal work.
+
+The first host execution completed the warmup and two timed replicas before its wrapper was interrupted during an incomplete third replica. No incomplete unit entered the cache. The recovery process performed the mandatory fresh full warmup, validated and reused exactly two complete replicas, charged their `4296.971965` wall / `16415.03` process-CPU seconds to the runaway ceilings, and completed the missing replica plus legacy and bookkeeping checks. The final active session plus reused charges total `10462.018172` wall / `41302.88` process-CPU seconds, below the `14400` / `57600` hard ceilings, with no fidelity reduction.
+
+Therefore EXP-649 remains planned but this frozen formal path is blocked. The runner's formal preconditions can never accept this artifact because its status is `runtime-gate-miss` and `candidate_wall_gate_passed` is false. Do not generate a collision audit, open formal root `20261149`, score oracle breadth, train a selector, vote, tune paths or noise, alter Candidate 005, or make a promotion or completion claim from this result.

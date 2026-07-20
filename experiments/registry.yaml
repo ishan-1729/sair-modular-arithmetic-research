@@ -652,6 +652,10 @@ runs:
     checkpoint: .scratch/exp-647-operand-swap-consistency/formal/confidence_consistency/weights.safetensors
   - run_id: exp-649-stochastic-trajectory-breadth
     status: planned
+    calibration_verdict: runtime-gate-miss
     approach: frozen-stochastic-width256-trajectory-breadth-gate
     config: configs/exp_649_stochastic_trajectory_breadth.yaml
     preregistration: knowledge/autoresearch/ablations/exp-649-stochastic-trajectory-breadth.md
+    run_record: experiments/runs/exp-649-stochastic-trajectory-breadth/run.json
+    metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
+    calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
