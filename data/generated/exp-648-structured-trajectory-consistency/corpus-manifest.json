@@ -1,0 +1,57 @@
+{
+  "constraints": {
+    "benchmark_identities": false,
+    "injection_corruption_or_masking": false,
+    "matching_relaxation": false,
+    "model_update": false,
+    "natural_trajectories_only": true,
+    "scientific_accuracy_or_selection_metrics": false
+  },
+  "data_artifact_set_hash_scope": "canonical-path-to-file-sha256-map-excluding-this-manifest",
+  "data_artifact_set_sha256": "d2fff8c84830f4598c902a59afc63ec1fd7a240f4388dcc80c60df9cc984776c",
+  "data_artifacts": {
+    "identity_manifest": "data/generated/exp-648-structured-trajectory-consistency/identity-manifest.json",
+    "paired_corpus": "data/generated/exp-648-structured-trajectory-consistency/paired-corpus.json.gz",
+    "trajectory_manifest": "data/generated/exp-648-structured-trajectory-consistency/trajectory-manifest.json.gz"
+  },
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "failure_windows_available": 518,
+  "failure_windows_frozen": 512,
+  "hashes": {
+    "identity_manifest_canonical_sha256": "13f9b68641c4f882a4db5b4b8ed43d80baf89405acb9b88b3af4d9240d8f64cb",
+    "identity_manifest_file_sha256": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+    "paired_corpus_canonical_sha256": "2ff624e2d91c637a1a2d7faece89416233c7372ac12cedb05538d3588c408353",
+    "paired_corpus_gzip_sha256": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+    "trajectory_manifest_canonical_sha256": "26054172371496c05f34e1e1687f00ee06d5b7aa3bf7b727d7d57ca72b72c9d4",
+    "trajectory_manifest_gzip_sha256": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a"
+  },
+  "identity_trajectories": 736,
+  "matched_pairs": 512,
+  "provenance": {
+    "calibration_evidence_core_sha256": "45f34f3c7e436af2e7468060d734937780c3cda36a758cd841a378484f2aceff",
+    "calibration_evidence_sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db",
+    "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+    "dataset_sha256": "69ab9b7a2399757561c638e0b2830c4af92ba9acc37d2ad7752f74eff0a81165",
+    "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+    "environment_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+    "evaluator_sha256": "137738928d8b0c7a2fefba9e910206355a01e9379816861adc06e7a860d09053",
+    "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+    "preregistration_sha256": "49336918d9a893dfb53427b6372a4d8a507e54e79ea77c539aaa507aba0a9d60",
+    "repository_head": "9f2226873a66e1938dbf30d87acbc876e528c622",
+    "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+    "root": 20261152,
+    "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
+    "scientific_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
+    "test_sha256": "938b92e151d96ba2bd7b18b83ccf9cbc6e78c02609c6ebb47426dedd334b4a6b",
+    "workload_sha256": "8dd16cb11b092a9cae9acdc3359aabecdbd6babc57f9a6e285cf8e79b498631e"
+  },
+  "role": "generated-training-split-corpus-only",
+  "root": 20261152,
+  "schema_version": "exp648-corpus-manifest-v1",
+  "success_windows_available": 99569,
+  "success_windows_frozen": 512,
+  "width": 256,
+  "window_length": 8
+}

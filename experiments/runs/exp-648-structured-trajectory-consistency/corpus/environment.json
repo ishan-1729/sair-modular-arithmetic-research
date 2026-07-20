@@ -1,0 +1,30 @@
+{
+  "calibrated_environment": {
+    "dependencies": {
+      "mlflow": "3.14.0",
+      "numpy": "2.5.1",
+      "psutil": "7.0.0",
+      "safetensors": "0.8.0",
+      "scipy": "1.18.0",
+      "sympy": "1.13.1",
+      "torch": "2.5.1+cpu"
+    },
+    "deterministic_algorithms": true,
+    "executable": "/home/ishan/.venvs/sair-mod-challenge/bin/python",
+    "machine": "x86_64",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "schema_version": "exp648-environment-v1",
+    "torch_device": "cpu",
+    "torch_interop_threads": 1,
+    "torch_threads": 4,
+    "torch_version": "2.5.1+cpu"
+  },
+  "calibrated_environment_payload_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+  "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+  "repository_head": "9f2226873a66e1938dbf30d87acbc876e528c622",
+  "repository_upstream": "9f2226873a66e1938dbf30d87acbc876e528c622",
+  "schema_version": "exp648-corpus-environment-v1",
+  "scientific_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2"
+}

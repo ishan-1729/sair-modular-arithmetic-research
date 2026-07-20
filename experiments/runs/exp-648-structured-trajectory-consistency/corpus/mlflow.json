@@ -1,0 +1,86 @@
+{
+  "experiment_id": "2",
+  "experiment_name": "sair-modular-arithmetic-wsl",
+  "limitations": [
+    "This MLflow run records corpus construction resources and provenance only, not scientific accuracy or selection evidence.",
+    "No model update or benchmark evaluation was performed."
+  ],
+  "reused_matching_completed_run": false,
+  "run_id": "6f79fb322d9f4dfb85e19051365b309c",
+  "run_name": "exp-648-structured-trajectory-consistency-corpus-only",
+  "run_status": "FINISHED",
+  "schema_version": "exp648-corpus-mlflow-receipt-v1",
+  "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+  "verified": {
+    "artifacts": [
+      {
+        "downloaded_sha256": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+        "path": "corpus/identity-manifest.json",
+        "source_path": "data/generated/exp-648-structured-trajectory-consistency/identity-manifest.json",
+        "source_sha256": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a",
+        "path": "corpus/trajectory-manifest.json.gz",
+        "source_path": "data/generated/exp-648-structured-trajectory-consistency/trajectory-manifest.json.gz",
+        "source_sha256": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+        "path": "corpus/paired-corpus.json.gz",
+        "source_path": "data/generated/exp-648-structured-trajectory-consistency/paired-corpus.json.gz",
+        "source_sha256": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+        "path": "corpus/corpus-manifest.json",
+        "source_path": "data/generated/exp-648-structured-trajectory-consistency/corpus-manifest.json",
+        "source_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "de34592118392d2b1a158697b78a35c0d0e130ead36f33e2069e8715d2056a09",
+        "path": "corpus-evidence/run.json",
+        "source_path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/run.json",
+        "source_sha256": "de34592118392d2b1a158697b78a35c0d0e130ead36f33e2069e8715d2056a09",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "cab308ec1c6148ee4e5a68764809dc2be5114f23026cf4f4dbc4d4572e89a957",
+        "path": "corpus-evidence/environment.json",
+        "source_path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/environment.json",
+        "source_sha256": "cab308ec1c6148ee4e5a68764809dc2be5114f23026cf4f4dbc4d4572e89a957",
+        "verified": true
+      }
+    ],
+    "final_resource_timing": {
+      "charged_aggregate_cpu_seconds": 10104.265504912,
+      "charged_wall_seconds": 2508.1712223960003,
+      "first_quarter_guard_checked": true,
+      "launcher_plus_active_aggregate_cpu_seconds": 10104.265504912,
+      "launcher_plus_active_wall_seconds": 2508.171175123,
+      "peak_rss_bytes": 669806592,
+      "reused_aggregate_cpu_seconds_charged": 0.0,
+      "reused_wall_seconds_charged": 0.0,
+      "soft_cpu_crossed_telemetry_only": false,
+      "soft_wall_crossed_telemetry_only": false
+    },
+    "metrics": {
+      "charged_aggregate_cpu_seconds": 10103.335504912,
+      "charged_wall_seconds": 2505.7548506850003,
+      "identity_trajectories": 736.0,
+      "launcher_plus_active_aggregate_cpu_seconds": 10103.335504912,
+      "launcher_plus_active_wall_seconds": 2505.754810802,
+      "matched_pairs": 512.0,
+      "peak_rss_bytes": 669806592.0,
+      "reused_aggregate_cpu_seconds_charged": 0.0,
+      "reused_wall_seconds_charged": 0.0
+    },
+    "no_accuracy_or_selection_metrics": true,
+    "params": true,
+    "tags": true
+  }
+}

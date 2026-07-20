@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T14:22:00+05:30
+updated_at: 2026-07-20T15:37:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,19 +36,19 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: implemented-calibrated-corpus-authorized-unopened
-  evidence_status: Implementation, static tests, and the audit-repaired full-fidelity resource calibration are complete. Calibration root 20261151 was consumed only for non-scientific timing, resource, provenance, and integrity evidence; no scientific accuracy, selection metric, corpus, screen, confirmation, candidate, or promotion evidence exists. The real corpus root and every scientific root remain unopened.
+  status: corpus-complete-screen-blocked
+  evidence_status: Implementation, static tests, audit-repaired full-fidelity resource calibration, and the immutable generated-training corpus are complete. Corpus root 20261152 produced 736 identity trajectories and 512 exact matched failure/success pairs in 2508.171222396 wall / 10104.265504912 aggregate-CPU seconds end to end. This is corpus provenance and resource evidence only; it contains zero accuracy or selection evidence, performs no model update, and does not change Candidate 005 or Goal completion eligibility.
   authorization:
     preregistration: judge-approved
     implementation: complete
     calibration: complete-non-scientific-resource-calibration
-    corpus: judge-authorized-but-unopened-after-commit
-    screen: blocked-pending-real-corpus-scientific-runner-hashes-and-judge
+    corpus: consumed-complete
+    screen: blocked-pending-readiness-repair-fresh-full-fidelity-recalibration-post-repair-judge
     confirmation: prohibited-until-screen-pass-and-separate-judge
     candidate_or_tier7_promotion: prohibited
   seed_roles:
     calibration_root_consumed_non_scientific: 20261151
-    corpus_root_authorized_unopened: 20261152
+    corpus_root_consumed_complete: 20261152
     screen_training_root_unopened_blocked: 20261153
     screen_evaluation_root_unopened_blocked: 20261154
     confirmation_1_training_root_unopened_blocked: 20261155
@@ -65,7 +65,7 @@ locked_prior_hypotheses:
     formal_root_status: unopened-permanently-locked-for-this-frozen-formulation
     prohibited: [formal-input-generation, collision-audit, scoring, selector, voting, tuning, promotion]
     incumbent_changed: false
-next_action: Commit this bookkeeping package, then execute only T-EXP648-CORPUS-FREEZE from the committed implementation/calibration state. Keep screen and confirmation roots unopened; a real frozen corpus, scientific runner and hashes, and a later Judge gate are mandatory before any screen. Keep Candidate 005 unchanged and EXP-649 formal root 20261149 permanently locked.
+next_action: Preserve and commit the accepted EXP-648 corpus package without rerunning root 20261152. Repair screen readiness without opening any scientific root, perform a fresh full-fidelity post-repair resource calibration under a separately authorized calibration root, and require a new Judge gate before screen roots 20261153/20261154 may open. Confirmation and checked, independent, official/private benchmark surfaces remain prohibited. Keep Candidate 005 unchanged and EXP-649 formal root 20261149 permanently locked.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -113,4 +113,6 @@ risks:
   - EXP-649's first implementation-readiness audit rejected calibration launch because sigma-zero controls did not retain every decoded prefix, runaway enforcement was only stage-end, formal compatibility omitted three provenance hashes, and retirement lacked a pinned machine-readable manifest; these are scaffold blockers, not experiment results.
   - EXP-649 completed its full-fidelity input-only calibration but misses the wall gate by more than an order of magnitude: 3150.892 seconds projected versus 285 seconds allowed. Formal root 20261149 remains unopened; no oracle, accuracy, breadth, selector, voting, tuning, candidate-promotion, or Goal-completion claim is authorized.
   - EXP-648's natural K=8 endpoint objective is untested; it may recover pre-first-error windows or may introduce drift into already successful trajectories, so both directions and first-error movement are binding paired gates.
-  - EXP-648 corpus construction may fail to find 512 exact start-index, modulus-bit-length, and normalized-band matches under the calibrated mining ceiling; the matching strata and count cannot be weakened after observing throughput.
+  - EXP-648 corpus construction succeeded with 512 exact start-index, modulus-bit-length, and normalized-band matches from 736 identities; those frozen strata and counts cannot be weakened or rematched after observing the corpus.
+  - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
+  - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.

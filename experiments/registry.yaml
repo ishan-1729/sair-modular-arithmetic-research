@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: planned
+    status: corpus-complete-screen-blocked
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -668,3 +668,33 @@ runs:
     environment: experiments/runs/exp-648-structured-trajectory-consistency/environment.json
     executed_config: experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml
     mlflow_receipt: experiments/runs/exp-648-structured-trajectory-consistency/mlflow.json
+    corpus:
+      root: 20261152
+      status: consumed-complete
+      identities: 736
+      matched_pairs: 512
+      corpus_manifest: data/generated/exp-648-structured-trajectory-consistency/corpus-manifest.json
+      identity_manifest: data/generated/exp-648-structured-trajectory-consistency/identity-manifest.json
+      trajectory_manifest: data/generated/exp-648-structured-trajectory-consistency/trajectory-manifest.json.gz
+      paired_corpus: data/generated/exp-648-structured-trajectory-consistency/paired-corpus.json.gz
+      run_record: experiments/runs/exp-648-structured-trajectory-consistency/corpus/run.json
+      environment: experiments/runs/exp-648-structured-trajectory-consistency/corpus/environment.json
+      integrity: experiments/runs/exp-648-structured-trajectory-consistency/corpus/integrity.json
+      mlflow_receipt: experiments/runs/exp-648-structured-trajectory-consistency/corpus/mlflow.json
+      provenance_amendment: experiments/runs/exp-648-structured-trajectory-consistency/corpus/provenance-amendment.json
+      mlflow_run_id: 6f79fb322d9f4dfb85e19051365b309c
+      hashes:
+        corpus_manifest_sha256: 1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d
+        scientific_runner_sha256: 83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2
+        scientific_test_sha256: 938b92e151d96ba2bd7b18b83ccf9cbc6e78c02609c6ebb47426dedd334b4a6b
+        integrity_sha256: a0a00d09379cf77dab8a0c89c1b6796fffb9f238021409ab9f473b102ecd24fe
+        mlflow_receipt_sha256: 9fbac562324f141d76f8b7e255ff54490072f7e72ffa777e0570466cea1d4a3f
+      authoritative_end_to_end_timing:
+        wall_seconds: 2508.171222396
+        aggregate_cpu_seconds: 10104.265504912
+      scientific_evidence: none
+      limitations:
+        - Corpus construction and resource/provenance evidence only; no model update, accuracy metric, selection metric, candidate promotion, or Goal-completion evidence.
+        - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
+        - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
+    screen_status: blocked-pending-readiness-repair-fresh-full-fidelity-recalibration-post-repair-judge
