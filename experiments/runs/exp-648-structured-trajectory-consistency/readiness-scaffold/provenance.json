@@ -1,0 +1,27 @@
+{
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "historical_corpus_commit": "8d960fa747b64bffa3b60581ae4ff518436a8887",
+  "historical_executed_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
+  "immutable_corpus_package_unchanged_from_historical_commit": true,
+  "judge_gate": {
+    "outcome": "required-repair",
+    "renewed_audit": "pending",
+    "repair": "honest-observed-launch-to-pre-outer-seal-resource-boundary"
+  },
+  "live_scaffold": {
+    "focused_scientific_test_sha256": "79a9627eaea6b5d44bab59c5c9fc70fc45f8437aa4cc955ebd4b4136c682a4d6",
+    "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+    "scientific_runner_sha256": "2b2a6d2241b784ef699b0947cd78554c6900208e3f125a9d40ebc8b13e633c49"
+  },
+  "outer_resource_evidence_scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
+  "schema_version": "exp648-readiness-scaffold-provenance-v1",
+  "scope": {
+    "candidate_changed": false,
+    "implementation_observations_only": true,
+    "root_opened": false,
+    "scientific_accuracy_or_selection_reported": false,
+    "training_or_evaluation_performed": false
+  },
+  "screen_workload_sha256": "c928d60f431788da7e27c0e7bf2f63f4e550568f7eea513e833417689c53cae5",
+  "status": "required-repair-applied-awaiting-renewed-audit-and-distinct-calibration-root"
+}

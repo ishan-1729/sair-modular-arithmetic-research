@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: corpus-complete-screen-blocked
+    status: corpus-complete-readiness-implementation-approved-base-pending-commit-and-push
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -693,8 +693,30 @@ runs:
         wall_seconds: 2508.171222396
         aggregate_cpu_seconds: 10104.265504912
       scientific_evidence: none
+    screen_readiness:
+      implementation: approved-base-pending-commit-and-push
+      closure_audits:
+        task: T-EXP648-SCREEN-READINESS
+        results: [APPROVE, APPROVE]
+      sequential_judge_gate: T648-approved
+      historical_calibration_valid_for_launch: false
+      fresh_calibration_root: 20261159
+      fresh_calibration_root_status: authorized-pending-authentication-child-not-consumed
+      authorization_order: approved-base-commit-and-push -> sole-file-canonical-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-warmup-and-three-full-fidelity-repeats
+      initial_resource_guards:
+        wall_seconds: 14400
+        process_user_plus_system_aggregate_cpu_seconds: 57600
+      cache_reuse: Only complete exact-provenance-matching units are reusable; partial, mismatched, or unverifiable units are prohibited, and valid reuse is charged to both wall and aggregate CPU.
+      fresh_calibration_receipt: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration.json
+      observed_pre_outer_seal_resource_completion: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-resource-completion.json
+      scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
+      screen_authorization_manifest: experiments/runs/exp-648-structured-trajectory-consistency/screen/judge-authorization.json
+      screen_roots_status: unopened-blocked
+      scientific_evidence: none
       limitations:
         - Corpus construction and resource/provenance evidence only; no model update, accuracy metric, selection metric, candidate promotion, or Goal-completion evidence.
+        - Readiness approval is control/gate evidence, not an observed calibration result; root 20261159 remains unconsumed.
+        - Candidate 005 remains at observed 59.5 percent checked-public / 59.3 percent independent accuracy, and completion_eligible remains false.
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
-    screen_status: blocked-pending-readiness-repair-fresh-full-fidelity-recalibration-post-repair-judge
+    screen_status: prohibited-pending-root-20261159-full-fidelity-calibration-and-separate-launch-judge

@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import inspect
 import json
 import time
+import types
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -92,15 +95,13 @@ def fake_window(
     }
 
 
-def test_frozen_calibration_import_and_all_pins(module) -> None:
+def test_historical_calibration_is_preserved_but_not_live_screen_calibration(module) -> None:
     assert module.sha256(module.CALIBRATION_RUNNER) == module.CALIBRATION_RUNNER_SHA256
     assert module.CALIBRATION_RUNNER_SHA256 == (
         "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672"
     )
-    config = module.yaml.safe_load(module.CONFIG_PATH.read_text())
-    observed = module.verify_pinned_foundation(config)
-    assert observed["repository_head"] == module.PINNED["repository_head"]
-    assert observed["repository_upstream"] == module.PINNED["repository_head"]
+    assert module.sha256(module.CALIBRATION_EVIDENCE_PATH) == module.PINNED["calibration_evidence_sha256"]
+    assert not module.SCREEN_READINESS_CALIBRATION_PATH.exists()
 
 
 def test_root_allowlist_uses_only_test_root_and_rejects_all_other_surfaces(module) -> None:
@@ -143,6 +144,17 @@ def test_screen_missing_authorization_fails_before_data_or_model_action(
     assert touched is False
 
 
+def test_readiness_calibration_cli_missing_authorization_fails_before_executor(module, monkeypatch, tmp_path) -> None:
+    events = []
+    monkeypatch.setattr(module, "execute_readiness_calibration", lambda *_args, **_kwargs: events.append("execute"))
+    with pytest.raises(PermissionError, match="absent"):
+        module.main([
+            "--mode", "readiness-calibration", "--authorization-manifest",
+            str(tmp_path / "missing.json"),
+        ])
+    assert events == []
+
+
 def test_screen_invalid_and_exact_authorization_manifest_hashes(
     module, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -153,18 +165,32 @@ def test_screen_invalid_and_exact_authorization_manifest_hashes(
     monkeypatch.setattr(module, "DATA_DIR", data)
     authorization = tmp_path / "authorization.json"
     authorization.write_text("{}\n", encoding="utf-8")
-    with pytest.raises(PermissionError, match="hash mismatch"):
-        module.verify_screen_authorization(authorization)
-    expected = module.expected_screen_authorization_payload(
-        module.sha256(corpus_manifest)
-    )
+    binding = {
+        "corpus_manifest_sha256": module.sha256(corpus_manifest),
+        "scientific_runner_sha256": module.sha256(module.RUNNER if hasattr(module, "RUNNER") else module.__file__),
+        "approved_base_commit": "a" * 40,
+    }
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    monkeypatch.setattr(module, "screen_readiness_binding", lambda _base: binding)
+    def fake_git(*args):
+        if args[0] == "status": return ""
+        if args[0] == "log": return "b" * 40
+        if args[0] == "rev-list": return "1"
+        if args[0] == "diff": return "authorization.json"
+        if args[0] == "rev-parse": return "b" * 40
+        return ""
+    monkeypatch.setattr(module, "git_output", fake_git)
+    monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", lambda **_kwargs: "b" * 40)
+    with pytest.raises(PermissionError, match="schema mismatch"):
+        module.verify_screen_authorization(authorization, committed_bytes=authorization.read_bytes())
+    expected = module.expected_screen_authorization_payload(module.sha256(corpus_manifest), binding=binding)
     authorization.write_bytes(module.canonical_json_bytes(expected, pretty=True))
-    assert module.verify_screen_authorization(authorization) == expected
+    assert module.verify_screen_authorization(authorization, committed_bytes=authorization.read_bytes()) == expected
     tampered = copy.deepcopy(expected)
     tampered["confirmation_authorized"] = True
     authorization.write_bytes(module.canonical_json_bytes(tampered, pretty=True))
     with pytest.raises(PermissionError, match="hash mismatch"):
-        module.verify_screen_authorization(authorization)
+        module.verify_screen_authorization(authorization, committed_bytes=authorization.read_bytes())
 
 
 def test_cli_wrong_corpus_root_fails_before_experiment_construction(
@@ -451,24 +477,905 @@ def test_source_checkpoint_is_read_only_and_screen_code_has_no_hand_arithmetic(m
     before = module.sha256(module.SOURCE_CHECKPOINT_PATH)
     assert before == module.PINNED["source_checkpoint_sha256"]
     assert module.sha256(module.SOURCE_CHECKPOINT_PATH) == before
-    source = RUNNER.read_text(encoding="utf-8")
-    corpus_class = source.split("class CorpusExperiment:", 1)[1].split(
-        "def _load_corpus_pairs", 1
-    )[0]
-    screen_class = source.split("class ScreenExperiment:", 1)[1].split(
-        "def _read_data_artifacts", 1
-    )[0]
-    assert "save_file(" not in corpus_class
-    assert "save_file(" in screen_class
-    assert "scientific_accuracy_reported\": False" in source
-    assert "selection_metric_reported\": False" in source
-    assert "screen_training_update" in source
-    assert "evaluate_transitions" in source
-    assert "evaluate_rollouts" in source
+    assert callable(module.atomic_save_checkpoint)
+    assert callable(module.screen_training_update)
+    assert callable(module.evaluate_transitions)
+    assert callable(module.evaluate_rollouts)
 
 
 def test_no_scientific_metric_names_in_corpus_mlflow_metric_block(module) -> None:
-    source = RUNNER.read_text(encoding="utf-8")
-    metric_block = source.split("mlflow.log_metrics(", 1)[1].split("}", 1)[0]
+    receipt = json.loads((module.TRACKED_CORPUS_DIR / "mlflow.json").read_text())
+    metric_names = receipt["verified"]["metrics"]
     for forbidden in ("accuracy", "selection", "exact", "gain", "delta"):
-        assert forbidden not in metric_block.lower()
+        assert all(forbidden not in name.lower() for name in metric_names)
+
+
+def test_screen_order_is_frozen_training_root_derived_and_matched(module) -> None:
+    first = module.frozen_root_pair_order(512, "a" * 64)
+    second = module.frozen_root_pair_order(512, "a" * 64)
+    changed = module.frozen_root_pair_order(512, "b" * 64)
+    assert first == second
+    assert first != list(range(512))
+    assert first != changed
+    assert sorted(first) == list(range(512))
+
+
+def test_screen_guard_independent_units_thresholds_and_numeric_quarter(module, monkeypatch) -> None:
+    calibration = {
+        "resolved_screen_budgets": {
+            "wall_seconds": {"projected_seconds": 1000, "soft_budget_seconds": 1500, "hard_runaway_ceiling_seconds": 2000},
+            "aggregate_cpu_seconds": {"projected_seconds": 4000, "soft_budget_seconds": 6000, "hard_runaway_ceiling_seconds": 8000},
+            "peak_rss_guard_bytes": 10**15,
+            "first_quarter_checkpoint": {"wall_seconds": {"expected_elapsed_seconds": 250}, "aggregate_cpu_seconds": {"expected_elapsed_seconds": 1000}},
+        }
+    }
+    guard = module.ScreenGuard(calibration, module.psutil.Process())
+    record = guard.check_first_quarter(100, 400)
+    assert set(record) >= {
+        "charged_wall_seconds", "charged_aggregate_cpu_seconds",
+        "projected_full_wall_seconds_from_checkpoint",
+        "projected_full_aggregate_cpu_seconds_from_checkpoint",
+    }
+    guard.reused_wall = 2001
+    with pytest.raises(TimeoutError, match="wall"):
+        guard.check("wall-test")
+    wall = module.ScreenGuard(calibration, module.psutil.Process())
+    wall.reused_cpu = 8001
+    with pytest.raises(TimeoutError, match="CPU"):
+        wall.check("cpu-test")
+    rss = module.ScreenGuard(calibration, module.psutil.Process())
+    rss.hard_rss = 1
+    with pytest.raises(MemoryError, match="RSS"):
+        rss.check("rss-test")
+
+
+def test_atomic_checkpoint_is_reload_verified_before_evaluation(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    model = module.nn.Linear(3, 2)
+    receipt = module.atomic_save_checkpoint(model, tmp_path / "screen" / "weights.safetensors")
+    assert receipt["saved_and_verified_before_evaluation"] is True
+    assert receipt["state_dict_sha256"] == receipt["reload_state_dict_sha256"]
+
+
+def test_event_trace_both_checkpoint_verifications_precede_evaluation(module, tmp_path, monkeypatch) -> None:
+    events = []
+    def fake_save(_model, path):
+        events.append(f"save:{path.stem}")
+        return {"saved_and_verified_before_evaluation": True, "sha256": path.stem}
+    monkeypatch.setattr(module, "atomic_save_checkpoint", fake_save)
+    receipts = module.prepare_checkpoints_for_evaluation(
+        {"control": object(), "challenger": object()}, tmp_path,
+        event_hook=events.append,
+    )
+    events.append("evaluation-input-generated")
+    assert set(receipts) == {"control", "challenger"}
+    assert events == [
+        "save:control", "checkpoint-verified:control",
+        "save:challenger", "checkpoint-verified:challenger",
+        "evaluation-input-generated",
+    ]
+
+
+def test_evaluation_recovery_rejects_provenance_mismatch(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path)
+    calibration = {
+        "resolved_screen_budgets": {
+            "wall_seconds": {"projected_seconds": 1000, "soft_budget_seconds": 1500, "hard_runaway_ceiling_seconds": 2000},
+            "aggregate_cpu_seconds": {"projected_seconds": 4000, "soft_budget_seconds": 6000, "hard_runaway_ceiling_seconds": 8000},
+            "peak_rss_guard_bytes": 10**15,
+            "first_quarter_checkpoint": {"wall_seconds": {"expected_elapsed_seconds": 250}, "aggregate_cpu_seconds": {"expected_elapsed_seconds": 1000}},
+        }
+    }
+    guard = module.ScreenGuard(calibration, module.psutil.Process())
+    cases = {"x": [1]}
+    fields = {"runner": "a" * 64}
+    key = module.sha256_bytes(module.canonical_json_bytes({
+        "unit": "test-1", "cases_sha256": module.sha256_bytes(module.canonical_json_bytes(cases)), "key_fields": fields,
+    }))
+    path = tmp_path / "evaluation-cache" / f"test-1-{key}.json"
+    path.parent.mkdir(parents=True)
+    path.write_text('{"schema_version":"wrong"}\n')
+    with pytest.raises(RuntimeError, match="provenance mismatch"):
+        module.load_or_evaluate_unit(
+            unit="test-1", cases=cases, models={}, evaluator=lambda *args: {},
+            width=1, exp300=None, key_fields=fields, guard=guard,
+        )
+
+
+def test_atomic_screen_evidence_and_failure_has_no_gates(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    module.write_screen_file("proof.json", {"ok": True})
+    assert (tmp_path / "scratch/evidence/proof.json").read_bytes() == (tmp_path / "tracked/proof.json").read_bytes()
+    module.preserve_screen_failure("evaluation", TimeoutError("budget"))
+    payload = json.loads((tmp_path / "tracked/incomplete.json").read_text())
+    assert payload["status"] == "evaluation-resource-overrun"
+    assert payload["gates_computed"] is False
+    assert "accuracy" not in module.canonical_json(payload).lower()
+
+
+def test_attempt_ledger_failure_receipt_is_complete_and_atomic(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    directory = tmp_path / "attempt"
+    directory.mkdir()
+    state = {
+        "attempt_id": "attempt-7", "authorization_sha256": "a" * 64,
+        "phase": "evaluation", "budgets": {"wall": 10},
+        "completed_updates": {"control": 200, "challenger": 200},
+        "completed_evaluation_units": ["transition-128"],
+        "cache_receipts": [{"unit": "transition-128"}],
+        "verified_checkpoints": {"control": {"sha256": "b" * 64}},
+        "first_quarter": {"complete": True}, "environment_sha256": "c" * 64,
+    }
+    class Ledger:
+        def __init__(self):
+            self.state = state
+            self.directory = directory
+        def persist(self):
+            module._atomic_write(
+                self.directory / "attempt-state.json",
+                module.canonical_json_bytes(self.state, pretty=True),
+            )
+    guard = types.SimpleNamespace(timing=lambda: {
+        "wall_seconds": 2.0, "aggregate_cpu_seconds": 5.0, "peak_rss_bytes": 100,
+    })
+    experiment = types.SimpleNamespace(ledger=Ledger(), guard=guard)
+    module.preserve_screen_failure("evaluation", TimeoutError("budget"), experiment=experiment)
+    receipt = json.loads((directory / "incomplete.json").read_text())
+    durable = json.loads((directory / "attempt-state.json").read_text())
+    assert receipt["attempt_id"] == "attempt-7"
+    assert receipt["completed_updates"] == state["completed_updates"]
+    assert receipt["completed_evaluation_units"] == ["transition-128"]
+    assert receipt["cache_receipts"] == [{"unit": "transition-128"}]
+    assert receipt["verified_checkpoints"] == state["verified_checkpoints"]
+    assert receipt["first_quarter"] == {"complete": True}
+    assert durable["phase"] == "incomplete" and durable["complete"] is False
+
+
+def test_historical_corpus_verifies_after_head_advance(module) -> None:
+    result = module.verify_corpus_artifacts(require_receipts=True)
+    assert result["historical_execution_provenance_verified"] is True
+    assert result["historical_corpus_commit"] == "8d960fa747b64bffa3b60581ae4ff518436a8887"
+    assert result["corpus_manifest_sha256"] == module.FROZEN_CORPUS_FILES["data/corpus-manifest.json"]
+
+
+def test_historical_committed_corpus_does_not_require_scratch_mirror(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "SCRATCH_CORPUS_DIR", tmp_path / "absent-scratch")
+    result = module.verify_corpus_artifacts(require_receipts=True)
+    assert result["historical_execution_provenance_verified"] is True
+    assert result["scratch_raw_tracked_byte_parity_when_present"] is None
+
+
+def fake_readiness_repeat(scale: float) -> dict:
+    timing = lambda value: {"wall_seconds": value * scale, "aggregate_cpu_seconds": value * scale * 4, "peak_rss_bytes": int(1_000_000 * scale)}
+    record = {
+        "complete": True,
+        "fidelity_reduced": False,
+        "scientific_accuracy_reported": False,
+        "components": {
+            "startup_model_loading": {"units": 1, "timing": timing(1)},
+            "mining": {"matched_pairs": 64, "windows": 128, "timing": timing(64)},
+            "corpus_integrity_validation": {"windows": 128, "timing": timing(128)},
+            "training": {arm: {"updates": 20, "timing": timing(20)} for arm in ("control", "challenger")},
+            "checkpoint": {arm: {"writes": 1, "timing": timing(1)} for arm in ("control", "challenger")},
+            "transitions": {arm: {str(width): {"cases": 200, "timing": timing(200)} for width in (128, 256)} for arm in ("control", "challenger")},
+            "rollouts": {arm: {str(width): {"cases": 20, "timing": timing(20)} for width in (64, 128, 256)} for arm in ("control", "challenger")},
+            "hash_serialization": {"timing": timing(1)},
+            "readiness_infrastructure": {"atomic_checkpoint_writes_and_reload_verifications": 2, "atomic_attempt_ledger_writes": 213, "evaluation_cache_write_validate_units": 7, "atomic_evidence_writes": 19, "component_timing": {"atomic_checkpoints": timing(0.5), "attempt_ledger": timing(0.5), "evaluation_cache": timing(0.5), "atomic_evidence": timing(0.5)}, "complete": True, "timing": timing(2)},
+            "actual_source_replay": {"complete_identities": 64, "steps_per_identity": 256, "complete_steps": 16384, "actual_rollout_identity_batch_path": True, "complete": True, "timing": timing(64)},
+            "mlflow_probe": {"complete": True, "artifact_count": 6, "remote_verified": True, "timing": timing(3)},
+        },
+        "base_total_timing_before_readiness_additions": timing(431),
+        "total_timing": timing(500),
+    }
+    return record
+
+
+def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> None:
+    repeats = [fake_readiness_repeat(value) for value in (1.0, 1.1, 0.9)]
+    launcher = {"wall_seconds": 2.0, "aggregate_cpu_seconds": 8.0, "peak_rss_bytes": 2_000_000}
+    warmup = fake_readiness_repeat(0.8)
+    warmup.update({
+        "launcher_timing": launcher,
+        "actual_source_replay": warmup["components"]["actual_source_replay"],
+        "mlflow_probe": warmup["components"]["mlflow_probe"],
+        "readiness_infrastructure": warmup["components"]["readiness_infrastructure"],
+    })
+    budgets, components = module.resolve_readiness_screen_budgets(repeats, launcher, warmup)
+    prior_wall = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
+    prior_cpu = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
+    historical_wall = 5900.399178599999
+    historical_cpu = 24278.120608365
+    boundary = {
+        "calibration_only": True, "screen_roots_opened": False,
+        "confirmation_roots_opened": False,
+        "checked_independent_official_private_opened": False,
+        "scientific_accuracy_or_selection_reported": False,
+        "model_update_performed": False, "fidelity_reduced": False,
+    }
+    payload = {
+        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "status": "complete-non-scientific-full-fidelity-resource-calibration",
+        "calibration_root": TEST_ROOT + 1, "calibration_authorization_sha256": "a" * 64,
+        "scientific_runner_sha256": module.sha256(RUNNER), "resolved_config_sha256": module.sha256(module.CONFIG_PATH),
+        "screen_workload_sha256": module.sha256_bytes(module.canonical_json_bytes(module.screen_workload_payload())),
+        "calibration_evidence_core_sha256": "b" * 64, "environment_sha256": "c" * 64, "mlflow_receipt_sha256": "d" * 64,
+        "warmups": 1, "timed_repeats": 3, "warmup": warmup,
+        "repeats": repeats, "component_resolution": components, "resolved_screen_budgets": budgets,
+        "recovery_charges": {
+            "scope": "prepublication-provisional-snapshot-before-inner-publication",
+            "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
+            "base_calibration_experiment_snapshot_provisional": {},
+            "prior_superseded_calibrations": list(module.cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+            "historical_completed_calibration_wall_seconds": historical_wall,
+            "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
+            "historical_prior_superseded_wall_seconds_charged": prior_wall,
+            "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
+            "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
+            "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+            "prepublication_provisional_active_wall_seconds": 1,
+            "prepublication_provisional_active_aggregate_cpu_seconds": 4,
+            "prepublication_provisional_reused_wall_seconds_charged": 2,
+            "prepublication_provisional_reused_aggregate_cpu_seconds_charged": 5,
+            "prepublication_provisional_cumulative_wall_seconds": historical_wall + 3,
+            "prepublication_provisional_cumulative_aggregate_cpu_seconds": historical_cpu + 9,
+            "prepublication_provisional_plus_historical_wall_seconds": historical_wall + 3,
+            "prepublication_provisional_plus_historical_aggregate_cpu_seconds": historical_cpu + 9,
+            "prepublication_provisional_process_peak_rss_bytes": 123,
+            "active_snapshot_boundary": "test",
+        }, "full_fidelity": True, "environment": {"test": True}, "boundary": boundary,
+    }
+    module.validate_readiness_calibration_receipt(payload)
+    tampered = copy.deepcopy(payload)
+    tampered["resolved_screen_budgets"]["wall_seconds"]["soft_budget_seconds"] += 1
+    with pytest.raises(RuntimeError, match="recompute"):
+        module.validate_readiness_calibration_receipt(tampered)
+
+    for field in module.READINESS_RELEASE_CRITICAL_FIELDS:
+        core = {key: copy.deepcopy(payload[key]) for key in module.READINESS_RELEASE_CRITICAL_FIELDS}
+        broken = copy.deepcopy(payload)
+        broken[field] = {"tampered": field}
+        with pytest.raises(RuntimeError, match=field):
+            module.validate_core_receipt_release_equality(core, broken)
+
+    omitted = copy.deepcopy(payload)
+    omitted["repeats"][0]["total_timing"]["wall_seconds"] -= omitted["repeats"][0]["components"]["mlflow_probe"]["timing"]["wall_seconds"]
+    with pytest.raises(RuntimeError, match="timing omission"):
+        module.validate_readiness_calibration_receipt(omitted)
+
+
+def test_readiness_mlflow_expected_scope_excludes_scientific_and_candidate(module) -> None:
+    payload = {
+        "calibration_authorization_sha256": "a" * 64, "calibration_root": TEST_ROOT + 1,
+        "scientific_runner_sha256": "b" * 64, "screen_workload_sha256": "c" * 64,
+        "calibration_evidence_core_sha256": "d" * 64,
+        "resolved_screen_budgets": {
+            "wall_seconds": {"projected_seconds": 1},
+            "aggregate_cpu_seconds": {"projected_seconds": 4}, "peak_rss_guard_bytes": 100,
+        },
+    }
+    tags, _params, metrics = module._readiness_mlflow_expected(payload)
+    assert tags["scientific_accuracy_reported"] == "false"
+    assert tags["candidate_registration"] == "false"
+    assert all(fragment not in key for key in metrics for fragment in ("accuracy", "selection", "gain"))
+
+
+def test_outer_readiness_resource_completion_is_final_bound_and_observed(module, tmp_path, monkeypatch) -> None:
+    attempt_id = "cal-test"
+    auth = "a" * 64
+    names = (
+        "readiness-calibration.json", "readiness-calibration-core.json",
+        "readiness-calibration-environment.json", "readiness-calibration-mlflow.json",
+        "readiness-calibration-executed-config.yaml",
+        "readiness-calibration-completion.json", "readiness-calibration-attempt-state.json",
+        "readiness-calibration-launch-ledger.json",
+    )
+    inner = {name: tmp_path / name for name in names}
+    for name, path in inner.items():
+        if path.suffix == ".json":
+            path.write_bytes(module.canonical_json_bytes({"artifact": name}, pretty=True))
+        else:
+            path.write_text(f"inner:{name}\n")
+    completion = {
+        "schema_version": "exp648-readiness-calibration-completion-v1",
+        "attempt_id": attempt_id,
+        "authorization_sha256": auth,
+        "artifacts": {},
+        "complete": True,
+    }
+    inner["readiness-calibration-completion.json"].write_bytes(
+        module.canonical_json_bytes(completion, pretty=True)
+    )
+    state = {
+        "schema_version": "exp648-readiness-calibration-attempt-v1",
+        "attempt_id": attempt_id, "authorization_sha256": auth,
+        "phase": "sealed", "complete": True,
+        "completion_manifest_sha256": module.sha256(inner["readiness-calibration-completion.json"]),
+    }
+    inner["readiness-calibration-attempt-state.json"].write_bytes(
+        module.canonical_json_bytes(state, pretty=True)
+    )
+    inner["readiness-calibration-launch-ledger.json"].write_bytes(
+        module.canonical_json_bytes(state, pretty=True)
+    )
+    output = tmp_path / "outer.json"
+    writes = []
+    events = []
+    original_write = module._atomic_write
+    original_prevalidate = module.prevalidate_readiness_inner_lifecycle
+    real_perf_counter = time.perf_counter
+    def recording_write(path, payload):
+        writes.append(Path(path)); original_write(path, payload)
+    def recording_prevalidate(**kwargs):
+        events.append("inner-hashed-and-validated")
+        return original_prevalidate(**kwargs)
+    monkeypatch.setattr(module, "_atomic_write", recording_write)
+    monkeypatch.setattr(module, "prevalidate_readiness_inner_lifecycle", recording_prevalidate)
+    monkeypatch.setattr(
+        module.time, "perf_counter",
+        lambda: events.append("final-wall-sample") or real_perf_counter(),
+    )
+    receipt = module.write_readiness_resource_completion(
+        inner_paths=inner, attempt_id=attempt_id, authorization_sha256=auth,
+        launch_wall_started=real_perf_counter() - 2,
+        launch_cpu_started=0, launch_peak_rss=1,
+        reused_wall=3, reused_cpu=12, output_path=output,
+    )
+    assert writes == [output]
+    assert events == ["inner-hashed-and-validated", "final-wall-sample"]
+    assert receipt["inner_lifecycle_complete_before_resource_sample"] is True
+    assert receipt["post_sample_operations"] == list(module.READINESS_POST_SAMPLE_OPERATIONS)
+    assert receipt["measurement_semantics"]["post_sample_operations_included_in_observed_totals"] is False
+    loaded = module.load_and_validate_readiness_resource_completion(
+        output, inner_paths=inner, expected_attempt_id=attempt_id,
+        expected_authorization_sha256=auth,
+    )
+    assert loaded["recovery_charges"]["observed_pre_outer_seal_peak_rss_bytes"] > 1
+    original_mlflow = inner["readiness-calibration-mlflow.json"].read_bytes()
+    inner["readiness-calibration-mlflow.json"].write_text("tampered\n")
+    with pytest.raises(RuntimeError, match="artifact hash"):
+        module.load_and_validate_readiness_resource_completion(
+            output, inner_paths=inner, expected_attempt_id=attempt_id,
+            expected_authorization_sha256=auth,
+        )
+    inner["readiness-calibration-mlflow.json"].write_bytes(original_mlflow)
+    arithmetic = copy.deepcopy(receipt)
+    arithmetic["recovery_charges"]["historical_plus_observed_active_and_reused_wall_seconds"] += 1
+    output.write_bytes(module.canonical_json_bytes(arithmetic, pretty=True))
+    with pytest.raises(RuntimeError, match="historical-plus-current wall"):
+        module.load_and_validate_readiness_resource_completion(
+            output, inner_paths=inner, expected_attempt_id=attempt_id,
+            expected_authorization_sha256=auth,
+        )
+    swapped = copy.deepcopy(receipt)
+    observation = swapped["resource_observation"]
+    observation["observed_wall_seconds"], observation["observed_aggregate_cpu_seconds"] = (
+        observation["observed_aggregate_cpu_seconds"], observation["observed_wall_seconds"]
+    )
+    output.write_bytes(module.canonical_json_bytes(swapped, pretty=True))
+    with pytest.raises(RuntimeError, match="wall is not monotonic wall"):
+        module.load_and_validate_readiness_resource_completion(
+            output, inner_paths=inner, expected_attempt_id=attempt_id,
+            expected_authorization_sha256=auth,
+        )
+    combined = copy.deepcopy(receipt)
+    observation = combined["resource_observation"]
+    observation["observed_aggregate_cpu_seconds"] = (
+        observation["observed_wall_seconds"]
+        + observation["observed_aggregate_cpu_seconds"]
+    )
+    output.write_bytes(module.canonical_json_bytes(combined, pretty=True))
+    with pytest.raises(RuntimeError, match="CPU is not process user plus system"):
+        module.load_and_validate_readiness_resource_completion(
+            output, inner_paths=inner, expected_attempt_id=attempt_id,
+            expected_authorization_sha256=auth,
+        )
+    output.write_text(json.dumps(receipt))
+    with pytest.raises(RuntimeError, match="noncanonical"):
+        module.load_and_validate_readiness_resource_completion(
+            output, inner_paths=inner, expected_attempt_id=attempt_id,
+            expected_authorization_sha256=auth,
+        )
+
+
+def test_readiness_outer_seal_precedes_execute_return_and_cli_output(module, monkeypatch) -> None:
+    execute_source = inspect.getsource(module.execute_readiness_calibration)
+    seal_position = execute_source.rindex("write_readiness_resource_completion(")
+    return_position = execute_source.rindex("return receipt")
+    assert seal_position < return_position
+    assert "_atomic_write(" not in execute_source[seal_position:return_position]
+
+    main_source = inspect.getsource(module.main)
+    execute_position = main_source.index("result = execute_readiness_calibration(")
+    output_position = main_source.index("print(json.dumps({", execute_position)
+    assert execute_position < output_position
+
+    events = []
+    monkeypatch.setattr(
+        module, "verify_readiness_calibration_authorization",
+        lambda *_args, **_kwargs: {"calibration_root": 999},
+    )
+    monkeypatch.setattr(
+        module, "execute_readiness_calibration",
+        lambda *_args, **_kwargs: events.append("outer-sealed") or {
+            "status": "complete-non-scientific-full-fidelity-resource-calibration",
+            "calibration_root": 999,
+            "resolved_screen_budgets": {},
+        },
+    )
+    monkeypatch.setattr(
+        "builtins.print",
+        lambda *_args, **kwargs: events.append(
+            "stdout-written-and-flushed" if kwargs.get("flush") is True else "stdout-unflushed"
+        ),
+    )
+    assert module.main(["--mode", "readiness-calibration"]) == 0
+    assert events == ["outer-sealed", "stdout-written-and-flushed"]
+
+
+def test_authentication_rejects_bad_bytes_before_expensive_binding_actions(module, tmp_path, monkeypatch) -> None:
+    events = []
+    monkeypatch.setattr(module, "readiness_calibration_authorization_base", lambda *_: events.append("binding") or {})
+    path = tmp_path / "auth.json"
+    cases = [
+        b"not-json",
+        module.canonical_json_bytes({"schema_version": "wrong"}, pretty=True),
+        b'{"schema_version":"exp648-screen-readiness-calibration-authorization-v1"}\n',
+    ]
+    for raw in cases:
+        path.write_bytes(raw)
+        with pytest.raises(PermissionError):
+            module.verify_readiness_calibration_authorization(path, committed_bytes=raw, allow_test_root=True)
+        assert events == []
+    oversized = b"{" + b" " * module.MAX_AUTHORIZATION_BYTES + b"}"
+    path.write_bytes(oversized)
+    with pytest.raises(PermissionError, match="size"):
+        module.verify_readiness_calibration_authorization(path, committed_bytes=oversized, allow_test_root=True)
+    assert events == []
+
+
+def test_readiness_authorization_binding_uses_only_base_blobs(module, monkeypatch) -> None:
+    paths = {
+        module.CONFIG_PATH.relative_to(module.ROOT).as_posix(): module.CONFIG_PATH.read_bytes(),
+        Path(module.__file__).resolve().relative_to(module.ROOT).as_posix(): Path(module.__file__).read_bytes(),
+        "tests/test_exp648_structured_trajectory_scientific.py": Path(__file__).read_bytes(),
+        module.CALIBRATION_RUNNER.relative_to(module.ROOT).as_posix(): module.CALIBRATION_RUNNER.read_bytes(),
+        module.EXECUTED_CONFIG_PATH.relative_to(module.ROOT).as_posix(): module.EXECUTED_CONFIG_PATH.read_bytes(),
+        module.CALIBRATION_ENVIRONMENT_PATH.relative_to(module.ROOT).as_posix(): module.CALIBRATION_ENVIRONMENT_PATH.read_bytes(),
+        module.READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(module.ROOT).as_posix(): module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_bytes(),
+    }
+    monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+    for name in (
+        "environment_payload", "scientific_protocol_sha256",
+        "resource_protocol_sha256", "exact_teacher_source_sha256",
+    ):
+        monkeypatch.setattr(module.cal, name, lambda *_args, _name=name, **_kwargs: (_ for _ in ()).throw(AssertionError(f"live {_name} used")))
+    monkeypatch.setattr(module, "scientific_evaluator_sha256", lambda: (_ for _ in ()).throw(AssertionError("live evaluator used")))
+    payload = module.readiness_calibration_authorization_base(TEST_ROOT + 7, "base-commit")
+    recorded_environment = json.loads(module.CALIBRATION_ENVIRONMENT_PATH.read_text())
+    assert payload["approved_runtime_environment"] == recorded_environment
+    assert payload["scientific_runner_sha256"] == module.sha256_bytes(paths[Path(module.__file__).resolve().relative_to(module.ROOT).as_posix()])
+    assert payload["source_checkpoint_sha256"] == "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+
+
+def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch) -> None:
+    events = []
+    monkeypatch.setattr(module, "screen_readiness_binding", lambda *_: events.append("binding"))
+    path = tmp_path / "screen-auth.json"
+    for raw in (
+        b"bad-json",
+        module.canonical_json_bytes({"schema_version": "wrong"}, pretty=True),
+        b'{"schema_version":"exp648-screen-judge-authorization-v1"}\n',
+    ):
+        path.write_bytes(raw)
+        with pytest.raises(PermissionError):
+            module.verify_screen_authorization(path, committed_bytes=raw)
+        assert events == []
+    raw = b"{" + b" " * module.MAX_AUTHORIZATION_BYTES + b"}"
+    path.write_bytes(raw)
+    with pytest.raises(PermissionError, match="size"):
+        module.verify_screen_authorization(path, committed_bytes=raw)
+    assert events == []
+    canonical = module.canonical_json_bytes({
+        "schema_version": "exp648-screen-readiness-calibration-authorization-v1"
+    }, pretty=True)
+    path.write_bytes(canonical)
+    with pytest.raises(PermissionError, match="committed"):
+        module.verify_readiness_calibration_authorization(path, committed_bytes=canonical + b"x", allow_test_root=True)
+    assert events == []
+
+
+def test_cached_transition_semantics_detect_prediction_and_rate_tampering(module) -> None:
+    cases = {
+        "state": [0, 1], "target": [2, 3], "quotient": [0, 1], "modulus": [5, 5]
+    }
+    base = {
+        "cases": 2, "exact_accuracy": 1.0, "quotient_accuracy": 1.0,
+        "valid_residue_rate": 1.0, "exact_vector": [True, True],
+        "predictions": [2, 3], "quotient_predictions": [0, 1],
+        "output_sha256": module.sha256_bytes(module.canonical_json_bytes([2, 3])),
+    }
+    module.validate_evaluation_results(
+        unit="transition-128", width=128, cases=cases,
+        results={"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)},
+    )
+    tampered = {"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)}
+    tampered["challenger"]["predictions"][0] = 4
+    with pytest.raises(RuntimeError, match="hash mismatch"):
+        module.validate_evaluation_results(unit="transition-128", width=128, cases=cases, results=tampered)
+
+
+def test_cached_rollout_recomputes_transient_invalid_teacher_and_first_error(module) -> None:
+    cases = {"multiplier": [0], "multiplicand": [1], "modulus": [3]}
+    base = {
+        "cases": 1, "exact_accuracy": 1.0, "exact_vector": [True],
+        "mean_clipped_first_error_index": 0.0, "invalid_rollout_rate": 1.0,
+        "output_sha256": module.sha256_bytes(module.canonical_json_bytes([0])),
+        "predictions": [0], "teacher_targets": [0], "first_error_indices": [0],
+        "any_intermediate_invalid_vector": [True],
+        "prediction_trace": [[0], [3], [0]], "teacher_trace": [[0], [0], [0]],
+    }
+    valid = {"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)}
+    module.validate_evaluation_results(unit="rollout-2", width=2, cases=cases, results=valid)
+    for field, value in (
+        ("teacher_trace", [[0], [1], [0]]),
+        ("first_error_indices", [3]),
+        ("any_intermediate_invalid_vector", [False]),
+    ):
+        tampered = {"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)}
+        tampered["challenger"][field] = value
+        with pytest.raises(RuntimeError, match="trace semantics"):
+            module.validate_evaluation_results(unit="rollout-2", width=2, cases=cases, results=tampered)
+    for field, value in (
+        ("prediction_trace", [[False], [3], [0]]),
+        ("prediction_trace", [[0], [-1], [0]]),
+        ("prediction_trace", [[0, 0], [3], [0]]),
+        ("prediction_trace", [[1], [3], [0]]),
+        ("teacher_trace", [[0], [False], [0]]),
+    ):
+        tampered = {"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)}
+        tampered["challenger"][field] = value
+        with pytest.raises(RuntimeError, match="trace row|initial prediction"):
+            module.validate_evaluation_results(unit="rollout-2", width=2, cases=cases, results=tampered)
+
+
+def test_attempt_suffix_uses_parsed_max_and_exclusive_allocation(module, tmp_path) -> None:
+    root = tmp_path / "attempts"
+    (root / "screen-a").mkdir(parents=True)
+    (root / "screen-a-retry-002").mkdir()
+    attempt_id, directory, prior = module.allocate_exclusive_attempt_directory(root, "screen-a")
+    assert attempt_id == "screen-a-retry-003"
+    assert directory.is_dir()
+    assert [item.name for item in prior] == ["screen-a", "screen-a-retry-002"]
+    (root / "screen-b-retry-x").mkdir()
+    with pytest.raises(RuntimeError, match="malformed"):
+        module.allocate_exclusive_attempt_directory(root, "screen-b")
+
+
+def test_readiness_mlflow_duplicate_runs_fail_before_create(module, monkeypatch) -> None:
+    payload = {
+        "calibration_authorization_sha256": "a" * 64, "calibration_root": TEST_ROOT + 1,
+        "scientific_runner_sha256": "b" * 64, "screen_workload_sha256": "c" * 64,
+        "calibration_evidence_core_sha256": "d" * 64,
+        "resolved_screen_budgets": {
+            "wall_seconds": {"projected_seconds": 1},
+            "aggregate_cpu_seconds": {"projected_seconds": 4}, "peak_rss_guard_bytes": 100,
+        },
+    }
+    duplicate = types.SimpleNamespace(
+        data=types.SimpleNamespace(tags={"authorization_sha256": "a" * 64}),
+        info=types.SimpleNamespace(status="FINISHED", run_id="duplicate"),
+    )
+    fake_client = types.SimpleNamespace(search_runs=lambda **_kwargs: [duplicate, duplicate])
+    monkeypatch.setattr(module.cal, "configure_mlflow", lambda *_: "1")
+    monkeypatch.setattr(module.cal, "tracking_uri", lambda: "sqlite://fake")
+    monkeypatch.setattr(module.cal.mlflow.tracking, "MlflowClient", lambda **_kwargs: fake_client)
+    with pytest.raises(RuntimeError, match="duplicate"):
+        module.log_and_verify_readiness_calibration_mlflow(payload, [])
+
+
+def test_one_child_authorization_commit_lifecycle_rejects_tamper_and_extra_files(module, tmp_path, monkeypatch) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    def git(*args):
+        return subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True, text=True).stdout.strip()
+    git("init")
+    git("config", "user.email", "test@example.invalid")
+    git("config", "user.name", "Test")
+    (repo / "base.txt").write_text("base\n")
+    git("add", "base.txt"); git("commit", "-m", "base")
+    base = git("rev-parse", "HEAD")
+    (repo / "auth.json").write_text('{"authorized":true}\n')
+    git("add", "auth.json"); git("commit", "-m", "auth only")
+    auth_commit = git("rev-parse", "HEAD")
+    original = module.git_output
+    monkeypatch.setattr(module, "ROOT", repo)
+    def local_git(*args):
+        if args == ("rev-parse", "@{upstream}"):
+            return git("rev-parse", "HEAD")
+        return original(*args)
+    monkeypatch.setattr(module, "git_output", local_git)
+    module.validate_one_child_authorization_lifecycle(
+        auth_relative="auth.json", approved_base_commit=base, launch=True
+    )
+    (repo / "base.txt").write_text("tampered\n")
+    with pytest.raises(PermissionError, match="clean"):
+        module.validate_one_child_authorization_lifecycle(
+            auth_relative="auth.json", approved_base_commit=base, launch=True
+        )
+    git("restore", "base.txt")
+    (repo / "extra.txt").write_text("extra\n")
+    git("add", "extra.txt"); git("commit", "--amend", "--no-edit")
+    with pytest.raises(PermissionError, match="outside"):
+        module.validate_one_child_authorization_lifecycle(
+            auth_relative="auth.json", approved_base_commit=base, launch=True
+        )
+    git("checkout", "-b", "historical-descendant", auth_commit)
+    (repo / "later.txt").write_text("unrelated descendant\n")
+    git("add", "later.txt"); git("commit", "-m", "later unrelated")
+    module.validate_one_child_authorization_lifecycle(
+        auth_relative="auth.json", approved_base_commit=base, launch=False
+    )
+    with pytest.raises(PermissionError, match="launch HEAD"):
+        module.validate_one_child_authorization_lifecycle(
+            auth_relative="auth.json", approved_base_commit=base, launch=True
+        )
+    (repo / "base.txt").write_text("descendant changed binding input\n")
+    git("add", "base.txt"); git("commit", "-m", "later bound file change")
+    assert module._git_blob(base, "base.txt") == b"base\n"
+    module.validate_one_child_authorization_lifecycle(
+        auth_relative="auth.json", approved_base_commit=base, launch=False
+    )
+
+
+def test_partial_mlflow_runs_are_terminated_and_superseded(module) -> None:
+    events = []
+    running = types.SimpleNamespace(info=types.SimpleNamespace(status="RUNNING", run_id="r1"))
+    scheduled = types.SimpleNamespace(info=types.SimpleNamespace(status="SCHEDULED", run_id="r3"))
+    failed = types.SimpleNamespace(info=types.SimpleNamespace(status="FAILED", run_id="r2"))
+    statuses = {"r1": "RUNNING", "r2": "FAILED", "r3": "SCHEDULED"}
+    def terminate(run_id, status):
+        events.append(("terminated", run_id, status)); statuses[run_id] = status
+    client = types.SimpleNamespace(
+        set_terminated=terminate,
+        set_tag=lambda run_id, key, value: events.append(("tag", run_id, key, value)),
+        get_run=lambda run_id: types.SimpleNamespace(info=types.SimpleNamespace(status=statuses[run_id], run_id=run_id)),
+    )
+    assert module.select_finished_or_supersede_partial_mlflow_runs(
+        client, [running, failed, scheduled], reason="recovery"
+    ) is None
+    assert ("terminated", "r1", "KILLED") in events
+    assert ("terminated", "r3", "KILLED") in events
+    assert any(event[:3] == ("tag", "r1", "superseded_for_recovery") for event in events)
+    assert any(event[:3] == ("tag", "r2", "superseded_for_recovery") for event in events)
+
+
+def test_constructor_failure_preserves_authenticated_launch_state(module, tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    launch = tmp_path / "launch-state.json"
+    launch.write_bytes(module.canonical_json_bytes({
+        "schema_version": "exp648-screen-launch-state-v1", "attempt_id": "launch-1",
+        "authorization_sha256": "a" * 64, "binding_sha256": "b" * 64,
+        "phase": "authorization-verified-constructor-pending", "complete": False,
+        "module_wall_elapsed_seconds": 1.0, "module_process_cpu_elapsed_seconds": 2.0,
+        "launch_wall_started_perf_counter": time.perf_counter() - 1.0,
+        "launch_process_cpu_started_seconds": 0.0,
+        "launch_initial_peak_rss_bytes": 1,
+    }, pretty=True))
+    module.preserve_screen_failure("constructor", RuntimeError("boom"), launch_state_path=launch)
+    state = json.loads(launch.read_text())
+    assert state["phase"] == "terminal-constructor-failure"
+    assert state["failure"]["authorization_sha256"] == "a" * 64
+    assert state["failure"]["gates_computed"] is False
+    timing = state["failure"]["launch_failure_timing"]
+    assert timing["sampled_fresh_at_exception_boundary"] is True
+    assert timing["wall_seconds"] >= 1.0
+    assert timing["aggregate_cpu_seconds"] >= 0
+    assert timing["peak_rss_bytes"] > 1
+
+
+def make_real_launch_ledger(module, tmp_path, monkeypatch):
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    auth_path = tmp_path / "auth.json"
+    auth_path.write_text("auth\n")
+    authorization = {"screen_readiness_binding_sha256": "b" * 64}
+    wall = time.perf_counter() - 1
+    launch = module.create_screen_launch_ledger(
+        authorization, auth_path, launch_wall_started=wall,
+        launch_cpu_started=0, launch_peak_rss=1,
+    )
+    return authorization, auth_path, launch, wall
+
+
+def fake_scientific_experiment(module, tmp_path, attempt_id, run):
+    directory = tmp_path / attempt_id
+    directory.mkdir(parents=True)
+    state = {
+        "attempt_id": attempt_id, "authorization_sha256": "a" * 64,
+        "phase": "authorized", "completed_updates": {},
+        "completed_evaluation_units": [], "cache_receipts": [],
+        "verified_checkpoints": {}, "first_quarter": None,
+        "environment_sha256": "c" * 64,
+    }
+    class Ledger:
+        def __init__(self):
+            self.attempt_id = attempt_id; self.directory = directory; self.state = state
+        def persist(self):
+            module._atomic_write(
+                directory / "attempt-state.json",
+                module.canonical_json_bytes(self.state, pretty=True),
+            )
+        def update(self, **values):
+            self.state.update(values); self.persist()
+    return types.SimpleNamespace(
+        ledger=Ledger(),
+        guard=types.SimpleNamespace(timing=lambda: {
+            "wall_seconds": 2, "aggregate_cpu_seconds": 5, "peak_rss_bytes": 100,
+        }),
+        run=run,
+    )
+
+
+def test_real_screen_orchestration_preserves_wrong_root_failure(module, tmp_path, monkeypatch) -> None:
+    authorization, auth_path, launch, wall = make_real_launch_ledger(module, tmp_path, monkeypatch)
+    monkeypatch.setattr(module, "reauthorize_screen_root", lambda *_args: (_ for _ in ()).throw(PermissionError("wrong root")))
+    with pytest.raises(PermissionError, match="wrong root"):
+        module.execute_authorized_screen_launch(
+            authorization=authorization, authorization_path=auth_path,
+            launch_state_path=launch, root=-1, launch_wall_started=wall,
+            launch_cpu_started=0, launch_peak_rss=1,
+            experiment_factory=lambda *_args, **_kwargs: pytest.fail("constructor opened"),
+        )
+    state = json.loads(launch.read_text())
+    assert state["phase"] == "terminal-constructor-failure" and state["complete"] is False
+
+
+def test_real_screen_orchestration_preserves_constructor_failure(module, tmp_path, monkeypatch) -> None:
+    authorization, auth_path, launch, wall = make_real_launch_ledger(module, tmp_path, monkeypatch)
+    monkeypatch.setattr(module, "reauthorize_screen_root", lambda *_args: None)
+    with pytest.raises(RuntimeError, match="constructor"):
+        module.execute_authorized_screen_launch(
+            authorization=authorization, authorization_path=auth_path,
+            launch_state_path=launch, root=module.SCREEN_TRAINING_ROOT,
+            launch_wall_started=wall, launch_cpu_started=0, launch_peak_rss=1,
+            experiment_factory=lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("constructor")),
+        )
+    assert json.loads(launch.read_text())["phase"] == "terminal-constructor-failure"
+
+
+def test_real_screen_orchestration_links_later_failure_to_both_ledgers(module, tmp_path, monkeypatch) -> None:
+    authorization, auth_path, launch, wall = make_real_launch_ledger(module, tmp_path, monkeypatch)
+    monkeypatch.setattr(module, "reauthorize_screen_root", lambda *_args: None)
+    experiment = fake_scientific_experiment(
+        module, tmp_path, "scientific-7",
+        lambda: (_ for _ in ()).throw(RuntimeError("later")),
+    )
+    with pytest.raises(RuntimeError, match="later"):
+        module.execute_authorized_screen_launch(
+            authorization=authorization, authorization_path=auth_path,
+            launch_state_path=launch, root=module.SCREEN_TRAINING_ROOT,
+            launch_wall_started=wall, launch_cpu_started=0, launch_peak_rss=1,
+            experiment_factory=lambda *_args, **_kwargs: experiment,
+        )
+    launch_state = json.loads(launch.read_text())
+    attempt_state = json.loads((experiment.ledger.directory / "attempt-state.json").read_text())
+    assert launch_state["phase"] == "terminal-scientific-attempt-failure"
+    assert launch_state["scientific_attempt_id"] == "scientific-7"
+    assert attempt_state["phase"] == "incomplete" and (experiment.ledger.directory / "incomplete.json").is_file()
+
+
+def test_real_screen_orchestration_marks_successful_sealed_launch(module, tmp_path, monkeypatch) -> None:
+    authorization, auth_path, launch, wall = make_real_launch_ledger(module, tmp_path, monkeypatch)
+    monkeypatch.setattr(module, "reauthorize_screen_root", lambda *_args: None)
+    attempt_id = "scientific-8"
+    def run():
+        attempt = module.TRACKED_SCREEN_DIR / "attempts" / attempt_id
+        attempt.mkdir(parents=True)
+        launch_attempt_id = experiment.ledger.state["launch_attempt_id"]
+        orchestration = {
+            "launch_attempt_id": launch_attempt_id,
+            "scientific_attempt_id": attempt_id,
+            "linkage_direction": "scientific-evidence-to-launch-attempt-id-without-launch-ledger-hash",
+        }
+        names = {
+            "first-quarter-telemetry.json", "checkpoints.json", "run.json",
+            "environment.json", "metrics.json", "integrity.json", "mlflow.json",
+            "final-timing.json", "attempt-state.json",
+        }
+        for name in names:
+            (attempt / name).write_text(f"{name}\n")
+        (attempt / "attempt-state.json").write_bytes(module.canonical_json_bytes({
+            **experiment.ledger.state, "phase": "sealed", "complete": True,
+        }, pretty=True))
+        (attempt / "run.json").write_bytes(module.canonical_json_bytes({
+            "sealed_orchestration": orchestration,
+        }, pretty=True))
+        (attempt / "integrity.json").write_bytes(module.canonical_json_bytes({
+            "sealed_orchestration": orchestration,
+        }, pretty=True))
+        seal = {
+            "schema_version": "exp648-screen-completion-seal-v1",
+            "attempt_id": attempt_id, "authorization_sha256": "a" * 64,
+            "artifacts": {name: module.sha256(attempt / name) for name in names},
+            "complete": True,
+        }
+        (attempt / "completion-seal.json").write_bytes(module.canonical_json_bytes(seal, pretty=True))
+        pointer = {
+            "schema_version": "exp648-screen-completion-pointer-v1",
+            "attempt_id": attempt_id,
+            "completion_seal_sha256": module.sha256(attempt / "completion-seal.json"),
+        }
+        (module.TRACKED_SCREEN_DIR / "completion.json").parent.mkdir(parents=True, exist_ok=True)
+        (module.TRACKED_SCREEN_DIR / "completion.json").write_bytes(module.canonical_json_bytes(pointer, pretty=True))
+        return {"ok": True}
+    experiment = fake_scientific_experiment(module, tmp_path, attempt_id, run)
+    result = module.execute_authorized_screen_launch(
+        authorization=authorization, authorization_path=auth_path,
+        launch_state_path=launch, root=module.SCREEN_TRAINING_ROOT,
+        launch_wall_started=wall, launch_cpu_started=0, launch_peak_rss=1,
+        experiment_factory=lambda *_args, **_kwargs: experiment,
+    )
+    state = json.loads(launch.read_text())
+    assert result == {"ok": True}
+    assert state["phase"] == "complete-sealed" and state["complete"] is True
+    assert state["scientific_attempt_id"] == attempt_id
+    assert len(state["completion_pointer_sha256"]) == 64
+    assert len(state["completion_seal_sha256"]) == 64
+    sealed_attempt = module.TRACKED_SCREEN_DIR / "attempts" / attempt_id
+    scientific_state = json.loads((sealed_attempt / "attempt-state.json").read_text())
+    run_receipt = json.loads((sealed_attempt / "run.json").read_text())
+    integrity_receipt = json.loads((sealed_attempt / "integrity.json").read_text())
+    assert scientific_state["launch_attempt_id"] == state["attempt_id"]
+    assert run_receipt["sealed_orchestration"]["launch_attempt_id"] == state["attempt_id"]
+    assert integrity_receipt["sealed_orchestration"] == run_receipt["sealed_orchestration"]
+    mismatched = {**state, "scientific_attempt_id": "wrong-scientific-attempt"}
+    launch.write_bytes(module.canonical_json_bytes(mismatched, pretty=True))
+    with pytest.raises(RuntimeError, match="terminal reciprocal"):
+        module.verify_screen_completion_seal(
+            module.TRACKED_SCREEN_DIR / "completion.json", launch_state_path=launch
+        )
+
+
+def test_completion_seal_covers_receipt_ledger_and_all_complete_artifacts(module, tmp_path) -> None:
+    attempt_id = "attempt-1"
+    attempt = tmp_path / "attempts" / attempt_id
+    attempt.mkdir(parents=True)
+    names = {
+        "first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json",
+        "metrics.json", "integrity.json", "mlflow.json", "final-timing.json", "attempt-state.json",
+    }
+    for name in names:
+        (attempt / name).write_text(f"{name}\n")
+    orchestration = {
+        "launch_attempt_id": "launch-1", "scientific_attempt_id": attempt_id,
+        "linkage_direction": "scientific-evidence-to-launch-attempt-id-without-launch-ledger-hash",
+    }
+    (attempt / "attempt-state.json").write_bytes(module.canonical_json_bytes({
+        "attempt_id": attempt_id, "launch_attempt_id": "launch-1",
+    }, pretty=True))
+    (attempt / "run.json").write_bytes(module.canonical_json_bytes({
+        "sealed_orchestration": orchestration,
+    }, pretty=True))
+    (attempt / "integrity.json").write_bytes(module.canonical_json_bytes({
+        "sealed_orchestration": orchestration,
+    }, pretty=True))
+    seal = {
+        "schema_version": "exp648-screen-completion-seal-v1", "attempt_id": attempt_id,
+        "authorization_sha256": "a" * 64,
+        "artifacts": {name: module.sha256(attempt / name) for name in names}, "complete": True,
+    }
+    seal_path = attempt / "completion-seal.json"
+    seal_path.write_bytes(module.canonical_json_bytes(seal, pretty=True))
+    pointer = {
+        "schema_version": "exp648-screen-completion-pointer-v1", "attempt_id": attempt_id,
+        "completion_seal_sha256": module.sha256(seal_path),
+    }
+    pointer_path = tmp_path / "completion.json"
+    pointer_path.write_bytes(module.canonical_json_bytes(pointer, pretty=True))
+    assert module.verify_screen_completion_seal(pointer_path)["complete"] is True
+    (attempt / "mlflow.json").write_text("tampered\n")
+    with pytest.raises(RuntimeError, match="sealed artifact"):
+        module.verify_screen_completion_seal(pointer_path)

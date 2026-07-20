@@ -15,6 +15,7 @@ _MODULE_WALL_STARTED = __import__("time").perf_counter()
 _MODULE_PROCESS_CPU_STARTED = __import__("time").process_time()
 
 import argparse
+import ast
 import copy
 import gzip
 import hashlib
@@ -24,6 +25,8 @@ import io
 import json
 import math
 import random
+import re
+import os
 import shutil
 import subprocess
 import sys
@@ -108,6 +111,28 @@ SCREEN_AUTHORIZATION_PATH = (
     ROOT
     / "experiments/runs/exp-648-structured-trajectory-consistency/screen/judge-authorization.json"
 )
+TRACKED_SCREEN_DIR = ROOT / "experiments/runs/exp-648-structured-trajectory-consistency/screen"
+SCRATCH_SCREEN_DIR = ROOT / ".scratch/exp-648-structured-trajectory-consistency/screen"
+SCREEN_READINESS_CALIBRATION_PATH = TRACKED_SCREEN_DIR / "readiness-calibration.json"
+READINESS_RESOURCE_COMPLETION_PATH = (
+    TRACKED_SCREEN_DIR / "readiness-calibration-resource-completion.json"
+)
+READINESS_CALIBRATION_AUTHORIZATION_PATH = TRACKED_SCREEN_DIR / "readiness-calibration-authorization.json"
+READINESS_SCAFFOLD_PROVENANCE_PATH = (
+    ROOT / "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json"
+)
+MAX_AUTHORIZATION_BYTES = 65_536
+
+FROZEN_CORPUS_FILES = {
+    "data/identity-manifest.json": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+    "data/trajectory-manifest.json.gz": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a",
+    "data/paired-corpus.json.gz": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+    "data/corpus-manifest.json": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "evidence/run.json": "de34592118392d2b1a158697b78a35c0d0e130ead36f33e2069e8715d2056a09",
+    "evidence/environment.json": "cab308ec1c6148ee4e5a68764809dc2be5114f23026cf4f4dbc4d4572e89a957",
+    "evidence/integrity.json": "a0a00d09379cf77dab8a0c89c1b6796fffb9f238021409ab9f473b102ecd24fe",
+    "evidence/mlflow.json": "9fbac562324f141d76f8b7e255ff54490072f7e72ffa777e0570466cea1d4a3f",
+}
 
 PINNED = {
     "repository_head": "9f2226873a66e1938dbf30d87acbc876e528c622",
@@ -223,9 +248,17 @@ def deterministic_gunzip_bytes(value: bytes) -> bytes:
 
 def _atomic_write(path: Path, payload: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(f".{path.name}.tmp")
-    temporary.write_bytes(payload)
-    temporary.replace(path)
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    with temporary.open("wb") as handle:
+        handle.write(payload)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+    directory_fd = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
 
 
 def write_mirrored(relative: Path, payload: bytes, *, family: str) -> tuple[Path, Path]:
@@ -323,15 +356,1545 @@ def verify_pinned_foundation(config: dict[str, Any]) -> dict[str, str]:
     return checks
 
 
-def expected_screen_authorization_payload(corpus_manifest_sha256: str) -> dict[str, Any]:
+def screen_workload_payload(
+    *, scientific_runner_sha256: str | None = None,
+    config_override: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    config = config_override or yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    return {
+        "schema_version": "exp648-screen-workload-v2",
+        "training": {"updates_per_arm": 200, "arms": 2, "batch_size": 16, "window_length": 8},
+        "evaluation": copy.deepcopy(config["screen"]["evaluation"]),
+        "frozen_corpus_semantic_replay": {"identity_trajectories": 736, "full_source_replays": 1},
+        "checkpoint_before_evaluation": {"writes": 2, "reload_verify": True},
+        "recoverable_evaluation_units": "paired-arm-width-mode",
+        "recoverable_evaluation_unit_count": 7,
+        "successful_attempt_ledger_atomic_writes": 213,
+        "successful_atomic_evidence_writes": 19,
+        "evidence_and_mlflow_verification": True,
+        "fidelity_reduction_allowed": False,
+        "scientific_runner_sha256": scientific_runner_sha256 or sha256(Path(__file__)),
+    }
+
+
+def _git_blob(commit: str, relative: str) -> bytes:
+    result = subprocess.run(["git", "show", f"{commit}:{relative}"], cwd=ROOT, check=False, capture_output=True)
+    if result.returncode != 0:
+        raise PermissionError(f"approved base lacks {relative}")
+    return result.stdout
+
+
+def _git_blob_sha256(commit: str, relative: str) -> str:
+    return sha256_bytes(_git_blob(commit, relative))
+
+
+def _git_json(commit: str, relative: str) -> dict[str, Any]:
+    raw = _git_blob(commit, relative)
+    try:
+        value = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError(f"approved base has malformed JSON at {relative}") from error
+    if not isinstance(value, dict) or raw != canonical_json_bytes(value, pretty=True):
+        raise PermissionError(f"approved base has noncanonical JSON at {relative}")
+    return value
+
+
+def _git_function_source(commit: str, relative: str, name: str) -> str:
+    source = _git_blob(commit, relative).decode("utf-8")
+    tree = ast.parse(source)
+    matches = [
+        node for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == name
+    ]
+    if len(matches) != 1:
+        raise PermissionError(f"approved base function binding missing or ambiguous: {name}")
+    node = matches[0]
+    return "".join(source.splitlines(keepends=True)[node.lineno - 1:node.end_lineno])
+
+
+def _base_protocol_hashes(commit: str, config: dict[str, Any]) -> tuple[str, str]:
+    scientific = copy.deepcopy(config)
+    for key in ("status", "phase", "resource_protocol", "authorization"):
+        scientific.pop(key, None)
+    scientific.get("corpus", {}).pop("resolved_corpus_mining_ceiling", None)
+    resource = copy.deepcopy(config["resource_protocol"])
+    resource.pop("status", None)
+    resource.pop("resolved", None)
+    resource.get("projections", {}).pop("resolved", None)
+    return (
+        sha256_bytes(canonical_json_bytes(scientific)),
+        sha256_bytes(canonical_json_bytes(resource)),
+    )
+
+
+def _base_exact_teacher_hash(commit: str) -> str:
+    relative = CALIBRATION_RUNNER.relative_to(ROOT).as_posix()
+    return sha256_bytes(_git_function_source(commit, relative, "exact_teacher_step").encode())
+
+
+def _base_evaluator_hash(commit: str, dependency_manifest_sha256: str) -> str:
+    relative = Path(__file__).resolve().relative_to(ROOT).as_posix()
+    functions = [
+        _git_function_source(commit, relative, name)
+        for name in (
+            "verify_trajectory_record", "verify_replay_pair",
+            "evaluate_transitions", "evaluate_rollouts",
+        )
+    ]
+    return sha256_bytes(canonical_json_bytes({
+        "calibration_runner_sha256": _git_blob_sha256(
+            commit, CALIBRATION_RUNNER.relative_to(ROOT).as_posix()
+        ),
+        "dependency_manifest_sha256": dependency_manifest_sha256,
+        "functions": functions,
+    }))
+
+
+def validate_one_child_authorization_lifecycle(
+    *, auth_relative: str, approved_base_commit: str, launch: bool,
+) -> str:
+    auth_commit = git_output("log", "-1", "--format=%H", "--", auth_relative)
+    if not auth_commit:
+        raise PermissionError("authorization file has no committed history")
+    if subprocess.run(["git", "merge-base", "--is-ancestor", approved_base_commit, auth_commit], cwd=ROOT).returncode != 0:
+        raise PermissionError("approved authorization base is not an ancestor")
+    if git_output("rev-list", "--count", f"{approved_base_commit}..{auth_commit}") != "1":
+        raise PermissionError("authorization must be one child commit above its base")
+    if git_output("diff", "--name-only", f"{approved_base_commit}..{auth_commit}").splitlines() != [auth_relative]:
+        raise PermissionError("authorization child commit changes files outside its manifest")
+    if launch:
+        if git_output("rev-parse", "HEAD") != auth_commit:
+            raise PermissionError("launch HEAD is not the authorization child commit")
+        if git_output("rev-parse", "HEAD") != git_output("rev-parse", "@{upstream}"):
+            raise PermissionError("launch authorization commit is not upstream")
+        if git_output("status", "--porcelain=v1", "--untracked-files=all"):
+            raise PermissionError("authorization launch requires a clean worktree")
+    return auth_commit
+
+
+def readiness_calibration_authorization_base(
+    root_seed: int, approved_base_commit: str
+) -> dict[str, Any]:
+    """Canonical Judge payload template; constructing it does not authorize a root."""
+    config_rel = CONFIG_PATH.relative_to(ROOT).as_posix()
+    config = yaml.safe_load(_git_blob(approved_base_commit, config_rel))
+    runner_rel = Path(__file__).resolve().relative_to(ROOT).as_posix()
+    test_rel = "tests/test_exp648_structured_trajectory_scientific.py"
+    scientific_hash, resource_hash = _base_protocol_hashes(approved_base_commit, config)
+    dependency_hash = config["executable_dependency_sources"]["manifest_sha256"]
+    environment = _git_json(
+        approved_base_commit,
+        CALIBRATION_ENVIRONMENT_PATH.relative_to(ROOT).as_posix(),
+    )
+    scaffold = _git_json(
+        approved_base_commit,
+        READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(ROOT).as_posix(),
+    )
+    return {
+        "schema_version": "exp648-screen-readiness-calibration-authorization-v1",
+        "experiment_id": RUN_ID,
+        "decision": "authorize-non-scientific-screen-readiness-calibration-only",
+        "calibration_root": int(root_seed),
+        "approved_base_commit": approved_base_commit,
+        "scientific_runner_sha256": _git_blob_sha256(approved_base_commit, runner_rel),
+        "scientific_test_sha256": _git_blob_sha256(approved_base_commit, test_rel),
+        "calibration_runner_sha256": _git_blob_sha256(approved_base_commit, CALIBRATION_RUNNER.relative_to(ROOT).as_posix()),
+        "resolved_config_sha256": _git_blob_sha256(approved_base_commit, config_rel),
+        "executed_config_sha256": _git_blob_sha256(approved_base_commit, EXECUTED_CONFIG_PATH.relative_to(ROOT).as_posix()),
+        "source_checkpoint_sha256": config["source_checkpoint_sha256"],
+        "dependency_manifest_sha256": dependency_hash,
+        "approved_runtime_environment": environment,
+        "evaluator_sha256": _base_evaluator_hash(approved_base_commit, dependency_hash),
+        "exact_teacher_source_sha256": _base_exact_teacher_hash(approved_base_commit),
+        "scientific_protocol_sha256": scientific_hash,
+        "resource_protocol_sha256": resource_hash,
+        "screen_workload_sha256": scaffold["screen_workload_sha256"],
+        "corpus_manifest_sha256": FROZEN_CORPUS_FILES["data/corpus-manifest.json"],
+        "screen_roots_authorized": False,
+        "scientific_accuracy_or_selection_authorized": False,
+    }
+
+
+def _read_authenticated_committed_manifest(
+    path: Path, *, expected_schema: str, committed_bytes: bytes | None = None
+) -> tuple[dict[str, Any], bytes]:
+    if not path.is_file():
+        raise PermissionError(f"{expected_schema} manifest is absent")
+    size = path.stat().st_size
+    if size <= 0 or size > MAX_AUTHORIZATION_BYTES:
+        raise PermissionError("authorization manifest size is invalid")
+    observed = path.read_bytes()
+    try:
+        payload = json.loads(observed)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError("authorization manifest is malformed") from error
+    if not isinstance(payload, dict) or payload.get("schema_version") != expected_schema:
+        raise PermissionError("authorization manifest schema mismatch")
+    if observed != canonical_json_bytes(payload, pretty=True):
+        raise PermissionError("authorization manifest is noncanonical")
+    if committed_bytes is None:
+        try:
+            relative = path.resolve().relative_to(ROOT).as_posix()
+        except ValueError as error:
+            raise PermissionError("authorization manifest must be inside repository") from error
+        result = subprocess.run(
+            ["git", "show", f"HEAD:{relative}"], cwd=ROOT,
+            check=False, capture_output=True,
+        )
+        if result.returncode != 0:
+            raise PermissionError("authorization manifest is not committed at HEAD")
+        committed_bytes = result.stdout
+    if committed_bytes != observed:
+        raise PermissionError("authorization bytes differ from committed Git blob")
+    return payload, observed
+
+
+def verify_readiness_calibration_authorization(
+    path: Path = READINESS_CALIBRATION_AUTHORIZATION_PATH, *,
+    committed_bytes: bytes | None = None, allow_test_root: bool = False,
+    launch: bool = True,
+) -> dict[str, Any]:
+    # Authentication and cheap structural checks happen before any config,
+    # environment, model, corpus, output-directory, RNG, root, or MLflow action.
+    payload, observed = _read_authenticated_committed_manifest(
+        path,
+        expected_schema="exp648-screen-readiness-calibration-authorization-v1",
+        committed_bytes=committed_bytes,
+    )
+    expected_keys = {
+        "schema_version", "experiment_id", "decision", "calibration_root",
+        "approved_base_commit", "scientific_runner_sha256", "scientific_test_sha256",
+        "calibration_runner_sha256", "resolved_config_sha256", "executed_config_sha256",
+        "source_checkpoint_sha256", "dependency_manifest_sha256", "approved_runtime_environment", "evaluator_sha256",
+        "exact_teacher_source_sha256", "scientific_protocol_sha256",
+        "resource_protocol_sha256", "screen_workload_sha256", "corpus_manifest_sha256",
+        "screen_roots_authorized", "scientific_accuracy_or_selection_authorized",
+    }
+    if set(payload) != expected_keys:
+        raise PermissionError("calibration authorization key schema mismatch")
+    root = int(payload["calibration_root"])
+    prohibited = {
+        CALIBRATION_ROOT, CORPUS_ROOT, SCREEN_TRAINING_ROOT, SCREEN_EVALUATION_ROOT,
+        EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
+    }
+    if root in prohibited or root <= 0 or (root == TEST_ONLY_ROOT and not allow_test_root):
+        raise PermissionError("calibration authorization root is reused, test-only, or prohibited")
+    if payload["decision"] != "authorize-non-scientific-screen-readiness-calibration-only":
+        raise PermissionError("calibration authorization decision mismatch")
+    if payload["screen_roots_authorized"] is not False or payload["scientific_accuracy_or_selection_authorized"] is not False:
+        raise PermissionError("calibration authorization scope expanded")
+    # Only after the committed bytes authenticate do we inspect relevant files.
+    base = str(payload["approved_base_commit"])
+    expected = readiness_calibration_authorization_base(root, base)
+    if payload != expected:
+        raise PermissionError("calibration authorization relevant-file binding mismatch")
+    auth_relative = path.resolve().relative_to(ROOT).as_posix()
+    validate_one_child_authorization_lifecycle(
+        auth_relative=auth_relative, approved_base_commit=base, launch=launch
+    )
+    return {**payload, "authorization_sha256": sha256_bytes(observed)}
+
+
+def verify_screen_readiness_calibration(
+    path: Path = SCREEN_READINESS_CALIBRATION_PATH,
+) -> dict[str, Any]:
+    if not path.is_file():
+        raise PermissionError("fresh post-repair full-fidelity screen calibration is absent")
+    raw = path.read_bytes()
+    payload = json.loads(raw)
+    if raw != canonical_json_bytes(payload, pretty=True):
+        raise PermissionError("screen readiness calibration receipt is noncanonical")
+    required = {
+        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "status": "complete-non-scientific-full-fidelity-resource-calibration",
+        "scientific_runner_sha256": sha256(Path(__file__)),
+        "resolved_config_sha256": sha256(CONFIG_PATH),
+        "screen_workload_sha256": sha256_bytes(canonical_json_bytes(screen_workload_payload())),
+        "full_fidelity": True,
+        "warmups": 1,
+        "timed_repeats": 3,
+    }
+    for key, value in required.items():
+        if payload.get(key) != value:
+            raise PermissionError(f"screen readiness calibration mismatch for {key}")
+    root = int(payload.get("calibration_root", -1))
+    if root <= 0 or root in {
+        CALIBRATION_ROOT, CORPUS_ROOT, SCREEN_TRAINING_ROOT, SCREEN_EVALUATION_ROOT,
+        EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
+    }:
+        raise PermissionError("fresh screen calibration root is absent, reused, or prohibited")
+    if not isinstance(payload.get("calibration_authorization_sha256"), str) or len(payload["calibration_authorization_sha256"]) != 64:
+        raise PermissionError("screen calibration lacks separate authorization binding")
+    budgets = payload.get("resolved_screen_budgets", {})
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        record = budgets.get(resource, {})
+        if not (0 < float(record.get("projected_seconds", 0)) < float(record.get("soft_budget_seconds", 0)) < float(record.get("hard_runaway_ceiling_seconds", 0))):
+            raise PermissionError(f"invalid dynamic {resource} budget")
+    if int(budgets.get("peak_rss_guard_bytes", 0)) <= 0:
+        raise PermissionError("invalid peak RSS guard")
+    quarter = budgets.get("first_quarter_checkpoint", {})
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        if float(quarter.get(resource, {}).get("expected_elapsed_seconds", 0)) <= 0:
+            raise PermissionError(f"missing measured first-quarter {resource} expectation")
+    for key in ("calibration_evidence_core_sha256", "environment_sha256", "mlflow_receipt_sha256"):
+        if not isinstance(payload.get(key), str) or len(payload[key]) != 64:
+            raise PermissionError(f"screen calibration lacks {key}")
+    try:
+        validate_readiness_calibration_receipt(payload)
+    except (KeyError, RuntimeError, TypeError, ValueError) as error:
+        raise PermissionError("screen readiness calibration receipt failed recomputation") from error
+    companion = {
+        "core": TRACKED_SCREEN_DIR / "readiness-calibration-core.json",
+        "environment": TRACKED_SCREEN_DIR / "readiness-calibration-environment.json",
+        "mlflow": TRACKED_SCREEN_DIR / "readiness-calibration-mlflow.json",
+        "completion": TRACKED_SCREEN_DIR / "readiness-calibration-completion.json",
+        "attempt_state": TRACKED_SCREEN_DIR / "readiness-calibration-attempt-state.json",
+        "launch_ledger": TRACKED_SCREEN_DIR / "readiness-calibration-launch-ledger.json",
+        "resource_completion": READINESS_RESOURCE_COMPLETION_PATH,
+        "executed_config": TRACKED_SCREEN_DIR / "readiness-calibration-executed-config.yaml",
+    }
+    if any(not value.is_file() for value in companion.values()):
+        raise PermissionError("screen readiness calibration companion evidence is incomplete")
+    if sha256(companion["core"]) != payload["calibration_evidence_core_sha256"]:
+        raise PermissionError("screen readiness calibration core hash mismatch")
+    if sha256(companion["environment"]) != payload["environment_sha256"]:
+        raise PermissionError("screen readiness calibration environment hash mismatch")
+    if sha256(companion["mlflow"]) != payload["mlflow_receipt_sha256"]:
+        raise PermissionError("screen readiness calibration MLflow hash mismatch")
+    for key, item in companion.items():
+        if key == "executed_config":
+            continue
+        parsed = json.loads(item.read_bytes())
+        if item.read_bytes() != canonical_json_bytes(parsed, pretty=True):
+            raise PermissionError("screen readiness calibration companion is noncanonical")
+    completion = json.loads(companion["completion"].read_text(encoding="utf-8"))
+    expected_artifacts = {
+        "readiness-calibration.json": sha256(path),
+        "readiness-calibration-core.json": sha256(companion["core"]),
+        "readiness-calibration-environment.json": sha256(companion["environment"]),
+        "readiness-calibration-mlflow.json": sha256(companion["mlflow"]),
+        "readiness-calibration-executed-config.yaml": sha256(companion["executed_config"]),
+    }
+    if set(completion) != {"schema_version", "attempt_id", "authorization_sha256", "artifacts", "complete"} or completion.get("schema_version") != "exp648-readiness-calibration-completion-v1" or completion.get("complete") is not True or completion.get("artifacts") != expected_artifacts:
+        raise PermissionError("screen readiness calibration completion seal mismatch")
+    authorization = verify_readiness_calibration_authorization(
+        READINESS_CALIBRATION_AUTHORIZATION_PATH, launch=False
+    )
+    if authorization["authorization_sha256"] != payload["calibration_authorization_sha256"]:
+        raise PermissionError("screen readiness calibration authorization hash mismatch")
+    core = json.loads(companion["core"].read_text(encoding="utf-8"))
+    if completion["attempt_id"] != core.get("attempt_id") or completion["authorization_sha256"] != authorization["authorization_sha256"]:
+        raise PermissionError("screen readiness completion attempt/auth mismatch")
+    if core.get("authorization") != authorization:
+        raise PermissionError("screen readiness calibration core provenance mismatch")
+    try:
+        validate_core_receipt_release_equality(core, payload)
+    except RuntimeError as error:
+        raise PermissionError("screen readiness calibration core/receipt mismatch") from error
+    executed_config = yaml.safe_load(companion["executed_config"].read_text(encoding="utf-8"))
+    if int(executed_config["resource_protocol"]["calibration"]["root"]) != int(payload["calibration_root"]):
+        raise PermissionError("screen readiness executed root config mismatch")
+    try:
+        for repeat in payload["repeats"]:
+            cal.validate_calibration_repeat(repeat, executed_config)
+        cal.verify_dependency_source_manifest(cal.dependency_source_manifest())
+    except (KeyError, RuntimeError, TypeError, ValueError) as error:
+        raise PermissionError("screen readiness detailed repeat/dependency verification failed") from error
+    environment = json.loads(companion["environment"].read_text(encoding="utf-8"))
+    config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    cal.configure_frozen_runtime(config)
+    current_environment = cal.environment_payload(config)
+    if environment != current_environment or core.get("environment") != environment:
+        raise PermissionError("screen launch environment differs from fresh calibration")
+    mlflow_receipt = json.loads(companion["mlflow"].read_text(encoding="utf-8"))
+    if not all(mlflow_receipt.get(key) is True for key in (
+        "exact_tags_verified", "exact_params_verified", "exact_metrics_verified"
+    )) or mlflow_receipt.get("status") != "FINISHED":
+        raise PermissionError("screen readiness calibration MLflow verification mismatch")
+    verify_readiness_calibration_mlflow_at_launch(
+        payload, mlflow_receipt, companion["core"], companion["environment"], companion["executed_config"]
+    )
+    inner_paths = {
+        "readiness-calibration.json": path,
+        "readiness-calibration-core.json": companion["core"],
+        "readiness-calibration-environment.json": companion["environment"],
+        "readiness-calibration-mlflow.json": companion["mlflow"],
+        "readiness-calibration-executed-config.yaml": companion["executed_config"],
+        "readiness-calibration-completion.json": companion["completion"],
+        "readiness-calibration-attempt-state.json": companion["attempt_state"],
+        "readiness-calibration-launch-ledger.json": companion["launch_ledger"],
+    }
+    try:
+        outer = load_and_validate_readiness_resource_completion(
+            companion["resource_completion"], inner_paths=inner_paths,
+            expected_attempt_id=core["attempt_id"],
+            expected_authorization_sha256=authorization["authorization_sha256"],
+        )
+    except (KeyError, RuntimeError, TypeError, ValueError) as error:
+        raise PermissionError("screen readiness observed resource completion mismatch") from error
+    verified = copy.deepcopy(payload)
+    verified["prepublication_provisional_recovery_charges"] = verified.pop("recovery_charges")
+    verified["recovery_charges"] = outer["recovery_charges"]
+    verified["observed_resource_completion"] = outer
+    return verified
+
+
+def _calibration_component_rates(repeats: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    if len(repeats) != 3:
+        raise RuntimeError("readiness calibration requires exactly three timed repeats")
+    rates: dict[str, Any] = {}
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        rates[resource] = {
+            "startup": max(float(r["components"]["startup_model_loading"]["timing"][resource]) for r in repeats),
+            "mining_per_pair": max(float(r["components"]["mining"]["timing"][resource]) / 64 for r in repeats),
+            "semantic_replay_per_window": max(float(r["components"]["corpus_integrity_validation"]["timing"][resource]) / 128 for r in repeats),
+            "actual_source_replay_per_complete_identity": max(float(r["components"]["actual_source_replay"]["timing"][resource]) / 64 for r in repeats),
+            "training_per_update_slower_arm": max(
+                float(r["components"]["training"][arm]["timing"][resource]) / 20
+                for r in repeats for arm in ("control", "challenger")
+            ),
+            "checkpoint_per_write_slower_arm": max(
+                float(r["components"]["checkpoint"][arm]["timing"][resource])
+                for r in repeats for arm in ("control", "challenger")
+            ),
+            "transition_per_case": {
+                str(width): max(
+                    float(r["components"]["transitions"][arm][str(width)]["timing"][resource]) / 200
+                    for r in repeats for arm in ("control", "challenger")
+                ) for width in (128, 256)
+            },
+            "rollout_per_case": {
+                str(width): max(
+                    float(r["components"]["rollouts"][arm][str(width)]["timing"][resource]) / 20
+                    for r in repeats for arm in ("control", "challenger")
+                ) for width in (64, 128, 256)
+            },
+            "serialization": max(float(r["components"]["hash_serialization"]["timing"][resource]) for r in repeats),
+            "readiness_infrastructure_complete_unit": max(float(r["components"]["readiness_infrastructure"]["timing"][resource]) for r in repeats),
+            "attempt_ledger_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["attempt_ledger"][resource]) / 213 for r in repeats),
+            "evaluation_cache_per_unit": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["evaluation_cache"][resource]) / 7 for r in repeats),
+            "atomic_evidence_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["atomic_evidence"][resource]) / 19 for r in repeats),
+            "atomic_checkpoint_reload_both": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["atomic_checkpoints"][resource]) for r in repeats),
+            "mlflow_remote_six_artifact_probe": max(float(r["components"]["mlflow_probe"]["timing"][resource]) for r in repeats),
+        }
+    return rates
+
+
+def resolve_readiness_screen_budgets(
+    repeats: Sequence[dict[str, Any]], launcher: dict[str, Any],
+    warmup: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    rates = _calibration_component_rates(repeats)
+    resolved: dict[str, Any] = {}
+    quarter: dict[str, Any] = {}
+    components_by_resource: dict[str, Any] = {}
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        rate = rates[resource]
+        components = {
+            "launcher_import_authorization_environment": float(launcher[resource]),
+            "startup": rate["startup"],
+            "frozen_corpus_source_replay": rate["actual_source_replay_per_complete_identity"] * 736,
+            "training_both_arms": rate["training_per_update_slower_arm"] * 200 * 2,
+            "checkpoints_both_arms": rate["checkpoint_per_write_slower_arm"] * 2,
+            "transitions_both_arms": sum(rate["transition_per_case"][str(w)] * 2000 * 2 for w in (128, 256)),
+            "rollouts_both_arms": sum(rate["rollout_per_case"][str(w)] * 200 * 2 for w in (64, 128, 256)),
+            "exact_repeat_both_passes_both_arms": rate["rollout_per_case"]["256"] * 20 * 2 * 2,
+            "attempt_ledger_213_writes": rate["attempt_ledger_per_write"] * 213,
+            "evaluation_cache_7_write_validate_units": rate["evaluation_cache_per_unit"] * 7,
+            "atomic_evidence_19_writes": rate["atomic_evidence_per_write"] * 19,
+            "atomic_checkpoint_reload_verification": rate["atomic_checkpoint_reload_both"],
+            "verified_remote_mlflow_six_artifact_run": rate["mlflow_remote_six_artifact_probe"],
+        }
+        projection = sum(components.values())
+        setup_headroom = 2 * (
+            components["launcher_import_authorization_environment"] + components["startup"]
+            + components["checkpoints_both_arms"] + components["atomic_checkpoint_reload_verification"]
+            + rate["serialization"] + rate["atomic_evidence_per_write"]
+        )
+        soft = 1.25 * projection + setup_headroom
+        hard = 1.5 * soft
+        resolved[resource] = {
+            "projected_seconds": projection,
+            "explicit_measured_setup_headroom_seconds": setup_headroom,
+            "soft_budget_seconds": soft,
+            "hard_runaway_ceiling_seconds": hard,
+        }
+        quarter_expected = (
+            components["launcher_import_authorization_environment"] + components["startup"]
+            + components["frozen_corpus_source_replay"]
+            + rate["training_per_update_slower_arm"] * 50 * 2
+            + rate["attempt_ledger_per_write"] * 54
+        )
+        quarter[resource] = {"expected_elapsed_seconds": quarter_expected}
+        components_by_resource[resource] = components
+    peak_candidates = [int(launcher["peak_rss_bytes"])] + [
+        int(r["total_timing"]["peak_rss_bytes"]) for r in repeats
+    ]
+    if warmup is not None:
+        peak_candidates.append(int(warmup["total_timing"]["peak_rss_bytes"]))
+    peak = max(peak_candidates)
+    resolved["peak_rss_guard_bytes"] = max(peak + 512 * 1024 * 1024, math.ceil(peak * 1.25))
+    resolved["peak_rss_formula"] = "max(max_complete_repeat_peak_rss+512MiB,1.25*max_complete_repeat_peak_rss)"
+    resolved["first_quarter_checkpoint"] = quarter
+    return resolved, {
+        "rates": rates, "projected_components": components_by_resource,
+        "rss_peak_inputs_bytes": peak_candidates,
+        "rss_peak_max_bytes": peak,
+        "timing_aggregation_contract": {
+            "complete_unit_total": "base CalibrationExperiment total + actual source replay + MLflow probe + readiness infrastructure",
+            "launcher": "excluded from each warmup/repeat total; charged once in projection and active process accounting",
+            "peak_rss": "maximum of launcher, complete warmup, and every complete repeat peak; never summed",
+        },
+    }
+
+
+READINESS_RELEASE_CRITICAL_FIELDS = (
+    "warmup",
+    "repeats",
+    "component_resolution",
+    "resolved_screen_budgets",
+    "recovery_charges",
+    "full_fidelity",
+    "environment",
+    "boundary",
+)
+
+
+def aggregate_readiness_timing(
+    base_timing: dict[str, Any], *additional_timings: dict[str, Any]
+) -> dict[str, Any]:
+    records = (base_timing, *additional_timings)
+    return {
+        "wall_seconds": sum(float(item["wall_seconds"]) for item in records),
+        "aggregate_cpu_seconds": sum(
+            float(item["aggregate_cpu_seconds"]) for item in records
+        ),
+        "peak_rss_bytes": max(int(item["peak_rss_bytes"]) for item in records),
+    }
+
+
+def validate_complete_readiness_timing(record: dict[str, Any]) -> None:
+    nested = record.get("components", {})
+    components = (
+        nested
+        if all(key in nested for key in ("actual_source_replay", "mlflow_probe", "readiness_infrastructure"))
+        else record
+    )
+    expected = aggregate_readiness_timing(
+        record["base_total_timing_before_readiness_additions"],
+        components["actual_source_replay"]["timing"],
+        components["mlflow_probe"]["timing"],
+        components["readiness_infrastructure"]["timing"],
+    )
+    observed = record["total_timing"]
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        if not math.isclose(
+            float(observed[resource]), float(expected[resource]), rel_tol=0, abs_tol=1e-9
+        ):
+            raise RuntimeError(f"readiness complete {resource} timing omission")
+    if int(observed["peak_rss_bytes"]) != int(expected["peak_rss_bytes"]):
+        raise RuntimeError("readiness complete peak RSS timing omission")
+
+
+def validate_core_receipt_release_equality(
+    core: dict[str, Any], receipt: dict[str, Any]
+) -> None:
+    for field in READINESS_RELEASE_CRITICAL_FIELDS:
+        if core.get(field) != receipt.get(field):
+            raise RuntimeError(f"readiness core/receipt mismatch for {field}")
+
+
+def readiness_historical_decomposition() -> dict[str, float]:
+    historical_wall = 5900.399178599999
+    historical_cpu = 24278.120608365
+    prior_wall = float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
+    prior_cpu = float(
+        cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
+    )
+    return {
+        "historical_completed_calibration_wall_seconds": historical_wall,
+        "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
+        "historical_prior_superseded_wall_seconds_charged": prior_wall,
+        "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
+        "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
+        "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+    }
+
+
+def observed_readiness_recovery(
+    *, active_wall: float, active_cpu: float, reused_wall: float,
+    reused_cpu: float, peak_rss: int,
+) -> dict[str, Any]:
+    historical = readiness_historical_decomposition()
+    wall_total = (
+        historical["historical_completed_calibration_wall_seconds"]
+        + active_wall + reused_wall
+    )
+    cpu_total = (
+        historical["historical_completed_calibration_aggregate_cpu_seconds"]
+        + active_cpu + reused_cpu
+    )
+    return {
+        "scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
+        "accounting_formula": "historical_prior_superseded + historical_accepted_active + observed_pre_outer_seal_active + current_reused",
+        "prior_superseded_calibrations": list(cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+        **historical,
+        "current_readiness_observed_pre_outer_seal_active_wall_seconds": active_wall,
+        "current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds": active_cpu,
+        "current_readiness_reused_wall_seconds_charged": reused_wall,
+        "current_readiness_reused_aggregate_cpu_seconds_charged": reused_cpu,
+        "cumulative_historical_prior_accepted_observed_active_reused_wall_seconds": wall_total,
+        "cumulative_historical_prior_accepted_observed_active_reused_aggregate_cpu_seconds": cpu_total,
+        "historical_plus_observed_active_and_reused_wall_seconds": wall_total,
+        "historical_plus_observed_active_and_reused_aggregate_cpu_seconds": cpu_total,
+        "observed_pre_outer_seal_peak_rss_bytes": int(peak_rss),
+    }
+
+
+def validate_observed_readiness_recovery(recovery: dict[str, Any]) -> None:
+    if recovery.get("scope") != "observed-launch-to-pre-outer-seal-sample-not-through-process-exit":
+        raise RuntimeError("readiness observed recovery scope mismatch")
+    if recovery.get("prior_superseded_calibrations") != list(cal.PRIOR_SUPERSEDED_CALIBRATIONS):
+        raise RuntimeError("readiness observed superseded evidence mismatch")
+    historical = readiness_historical_decomposition()
+    for key, expected in historical.items():
+        if not math.isclose(float(recovery.get(key, -1)), expected, rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError(f"readiness observed historical mismatch for {key}")
+    for resource in ("wall", "aggregate_cpu"):
+        active = float(recovery.get(f"current_readiness_observed_pre_outer_seal_active_{resource}_seconds", -1))
+        reused = float(recovery.get(f"current_readiness_reused_{resource}_seconds_charged", -1))
+        prior = float(recovery[f"historical_prior_superseded_{resource}_seconds_charged"])
+        accepted = float(recovery[f"historical_accepted_active_{resource}_seconds"])
+        total = float(recovery.get(f"cumulative_historical_prior_accepted_observed_active_reused_{resource}_seconds", -1))
+        if min(active, reused, prior, accepted, total) < 0 or not math.isclose(
+            total, prior + accepted + active + reused, rel_tol=0, abs_tol=1e-6
+        ):
+            raise RuntimeError(f"readiness observed cumulative {resource} mismatch")
+        if not math.isclose(
+            float(recovery.get(f"historical_plus_observed_active_and_reused_{resource}_seconds", -1)),
+            total, rel_tol=0, abs_tol=1e-6,
+        ):
+            raise RuntimeError(f"readiness observed historical-plus-current {resource} mismatch")
+    if int(recovery.get("observed_pre_outer_seal_peak_rss_bytes", 0)) <= 0:
+        raise RuntimeError("readiness observed RSS missing")
+
+
+READINESS_POST_SAMPLE_OPERATIONS = (
+    "construct recovery arithmetic from already captured samples",
+    "construct and validate the outer resource-completion payload",
+    "canonical JSON serialization of the outer payload",
+    "ensure the outer receipt parent directory exists",
+    "create and open the atomic temporary file",
+    "write the canonical outer payload bytes",
+    "flush the temporary file",
+    "fsync the temporary file",
+    "close the temporary file",
+    "atomically replace the outer receipt path with the temporary file",
+    "open the parent directory",
+    "fsync the parent directory",
+    "close the parent directory",
+    "return from write_readiness_resource_completion",
+    "return from execute_readiness_calibration",
+    "construct and serialize the CLI summary",
+    "stdout write and flush",
+    "return from main",
+    "SystemExit construction and stack unwind",
+    "Python interpreter teardown and process exit",
+)
+
+
+READINESS_INNER_ARTIFACT_NAMES = {
+    "readiness-calibration.json",
+    "readiness-calibration-core.json",
+    "readiness-calibration-environment.json",
+    "readiness-calibration-mlflow.json",
+    "readiness-calibration-executed-config.yaml",
+    "readiness-calibration-completion.json",
+    "readiness-calibration-attempt-state.json",
+    "readiness-calibration-launch-ledger.json",
+}
+
+
+def prevalidate_readiness_inner_lifecycle(
+    *, inner_paths: dict[str, Path], expected_attempt_id: str,
+    expected_authorization_sha256: str,
+    expected_inner_hashes: dict[str, str] | None = None,
+) -> dict[str, str]:
+    """Hash and validate every non-self-referential inner artifact before sampling."""
+    if set(inner_paths) != READINESS_INNER_ARTIFACT_NAMES:
+        raise RuntimeError("readiness resource completion inner artifact schema mismatch")
+    hashes = {name: sha256(path) for name, path in inner_paths.items()}
+    if expected_inner_hashes is not None and hashes != expected_inner_hashes:
+        raise RuntimeError("readiness resource completion inner artifact hash mismatch")
+    parsed: dict[str, dict[str, Any]] = {}
+    for name, path in inner_paths.items():
+        if path.suffix != ".json":
+            continue
+        raw = path.read_bytes()
+        try:
+            value = json.loads(raw)
+        except (json.JSONDecodeError, UnicodeDecodeError) as error:
+            raise RuntimeError(
+                f"readiness inner artifact is invalid JSON: {name}"
+            ) from error
+        if raw != canonical_json_bytes(value, pretty=True):
+            raise RuntimeError(f"readiness inner artifact is noncanonical: {name}")
+        parsed[name] = value
+    completion = parsed["readiness-calibration-completion.json"]
+    attempt_state = parsed["readiness-calibration-attempt-state.json"]
+    launch_ledger = parsed["readiness-calibration-launch-ledger.json"]
+    if (
+        completion.get("schema_version")
+        != "exp648-readiness-calibration-completion-v1"
+        or completion.get("attempt_id") != expected_attempt_id
+        or completion.get("authorization_sha256")
+        != expected_authorization_sha256
+        or completion.get("complete") is not True
+    ):
+        raise RuntimeError("readiness resource completion inner completion seal mismatch")
+    if (
+        launch_ledger != attempt_state
+        or attempt_state.get("schema_version")
+        != "exp648-readiness-calibration-attempt-v1"
+        or attempt_state.get("attempt_id") != expected_attempt_id
+        or attempt_state.get("authorization_sha256")
+        != expected_authorization_sha256
+        or attempt_state.get("phase") != "sealed"
+        or attempt_state.get("complete") is not True
+        or attempt_state.get("completion_manifest_sha256")
+        != hashes["readiness-calibration-completion.json"]
+    ):
+        raise RuntimeError("readiness resource completion final attempt state mismatch")
+    return hashes
+
+
+def validate_readiness_resource_completion(
+    payload: dict[str, Any], *, inner_paths: dict[str, Path],
+    expected_attempt_id: str, expected_authorization_sha256: str,
+    prevalidated_inner_hashes: dict[str, str] | None = None,
+) -> None:
+    required = {
+        "schema_version", "status", "attempt_id", "authorization_sha256",
+        "inner_artifacts", "inner_lifecycle_complete_before_resource_sample",
+        "resource_boundary", "resource_observation", "measurement_semantics",
+        "recovery_charges", "post_sample_operations",
+    }
+    if set(payload) != required or payload.get("schema_version") != "exp648-readiness-resource-completion-v2":
+        raise RuntimeError("readiness resource completion schema mismatch")
+    if payload.get("status") != "complete-observed-launch-to-pre-outer-seal-sample-resource-evidence":
+        raise RuntimeError("readiness resource completion status mismatch")
+    if payload.get("attempt_id") != expected_attempt_id or payload.get("authorization_sha256") != expected_authorization_sha256:
+        raise RuntimeError("readiness resource completion attempt/auth mismatch")
+    if payload.get("inner_lifecycle_complete_before_resource_sample") is not True:
+        raise RuntimeError("readiness resource completion boundary is early")
+    if payload.get("resource_boundary") != "observed launch-to-pre-outer-seal samples captured after inner MLflow verification, tracked publication, completion manifest, final sealed attempt state, and all feasible non-self-referential inner hashing and lifecycle validation; not through function return, CLI output, interpreter teardown, or process exit":
+        raise RuntimeError("readiness resource completion boundary mismatch")
+    if payload.get("post_sample_operations") != list(READINESS_POST_SAMPLE_OPERATIONS):
+        raise RuntimeError("readiness resource completion post-sample operation list mismatch")
+    semantics = payload.get("measurement_semantics")
+    if semantics != {
+        "wall_seconds": "external monotonic perf-counter elapsed seconds",
+        "aggregate_cpu_seconds": "process user seconds plus process system seconds elapsed",
+        "peak_rss_bytes": "Linux process high-water RSS bytes sampled separately",
+        "wall_and_cpu_are_not_interchangeable_or_combined": True,
+        "post_sample_operations_included_in_observed_totals": False,
+    }:
+        raise RuntimeError("readiness resource completion measurement semantics mismatch")
+    expected_hashes = (
+        prevalidate_readiness_inner_lifecycle(
+            inner_paths=inner_paths,
+            expected_attempt_id=expected_attempt_id,
+            expected_authorization_sha256=expected_authorization_sha256,
+            expected_inner_hashes=payload.get("inner_artifacts"),
+        )
+        if prevalidated_inner_hashes is None
+        else prevalidated_inner_hashes
+    )
+    if payload.get("inner_artifacts") != expected_hashes:
+        raise RuntimeError("readiness resource completion inner artifact hash mismatch")
+    observation = payload.get("resource_observation", {})
+    required_observation = {
+        "sampling_order", "launch_wall_perf_counter", "wall_sample_perf_counter",
+        "launch_process_user_plus_system_seconds", "process_user_seconds_at_sample",
+        "process_system_seconds_at_sample", "observed_wall_seconds",
+        "observed_aggregate_cpu_seconds", "observed_peak_rss_bytes",
+    }
+    if set(observation) != required_observation or observation.get("sampling_order") != [
+        "process user/system CPU", "process peak RSS", "monotonic wall"
+    ]:
+        raise RuntimeError("readiness resource completion raw observation schema mismatch")
+    expected_wall = float(observation["wall_sample_perf_counter"]) - float(observation["launch_wall_perf_counter"])
+    expected_cpu = (
+        float(observation["process_user_seconds_at_sample"])
+        + float(observation["process_system_seconds_at_sample"])
+        - float(observation["launch_process_user_plus_system_seconds"])
+    )
+    if not math.isclose(float(observation["observed_wall_seconds"]), expected_wall, rel_tol=0, abs_tol=1e-9):
+        raise RuntimeError("readiness observed wall is not monotonic wall elapsed")
+    if not math.isclose(float(observation["observed_aggregate_cpu_seconds"]), expected_cpu, rel_tol=0, abs_tol=1e-9):
+        raise RuntimeError("readiness observed CPU is not process user plus system elapsed")
+    recovery = payload["recovery_charges"]
+    validate_observed_readiness_recovery(recovery)
+    if not math.isclose(
+        float(recovery["current_readiness_observed_pre_outer_seal_active_wall_seconds"]),
+        expected_wall, rel_tol=0, abs_tol=1e-9,
+    ):
+        raise RuntimeError("readiness observed recovery wall/sample mismatch")
+    if not math.isclose(
+        float(recovery["current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds"]),
+        expected_cpu, rel_tol=0, abs_tol=1e-9,
+    ):
+        raise RuntimeError("readiness observed recovery CPU/sample mismatch")
+    if int(recovery["observed_pre_outer_seal_peak_rss_bytes"]) != int(observation["observed_peak_rss_bytes"]):
+        raise RuntimeError("readiness observed recovery RSS/sample mismatch")
+
+
+def write_readiness_resource_completion(
+    *, inner_paths: dict[str, Path], attempt_id: str,
+    authorization_sha256: str, launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+    reused_wall: float, reused_cpu: float,
+    output_path: Path = READINESS_RESOURCE_COMPLETION_PATH,
+) -> dict[str, Any]:
+    inner_hashes = prevalidate_readiness_inner_lifecycle(
+        inner_paths=inner_paths,
+        expected_attempt_id=attempt_id,
+        expected_authorization_sha256=authorization_sha256,
+    )
+    process = psutil.Process()
+    cpu = process.cpu_times()
+    peak_rss = max(launch_peak_rss, cal.process_peak_rss_bytes(process))
+    wall_sample = time.perf_counter()
+    observed_wall = wall_sample - launch_wall_started
+    observed_cpu = float(cpu.user + cpu.system) - launch_cpu_started
+    observation = {
+        "sampling_order": [
+            "process user/system CPU", "process peak RSS", "monotonic wall"
+        ],
+        "launch_wall_perf_counter": launch_wall_started,
+        "wall_sample_perf_counter": wall_sample,
+        "launch_process_user_plus_system_seconds": launch_cpu_started,
+        "process_user_seconds_at_sample": float(cpu.user),
+        "process_system_seconds_at_sample": float(cpu.system),
+        "observed_wall_seconds": observed_wall,
+        "observed_aggregate_cpu_seconds": observed_cpu,
+        "observed_peak_rss_bytes": peak_rss,
+    }
+    recovery = observed_readiness_recovery(
+        active_wall=observed_wall,
+        active_cpu=observed_cpu,
+        reused_wall=reused_wall,
+        reused_cpu=reused_cpu,
+        peak_rss=peak_rss,
+    )
+    payload = {
+        "schema_version": "exp648-readiness-resource-completion-v2",
+        "status": "complete-observed-launch-to-pre-outer-seal-sample-resource-evidence",
+        "attempt_id": attempt_id,
+        "authorization_sha256": authorization_sha256,
+        "inner_artifacts": inner_hashes,
+        "inner_lifecycle_complete_before_resource_sample": True,
+        "resource_boundary": "observed launch-to-pre-outer-seal samples captured after inner MLflow verification, tracked publication, completion manifest, final sealed attempt state, and all feasible non-self-referential inner hashing and lifecycle validation; not through function return, CLI output, interpreter teardown, or process exit",
+        "resource_observation": observation,
+        "measurement_semantics": {
+            "wall_seconds": "external monotonic perf-counter elapsed seconds",
+            "aggregate_cpu_seconds": "process user seconds plus process system seconds elapsed",
+            "peak_rss_bytes": "Linux process high-water RSS bytes sampled separately",
+            "wall_and_cpu_are_not_interchangeable_or_combined": True,
+            "post_sample_operations_included_in_observed_totals": False,
+        },
+        "recovery_charges": recovery,
+        "post_sample_operations": list(READINESS_POST_SAMPLE_OPERATIONS),
+    }
+    validate_readiness_resource_completion(
+        payload, inner_paths=inner_paths,
+        expected_attempt_id=attempt_id,
+        expected_authorization_sha256=authorization_sha256,
+        prevalidated_inner_hashes=inner_hashes,
+    )
+    _atomic_write(output_path, canonical_json_bytes(payload, pretty=True))
+    return payload
+
+
+def load_and_validate_readiness_resource_completion(
+    path: Path, *, inner_paths: dict[str, Path], expected_attempt_id: str,
+    expected_authorization_sha256: str,
+) -> dict[str, Any]:
+    raw = path.read_bytes()
+    payload = json.loads(raw)
+    if raw != canonical_json_bytes(payload, pretty=True):
+        raise RuntimeError("readiness resource completion is noncanonical")
+    validate_readiness_resource_completion(
+        payload, inner_paths=inner_paths,
+        expected_attempt_id=expected_attempt_id,
+        expected_authorization_sha256=expected_authorization_sha256,
+    )
+    return payload
+
+
+def validate_readiness_calibration_receipt(
+    payload: dict[str, Any], *, base_artifact: dict[str, Any] | None = None
+) -> None:
+    required = {
+        "schema_version", "status", "calibration_root", "calibration_authorization_sha256",
+        "scientific_runner_sha256", "resolved_config_sha256", "screen_workload_sha256",
+        "calibration_evidence_core_sha256", "environment_sha256", "mlflow_receipt_sha256",
+        "warmups", "timed_repeats", "warmup", "repeats", "component_resolution",
+        "resolved_screen_budgets", "recovery_charges", "full_fidelity",
+        "environment", "boundary",
+    }
+    if set(payload) != required:
+        raise RuntimeError("readiness calibration receipt key schema mismatch")
+    if payload["schema_version"] != "exp648-screen-readiness-calibration-v1" or payload["warmups"] != 1 or payload["timed_repeats"] != 3:
+        raise RuntimeError("readiness calibration repetition/schema mismatch")
+    repeats = payload["repeats"]
+    if len(repeats) != 3 or any(r.get("complete") is not True for r in repeats):
+        raise RuntimeError("readiness calibration repeats incomplete")
+    for repeat in repeats:
+        validate_complete_readiness_timing(repeat)
+        components = repeat.get("components", {})
+        if components.get("startup_model_loading", {}).get("units") != 1:
+            raise RuntimeError("readiness calibration startup workload mismatch")
+        if components.get("mining", {}).get("matched_pairs") != 64 or components["mining"].get("windows") != 128:
+            raise RuntimeError("readiness calibration mining workload mismatch")
+        if components.get("corpus_integrity_validation", {}).get("windows") != 128:
+            raise RuntimeError("readiness calibration replay workload mismatch")
+        for arm in ("control", "challenger"):
+            if components.get("training", {}).get(arm, {}).get("updates") != 20:
+                raise RuntimeError("readiness calibration training workload mismatch")
+            if components.get("checkpoint", {}).get(arm, {}).get("writes") != 1:
+                raise RuntimeError("readiness calibration checkpoint workload mismatch")
+            for width in (128, 256):
+                if components.get("transitions", {}).get(arm, {}).get(str(width), {}).get("cases") != 200:
+                    raise RuntimeError("readiness calibration transition workload mismatch")
+            for width in (64, 128, 256):
+                if components.get("rollouts", {}).get(arm, {}).get(str(width), {}).get("cases") != 20:
+                    raise RuntimeError("readiness calibration rollout workload mismatch")
+        infra = components.get("readiness_infrastructure", {})
+        if infra.get("atomic_checkpoint_writes_and_reload_verifications") != 2 or infra.get("atomic_attempt_ledger_writes") != 213 or infra.get("evaluation_cache_write_validate_units") != 7 or infra.get("atomic_evidence_writes") != 19 or set(infra.get("component_timing", {})) != {"atomic_checkpoints", "attempt_ledger", "evaluation_cache", "atomic_evidence"} or infra.get("complete") is not True:
+            raise RuntimeError("readiness calibration infrastructure workload mismatch")
+        replay = components.get("actual_source_replay", {})
+        if replay.get("complete_identities") != 64 or replay.get("steps_per_identity") != 256 or replay.get("complete_steps") != 16_384 or replay.get("actual_rollout_identity_batch_path") is not True or replay.get("complete") is not True:
+            raise RuntimeError("readiness calibration actual source replay workload mismatch")
+        probe = components.get("mlflow_probe", {})
+        if probe.get("complete") is not True or probe.get("artifact_count") != 6 or probe.get("remote_verified") is not True:
+            raise RuntimeError("readiness calibration MLflow probe workload mismatch")
+        if repeat.get("fidelity_reduced") is not False or repeat.get("scientific_accuracy_reported") is not False:
+            raise RuntimeError("readiness calibration repeat scientific/fidelity boundary mismatch")
+    warmup = payload.get("warmup", {})
+    validate_complete_readiness_timing(warmup)
+    warmup_replay = warmup.get("actual_source_replay", {})
+    if warmup_replay.get("complete_identities") != 64 or warmup_replay.get("complete_steps") != 16_384 or warmup_replay.get("complete") is not True:
+        raise RuntimeError("readiness calibration warmup source replay mismatch")
+    warmup_probe = payload.get("warmup", {}).get("mlflow_probe", {})
+    if warmup_probe.get("complete") is not True or warmup_probe.get("artifact_count") != 6 or warmup_probe.get("remote_verified") is not True:
+        raise RuntimeError("readiness calibration warmup MLflow probe mismatch")
+    warmup_infra = warmup.get("readiness_infrastructure", {})
+    if warmup_infra.get("complete") is not True:
+        raise RuntimeError("readiness calibration warmup infrastructure mismatch")
+    expected_budgets, expected_components = resolve_readiness_screen_budgets(
+        repeats, payload["warmup"]["launcher_timing"], payload["warmup"]
+    )
+    if payload["resolved_screen_budgets"] != expected_budgets or payload["component_resolution"] != expected_components:
+        raise RuntimeError("readiness calibration budgets/component rates do not recompute")
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        b = expected_budgets[resource]
+        if not math.isclose(b["soft_budget_seconds"], 1.25 * b["projected_seconds"] + b["explicit_measured_setup_headroom_seconds"], rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError("readiness calibration soft-budget formula mismatch")
+        if not math.isclose(b["hard_runaway_ceiling_seconds"], 1.5 * b["soft_budget_seconds"], rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError("readiness calibration hard-budget formula mismatch")
+    expected_boundary = {
+        "calibration_only": True,
+        "screen_roots_opened": False,
+        "confirmation_roots_opened": False,
+        "checked_independent_official_private_opened": False,
+        "scientific_accuracy_or_selection_reported": False,
+        "model_update_performed": False,
+        "fidelity_reduced": False,
+    }
+    if payload["full_fidelity"] is not True or payload["boundary"] != expected_boundary:
+        raise RuntimeError("readiness calibration fidelity/scientific boundary mismatch")
+    recovery = payload["recovery_charges"]
+    if not math.isclose(float(recovery.get("historical_completed_calibration_wall_seconds", 0)), 5900.399178599999, abs_tol=1e-9) or not math.isclose(float(recovery.get("historical_completed_calibration_aggregate_cpu_seconds", 0)), 24278.120608365, abs_tol=1e-9):
+        raise RuntimeError("historical calibration charge mismatch")
+    if recovery.get("scope") != "prepublication-provisional-snapshot-before-inner-publication":
+        raise RuntimeError("readiness calibration provisional recovery scope mismatch")
+    if recovery.get("prior_superseded_calibrations") != list(cal.PRIOR_SUPERSEDED_CALIBRATIONS):
+        raise RuntimeError("readiness calibration superseded evidence list mismatch")
+    for resource in ("wall", "aggregate_cpu"):
+        active = float(recovery.get(f"prepublication_provisional_active_{resource}_seconds", 0))
+        reused = float(recovery.get(f"prepublication_provisional_reused_{resource}_seconds_charged", 0))
+        prior = float(recovery.get(f"historical_prior_superseded_{resource}_seconds_charged", 0))
+        accepted = float(recovery.get(f"historical_accepted_active_{resource}_seconds", -1))
+        historical = float(recovery[f"historical_completed_calibration_{resource}_seconds"])
+        cumulative = float(recovery.get(f"prepublication_provisional_cumulative_{resource}_seconds", -1))
+        if min(active, reused, prior, accepted, cumulative) < 0 or not math.isclose(historical, prior + accepted, rel_tol=0, abs_tol=1e-6):
+            raise RuntimeError(f"readiness calibration historical decomposition {resource} mismatch")
+        if not math.isclose(cumulative, prior + accepted + active + reused, rel_tol=0, abs_tol=1e-6):
+            raise RuntimeError(f"readiness calibration cumulative {resource} charge mismatch")
+        if not math.isclose(float(recovery[f"prepublication_provisional_plus_historical_{resource}_seconds"]), historical + active + reused, rel_tol=0, abs_tol=1e-6):
+            raise RuntimeError(f"readiness calibration historical-plus-new {resource} mismatch")
+    if int(recovery.get("prepublication_provisional_process_peak_rss_bytes", 0)) <= 0:
+        raise RuntimeError("readiness calibration final process peak RSS missing")
+    if base_artifact is not None:
+        for repeat in repeats:
+            cal.validate_calibration_repeat(repeat, base_artifact["config_for_validation"])
+
+
+def _readiness_mlflow_expected(payload: dict[str, Any]) -> tuple[dict[str, str], dict[str, str], dict[str, float]]:
+    tags = {
+        "canonical_run_id": RUN_ID, "role": "screen-readiness-calibration-only",
+        "authorization_sha256": payload["calibration_authorization_sha256"],
+        "scientific_accuracy_reported": "false", "candidate_registration": "false",
+    }
+    params = {
+        "calibration_root": str(payload["calibration_root"]),
+        "scientific_runner_sha256": payload["scientific_runner_sha256"],
+        "screen_workload_sha256": payload["screen_workload_sha256"],
+        "calibration_evidence_core_sha256": payload["calibration_evidence_core_sha256"],
+    }
+    metrics = {
+        "projected_wall_seconds": float(payload["resolved_screen_budgets"]["wall_seconds"]["projected_seconds"]),
+        "projected_aggregate_cpu_seconds": float(payload["resolved_screen_budgets"]["aggregate_cpu_seconds"]["projected_seconds"]),
+        "peak_rss_guard_bytes": float(payload["resolved_screen_budgets"]["peak_rss_guard_bytes"]),
+    }
+    return tags, params, metrics
+
+
+def select_finished_or_supersede_partial_mlflow_runs(
+    client: Any, matches: Sequence[Any], *, reason: str
+) -> Any | None:
+    finished = [run for run in matches if run.info.status == "FINISHED"]
+    if len(finished) > 1:
+        raise RuntimeError(f"duplicate FINISHED {reason} MLflow runs")
+    terminal = {"FINISHED", "FAILED", "KILLED"}
+    active = {"RUNNING", "SCHEDULED"}
+    for run in matches:
+        if run.info.status == "FINISHED":
+            continue
+        if run.info.status in active:
+            client.set_terminated(run.info.run_id, status="KILLED")
+        client.set_tag(run.info.run_id, "superseded_for_recovery", "true")
+        client.set_tag(run.info.run_id, "supersession_reason", reason)
+        refreshed = client.get_run(run.info.run_id)
+        if refreshed.info.status not in terminal:
+            raise RuntimeError(f"superseded {reason} MLflow run remains active")
+    return finished[0] if finished else None
+
+
+def log_and_verify_readiness_calibration_mlflow(
+    payload: dict[str, Any], artifact_paths: Sequence[Path]
+) -> dict[str, Any]:
+    experiment_id = cal.configure_mlflow("sair-modular-arithmetic-wsl")
+    client = cal.mlflow.tracking.MlflowClient(tracking_uri=cal.tracking_uri())
+    tags, params, metrics = _readiness_mlflow_expected(payload)
+    matches = client.search_runs(
+        experiment_ids=[str(experiment_id)],
+        filter_string=(f"tags.canonical_run_id = '{RUN_ID}' and tags.role = 'screen-readiness-calibration-only'"),
+        max_results=50,
+    )
+    matches = [r for r in matches if r.data.tags.get("authorization_sha256") == tags["authorization_sha256"]]
+    finished = select_finished_or_supersede_partial_mlflow_runs(
+        client, matches, reason="readiness-calibration-exact-binding"
+    )
+    reused = finished is not None
+    if finished is not None:
+        run_id = finished.info.run_id
+    else:
+        with mlflow.start_run(run_name=f"{RUN_ID}-screen-readiness-calibration") as active:
+            run_id = active.info.run_id
+            mlflow.set_tags(tags)
+            mlflow.log_params(params)
+            mlflow.log_metrics(metrics)
+            for path in artifact_paths:
+                mlflow.log_artifact(str(path), artifact_path="readiness-calibration")
+    run = client.get_run(run_id)
+    if run.info.status != "FINISHED":
+        raise RuntimeError("readiness calibration MLflow run is not FINISHED")
+    custom_tags = {k: v for k, v in run.data.tags.items() if not k.startswith("mlflow.")}
+    if custom_tags != tags or dict(run.data.params) != params or set(run.data.metrics) != set(metrics):
+        raise RuntimeError("readiness calibration MLflow tags/params/metrics mismatch")
+    for key, expected in metrics.items():
+        if not math.isclose(float(run.data.metrics[key]), expected, rel_tol=1e-12, abs_tol=1e-9):
+            raise RuntimeError(f"readiness calibration MLflow metric mismatch: {key}")
+    verify_dir = SCRATCH_SCREEN_DIR / "readiness-calibration-mlflow" / run_id
+    artifacts = []
+    for source in artifact_paths:
+        downloaded = Path(client.download_artifacts(run_id, f"readiness-calibration/{source.name}", str(verify_dir)))
+        if sha256(downloaded) != sha256(source):
+            raise RuntimeError(f"readiness calibration MLflow artifact mismatch: {source.name}")
+        artifacts.append({"path": source.name, "sha256": sha256(source), "verified": True})
+    return {
+        "schema_version": "exp648-screen-readiness-calibration-mlflow-v1",
+        "run_id": run_id, "status": "FINISHED", "reused": reused,
+        "expected_tags": tags, "expected_params": params, "expected_metrics": metrics,
+        "exact_tags_verified": True, "exact_params_verified": True,
+        "exact_metrics_verified": True, "artifacts": artifacts,
+    }
+
+
+def verify_readiness_calibration_mlflow_at_launch(
+    payload: dict[str, Any], receipt: dict[str, Any], core: Path,
+    environment: Path, executed_config: Path,
+) -> None:
+    client = cal.mlflow.tracking.MlflowClient(tracking_uri=cal.tracking_uri())
+    run = client.get_run(receipt["run_id"])
+    tags, params, metrics = _readiness_mlflow_expected(payload)
+    custom_tags = {k: v for k, v in run.data.tags.items() if not k.startswith("mlflow.")}
+    if run.info.status != "FINISHED" or custom_tags != tags or dict(run.data.params) != params or set(run.data.metrics) != set(metrics):
+        raise PermissionError("fresh calibration MLflow launch requery schema mismatch")
+    if any(not math.isclose(float(run.data.metrics[k]), v, rel_tol=1e-12, abs_tol=1e-9) for k, v in metrics.items()):
+        raise PermissionError("fresh calibration MLflow launch metric mismatch")
+    verify_dir = SCRATCH_SCREEN_DIR / "launch-mlflow-reverify" / receipt["run_id"]
+    for source, remote_name in ((core, "calibration-core.json"), (environment, "environment.json"), (executed_config, "executed-config.yaml")):
+        downloaded = Path(client.download_artifacts(receipt["run_id"], f"readiness-calibration/{remote_name}", str(verify_dir)))
+        if sha256(downloaded) != sha256(source):
+            raise PermissionError(f"fresh calibration MLflow launch artifact mismatch: {remote_name}")
+
+
+def measure_readiness_infrastructure_unit(
+    repeat: dict[str, Any], output: Path, process: Any
+) -> dict[str, Any]:
+    measurement = cal.Measurement(process)
+    checkpoint_measurement = cal.Measurement(process)
+    checkpoint_receipts = {}
+    for arm in ("control", "challenger"):
+        source = ROOT / repeat["components"]["checkpoint"][arm]["path"]
+        state = load_file(source)
+        destination = output / arm / "atomic-reload.safetensors"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = destination.with_name(f".{destination.name}.{os.getpid()}.tmp")
+        save_file(state, temporary)
+        os.replace(temporary, destination)
+        reloaded = load_file(destination)
+        if cal.state_dict_sha256(state) != cal.state_dict_sha256(reloaded):
+            raise RuntimeError("readiness calibration atomic checkpoint reload mismatch")
+        checkpoint_receipts[arm] = {"sha256": sha256(destination), "state_dict_sha256": cal.state_dict_sha256(reloaded)}
+    checkpoint_timing = checkpoint_measurement.stop().payload()
+    ledger_measurement = cal.Measurement(process)
+    ledger_dir = output / "ledger"
+    for index in range(213):
+        _atomic_write(ledger_dir / "attempt-state.json", canonical_json_bytes({
+            "schema_version": "exp648-calibration-ledger-work-v1", "paired_update_or_unit": index,
+            "checkpoint_hashes": checkpoint_receipts, "complete": index == 212,
+        }, pretty=True))
+    ledger_timing = ledger_measurement.stop().payload()
+    cache_measurement = cal.Measurement(process)
+    cases = {"state": [0, 1], "target": [0, 1], "quotient": [0, 0], "modulus": [3, 3]}
+    result = {
+        "cases": 2, "exact_accuracy": 1.0, "quotient_accuracy": 1.0,
+        "valid_residue_rate": 1.0, "exact_vector": [True, True],
+        "output_sha256": sha256_bytes(canonical_json_bytes([0, 1])),
+        "predictions": [0, 1], "quotient_predictions": [0, 0],
+    }
+    for index in range(7):
+        cache = output / "evaluation-cache" / f"unit-{index}.json"
+        record = {"unit": index, "cases": cases, "results": {"control": result, "challenger": result}}
+        _atomic_write(cache, canonical_json_bytes(record, pretty=True))
+        loaded = json.loads(cache.read_text(encoding="utf-8"))
+        validate_evaluation_results(unit="transition-128", width=128, cases=loaded["cases"], results=loaded["results"])
+    cache_timing = cache_measurement.stop().payload()
+    evidence_measurement = cal.Measurement(process)
+    for index in range(19):
+        _atomic_write(output / "evidence" / f"artifact-{index}.json", canonical_json_bytes({"index": index, "checkpoint_hashes": checkpoint_receipts}, pretty=True))
+    evidence_timing = evidence_measurement.stop().payload()
+    timing = measurement.stop().payload()
+    return {
+        "atomic_checkpoint_writes_and_reload_verifications": 2,
+        "atomic_attempt_ledger_writes": 213,
+        "evaluation_cache_write_validate_units": 7,
+        "atomic_evidence_writes": 19,
+        "component_timing": {"atomic_checkpoints": checkpoint_timing, "attempt_ledger": ledger_timing, "evaluation_cache": cache_timing, "atomic_evidence": evidence_timing},
+        "checkpoint_receipts": checkpoint_receipts,
+        "timing": timing, "complete": True,
+    }
+
+
+def measure_actual_source_replay_unit(
+    experiment: Any, output: Path, process: Any
+) -> dict[str, Any]:
+    artifacts = _read_data_artifacts()
+    identities_payload = artifacts["identity"]["identities"][:64]
+    expected = artifacts["trajectory"]["trajectories"][:64]
+    identities = [cal.Identity(
+        int(row["identity_index"]), int(row["multiplier"]),
+        int(row["multiplicand"]), int(row["modulus"]),
+    ) for row in identities_payload]
+    source_model = experiment.load_verified_models_and_optimizers(20)[0].eval()
+    measurement = cal.Measurement(process)
+    observed = []
+    for start in range(0, 64, 32):
+        rows = cal.rollout_identity_batch(source_model, experiment.exp300, identities[start:start + 32], experiment.guard)
+        observed.extend(trajectory_record_payload(row) for row in rows)
+    timing = measurement.stop().payload()
+    if canonical_json(observed) != canonical_json(expected):
+        raise RuntimeError("readiness calibration actual source replay mismatch")
+    payload = {
+        "schema_version": "exp648-readiness-source-replay-v1",
+        "complete_identities": 64, "steps_per_identity": 256, "complete_steps": 64 * 256,
+        "identity_sha256": sha256_bytes(canonical_json_bytes(identities_payload)),
+        "trajectory_sha256": sha256_bytes(canonical_json_bytes(observed)),
+        "actual_rollout_identity_batch_path": True, "complete": True, "timing": timing,
+    }
+    _atomic_write(output / "source-replay.json", canonical_json_bytes(payload, pretty=True))
+    return payload
+
+
+def measure_readiness_mlflow_probe(
+    *, authorization_sha256: str, unit: str, output: Path, process: Any
+) -> dict[str, Any]:
+    output.mkdir(parents=True, exist_ok=True)
+    artifacts = []
+    for index in range(6):
+        path = output / f"probe-{index}.json"
+        _atomic_write(path, canonical_json_bytes({"unit": unit, "index": index}, pretty=True))
+        artifacts.append(path)
+    measurement = cal.Measurement(process)
+    experiment_id = cal.configure_mlflow("sair-modular-arithmetic-wsl")
+    with mlflow.start_run(run_name=f"{RUN_ID}-readiness-probe-{unit}") as active:
+        run_id = active.info.run_id
+        mlflow.set_tags({"canonical_run_id": RUN_ID, "role": "readiness-calibration-mlflow-probe", "authorization_sha256": authorization_sha256})
+        mlflow.log_params({"unit": unit, "artifact_count": 6})
+        mlflow.log_metrics({"probe_resource_only": 1.0})
+        for path in artifacts:
+            mlflow.log_artifact(str(path), artifact_path="probe")
+    client = cal.mlflow.tracking.MlflowClient(tracking_uri=cal.tracking_uri())
+    run = client.get_run(run_id)
+    if run.info.status != "FINISHED":
+        raise RuntimeError("readiness calibration MLflow probe did not finish")
+    verify = output / "download"
+    for path in artifacts:
+        downloaded = Path(client.download_artifacts(run_id, f"probe/{path.name}", str(verify)))
+        if sha256(downloaded) != sha256(path):
+            raise RuntimeError("readiness calibration MLflow probe artifact mismatch")
+    timing = measurement.stop().payload()
+    client.set_tag(run_id, "superseded_for_calibration_probe_only", "true")
+    return {"complete": True, "run_id": run_id, "artifact_count": 6, "remote_verified": True, "timing": timing}
+
+
+def execute_readiness_calibration(
+    authorization: dict[str, Any], *, launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+) -> dict[str, Any]:
+    root_seed = int(authorization["calibration_root"])
+    auth_sha = authorization["authorization_sha256"]
+    attempt_id = f"cal-{auth_sha[:16]}"
+    attempt = SCRATCH_SCREEN_DIR / "readiness-calibration-attempts" / attempt_id
+    if attempt.exists():
+        state_path = attempt / "attempt-state.json"
+        if state_path.is_file():
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            if state.get("authorization_sha256") != auth_sha:
+                raise RuntimeError("stale readiness calibration attempt binding mismatch")
+    attempt.mkdir(parents=True, exist_ok=True)
+    _atomic_write(attempt / "attempt-state.json", canonical_json_bytes({
+        "schema_version": "exp648-readiness-calibration-attempt-v1",
+        "attempt_id": attempt_id, "authorization_sha256": auth_sha,
+        "phase": "authorized", "complete": False,
+    }, pretty=True))
+    config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    config["resource_protocol"]["calibration"]["root"] = root_seed
+    config["seed_roles"]["calibration_root"]["seed"] = root_seed
+    config_path = attempt / "executed-config.yaml"
+    _atomic_write(config_path, yaml.safe_dump(config, sort_keys=False).encode("utf-8"))
+
+    original_root = cal.CALIBRATION_ROOT
+    original_allowed = cal.ALLOWED_MODE_ROOTS["calibration"]
+    original_preserve = cal.preserve_executed_config
+    def preserve_local(source: Path, raw_output: Path, tracked_output_directory: Path | None = None) -> dict[str, Any]:
+        payload = source.read_bytes()
+        raw = raw_output / "executed-config.yaml"
+        tracked = attempt / "evidence" / "executed-config.yaml"
+        _atomic_write(raw, payload); _atomic_write(tracked, payload)
+        digest = sha256_bytes(payload)
+        return {"sha256": digest, "bytes": len(payload), "raw_path": raw.relative_to(ROOT).as_posix(), "raw_sha256": digest, "tracked_path": tracked.relative_to(ROOT).as_posix(), "tracked_sha256": digest, "raw_tracked_byte_identical": True, "preserved_before_root_authorization": True}
+    try:
+        cal.CALIBRATION_ROOT = root_seed
+        cal.ALLOWED_MODE_ROOTS["calibration"] = frozenset((root_seed,))
+        cal.preserve_executed_config = preserve_local
+        experiment = cal.CalibrationExperiment(config_path, attempt / "raw")
+        setup_process = psutil.Process()
+        setup_cpu = setup_process.cpu_times()
+        prewarmup_launcher = {
+            "wall_seconds": time.perf_counter() - launch_wall_started,
+            "aggregate_cpu_seconds": float(setup_cpu.user + setup_cpu.system) - launch_cpu_started,
+            "peak_rss_bytes": max(launch_peak_rss, cal.process_peak_rss_bytes(setup_process)),
+            "captured_before_warmup_and_repeats": True,
+        }
+        base = experiment.run()
+    finally:
+        cal.CALIBRATION_ROOT = original_root
+        cal.ALLOWED_MODE_ROOTS["calibration"] = original_allowed
+        cal.preserve_executed_config = original_preserve
+    repeats = copy.deepcopy(list(base["timed_repeats"]))
+    warmup = copy.deepcopy(base["warmup"])
+    warmup["base_total_timing_before_readiness_additions"] = copy.deepcopy(
+        warmup["total_timing"]
+    )
+    warmup_replay = measure_actual_source_replay_unit(
+        experiment, attempt / "readiness-source-replay" / "warmup", psutil.Process()
+    )
+    warmup_mlflow_probe = measure_readiness_mlflow_probe(
+        authorization_sha256=auth_sha, unit="warmup", output=attempt / "mlflow-probes" / "warmup", process=psutil.Process()
+    )
+    warmup_infrastructure = measure_readiness_infrastructure_unit(
+        warmup, attempt / "readiness-infrastructure" / "warmup", psutil.Process()
+    )
+    warmup["actual_source_replay"] = warmup_replay
+    warmup["mlflow_probe"] = warmup_mlflow_probe
+    warmup["readiness_infrastructure"] = warmup_infrastructure
+    warmup["launcher_timing"] = prewarmup_launcher
+    warmup["total_timing"] = aggregate_readiness_timing(
+        warmup["base_total_timing_before_readiness_additions"],
+        warmup_replay["timing"],
+        warmup_mlflow_probe["timing"],
+        warmup_infrastructure["timing"],
+    )
+    validate_complete_readiness_timing(warmup)
+    for index, repeat in enumerate(repeats, start=1):
+        repeat["base_total_timing_before_readiness_additions"] = copy.deepcopy(
+            repeat["total_timing"]
+        )
+        repeat["components"]["actual_source_replay"] = measure_actual_source_replay_unit(
+            experiment, attempt / "readiness-source-replay" / f"repeat-{index}", psutil.Process()
+        )
+        repeat["components"]["mlflow_probe"] = measure_readiness_mlflow_probe(
+            authorization_sha256=auth_sha, unit=f"repeat-{index}",
+            output=attempt / "mlflow-probes" / f"repeat-{index}", process=psutil.Process()
+        )
+        infrastructure = measure_readiness_infrastructure_unit(
+            repeat, attempt / "readiness-infrastructure" / f"repeat-{index}", psutil.Process()
+        )
+        repeat["components"]["readiness_infrastructure"] = infrastructure
+        repeat["total_timing"] = aggregate_readiness_timing(
+            repeat["base_total_timing_before_readiness_additions"],
+            repeat["components"]["actual_source_replay"]["timing"],
+            repeat["components"]["mlflow_probe"]["timing"],
+            infrastructure["timing"],
+        )
+        validate_complete_readiness_timing(repeat)
+        cal.validate_calibration_repeat(repeat, config)
+    launcher = prewarmup_launcher
+    budgets, component_resolution = resolve_readiness_screen_budgets(
+        repeats, launcher, warmup
+    )
+    environment = base["environment"]
+    environment_path = attempt / "environment.json"
+    _atomic_write(environment_path, canonical_json_bytes(environment, pretty=True))
+    base_recovery = copy.deepcopy(base["recovery"])
+    final_process = psutil.Process()
+    final_cpu = final_process.cpu_times()
+    active_wall = time.perf_counter() - launch_wall_started
+    active_cpu = float(final_cpu.user + final_cpu.system) - launch_cpu_started
+    final_peak_rss = max(launch_peak_rss, cal.process_peak_rss_bytes(final_process))
+    historical_wall = 5900.399178599999
+    historical_cpu = 24278.120608365
+    prior_wall = float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
+    prior_cpu = float(
+        cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
+    )
+    reused_wall = float(base_recovery["reused_wall_seconds_charged"])
+    reused_cpu = float(base_recovery["reused_aggregate_cpu_seconds_charged"])
+    recovery = {
+        "scope": "prepublication-provisional-snapshot-before-inner-publication",
+        "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
+        "base_calibration_experiment_snapshot_provisional": base_recovery,
+        "prior_superseded_calibrations": list(cal.PRIOR_SUPERSEDED_CALIBRATIONS),
+        "historical_completed_calibration_wall_seconds": historical_wall,
+        "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
+        "historical_prior_superseded_wall_seconds_charged": prior_wall,
+        "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
+        "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
+        "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+        "prepublication_provisional_active_wall_seconds": active_wall,
+        "prepublication_provisional_active_aggregate_cpu_seconds": active_cpu,
+        "prepublication_provisional_reused_wall_seconds_charged": reused_wall,
+        "prepublication_provisional_reused_aggregate_cpu_seconds_charged": reused_cpu,
+        "prepublication_provisional_cumulative_wall_seconds": historical_wall + active_wall + reused_wall,
+        "prepublication_provisional_cumulative_aggregate_cpu_seconds": historical_cpu + active_cpu + reused_cpu,
+        "prepublication_provisional_plus_historical_wall_seconds": historical_wall + active_wall + reused_wall,
+        "prepublication_provisional_plus_historical_aggregate_cpu_seconds": historical_cpu + active_cpu + reused_cpu,
+        "prepublication_provisional_process_peak_rss_bytes": final_peak_rss,
+        "active_snapshot_boundary": "after complete warmup and three repeats including actual replay, MLflow probes, readiness infrastructure, setup, and launcher; before immutable evidence publication",
+    }
+    boundary = {
+        "calibration_only": True,
+        "screen_roots_opened": False,
+        "confirmation_roots_opened": False,
+        "checked_independent_official_private_opened": False,
+        "scientific_accuracy_or_selection_reported": False,
+        "model_update_performed": False,
+        "fidelity_reduced": False,
+    }
+    core = {
+        "schema_version": "exp648-screen-readiness-calibration-core-v1",
+        "authorization": authorization, "attempt_id": attempt_id,
+        "warmup": warmup, "repeats": repeats,
+        "component_resolution": component_resolution,
+        "resolved_screen_budgets": budgets, "environment": environment,
+        "recovery_charges": recovery,
+        "full_fidelity": True, "boundary": boundary,
+    }
+    core_path = attempt / "calibration-core.json"
+    _atomic_write(core_path, canonical_json_bytes(core, pretty=True))
+    core_sha = sha256(core_path)
+    receipt_stub = {
+        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "status": "complete-non-scientific-full-fidelity-resource-calibration",
+        "calibration_root": root_seed, "calibration_authorization_sha256": auth_sha,
+        "scientific_runner_sha256": sha256(Path(__file__)),
+        "resolved_config_sha256": sha256(CONFIG_PATH),
+        "screen_workload_sha256": sha256_bytes(canonical_json_bytes(screen_workload_payload())),
+        "calibration_evidence_core_sha256": core_sha,
+        "environment_sha256": sha256(environment_path), "mlflow_receipt_sha256": "pending",
+        "warmups": 1, "timed_repeats": 3,
+        "warmup": warmup,
+        "repeats": repeats, "component_resolution": component_resolution,
+        "resolved_screen_budgets": budgets, "recovery_charges": recovery,
+        "full_fidelity": True, "environment": environment, "boundary": boundary,
+    }
+    validate_core_receipt_release_equality(core, receipt_stub)
+    # MLflow keys use the immutable core, not the pending final receipt.
+    mlflow_receipt = log_and_verify_readiness_calibration_mlflow(receipt_stub, [core_path, environment_path, config_path])
+    mlflow_path = attempt / "mlflow.json"
+    _atomic_write(mlflow_path, canonical_json_bytes(mlflow_receipt, pretty=True))
+    receipt = {**receipt_stub, "mlflow_receipt_sha256": sha256(mlflow_path)}
+    validate_readiness_calibration_receipt(receipt)
+    receipt_path = attempt / "readiness-calibration.json"
+    _atomic_write(receipt_path, canonical_json_bytes(receipt, pretty=True))
+    for source, name in ((receipt_path, "readiness-calibration.json"), (core_path, "readiness-calibration-core.json"), (environment_path, "readiness-calibration-environment.json"), (mlflow_path, "readiness-calibration-mlflow.json"), (config_path, "readiness-calibration-executed-config.yaml")):
+        _atomic_write(TRACKED_SCREEN_DIR / name, source.read_bytes())
+    manifest = {
+        "schema_version": "exp648-readiness-calibration-completion-v1",
+        "attempt_id": attempt_id, "authorization_sha256": auth_sha,
+        "artifacts": {name: sha256(TRACKED_SCREEN_DIR / name) for name in ("readiness-calibration.json", "readiness-calibration-core.json", "readiness-calibration-environment.json", "readiness-calibration-mlflow.json", "readiness-calibration-executed-config.yaml")},
+        "complete": True,
+    }
+    _atomic_write(TRACKED_SCREEN_DIR / "readiness-calibration-completion.json", canonical_json_bytes(manifest, pretty=True))
+    final_attempt_state = {
+        "schema_version": "exp648-readiness-calibration-attempt-v1", "attempt_id": attempt_id,
+        "authorization_sha256": auth_sha, "phase": "sealed", "complete": True,
+        "completion_manifest_sha256": sha256(TRACKED_SCREEN_DIR / "readiness-calibration-completion.json"),
+    }
+    final_attempt_state_bytes = canonical_json_bytes(final_attempt_state, pretty=True)
+    _atomic_write(attempt / "attempt-state.json", final_attempt_state_bytes)
+    tracked_attempt_state = TRACKED_SCREEN_DIR / "readiness-calibration-attempt-state.json"
+    _atomic_write(tracked_attempt_state, final_attempt_state_bytes)
+    _atomic_write(
+        TRACKED_SCREEN_DIR / "readiness-calibration-launch-ledger.json",
+        final_attempt_state_bytes,
+    )
+    inner_paths = {
+        name: TRACKED_SCREEN_DIR / name
+        for name in (
+            "readiness-calibration.json",
+            "readiness-calibration-core.json",
+            "readiness-calibration-environment.json",
+            "readiness-calibration-mlflow.json",
+            "readiness-calibration-executed-config.yaml",
+            "readiness-calibration-completion.json",
+            "readiness-calibration-attempt-state.json",
+            "readiness-calibration-launch-ledger.json",
+        )
+    }
+    # All feasible inner hashing and lifecycle checks happen before the sample.
+    # The remaining explicitly enumerated operations are outside observed totals.
+    write_readiness_resource_completion(
+        inner_paths=inner_paths,
+        attempt_id=attempt_id,
+        authorization_sha256=auth_sha,
+        launch_wall_started=launch_wall_started,
+        launch_cpu_started=launch_cpu_started,
+        launch_peak_rss=launch_peak_rss,
+        reused_wall=reused_wall,
+        reused_cpu=reused_cpu,
+    )
+    return receipt
+
+
+def screen_readiness_binding(approved_base_commit: str) -> dict[str, Any]:
+    config_rel = CONFIG_PATH.relative_to(ROOT).as_posix()
+    config = yaml.safe_load(_git_blob(approved_base_commit, config_rel))
+    dependency_manifest = config["executable_dependency_sources"]
+    dependency_hash = dependency_manifest["manifest_sha256"]
+    scientific_hash, resource_hash = _base_protocol_hashes(approved_base_commit, config)
+    calibration_rel = SCREEN_READINESS_CALIBRATION_PATH.relative_to(ROOT).as_posix()
+    calibration = _git_json(approved_base_commit, calibration_rel)
+    resource_completion_rel = READINESS_RESOURCE_COMPLETION_PATH.relative_to(ROOT).as_posix()
+    resource_completion = _git_json(approved_base_commit, resource_completion_rel)
+    scaffold = _git_json(
+        approved_base_commit,
+        READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(ROOT).as_posix(),
+    )
+    frozen_paths = {
+        "data/identity-manifest.json": DATA_DIR / "identity-manifest.json",
+        "data/trajectory-manifest.json.gz": DATA_DIR / "trajectory-manifest.json.gz",
+        "data/paired-corpus.json.gz": DATA_DIR / "paired-corpus.json.gz",
+        "data/corpus-manifest.json": DATA_DIR / "corpus-manifest.json",
+        "evidence/run.json": TRACKED_CORPUS_DIR / "run.json",
+        "evidence/environment.json": TRACKED_CORPUS_DIR / "environment.json",
+        "evidence/integrity.json": TRACKED_CORPUS_DIR / "integrity.json",
+        "evidence/mlflow.json": TRACKED_CORPUS_DIR / "mlflow.json",
+    }
+    frozen_hashes = {
+        name: _git_blob_sha256(approved_base_commit, path.relative_to(ROOT).as_posix())
+        for name, path in frozen_paths.items()
+    }
+    runner_rel = Path(__file__).resolve().relative_to(ROOT).as_posix()
+    return {
+        "approved_base_commit": approved_base_commit,
+        "corpus_manifest_sha256": frozen_hashes["data/corpus-manifest.json"],
+        "historical_corpus_commit": scaffold["historical_corpus_commit"],
+        "frozen_corpus_file_sha256": frozen_hashes,
+        "corpus_provenance_amendment_sha256": _git_blob_sha256(approved_base_commit, (TRACKED_CORPUS_DIR / "provenance-amendment.json").relative_to(ROOT).as_posix()),
+        "scientific_runner_sha256": _git_blob_sha256(approved_base_commit, runner_rel),
+        "scientific_test_sha256": _git_blob_sha256(approved_base_commit, "tests/test_exp648_structured_trajectory_scientific.py"),
+        "calibration_runner_sha256": _git_blob_sha256(approved_base_commit, CALIBRATION_RUNNER.relative_to(ROOT).as_posix()),
+        "resolved_config_sha256": _git_blob_sha256(approved_base_commit, config_rel),
+        "executed_config_sha256": _git_blob_sha256(approved_base_commit, EXECUTED_CONFIG_PATH.relative_to(ROOT).as_posix()),
+        "screen_workload_sha256": calibration["screen_workload_sha256"],
+        "readiness_calibration_sha256": _git_blob_sha256(approved_base_commit, calibration_rel),
+        "readiness_calibration_root": int(calibration["calibration_root"]),
+        "readiness_calibration_core_sha256": calibration["calibration_evidence_core_sha256"],
+        "readiness_calibration_environment_sha256": calibration["environment_sha256"],
+        "readiness_calibration_mlflow_receipt_sha256": calibration["mlflow_receipt_sha256"],
+        "readiness_resource_completion_sha256": _git_blob_sha256(approved_base_commit, resource_completion_rel),
+        "readiness_observed_recovery_sha256": sha256_bytes(
+            canonical_json_bytes(resource_completion["recovery_charges"])
+        ),
+        "source_checkpoint_sha256": config["source_checkpoint_sha256"],
+        "source_model": copy.deepcopy(config["source_model"]),
+        "dependency_manifest_sha256": dependency_hash,
+        "dependency_sources": copy.deepcopy(dependency_manifest["sources"]),
+        "preregistration_sha256": _git_blob_sha256(approved_base_commit, PREREGISTRATION_PATH.relative_to(ROOT).as_posix()),
+        "scientific_protocol_sha256": scientific_hash,
+        "resource_protocol_sha256": resource_hash,
+        "exact_teacher_source_sha256": _base_exact_teacher_hash(approved_base_commit),
+        "evaluator_sha256": _base_evaluator_hash(approved_base_commit, dependency_hash),
+        "runtime": {
+            "torch_threads": int(config["training"]["torch_threads"]),
+            "torch_interop_threads": int(config["training"]["torch_interop_threads"]),
+            "deterministic_algorithms": bool(config["training"]["deterministic_algorithms"]),
+        },
+    }
+
+
+def expected_screen_authorization_payload(
+    corpus_manifest_sha256: str, *, binding: dict[str, Any] | None = None
+) -> dict[str, Any]:
     if len(corpus_manifest_sha256) != 64:
         raise ValueError("corpus manifest hash must be SHA-256")
+    if binding is None:
+        raise ValueError("screen authorization requires an explicit approved-base binding")
+    if binding.get("corpus_manifest_sha256") != corpus_manifest_sha256:
+        raise ValueError("authorization binding corpus hash mismatch")
     return {
         "schema_version": "exp648-screen-judge-authorization-v1",
         "experiment_id": RUN_ID,
         "decision": "authorized-after-corpus-freeze",
         "corpus_manifest_sha256": corpus_manifest_sha256,
-        "scientific_runner_sha256": sha256(Path(__file__)),
+        "screen_readiness_binding": binding,
+        "screen_readiness_binding_sha256": sha256_bytes(canonical_json_bytes(binding)),
         "screen_training_root": SCREEN_TRAINING_ROOT,
         "screen_evaluation_root": SCREEN_EVALUATION_ROOT,
         "confirmation_authorized": False,
@@ -339,20 +1902,43 @@ def expected_screen_authorization_payload(corpus_manifest_sha256: str) -> dict[s
     }
 
 
-def verify_screen_authorization(path: Path = SCREEN_AUTHORIZATION_PATH) -> dict[str, Any]:
-    # Missing is checked before reading the corpus manifest or touching a root.
-    if not path.is_file():
-        raise PermissionError("EXP-648 screen Judge authorization manifest is absent")
-    manifest_path = DATA_DIR / "corpus-manifest.json"
-    if not manifest_path.is_file():
-        raise PermissionError("EXP-648 frozen corpus manifest is absent")
-    expected = expected_screen_authorization_payload(sha256(manifest_path))
+def verify_screen_authorization(
+    path: Path = SCREEN_AUTHORIZATION_PATH, *, committed_bytes: bytes | None = None,
+    launch: bool = True,
+) -> dict[str, Any]:
+    # Authenticate the small canonical committed object before expensive binding reads.
+    observed, raw = _read_authenticated_committed_manifest(
+        path, expected_schema="exp648-screen-judge-authorization-v1",
+        committed_bytes=committed_bytes,
+    )
+    required_keys = {
+        "schema_version", "experiment_id", "decision", "corpus_manifest_sha256",
+        "screen_readiness_binding", "screen_readiness_binding_sha256",
+        "screen_training_root", "screen_evaluation_root", "confirmation_authorized",
+        "checked_independent_official_authorized",
+    }
+    if set(observed) != required_keys:
+        raise PermissionError("screen authorization key schema mismatch")
+    if observed.get("screen_readiness_binding_sha256") != sha256_bytes(
+        canonical_json_bytes(observed.get("screen_readiness_binding"))
+    ):
+        raise PermissionError("screen authorization embedded binding hash mismatch")
+    embedded = observed.get("screen_readiness_binding", {})
+    base = str(embedded.get("approved_base_commit", ""))
+    binding = screen_readiness_binding(base)
+    expected = expected_screen_authorization_payload(
+        binding["corpus_manifest_sha256"], binding=binding
+    )
     expected_bytes = canonical_json_bytes(expected, pretty=True)
-    observed_bytes = path.read_bytes()
+    observed_bytes = raw
     expected_hash = sha256_bytes(expected_bytes)
     observed_hash = sha256_bytes(observed_bytes)
     if observed_hash != expected_hash or observed_bytes != expected_bytes:
         raise PermissionError("EXP-648 screen Judge authorization hash mismatch")
+    auth_relative = path.resolve().relative_to(ROOT).as_posix()
+    validate_one_child_authorization_lifecycle(
+        auth_relative=auth_relative, approved_base_commit=base, launch=launch
+    )
     return expected
 
 
@@ -389,6 +1975,25 @@ def authorize_root(
             f"EXP-648 mode {normalized!r} permits only {sorted(allowed)}, not {seed}"
         )
     return seed
+
+
+def reauthorize_screen_root(
+    mode: str, root_seed: int, authorization: dict[str, Any], path: Path
+) -> int:
+    normalized = str(mode).strip().lower()
+    if normalized not in ("screen-training", "screen-evaluation"):
+        raise PermissionError("lightweight screen reauthorization accepts one exact role")
+    expected_bytes = canonical_json_bytes(authorization, pretty=True)
+    if not path.is_file() or path.read_bytes() != expected_bytes:
+        raise PermissionError("screen authorization bytes changed after verification")
+    expected_seed = (
+        int(authorization["screen_training_root"])
+        if normalized == "screen-training"
+        else int(authorization["screen_evaluation_root"])
+    )
+    if int(root_seed) != expected_seed:
+        raise PermissionError(f"screen {normalized} root mismatch")
+    return expected_seed
 
 
 def generate_identities(
@@ -1270,12 +2875,26 @@ def _load_corpus_pairs() -> list[dict[str, Any]]:
 
 
 def ordered_batch_windows(
-    pairs: Sequence[dict[str, Any]], update_index: int
+    pairs: Sequence[dict[str, Any]], update_index: int, *, order: Sequence[int] | None = None
 ) -> list[dict[str, Any]]:
     if len(pairs) != CORPUS_TARGET_PAIRS:
         raise RuntimeError("screen requires the complete frozen 512-pair corpus")
-    selected = [pairs[(update_index * 8 + offset) % len(pairs)] for offset in range(8)]
+    indices = list(range(len(pairs))) if order is None else list(order)
+    if len(indices) != len(pairs) or sorted(indices) != list(range(len(pairs))):
+        raise RuntimeError("screen pair order must be a complete permutation")
+    selected = [pairs[indices[(update_index * 8 + offset) % len(pairs)]] for offset in range(8)]
     return [pair["failure"] for pair in selected] + [pair["success"] for pair in selected]
+
+
+def frozen_root_pair_order(pair_count: int, corpus_manifest_sha256: str) -> list[int]:
+    if pair_count != CORPUS_TARGET_PAIRS:
+        raise RuntimeError("screen order requires frozen pair count")
+    rng = random.Random(
+        cal.derive_seed(SCREEN_TRAINING_ROOT, f"frozen-pair-order:{corpus_manifest_sha256}")
+    )
+    order = list(range(pair_count))
+    rng.shuffle(order)
+    return order
 
 
 def screen_training_update(
@@ -1354,11 +2973,13 @@ def screen_training_update(
 
 
 def generate_screen_transition_cases(
-    root_seed: int, width: int, count: int, authorization_path: Path
+    root_seed: int, width: int, count: int, authorization_path: Path,
+    authorization: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    authorize_root(
-        "screen-evaluation", root_seed, authorization_path=authorization_path
-    )
+    if authorization is None:
+        authorize_root("screen-evaluation", root_seed, authorization_path=authorization_path)
+    else:
+        reauthorize_screen_root("screen-evaluation", root_seed, authorization, authorization_path)
     rng = random.Random(cal.derive_seed(root_seed, f"transition:{width}:{count}"))
     primes = [cal._prime_in_band(rng, width, index % 4) for index in range(16)]
     payload = {key: [] for key in ("state", "multiplicand", "modulus", "input_bit", "target", "quotient")}
@@ -1381,11 +3002,13 @@ def generate_screen_transition_cases(
 
 
 def generate_screen_rollout_cases(
-    root_seed: int, width: int, count: int, authorization_path: Path
+    root_seed: int, width: int, count: int, authorization_path: Path,
+    authorization: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    authorize_root(
-        "screen-evaluation", root_seed, authorization_path=authorization_path
-    )
+    if authorization is None:
+        authorize_root("screen-evaluation", root_seed, authorization_path=authorization_path)
+    else:
+        reauthorize_screen_root("screen-evaluation", root_seed, authorization, authorization_path)
     rng = random.Random(cal.derive_seed(root_seed, f"rollout:{width}:{count}"))
     primes = [cal._prime_in_band(rng, width, index % 4) for index in range(16)]
     moduli = [rng.choice(primes) for _ in range(count)]
@@ -1436,6 +3059,8 @@ def evaluate_transitions(model: Any, width: int, cases: dict[str, Any], exp300: 
         "valid_residue_rate": sum(valid) / len(valid),
         "exact_vector": exact,
         "output_sha256": sha256_bytes(canonical_json_bytes(predictions)),
+        "predictions": predictions,
+        "quotient_predictions": quotient_predictions,
     }
 
 
@@ -1450,6 +3075,8 @@ def evaluate_rollouts(model: Any, width: int, cases: dict[str, Any], exp300: Any
     teacher = [0] * len(multiplier)
     first_errors: list[int | None] = [None] * len(multiplier)
     invalid = [False] * len(multiplier)
+    prediction_trace = [list(state)]
+    teacher_trace = [list(teacher)]
     for position in range(width):
         bits = [(value >> (width - 1 - position)) & 1 for value in multiplier]
         logits, _ = model(exp300.features(state, multiplicand, moduli, bits, width))
@@ -1466,6 +3093,8 @@ def evaluate_rollouts(model: Any, width: int, cases: dict[str, Any], exp300: Any
             if first_errors[index] is None and prediction != expected:
                 first_errors[index] = position
             invalid[index] = invalid[index] or prediction >= modulus
+        prediction_trace.append(list(state))
+        teacher_trace.append(list(teacher))
     exact = [left == right for left, right in zip(state, teacher, strict=True)]
     clipped = [width + 1 if value is None else value for value in first_errors]
     return {
@@ -1475,29 +3104,569 @@ def evaluate_rollouts(model: Any, width: int, cases: dict[str, Any], exp300: Any
         "mean_clipped_first_error_index": sum(clipped) / len(clipped),
         "invalid_rollout_rate": sum(invalid) / len(invalid),
         "output_sha256": sha256_bytes(canonical_json_bytes(state)),
+        "predictions": state,
+        "teacher_targets": teacher,
+        "first_error_indices": clipped,
+        "any_intermediate_invalid_vector": invalid,
+        "prediction_trace": prediction_trace,
+        "teacher_trace": teacher_trace,
+    }
+
+
+class ScreenGuard:
+    """Independent wall/aggregate-CPU/RSS guards from fresh measured budgets."""
+
+    def __init__(
+        self, calibration: dict[str, Any], process: Any, *,
+        started_wall: float | None = None, started_cpu: float | None = None,
+        initial_peak_rss: int | None = None,
+    ) -> None:
+        self.process = process
+        self.started_wall = time.perf_counter() if started_wall is None else float(started_wall)
+        cpu = process.cpu_times()
+        self.started_cpu = float(cpu.user + cpu.system) if started_cpu is None else float(started_cpu)
+        self.reused_wall = 0.0
+        self.reused_cpu = 0.0
+        self.peak_rss = max(cal.process_peak_rss_bytes(process), int(initial_peak_rss or 0))
+        budgets = calibration["resolved_screen_budgets"]
+        self.projected_wall = float(budgets["wall_seconds"]["projected_seconds"])
+        self.soft_wall = float(budgets["wall_seconds"]["soft_budget_seconds"])
+        self.hard_wall = float(budgets["wall_seconds"]["hard_runaway_ceiling_seconds"])
+        self.projected_cpu = float(budgets["aggregate_cpu_seconds"]["projected_seconds"])
+        self.soft_cpu = float(budgets["aggregate_cpu_seconds"]["soft_budget_seconds"])
+        self.hard_cpu = float(budgets["aggregate_cpu_seconds"]["hard_runaway_ceiling_seconds"])
+        self.hard_rss = int(budgets["peak_rss_guard_bytes"])
+        quarter = budgets["first_quarter_checkpoint"]
+        self.expected_quarter_wall = float(quarter["wall_seconds"]["expected_elapsed_seconds"])
+        self.expected_quarter_cpu = float(quarter["aggregate_cpu_seconds"]["expected_elapsed_seconds"])
+        self.first_quarter: dict[str, Any] | None = None
+        self.soft_crossings = {"wall": None, "aggregate_cpu": None}
+
+    def timing(self) -> dict[str, Any]:
+        cpu = self.process.cpu_times()
+        active_wall = time.perf_counter() - self.started_wall
+        active_cpu = float(cpu.user + cpu.system) - self.started_cpu
+        self.peak_rss = max(self.peak_rss, cal.process_peak_rss_bytes(self.process))
+        return {
+            "active_wall_seconds": active_wall,
+            "active_aggregate_cpu_seconds": active_cpu,
+            "reused_wall_seconds_charged": self.reused_wall,
+            "reused_aggregate_cpu_seconds_charged": self.reused_cpu,
+            "charged_wall_seconds": active_wall + self.reused_wall,
+            "charged_aggregate_cpu_seconds": active_cpu + self.reused_cpu,
+            "peak_rss_bytes": self.peak_rss,
+            "first_quarter": self.first_quarter,
+            "budgets": {
+                "wall_seconds": {"projected": self.projected_wall, "soft": self.soft_wall, "hard": self.hard_wall},
+                "aggregate_cpu_seconds": {"projected": self.projected_cpu, "soft": self.soft_cpu, "hard": self.hard_cpu},
+                "peak_rss_guard_bytes": self.hard_rss,
+            },
+            "soft_crossings": self.soft_crossings,
+        }
+
+    def check(self, stage: str) -> None:
+        timing = self.timing()
+        if timing["charged_wall_seconds"] > self.soft_wall and self.soft_crossings["wall"] is None:
+            self.soft_crossings["wall"] = {"stage": stage, "seconds": timing["charged_wall_seconds"]}
+        if timing["charged_aggregate_cpu_seconds"] > self.soft_cpu and self.soft_crossings["aggregate_cpu"] is None:
+            self.soft_crossings["aggregate_cpu"] = {"stage": stage, "seconds": timing["charged_aggregate_cpu_seconds"]}
+        if timing["charged_wall_seconds"] > self.hard_wall:
+            raise TimeoutError(f"screen wall runaway ceiling exceeded during {stage}")
+        if timing["charged_aggregate_cpu_seconds"] > self.hard_cpu:
+            raise TimeoutError(f"screen aggregate CPU runaway ceiling exceeded during {stage}")
+        if timing["peak_rss_bytes"] > self.hard_rss:
+            raise MemoryError(f"screen RSS guard exceeded during {stage}")
+
+    def add_reused(self, timing: dict[str, Any], stage: str) -> None:
+        self.reused_wall += float(timing["wall_seconds"])
+        self.reused_cpu += float(timing["aggregate_cpu_seconds"])
+        self.peak_rss = max(self.peak_rss, int(timing.get("peak_rss_bytes", 0)))
+        self.check(stage)
+
+    def check_first_quarter(self, completed_arm_updates: int, total_arm_updates: int) -> dict[str, Any]:
+        if completed_arm_updates * 4 != total_arm_updates:
+            raise RuntimeError("screen first-quarter checkpoint is not exactly one quarter")
+        timing = self.timing()
+        record = {
+            "completed_arm_updates": completed_arm_updates,
+            "total_arm_updates": total_arm_updates,
+            "charged_wall_seconds": timing["charged_wall_seconds"],
+            "charged_aggregate_cpu_seconds": timing["charged_aggregate_cpu_seconds"],
+            "projected_full_wall_seconds_from_checkpoint": timing["charged_wall_seconds"] * 4,
+            "projected_full_aggregate_cpu_seconds_from_checkpoint": timing["charged_aggregate_cpu_seconds"] * 4,
+            "measured_expected_quarter_wall_seconds": self.expected_quarter_wall,
+            "measured_expected_quarter_aggregate_cpu_seconds": self.expected_quarter_cpu,
+            "wall_within_20_percent_of_measured_projection": timing["charged_wall_seconds"] <= self.expected_quarter_wall * 1.20,
+            "aggregate_cpu_within_20_percent_of_measured_projection": timing["charged_aggregate_cpu_seconds"] <= self.expected_quarter_cpu * 1.20,
+        }
+        self.first_quarter = record
+        if not record["wall_within_20_percent_of_measured_projection"]:
+            raise TimeoutError("screen first-quarter wall throughput requires re-budget")
+        if not record["aggregate_cpu_within_20_percent_of_measured_projection"]:
+            raise TimeoutError("screen first-quarter aggregate CPU throughput requires re-budget")
+        return record
+
+
+def _parsed_attempt_directories(root: Path, stem: str) -> list[tuple[int, Path]]:
+    if not root.exists():
+        return []
+    matching = sorted(item for item in root.iterdir() if item.name.startswith(stem))
+    parsed: list[tuple[int, Path]] = []
+    pattern = re.compile(rf"^{re.escape(stem)}(?:-retry-(\d{{3,}}))?$")
+    for item in matching:
+        match = pattern.fullmatch(item.name)
+        if match is None or not item.is_dir():
+            raise RuntimeError("malformed or colliding attempt path")
+        suffix = 0 if match.group(1) is None else int(match.group(1))
+        parsed.append((suffix, item))
+    if len({suffix for suffix, _ in parsed}) != len(parsed):
+        raise RuntimeError("colliding parsed attempt suffix")
+    return parsed
+
+
+def allocate_exclusive_attempt_directory(root: Path, stem: str) -> tuple[str, Path, list[Path]]:
+    root.mkdir(parents=True, exist_ok=True)
+    parsed = _parsed_attempt_directories(root, stem)
+    suffix = 0 if not parsed else max(value for value, _ in parsed) + 1
+    attempt_id = stem if suffix == 0 else f"{stem}-retry-{suffix:03d}"
+    directory = root / attempt_id
+    try:
+        directory.mkdir(exist_ok=False)
+    except FileExistsError as error:
+        raise RuntimeError("exclusive attempt allocation collision") from error
+    return attempt_id, directory, [item for _, item in parsed]
+
+
+class ScreenAttemptLedger:
+    def __init__(self, *, authorization_sha256: str, binding_sha256: str, guard: ScreenGuard, environment_sha256: str) -> None:
+        stem = f"screen-{authorization_sha256[:16]}-{binding_sha256[:12]}"
+        root = SCRATCH_SCREEN_DIR / "attempts"
+        existing = [item for _, item in _parsed_attempt_directories(root, stem)]
+        for directory in existing:
+            state_path = directory / "attempt-state.json"
+            if not state_path.is_file():
+                raise RuntimeError("existing screen attempt lacks durable state")
+            prior = json.loads(state_path.read_text(encoding="utf-8"))
+            if prior.get("authorization_sha256") != authorization_sha256 or prior.get("binding_sha256") != binding_sha256:
+                raise RuntimeError("existing screen attempt provenance mismatch")
+        self.attempt_id, self.directory, allocated_existing = allocate_exclusive_attempt_directory(
+            root, stem
+        )
+        if [item.name for item in allocated_existing] != [item.name for item in existing]:
+            raise RuntimeError("screen attempt set changed during exclusive allocation")
+        self.guard = guard
+        self.state = {
+            "schema_version": "exp648-screen-attempt-state-v1",
+            "attempt_id": self.attempt_id, "authorization_sha256": authorization_sha256,
+            "binding_sha256": binding_sha256, "environment_sha256": environment_sha256,
+            "phase": "authorized", "completed_updates": {"control": 0, "challenger": 0},
+            "completed_evaluation_units": [], "cache_receipts": [],
+            "verified_checkpoints": {}, "first_quarter": None,
+            "gates_computed": False, "complete": False,
+            "prior_attempts_preserved": [item.name for item in existing],
+            "training_resume_supported": False,
+            "budgets": {
+                "projected_wall_seconds": guard.projected_wall, "hard_wall_seconds": guard.hard_wall,
+                "projected_aggregate_cpu_seconds": guard.projected_cpu, "hard_aggregate_cpu_seconds": guard.hard_cpu,
+                "hard_rss_bytes": guard.hard_rss,
+            },
+        }
+        self.persist()
+
+    def persist(self) -> None:
+        self.state["final_timing"] = self.guard.timing()
+        _atomic_write(self.directory / "attempt-state.json", canonical_json_bytes(self.state, pretty=True))
+
+    def update(self, **values: Any) -> None:
+        self.state.update(values)
+        self.persist()
+
+
+def create_screen_launch_ledger(
+    authorization: dict[str, Any], path: Path, *, launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+) -> Path:
+    auth_sha = sha256(path)
+    binding_sha = authorization["screen_readiness_binding_sha256"]
+    root = SCRATCH_SCREEN_DIR / "launch-attempts"
+    stem = f"launch-{auth_sha[:16]}-{binding_sha[:12]}"
+    attempt_id, directory, existing = allocate_exclusive_attempt_directory(root, stem)
+    payload = {
+        "schema_version": "exp648-screen-launch-state-v1", "attempt_id": attempt_id,
+        "authorization_sha256": auth_sha, "binding_sha256": binding_sha,
+        "phase": "authorization-verified-constructor-pending", "complete": False,
+        "module_wall_elapsed_seconds": time.perf_counter() - _MODULE_WALL_STARTED,
+        "module_process_cpu_elapsed_seconds": time.process_time() - _MODULE_PROCESS_CPU_STARTED,
+        "launch_wall_started_perf_counter": launch_wall_started,
+        "launch_process_cpu_started_seconds": launch_cpu_started,
+        "launch_initial_peak_rss_bytes": launch_peak_rss,
+        "prior_launch_attempts_preserved": [item.name for item in existing],
+    }
+    _atomic_write(directory / "launch-state.json", canonical_json_bytes(payload, pretty=True))
+    return directory / "launch-state.json"
+
+
+def transition_screen_launch_ledger(
+    path: Path, *, phase: str, complete: bool,
+    scientific_attempt_id: str | None = None,
+    completion_pointer_path: Path | None = None,
+) -> dict[str, Any]:
+    raw = path.read_bytes()
+    state = json.loads(raw)
+    if raw != canonical_json_bytes(state, pretty=True):
+        raise RuntimeError("screen launch ledger is noncanonical")
+    process = psutil.Process()
+    cpu = process.cpu_times()
+    timing = {
+        "wall_seconds": time.perf_counter() - float(state["launch_wall_started_perf_counter"]),
+        "aggregate_cpu_seconds": float(cpu.user + cpu.system) - float(state["launch_process_cpu_started_seconds"]),
+        "peak_rss_bytes": max(
+            int(state["launch_initial_peak_rss_bytes"]),
+            cal.process_peak_rss_bytes(process),
+        ),
+        "sampled_fresh_at_transition": True,
+    }
+    updated = {
+        **state,
+        "phase": phase,
+        "complete": bool(complete),
+        "scientific_attempt_id": scientific_attempt_id,
+        "latest_transition_timing": timing,
+    }
+    if completion_pointer_path is not None:
+        pointer = json.loads(completion_pointer_path.read_bytes())
+        seal = completion_pointer_path.parent / "attempts" / pointer["attempt_id"] / "completion-seal.json"
+        updated["completion_pointer_sha256"] = sha256(completion_pointer_path)
+        updated["completion_seal_sha256"] = sha256(seal)
+        updated["scientific_attempt_state_sha256"] = sha256(
+            seal.parent / "attempt-state.json"
+        )
+    _atomic_write(path, canonical_json_bytes(updated, pretty=True))
+    return updated
+
+
+def execute_authorized_screen_launch(
+    *, authorization: dict[str, Any], authorization_path: Path,
+    launch_state_path: Path, root: int, launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+    experiment_factory: Callable[..., Any] | None = None,
+) -> dict[str, Any]:
+    experiment = None
+    factory = experiment_factory or ScreenExperiment
+    try:
+        reauthorize_screen_root(
+            "screen-training", root, authorization, authorization_path
+        )
+        experiment = factory(
+            authorization_path,
+            preverified_authorization=authorization,
+            launch_wall_started=launch_wall_started,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=launch_peak_rss,
+        )
+        launch_raw = launch_state_path.read_bytes()
+        launch_state = json.loads(launch_raw)
+        if launch_raw != canonical_json_bytes(launch_state, pretty=True):
+            raise RuntimeError("screen launch ledger became noncanonical after construction")
+        launch_attempt_id = launch_state.get("attempt_id")
+        if not isinstance(launch_attempt_id, str) or not launch_attempt_id:
+            raise RuntimeError("screen launch ledger lacks launch attempt ID")
+        experiment.ledger.update(launch_attempt_id=launch_attempt_id)
+        transition_screen_launch_ledger(
+            launch_state_path, phase="constructor-complete", complete=False,
+            scientific_attempt_id=experiment.ledger.attempt_id,
+        )
+        result = experiment.run()
+        pointer = TRACKED_SCREEN_DIR / "completion.json"
+        transition_screen_launch_ledger(
+            launch_state_path, phase="complete-sealed", complete=True,
+            scientific_attempt_id=experiment.ledger.attempt_id,
+            completion_pointer_path=pointer,
+        )
+        verify_screen_completion_seal(pointer, launch_state_path=launch_state_path)
+        return result
+    except BaseException as error:
+        preserve_screen_failure(
+            "authorized-screen", error, experiment, launch_state_path
+        )
+        raise
+
+
+def write_screen_file(relative: str, payload: dict[str, Any]) -> tuple[Path, Path]:
+    encoded = canonical_json_bytes(payload, pretty=True)
+    scratch = SCRATCH_SCREEN_DIR / "evidence" / relative
+    tracked = TRACKED_SCREEN_DIR / relative
+    _atomic_write(scratch, encoded)
+    _atomic_write(tracked, encoded)
+    if sha256(scratch) != sha256(tracked):
+        raise RuntimeError(f"screen atomic evidence parity failed for {relative}")
+    return scratch, tracked
+
+
+def atomic_save_checkpoint(model: Any, path: Path) -> dict[str, Any]:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    save_file(model.state_dict(), temporary)
+    with temporary.open("rb") as handle:
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+    directory_fd = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    file_hash = sha256(path)
+    loaded = load_file(path)
+    loaded_state_hash = cal.state_dict_sha256(loaded)
+    live_state_hash = cal.state_dict_sha256(model)
+    if loaded_state_hash != live_state_hash or sha256(path) != file_hash:
+        raise RuntimeError("atomically saved screen checkpoint failed reload/hash verification")
+    return {
+        "path": path.relative_to(ROOT).as_posix(),
+        "sha256": file_hash,
+        "state_dict_sha256": live_state_hash,
+        "reload_state_dict_sha256": loaded_state_hash,
+        "saved_and_verified_before_evaluation": True,
+    }
+
+
+def prepare_checkpoints_for_evaluation(
+    models: dict[str, Any], checkpoint_dir: Path,
+    event_hook: Callable[[str], None] | None = None,
+) -> dict[str, Any]:
+    receipts = {}
+    for arm in ("control", "challenger"):
+        receipts[arm] = atomic_save_checkpoint(models[arm], checkpoint_dir / f"{arm}.safetensors")
+        if event_hook is not None:
+            event_hook(f"checkpoint-verified:{arm}")
+    if set(receipts) != {"control", "challenger"} or not all(
+        value.get("saved_and_verified_before_evaluation") is True for value in receipts.values()
+    ):
+        raise RuntimeError("both screen checkpoints must verify before evaluation")
+    return receipts
+
+
+def evaluation_cache_key_fields(
+    *, binding: dict[str, Any], checkpoint_hashes: dict[str, Any], environment_sha256: str
+) -> dict[str, Any]:
+    return {
+        **binding,
+        "checkpoint_sha256": {arm: value["sha256"] for arm, value in checkpoint_hashes.items()},
+        "environment_sha256": environment_sha256,
+        "evaluator_sha256": scientific_evaluator_sha256(),
+        "evaluation_root": SCREEN_EVALUATION_ROOT,
+    }
+
+
+def validate_evaluation_results(
+    *, unit: str, width: int, cases: dict[str, Any], results: dict[str, Any]
+) -> None:
+    if set(results) != {"control", "challenger"}:
+        raise RuntimeError(f"screen cached arm schema mismatch for {unit}")
+    mode = "transition" if unit.startswith("transition-") else "rollout"
+    expected_count = len(cases["state"] if mode == "transition" else cases["multiplier"])
+    for arm, result in results.items():
+        expected_keys = (
+            {"cases", "exact_accuracy", "quotient_accuracy", "valid_residue_rate", "exact_vector", "output_sha256", "predictions", "quotient_predictions"}
+            if mode == "transition" else
+            {"cases", "exact_accuracy", "exact_vector", "mean_clipped_first_error_index", "invalid_rollout_rate", "output_sha256", "predictions", "teacher_targets", "first_error_indices", "any_intermediate_invalid_vector", "prediction_trace", "teacher_trace"}
+        )
+        if set(result) != expected_keys:
+            raise RuntimeError(f"screen cached result key schema mismatch for {unit}/{arm}")
+        predictions = result.get("predictions")
+        exact = result.get("exact_vector")
+        if not isinstance(predictions, list) or not isinstance(exact, list) or len(predictions) != expected_count or len(exact) != expected_count:
+            raise RuntimeError(f"screen cached result length mismatch for {unit}/{arm}")
+        if any(type(value) is not int or value < 0 for value in predictions) or any(type(value) is not bool for value in exact):
+            raise RuntimeError(f"screen cached result type/range mismatch for {unit}/{arm}")
+        if result.get("cases") != expected_count or result.get("output_sha256") != sha256_bytes(canonical_json_bytes(predictions)):
+            raise RuntimeError(f"screen cached result count/output hash mismatch for {unit}/{arm}")
+        accuracy = sum(exact) / expected_count
+        if not math.isfinite(float(result.get("exact_accuracy", math.nan))) or not math.isclose(float(result["exact_accuracy"]), accuracy, abs_tol=1e-15):
+            raise RuntimeError(f"screen cached exact accuracy mismatch for {unit}/{arm}")
+        if mode == "transition":
+            recomputed = [left == right for left, right in zip(predictions, cases["target"], strict=True)]
+            quotient = result.get("quotient_predictions")
+            if recomputed != exact or not isinstance(quotient, list) or len(quotient) != expected_count:
+                raise RuntimeError(f"screen cached transition semantics mismatch for {unit}/{arm}")
+            qacc = sum(int(left) == int(right) for left, right in zip(quotient, cases["quotient"], strict=True)) / expected_count
+            valid = sum(pred < modulus for pred, modulus in zip(predictions, cases["modulus"], strict=True)) / expected_count
+            if not math.isclose(float(result["quotient_accuracy"]), qacc, abs_tol=1e-15) or not math.isclose(float(result["valid_residue_rate"]), valid, abs_tol=1e-15):
+                raise RuntimeError(f"screen cached transition rates mismatch for {unit}/{arm}")
+        else:
+            teacher = result.get("teacher_targets")
+            first = result.get("first_error_indices")
+            if not isinstance(teacher, list) or not isinstance(first, list) or len(teacher) != expected_count or len(first) != expected_count:
+                raise RuntimeError(f"screen cached rollout semantic arrays mismatch for {unit}/{arm}")
+            if [a == b for a, b in zip(predictions, teacher, strict=True)] != exact:
+                raise RuntimeError(f"screen cached rollout exact vector mismatch for {unit}/{arm}")
+            prediction_trace = result.get("prediction_trace")
+            teacher_trace = result.get("teacher_trace")
+            invalid_vector = result.get("any_intermediate_invalid_vector")
+            if not isinstance(prediction_trace, list) or not isinstance(teacher_trace, list) or len(prediction_trace) != width + 1 or len(teacher_trace) != width + 1:
+                raise RuntimeError(f"screen cached rollout trace length mismatch for {unit}/{arm}")
+            for trace_name, trace in (
+                ("prediction", prediction_trace), ("teacher", teacher_trace)
+            ):
+                if any(
+                    not isinstance(row, list)
+                    or len(row) != expected_count
+                    or any(type(value) is not int or value < 0 for value in row)
+                    for row in trace
+                ):
+                    raise RuntimeError(
+                        f"screen cached rollout {trace_name} trace row mismatch for {unit}/{arm}"
+                    )
+            if prediction_trace[0] != [0] * expected_count:
+                raise RuntimeError(f"screen cached rollout initial prediction mismatch for {unit}/{arm}")
+            if prediction_trace[-1] != predictions or teacher_trace[-1] != teacher:
+                raise RuntimeError(f"screen cached rollout endpoint trace mismatch for {unit}/{arm}")
+            recomputed_teacher = [[0] * expected_count]
+            recomputed_first: list[int | None] = [None] * expected_count
+            recomputed_invalid = [False] * expected_count
+            for position in range(width):
+                bits = [(value >> (width - 1 - position)) & 1 for value in cases["multiplier"]]
+                next_teacher = [
+                    cal.exact_teacher_step(previous, multiplicand, modulus, bit)[0]
+                    for previous, multiplicand, modulus, bit in zip(
+                        recomputed_teacher[-1], cases["multiplicand"], cases["modulus"], bits, strict=True
+                    )
+                ]
+                recomputed_teacher.append(next_teacher)
+                for index, (prediction, target, modulus) in enumerate(zip(prediction_trace[position + 1], next_teacher, cases["modulus"], strict=True)):
+                    if recomputed_first[index] is None and prediction != target:
+                        recomputed_first[index] = position
+                    recomputed_invalid[index] = recomputed_invalid[index] or prediction >= modulus
+            recomputed_clipped = [width + 1 if value is None else value for value in recomputed_first]
+            if teacher_trace != recomputed_teacher or first != recomputed_clipped or invalid_vector != recomputed_invalid:
+                raise RuntimeError(f"screen cached rollout trace semantics mismatch for {unit}/{arm}")
+            mean_first = sum(recomputed_clipped) / expected_count
+            invalid = sum(recomputed_invalid) / expected_count
+            if any(type(value) is not int or value < 0 or value > width + 1 for value in first):
+                raise RuntimeError(f"screen cached first-error range mismatch for {unit}/{arm}")
+            if not math.isclose(float(result["mean_clipped_first_error_index"]), mean_first, abs_tol=1e-15) or not math.isclose(float(result["invalid_rollout_rate"]), invalid, abs_tol=1e-15):
+                raise RuntimeError(f"screen cached rollout rates mismatch for {unit}/{arm}")
+
+
+def compact_evaluation_results(value: Any) -> Any:
+    bulky = {
+        "predictions", "quotient_predictions", "teacher_targets", "first_error_indices",
+        "any_intermediate_invalid_vector", "prediction_trace", "teacher_trace",
+    }
+    if isinstance(value, dict):
+        return {key: compact_evaluation_results(item) for key, item in value.items() if key not in bulky}
+    if isinstance(value, list):
+        return [compact_evaluation_results(item) for item in value]
+    return value
+
+
+def load_or_evaluate_unit(
+    *, unit: str, cases: dict[str, Any], models: dict[str, Any], evaluator: Callable[..., dict[str, Any]],
+    width: int, exp300: Any, key_fields: dict[str, Any], guard: ScreenGuard,
+) -> tuple[dict[str, Any], bool]:
+    cases_sha = sha256_bytes(canonical_json_bytes(cases))
+    key = sha256_bytes(canonical_json_bytes({"unit": unit, "cases_sha256": cases_sha, "key_fields": key_fields}))
+    path = SCRATCH_SCREEN_DIR / "evaluation-cache" / f"{unit}-{key}.json"
+    if path.is_file():
+        record = json.loads(path.read_text(encoding="utf-8"))
+        core = copy.deepcopy(record)
+        observed_core = core.pop("core_sha256", None)
+        if (
+            record.get("schema_version") != "exp648-screen-evaluation-cache-v1"
+            or record.get("complete") is not True
+            or record.get("unit") != unit
+            or record.get("cases_sha256") != cases_sha
+            or record.get("key_fields") != key_fields
+            or observed_core != sha256_bytes(canonical_json_bytes(core))
+        ):
+            raise RuntimeError(f"screen evaluation recovery provenance mismatch for {unit}")
+        timing = record.get("timing", {})
+        if set(timing) != {"wall_seconds", "aggregate_cpu_seconds", "peak_rss_bytes"} or any(
+            not isinstance(timing[key], (int, float)) or not math.isfinite(float(timing[key])) or float(timing[key]) < 0
+            for key in timing
+        ):
+            raise RuntimeError(f"screen evaluation cache timing mismatch for {unit}")
+        validate_evaluation_results(unit=unit, width=width, cases=cases, results=record["results"])
+        guard.add_reused(timing, f"evaluation-cache:{unit}")
+        return record["results"], True
+    measurement = cal.Measurement(guard.process)
+    results = {arm: evaluator(model, width, cases, exp300) for arm, model in models.items()}
+    validate_evaluation_results(unit=unit, width=width, cases=cases, results=results)
+    timing = measurement.stop().payload()
+    record = {
+        "schema_version": "exp648-screen-evaluation-cache-v1", "complete": True,
+        "unit": unit, "cases_sha256": cases_sha, "key_fields": key_fields,
+        "results": results,
+        "timing": {"wall_seconds": timing["wall_seconds"], "aggregate_cpu_seconds": timing["aggregate_cpu_seconds"], "peak_rss_bytes": timing["peak_rss_bytes"]},
+    }
+    record["core_sha256"] = sha256_bytes(canonical_json_bytes(record))
+    _atomic_write(path, canonical_json_bytes(record, pretty=True))
+    guard.check(f"evaluation:{unit}")
+    return results, False
+
+
+def replay_frozen_corpus_from_source(
+    *, model: Any, exp300: Any, guard: ScreenGuard
+) -> dict[str, Any]:
+    artifacts = _read_data_artifacts()
+    identities = artifacts["identity"]["identities"]
+    expected = artifacts["trajectory"]["trajectories"]
+    observed: list[dict[str, Any]] = []
+    for start in range(0, len(identities), IDENTITY_BATCH_SIZE):
+        batch = [
+            cal.Identity(
+                int(row["identity_index"]), int(row["multiplier"]),
+                int(row["multiplicand"]), int(row["modulus"]),
+            )
+            for row in identities[start : start + IDENTITY_BATCH_SIZE]
+        ]
+        mined = cal.rollout_identity_batch(
+            model, exp300, batch, lambda stage: guard.check(f"semantic-replay:{stage}")
+        )
+        observed.extend(trajectory_record_payload(row) for row in mined)
+        guard.check(f"semantic-replay:batch:{start}")
+    if canonical_json(observed) != canonical_json(expected):
+        raise RuntimeError("frozen corpus source-model semantic replay mismatch")
+    return {
+        "identity_trajectories": len(observed),
+        "trajectory_manifest_sha256": FROZEN_CORPUS_FILES["data/trajectory-manifest.json.gz"],
+        "observed_canonical_sha256": sha256_bytes(canonical_json_bytes(observed)),
+        "exact_complete_source_replay": True,
     }
 
 
 class ScreenExperiment:
     """Complete screen path; construction itself requires exact Judge bytes."""
 
-    def __init__(self, authorization_path: Path = SCREEN_AUTHORIZATION_PATH) -> None:
+    def __init__(
+        self, authorization_path: Path = SCREEN_AUTHORIZATION_PATH, *,
+        preverified_authorization: dict[str, Any] | None = None,
+        launch_wall_started: float | None = None,
+        launch_cpu_started: float | None = None,
+        launch_peak_rss: int | None = None,
+    ) -> None:
         # This must remain the first operation: no config/data/model/root work may
         # happen before exact authorization has passed.
-        self.authorization = verify_screen_authorization(authorization_path)
+        if preverified_authorization is None:
+            self.authorization = verify_screen_authorization(authorization_path)
+        else:
+            expected_bytes = canonical_json_bytes(preverified_authorization, pretty=True)
+            if authorization_path.read_bytes() != expected_bytes:
+                raise PermissionError("preverified screen authorization bytes changed")
+            self.authorization = preverified_authorization
         self.authorization_path = authorization_path
-        self.training_root = authorize_root(
-            "screen-training",
-            SCREEN_TRAINING_ROOT,
-            authorization_path=authorization_path,
+        self.training_root = reauthorize_screen_root(
+            "screen-training", SCREEN_TRAINING_ROOT, self.authorization, authorization_path
         )
-        self.evaluation_root = authorize_root(
-            "screen-evaluation",
-            SCREEN_EVALUATION_ROOT,
-            authorization_path=authorization_path,
+        self.evaluation_root = reauthorize_screen_root(
+            "screen-evaluation", SCREEN_EVALUATION_ROOT, self.authorization, authorization_path
         )
+        self.binding = self.authorization["screen_readiness_binding"]
+        self.calibration = verify_screen_readiness_calibration()
         self.config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
-        verify_pinned_foundation(self.config)
+        cal.validate_frozen_config(self.config)
+        if sha256(SOURCE_CHECKPOINT_PATH) != PINNED["source_checkpoint_sha256"]:
+            raise RuntimeError("screen source checkpoint hash mismatch")
         self.runtime = cal.configure_frozen_runtime(self.config)
         self.dependencies = cal.dependency_source_manifest()
         cal.verify_dependency_source_manifest(self.dependencies)
@@ -1508,18 +3677,30 @@ class ScreenExperiment:
         self.cellular = cal.load_verified_dependency_module(
             "cellular_for_exp648_screen", "cellular_model", self.dependencies
         )
+        self.process = psutil.Process()
+        self.guard = ScreenGuard(
+            self.calibration, self.process, started_wall=launch_wall_started,
+            started_cpu=launch_cpu_started, initial_peak_rss=launch_peak_rss,
+        )
+        self.environment = cal.environment_payload(self.config)
+        self.environment_sha256 = sha256_bytes(canonical_json_bytes(self.environment))
+        self.ledger = ScreenAttemptLedger(
+            authorization_sha256=sha256(self.authorization_path),
+            binding_sha256=self.authorization["screen_readiness_binding_sha256"],
+            guard=self.guard, environment_sha256=self.environment_sha256,
+        )
 
     def new_model(self):
-        authorize_root(
-            "screen-training",
-            self.training_root,
-            authorization_path=self.authorization_path,
+        reauthorize_screen_root(
+            "screen-training", self.training_root, self.authorization, self.authorization_path
         )
         model = self.cellular.SharedDilatedConvGRU(width=256, hidden=92, cycles=2)
         model.load_state_dict(load_file(SOURCE_CHECKPOINT_PATH))
         return model
 
     def run(self) -> dict[str, Any]:
+        corpus_verification = verify_corpus_artifacts(require_receipts=True)
+        self.ledger.update(phase="corpus-verified")
         pairs = _load_corpus_pairs()
         models = {"control": self.new_model(), "challenger": self.new_model()}
         initial = {name: cal.state_dict_sha256(model) for name, model in models.items()}
@@ -1533,26 +3714,33 @@ class ScreenExperiment:
             )
             for name, model in models.items()
         }
-        histories = {}
-        batch_hashes = []
+        semantic_replay = replay_frozen_corpus_from_source(
+            model=self.new_model(), exp300=self.exp300, guard=self.guard
+        )
+        self.ledger.update(phase="training", frozen_corpus_semantic_replay=semantic_replay)
+        histories = {"control": [], "challenger": []}
+        batch_hashes = {"control": [], "challenger": []}
         updates = int(self.config["screen"]["updates_per_arm"])
-        for arm in ("control", "challenger"):
-            authorize_root(
-                "screen-training",
-                self.training_root,
-                authorization_path=self.authorization_path,
-            )
-            scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+        order = frozen_root_pair_order(
+            len(pairs), corpus_verification["corpus_manifest_sha256"]
+        )
+        schedulers = {
+            arm: torch.optim.lr_scheduler.CosineAnnealingLR(
                 optimizers[arm],
                 T_max=updates,
                 eta_min=float(self.config["training"]["minimum_learning_rate"]),
             )
-            history = []
-            local_hashes = []
-            for update in range(updates):
-                windows = ordered_batch_windows(pairs, update)
-                local_hashes.append(sha256_bytes(canonical_json_bytes(windows)))
-                history.append(
+            for arm in ("control", "challenger")
+        }
+        for update in range(updates):
+            windows = ordered_batch_windows(pairs, update, order=order)
+            batch_hash = sha256_bytes(canonical_json_bytes(windows))
+            for arm in ("control", "challenger"):
+                reauthorize_screen_root(
+                    "screen-training", self.training_root, self.authorization, self.authorization_path
+                )
+                batch_hashes[arm].append(batch_hash)
+                histories[arm].append(
                     screen_training_update(
                         models[arm],
                         optimizers[arm],
@@ -1562,13 +3750,42 @@ class ScreenExperiment:
                         self.exp300,
                     )
                 )
-                scheduler.step()
-            histories[arm] = history
-            batch_hashes.append(local_hashes)
-        if batch_hashes[0] != batch_hashes[1]:
+                schedulers[arm].step()
+                self.guard.check(f"training:{arm}:update:{update}")
+            self.ledger.state["completed_updates"] = {
+                "control": update + 1, "challenger": update + 1
+            }
+            self.ledger.persist()
+            if update == updates // 4 - 1:
+                telemetry = self.guard.check_first_quarter(
+                    completed_arm_updates=2 * (update + 1), total_arm_updates=2 * updates
+                )
+                write_screen_file("first-quarter-telemetry.json", {
+                    "schema_version": "exp648-screen-first-quarter-v1",
+                    "authorization_sha256": sha256(self.authorization_path),
+                    "telemetry": telemetry,
+                })
+                self.ledger.update(first_quarter=telemetry)
+        if batch_hashes["control"] != batch_hashes["challenger"]:
             raise RuntimeError("screen arms did not receive identical batch order")
 
+        # Both durable, hash-verified checkpoints exist before the first
+        # evaluation input is generated or evaluator is invoked.
+        checkpoint_dir = SCRATCH_SCREEN_DIR / "checkpoints"
+        checkpoint_hashes = prepare_checkpoints_for_evaluation(models, checkpoint_dir)
+        write_screen_file("checkpoints.json", {
+            "schema_version": "exp648-screen-checkpoints-v1",
+            "authorization_sha256": sha256(self.authorization_path),
+            "checkpoint_hashes": checkpoint_hashes,
+            "evaluation_started": False,
+        })
+        self.ledger.update(phase="evaluation", verified_checkpoints=checkpoint_hashes)
+        key_fields = evaluation_cache_key_fields(
+            binding=self.binding, checkpoint_hashes=checkpoint_hashes,
+            environment_sha256=self.environment_sha256,
+        )
         evaluation = {"transitions": {}, "rollouts": {}}
+        reused_units = []
         spec = self.config["screen"]["evaluation"]
         for width, count in spec["transition_cases"].items():
             cases = generate_screen_transition_cases(
@@ -1576,36 +3793,64 @@ class ScreenExperiment:
                 int(width),
                 int(count),
                 self.authorization_path,
+                self.authorization,
             )
-            evaluation["transitions"][str(width)] = {
-                arm: evaluate_transitions(model, int(width), cases, self.exp300)
-                for arm, model in models.items()
-            }
+            result, reused = load_or_evaluate_unit(
+                unit=f"transition-{width}", cases=cases, models=models,
+                evaluator=evaluate_transitions, width=int(width), exp300=self.exp300,
+                key_fields=key_fields, guard=self.guard,
+            )
+            evaluation["transitions"][str(width)] = result
+            reused_units.append({"unit": f"transition-{width}", "reused": reused})
+            self.ledger.state["completed_evaluation_units"].append(f"transition-{width}")
+            self.ledger.state["cache_receipts"].append(reused_units[-1])
+            self.ledger.persist()
         for width, count in spec["full_rollout_cases"].items():
             cases = generate_screen_rollout_cases(
                 self.evaluation_root,
                 int(width),
                 int(count),
                 self.authorization_path,
+                self.authorization,
             )
-            evaluation["rollouts"][str(width)] = {
-                arm: evaluate_rollouts(model, int(width), cases, self.exp300)
-                for arm, model in models.items()
-            }
+            result, reused = load_or_evaluate_unit(
+                unit=f"rollout-{width}", cases=cases, models=models,
+                evaluator=evaluate_rollouts, width=int(width), exp300=self.exp300,
+                key_fields=key_fields, guard=self.guard,
+            )
+            evaluation["rollouts"][str(width)] = result
+            reused_units.append({"unit": f"rollout-{width}", "reused": reused})
+            self.ledger.state["completed_evaluation_units"].append(f"rollout-{width}")
+            self.ledger.state["cache_receipts"].append(reused_units[-1])
+            self.ledger.persist()
         repeat_cases = generate_screen_rollout_cases(
             self.evaluation_root,
             int(spec["exact_repeat_width"]),
             int(spec["exact_repeat_cases"]),
             self.authorization_path,
+            self.authorization,
         )
+        repeat_first, reused_first = load_or_evaluate_unit(
+            unit="exact-repeat-first-256", cases=repeat_cases, models=models,
+            evaluator=evaluate_rollouts, width=int(spec["exact_repeat_width"]),
+            exp300=self.exp300, key_fields=key_fields, guard=self.guard,
+        )
+        repeat_second, reused_second = load_or_evaluate_unit(
+            unit="exact-repeat-second-256", cases=repeat_cases, models=models,
+            evaluator=evaluate_rollouts, width=int(spec["exact_repeat_width"]),
+            exp300=self.exp300, key_fields=key_fields, guard=self.guard,
+        )
+        reused_units.extend([
+            {"unit": "exact-repeat-first-256", "reused": reused_first},
+            {"unit": "exact-repeat-second-256", "reused": reused_second},
+        ])
+        self.ledger.state["completed_evaluation_units"].extend(["exact-repeat-first-256", "exact-repeat-second-256"])
+        self.ledger.state["cache_receipts"].extend(reused_units[-2:])
+        self.ledger.persist()
         exact_repeat = {}
-        for arm, model in models.items():
-            first = evaluate_rollouts(
-                model, int(spec["exact_repeat_width"]), repeat_cases, self.exp300
-            )
-            second = evaluate_rollouts(
-                model, int(spec["exact_repeat_width"]), repeat_cases, self.exp300
-            )
+        for arm in models:
+            first = repeat_first[arm]
+            second = repeat_second[arm]
             exact_repeat[arm] = {
                 "first": first,
                 "second": second,
@@ -1637,19 +3882,6 @@ class ScreenExperiment:
                     "invalid_rollout_rate"
                 ],
             }
-        checkpoint_dir = (
-            ROOT / ".scratch/exp-648-structured-trajectory-consistency/screen/checkpoints"
-        )
-        checkpoint_dir.mkdir(parents=True, exist_ok=True)
-        checkpoint_hashes = {}
-        for arm, model in models.items():
-            path = checkpoint_dir / f"{arm}.safetensors"
-            save_file(model.state_dict(), path)
-            checkpoint_hashes[arm] = {
-                "path": path.relative_to(ROOT).as_posix(),
-                "sha256": sha256(path),
-                "state_dict_sha256": cal.state_dict_sha256(model),
-            }
         integrity = {
             "source_checkpoint_hash_valid": sha256(SOURCE_CHECKPOINT_PATH)
             == PINNED["source_checkpoint_sha256"],
@@ -1658,7 +3890,7 @@ class ScreenExperiment:
                 sum(parameter.numel() for parameter in model.parameters()) == 99_824
                 for model in models.values()
             ),
-            "paired_data_order_valid": batch_hashes[0] == batch_hashes[1],
+            "paired_data_order_valid": batch_hashes["control"] == batch_hashes["challenger"],
             "seed_roles_valid": (
                 self.training_root == SCREEN_TRAINING_ROOT
                 and self.evaluation_root == SCREEN_EVALUATION_ROOT
@@ -1671,7 +3903,7 @@ class ScreenExperiment:
             == self.evaluator_sha256,
             "dependency_manifest_valid": self.dependencies["manifest_sha256"]
             == PINNED["dependency_manifest_sha256"],
-            "matched_work_valid": batch_hashes[0] == batch_hashes[1],
+            "matched_work_valid": batch_hashes["control"] == batch_hashes["challenger"],
             "control_exact_repeat_deterministic": exact_repeat["control"][
                 "deterministic"
             ],
@@ -1687,24 +3919,326 @@ class ScreenExperiment:
             integrity,
             self.config["screen"]["gates"],
         )
-        return {
+        self.ledger.update(phase="finalization", gates_computed=False)
+        result = {
             "schema_version": "exp648-screen-result-v1",
             "training_root": self.training_root,
             "evaluation_root": self.evaluation_root,
             "initial_tensor_sha256": initial,
-            "ordered_batch_sha256": sha256_bytes(canonical_json_bytes(batch_hashes[0])),
+            "authorization_sha256": sha256(self.authorization_path),
+            "screen_readiness_binding": self.binding,
+            "corpus_verification": corpus_verification,
+            "frozen_corpus_semantic_replay": semantic_replay,
+            "ordered_pair_permutation_sha256": sha256_bytes(canonical_json_bytes(order)),
+            "ordered_batch_sha256": sha256_bytes(canonical_json_bytes(batch_hashes["control"])),
             "histories": histories,
-            "evaluation": evaluation,
-            "exact_repeat": exact_repeat,
+            "evaluation": compact_evaluation_results(evaluation),
+            "exact_repeat": compact_evaluation_results(exact_repeat),
             "arm_metrics": arm_metrics,
             "paired_width256_drift_counts": width256_drift,
             "checkpoint_hashes": checkpoint_hashes,
+            "evaluation_cache": {"key_fields": key_fields, "units": reused_units},
+            "timing": self.guard.timing(),
             "scientific_integrity": integrity,
             "gates": gates,
             "decision": "pass-intermediate-requires-separate-confirmation-judge"
             if gates["all_passed"]
             else "reject-frozen-screen",
         }
+        return finalize_screen_evidence(result, self.environment, self.guard, self.ledger)
+
+
+def finalize_screen_evidence(
+    result: dict[str, Any], environment: dict[str, Any], guard: ScreenGuard,
+    ledger: ScreenAttemptLedger,
+) -> dict[str, Any]:
+    launch_attempt_id = ledger.state.get("launch_attempt_id")
+    if not isinstance(launch_attempt_id, str) or not launch_attempt_id:
+        raise RuntimeError("screen scientific attempt lacks reciprocal launch attempt ID")
+    orchestration = {
+        "launch_attempt_id": launch_attempt_id,
+        "scientific_attempt_id": ledger.attempt_id,
+        "linkage_direction": "scientific-evidence-to-launch-attempt-id-without-launch-ledger-hash",
+    }
+    result["sealed_orchestration"] = orchestration
+    metrics = {
+        "schema_version": "exp648-screen-metrics-v1",
+        "role": "frozen-preregistered-screen-only",
+        "arm_metrics": result["arm_metrics"],
+        "paired_width256_drift_counts": result["paired_width256_drift_counts"],
+        "gates": result["gates"],
+        "candidate_promotion_metric": False,
+        "benchmark_metric": False,
+    }
+    integrity = {
+        "schema_version": "exp648-screen-integrity-v1",
+        "authorization_sha256": result["authorization_sha256"],
+        "sealed_orchestration": orchestration,
+        "checks": {
+            **result["scientific_integrity"],
+            "frozen_corpus_historical_bytes_valid": result["corpus_verification"]["historical_execution_provenance_verified"],
+            "frozen_corpus_source_semantic_replay_valid": result["frozen_corpus_semantic_replay"]["exact_complete_source_replay"],
+            "checkpoints_saved_before_evaluation": all(v["saved_and_verified_before_evaluation"] for v in result["checkpoint_hashes"].values()),
+            "dynamic_wall_cpu_rss_guards_valid": True,
+            "first_quarter_numeric_telemetry_serialized": result["timing"]["first_quarter"] is not None,
+            "evaluation_cache_provenance_bound": True,
+            "checked_independent_official_private_unopened": True,
+            "candidate_005_unchanged": True,
+        },
+    }
+    if not all(type(value) is bool and value for value in integrity["checks"].values()):
+        raise RuntimeError("screen final integrity failed")
+    result["timing"] = guard.timing()
+    write_screen_file("run.json", result)
+    write_screen_file("environment.json", {
+        "schema_version": "exp648-screen-environment-v1",
+        "payload": environment,
+        "payload_sha256": sha256_bytes(canonical_json_bytes(environment)),
+    })
+    write_screen_file("metrics.json", metrics)
+    evidence_hashes = {
+        name: sha256(TRACKED_SCREEN_DIR / name)
+        for name in ("run.json", "environment.json", "metrics.json", "checkpoints.json", "first-quarter-telemetry.json")
+    }
+    integrity["evidence_hashes"] = evidence_hashes
+    integrity["evidence_set_sha256"] = sha256_bytes(canonical_json_bytes(evidence_hashes))
+    write_screen_file("integrity.json", integrity)
+
+    experiment_id = cal.configure_mlflow("sair-modular-arithmetic-wsl")
+    required_tags = {
+        "canonical_run_id": RUN_ID, "role": "frozen-preregistered-screen",
+        "authorization_sha256": result["authorization_sha256"],
+        "binding_sha256": result["screen_readiness_binding"]["screen_workload_sha256"],
+        "checked_public_opened": "false", "independent_opened": "false",
+        "official_private_opened": "false", "candidate_registration": "false",
+    }
+    required_params = {
+        "training_root": str(SCREEN_TRAINING_ROOT), "evaluation_root": str(SCREEN_EVALUATION_ROOT),
+        "scientific_runner_sha256": sha256(Path(__file__)),
+        "screen_workload_sha256": result["screen_readiness_binding"]["screen_workload_sha256"],
+        "corpus_manifest_sha256": result["corpus_verification"]["corpus_manifest_sha256"],
+        "control_checkpoint_sha256": result["checkpoint_hashes"]["control"]["sha256"],
+        "challenger_checkpoint_sha256": result["checkpoint_hashes"]["challenger"]["sha256"],
+    }
+    flat_metrics = {
+        f"{arm}_{key}": float(value)
+        for arm, values in result["arm_metrics"].items()
+        for key, value in values.items()
+    }
+    flat_metrics.update({f"gate_{key}": float(value) for key, value in result["gates"].items() if type(value) in (bool, int, float)})
+    client = cal.mlflow.tracking.MlflowClient(tracking_uri=cal.tracking_uri())
+    matches = client.search_runs(
+        experiment_ids=[str(experiment_id)],
+        filter_string=(f"tags.canonical_run_id = '{RUN_ID}' and tags.role = 'frozen-preregistered-screen'"),
+        max_results=50,
+    )
+    matches = [r for r in matches if r.data.tags.get("authorization_sha256") == result["authorization_sha256"]]
+    finished = select_finished_or_supersede_partial_mlflow_runs(
+        client, matches, reason="screen-exact-auth-binding-checkpoints"
+    )
+    reused_mlflow = finished is not None
+    if finished is not None:
+        mlflow_run_id = finished.info.run_id
+    else:
+        with mlflow.start_run(run_name=f"{RUN_ID}-screen") as active:
+            mlflow_run_id = active.info.run_id
+            mlflow.set_tags(required_tags)
+            mlflow.log_params(required_params)
+            mlflow.log_metrics(flat_metrics)
+            for name in ("run.json", "environment.json", "metrics.json", "integrity.json", "checkpoints.json", "first-quarter-telemetry.json"):
+                mlflow.log_artifact(str(TRACKED_SCREEN_DIR / name), artifact_path="screen-evidence")
+                guard.check(f"mlflow:{name}")
+    observed = client.get_run(mlflow_run_id)
+    if observed.info.status != "FINISHED":
+        raise RuntimeError("screen MLflow run did not finish")
+    custom_tags = {k: v for k, v in observed.data.tags.items() if not k.startswith("mlflow.")}
+    if custom_tags != required_tags or dict(observed.data.params) != required_params or set(observed.data.metrics) != set(flat_metrics):
+        raise RuntimeError("screen MLflow exact tag/param/metric schema verification failed")
+    if any(not math.isclose(float(observed.data.metrics[key]), value, rel_tol=1e-12, abs_tol=1e-9) for key, value in flat_metrics.items()):
+        raise RuntimeError("screen MLflow metric value verification failed")
+    verify_dir = SCRATCH_SCREEN_DIR / "mlflow-verification" / mlflow_run_id
+    verified_artifacts = []
+    for name in ("run.json", "environment.json", "metrics.json", "integrity.json", "checkpoints.json", "first-quarter-telemetry.json"):
+        downloaded = Path(client.download_artifacts(mlflow_run_id, f"screen-evidence/{name}", str(verify_dir)))
+        source = TRACKED_SCREEN_DIR / name
+        if sha256(downloaded) != sha256(source):
+            raise RuntimeError(f"screen MLflow artifact hash mismatch for {name}")
+        verified_artifacts.append({"path": name, "sha256": sha256(source), "verified": True})
+        guard.check(f"mlflow-verify:{name}")
+    receipt = {
+        "schema_version": "exp648-screen-mlflow-receipt-v1",
+        "run_id": mlflow_run_id, "status": observed.info.status,
+        "reused": reused_mlflow,
+        "tags_verified": True, "params_verified": True, "metrics_verified": True,
+        "expected_tags": required_tags, "expected_params": required_params,
+        "expected_metrics": flat_metrics,
+        "artifacts": verified_artifacts, "final_resource_timing": guard.timing(),
+        "benchmark_metrics_logged": False, "candidate_registration_performed": False,
+    }
+    write_screen_file("mlflow.json", receipt)
+    result["mlflow"] = receipt
+    write_screen_file("final-timing.json", {
+        "schema_version": "exp648-screen-final-timing-v1",
+        "workload_timing": result["timing"],
+        "through_remote_verification_preseal_timing": guard.timing(),
+        "excluded_tail": "bounded local atomic copies, completion-seal write, and completion-pointer publication",
+        "mlflow_run_id": receipt["run_id"],
+    })
+    attempt_tracked = TRACKED_SCREEN_DIR / "attempts" / ledger.attempt_id
+    names = (
+        "first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json",
+        "metrics.json", "integrity.json", "mlflow.json", "final-timing.json",
+    )
+    for name in names:
+        _atomic_write(attempt_tracked / name, (TRACKED_SCREEN_DIR / name).read_bytes())
+    ledger.update(phase="sealed", gates_computed=True, complete=True)
+    _atomic_write(attempt_tracked / "attempt-state.json", (ledger.directory / "attempt-state.json").read_bytes())
+    hashes = {name: sha256(attempt_tracked / name) for name in (*names, "attempt-state.json")}
+    seal = {
+        "schema_version": "exp648-screen-completion-seal-v1",
+        "attempt_id": ledger.attempt_id, "authorization_sha256": result["authorization_sha256"],
+        "artifacts": hashes, "complete": True,
+    }
+    _atomic_write(attempt_tracked / "completion-seal.json", canonical_json_bytes(seal, pretty=True))
+    pointer = {
+        "schema_version": "exp648-screen-completion-pointer-v1",
+        "attempt_id": ledger.attempt_id,
+        "completion_seal_sha256": sha256(attempt_tracked / "completion-seal.json"),
+    }
+    _atomic_write(TRACKED_SCREEN_DIR / "completion.json", canonical_json_bytes(pointer, pretty=True))
+    verify_screen_completion_seal(TRACKED_SCREEN_DIR / "completion.json")
+    return result
+
+
+def verify_screen_completion_seal(
+    pointer_path: Path, *, launch_state_path: Path | None = None,
+) -> dict[str, Any]:
+    pointer_raw = pointer_path.read_bytes()
+    pointer = json.loads(pointer_raw)
+    if pointer_raw != canonical_json_bytes(pointer, pretty=True) or set(pointer) != {"schema_version", "attempt_id", "completion_seal_sha256"}:
+        raise RuntimeError("screen completion pointer schema/canonical mismatch")
+    attempt = pointer_path.parent / "attempts" / pointer["attempt_id"]
+    seal_path = attempt / "completion-seal.json"
+    if not seal_path.is_file() or sha256(seal_path) != pointer["completion_seal_sha256"]:
+        raise RuntimeError("screen completion seal pointer hash mismatch")
+    seal_raw = seal_path.read_bytes()
+    seal = json.loads(seal_raw)
+    if seal_raw != canonical_json_bytes(seal, pretty=True) or set(seal) != {"schema_version", "attempt_id", "authorization_sha256", "artifacts", "complete"} or seal.get("complete") is not True:
+        raise RuntimeError("screen completion seal schema mismatch")
+    required = {"first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json", "metrics.json", "integrity.json", "mlflow.json", "final-timing.json", "attempt-state.json"}
+    if set(seal["artifacts"]) != required:
+        raise RuntimeError("screen completion artifact set mismatch")
+    for name, digest in seal["artifacts"].items():
+        if not (attempt / name).is_file() or sha256(attempt / name) != digest:
+            raise RuntimeError(f"screen sealed artifact mismatch: {name}")
+    attempt_state = json.loads((attempt / "attempt-state.json").read_bytes())
+    run = json.loads((attempt / "run.json").read_bytes())
+    integrity = json.loads((attempt / "integrity.json").read_bytes())
+    launch_attempt_id = attempt_state.get("launch_attempt_id")
+    expected_orchestration = {
+        "launch_attempt_id": launch_attempt_id,
+        "scientific_attempt_id": pointer["attempt_id"],
+        "linkage_direction": "scientific-evidence-to-launch-attempt-id-without-launch-ledger-hash",
+    }
+    if (
+        not isinstance(launch_attempt_id, str)
+        or not launch_attempt_id
+        or attempt_state.get("attempt_id") != pointer["attempt_id"]
+        or run.get("sealed_orchestration") != expected_orchestration
+        or integrity.get("sealed_orchestration") != expected_orchestration
+    ):
+        raise RuntimeError("screen sealed reciprocal launch/scientific linkage mismatch")
+    if launch_state_path is not None:
+        launch_raw = launch_state_path.read_bytes()
+        launch = json.loads(launch_raw)
+        if launch_raw != canonical_json_bytes(launch, pretty=True):
+            raise RuntimeError("screen terminal launch ledger is noncanonical")
+        if (
+            launch.get("phase") != "complete-sealed"
+            or launch.get("complete") is not True
+            or launch.get("attempt_id") != launch_attempt_id
+            or launch.get("scientific_attempt_id") != pointer["attempt_id"]
+            or launch.get("completion_pointer_sha256") != sha256(pointer_path)
+            or launch.get("completion_seal_sha256") != sha256(seal_path)
+            or launch.get("scientific_attempt_state_sha256") != sha256(attempt / "attempt-state.json")
+        ):
+            raise RuntimeError("screen terminal reciprocal launch/scientific pair mismatch")
+    return seal
+
+
+def preserve_screen_failure(
+    stage: str, error: BaseException, experiment: ScreenExperiment | None = None,
+    launch_state_path: Path | None = None,
+) -> None:
+    # Called only after exact authorization has passed.  It preserves completed
+    # work without fabricating gates or a completed scientific result.
+    phase = experiment.ledger.state["phase"] if experiment is not None else stage
+    if isinstance(error, (TimeoutError, MemoryError)):
+        if phase in ("training", "corpus-verified"):
+            status = "training-resource-overrun"
+        elif phase == "evaluation":
+            status = "evaluation-resource-overrun"
+        else:
+            status = "finalization-resource-overrun"
+    elif phase in ("finalization", "sealed"):
+        status = "mlflow-or-finalization-error"
+    else:
+        status = "generic-error"
+    launch_state = (
+        json.loads(launch_state_path.read_text(encoding="utf-8"))
+        if launch_state_path is not None and launch_state_path.is_file() else {}
+    )
+    state = experiment.ledger.state if experiment is not None else launch_state
+    failure_process = psutil.Process()
+    failure_cpu = failure_process.cpu_times()
+    launch_failure_timing = {
+        "wall_seconds": time.perf_counter()
+        - float(launch_state.get("launch_wall_started_perf_counter", _MODULE_WALL_STARTED)),
+        "aggregate_cpu_seconds": float(failure_cpu.user + failure_cpu.system)
+        - float(launch_state.get("launch_process_cpu_started_seconds", 0.0)),
+        "peak_rss_bytes": max(
+            int(launch_state.get("launch_initial_peak_rss_bytes", 0)),
+            cal.process_peak_rss_bytes(failure_process),
+        ),
+        "sampled_fresh_at_exception_boundary": True,
+    }
+    if experiment is not None:
+        experiment.ledger.state["final_timing"] = experiment.guard.timing()
+        experiment.ledger.persist()
+        state = experiment.ledger.state
+    payload = {
+        "schema_version": "exp648-screen-incomplete-v1",
+        "status": status, "stage": stage, "phase": phase,
+        "attempt_id": state.get("attempt_id"),
+        "launch_attempt_id": launch_state.get("attempt_id"),
+        "authorization_sha256": state.get("authorization_sha256"),
+        "error_type": type(error).__name__, "error": str(error),
+        "budgets": state.get("budgets"), "final_timing": state.get("final_timing"),
+        "launch_failure_timing": launch_failure_timing,
+        "completed_updates": state.get("completed_updates", {}),
+        "completed_evaluation_units": state.get("completed_evaluation_units", []),
+        "cache_receipts": state.get("cache_receipts", []),
+        "verified_checkpoints": state.get("verified_checkpoints", {}),
+        "first_quarter": state.get("first_quarter"),
+        "environment_sha256": state.get("environment_sha256"),
+        "recovery_instructions": "Reuse only complete hash-validated checkpoints/evaluation units under the same committed authorization and binding; otherwise start a new attempt.",
+        "gates_computed": False, "candidate_changed": False,
+        "checked_independent_official_private_opened": False,
+    }
+    if experiment is not None:
+        experiment.ledger.state.update({"phase": "incomplete", "complete": False, "gates_computed": False})
+        experiment.ledger.persist()
+        _atomic_write(experiment.ledger.directory / "incomplete.json", canonical_json_bytes(payload, pretty=True))
+    if launch_state_path is not None:
+        terminal = transition_screen_launch_ledger(
+            launch_state_path,
+            phase="terminal-constructor-failure" if experiment is None else "terminal-scientific-attempt-failure",
+            complete=False,
+            scientific_attempt_id=(experiment.ledger.attempt_id if experiment is not None else None),
+        )
+        terminal["failure"] = payload
+        _atomic_write(launch_state_path, canonical_json_bytes(terminal, pretty=True))
+    write_screen_file("incomplete.json", payload)
 
 
 def _read_data_artifacts() -> dict[str, Any]:
@@ -1729,8 +4263,33 @@ def _read_data_artifacts() -> dict[str, Any]:
 
 
 def verify_corpus_artifacts(*, require_receipts: bool = True) -> dict[str, Any]:
-    config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
-    verify_pinned_foundation(config)
+    # This verifies the immutable historical execution as history.  The live
+    # runner/HEAD are deliberately not asserted to have executed these bytes.
+    paths = {
+        "data/identity-manifest.json": DATA_DIR / "identity-manifest.json",
+        "data/trajectory-manifest.json.gz": DATA_DIR / "trajectory-manifest.json.gz",
+        "data/paired-corpus.json.gz": DATA_DIR / "paired-corpus.json.gz",
+        "data/corpus-manifest.json": DATA_DIR / "corpus-manifest.json",
+        "evidence/run.json": TRACKED_CORPUS_DIR / "run.json",
+        "evidence/environment.json": TRACKED_CORPUS_DIR / "environment.json",
+        "evidence/integrity.json": TRACKED_CORPUS_DIR / "integrity.json",
+        "evidence/mlflow.json": TRACKED_CORPUS_DIR / "mlflow.json",
+    }
+    for name, expected_hash in FROZEN_CORPUS_FILES.items():
+        if not paths[name].is_file() or sha256(paths[name]) != expected_hash:
+            raise RuntimeError(f"immutable historical corpus byte mismatch: {name}")
+    amendment_path = TRACKED_CORPUS_DIR / "provenance-amendment.json"
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    if amendment["execution"]["repository_head"] != PINNED["repository_head"]:
+        raise RuntimeError("historical execution HEAD amendment mismatch")
+    if amendment["execution"]["scoped_executed_bytes"]["scientific_runner"]["sha256"] != "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2":
+        raise RuntimeError("historical runner amendment mismatch")
+    historical = subprocess.run(
+        ["git", "show", "8d960fa747b64bffa3b60581ae4ff518436a8887:experiments/exp_648_structured_trajectory_consistency/scientific.py"],
+        cwd=ROOT, check=True, capture_output=True,
+    ).stdout
+    if sha256_bytes(historical) != "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2":
+        raise RuntimeError("immutable corpus commit does not preserve executed runner bytes")
     artifacts = _read_data_artifacts()
     identities = artifacts["identity"]["identities"]
     trajectories = artifacts["trajectory"]["trajectories"]
@@ -1786,20 +4345,29 @@ def verify_corpus_artifacts(*, require_receipts: bool = True) -> dict[str, Any]:
     }
     if hashes != observed:
         raise RuntimeError("corpus manifest artifact hash mismatch")
+    scratch_parity: bool | None = None
+    scratch_pairs = []
     for name in (
         "identity-manifest.json",
         "trajectory-manifest.json.gz",
         "paired-corpus.json.gz",
         "corpus-manifest.json",
     ):
-        if (DATA_DIR / name).read_bytes() != (SCRATCH_CORPUS_DIR / "data" / name).read_bytes():
-            raise RuntimeError(f"raw/tracked corpus parity mismatch for {name}")
+        raw_path = SCRATCH_CORPUS_DIR / "data" / name
+        if raw_path.is_file():
+            scratch_pairs.append(raw_path.read_bytes() == (DATA_DIR / name).read_bytes())
+    if scratch_pairs:
+        scratch_parity = all(scratch_pairs) and len(scratch_pairs) == 4
+        if not scratch_parity:
+            raise RuntimeError("optional scratch corpus parity mismatch")
     if require_receipts:
         for name in ("run.json", "environment.json", "integrity.json", "mlflow.json"):
             tracked = TRACKED_CORPUS_DIR / name
             raw = SCRATCH_CORPUS_DIR / "evidence" / name
-            if not tracked.is_file() or not raw.is_file() or tracked.read_bytes() != raw.read_bytes():
-                raise RuntimeError(f"raw/tracked evidence parity mismatch for {name}")
+            if not tracked.is_file():
+                raise RuntimeError(f"durable committed evidence is absent for {name}")
+            if raw.is_file() and tracked.read_bytes() != raw.read_bytes():
+                raise RuntimeError(f"optional scratch evidence parity mismatch for {name}")
         integrity = json.loads((TRACKED_CORPUS_DIR / "integrity.json").read_text())
         validate_integrity_checks(integrity["checks"])
         mlflow_receipt = json.loads((TRACKED_CORPUS_DIR / "mlflow.json").read_text())
@@ -1812,7 +4380,10 @@ def verify_corpus_artifacts(*, require_receipts: bool = True) -> dict[str, Any]:
         "semantic_verification": True,
         "deterministic_rematching": True,
         "gzip_determinism": True,
-        "raw_tracked_byte_parity": True,
+        "scratch_raw_tracked_byte_parity_when_present": scratch_parity,
+        "historical_execution_provenance_verified": True,
+        "historical_corpus_commit": "8d960fa747b64bffa3b60581ae4ff518436a8887",
+        "current_verifier_sha256": sha256(Path(__file__)),
     }
 
 
@@ -2055,17 +4626,59 @@ def finalize_corpus_evidence(
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--mode", choices=("corpus", "screen", "verify-corpus"), required=True
+        "--mode", choices=("corpus", "screen", "verify-corpus", "readiness-calibration"), required=True
     )
     parser.add_argument("--root", type=int)
-    parser.add_argument("--authorization-manifest", type=Path, default=SCREEN_AUTHORIZATION_PATH)
+    parser.add_argument("--authorization-manifest", type=Path)
     args = parser.parse_args(argv)
+    if args.mode == "readiness-calibration":
+        authorization_path = args.authorization_manifest or READINESS_CALIBRATION_AUTHORIZATION_PATH
+        authorization = verify_readiness_calibration_authorization(authorization_path)
+        process = psutil.Process()
+        cpu = process.cpu_times()
+        launch_cpu_started = float(cpu.user + cpu.system) - (
+            time.process_time() - _MODULE_PROCESS_CPU_STARTED
+        )
+        if args.root is not None and int(args.root) != int(authorization["calibration_root"]):
+            raise PermissionError("CLI calibration root differs from committed authorization")
+        result = execute_readiness_calibration(
+            authorization, launch_wall_started=_MODULE_WALL_STARTED,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=cal.process_peak_rss_bytes(process),
+        )
+        print(json.dumps({
+            "status": result["status"], "calibration_root": result["calibration_root"],
+            "resolved_screen_budgets": result["resolved_screen_budgets"],
+            "scientific_accuracy_or_selection_reported": False,
+        }, indent=2), flush=True)
+        return 0
     if args.mode == "screen":
-        # Fail before constructing ScreenExperiment or reading any root/data/model.
-        verify_screen_authorization(args.authorization_manifest)
+        authorization_path = args.authorization_manifest or SCREEN_AUTHORIZATION_PATH
+        # Fail before constructing ScreenExperiment or reading any root/data/model/environment.
+        authorization = verify_screen_authorization(authorization_path)
+        process = psutil.Process()
+        launch_wall_started = _MODULE_WALL_STARTED
+        cpu = process.cpu_times()
+        launch_cpu_started = float(cpu.user + cpu.system) - (
+            time.process_time() - _MODULE_PROCESS_CPU_STARTED
+        )
+        launch_peak_rss = cal.process_peak_rss_bytes(process)
+        launch_state_path = create_screen_launch_ledger(
+            authorization, authorization_path,
+            launch_wall_started=launch_wall_started,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=launch_peak_rss,
+        )
         root = SCREEN_TRAINING_ROOT if args.root is None else args.root
-        authorize_root("screen", root, authorization_path=args.authorization_manifest)
-        result = ScreenExperiment(args.authorization_manifest).run()
+        result = execute_authorized_screen_launch(
+            authorization=authorization,
+            authorization_path=authorization_path,
+            launch_state_path=launch_state_path,
+            root=root,
+            launch_wall_started=launch_wall_started,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=launch_peak_rss,
+        )
         print(json.dumps(result, indent=2), flush=True)
         return 0
     if args.mode == "verify-corpus":
