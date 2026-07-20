@@ -659,3 +659,8 @@ runs:
     run_record: experiments/runs/exp-649-stochastic-trajectory-breadth/run.json
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
+  - run_id: exp-648-structured-trajectory-consistency
+    status: planned
+    approach: matched-natural-width256-k8-endpoint-consistency
+    config: configs/exp_648_structured_trajectory_consistency.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md

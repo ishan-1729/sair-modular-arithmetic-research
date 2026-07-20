@@ -52,4 +52,5 @@
 - [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability-diagnostic.md) - frozen width-128/256 mechanistic diagnosis of overthinking and recurrent stability.
 - [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - matched ordinary-initialized addressable-memory viability rung and controls.
 - [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - matched full-rollout distillation of proven commutative trajectory diversity into one orientation.
+- [EXP-648 structured natural-trajectory consistency](exp-648-structured-trajectory-consistency.md) - selected/preregistered matched K=8 endpoint-consistency screen without synthetic state corruption.
 - [EXP-649 stochastic trajectory breadth](exp-649-stochastic-trajectory-breadth.md) - planned/formal-blocked frozen width-256 breadth study; full input-only calibration returns `runtime-gate-miss` without opening oracle evidence.

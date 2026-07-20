@@ -1,0 +1,264 @@
+run_id: exp-648-structured-trajectory-consistency
+status: selected-preregistered-pending-implementation-calibration
+hypothesis: A fixed K=8 endpoint-consistency loss on natural model-generated width-256 trajectories improves exact autonomous rollout by at least three percentage points over a matched clean-loss control without harming width-64 or width-128 retention.
+phase: matched-width256-screen-pending-implementation-calibration
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
+source_note: knowledge/autoresearch/research/2026-07-20-structured-trajectory-consistency.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+
+source_model:
+  hidden: 92
+  cycles: 2
+  parameter_count: 99824
+  inference_architecture_changes: false
+  inference_semantics_changes: false
+  parameter_count_changes: false
+
+seed_roles:
+  calibration_root: {seed: 20261151, status: unused-unopened, role: resource-calibration-only}
+  corpus_root: {seed: 20261152, status: unused-unopened, role: generated-training-split-corpus-only}
+  screen_training_root: {seed: 20261153, status: unused-unopened, role: screen-training-order-and-arm-cloning}
+  screen_evaluation_root: {seed: 20261154, status: unused-unopened, role: screen-paired-evaluation-only}
+  confirmation_1_training_root: {seed: 20261155, status: unused-unopened, role: confirmation-1-training-order-and-arm-cloning}
+  confirmation_1_evaluation_root: {seed: 20261156, status: unused-unopened, role: confirmation-1-paired-evaluation-only}
+  confirmation_2_training_root: {seed: 20261157, status: unused-unopened, role: confirmation-2-training-order-and-arm-cloning}
+  confirmation_2_evaluation_root: {seed: 20261158, status: unused-unopened, role: confirmation-2-paired-evaluation-only}
+  scaffold_test_only_root: {seed: 648900001, status: reserved-unopened, role: scaffold-tests-only-never-experiment-evidence}
+  excluded_surfaces:
+    - checked-public benchmark inputs and answers
+    - prior independent benchmark inputs and answers
+    - official private benchmark inputs and answers
+    - EXP-649 formal root 20261149
+
+corpus:
+  width: 256
+  source_execution: frozen-source-autonomous-rollout
+  split_role: generated-training-identities-only
+  benchmark_identities_allowed: false
+  target_failure_windows: 512
+  target_success_windows: 512
+  matched_pairs: 512
+  window_length: 8
+  synthetic_state_corruption: prohibited
+  state_bit_flips_or_injections: prohibited
+  failure_window:
+    first_error_indexing: zero-based-first-wrong-transition
+    maximum_first_error_index: 248
+    start_state: exact-prefix-immediately-before-first-wrong-transition
+    eligibility: a-complete-eight-transition-window-must-fit-from-that-prefix
+  success_window:
+    start_state: exact-prefix-at-the-matched-start-index
+    eligibility: all-eight-autonomous-transitions-from-that-exact-prefix-are-exact
+  normalized_modulus_band:
+    definition: modulus / (2 ** modulus.bit_length())
+    range: "[0.5, 1.0)"
+    bins:
+      - {id: b0, lower_inclusive: 0.500, upper_exclusive: 0.625}
+      - {id: b1, lower_inclusive: 0.625, upper_exclusive: 0.750}
+      - {id: b2, lower_inclusive: 0.750, upper_exclusive: 0.875}
+      - {id: b3, lower_inclusive: 0.875, upper_exclusive: 1.000}
+  matching:
+    ratio: one-success-to-one-failure
+    exact_fields: [window_start_index, modulus_bit_length, normalized_modulus_band]
+    failure_order: corpus-root-generated-identity-and-trajectory-order
+    success_tie_order: first-unused-eligible-success-in-corpus-root-generated-order
+    fallback_or_relaxation: prohibited
+  exact_offline_teacher:
+    allowed: true
+    scope: corpus-label-generation-and-evaluation-only
+    inference_use: prohibited
+  freeze_before_training:
+    - identity_manifest_sha256
+    - trajectory_manifest_sha256
+    - source_checkpoint_sha256
+    - exact_teacher_source_sha256
+    - corpus_artifact_sha256
+  resolved_corpus_mining_ceiling: pending-full-fidelity-calibration
+  shortfall_decision: corpus-construction-failure-no-weakened-matching-or-count
+
+matched_arms:
+  common_initialization:
+    method: independent-clone-from-identical-raw-source-checkpoint
+    require_identical_parameter_count: true
+    require_identical_initial_tensor_sha256: true
+  control:
+    endpoint_loss_weight: 0.0
+  challenger:
+    endpoint_loss_weight: 0.1
+  only_changed_variable: endpoint_loss_weight
+  required_equalities:
+    - source checkpoint and initial tensor hash
+    - parameter count and trainable tensors
+    - frozen windows and batch order
+    - optimizer and learning-rate schedule
+    - batch composition and update count
+    - clean teacher-forced and autonomous forward work
+    - endpoint-loss computation before weighting
+    - checkpoint, evaluation, hashing, and serialization work
+
+training:
+  screen_updates_per_arm: 200
+  confirmation_updates_per_arm: 400
+  batch_size: 16
+  failure_windows_per_batch: 8
+  matched_success_windows_per_batch: 8
+  autonomous_unroll_steps: 8
+  autonomous_state_forward: hard-thresholded-residue-bits
+  autonomous_state_backward: sigmoid-straight-through
+  clean_branch: eight-exact-teacher-forced-transitions
+  optimizer: AdamW
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  schedule: cosine
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  torch_threads: 4
+  torch_interop_threads: 1
+  deterministic_algorithms: true
+
+loss:
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  challenger_endpoint_weight: 0.10
+  clean_transition_loss_per_step: mean_bit_bce + 0.45 * worst_position_mean_bce + 0.10 * quotient_cross_entropy
+  base_clean_loss: mean of clean_transition_loss_per_step over the eight exact teacher-forced steps
+  endpoint_logits: eighth-autonomous-transition-residue-bit-logits
+  endpoint_target: exact-offline-eight-step-endpoint-residue-bits
+  endpoint_loss: mean_bit_bce + 0.45 * worst_position_mean_bce
+  endpoint_quotient_term: none
+  total_loss: base_clean_loss + endpoint_loss_weight * endpoint_loss
+  endpoint_loss_computed_for_both_arms: true
+
+screen:
+  authorization: blocked-pending-implementation-calibration-hash-freeze-and-judge
+  initialization: independent-reinitialization-of-each-arm-from-the-raw-source-checkpoint
+  updates_per_arm: 200
+  evaluation:
+    paired_identical_inputs: true
+    transition_cases: {128: 2000, 256: 2000}
+    full_rollout_cases: {64: 200, 128: 200, 256: 200}
+    exact_repeat_width: 256
+    exact_repeat_cases: 20
+    report_outcome_transitions:
+      - recovered-control-wrong-challenger-exact
+      - introduced-drift-control-exact-challenger-wrong
+  first_error:
+    definition: zero-based-first-wrong-transition
+    successful_rollout_value: 257
+    statistic: mean-clipped-first-error-index
+  gates:
+    minimum_width256_rollout_gain: 0.03
+    minimum_first_error_mean_delta: 0.0
+    minimum_width64_rollout_delta: -0.01
+    minimum_width128_rollout_delta: -0.01
+    minimum_challenger_width256_transition_accuracy: 0.995
+    maximum_challenger_invalid_rollout_rate: 0.01
+    require_exact_repeat_and_determinism: true
+    require_checkpoint_data_seed_hash_and_matched-work-integrity: true
+    all_gates_required: true
+  decision_if_any_gate_misses: reject-frozen-screen
+  interpretation_if_all_gates_pass: intermediate-evidence-requires-separate-confirmation-judge
+
+confirmation:
+  authorization: prohibited-until-screen-pass-and-separate-judge-authorization
+  pairs: 2
+  continuation_from_screen: false
+  initialization: each-pair-fresh-matched-clones-from-the-raw-source-checkpoint
+  updates_per_arm_per_pair: 400
+  evaluation_per_pair:
+    paired_identical_inputs: true
+    transition_cases: {128: 2000, 256: 2000}
+    full_rollout_cases: {64: 200, 128: 200, 256: 500}
+    exact_repeat_width: 256
+    exact_repeat_cases: 20
+  gates_per_pair:
+    minimum_width256_rollout_gain: 0.03
+    minimum_first_error_mean_delta: 0.0
+    minimum_width64_rollout_delta: -0.01
+    minimum_width128_rollout_delta: -0.01
+    minimum_challenger_width256_transition_accuracy: 0.995
+    maximum_challenger_invalid_rollout_rate: 0.01
+    require_exact_repeat_and_determinism: true
+    require_integrity: true
+  pooled_width256_paired_cases: 1000
+  pooled_exact_conditional_bound:
+    recovered_symbol: b
+    introduced_drift_symbol: c
+    denominator: 1000
+    alpha: 0.05
+    sidedness: one-sided
+    conditional_success_parameter: b / (b + c)
+    clopper_pearson_lower: "0 if b == 0; otherwise BetaQuantile(0.05, b, c + 1)"
+    net_exact_gain_lower: (2 * clopper_pearson_lower - 1) * (b + c) / 1000
+    no_discordant_cases_rule: "if b + c == 0, net_exact_gain_lower = 0"
+    gate: net_exact_gain_lower > 0
+  decision_if_any_pair_or_pooled_gate_misses: reject-frozen-confirmation
+  interpretation_if_all_gates_pass: supports-only-a-separate-candidate-and-tier7-preregistration
+  direct_candidate_promotion: prohibited
+
+resource_protocol:
+  status: pending-full-fidelity-calibration
+  binding_policy: knowledge/autoresearch/program.md#resource-budget-policy
+  measurement:
+    wall: external-monotonic-wall-seconds
+    aggregate_cpu: process-user-plus-system-seconds
+    peak_memory: peak-rss-bytes-recorded-separately
+    wall_and_cpu_are_not_interchangeable: true
+  calibration:
+    root: 20261151
+    warmups: 1
+    timed_repeats: 3
+    each_warmup_and_repeat_is_complete: true
+    representative_corpus_mining:
+      matched_pairs: 64
+      exact_same-width-source-matching-and-hashing-path: true
+    startup_and_model_loading: measured
+    k8_updates_per_arm: 20
+    checkpoint_writes_per_arm: 1
+    transition_cases_per_arm: {128: 200, 256: 200}
+    full_rollout_cases_per_arm: {64: 20, 128: 20, 256: 20}
+    hash_and_serialization_work: measured
+    torch_threads: 4
+    torch_interop_threads: 1
+    rate_selection: slower-arm-and-maximum-complete-repeat-per-component
+    initial_planning_hard_ceiling_wall_seconds: 14400
+    initial_planning_hard_ceiling_aggregate_cpu_seconds: 57600
+    planning_ceiling_basis: EXP-647-full-run-5141.6-wall-and-20465.9-aggregate-cpu-seconds
+    planning_ceiling_role: generous-runaway-protection-only-never-a-fidelity-cap
+  projections:
+    screen: measured-setup-plus-corpus-mining-1024-windows-plus-400-total-updates-plus-both-checkpoints-plus-all-screen-evaluation-hash-and-serialization-units
+    confirmation_pair: measured-setup-plus-frozen-corpus-integrity-validation-plus-800-total-updates-plus-both-checkpoints-plus-all-confirmation-evaluation-hash-and-serialization-units
+    confirmation_total: two-independently-projected-confirmation-pairs
+    component_rate: maximum-complete-repeat-rate-for-the-slower-arm
+    explicit_measured_setup_headroom: 2.0 * maximum_complete_repeat_startup_checkpoint_hash_and_serialization_component
+    soft_wall_seconds: 1.25 * projected_component_wall_seconds + explicit_measured_setup_headroom_wall_seconds
+    soft_aggregate_cpu_seconds: 1.25 * projected_component_aggregate_cpu_seconds + explicit_measured_setup_headroom_aggregate_cpu_seconds
+    hard_wall_seconds: 1.5 * soft_wall_seconds
+    hard_aggregate_cpu_seconds: 1.5 * soft_aggregate_cpu_seconds
+    resolved: pending-calibration
+  recalibrate_if:
+    - runner hash changes
+    - config hash changes
+    - source-checkpoint hash changes
+    - environment hash changes
+    - thread configuration changes
+    - declared workload hash changes
+    - first-quarter observed throughput is more than 20 percent slower than projection
+  cache:
+    preserve_completed_unit_caches: true
+    preserve_completed_checkpoints: true
+    key_fields: [checkpoint, evaluator, dataset, config, seed, environment, runner, scientific_protocol, resource_protocol]
+  evaluation_only_overrun: preserve-checkpoint-and-record-missing-evidence-not-scientific-rejection
+  fidelity_may_be_reduced_to_fit_budget: false
+  counts_or_work_may_be_reduced_to_fit_budget: false
+
+authorization:
+  implementation: pending
+  calibration: pending-implementation-and-static-tests
+  corpus_root: pending-implementation-and-calibrated-mining-ceiling
+  screen_roots: unopened-and-blocked-until-corpus-runner-tests-config-hashes-and-measured-budgets-are-frozen-and-judge-approved
+  confirmation_roots: unopened-and-prohibited-until-screen-pass-and-separate-judge-approval
+  checked_or_independent_or_official_evaluation: prohibited
+  candidate_or_tier7_promotion: prohibited
