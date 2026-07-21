@@ -1,0 +1,32 @@
+run_id: exp-656-tensor-native-rollout-route
+hypothesis: caching loop-invariant bit planes and retaining recurrent state as a tensor materially reduces width-256 rollout time without changing the frozen learned computation
+seed: 20260721
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+preregistration: knowledge/autoresearch/ablations/exp-656-tensor-native-rollout-route.md
+source:
+  candidate_model: submission/model.py
+  candidate_model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
+  candidate_manifest: submission/manifest.json
+  candidate_manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
+  checkpoint: submission/weights.safetensors
+  checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+benchmark:
+  widths: [128, 256]
+  batch_size: 16
+  warmups_per_route: 1
+  measured_repeats: 4
+  torch_threads: 4
+  route_order: alternating-legacy-first-then-tensor-first
+gates:
+  require_exact_outputs: true
+  require_exact_minimum_margins: true
+  maximum_width128_tensor_to_legacy_wall_ratio: 1.0
+  maximum_width256_tensor_to_legacy_wall_ratio: 0.8
+resource_budget:
+  hard_wall_seconds: 900
+  hard_aggregate_process_cpu_seconds: 3600
+outputs:
+  run_dir: experiments/runs/exp-656-tensor-native-rollout-route
+  metrics: evals/results/exp-656-tensor-native-rollout-route/metrics.json
+

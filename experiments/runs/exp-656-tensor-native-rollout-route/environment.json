@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-07-21T16:08:11.274898+00:00",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "executable": "/home/ishan/.venvs/sair-mod-challenge/bin/python",
+  "device": "cpu",
+  "torch_threads": 4,
+  "torch_interop_threads": 1,
+  "deterministic_algorithms": true,
+  "dependencies": {
+    "mlflow": "3.14.0",
+    "psutil": "7.0.0",
+    "safetensors": "0.8.0",
+    "torch": "2.5.1+cpu",
+    "PyYAML": "6.0.3"
+  }
+}

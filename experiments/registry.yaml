@@ -886,3 +886,20 @@ runs:
     checkpoint: null
     authorization: null
     scientific_evidence: none
+  - run_id: exp-656-tensor-native-rollout-route
+    status: completed-rejected
+    approach: matched-input-only-legacy-bigint-versus-cached-tensor-rollout-route
+    config: configs/exp_656_tensor_native_rollout_route.yaml
+    run_record: experiments/runs/exp-656-tensor-native-rollout-route/run.json
+    metrics: evals/results/exp-656-tensor-native-rollout-route/metrics.json
+    checkpoint: submission/weights.safetensors
+    checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+    mlflow_run_id: cae18b9e8a1b441b973178536052d9f3
+    decision: reject-tensor-native-route
+    semantic_parity: exact-outputs-and-minimum-margins-at-widths-128-and-256
+    width128_tensor_to_legacy_wall_ratio: 0.8768234875303702
+    width256_tensor_to_legacy_wall_ratio: 0.8910937693596073
+    scientific_evidence: none-input-only-route-performance
+    limitations:
+      - No exact-answer accuracy, model update, candidate promotion, or submission change.
+      - Local CPU timing from a dirty research worktree; confirmation would be required before integration.
