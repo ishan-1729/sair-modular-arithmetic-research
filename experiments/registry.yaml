@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: approved-complete-non-scientific-readiness-calibration
+    status: scientific-scaffold-repaired-awaiting-fresh-readiness-calibration-and-judge
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -694,7 +694,8 @@ runs:
         aggregate_cpu_seconds: 10104.265504912
       scientific_evidence: none
     screen_readiness:
-      implementation: approved-recovery-base-and-authorization-child-pushed
+      historical_implementation: approved-recovery-base-and-authorization-child-pushed
+      current_implementation: r3-scaffold-repair-awaiting-closure-and-separate-reconstruction-package
       closure_audits:
         task: T-EXP648-SCREEN-READINESS
         prior_results: [APPROVE, APPROVE]
@@ -776,11 +777,27 @@ runs:
           - {role: repeat-2-resource-probe, run_id: cea11ae498ef4243ac222aa732e8ed06, status: FINISHED}
           - {role: repeat-3-resource-probe, run_id: f89f15cf84334df9acdc41ca6625b25d, status: FINISHED}
           - {role: readiness-calibration-resource-only, run_id: c27161cb0f2a46228b94b47362769fb1, status: FINISHED}
-      live_readiness_calibration_authorization:
+      post_repair_scaffold:
+        status: implementation-repaired-no-scientific-execution
+        trajectory_repeat: complete-ordered-prediction-trace-digest-independent-recomputation
+        matched_work: independent-per-arm-counts-and-ordered-digests-separate-from-data-order
+        checkpoints: immutable-attempt-specific-paths-with-completion-and-failure-byte-bindings
+        historical_root_20261161: preserved-consumed-complete-non-scientific-sealed-non-retryable-not-valid-for-repaired-bindings
+        post_repair_readiness_root: {root: 20261162, status: reserved-unopened-unauthorized, cache_reuse_from_20261161: prohibited}
+        scientific_evidence: none
+        corpus: consumed-complete-immutable-historical
+        old_authorization_source_and_scaffold: historical-cannot-bind-repaired-bytes
+        next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
+        declared_to_actual_cross_binding: required
+        cache_operation_evidence: fresh-calls-and-validated-reuse-separated-per-arm
+        checkpoint_failure_inventory: orphan-bytes-preserved-hashed-and-explicitly-unbound
+        completion_seal_identity: pointer-seal-attempt-state-and-authorization-bound
+      historical_root_20261161_readiness_calibration_authorization:
         path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json
         root: 20261161
         sha256: 0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa
         status: consumed-complete-non-scientific-sealed-non-retryable
+        evidence_class: historical-pre-repair-cannot-authorize-root-20261162-or-screen
       cumulative_runaway_guards:
         wall_seconds: 25000
         process_user_plus_system_aggregate_cpu_seconds: 100000

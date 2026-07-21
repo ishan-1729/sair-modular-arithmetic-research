@@ -143,7 +143,7 @@ def test_fail_closed_mode_root_allowlist_rejects_every_locked_surface() -> None:
     for role in config["seed_roles"].values():
         if isinstance(role, dict) and "seed" in role:
             assert "status" not in role
-            assert "status_at_preregistration" in role
+            assert "status_at_preregistration" in role or "current_status" in role
     assert "authorization" not in config["screen"]
     assert "authorization" not in config["confirmation"]
     assert "authorization_at_preregistration" in config["screen"]
@@ -593,11 +593,11 @@ def test_scientific_resource_hashing_and_composite_cache_invalidation() -> None:
     config = load_config()
     science = module.scientific_protocol_sha256(config)
     resource = module.resource_protocol_sha256(config)
-    assert science == "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086"
-    assert resource == "a49983e9e72ebf2592a3fc61756ed55c48aca9aed4bd4471130f9d3026cad23f"
+    assert science == "f4cc038b205289203569dceed0ee5e833d406a8d0f79aceaf6c5cd393353c98e"
+    assert resource == "8d930606bf3ac8d5f1e6d1394a5000f2883bd3a1ff54d92c0d8af88f347ed37b"
     assert resource != "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198"
     assert "readiness_recovery" not in config
-    assert "readiness_recovery" in config["resource_protocol"]
+    assert "historical_readiness_recovery_root_20261160_to_20261161" in config["resource_protocol"]
     resolved = copy.deepcopy(config)
     resolved["status"] = "calibration-complete-awaiting-judge"
     resolved["phase"] = "post-calibration"
@@ -636,6 +636,34 @@ def test_scientific_resource_hashing_and_composite_cache_invalidation() -> None:
     artifact["calibration_evidence_core_sha256"] = core
     artifact["calibration_evidence_core_hash_scope"] = "documented"
     assert module.calibration_evidence_core_sha256(artifact) == core
+
+
+def test_current_lifecycle_fields_distinguish_historical_and_unopened_roots() -> None:
+    config = load_config()
+    roles = config["seed_roles"]
+    assert roles["calibration_root"]["current_status"] == "consumed-historical-non-scientific"
+    assert roles["corpus_root"]["current_status"] == "consumed-complete-immutable"
+    assert all(
+        roles[name]["current_status"] == "unopened-prohibited"
+        for name in (
+            "screen_training_root", "screen_evaluation_root",
+            "confirmation_1_training_root", "confirmation_1_evaluation_root",
+            "confirmation_2_training_root", "confirmation_2_evaluation_root",
+        )
+    )
+    assert roles["completed_readiness_root"]["current_status"].endswith("-historical")
+    assert roles["post_repair_readiness_calibration_root"]["status_at_preregistration"] == "reserved-unopened-unauthorized"
+    assert config["corpus"]["lifecycle_status"] == "consumed-complete-immutable-historical"
+    assert config["authorization"]["corpus_root"] == "consumed-complete-immutable-historical"
+    assert "reconstruction" in config["authorization"]["screen_roots"]
+    prereg = (ROOT / "knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md").read_text()
+    assert "Every seed below is currently unused and unopened" not in prereg
+    registry = (ROOT / "experiments/registry.yaml").read_text()
+    assert "historical_implementation: approved-recovery-base-and-authorization-child-pushed" in registry
+    assert not any(
+        line.strip() == "implementation: approved-recovery-base-and-authorization-child-pushed"
+        for line in registry.splitlines()
+    )
 
 
 def synthetic_repeat(module, config: dict, factor: float, identities: int = 96) -> dict:

@@ -48,9 +48,10 @@ SCREEN_TRAINING_ROOT = 20_261_153
 SCREEN_EVALUATION_ROOT = 20_261_154
 CONFIRMATION_ROOTS = frozenset((20_261_155, 20_261_156, 20_261_157, 20_261_158))
 EXP649_FORMAL_ROOT = 20_261_149
-PREREGISTERED_READINESS_CALIBRATION_ROOT = 20_261_161
+HISTORICAL_READINESS_CALIBRATION_ROOT = 20_261_161
+PREREGISTERED_READINESS_CALIBRATION_ROOT = 20_261_162
 CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS = frozenset(
-    (20_261_159, 20_261_160)
+    (20_261_159, 20_261_160, HISTORICAL_READINESS_CALIBRATION_ROOT)
 )
 
 
@@ -798,9 +799,11 @@ def verify_readiness_calibration_authorization(
     }
     allowed_root = (
         root == PREREGISTERED_READINESS_CALIBRATION_ROOT
+        or (root == HISTORICAL_READINESS_CALIBRATION_ROOT and not launch)
         or (root == TEST_ONLY_ROOT and allow_test_root)
     )
-    if root in prohibited or root <= 0 or not allowed_root:
+    historically_verifiable = root == HISTORICAL_READINESS_CALIBRATION_ROOT and not launch
+    if (root in prohibited and not historically_verifiable) or root <= 0 or not allowed_root:
         raise PermissionError("calibration authorization root is reused, test-only, or prohibited")
     if payload["decision"] != "authorize-non-scientific-screen-readiness-calibration-only":
         raise PermissionError("calibration authorization decision mismatch")
@@ -4427,6 +4430,9 @@ def screen_training_update(
     endpoint_loss_weight: float,
     config: dict[str, Any],
     exp300: Any,
+    *,
+    matched_work: dict[str, Any] | None = None,
+    arm: str | None = None,
 ) -> dict[str, Any]:
     if endpoint_loss_weight not in (0.0, 0.1):
         raise RuntimeError("EXP-648 screen endpoint coefficient changed")
@@ -4486,6 +4492,22 @@ def screen_training_update(
         )
     )
     optimizer.step()
+    if matched_work is not None:
+        if arm not in ("control", "challenger"):
+            raise RuntimeError("matched-work training arm is invalid")
+        for category, count in (
+            ("clean_forward_steps", WINDOW_LENGTH),
+            ("autonomous_forward_steps", WINDOW_LENGTH),
+            ("endpoint_loss_computations", 1),
+            ("clean_backward_calls", WINDOW_LENGTH),
+            ("endpoint_backward_calls", 1),
+            ("gradient_clip_calls", 1),
+            ("optimizer_steps", 1),
+        ):
+            record_matched_work(matched_work, arm, category, count)
+        record_actual_matched_work(
+            matched_work, arm, "training_update_calls", 1
+        )
     return {
         "base_clean_loss": clean_total / WINDOW_LENGTH,
         "endpoint_loss": float(endpoint_loss.detach()),
@@ -4627,6 +4649,9 @@ def evaluate_rollouts(model: Any, width: int, cases: dict[str, Any], exp300: Any
         "mean_clipped_first_error_index": sum(clipped) / len(clipped),
         "invalid_rollout_rate": sum(invalid) / len(invalid),
         "output_sha256": sha256_bytes(canonical_json_bytes(state)),
+        "prediction_trace_sha256": sha256_bytes(
+            canonical_json_bytes(prediction_trace)
+        ),
         "predictions": state,
         "teacher_targets": teacher,
         "first_error_indices": clipped,
@@ -4634,6 +4659,20 @@ def evaluate_rollouts(model: Any, width: int, cases: dict[str, Any], exp300: Any
         "prediction_trace": prediction_trace,
         "teacher_trace": teacher_trace,
     }
+
+
+def prediction_trajectory_repeat_deterministic(
+    first: dict[str, Any], second: dict[str, Any]
+) -> bool:
+    """Compare complete ordered predicted-state traces, never endpoint summaries."""
+    for payload in (first, second):
+        trace = payload.get("prediction_trace")
+        digest = payload.get("prediction_trace_sha256")
+        if not isinstance(trace, list) or digest != sha256_bytes(
+            canonical_json_bytes(trace)
+        ):
+            raise RuntimeError("exact-repeat prediction trajectory digest mismatch")
+    return first["prediction_trace_sha256"] == second["prediction_trace_sha256"]
 
 
 class ScreenGuard:
@@ -4927,6 +4966,8 @@ def write_screen_file(relative: str, payload: dict[str, Any]) -> tuple[Path, Pat
 
 
 def atomic_save_checkpoint(model: Any, path: Path) -> dict[str, Any]:
+    if path.exists():
+        raise RuntimeError("screen checkpoint path is immutable once created")
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
     save_file(model.state_dict(), temporary)
@@ -4956,10 +4997,19 @@ def atomic_save_checkpoint(model: Any, path: Path) -> dict[str, Any]:
 def prepare_checkpoints_for_evaluation(
     models: dict[str, Any], checkpoint_dir: Path,
     event_hook: Callable[[str], None] | None = None,
+    *, attempt_id: str | None = None,
+    receipt_hook: Callable[[str, dict[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
+    if attempt_id is not None and checkpoint_dir.name != "checkpoints":
+        raise RuntimeError("screen checkpoint directory must be attempt-local")
+    if attempt_id is not None and checkpoint_dir.parent.name != attempt_id:
+        raise RuntimeError("screen checkpoint directory does not bind the attempt ID")
     receipts = {}
     for arm in ("control", "challenger"):
         receipts[arm] = atomic_save_checkpoint(models[arm], checkpoint_dir / f"{arm}.safetensors")
+        receipts[arm]["attempt_id"] = attempt_id
+        if receipt_hook is not None:
+            receipt_hook(arm, copy.deepcopy(receipts[arm]))
         if event_hook is not None:
             event_hook(f"checkpoint-verified:{arm}")
     if set(receipts) != {"control", "challenger"} or not all(
@@ -4992,7 +5042,7 @@ def validate_evaluation_results(
         expected_keys = (
             {"cases", "exact_accuracy", "quotient_accuracy", "valid_residue_rate", "exact_vector", "output_sha256", "predictions", "quotient_predictions"}
             if mode == "transition" else
-            {"cases", "exact_accuracy", "exact_vector", "mean_clipped_first_error_index", "invalid_rollout_rate", "output_sha256", "predictions", "teacher_targets", "first_error_indices", "any_intermediate_invalid_vector", "prediction_trace", "teacher_trace"}
+            {"cases", "exact_accuracy", "exact_vector", "mean_clipped_first_error_index", "invalid_rollout_rate", "output_sha256", "prediction_trace_sha256", "predictions", "teacher_targets", "first_error_indices", "any_intermediate_invalid_vector", "prediction_trace", "teacher_trace"}
         )
         if set(result) != expected_keys:
             raise RuntimeError(f"screen cached result key schema mismatch for {unit}/{arm}")
@@ -5044,6 +5094,12 @@ def validate_evaluation_results(
                 raise RuntimeError(f"screen cached rollout initial prediction mismatch for {unit}/{arm}")
             if prediction_trace[-1] != predictions or teacher_trace[-1] != teacher:
                 raise RuntimeError(f"screen cached rollout endpoint trace mismatch for {unit}/{arm}")
+            if result.get("prediction_trace_sha256") != sha256_bytes(
+                canonical_json_bytes(prediction_trace)
+            ):
+                raise RuntimeError(
+                    f"screen cached rollout prediction trace hash mismatch for {unit}/{arm}"
+                )
             recomputed_teacher = [[0] * expected_count]
             recomputed_first: list[int | None] = [None] * expected_count
             recomputed_invalid = [False] * expected_count
@@ -5083,9 +5139,340 @@ def compact_evaluation_results(value: Any) -> Any:
     return value
 
 
+MATCHED_WORK_CATEGORIES = (
+    "clean_forward_steps",
+    "autonomous_forward_steps",
+    "endpoint_loss_computations",
+    "clean_backward_calls",
+    "endpoint_backward_calls",
+    "gradient_clip_calls",
+    "optimizer_steps",
+    "scheduler_steps",
+    "checkpoint_writes",
+    "checkpoint_reload_verifications",
+    "checkpoint_byte_hashes",
+    "checkpoint_receipt_serializations",
+    "transition_evaluation_cases",
+    "rollout_evaluation_cases",
+    "rollout_evaluation_steps",
+    "evaluation_result_hashes",
+    "evaluation_result_serializations",
+)
+
+MATCHED_ACTUAL_OPERATION_CATEGORIES = (
+    "training_update_calls",
+    "scheduler_step_calls",
+    "checkpoint_save_reload_hash_calls",
+    "checkpoint_receipt_persist_calls",
+    "fresh_evaluator_calls",
+    "fresh_result_hashes",
+    "fresh_result_serializations",
+    "cache_record_validations",
+    "cache_per_arm_receipt_validations",
+    "cached_result_digest_validations",
+    "cache_reuse_operations",
+)
+
+
+def create_matched_work_accounting() -> dict[str, Any]:
+    """Create independent per-arm work ledgers; data-order hashes never enter them."""
+    return {
+        "schema_version": "exp648-matched-work-accounting-v1",
+        "categories": list(MATCHED_WORK_CATEGORIES),
+        "actual_operation_categories": list(MATCHED_ACTUAL_OPERATION_CATEGORIES),
+        "arms": {
+            arm: {
+                "counts": {category: 0 for category in MATCHED_WORK_CATEGORIES},
+                "ordered_events": [],
+                "actual_counts": {
+                    category: 0 for category in MATCHED_ACTUAL_OPERATION_CATEGORIES
+                },
+                "ordered_actual_operations": [],
+            }
+            for arm in ("control", "challenger")
+        },
+    }
+
+
+def record_matched_work(
+    accounting: dict[str, Any], arm: str, category: str, count: int = 1,
+    *, unit: str | None = None,
+) -> None:
+    if arm not in ("control", "challenger") or category not in MATCHED_WORK_CATEGORIES:
+        raise RuntimeError("matched-work event schema mismatch")
+    if type(count) is not int or count < 0:
+        raise RuntimeError("matched-work count must be a nonnegative integer")
+    event = {"category": category, "count": count, "unit": unit}
+    accounting["arms"][arm]["counts"][category] += count
+    accounting["arms"][arm]["ordered_events"].append(event)
+
+
+def record_actual_matched_work(
+    accounting: dict[str, Any], arm: str, operation: str, count: int = 1,
+    *, unit: str | None = None, evidence_sha256: str | None = None,
+) -> None:
+    if (
+        arm not in ("control", "challenger")
+        or operation not in MATCHED_ACTUAL_OPERATION_CATEGORIES
+        or type(count) is not int
+        or count < 0
+    ):
+        raise RuntimeError("matched-work actual operation schema mismatch")
+    if evidence_sha256 is not None and not re.fullmatch(r"[0-9a-f]{64}", evidence_sha256):
+        raise RuntimeError("matched-work actual evidence hash mismatch")
+    event = {
+        "operation": operation,
+        "count": count,
+        "unit": unit,
+        "evidence_sha256": evidence_sha256,
+    }
+    record = accounting["arms"][arm]
+    record["actual_counts"][operation] += count
+    record["ordered_actual_operations"].append(event)
+
+
+def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
+    if (
+        accounting.get("schema_version") != "exp648-matched-work-accounting-v1"
+        or accounting.get("categories") != list(MATCHED_WORK_CATEGORIES)
+        or accounting.get("actual_operation_categories")
+        != list(MATCHED_ACTUAL_OPERATION_CATEGORIES)
+        or set(accounting.get("arms", {})) != {"control", "challenger"}
+    ):
+        raise RuntimeError("matched-work accounting schema mismatch")
+    per_arm = {}
+    for arm in ("control", "challenger"):
+        record = accounting["arms"][arm]
+        if set(record) != {
+            "counts", "ordered_events", "actual_counts",
+            "ordered_actual_operations",
+        }:
+            raise RuntimeError("matched-work arm schema mismatch")
+        if set(record["counts"]) != set(MATCHED_WORK_CATEGORIES):
+            raise RuntimeError("matched-work category set mismatch")
+        recomputed = {category: 0 for category in MATCHED_WORK_CATEGORIES}
+        for event in record["ordered_events"]:
+            if (
+                set(event) != {"category", "count", "unit"}
+                or event["category"] not in recomputed
+                or type(event["count"]) is not int
+                or event["count"] < 0
+            ):
+                raise RuntimeError("matched-work ordered event mismatch")
+            recomputed[event["category"]] += event["count"]
+        if recomputed != record["counts"]:
+            raise RuntimeError("matched-work counts do not recompute")
+        recomputed_actual = {
+            category: 0 for category in MATCHED_ACTUAL_OPERATION_CATEGORIES
+        }
+        operation_projection = []
+        bound_actual_events = []
+        for event in record["ordered_actual_operations"]:
+            if (
+                set(event)
+                != {"operation", "count", "unit", "evidence_sha256"}
+                or event["operation"] not in recomputed_actual
+                or type(event["count"]) is not int
+                or event["count"] < 0
+                or (
+                    event["evidence_sha256"] is not None
+                    and not re.fullmatch(r"[0-9a-f]{64}", event["evidence_sha256"])
+                )
+            ):
+                raise RuntimeError("matched-work actual event mismatch")
+            recomputed_actual[event["operation"]] += event["count"]
+            operation_projection.append({
+                key: event[key] for key in ("operation", "count", "unit")
+            })
+            bound_actual_events.append(event)
+        if recomputed_actual != record["actual_counts"]:
+            raise RuntimeError("matched-work actual counts do not recompute")
+        training_calls = recomputed_actual["training_update_calls"]
+        checkpoint_calls = recomputed_actual[
+            "checkpoint_save_reload_hash_calls"
+        ]
+        evaluation_paths = (
+            recomputed_actual["fresh_evaluator_calls"]
+            + recomputed_actual["cache_reuse_operations"]
+        )
+        declared_to_actual_valid = bool(
+            recomputed["clean_forward_steps"]
+            == recomputed["autonomous_forward_steps"]
+            == recomputed["clean_backward_calls"]
+            == WINDOW_LENGTH * training_calls
+            and recomputed["endpoint_loss_computations"]
+            == recomputed["endpoint_backward_calls"]
+            == recomputed["gradient_clip_calls"]
+            == recomputed["optimizer_steps"]
+            == training_calls
+            and recomputed["scheduler_steps"]
+            == recomputed_actual["scheduler_step_calls"]
+            and recomputed["checkpoint_writes"]
+            == recomputed["checkpoint_reload_verifications"]
+            == recomputed["checkpoint_byte_hashes"]
+            == checkpoint_calls
+            and recomputed["checkpoint_receipt_serializations"]
+            == recomputed_actual["checkpoint_receipt_persist_calls"]
+            and recomputed["evaluation_result_hashes"]
+            == recomputed["evaluation_result_serializations"]
+            == evaluation_paths
+            and recomputed_actual["fresh_result_hashes"]
+            == recomputed_actual["fresh_result_serializations"]
+            == recomputed_actual["fresh_evaluator_calls"]
+            and recomputed_actual["cache_record_validations"]
+            == recomputed_actual["cache_per_arm_receipt_validations"]
+            == recomputed_actual["cached_result_digest_validations"]
+            == recomputed_actual["cache_reuse_operations"]
+        )
+        per_arm[arm] = {
+            "counts": recomputed,
+            "ordered_event_count": len(record["ordered_events"]),
+            "ordered_work_sha256": sha256_bytes(
+                canonical_json_bytes(record["ordered_events"])
+            ),
+            "total_declared_work_units": sum(recomputed.values()),
+            "actual_operation_counts": recomputed_actual,
+            "actual_operation_event_count": len(operation_projection),
+            "actual_operation_schedule_sha256": sha256_bytes(
+                canonical_json_bytes(operation_projection)
+            ),
+            "actual_operation_evidence_sha256": sha256_bytes(
+                canonical_json_bytes(bound_actual_events)
+            ),
+            "declared_to_actual_cross_binding_valid": declared_to_actual_valid,
+        }
+    required_positive = set(MATCHED_WORK_CATEGORIES)
+    complete = all(
+        per_arm[arm]["counts"][category] > 0
+        for arm in ("control", "challenger")
+        for category in required_positive
+    )
+    effective_equal = all(
+        per_arm["control"][key] == per_arm["challenger"][key]
+        for key in (
+            "counts", "ordered_event_count", "ordered_work_sha256",
+            "total_declared_work_units",
+        )
+    )
+    actual_equal = all(
+        per_arm["control"][key] == per_arm["challenger"][key]
+        for key in (
+            "actual_operation_counts", "actual_operation_event_count",
+            "actual_operation_schedule_sha256",
+        )
+    )
+    actual_paths_valid = True
+    for arm in ("control", "challenger"):
+        counts = per_arm[arm]["actual_operation_counts"]
+        actual_paths_valid = actual_paths_valid and all(
+            counts[key] > 0
+            for key in (
+                "training_update_calls", "scheduler_step_calls",
+                "checkpoint_save_reload_hash_calls",
+                "checkpoint_receipt_persist_calls",
+            )
+        )
+        fresh = counts["fresh_evaluator_calls"]
+        cached = counts["cache_reuse_operations"]
+        actual_paths_valid = actual_paths_valid and fresh + cached > 0
+        if fresh:
+            actual_paths_valid = actual_paths_valid and (
+                counts["fresh_result_hashes"] == fresh
+                and counts["fresh_result_serializations"] == fresh
+            )
+        if cached:
+            actual_paths_valid = actual_paths_valid and (
+                counts["cache_record_validations"] == cached
+                and counts["cache_per_arm_receipt_validations"] == cached
+                and counts["cached_result_digest_validations"] == cached
+            )
+    declared_to_actual_cross_binding_valid = all(
+        per_arm[arm]["declared_to_actual_cross_binding_valid"]
+        for arm in ("control", "challenger")
+    )
+    return {
+        "schema_version": "exp648-matched-work-receipt-v1",
+        "independent_from_paired_data_order": True,
+        "per_arm": per_arm,
+        "all_declared_categories_observed": complete,
+        "per_arm_effective_counts_and_ordered_digests_equal": effective_equal,
+        "per_arm_actual_operation_counts_and_schedules_equal": actual_equal,
+        "truthful_fresh_or_valid_cache_paths": actual_paths_valid,
+        "declared_to_actual_cross_binding_valid": declared_to_actual_cross_binding_valid,
+        "valid": bool(
+            complete and effective_equal and actual_equal
+            and actual_paths_valid and declared_to_actual_cross_binding_valid
+        ),
+    }
+
+
+def evaluation_cache_work_receipts(
+    *, unit: str, width: int, cases_sha256: str,
+    expected_count: int, results: dict[str, Any],
+) -> dict[str, Any]:
+    arms = {}
+    for arm in ("control", "challenger"):
+        result_sha = sha256_bytes(canonical_json_bytes(results[arm]))
+        core = {
+            "schema_version": "exp648-evaluation-cache-arm-work-v1",
+            "arm": arm,
+            "unit": unit,
+            "width": width,
+            "cases": expected_count,
+            "cases_sha256": cases_sha256,
+            "execution_path": "fresh-explicit-evaluator-call",
+            "result_canonical_sha256": result_sha,
+            "output_sha256": results[arm]["output_sha256"],
+        }
+        arms[arm] = {
+            **core,
+            "receipt_sha256": sha256_bytes(canonical_json_bytes(core)),
+        }
+    return {
+        "schema_version": "exp648-evaluation-cache-work-receipts-v1",
+        "arms": arms,
+    }
+
+
+def validate_evaluation_cache_work_receipts(
+    *, receipts: dict[str, Any], unit: str, width: int,
+    cases_sha256: str, expected_count: int, results: dict[str, Any],
+) -> None:
+    if (
+        not isinstance(receipts, dict)
+        or set(receipts) != {"schema_version", "arms"}
+        or receipts["schema_version"]
+        != "exp648-evaluation-cache-work-receipts-v1"
+        or set(receipts.get("arms", {})) != {"control", "challenger"}
+    ):
+        raise RuntimeError(f"screen cached matched-work receipt schema mismatch for {unit}")
+    for arm in ("control", "challenger"):
+        receipt = receipts["arms"][arm]
+        core = {
+            "schema_version": "exp648-evaluation-cache-arm-work-v1",
+            "arm": arm,
+            "unit": unit,
+            "width": width,
+            "cases": expected_count,
+            "cases_sha256": cases_sha256,
+            "execution_path": "fresh-explicit-evaluator-call",
+            "result_canonical_sha256": sha256_bytes(
+                canonical_json_bytes(results[arm])
+            ),
+            "output_sha256": results[arm]["output_sha256"],
+        }
+        if receipt != {
+            **core, "receipt_sha256": sha256_bytes(canonical_json_bytes(core))
+        }:
+            raise RuntimeError(
+                f"screen cached matched-work receipt/result mismatch for {unit}/{arm}"
+            )
+
+
 def load_or_evaluate_unit(
     *, unit: str, cases: dict[str, Any], models: dict[str, Any], evaluator: Callable[..., dict[str, Any]],
     width: int, exp300: Any, key_fields: dict[str, Any], guard: ScreenGuard,
+    matched_work: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], bool]:
     cases_sha = sha256_bytes(canonical_json_bytes(cases))
     key = sha256_bytes(canonical_json_bytes({"unit": unit, "cases_sha256": cases_sha, "key_fields": key_fields}))
@@ -5103,6 +5490,10 @@ def load_or_evaluate_unit(
             or observed_core != sha256_bytes(canonical_json_bytes(core))
         ):
             raise RuntimeError(f"screen evaluation recovery provenance mismatch for {unit}")
+        expected_count = len(
+            cases["state"]
+            if unit.startswith("transition-") else cases["multiplier"]
+        )
         timing = record.get("timing", {})
         if set(timing) != {"wall_seconds", "aggregate_cpu_seconds", "peak_rss_bytes"} or any(
             not isinstance(timing[key], (int, float)) or not math.isfinite(float(timing[key])) or float(timing[key]) < 0
@@ -5110,22 +5501,92 @@ def load_or_evaluate_unit(
         ):
             raise RuntimeError(f"screen evaluation cache timing mismatch for {unit}")
         validate_evaluation_results(unit=unit, width=width, cases=cases, results=record["results"])
+        validate_evaluation_cache_work_receipts(
+            receipts=record.get("matched_work_receipts"), unit=unit,
+            width=width, cases_sha256=cases_sha, expected_count=expected_count,
+            results=record["results"],
+        )
         guard.add_reused(timing, f"evaluation-cache:{unit}")
+        if matched_work is not None:
+            record_evaluation_matched_work(
+                matched_work, unit, width, expected_count=expected_count
+            )
+            for arm in ("control", "challenger"):
+                receipt = record["matched_work_receipts"]["arms"][arm]
+                for operation in (
+                    "cache_record_validations",
+                    "cache_per_arm_receipt_validations",
+                    "cached_result_digest_validations",
+                    "cache_reuse_operations",
+                ):
+                    record_actual_matched_work(
+                        matched_work, arm, operation, 1, unit=unit,
+                        evidence_sha256=receipt["receipt_sha256"],
+                    )
         return record["results"], True
+    expected_count = len(
+        cases["state"] if unit.startswith("transition-") else cases["multiplier"]
+    )
     measurement = cal.Measurement(guard.process)
-    results = {arm: evaluator(model, width, cases, exp300) for arm, model in models.items()}
+    results = {}
+    for arm in ("control", "challenger"):
+        results[arm] = evaluator(models[arm], width, cases, exp300)
+        if matched_work is not None:
+            record_actual_matched_work(
+                matched_work, arm, "fresh_evaluator_calls", 1, unit=unit
+            )
     validate_evaluation_results(unit=unit, width=width, cases=cases, results=results)
     timing = measurement.stop().payload()
+    work_receipts = evaluation_cache_work_receipts(
+        unit=unit, width=width, cases_sha256=cases_sha,
+        expected_count=expected_count, results=results,
+    )
     record = {
         "schema_version": "exp648-screen-evaluation-cache-v1", "complete": True,
         "unit": unit, "cases_sha256": cases_sha, "key_fields": key_fields,
         "results": results,
+        "matched_work_receipts": work_receipts,
         "timing": {"wall_seconds": timing["wall_seconds"], "aggregate_cpu_seconds": timing["aggregate_cpu_seconds"], "peak_rss_bytes": timing["peak_rss_bytes"]},
     }
     record["core_sha256"] = sha256_bytes(canonical_json_bytes(record))
     _atomic_write(path, canonical_json_bytes(record, pretty=True))
+    if matched_work is not None:
+        record_evaluation_matched_work(
+            matched_work, unit, width, expected_count=expected_count
+        )
+        for arm in ("control", "challenger"):
+            receipt_sha = work_receipts["arms"][arm]["receipt_sha256"]
+            record_actual_matched_work(
+                matched_work, arm, "fresh_result_hashes", 1, unit=unit,
+                evidence_sha256=receipt_sha,
+            )
+            record_actual_matched_work(
+                matched_work, arm, "fresh_result_serializations", 1, unit=unit,
+                evidence_sha256=receipt_sha,
+            )
     guard.check(f"evaluation:{unit}")
     return results, False
+
+
+def record_evaluation_matched_work(
+    accounting: dict[str, Any], unit: str, width: int, *, expected_count: int
+) -> None:
+    category = (
+        "transition_evaluation_cases"
+        if unit.startswith("transition-")
+        else "rollout_evaluation_cases"
+    )
+    for arm in ("control", "challenger"):
+        record_matched_work(accounting, arm, category, expected_count, unit=unit)
+        if category == "rollout_evaluation_cases":
+            record_matched_work(
+                accounting, arm, "rollout_evaluation_steps",
+                expected_count * width, unit=unit,
+            )
+        record_matched_work(accounting, arm, "evaluation_result_hashes", 1, unit=unit)
+        record_matched_work(
+            accounting, arm, "evaluation_result_serializations", 1, unit=unit
+        )
 
 
 def replay_frozen_corpus_from_source(
@@ -5243,6 +5704,7 @@ class ScreenExperiment:
         self.ledger.update(phase="training", frozen_corpus_semantic_replay=semantic_replay)
         histories = {"control": [], "challenger": []}
         batch_hashes = {"control": [], "challenger": []}
+        matched_work = create_matched_work_accounting()
         updates = int(self.config["screen"]["updates_per_arm"])
         order = frozen_root_pair_order(
             len(pairs), corpus_verification["corpus_manifest_sha256"]
@@ -5271,9 +5733,15 @@ class ScreenExperiment:
                         float(self.config["matched_arms"][arm]["endpoint_loss_weight"]),
                         self.config,
                         self.exp300,
+                        matched_work=matched_work,
+                        arm=arm,
                     )
                 )
                 schedulers[arm].step()
+                record_matched_work(matched_work, arm, "scheduler_steps", 1)
+                record_actual_matched_work(
+                    matched_work, arm, "scheduler_step_calls", 1
+                )
                 self.guard.check(f"training:{arm}:update:{update}")
             self.ledger.state["completed_updates"] = {
                 "control": update + 1, "challenger": update + 1
@@ -5294,8 +5762,27 @@ class ScreenExperiment:
 
         # Both durable, hash-verified checkpoints exist before the first
         # evaluation input is generated or evaluator is invoked.
-        checkpoint_dir = SCRATCH_SCREEN_DIR / "checkpoints"
-        checkpoint_hashes = prepare_checkpoints_for_evaluation(models, checkpoint_dir)
+        checkpoint_dir = self.ledger.directory / "checkpoints"
+        def persist_checkpoint_receipt(arm: str, receipt: dict[str, Any]) -> None:
+            self.ledger.state["verified_checkpoints"][arm] = receipt
+            self.ledger.persist()
+            for category in (
+                "checkpoint_writes", "checkpoint_reload_verifications",
+                "checkpoint_byte_hashes", "checkpoint_receipt_serializations",
+            ):
+                record_matched_work(matched_work, arm, category, 1)
+            record_actual_matched_work(
+                matched_work, arm, "checkpoint_save_reload_hash_calls", 1,
+                evidence_sha256=receipt["sha256"],
+            )
+            record_actual_matched_work(
+                matched_work, arm, "checkpoint_receipt_persist_calls", 1,
+                evidence_sha256=sha256_bytes(canonical_json_bytes(receipt)),
+            )
+        checkpoint_hashes = prepare_checkpoints_for_evaluation(
+            models, checkpoint_dir, attempt_id=self.ledger.attempt_id,
+            receipt_hook=persist_checkpoint_receipt,
+        )
         write_screen_file("checkpoints.json", {
             "schema_version": "exp648-screen-checkpoints-v1",
             "authorization_sha256": sha256(self.authorization_path),
@@ -5322,6 +5809,7 @@ class ScreenExperiment:
                 unit=f"transition-{width}", cases=cases, models=models,
                 evaluator=evaluate_transitions, width=int(width), exp300=self.exp300,
                 key_fields=key_fields, guard=self.guard,
+                matched_work=matched_work,
             )
             evaluation["transitions"][str(width)] = result
             reused_units.append({"unit": f"transition-{width}", "reused": reused})
@@ -5340,6 +5828,7 @@ class ScreenExperiment:
                 unit=f"rollout-{width}", cases=cases, models=models,
                 evaluator=evaluate_rollouts, width=int(width), exp300=self.exp300,
                 key_fields=key_fields, guard=self.guard,
+                matched_work=matched_work,
             )
             evaluation["rollouts"][str(width)] = result
             reused_units.append({"unit": f"rollout-{width}", "reused": reused})
@@ -5357,11 +5846,13 @@ class ScreenExperiment:
             unit="exact-repeat-first-256", cases=repeat_cases, models=models,
             evaluator=evaluate_rollouts, width=int(spec["exact_repeat_width"]),
             exp300=self.exp300, key_fields=key_fields, guard=self.guard,
+            matched_work=matched_work,
         )
         repeat_second, reused_second = load_or_evaluate_unit(
             unit="exact-repeat-second-256", cases=repeat_cases, models=models,
             evaluator=evaluate_rollouts, width=int(spec["exact_repeat_width"]),
             exp300=self.exp300, key_fields=key_fields, guard=self.guard,
+            matched_work=matched_work,
         )
         reused_units.extend([
             {"unit": "exact-repeat-first-256", "reused": reused_first},
@@ -5377,8 +5868,11 @@ class ScreenExperiment:
             exact_repeat[arm] = {
                 "first": first,
                 "second": second,
-                "deterministic": first["output_sha256"] == second["output_sha256"],
+                "deterministic": prediction_trajectory_repeat_deterministic(
+                    first, second
+                ),
             }
+        matched_work_receipt = finalize_matched_work(matched_work)
         width256_drift = cal.paired_drift_counts(
             evaluation["rollouts"]["256"]["control"]["exact_vector"],
             evaluation["rollouts"]["256"]["challenger"]["exact_vector"],
@@ -5426,7 +5920,7 @@ class ScreenExperiment:
             == self.evaluator_sha256,
             "dependency_manifest_valid": self.dependencies["manifest_sha256"]
             == PINNED["dependency_manifest_sha256"],
-            "matched_work_valid": batch_hashes["control"] == batch_hashes["challenger"],
+            "matched_work_valid": matched_work_receipt["valid"],
             "control_exact_repeat_deterministic": exact_repeat["control"][
                 "deterministic"
             ],
@@ -5454,6 +5948,7 @@ class ScreenExperiment:
             "frozen_corpus_semantic_replay": semantic_replay,
             "ordered_pair_permutation_sha256": sha256_bytes(canonical_json_bytes(order)),
             "ordered_batch_sha256": sha256_bytes(canonical_json_bytes(batch_hashes["control"])),
+            "matched_work": matched_work_receipt,
             "histories": histories,
             "evaluation": compact_evaluation_results(evaluation),
             "exact_repeat": compact_evaluation_results(exact_repeat),
@@ -5614,9 +6109,27 @@ def finalize_screen_evidence(
     )
     for name in names:
         _atomic_write(attempt_tracked / name, (TRACKED_SCREEN_DIR / name).read_bytes())
+    checkpoint_artifacts = {}
+    for arm in ("control", "challenger"):
+        receipt = result["checkpoint_hashes"][arm]
+        if receipt.get("attempt_id") != ledger.attempt_id:
+            raise RuntimeError("screen checkpoint receipt is not bound to this attempt")
+        source = ROOT / receipt["path"]
+        if not source.is_file() or sha256(source) != receipt["sha256"]:
+            raise RuntimeError("screen checkpoint bytes changed before sealing")
+        relative = f"checkpoints/{arm}.safetensors"
+        destination = attempt_tracked / relative
+        _atomic_write(destination, source.read_bytes())
+        if sha256(destination) != receipt["sha256"]:
+            raise RuntimeError("sealed screen checkpoint copy hash mismatch")
+        checkpoint_artifacts[relative] = receipt["sha256"]
     ledger.update(phase="sealed", gates_computed=True, complete=True)
     _atomic_write(attempt_tracked / "attempt-state.json", (ledger.directory / "attempt-state.json").read_bytes())
-    hashes = {name: sha256(attempt_tracked / name) for name in (*names, "attempt-state.json")}
+    hashes = {
+        name: sha256(attempt_tracked / name)
+        for name in (*names, "attempt-state.json")
+    }
+    hashes.update(checkpoint_artifacts)
     seal = {
         "schema_version": "exp648-screen-completion-seal-v1",
         "attempt_id": ledger.attempt_id, "authorization_sha256": result["authorization_sha256"],
@@ -5648,7 +6161,9 @@ def verify_screen_completion_seal(
     seal = json.loads(seal_raw)
     if seal_raw != canonical_json_bytes(seal, pretty=True) or set(seal) != {"schema_version", "attempt_id", "authorization_sha256", "artifacts", "complete"} or seal.get("complete") is not True:
         raise RuntimeError("screen completion seal schema mismatch")
-    required = {"first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json", "metrics.json", "integrity.json", "mlflow.json", "final-timing.json", "attempt-state.json"}
+    if seal.get("attempt_id") != pointer["attempt_id"]:
+        raise RuntimeError("screen completion seal attempt ID mismatch")
+    required = {"first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json", "metrics.json", "integrity.json", "mlflow.json", "final-timing.json", "attempt-state.json", "checkpoints/control.safetensors", "checkpoints/challenger.safetensors"}
     if set(seal["artifacts"]) != required:
         raise RuntimeError("screen completion artifact set mismatch")
     for name, digest in seal["artifacts"].items():
@@ -5657,6 +6172,31 @@ def verify_screen_completion_seal(
     attempt_state = json.loads((attempt / "attempt-state.json").read_bytes())
     run = json.loads((attempt / "run.json").read_bytes())
     integrity = json.loads((attempt / "integrity.json").read_bytes())
+    checkpoint_receipt = json.loads((attempt / "checkpoints.json").read_bytes())
+    authorization_sha256 = seal.get("authorization_sha256")
+    if (
+        attempt_state.get("phase") != "sealed"
+        or attempt_state.get("complete") is not True
+        or attempt_state.get("gates_computed") is not True
+    ):
+        raise RuntimeError("screen sealed attempt state is not terminal-complete")
+    if (
+        not isinstance(authorization_sha256, str)
+        or not re.fullmatch(r"[0-9a-f]{64}", authorization_sha256)
+        or attempt_state.get("authorization_sha256") != authorization_sha256
+        or run.get("authorization_sha256") != authorization_sha256
+        or integrity.get("authorization_sha256") != authorization_sha256
+        or checkpoint_receipt.get("authorization_sha256") != authorization_sha256
+    ):
+        raise RuntimeError("screen sealed authorization binding mismatch")
+    for arm in ("control", "challenger"):
+        receipt = checkpoint_receipt.get("checkpoint_hashes", {}).get(arm, {})
+        if (
+            receipt.get("attempt_id") != pointer["attempt_id"]
+            or receipt.get("sha256")
+            != seal["artifacts"][f"checkpoints/{arm}.safetensors"]
+        ):
+            raise RuntimeError("screen sealed checkpoint receipt/bytes mismatch")
     launch_attempt_id = attempt_state.get("launch_attempt_id")
     expected_orchestration = {
         "launch_attempt_id": launch_attempt_id,
@@ -5687,6 +6227,83 @@ def verify_screen_completion_seal(
         ):
             raise RuntimeError("screen terminal reciprocal launch/scientific pair mismatch")
     return seal
+
+
+def inventory_attempt_checkpoint_artifacts(
+    checkpoint_dir: Path, receipts: dict[str, Any]
+) -> dict[str, Any]:
+    """Inventory every direct checkpoint artifact without following unsafe links."""
+    artifacts = []
+    unsafe_entries = []
+    if os.path.lexists(checkpoint_dir) and checkpoint_dir.is_symlink():
+        return {
+            "checkpoint_directory": checkpoint_dir.as_posix(),
+            "directory_present": True,
+            "artifacts": [],
+            "unsafe_entries": [{
+                "name": checkpoint_dir.name,
+                "kind": "checkpoint-directory-symlink",
+            }],
+            "all_entries_regular_files": False,
+            "all_artifacts_receipt_bound": False,
+        }
+    if checkpoint_dir.exists() and not checkpoint_dir.is_dir():
+        return {
+            "checkpoint_directory": checkpoint_dir.as_posix(),
+            "directory_present": True,
+            "artifacts": [],
+            "unsafe_entries": [{
+                "name": checkpoint_dir.name,
+                "kind": "checkpoint-directory-is-not-a-directory",
+            }],
+            "all_entries_regular_files": False,
+            "all_artifacts_receipt_bound": False,
+        }
+    if checkpoint_dir.is_dir():
+        for entry in sorted(checkpoint_dir.iterdir(), key=lambda value: value.name):
+            mode = entry.lstat().st_mode
+            if stat.S_ISREG(mode):
+                digest = sha256(entry)
+                matching = [
+                    arm for arm, receipt in receipts.items()
+                    if isinstance(receipt, dict)
+                    and Path(str(receipt.get("path", ""))).name == entry.name
+                ]
+                if len(matching) == 0:
+                    binding_status = "unbound-no-receipt"
+                elif len(matching) > 1:
+                    binding_status = "ambiguous-multiple-receipts"
+                elif receipts[matching[0]].get("sha256") != digest:
+                    binding_status = "receipt-hash-mismatch"
+                else:
+                    binding_status = "receipt-bound"
+                artifacts.append({
+                    "name": entry.name,
+                    "sha256": digest,
+                    "bytes": entry.stat(follow_symlinks=False).st_size,
+                    "matching_receipt_arms": matching,
+                    "exactly_one_matching_arm_receipt": len(matching) == 1,
+                    "binding_status": binding_status,
+                    "receipt_binds_bytes": binding_status == "receipt-bound",
+                })
+            else:
+                kind = (
+                    "symlink" if stat.S_ISLNK(mode)
+                    else "directory" if stat.S_ISDIR(mode)
+                    else "non-regular"
+                )
+                unsafe_entries.append({"name": entry.name, "kind": kind})
+    return {
+        "checkpoint_directory": checkpoint_dir.as_posix(),
+        "directory_present": checkpoint_dir.is_dir(),
+        "artifacts": artifacts,
+        "unsafe_entries": unsafe_entries,
+        "all_entries_regular_files": not unsafe_entries,
+        "all_artifacts_receipt_bound": bool(artifacts) and all(
+            artifact["binding_status"] == "receipt-bound"
+            for artifact in artifacts
+        ),
+    }
 
 
 def preserve_screen_failure(
@@ -5729,6 +6346,27 @@ def preserve_screen_failure(
         experiment.ledger.state["final_timing"] = experiment.guard.timing()
         experiment.ledger.persist()
         state = experiment.ledger.state
+    checkpoint_directory = (
+        experiment.ledger.directory / "checkpoints"
+        if experiment is not None else SCRATCH_SCREEN_DIR / "absent-attempt/checkpoints"
+    )
+    checkpoint_inventory = inventory_attempt_checkpoint_artifacts(
+        checkpoint_directory, state.get("verified_checkpoints", {})
+    )
+    preserved_checkpoints = {}
+    for arm, receipt in state.get("verified_checkpoints", {}).items():
+        path_text = receipt.get("path") if isinstance(receipt, dict) else None
+        path = ROOT / path_text if isinstance(path_text, str) else None
+        preserved_checkpoints[arm] = {
+            "receipt": receipt,
+            "bytes_present": bool(path is not None and path.is_file()),
+            "observed_sha256": sha256(path) if path is not None and path.is_file() else None,
+            "receipt_hash_matches_preserved_bytes": bool(
+                path is not None
+                and path.is_file()
+                and sha256(path) == receipt.get("sha256")
+            ),
+        }
     payload = {
         "schema_version": "exp648-screen-incomplete-v1",
         "status": status, "stage": stage, "phase": phase,
@@ -5742,6 +6380,8 @@ def preserve_screen_failure(
         "completed_evaluation_units": state.get("completed_evaluation_units", []),
         "cache_receipts": state.get("cache_receipts", []),
         "verified_checkpoints": state.get("verified_checkpoints", {}),
+        "preserved_checkpoint_bytes": preserved_checkpoints,
+        "attempt_checkpoint_artifact_inventory": checkpoint_inventory,
         "first_quarter": state.get("first_quarter"),
         "environment_sha256": state.get("environment_sha256"),
         "recovery_instructions": "Reuse only complete hash-validated checkpoints/evaluation units under the same committed authorization and binding; otherwise start a new attempt.",

@@ -1,7 +1,14 @@
 run_id: exp-648-structured-trajectory-consistency
-status: failed-readiness-root-20261160-recovery-repaired-awaiting-closure-audits-and-judge
+status: scientific-scaffold-repaired-awaiting-readiness-recalibration-audits-and-judge
 hypothesis: A fixed K=8 endpoint-consistency loss on natural model-generated width-256 trajectories improves exact autonomous rollout by at least three percentage points over a matched clean-loss control without harming width-64 or width-128 retention.
-phase: matched-width256-screen-blocked-pending-corpus-hash-freeze-and-judge
+phase: r3-scaffold-repair-awaiting-closure-before-root161-preservation-and-root162-reconstruction
+current_lifecycle:
+  corpus: consumed-complete-immutable-historical
+  root_20261161: consumed-complete-non-scientific-sealed-non-retryable-historical
+  root_20261162: reserved-unopened-unauthorized-current-post-repair-readiness-root
+  old_authorization_source_and_scaffold: historical-pre-repair-cannot-bind-repaired-bytes
+  screen_and_scientific_execution: prohibited
+  next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
 tracking: {experiment_name: sair-modular-arithmetic-wsl}
 preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
 source_note: knowledge/autoresearch/research/2026-07-20-structured-trajectory-consistency.md
@@ -24,15 +31,19 @@ executable_dependency_sources:
   manifest_sha256: a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc
 
 seed_roles:
-  calibration_root: {seed: 20261151, status_at_preregistration: unused-unopened, role: resource-calibration-only}
-  corpus_root: {seed: 20261152, status_at_preregistration: unused-unopened, role: generated-training-split-corpus-only}
-  screen_training_root: {seed: 20261153, status_at_preregistration: unused-unopened, role: screen-training-order-and-arm-cloning}
-  screen_evaluation_root: {seed: 20261154, status_at_preregistration: unused-unopened, role: screen-paired-evaluation-only}
-  confirmation_1_training_root: {seed: 20261155, status_at_preregistration: unused-unopened, role: confirmation-1-training-order-and-arm-cloning}
-  confirmation_1_evaluation_root: {seed: 20261156, status_at_preregistration: unused-unopened, role: confirmation-1-paired-evaluation-only}
-  confirmation_2_training_root: {seed: 20261157, status_at_preregistration: unused-unopened, role: confirmation-2-training-order-and-arm-cloning}
-  confirmation_2_evaluation_root: {seed: 20261158, status_at_preregistration: unused-unopened, role: confirmation-2-paired-evaluation-only}
+  calibration_root: {seed: 20261151, status_at_preregistration: unused-unopened, current_status: consumed-historical-non-scientific, role: resource-calibration-only}
+  corpus_root: {seed: 20261152, status_at_preregistration: unused-unopened, current_status: consumed-complete-immutable, role: generated-training-split-corpus-only}
+  screen_training_root: {seed: 20261153, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: screen-training-order-and-arm-cloning}
+  screen_evaluation_root: {seed: 20261154, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: screen-paired-evaluation-only}
+  confirmation_1_training_root: {seed: 20261155, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: confirmation-1-training-order-and-arm-cloning}
+  confirmation_1_evaluation_root: {seed: 20261156, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: confirmation-1-paired-evaluation-only}
+  confirmation_2_training_root: {seed: 20261157, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: confirmation-2-training-order-and-arm-cloning}
+  confirmation_2_evaluation_root: {seed: 20261158, status_at_preregistration: unused-unopened, current_status: unopened-prohibited, role: confirmation-2-paired-evaluation-only}
+  rejected_readiness_root: {seed: 20261159, current_status: consumed-superseded-historical, role: historical-readiness-only}
+  failed_readiness_root: {seed: 20261160, current_status: consumed-incomplete-permanently-denied-historical, role: historical-readiness-only}
+  completed_readiness_root: {seed: 20261161, current_status: consumed-complete-sealed-non-retryable-historical, role: historical-readiness-only}
   scaffold_test_only_root: {seed: 648900001, status_at_preregistration: reserved-unopened, role: scaffold-tests-only-never-experiment-evidence}
+  post_repair_readiness_calibration_root: {seed: 20261162, status_at_preregistration: reserved-unopened-unauthorized, current_status: reserved-unopened-unauthorized, role: post-repair-resource-readiness-only}
   excluded_surfaces:
     - checked-public benchmark inputs and answers
     - prior independent benchmark inputs and answers
@@ -40,6 +51,7 @@ seed_roles:
     - EXP-649 formal root 20261149
 
 corpus:
+  lifecycle_status: consumed-complete-immutable-historical
   width: 256
   source_execution: frozen-source-autonomous-rollout
   split_role: generated-training-identities-only
@@ -115,6 +127,13 @@ matched_arms:
     - clean teacher-forced and autonomous forward work
     - endpoint-loss computation before weighting
     - checkpoint, evaluation, hashing, and serialization work
+  matched_work_accounting:
+    independent_per_arm: true
+    independent_from_paired_data_order: true
+    ordered_event_digest_per_arm: true
+    required_categories: [clean_forward_steps, autonomous_forward_steps, endpoint_loss_computations, clean_backward_calls, endpoint_backward_calls, gradient_clip_calls, optimizer_steps, scheduler_steps, checkpoint_writes, checkpoint_reload_verifications, checkpoint_byte_hashes, checkpoint_receipt_serializations, transition_evaluation_cases, rollout_evaluation_cases, rollout_evaluation_steps, evaluation_result_hashes, evaluation_result_serializations]
+    declared_to_actual_cross_binding_required: true
+    fresh_and_cache_operation_paths_are_mutually_truthful: true
 
 training:
   screen_updates_per_arm: 200
@@ -167,6 +186,7 @@ scientific_integrity_protocol:
   missing_extra_or_nonboolean_key_decision: fail-closed
 
 screen:
+  current_status: prohibited-pending-post-repair-readiness-lifecycle-and-separate-screen-judge
   authorization_at_preregistration: blocked-pending-implementation-calibration-hash-freeze-and-judge
   initialization: independent-reinitialization-of-each-arm-from-the-raw-source-checkpoint
   updates_per_arm: 200
@@ -176,6 +196,7 @@ screen:
     full_rollout_cases: {64: 200, 128: 200, 256: 200}
     exact_repeat_width: 256
     exact_repeat_cases: 20
+    exact_repeat_comparison: complete-ordered-prediction-trajectory-sha256
     report_outcome_transitions:
       - recovered-control-wrong-challenger-exact
       - introduced-drift-control-exact-challenger-wrong
@@ -234,7 +255,7 @@ confirmation:
   direct_candidate_promotion: prohibited
 
 resource_protocol:
-  status: failed-readiness-attempt-recovered-cumulative-accounting-repaired-no-retry-authorized
+  status: prior-readiness-evidence-preserved-but-invalid-for-changed-runner-root-20261162-reserved-unopened-unauthorized
   binding_policy: knowledge/autoresearch/program.md#resource-budget-policy
   measurement:
     wall: external-monotonic-wall-seconds
@@ -242,6 +263,7 @@ resource_protocol:
     peak_memory: linux-process-high-water-rss-bytes-recorded-separately
     wall_and_cpu_are_not_interchangeable: true
   calibration:
+    lifecycle_classification: historical-original-calibration-contract
     root: 20261151
     warmups: 1
     timed_repeats: 3
@@ -286,11 +308,29 @@ resource_protocol:
     preserve_completed_unit_caches: true
     preserve_completed_checkpoints: true
     key_fields: [checkpoint, evaluator, dependency_manifest, dataset, config, seed, environment, runner, scientific_protocol, resource_protocol, workload]
+  post_repair_readiness:
+    root: 20261162
+    status: reserved-unopened-unauthorized
+    root_20261161: consumed-complete-non-scientific-sealed-non-retryable-historical-only
+    cache_reuse_from_20261161: prohibited-because-runner-config-and-workload-bindings-changed
+    requires_fresh_dynamic_budget_calibration: true
+    old_authorization_source_and_scaffold_can_bind_repaired_bytes: false
+    reconstruction_status: separate-audited-package-required-after-clean-intermediate-base
+  checkpoint_lifecycle:
+    path_scope: immutable-attempt-specific-directory
+    retry_overwrite: prohibited
+    completion_and_failure_evidence_bind_checkpoint_bytes: true
+    failure_inventory_orphans: preserve-and-hash-but-label-unbound
+    aggregate_receipt_binding_requires_every-artifact-exactly-one-valid-receipt: true
+  completion_seal:
+    pointer_seal_attempt_id_equality_required: true
+    terminal_state_required: {phase: sealed, complete: true, gates_computed: true}
   evaluation_only_overrun: preserve-checkpoint-and-record-missing-evidence-not-scientific-rejection
   fidelity_may_be_reduced_to_fit_budget: false
   counts_or_work_may_be_reduced_to_fit_budget: false
   resolved:
-    lifecycle_status: implemented-resource-reaudit-repaired-calibrated-awaiting-post-calibration-judge
+    evidence_class: historical-pre-r2-repair-resolved-content-not-current-launch-binding
+    lifecycle_status: historical-completed-readiness-only-superseded-for-repaired-runner-config-workload
     calibration_status: complete-non-scientific-corrected-full-fidelity
     calibration_root_lifecycle_status: opened-consumed-complete-non-scientific-calibration
     raw_calibration_output: .scratch/exp-648-structured-trajectory-consistency/calibration.json
@@ -390,7 +430,7 @@ resource_protocol:
     fidelity_reduced: false
     scientific_accuracy_reported: false
     corpus_screen_confirmation_authorized: false
-  readiness_recovery:
+  historical_readiness_recovery_root_20261160_to_20261161:
     schema_version: exp648-readiness-recovery-v2
     failed_root:
       seed: 20261160
@@ -416,15 +456,16 @@ resource_protocol:
       exact_binding_required: [root, authorization, checkpoint, evaluator, dependency_manifest, dataset, config, seed, environment, calibration_runner, scientific_runner, scientific_protocol, resource_protocol, workload, frozen_corpus_files, corpus_provenance_amendment, chronology_contract, source_seal, source_augmented_record]
     candidate_root:
       seed: 20261161
-      status: unopened-unconsumed-unauthorized-negative-use-audited
-      authorization_manifest_exists: false
-      opening_or_use_before_new-judge-and-auth-lifecycle: prohibited
-    future_execution_order: repaired-base-closure-audits-and-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261161-authorization-child-commit-and-push-and-clean-upstream-verification -> fresh-warmup-and-three-fresh-full-fidelity-repeats
+      historical_status_at_that_boundary: unopened-unconsumed-unauthorized-negative-use-audited
+      current_status: consumed-complete-non-scientific-sealed-non-retryable-historical
+      historical_authorization_manifest_existed_and_was_consumed: true
+      current_launch_eligibility: false
+    historical_future_execution_order_at_that_boundary: repaired-base-closure-audits-and-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261161-authorization-child-commit-and-push-and-clean-upstream-verification -> fresh-warmup-and-three-fresh-full-fidelity-repeats
 authorization:
-  implementation: catchable-exception-boundary-and-recovery-repair-complete-pending-audits
-  calibration: root-20261160-consumed-incomplete-permanently-denied-root-20261161-candidate-unopened-unconsumed-unauthorized
-  corpus_root: unopened-and-blocked-pending-post-calibration-judge
-  screen_roots: unopened-and-blocked-pending-corpus-hash-freeze-and-judge
+  implementation: r3-scaffold-repair-awaiting-closure
+  calibration: root-20261161-consumed-historical-root-20261162-reserved-unopened-unauthorized-pending-reconstruction
+  corpus_root: consumed-complete-immutable-historical
+  screen_roots: unopened-and-prohibited-pending-reconstruction-fresh-root162-calibration-completion-judge-and-separate-screen-judge
   confirmation_roots: unopened-and-prohibited-until-screen-pass-and-separate-judge-approval
   checked_or_independent_or_official_evaluation: prohibited
   candidate_or_tier7_promotion: prohibited

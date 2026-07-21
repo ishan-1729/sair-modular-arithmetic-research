@@ -562,6 +562,271 @@ def test_event_trace_both_checkpoint_verifications_precede_evaluation(module, tm
     ]
 
 
+def test_exact_repeat_uses_complete_ordered_prediction_trajectory_digest(module) -> None:
+    first_trace = [[0, 0], [1, 0], [3, 2]]
+    second_trace = [[0, 0], [2, 1], [3, 2]]
+    first = {
+        "predictions": [3, 2],
+        "output_sha256": module.sha256_bytes(module.canonical_json_bytes([3, 2])),
+        "prediction_trace": first_trace,
+        "prediction_trace_sha256": module.sha256_bytes(
+            module.canonical_json_bytes(first_trace)
+        ),
+        "exact_accuracy": 1.0,
+        "first_error_indices": [2, 2],
+    }
+    second = {
+        **first,
+        "prediction_trace": second_trace,
+        "prediction_trace_sha256": module.sha256_bytes(
+            module.canonical_json_bytes(second_trace)
+        ),
+    }
+    assert first["predictions"] == second["predictions"]
+    assert first["output_sha256"] == second["output_sha256"]
+    assert first["exact_accuracy"] == second["exact_accuracy"]
+    assert first["first_error_indices"] == second["first_error_indices"]
+    assert not module.prediction_trajectory_repeat_deterministic(first, second)
+    tampered = {**first, "prediction_trace_sha256": "0" * 64}
+    with pytest.raises(RuntimeError, match="trajectory digest"):
+        module.prediction_trajectory_repeat_deterministic(first, tampered)
+
+
+def test_matched_work_is_independent_per_arm_and_distinct_from_data_order(module) -> None:
+    accounting = module.create_matched_work_accounting()
+    declared = {
+        "clean_forward_steps": module.WINDOW_LENGTH,
+        "autonomous_forward_steps": module.WINDOW_LENGTH,
+        "endpoint_loss_computations": 1,
+        "clean_backward_calls": module.WINDOW_LENGTH,
+        "endpoint_backward_calls": 1,
+        "gradient_clip_calls": 1,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "checkpoint_writes": 1,
+        "checkpoint_reload_verifications": 1,
+        "checkpoint_byte_hashes": 1,
+        "checkpoint_receipt_serializations": 1,
+        "transition_evaluation_cases": 2,
+        "rollout_evaluation_cases": 2,
+        "rollout_evaluation_steps": 4,
+        "evaluation_result_hashes": 1,
+        "evaluation_result_serializations": 1,
+    }
+    for arm in ("control", "challenger"):
+        for category, count in declared.items():
+            module.record_matched_work(
+                accounting, arm, category, count, unit="declared-work-unit"
+            )
+        for operation in (
+            "training_update_calls", "scheduler_step_calls",
+            "checkpoint_save_reload_hash_calls",
+            "checkpoint_receipt_persist_calls", "fresh_evaluator_calls",
+            "fresh_result_hashes", "fresh_result_serializations",
+        ):
+            module.record_actual_matched_work(
+                accounting, arm, operation, 1, unit="actual-work-unit"
+            )
+    receipt = module.finalize_matched_work(accounting)
+    assert receipt["valid"] is True
+    assert receipt["declared_to_actual_cross_binding_valid"] is True
+    assert receipt["independent_from_paired_data_order"] is True
+    assert set(receipt["per_arm"]) == {"control", "challenger"}
+    assert "batch" not in module.canonical_json(receipt["per_arm"])
+    changed = copy.deepcopy(accounting)
+    module.record_actual_matched_work(
+        changed, "challenger", "fresh_evaluator_calls", 1, unit="extra"
+    )
+    assert module.finalize_matched_work(changed)["valid"] is False
+
+    for category in (
+        "clean_forward_steps", "optimizer_steps", "scheduler_steps", "checkpoint_writes",
+        "evaluation_result_hashes",
+    ):
+        identically_undercounted_actual = copy.deepcopy(accounting)
+        for arm in ("control", "challenger"):
+            module.record_matched_work(
+                identically_undercounted_actual, arm, category, 1,
+                unit=f"unmatched-{category}",
+            )
+        invalid = module.finalize_matched_work(identically_undercounted_actual)
+        assert invalid["per_arm_effective_counts_and_ordered_digests_equal"] is True
+        assert invalid["per_arm_actual_operation_counts_and_schedules_equal"] is True
+        assert invalid["declared_to_actual_cross_binding_valid"] is False
+        assert invalid["valid"] is False
+
+
+def test_evaluation_cache_records_truthful_fresh_and_reuse_work(
+    module, tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path)
+    calibration = {
+        "resolved_screen_budgets": {
+            "wall_seconds": {"projected_seconds": 1000, "soft_budget_seconds": 1500, "hard_runaway_ceiling_seconds": 2000},
+            "aggregate_cpu_seconds": {"projected_seconds": 4000, "soft_budget_seconds": 6000, "hard_runaway_ceiling_seconds": 8000},
+            "peak_rss_guard_bytes": 10**15,
+            "first_quarter_checkpoint": {"wall_seconds": {"expected_elapsed_seconds": 250}, "aggregate_cpu_seconds": {"expected_elapsed_seconds": 1000}},
+        }
+    }
+    cases = {
+        "state": [0], "multiplicand": [0], "modulus": [2],
+        "input_bit": [0], "target": [0], "quotient": [0],
+    }
+    calls = []
+    def evaluator(model, _width, _cases, _exp300):
+        calls.append(model)
+        return {
+            "cases": 1, "exact_accuracy": 1.0, "quotient_accuracy": 1.0,
+            "valid_residue_rate": 1.0, "exact_vector": [True],
+            "output_sha256": module.sha256_bytes(module.canonical_json_bytes([0])),
+            "predictions": [0], "quotient_predictions": [0],
+        }
+    fields = {"runner": "a" * 64}
+    fresh = module.create_matched_work_accounting()
+    result, reused = module.load_or_evaluate_unit(
+        unit="transition-1", cases=cases,
+        models={"control": "control", "challenger": "challenger"},
+        evaluator=evaluator, width=1, exp300=None, key_fields=fields,
+        guard=module.ScreenGuard(calibration, module.psutil.Process()),
+        matched_work=fresh,
+    )
+    assert reused is False and calls == ["control", "challenger"]
+    for arm in ("control", "challenger"):
+        assert fresh["arms"][arm]["actual_counts"]["fresh_evaluator_calls"] == 1
+        assert fresh["arms"][arm]["actual_counts"]["cache_reuse_operations"] == 0
+
+    cached = module.create_matched_work_accounting()
+    result_again, reused = module.load_or_evaluate_unit(
+        unit="transition-1", cases=cases,
+        models={"control": object(), "challenger": object()},
+        evaluator=lambda *_args: pytest.fail("evaluator called on valid cache reuse"),
+        width=1, exp300=None, key_fields=fields,
+        guard=module.ScreenGuard(calibration, module.psutil.Process()),
+        matched_work=cached,
+    )
+    assert reused is True and result_again == result and calls == ["control", "challenger"]
+    for arm in ("control", "challenger"):
+        counts = cached["arms"][arm]["actual_counts"]
+        assert counts["fresh_evaluator_calls"] == 0
+        assert counts["cache_record_validations"] == 1
+        assert counts["cache_per_arm_receipt_validations"] == 1
+        assert counts["cached_result_digest_validations"] == 1
+        assert counts["cache_reuse_operations"] == 1
+
+    cache_path = next((tmp_path / "evaluation-cache").glob("transition-1-*.json"))
+    record = json.loads(cache_path.read_text())
+    record["matched_work_receipts"]["arms"]["control"]["result_canonical_sha256"] = "0" * 64
+    core = copy.deepcopy(record)
+    core.pop("core_sha256")
+    record["core_sha256"] = module.sha256_bytes(module.canonical_json_bytes(core))
+    cache_path.write_bytes(module.canonical_json_bytes(record, pretty=True))
+    with pytest.raises(RuntimeError, match="matched-work receipt/result"):
+        module.load_or_evaluate_unit(
+            unit="transition-1", cases=cases,
+            models={"control": object(), "challenger": object()},
+            evaluator=lambda *_args: pytest.fail("tampered cache invoked evaluator"),
+            width=1, exp300=None, key_fields=fields,
+            guard=module.ScreenGuard(calibration, module.psutil.Process()),
+        )
+
+
+def test_retry_checkpoints_are_attempt_local_immutable_and_byte_bound(
+    module, tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    models = {
+        "control": module.nn.Linear(3, 2),
+        "challenger": module.nn.Linear(3, 2),
+    }
+    first_dir = tmp_path / "attempt-001" / "checkpoints"
+    first = module.prepare_checkpoints_for_evaluation(
+        models, first_dir, attempt_id="attempt-001"
+    )
+    before = {
+        arm: (tmp_path / receipt["path"]).read_bytes()
+        for arm, receipt in first.items()
+    }
+    retry_dir = tmp_path / "attempt-002" / "checkpoints"
+    retry = module.prepare_checkpoints_for_evaluation(
+        models, retry_dir, attempt_id="attempt-002"
+    )
+    assert all(receipt["attempt_id"] == "attempt-002" for receipt in retry.values())
+    assert all(
+        (tmp_path / first[arm]["path"]).read_bytes() == before[arm]
+        for arm in before
+    )
+    with pytest.raises(RuntimeError, match="immutable once created"):
+        module.prepare_checkpoints_for_evaluation(
+            models, first_dir, attempt_id="attempt-001"
+        )
+
+
+def test_control_checkpoint_is_persisted_and_failure_bound_before_challenger(
+    module, tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    attempt = tmp_path / "attempt-003"
+    attempt.mkdir()
+    state = {
+        "attempt_id": "attempt-003", "authorization_sha256": "a" * 64,
+        "phase": "evaluation", "verified_checkpoints": {},
+        "completed_updates": {}, "completed_evaluation_units": [],
+        "cache_receipts": [], "first_quarter": None,
+    }
+    class Ledger:
+        attempt_id = "attempt-003"
+        directory = attempt
+        def __init__(self): self.state = state
+        def persist(self):
+            module._atomic_write(
+                attempt / "attempt-state.json",
+                module.canonical_json_bytes(self.state, pretty=True),
+            )
+    ledger = Ledger()
+    def persist(arm, receipt):
+        ledger.state["verified_checkpoints"][arm] = receipt
+        ledger.persist()
+    with pytest.raises(RuntimeError, match="fault-after-control"):
+        module.prepare_checkpoints_for_evaluation(
+            {"control": module.nn.Linear(3, 2), "challenger": module.nn.Linear(3, 2)},
+            attempt / "checkpoints", attempt_id="attempt-003",
+            receipt_hook=persist,
+            event_hook=lambda event: (_ for _ in ()).throw(
+                RuntimeError("fault-after-control")
+            ) if event == "checkpoint-verified:control" else None,
+        )
+    (attempt / "checkpoints/.challenger.orphan.tmp").write_bytes(
+        b"preserved-orphan-partial-checkpoint-bytes"
+    )
+    experiment = types.SimpleNamespace(
+        ledger=ledger,
+        guard=types.SimpleNamespace(timing=lambda: {
+            "wall_seconds": 1.0, "aggregate_cpu_seconds": 2.0,
+            "peak_rss_bytes": 100,
+        }),
+    )
+    module.preserve_screen_failure(
+        "checkpoint", RuntimeError("fault-after-control"), experiment=experiment
+    )
+    failure = json.loads((attempt / "incomplete.json").read_text())
+    inventory = failure["attempt_checkpoint_artifact_inventory"]
+    by_name = {item["name"]: item for item in inventory["artifacts"]}
+    assert set(by_name) == {"control.safetensors", ".challenger.orphan.tmp"}
+    assert by_name["control.safetensors"]["matching_receipt_arms"] == ["control"]
+    assert by_name["control.safetensors"]["exactly_one_matching_arm_receipt"] is True
+    assert by_name["control.safetensors"]["binding_status"] == "receipt-bound"
+    assert by_name["control.safetensors"]["receipt_binds_bytes"] is True
+    assert by_name[".challenger.orphan.tmp"]["matching_receipt_arms"] == []
+    assert by_name[".challenger.orphan.tmp"]["exactly_one_matching_arm_receipt"] is False
+    assert by_name[".challenger.orphan.tmp"]["binding_status"] == "unbound-no-receipt"
+    assert by_name[".challenger.orphan.tmp"]["receipt_binds_bytes"] is False
+    assert len(by_name[".challenger.orphan.tmp"]["sha256"]) == 64
+    assert inventory["all_artifacts_receipt_bound"] is False
+    assert failure["preserved_checkpoint_bytes"]["control"]["receipt_hash_matches_preserved_bytes"] is True
+
+
 def test_evaluation_recovery_rejects_provenance_mismatch(module, tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path)
     calibration = {
@@ -1528,15 +1793,9 @@ def mocked_readiness_authorization_base_blobs(module):
     provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
     source = provenance["readiness_calibration_authorization_source"]
     paths = {
-        binding["path"]: (module.ROOT / binding["path"]).read_bytes()
+        binding["path"]: module._git_blob(approved_base_commit, binding["path"])
         for binding in source["approved_base_file_bindings"].values()
     }
-    scientific_test_path = source["approved_base_file_bindings"][
-        "scientific_test"
-    ]["path"]
-    paths[scientific_test_path] = module._git_blob(
-        approved_base_commit, scientific_test_path
-    )
     provenance_path = (
         "experiments/runs/exp-648-structured-trajectory-consistency/"
         "readiness-scaffold/provenance.json"
@@ -1772,6 +2031,9 @@ def test_cached_rollout_recomputes_transient_invalid_teacher_and_first_error(mod
         "any_intermediate_invalid_vector": [True],
         "prediction_trace": [[0], [3], [0]], "teacher_trace": [[0], [0], [0]],
     }
+    base["prediction_trace_sha256"] = module.sha256_bytes(
+        module.canonical_json_bytes(base["prediction_trace"])
+    )
     valid = {"control": copy.deepcopy(base), "challenger": copy.deepcopy(base)}
     module.validate_evaluation_results(unit="rollout-2", width=2, cases=cases, results=valid)
     for field, value in (
@@ -2386,16 +2648,33 @@ def test_real_screen_orchestration_marks_successful_sealed_launch(module, tmp_pa
             "first-quarter-telemetry.json", "checkpoints.json", "run.json",
             "environment.json", "metrics.json", "integrity.json", "mlflow.json",
             "final-timing.json", "attempt-state.json",
+            "checkpoints/control.safetensors",
+            "checkpoints/challenger.safetensors",
         }
         for name in names:
+            (attempt / name).parent.mkdir(parents=True, exist_ok=True)
             (attempt / name).write_text(f"{name}\n")
+        checkpoint_hashes = {
+            arm: {
+                "attempt_id": attempt_id,
+                "sha256": module.sha256(attempt / f"checkpoints/{arm}.safetensors"),
+            }
+            for arm in ("control", "challenger")
+        }
+        (attempt / "checkpoints.json").write_bytes(module.canonical_json_bytes({
+            "authorization_sha256": "a" * 64,
+            "checkpoint_hashes": checkpoint_hashes,
+        }, pretty=True))
         (attempt / "attempt-state.json").write_bytes(module.canonical_json_bytes({
             **experiment.ledger.state, "phase": "sealed", "complete": True,
+            "gates_computed": True,
         }, pretty=True))
         (attempt / "run.json").write_bytes(module.canonical_json_bytes({
+            "authorization_sha256": "a" * 64,
             "sealed_orchestration": orchestration,
         }, pretty=True))
         (attempt / "integrity.json").write_bytes(module.canonical_json_bytes({
+            "authorization_sha256": "a" * 64,
             "sealed_orchestration": orchestration,
         }, pretty=True))
         seal = {
@@ -2448,20 +2727,37 @@ def test_completion_seal_covers_receipt_ledger_and_all_complete_artifacts(module
     names = {
         "first-quarter-telemetry.json", "checkpoints.json", "run.json", "environment.json",
         "metrics.json", "integrity.json", "mlflow.json", "final-timing.json", "attempt-state.json",
+        "checkpoints/control.safetensors", "checkpoints/challenger.safetensors",
     }
     for name in names:
+        (attempt / name).parent.mkdir(parents=True, exist_ok=True)
         (attempt / name).write_text(f"{name}\n")
+    checkpoint_hashes = {
+        arm: {
+            "attempt_id": attempt_id,
+            "sha256": module.sha256(attempt / f"checkpoints/{arm}.safetensors"),
+        }
+        for arm in ("control", "challenger")
+    }
+    (attempt / "checkpoints.json").write_bytes(module.canonical_json_bytes({
+        "authorization_sha256": "a" * 64,
+        "checkpoint_hashes": checkpoint_hashes,
+    }, pretty=True))
     orchestration = {
         "launch_attempt_id": "launch-1", "scientific_attempt_id": attempt_id,
         "linkage_direction": "scientific-evidence-to-launch-attempt-id-without-launch-ledger-hash",
     }
     (attempt / "attempt-state.json").write_bytes(module.canonical_json_bytes({
         "attempt_id": attempt_id, "launch_attempt_id": "launch-1",
+        "authorization_sha256": "a" * 64, "phase": "sealed",
+        "complete": True, "gates_computed": True,
     }, pretty=True))
     (attempt / "run.json").write_bytes(module.canonical_json_bytes({
+        "authorization_sha256": "a" * 64,
         "sealed_orchestration": orchestration,
     }, pretty=True))
     (attempt / "integrity.json").write_bytes(module.canonical_json_bytes({
+        "authorization_sha256": "a" * 64,
         "sealed_orchestration": orchestration,
     }, pretty=True))
     seal = {
@@ -2478,6 +2774,44 @@ def test_completion_seal_covers_receipt_ledger_and_all_complete_artifacts(module
     pointer_path = tmp_path / "completion.json"
     pointer_path.write_bytes(module.canonical_json_bytes(pointer, pretty=True))
     assert module.verify_screen_completion_seal(pointer_path)["complete"] is True
+    original_state = json.loads((attempt / "attempt-state.json").read_text())
+    original_run = json.loads((attempt / "run.json").read_text())
+    def reseal() -> None:
+        seal["artifacts"] = {name: module.sha256(attempt / name) for name in names}
+        seal_path.write_bytes(module.canonical_json_bytes(seal, pretty=True))
+        pointer["completion_seal_sha256"] = module.sha256(seal_path)
+        pointer_path.write_bytes(module.canonical_json_bytes(pointer, pretty=True))
+    for mutation in (
+        {**original_state, "phase": "finalization"},
+        {**original_state, "complete": False},
+        {**original_state, "gates_computed": False},
+        {**original_state, "authorization_sha256": "b" * 64},
+    ):
+        (attempt / "attempt-state.json").write_bytes(
+            module.canonical_json_bytes(mutation, pretty=True)
+        )
+        reseal()
+        with pytest.raises(RuntimeError, match="terminal-complete|authorization binding"):
+            module.verify_screen_completion_seal(pointer_path)
+    (attempt / "attempt-state.json").write_bytes(
+        module.canonical_json_bytes(original_state, pretty=True)
+    )
+    (attempt / "run.json").write_bytes(module.canonical_json_bytes({
+        **original_run, "authorization_sha256": "b" * 64,
+    }, pretty=True))
+    reseal()
+    with pytest.raises(RuntimeError, match="authorization binding"):
+        module.verify_screen_completion_seal(pointer_path)
+    (attempt / "run.json").write_bytes(
+        module.canonical_json_bytes(original_run, pretty=True)
+    )
+    reseal()
+    seal["attempt_id"] = "wrong-attempt-even-though-resealed"
+    reseal()
+    with pytest.raises(RuntimeError, match="seal attempt ID mismatch"):
+        module.verify_screen_completion_seal(pointer_path)
+    seal["attempt_id"] = attempt_id
+    reseal()
     (attempt / "mlflow.json").write_text("tampered\n")
     with pytest.raises(RuntimeError, match="sealed artifact"):
         module.verify_screen_completion_seal(pointer_path)

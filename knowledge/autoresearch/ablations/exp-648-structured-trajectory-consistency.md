@@ -2,17 +2,17 @@
 type: Experiment Preregistration
 title: EXP-648 structured natural-trajectory consistency
 description: Matched K=8 endpoint-consistency screen on natural width-256 failure and success windows from the frozen cellular source.
-status: approved-complete-non-scientific-readiness-calibration
+status: scientific-scaffold-repaired-awaiting-fresh-readiness-calibration-and-judge
 tags: [autoresearch, tier7, trajectory-consistency, endpoint-loss, matched-ab, exact-rollout]
 timestamp: "2026-07-20T10:20:00+05:30"
-last_updated: "2026-07-20T21:21:35+05:30"
+last_updated: "2026-07-21T23:40:00+05:30"
 ---
 
 # EXP-648 structured natural-trajectory consistency
 
 ## Status and falsifiable question
 
-The Judge selected EXP-648 as the next hypothesis with the best expected information value per CPU and wall time. This document freezes a preregistration only. The runner, corpus, calibration, screen, and confirmation do not yet exist and no experiment root has been opened.
+Original historical preregistration status: the Judge selected EXP-648 as the next hypothesis with the best expected information value per CPU and wall time, before the runner, corpus, or readiness evidence existed. That sentence is preserved as history, not current lifecycle state. The corpus is now consumed-complete and immutable; roots `20261159`/`20261160` are historical denied attempts; root `20261161` is consumed historical readiness evidence; root `20261162` is the current reserved, unopened, unauthorized post-repair readiness root; and screen/confirmation remain unopened and prohibited.
 
 The falsifiable question is whether a fixed `0.1` endpoint-consistency term over eight natural autonomous transitions improves width-256 exact rollout by at least three percentage points over an otherwise identical `0.0` control, moves the mean first error no earlier, and retains width-64 and width-128 exact rollout within one point.
 
@@ -28,18 +28,22 @@ The local diagnosis is more important than analogy. EXP-643 observes 99.70–99.
 
 Both arms independently load the same raw hidden-92, two-cycle, 99,824-parameter checkpoint at `.scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors`, SHA-256 `cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd`. The two initial parameter tensors must have the same hash before the first update.
 
-Every seed below is currently unused and unopened:
+The table preserves each root's original role and gives its current lifecycle truthfully. Roots `20261153`–`20261158` remain unopened; the earlier resource and corpus roots do not.
 
 | Role | Frozen root | Opening rule |
 |---|---:|---|
-| Resource calibration only | `20261151` | After the implementation and static-test gate; never scientific evidence |
-| Corpus construction | `20261152` | Generated training-split identities only, under the resolved mining ceiling |
+| Historical resource calibration only | `20261151` | Consumed historical non-scientific calibration; not current launch evidence |
+| Corpus construction | `20261152` | Consumed-complete immutable generated training-split corpus |
 | Screen training/order | `20261153` | Only after corpus, code, config, tests, hashes, and measured budgets are frozen and Judge-approved |
 | Screen paired evaluation | `20261154` | Same screen launch gate as `20261153` |
 | Confirmation 1 training/order | `20261155` | Only after a complete screen pass and separate Judge authorization |
 | Confirmation 1 paired evaluation | `20261156` | Same confirmation authorization |
 | Confirmation 2 training/order | `20261157` | Only after a complete screen pass and separate Judge authorization |
 | Confirmation 2 paired evaluation | `20261158` | Same confirmation authorization |
+| Rejected readiness | `20261159` | Consumed, superseded, historical, and forbidden for launch/rates/cache reuse |
+| Failed readiness | `20261160` | Consumed-incomplete, permanently denied, historical |
+| Completed readiness | `20261161` | Consumed-complete, sealed, non-retryable, historical; cannot bind repaired bytes |
+| Post-repair readiness | `20261162` | Reserved, unopened, unauthorized; requires reconstruction and a sole-file authorization child |
 | Scaffold tests only | `648900001` | Never experiment or evaluation evidence |
 
 Checked/public inputs and answers, every prior independent set, the official private benchmark, and EXP-649 formal root `20261149` are excluded. Tests may use only `648900001`; they may not invoke any calibration, corpus, screen, confirmation, checked, independent, private, or EXP-649 formal root.
@@ -96,7 +100,7 @@ The challenger advances only if every gate passes:
 - width-64 and width-128 exact rollout deltas are each at least `-0.01`;
 - challenger width-256 exact transition accuracy is at least `0.995`;
 - challenger invalid-rollout rate is at most `0.01`;
-- the twenty-case repeat is bit-identical and deterministic; and
+- the complete ordered predicted-state trajectory of every twenty-case repeat has the same independently recomputable SHA-256 digest; endpoint equality, accuracy, and first-error summaries are insufficient; and
 - source, initial-state, parameter, data/order, seed, checkpoint, evaluator, and matched-work integrity checks all pass.
 
 Any miss rejects this exact frozen screen. A pass is intermediate evidence only and requires a separate Judge decision before confirmation. It does not authorize a candidate, Tier-7 promotion, or benchmark evaluation.
@@ -213,3 +217,19 @@ Resolved screen wall projection / soft budget / hard ceiling are `9385.257597574
 The project verifier succeeded. A later `KeyError` came from an incorrect external assertion path and is not a failed verifier or a passing assertion; the correct field is `receipt['boundary']['scientific_accuracy_or_selection_reported']`, whose value is `false`. Both completion audits return `[APPROVE, APPROVE]`, and the Judge decision is `approved-complete-non-scientific-readiness-calibration`. Candidate 005 remains unchanged. No `judge-authorization.json` exists, so screen, scientific evaluation, accuracy, selection, benchmark, promotion, and Goal completion remain blocked.
 
 Post-publication regression provenance is separate from execution provenance. Approved base `87384f92ab1c053c7791e8afd69a07936d5a7402`, immutable scaffold provenance SHA-256 `593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6`, and execution-bound focused-test SHA-256 `f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5` remain unchanged. Renewed Judge approval expands registration to exactly 17 paths by adding only the lifecycle-regression test, whose stabilized repaired SHA-256 is `967fdc7d4ce5e9b8deaf9d5ea0d4b0cd74d8b4729b66c75b5eadf461626cfb50`; `screen_readiness_binding` must resolve that separate hash from the committed registration base. The pre-repair full suite stopped before commit at 257 passed / two stale lifecycle failures, and the exact three repaired regressions passed. The first focused-file run then stopped before commit at 87 passed / four approved-base fixture failures; the second bounded repair changed only that test fixture. The expanded targeted regression/tamper set then passed 8/8, the focused file passed exactly 91/91, the full suite passed exactly 259/259, and the project validator passed.
+
+## Scientific scaffold repair — 2026-07-21
+
+A renewed launch audit found three scientific-integrity gaps in the unexecuted screen path. This repair changes no corpus bytes, source checkpoint, seeds already assigned to scientific phases, loss, coefficient, update count, evaluation count, gate, architecture, or evaluation fidelity.
+
+Exact-repeat determinism now hashes the complete ordered prediction trajectory, including every intermediate state, and independently recomputes that digest during evaluation-cache validation. Endpoint hashes remain reported but cannot satisfy the repeat gate. A regression holds endpoint predictions, endpoint hash, endpoint accuracy, and first-error summaries equal while changing an intermediate state and proves that the repeat fails.
+
+Matched-work integrity is now independent of paired data order. Each arm accumulates its own ordered event ledger, category counts, total declared work, and SHA-256 digest for the clean and autonomous training branches, endpoint computation, backward calls, gradient clipping, optimizer and scheduler steps, checkpoint write/reload/hash/receipt serialization, transition and rollout evaluation cases and steps, and evaluation-result hash/serialization work. `matched_work_valid` is true only when all declared categories were observed and the two independently accumulated count-and-digest receipts are exactly equal; `paired_data_order_valid` remains a separate check.
+
+R3 additionally cross-binds every declared count to the actual operation ledger, so identical undercounting in both arms cannot pass equality. Fresh evaluator calls and validated cache reuse are alternative truthful paths: cache hits record zero evaluator calls and bind per-arm cached result/work receipts, while fresh calls bind their own result hashes and serializations. Scheduler and checkpoint events are recorded only after the corresponding operation and durable receipt persistence.
+
+Every scientific attempt now writes `control.safetensors` and `challenger.safetensors` under its exclusive immutable attempt directory. A retry cannot reuse or overwrite another attempt's paths. Completion seals include both checkpoint files and verify their bytes against the attempt-bound checkpoint receipts. Failure evidence records whether each preserved checkpoint exists and whether its observed byte hash matches its receipt.
+
+Failure inventory now hashes every regular checkpoint-directory artifact independently. Each artifact is explicitly `receipt-bound`, `unbound-no-receipt`, `receipt-hash-mismatch`, or ambiguous; no empty receipt set can pass vacuously. Completion verification also requires pointer/seal/attempt-state identity, terminal `sealed`/`complete`/`gates_computed` state, and consistent authorization across the seal and all applicable evidence.
+
+Because the live runner, config, evaluator, scientific protocol, resource protocol, and declared workload bindings changed, root `20261161` remains immutable historical evidence but cannot authorize the repaired screen and none of its caches may be reused. The old authorization source and readiness scaffold are historical and cannot bind repaired bytes. Root `20261162` is reserved as the sole post-repair readiness-calibration root, but it is unopened and unauthorized. The binding next transition is: repair closure -> commit/push clean intermediate base -> separate audited root-`20261161` preservation/archive plus versioned post-repair authorization-source/scaffold reconstruction package -> commit/push -> sole-file root-`20261162` authorization child -> full-fidelity calibration -> completion audits/Judge -> separate screen Judge. Screen roots `20261153`/`20261154`, every model update and evaluation RNG, output/checkpoint directory, evaluator, MLflow run, benchmark, promotion, and Goal-completion surface remain blocked.

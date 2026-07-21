@@ -36,9 +36,10 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: approved-complete-non-scientific-readiness-calibration
-  evidence_status: The accepted immutable corpus remains unchanged. Roots 20261159 and 20261160 are consumed non-scientific history and permanently denied. Root 20261161 is now consumed-complete, non-scientific, sealed, and non-retryable after one fresh full-fidelity warmup and three fresh full-fidelity repeats with no cache reuse. Receipt SHA-256 is 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a. Five resource-only MLflow runs are FINISHED. The verifier succeeded; a subsequent KeyError came only from an incorrect external assertion path, not from the verifier or evidence. No model update, scientific accuracy, selection, screen, benchmark, or promotion surface opened.
+  status: scientific-scaffold-repaired-awaiting-fresh-readiness-calibration-and-judge
+  evidence_status: The accepted immutable corpus and every root-20261159/160/161 evidence byte remain unchanged. Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable, but its runner/config/workload bindings predate the complete-trajectory, independent matched-work, and attempt-local checkpoint repair and cannot authorize the repaired screen or supply reusable caches. Root 20261162 is reserved, unopened, and unauthorized for a fresh full-fidelity readiness calibration. No model update, scientific accuracy, selection, screen, benchmark, or promotion surface opened.
   readiness_gate:
+    evidence_class: historical-pre-r2-repair-approvals-not-current-root162-authorization
     task: T-EXP648-SCREEN-READINESS
     prior_closure_audits: [APPROVE, APPROVE]
     recovery_closure_audits: [APPROVE, APPROVE]
@@ -46,11 +47,11 @@ current_hypothesis:
     sequential_judge_result: APPROVE
     calibration_completion_audits: [APPROVE, APPROVE]
     calibration_completion_judge_result: approved-complete-non-scientific-readiness-calibration
-    status: approved-complete-non-scientific-readiness-calibration
+    status: prior-readiness-complete-scaffold-repaired-fresh-readiness-required
   authorization:
     preregistration: judge-approved
-    implementation: approved-recovery-base-and-authorization-child-pushed
-    calibration: roots-20261159-and-20261160-permanently-denied-root-20261161-consumed-complete-non-scientific-sealed-non-retryable
+    implementation: repaired-complete-trajectory-matched-work-and-attempt-checkpoint-scaffold-awaiting-audits-and-judge
+    calibration: roots-20261159-and-20261160-permanently-denied-root-20261161-consumed-complete-historical-only-root-20261162-reserved-unopened-unauthorized
     corpus: consumed-complete
     screen: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
     confirmation: prohibited-until-screen-pass-and-separate-judge
@@ -67,11 +68,12 @@ current_hypothesis:
     rejected_readiness_calibration_root_consumed_superseded: 20261159
     failed_readiness_calibration_root_consumed_incomplete_permanently_denied: 20261160
     readiness_calibration_root_consumed_complete_non_scientific_non_retryable: 20261161
+    post_repair_readiness_calibration_root_reserved_unopened_unauthorized: 20261162
     scaffold_test_only_root_reserved_unopened: 648900001
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
   calibration_protocol:
     completed_transition: approved-recovery-base-pushed -> sole-file-root-20261161-authentication-child-pushed -> fresh-warmup-and-three-fresh-full-fidelity-repeats-complete -> verifier-succeeded -> completion-judge-approved
-    next_transition: commit-and-push-this-exact-registration -> stop-before-screen-or-scientific-action -> obtain-separate-screen-launch-judge
+    next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
     warmups: 1
     timed_repeats: 3
     fidelity_reduction_allowed: false
@@ -85,7 +87,22 @@ current_hypothesis:
     root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
     chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
     cache_reuse: Root-20261160 repeat-1/2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and all three fresh full-fidelity repeats; reused wall and aggregate-CPU charges are both exactly zero.
-  observed_readiness_calibration:
+    post_repair_cache_policy: Root-20261161 caches are prohibited for repaired runner/config/workload bindings; root 20261162 requires fresh full-fidelity work.
+  post_repair_scaffold:
+    trajectory_repeat: complete-ordered-prediction-trace-digest-with-independent-recomputation
+    endpoint_equal_intermediate_different_regression: required-and-passing
+    matched_work: independent-per-arm-counts-and-ordered-digests-distinct-from-paired-data-order
+    checkpoint_lifecycle: immutable-attempt-specific-paths-completion-and-failure-bind-preserved-bytes
+    root_20261162: reserved-unopened-unauthorized
+    corpus: consumed-complete-immutable-historical
+    root_20261161: consumed-historical-not-current-launch-evidence
+    old_authorization_source_and_scaffold: historical-cannot-bind-repaired-bytes
+    declared_to_actual_cross_binding: required-and-covered-by-identical-undercount-regressions
+    evaluation_cache_truthfulness: fresh-evaluator-and-validated-cache-reuse-are-distinct-bound-paths
+    checkpoint_failure_inventory: every-regular-artifact-hashed-and-explicitly-bound-or-unbound-no-vacuous-success
+    completion_seal: pointer-seal-state-attempt-and-authorization-bindings-required
+    scientific_evidence: none
+  historical_observed_readiness_calibration_root_20261161:
     root: 20261161
     status: consumed-complete-non-scientific-sealed-non-retryable
     receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
@@ -189,7 +206,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Obtain a separate EXP-648 screen-launch Judge and authenticated judge-authorization.json from a clean pushed base before any screen or scientific action. The arXiv 2607.16051v2 intake and 44-parent/81-component full-PDF reconciliation are complete and independently audited. Root 20261161 remains consumed-complete, non-scientific, sealed, and non-retryable. EXP-648 is the sole active scientific task; every benchmark, selection, promotion, and Goal-completion surface remains blocked. EXP-655 is planned-blocked-awaiting-EXP648-and-separate-launch-judge and has no config, authorization, run, checkpoint, metrics, or scientific evidence.
+next_action: Complete repair closure, commit/push the clean intermediate base, then create a separate audited package that preserves/archives root 20261161 and reconstructs a versioned post-repair authorization source/scaffold; commit/push that package; create a sole-file root-20261162 authorization child; run full-fidelity calibration; obtain completion audits/Judge; then obtain a separate screen Judge. The corpus is consumed-complete, root 20261161 is historical, root 20261162 is reserved-unopened-unauthorized, and old provenance cannot bind repaired bytes. All scientific surfaces remain blocked.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -236,7 +253,7 @@ risks:
   - EXP-649 calibration root 20261148 is permanently retired because a scaffold parity test computed official-reference labels for its 1,100 identities in memory; no label was inspected or persisted, but only audited replacement root 20261150 may be used input-only after the clean scaffold gate.
   - EXP-649's first implementation-readiness audit rejected calibration launch because sigma-zero controls did not retain every decoded prefix, runaway enforcement was only stage-end, formal compatibility omitted three provenance hashes, and retirement lacked a pinned machine-readable manifest; these are scaffold blockers, not experiment results.
   - EXP-649 completed its full-fidelity input-only calibration but misses the wall gate by more than an order of magnitude: 3150.892 seconds projected versus 285 seconds allowed. Formal root 20261149 remains unopened; no oracle, accuracy, breadth, selector, voting, tuning, candidate-promotion, or Goal-completion claim is authorized.
-  - EXP-648's natural K=8 endpoint objective is untested; it may recover pre-first-error windows or may introduce drift into already successful trajectories, so both directions and first-error movement are binding paired gates.
+  - EXP-648's natural K=8 endpoint objective is untested; complete ordered prediction-trajectory repeats, independent per-arm matched-work evidence, both drift directions, and first-error movement are binding gates.
   - EXP-648 corpus construction succeeded with 512 exact start-index, modulus-bit-length, and normalized-band matches from 736 identities; those frozen strata and counts cannot be weakened or rematched after observing the corpus.
   - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
   - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
