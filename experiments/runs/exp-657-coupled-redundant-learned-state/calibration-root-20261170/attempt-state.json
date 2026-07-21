@@ -1,0 +1,13 @@
+{
+  "completion_sha256": "a2d3c5e598b19b4e1f366dc25fd206a25bf87e1ae955cfa44e475e6af9f8311f",
+  "config_sha256": "4250ee8505547988ca3c4a133819859481f66993f9dedc287c6dfc1e84a0b737",
+  "formal_root_opened": false,
+  "model_sha256": "305e6ae4102bd37b88162e029d83f5c6313e7327ea2447e7f5c0c3e203f27239",
+  "root": 20261170,
+  "run_id": "exp-657-coupled-redundant-learned-state",
+  "runner_sha256": "6b9e38078730e3e1882cff40e71ed971bd3a48c179f4bffe87336bcabd357526",
+  "schema_version": "exp657-attempt-state-v1",
+  "stage": "L1-resource-only",
+  "started_at_unix_ns": 1784657561508346559,
+  "status": "consumed-failed"
+}

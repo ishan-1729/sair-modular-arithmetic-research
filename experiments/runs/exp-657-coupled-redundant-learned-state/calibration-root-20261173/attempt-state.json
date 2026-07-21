@@ -1,0 +1,15 @@
+{
+  "calibration_receipt_sha256": "f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616",
+  "completion_sha256": "261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc",
+  "config_sha256": "bd6f116096e52e0ce834661c46e2f2a92671d456c74c7ed98e2b75bb869a2d8f",
+  "finished_at_unix_ns": 1784657940526290767,
+  "formal_root_opened": false,
+  "model_sha256": "305e6ae4102bd37b88162e029d83f5c6313e7327ea2447e7f5c0c3e203f27239",
+  "root": 20261173,
+  "run_id": "exp-657-coupled-redundant-learned-state",
+  "runner_sha256": "55581c1e267a273128a1a505f87fadfdb79b17f2cf6b814efc85d7514165ef8c",
+  "schema_version": "exp657-attempt-state-v1",
+  "stage": "L1-resource-only",
+  "started_at_unix_ns": 1784657921016597983,
+  "status": "consumed-complete-non-scientific"
+}

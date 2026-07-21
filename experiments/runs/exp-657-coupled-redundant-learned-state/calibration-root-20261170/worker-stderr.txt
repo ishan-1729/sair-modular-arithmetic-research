@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 1380, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 1375, in main
+    return calibration_worker(config_path, output)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 885, in calibration_worker
+    control, control_records, control_errors = train_one_arm(
+                                               ^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 478, in train_one_arm
+    result, record = measure_callback(
+                     ^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 507, in measure_component
+    result = function()
+             ^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 458, in update
+    loss, losses = supervised_loss(output, targets, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/experiments/exp_657_coupled_redundant_learned_state/run.py", line 272, in supervised_loss
+    fused = F.binary_cross_entropy_with_logits(output.fused_logits, targets)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ishan/.venvs/sair-mod-challenge/lib/python3.12/site-packages/torch/nn/functional.py", line 3628, in binary_cross_entropy_with_logits
+    return torch.binary_cross_entropy_with_logits(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Inference tensors cannot be saved for backward. To work around you can make a clone to get a normal tensor and use it in autograd.

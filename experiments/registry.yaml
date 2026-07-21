@@ -938,3 +938,104 @@ runs:
     limitations:
       - No exact-answer accuracy, model update, candidate promotion, or submission change.
       - Local CPU timing from a dirty research worktree; confirmation would be required before integration.
+  - run_id: exp-657-coupled-redundant-learned-state
+    status: rejected-before-L2-resource-gate
+    approach: exact-parameter-matched-single-persistent-state-versus-two-learned-persistent-belief-planes-with-learned-syndrome-corrections-fusion-and-decoder
+    decision: reject-current-geometry-before-L2
+    decision_gate: conjunctive-width256-100-case-projected-wall-and-aggregate-cpu-at-most-240-seconds-each
+    decision_authority: T014-approve-publication-and-reject-before-L2
+    config: configs/exp_657_coupled_redundant_learned_state.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+    failed_calibration:
+      root: 20261170
+      status: consumed-failed-non-scientific-non-retryable
+      resources:
+        monotonic_wall_seconds: 9.60841893900033
+        process_user_plus_system_aggregate_cpu_seconds: 8.918745000000001
+        peak_rss_bytes: 481116160
+        child_exit_code: 1
+      evidence:
+        attempt_state: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/attempt-state.json, sha256: 0f00042606d29e9554f40eaf61abc28ebe35e39e5e5c4000ff342b4259a748dc}
+        completion: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/completion.json, sha256: a2d3c5e598b19b4e1f366dc25fd206a25bf87e1ae955cfa44e475e6af9f8311f}
+        stdout: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stdout.txt, sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}
+        stderr: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stderr.txt, sha256: 72f5af7d49b1397fd98fd96e594a2feaa93c692480a14323975360a001203ca6}
+      failure: inference-mode-mined-tensors-could-not-be-saved-for-backward
+      scientific_evidence: none
+    superseded_never_authorized_roots: [20261171, 20261172]
+    completed_calibration:
+      root: 20261173
+      status: consumed-complete-non-scientific-sealed-non-retryable
+      receipt: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration.json, sha256: f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616}
+      attempt_state: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/attempt-state.json, sha256: a3918125a52d18e0e2c1667e65d7c09abc68426f8e563371da245ffd295bb6ba}
+      completion: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/completion.json, sha256: 261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc}
+      core: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration-core.json, sha256: 143ac2b968eef975d41c297775f7e1109276fb58e897a573181b8ffddb785474}
+      executed_config: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/executed-config.yaml, sha256: 5c7b816c848001af444e5b4bdb4e0601cec531bc91b49d083ce1345fe5465b5d}
+      environment: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/environment.json, sha256: 4c753be71424fa637463cb52720ce79853af54c75b70267de03ddf667ecdb9d0}
+      mlflow: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/mlflow.json, sha256: 5a20fe9af6fa9f898cbf67d772a571169b2bfccca5a6d4321335b46cd9b873d7, run_id: baea166d0eee497ba0f9bbb3ef871913, status: FINISHED}
+      stdout: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stdout.txt, sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}
+      stderr: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stderr.txt, sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855}
+      source:
+        repository_commit: 9c6b732846db6671975cf992061c032b2943174d
+        repository_dirty: true
+        config_sha256: bd6f116096e52e0ce834661c46e2f2a92671d456c74c7ed98e2b75bb869a2d8f
+        runner_sha256: 55581c1e267a273128a1a505f87fadfdb79b17f2cf6b814efc85d7514165ef8c
+        model_sha256: 305e6ae4102bd37b88162e029d83f5c6313e7327ea2447e7f5c0c3e203f27239
+        execution_bound_preregistration_sha256: f2d25f36f318bf3802afe9e3e3c98f8a914d4b3c90028fafda557000b030e1da
+        dataset_split_sha256: e0d382f929b185d89086fe922a719b016108b6e2e561f1b8d0541fdf3e625397
+      publication_provenance:
+        focused_test_sha256: 278ab86a49bf06b8b3433eb3abfb3aa7c408def48b823eb9a8aef3b10f532b8d
+        package_regression: {passed: 300, failed: 0, wall_seconds: 128.91}
+        project_validator: {status: passed, okf_concepts: 158, benchmark_records: 1100}
+      matched_geometry:
+        parameters_each_arm: 17832
+        parameter_count_difference: 0
+        parameter_signature_sha256: 893bf71c262ce989bb8d19d4a7bafd687c6b93c7197527ac7cd59941f83d49a6
+        separate_channel_parameters: true
+      workload:
+        every_arm_trained: true
+        all_planned_evaluation_components_exercised: true
+        natural_first_error_training_available_for_every_arm: true
+        held_out_natural_control_error_threshold_met: true
+        natural_error_counts_released: false
+        generic_or_random_synthetic_corruption_used: false
+        cache_reuse: false
+        fidelity_reduced: false
+      resources:
+        monotonic_wall_seconds: 19.261643565999293
+        process_user_plus_system_aggregate_cpu_seconds: 39.670866
+        peak_rss_bytes: 487632896
+        child_exit_code: 0
+      resolved_formal_budget:
+        projected: {monotonic_wall_seconds: 315.67735660561084, process_user_plus_system_aggregate_cpu_seconds: 1135.1608660000004}
+        soft: {monotonic_wall_seconds: 483.03303216141694, process_user_plus_system_aggregate_cpu_seconds: 1703.3008660000005}
+        hard: {monotonic_wall_seconds: 724.5495482421254, process_user_plus_system_aggregate_cpu_seconds: 2554.9512990000007}
+        peak_rss_guard_bytes: 609541120
+        fixed_short_wall_cap_used: false
+        fidelity_reduced: false
+      width256_100_case_resource_projection:
+        measured_component:
+          cases: 2
+          bit_steps: 512
+          monotonic_wall_seconds: 4.599589136999384
+          process_user_plus_system_aggregate_cpu_seconds: 17.060000000000002
+        projection_formula: (measured_component / 2 cases) * 100 cases * 1.50
+        monotonic_wall_seconds: 344.9691852749538
+        process_user_plus_system_aggregate_cpu_seconds: 1279.5000000000002
+        preregistered_eventual_gate: {maximum_wall_seconds: 240.0, maximum_aggregate_cpu_seconds: 240.0}
+        gate_multiples: {wall: 1.4373716053123075, aggregate_cpu: 5.33125}
+        classification: projected-not-measured-100-case-runtime-binding-resource-rejection
+      calibration_checkpoints:
+        single_state_control: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/single-state-control-calibration-weights.safetensors, sha256: 571f10baa9badeca3af87dafd7fe94c811f513573b5427b27d071cf324ac286e, bytes: 74984, scientific: false}
+        coupled_redundant_challenger: {path: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/coupled-redundant-challenger-calibration-weights.safetensors, sha256: 00c72cf3862ec31b32b6151393b5122c3007bfa714bec8578a5e4e967073ed67, bytes: 74984, scientific: false}
+    formal_roots:
+      reserved: [20261174, 20261175]
+      opened: []
+      authorization: absent
+      status: closed-unopened-unauthorized-for-this-exact-geometry
+    scientific_evidence: none-calibration-only
+    limitations:
+      - Root 20261173 releases resource measurements and natural-error availability booleans only; no loss, accuracy, correct/error numerator, recovery rate, ablation result, or selection metric.
+      - T014 rejects the current geometry before L2 because its projected 100-case width-256 wall and aggregate-CPU resources fail the conjunctive 240/240 gate; the two-case component alone was measured.
+      - This resource rejection makes no scientific-accuracy, recovery, ablation, channel-collapse, or mechanism-success claim.
+      - Calibration weights are non-scientific and cannot be promoted or used as benchmark evidence.
+      - Candidate 005, submission files, EXP648, EXP656, checked, independent, and private evaluation remain unchanged.

@@ -5,7 +5,7 @@ goal:
   slug: "optimize-sair-goal-run"
   kind: recovery
   tranche: "Diagnose the prior run, transfer validated process improvements, and execute successive reproducible algorithmic/model optimization packages until the full outcome is proven."
-  status: done
+  status: active
   oracle:
     signal: "A reproducible, receipt-backed run whose selected improvements address trace evidence and whose registered experiments compare exact-answer accuracy against baselines on held-out seeds."
     cadence: "after each Worker package and at final audit"
@@ -64,7 +64,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/optimize-sair-goal-run/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.1/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/optimize-sair-goal-run"
 
-active_task: null
+active_task: T016
 
 tasks:
   - id: T001
@@ -587,6 +587,470 @@ tasks:
           status: pass
           evidence: "157 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1"
       summary: "Normalized EXP656 into the repository-standard run and evaluation envelopes after the first project-wide validator found five missing aliases. Added the explicit no-evaluation declaration, controls/runtime aliases, checkpoint field, challenge commit, dirty flag, and artifact map; updated future runner output and focused assertions. Both artifacts preserve their pre-normalization SHA256 values and executed-runner hash, and explicitly state that no benchmark field or decision changed. Focused tests and the project validator now pass without rerunning the benchmark."
+  - id: T010
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: medium
+    objective: >-
+      Implement and preregister EXP-657 as the single active coupled
+      redundant learned-state falsifier. Build a width-16/32 matched control
+      and challenger with two separately learned persistent residue-belief
+      channels plus a learned syndrome/fusion decoder, natural-error-only
+      recovery evidence, causal channel ablations, collapse diagnostics, and a
+      representative resource-only calibration. Do not open a formal
+      scientific root or release accuracy/selection evidence in this task.
+    inputs:
+      - "T001-T004 final receipts and T005/T999 decisions"
+      - "EXP656 durable rejection at commit 53848678f95a18590d2623cc8ec9a5d14c509e75"
+      - "EXP648 preserved root162 registration at commit 9c6b732846db6671975cf992061c032b2943174d"
+      - "knowledge/autoresearch/program.md, especially Resource-budget policy and trained-parameters boundary"
+    constraints:
+      - "Keep EXP648 parked, byte-preserved, and scientifically unopened."
+      - "Treat calibration root 20261170 as resource-only; reserve formal roots 20261171 onward and do not open them."
+      - "Use exact arithmetic only for offline labels and tests; inference may contain no exact residue, parity, carry, division, reduction, or correction routine."
+      - "Use naturally observed model errors or pre-first-error states only; generic/random synthetic state corruption is prohibited."
+      - "Measure wall, process user-plus-system aggregate CPU, and peak RSS separately; project formal work from maximum measured rates plus explicit headroom and a hard runaway ceiling."
+      - "Do not install dependencies, edit submission code, or weaken training/evaluation fidelity to fit a cap."
+    allowed_files:
+      - configs/exp_657_coupled_redundant_learned_state.yaml
+      - experiments/exp_657_coupled_redundant_learned_state/model.py
+      - experiments/exp_657_coupled_redundant_learned_state/run.py
+      - tests/test_exp657_coupled_redundant_learned_state.py
+      - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      - experiments/runs/exp-657-coupled-redundant-learned-state/
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python experiments/exp_657_coupled_redundant_learned_state/run.py --config configs/exp_657_coupled_redundant_learned_state.yaml --mode calibration"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+    stop_if:
+      - "The inference graph requires any hand-coded arithmetic/recovery helper or exact parity/correction operation."
+      - "A defensible parameter/compute-matched single-state control cannot be constructed."
+      - "Natural model-error cases are unavailable at the declared widths."
+      - "Calibration cannot measure both wall and process user-plus-system aggregate CPU, or cannot derive dynamic budgets without reducing fidelity."
+      - "Any required edit falls outside allowed_files, especially submission/, EXP648/EXP656, docs/goals/, research/, sources/, or data/external/."
+      - "A declared focused verification command fails twice for a task-owned cause."
+    expected_output:
+      - "Calibration-ready code, config, tests, and preregistration"
+      - "Canonical resource-only calibration receipt with hashes and dynamic formal budgets"
+      - "No formal scientific or accuracy evidence"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: blocked
+      changed_files:
+        - configs/exp_657_coupled_redundant_learned_state.yaml
+        - experiments/exp_657_coupled_redundant_learned_state/model.py
+        - experiments/exp_657_coupled_redundant_learned_state/run.py
+        - tests/test_exp657_coupled_redundant_learned_state.py
+        - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      commands:
+        - "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q -> 1 failed, 9 passed, 2 skipped"
+        - "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q -> 1 failed, 9 passed, 2 skipped after removing schedule shift/modulo"
+        - "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q -> 1 failed, 9 passed, 2 skipped after removing annotation BitOr"
+      summary: >-
+        Implemented the bounded EXP-657 scaffold and preregistration, then
+        stopped before calibration after the allowed repairs. The sole L0
+        failure is a test-contract conflict: a substring assertion bans
+        `decode`, while the task requires and model contains only the learned
+        neural module name `learned_decoder`. No calibration or formal root ran.
+      remaining_blockers:
+        - "Replace the contradictory substring assertion with an AST check for exact integer/offline decode calls, then recover the package under a new task."
+      verification_attempts: 3
+      stopped_because: "Focused verification remained red after two fixes because the required learned decoder conflicts with an overbroad substring assertion."
+  - id: T011
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: medium
+    objective: >-
+      Recover T010 without changing its scientific contract. Replace only the
+      overbroad `decode` substring ban with an AST-level prohibition on exact
+      integer/offline decoding calls while allowing the required learned neural
+      decoder. Then rerun L0, repair only genuine task-owned defects exposed by
+      verification, execute resource-only calibration root 20261170 exactly
+      once, register the calibration-ready EXP-657 package, and stop before any
+      formal scientific root or accuracy release.
+    allowed_files:
+      - configs/exp_657_coupled_redundant_learned_state.yaml
+      - experiments/exp_657_coupled_redundant_learned_state/model.py
+      - experiments/exp_657_coupled_redundant_learned_state/run.py
+      - tests/test_exp657_coupled_redundant_learned_state.py
+      - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      - experiments/runs/exp-657-coupled-redundant-learned-state/
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python experiments/exp_657_coupled_redundant_learned_state/run.py --config configs/exp_657_coupled_redundant_learned_state.yaml --mode calibration"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+    stop_if:
+      - "The repair weakens the inference prohibition beyond replacing substring matching with exact AST call/operator checks."
+      - "Calibration root 20261170 is already consumed or any formal root/authorization exists."
+      - "The inference graph requires any exact arithmetic/recovery helper or matched control geometry becomes unequal."
+      - "Calibration cannot measure wall, process user-plus-system aggregate CPU, and peak RSS separately or cannot derive a dynamic budget without reduced fidelity."
+      - "Any required edit falls outside allowed_files, especially submission/, EXP648/EXP656, docs/goals/, research/, sources/, or data/external/."
+      - "A declared focused verification command fails twice for a task-owned cause."
+    expected_output:
+      - "Green L0 with exact AST inference prohibitions"
+      - "Consumed-complete non-scientific root-20261170 calibration evidence"
+      - "Registered EXP-657 scaffold and dynamic formal budgets"
+      - "No formal scientific or accuracy evidence"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: blocked
+      changed_files:
+        - configs/exp_657_coupled_redundant_learned_state.yaml
+        - experiments/exp_657_coupled_redundant_learned_state/model.py
+        - experiments/exp_657_coupled_redundant_learned_state/run.py
+        - tests/test_exp657_coupled_redundant_learned_state.py
+        - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/attempt-state.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/completion.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stdout.txt
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stderr.txt
+      commands:
+        - "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q -> 10 passed, 2 skipped"
+        - "python experiments/exp_657_coupled_redundant_learned_state/run.py --config configs/exp_657_coupled_redundant_learned_state.yaml --mode calibration -> exit 1; consumed-failed root"
+      summary: >-
+        The exact AST repair passed L0. The sole root-20261170 resource-only
+        calibration launch then failed during its first natural-error recovery
+        update because tensors produced under torch.inference_mode were passed
+        directly into an autograd graph. The failure is durably sealed at
+        9.608418939 wall seconds, 8.918745 aggregate CPU seconds, 481116160-byte
+        peak RSS, and exit code 1. No accuracy, selection, formal root, or
+        authorization opened.
+      evidence:
+        - "attempt-state.json sha256 0f00042606d29e9554f40eaf61abc28ebe35e39e5e5c4000ff342b4259a748dc"
+        - "completion.json sha256 a2d3c5e598b19b4e1f366dc25fd206a25bf87e1ae955cfa44e475e6af9f8311f"
+        - "worker-stderr.txt sha256 72f5af7d49b1397fd98fd96e594a2feaa93c692480a14323975360a001203ca6"
+        - "worker-stdout.txt sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      remaining_blockers:
+        - "Preserve root20261170, assign a fresh calibration root, and materialize mined tensors as ordinary tensors outside inference mode before backward."
+      verification_attempts: 1
+      stopped_because: "Calibration root20261170 is consumed-failed and non-retryable."
+  - id: T012
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Recover the EXP-657 resource calibration without retrying consumed root
+      20261170. Preserve its four failure artifacts byte-for-byte and register
+      their hashes/limitations. Repair natural-error replay by cloning every
+      mined state, context, and target into ordinary non-inference tensors after
+      the inference-mode miner returns, with a focused regression proving
+      autograd can save them. Assign fresh resource-only calibration root
+      20261173, supersede unopened roots 20261171/20261172, reserve formal roots
+      20261174/20261175, rerun L0, launch root20261173 exactly once, register the
+      complete dynamic-budget scaffold, validate, and stop before formal work.
+    allowed_files:
+      - configs/exp_657_coupled_redundant_learned_state.yaml
+      - experiments/exp_657_coupled_redundant_learned_state/model.py
+      - experiments/exp_657_coupled_redundant_learned_state/run.py
+      - tests/test_exp657_coupled_redundant_learned_state.py
+      - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      - experiments/runs/exp-657-coupled-redundant-learned-state/
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    verify:
+      - "sha256sum the four root20261170 artifacts and require the T011 hashes"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python experiments/exp_657_coupled_redundant_learned_state/run.py --config configs/exp_657_coupled_redundant_learned_state.yaml --mode calibration"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+    stop_if:
+      - "Any root20261170 byte/hash changes or a retry of root20261170 is attempted."
+      - "Any scientific metric is released from calibration, any formal root opens, or an authorization file appears."
+      - "The replay repair changes model geometry, data, labels, optimizer work, or evaluation fidelity instead of tensor ownership only."
+      - "The materialized replay tensors remain inference tensors or fail an actual backward regression."
+      - "Calibration cannot separately measure wall, process user-plus-system aggregate CPU, and peak RSS or cannot derive dynamic budgets without fidelity reduction."
+      - "Any required edit falls outside allowed_files, especially submission/, EXP648/EXP656, docs/goals/, research/, sources/, or data/external/."
+      - "A declared focused verification command fails twice for a task-owned cause."
+    expected_output:
+      - "Immutable consumed-failed root20261170 history"
+      - "Green tensor-ownership/autograd regression and L0"
+      - "Consumed-complete non-scientific root20261173 calibration evidence"
+      - "Registered EXP-657 scaffold with measured dynamic formal budgets"
+      - "No formal scientific or accuracy evidence"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_657_coupled_redundant_learned_state.yaml
+        - experiments/exp_657_coupled_redundant_learned_state/model.py
+        - experiments/exp_657_coupled_redundant_learned_state/run.py
+        - tests/test_exp657_coupled_redundant_learned_state.py
+        - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+        - experiments/runs/exp-657-coupled-redundant-learned-state/
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+      commands:
+        - cmd: "sha256sum the four root20261170 artifacts"
+          status: pass
+          evidence: "All four exact T011 hashes preserved."
+        - cmd: "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+          status: pass
+          evidence: "11 passed, 2 skipped before L1."
+        - cmd: "python experiments/exp_657_coupled_redundant_learned_state/run.py --config configs/exp_657_coupled_redundant_learned_state.yaml --mode calibration"
+          status: pass
+          evidence: "Exit 0; root20261173 consumed-complete non-scientific."
+        - cmd: "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+          status: pass
+          evidence: "13 passed after L1."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "158 concepts, 1100 records."
+      summary: >-
+        EXP657 L0/L1 completed without formal or accuracy evidence. Root20261173
+        consumed 19.261643566 wall seconds, 39.670866 aggregate CPU seconds,
+        and 487632896-byte peak RSS. Projected L2 is 315.677356606 wall /
+        1135.160866 CPU seconds; soft budgets are 483.033032161 /
+        1703.300866 and hard ceilings 724.549548242 / 2554.951299. Both
+        17832-parameter arms and every planned evaluation shape ran. The
+        credible 100-case width256 projection is 344.969185275 wall /
+        1279.5 aggregate CPU seconds, above the unchanged 240/240 eventual
+        gate. Root20261170 remains byte-immutable.
+      evidence:
+        - "calibration.json sha256 f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616"
+        - "completion.json sha256 261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc"
+        - "calibration-core.json sha256 143ac2b968eef975d41c297775f7e1109276fb58e897a573181b8ffddb785474"
+      remaining_blockers:
+        - "Formal roots20261174/20261175 remain unopened and unauthorized pending a runtime-aware phase decision."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T013
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: low
+    objective: >-
+      Repair only EXP657 focused-test import isolation after the package-level
+      full suite showed that collection left the experiment model cached as the
+      global module name `model`. Snapshot and restore `sys.modules['model']`
+      and `sys.path` around runner loading so later submission tests import
+      submission/model.py. Preserve every EXP657 implementation, config,
+      preregistration, governance, checkpoint, root20261170 failure artifact,
+      and root20261173 calibration artifact byte-for-byte.
+    allowed_files:
+      - tests/test_exp657_coupled_redundant_learned_state.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py tests/test_submission_candidate.py -q"
+    stop_if:
+      - "Any file outside the single allowed test file would change."
+      - "The repair weakens any scientific, compliance, root-lifecycle, source-hash, or receipt assertion."
+      - "Any experiment or submission code is modified, any root is launched, or any artifact byte changes."
+      - "The targeted verification fails twice for a task-owned cause."
+    expected_output:
+      - "Isolated test import state"
+      - "Focused EXP657 plus submission tests pass in one process"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - tests/test_exp657_coupled_redundant_learned_state.py
+      commands:
+        - cmd: "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py tests/test_submission_candidate.py -q"
+          status: pass
+          evidence: "21 passed in 16.67s."
+      summary: >-
+        EXP657 test collection now transactionally restores the complete prior
+        sys.path and exact prior global `model` module state, including
+        absent-versus-present behavior. The experiment model is bound globally
+        only while run.py loads. No experiment, artifact, implementation,
+        config, governance, or submission file was touched or launched.
+      remaining_blockers: []
+      verification_attempts: 1
+      stopped_because: null
+  - id: T014
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Audit the complete EXP657 L0/L1 package after the PM package regression.
+      Decide whether the preregistered credible width256 100-case runtime
+      projection, 344.969185275 wall / 1279.5 process CPU seconds versus the
+      binding 240/240 gate, decision-safely rejects L2 before scientific
+      training or whether a formal root remains justified. Also audit model
+      compliance, matched-control geometry, resource projection arithmetic,
+      evidence scope, root lifecycle, and publication readiness. Read-only.
+    inputs:
+      - "T010-T013 receipts"
+      - "EXP657 config, implementation, tests, preregistration, registry, governance, and both calibration roots"
+      - "knowledge/autoresearch/program.md Resource-budget policy and trained-parameters boundary"
+      - "T001-T004 run-control and hypothesis-ranking receipts"
+      - "PM full-suite regression result"
+    constraints:
+      - "Do not implement, edit, train, launch a root, or create authorization."
+      - "Do not discount the runtime gate merely because calibration is non-scientific."
+      - "Distinguish measured calibration observations, projected formal resources, and unmeasured accuracy."
+      - "Reject sunk-cost reasoning and choose by expected information gain per remaining wall/CPU compute."
+      - "Require preservation/publication repairs explicitly if the package is not commit-ready."
+    expected_output:
+      - "approve-publication-and-reject-before-L2 | approve-publication-and-authorize-separate-L2-gate | required-repair"
+      - "Binding rationale and exact evidence"
+      - "Publication file boundary"
+      - "Next single experiment package if rejected"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-publication-and-reject-before-L2
+      full_outcome_complete: false
+      rationale: >-
+        Approve publication of the non-scientific L0/L1 package and reject the
+        current EXP657 geometry before L2. Root20261173 measured two width256
+        cases at 4.599589137 wall and 17.06 aggregate-CPU seconds. The frozen
+        formula `(measured / 2) * 100 * 1.50` yields 344.969185275 wall and
+        1279.5 CPU seconds, 1.437x and 5.331x the conjunctive 240/240 gate. No
+        possible unmeasured L2 accuracy can promote a formulation that already
+        fails this binding runtime stop rule. Compliance, exact 17832-parameter
+        matching, root lifecycle, hashes, validator, and the 300-test package
+        regression pass. Continue with one joint quotient/carry learned
+        transducer package after EXP657 is durably published.
+      evidence:
+        - "Measured root20261173 outer boundary: 19.261643566 wall, 39.670866 aggregate CPU, 487632896-byte peak RSS."
+        - "Width256 component: 2 cases / 512 bit-steps in 4.599589136999384 wall and 17.060000000000002 aggregate CPU seconds."
+        - "Independent projection: 344.9691852749538 wall and 1279.5 aggregate CPU seconds for 100 cases with frozen 1.50 multiplier."
+        - "No scientific accuracy, recovery, ablation, selection, checked, independent, private, candidate, or submission evidence exists."
+        - "Receipt f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616 and completion 261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc verify."
+        - "PM package regression: 300 passed in 128.91s; validator: 158 concepts and 1100 records."
+      blocked_tasks:
+        - "EXP657 L2 formal execution on roots20261174/20261175."
+      missing_evidence:
+        - "EXP657 has no scientific accuracy evidence and supports no mechanism-success, candidate-promotion, or Goal-completion claim."
+        - "The overall Goal remains below 85% and lacks required checked, five-seed independent, and legitimate private evidence."
+  - id: T015
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: low
+    objective: >-
+      Apply the T014 decision to governance only: change EXP657 from
+      active/calibrated-awaiting-decision to rejected-before-L2-resource-gate in
+      its preregistration, registry, autoresearch state, backlog, and decision
+      log. Record the exact measured/projection distinction, preserve both
+      calibration roots and every execution-bound source/config/test/checkpoint
+      artifact byte-for-byte, keep formal roots20261174/20261175 unopened and
+      unauthorized, and make no accuracy claim.
+    allowed_files:
+      - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    verify:
+      - "sha256sum all root20261170/root20261173 artifacts and require the registered hashes"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check plus explicit no-formal-authorization/no-formal-root audit"
+    stop_if:
+      - "Any execution-bound config/model/runner/test or calibration artifact/checkpoint byte would change."
+      - "Any formal root or authorization is opened, or any scientific accuracy/selection claim is introduced."
+      - "The governance text treats the 100-case projection as measured 100-case runtime or omits separate wall/aggregate-CPU units."
+      - "Any required edit falls outside the five allowed governance files."
+      - "A declared focused verification command fails twice for a task-owned cause."
+    expected_output:
+      - "Durable rejected-before-L2-resource-gate status"
+      - "Immutable EXP657 evidence and unopened formal roots"
+      - "Publication-ready governance"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+      commands:
+        - cmd: "sha256sum all root20261170/root20261173 artifacts"
+          status: pass
+          evidence: "Every registered failure, receipt, completion, core, environment, MLflow, config, stdout/stderr, and checkpoint hash matches."
+        - cmd: "python -m pytest tests/test_exp657_coupled_redundant_learned_state.py -q"
+          status: pass
+          evidence: "13 passed in 9.13s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "158 concepts, 1100 records, pinned upstream."
+        - cmd: "git diff --check on the tracked governance files plus no-formal audit"
+          status: pass
+          evidence: "No whitespace errors; no formal authorization or formal-root artifact exists."
+      summary: >-
+        Applied T014's decision to governance only. EXP657 is durably
+        `rejected-before-L2-resource-gate`; the two-case width256 observation
+        and frozen 100-case projection remain explicitly distinguished, both
+        clocks retain their units, no accuracy claim was added, and formal
+        roots20261174/20261175 remain unopened and unauthorized. The assigned
+        Worker exceeded one bounded wait; PM interrupted it and completed the
+        exact five-file audit without repeated polling.
+      remaining_blockers: []
+      verification_attempts: 1
+      stopped_because: null
+  - id: T016
+    type: worker
+    assignee: Worker
+    status: active
+    reasoning_hint: low
+    objective: >-
+      Publish the complete rejected EXP657 package as one exact commit before
+      opening another experiment. Stage exactly the 24 EXP657 paths approved by
+      T014 plus this PM-owned GoalBuddy state file, verify cached diff and path
+      count, commit, push the current branch, and verify HEAD/upstream/remote
+      identity. Preserve all unrelated research-paper/LFS worktree changes and
+      do not stage them.
+    allowed_files:
+      - configs/exp_657_coupled_redundant_learned_state.yaml
+      - experiments/exp_657_coupled_redundant_learned_state/model.py
+      - experiments/exp_657_coupled_redundant_learned_state/run.py
+      - tests/test_exp657_coupled_redundant_learned_state.py
+      - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/attempt-state.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/completion.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stderr.txt
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stdout.txt
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/attempt-state.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration-core.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/completion.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/coupled-redundant-challenger-calibration-weights.safetensors
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/environment.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/executed-config.yaml
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/mlflow.json
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/single-state-control-calibration-weights.safetensors
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stderr.txt
+      - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stdout.txt
+      - docs/goals/optimize-sair-goal-run/state.yaml
+    verify:
+      - "git diff --cached --check"
+      - "cached path count equals 25 and contains no research/papers, submission, EXP648, EXP656, source, or data path"
+      - "cached root artifact hashes and absent formal authorization/root audit"
+      - "commit and normal push succeed"
+      - "HEAD, upstream, and remote branch SHA are identical after push"
+    stop_if:
+      - "The cached path set differs from the exact 25-path boundary."
+      - "Any unrelated PDF/LFS or user-owned change is staged."
+      - "Any root artifact hash changes or a formal artifact appears."
+      - "Commit or push would require destructive Git operations or credential changes."
+    expected_output:
+      - "One pushed EXP657 rejection commit"
+      - "Clean index with unrelated PDF/LFS changes left unstaged"
+      - "goalbuddy_receipt_v1"
   - id: T999
     type: judge
     assignee: Judge

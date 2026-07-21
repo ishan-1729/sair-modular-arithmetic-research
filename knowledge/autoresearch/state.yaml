@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T00:30:00+05:30
+updated_at: 2026-07-22T05:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,6 +33,50 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
+  run_id: null
+  status: no-active-experiment-package-awaiting-preregistration
+  next_selected_family: joint-quotient-carry-learned-transducer
+  selection_basis: T014 directs one joint quotient/carry learned-transducer package after durable EXP657 publication, ranked next by expected information gain per remaining wall/CPU compute.
+  authorization: none
+last_rejected_hypothesis:
+  run_id: exp-657-coupled-redundant-learned-state
+  statement: Two separately learned persistent residue-belief planes with learned syndrome, corrections, fusion, and decoder may recover naturally observed errors better than an exactly parameter-matched single-persistent-state control at widths 16 and 32.
+  status: rejected-before-L2-resource-gate
+  evidence_status: Resource-only calibration exercised every arm, update kind, planned evaluation component, causal ablation shape, collapse diagnostic, width-256 shape, serialization/reload/hash path, MLflow publication, and child-exit boundary without releasing scientific accuracy or selection evidence.
+  roots:
+    consumed_failed_calibration: 20261170
+    superseded_never_authorized: [20261171, 20261172]
+    consumed_complete_calibration: 20261173
+    reserved_formal_unopened_unauthorized: [20261174, 20261175]
+  matched_geometry:
+    parameters_each_arm: 17832
+    parameter_count_difference: 0
+    separate_channel_parameters: true
+    parameter_signature_sha256: 893bf71c262ce989bb8d19d4a7bafd687c6b93c7197527ac7cd59941f83d49a6
+  calibration:
+    receipt_sha256: f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616
+    completion_sha256: 261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc
+    mlflow_run_id: baea166d0eee497ba0f9bbb3ef871913
+    resources: {monotonic_wall_seconds: 19.261643565999293, process_user_plus_system_aggregate_cpu_seconds: 39.670866, peak_rss_bytes: 487632896}
+    projected_formal: {monotonic_wall_seconds: 315.67735660561084, process_user_plus_system_aggregate_cpu_seconds: 1135.1608660000004}
+    soft_budget: {monotonic_wall_seconds: 483.03303216141694, process_user_plus_system_aggregate_cpu_seconds: 1703.3008660000005}
+    hard_runaway_ceiling: {monotonic_wall_seconds: 724.5495482421254, process_user_plus_system_aggregate_cpu_seconds: 2554.9512990000007}
+    peak_rss_guard_bytes: 609541120
+    width256_100_case_projection: {monotonic_wall_seconds: 344.9691852749538, process_user_plus_system_aggregate_cpu_seconds: 1279.5000000000002}
+    measured_width256_component: {cases: 2, bit_steps: 512, monotonic_wall_seconds: 4.599589136999384, process_user_plus_system_aggregate_cpu_seconds: 17.060000000000002}
+    width256_projection_formula: (measured component / 2 cases) * 100 cases * 1.50
+    fixed_short_wall_cap_used: false
+    fidelity_reduced: false
+    scientific_accuracy_or_selection_reported: false
+  promotion_gate: L2 remains conjunctively bound to at least 50 percent recovery of exactly 256 held-out natural control errors, at least two-point dependence on each channel, at least three width-32 rollout points, no more than one width-16 retention point or 0.05 transition point lost, trained-width nonzero rollout, collapse/diversity, validity, determinism, integrity, and width-256 runtime gates.
+  decision:
+    authority: T014
+    verdict: approve-publication-and-reject-before-L2
+    rationale: The projected 100-case width-256 wall and aggregate-CPU resources are 1.437 and 5.331 times the conjunctive 240/240 gate; unmeasured L2 accuracy cannot make this exact geometry promotable.
+    evidence_scope: resource-gate-only-no-scientific-accuracy-recovery-ablation-collapse-or-mechanism-claim
+  next_gate: none-current-geometry-closed-before-L2
+  authorization: {formal: absent, formal_roots_opened: [], formal_roots_closed_unopened: [20261174, 20261175], L3: prohibited}
+parked_exp648_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
@@ -212,15 +256,15 @@ research_programs:
     scientifically_reproduced_parent_count: 0
     coverage_complete_parent_count: 6
     coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
-    status: full-pdf-reconciled-contract-queued-behind-exp-648
+    status: full-pdf-reconciled-contract-queued-behind-next-single-package
     mandate_status: queued-binding
     active_experiment: null
-    blocked_by: exp-648-structured-trajectory-consistency
+    blocked_by: joint-quotient-carry-package-preregistration
     next_family: structural-equivariance-then-dense-layer-loop-schedule
     coverage_completion_rule: Every applicable atomic component under each of the 44 stable parents requires an independent durable faithful, bounded-faithful, analogue, supporting-only, excluded, or non-applicable verdict with its terminal criterion met; a parent completes only when all applicable components complete.
     library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
     faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
-    sole_active_task_unchanged: exp-648-structured-trajectory-consistency
+    sole_active_task: null
     ordered_queue:
       - structural-equivariance
       - shared-recurrent-depth-including-looplm-controls
@@ -256,7 +300,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Obtain completion audits and a completion Judge for consumed-complete non-scientific root 20261162, then obtain a separate screen-launch Judge if approved. Screen roots and all scientific surfaces remain blocked; no judge-authorization exists.
+next_action: Preregister one joint quotient/carry learned-transducer package as the next expected-information-gain experiment, beginning with static compliance and representative resource calibration. EXP657 formal roots 20261174/20261175 are closed, unopened, and unauthorized; EXP648 remains parked and scientifically unopened.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -272,6 +316,8 @@ git:
   last_validated_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
   dirty: true
 risks:
+  - EXP-657 is rejected before L2: its projected 100-case width-256 resources are 344.97 wall / 1279.50 aggregate CPU seconds versus the conjunctive 240/240 gate. Only the underlying two-case 4.5996-wall / 17.06-CPU component was measured; no scientific accuracy exists.
+  - EXP-657 root 20261170 is immutable consumed-failed history; roots 20261171/20261172 are superseded-never-authorized, root 20261173 is consumed-complete non-scientific, and roots 20261174/20261175 are closed for this geometry while remaining unopened and unauthorized.
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
   - Candidate 005 currently has no learned inference path above 128 bits; EXP-649 invokes the raw cellular checkpoint at width 256 only as a frozen research diagnostic.
   - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.

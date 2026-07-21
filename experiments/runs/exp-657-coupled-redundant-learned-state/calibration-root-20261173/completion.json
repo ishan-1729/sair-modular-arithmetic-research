@@ -1,0 +1,58 @@
+{
+  "artifacts_before_completion": {
+    "calibration-core.json": {
+      "bytes": 18779,
+      "sha256": "143ac2b968eef975d41c297775f7e1109276fb58e897a573181b8ffddb785474"
+    },
+    "coupled-redundant-challenger-calibration-weights.safetensors": {
+      "bytes": 74984,
+      "sha256": "00c72cf3862ec31b32b6151393b5122c3007bfa714bec8578a5e4e967073ed67"
+    },
+    "environment.json": {
+      "bytes": 367,
+      "sha256": "4c753be71424fa637463cb52720ce79853af54c75b70267de03ddf667ecdb9d0"
+    },
+    "executed-config.yaml": {
+      "bytes": 11487,
+      "sha256": "5c7b816c848001af444e5b4bdb4e0601cec531bc91b49d083ce1345fe5465b5d"
+    },
+    "mlflow.json": {
+      "bytes": 304,
+      "sha256": "5a20fe9af6fa9f898cbf67d772a571169b2bfccca5a6d4321335b46cd9b873d7"
+    },
+    "single-state-control-calibration-weights.safetensors": {
+      "bytes": 74984,
+      "sha256": "571f10baa9badeca3af87dafd7fe94c811f513573b5427b27d071cf324ac286e"
+    },
+    "worker-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker-stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "completion_observed_after_child_exit": true,
+  "formal_root_opened": false,
+  "outer_resource_boundary": {
+    "child_exit_code": 0,
+    "monotonic_wall_seconds": 19.261643565999293,
+    "peak_rss_bytes": 487632896,
+    "process_user_plus_system_aggregate_cpu_seconds": 39.670866,
+    "scope": "parent-prelaunch-through-observed-child-process-exit"
+  },
+  "post_sample_exclusions": [
+    "completion-json-serialization-and-atomic-replace",
+    "canonical-calibration-receipt-serialization-and-atomic-replace",
+    "attempt-state-terminal-rewrite",
+    "cli-summary-stdout",
+    "parent-return-interpreter-teardown-and-exit"
+  ],
+  "root": 20261173,
+  "run_id": "exp-657-coupled-redundant-learned-state",
+  "schema_version": "exp657-calibration-completion-v1",
+  "scientific_accuracy_or_selection_reported": false,
+  "stage": "L1-resource-only",
+  "status": "completed-child-exited-zero"
+}

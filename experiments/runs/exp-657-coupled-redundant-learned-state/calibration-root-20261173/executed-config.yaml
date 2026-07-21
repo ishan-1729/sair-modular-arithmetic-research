@@ -1,0 +1,302 @@
+run_id: exp-657-coupled-redundant-learned-state
+hypothesis: Two separately learned persistent residue-belief planes, coupled only
+  through a learned syndrome, learned corrections, and a learned fusion decoder, recover
+  naturally occurring one-step errors often enough to improve width-32 exact autonomous
+  rollout over an exactly parameter-matched single-persistent-state control without
+  harming clean transitions or width-16 retention.
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+preregistration: knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+roots:
+  consumed_failed_calibration: 20261170
+  superseded_never_authorized:
+  - 20261171
+  - 20261172
+  calibration: 20261173
+  first_formal: 20261174
+  second_formal: 20261175
+  formal_status: reserved-unopened-authorization-required
+  confirmation_status: prohibited-until-formal-promotion-and-separate-authorization
+stages:
+  L0:
+    purpose: static-shape-determinism-forbidden-path-and-match-gates
+    scientific_metrics: prohibited
+  L1:
+    purpose: representative-resource-only-calibration
+    root: 20261173
+    scientific_metrics: prohibited
+  L2:
+    purpose: first-formal-width16-width32-matched-falsifier
+    minimum_root: 20261174
+    authorization_file: experiments/runs/exp-657-coupled-redundant-learned-state/formal-authorization.json
+  L3:
+    purpose: fresh-root-confirmation-and-width-scaling
+    status: prohibited-until-L2-promotion-and-separate-authorization
+model:
+  hidden: 24
+  syndrome_hidden: 16
+  cycles: 2
+  input_context_channels: 5
+  channel_auxiliary_weight: 0.3
+  syndrome_supervision_weight: 0.1
+  residual_decorrelation_weight: 0.02
+  correction_scale: 0.5
+data:
+  widths:
+  - 16
+  - 32
+  prime_bit_span: 4
+  train_prime_identities: 128
+  test_prime_identities: 64
+  split_seed_offset: 657000
+  training_seed_offset: 657100
+  evaluation_seed_offset: 657200
+  natural_error_seed_offset: 657300
+  held_out_recovery_seed_offset: 657400
+formal_protocol:
+  root: 20261174
+  seeds:
+  - 20261174
+  - 20261175
+  arms:
+  - single-state-control
+  - coupled-redundant-challenger
+  matched:
+    initialization_seed: true
+    parameter_shapes_and_count: exact
+    optimizer_and_schedule: exact
+    generated_pair_order: exact
+    update_count_and_batch_size: exact
+    width_and_update_mode_order: exact
+    forward_step_graph: exact-except-persistent-state-feedback-rule
+  training:
+    updates_per_arm: 600
+    batch_size: 32
+    recovery_batch_size: 16
+    recovery_update_period: 3
+    maximum_natural_error_candidate_pairs_per_update: 512
+    learning_rate: 0.001
+    minimum_learning_rate: 5.0e-05
+    weight_decay: 0.0001
+    gradient_clip: 1.0
+    torch_threads: 4
+  evaluation:
+    transition_cases_per_width_arm: 4096
+    rollout_cases_per_width_arm: 512
+    rollout_batch_size: 32
+    held_out_natural_error_denominator: 256
+    maximum_held_out_natural_error_candidates: 16384
+    causal_ablation_rollout_cases_per_mode: 512
+    collapse_transition_cases: 4096
+    deterministic_replay_cases: 32
+  decision_safe_stopping:
+    batch_size: 32
+    rule: Stop an evaluation component only when its exact best attainable final numerator,
+      assuming every remaining case is favorable and every adverse paired count is
+      zero, cannot reach the preregistered threshold. Training work is never shortened
+      by an accuracy proxy. Preserve checkpoints and all completed denominators on
+      any stop.
+calibration:
+  mode: resource-only
+  root: 20261173
+  repeats: 1
+  cache_reuse: false
+  fidelity_reduced: false
+  training:
+    updates_per_arm: 8
+    batch_size: 8
+    recovery_batch_size: 4
+    recovery_update_period: 2
+    maximum_natural_error_candidate_pairs_per_update: 64
+  evaluation:
+    transition_cases_per_width_arm: 64
+    rollout_cases_per_width_arm: 8
+    rollout_batch_size: 4
+    held_out_natural_error_threshold: 8
+    maximum_held_out_natural_error_candidates: 128
+    causal_ablation_rollout_cases_per_mode: 8
+    collapse_transition_cases: 64
+    width256_runtime_projection_cases: 2
+  output_dir: experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173
+  boundary:
+    accuracy_metrics_released: false
+    selection_metrics_released: false
+    formal_root_opened: false
+    checked_or_independent_or_private_answers_read: false
+promotion_gates:
+  held_out_natural_one_step_recovery:
+    numerator: challenger-exact-among-parameter-matched-control-one-step-errors
+    denominator: exactly-256-held-out-natural-control-errors
+    minimum_fraction: 0.5
+  causal_channel_a:
+    numerator: normal-challenger-exact-minus-drop-a-exact
+    denominator: exactly-512-width32-autonomous-rollouts
+    minimum_drop_fraction: 0.02
+  causal_channel_b:
+    numerator: normal-challenger-exact-minus-drop-b-exact
+    denominator: exactly-512-width32-autonomous-rollouts
+    minimum_drop_fraction: 0.02
+  width32_rollout_gain:
+    numerator: challenger-exact-minus-control-exact
+    denominator: exactly-512-paired-width32-autonomous-rollouts
+    minimum_fraction: 0.03
+  width16_retention:
+    numerator: challenger-exact-minus-control-exact
+    denominator: exactly-512-paired-width16-autonomous-rollouts
+    minimum_fraction: -0.01
+  clean_width32_transition:
+    numerator: challenger-exact-minus-control-exact
+    denominator: exactly-4096-paired-held-out-transitions
+    minimum_fraction: -0.0005
+  trained_width_viability:
+    widths:
+    - 16
+    - 32
+    minimum_challenger_exact_rollout_numerator: 1
+    denominator_per_width: 512
+  validity:
+    maximum_invalid_residue_fraction: 0.01
+  channel_collapse:
+    denominator_bits: exactly-4096-width32-transitions-times-32-bits
+    collapse_if_all:
+      maximum_mean_absolute_probability_difference: 0.01
+      maximum_binary_disagreement_fraction: 0.001
+      minimum_centered_cosine_similarity: 0.999
+    maximum_case_error_jaccard: 0.9
+    error_jaccard_denominator: case-level-union-of-channel-a-and-channel-b-errors
+    minimum_error_union_cases: 32
+  determinism_and_integrity:
+    exact_replay_required: true
+    checkpoint_reload_exact_required: true
+    source_hashes_required: true
+  width256_runtime_projection:
+    projected_cases: 100
+    maximum_projected_aggregate_cpu_seconds: 240.0
+    maximum_projected_wall_seconds: 240.0
+stop_rules:
+- channel-collapse-all-three-thresholds-met
+- either-channel-causal-ablation-drop-below-0.02
+- challenger-width16-or-width32-rollout-numerator-equals-zero
+- clean-width32-transition-change-below-minus-0.0005
+- any-best-attainable-final-bound-cannot-cross-required-threshold
+- exact-determinism-integrity-or-validity-gate-fails
+- credible-width256-runtime-projection-exceeds-preregistered-gate
+resource_policy:
+  measured_units:
+  - monotonic_wall_seconds
+  - process_user_plus_system_aggregate_cpu_seconds
+  - peak_rss_bytes
+  representative_components:
+  - setup-and-data-split
+  - every-arm-transition-update
+  - every-arm-natural-error-recovery-update
+  - clean-transition-evaluation
+  - autonomous-rollout-evaluation
+  - held-out-natural-error-recovery
+  - channel-a-and-channel-b-causal-ablations
+  - channel-collapse-and-error-overlap-diagnostics
+  - width256-runtime-shape
+  - checkpoint-serialization-reload-and-hashing
+  - mlflow-and-receipt-publication
+  projection_rate_policy: maximum-observed-matching-component-rate
+  throughput_safety_multiplier: 1.5
+  explicit_setup_headroom:
+    minimum_wall_seconds: 15.0
+    minimum_aggregate_cpu_seconds: 5.0
+    measured_setup_fraction: 0.25
+  soft_budget_formula: observed_setup_plus-1.50-times-projected_variable_work-plus-explicit_setup_headroom
+  hard_runaway_multiplier_over_soft: 1.5
+  peak_rss_guard_multiplier: 1.25
+  preserve_recoverable_checkpoints: true
+  never_reduce_fidelity_to_fit_budget: true
+  calibration_fixed_short_wall_cap: null
+compliance:
+  exact_arithmetic_scope: offline-data-labels-tests-and-evaluation-only
+  inference_prohibitions:
+  - exact-residue
+  - exact-parity
+  - exact-carry
+  - division
+  - modular-reduction
+  - hand-coded-correction
+  natural_error_only: true
+  generic_or_random_synthetic_corruption: prohibited
+  submission_changes: prohibited-in-this-package
+  exp648_changes: prohibited
+resolved_resource_budget:
+  policy: maximum-measured-matching-component-rates-with-separate-clocks
+  formal_workload:
+    training_update: 1200
+    transition_case: 16384
+    rollout_case_bit_step: 49152
+    natural_recovery_candidate_bit_step: 524288
+    ablation_case_bit_step: 49152
+    collapse_transition_case: 4096
+    width256_case_bit_step: 512
+    checkpoint_byte: 149968
+  maximum_measured_rates:
+    monotonic_wall_seconds:
+      training_update: 0.057776250000642904
+      transition_case: 0.0005035165000037978
+      rollout_case_bit_step: 0.001858470078122565
+      natural_recovery_candidate_bit_step: 3.301346093742552e-05
+      ablation_case_bit_step: 0.0022791555351560078
+      collapse_transition_case: 0.00043194704686300156
+      width256_case_bit_step: 0.008983572533201922
+      checkpoint_byte: 5.351607142783814e-07
+    process_user_plus_system_aggregate_cpu_seconds:
+      training_update: 0.20000000000000107
+      transition_case: 0.0018749999999999878
+      rollout_case_bit_step: 0.007031250000000003
+      natural_recovery_candidate_bit_step: 0.00011718749999999924
+      ablation_case_bit_step: 0.00863281249999999
+      collapse_transition_case: 0.0017187500000000466
+      width256_case_bit_step: 0.033320312500000004
+      checkpoint_byte: 6.668089192360658e-07
+  projected_component_contributions:
+    monotonic_wall_seconds:
+      training_update: 69.33150000077148
+      transition_case: 8.249614336062223
+      rollout_case_bit_step: 91.34752127988031
+      natural_recovery_candidate_bit_step: 17.30856140796095
+      ablation_case_bit_step: 112.0250528639881
+      collapse_transition_case: 1.7692551039508544
+      width256_case_bit_step: 4.599589136999384
+      checkpoint_byte: 0.0802569819989003
+    process_user_plus_system_aggregate_cpu_seconds:
+      training_update: 240.00000000000128
+      transition_case: 30.7199999999998
+      rollout_case_bit_step: 345.60000000000014
+      natural_recovery_candidate_bit_step: 61.4399999999996
+      ablation_case_bit_step: 424.3199999999995
+      collapse_transition_case: 7.040000000000191
+      width256_case_bit_step: 17.060000000000002
+      checkpoint_byte: 0.09999999999999432
+  observed_unassigned_setup_and_publication:
+    monotonic_wall_seconds: 10.966005493998637
+    process_user_plus_system_aggregate_cpu_seconds: 8.880865999999997
+  explicit_setup_headroom:
+    monotonic_wall_seconds: 15.0
+    process_user_plus_system_aggregate_cpu_seconds: 5.0
+  throughput_safety_multiplier: 1.5
+  projected:
+    monotonic_wall_seconds: 315.67735660561084
+    process_user_plus_system_aggregate_cpu_seconds: 1135.1608660000004
+  soft_budget:
+    monotonic_wall_seconds: 483.03303216141694
+    process_user_plus_system_aggregate_cpu_seconds: 1703.3008660000005
+  hard_runaway_ceiling:
+    monotonic_wall_seconds: 724.5495482421254
+    process_user_plus_system_aggregate_cpu_seconds: 2554.9512990000007
+  peak_rss_guard_bytes: 609541120
+  credible_width256_100_case_projection:
+    monotonic_wall_seconds: 344.9691852749538
+    process_user_plus_system_aggregate_cpu_seconds: 1279.5000000000002
+  fidelity_reduced: false
+  fixed_short_wall_cap_used: false
+execution_boundary:
+  root: 20261173
+  stage: L1-resource-only
+  formal_roots_opened: []
+  scientific_metrics_released: false
