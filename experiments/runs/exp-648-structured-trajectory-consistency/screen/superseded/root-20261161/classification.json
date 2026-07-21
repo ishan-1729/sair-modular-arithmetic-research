@@ -1,0 +1,63 @@
+{
+  "accounting": {
+    "aggregate_cpu_seconds": 18657.139380582998,
+    "charged_exactly_once_into_root20261162_carried_charge": true,
+    "new_cumulative_carried_aggregate_cpu_seconds": 76378.175260173,
+    "new_cumulative_carried_wall_seconds": 19072.695949158995,
+    "previous_cumulative_carried_aggregate_cpu_seconds": 57721.035879589996,
+    "previous_cumulative_carried_wall_seconds": 14302.253947323996,
+    "wall_seconds": 4770.442001834999
+  },
+  "archive_integrity": {
+    "authorization_sha256": "0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa",
+    "core_sha256": "2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8",
+    "receipt_sha256": "1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a",
+    "resource_completion_sha256": "e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a"
+  },
+  "authorization_history": {
+    "approved_base_commit": "87384f92ab1c053c7791e8afd69a07936d5a7402",
+    "authorization_commit": "16d903301f50e54e3f6d9ab8cb6435e61f0d648f",
+    "historical_v1_nonlaunch_verification_only": true,
+    "original_path": "experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json",
+    "sole_file_child": true
+  },
+  "boundary": {
+    "candidate_or_promotion_evidence": false,
+    "checked_independent_official_private_opened": false,
+    "model_update_performed": false,
+    "scientific_accuracy_or_selection_reported": false,
+    "screen_or_confirmation_opened": false
+  },
+  "classification": "consumed-complete-pre-r3-binding-historical-only",
+  "eligible_for_cache_reuse": false,
+  "eligible_for_launch": false,
+  "eligible_for_projection_rates": false,
+  "mlflow_evidence": {
+    "api_requeried_during_archive": false,
+    "artifact_file_count": 27,
+    "artifact_total_bytes": 252562,
+    "run_count": 5,
+    "runs_finished": 5
+  },
+  "next_root": 20261162,
+  "non_scientific": true,
+  "prohibitions": [
+    "root 20261161 authorization reuse",
+    "root 20261161 cache reuse",
+    "root 20261161 projection-rate reuse",
+    "screen or confirmation launch",
+    "candidate or tier promotion",
+    "checked, independent, official, or private evaluation"
+  ],
+  "reason": "The calibration completed under pre-R3 runner, config, evaluator, workload, trace, matched-work, checkpoint, and completion-seal bindings. Its exact resource charge remains durable history, but its rates, caches, authorization, and receipts cannot authorize or substitute for a fresh root 20261162 calibration of the repaired paths.",
+  "root": 20261161,
+  "schema_version": "exp648-readiness-superseded-classification-v2",
+  "scratch_evidence": {
+    "copied_into_archive": false,
+    "file_count": 218,
+    "preserved_in_place": true,
+    "total_bytes": 24573993
+  },
+  "status": "consumed-complete-pre-r3-binding-historical-only",
+  "superseded": true
+}

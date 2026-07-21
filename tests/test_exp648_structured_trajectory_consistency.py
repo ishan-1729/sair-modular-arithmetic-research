@@ -593,8 +593,8 @@ def test_scientific_resource_hashing_and_composite_cache_invalidation() -> None:
     config = load_config()
     science = module.scientific_protocol_sha256(config)
     resource = module.resource_protocol_sha256(config)
-    assert science == "f4cc038b205289203569dceed0ee5e833d406a8d0f79aceaf6c5cd393353c98e"
-    assert resource == "8d930606bf3ac8d5f1e6d1394a5000f2883bd3a1ff54d92c0d8af88f347ed37b"
+    assert science == "b5145a3f61a8366d3d4ef647bf21ba7d02b509229c16c89d85a107212561e54b"
+    assert resource == "2583c4c2d6958d13d187e829aa3e162ddd70a2da9931c18e25d80bff062cf627"
     assert resource != "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198"
     assert "readiness_recovery" not in config
     assert "historical_readiness_recovery_root_20261160_to_20261161" in config["resource_protocol"]
@@ -655,7 +655,7 @@ def test_current_lifecycle_fields_distinguish_historical_and_unopened_roots() ->
     assert roles["post_repair_readiness_calibration_root"]["status_at_preregistration"] == "reserved-unopened-unauthorized"
     assert config["corpus"]["lifecycle_status"] == "consumed-complete-immutable-historical"
     assert config["authorization"]["corpus_root"] == "consumed-complete-immutable-historical"
-    assert "reconstruction" in config["authorization"]["screen_roots"]
+    assert "sole-file-root162-authorization" in config["authorization"]["screen_roots"]
     prereg = (ROOT / "knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md").read_text()
     assert "Every seed below is currently unused and unopened" not in prereg
     registry = (ROOT / "experiments/registry.yaml").read_text()
@@ -1067,8 +1067,8 @@ def test_run_recovery_order_requires_fresh_warmup_before_reuse() -> None:
 def test_wall_and_cpu_planning_ceilings_are_distinct_and_fidelity_is_binding() -> None:
     config = load_config()
     calibration = config["resource_protocol"]["calibration"]
-    assert calibration["initial_planning_hard_ceiling_wall_seconds"] == 25_000
-    assert calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"] == 100_000
+    assert calibration["initial_planning_hard_ceiling_wall_seconds"] == 30_000
+    assert calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"] == 120_000
     source = inspect.getsource(load_runner().CalibrationExperiment.__init__)
     assert 'wall_ceiling=float(calibration["initial_planning_hard_ceiling_wall_seconds"])' in source
     assert 'calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"]' in source

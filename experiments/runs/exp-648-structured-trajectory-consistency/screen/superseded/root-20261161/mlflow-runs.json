@@ -1,0 +1,59 @@
+{
+  "api_requeried_during_archive": false,
+  "artifact_file_count": 27,
+  "artifact_manifest_bytes": 4227,
+  "artifact_manifest_path": "mlflow-artifacts.sha256",
+  "artifact_manifest_sha256": "7743b0fc1e77349378b06863c0506c3fa34cf98c66819a8f2db5dcbee19b70b8",
+  "artifact_total_bytes": 252562,
+  "preserved_in_place": true,
+  "root": 20261161,
+  "runs": [
+    {
+      "artifact_directory": ".scratch/mlflow/artifacts/8f887966943d44a3a4bebea6ad5dddb9",
+      "artifact_file_count": 6,
+      "artifact_manifest_subset_sha256": "a72d5c3d52bea4d2892ce5c7d860990375648a784e6a3da7e55fb2fdbda32763",
+      "artifact_total_bytes": 234,
+      "role": "repeat-1-readiness-probe",
+      "run_id": "8f887966943d44a3a4bebea6ad5dddb9",
+      "status": "FINISHED"
+    },
+    {
+      "artifact_directory": ".scratch/mlflow/artifacts/b49db1ca755e46e6b7b18e9e5c1fb859",
+      "artifact_file_count": 6,
+      "artifact_manifest_subset_sha256": "389c72890d76ecbb208dc2abd885480c4383d00654c1bc5a123ed3e6fa9b6315",
+      "artifact_total_bytes": 222,
+      "role": "warmup-readiness-probe",
+      "run_id": "b49db1ca755e46e6b7b18e9e5c1fb859",
+      "status": "FINISHED"
+    },
+    {
+      "artifact_directory": ".scratch/mlflow/artifacts/c27161cb0f2a46228b94b47362769fb1",
+      "artifact_file_count": 3,
+      "artifact_manifest_subset_sha256": "15332beea79c2e751c5aad266adae96b1a41fca64e3bfd02c9315fbedb089a92",
+      "artifact_total_bytes": 251638,
+      "role": "readiness-calibration-evidence",
+      "run_id": "c27161cb0f2a46228b94b47362769fb1",
+      "status": "FINISHED"
+    },
+    {
+      "artifact_directory": ".scratch/mlflow/artifacts/cea11ae498ef4243ac222aa732e8ed06",
+      "artifact_file_count": 6,
+      "artifact_manifest_subset_sha256": "0045c3553553c3f695f6c0528920c2ea438f949e56695590d92a9bd639e80da5",
+      "artifact_total_bytes": 234,
+      "role": "repeat-2-readiness-probe",
+      "run_id": "cea11ae498ef4243ac222aa732e8ed06",
+      "status": "FINISHED"
+    },
+    {
+      "artifact_directory": ".scratch/mlflow/artifacts/f89f15cf84334df9acdc41ca6625b25d",
+      "artifact_file_count": 6,
+      "artifact_manifest_subset_sha256": "f066bb0ec9948dc0f79e17b8e1adbe7e8ff64e0742c0a01f09c607144fc5e4f1",
+      "artifact_total_bytes": 234,
+      "role": "repeat-3-readiness-probe",
+      "run_id": "f89f15cf84334df9acdc41ca6625b25d",
+      "status": "FINISHED"
+    }
+  ],
+  "schema_version": "exp648-readiness-mlflow-runs-v1",
+  "status_source": "existing canonical EXP-648 readiness receipts and downloaded artifact bytes only"
+}

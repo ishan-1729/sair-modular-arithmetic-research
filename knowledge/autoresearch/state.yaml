@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-21T13:13:26+05:30
+updated_at: 2026-07-22T00:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -36,8 +36,8 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: scientific-scaffold-repaired-awaiting-fresh-readiness-calibration-and-judge
-  evidence_status: The accepted immutable corpus and every root-20261159/160/161 evidence byte remain unchanged. Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable, but its runner/config/workload bindings predate the complete-trajectory, independent matched-work, and attempt-local checkpoint repair and cannot authorize the repaired screen or supply reusable caches. Root 20261162 is reserved, unopened, and unauthorized for a fresh full-fidelity readiness calibration. No model update, scientific accuracy, selection, screen, benchmark, or promotion surface opened.
+  status: root161-byte-archived-root162-v2-scaffold-regenerated-after-cache-fidelity-repair-awaiting-fresh-audit
+  evidence_status: The accepted immutable corpus remains unchanged. Root 20261161 is consumed-complete historical evidence; its ten tracked readiness files are byte-identically archived, and canonical manifests cover 218 in-place scratch files plus 27 in-place artifacts from five recorded FINISHED MLflow runs without requery or copying. Its pre-R3 authorization, rates, and caches cannot authorize or substitute for root 20261162. The root-20261162 resource profiler now uses deterministic target-width values and a conservative production-schema envelope after the prior tiny-integer profile was rejected; v2 source/provenance bindings were regenerated, but root 20261162 remains reserved, unopened, and unauthorized pending a fresh audit and no live authorization exists. No model update, scientific accuracy, selection, screen, benchmark, or promotion surface opened.
   readiness_gate:
     evidence_class: historical-pre-r2-repair-approvals-not-current-root162-authorization
     task: T-EXP648-SCREEN-READINESS
@@ -47,10 +47,10 @@ current_hypothesis:
     sequential_judge_result: APPROVE
     calibration_completion_audits: [APPROVE, APPROVE]
     calibration_completion_judge_result: approved-complete-non-scientific-readiness-calibration
-    status: prior-readiness-complete-scaffold-repaired-fresh-readiness-required
+    status: root161-preserved-root162-v2-cache-fidelity-repaired-source-scaffold-regenerated-fresh-audit-required
   authorization:
     preregistration: judge-approved
-    implementation: repaired-complete-trajectory-matched-work-and-attempt-checkpoint-scaffold-awaiting-audits-and-judge
+    implementation: repaired-scaffold-plus-root161-preservation-root162-v2-reconstruction-and-wide-cache-envelope-awaiting-fresh-audit
     calibration: roots-20261159-and-20261160-permanently-denied-root-20261161-consumed-complete-historical-only-root-20261162-reserved-unopened-unauthorized
     corpus: consumed-complete
     screen: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
@@ -73,38 +73,70 @@ current_hypothesis:
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
   calibration_protocol:
     completed_transition: approved-recovery-base-pushed -> sole-file-root-20261161-authentication-child-pushed -> fresh-warmup-and-three-fresh-full-fidelity-repeats-complete -> verifier-succeeded -> completion-judge-approved
-    next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
+    next_transition: fresh-cache-fidelity-package-audit -> commit/push-preservation-and-reconstruction-base -> sole-file-root162-authorization-child -> fresh-full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
     warmups: 1
     timed_repeats: 3
     fidelity_reduction_allowed: false
-    cumulative_wall_runaway_ceiling_seconds: 25000
-    cumulative_process_user_plus_system_aggregate_cpu_runaway_ceiling_seconds: 100000
+    cumulative_wall_runaway_ceiling_seconds: 30000
+    cumulative_process_user_plus_system_aggregate_cpu_runaway_ceiling_seconds: 120000
     runaway_ceiling_role: independent-cumulative-protection-only-never-per-attempt-target-fidelity-cap-or-scientific-gate
-    completed_history: {wall_seconds: 9007.853947323996, process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996}
+    completed_history_including_root_20261161: {wall_seconds: 13778.295949158995, process_user_plus_system_aggregate_cpu_seconds: 55378.175260172996}
     failed_root_20261160_conservative_allowance: {wall_seconds: 5294.4, aggregate_cpu_seconds: 21000, exact_internal_observation: false, completed_work_claimed: false}
-    carried_charge_applied_exactly_once: {wall_seconds: 14302.253947323995, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+    pre_root_20261161_carried_charge: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+    root_20261161_canonical_charge: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998}
+    carried_charge_applied_exactly_once: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173}
+    planning_inputs: {R_wall_seconds: 5305.469600509008, R_aggregate_cpu_seconds: 20967.89, E_wall_seconds: 73.8932728219952, E_aggregate_cpu_seconds: 135.975487648}
+    budget_formula: new_carried_charge + 1.5 * (1.25 * R + E)
+    budget_formula_results: {wall_seconds: 29131.291359346378, process_user_plus_system_aggregate_cpu_seconds: 115896.932241645}
     carried_charge_policy: apply-exactly-once-to-planning-guard-and-accounting
     root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
     chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
     cache_reuse: Root-20261160 repeat-1/2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and all three fresh full-fidelity repeats; reused wall and aggregate-CPU charges are both exactly zero.
-    post_repair_cache_policy: Root-20261161 caches are prohibited for repaired runner/config/workload bindings; root 20261162 requires fresh full-fidelity work.
+    post_repair_cache_policy: Root-20261161 caches are prohibited for repaired runner/config/workload bindings; root 20261162 requires one fresh warmup and three fresh full-fidelity timed segments with both cross-root and same-root segment-cache reuse disabled.
   post_repair_scaffold:
     trajectory_repeat: complete-ordered-prediction-trace-digest-with-independent-recomputation
     endpoint_equal_intermediate_different_regression: required-and-passing
     matched_work: independent-per-arm-counts-and-ordered-digests-distinct-from-paired-data-order
     checkpoint_lifecycle: immutable-attempt-specific-paths-completion-and-failure-bind-preserved-bytes
     root_20261162: reserved-unopened-unauthorized
+    authorization_source_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/authorization-source.json
+    scaffold_provenance_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/provenance.json
+    live_authorization_manifest: absent
     corpus: consumed-complete-immutable-historical
     root_20261161: consumed-historical-not-current-launch-evidence
-    old_authorization_source_and_scaffold: historical-cannot-bind-repaired-bytes
+    old_authorization_source_and_scaffold: immutable-pre-r3-v1-history-cannot-bind-repaired-bytes
+    root_20261161_archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+    root_20261161_scratch_inventory: {files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+    root_20261161_mlflow_inventory: {runs: 5, finished: 5, artifact_files: 27, artifact_bytes: 252562, api_requeried_during_archive: false}
+    shared_screen_execution_schedule: {scientific_ledger_writes: 216, outer_launch_ledger_writes: 3, total_ledger_writes: 219, cache_units: 7, checkpoint_save_reload_verifications: 2, atomic_evidence_writes: 29, first_quarter_scientific_ledger_writes: 54, per_arm_declared_total: 110298, per_arm_declared_events: 1630, per_arm_fresh_actual_events: 423}
+    shared_schedule_derivation: totals-derived-from-update-counts-and-named-write-declared-and-actual-operation-dictionaries-with-config-mutation-regression
     declared_to_actual_cross_binding: required-and-covered-by-identical-undercount-regressions
     evaluation_cache_truthfulness: fresh-evaluator-and-validated-cache-reuse-are-distinct-bound-paths
+    readiness_cache_profile:
+      schema_version: exp648-shape-matched-evaluation-cache-profile-v2
+      units: 7
+      cases: 4640
+      prediction_trace_elements_both_arms: 200960
+      teacher_trace_elements_both_arms: 200960
+      deterministic_value_fixture: modulus-equals-two-to-width-minus-159-and-base-equals-one-shifted-by-width-minus-one-with-exact-teacher-trajectories
+      minimum_nonzero_width_bearing_bits: width-minus-1
+      actual_cache_schema: projected-and-hashed
+      conservative_envelope: raw-cases-specification-value-width-audit-plus-16384-byte-per-unit-padding
+      external_reference_minimum_payload_bytes: 20147941
+      local_deterministic_diagnostic_payload_bytes: {envelope: 31567530, actual_schema_projection: 30080731, envelope_extra: 1486799, scientific_or_rate_evidence: false}
+      validation: canonical-roundtrip-actual-projection-core-cases-width-contract-traces-receipts-results-and-semantics
+      timing: fixture-construction-plus-fresh-serialization-plus-recovery-plus-complete-set-with-wall-cpu-rss-separated
+      projection: measured-complete-set-direct-no-tiny-payload-extrapolation
     checkpoint_failure_inventory: every-regular-artifact-hashed-and-explicitly-bound-or-unbound-no-vacuous-success
     completion_seal: pointer-seal-state-attempt-and-authorization-bindings-required
     scientific_evidence: none
   historical_observed_readiness_calibration_root_20261161:
     root: 20261161
-    status: consumed-complete-non-scientific-sealed-non-retryable
+    status: consumed-complete-pre-r3-binding-byte-archived-historical-only
+    archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+    original_authorization_history: {authorization_commit: 16d903301f50e54e3f6d9ab8cb6435e61f0d648f, approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402, original_path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json, historical_v1_nonlaunch_only: true}
+    scratch_inventory: {files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+    mlflow_artifact_inventory: {files: 27, bytes: 252562, api_requeried_during_archive: false}
     receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
     workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
     mlflow:
@@ -206,7 +238,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Complete repair closure, commit/push the clean intermediate base, then create a separate audited package that preserves/archives root 20261161 and reconstructs a versioned post-repair authorization source/scaffold; commit/push that package; create a sole-file root-20261162 authorization child; run full-fidelity calibration; obtain completion audits/Judge; then obtain a separate screen Judge. The corpus is consumed-complete, root 20261161 is historical, root 20261162 is reserved-unopened-unauthorized, and old provenance cannot bind repaired bytes. All scientific surfaces remain blocked.
+next_action: Audit, commit, and push this root-20261161 preservation/root-20261162 v2 reconstruction base; then create a separate sole-file root-20261162 authorization child, run one fresh warmup plus three fresh full-fidelity timed segments under the revised dynamic budget, obtain completion audits/Judge, and only then obtain a separate screen Judge. Root 20261162 remains reserved-unopened-unauthorized and all scientific surfaces remain blocked.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

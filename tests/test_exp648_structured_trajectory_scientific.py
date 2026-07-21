@@ -103,11 +103,80 @@ def test_historical_calibration_is_preserved_but_not_live_screen_calibration(mod
     )
     assert module.sha256(module.CALIBRATION_EVIDENCE_PATH) == module.PINNED["calibration_evidence_sha256"]
     lifecycle = module.readiness_calibration_publication_state()
-    assert lifecycle["status"] == "live-receipt-present"
-    assert lifecycle["live_receipt_sha256"] == (
-        "1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a"
+    assert lifecycle["status"] == "superseded-only-no-live-receipt"
+    assert lifecycle["live_receipt_sha256"] is None
+    assert lifecycle["superseded_root_20261161_preserved"] is True
+    archived = module.validate_root20261161_archive()
+    assert archived["authorization_sha256"] == (
+        "0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa"
     )
-    assert lifecycle["superseded_root_20261159_preserved"] is True
+    assert archived["scratch_file_count"] == 218
+    assert archived["mlflow_artifact_file_count"] == 27
+    assert not module.SCREEN_READINESS_CALIBRATION_PATH.exists()
+    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
+
+
+def reseal_root20261161_archive(module, archive: Path) -> None:
+    lines = [
+        f"{module.sha256(path)}  {path.name}\n"
+        for path in sorted(archive.iterdir(), key=lambda item: item.name)
+        if path.is_file() and path.name != "SHA256SUMS"
+    ]
+    (archive / "SHA256SUMS").write_text("".join(lines), encoding="utf-8")
+
+
+@pytest.mark.parametrize(
+    "surface",
+    ("classification", "authorization", "completion", "scratch", "mlflow"),
+)
+def test_root20261161_archive_tamper_and_crosslinks_fail_closed(
+    module, tmp_path, surface
+) -> None:
+    archive = tmp_path / "root-20261161"
+    shutil.copytree(module.ROOT_20261161_SUPERSEDED_DIR, archive)
+    if surface == "classification":
+        path = archive / "classification.json"
+        payload = json.loads(path.read_bytes())
+        payload["eligible_for_cache_reuse"] = True
+        path.write_bytes(module.canonical_json_bytes(payload, pretty=True))
+        expected = "classification mismatch"
+    elif surface == "authorization":
+        path = archive / "readiness-calibration-authorization.json"
+        payload = json.loads(path.read_bytes())
+        payload["calibration_root"] += 1
+        path.write_bytes(module.canonical_json_bytes(payload, pretty=True))
+        expected = "authorization bytes changed"
+    elif surface == "completion":
+        path = archive / "readiness-calibration-completion.json"
+        payload = json.loads(path.read_bytes())
+        payload["authorization_sha256"] = "0" * 64
+        path.write_bytes(module.canonical_json_bytes(payload, pretty=True))
+        expected = "authorization/attempt crosslink"
+    elif surface == "scratch":
+        manifest = archive / "scratch-files.sha256"
+        lines = manifest.read_text(encoding="utf-8").splitlines(keepends=True)
+        lines[0] = "0" * 64 + lines[0][64:]
+        manifest.write_text("".join(lines), encoding="utf-8")
+        inventory_path = archive / "scratch-inventory.json"
+        inventory = json.loads(inventory_path.read_bytes())
+        inventory["manifest_sha256"] = module.sha256(manifest)
+        inventory_path.write_bytes(
+            module.canonical_json_bytes(inventory, pretty=True)
+        )
+        expected = "scratch hash mismatch"
+    else:
+        manifest = archive / "mlflow-artifacts.sha256"
+        lines = manifest.read_text(encoding="utf-8").splitlines(keepends=True)
+        lines[0] = "0" * 64 + lines[0][64:]
+        manifest.write_text("".join(lines), encoding="utf-8")
+        runs_path = archive / "mlflow-runs.json"
+        runs = json.loads(runs_path.read_bytes())
+        runs["artifact_manifest_sha256"] = module.sha256(manifest)
+        runs_path.write_bytes(module.canonical_json_bytes(runs, pretty=True))
+        expected = "MLflow artifact hash mismatch"
+    reseal_root20261161_archive(module, archive)
+    with pytest.raises(PermissionError, match=expected):
+        module.validate_root20261161_archive(archive_dir=archive)
 
 
 def test_root_allowlist_uses_only_test_root_and_rejects_all_other_surfaces(module) -> None:
@@ -656,6 +725,325 @@ def test_matched_work_is_independent_per_arm_and_distinct_from_data_order(module
         assert invalid["valid"] is False
 
 
+def test_screen_execution_schedule_has_exact_shared_counts_and_cache_formula(
+    module,
+) -> None:
+    schedule = module.screen_execution_schedule()
+    assert schedule["scientific_attempt_ledger"]["atomic_writes"] == 216
+    assert schedule["scientific_attempt_ledger"]["write_reasons"] == {
+            "constructor": 1,
+            "reciprocal_launch_attempt_binding": 1,
+            "corpus_verified": 1,
+            "training_started": 1,
+            "completed_update_pairs": 200,
+            "first_quarter_telemetry": 1,
+            "checkpoint_receipts": 2,
+            "evaluation_started": 1,
+            "transition_units": 2,
+            "rollout_units": 3,
+            "exact_repeat_pair": 1,
+            "finalization_started": 1,
+            "sealed": 1,
+    }
+    assert schedule["scientific_attempt_ledger"][
+        "fixed_write_reasons_before_first_quarter_guard"
+    ] == {
+        "constructor": 1,
+        "reciprocal_launch_attempt_binding": 1,
+        "corpus_verified": 1,
+        "training_started": 1,
+    }
+    assert schedule["scientific_attempt_ledger"][
+        "writes_before_first_quarter_guard"
+    ] == 54
+    assert schedule["scientific_attempt_ledger"][
+        "completed_arm_updates_before_first_quarter_guard"
+    ] == 100
+    assert schedule["scientific_attempt_ledger"]["total_arm_updates"] == 400
+    assert schedule["outer_launch_ledger"][
+        "writes_before_first_quarter_guard"
+    ] == 2
+    assert schedule["outer_launch_ledger"]["atomic_writes"] == 3
+    assert schedule["total_screen_ledger_atomic_writes"] == 219
+    assert schedule["evaluation_cache_write_validate_units"] == 7
+    assert schedule["checkpoint_save_reload_verifications"] == 2
+    assert schedule["atomic_evidence_writes"] == 29
+    assert [
+        (unit["unit"], unit["mode"], unit["width"], unit["cases"])
+        for unit in schedule["evaluation_units"]
+    ] == [
+        ("transition-128", "transition", 128, 2000),
+        ("transition-256", "transition", 256, 2000),
+        ("rollout-64", "rollout", 64, 200),
+        ("rollout-128", "rollout", 128, 200),
+        ("rollout-256", "rollout", 256, 200),
+        ("exact-repeat-first-256", "rollout", 256, 20),
+        ("exact-repeat-second-256", "rollout", 256, 20),
+    ]
+    assert schedule["per_arm_declared_counts"] == {
+        "clean_forward_steps": 1600,
+        "autonomous_forward_steps": 1600,
+        "endpoint_loss_computations": 200,
+        "clean_backward_calls": 1600,
+        "endpoint_backward_calls": 200,
+        "gradient_clip_calls": 200,
+        "optimizer_steps": 200,
+        "scheduler_steps": 200,
+        "checkpoint_writes": 1,
+        "checkpoint_reload_verifications": 1,
+        "checkpoint_byte_hashes": 1,
+        "checkpoint_receipt_serializations": 1,
+        "transition_evaluation_cases": 4000,
+        "rollout_evaluation_cases": 640,
+        "rollout_evaluation_steps": 99840,
+        "evaluation_result_hashes": 7,
+        "evaluation_result_serializations": 7,
+    }
+    assert schedule["per_arm_declared_count_total"] == 110_298
+    assert schedule["per_arm_declared_ordered_event_count"] == 1_630
+    for cached_units in range(8):
+        counts = module.screen_actual_operation_counts(cached_units)
+        assert sum(counts.values()) == 423 + cached_units
+        assert counts["fresh_evaluator_calls"] == 7 - cached_units
+        assert counts["fresh_result_hashes"] == 7 - cached_units
+        assert counts["fresh_result_serializations"] == 7 - cached_units
+        for name in (
+            "cache_record_validations", "cache_per_arm_receipt_validations",
+            "cached_result_digest_validations", "cache_reuse_operations",
+        ):
+            assert counts[name] == cached_units
+    with pytest.raises(RuntimeError, match="outside the schedule"):
+        module.screen_actual_operation_counts(8)
+    live_schedule_source = "\n".join(
+        inspect.getsource(value)
+        for value in (
+            module.screen_execution_schedule,
+            module.screen_workload_payload,
+            module.measure_readiness_infrastructure_unit,
+            module.finalize_matched_work,
+        )
+    )
+    assert "atomic_attempt_ledger_writes" not in live_schedule_source
+    assert '"atomic_evidence_writes": 19' not in live_schedule_source
+    assert '!= 213' not in live_schedule_source
+    schedule_source = inspect.getsource(module.screen_execution_schedule)
+    for forbidden_literal in (
+        '"writes_before_first_quarter_guard": 54',
+        '"completed_arm_updates_before_first_quarter_guard": 100',
+        '"total_arm_updates": 400',
+        '"ordered_event_count_fresh": 423',
+        "sum(scientific_ledger_reasons.values()) + 3",
+    ):
+        assert forbidden_literal not in schedule_source
+    assert "WINDOW_LENGTH" not in inspect.getsource(
+        module._exercise_calibration_matched_work_schedule
+    )
+
+
+def test_calibration_matched_work_exercises_exact_screen_schedule_and_tamper_fails(
+    module, monkeypatch
+) -> None:
+    config = module.yaml.safe_load(module.CONFIG_PATH.read_bytes())
+    schedule = module.screen_execution_schedule(config_override=config)
+    receipt = module._exercise_calibration_matched_work_schedule(config)
+    assert receipt["valid"] is True
+    assert receipt["screen_execution_schedule_valid"] is True
+    assert receipt["screen_execution_schedule_sha256"] == module.sha256_bytes(
+        module.canonical_json_bytes(schedule)
+    )
+    for arm in ("control", "challenger"):
+        arm_receipt = receipt["per_arm"][arm]
+        assert arm_receipt["counts"] == schedule["per_arm_declared_counts"]
+        assert arm_receipt["total_declared_work_units"] == 110_298
+        assert arm_receipt["ordered_event_count"] == 1_630
+        assert arm_receipt["actual_operation_counts"] == (
+            schedule["per_arm_actual_operation_contract"]["fresh_zero_cache_reuse"]
+        )
+        assert arm_receipt["actual_operation_event_count"] == 423
+    tampered = copy.deepcopy(schedule)
+    tampered["per_arm_declared_count_total"] += 1
+    monkeypatch.setattr(
+        module, "screen_execution_schedule", lambda **_kwargs: copy.deepcopy(tampered)
+    )
+    with pytest.raises(RuntimeError, match="schedule exercise failed"):
+        module._exercise_calibration_matched_work_schedule(config)
+
+
+def test_readiness_infrastructure_physically_runs_every_shared_schedule_unit(
+    module, tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr(module, "ROOT", tmp_path)
+    for arm in ("control", "challenger"):
+        path = tmp_path / f"{arm}.safetensors"
+        module.save_file({"weight": module.torch.tensor([1.0])}, path)
+    repeat = {
+        "components": {
+            "checkpoint": {
+                arm: {"path": f"{arm}.safetensors"}
+                for arm in ("control", "challenger")
+            }
+        }
+    }
+    output = tmp_path / "infrastructure"
+    observed_writes = []
+
+    def recording_write(path, raw):
+        path = Path(path)
+        observed_writes.append(path.relative_to(output).as_posix())
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(raw)
+
+    monkeypatch.setattr(module, "_atomic_write", recording_write)
+    result = module.measure_readiness_infrastructure_unit(
+        repeat, output, module.psutil.Process()
+    )
+    schedule = module.screen_execution_schedule()
+    assert result["complete"] is True
+    assert result["matched_work_schedule_valid"] is True
+    assert result["scientific_attempt_ledger_atomic_writes"] == 216
+    assert result["outer_launch_ledger_atomic_writes"] == 3
+    assert result["total_screen_ledger_atomic_writes"] == 219
+    assert result["evaluation_cache_write_validate_units"] == 7
+    assert result["atomic_evidence_writes"] == 29
+    assert sum(name == "ledger/attempt-state.json" for name in observed_writes) == 216
+    assert sum(name == "ledger/launch-state.json" for name in observed_writes) == 3
+    assert sum(name.startswith("evaluation-cache/") for name in observed_writes) == 7
+    assert sum(name.startswith("evidence/") for name in observed_writes) == 29
+    assert result["execution_schedule_sha256"] == module.sha256_bytes(
+        module.canonical_json_bytes(schedule)
+    )
+    profile = result["evaluation_cache_profile"]
+    module.validate_shape_matched_evaluation_cache_profile(profile, schedule)
+    assert profile["evaluation_unit_count"] == 7
+    assert profile["total_cases"] == 4_640
+    assert profile["total_prediction_trace_elements"] == 200_960
+    assert profile["total_teacher_trace_elements"] == 200_960
+    assert profile["total_trace_elements"] == 401_920
+    assert profile["total_canonical_payload_bytes"] == sum(
+        unit["canonical_payload_bytes"] for unit in profile["evaluation_units"]
+    )
+    assert profile[
+        "total_external_reference_minimum_payload_bytes"
+    ] == sum(module.SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES.values())
+    assert profile[
+        "total_external_reference_minimum_payload_bytes"
+    ] == 20_147_941
+    assert profile["total_canonical_payload_bytes"] >= 20_147_941
+    assert profile["total_actual_schema_projected_payload_bytes"] < profile[
+        "total_canonical_payload_bytes"
+    ]
+    assert all(
+        unit["canonical_payload_bytes"]
+        >= unit["external_reference_minimum_payload_bytes"]
+        for unit in profile["evaluation_units"]
+    )
+    for unit in profile["evaluation_units"]:
+        contract = unit["value_width_contract"]
+        assert contract["target_width_bits"] == unit["width"]
+        for field in contract["fields"].values():
+            assert field["bit_length_histogram"]
+            assert field["decimal_digit_histogram"]
+            if field["role"] == "width-bearing-integer":
+                assert field["minimum_nonzero_bit_length"] >= unit["width"] - 1
+        assert unit["actual_schema_projected_payload_bytes"] < unit[
+            "canonical_payload_bytes"
+        ]
+        assert unit["envelope_extra_payload_bytes"] >= (
+            module.SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+        )
+    rollout_payload = json.loads(
+        (output / "evaluation-cache/04-rollout-256.json").read_bytes()
+    )
+    assert set(rollout_payload) == set(
+        module.REAL_SCREEN_EVALUATION_CACHE_FIELDS
+    ) | {"profiling_envelope"}
+    assert "cases" not in {
+        key for key in rollout_payload if key != "profiling_envelope"
+    }
+    assert rollout_payload["profiling_envelope"][
+        "raw_cases_absent_from_actual_cache_schema"
+    ] is True
+    assert "cases" in rollout_payload["profiling_envelope"]
+    assert profile["real_cache_schema_comparison"][
+        "exact_schema_claimed"
+    ] is False
+    assert profile["real_cache_schema_comparison"][
+        "conservative_serialization_parse_envelope_claimed"
+    ] is True
+    for arm in schedule["arm_names"]:
+        assert len(rollout_payload["results"][arm]["prediction_trace"]) == 257
+        assert len(rollout_payload["results"][arm]["teacher_trace"]) == 257
+        assert all(
+            len(row) == 200
+            for row in rollout_payload["results"][arm]["prediction_trace"]
+        )
+        assert all(
+            len(row) == 200
+            for row in rollout_payload["results"][arm]["teacher_trace"]
+        )
+
+
+def test_shape_matched_cache_width_and_bytes_grow_at_equal_case_count(
+    module,
+) -> None:
+    config = module.yaml.safe_load(module.CONFIG_PATH.read_bytes())
+
+    def record(mode: str, width: int, cases: int) -> dict:
+        rows = width + 1 if mode == "rollout" else 0
+        specification = {
+            "unit": f"{mode}-{width}", "mode": mode, "width": width,
+            "cases": cases,
+            "prediction_trace_rows_per_arm": rows,
+            "prediction_trace_elements_per_arm": rows * cases,
+            "teacher_trace_elements_per_arm": rows * cases,
+        }
+        fixture = module._shape_matched_evaluation_cache_records(
+            specification, config
+        )
+        return {
+            "bytes": len(module.canonical_json_bytes(
+                fixture["envelope_record"], pretty=True
+            )),
+            "contract": fixture["value_width_contract"],
+        }
+
+    transition_128 = record("transition", 128, 5)
+    transition_256 = record("transition", 256, 5)
+    rollout_64 = record("rollout", 64, 3)
+    rollout_128 = record("rollout", 128, 3)
+    rollout_256 = record("rollout", 256, 3)
+    assert transition_256["bytes"] > transition_128["bytes"]
+    assert rollout_256["bytes"] > rollout_128["bytes"] > rollout_64["bytes"]
+    assert transition_256["contract"]["summary"][
+        "width_bearing_decimal_digit_count"
+    ] > transition_128["contract"]["summary"][
+        "width_bearing_decimal_digit_count"
+    ]
+    assert rollout_256["contract"]["target_width_decimal_digits"] == 78
+    assert rollout_128["contract"]["target_width_decimal_digits"] == 39
+    assert rollout_64["contract"]["target_width_decimal_digits"] == 20
+
+
+@pytest.mark.parametrize("shrunk_value", [0, 1 << 124])
+def test_shape_matched_cache_rejects_zero_or_shrunk_width_values(
+    module, shrunk_value: int,
+) -> None:
+    specification = {
+        "unit": "transition-128", "mode": "transition", "width": 128,
+        "cases": 4, "prediction_trace_rows_per_arm": 0,
+        "prediction_trace_elements_per_arm": 0,
+        "teacher_trace_elements_per_arm": 0,
+    }
+    cases, results = module._shape_matched_evaluation_cache_payload(
+        specification
+    )
+    cases["state"][0] = shrunk_value
+    with pytest.raises(RuntimeError, match="width-bearing value envelope"):
+        module._shape_matched_value_width_contract(
+            specification, cases, results
+        )
+
+
 def test_evaluation_cache_records_truthful_fresh_and_reuse_work(
     module, tmp_path, monkeypatch
 ) -> None:
@@ -918,8 +1306,274 @@ def test_historical_committed_corpus_does_not_require_scratch_mirror(module, tmp
     assert result["scratch_raw_tracked_byte_parity_when_present"] is None
 
 
-def fake_readiness_repeat(scale: float) -> dict:
+def fake_shape_matched_value_width_contract(
+    module, specification: dict,
+) -> dict:
+    width = int(specification["width"])
+    roles = module._shape_matched_value_field_roles(specification)
+    fields = {}
+    wide_value = 1 << (width - 1)
+    for name, role in roles.items():
+        count = role["expected_integer_count"]
+        if role["role"] == "width-bearing-integer":
+            zero_count = role["expected_schema_zero_count"]
+            nonzero_count = count - zero_count
+            bit_histogram = {str(width): nonzero_count}
+            digit_histogram = {str(len(str(wide_value))): nonzero_count}
+            if zero_count:
+                bit_histogram["0"] = zero_count
+                digit_histogram["1"] = (
+                    digit_histogram.get("1", 0) + zero_count
+                )
+            field = {
+                **role,
+                "count": count,
+                "zero_count": zero_count,
+                "nonzero_count": nonzero_count,
+                "minimum_value": 0 if zero_count else wide_value,
+                "maximum_value": wide_value,
+                "minimum_nonzero_bit_length": width,
+                "maximum_bit_length": width,
+                "minimum_decimal_digits": (
+                    1 if zero_count else len(str(wide_value))
+                ),
+                "maximum_decimal_digits": len(str(wide_value)),
+                "bit_length_histogram": bit_histogram,
+                "decimal_digit_histogram": digit_histogram,
+            }
+        else:
+            value = int(role["maximum_schema_value"])
+            field = {
+                **role,
+                "count": count,
+                "zero_count": 0,
+                "nonzero_count": count,
+                "minimum_value": value,
+                "maximum_value": value,
+                "minimum_nonzero_bit_length": value.bit_length(),
+                "maximum_bit_length": value.bit_length(),
+                "minimum_decimal_digits": len(str(value)),
+                "maximum_decimal_digits": len(str(value)),
+                "bit_length_histogram": {str(value.bit_length()): count},
+                "decimal_digit_histogram": {str(len(str(value))): count},
+            }
+        fields[name] = field
+    width_fields = [
+        field for field in fields.values()
+        if field["role"] == "width-bearing-integer"
+    ]
+    small_fields = [
+        field for field in fields.values()
+        if field["role"] == "naturally-small-schema-integer"
+    ]
+    contract = {
+        "schema_version": "exp648-cache-value-width-contract-v1",
+        "target_width_bits": width,
+        "target_width_decimal_digits": len(str((1 << width) - 1)),
+        "minimum_width_bearing_nonzero_bit_length": width - 1,
+        "fixture_construction": {
+            "modulus": "(1 << width) - 159",
+            "base": "1 << (width - 1)",
+            "transition": (
+                "base-plus-bounded-offset state/multiplicand; input bit one; "
+                "target and quotient from frozen exact_teacher_step"
+            ),
+            "rollout": (
+                "multiplier=base; multiplicand=modulus-1; complete teacher "
+                "trajectory from frozen exact_teacher_step; prediction trace "
+                "is a separately allocated exact copy"
+            ),
+        },
+        "construction_scope": {
+            "resource_calibration_only": True,
+            "offline_exact_teacher_labels_only": True,
+            "model_or_evaluator_called": False,
+            "root_rng_or_data_opened": False,
+            "submission_inference_path": False,
+            "scientific_accuracy_or_selection_evidence": False,
+        },
+        "fields": fields,
+        "summary": {
+            "field_count": len(fields),
+            "width_bearing_field_count": len(width_fields),
+            "naturally_small_field_count": len(small_fields),
+            "integer_count": sum(field["count"] for field in fields.values()),
+            "width_bearing_integer_count": sum(
+                field["count"] for field in width_fields
+            ),
+            "width_bearing_zero_count": sum(
+                field["zero_count"] for field in width_fields
+            ),
+            "width_bearing_nonzero_count": sum(
+                field["nonzero_count"] for field in width_fields
+            ),
+            "width_bearing_decimal_digit_count": sum(
+                int(digits) * occurrences
+                for field in width_fields
+                for digits, occurrences in field[
+                    "decimal_digit_histogram"
+                ].items()
+            ),
+            "minimum_observed_nonzero_width_bearing_bit_length": min(
+                field["minimum_nonzero_bit_length"]
+                for field in width_fields
+            ),
+            "maximum_observed_width_bearing_bit_length": max(
+                field["maximum_bit_length"] for field in width_fields
+            ),
+        },
+    }
+    module._validate_declared_shape_matched_value_width_contract(
+        contract, specification
+    )
+    return contract
+
+
+def fake_shape_matched_cache_profile(module, schedule: dict, scale: float) -> dict:
+    def digest(value) -> str:
+        return module.sha256_bytes(module.canonical_json_bytes(value))
+
+    units = []
+    for specification in schedule["evaluation_units"]:
+        prediction_per_arm = specification[
+            "prediction_trace_elements_per_arm"
+        ]
+        teacher_per_arm = specification["teacher_trace_elements_per_arm"]
+        prediction_total = prediction_per_arm * schedule["arm_count"]
+        teacher_total = teacher_per_arm * schedule["arm_count"]
+        rollout = specification["mode"] == "rollout"
+        value_width_contract = fake_shape_matched_value_width_contract(
+            module, specification
+        )
+        reference_minimum = (
+            module.SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES.get(
+                specification["unit"]
+            )
+        )
+        actual_schema_bytes = max(
+            1_000,
+            (reference_minimum or (
+                1_000 + specification["cases"] * 10
+                + prediction_total + teacher_total
+            )) // 2,
+        )
+        canonical_bytes = max(
+            reference_minimum or 0,
+            actual_schema_bytes
+            + module.SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES + 1_000,
+        )
+        units.append({
+            **copy.deepcopy(specification),
+            "arm_count": schedule["arm_count"],
+            "total_prediction_trace_elements": prediction_total,
+            "total_teacher_trace_elements": teacher_total,
+            "total_trace_elements": prediction_total + teacher_total,
+            "canonical_payload_bytes": canonical_bytes,
+            "actual_schema_projected_payload_bytes": actual_schema_bytes,
+            "envelope_extra_payload_bytes": (
+                canonical_bytes - actual_schema_bytes
+            ),
+            "metadata_padding_bytes": (
+                module.SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+            ),
+            "external_reference_minimum_payload_bytes": reference_minimum,
+            "canonical_payload_sha256": digest([
+                "payload", specification["unit"]
+            ]),
+            "actual_schema_projected_payload_sha256": digest([
+                "actual-schema", specification["unit"]
+            ]),
+            "core_sha256": digest(["core", specification["unit"]]),
+            "cases_sha256": digest(["cases", specification["unit"]]),
+            "semantic_fixture_sha256": digest([
+                "semantic-fixture", specification["unit"]
+            ]),
+            "value_width_contract": value_width_contract,
+            "value_width_contract_sha256": digest(value_width_contract),
+            "matched_work_receipts_sha256": digest([
+                "receipts", specification["unit"]
+            ]),
+            "prediction_trace_sha256_by_arm": {
+                arm: digest(["prediction", specification["unit"], arm])
+                if rollout else None
+                for arm in schedule["arm_names"]
+            },
+            "teacher_trace_sha256_by_arm": {
+                arm: digest(["teacher", specification["unit"], arm])
+                if rollout else None
+                for arm in schedule["arm_names"]
+            },
+            "actual_cache_schema_fields_covered": True,
+            "raw_cases_are_conservative_envelope_only": True,
+            "fresh_cache_serialized": True,
+            "recovery_payload_parsed": True,
+            "canonical_round_trip_verified": True,
+            "core_hash_verified": True,
+            "work_receipts_verified": True,
+            "semantic_results_verified": True,
+        })
+    timing = lambda value: {
+        "wall_seconds": value * scale,
+        "aggregate_cpu_seconds": value * scale * 4,
+        "peak_rss_bytes": int(1_000_000 * scale),
+    }
+    return {
+        "schema_version": "exp648-shape-matched-evaluation-cache-profile-v2",
+        "evaluation_units": units,
+        "evaluation_unit_count": len(units),
+        "total_cases": sum(unit["cases"] for unit in units),
+        "total_canonical_payload_bytes": sum(
+            unit["canonical_payload_bytes"] for unit in units
+        ),
+        "total_actual_schema_projected_payload_bytes": sum(
+            unit["actual_schema_projected_payload_bytes"] for unit in units
+        ),
+        "total_envelope_extra_payload_bytes": sum(
+            unit["envelope_extra_payload_bytes"] for unit in units
+        ),
+        "total_metadata_padding_bytes": sum(
+            unit["metadata_padding_bytes"] for unit in units
+        ),
+        "total_external_reference_minimum_payload_bytes": sum(
+            unit["external_reference_minimum_payload_bytes"] or 0
+            for unit in units
+        ),
+        "total_prediction_trace_elements": sum(
+            unit["total_prediction_trace_elements"] for unit in units
+        ),
+        "total_teacher_trace_elements": sum(
+            unit["total_teacher_trace_elements"] for unit in units
+        ),
+        "total_trace_elements": sum(
+            unit["total_trace_elements"] for unit in units
+        ),
+        "complete_set_sha256": digest(units),
+        "value_width_contracts_sha256": digest([
+            unit["value_width_contract"] for unit in units
+        ]),
+        "real_cache_schema_comparison": (
+            module._shape_matched_real_cache_schema_comparison()
+        ),
+        "read_only_value_width_evidence": copy.deepcopy(
+            module.SHAPE_MATCHED_CACHE_READ_ONLY_VALUE_WIDTH_EVIDENCE
+        ),
+        "fresh_cache_serialization_complete": True,
+        "recovery_parse_digest_receipt_semantic_validation_complete": True,
+        "timing_breakdown": {
+            "fixture_construction_and_semantic_validation": timing(0.1),
+            "fresh_cache_serialization": timing(0.1),
+            "recovery_validation": timing(0.1),
+            "complete_evaluation_unit_set": timing(0.4),
+        },
+    }
+
+
+def fake_readiness_repeat(
+    module, scale: float, config: dict | None = None,
+) -> dict:
     timing = lambda value: {"wall_seconds": value * scale, "aggregate_cpu_seconds": value * scale * 4, "peak_rss_bytes": int(1_000_000 * scale)}
+    schedule = module.screen_execution_schedule(config_override=config)
+    cache_profile = fake_shape_matched_cache_profile(module, schedule, scale)
     record = {
         "complete": True,
         "fidelity_reduced": False,
@@ -933,7 +1587,7 @@ def fake_readiness_repeat(scale: float) -> dict:
             "transitions": {arm: {str(width): {"cases": 200, "timing": timing(200)} for width in (128, 256)} for arm in ("control", "challenger")},
             "rollouts": {arm: {str(width): {"cases": 20, "timing": timing(20)} for width in (64, 128, 256)} for arm in ("control", "challenger")},
             "hash_serialization": {"timing": timing(1)},
-            "readiness_infrastructure": {"atomic_checkpoint_writes_and_reload_verifications": 2, "atomic_attempt_ledger_writes": 213, "evaluation_cache_write_validate_units": 7, "atomic_evidence_writes": 19, "component_timing": {"atomic_checkpoints": timing(0.5), "attempt_ledger": timing(0.5), "evaluation_cache": timing(0.5), "atomic_evidence": timing(0.5)}, "complete": True, "timing": timing(2)},
+            "readiness_infrastructure": {"execution_schedule_sha256": module.sha256_bytes(module.canonical_json_bytes(schedule)), "atomic_checkpoint_writes_and_reload_verifications": schedule["checkpoint_save_reload_verifications"], "scientific_attempt_ledger_atomic_writes": schedule["scientific_attempt_ledger"]["atomic_writes"], "outer_launch_ledger_atomic_writes": schedule["outer_launch_ledger"]["atomic_writes"], "total_screen_ledger_atomic_writes": schedule["total_screen_ledger_atomic_writes"], "evaluation_cache_write_validate_units": schedule["evaluation_cache_write_validate_units"], "evaluation_cache_profile": cache_profile, "atomic_evidence_writes": schedule["atomic_evidence_writes"], "first_quarter_scientific_ledger_writes": schedule["scientific_attempt_ledger"]["writes_before_first_quarter_guard"], "matched_work_schedule_valid": True, "matched_work_receipt_sha256": "a" * 64, "component_timing": {"atomic_checkpoints": timing(0.5), "scientific_attempt_ledger": timing(0.5), "outer_launch_ledger": timing(0.5), "evaluation_cache": timing(0.5), "atomic_evidence": timing(0.5), "matched_work": timing(0.5)}, "complete": True, "timing": timing(2)},
             "actual_source_replay": {"complete_identities": 64, "steps_per_identity": 256, "complete_steps": 16384, "actual_rollout_identity_batch_path": True, "complete": True, "timing": timing(64)},
             "mlflow_probe": {"complete": True, "artifact_count": 6, "remote_verified": True, "timing": timing(3)},
         },
@@ -941,6 +1595,179 @@ def fake_readiness_repeat(scale: float) -> dict:
         "total_timing": timing(500),
     }
     return record
+
+
+def test_schedule_mutation_covaries_counts_workload_shapes_and_projection(
+    module,
+) -> None:
+    baseline_config = module.yaml.safe_load(module.CONFIG_PATH.read_bytes())
+    mutated_config = copy.deepcopy(baseline_config)
+    mutated_config["screen"]["updates_per_arm"] = 240
+    mutated_config["screen"]["evaluation"]["transition_cases"][512] = 100
+
+    baseline = module.screen_execution_schedule(
+        config_override=baseline_config
+    )
+    mutated = module.screen_execution_schedule(config_override=mutated_config)
+    assert baseline["scientific_attempt_ledger"][
+        "writes_before_first_quarter_guard"
+    ] == 54
+    assert baseline["scientific_attempt_ledger"][
+        "completed_arm_updates_before_first_quarter_guard"
+    ] == 100
+    assert baseline["scientific_attempt_ledger"]["total_arm_updates"] == 400
+    assert baseline["per_arm_actual_operation_contract"][
+        "ordered_event_count_fresh"
+    ] == 423
+    assert mutated["scientific_attempt_ledger"][
+        "writes_before_first_quarter_guard"
+    ] == 64
+    assert mutated["scientific_attempt_ledger"][
+        "completed_arm_updates_before_first_quarter_guard"
+    ] == 120
+    assert mutated["scientific_attempt_ledger"]["total_arm_updates"] == 480
+    assert mutated["scientific_attempt_ledger"]["atomic_writes"] == 257
+    assert mutated["total_screen_ledger_atomic_writes"] == 260
+    assert mutated["per_arm_actual_operation_contract"][
+        "ordered_event_count_fresh"
+    ] == 506
+    assert sum(module.screen_actual_operation_counts(
+        8, config_override=mutated_config
+    ).values()) == 514
+    assert mutated["per_arm_declared_ordered_event_count"] == 1_953
+    assert mutated["per_arm_declared_count_total"] == 111_560
+
+    baseline_workload = module.screen_workload_payload(
+        config_override=baseline_config
+    )
+    mutated_workload = module.screen_workload_payload(
+        config_override=mutated_config
+    )
+    assert module.sha256_bytes(module.canonical_json_bytes(baseline_workload)) != (
+        module.sha256_bytes(module.canonical_json_bytes(mutated_workload))
+    )
+    extra_unit = mutated["evaluation_units"][2]
+    assert extra_unit == {
+        "unit": "transition-512", "mode": "transition", "width": 512,
+        "cases": 100, "prediction_trace_rows_per_arm": 0,
+        "prediction_trace_elements_per_arm": 0,
+        "teacher_trace_elements_per_arm": 0,
+    }
+    cases, results = module._shape_matched_evaluation_cache_payload(extra_unit)
+    assert len(cases["state"]) == 100
+    module.validate_evaluation_results(
+        unit=extra_unit["unit"], width=extra_unit["width"],
+        cases=cases, results=results,
+    )
+    profile = fake_shape_matched_cache_profile(module, mutated, 1.0)
+    module.validate_shape_matched_evaluation_cache_profile(profile, mutated)
+    assert profile["evaluation_unit_count"] == 8
+    mutated_matched_work = module._exercise_calibration_matched_work_schedule(
+        mutated_config
+    )
+    assert mutated_matched_work["valid"] is True
+    assert mutated_matched_work["per_arm"]["control"][
+        "actual_operation_event_count"
+    ] == 506
+
+    baseline_repeats = [
+        fake_readiness_repeat(module, scale, baseline_config)
+        for scale in (1.0, 1.1, 0.9)
+    ]
+    mutated_repeats = [
+        fake_readiness_repeat(module, scale, mutated_config)
+        for scale in (1.0, 1.1, 0.9)
+    ]
+    launcher = {
+        "wall_seconds": 2.0,
+        "aggregate_cpu_seconds": 8.0,
+        "peak_rss_bytes": 2_000_000,
+    }
+    _, baseline_resolution = module.resolve_readiness_screen_budgets(
+        baseline_repeats, launcher, config_override=baseline_config
+    )
+    _, mutated_resolution = module.resolve_readiness_screen_budgets(
+        mutated_repeats, launcher, config_override=mutated_config
+    )
+    baseline_denominators = baseline_resolution["projection_denominators"]
+    mutated_denominators = mutated_resolution["projection_denominators"]
+    assert baseline_denominators["evaluation_cache_profiled_unit_count"] == 7
+    assert mutated_denominators["evaluation_cache_profiled_unit_count"] == 8
+    assert mutated_denominators["updates_per_arm"] == 240
+    assert mutated_denominators["quarter_updates_per_arm"] == 60
+    assert mutated_denominators["total_arm_updates"] == 480
+    assert mutated_denominators["first_quarter_completed_arm_updates"] == 120
+    assert mutated_denominators["scientific_attempt_ledger_writes"] == 257
+    assert mutated_denominators[
+        "first_quarter_scientific_attempt_ledger_writes"
+    ] == 64
+    assert mutated_denominators["evaluation_units"] == mutated["evaluation_units"]
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        assert "evaluation_cache_per_unit" not in mutated_resolution["rates"][
+            resource
+        ]
+        assert mutated_resolution["projected_components"][resource][
+            "evaluation_cache_shape_matched_complete_set"
+        ] == mutated_resolution["rates"][resource][
+            "evaluation_cache_complete_profiled_set"
+        ]
+        assert mutated_resolution["projected_components"][resource][
+            "training_both_arms"
+        ] > baseline_resolution["projected_components"][resource][
+            "training_both_arms"
+        ]
+        assert mutated_resolution["projected_components"][resource][
+            "transitions_both_arms"
+        ] > baseline_resolution["projected_components"][resource][
+            "transitions_both_arms"
+        ]
+
+
+def test_shape_matched_cache_profile_rejects_unit_and_total_tampering(
+    module,
+) -> None:
+    schedule = module.screen_execution_schedule()
+    profile = fake_shape_matched_cache_profile(module, schedule, 1.0)
+    module.validate_shape_matched_evaluation_cache_profile(profile, schedule)
+    mutations = []
+    wrong_cases = copy.deepcopy(profile)
+    wrong_cases["evaluation_units"][0]["cases"] += 1
+    mutations.append(wrong_cases)
+    zero_bytes = copy.deepcopy(profile)
+    zero_bytes["evaluation_units"][0]["canonical_payload_bytes"] = 0
+    mutations.append(zero_bytes)
+    below_reference = copy.deepcopy(profile)
+    below_reference["evaluation_units"][0]["canonical_payload_bytes"] = (
+        module.SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES["transition-128"]
+        - 1
+    )
+    below_reference["evaluation_units"][0][
+        "envelope_extra_payload_bytes"
+    ] = (
+        below_reference["evaluation_units"][0]["canonical_payload_bytes"]
+        - below_reference["evaluation_units"][0][
+            "actual_schema_projected_payload_bytes"
+        ]
+    )
+    mutations.append(below_reference)
+    shrunk_width_contract = copy.deepcopy(profile)
+    shrunk_width_contract["evaluation_units"][0]["value_width_contract"][
+        "fields"
+    ]["cases.state"]["minimum_nonzero_bit_length"] = 1
+    mutations.append(shrunk_width_contract)
+    wrong_trace_count = copy.deepcopy(profile)
+    wrong_trace_count["evaluation_units"][2][
+        "total_prediction_trace_elements"
+    ] += 1
+    mutations.append(wrong_trace_count)
+    wrong_complete_hash = copy.deepcopy(profile)
+    wrong_complete_hash["complete_set_sha256"] = "f" * 64
+    mutations.append(wrong_complete_hash)
+    for mutated in mutations:
+        with pytest.raises(RuntimeError, match="shape-matched evaluation cache"):
+            module.validate_shape_matched_evaluation_cache_profile(
+                mutated, schedule
+            )
 
 
 def attach_fake_readiness_chronology(module, payload: dict) -> None:
@@ -1001,9 +1828,9 @@ def attach_fake_readiness_chronology(module, payload: dict) -> None:
 
 
 def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> None:
-    repeats = [fake_readiness_repeat(value) for value in (1.0, 1.1, 0.9)]
+    repeats = [fake_readiness_repeat(module, value) for value in (1.0, 1.1, 0.9)]
     launcher = {"wall_seconds": 2.0, "aggregate_cpu_seconds": 8.0, "peak_rss_bytes": 2_000_000}
-    warmup = fake_readiness_repeat(0.8)
+    warmup = fake_readiness_repeat(module, 0.8)
     warmup.update({
         "launcher_timing": launcher,
         "actual_source_replay": warmup["components"]["actual_source_replay"],
@@ -1020,7 +1847,7 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
         "model_update_performed": False, "fidelity_reduced": False,
     }
     payload = {
-        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "schema_version": "exp648-screen-readiness-calibration-v2",
         "status": "complete-non-scientific-full-fidelity-resource-calibration",
         "calibration_root": TEST_ROOT + 1, "calibration_authorization_sha256": "a" * 64,
         "scientific_runner_sha256": module.sha256(RUNNER), "resolved_config_sha256": module.sha256(module.CONFIG_PATH),
@@ -1034,13 +1861,13 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
             "augmented_unit_orchestration": {
                 "chronology_contract_sha256": module.READINESS_CHRONOLOGY_CONTRACT_SHA256,
                 "execution_order": [name for name, _ in module.READINESS_AUGMENTED_UNIT_ORDER],
-                "old_base_only_cache_loaded_or_saved": False,
-                "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+                "pre_r3_or_same_root_cache_loaded_or_saved": False,
+                "fresh_warmup_and_three_fresh_representative_repeats": True,
                 "carried_charge_applied_exactly_once": True,
                 "guard_carried_wall_seconds": module.READINESS_CARRIED_CHARGE["wall_seconds"],
                 "guard_carried_aggregate_cpu_seconds": module.READINESS_CARRIED_CHARGE["aggregate_cpu_seconds"],
-                "guard_configured_wall_ceiling_seconds": 25000.0,
-                "guard_configured_aggregate_cpu_ceiling_seconds": 100000.0,
+                "guard_configured_wall_ceiling_seconds": 30000.0,
+                "guard_configured_aggregate_cpu_ceiling_seconds": 120000.0,
                 "reused_complete_augmented_repeat_indices": [],
                 "all_augmented_units_validated_and_sealed_before_next_start": True,
             },
@@ -1102,7 +1929,7 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
         def execute_complete_unit(self, _name, *, repeat_index):
             unit = "warmup" if repeat_index is None else f"repeat-{repeat_index}"
             events.append(f"{unit}:base")
-            record = fake_readiness_repeat(1.0)
+            record = fake_readiness_repeat(module, 1.0)
             record["components"].pop("actual_source_replay")
             record["components"].pop("mlflow_probe")
             record["components"].pop("readiness_infrastructure")
@@ -1148,19 +1975,11 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
     def infrastructure(record, _output, _process):
         unit = "warmup" if record["repeat_index"] is None else f"repeat-{record['repeat_index']}"
         events.append(f"{unit}:infrastructure")
-        return copy.deepcopy(fake_readiness_repeat(1.0)["components"]["readiness_infrastructure"])
+        return copy.deepcopy(fake_readiness_repeat(module, 1.0)["components"]["readiness_infrastructure"])
 
     def validate(record, _config):
         unit = "warmup" if record["repeat_index"] is None else f"repeat-{record['repeat_index']}"
         events.append(f"{unit}:validate")
-
-    def load_cache(*, repeat_index, **_kwargs):
-        events.append(f"repeat-{repeat_index}:cache-lookup")
-        return None
-
-    def save_cache(*, repeat_index, **_kwargs):
-        events.append(f"repeat-{repeat_index}:cache-save")
-        return tmp_path / f"repeat-{repeat_index}.json", "f" * 64
 
     monkeypatch.setattr(module, "_write_readiness_chronology_start", recording_start)
     monkeypatch.setattr(module, "_write_readiness_chronology_seal", recording_seal)
@@ -1168,8 +1987,6 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
     monkeypatch.setattr(module, "measure_readiness_mlflow_probe", probe)
     monkeypatch.setattr(module, "measure_readiness_infrastructure_unit", infrastructure)
     monkeypatch.setattr(module.cal, "validate_calibration_repeat", validate)
-    monkeypatch.setattr(module, "load_augmented_repeat_cache", load_cache)
-    monkeypatch.setattr(module, "save_augmented_repeat_cache", save_cache)
 
     stage_context = {"stage": "test", "guard": None}
     warmup, repeats, chronology = module.execute_synchronous_augmented_readiness_units(
@@ -1196,29 +2013,29 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
             "augmented-record-published", "fresh-augmented-unit-sealed",
         ):
             assert f"guard:readiness:{unit}:{stage}" in events
-    assert events.index("warmup:seal") < events.index("repeat-1:cache-lookup")
-    for repeat_index in range(1, 4):
-        assert events.index(f"repeat-{repeat_index}:seal") < events.index(
-            f"repeat-{repeat_index}:cache-save"
-        )
+    assert events.index("warmup:seal") < events.index("repeat-1:start")
+    assert all(record["reused_from_augmented_cache"] is False for record in [warmup, *repeats])
+    assert all(record["augmented_cache_path"] is None for record in [warmup, *repeats])
     source = inspect.getsource(module._execute_one_augmented_readiness_unit)
     for component in (
-        "chronology-start", "cache-lookup-and-validation", "cache-reuse-charge",
-        "cache-acceptance-guard", "cached-record-publication",
-        "reused-chronology-seal", "base-complete-unit", "source-replay",
+        "chronology-start", "fresh-cache-exclusion", "base-complete-unit", "source-replay",
         "mlflow-probe", "readiness-infrastructure", "augmented-validation",
         "augmented-record-publication", "fresh-chronology-seal",
-        "augmented-cache-publication",
     ):
         assert component in source
+    for forbidden in (
+        "load_augmented_repeat_cache(", "save_augmented_repeat_cache(",
+        "cache-reuse-charge", "reused-chronology-seal",
+    ):
+        assert forbidden not in source
 
 
 def test_old_post_hoc_readiness_records_without_chronology_are_rejected(module) -> None:
     payload = {
         "calibration_root": TEST_ROOT + 12,
         "calibration_authorization_sha256": "a" * 64,
-        "warmup": fake_readiness_repeat(1.0),
-        "repeats": [fake_readiness_repeat(1.0) for _ in range(3)],
+        "warmup": fake_readiness_repeat(module, 1.0),
+        "repeats": [fake_readiness_repeat(module, 1.0) for _ in range(3)],
     }
     with pytest.raises(RuntimeError, match="chronology is absent"):
         module.validate_readiness_chronology(payload)
@@ -1232,8 +2049,8 @@ def test_incomplete_and_tampered_augmented_repeat_cache_are_rejected(
     source = {
         "calibration_root": root,
         "calibration_authorization_sha256": authorization_sha256,
-        "warmup": fake_readiness_repeat(1.0),
-        "repeats": [fake_readiness_repeat(1.0) for _ in range(3)],
+        "warmup": fake_readiness_repeat(module, 1.0),
+        "repeats": [fake_readiness_repeat(module, 1.0) for _ in range(3)],
     }
     attach_fake_readiness_chronology(module, source)
     reference = source["repeats"][0]["readiness_chronology"]
@@ -1290,7 +2107,7 @@ def test_consumed_readiness_root_is_denied_before_binding(module, monkeypatch) -
         module, "readiness_calibration_authorization_base",
         lambda *_: (_ for _ in ()).throw(AssertionError("binding must not run")),
     )
-    with pytest.raises(PermissionError, match="reused, test-only, or prohibited"):
+    with pytest.raises(PermissionError, match="schema mismatch"):
         module.verify_readiness_calibration_authorization(
             path, committed_bytes=raw, allow_test_root=True
         )
@@ -1312,7 +2129,7 @@ def test_failed_root20261160_is_permanently_denied_before_binding(module, monkey
         module, "readiness_calibration_authorization_base",
         lambda *_: (_ for _ in ()).throw(AssertionError("binding must not run")),
     )
-    with pytest.raises(PermissionError, match="reused, test-only, or prohibited"):
+    with pytest.raises(PermissionError, match="schema mismatch"):
         module.verify_readiness_calibration_authorization(
             path, committed_bytes=raw, allow_test_root=True
         )
@@ -1352,8 +2169,8 @@ def test_completed_allowance_and_carried_charge_are_separate_and_applied_once(mo
         def __init__(self):
             self.events = []
             self.checks = []
-            self.wall_ceiling = 25000.0
-            self.cpu_ceiling = 100000.0
+            self.wall_ceiling = 30000.0
+            self.cpu_ceiling = 120000.0
             self.prior_superseded_wall_seconds = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE[
                 "wall_seconds"
             ]
@@ -1367,21 +2184,21 @@ def test_completed_allowance_and_carried_charge_are_separate_and_applied_once(mo
     guard = Guard()
     module.apply_readiness_carried_charge_once(guard)
     assert module.READINESS_COMPLETED_HISTORY_CHARGE == {
-        "wall_seconds": 9007.853947323996,
-        "aggregate_cpu_seconds": 36721.035879589996,
+        "wall_seconds": 13778.295949158995,
+        "aggregate_cpu_seconds": 55378.175260172996,
     }
     assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["wall_seconds"] == 5294.4
     assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["aggregate_cpu_seconds"] == 21000.0
     assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["exact_internal_observation"] is False
     assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["completed_work_claimed"] is False
     assert module.READINESS_CARRIED_CHARGE == {
-        "wall_seconds": 14302.253947323995,
-        "aggregate_cpu_seconds": 57721.035879589996,
+        "wall_seconds": 19072.695949158995,
+        "aggregate_cpu_seconds": 76378.175260173,
     }
-    assert guard.prior_superseded_wall_seconds == 14302.253947323995
-    assert guard.prior_superseded_cpu_seconds == 57721.035879589996
-    assert guard.wall_ceiling == 25000.0
-    assert guard.cpu_ceiling == 100000.0
+    assert guard.prior_superseded_wall_seconds == 19072.695949158995
+    assert guard.prior_superseded_cpu_seconds == 76378.175260173
+    assert guard.wall_ceiling == 30000.0
+    assert guard.cpu_ceiling == 120000.0
     assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["semantics"] == (
         "conservative-accounting-allowance-never-an-exact-internal-observation"
     )
@@ -1392,9 +2209,42 @@ def test_completed_allowance_and_carried_charge_are_separate_and_applied_once(mo
         module.apply_readiness_carried_charge_once(guard)
 
     wrong_ceiling = Guard()
-    wrong_ceiling.wall_ceiling = 24999.0
+    wrong_ceiling.wall_ceiling = 29999.0
     with pytest.raises(RuntimeError, match="configured cumulative ceilings"):
         module.apply_readiness_carried_charge_once(wrong_ceiling)
+
+
+def test_root20261162_budget_formula_uses_new_carried_charge_and_independent_resources(
+    module,
+) -> None:
+    contract = module.readiness_root20261162_cumulative_budget_contract()
+    assert contract["formula"] == (
+        "new_carried_charge + 1.5 * (1.25 * representative_full_screen + explicit_setup)"
+    )
+    assert contract["carried_charge_applied_exactly_once"] is True
+    assert contract["root20261161_rates_executable"] is False
+    assert contract["root20261161_caches_executable"] is False
+    assert contract["fidelity_cap"] is False
+    assert contract["scientific_gate"] is False
+    assert contract["per_attempt_target"] is False
+    expected = {
+        "wall_seconds": {
+            "new_carried_charge_seconds": 19072.695949158995,
+            "representative_full_screen_seconds": 5305.469600509008,
+            "explicit_setup_seconds": 73.8932728219952,
+            "formula_result_seconds": 29131.291359346378,
+            "independently_rounded_cumulative_ceiling_seconds": 30000.0,
+        },
+        "aggregate_cpu_seconds": {
+            "new_carried_charge_seconds": 76378.175260173,
+            "representative_full_screen_seconds": 20967.89,
+            "explicit_setup_seconds": 135.975487648,
+            "formula_result_seconds": 115896.932241645,
+            "independently_rounded_cumulative_ceiling_seconds": 120000.0,
+        },
+    }
+    for resource, values in expected.items():
+        assert contract[resource] == values
 
 
 def test_readiness_mlflow_expected_scope_excludes_scientific_and_candidate(module) -> None:
@@ -1783,58 +2633,87 @@ def test_authentication_rejects_bad_bytes_before_expensive_binding_actions(modul
     assert events == []
 
 
-def mocked_readiness_authorization_base_blobs(module):
-    authorization_raw = module.READINESS_CALIBRATION_AUTHORIZATION_PATH.read_bytes()
-    authorization = json.loads(authorization_raw)
-    assert authorization_raw == module.canonical_json_bytes(
-        authorization, pretty=True
-    )
-    approved_base_commit = authorization["approved_base_commit"]
-    provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
-    source = provenance["readiness_calibration_authorization_source"]
-    paths = {
-        binding["path"]: module._git_blob(approved_base_commit, binding["path"])
-        for binding in source["approved_base_file_bindings"].values()
-    }
-    provenance_path = (
-        "experiments/runs/exp-648-structured-trajectory-consistency/"
-        "readiness-scaffold/provenance.json"
-    )
-    paths[provenance_path] = module.canonical_json_bytes(provenance, pretty=True)
-    return paths, provenance
-
-
-def test_readiness_authorization_is_frozen_provenance_template_under_hostile_live_state(
+def test_historical_v1_authorization_is_fixed_path_nonlaunch_history_only(
     module, monkeypatch
 ) -> None:
-    paths, provenance = mocked_readiness_authorization_base_blobs(module)
-    monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+    monkeypatch.setattr(
+        module, "validate_one_child_authorization_lifecycle",
+        lambda *_args, **_kwargs: pytest.fail(
+            "generic current authorization lifecycle used for historical v1"
+        ),
+    )
+    payload = module.verify_historical_root20261161_authorization()
+    assert payload["calibration_root"] == 20_261_161
+    assert payload["approved_base_commit"] == (
+        "87384f92ab1c053c7791e8afd69a07936d5a7402"
+    )
+    assert payload["original_authorization_commit"] == (
+        "16d903301f50e54e3f6d9ab8cb6435e61f0d648f"
+    )
+    assert payload["original_authorization_path"] == (
+        "experiments/runs/exp-648-structured-trajectory-consistency/screen/"
+        "readiness-calibration-authorization.json"
+    )
+    assert payload["historical_nonlaunch_only"] is True
 
-    def hostile(name):
-        return lambda *_args, **_kwargs: (_ for _ in ()).throw(
-            AssertionError(f"live {name} used")
+
+def test_historical_v1_schema_cannot_authorize_root20261162_before_binding(
+    module, tmp_path, monkeypatch
+) -> None:
+    raw = (
+        module.ROOT_20261161_SUPERSEDED_DIR
+        / "readiness-calibration-authorization.json"
+    ).read_bytes()
+    path = tmp_path / "v1.json"
+    path.write_bytes(raw)
+    events = []
+    monkeypatch.setattr(
+        module, "readiness_calibration_authorization_base",
+        lambda *_args, **_kwargs: events.append("binding"),
+    )
+    with pytest.raises(PermissionError, match="schema mismatch"):
+        module.verify_readiness_calibration_authorization(
+            path, committed_bytes=raw, allow_test_root=True, launch=False
         )
+    assert events == []
 
-    for name in (
-        "screen_workload_payload", "_base_protocol_hashes", "_base_evaluator_hash",
-        "_base_exact_teacher_hash",
-    ):
-        monkeypatch.setattr(module, name, hostile(name))
-    monkeypatch.setattr(module, "RUN_ID", "hostile-run-id")
-    monkeypatch.setattr(module, "FROZEN_CORPUS_FILES", {"hostile": "state"})
-    monkeypatch.setattr(module, "CONFIG_PATH", Path("hostile-config"))
-    monkeypatch.setattr(module, "CALIBRATION_RUNNER", Path("hostile-runner"))
-    monkeypatch.setattr(module, "EXECUTED_CONFIG_PATH", Path("hostile-executed"))
-    monkeypatch.setattr(module, "CALIBRATION_ENVIRONMENT_PATH", Path("hostile-environment"))
-    monkeypatch.setattr(module, "READINESS_SCAFFOLD_PROVENANCE_PATH", Path("hostile-provenance"))
-    monkeypatch.setattr(module, "__file__", "hostile-scientific.py")
-    root = TEST_ROOT + 7
-    payload = module.readiness_calibration_authorization_base(root, "base-commit")
-    assert payload == {
-        **provenance["readiness_calibration_authorization_source"]["authorization_template"],
-        "calibration_root": root,
+
+def mocked_root20261162_base_blobs(module):
+    source_raw = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.read_bytes()
+    provenance_raw = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.read_bytes()
+    source = json.loads(source_raw)
+    provenance = json.loads(provenance_raw)
+    paths = {}
+    for binding in source["approved_base_file_bindings"].values():
+        paths[binding["path"]] = (module.ROOT / binding["path"]).read_bytes()
+    for binding in source["frozen_corpus_file_bindings"].values():
+        paths[binding["path"]] = (module.ROOT / binding["path"]).read_bytes()
+    paths[module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(module.ROOT).as_posix()] = source_raw
+    paths[module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(module.ROOT).as_posix()] = provenance_raw
+    return paths, source, provenance
+
+
+def test_readiness_authorization_v2_has_only_four_dynamic_fields(
+    module, monkeypatch
+) -> None:
+    paths, source, _provenance = mocked_root20261162_base_blobs(module)
+    monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+    payload = module.readiness_calibration_authorization_base(
+        TEST_ROOT, "base-commit"
+    )
+    dynamic = {
+        "calibration_root": TEST_ROOT,
         "approved_base_commit": "base-commit",
+        "authorization_source_blob_sha256": module.sha256_bytes(
+            paths[module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(module.ROOT).as_posix()]
+        ),
+        "scaffold_provenance_blob_sha256": module.sha256_bytes(
+            paths[module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(module.ROOT).as_posix()]
+        ),
     }
+    assert payload == {**source["authorization_template"], **dynamic}
+    assert not set(dynamic).intersection(source["authorization_template"])
+    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
 
 
 @pytest.mark.parametrize(
@@ -1843,18 +2722,17 @@ def test_readiness_authorization_is_frozen_provenance_template_under_hostile_liv
         ("workload", "screen workload hash mismatch"),
         ("template", "authorization template hash mismatch"),
         ("runner_binding", "scientific_runner direct hash mismatch"),
-        ("environment", "template/runtime environment binding mismatch"),
+        ("environment", "authorization environment mismatch"),
     ],
 )
 def test_authorization_source_tampering_fails_before_root_data_model_mlflow_or_lifecycle(
     module, monkeypatch, tamper, message
 ) -> None:
-    paths, provenance = mocked_readiness_authorization_base_blobs(module)
-    source = provenance["readiness_calibration_authorization_source"]
+    paths, source, provenance = mocked_root20261162_base_blobs(module)
     if tamper == "workload":
         source["screen_workload"]["recoverable_evaluation_unit_count"] += 1
     elif tamper == "template":
-        source["authorization_template"]["source_checkpoint_sha256"] = "0" * 64
+        source["authorization_template_sha256"] = "0" * 64
     elif tamper == "runner_binding":
         source["approved_base_file_bindings"]["scientific_runner"]["sha256"] = "0" * 64
     elif tamper == "environment":
@@ -1862,11 +2740,10 @@ def test_authorization_source_tampering_fails_before_root_data_model_mlflow_or_l
         source["authorization_template_sha256"] = module.sha256_bytes(
             module.canonical_json_bytes(source["authorization_template"])
         )
-    provenance_path = (
-        "experiments/runs/exp-648-structured-trajectory-consistency/"
-        "readiness-scaffold/provenance.json"
-    )
-    paths[provenance_path] = module.canonical_json_bytes(provenance, pretty=True)
+    source_path = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    paths[source_path] = module.canonical_json_bytes(source, pretty=True)
     monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
     actions = []
 
@@ -1882,63 +2759,54 @@ def test_authorization_source_tampering_fails_before_root_data_model_mlflow_or_l
     monkeypatch.setattr(module.mlflow, "start_run", forbidden("mlflow"))
     monkeypatch.setattr(module, "validate_one_child_authorization_lifecycle", forbidden("lifecycle"))
     with pytest.raises(PermissionError, match=message):
-        module.readiness_calibration_authorization_base(TEST_ROOT + 8, "base-commit")
+        module.readiness_calibration_authorization_base(TEST_ROOT, "base-commit")
+    assert actions == []
+
+
+def test_authorization_provenance_crosslink_tamper_fails_before_actions(
+    module, monkeypatch
+) -> None:
+    paths, _source, provenance = mocked_root20261162_base_blobs(module)
+    provenance["screen_workload_sha256"] = "0" * 64
+    provenance_path = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    paths[provenance_path] = module.canonical_json_bytes(provenance, pretty=True)
+    monkeypatch.setattr(module, "_git_blob", lambda _commit, relative: paths[relative])
+    actions = []
+    monkeypatch.setattr(
+        module, "authorize_root", lambda *_args, **_kwargs: actions.append("root")
+    )
+    monkeypatch.setattr(
+        module.mlflow, "start_run", lambda *_args, **_kwargs: actions.append("mlflow")
+    )
+    with pytest.raises(PermissionError, match="scaffold crosslink mismatch"):
+        module.readiness_calibration_authorization_base(TEST_ROOT, "base-commit")
     assert actions == []
 
 
 def test_readiness_scaffold_provenance_matches_current_code_and_workload(module) -> None:
-    authorization_raw = module.READINESS_CALIBRATION_AUTHORIZATION_PATH.read_bytes()
-    authorization = json.loads(authorization_raw)
-    assert authorization_raw == module.canonical_json_bytes(
-        authorization, pretty=True
-    )
-    approved_base_commit = authorization["approved_base_commit"]
-    assert approved_base_commit == "87384f92ab1c053c7791e8afd69a07936d5a7402"
-
-    provenance_relative = module.READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(
-        module.ROOT
-    ).as_posix()
-    provenance_raw = module._git_blob(approved_base_commit, provenance_relative)
-    assert module.sha256_bytes(provenance_raw) == (
-        "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
-    )
+    provenance_raw = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.read_bytes()
+    source_raw = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.read_bytes()
+    provenance = json.loads(provenance_raw)
+    source = json.loads(source_raw)
+    assert provenance_raw == module.canonical_json_bytes(provenance, pretty=True)
+    assert source_raw == module.canonical_json_bytes(source, pretty=True)
     assert module.sha256(module.READINESS_SCAFFOLD_PROVENANCE_PATH) == (
         "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
     )
-    provenance = json.loads(provenance_raw)
-
-    runner_relative = Path(module.__file__).resolve().relative_to(
-        module.ROOT
-    ).as_posix()
-    test_relative = Path(__file__).resolve().relative_to(module.ROOT).as_posix()
-    config_relative = module.CONFIG_PATH.relative_to(module.ROOT).as_posix()
-    runner_sha256 = module._git_blob_sha256(
-        approved_base_commit, runner_relative
-    )
-    test_sha256 = module._git_blob_sha256(approved_base_commit, test_relative)
-    config_raw = module._git_blob(approved_base_commit, config_relative)
-    config_sha256 = module.sha256_bytes(config_raw)
+    runner_sha256 = module.sha256(Path(module.__file__))
+    test_sha256 = module.sha256(Path(__file__))
+    config_sha256 = module.sha256(module.CONFIG_PATH)
+    config_raw = module.CONFIG_PATH.read_bytes()
     config = module.yaml.safe_load(config_raw)
-    assert test_sha256 == (
-        "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5"
-    )
-    assert module.sha256(Path(__file__)) != test_sha256
-    assert authorization["scientific_runner_sha256"] == runner_sha256
-    assert authorization["scientific_test_sha256"] == test_sha256
-    assert authorization["resolved_config_sha256"] == config_sha256
     expected_workload_sha256 = module.sha256_bytes(module.canonical_json_bytes(
         module.screen_workload_payload(
             scientific_runner_sha256=runner_sha256,
             config_override=config,
         )
     ))
-    assert provenance["live_scaffold"] == {
-        "focused_scientific_test_sha256": test_sha256,
-        "resolved_config_sha256": config_sha256,
-        "scientific_runner_sha256": runner_sha256,
-    }
     assert provenance["screen_workload_sha256"] == expected_workload_sha256
-    source = provenance["readiness_calibration_authorization_source"]
     assert source["screen_workload"] == module.screen_workload_payload(
         scientific_runner_sha256=runner_sha256,
         config_override=config,
@@ -1948,17 +2816,26 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
         module.canonical_json_bytes(source["authorization_template"])
     )
     template = source["authorization_template"]
-    assert "calibration_root" not in template
-    assert "approved_base_commit" not in template
+    for dynamic in (
+        "calibration_root", "approved_base_commit",
+        "authorization_source_blob_sha256", "scaffold_provenance_blob_sha256",
+    ):
+        assert dynamic not in template
     assert template["screen_workload_sha256"] == expected_workload_sha256
     assert template["scientific_runner_sha256"] == runner_sha256
     assert template["scientific_test_sha256"] == test_sha256
-    assert template["scientific_protocol_sha256"] == module.cal.scientific_protocol_sha256(
-        config
+    assert template["resolved_config_sha256"] == config_sha256
+    scientific_protocol, resource_protocol = module._base_protocol_hashes(
+        "unused", config
     )
-    assert template["resource_protocol_sha256"] == module.cal.resource_protocol_sha256(
-        config
-    )
+    assert template["scientific_protocol_sha256"] == scientific_protocol
+    assert template["resource_protocol_sha256"] == resource_protocol
+    assert template["calibration_segment_evaluator_sha256"] == module.PINNED[
+        "calibration_evaluator_sha256"
+    ]
+    assert template["screen_evaluator_sha256"] != template[
+        "calibration_segment_evaluator_sha256"
+    ]
     accepted_corpus_manifest_bytes = (
         module.DATA_DIR / "corpus-manifest.json"
     ).read_bytes()
@@ -1969,9 +2846,34 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
         "data/corpus-manifest.json"
     ]
     for binding in source["approved_base_file_bindings"].values():
-        assert module._git_blob_sha256(
-            approved_base_commit, binding["path"]
-        ) == binding["sha256"]
+        assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
+    for name, binding in source["frozen_corpus_file_bindings"].items():
+        assert binding["sha256"] == module.FROZEN_CORPUS_FILES[name]
+        assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
+    source_path = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    provenance_path = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    bound_paths = {
+        binding["path"]
+        for collection in (
+            source["approved_base_file_bindings"],
+            source["frozen_corpus_file_bindings"],
+        )
+        for binding in collection.values()
+    }
+    assert source_path not in bound_paths
+    assert provenance_path not in bound_paths
+    assert provenance["dynamic_authorization_fields"] == sorted(
+        {
+            "calibration_root", "approved_base_commit",
+            "authorization_source_blob_sha256", "scaffold_provenance_blob_sha256",
+        }
+    )
+    assert provenance["authorization_manifest_present"] is False
+    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
 
 
 def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch) -> None:
@@ -1993,7 +2895,7 @@ def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch
         module.verify_screen_authorization(path, committed_bytes=raw)
     assert events == []
     canonical = module.canonical_json_bytes({
-        "schema_version": "exp648-screen-readiness-calibration-authorization-v1"
+        "schema_version": "exp648-screen-readiness-calibration-authorization-v2"
     }, pretty=True)
     path.write_bytes(canonical)
     with pytest.raises(PermissionError, match="committed"):

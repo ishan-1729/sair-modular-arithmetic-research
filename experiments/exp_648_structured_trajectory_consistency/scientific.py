@@ -115,30 +115,65 @@ ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE = {
     "exact_internal_observation": False,
     "completed_work_claimed": False,
 }
-READINESS_COMPLETED_HISTORY_CHARGE = {
-    "wall_seconds": 9007.853947323996,
-    "aggregate_cpu_seconds": 36721.035879589996,
+ROOT_20261161_HISTORICAL_CHARGE = {
+    "root": HISTORICAL_READINESS_CALIBRATION_ROOT,
+    "authorization_sha256": "0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa",
+    "receipt_sha256": "1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a",
+    "core_sha256": "2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8",
+    "resource_completion_sha256": "e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a",
+    "wall_seconds": 4770.442001834999,
+    "aggregate_cpu_seconds": 18657.139380582998,
+    "eligible_for_projection_rates": False,
+    "eligible_for_launch": False,
+    "eligible_for_cache_reuse": False,
+    "classification": "consumed-complete-pre-r3-binding-historical-only",
 }
-READINESS_CARRIED_CHARGE = {
-    "wall_seconds": 14302.253947323995,
+READINESS_PRE_ROOT20261161_CARRIED_CHARGE = {
+    "wall_seconds": 14302.253947323996,
     "aggregate_cpu_seconds": 57721.035879589996,
 }
+READINESS_COMPLETED_HISTORY_CHARGE = {
+    "wall_seconds": 13778.295949158995,
+    "aggregate_cpu_seconds": 55378.175260172996,
+}
+READINESS_CARRIED_CHARGE = {
+    "wall_seconds": 19072.695949158995,
+    "aggregate_cpu_seconds": 76378.175260173,
+}
 READINESS_CUMULATIVE_RUNAWAY_CEILINGS = {
-    "wall_seconds": 25000.0,
-    "aggregate_cpu_seconds": 100000.0,
+    "wall_seconds": 30000.0,
+    "aggregate_cpu_seconds": 120000.0,
     "scope": "independent-cumulative-runaway-protection-only-never-per-attempt-or-fidelity-cap",
+}
+READINESS_ROOT20261162_PLANNING_INPUTS = {
+    "wall_seconds": {
+        "representative_full_screen_seconds": 5305.469600509008,
+        "explicit_setup_seconds": 73.8932728219952,
+        "formula_result_seconds": 29131.291359346378,
+        "independently_rounded_cumulative_ceiling_seconds": 30000.0,
+    },
+    "aggregate_cpu_seconds": {
+        "representative_full_screen_seconds": 20967.89,
+        "explicit_setup_seconds": 135.975487648,
+        "formula_result_seconds": 115896.932241645,
+        "independently_rounded_cumulative_ceiling_seconds": 120000.0,
+    },
+    "formula": "new_carried_charge + 1.5 * (1.25 * representative_full_screen + explicit_setup)",
 }
 READINESS_SUPERSEDED_CALIBRATIONS = (
     *cal.PRIOR_SUPERSEDED_CALIBRATIONS,
     ROOT_20261159_SUPERSEDED_CHARGE,
+    ROOT_20261161_HISTORICAL_CHARGE,
 )
 READINESS_SUPERSEDED_CALIBRATION_CHARGE = {
     "wall_seconds": float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"])
-    + ROOT_20261159_SUPERSEDED_CHARGE["wall_seconds"],
+    + ROOT_20261159_SUPERSEDED_CHARGE["wall_seconds"]
+    + ROOT_20261161_HISTORICAL_CHARGE["wall_seconds"],
     "aggregate_cpu_seconds": float(
         cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
     )
-    + ROOT_20261159_SUPERSEDED_CHARGE["aggregate_cpu_seconds"],
+    + ROOT_20261159_SUPERSEDED_CHARGE["aggregate_cpu_seconds"]
+    + ROOT_20261161_HISTORICAL_CHARGE["aggregate_cpu_seconds"],
 }
 
 CONFIG_PATH = ROOT / "configs/exp_648_structured_trajectory_consistency.yaml"
@@ -177,6 +212,16 @@ READINESS_CALIBRATION_AUTHORIZATION_PATH = TRACKED_SCREEN_DIR / "readiness-calib
 READINESS_SCAFFOLD_PROVENANCE_PATH = (
     ROOT / "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json"
 )
+ROOT_20261162_SCAFFOLD_DIR = (
+    ROOT
+    / "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162"
+)
+ROOT_20261162_AUTHORIZATION_SOURCE_PATH = (
+    ROOT_20261162_SCAFFOLD_DIR / "authorization-source.json"
+)
+ROOT_20261162_SCAFFOLD_PROVENANCE_PATH = (
+    ROOT_20261162_SCAFFOLD_DIR / "provenance.json"
+)
 ROOT_20261159_SUPERSEDED_DIR = (
     TRACKED_SCREEN_DIR / "superseded/root-20261159"
 )
@@ -189,7 +234,90 @@ ROOT_20261160_SUPERSEDED_DIR = (
 ROOT_20261160_CLASSIFICATION_PATH = (
     ROOT_20261160_SUPERSEDED_DIR / "classification.json"
 )
+ROOT_20261161_SUPERSEDED_DIR = (
+    TRACKED_SCREEN_DIR / "superseded/root-20261161"
+)
+ROOT_20261161_CLASSIFICATION_PATH = (
+    ROOT_20261161_SUPERSEDED_DIR / "classification.json"
+)
+ROOT_20261161_ORIGINAL_AUTHORIZATION_RELATIVE = (
+    "experiments/runs/exp-648-structured-trajectory-consistency/screen/"
+    "readiness-calibration-authorization.json"
+)
+ROOT_20261161_AUTHORIZATION_COMMIT = (
+    "16d903301f50e54e3f6d9ab8cb6435e61f0d648f"
+)
+ROOT_20261161_APPROVED_BASE_COMMIT = (
+    "87384f92ab1c053c7791e8afd69a07936d5a7402"
+)
+HISTORICAL_READINESS_SCAFFOLD_SHA256 = (
+    "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
+)
 MAX_AUTHORIZATION_BYTES = 65_536
+
+# Resource-calibration-only cache envelope. These constants never enter model
+# inference, label generation for training, or any scientific evaluation path.
+SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES = 16_384
+SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES = {
+    "transition-128": 710_748,
+    "transition-256": 1_168_748,
+    "rollout-64": 1_320_122,
+    "rollout-128": 3_595_231,
+    "rollout-256": 11_100_815,
+    "exact-repeat-first-256": 1_126_137,
+    "exact-repeat-second-256": 1_126_140,
+}
+SHAPE_MATCHED_CACHE_READ_ONLY_VALUE_WIDTH_EVIDENCE = {
+    "schema_version": "exp648-cache-value-width-reference-v1",
+    "artifact": (
+        ".scratch/exp-648-structured-trajectory-consistency/screen/"
+        "readiness-calibration-attempts/cal-0553c6434beb9528/raw/units/"
+        "readiness-repeat-1-1784605981246114650/calibration-corpus.json"
+    ),
+    "artifact_sha256": (
+        "d49a042062ae1a06b7d7e5b5914c73411875aed12cd2a704862c3821147127f0"
+    ),
+    "artifact_bytes": 4_135_139,
+    "classification": (
+        "sealed-root20261161-read-only-non-scientific-value-width-evidence"
+    ),
+    "observed_width_256": {
+        "modulus": {
+            "count": 96, "zero_count": 0,
+            "nonzero_bit_length_min": 256, "bit_length_max": 256,
+            "decimal_digits_min": 77, "decimal_digits_max": 78,
+        },
+        "multiplicand": {
+            "count": 96, "zero_count": 0,
+            "nonzero_bit_length_min": 248, "bit_length_max": 256,
+            "decimal_digits_min": 75, "decimal_digits_max": 78,
+        },
+        "multiplier": {
+            "count": 96, "zero_count": 0,
+            "nonzero_bit_length_min": 242, "bit_length_max": 256,
+            "decimal_digits_min": 73, "decimal_digits_max": 78,
+        },
+        "teacher_trace": {
+            "count": 24_672, "zero_count": 245,
+            "nonzero_bit_length_min": 239, "bit_length_max": 256,
+            "decimal_digits_min": 1, "decimal_digits_max": 78,
+        },
+        "prediction_trace": {
+            "count": 24_672, "zero_count": 245,
+            "nonzero_bit_length_min": 241, "bit_length_max": 256,
+            "decimal_digits_min": 1, "decimal_digits_max": 78,
+        },
+    },
+    "screen_evaluation_cache_artifact_available": False,
+    "use": (
+        "historical-width-distribution-context-only; never executable cache, "
+        "projection rate, launch evidence, or scientific evidence"
+    ),
+}
+REAL_SCREEN_EVALUATION_CACHE_FIELDS = (
+    "schema_version", "complete", "unit", "cases_sha256", "key_fields",
+    "results", "matched_work_receipts", "timing", "core_sha256",
+)
 
 FROZEN_CORPUS_FILES = {
     "data/identity-manifest.json": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
@@ -424,22 +552,318 @@ def verify_pinned_foundation(config: dict[str, Any]) -> dict[str, str]:
     return checks
 
 
+def screen_execution_schedule(
+    *, config_override: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Return the single count schedule shared by screen and calibration code."""
+    config = config_override or yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    evaluation = config["screen"]["evaluation"]
+    updates = int(config["screen"]["updates_per_arm"])
+    arm_names = ("control", "challenger")
+    arm_count = len(arm_names)
+    if updates <= 0 or updates % 4:
+        raise RuntimeError("screen updates must be positive and quarter-divisible")
+    quarter_updates_per_arm = updates // 4
+    window = int(config["training"]["autonomous_unroll_steps"])
+    evaluation_units: list[dict[str, Any]] = []
+    for width, count in evaluation["transition_cases"].items():
+        evaluation_units.append({
+            "unit": f"transition-{int(width)}", "mode": "transition",
+            "width": int(width), "cases": int(count),
+            "prediction_trace_rows_per_arm": 0,
+            "prediction_trace_elements_per_arm": 0,
+            "teacher_trace_elements_per_arm": 0,
+        })
+    for width, count in evaluation["full_rollout_cases"].items():
+        width_int, count_int = int(width), int(count)
+        evaluation_units.append({
+            "unit": f"rollout-{width_int}", "mode": "rollout",
+            "width": width_int, "cases": count_int,
+            "prediction_trace_rows_per_arm": width_int + 1,
+            "prediction_trace_elements_per_arm": (width_int + 1) * count_int,
+            "teacher_trace_elements_per_arm": (width_int + 1) * count_int,
+        })
+    repeat_width = int(evaluation["exact_repeat_width"])
+    repeat_cases = int(evaluation["exact_repeat_cases"])
+    for pass_name in ("first", "second"):
+        unit = f"exact-repeat-{pass_name}-{repeat_width}"
+        evaluation_units.append({
+            "unit": unit, "mode": "rollout", "width": repeat_width,
+            "cases": repeat_cases,
+            "prediction_trace_rows_per_arm": repeat_width + 1,
+            "prediction_trace_elements_per_arm": (repeat_width + 1) * repeat_cases,
+            "teacher_trace_elements_per_arm": (repeat_width + 1) * repeat_cases,
+        })
+    if (
+        any(unit["cases"] <= 0 or unit["width"] <= 0 for unit in evaluation_units)
+        or len({unit["unit"] for unit in evaluation_units}) != len(evaluation_units)
+    ):
+        raise RuntimeError("screen evaluation-unit schedule is invalid")
+
+    training_declared_per_update = {
+        "clean_forward_steps": window,
+        "autonomous_forward_steps": window,
+        "endpoint_loss_computations": 1,
+        "clean_backward_calls": window,
+        "endpoint_backward_calls": 1,
+        "gradient_clip_calls": 1,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+    }
+    checkpoint_declared = {
+        "checkpoint_writes": 1,
+        "checkpoint_reload_verifications": 1,
+        "checkpoint_byte_hashes": 1,
+        "checkpoint_receipt_serializations": 1,
+    }
+    evaluation_declared_per_unit = {
+        "transition": (
+            "transition_evaluation_cases", "evaluation_result_hashes",
+            "evaluation_result_serializations",
+        ),
+        "rollout": (
+            "rollout_evaluation_cases", "rollout_evaluation_steps",
+            "evaluation_result_hashes", "evaluation_result_serializations",
+        ),
+    }
+    declared = {
+        **{
+            category: count * updates
+            for category, count in training_declared_per_update.items()
+        },
+        **checkpoint_declared,
+        "transition_evaluation_cases": sum(
+            unit["cases"] for unit in evaluation_units
+            if unit["mode"] == "transition"
+        ),
+        "rollout_evaluation_cases": sum(
+            unit["cases"] for unit in evaluation_units
+            if unit["mode"] == "rollout"
+        ),
+        "rollout_evaluation_steps": sum(
+            unit["width"] * unit["cases"] for unit in evaluation_units
+            if unit["mode"] == "rollout"
+        ),
+        "evaluation_result_hashes": len(evaluation_units),
+        "evaluation_result_serializations": len(evaluation_units),
+    }
+    scientific_ledger_reasons = {
+        "constructor": 1,
+        "reciprocal_launch_attempt_binding": 1,
+        "corpus_verified": 1,
+        "training_started": 1,
+        "completed_update_pairs": updates,
+        "first_quarter_telemetry": 1,
+        "checkpoint_receipts": arm_count,
+        "evaluation_started": 1,
+        "transition_units": len(evaluation["transition_cases"]),
+        "rollout_units": len(evaluation["full_rollout_cases"]),
+        "exact_repeat_pair": 1,
+        "finalization_started": 1,
+        "sealed": 1,
+    }
+    scientific_pre_quarter_fixed_reasons = {
+        name: scientific_ledger_reasons[name]
+        for name in (
+            "constructor", "reciprocal_launch_attempt_binding",
+            "corpus_verified", "training_started",
+        )
+    }
+    outer_launch_ledger_reasons = {
+        "authorization_verified_constructor_pending": 1,
+        "constructor_complete": 1,
+        "complete_sealed": 1,
+    }
+    outer_pre_quarter_reasons = {
+        name: outer_launch_ledger_reasons[name]
+        for name in (
+            "authorization_verified_constructor_pending", "constructor_complete",
+        )
+    }
+    evidence_write_reasons = {
+        "mirrored_write_screen_file_atomic_writes": 16,
+        "attempt_artifact_publication_atomic_writes": 8,
+        "sealed_checkpoint_artifact_copies": 2,
+        "attempt_state_copy": 1,
+        "completion_seal": 1,
+        "completion_pointer": 1,
+    }
+    training_actual_per_update = {
+        "training_update_calls": 1,
+        "scheduler_step_calls": 1,
+    }
+    checkpoint_actual = {
+        "checkpoint_save_reload_hash_calls": 1,
+        "checkpoint_receipt_persist_calls": 1,
+    }
+    fresh_evaluation_actual_per_unit = {
+        "fresh_evaluator_calls": 1,
+        "fresh_result_hashes": 1,
+        "fresh_result_serializations": 1,
+    }
+    cache_recovery_actual_per_unit = {
+        "cache_record_validations": 1,
+        "cache_per_arm_receipt_validations": 1,
+        "cached_result_digest_validations": 1,
+        "cache_reuse_operations": 1,
+    }
+    fresh_actual_counts = {
+        **{
+            operation: count * updates
+            for operation, count in training_actual_per_update.items()
+        },
+        **checkpoint_actual,
+        **{
+            operation: count * len(evaluation_units)
+            for operation, count in fresh_evaluation_actual_per_unit.items()
+        },
+        **{operation: 0 for operation in cache_recovery_actual_per_unit},
+    }
+    fresh_actual_event_count = sum(fresh_actual_counts.values())
+    cache_event_delta = (
+        sum(cache_recovery_actual_per_unit.values())
+        - sum(fresh_evaluation_actual_per_unit.values())
+    )
+    schedule = {
+        "schema_version": "exp648-screen-execution-schedule-v1",
+        "arm_names": list(arm_names),
+        "arm_count": arm_count,
+        "updates_per_arm": updates,
+        "quarter_updates_per_arm": quarter_updates_per_arm,
+        "evaluation_units": evaluation_units,
+        "scientific_attempt_ledger": {
+            "atomic_writes": sum(scientific_ledger_reasons.values()),
+            "write_reasons": scientific_ledger_reasons,
+            "fixed_write_reasons_before_first_quarter_guard": (
+                scientific_pre_quarter_fixed_reasons
+            ),
+            "writes_before_first_quarter_guard": (
+                sum(scientific_pre_quarter_fixed_reasons.values())
+                + quarter_updates_per_arm
+            ),
+            "completed_arm_updates_before_first_quarter_guard": (
+                quarter_updates_per_arm * arm_count
+            ),
+            "total_arm_updates": updates * arm_count,
+        },
+        "outer_launch_ledger": {
+            "atomic_writes": sum(outer_launch_ledger_reasons.values()),
+            "write_reasons": outer_launch_ledger_reasons,
+            "fixed_write_reasons_before_first_quarter_guard": (
+                outer_pre_quarter_reasons
+            ),
+            "writes_before_first_quarter_guard": sum(
+                outer_pre_quarter_reasons.values()
+            ),
+        },
+        "total_screen_ledger_atomic_writes": (
+            sum(scientific_ledger_reasons.values())
+            + sum(outer_launch_ledger_reasons.values())
+        ),
+        "evaluation_cache_write_validate_units": len(evaluation_units),
+        "checkpoint_save_reload_verifications": arm_count,
+        "atomic_evidence_writes": sum(evidence_write_reasons.values()),
+        "atomic_evidence_write_reasons": evidence_write_reasons,
+        "per_arm_training_declared_per_update": training_declared_per_update,
+        "per_arm_checkpoint_declared": checkpoint_declared,
+        "per_mode_evaluation_declared_categories": {
+            mode: list(categories)
+            for mode, categories in evaluation_declared_per_unit.items()
+        },
+        "per_arm_declared_counts": declared,
+        "per_arm_declared_count_total": sum(declared.values()),
+        "per_arm_declared_ordered_event_count": (
+            updates * len(training_declared_per_update)
+            + len(checkpoint_declared)
+            + sum(
+                len(evaluation_declared_per_unit[unit["mode"]])
+                for unit in evaluation_units
+            )
+        ),
+        "per_arm_actual_operation_contract": {
+            "training_per_update": training_actual_per_update,
+            "checkpoint": checkpoint_actual,
+            "fresh_evaluation_per_unit": fresh_evaluation_actual_per_unit,
+            "cache_recovery_per_unit": cache_recovery_actual_per_unit,
+            "fresh_zero_cache_reuse": fresh_actual_counts,
+            "ordered_event_count_fresh": fresh_actual_event_count,
+            "ordered_event_count_formula": {
+                "base": "ordered_event_count_fresh",
+                "cache_reuse_unit_delta": cache_event_delta,
+            },
+            "cache_reuse_units_min": 0,
+            "cache_reuse_units_max": len(evaluation_units),
+        },
+        "calibration_representative_segment": {
+            "fresh_warmups": 1,
+            "fresh_timed_repeats": 3,
+            "cross_root_cache_reuse_allowed": False,
+            "same_root_repeat_cache_reuse_allowed": False,
+            "mining_matched_pairs": 64,
+            "semantic_replay_windows": 128,
+            "training_updates_per_arm": 20,
+            "transition_cases_per_arm": {"128": 200, "256": 200},
+            "rollout_cases_per_arm": {"64": 20, "128": 20, "256": 20},
+            "source_replay_identities": 64,
+        },
+    }
+    return schedule
+
+
+def _screen_actual_operation_counts_from_schedule(
+    schedule: dict[str, Any], cache_reuse_units: int,
+) -> dict[str, int]:
+    contract = schedule["per_arm_actual_operation_contract"]
+    maximum = int(contract["cache_reuse_units_max"])
+    if type(cache_reuse_units) is not int or not 0 <= cache_reuse_units <= maximum:
+        raise RuntimeError("screen cache-reuse unit count is outside the schedule")
+    fresh_units = maximum - cache_reuse_units
+    counts = copy.deepcopy(contract["fresh_zero_cache_reuse"])
+    for name, per_unit in contract["fresh_evaluation_per_unit"].items():
+        counts[name] = fresh_units * int(per_unit)
+    for name, per_unit in contract["cache_recovery_per_unit"].items():
+        counts[name] = cache_reuse_units * int(per_unit)
+    return counts
+
+
+def screen_actual_operation_counts(
+    cache_reuse_units: int, *, config_override: dict[str, Any] | None = None,
+) -> dict[str, int]:
+    schedule = screen_execution_schedule(config_override=config_override)
+    return _screen_actual_operation_counts_from_schedule(
+        schedule, cache_reuse_units
+    )
+
+
 def screen_workload_payload(
     *, scientific_runner_sha256: str | None = None,
     config_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     config = config_override or yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    schedule = screen_execution_schedule(config_override=config)
     return {
-        "schema_version": "exp648-screen-workload-v2",
-        "training": {"updates_per_arm": 200, "arms": 2, "batch_size": 16, "window_length": 8},
+        "schema_version": "exp648-screen-workload-v3",
+        "training": {
+            "updates_per_arm": int(config["screen"]["updates_per_arm"]),
+            "arms": schedule["arm_count"],
+            "batch_size": int(config["training"]["batch_size"]),
+            "window_length": int(config["training"]["autonomous_unroll_steps"]),
+        },
         "evaluation": json.loads(canonical_json(config["screen"]["evaluation"])),
         "frozen_corpus_semantic_replay": {"identity_trajectories": 736, "full_source_replays": 1},
-        "checkpoint_before_evaluation": {"writes": 2, "reload_verify": True},
+        "checkpoint_before_evaluation": {
+            "writes": schedule["checkpoint_save_reload_verifications"],
+            "reload_verify": True,
+        },
         "recoverable_evaluation_units": "paired-arm-width-mode",
-        "recoverable_evaluation_unit_count": 7,
-        "successful_attempt_ledger_atomic_writes": 213,
-        "successful_atomic_evidence_writes": 19,
+        "recoverable_evaluation_unit_count": schedule[
+            "evaluation_cache_write_validate_units"
+        ],
+        "execution_schedule": schedule,
+        "execution_schedule_sha256": sha256_bytes(canonical_json_bytes(schedule)),
         "evidence_and_mlflow_verification": True,
+        "calibration_requires_fresh_representative_segments": True,
+        "cross_root_cache_reuse_allowed": False,
         "fidelity_reduction_allowed": False,
         "scientific_runner_sha256": scientific_runner_sha256 or sha256(Path(__file__)),
     }
@@ -540,7 +964,7 @@ def validate_one_child_authorization_lifecycle(
     return auth_commit
 
 
-def _validate_readiness_authorization_source(
+def _validate_readiness_authorization_source_v1(
     provenance: dict[str, Any], approved_base_commit: str
 ) -> dict[str, Any]:
     """Validate the frozen approved-base source without rebuilding its semantics."""
@@ -663,21 +1087,352 @@ def _validate_readiness_authorization_source(
     return copy.deepcopy(template)
 
 
-def readiness_calibration_authorization_base(
+def _historical_readiness_calibration_authorization_base_v1(
     root_seed: int, approved_base_commit: str
 ) -> dict[str, Any]:
-    """Return one frozen approved-base template plus its only two dynamic values."""
+    """Reconstruct the immutable pre-R3 v1 authorization for archive audit only."""
     provenance = _git_json(
         approved_base_commit,
         "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json",
     )
-    template = _validate_readiness_authorization_source(
+    template = _validate_readiness_authorization_source_v1(
         provenance, approved_base_commit
     )
     return {
         **template,
         "calibration_root": int(root_seed),
         "approved_base_commit": approved_base_commit,
+    }
+
+
+def verify_historical_root20261161_authorization(
+    path: Path = ROOT_20261161_SUPERSEDED_DIR
+    / "readiness-calibration-authorization.json",
+) -> dict[str, Any]:
+    """Authenticate root 161 against its original path/history; never launch it."""
+    observed = path.read_bytes()
+    original = _git_blob(
+        ROOT_20261161_AUTHORIZATION_COMMIT,
+        ROOT_20261161_ORIGINAL_AUTHORIZATION_RELATIVE,
+    )
+    if observed != original:
+        raise PermissionError("historical root 20261161 authorization bytes changed")
+    parents = git_output("show", "-s", "--format=%P", ROOT_20261161_AUTHORIZATION_COMMIT)
+    if parents.split() != [ROOT_20261161_APPROVED_BASE_COMMIT]:
+        raise PermissionError("historical root 20261161 authorization parent mismatch")
+    changed = git_output(
+        "diff", "--name-only", ROOT_20261161_APPROVED_BASE_COMMIT,
+        ROOT_20261161_AUTHORIZATION_COMMIT,
+    ).splitlines()
+    if changed != [ROOT_20261161_ORIGINAL_AUTHORIZATION_RELATIVE]:
+        raise PermissionError("historical root 20261161 authorization was not sole-file")
+    payload, _ = _read_authenticated_committed_manifest(
+        path,
+        expected_schema="exp648-screen-readiness-calibration-authorization-v1",
+        committed_bytes=original,
+    )
+    expected = _historical_readiness_calibration_authorization_base_v1(
+        HISTORICAL_READINESS_CALIBRATION_ROOT,
+        ROOT_20261161_APPROVED_BASE_COMMIT,
+    )
+    if payload != expected:
+        raise PermissionError("historical root 20261161 v1 binding mismatch")
+    return {
+        **payload,
+        "authorization_sha256": sha256_bytes(observed),
+        "historical_nonlaunch_only": True,
+        "original_authorization_commit": ROOT_20261161_AUTHORIZATION_COMMIT,
+        "original_authorization_path": ROOT_20261161_ORIGINAL_AUTHORIZATION_RELATIVE,
+    }
+
+
+def _root20261162_expected_direct_binding_paths() -> dict[str, str]:
+    return {
+        "scientific_runner": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
+        "scientific_test": "tests/test_exp648_structured_trajectory_scientific.py",
+        "resolved_config": "configs/exp_648_structured_trajectory_consistency.yaml",
+        "calibration_runner": "experiments/exp_648_structured_trajectory_consistency/run.py",
+        "executed_config": "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml",
+        "runtime_environment": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
+        "preregistration": "knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md",
+        "corpus_provenance_amendment": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/provenance-amendment.json",
+        "root20261161_classification": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/classification.json",
+        "cellular_model": "experiments/exp_220_width_independent_cellular/model.py",
+        "exp300_data_evaluator": "experiments/exp_300_width64_bit_tensor_transfer/run.py",
+    }
+
+
+def _root20261162_expected_frozen_paths() -> dict[str, str]:
+    prefix = "experiments/runs/exp-648-structured-trajectory-consistency/corpus"
+    return {
+        "data/identity-manifest.json": "data/generated/exp-648-structured-trajectory-consistency/identity-manifest.json",
+        "data/trajectory-manifest.json.gz": "data/generated/exp-648-structured-trajectory-consistency/trajectory-manifest.json.gz",
+        "data/paired-corpus.json.gz": "data/generated/exp-648-structured-trajectory-consistency/paired-corpus.json.gz",
+        "data/corpus-manifest.json": "data/generated/exp-648-structured-trajectory-consistency/corpus-manifest.json",
+        "evidence/run.json": f"{prefix}/run.json",
+        "evidence/environment.json": f"{prefix}/environment.json",
+        "evidence/integrity.json": f"{prefix}/integrity.json",
+        "evidence/mlflow.json": f"{prefix}/mlflow.json",
+    }
+
+
+def _validate_root20261162_authorization_source(
+    *, approved_base_commit: str,
+) -> tuple[dict[str, Any], bytes, bytes]:
+    source_relative = ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(ROOT).as_posix()
+    provenance_relative = ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(ROOT).as_posix()
+    source_raw = _git_blob(approved_base_commit, source_relative)
+    provenance_raw = _git_blob(approved_base_commit, provenance_relative)
+    try:
+        source = json.loads(source_raw)
+        provenance = json.loads(provenance_raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError("root 20261162 authorization source/scaffold is malformed") from error
+    if source_raw != canonical_json_bytes(source, pretty=True):
+        raise PermissionError("root 20261162 authorization source is noncanonical")
+    if provenance_raw != canonical_json_bytes(provenance, pretty=True):
+        raise PermissionError("root 20261162 scaffold provenance is noncanonical")
+    source_keys = {
+        "schema_version", "experiment_id", "approved_base_file_bindings",
+        "frozen_corpus_file_bindings", "derived_bindings", "screen_workload",
+        "screen_workload_sha256", "authorization_template",
+        "authorization_template_sha256",
+    }
+    if set(source) != source_keys or source.get("schema_version") != (
+        "exp648-readiness-authorization-source-v2"
+    ):
+        raise PermissionError("root 20261162 authorization source schema mismatch")
+    if source.get("experiment_id") != RUN_ID:
+        raise PermissionError("root 20261162 authorization source experiment mismatch")
+
+    expected_paths = _root20261162_expected_direct_binding_paths()
+    bindings = source.get("approved_base_file_bindings")
+    if not isinstance(bindings, dict) or set(bindings) != set(expected_paths):
+        raise PermissionError("root 20261162 direct binding schema mismatch")
+    observed_blobs: dict[str, bytes] = {}
+    for name, expected_path in expected_paths.items():
+        binding = bindings[name]
+        if not isinstance(binding, dict) or set(binding) != {"path", "sha256"}:
+            raise PermissionError(f"root 20261162 {name} binding schema mismatch")
+        if binding["path"] != expected_path:
+            raise PermissionError(f"root 20261162 {name} binding path mismatch")
+        raw = _git_blob(approved_base_commit, expected_path)
+        observed_blobs[name] = raw
+        if binding["sha256"] != sha256_bytes(raw):
+            raise PermissionError(f"root 20261162 {name} direct hash mismatch")
+
+    frozen_paths = _root20261162_expected_frozen_paths()
+    frozen = source.get("frozen_corpus_file_bindings")
+    if not isinstance(frozen, dict) or set(frozen) != set(FROZEN_CORPUS_FILES):
+        raise PermissionError("root 20261162 frozen corpus binding schema mismatch")
+    for name, expected_path in frozen_paths.items():
+        binding = frozen[name]
+        if not isinstance(binding, dict) or set(binding) != {"path", "sha256"}:
+            raise PermissionError(f"root 20261162 frozen {name} binding schema mismatch")
+        if binding != {"path": expected_path, "sha256": FROZEN_CORPUS_FILES[name]}:
+            raise PermissionError(f"root 20261162 frozen {name} declared binding mismatch")
+        if _git_blob_sha256(approved_base_commit, expected_path) != binding["sha256"]:
+            raise PermissionError(f"root 20261162 frozen {name} Git blob mismatch")
+
+    try:
+        config = yaml.safe_load(observed_blobs["resolved_config"])
+        environment = json.loads(observed_blobs["runtime_environment"])
+    except (yaml.YAMLError, json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise PermissionError("root 20261162 bound config/environment is malformed") from error
+    if observed_blobs["runtime_environment"] != canonical_json_bytes(
+        environment, pretty=True
+    ):
+        raise PermissionError("root 20261162 runtime environment is noncanonical")
+    dependency = config.get("executable_dependency_sources", {})
+    if dependency.get("manifest_sha256") != PINNED["dependency_manifest_sha256"]:
+        raise PermissionError("root 20261162 dependency manifest hash mismatch")
+    for name in ("cellular_model", "exp300_data_evaluator"):
+        dependency_binding = dependency.get("sources", {}).get(name)
+        direct_binding = bindings[name]
+        if dependency_binding != direct_binding:
+            raise PermissionError(f"root 20261162 dependency/direct binding mismatch for {name}")
+    scientific_protocol_sha, resource_protocol_sha = _base_protocol_hashes(
+        approved_base_commit, config
+    )
+    derived_expected = {
+        "dependency_manifest_sha256": PINNED["dependency_manifest_sha256"],
+        "source_checkpoint_sha256": PINNED["source_checkpoint_sha256"],
+        "exact_teacher_source_sha256": _base_exact_teacher_hash(
+            approved_base_commit
+        ),
+        "scientific_protocol_sha256": scientific_protocol_sha,
+        "resource_protocol_sha256": resource_protocol_sha,
+        "calibration_segment_evaluator_sha256": PINNED[
+            "calibration_evaluator_sha256"
+        ],
+        "screen_evaluator_sha256": _base_evaluator_hash(
+            approved_base_commit, PINNED["dependency_manifest_sha256"]
+        ),
+        "corpus_manifest_sha256": FROZEN_CORPUS_FILES[
+            "data/corpus-manifest.json"
+        ],
+    }
+    if source.get("derived_bindings") != derived_expected:
+        raise PermissionError("root 20261162 derived binding mismatch")
+
+    workload = source.get("screen_workload")
+    if not isinstance(workload, dict) or workload.get("schema_version") != (
+        "exp648-screen-workload-v3"
+    ):
+        raise PermissionError("root 20261162 screen workload schema mismatch")
+    workload_sha = sha256_bytes(canonical_json_bytes(workload))
+    if source.get("screen_workload_sha256") != workload_sha:
+        raise PermissionError("root 20261162 screen workload hash mismatch")
+    if workload.get("scientific_runner_sha256") != bindings[
+        "scientific_runner"
+    ]["sha256"]:
+        raise PermissionError("root 20261162 workload runner mismatch")
+    expected_schedule = screen_execution_schedule(config_override=config)
+    if (
+        workload.get("execution_schedule") != expected_schedule
+        or workload.get("execution_schedule_sha256")
+        != sha256_bytes(canonical_json_bytes(expected_schedule))
+        or workload.get("evaluation")
+        != json.loads(canonical_json(config["screen"]["evaluation"]))
+        or workload.get("cross_root_cache_reuse_allowed") is not False
+        or workload.get("calibration_requires_fresh_representative_segments")
+        is not True
+    ):
+        raise PermissionError("root 20261162 screen workload schedule mismatch")
+
+    template = source.get("authorization_template")
+    dynamic_keys = {
+        "calibration_root", "approved_base_commit",
+        "authorization_source_blob_sha256", "scaffold_provenance_blob_sha256",
+    }
+    required_template_keys = {
+        "schema_version", "experiment_id", "decision",
+        "scientific_runner_sha256", "scientific_test_sha256",
+        "calibration_runner_sha256", "resolved_config_sha256",
+        "executed_config_sha256", "preregistration_sha256",
+        "corpus_provenance_amendment_sha256",
+        "root20261161_classification_sha256",
+        "frozen_corpus_file_bindings_sha256", "source_checkpoint_sha256",
+        "dependency_manifest_sha256", "approved_runtime_environment",
+        "calibration_segment_evaluator_sha256", "screen_evaluator_sha256",
+        "exact_teacher_source_sha256", "scientific_protocol_sha256",
+        "resource_protocol_sha256", "screen_workload_sha256",
+        "corpus_manifest_sha256", "screen_roots_authorized",
+        "scientific_accuracy_or_selection_authorized",
+    }
+    if (
+        not isinstance(template, dict)
+        or set(template) != required_template_keys
+        or dynamic_keys.intersection(template)
+        or template.get("schema_version")
+        != "exp648-screen-readiness-calibration-authorization-v2"
+    ):
+        raise PermissionError("root 20261162 authorization template schema mismatch")
+    if template.get("decision") != (
+        "authorize-non-scientific-screen-readiness-calibration-only"
+    ):
+        raise PermissionError("root 20261162 authorization template decision mismatch")
+    if (
+        template.get("screen_roots_authorized") is not False
+        or template.get("scientific_accuracy_or_selection_authorized") is not False
+    ):
+        raise PermissionError("root 20261162 authorization template scope expanded")
+    expected_template_bindings = {
+        "scientific_runner_sha256": bindings["scientific_runner"]["sha256"],
+        "scientific_test_sha256": bindings["scientific_test"]["sha256"],
+        "calibration_runner_sha256": bindings["calibration_runner"]["sha256"],
+        "resolved_config_sha256": bindings["resolved_config"]["sha256"],
+        "executed_config_sha256": bindings["executed_config"]["sha256"],
+        "preregistration_sha256": bindings["preregistration"]["sha256"],
+        "corpus_provenance_amendment_sha256": bindings[
+            "corpus_provenance_amendment"
+        ]["sha256"],
+        "root20261161_classification_sha256": bindings[
+            "root20261161_classification"
+        ]["sha256"],
+        "frozen_corpus_file_bindings_sha256": sha256_bytes(
+            canonical_json_bytes(frozen)
+        ),
+        **derived_expected,
+        "screen_workload_sha256": workload_sha,
+    }
+    for key, expected in expected_template_bindings.items():
+        if template.get(key) != expected:
+            raise PermissionError(f"root 20261162 authorization template mismatch for {key}")
+    if template.get("approved_runtime_environment") != environment:
+        raise PermissionError("root 20261162 authorization environment mismatch")
+    if source.get("authorization_template_sha256") != sha256_bytes(
+        canonical_json_bytes(template)
+    ):
+        raise PermissionError("root 20261162 authorization template hash mismatch")
+
+    provenance_keys = {
+        "schema_version", "experiment_id", "root", "status",
+        "authorization_source_path", "approved_base_file_bindings_sha256",
+        "frozen_corpus_file_bindings_sha256", "derived_bindings_sha256",
+        "screen_workload_sha256", "root20261161_archive_classification_sha256",
+        "historical_scaffold", "dynamic_authorization_fields",
+        "authorization_manifest_present", "scientific_action_authorized",
+    }
+    if (
+        not isinstance(provenance, dict)
+        or set(provenance) != provenance_keys
+        or provenance.get("schema_version")
+        != "exp648-readiness-scaffold-provenance-v2"
+        or provenance.get("experiment_id") != RUN_ID
+        or provenance.get("root") != PREREGISTERED_READINESS_CALIBRATION_ROOT
+        or provenance.get("status") != "reserved-unopened-unauthorized"
+        or provenance.get("authorization_source_path") != source_relative
+        or provenance.get("authorization_manifest_present") is not False
+        or provenance.get("scientific_action_authorized") is not False
+    ):
+        raise PermissionError("root 20261162 scaffold provenance schema mismatch")
+    crosslinks = {
+        "approved_base_file_bindings_sha256": sha256_bytes(
+            canonical_json_bytes(bindings)
+        ),
+        "frozen_corpus_file_bindings_sha256": sha256_bytes(
+            canonical_json_bytes(frozen)
+        ),
+        "derived_bindings_sha256": sha256_bytes(
+            canonical_json_bytes(derived_expected)
+        ),
+        "screen_workload_sha256": workload_sha,
+        "root20261161_archive_classification_sha256": bindings[
+            "root20261161_classification"
+        ]["sha256"],
+    }
+    for key, expected in crosslinks.items():
+        if provenance.get(key) != expected:
+            raise PermissionError(f"root 20261162 scaffold crosslink mismatch for {key}")
+    if provenance.get("historical_scaffold") != {
+        "path": "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json",
+        "sha256": HISTORICAL_READINESS_SCAFFOLD_SHA256,
+        "role": "immutable-pre-r3-v1-history-never-a-root20261162-source",
+    }:
+        raise PermissionError("root 20261162 historical scaffold classification mismatch")
+    if provenance.get("dynamic_authorization_fields") != sorted(dynamic_keys):
+        raise PermissionError("root 20261162 dynamic authorization field mismatch")
+    return copy.deepcopy(template), source_raw, provenance_raw
+
+
+def readiness_calibration_authorization_base(
+    root_seed: int, approved_base_commit: str
+) -> dict[str, Any]:
+    """Build v2 bytes from two fixed approved-base blobs plus four dynamic values."""
+    if int(root_seed) not in (
+        PREREGISTERED_READINESS_CALIBRATION_ROOT, TEST_ONLY_ROOT
+    ):
+        raise PermissionError("v2 readiness authorization root is not reserved")
+    template, source_raw, provenance_raw = _validate_root20261162_authorization_source(
+        approved_base_commit=approved_base_commit
+    )
+    return {
+        **template,
+        "calibration_root": int(root_seed),
+        "approved_base_commit": approved_base_commit,
+        "authorization_source_blob_sha256": sha256_bytes(source_raw),
+        "scaffold_provenance_blob_sha256": sha256_bytes(provenance_raw),
     }
 
 
@@ -715,21 +1470,412 @@ def _read_authenticated_committed_manifest(
     return payload, observed
 
 
+def _parse_canonical_sha256sum_manifest(raw: bytes) -> dict[str, str]:
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise PermissionError("SHA256SUMS manifest is not UTF-8") from error
+    if not text or not text.endswith("\n"):
+        raise PermissionError("SHA256SUMS manifest lacks canonical terminal LF")
+    entries: dict[str, str] = {}
+    for line in text.splitlines():
+        match = re.fullmatch(r"([0-9a-f]{64})  ([^\r\n]+)", line)
+        if match is None:
+            raise PermissionError("SHA256SUMS manifest line is malformed")
+        digest, name = match.groups()
+        path = Path(name)
+        if path.is_absolute() or ".." in path.parts or name in entries:
+            raise PermissionError("SHA256SUMS manifest path is unsafe or repeated")
+        entries[name] = digest
+    if list(entries) != sorted(entries):
+        raise PermissionError("SHA256SUMS manifest paths are not sorted")
+    return entries
+
+
+def _verify_manifest_files(
+    *, manifest: Path, base: Path, expected_names: set[str] | None = None,
+) -> tuple[dict[str, str], int]:
+    entries = _parse_canonical_sha256sum_manifest(manifest.read_bytes())
+    if expected_names is not None and set(entries) != expected_names:
+        raise PermissionError("SHA256SUMS manifest inventory mismatch")
+    total = 0
+    for name, digest in entries.items():
+        path = base / name
+        if not path.is_file() or path.is_symlink() or sha256(path) != digest:
+            raise PermissionError(f"SHA256SUMS file mismatch for {name}")
+        total += path.stat().st_size
+    return entries, total
+
+
+def validate_root20261161_archive(
+    *, archive_dir: Path = ROOT_20261161_SUPERSEDED_DIR,
+    repository_root: Path = ROOT,
+) -> dict[str, Any]:
+    """Validate the byte archive and in-place scratch/MLflow evidence read-only."""
+    expected_archive_names = {
+        "classification.json", "scratch-files.sha256", "scratch-inventory.json",
+        "mlflow-artifacts.sha256", "mlflow-runs.json",
+        "readiness-calibration-attempt-state.json",
+        "readiness-calibration-authorization.json",
+        "readiness-calibration-completion.json",
+        "readiness-calibration-core.json",
+        "readiness-calibration-environment.json",
+        "readiness-calibration-executed-config.yaml",
+        "readiness-calibration-launch-ledger.json",
+        "readiness-calibration-mlflow.json",
+        "readiness-calibration-resource-completion.json",
+        "readiness-calibration.json",
+    }
+    observed_names = {
+        path.name for path in archive_dir.iterdir()
+        if path.is_file() and path.name != "SHA256SUMS"
+    }
+    if observed_names != expected_archive_names:
+        raise PermissionError("historical root 20261161 archive file set mismatch")
+    archive_entries, _ = _verify_manifest_files(
+        manifest=archive_dir / "SHA256SUMS", base=archive_dir,
+        expected_names=expected_archive_names,
+    )
+
+    classification_raw = (archive_dir / "classification.json").read_bytes()
+    classification = json.loads(classification_raw)
+    if classification_raw != canonical_json_bytes(classification, pretty=True):
+        raise PermissionError("historical root 20261161 classification is noncanonical")
+    classification_keys = {
+        "schema_version", "root", "status", "classification", "superseded",
+        "non_scientific", "eligible_for_launch", "eligible_for_projection_rates",
+        "eligible_for_cache_reuse", "next_root", "reason", "prohibitions",
+        "authorization_history", "archive_integrity", "accounting", "boundary",
+        "scratch_evidence", "mlflow_evidence",
+    }
+    if not isinstance(classification, dict) or set(classification) != classification_keys:
+        raise PermissionError("historical root 20261161 classification key schema mismatch")
+    required_classification = {
+        "schema_version": "exp648-readiness-superseded-classification-v2",
+        "root": HISTORICAL_READINESS_CALIBRATION_ROOT,
+        "status": "consumed-complete-pre-r3-binding-historical-only",
+        "superseded": True,
+        "non_scientific": True,
+        "eligible_for_launch": False,
+        "eligible_for_projection_rates": False,
+        "eligible_for_cache_reuse": False,
+        "next_root": PREREGISTERED_READINESS_CALIBRATION_ROOT,
+    }
+    for key, expected in required_classification.items():
+        if classification.get(key) != expected:
+            raise PermissionError(
+                f"historical root 20261161 classification mismatch for {key}"
+            )
+    if classification.get("authorization_history") != {
+        "approved_base_commit": ROOT_20261161_APPROVED_BASE_COMMIT,
+        "authorization_commit": ROOT_20261161_AUTHORIZATION_COMMIT,
+        "historical_v1_nonlaunch_verification_only": True,
+        "original_path": ROOT_20261161_ORIGINAL_AUTHORIZATION_RELATIVE,
+        "sole_file_child": True,
+    }:
+        raise PermissionError("historical root 20261161 authorization history mismatch")
+    expected_accounting = {
+        "wall_seconds": ROOT_20261161_HISTORICAL_CHARGE["wall_seconds"],
+        "aggregate_cpu_seconds": ROOT_20261161_HISTORICAL_CHARGE[
+            "aggregate_cpu_seconds"
+        ],
+        "previous_cumulative_carried_wall_seconds": (
+            READINESS_PRE_ROOT20261161_CARRIED_CHARGE["wall_seconds"]
+        ),
+        "previous_cumulative_carried_aggregate_cpu_seconds": (
+            READINESS_PRE_ROOT20261161_CARRIED_CHARGE["aggregate_cpu_seconds"]
+        ),
+        "new_cumulative_carried_wall_seconds": READINESS_CARRIED_CHARGE[
+            "wall_seconds"
+        ],
+        "new_cumulative_carried_aggregate_cpu_seconds": READINESS_CARRIED_CHARGE[
+            "aggregate_cpu_seconds"
+        ],
+        "charged_exactly_once_into_root20261162_carried_charge": True,
+    }
+    if classification.get("accounting") != expected_accounting:
+        raise PermissionError("historical root 20261161 accounting mismatch")
+    if classification.get("boundary") != {
+        "candidate_or_promotion_evidence": False,
+        "checked_independent_official_private_opened": False,
+        "model_update_performed": False,
+        "scientific_accuracy_or_selection_reported": False,
+        "screen_or_confirmation_opened": False,
+    }:
+        raise PermissionError("historical root 20261161 boundary mismatch")
+
+    auth = verify_historical_root20261161_authorization(
+        archive_dir / "readiness-calibration-authorization.json"
+    )
+    auth_sha = auth["authorization_sha256"]
+    receipt = json.loads((archive_dir / "readiness-calibration.json").read_bytes())
+    core = json.loads((archive_dir / "readiness-calibration-core.json").read_bytes())
+    completion = json.loads(
+        (archive_dir / "readiness-calibration-completion.json").read_bytes()
+    )
+    resource = json.loads(
+        (archive_dir / "readiness-calibration-resource-completion.json").read_bytes()
+    )
+    attempt = json.loads(
+        (archive_dir / "readiness-calibration-attempt-state.json").read_bytes()
+    )
+    launch = json.loads(
+        (archive_dir / "readiness-calibration-launch-ledger.json").read_bytes()
+    )
+    for name, payload in (
+        ("receipt", receipt), ("core", core), ("completion", completion),
+        ("resource", resource), ("attempt", attempt), ("launch", launch),
+    ):
+        path = archive_dir / {
+            "receipt": "readiness-calibration.json",
+            "core": "readiness-calibration-core.json",
+            "completion": "readiness-calibration-completion.json",
+            "resource": "readiness-calibration-resource-completion.json",
+            "attempt": "readiness-calibration-attempt-state.json",
+            "launch": "readiness-calibration-launch-ledger.json",
+        }[name]
+        if path.read_bytes() != canonical_json_bytes(payload, pretty=True):
+            raise PermissionError(f"historical root 20261161 {name} is noncanonical")
+    attempt_id = "cal-0553c6434beb9528"
+    if (
+        receipt.get("calibration_root") != HISTORICAL_READINESS_CALIBRATION_ROOT
+        or receipt.get("calibration_authorization_sha256") != auth_sha
+        or core.get("attempt_id") != attempt_id
+        or core.get("authorization", {}).get("authorization_sha256") != auth_sha
+        or completion.get("attempt_id") != attempt_id
+        or completion.get("authorization_sha256") != auth_sha
+        or resource.get("attempt_id") != attempt_id
+        or resource.get("authorization_sha256") != auth_sha
+        or attempt.get("attempt_id") != attempt_id
+        or attempt.get("authorization_sha256") != auth_sha
+        or launch != attempt
+    ):
+        raise PermissionError("historical root 20261161 authorization/attempt crosslink mismatch")
+    completion_artifacts = completion.get("artifacts", {})
+    for name, digest in completion_artifacts.items():
+        if not (archive_dir / name).is_file() or sha256(archive_dir / name) != digest:
+            raise PermissionError("historical root 20261161 completion crosslink mismatch")
+    for name, digest in resource.get("inner_artifacts", {}).items():
+        if not (archive_dir / name).is_file() or sha256(archive_dir / name) != digest:
+            raise PermissionError("historical root 20261161 resource crosslink mismatch")
+    integrity = classification.get("archive_integrity", {})
+    expected_integrity = {
+        "authorization_sha256": auth_sha,
+        "receipt_sha256": sha256(archive_dir / "readiness-calibration.json"),
+        "core_sha256": sha256(archive_dir / "readiness-calibration-core.json"),
+        "resource_completion_sha256": sha256(
+            archive_dir / "readiness-calibration-resource-completion.json"
+        ),
+    }
+    if integrity != expected_integrity:
+        raise PermissionError("historical root 20261161 classification hash crosslink mismatch")
+
+    scratch_manifest = archive_dir / "scratch-files.sha256"
+    scratch_entries = _parse_canonical_sha256sum_manifest(
+        scratch_manifest.read_bytes()
+    )
+    scratch_inventory_raw = (archive_dir / "scratch-inventory.json").read_bytes()
+    scratch_inventory = json.loads(scratch_inventory_raw)
+    if scratch_inventory_raw != canonical_json_bytes(scratch_inventory, pretty=True):
+        raise PermissionError("historical root 20261161 scratch inventory is noncanonical")
+    expected_scratch_scopes = [
+        ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261161",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/launch-mlflow-reverify/c27161cb0f2a46228b94b47362769fb1",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-0553c6434beb9528",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-locks/cal-0553c6434beb9528.lock",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-mlflow/c27161cb0f2a46228b94b47362769fb1",
+    ]
+    scratch_inventory_keys = {
+        "schema_version", "root", "preserved_in_place", "copied_into_archive",
+        "eligible_for_launch", "eligible_for_projection_rates",
+        "eligible_for_cache_reuse", "scopes", "file_count", "total_bytes",
+        "manifest_path", "manifest_format", "manifest_sha256", "manifest_bytes",
+    }
+    if (
+        not isinstance(scratch_inventory, dict)
+        or set(scratch_inventory) != scratch_inventory_keys
+        or scratch_inventory.get("scopes") != expected_scratch_scopes
+        or scratch_inventory.get("manifest_path") != "scratch-files.sha256"
+        or scratch_inventory.get("manifest_format")
+        != "lowercase SHA-256, two ASCII spaces, repository-relative POSIX path, one LF; sorted bytewise by path"
+        or scratch_inventory.get("eligible_for_launch") is not False
+        or scratch_inventory.get("eligible_for_projection_rates") is not False
+        or scratch_inventory.get("eligible_for_cache_reuse") is not False
+        or any(
+            not any(
+                name == scope or name.startswith(f"{scope}/")
+                for scope in expected_scratch_scopes
+            )
+            for name in scratch_entries
+        )
+    ):
+        raise PermissionError("historical root 20261161 scratch inventory scope mismatch")
+    scratch_paths = [repository_root / name for name in scratch_entries]
+    if any(not path.is_file() or path.is_symlink() for path in scratch_paths):
+        raise PermissionError("historical root 20261161 scratch file is absent or linked")
+    if any(sha256(path) != scratch_entries[path.relative_to(repository_root).as_posix()] for path in scratch_paths):
+        raise PermissionError("historical root 20261161 scratch hash mismatch")
+    scratch_bytes = sum(path.stat().st_size for path in scratch_paths)
+    if (
+        scratch_inventory.get("schema_version")
+        != "exp648-readiness-scratch-inventory-v1"
+        or scratch_inventory.get("root") != HISTORICAL_READINESS_CALIBRATION_ROOT
+        or scratch_inventory.get("preserved_in_place") is not True
+        or scratch_inventory.get("copied_into_archive") is not False
+        or scratch_inventory.get("file_count") != 218
+        or scratch_inventory.get("total_bytes") != 24_573_993
+        or len(scratch_entries) != 218
+        or scratch_bytes != 24_573_993
+        or scratch_inventory.get("manifest_sha256") != sha256(scratch_manifest)
+        or scratch_inventory.get("manifest_bytes") != scratch_manifest.stat().st_size
+        or classification.get("scratch_evidence") != {
+            "copied_into_archive": False,
+            "file_count": 218,
+            "preserved_in_place": True,
+            "total_bytes": 24_573_993,
+        }
+    ):
+        raise PermissionError("historical root 20261161 scratch inventory mismatch")
+
+    mlflow_manifest = archive_dir / "mlflow-artifacts.sha256"
+    mlflow_entries = _parse_canonical_sha256sum_manifest(
+        mlflow_manifest.read_bytes()
+    )
+    mlflow_paths = [repository_root / name for name in mlflow_entries]
+    if any(not path.is_file() or path.is_symlink() for path in mlflow_paths):
+        raise PermissionError("historical root 20261161 MLflow artifact is absent or linked")
+    if any(sha256(path) != mlflow_entries[path.relative_to(repository_root).as_posix()] for path in mlflow_paths):
+        raise PermissionError("historical root 20261161 MLflow artifact hash mismatch")
+    mlflow_bytes = sum(path.stat().st_size for path in mlflow_paths)
+    runs_raw = (archive_dir / "mlflow-runs.json").read_bytes()
+    runs = json.loads(runs_raw)
+    if runs_raw != canonical_json_bytes(runs, pretty=True):
+        raise PermissionError("historical root 20261161 MLflow run inventory is noncanonical")
+    expected_ids = {
+        "b49db1ca755e46e6b7b18e9e5c1fb859",
+        "8f887966943d44a3a4bebea6ad5dddb9",
+        "cea11ae498ef4243ac222aa732e8ed06",
+        "f89f15cf84334df9acdc41ca6625b25d",
+        "c27161cb0f2a46228b94b47362769fb1",
+    }
+    run_records = runs.get("runs", [])
+    expected_runs = {
+        "b49db1ca755e46e6b7b18e9e5c1fb859": {
+            "role": "warmup-readiness-probe", "file_count": 6,
+            "total_bytes": 222,
+            "subset_sha256": "389c72890d76ecbb208dc2abd885480c4383d00654c1bc5a123ed3e6fa9b6315",
+        },
+        "8f887966943d44a3a4bebea6ad5dddb9": {
+            "role": "repeat-1-readiness-probe", "file_count": 6,
+            "total_bytes": 234,
+            "subset_sha256": "a72d5c3d52bea4d2892ce5c7d860990375648a784e6a3da7e55fb2fdbda32763",
+        },
+        "cea11ae498ef4243ac222aa732e8ed06": {
+            "role": "repeat-2-readiness-probe", "file_count": 6,
+            "total_bytes": 234,
+            "subset_sha256": "0045c3553553c3f695f6c0528920c2ea438f949e56695590d92a9bd639e80da5",
+        },
+        "f89f15cf84334df9acdc41ca6625b25d": {
+            "role": "repeat-3-readiness-probe", "file_count": 6,
+            "total_bytes": 234,
+            "subset_sha256": "f066bb0ec9948dc0f79e17b8e1adbe7e8ff64e0742c0a01f09c607144fc5e4f1",
+        },
+        "c27161cb0f2a46228b94b47362769fb1": {
+            "role": "readiness-calibration-evidence", "file_count": 3,
+            "total_bytes": 251_638,
+            "subset_sha256": "15332beea79c2e751c5aad266adae96b1a41fca64e3bfd02c9315fbedb089a92",
+        },
+    }
+    mlflow_run_keys = {
+        "run_id", "status", "role", "artifact_directory", "artifact_file_count",
+        "artifact_total_bytes", "artifact_manifest_subset_sha256",
+    }
+    run_inventory_valid = True
+    for record in run_records:
+        run_id = record.get("run_id")
+        expected = expected_runs.get(run_id, {})
+        prefix = f".scratch/mlflow/artifacts/{run_id}"
+        subset = {
+            name: digest for name, digest in mlflow_entries.items()
+            if name.startswith(f"{prefix}/")
+        }
+        subset_raw = "".join(
+            f"{digest}  {name}\n" for name, digest in subset.items()
+        ).encode("utf-8")
+        run_inventory_valid = run_inventory_valid and (
+            set(record) == mlflow_run_keys
+            and record.get("artifact_directory") == prefix
+            and record.get("role") == expected.get("role")
+            and record.get("artifact_file_count") == expected.get("file_count")
+            and record.get("artifact_total_bytes") == expected.get("total_bytes")
+            and record.get("artifact_manifest_subset_sha256")
+            == expected.get("subset_sha256")
+            and len(subset) == expected.get("file_count")
+            and sum((repository_root / name).stat().st_size for name in subset)
+            == expected.get("total_bytes")
+            and sha256_bytes(subset_raw) == expected.get("subset_sha256")
+        )
+    if (
+        runs.get("schema_version") != "exp648-readiness-mlflow-runs-v1"
+        or set(runs) != {
+            "schema_version", "root", "preserved_in_place",
+            "api_requeried_during_archive", "artifact_file_count",
+            "artifact_total_bytes", "artifact_manifest_path",
+            "artifact_manifest_sha256", "artifact_manifest_bytes",
+            "status_source", "runs",
+        }
+        or {record.get("run_id") for record in run_records} != expected_ids
+        or any(record.get("status") != "FINISHED" for record in run_records)
+        or not run_inventory_valid
+        or runs.get("root") != HISTORICAL_READINESS_CALIBRATION_ROOT
+        or runs.get("preserved_in_place") is not True
+        or runs.get("artifact_manifest_path") != "mlflow-artifacts.sha256"
+        or runs.get("artifact_file_count") != 27
+        or runs.get("artifact_total_bytes") != 252_562
+        or len(mlflow_entries) != 27
+        or mlflow_bytes != 252_562
+        or runs.get("artifact_manifest_sha256") != sha256(mlflow_manifest)
+        or runs.get("artifact_manifest_bytes") != mlflow_manifest.stat().st_size
+        or runs.get("api_requeried_during_archive") is not False
+        or classification.get("mlflow_evidence") != {
+            "api_requeried_during_archive": False,
+            "artifact_file_count": 27,
+            "artifact_total_bytes": 252_562,
+            "run_count": 5,
+            "runs_finished": 5,
+        }
+    ):
+        raise PermissionError("historical root 20261161 MLflow inventory mismatch")
+    return {
+        "root": HISTORICAL_READINESS_CALIBRATION_ROOT,
+        "status": classification["status"],
+        "authorization_sha256": auth_sha,
+        "archive_sha256sum_entries": len(archive_entries),
+        "scratch_file_count": len(scratch_entries),
+        "scratch_total_bytes": scratch_bytes,
+        "mlflow_artifact_file_count": len(mlflow_entries),
+        "mlflow_artifact_total_bytes": mlflow_bytes,
+        "eligible_for_launch": False,
+        "eligible_for_projection_rates": False,
+        "eligible_for_cache_reuse": False,
+    }
+
+
 def readiness_calibration_publication_state(
     *, live_receipt: Path = SCREEN_READINESS_CALIBRATION_PATH,
-    superseded_classification: Path = ROOT_20261159_CLASSIFICATION_PATH,
+    superseded_classification: Path = ROOT_20261161_CLASSIFICATION_PATH,
 ) -> dict[str, Any]:
     if live_receipt.is_file():
         return {
             "status": "live-receipt-present",
             "live_receipt_sha256": sha256(live_receipt),
-            "superseded_root_20261159_preserved": superseded_classification.is_file(),
+            "superseded_root_20261161_preserved": superseded_classification.is_file(),
         }
     if not superseded_classification.is_file():
         return {
-            "status": "no-live-receipt-and-no-superseded-classification",
+            "status": "no-live-receipt-and-no-root20261161-classification",
             "live_receipt_sha256": None,
-            "superseded_root_20261159_preserved": False,
+            "superseded_root_20261161_preserved": False,
         }
     raw = superseded_classification.read_bytes()
     try:
@@ -739,9 +1885,9 @@ def readiness_calibration_publication_state(
     if raw != canonical_json_bytes(classification, pretty=True):
         raise PermissionError("superseded readiness classification is noncanonical")
     required = {
-        "schema_version": "exp648-readiness-superseded-classification-v1",
-        "root": 20_261_159,
-        "status": "consumed-complete-components-but-chronology-nonconforming",
+        "schema_version": "exp648-readiness-superseded-classification-v2",
+        "root": HISTORICAL_READINESS_CALIBRATION_ROOT,
+        "status": "consumed-complete-pre-r3-binding-historical-only",
         "superseded": True,
         "eligible_for_launch": False,
         "eligible_for_projection_rates": False,
@@ -752,17 +1898,17 @@ def readiness_calibration_publication_state(
             raise PermissionError(
                 f"superseded readiness classification mismatch for {key}"
             )
-    archived_receipt = ROOT_20261159_SUPERSEDED_DIR / "readiness-calibration.json"
+    archived_receipt = ROOT_20261161_SUPERSEDED_DIR / "readiness-calibration.json"
     if (
         not archived_receipt.is_file()
         or sha256(archived_receipt)
-        != ROOT_20261159_SUPERSEDED_CHARGE["receipt_sha256"]
+        != ROOT_20261161_HISTORICAL_CHARGE["receipt_sha256"]
     ):
         raise PermissionError("superseded readiness receipt preservation mismatch")
     return {
         "status": "superseded-only-no-live-receipt",
         "live_receipt_sha256": None,
-        "superseded_root_20261159_preserved": True,
+        "superseded_root_20261161_preserved": True,
         "classification_sha256": sha256(superseded_classification),
         "superseded_receipt_sha256": sha256(archived_receipt),
     }
@@ -777,14 +1923,20 @@ def verify_readiness_calibration_authorization(
     # environment, model, corpus, output-directory, RNG, root, or MLflow action.
     payload, observed = _read_authenticated_committed_manifest(
         path,
-        expected_schema="exp648-screen-readiness-calibration-authorization-v1",
+        expected_schema="exp648-screen-readiness-calibration-authorization-v2",
         committed_bytes=committed_bytes,
     )
     expected_keys = {
         "schema_version", "experiment_id", "decision", "calibration_root",
-        "approved_base_commit", "scientific_runner_sha256", "scientific_test_sha256",
+        "approved_base_commit", "authorization_source_blob_sha256",
+        "scaffold_provenance_blob_sha256", "scientific_runner_sha256",
+        "scientific_test_sha256",
         "calibration_runner_sha256", "resolved_config_sha256", "executed_config_sha256",
-        "source_checkpoint_sha256", "dependency_manifest_sha256", "approved_runtime_environment", "evaluator_sha256",
+        "preregistration_sha256", "corpus_provenance_amendment_sha256",
+        "root20261161_classification_sha256",
+        "frozen_corpus_file_bindings_sha256", "source_checkpoint_sha256",
+        "dependency_manifest_sha256", "approved_runtime_environment",
+        "calibration_segment_evaluator_sha256", "screen_evaluator_sha256",
         "exact_teacher_source_sha256", "scientific_protocol_sha256",
         "resource_protocol_sha256", "screen_workload_sha256", "corpus_manifest_sha256",
         "screen_roots_authorized", "scientific_accuracy_or_selection_authorized",
@@ -799,11 +1951,9 @@ def verify_readiness_calibration_authorization(
     }
     allowed_root = (
         root == PREREGISTERED_READINESS_CALIBRATION_ROOT
-        or (root == HISTORICAL_READINESS_CALIBRATION_ROOT and not launch)
         or (root == TEST_ONLY_ROOT and allow_test_root)
     )
-    historically_verifiable = root == HISTORICAL_READINESS_CALIBRATION_ROOT and not launch
-    if (root in prohibited and not historically_verifiable) or root <= 0 or not allowed_root:
+    if root in prohibited or root <= 0 or not allowed_root:
         raise PermissionError("calibration authorization root is reused, test-only, or prohibited")
     if payload["decision"] != "authorize-non-scientific-screen-readiness-calibration-only":
         raise PermissionError("calibration authorization decision mismatch")
@@ -835,7 +1985,7 @@ def verify_screen_readiness_calibration(
     if raw != canonical_json_bytes(payload, pretty=True):
         raise PermissionError("screen readiness calibration receipt is noncanonical")
     required = {
-        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "schema_version": "exp648-screen-readiness-calibration-v2",
         "status": "complete-non-scientific-full-fidelity-resource-calibration",
         "scientific_runner_sha256": sha256(Path(__file__)),
         "resolved_config_sha256": sha256(CONFIG_PATH),
@@ -848,11 +1998,7 @@ def verify_screen_readiness_calibration(
         if payload.get(key) != value:
             raise PermissionError(f"screen readiness calibration mismatch for {key}")
     root = int(payload.get("calibration_root", -1))
-    if root <= 0 or root in {
-        CALIBRATION_ROOT, CORPUS_ROOT, SCREEN_TRAINING_ROOT, SCREEN_EVALUATION_ROOT,
-        EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
-        *CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS,
-    }:
+    if root != PREREGISTERED_READINESS_CALIBRATION_ROOT:
         raise PermissionError("fresh screen calibration root is absent, reused, or prohibited")
     if not isinstance(payload.get("calibration_authorization_sha256"), str) or len(payload["calibration_authorization_sha256"]) != 64:
         raise PermissionError("screen calibration lacks separate authorization binding")
@@ -970,42 +2116,91 @@ def verify_screen_readiness_calibration(
     return verified
 
 
-def _calibration_component_rates(repeats: Sequence[dict[str, Any]]) -> dict[str, Any]:
+def _calibration_component_rates(
+    repeats: Sequence[dict[str, Any]],
+    *, config_override: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if len(repeats) != 3:
         raise RuntimeError("readiness calibration requires exactly three timed repeats")
+    schedule = screen_execution_schedule(config_override=config_override)
+    representative = schedule["calibration_representative_segment"]
+    for repeat in repeats:
+        infrastructure = repeat["components"]["readiness_infrastructure"]
+        validate_shape_matched_evaluation_cache_profile(
+            infrastructure.get("evaluation_cache_profile"), schedule
+        )
+        complete_cache_timing = infrastructure["component_timing"][
+            "evaluation_cache"
+        ]
+        profile_timing = infrastructure["evaluation_cache_profile"][
+            "timing_breakdown"
+        ]
+        nested_cache_timing = aggregate_readiness_timing(
+            profile_timing[
+                "fixture_construction_and_semantic_validation"
+            ],
+            profile_timing["fresh_cache_serialization"],
+            profile_timing["recovery_validation"],
+        )
+        if any(
+            float(complete_cache_timing[resource]) + 1e-9
+            < float(nested_cache_timing[resource])
+            for resource in ("wall_seconds", "aggregate_cpu_seconds")
+        ) or int(complete_cache_timing["peak_rss_bytes"]) < int(
+            nested_cache_timing["peak_rss_bytes"]
+        ):
+            raise RuntimeError(
+                "shape-matched cache complete timing omits profiled work"
+            )
+        full_set_timing = profile_timing["complete_evaluation_unit_set"]
+        if any(
+            float(complete_cache_timing[resource]) + 1e-9
+            < float(full_set_timing[resource])
+            for resource in ("wall_seconds", "aggregate_cpu_seconds")
+        ) or int(complete_cache_timing["peak_rss_bytes"]) < int(
+            full_set_timing["peak_rss_bytes"]
+        ):
+            raise RuntimeError(
+                "shape-matched cache complete timing omits full-set timing"
+            )
     rates: dict[str, Any] = {}
     for resource in ("wall_seconds", "aggregate_cpu_seconds"):
         rates[resource] = {
             "startup": max(float(r["components"]["startup_model_loading"]["timing"][resource]) for r in repeats),
-            "mining_per_pair": max(float(r["components"]["mining"]["timing"][resource]) / 64 for r in repeats),
-            "semantic_replay_per_window": max(float(r["components"]["corpus_integrity_validation"]["timing"][resource]) / 128 for r in repeats),
-            "actual_source_replay_per_complete_identity": max(float(r["components"]["actual_source_replay"]["timing"][resource]) / 64 for r in repeats),
+            "mining_per_pair": max(float(r["components"]["mining"]["timing"][resource]) / representative["mining_matched_pairs"] for r in repeats),
+            "semantic_replay_per_window": max(float(r["components"]["corpus_integrity_validation"]["timing"][resource]) / representative["semantic_replay_windows"] for r in repeats),
+            "actual_source_replay_per_complete_identity": max(float(r["components"]["actual_source_replay"]["timing"][resource]) / representative["source_replay_identities"] for r in repeats),
             "training_per_update_slower_arm": max(
-                float(r["components"]["training"][arm]["timing"][resource]) / 20
-                for r in repeats for arm in ("control", "challenger")
+                float(r["components"]["training"][arm]["timing"][resource])
+                / representative["training_updates_per_arm"]
+                for r in repeats for arm in schedule["arm_names"]
             ),
             "checkpoint_per_write_slower_arm": max(
                 float(r["components"]["checkpoint"][arm]["timing"][resource])
-                for r in repeats for arm in ("control", "challenger")
+                for r in repeats for arm in schedule["arm_names"]
             ),
             "transition_per_case": {
                 str(width): max(
-                    float(r["components"]["transitions"][arm][str(width)]["timing"][resource]) / 200
-                    for r in repeats for arm in ("control", "challenger")
-                ) for width in (128, 256)
+                    float(r["components"]["transitions"][arm][str(width)]["timing"][resource])
+                    / int(cases)
+                    for r in repeats for arm in schedule["arm_names"]
+                ) for width, cases in representative["transition_cases_per_arm"].items()
             },
             "rollout_per_case": {
                 str(width): max(
-                    float(r["components"]["rollouts"][arm][str(width)]["timing"][resource]) / 20
-                    for r in repeats for arm in ("control", "challenger")
-                ) for width in (64, 128, 256)
+                    float(r["components"]["rollouts"][arm][str(width)]["timing"][resource])
+                    / int(cases)
+                    for r in repeats for arm in schedule["arm_names"]
+                ) for width, cases in representative["rollout_cases_per_arm"].items()
             },
             "serialization": max(float(r["components"]["hash_serialization"]["timing"][resource]) for r in repeats),
             "readiness_infrastructure_complete_unit": max(float(r["components"]["readiness_infrastructure"]["timing"][resource]) for r in repeats),
-            "attempt_ledger_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["attempt_ledger"][resource]) / 213 for r in repeats),
-            "evaluation_cache_per_unit": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["evaluation_cache"][resource]) / 7 for r in repeats),
-            "atomic_evidence_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["atomic_evidence"][resource]) / 19 for r in repeats),
+            "scientific_attempt_ledger_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["scientific_attempt_ledger"][resource]) / schedule["scientific_attempt_ledger"]["atomic_writes"] for r in repeats),
+            "outer_launch_ledger_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["outer_launch_ledger"][resource]) / schedule["outer_launch_ledger"]["atomic_writes"] for r in repeats),
+            "evaluation_cache_complete_profiled_set": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["evaluation_cache"][resource]) for r in repeats),
+            "atomic_evidence_per_write": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["atomic_evidence"][resource]) / schedule["atomic_evidence_writes"] for r in repeats),
             "atomic_checkpoint_reload_both": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["atomic_checkpoints"][resource]) for r in repeats),
+            "matched_work_complete_schedule": max(float(r["components"]["readiness_infrastructure"]["component_timing"]["matched_work"][resource]) for r in repeats),
             "mlflow_remote_six_artifact_probe": max(float(r["components"]["mlflow_probe"]["timing"][resource]) for r in repeats),
         }
     return rates
@@ -1014,26 +2209,44 @@ def _calibration_component_rates(repeats: Sequence[dict[str, Any]]) -> dict[str,
 def resolve_readiness_screen_budgets(
     repeats: Sequence[dict[str, Any]], launcher: dict[str, Any],
     warmup: dict[str, Any] | None = None,
+    *, config_override: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    rates = _calibration_component_rates(repeats)
+    rates = _calibration_component_rates(
+        repeats, config_override=config_override
+    )
+    workload = screen_workload_payload(config_override=config_override)
+    schedule = workload["execution_schedule"]
     resolved: dict[str, Any] = {}
     quarter: dict[str, Any] = {}
     components_by_resource: dict[str, Any] = {}
     for resource in ("wall_seconds", "aggregate_cpu_seconds"):
         rate = rates[resource]
+        transition_fallback = max(rate["transition_per_case"].values())
+        rollout_fallback = max(rate["rollout_per_case"].values())
         components = {
             "launcher_import_authorization_environment": float(launcher[resource]),
             "startup": rate["startup"],
-            "frozen_corpus_source_replay": rate["actual_source_replay_per_complete_identity"] * 736,
-            "training_both_arms": rate["training_per_update_slower_arm"] * 200 * 2,
-            "checkpoints_both_arms": rate["checkpoint_per_write_slower_arm"] * 2,
-            "transitions_both_arms": sum(rate["transition_per_case"][str(w)] * 2000 * 2 for w in (128, 256)),
-            "rollouts_both_arms": sum(rate["rollout_per_case"][str(w)] * 200 * 2 for w in (64, 128, 256)),
-            "exact_repeat_both_passes_both_arms": rate["rollout_per_case"]["256"] * 20 * 2 * 2,
-            "attempt_ledger_213_writes": rate["attempt_ledger_per_write"] * 213,
-            "evaluation_cache_7_write_validate_units": rate["evaluation_cache_per_unit"] * 7,
-            "atomic_evidence_19_writes": rate["atomic_evidence_per_write"] * 19,
+            "frozen_corpus_source_replay": rate["actual_source_replay_per_complete_identity"] * int(workload["frozen_corpus_semantic_replay"]["identity_trajectories"]),
+            "training_both_arms": rate["training_per_update_slower_arm"] * schedule["updates_per_arm"] * schedule["arm_count"],
+            "checkpoints_both_arms": rate["checkpoint_per_write_slower_arm"] * schedule["checkpoint_save_reload_verifications"],
+            "transitions_both_arms": sum(
+                rate["transition_per_case"].get(str(unit["width"]), transition_fallback)
+                * int(unit["cases"]) * schedule["arm_count"]
+                for unit in schedule["evaluation_units"]
+                if unit["mode"] == "transition"
+            ),
+            "rollouts_both_arms": sum(
+                rate["rollout_per_case"].get(str(unit["width"]), rollout_fallback)
+                * int(unit["cases"]) * schedule["arm_count"]
+                for unit in schedule["evaluation_units"]
+                if unit["mode"] == "rollout"
+            ),
+            "scientific_attempt_ledger_writes": rate["scientific_attempt_ledger_per_write"] * schedule["scientific_attempt_ledger"]["atomic_writes"],
+            "outer_launch_ledger_writes": rate["outer_launch_ledger_per_write"] * schedule["outer_launch_ledger"]["atomic_writes"],
+            "evaluation_cache_shape_matched_complete_set": rate["evaluation_cache_complete_profiled_set"],
+            "atomic_evidence_writes": rate["atomic_evidence_per_write"] * schedule["atomic_evidence_writes"],
             "atomic_checkpoint_reload_verification": rate["atomic_checkpoint_reload_both"],
+            "matched_work_exact_full_schedule": rate["matched_work_complete_schedule"],
             "verified_remote_mlflow_six_artifact_run": rate["mlflow_remote_six_artifact_probe"],
         }
         projection = sum(components.values())
@@ -1053,8 +2266,11 @@ def resolve_readiness_screen_budgets(
         quarter_expected = (
             components["launcher_import_authorization_environment"] + components["startup"]
             + components["frozen_corpus_source_replay"]
-            + rate["training_per_update_slower_arm"] * 50 * 2
-            + rate["attempt_ledger_per_write"] * 54
+            + rate["training_per_update_slower_arm"] * schedule["scientific_attempt_ledger"]["completed_arm_updates_before_first_quarter_guard"]
+            + rate["scientific_attempt_ledger_per_write"] * schedule["scientific_attempt_ledger"]["writes_before_first_quarter_guard"]
+            + rate["outer_launch_ledger_per_write"] * schedule["outer_launch_ledger"]["writes_before_first_quarter_guard"]
+            + rate["matched_work_complete_schedule"]
+            * schedule["quarter_updates_per_arm"] / schedule["updates_per_arm"]
         )
         quarter[resource] = {"expected_elapsed_seconds": quarter_expected}
         components_by_resource[resource] = components
@@ -1069,6 +2285,37 @@ def resolve_readiness_screen_budgets(
     resolved["first_quarter_checkpoint"] = quarter
     return resolved, {
         "rates": rates, "projected_components": components_by_resource,
+        "projection_denominators": {
+            "arm_count": schedule["arm_count"],
+            "updates_per_arm": schedule["updates_per_arm"],
+            "quarter_updates_per_arm": schedule["quarter_updates_per_arm"],
+            "total_arm_updates": schedule["scientific_attempt_ledger"][
+                "total_arm_updates"
+            ],
+            "first_quarter_completed_arm_updates": schedule[
+                "scientific_attempt_ledger"
+            ]["completed_arm_updates_before_first_quarter_guard"],
+            "scientific_attempt_ledger_writes": schedule[
+                "scientific_attempt_ledger"
+            ]["atomic_writes"],
+            "first_quarter_scientific_attempt_ledger_writes": schedule[
+                "scientific_attempt_ledger"
+            ]["writes_before_first_quarter_guard"],
+            "outer_launch_ledger_writes": schedule["outer_launch_ledger"][
+                "atomic_writes"
+            ],
+            "first_quarter_outer_launch_ledger_writes": schedule[
+                "outer_launch_ledger"
+            ]["writes_before_first_quarter_guard"],
+            "evaluation_cache_profiled_unit_count": schedule[
+                "evaluation_cache_write_validate_units"
+            ],
+            "evaluation_units": copy.deepcopy(schedule["evaluation_units"]),
+            "checkpoint_save_reload_verifications": schedule[
+                "checkpoint_save_reload_verifications"
+            ],
+            "atomic_evidence_writes": schedule["atomic_evidence_writes"],
+        },
         "rss_peak_inputs_bytes": peak_candidates,
         "rss_peak_max_bytes": peak,
         "superseded_rate_exclusions": {
@@ -1177,6 +2424,39 @@ def readiness_accounting_decomposition() -> dict[str, Any]:
             "aggregate_cpu_seconds"
         ],
     }
+
+
+def readiness_root20261162_cumulative_budget_contract() -> dict[str, Any]:
+    resolved: dict[str, Any] = {
+        "formula": READINESS_ROOT20261162_PLANNING_INPUTS["formula"],
+        "carried_charge_applied_exactly_once": True,
+        "root20261161_rates_executable": False,
+        "root20261161_caches_executable": False,
+        "fidelity_cap": False,
+        "scientific_gate": False,
+        "per_attempt_target": False,
+    }
+    for resource in ("wall_seconds", "aggregate_cpu_seconds"):
+        inputs = READINESS_ROOT20261162_PLANNING_INPUTS[resource]
+        computed = READINESS_CARRIED_CHARGE[resource] + 1.5 * (
+            1.25 * inputs["representative_full_screen_seconds"]
+            + inputs["explicit_setup_seconds"]
+        )
+        if not math.isclose(
+            computed, inputs["formula_result_seconds"], rel_tol=0, abs_tol=1e-12
+        ):
+            raise RuntimeError(f"root 20261162 {resource} budget formula drift")
+        ceiling = READINESS_CUMULATIVE_RUNAWAY_CEILINGS[resource]
+        if (
+            ceiling != inputs["independently_rounded_cumulative_ceiling_seconds"]
+            or ceiling < computed
+        ):
+            raise RuntimeError(f"root 20261162 {resource} cumulative ceiling drift")
+        resolved[resource] = {
+            "new_carried_charge_seconds": READINESS_CARRIED_CHARGE[resource],
+            **copy.deepcopy(inputs),
+        }
+    return resolved
 
 
 def observed_readiness_recovery(
@@ -1510,11 +2790,18 @@ def validate_readiness_calibration_receipt(
     }
     if set(payload) != required:
         raise RuntimeError("readiness calibration receipt key schema mismatch")
-    if payload["schema_version"] != "exp648-screen-readiness-calibration-v1" or payload["warmups"] != 1 or payload["timed_repeats"] != 3:
+    if payload["schema_version"] != "exp648-screen-readiness-calibration-v2" or payload["warmups"] != 1 or payload["timed_repeats"] != 3:
         raise RuntimeError("readiness calibration repetition/schema mismatch")
     repeats = payload["repeats"]
     if len(repeats) != 3 or any(r.get("complete") is not True for r in repeats):
         raise RuntimeError("readiness calibration repeats incomplete")
+    if any(
+        record.get("reused_from_augmented_cache") is not False
+        or record.get("augmented_cache_path") is not None
+        for record in [payload.get("warmup", {}), *repeats]
+    ):
+        raise RuntimeError("readiness calibration must use four fresh segments")
+    schedule = screen_execution_schedule()
     validate_readiness_chronology(payload)
     for repeat in repeats:
         validate_complete_readiness_timing(repeat)
@@ -1537,7 +2824,39 @@ def validate_readiness_calibration_receipt(
                 if components.get("rollouts", {}).get(arm, {}).get(str(width), {}).get("cases") != 20:
                     raise RuntimeError("readiness calibration rollout workload mismatch")
         infra = components.get("readiness_infrastructure", {})
-        if infra.get("atomic_checkpoint_writes_and_reload_verifications") != 2 or infra.get("atomic_attempt_ledger_writes") != 213 or infra.get("evaluation_cache_write_validate_units") != 7 or infra.get("atomic_evidence_writes") != 19 or set(infra.get("component_timing", {})) != {"atomic_checkpoints", "attempt_ledger", "evaluation_cache", "atomic_evidence"} or infra.get("complete") is not True:
+        validate_shape_matched_evaluation_cache_profile(
+            infra.get("evaluation_cache_profile"), schedule
+        )
+        if (
+            infra.get("execution_schedule_sha256")
+            != sha256_bytes(canonical_json_bytes(schedule))
+            or infra.get("atomic_checkpoint_writes_and_reload_verifications")
+            != schedule["checkpoint_save_reload_verifications"]
+            or infra.get("scientific_attempt_ledger_atomic_writes")
+            != schedule["scientific_attempt_ledger"]["atomic_writes"]
+            or infra.get("outer_launch_ledger_atomic_writes")
+            != schedule["outer_launch_ledger"]["atomic_writes"]
+            or infra.get("total_screen_ledger_atomic_writes")
+            != schedule["total_screen_ledger_atomic_writes"]
+            or infra.get("evaluation_cache_write_validate_units")
+            != schedule["evaluation_cache_write_validate_units"]
+            or infra.get("atomic_evidence_writes")
+            != schedule["atomic_evidence_writes"]
+            or infra.get("first_quarter_scientific_ledger_writes")
+            != schedule["scientific_attempt_ledger"][
+                "writes_before_first_quarter_guard"
+            ]
+            or infra.get("matched_work_schedule_valid") is not True
+            or not isinstance(infra.get("matched_work_receipt_sha256"), str)
+            or len(infra["matched_work_receipt_sha256"]) != 64
+            or set(infra.get("component_timing", {}))
+            != {
+                "atomic_checkpoints", "scientific_attempt_ledger",
+                "outer_launch_ledger", "evaluation_cache", "atomic_evidence",
+                "matched_work",
+            }
+            or infra.get("complete") is not True
+        ):
             raise RuntimeError("readiness calibration infrastructure workload mismatch")
         replay = components.get("actual_source_replay", {})
         if replay.get("complete_identities") != 64 or replay.get("steps_per_identity") != 256 or replay.get("complete_steps") != 16_384 or replay.get("actual_rollout_identity_batch_path") is not True or replay.get("complete") is not True:
@@ -1556,7 +2875,20 @@ def validate_readiness_calibration_receipt(
     if warmup_probe.get("complete") is not True or warmup_probe.get("artifact_count") != 6 or warmup_probe.get("remote_verified") is not True:
         raise RuntimeError("readiness calibration warmup MLflow probe mismatch")
     warmup_infra = warmup.get("readiness_infrastructure", {})
-    if warmup_infra.get("complete") is not True:
+    validate_shape_matched_evaluation_cache_profile(
+        warmup_infra.get("evaluation_cache_profile"), schedule
+    )
+    if (
+        warmup_infra.get("complete") is not True
+        or warmup_infra.get("execution_schedule_sha256")
+        != sha256_bytes(canonical_json_bytes(schedule))
+        or warmup_infra.get("scientific_attempt_ledger_atomic_writes")
+        != schedule["scientific_attempt_ledger"]["atomic_writes"]
+        or warmup_infra.get("outer_launch_ledger_atomic_writes")
+        != schedule["outer_launch_ledger"]["atomic_writes"]
+        or warmup_infra.get("atomic_evidence_writes")
+        != schedule["atomic_evidence_writes"]
+    ):
         raise RuntimeError("readiness calibration warmup infrastructure mismatch")
     expected_budgets, expected_components = resolve_readiness_screen_budgets(
         repeats, payload["warmup"]["launcher_timing"], payload["warmup"]
@@ -1598,8 +2930,8 @@ def validate_readiness_calibration_receipt(
     expected_orchestration = {
         "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
         "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
-        "old_base_only_cache_loaded_or_saved": False,
-        "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+        "pre_r3_or_same_root_cache_loaded_or_saved": False,
+        "fresh_warmup_and_three_fresh_representative_repeats": True,
         "carried_charge_applied_exactly_once": True,
         "guard_carried_wall_seconds": (
             READINESS_CARRIED_CHARGE["wall_seconds"]
@@ -1613,11 +2945,7 @@ def validate_readiness_calibration_receipt(
         "guard_configured_aggregate_cpu_ceiling_seconds": READINESS_CUMULATIVE_RUNAWAY_CEILINGS[
             "aggregate_cpu_seconds"
         ],
-        "reused_complete_augmented_repeat_indices": [
-            int(record["repeat_index"])
-            for record in repeats
-            if record.get("reused_from_augmented_cache") is True
-        ],
+        "reused_complete_augmented_repeat_indices": [],
         "all_augmented_units_validated_and_sealed_before_next_start": True,
     }
     if recovery.get("augmented_unit_orchestration") != expected_orchestration:
@@ -1753,9 +3081,952 @@ def verify_readiness_calibration_mlflow_at_launch(
             raise PermissionError(f"fresh calibration MLflow launch artifact mismatch: {remote_name}")
 
 
-def measure_readiness_infrastructure_unit(
-    repeat: dict[str, Any], output: Path, process: Any
+def _exercise_calibration_matched_work_schedule(
+    config: dict[str, Any],
 ) -> dict[str, Any]:
+    schedule = screen_execution_schedule(config_override=config)
+    accounting = create_matched_work_accounting()
+    updates = int(schedule["updates_per_arm"])
+    training_declared_per_update = schedule[
+        "per_arm_training_declared_per_update"
+    ]
+    actual_contract = schedule["per_arm_actual_operation_contract"]
+    for update in range(updates):
+        for arm in schedule["arm_names"]:
+            for category, count in training_declared_per_update.items():
+                record_matched_work(
+                    accounting, arm, category, count, unit=f"training-{update}"
+                )
+            for operation, count in actual_contract["training_per_update"].items():
+                record_actual_matched_work(
+                    accounting, arm, operation, count,
+                    unit=f"training-{update}",
+                )
+    for arm in schedule["arm_names"]:
+        for category, count in schedule["per_arm_checkpoint_declared"].items():
+            record_matched_work(
+                accounting, arm, category, count, unit="checkpoint"
+            )
+        for operation, count in actual_contract["checkpoint"].items():
+            record_actual_matched_work(
+                accounting, arm, operation, count, unit="checkpoint"
+            )
+    for specification in schedule["evaluation_units"]:
+        unit = str(specification["unit"])
+        width = int(specification["width"])
+        count = int(specification["cases"])
+        record_evaluation_matched_work(
+            accounting, unit, width, expected_count=count
+        )
+        for arm in schedule["arm_names"]:
+            for operation, operation_count in actual_contract[
+                "fresh_evaluation_per_unit"
+            ].items():
+                record_actual_matched_work(
+                    accounting, arm, operation, operation_count, unit=unit
+                )
+    receipt = finalize_matched_work(
+        accounting, expected_schedule=schedule
+    )
+    if receipt["valid"] is not True:
+        raise RuntimeError("calibration matched-work schedule exercise failed")
+    return receipt
+
+
+def _shape_matched_evaluation_cache_payload(
+    specification: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Build a deterministic wide-integer resource-calibration fixture.
+
+    This is an offline, non-scientific profiling path.  It uses the frozen exact
+    teacher only to make semantic validation possible; it never calls a model or
+    evaluator, opens a root/RNG/data surface, or enters submission inference.
+    """
+    required = {
+        "unit", "mode", "width", "cases",
+        "prediction_trace_rows_per_arm",
+        "prediction_trace_elements_per_arm",
+        "teacher_trace_elements_per_arm",
+    }
+    if not isinstance(specification, dict) or set(specification) != required:
+        raise RuntimeError("shape-matched evaluation unit schema mismatch")
+    mode = specification["mode"]
+    width = int(specification["width"])
+    count = int(specification["cases"])
+    if mode not in ("transition", "rollout") or width < 16 or count <= 0:
+        raise RuntimeError("shape-matched evaluation unit dimensions are invalid")
+    modulus = (1 << width) - 159
+    base = 1 << (width - 1)
+    if mode == "transition":
+        if any(
+            specification[key] != 0
+            for key in (
+                "prediction_trace_rows_per_arm",
+                "prediction_trace_elements_per_arm",
+                "teacher_trace_elements_per_arm",
+            )
+        ):
+            raise RuntimeError("transition cache unit incorrectly declares rollout traces")
+        offset_bound = min(1_024, modulus - base - 1)
+        states = [base + (index % offset_bound) for index in range(count)]
+        multiplicands = [
+            base + ((index * 3) % offset_bound) for index in range(count)
+        ]
+        bits = [1 for _ in range(count)]
+        labels = [
+            cal.exact_teacher_step(state, multiplicand, modulus, bit)
+            for state, multiplicand, bit in zip(
+                states, multiplicands, bits, strict=True
+            )
+        ]
+        targets = [value[0] for value in labels]
+        quotients = [value[1] for value in labels]
+        cases = {
+            "state": states,
+            "multiplicand": multiplicands,
+            "modulus": [modulus + (index & 0) for index in range(count)],
+            "input_bit": bits,
+            "target": targets,
+            "quotient": quotients,
+        }
+        result = {
+            "cases": count,
+            "exact_accuracy": 1.0,
+            "quotient_accuracy": 1.0,
+            "valid_residue_rate": 1.0,
+            "exact_vector": [True] * count,
+            "output_sha256": sha256_bytes(canonical_json_bytes(targets)),
+            "predictions": [value + 0 for value in targets],
+            "quotient_predictions": list(quotients),
+        }
+    else:
+        rows = width + 1
+        elements = rows * count
+        if (
+            specification["prediction_trace_rows_per_arm"] != rows
+            or specification["prediction_trace_elements_per_arm"] != elements
+            or specification["teacher_trace_elements_per_arm"] != elements
+        ):
+            raise RuntimeError("rollout cache unit trace shape mismatch")
+        cases = {
+            "multiplier": [base + (index & 0) for index in range(count)],
+            "multiplicand": [
+                modulus - (1 + (index & 0)) for index in range(count)
+            ],
+            "modulus": [modulus + (index & 0) for index in range(count)],
+        }
+        teacher = [0 for _ in range(count)]
+        teacher_trace = [list(teacher)]
+        for position in range(width):
+            bits = [
+                (value >> (width - 1 - position)) & 1
+                for value in cases["multiplier"]
+            ]
+            teacher = [
+                cal.exact_teacher_step(previous, multiplicand, case_modulus, bit)[0]
+                for previous, multiplicand, case_modulus, bit in zip(
+                    teacher, cases["multiplicand"], cases["modulus"], bits,
+                    strict=True,
+                )
+            ]
+            teacher_trace.append(list(teacher))
+        prediction_trace = [
+            [value + 0 for value in row] for row in teacher_trace
+        ]
+        predictions = list(prediction_trace[-1])
+        teacher_targets = list(teacher_trace[-1])
+        result = {
+            "cases": count,
+            "exact_accuracy": 1.0,
+            "exact_vector": [True] * count,
+            "mean_clipped_first_error_index": float(rows),
+            "invalid_rollout_rate": 0.0,
+            "output_sha256": sha256_bytes(canonical_json_bytes(predictions)),
+            "prediction_trace_sha256": sha256_bytes(
+                canonical_json_bytes(prediction_trace)
+            ),
+            "predictions": predictions,
+            "teacher_targets": teacher_targets,
+            "first_error_indices": [rows] * count,
+            "any_intermediate_invalid_vector": [False] * count,
+            "prediction_trace": prediction_trace,
+            "teacher_trace": teacher_trace,
+        }
+    results = {
+        arm: _clone_shape_matched_profile_value(result)
+        for arm in ("control", "challenger")
+    }
+    validate_evaluation_results(
+        unit=str(specification["unit"]), width=width,
+        cases=cases, results=results,
+    )
+    return cases, results
+
+
+def _clone_shape_matched_profile_value(value: Any) -> Any:
+    """Clone containers and allocate distinct large integers for RSS fidelity."""
+    if type(value) is int:
+        return value + 0
+    if isinstance(value, list):
+        return [_clone_shape_matched_profile_value(item) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: _clone_shape_matched_profile_value(item)
+            for key, item in value.items()
+        }
+    return copy.deepcopy(value)
+
+
+def _shape_matched_value_field_roles(
+    specification: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    count = int(specification["cases"])
+    width = int(specification["width"])
+    mode = specification["mode"]
+    roles: dict[str, dict[str, Any]] = {}
+
+    def width_field(
+        name: str, *, expected_zeros: int = 0,
+        expected_count: int = count,
+    ) -> None:
+        roles[name] = {
+            "role": "width-bearing-integer",
+            "expected_integer_count": expected_count,
+            "expected_schema_zero_count": expected_zeros,
+            "maximum_schema_value": (1 << width) - 1,
+        }
+
+    def small_field(
+        name: str, maximum: int, *, expected_count: int = count,
+    ) -> None:
+        roles[name] = {
+            "role": "naturally-small-schema-integer",
+            "expected_integer_count": expected_count,
+            "expected_schema_zero_count": None,
+            "maximum_schema_value": maximum,
+        }
+
+    if mode == "transition":
+        for name in ("state", "multiplicand", "modulus", "target"):
+            width_field(f"cases.{name}")
+        small_field("cases.input_bit", 1)
+        small_field("cases.quotient", 2)
+        for arm in ("control", "challenger"):
+            width_field(f"results.{arm}.predictions")
+            small_field(f"results.{arm}.quotient_predictions", 2)
+    elif mode == "rollout":
+        for name in ("multiplier", "multiplicand", "modulus"):
+            width_field(f"cases.{name}")
+        for arm in ("control", "challenger"):
+            width_field(f"results.{arm}.predictions")
+            width_field(f"results.{arm}.teacher_targets")
+            width_field(
+                f"results.{arm}.prediction_trace", expected_zeros=count,
+                expected_count=(width + 1) * count,
+            )
+            width_field(
+                f"results.{arm}.teacher_trace", expected_zeros=count,
+                expected_count=(width + 1) * count,
+            )
+            small_field(f"results.{arm}.first_error_indices", width + 1)
+    else:
+        raise RuntimeError("shape-matched value-width mode mismatch")
+    return roles
+
+
+def _shape_matched_integer_field_values(
+    specification: dict[str, Any], cases: dict[str, Any],
+    results: dict[str, Any],
+) -> dict[str, list[int]]:
+    roles = _shape_matched_value_field_roles(specification)
+
+    def resolve(name: str) -> Any:
+        parts = name.split(".")
+        value: Any = cases if parts[0] == "cases" else results
+        for part in parts[1:]:
+            value = value[part]
+        return value
+
+    def flatten(value: Any) -> list[int]:
+        if type(value) is int:
+            return [value]
+        if isinstance(value, list):
+            flattened: list[int] = []
+            for item in value:
+                flattened.extend(flatten(item))
+            return flattened
+        raise RuntimeError("shape-matched value-width field is not integer/list")
+
+    return {name: flatten(resolve(name)) for name in roles}
+
+
+def _integer_width_distribution(values: Sequence[int]) -> dict[str, Any]:
+    if not values or any(type(value) is not int or value < 0 for value in values):
+        raise RuntimeError("shape-matched value-width integers are invalid")
+    bit_histogram: dict[str, int] = {}
+    digit_histogram: dict[str, int] = {}
+    for value in values:
+        bit_key = str(value.bit_length())
+        digit_key = str(len(str(value)))
+        bit_histogram[bit_key] = bit_histogram.get(bit_key, 0) + 1
+        digit_histogram[digit_key] = digit_histogram.get(digit_key, 0) + 1
+    nonzero = [value for value in values if value]
+    return {
+        "count": len(values),
+        "zero_count": len(values) - len(nonzero),
+        "nonzero_count": len(nonzero),
+        "minimum_value": min(values),
+        "maximum_value": max(values),
+        "minimum_nonzero_bit_length": (
+            min(value.bit_length() for value in nonzero) if nonzero else None
+        ),
+        "maximum_bit_length": max(value.bit_length() for value in values),
+        "minimum_decimal_digits": min(len(str(value)) for value in values),
+        "maximum_decimal_digits": max(len(str(value)) for value in values),
+        "bit_length_histogram": bit_histogram,
+        "decimal_digit_histogram": digit_histogram,
+    }
+
+
+def _shape_matched_value_width_contract(
+    specification: dict[str, Any], cases: dict[str, Any],
+    results: dict[str, Any],
+) -> dict[str, Any]:
+    width = int(specification["width"])
+    roles = _shape_matched_value_field_roles(specification)
+    values = _shape_matched_integer_field_values(specification, cases, results)
+    fields = {}
+    for name, role in roles.items():
+        distribution = _integer_width_distribution(values[name])
+        fields[name] = {**role, **distribution}
+    width_fields = [
+        field for field in fields.values()
+        if field["role"] == "width-bearing-integer"
+    ]
+    small_fields = [
+        field for field in fields.values()
+        if field["role"] == "naturally-small-schema-integer"
+    ]
+    contract = {
+        "schema_version": "exp648-cache-value-width-contract-v1",
+        "target_width_bits": width,
+        "target_width_decimal_digits": len(str((1 << width) - 1)),
+        "minimum_width_bearing_nonzero_bit_length": width - 1,
+        "fixture_construction": {
+            "modulus": "(1 << width) - 159",
+            "base": "1 << (width - 1)",
+            "transition": (
+                "base-plus-bounded-offset state/multiplicand; input bit one; "
+                "target and quotient from frozen exact_teacher_step"
+            ),
+            "rollout": (
+                "multiplier=base; multiplicand=modulus-1; complete teacher "
+                "trajectory from frozen exact_teacher_step; prediction trace "
+                "is a separately allocated exact copy"
+            ),
+        },
+        "construction_scope": {
+            "resource_calibration_only": True,
+            "offline_exact_teacher_labels_only": True,
+            "model_or_evaluator_called": False,
+            "root_rng_or_data_opened": False,
+            "submission_inference_path": False,
+            "scientific_accuracy_or_selection_evidence": False,
+        },
+        "fields": fields,
+        "summary": {
+            "field_count": len(fields),
+            "width_bearing_field_count": len(width_fields),
+            "naturally_small_field_count": len(small_fields),
+            "integer_count": sum(field["count"] for field in fields.values()),
+            "width_bearing_integer_count": sum(
+                field["count"] for field in width_fields
+            ),
+            "width_bearing_zero_count": sum(
+                field["zero_count"] for field in width_fields
+            ),
+            "width_bearing_nonzero_count": sum(
+                field["nonzero_count"] for field in width_fields
+            ),
+            "width_bearing_decimal_digit_count": sum(
+                int(digits) * occurrences
+                for field in width_fields
+                for digits, occurrences in field[
+                    "decimal_digit_histogram"
+                ].items()
+            ),
+            "minimum_observed_nonzero_width_bearing_bit_length": min(
+                field["minimum_nonzero_bit_length"] for field in width_fields
+            ),
+            "maximum_observed_width_bearing_bit_length": max(
+                field["maximum_bit_length"] for field in width_fields
+            ),
+        },
+    }
+    _validate_declared_shape_matched_value_width_contract(
+        contract, specification
+    )
+    return contract
+
+
+def _validate_declared_shape_matched_value_width_contract(
+    contract: dict[str, Any], specification: dict[str, Any],
+) -> None:
+    width = int(specification["width"])
+    roles = _shape_matched_value_field_roles(specification)
+    required = {
+        "schema_version", "target_width_bits", "target_width_decimal_digits",
+        "minimum_width_bearing_nonzero_bit_length", "fixture_construction",
+        "construction_scope", "fields", "summary",
+    }
+    expected_fixture_construction = {
+        "modulus": "(1 << width) - 159",
+        "base": "1 << (width - 1)",
+        "transition": (
+            "base-plus-bounded-offset state/multiplicand; input bit one; "
+            "target and quotient from frozen exact_teacher_step"
+        ),
+        "rollout": (
+            "multiplier=base; multiplicand=modulus-1; complete teacher "
+            "trajectory from frozen exact_teacher_step; prediction trace "
+            "is a separately allocated exact copy"
+        ),
+    }
+    if (
+        not isinstance(contract, dict)
+        or set(contract) != required
+        or contract.get("schema_version")
+        != "exp648-cache-value-width-contract-v1"
+        or contract.get("target_width_bits") != width
+        or contract.get("target_width_decimal_digits")
+        != len(str((1 << width) - 1))
+        or contract.get("minimum_width_bearing_nonzero_bit_length")
+        != width - 1
+        or contract.get("fixture_construction")
+        != expected_fixture_construction
+        or set(contract.get("fields", {})) != set(roles)
+        or contract.get("construction_scope") != {
+            "resource_calibration_only": True,
+            "offline_exact_teacher_labels_only": True,
+            "model_or_evaluator_called": False,
+            "root_rng_or_data_opened": False,
+            "submission_inference_path": False,
+            "scientific_accuracy_or_selection_evidence": False,
+        }
+    ):
+        raise RuntimeError("shape-matched value-width contract schema mismatch")
+    fields = contract["fields"]
+    distribution_keys = {
+        "role", "expected_integer_count", "expected_schema_zero_count",
+        "maximum_schema_value", "count", "zero_count", "nonzero_count",
+        "minimum_value", "maximum_value",
+        "minimum_nonzero_bit_length", "maximum_bit_length",
+        "minimum_decimal_digits", "maximum_decimal_digits",
+        "bit_length_histogram", "decimal_digit_histogram",
+    }
+    for name, expected_role in roles.items():
+        field = fields[name]
+        if not isinstance(field, dict) or set(field) != distribution_keys:
+            raise RuntimeError("shape-matched value-width field schema mismatch")
+        for histogram_name in (
+            "bit_length_histogram", "decimal_digit_histogram"
+        ):
+            histogram = field[histogram_name]
+            if (
+                not isinstance(histogram, dict)
+                or not histogram
+                or any(
+                    not isinstance(key, str) or not key.isdigit()
+                    or type(value) is not int or value <= 0
+                    for key, value in histogram.items()
+                )
+                or sum(histogram.values()) != field["count"]
+            ):
+                raise RuntimeError(
+                    "shape-matched value-width histogram mismatch"
+                )
+        bit_lengths = [int(key) for key in field["bit_length_histogram"]]
+        decimal_digits = [
+            int(key) for key in field["decimal_digit_histogram"]
+        ]
+        if (
+            any(field.get(key) != value for key, value in expected_role.items())
+            or type(field["count"]) is not int or field["count"] <= 0
+            or field["count"] != field["expected_integer_count"]
+            or type(field["zero_count"]) is not int
+            or not 0 <= field["zero_count"] <= field["count"]
+            or field["nonzero_count"] != field["count"] - field["zero_count"]
+            or type(field["minimum_value"]) is not int
+            or type(field["maximum_value"]) is not int
+            or not 0 <= field["minimum_value"] <= field["maximum_value"]
+            or field["maximum_value"] > field["maximum_schema_value"]
+            or field["minimum_value"].bit_length() != min(bit_lengths)
+            or field["maximum_value"].bit_length() != max(bit_lengths)
+            or len(str(field["minimum_value"])) != min(decimal_digits)
+            or len(str(field["maximum_value"])) != max(decimal_digits)
+            or field["maximum_bit_length"] != max(bit_lengths)
+            or field["minimum_decimal_digits"] != min(decimal_digits)
+            or field["maximum_decimal_digits"] != max(decimal_digits)
+            or field["zero_count"]
+            != field["bit_length_histogram"].get("0", 0)
+        ):
+            raise RuntimeError("shape-matched value-width field mismatch")
+        nonzero_bits = [value for value in bit_lengths if value > 0]
+        expected_minimum = min(nonzero_bits) if nonzero_bits else None
+        if field["minimum_nonzero_bit_length"] != expected_minimum:
+            raise RuntimeError("shape-matched minimum bit-length mismatch")
+        if field["role"] == "width-bearing-integer":
+            if (
+                field["zero_count"] != field["expected_schema_zero_count"]
+                or field["nonzero_count"] <= 0
+                or field["minimum_nonzero_bit_length"] < width - 1
+                or field["maximum_bit_length"] > width
+                or field["maximum_decimal_digits"]
+                > contract["target_width_decimal_digits"]
+            ):
+                raise RuntimeError(
+                    "shape-matched width-bearing value envelope mismatch"
+                )
+        elif field["maximum_value"] > field["maximum_schema_value"]:
+            raise RuntimeError("shape-matched naturally-small value mismatch")
+    width_fields = [
+        field for field in fields.values()
+        if field["role"] == "width-bearing-integer"
+    ]
+    small_fields = [
+        field for field in fields.values()
+        if field["role"] == "naturally-small-schema-integer"
+    ]
+    expected_summary = {
+        "field_count": len(fields),
+        "width_bearing_field_count": len(width_fields),
+        "naturally_small_field_count": len(small_fields),
+        "integer_count": sum(field["count"] for field in fields.values()),
+        "width_bearing_integer_count": sum(
+            field["count"] for field in width_fields
+        ),
+        "width_bearing_zero_count": sum(
+            field["zero_count"] for field in width_fields
+        ),
+        "width_bearing_nonzero_count": sum(
+            field["nonzero_count"] for field in width_fields
+        ),
+        "width_bearing_decimal_digit_count": sum(
+            int(digits) * occurrences
+            for field in width_fields
+            for digits, occurrences in field[
+                "decimal_digit_histogram"
+            ].items()
+        ),
+        "minimum_observed_nonzero_width_bearing_bit_length": min(
+            field["minimum_nonzero_bit_length"] for field in width_fields
+        ),
+        "maximum_observed_width_bearing_bit_length": max(
+            field["maximum_bit_length"] for field in width_fields
+        ),
+    }
+    if contract.get("summary") != expected_summary:
+        raise RuntimeError("shape-matched value-width summary mismatch")
+
+
+def _shape_matched_profile_key_fields(config: dict[str, Any]) -> dict[str, Any]:
+    """Return maximum-length, actual-key-shaped metadata without reading auth."""
+    digest = "f" * 64
+    commit = "f" * 40
+    binding = {
+        "approved_base_commit": commit,
+        "corpus_manifest_sha256": digest,
+        "historical_corpus_commit": commit,
+        "frozen_corpus_file_sha256": {
+            name: digest for name in FROZEN_CORPUS_FILES
+        },
+        "corpus_provenance_amendment_sha256": digest,
+        "scientific_runner_sha256": digest,
+        "scientific_test_sha256": digest,
+        "calibration_runner_sha256": digest,
+        "resolved_config_sha256": digest,
+        "executed_config_sha256": digest,
+        "screen_workload_sha256": digest,
+        "readiness_calibration_sha256": digest,
+        "readiness_calibration_root": PREREGISTERED_READINESS_CALIBRATION_ROOT,
+        "readiness_calibration_core_sha256": digest,
+        "readiness_calibration_environment_sha256": digest,
+        "readiness_calibration_mlflow_receipt_sha256": digest,
+        "readiness_resource_completion_sha256": digest,
+        "readiness_observed_recovery_sha256": digest,
+        "source_checkpoint_sha256": digest,
+        "source_model": copy.deepcopy(config["source_model"]),
+        "dependency_manifest_sha256": digest,
+        "dependency_sources": copy.deepcopy(
+            config["executable_dependency_sources"]["sources"]
+        ),
+        "preregistration_sha256": digest,
+        "scientific_protocol_sha256": digest,
+        "resource_protocol_sha256": digest,
+        "exact_teacher_source_sha256": digest,
+        "evaluator_sha256": digest,
+        "runtime": {
+            "torch_threads": int(config["training"]["torch_threads"]),
+            "torch_interop_threads": int(
+                config["training"]["torch_interop_threads"]
+            ),
+            "deterministic_algorithms": bool(
+                config["training"]["deterministic_algorithms"]
+            ),
+        },
+    }
+    return {
+        **binding,
+        "checkpoint_sha256": {
+            arm: digest for arm in ("control", "challenger")
+        },
+        "environment_sha256": digest,
+        "evaluator_sha256": digest,
+        "evaluation_root": SCREEN_EVALUATION_ROOT,
+    }
+
+
+def _shape_matched_evaluation_cache_records(
+    specification: dict[str, Any], config: dict[str, Any],
+) -> dict[str, Any]:
+    """Build an actual-cache-shaped record plus an explicit strict envelope."""
+    unit = str(specification["unit"])
+    width = int(specification["width"])
+    expected_count = int(specification["cases"])
+    cases, results = _shape_matched_evaluation_cache_payload(specification)
+    cases_sha = sha256_bytes(canonical_json_bytes(cases))
+    receipts = evaluation_cache_work_receipts(
+        unit=unit, width=width, cases_sha256=cases_sha,
+        expected_count=expected_count, results=results,
+    )
+    value_width_contract = _shape_matched_value_width_contract(
+        specification, cases, results
+    )
+    actual_core = {
+        "schema_version": "exp648-screen-evaluation-cache-v1",
+        "complete": True,
+        "unit": unit,
+        "cases_sha256": cases_sha,
+        "key_fields": _shape_matched_profile_key_fields(config),
+        "results": results,
+        "matched_work_receipts": receipts,
+        "timing": {
+            "wall_seconds": 0.0,
+            "aggregate_cpu_seconds": 0.0,
+            "peak_rss_bytes": 0,
+        },
+    }
+    actual_record = {
+        **actual_core,
+        "core_sha256": sha256_bytes(canonical_json_bytes(actual_core)),
+    }
+    envelope_core = {
+        **actual_core,
+        "profiling_envelope": {
+            "schema_version": (
+                "exp648-shape-matched-evaluation-cache-envelope-v2"
+            ),
+            "actual_cache_schema_is_strict_subset": True,
+            "raw_cases_absent_from_actual_cache_schema": True,
+            "specification": copy.deepcopy(specification),
+            "cases": cases,
+            "value_width_contract": value_width_contract,
+            "metadata_padding": (
+                "p" * SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+            ),
+        },
+    }
+    envelope_record = {
+        **envelope_core,
+        "core_sha256": sha256_bytes(canonical_json_bytes(envelope_core)),
+    }
+    return {
+        "cases": cases,
+        "results": results,
+        "cases_sha256": cases_sha,
+        "matched_work_receipts": receipts,
+        "value_width_contract": value_width_contract,
+        "actual_schema_record": actual_record,
+        "envelope_record": envelope_record,
+    }
+
+
+def _valid_profile_timing(payload: Any) -> bool:
+    return bool(
+        isinstance(payload, dict)
+        and set(payload) == {
+            "wall_seconds", "aggregate_cpu_seconds", "peak_rss_bytes"
+        }
+        and all(
+            isinstance(payload[key], (int, float))
+            and math.isfinite(float(payload[key]))
+            and float(payload[key]) >= 0
+            for key in ("wall_seconds", "aggregate_cpu_seconds", "peak_rss_bytes")
+        )
+    )
+
+
+def _shape_matched_real_cache_schema_comparison() -> dict[str, Any]:
+    return {
+        "actual_schema_version": "exp648-screen-evaluation-cache-v1",
+        "actual_top_level_fields": list(REAL_SCREEN_EVALUATION_CACHE_FIELDS),
+        "envelope_extra_top_level_fields": ["profiling_envelope"],
+        "relationship": (
+            "actual cache record is a strict top-level subset; envelope "
+            "adds raw cases, specification, audited value widths, and "
+            "fixed metadata padding"
+        ),
+        "raw_cases_present_in_actual_cache": False,
+        "synthetic_key_fields_match_actual_key_structure": True,
+        "synthetic_timing_metadata_only": True,
+        "exact_schema_claimed": False,
+        "conservative_serialization_parse_envelope_claimed": True,
+        "padding_rationale": (
+            "all-exact booleans and compact 0.0/1.0 metrics can serialize "
+            "slightly shorter than error-bearing production values; fixed "
+            "per-unit padding covers that lexical variance"
+        ),
+        "timing_limitation": (
+            "larger canonical bytes are an empirical conservative workload "
+            "envelope, not a mathematical CPU or RSS upper bound; maximum "
+            "repeat timing and independent safety headroom remain required"
+        ),
+    }
+
+
+def validate_shape_matched_evaluation_cache_profile(
+    profile: dict[str, Any], schedule: dict[str, Any],
+) -> None:
+    required = {
+        "schema_version", "evaluation_units", "evaluation_unit_count",
+        "total_cases", "total_canonical_payload_bytes",
+        "total_actual_schema_projected_payload_bytes",
+        "total_envelope_extra_payload_bytes",
+        "total_metadata_padding_bytes",
+        "total_external_reference_minimum_payload_bytes",
+        "total_prediction_trace_elements", "total_teacher_trace_elements",
+        "total_trace_elements", "complete_set_sha256",
+        "value_width_contracts_sha256", "real_cache_schema_comparison",
+        "read_only_value_width_evidence",
+        "fresh_cache_serialization_complete",
+        "recovery_parse_digest_receipt_semantic_validation_complete",
+        "timing_breakdown",
+    }
+    units = profile.get("evaluation_units") if isinstance(profile, dict) else None
+    if (
+        not isinstance(profile, dict)
+        or set(profile) != required
+        or profile.get("schema_version")
+        != "exp648-shape-matched-evaluation-cache-profile-v2"
+        or not isinstance(units, list)
+        or len(units) != len(schedule["evaluation_units"])
+        or profile.get("evaluation_unit_count") != len(units)
+        or profile.get("fresh_cache_serialization_complete") is not True
+        or profile.get(
+            "recovery_parse_digest_receipt_semantic_validation_complete"
+        ) is not True
+    ):
+        raise RuntimeError("shape-matched evaluation cache profile schema mismatch")
+    arm_names = schedule["arm_names"]
+    unit_keys = {
+        "unit", "mode", "width", "cases", "arm_count",
+        "prediction_trace_rows_per_arm",
+        "prediction_trace_elements_per_arm",
+        "teacher_trace_elements_per_arm", "total_prediction_trace_elements",
+        "total_teacher_trace_elements", "total_trace_elements",
+        "canonical_payload_bytes", "actual_schema_projected_payload_bytes",
+        "envelope_extra_payload_bytes", "metadata_padding_bytes",
+        "external_reference_minimum_payload_bytes",
+        "canonical_payload_sha256",
+        "actual_schema_projected_payload_sha256", "core_sha256",
+        "cases_sha256", "semantic_fixture_sha256",
+        "value_width_contract", "value_width_contract_sha256",
+        "matched_work_receipts_sha256",
+        "prediction_trace_sha256_by_arm",
+        "teacher_trace_sha256_by_arm", "fresh_cache_serialized",
+        "actual_cache_schema_fields_covered",
+        "raw_cases_are_conservative_envelope_only",
+        "recovery_payload_parsed", "canonical_round_trip_verified",
+        "core_hash_verified", "work_receipts_verified",
+        "semantic_results_verified",
+    }
+    for observed, expected in zip(units, schedule["evaluation_units"], strict=True):
+        prediction_per_arm = int(expected["prediction_trace_elements_per_arm"])
+        teacher_per_arm = int(expected["teacher_trace_elements_per_arm"])
+        expected_prediction = prediction_per_arm * int(schedule["arm_count"])
+        expected_teacher = teacher_per_arm * int(schedule["arm_count"])
+        expected_reference_minimum = (
+            SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES.get(expected["unit"])
+        )
+        if (
+            not isinstance(observed, dict)
+            or set(observed) != unit_keys
+            or any(observed.get(key) != expected[key] for key in (
+                "unit", "mode", "width", "cases",
+                "prediction_trace_rows_per_arm",
+                "prediction_trace_elements_per_arm",
+                "teacher_trace_elements_per_arm",
+            ))
+            or observed.get("arm_count") != schedule["arm_count"]
+            or observed.get("total_prediction_trace_elements") != expected_prediction
+            or observed.get("total_teacher_trace_elements") != expected_teacher
+            or observed.get("total_trace_elements")
+            != expected_prediction + expected_teacher
+            or type(observed.get("canonical_payload_bytes")) is not int
+            or observed["canonical_payload_bytes"] <= 0
+            or type(observed.get(
+                "actual_schema_projected_payload_bytes"
+            )) is not int
+            or observed["actual_schema_projected_payload_bytes"] <= 0
+            or observed.get("envelope_extra_payload_bytes")
+            != observed["canonical_payload_bytes"] - observed[
+                "actual_schema_projected_payload_bytes"
+            ]
+            or observed["envelope_extra_payload_bytes"]
+            < SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+            or observed.get("metadata_padding_bytes")
+            != SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+            or observed.get("external_reference_minimum_payload_bytes")
+            != expected_reference_minimum
+            or (
+                expected_reference_minimum is not None
+                and observed["canonical_payload_bytes"]
+                < expected_reference_minimum
+            )
+            or any(
+                not isinstance(observed.get(key), str)
+                or re.fullmatch(r"[0-9a-f]{64}", observed[key]) is None
+                for key in (
+                    "canonical_payload_sha256",
+                    "actual_schema_projected_payload_sha256", "core_sha256",
+                    "cases_sha256", "semantic_fixture_sha256",
+                    "value_width_contract_sha256",
+                    "matched_work_receipts_sha256",
+                )
+            )
+            or set(observed.get("prediction_trace_sha256_by_arm", {}))
+            != set(arm_names)
+            or set(observed.get("teacher_trace_sha256_by_arm", {}))
+            != set(arm_names)
+            or any(
+                observed.get(flag) is not True
+                for flag in (
+                    "fresh_cache_serialized", "recovery_payload_parsed",
+                    "canonical_round_trip_verified", "core_hash_verified",
+                    "work_receipts_verified", "semantic_results_verified",
+                    "actual_cache_schema_fields_covered",
+                    "raw_cases_are_conservative_envelope_only",
+                )
+            )
+        ):
+            raise RuntimeError(
+                f"shape-matched evaluation cache unit profile mismatch for {expected['unit']}"
+            )
+        try:
+            _validate_declared_shape_matched_value_width_contract(
+                observed["value_width_contract"], expected
+            )
+        except (KeyError, RuntimeError, TypeError, ValueError) as error:
+            raise RuntimeError(
+                "shape-matched evaluation cache value-width contract "
+                f"mismatch for {expected['unit']}"
+            ) from error
+        if observed["value_width_contract_sha256"] != sha256_bytes(
+            canonical_json_bytes(observed["value_width_contract"])
+        ):
+            raise RuntimeError(
+                "shape-matched evaluation cache value-width hash "
+                f"mismatch for {expected['unit']}"
+            )
+        for trace_key in (
+            "prediction_trace_sha256_by_arm", "teacher_trace_sha256_by_arm"
+        ):
+            for value in observed[trace_key].values():
+                if expected["mode"] == "transition":
+                    if value is not None:
+                        raise RuntimeError("transition cache profile has a trace hash")
+                elif not isinstance(value, str) or re.fullmatch(
+                    r"[0-9a-f]{64}", value
+                ) is None:
+                    raise RuntimeError("rollout cache profile lacks a trace hash")
+    expected_totals = {
+        "total_cases": sum(unit["cases"] for unit in units),
+        "total_canonical_payload_bytes": sum(
+            unit["canonical_payload_bytes"] for unit in units
+        ),
+        "total_actual_schema_projected_payload_bytes": sum(
+            unit["actual_schema_projected_payload_bytes"] for unit in units
+        ),
+        "total_envelope_extra_payload_bytes": sum(
+            unit["envelope_extra_payload_bytes"] for unit in units
+        ),
+        "total_metadata_padding_bytes": sum(
+            unit["metadata_padding_bytes"] for unit in units
+        ),
+        "total_external_reference_minimum_payload_bytes": sum(
+            unit["external_reference_minimum_payload_bytes"] or 0
+            for unit in units
+        ),
+        "total_prediction_trace_elements": sum(
+            unit["total_prediction_trace_elements"] for unit in units
+        ),
+        "total_teacher_trace_elements": sum(
+            unit["total_teacher_trace_elements"] for unit in units
+        ),
+        "total_trace_elements": sum(unit["total_trace_elements"] for unit in units),
+        "complete_set_sha256": sha256_bytes(canonical_json_bytes(units)),
+        "value_width_contracts_sha256": sha256_bytes(
+            canonical_json_bytes([
+                unit["value_width_contract"] for unit in units
+            ])
+        ),
+    }
+    if any(profile.get(key) != value for key, value in expected_totals.items()):
+        raise RuntimeError("shape-matched evaluation cache profile totals mismatch")
+    if (
+        profile.get("real_cache_schema_comparison")
+        != _shape_matched_real_cache_schema_comparison()
+        or profile.get("read_only_value_width_evidence")
+        != SHAPE_MATCHED_CACHE_READ_ONLY_VALUE_WIDTH_EVIDENCE
+    ):
+        raise RuntimeError(
+            "shape-matched evaluation cache provenance comparison mismatch"
+        )
+    timing = profile.get("timing_breakdown", {})
+    if (
+        not isinstance(timing, dict)
+        or set(timing) != {
+            "fixture_construction_and_semantic_validation",
+            "fresh_cache_serialization", "recovery_validation",
+            "complete_evaluation_unit_set",
+        }
+        or not all(_valid_profile_timing(value) for value in timing.values())
+    ):
+        raise RuntimeError("shape-matched evaluation cache timing breakdown mismatch")
+    nested_timing = aggregate_readiness_timing(
+        timing["fixture_construction_and_semantic_validation"],
+        timing["fresh_cache_serialization"],
+        timing["recovery_validation"],
+    )
+    complete_timing = timing["complete_evaluation_unit_set"]
+    if any(
+        float(complete_timing[resource]) + 1e-9
+        < float(nested_timing[resource])
+        for resource in ("wall_seconds", "aggregate_cpu_seconds")
+    ) or int(complete_timing["peak_rss_bytes"]) < int(
+        nested_timing["peak_rss_bytes"]
+    ):
+        raise RuntimeError(
+            "shape-matched evaluation cache full-set timing mismatch"
+        )
+
+
+def measure_readiness_infrastructure_unit(
+    repeat: dict[str, Any], output: Path, process: Any,
+    *, config_override: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    config = config_override or yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+    schedule = screen_execution_schedule(config_override=config)
     measurement = cal.Measurement(process)
     checkpoint_measurement = cal.Measurement(process)
     checkpoint_receipts = {}
@@ -1774,38 +4045,350 @@ def measure_readiness_infrastructure_unit(
     checkpoint_timing = checkpoint_measurement.stop().payload()
     ledger_measurement = cal.Measurement(process)
     ledger_dir = output / "ledger"
-    for index in range(213):
+    scientific_ledger_writes = schedule["scientific_attempt_ledger"][
+        "atomic_writes"
+    ]
+    for index in range(scientific_ledger_writes):
         _atomic_write(ledger_dir / "attempt-state.json", canonical_json_bytes({
             "schema_version": "exp648-calibration-ledger-work-v1", "paired_update_or_unit": index,
-            "checkpoint_hashes": checkpoint_receipts, "complete": index == 212,
+            "checkpoint_hashes": checkpoint_receipts,
+            "complete": index == scientific_ledger_writes - 1,
         }, pretty=True))
     ledger_timing = ledger_measurement.stop().payload()
+    outer_ledger_measurement = cal.Measurement(process)
+    outer_ledger_writes = schedule["outer_launch_ledger"]["atomic_writes"]
+    for index in range(outer_ledger_writes):
+        _atomic_write(
+            ledger_dir / "launch-state.json",
+            canonical_json_bytes(
+                {
+                    "schema_version": "exp648-calibration-launch-ledger-work-v1",
+                    "transition": index,
+                    "complete": index == outer_ledger_writes - 1,
+                },
+                pretty=True,
+            ),
+        )
+    outer_ledger_timing = outer_ledger_measurement.stop().payload()
     cache_measurement = cal.Measurement(process)
-    cases = {"state": [0, 1], "target": [0, 1], "quotient": [0, 0], "modulus": [3, 3]}
-    result = {
-        "cases": 2, "exact_accuracy": 1.0, "quotient_accuracy": 1.0,
-        "valid_residue_rate": 1.0, "exact_vector": [True, True],
-        "output_sha256": sha256_bytes(canonical_json_bytes([0, 1])),
-        "predictions": [0, 1], "quotient_predictions": [0, 0],
+    complete_cache_unit_set_measurement = cal.Measurement(process)
+    cache_unit_profiles: list[dict[str, Any]] = []
+    fixture_construction_timings: list[dict[str, Any]] = []
+    fresh_cache_timings: list[dict[str, Any]] = []
+    recovery_timings: list[dict[str, Any]] = []
+    for index, specification in enumerate(schedule["evaluation_units"]):
+        fixture_measurement = cal.Measurement(process)
+        cache = output / "evaluation-cache" / f"{index:02d}-{specification['unit']}.json"
+        unit = str(specification["unit"])
+        width = int(specification["width"])
+        expected_count = int(specification["cases"])
+        fixture = _shape_matched_evaluation_cache_records(
+            specification, config
+        )
+        cases = fixture["cases"]
+        results = fixture["results"]
+        cases_sha = fixture["cases_sha256"]
+        receipts = fixture["matched_work_receipts"]
+        value_width_contract = fixture["value_width_contract"]
+        record = fixture["envelope_record"]
+        actual_schema_record = fixture["actual_schema_record"]
+        core_sha = record["core_sha256"]
+        fixture_construction_timings.append(
+            fixture_measurement.stop().payload()
+        )
+        fresh_measurement = cal.Measurement(process)
+        serialized = canonical_json_bytes(record, pretty=True)
+        actual_schema_serialized = canonical_json_bytes(
+            actual_schema_record, pretty=True
+        )
+        _atomic_write(cache, serialized)
+        fresh_cache_timings.append(fresh_measurement.stop().payload())
+
+        recovery_measurement = cal.Measurement(process)
+        observed = cache.read_bytes()
+        try:
+            loaded = json.loads(observed)
+        except (json.JSONDecodeError, UnicodeDecodeError) as error:
+            raise RuntimeError(
+                f"shape-matched cache recovery parse failed for {unit}"
+            ) from error
+        if observed != canonical_json_bytes(loaded, pretty=True):
+            raise RuntimeError(
+                f"shape-matched cache canonical round trip failed for {unit}"
+            )
+        loaded_core = copy.deepcopy(loaded)
+        observed_core_sha = loaded_core.pop("core_sha256", None)
+        envelope = loaded.get("profiling_envelope", {})
+        if (
+            set(loaded) != set(REAL_SCREEN_EVALUATION_CACHE_FIELDS) | {
+                "profiling_envelope"
+            }
+            or loaded.get("schema_version")
+            != "exp648-screen-evaluation-cache-v1"
+            or loaded.get("complete") is not True
+            or loaded.get("unit") != unit
+            or observed_core_sha != core_sha
+            or sha256_bytes(canonical_json_bytes(loaded_core)) != core_sha
+            or loaded.get("key_fields")
+            != _shape_matched_profile_key_fields(config)
+            or not _valid_profile_timing(loaded.get("timing"))
+            or not isinstance(envelope, dict)
+            or set(envelope) != {
+                "schema_version", "actual_cache_schema_is_strict_subset",
+                "raw_cases_absent_from_actual_cache_schema", "specification",
+                "cases", "value_width_contract", "metadata_padding",
+            }
+            or envelope.get("schema_version")
+            != "exp648-shape-matched-evaluation-cache-envelope-v2"
+            or envelope.get("actual_cache_schema_is_strict_subset") is not True
+            or envelope.get("raw_cases_absent_from_actual_cache_schema") is not True
+            or envelope.get("specification") != specification
+            or envelope.get("metadata_padding")
+            != "p" * SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES
+            or loaded.get("cases_sha256")
+            != sha256_bytes(canonical_json_bytes(envelope.get("cases")))
+        ):
+            raise RuntimeError(f"shape-matched cache core/hash mismatch for {unit}")
+        loaded_cases = envelope["cases"]
+        recomputed_width_contract = _shape_matched_value_width_contract(
+            specification, loaded_cases, loaded["results"]
+        )
+        if (
+            envelope.get("value_width_contract") != recomputed_width_contract
+            or envelope["value_width_contract"] != value_width_contract
+        ):
+            raise RuntimeError(
+                f"shape-matched cache value-width mismatch for {unit}"
+            )
+        validate_evaluation_results(
+            unit=unit, width=width, cases=loaded_cases,
+            results=loaded["results"]
+        )
+        validate_evaluation_cache_work_receipts(
+            receipts=loaded["matched_work_receipts"], unit=unit, width=width,
+            cases_sha256=cases_sha,
+            expected_count=expected_count,
+            results=loaded["results"],
+        )
+        actual_core = {
+            key: loaded[key]
+            for key in REAL_SCREEN_EVALUATION_CACHE_FIELDS
+            if key != "core_sha256"
+        }
+        recovered_actual_schema_record = {
+            **actual_core,
+            "core_sha256": sha256_bytes(canonical_json_bytes(actual_core)),
+        }
+        recovered_actual_schema_serialized = canonical_json_bytes(
+            recovered_actual_schema_record, pretty=True
+        )
+        if recovered_actual_schema_serialized != actual_schema_serialized:
+            raise RuntimeError(
+                f"shape-matched actual-cache projection mismatch for {unit}"
+            )
+        prediction_trace_hashes: dict[str, str | None] = {}
+        teacher_trace_hashes: dict[str, str | None] = {}
+        for arm in schedule["arm_names"]:
+            result = loaded["results"][arm]
+            if specification["mode"] == "rollout":
+                prediction_trace_hashes[arm] = result["prediction_trace_sha256"]
+                teacher_trace_hashes[arm] = sha256_bytes(
+                    canonical_json_bytes(result["teacher_trace"])
+                )
+                if (
+                    sum(len(row) for row in result["prediction_trace"])
+                    != specification["prediction_trace_elements_per_arm"]
+                    or sum(len(row) for row in result["teacher_trace"])
+                    != specification["teacher_trace_elements_per_arm"]
+                ):
+                    raise RuntimeError(
+                        f"shape-matched cache parsed trace element mismatch for {unit}/{arm}"
+                    )
+            else:
+                prediction_trace_hashes[arm] = None
+                teacher_trace_hashes[arm] = None
+        recovery_timings.append(recovery_measurement.stop().payload())
+        prediction_total = (
+            int(specification["prediction_trace_elements_per_arm"])
+            * int(schedule["arm_count"])
+        )
+        teacher_total = (
+            int(specification["teacher_trace_elements_per_arm"])
+            * int(schedule["arm_count"])
+        )
+        reference_minimum = SHAPE_MATCHED_CACHE_REFERENCE_MINIMUM_BYTES.get(
+            unit
+        )
+        if (
+            len(observed) <= len(recovered_actual_schema_serialized)
+            or (
+                reference_minimum is not None
+                and len(observed) < reference_minimum
+            )
+        ):
+            raise RuntimeError(
+                f"shape-matched cache byte envelope is too small for {unit}"
+            )
+        cache_unit_profiles.append({
+            "unit": unit,
+            "mode": specification["mode"],
+            "width": width,
+            "cases": expected_count,
+            "arm_count": schedule["arm_count"],
+            "prediction_trace_rows_per_arm": specification[
+                "prediction_trace_rows_per_arm"
+            ],
+            "prediction_trace_elements_per_arm": specification[
+                "prediction_trace_elements_per_arm"
+            ],
+            "teacher_trace_elements_per_arm": specification[
+                "teacher_trace_elements_per_arm"
+            ],
+            "total_prediction_trace_elements": prediction_total,
+            "total_teacher_trace_elements": teacher_total,
+            "total_trace_elements": prediction_total + teacher_total,
+            "canonical_payload_bytes": len(observed),
+            "actual_schema_projected_payload_bytes": len(
+                recovered_actual_schema_serialized
+            ),
+            "envelope_extra_payload_bytes": (
+                len(observed) - len(recovered_actual_schema_serialized)
+            ),
+            "metadata_padding_bytes": SHAPE_MATCHED_CACHE_METADATA_PADDING_BYTES,
+            "external_reference_minimum_payload_bytes": reference_minimum,
+            "canonical_payload_sha256": sha256_bytes(observed),
+            "actual_schema_projected_payload_sha256": sha256_bytes(
+                recovered_actual_schema_serialized
+            ),
+            "core_sha256": core_sha,
+            "cases_sha256": cases_sha,
+            "semantic_fixture_sha256": sha256_bytes(canonical_json_bytes({
+                "cases": loaded_cases, "results": loaded["results"],
+            })),
+            "value_width_contract": recomputed_width_contract,
+            "value_width_contract_sha256": sha256_bytes(
+                canonical_json_bytes(recomputed_width_contract)
+            ),
+            "matched_work_receipts_sha256": sha256_bytes(
+                canonical_json_bytes(loaded["matched_work_receipts"])
+            ),
+            "prediction_trace_sha256_by_arm": prediction_trace_hashes,
+            "teacher_trace_sha256_by_arm": teacher_trace_hashes,
+            "actual_cache_schema_fields_covered": True,
+            "raw_cases_are_conservative_envelope_only": True,
+            "fresh_cache_serialized": True,
+            "recovery_payload_parsed": True,
+            "canonical_round_trip_verified": True,
+            "core_hash_verified": True,
+            "work_receipts_verified": True,
+            "semantic_results_verified": True,
+        })
+    complete_cache_unit_set_timing = (
+        complete_cache_unit_set_measurement.stop().payload()
+    )
+    cache_units = len(cache_unit_profiles)
+    fixture_construction_timing = aggregate_readiness_timing(
+        fixture_construction_timings[0], *fixture_construction_timings[1:]
+    )
+    fresh_cache_timing = aggregate_readiness_timing(
+        fresh_cache_timings[0], *fresh_cache_timings[1:]
+    )
+    recovery_timing = aggregate_readiness_timing(
+        recovery_timings[0], *recovery_timings[1:]
+    )
+    cache_profile = {
+        "schema_version": "exp648-shape-matched-evaluation-cache-profile-v2",
+        "evaluation_units": cache_unit_profiles,
+        "evaluation_unit_count": cache_units,
+        "total_cases": sum(unit["cases"] for unit in cache_unit_profiles),
+        "total_canonical_payload_bytes": sum(
+            unit["canonical_payload_bytes"] for unit in cache_unit_profiles
+        ),
+        "total_actual_schema_projected_payload_bytes": sum(
+            unit["actual_schema_projected_payload_bytes"]
+            for unit in cache_unit_profiles
+        ),
+        "total_envelope_extra_payload_bytes": sum(
+            unit["envelope_extra_payload_bytes"] for unit in cache_unit_profiles
+        ),
+        "total_metadata_padding_bytes": sum(
+            unit["metadata_padding_bytes"] for unit in cache_unit_profiles
+        ),
+        "total_external_reference_minimum_payload_bytes": sum(
+            unit["external_reference_minimum_payload_bytes"] or 0
+            for unit in cache_unit_profiles
+        ),
+        "total_prediction_trace_elements": sum(
+            unit["total_prediction_trace_elements"] for unit in cache_unit_profiles
+        ),
+        "total_teacher_trace_elements": sum(
+            unit["total_teacher_trace_elements"] for unit in cache_unit_profiles
+        ),
+        "total_trace_elements": sum(
+            unit["total_trace_elements"] for unit in cache_unit_profiles
+        ),
+        "complete_set_sha256": sha256_bytes(
+            canonical_json_bytes(cache_unit_profiles)
+        ),
+        "value_width_contracts_sha256": sha256_bytes(canonical_json_bytes([
+            unit["value_width_contract"] for unit in cache_unit_profiles
+        ])),
+        "real_cache_schema_comparison": (
+            _shape_matched_real_cache_schema_comparison()
+        ),
+        "read_only_value_width_evidence": copy.deepcopy(
+            SHAPE_MATCHED_CACHE_READ_ONLY_VALUE_WIDTH_EVIDENCE
+        ),
+        "fresh_cache_serialization_complete": True,
+        "recovery_parse_digest_receipt_semantic_validation_complete": True,
+        "timing_breakdown": {
+            "fixture_construction_and_semantic_validation": (
+                fixture_construction_timing
+            ),
+            "fresh_cache_serialization": fresh_cache_timing,
+            "recovery_validation": recovery_timing,
+            "complete_evaluation_unit_set": complete_cache_unit_set_timing,
+        },
     }
-    for index in range(7):
-        cache = output / "evaluation-cache" / f"unit-{index}.json"
-        record = {"unit": index, "cases": cases, "results": {"control": result, "challenger": result}}
-        _atomic_write(cache, canonical_json_bytes(record, pretty=True))
-        loaded = json.loads(cache.read_text(encoding="utf-8"))
-        validate_evaluation_results(unit="transition-128", width=128, cases=loaded["cases"], results=loaded["results"])
+    validate_shape_matched_evaluation_cache_profile(cache_profile, schedule)
     cache_timing = cache_measurement.stop().payload()
     evidence_measurement = cal.Measurement(process)
-    for index in range(19):
+    evidence_writes = schedule["atomic_evidence_writes"]
+    for index in range(evidence_writes):
         _atomic_write(output / "evidence" / f"artifact-{index}.json", canonical_json_bytes({"index": index, "checkpoint_hashes": checkpoint_receipts}, pretty=True))
     evidence_timing = evidence_measurement.stop().payload()
+    matched_work_measurement = cal.Measurement(process)
+    matched_work_receipt = _exercise_calibration_matched_work_schedule(config)
+    matched_work_timing = matched_work_measurement.stop().payload()
     timing = measurement.stop().payload()
     return {
-        "atomic_checkpoint_writes_and_reload_verifications": 2,
-        "atomic_attempt_ledger_writes": 213,
-        "evaluation_cache_write_validate_units": 7,
-        "atomic_evidence_writes": 19,
-        "component_timing": {"atomic_checkpoints": checkpoint_timing, "attempt_ledger": ledger_timing, "evaluation_cache": cache_timing, "atomic_evidence": evidence_timing},
+        "execution_schedule_sha256": sha256_bytes(canonical_json_bytes(schedule)),
+        "atomic_checkpoint_writes_and_reload_verifications": schedule[
+            "checkpoint_save_reload_verifications"
+        ],
+        "scientific_attempt_ledger_atomic_writes": scientific_ledger_writes,
+        "outer_launch_ledger_atomic_writes": outer_ledger_writes,
+        "total_screen_ledger_atomic_writes": schedule[
+            "total_screen_ledger_atomic_writes"
+        ],
+        "evaluation_cache_write_validate_units": cache_units,
+        "evaluation_cache_profile": cache_profile,
+        "atomic_evidence_writes": evidence_writes,
+        "first_quarter_scientific_ledger_writes": schedule[
+            "scientific_attempt_ledger"
+        ]["writes_before_first_quarter_guard"],
+        "matched_work_schedule_valid": matched_work_receipt["valid"],
+        "matched_work_receipt_sha256": sha256_bytes(
+            canonical_json_bytes(matched_work_receipt)
+        ),
+        "component_timing": {
+            "atomic_checkpoints": checkpoint_timing,
+            "scientific_attempt_ledger": ledger_timing,
+            "outer_launch_ledger": outer_ledger_timing,
+            "evaluation_cache": cache_timing,
+            "atomic_evidence": evidence_timing,
+            "matched_work": matched_work_timing,
+        },
         "checkpoint_receipts": checkpoint_receipts,
         "timing": timing, "complete": True,
     }
@@ -1884,8 +4467,9 @@ READINESS_CHRONOLOGY_CONTRACT_SHA256 = sha256_bytes(canonical_json_bytes({
     "order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
     "unit_order": "base->source-replay->mlflow-probe->readiness-infrastructure->validate->atomic-record->seal",
     "next_start_requires_predecessor_seal": True,
-    "fresh_augmented_warmup_before_repeat_cache_reuse": True,
-    "old_base_only_cache_forbidden": True,
+    "fresh_warmup_and_three_fresh_representative_repeats": True,
+    "all_augmented_cache_reuse_for_calibration_forbidden": True,
+    "cross_root_cache_reuse_forbidden": True,
 }))
 READINESS_RECORD_METADATA_KEYS = frozenset((
     "readiness_chronology", "reused_from_augmented_cache", "augmented_cache_path",
@@ -1909,6 +4493,7 @@ def _bare_augmented_record(record: dict[str, Any]) -> dict[str, Any]:
 def apply_readiness_carried_charge_once(guard: Any) -> None:
     if getattr(guard, "readiness_carried_charge_applied", False):
         raise RuntimeError("readiness cumulative carried charge applied more than once")
+    readiness_root20261162_cumulative_budget_contract()
     if not math.isclose(
         float(guard.wall_ceiling),
         READINESS_CUMULATIVE_RUNAWAY_CEILINGS["wall_seconds"],
@@ -2426,41 +5011,10 @@ def _execute_one_augmented_readiness_unit(
     predecessor_sha = None if predecessor is None else predecessor["seal_sha256"]
     output = attempt / "augmented-units" / f"{ordinal:02d}-{unit}"
     record_path = output / "augmented-unit.json"
-    stage_context["stage"] = f"{unit}:cache-lookup-and-validation"
-    cached = None if repeat_index is None else load_augmented_repeat_cache(
-        experiment=experiment, authorization_sha256=authorization_sha256,
-        repeat_index=repeat_index, config=config,
-    )
-    if cached is not None:
-        cache_payload, cache_path, cache_sha = cached
-        record = copy.deepcopy(cache_payload["record"])
-        stage_context["stage"] = f"{unit}:cache-reuse-charge"
-        experiment.guard.add_reused(
-            float(record["total_timing"]["wall_seconds"]),
-            float(record["total_timing"]["aggregate_cpu_seconds"]),
-        )
-        stage_context["stage"] = f"{unit}:cache-acceptance-guard"
-        experiment.guard(f"readiness:{unit}:complete-augmented-cache-accepted")
-        stage_context["stage"] = f"{unit}:cached-record-publication"
-        _atomic_write(record_path, canonical_json_bytes(record, pretty=True))
-        experiment.guard(f"readiness:{unit}:cached-augmented-record-published")
-        stage_context["stage"] = f"{unit}:reused-chronology-seal"
-        reference = _write_readiness_chronology_seal(
-            attempt=attempt, root=int(experiment.root_seed),
-            authorization_sha256=authorization_sha256,
-            ordinal=ordinal, unit=unit, repeat_index=repeat_index,
-            predecessor_seal_sha256=predecessor_sha,
-            start=start, record_path=record_path,
-            reused_from_augmented_cache=True,
-            source_cache_sha256=cache_sha,
-        )
-        experiment.guard(f"readiness:{unit}:reused-augmented-unit-sealed")
-        return {
-            **record,
-            "readiness_chronology": reference,
-            "reused_from_augmented_cache": True,
-            "augmented_cache_path": _path_for_receipt(cache_path),
-        }
+    stage_context["stage"] = f"{unit}:fresh-cache-exclusion"
+    # Root 20261162 calibrates the repaired paths themselves.  No pre-R3 or
+    # same-root augmented cache may replace any of the four representative
+    # segments in this evidence package.
 
     base_name = f"readiness-{unit}-{time.time_ns()}"
     stage_context["stage"] = f"{unit}:base-complete-unit"
@@ -2525,14 +5079,6 @@ def _execute_one_augmented_readiness_unit(
         "reused_from_augmented_cache": False,
         "augmented_cache_path": None,
     }
-    if repeat_index is not None:
-        stage_context["stage"] = f"{unit}:augmented-cache-publication"
-        cache_path, _cache_sha = save_augmented_repeat_cache(
-            experiment=experiment, authorization_sha256=authorization_sha256,
-            repeat_index=repeat_index, config=config, record=result,
-        )
-        result["augmented_cache_path"] = _path_for_receipt(cache_path)
-        experiment.guard(f"readiness:{unit}:augmented-cache-preserved-after-seal")
     return result
 
 
@@ -3200,8 +5746,8 @@ def _execute_readiness_calibration_attempt_body(
         "augmented_unit_orchestration": {
             "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
             "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
-            "old_base_only_cache_loaded_or_saved": False,
-            "fresh_augmented_warmup_before_repeat_cache_reuse": True,
+            "pre_r3_or_same_root_cache_loaded_or_saved": False,
+            "fresh_warmup_and_three_fresh_representative_repeats": True,
             "carried_charge_applied_exactly_once": bool(
                 getattr(
                     experiment.guard, "readiness_carried_charge_applied_exactly_once", False
@@ -3248,7 +5794,7 @@ def _execute_readiness_calibration_attempt_body(
         "fidelity_reduced": False,
     }
     core = {
-        "schema_version": "exp648-screen-readiness-calibration-core-v1",
+        "schema_version": "exp648-screen-readiness-calibration-core-v2",
         "authorization": authorization, "attempt_id": attempt_id,
         "warmup": warmup, "repeats": repeats,
         "chronology": chronology,
@@ -3261,7 +5807,7 @@ def _execute_readiness_calibration_attempt_body(
     _atomic_write(core_path, canonical_json_bytes(core, pretty=True))
     core_sha = sha256(core_path)
     receipt_stub = {
-        "schema_version": "exp648-screen-readiness-calibration-v1",
+        "schema_version": "exp648-screen-readiness-calibration-v2",
         "status": "complete-non-scientific-full-fidelity-resource-calibration",
         "calibration_root": root_seed, "calibration_authorization_sha256": auth_sha,
         "scientific_runner_sha256": sha256(Path(__file__)),
@@ -5231,7 +7777,9 @@ def record_actual_matched_work(
     record["ordered_actual_operations"].append(event)
 
 
-def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
+def finalize_matched_work(
+    accounting: dict[str, Any], *, expected_schedule: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     if (
         accounting.get("schema_version") != "exp648-matched-work-accounting-v1"
         or accounting.get("categories") != list(MATCHED_WORK_CATEGORIES)
@@ -5240,6 +7788,28 @@ def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
         or set(accounting.get("arms", {})) != {"control", "challenger"}
     ):
         raise RuntimeError("matched-work accounting schema mismatch")
+    if expected_schedule is None:
+        training_declared_per_update = {
+            "clean_forward_steps": WINDOW_LENGTH,
+            "autonomous_forward_steps": WINDOW_LENGTH,
+            "endpoint_loss_computations": 1,
+            "clean_backward_calls": WINDOW_LENGTH,
+            "endpoint_backward_calls": 1,
+            "gradient_clip_calls": 1,
+            "optimizer_steps": 1,
+            "scheduler_steps": 1,
+        }
+        checkpoint_declared = {
+            "checkpoint_writes": 1,
+            "checkpoint_reload_verifications": 1,
+            "checkpoint_byte_hashes": 1,
+            "checkpoint_receipt_serializations": 1,
+        }
+    else:
+        training_declared_per_update = expected_schedule[
+            "per_arm_training_declared_per_update"
+        ]
+        checkpoint_declared = expected_schedule["per_arm_checkpoint_declared"]
     per_arm = {}
     for arm in ("control", "challenger"):
         record = accounting["arms"][arm]
@@ -5296,21 +7866,16 @@ def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
             + recomputed_actual["cache_reuse_operations"]
         )
         declared_to_actual_valid = bool(
-            recomputed["clean_forward_steps"]
-            == recomputed["autonomous_forward_steps"]
-            == recomputed["clean_backward_calls"]
-            == WINDOW_LENGTH * training_calls
-            and recomputed["endpoint_loss_computations"]
-            == recomputed["endpoint_backward_calls"]
-            == recomputed["gradient_clip_calls"]
-            == recomputed["optimizer_steps"]
-            == training_calls
+            all(
+                recomputed[category] == int(count) * training_calls
+                for category, count in training_declared_per_update.items()
+            )
             and recomputed["scheduler_steps"]
             == recomputed_actual["scheduler_step_calls"]
-            and recomputed["checkpoint_writes"]
-            == recomputed["checkpoint_reload_verifications"]
-            == recomputed["checkpoint_byte_hashes"]
-            == checkpoint_calls
+            and all(
+                recomputed[category] == int(count) * checkpoint_calls
+                for category, count in checkpoint_declared.items()
+            )
             and recomputed["checkpoint_receipt_serializations"]
             == recomputed_actual["checkpoint_receipt_persist_calls"]
             and recomputed["evaluation_result_hashes"]
@@ -5390,6 +7955,72 @@ def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
         per_arm[arm]["declared_to_actual_cross_binding_valid"]
         for arm in ("control", "challenger")
     )
+    schedule_valid = True
+    if expected_schedule is not None:
+        expected_evaluation_events = sum(
+            len(expected_schedule["per_mode_evaluation_declared_categories"][
+                unit["mode"]
+            ])
+            for unit in expected_schedule["evaluation_units"]
+        )
+        contract = expected_schedule["per_arm_actual_operation_contract"]
+        schedule_valid = bool(
+            expected_schedule["arm_count"]
+            == len(expected_schedule["arm_names"])
+            and expected_schedule["quarter_updates_per_arm"] * 4
+            == expected_schedule["updates_per_arm"]
+            and expected_schedule["evaluation_cache_write_validate_units"]
+            == len(expected_schedule["evaluation_units"])
+            and expected_schedule["checkpoint_save_reload_verifications"]
+            == expected_schedule["arm_count"]
+            and expected_schedule["scientific_attempt_ledger"]["atomic_writes"]
+            == sum(expected_schedule["scientific_attempt_ledger"][
+                "write_reasons"
+            ].values())
+            and expected_schedule["outer_launch_ledger"]["atomic_writes"]
+            == sum(expected_schedule["outer_launch_ledger"][
+                "write_reasons"
+            ].values())
+            and expected_schedule["total_screen_ledger_atomic_writes"]
+            == expected_schedule["scientific_attempt_ledger"]["atomic_writes"]
+            + expected_schedule["outer_launch_ledger"]["atomic_writes"]
+            and expected_schedule["atomic_evidence_writes"]
+            == sum(expected_schedule["atomic_evidence_write_reasons"].values())
+            and expected_schedule["per_arm_declared_count_total"]
+            == sum(expected_schedule["per_arm_declared_counts"].values())
+            and expected_schedule["per_arm_declared_ordered_event_count"]
+            == (
+                expected_schedule["updates_per_arm"]
+                * len(expected_schedule["per_arm_training_declared_per_update"])
+                + len(expected_schedule["per_arm_checkpoint_declared"])
+                + expected_evaluation_events
+            )
+            and contract["fresh_zero_cache_reuse"]
+            == _screen_actual_operation_counts_from_schedule(
+                expected_schedule, 0
+            )
+            and contract["ordered_event_count_fresh"]
+            == sum(contract["fresh_zero_cache_reuse"].values())
+        )
+        for arm in expected_schedule["arm_names"]:
+            cache_units = per_arm[arm]["actual_operation_counts"][
+                "cache_reuse_operations"
+            ]
+            expected_actual_counts = _screen_actual_operation_counts_from_schedule(
+                expected_schedule, cache_units
+            )
+            schedule_valid = schedule_valid and (
+                per_arm[arm]["counts"]
+                == expected_schedule["per_arm_declared_counts"]
+                and per_arm[arm]["total_declared_work_units"]
+                == expected_schedule["per_arm_declared_count_total"]
+                and per_arm[arm]["ordered_event_count"]
+                == expected_schedule["per_arm_declared_ordered_event_count"]
+                and per_arm[arm]["actual_operation_counts"]
+                == expected_actual_counts
+                and per_arm[arm]["actual_operation_event_count"]
+                == sum(expected_actual_counts.values())
+            )
     return {
         "schema_version": "exp648-matched-work-receipt-v1",
         "independent_from_paired_data_order": True,
@@ -5399,9 +8030,15 @@ def finalize_matched_work(accounting: dict[str, Any]) -> dict[str, Any]:
         "per_arm_actual_operation_counts_and_schedules_equal": actual_equal,
         "truthful_fresh_or_valid_cache_paths": actual_paths_valid,
         "declared_to_actual_cross_binding_valid": declared_to_actual_cross_binding_valid,
+        "screen_execution_schedule_valid": schedule_valid,
+        "screen_execution_schedule_sha256": (
+            sha256_bytes(canonical_json_bytes(expected_schedule))
+            if expected_schedule is not None else None
+        ),
         "valid": bool(
             complete and effective_equal and actual_equal
             and actual_paths_valid and declared_to_actual_cross_binding_valid
+            and schedule_valid
         ),
     }
 
@@ -5649,6 +8286,9 @@ class ScreenExperiment:
         self.calibration = verify_screen_readiness_calibration()
         self.config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
         cal.validate_frozen_config(self.config)
+        self.execution_schedule = screen_execution_schedule(
+            config_override=self.config
+        )
         if sha256(SOURCE_CHECKPOINT_PATH) != PINNED["source_checkpoint_sha256"]:
             raise RuntimeError("screen source checkpoint hash mismatch")
         self.runtime = cal.configure_frozen_runtime(self.config)
@@ -5872,7 +8512,9 @@ class ScreenExperiment:
                     first, second
                 ),
             }
-        matched_work_receipt = finalize_matched_work(matched_work)
+        matched_work_receipt = finalize_matched_work(
+            matched_work, expected_schedule=self.execution_schedule
+        )
         width256_drift = cal.paired_drift_counts(
             evaluation["rollouts"]["256"]["control"]["exact_vector"],
             evaluation["rollouts"]["256"]["challenger"]["exact_vector"],

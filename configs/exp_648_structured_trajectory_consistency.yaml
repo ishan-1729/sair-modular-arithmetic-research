@@ -1,14 +1,15 @@
 run_id: exp-648-structured-trajectory-consistency
-status: scientific-scaffold-repaired-awaiting-readiness-recalibration-audits-and-judge
+status: root161-byte-archived-root162-v2-scaffold-reconstructed-awaiting-sole-file-authorization
 hypothesis: A fixed K=8 endpoint-consistency loss on natural model-generated width-256 trajectories improves exact autonomous rollout by at least three percentage points over a matched clean-loss control without harming width-64 or width-128 retention.
-phase: r3-scaffold-repair-awaiting-closure-before-root161-preservation-and-root162-reconstruction
+phase: root161-preserved-root162-reconstructed-awaiting-separate-authorization-child
 current_lifecycle:
   corpus: consumed-complete-immutable-historical
   root_20261161: consumed-complete-non-scientific-sealed-non-retryable-historical
   root_20261162: reserved-unopened-unauthorized-current-post-repair-readiness-root
-  old_authorization_source_and_scaffold: historical-pre-repair-cannot-bind-repaired-bytes
+  old_authorization_source_and_scaffold: immutable-pre-r3-v1-history-never-a-root20261162-source
+  root_20261162_authorization_source_and_scaffold: v2-reconstructed-no-live-authorization
   screen_and_scientific_execution: prohibited
-  next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
+  next_transition: commit-and-push-this-preservation-and-reconstruction-base -> sole-file-root162-authorization-child -> fresh-full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
 tracking: {experiment_name: sair-modular-arithmetic-wsl}
 preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
 source_note: knowledge/autoresearch/research/2026-07-20-structured-trajectory-consistency.md
@@ -255,7 +256,7 @@ confirmation:
   direct_candidate_promotion: prohibited
 
 resource_protocol:
-  status: prior-readiness-evidence-preserved-but-invalid-for-changed-runner-root-20261162-reserved-unopened-unauthorized
+  status: root161-byte-archived-and-charged-once-root162-v2-scaffold-reconstructed-reserved-unopened-unauthorized
   binding_policy: knowledge/autoresearch/program.md#resource-budget-policy
   measurement:
     wall: external-monotonic-wall-seconds
@@ -281,9 +282,9 @@ resource_protocol:
     torch_threads: 4
     torch_interop_threads: 1
     rate_selection: slower-arm-and-maximum-complete-repeat-per-component
-    initial_planning_hard_ceiling_wall_seconds: 25000
-    initial_planning_hard_ceiling_aggregate_cpu_seconds: 100000
-    planning_ceiling_basis: EXP-647-full-run-5141.6-wall-and-20465.9-aggregate-cpu-seconds
+    initial_planning_hard_ceiling_wall_seconds: 30000
+    initial_planning_hard_ceiling_aggregate_cpu_seconds: 120000
+    planning_ceiling_basis: new-carried-charge-plus-1.5-times-1.25R-plus-explicit-E-independently-rounded-up
     planning_ceiling_role: generous-runaway-protection-only-never-a-fidelity-cap
   projections:
     screen: measured-setup-plus-corpus-mining-512-pairs-plus-strong-semantic-integrity-replay-of-all-1024-mined-windows-plus-400-total-updates-plus-both-checkpoints-plus-all-screen-evaluation-hash-and-serialization-units
@@ -315,7 +316,60 @@ resource_protocol:
     cache_reuse_from_20261161: prohibited-because-runner-config-and-workload-bindings-changed
     requires_fresh_dynamic_budget_calibration: true
     old_authorization_source_and_scaffold_can_bind_repaired_bytes: false
-    reconstruction_status: separate-audited-package-required-after-clean-intermediate-base
+    reconstruction_status: v2-authorization-source-and-scaffold-reconstructed-no-live-authorization
+    authorization_source: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/authorization-source.json
+    scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/provenance.json
+    historical_root_20261161_archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+    historical_root_20261161_scratch: {files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+    historical_root_20261161_mlflow_artifacts: {runs: 5, finished: 5, files: 27, bytes: 252562, api_requeried_during_archive: false}
+    fresh_calibration_contract: {warmups: 1, timed_repeats: 3, every_segment_fresh: true, cross_root_cache_reuse: false, same_root_repeat_cache_reuse: false}
+    screen_execution_schedule:
+      schema_version: exp648-screen-execution-schedule-v1
+      derivation_policy: all quarter, arm-update, ledger, declared-work, actual-operation, cache-unit, checkpoint, and evidence totals are computed from update counts plus named reason/operation dictionaries; duplicated numeric control literals are forbidden
+      scientific_attempt_ledger_atomic_writes: 216
+      outer_launch_ledger_atomic_writes: 3
+      total_screen_ledger_atomic_writes: 219
+      evaluation_cache_write_validate_units: 7
+      checkpoint_save_reload_verifications: 2
+      atomic_evidence_writes: 29
+      first_quarter_scientific_ledger_writes_before_guard: 54
+      first_quarter_completed_arm_updates_before_guard: 100
+      per_arm_declared_count_total: 110298
+      per_arm_declared_ordered_event_count: 1630
+      per_arm_fresh_actual_operation_count_total: 423
+      evaluation_cache_profile:
+        schema_version: exp648-shape-matched-evaluation-cache-profile-v2
+        units:
+          - {unit: transition-128, width: 128, cases: 2000, mode: transition}
+          - {unit: transition-256, width: 256, cases: 2000, mode: transition}
+          - {unit: rollout-64, width: 64, cases: 200, mode: rollout}
+          - {unit: rollout-128, width: 128, cases: 200, mode: rollout}
+          - {unit: rollout-256, width: 256, cases: 200, mode: rollout}
+          - {unit: exact-repeat-first-256, width: 256, cases: 20, mode: rollout}
+          - {unit: exact-repeat-second-256, width: 256, cases: 20, mode: rollout}
+        total_cases: 4640
+        total_prediction_trace_elements_both_arms: 200960
+        total_teacher_trace_elements_both_arms: 200960
+        total_trace_elements_both_arms: 401920
+        value_fixture: deterministic target-width operands and states using modulus=(1<<width)-159 and base=1<<(width-1); transition labels and complete rollout trajectories come from frozen exact_teacher_step
+        value_width_contract: every width-bearing nonzero integer is at least width-1 bits; only required initial trace zeros and naturally small bit, quotient, and index fields are exempt; per-field bit-length and decimal-digit histograms are bound
+        actual_cache_schema_comparison: the production top-level cache record is serialized as a projection with unit, key_fields, timing, results, work receipts, and core hash; a separately labeled strict envelope adds cases, specification, width audit, and fixed padding without claiming exact-schema identity
+        metadata_padding_bytes_per_unit: 16384
+        external_reference_minimum_payload_bytes: 20147941
+        payload_contract: complete deterministic cases and both-arm result payloads, including every rollout prediction and independently allocated teacher trace, in a conservative serialization/parse envelope
+        recovery_validation: canonical parse/round-trip plus actual-schema projection, core, cases, value-width contract, trace, result, per-arm work-receipt, and semantic validation
+        per_unit_receipt: width, cases, trace shapes and counts, envelope and actual-projection bytes and SHA-256, fixture/width-contract/core/cases/work-receipt SHA-256, and per-arm prediction/teacher trace SHA-256
+        timing_contract: separately time fixture construction and semantic validation, fresh serialization/write, and recovery parse/digest/receipt/semantic validation; also bind elapsed timing for the complete seven-unit set
+        projection_policy: use the maximum measured duration of the complete shape-matched set directly once; never divide a tiny payload by unit count or extrapolate it
+    cumulative_accounting:
+      pre_root20261161_carried_charge: {wall_seconds: 14302.253947323996, aggregate_cpu_seconds: 57721.035879589996}
+      root20261161_canonical_charge: {wall_seconds: 4770.442001834999, aggregate_cpu_seconds: 18657.139380582998}
+      root20261162_new_carried_charge: {wall_seconds: 19072.695949158995, aggregate_cpu_seconds: 76378.175260173, apply_exactly_once: true}
+      planning_inputs: {R_wall_seconds: 5305.469600509008, R_aggregate_cpu_seconds: 20967.89, E_wall_seconds: 73.8932728219952, E_aggregate_cpu_seconds: 135.975487648}
+      formula: new_carried_charge + 1.5 * (1.25 * R + E)
+      formula_results: {wall_seconds: 29131.291359346378, aggregate_cpu_seconds: 115896.932241645}
+      independently_rounded_cumulative_runaway_ceilings: {wall_seconds: 30000.0, aggregate_cpu_seconds: 120000.0, per_attempt_target: false, fidelity_cap: false, scientific_gate: false}
+      rss: separate-from-wall-and-aggregate-cpu-dynamically-measured
   checkpoint_lifecycle:
     path_scope: immutable-attempt-specific-directory
     retry_overwrite: prohibited
@@ -462,10 +516,10 @@ resource_protocol:
       current_launch_eligibility: false
     historical_future_execution_order_at_that_boundary: repaired-base-closure-audits-and-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261161-authorization-child-commit-and-push-and-clean-upstream-verification -> fresh-warmup-and-three-fresh-full-fidelity-repeats
 authorization:
-  implementation: r3-scaffold-repair-awaiting-closure
-  calibration: root-20261161-consumed-historical-root-20261162-reserved-unopened-unauthorized-pending-reconstruction
+  implementation: root161-preservation-and-root162-v2-reconstruction-complete-awaiting-publication
+  calibration: root-20261161-consumed-byte-archived-historical-root-20261162-reserved-unopened-unauthorized
   corpus_root: consumed-complete-immutable-historical
-  screen_roots: unopened-and-prohibited-pending-reconstruction-fresh-root162-calibration-completion-judge-and-separate-screen-judge
+  screen_roots: unopened-and-prohibited-pending-sole-file-root162-authorization-fresh-calibration-completion-judge-and-separate-screen-judge
   confirmation_roots: unopened-and-prohibited-until-screen-pass-and-separate-judge-approval
   checked_or_independent_or_official_evaluation: prohibited
   candidate_or_tier7_promotion: prohibited

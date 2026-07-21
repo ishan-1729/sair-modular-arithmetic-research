@@ -1,0 +1,424 @@
+{
+  "approved_base_file_bindings": {
+    "calibration_runner": {
+      "path": "experiments/exp_648_structured_trajectory_consistency/run.py",
+      "sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672"
+    },
+    "cellular_model": {
+      "path": "experiments/exp_220_width_independent_cellular/model.py",
+      "sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc"
+    },
+    "corpus_provenance_amendment": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/provenance-amendment.json",
+      "sha256": "9f2b3ab9f82a083adca05e21f08f23cfe0fdcedfce47afa656be89e87701def9"
+    },
+    "executed_config": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml",
+      "sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127"
+    },
+    "exp300_data_evaluator": {
+      "path": "experiments/exp_300_width64_bit_tensor_transfer/run.py",
+      "sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f"
+    },
+    "preregistration": {
+      "path": "knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md",
+      "sha256": "6af3397a3a6e6d9a081c8e31ef817621bd54174a1ef520052237eecef3783c80"
+    },
+    "resolved_config": {
+      "path": "configs/exp_648_structured_trajectory_consistency.yaml",
+      "sha256": "c306354929105afa20b5be3672d25513000cf68bd57c46b4e2b8e95bda9be067"
+    },
+    "root20261161_classification": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/classification.json",
+      "sha256": "25df42834a00cb4f3338d5f16e2a33d1d207d5e50e5debf34f6377c9fedd293b"
+    },
+    "runtime_environment": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
+      "sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9"
+    },
+    "scientific_runner": {
+      "path": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
+      "sha256": "e7ec10246fd259d0072ba9250a6730c8fb877542fe8deb72136c6e5b8b56b1bf"
+    },
+    "scientific_test": {
+      "path": "tests/test_exp648_structured_trajectory_scientific.py",
+      "sha256": "f94b309c83609285c3c2009327e7ea8dc78b7280dc05df6e73fa6c39360a0514"
+    }
+  },
+  "authorization_template": {
+    "approved_runtime_environment": {
+      "dependencies": {
+        "mlflow": "3.14.0",
+        "numpy": "2.5.1",
+        "psutil": "7.0.0",
+        "safetensors": "0.8.0",
+        "scipy": "1.18.0",
+        "sympy": "1.13.1",
+        "torch": "2.5.1+cpu"
+      },
+      "deterministic_algorithms": true,
+      "executable": "/home/ishan/.venvs/sair-mod-challenge/bin/python",
+      "machine": "x86_64",
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "processor": "x86_64",
+      "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+      "schema_version": "exp648-environment-v1",
+      "torch_device": "cpu",
+      "torch_interop_threads": 1,
+      "torch_threads": 4,
+      "torch_version": "2.5.1+cpu"
+    },
+    "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+    "calibration_segment_evaluator_sha256": "a926268b51c935534a21edfe52fe25ec6fa3721ee5e4cae2d144cbce5408560c",
+    "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "corpus_provenance_amendment_sha256": "9f2b3ab9f82a083adca05e21f08f23cfe0fdcedfce47afa656be89e87701def9",
+    "decision": "authorize-non-scientific-screen-readiness-calibration-only",
+    "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+    "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
+    "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+    "experiment_id": "exp-648-structured-trajectory-consistency",
+    "frozen_corpus_file_bindings_sha256": "3810a28f295dadc5805bccc0d3221c03f5e075c90054dbc96b37ea119253beff",
+    "preregistration_sha256": "6af3397a3a6e6d9a081c8e31ef817621bd54174a1ef520052237eecef3783c80",
+    "resolved_config_sha256": "c306354929105afa20b5be3672d25513000cf68bd57c46b4e2b8e95bda9be067",
+    "resource_protocol_sha256": "2583c4c2d6958d13d187e829aa3e162ddd70a2da9931c18e25d80bff062cf627",
+    "root20261161_classification_sha256": "25df42834a00cb4f3338d5f16e2a33d1d207d5e50e5debf34f6377c9fedd293b",
+    "schema_version": "exp648-screen-readiness-calibration-authorization-v2",
+    "scientific_accuracy_or_selection_authorized": false,
+    "scientific_protocol_sha256": "b5145a3f61a8366d3d4ef647bf21ba7d02b509229c16c89d85a107212561e54b",
+    "scientific_runner_sha256": "e7ec10246fd259d0072ba9250a6730c8fb877542fe8deb72136c6e5b8b56b1bf",
+    "scientific_test_sha256": "f94b309c83609285c3c2009327e7ea8dc78b7280dc05df6e73fa6c39360a0514",
+    "screen_evaluator_sha256": "2096db581b59a9b0068b9be790de6674520295601e2123007cbcd2ff7691c020",
+    "screen_roots_authorized": false,
+    "screen_workload_sha256": "2f703cda7d1a9e4afbc4bc4722d9032d2eac66b678cfbd0d29ca6c900717dfe1",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "authorization_template_sha256": "7643506889cbce17a7d3a41d3073e8f27a5fefbcbee00fb24cfd8e78a9bd4310",
+  "derived_bindings": {
+    "calibration_segment_evaluator_sha256": "a926268b51c935534a21edfe52fe25ec6fa3721ee5e4cae2d144cbce5408560c",
+    "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+    "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
+    "resource_protocol_sha256": "2583c4c2d6958d13d187e829aa3e162ddd70a2da9931c18e25d80bff062cf627",
+    "scientific_protocol_sha256": "b5145a3f61a8366d3d4ef647bf21ba7d02b509229c16c89d85a107212561e54b",
+    "screen_evaluator_sha256": "2096db581b59a9b0068b9be790de6674520295601e2123007cbcd2ff7691c020",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "frozen_corpus_file_bindings": {
+    "data/corpus-manifest.json": {
+      "path": "data/generated/exp-648-structured-trajectory-consistency/corpus-manifest.json",
+      "sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d"
+    },
+    "data/identity-manifest.json": {
+      "path": "data/generated/exp-648-structured-trajectory-consistency/identity-manifest.json",
+      "sha256": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7"
+    },
+    "data/paired-corpus.json.gz": {
+      "path": "data/generated/exp-648-structured-trajectory-consistency/paired-corpus.json.gz",
+      "sha256": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0"
+    },
+    "data/trajectory-manifest.json.gz": {
+      "path": "data/generated/exp-648-structured-trajectory-consistency/trajectory-manifest.json.gz",
+      "sha256": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a"
+    },
+    "evidence/environment.json": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/environment.json",
+      "sha256": "cab308ec1c6148ee4e5a68764809dc2be5114f23026cf4f4dbc4d4572e89a957"
+    },
+    "evidence/integrity.json": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/integrity.json",
+      "sha256": "a0a00d09379cf77dab8a0c89c1b6796fffb9f238021409ab9f473b102ecd24fe"
+    },
+    "evidence/mlflow.json": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/mlflow.json",
+      "sha256": "9fbac562324f141d76f8b7e255ff54490072f7e72ffa777e0570466cea1d4a3f"
+    },
+    "evidence/run.json": {
+      "path": "experiments/runs/exp-648-structured-trajectory-consistency/corpus/run.json",
+      "sha256": "de34592118392d2b1a158697b78a35c0d0e130ead36f33e2069e8715d2056a09"
+    }
+  },
+  "schema_version": "exp648-readiness-authorization-source-v2",
+  "screen_workload": {
+    "calibration_requires_fresh_representative_segments": true,
+    "checkpoint_before_evaluation": {
+      "reload_verify": true,
+      "writes": 2
+    },
+    "cross_root_cache_reuse_allowed": false,
+    "evaluation": {
+      "exact_repeat_cases": 20,
+      "exact_repeat_comparison": "complete-ordered-prediction-trajectory-sha256",
+      "exact_repeat_width": 256,
+      "full_rollout_cases": {
+        "128": 200,
+        "256": 200,
+        "64": 200
+      },
+      "paired_identical_inputs": true,
+      "report_outcome_transitions": [
+        "recovered-control-wrong-challenger-exact",
+        "introduced-drift-control-exact-challenger-wrong"
+      ],
+      "transition_cases": {
+        "128": 2000,
+        "256": 2000
+      }
+    },
+    "evidence_and_mlflow_verification": true,
+    "execution_schedule": {
+      "arm_count": 2,
+      "arm_names": [
+        "control",
+        "challenger"
+      ],
+      "atomic_evidence_write_reasons": {
+        "attempt_artifact_publication_atomic_writes": 8,
+        "attempt_state_copy": 1,
+        "completion_pointer": 1,
+        "completion_seal": 1,
+        "mirrored_write_screen_file_atomic_writes": 16,
+        "sealed_checkpoint_artifact_copies": 2
+      },
+      "atomic_evidence_writes": 29,
+      "calibration_representative_segment": {
+        "cross_root_cache_reuse_allowed": false,
+        "fresh_timed_repeats": 3,
+        "fresh_warmups": 1,
+        "mining_matched_pairs": 64,
+        "rollout_cases_per_arm": {
+          "128": 20,
+          "256": 20,
+          "64": 20
+        },
+        "same_root_repeat_cache_reuse_allowed": false,
+        "semantic_replay_windows": 128,
+        "source_replay_identities": 64,
+        "training_updates_per_arm": 20,
+        "transition_cases_per_arm": {
+          "128": 200,
+          "256": 200
+        }
+      },
+      "checkpoint_save_reload_verifications": 2,
+      "evaluation_cache_write_validate_units": 7,
+      "evaluation_units": [
+        {
+          "cases": 2000,
+          "mode": "transition",
+          "prediction_trace_elements_per_arm": 0,
+          "prediction_trace_rows_per_arm": 0,
+          "teacher_trace_elements_per_arm": 0,
+          "unit": "transition-128",
+          "width": 128
+        },
+        {
+          "cases": 2000,
+          "mode": "transition",
+          "prediction_trace_elements_per_arm": 0,
+          "prediction_trace_rows_per_arm": 0,
+          "teacher_trace_elements_per_arm": 0,
+          "unit": "transition-256",
+          "width": 256
+        },
+        {
+          "cases": 200,
+          "mode": "rollout",
+          "prediction_trace_elements_per_arm": 13000,
+          "prediction_trace_rows_per_arm": 65,
+          "teacher_trace_elements_per_arm": 13000,
+          "unit": "rollout-64",
+          "width": 64
+        },
+        {
+          "cases": 200,
+          "mode": "rollout",
+          "prediction_trace_elements_per_arm": 25800,
+          "prediction_trace_rows_per_arm": 129,
+          "teacher_trace_elements_per_arm": 25800,
+          "unit": "rollout-128",
+          "width": 128
+        },
+        {
+          "cases": 200,
+          "mode": "rollout",
+          "prediction_trace_elements_per_arm": 51400,
+          "prediction_trace_rows_per_arm": 257,
+          "teacher_trace_elements_per_arm": 51400,
+          "unit": "rollout-256",
+          "width": 256
+        },
+        {
+          "cases": 20,
+          "mode": "rollout",
+          "prediction_trace_elements_per_arm": 5140,
+          "prediction_trace_rows_per_arm": 257,
+          "teacher_trace_elements_per_arm": 5140,
+          "unit": "exact-repeat-first-256",
+          "width": 256
+        },
+        {
+          "cases": 20,
+          "mode": "rollout",
+          "prediction_trace_elements_per_arm": 5140,
+          "prediction_trace_rows_per_arm": 257,
+          "teacher_trace_elements_per_arm": 5140,
+          "unit": "exact-repeat-second-256",
+          "width": 256
+        }
+      ],
+      "outer_launch_ledger": {
+        "atomic_writes": 3,
+        "fixed_write_reasons_before_first_quarter_guard": {
+          "authorization_verified_constructor_pending": 1,
+          "constructor_complete": 1
+        },
+        "write_reasons": {
+          "authorization_verified_constructor_pending": 1,
+          "complete_sealed": 1,
+          "constructor_complete": 1
+        },
+        "writes_before_first_quarter_guard": 2
+      },
+      "per_arm_actual_operation_contract": {
+        "cache_recovery_per_unit": {
+          "cache_per_arm_receipt_validations": 1,
+          "cache_record_validations": 1,
+          "cache_reuse_operations": 1,
+          "cached_result_digest_validations": 1
+        },
+        "cache_reuse_units_max": 7,
+        "cache_reuse_units_min": 0,
+        "checkpoint": {
+          "checkpoint_receipt_persist_calls": 1,
+          "checkpoint_save_reload_hash_calls": 1
+        },
+        "fresh_evaluation_per_unit": {
+          "fresh_evaluator_calls": 1,
+          "fresh_result_hashes": 1,
+          "fresh_result_serializations": 1
+        },
+        "fresh_zero_cache_reuse": {
+          "cache_per_arm_receipt_validations": 0,
+          "cache_record_validations": 0,
+          "cache_reuse_operations": 0,
+          "cached_result_digest_validations": 0,
+          "checkpoint_receipt_persist_calls": 1,
+          "checkpoint_save_reload_hash_calls": 1,
+          "fresh_evaluator_calls": 7,
+          "fresh_result_hashes": 7,
+          "fresh_result_serializations": 7,
+          "scheduler_step_calls": 200,
+          "training_update_calls": 200
+        },
+        "ordered_event_count_formula": {
+          "base": "ordered_event_count_fresh",
+          "cache_reuse_unit_delta": 1
+        },
+        "ordered_event_count_fresh": 423,
+        "training_per_update": {
+          "scheduler_step_calls": 1,
+          "training_update_calls": 1
+        }
+      },
+      "per_arm_checkpoint_declared": {
+        "checkpoint_byte_hashes": 1,
+        "checkpoint_receipt_serializations": 1,
+        "checkpoint_reload_verifications": 1,
+        "checkpoint_writes": 1
+      },
+      "per_arm_declared_count_total": 110298,
+      "per_arm_declared_counts": {
+        "autonomous_forward_steps": 1600,
+        "checkpoint_byte_hashes": 1,
+        "checkpoint_receipt_serializations": 1,
+        "checkpoint_reload_verifications": 1,
+        "checkpoint_writes": 1,
+        "clean_backward_calls": 1600,
+        "clean_forward_steps": 1600,
+        "endpoint_backward_calls": 200,
+        "endpoint_loss_computations": 200,
+        "evaluation_result_hashes": 7,
+        "evaluation_result_serializations": 7,
+        "gradient_clip_calls": 200,
+        "optimizer_steps": 200,
+        "rollout_evaluation_cases": 640,
+        "rollout_evaluation_steps": 99840,
+        "scheduler_steps": 200,
+        "transition_evaluation_cases": 4000
+      },
+      "per_arm_declared_ordered_event_count": 1630,
+      "per_arm_training_declared_per_update": {
+        "autonomous_forward_steps": 8,
+        "clean_backward_calls": 8,
+        "clean_forward_steps": 8,
+        "endpoint_backward_calls": 1,
+        "endpoint_loss_computations": 1,
+        "gradient_clip_calls": 1,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1
+      },
+      "per_mode_evaluation_declared_categories": {
+        "rollout": [
+          "rollout_evaluation_cases",
+          "rollout_evaluation_steps",
+          "evaluation_result_hashes",
+          "evaluation_result_serializations"
+        ],
+        "transition": [
+          "transition_evaluation_cases",
+          "evaluation_result_hashes",
+          "evaluation_result_serializations"
+        ]
+      },
+      "quarter_updates_per_arm": 50,
+      "schema_version": "exp648-screen-execution-schedule-v1",
+      "scientific_attempt_ledger": {
+        "atomic_writes": 216,
+        "completed_arm_updates_before_first_quarter_guard": 100,
+        "fixed_write_reasons_before_first_quarter_guard": {
+          "constructor": 1,
+          "corpus_verified": 1,
+          "reciprocal_launch_attempt_binding": 1,
+          "training_started": 1
+        },
+        "total_arm_updates": 400,
+        "write_reasons": {
+          "checkpoint_receipts": 2,
+          "completed_update_pairs": 200,
+          "constructor": 1,
+          "corpus_verified": 1,
+          "evaluation_started": 1,
+          "exact_repeat_pair": 1,
+          "finalization_started": 1,
+          "first_quarter_telemetry": 1,
+          "reciprocal_launch_attempt_binding": 1,
+          "rollout_units": 3,
+          "sealed": 1,
+          "training_started": 1,
+          "transition_units": 2
+        },
+        "writes_before_first_quarter_guard": 54
+      },
+      "total_screen_ledger_atomic_writes": 219,
+      "updates_per_arm": 200
+    },
+    "execution_schedule_sha256": "25ba0cfae526770cc0e1f0777645af674dfeeb181ce321f0f0d4e63f611a1e09",
+    "fidelity_reduction_allowed": false,
+    "frozen_corpus_semantic_replay": {
+      "full_source_replays": 1,
+      "identity_trajectories": 736
+    },
+    "recoverable_evaluation_unit_count": 7,
+    "recoverable_evaluation_units": "paired-arm-width-mode",
+    "schema_version": "exp648-screen-workload-v3",
+    "scientific_runner_sha256": "e7ec10246fd259d0072ba9250a6730c8fb877542fe8deb72136c6e5b8b56b1bf",
+    "training": {
+      "arms": 2,
+      "batch_size": 16,
+      "updates_per_arm": 200,
+      "window_length": 8
+    }
+  },
+  "screen_workload_sha256": "2f703cda7d1a9e4afbc4bc4722d9032d2eac66b678cfbd0d29ca6c900717dfe1"
+}

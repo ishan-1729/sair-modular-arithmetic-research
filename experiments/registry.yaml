@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: scientific-scaffold-repaired-awaiting-fresh-readiness-calibration-and-judge
+    status: root161-byte-archived-root162-v2-scaffold-reconstructed-awaiting-sole-file-authorization
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -695,7 +695,7 @@ runs:
       scientific_evidence: none
     screen_readiness:
       historical_implementation: approved-recovery-base-and-authorization-child-pushed
-      current_implementation: r3-scaffold-repair-awaiting-closure-and-separate-reconstruction-package
+      current_implementation: root161-preserved-root162-v2-source-and-scaffold-reconstructed-no-live-authorization
       closure_audits:
         task: T-EXP648-SCREEN-READINESS
         prior_results: [APPROVE, APPROVE]
@@ -734,7 +734,11 @@ runs:
         exception_boundary_limitation: Historical failure predates the catchable-exception receipt and has no exact persisted exception-boundary resource sample.
       completed_readiness_calibration:
         root: 20261161
-        status: consumed-complete-non-scientific-sealed-non-retryable
+        status: consumed-complete-pre-r3-binding-byte-archived-historical-only
+        archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+        archive_manifest: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/SHA256SUMS
+        scratch_inventory: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/scratch-inventory.json, files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+        mlflow_inventory: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/mlflow-runs.json, runs: 5, finished: 5, artifact_files: 27, artifact_bytes: 252562, api_requeried_during_archive: false}
         receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
         workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
         verifier: {succeeded: true, subsequent_key_error: incorrect-external-assertion-path, correct_field: "receipt['boundary']['scientific_accuracy_or_selection_reported']", failed_assertion_called_a_pass: false}
@@ -762,15 +766,15 @@ runs:
           peak_rss_guard_bytes: 3409991680
         coarse_tool_trace: {wall_seconds: 4727.1, canonical: false, clock_comparable: false, policy: never-substitute-average-or-infer-tail}
         evidence:
-          receipt: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration.json, sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a}
-          core: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-core.json, sha256: 2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8}
-          environment: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-environment.json, sha256: d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9}
-          mlflow: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-mlflow.json, sha256: 5ebcd2acf99dfb2cf9f583b988cf2d381f500bd9dde060e4e4786017d1eb8505}
-          executed_config: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-executed-config.yaml, sha256: 7f0277fd633764c0c20c8f04777c12c383e3e7972730f04bb35835980c2187a5}
-          completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-completion.json, sha256: 89b5b64a7f227f77c970ada2d6cd6d19df2fb498e526b22c0a9fca4abf60e1de}
-          attempt_state: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempt-state.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
-          launch_ledger: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-launch-ledger.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
-          resource_completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-resource-completion.json, sha256: e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a}
+          receipt: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration.json, sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a}
+          core: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-core.json, sha256: 2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8}
+          environment: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-environment.json, sha256: d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9}
+          mlflow: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-mlflow.json, sha256: 5ebcd2acf99dfb2cf9f583b988cf2d381f500bd9dde060e4e4786017d1eb8505}
+          executed_config: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-executed-config.yaml, sha256: 7f0277fd633764c0c20c8f04777c12c383e3e7972730f04bb35835980c2187a5}
+          completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-completion.json, sha256: 89b5b64a7f227f77c970ada2d6cd6d19df2fb498e526b22c0a9fca4abf60e1de}
+          attempt_state: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-attempt-state.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
+          launch_ledger: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-launch-ledger.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
+          resource_completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-resource-completion.json, sha256: e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a}
         mlflow_runs:
           - {role: warmup-resource-probe, run_id: b49db1ca755e46e6b7b18e9e5c1fb859, status: FINISHED}
           - {role: repeat-1-resource-probe, run_id: 8f887966943d44a3a4bebea6ad5dddb9, status: FINISHED}
@@ -778,38 +782,65 @@ runs:
           - {role: repeat-3-resource-probe, run_id: f89f15cf84334df9acdc41ca6625b25d, status: FINISHED}
           - {role: readiness-calibration-resource-only, run_id: c27161cb0f2a46228b94b47362769fb1, status: FINISHED}
       post_repair_scaffold:
-        status: implementation-repaired-no-scientific-execution
+        status: root161-preserved-root162-v2-source-scaffold-regenerated-after-wide-cache-fidelity-repair-no-scientific-execution
         trajectory_repeat: complete-ordered-prediction-trace-digest-independent-recomputation
         matched_work: independent-per-arm-counts-and-ordered-digests-separate-from-data-order
         checkpoints: immutable-attempt-specific-paths-with-completion-and-failure-byte-bindings
         historical_root_20261161: preserved-consumed-complete-non-scientific-sealed-non-retryable-not-valid-for-repaired-bindings
-        post_repair_readiness_root: {root: 20261162, status: reserved-unopened-unauthorized, cache_reuse_from_20261161: prohibited}
+        post_repair_readiness_root: {root: 20261162, status: reserved-unopened-unauthorized, cache_reuse_from_20261161: prohibited, same_root_calibration_segment_cache_reuse: prohibited}
         scientific_evidence: none
         corpus: consumed-complete-immutable-historical
-        old_authorization_source_and_scaffold: historical-cannot-bind-repaired-bytes
-        next_transition: repair-closure -> commit/push-clean-intermediate-base -> separate-audited-root161-preservation-archive-and-versioned-post-repair-authorization-source-scaffold-reconstruction-package -> commit/push -> sole-file-root162-authorization-child -> full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
+        old_authorization_source_and_scaffold: immutable-pre-r3-v1-history-cannot-bind-repaired-bytes
+        authorization_source_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/authorization-source.json
+        scaffold_provenance_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/provenance.json
+        live_authorization_manifest: absent
+        next_transition: fresh-cache-fidelity-package-audit -> commit/push-preservation-and-reconstruction-base -> sole-file-root162-authorization-child -> fresh-full-fidelity-calibration -> completion-audits-and-Judge -> separate-screen-Judge
         declared_to_actual_cross_binding: required
         cache_operation_evidence: fresh-calls-and-validated-reuse-separated-per-arm
+        schedule_derivation: quarter/arm-update/ledger/declared-work/actual-operation/cache/checkpoint/evidence totals derive from update counts and named reason-operation dictionaries, with mutation regression coverage
+        readiness_cache_profile:
+          schema_version: exp648-shape-matched-evaluation-cache-profile-v2
+          units: [transition-128x2000, transition-256x2000, rollout-64x200, rollout-128x200, rollout-256x200, exact-repeat-first-256x20, exact-repeat-second-256x20]
+          total_cases: 4640
+          total_prediction_trace_elements_both_arms: 200960
+          total_teacher_trace_elements_both_arms: 200960
+          deterministic_value_fixture: modulus-equals-two-to-width-minus-159-and-base-equals-one-shifted-by-width-minus-one-with-exact-teacher-trajectories
+          minimum_nonzero_width_bearing_bits: width-minus-1
+          actual_cache_schema: projected-and-hashed
+          conservative_envelope: raw-cases-specification-value-width-audit-plus-16384-byte-per-unit-padding
+          external_reference_minimum_payload_bytes: 20147941
+          local_deterministic_diagnostic_payload_bytes: {envelope: 31567530, actual_schema_projection: 30080731, envelope_extra: 1486799, scientific_or_rate_evidence: false}
+          validation: canonical-parse-roundtrip-actual-projection-core-cases-width-contract-traces-work-receipts-results-and-semantics
+          timing: fixture-construction-fresh-serialization-recovery-validation-and-complete-set-with-wall-cpu-rss-separated
+          projection: maximum-measured-complete-shape-matched-set-charged-once-without-tiny-payload-or-per-unit-extrapolation
         checkpoint_failure_inventory: orphan-bytes-preserved-hashed-and-explicitly-unbound
         completion_seal_identity: pointer-seal-attempt-state-and-authorization-bound
       historical_root_20261161_readiness_calibration_authorization:
-        path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json
+        path: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/readiness-calibration-authorization.json
+        original_live_path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json
+        authorization_commit: 16d903301f50e54e3f6d9ab8cb6435e61f0d648f
+        approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402
         root: 20261161
         sha256: 0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa
         status: consumed-complete-non-scientific-sealed-non-retryable
         evidence_class: historical-pre-repair-cannot-authorize-root-20261162-or-screen
       cumulative_runaway_guards:
-        wall_seconds: 25000
-        process_user_plus_system_aggregate_cpu_seconds: 100000
+        wall_seconds: 30000
+        process_user_plus_system_aggregate_cpu_seconds: 120000
+        formula_results: {wall_seconds: 29131.291359346378, process_user_plus_system_aggregate_cpu_seconds: 115896.932241645}
         role: independently-rounded-cumulative-runaway-protection-only-never-per-attempt-target-scientific-gate-or-fidelity-cap
       recovery_accounting:
-        completed_history: {wall_seconds: 9007.853947323996, process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996}
+        completed_history_including_root_20261161: {wall_seconds: 13778.295949158995, process_user_plus_system_aggregate_cpu_seconds: 55378.175260172996}
         failed_root_20261160_conservative_allowance: {wall_seconds: 5294.4, process_user_plus_system_aggregate_cpu_seconds: 21000, exact_internal_observation: false, completed_work_claimed: false}
-        carried_charge: {wall_seconds: 14302.253947323995, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996, apply_exactly_once: true}
+        pre_root_20261161_carried_charge: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+        root_20261161_canonical_charge: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998}
+        root_20261162_carried_charge: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173, apply_exactly_once: true}
+        planning_inputs: {R_wall_seconds: 5305.469600509008, R_aggregate_cpu_seconds: 20967.89, E_wall_seconds: 73.8932728219952, E_aggregate_cpu_seconds: 135.975487648}
       root_20261159_rate_policy: Preserved timings may inform conservative planning context only and are forbidden as projection rates.
       chronology: Each warmup or repeat must synchronously execute base -> source replay -> MLflow probe -> readiness infrastructure -> validation -> atomic record -> seal, and the next start must authenticate the predecessor seal.
       cache_reuse: Root-20261160 repeat-1 and repeat-2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and three fresh full-fidelity repeats; reused charge is zero.
-      scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
+      historical_scaffold_provenance_v1: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
+      post_repair_scaffold_provenance_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/provenance.json
       screen_authorization_manifest: experiments/runs/exp-648-structured-trajectory-consistency/screen/judge-authorization.json
       screen_roots_status: unopened-blocked
       scientific_evidence: none
@@ -818,6 +849,7 @@ runs:
         - Root 20261159 is consumed and preserved as non-scientific superseded evidence, but its post-hoc augmentation chronology forbids launch, projection-rate selection, and cache reuse.
         - Root 20261160 is consumed-incomplete, non-scientific, permanently denied, and ineligible for launch, final/projection rates, or executable cache reuse; repeat 3 is not complete.
         - Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable; readiness evidence authorizes no screen or scientific surface.
+        - The root-20261161 tiny-integer cache profile is historical and cannot provide repaired projection rates; the v2 wide-value local payload measurement is diagnostic only until a fresh authorized root-20261162 calibration completes.
         - The 4727.1-second tool trace is a coarse noncanonical boundary from a different clock and must never be substituted for, averaged with, or used to infer a tail from the canonical 4770.442001834999-second outer observation.
         - Candidate 005 remains at observed 59.5 percent checked-public / 59.3 percent independent accuracy, and completion_eligible remains false.
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
