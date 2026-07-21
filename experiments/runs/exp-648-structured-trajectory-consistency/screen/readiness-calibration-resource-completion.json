@@ -1,0 +1,130 @@
+{
+  "attempt_id": "cal-2dd822120fe60e69",
+  "authorization_sha256": "2dd822120fe60e69f576f894461d333429dd568144a7ea87cadda74b607fd11b",
+  "inner_artifacts": {
+    "readiness-calibration-attempt-state.json": "814a86e8f14ad519b8c0580cca19b961747724791e143d79d2a36265c9e7aec9",
+    "readiness-calibration-completion.json": "845c35d17475fd61320e0d82134d5b0c64804547ef7e0147b056bb3935cfa022",
+    "readiness-calibration-core.json": "3127c562b1ea627ca48979bbb059f9b57a5517ea3f846c987cce0c400d60262c",
+    "readiness-calibration-environment.json": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "readiness-calibration-executed-config.yaml": "b4bd239120e130f77b19edced2ce85684c05b0c3505aad8355a6700f9d968554",
+    "readiness-calibration-launch-ledger.json": "814a86e8f14ad519b8c0580cca19b961747724791e143d79d2a36265c9e7aec9",
+    "readiness-calibration-mlflow.json": "540a4269e7a126ef2ee197d025011fd53951a671fd36d4d3b395f6092b5d9f69",
+    "readiness-calibration.json": "7209d1b59f6b980c7cb829a2290fe7735ba32db98be10181dc98f230363186ff"
+  },
+  "inner_lifecycle_complete_before_resource_sample": true,
+  "measurement_semantics": {
+    "aggregate_cpu_seconds": "process user seconds plus process system seconds elapsed",
+    "peak_rss_bytes": "Linux process high-water RSS bytes sampled separately",
+    "post_sample_operations_included_in_observed_totals": false,
+    "wall_and_cpu_are_not_interchangeable_or_combined": true,
+    "wall_seconds": "external monotonic perf-counter elapsed seconds"
+  },
+  "post_sample_operations": [
+    "construct recovery arithmetic from already captured samples",
+    "construct and validate the outer resource-completion payload",
+    "canonical JSON serialization of the outer payload",
+    "ensure the outer receipt parent directory exists",
+    "create and open the atomic temporary file",
+    "write the canonical outer payload bytes",
+    "flush the temporary file",
+    "fsync the temporary file",
+    "close the temporary file",
+    "atomically replace the outer receipt path with the temporary file",
+    "open the parent directory",
+    "fsync the parent directory",
+    "close the parent directory",
+    "return from write_readiness_resource_completion",
+    "return from execute_readiness_calibration",
+    "construct and serialize the CLI summary",
+    "stdout write and flush",
+    "return from main",
+    "SystemExit construction and stack unwind",
+    "Python interpreter teardown and process exit"
+  ],
+  "recovery_charges": {
+    "accounting_formula": "completed_history + failed_attempt_conservative_allowance + observed_pre_outer_seal_active + current_reused",
+    "carried_charge_aggregate_cpu_seconds": 76378.175260173,
+    "carried_charge_applied_exactly_once": true,
+    "carried_charge_wall_seconds": 19072.695949158995,
+    "completed_accepted_active_aggregate_cpu_seconds": 8516.110946257002,
+    "completed_accepted_active_wall_seconds": 2087.6300150939987,
+    "completed_history_aggregate_cpu_seconds": 55378.175260173,
+    "completed_history_wall_seconds": 13778.295949158995,
+    "completed_prior_superseded_aggregate_cpu_seconds": 46862.064313915995,
+    "completed_prior_superseded_wall_seconds": 11690.665934064997,
+    "cumulative_carried_observed_active_reused_aggregate_cpu_seconds": 86570.73525038699,
+    "cumulative_carried_observed_active_reused_wall_seconds": 21782.063508353996,
+    "current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds": 10192.559990214,
+    "current_readiness_observed_pre_outer_seal_active_wall_seconds": 2709.3675591950014,
+    "current_readiness_reused_aggregate_cpu_seconds_charged": 0.0,
+    "current_readiness_reused_wall_seconds_charged": 0.0,
+    "failed_attempt_allowance_completed_work_claimed": false,
+    "failed_attempt_allowance_exact_internal_observation": false,
+    "failed_attempt_conservative_allowance_aggregate_cpu_seconds": 21000.0,
+    "failed_attempt_conservative_allowance_wall_seconds": 5294.4,
+    "observed_pre_outer_seal_peak_rss_bytes": 2761617408,
+    "prior_superseded_calibrations": [
+      {
+        "aggregate_cpu_seconds": 6085.320000000001,
+        "classified_as_reused_repeat": false,
+        "eligible_for_projection_rates": false,
+        "evidence_sha256": "f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+        "wall_seconds": 1478.023299573
+      },
+      {
+        "aggregate_cpu_seconds": 9676.689662108,
+        "classified_as_reused_repeat": false,
+        "eligible_for_projection_rates": false,
+        "evidence_sha256": "d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6",
+        "executed_pre_resolution_config_bytes_preserved": false,
+        "executed_pre_resolution_config_recorded_sha256": "cbc50fd22333126db992c74de307b9f344be8e6769a7d8f46d0f954678c3f491",
+        "wall_seconds": 2334.745863933
+      },
+      {
+        "aggregate_cpu_seconds": 12442.915271225,
+        "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+        "classification": "consumed-complete-components-but-chronology-nonconforming",
+        "core_sha256": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+        "eligible_for_cache_reuse": false,
+        "eligible_for_launch": false,
+        "eligible_for_projection_rates": false,
+        "receipt_sha256": "cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981",
+        "resource_completion_sha256": "9eeb228450ba8e684adbe34bb95ad057036ffdedc643fe3942a0aaf846cf1ab0",
+        "root": 20261159,
+        "wall_seconds": 3107.4547687239974
+      },
+      {
+        "aggregate_cpu_seconds": 18657.139380582998,
+        "authorization_sha256": "0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa",
+        "classification": "consumed-complete-pre-r3-binding-historical-only",
+        "core_sha256": "2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8",
+        "eligible_for_cache_reuse": false,
+        "eligible_for_launch": false,
+        "eligible_for_projection_rates": false,
+        "receipt_sha256": "1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a",
+        "resource_completion_sha256": "e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a",
+        "root": 20261161,
+        "wall_seconds": 4770.442001834999
+      }
+    ],
+    "scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit"
+  },
+  "resource_boundary": "observed launch-to-pre-outer-seal samples captured after inner MLflow verification, tracked publication, completion manifest, final sealed attempt state, and all feasible non-self-referential inner hashing and lifecycle validation; not through function return, CLI output, interpreter teardown, or process exit",
+  "resource_observation": {
+    "launch_process_user_plus_system_seconds": 0.09000978599999954,
+    "launch_wall_perf_counter": 94177.642302514,
+    "observed_aggregate_cpu_seconds": 10192.559990214,
+    "observed_peak_rss_bytes": 2761617408,
+    "observed_wall_seconds": 2709.3675591950014,
+    "process_system_seconds_at_sample": 86.4,
+    "process_user_seconds_at_sample": 10106.25,
+    "sampling_order": [
+      "process user/system CPU",
+      "process peak RSS",
+      "monotonic wall"
+    ],
+    "wall_sample_perf_counter": 96887.009861709
+  },
+  "schema_version": "exp648-readiness-resource-completion-v2",
+  "status": "complete-observed-launch-to-pre-outer-seal-sample-resource-evidence"
+}

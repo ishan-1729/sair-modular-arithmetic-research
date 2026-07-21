@@ -103,8 +103,10 @@ def test_historical_calibration_is_preserved_but_not_live_screen_calibration(mod
     )
     assert module.sha256(module.CALIBRATION_EVIDENCE_PATH) == module.PINNED["calibration_evidence_sha256"]
     lifecycle = module.readiness_calibration_publication_state()
-    assert lifecycle["status"] == "superseded-only-no-live-receipt"
-    assert lifecycle["live_receipt_sha256"] is None
+    assert lifecycle["status"] == "live-receipt-present"
+    assert lifecycle["live_receipt_sha256"] == (
+        "7209d1b59f6b980c7cb829a2290fe7735ba32db98be10181dc98f230363186ff"
+    )
     assert lifecycle["superseded_root_20261161_preserved"] is True
     archived = module.validate_root20261161_archive()
     assert archived["authorization_sha256"] == (
@@ -112,8 +114,14 @@ def test_historical_calibration_is_preserved_but_not_live_screen_calibration(mod
     )
     assert archived["scratch_file_count"] == 218
     assert archived["mlflow_artifact_file_count"] == 27
-    assert not module.SCREEN_READINESS_CALIBRATION_PATH.exists()
-    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
+    authorization = module.verify_readiness_calibration_authorization(launch=False)
+    assert authorization["calibration_root"] == module.PREREGISTERED_READINESS_CALIBRATION_ROOT
+    assert authorization["approved_base_commit"] == (
+        "964cdbbb0828a929dba8244ed73c010e352c1a74"
+    )
+    assert authorization["authorization_sha256"] == (
+        "2dd822120fe60e69f576f894461d333429dd568144a7ea87cadda74b607fd11b"
+    )
 
 
 def reseal_root20261161_archive(module, archive: Path) -> None:
@@ -2679,17 +2687,27 @@ def test_historical_v1_schema_cannot_authorize_root20261162_before_binding(
 
 
 def mocked_root20261162_base_blobs(module):
-    source_raw = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.read_bytes()
-    provenance_raw = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.read_bytes()
+    authorization = json.loads(
+        module.READINESS_CALIBRATION_AUTHORIZATION_PATH.read_bytes()
+    )
+    approved_base = authorization["approved_base_commit"]
+    source_relative = module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    provenance_relative = module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    source_raw = module._git_blob(approved_base, source_relative)
+    provenance_raw = module._git_blob(approved_base, provenance_relative)
     source = json.loads(source_raw)
     provenance = json.loads(provenance_raw)
     paths = {}
     for binding in source["approved_base_file_bindings"].values():
-        paths[binding["path"]] = (module.ROOT / binding["path"]).read_bytes()
+        paths[binding["path"]] = module._git_blob(approved_base, binding["path"])
     for binding in source["frozen_corpus_file_bindings"].values():
-        paths[binding["path"]] = (module.ROOT / binding["path"]).read_bytes()
-    paths[module.ROOT_20261162_AUTHORIZATION_SOURCE_PATH.relative_to(module.ROOT).as_posix()] = source_raw
-    paths[module.ROOT_20261162_SCAFFOLD_PROVENANCE_PATH.relative_to(module.ROOT).as_posix()] = provenance_raw
+        paths[binding["path"]] = module._git_blob(approved_base, binding["path"])
+    paths[source_relative] = source_raw
+    paths[provenance_relative] = provenance_raw
     return paths, source, provenance
 
 
@@ -2713,7 +2731,10 @@ def test_readiness_authorization_v2_has_only_four_dynamic_fields(
     }
     assert payload == {**source["authorization_template"], **dynamic}
     assert not set(dynamic).intersection(source["authorization_template"])
-    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
+    authorization = module.verify_readiness_calibration_authorization(launch=False)
+    assert authorization["calibration_root"] == module.PREREGISTERED_READINESS_CALIBRATION_ROOT
+    assert authorization["scientific_accuracy_or_selection_authorized"] is False
+    assert authorization["screen_roots_authorized"] is False
 
 
 @pytest.mark.parametrize(
@@ -2795,10 +2816,20 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
     assert module.sha256(module.READINESS_SCAFFOLD_PROVENANCE_PATH) == (
         "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
     )
-    runner_sha256 = module.sha256(Path(module.__file__))
-    test_sha256 = module.sha256(Path(__file__))
-    config_sha256 = module.sha256(module.CONFIG_PATH)
-    config_raw = module.CONFIG_PATH.read_bytes()
+    approved_base = "964cdbbb0828a929dba8244ed73c010e352c1a74"
+    direct_bindings = source["approved_base_file_bindings"]
+    runner_raw = module._git_blob(
+        approved_base, direct_bindings["scientific_runner"]["path"]
+    )
+    test_raw = module._git_blob(
+        approved_base, direct_bindings["scientific_test"]["path"]
+    )
+    config_raw = module._git_blob(
+        approved_base, direct_bindings["resolved_config"]["path"]
+    )
+    runner_sha256 = module.sha256_bytes(runner_raw)
+    test_sha256 = module.sha256_bytes(test_raw)
+    config_sha256 = module.sha256_bytes(config_raw)
     config = module.yaml.safe_load(config_raw)
     expected_workload_sha256 = module.sha256_bytes(module.canonical_json_bytes(
         module.screen_workload_payload(
@@ -2846,7 +2877,9 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
         "data/corpus-manifest.json"
     ]
     for binding in source["approved_base_file_bindings"].values():
-        assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
+        assert module.sha256_bytes(
+            module._git_blob(approved_base, binding["path"])
+        ) == binding["sha256"]
     for name, binding in source["frozen_corpus_file_bindings"].items():
         assert binding["sha256"] == module.FROZEN_CORPUS_FILES[name]
         assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
@@ -2873,7 +2906,9 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
         }
     )
     assert provenance["authorization_manifest_present"] is False
-    assert not module.READINESS_CALIBRATION_AUTHORIZATION_PATH.exists()
+    authorization = module.verify_readiness_calibration_authorization(launch=False)
+    assert authorization["approved_base_commit"] == approved_base
+    assert authorization["scientific_test_sha256"] == test_sha256
 
 
 def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch) -> None:

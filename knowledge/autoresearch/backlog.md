@@ -5,7 +5,7 @@ description: Ranking-aware, compute-bounded queue of falsifiable model experimen
 status: active
 tags: [autoresearch, backlog, hypotheses]
 timestamp: "2026-07-12T02:20:00+05:30"
-last_updated: "2026-07-21T00:00:00+05:30"
+last_updated: "2026-07-22T00:00:00+05:30"
 ---
 
 # Autoresearch hypothesis backlog
@@ -38,7 +38,7 @@ The binding [coverage contract](research/2026-07-21-super-transformers-coverage-
 
 ### Binding staged queue
 
-EXP-648 remains the sole active task. Root `20261160` is consumed-incomplete, non-scientific, and permanently denied. Root `20261161` is consumed-complete, non-scientific, sealed, and non-retryable after fresh full-fidelity readiness calibration; completion audits return `[APPROVE, APPROVE]` and the Judge decision is `approved-complete-non-scientific-readiness-calibration`. Screen and scientific surfaces remain blocked pending a separate launch Judge and absent `judge-authorization.json`. No Super Transformers entry authorizes an experiment or dependency installation. The arXiv:2607.16051v2 full-PDF intake is complete; it adds M043/M044 and planned EXP-655, but no scientific evidence.
+EXP-648 remains the sole active task. Roots `20261160` and `20261161` retain their denied/historical classifications. Post-repair root `20261162` is now consumed-complete, non-scientific, sealed, and non-retryable after one fresh warmup and three fresh full-fidelity repeats with zero cache reuse; it awaits completion audits and a separate screen-launch Judge. Screen and scientific surfaces remain blocked because `judge-authorization.json` is absent. No Super Transformers entry authorizes an experiment or dependency installation. The arXiv:2607.16051v2 full-PDF intake is complete; it adds M043/M044 and planned EXP-655, but no scientific evidence.
 
 ### Relevance triage
 
@@ -64,6 +64,8 @@ These IDs reserve hypotheses; each remains `planned` until separately preregiste
 Regression provenance does not rewrite execution provenance: approved base `87384f92ab1c053c7791e8afd69a07936d5a7402`, immutable scaffold SHA-256 `593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6`, and execution-bound focused-test SHA-256 `f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5` remain frozen. The separate stabilized post-publication repaired test SHA-256 is `967fdc7d4ce5e9b8deaf9d5ea0d4b0cd74d8b4729b66c75b5eadf461626cfb50`, which `screen_readiness_binding` must obtain from the eventual committed registration base. The first full suite stopped before commit with 257 passes and two stale lifecycle failures; the exact targeted three passed after repair. The first focused-file run then stopped before commit with 87 passes and four approved-base fixture failures; the second bounded repair touched only that fixture. The expanded targeted regression/tamper set passed 8/8, the focused file passed exactly 91/91, the full suite passed exactly 259/259, and the project validator passed.
 
 The binding Super Transformers mandate is queued behind EXP-648. The full-PDF ledger owns all 44 stable parents/81 components and thirteen main-paper mappings. Its staged order includes structural equivariance, shared recurrent depth, dense EXP-655 layer-loop scheduling, structured recursive models, separated supervision/stability mechanisms, library-backed mixers, direct UT memory, dynamically budgeted stochastic/energy work, and only then conditional adaptive/autoregressive/post-training work. No queued item is authorization to run.
+
+Root `20261162` readiness is durable non-scientific evidence only. Receipt SHA-256 is `7209d1b59f6b980c7cb829a2290fe7735ba32db98be10181dc98f230363186ff`; canonical outer resources are `2709.3675591950014` wall / `10192.559990214` aggregate CPU / `2761617408` peak RSS, and the resolved screen projections are `4137.60510254003` wall / `15845.32999021402` aggregate CPU with separate soft/hard ceilings. The five recorded FINISHED MLflow IDs are `e85ed75266a6431498883444088c66d3`, `be37f281769f4568b33165556a48fe8b`, `0318b0f26a5043368a9db1e136752e83`, `30fbf063630c417b85aa9738009e7e45`, and `1c7249dd4cbd4816a8cfab9b064cbacb`. Execution-bound test SHA `f94b309c83609285c3c2009327e7ea8dc78b7280dc05df6e73fa6c39360a0514` remains distinct from repaired lifecycle-test SHA `0fa15edd01e474bfd9dfdfb6990dc046a75ab0a5d005c71b24d3f610e58f2d32`. Next action is completion audit/Judge review; screen remains prohibited.
 
 | Priority | ID | Falsifiable experiment | Matched control and primary measurements | Advance / stop rule |
 |---:|---|---|---|---|
