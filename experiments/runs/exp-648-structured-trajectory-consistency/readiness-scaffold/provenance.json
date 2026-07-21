@@ -4,7 +4,7 @@
   "historical_executed_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
   "immutable_corpus_package_unchanged_from_historical_commit": true,
   "judge_gate": {
-    "current_status": "chronology-repair-applied-awaiting-renewed-evidence-audit-and-judge",
+    "current_status": "failed-root-20261160-recovery-repaired-awaiting-closure-audits-and-judge",
     "renewed_evidence_audit": "pending",
     "renewed_judge": "pending",
     "repair_history": [
@@ -49,13 +49,25 @@
         "outcome": "required-repair",
         "repair": "unconditional-nine-singleton-presence-gate-before-attempt-allocation-with-authorization-manifest-explicitly-excluded-as-the-required-input",
         "status": "applied-without-opening-or-authorizing-root-20261160"
+      },
+      {
+        "finding": "Root 20261160 failed during repeat 3 without an attempt-scoped catchable-exception boundary receipt and left old repeat caches plus partial evidence requiring durable classification.",
+        "outcome": "bounded-recovery-repair-approved-no-retry",
+        "repair": "archive exact attempt cache and MLflow hashes; permanently deny consumed root; apply conservative allowance once; add fail-closed catchable-exception receipt; preregister negative-use-audited root 20261161 candidate",
+        "status": "applied-without-running-an-experiment-or-mutating-live-authorization-scratch-cache-or-MLflow"
+      },
+      {
+        "finding": "The sequential Judge rejected the first recovery patch because recovery policy altered the scientific hash, operative config ceilings were silently overwritten, failed-attempt allowance was conflated with completed history, exception context lacked granular stage and exact last guard check, and same-authorization retry remained possible after failure.",
+        "outcome": "required-repair",
+        "repair": "resource-only recovery policy with config-bound cumulative ceilings; separate completed-history allowance and carried-charge accounting; granular stage and exact guard evidence; receipt-bound terminal failed state; fail-closed same-authorization retry and publication handling",
+        "status": "applied-without-running-an-experiment-or-mutating-live-authorization-scratch-cache-or-MLflow"
       }
     ]
   },
   "live_scaffold": {
-    "focused_scientific_test_sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df",
-    "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
-    "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c"
+    "focused_scientific_test_sha256": "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5",
+    "resolved_config_sha256": "ac6368db71d5d96a083242957e4621d746b2086c51325c02c5cfed8cf7e4fd60",
+    "scientific_runner_sha256": "8c389e88467d956debe244c895cbd9fb2db99ad3d3a5375b55eb2fdf1d72ffc9"
   },
   "outer_resource_evidence_scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
   "readiness_calibration_authorization_source": {
@@ -70,7 +82,7 @@
       },
       "resolved_config": {
         "path": "configs/exp_648_structured_trajectory_consistency.yaml",
-        "sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263"
+        "sha256": "ac6368db71d5d96a083242957e4621d746b2086c51325c02c5cfed8cf7e4fd60"
       },
       "runtime_environment": {
         "path": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
@@ -78,11 +90,11 @@
       },
       "scientific_runner": {
         "path": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
-        "sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c"
+        "sha256": "8c389e88467d956debe244c895cbd9fb2db99ad3d3a5375b55eb2fdf1d72ffc9"
       },
       "scientific_test": {
         "path": "tests/test_exp648_structured_trajectory_scientific.py",
-        "sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df"
+        "sha256": "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5"
       }
     },
     "authorization_template": {
@@ -116,18 +128,18 @@
       "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
       "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
       "experiment_id": "exp-648-structured-trajectory-consistency",
-      "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
-      "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+      "resolved_config_sha256": "ac6368db71d5d96a083242957e4621d746b2086c51325c02c5cfed8cf7e4fd60",
+      "resource_protocol_sha256": "a49983e9e72ebf2592a3fc61756ed55c48aca9aed4bd4471130f9d3026cad23f",
       "schema_version": "exp648-screen-readiness-calibration-authorization-v1",
       "scientific_accuracy_or_selection_authorized": false,
       "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
-      "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
-      "scientific_test_sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df",
+      "scientific_runner_sha256": "8c389e88467d956debe244c895cbd9fb2db99ad3d3a5375b55eb2fdf1d72ffc9",
+      "scientific_test_sha256": "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5",
       "screen_roots_authorized": false,
-      "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee",
+      "screen_workload_sha256": "998b620b5a5bbbe8ee56bc629c7b0951f4b6e8e86372002870c589c15619bfac",
       "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
     },
-    "authorization_template_sha256": "49938cc3b7fa56f21c4b1cbbba5882d2592f3b362bfca285b44fb57e787a5da7",
+    "authorization_template_sha256": "749554261ab2bc28ca604291c019b4a66092e05d4e3f1ed285aaa129455e636a",
     "schema_version": "exp648-readiness-authorization-source-v1",
     "screen_workload": {
       "checkpoint_before_evaluation": {
@@ -161,7 +173,7 @@
       "recoverable_evaluation_unit_count": 7,
       "recoverable_evaluation_units": "paired-arm-width-mode",
       "schema_version": "exp648-screen-workload-v2",
-      "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
+      "scientific_runner_sha256": "8c389e88467d956debe244c895cbd9fb2db99ad3d3a5375b55eb2fdf1d72ffc9",
       "successful_atomic_evidence_writes": 19,
       "successful_attempt_ledger_atomic_writes": 213,
       "training": {
@@ -171,7 +183,7 @@
         "window_length": 8
       }
     },
-    "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee"
+    "screen_workload_sha256": "998b620b5a5bbbe8ee56bc629c7b0951f4b6e8e86372002870c589c15619bfac"
   },
   "readiness_filesystem_threat_model": {
     "bounded_protection": "The authorization-scoped flock, exclusive mkdir allocation, and no-follow identity checks protect ordinary and concurrent cooperative processes plus pre-existing symlink, broken-link, and non-regular path hazards.",
@@ -196,11 +208,24 @@
       "scientific_evidence": "none"
     },
     "root_20261160": {
+      "archive": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261160",
+      "authorization_created": true,
+      "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+      "consumed": true,
+      "eligible_for_executable_cache_reuse": false,
+      "eligible_for_launch": false,
+      "eligible_for_projection_or_final_rates": false,
+      "opened": true,
+      "root": 20261160,
+      "status": "consumed-incomplete-non-scientific-permanently-denied"
+    },
+    "root_20261161": {
       "authorization_created": false,
       "consumed": false,
+      "negative_use_audited": true,
       "opened": false,
-      "root": 20261160,
-      "status": "distinct-unopened-unconsumed-unauthorized-pending-renewed-evidence-audit-and-judge"
+      "root": 20261161,
+      "status": "candidate-unopened-unconsumed-unauthorized-pending-closure-audits-and-judge"
     }
   },
   "schema_version": "exp648-readiness-scaffold-provenance-v1",
@@ -213,6 +238,6 @@
     "scientific_accuracy_or_selection_reported": false,
     "training_or_evaluation_performed_by_this_repair": false
   },
-  "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee",
-  "status": "chronology-repair-applied-awaiting-renewed-evidence-audit-and-judge"
+  "screen_workload_sha256": "998b620b5a5bbbe8ee56bc629c7b0951f4b6e8e86372002870c589c15619bfac",
+  "status": "failed-root-20261160-recovery-repaired-awaiting-closure-audits-and-judge"
 }

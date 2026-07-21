@@ -48,7 +48,10 @@ SCREEN_TRAINING_ROOT = 20_261_153
 SCREEN_EVALUATION_ROOT = 20_261_154
 CONFIRMATION_ROOTS = frozenset((20_261_155, 20_261_156, 20_261_157, 20_261_158))
 EXP649_FORMAL_ROOT = 20_261_149
-CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS = frozenset((20_261_159,))
+PREREGISTERED_READINESS_CALIBRATION_ROOT = 20_261_161
+CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS = frozenset(
+    (20_261_159, 20_261_160)
+)
 
 
 CALIBRATION_RUNNER = ROOT / "experiments/exp_648_structured_trajectory_consistency/run.py"
@@ -103,9 +106,26 @@ ROOT_20261159_SUPERSEDED_CHARGE = {
     "eligible_for_cache_reuse": False,
     "classification": "consumed-complete-components-but-chronology-nonconforming",
 }
-READINESS_HISTORICAL_COMPLETED_CHARGE = {
+ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE = {
+    "root": 20_261_160,
+    "wall_seconds": 5294.4,
+    "aggregate_cpu_seconds": 21000.0,
+    "semantics": "conservative-accounting-allowance-never-an-exact-internal-observation",
+    "exact_internal_observation": False,
+    "completed_work_claimed": False,
+}
+READINESS_COMPLETED_HISTORY_CHARGE = {
     "wall_seconds": 9007.853947323996,
     "aggregate_cpu_seconds": 36721.035879589996,
+}
+READINESS_CARRIED_CHARGE = {
+    "wall_seconds": 14302.253947323995,
+    "aggregate_cpu_seconds": 57721.035879589996,
+}
+READINESS_CUMULATIVE_RUNAWAY_CEILINGS = {
+    "wall_seconds": 25000.0,
+    "aggregate_cpu_seconds": 100000.0,
+    "scope": "independent-cumulative-runaway-protection-only-never-per-attempt-or-fidelity-cap",
 }
 READINESS_SUPERSEDED_CALIBRATIONS = (
     *cal.PRIOR_SUPERSEDED_CALIBRATIONS,
@@ -161,6 +181,12 @@ ROOT_20261159_SUPERSEDED_DIR = (
 )
 ROOT_20261159_CLASSIFICATION_PATH = (
     ROOT_20261159_SUPERSEDED_DIR / "classification.json"
+)
+ROOT_20261160_SUPERSEDED_DIR = (
+    TRACKED_SCREEN_DIR / "superseded/root-20261160"
+)
+ROOT_20261160_CLASSIFICATION_PATH = (
+    ROOT_20261160_SUPERSEDED_DIR / "classification.json"
 )
 MAX_AUTHORIZATION_BYTES = 65_536
 
@@ -770,7 +796,11 @@ def verify_readiness_calibration_authorization(
         EXP649_FORMAL_ROOT, *CONFIRMATION_ROOTS,
         *CONSUMED_REJECTED_READINESS_CALIBRATION_ROOTS,
     }
-    if root in prohibited or root <= 0 or (root == TEST_ONLY_ROOT and not allow_test_root):
+    allowed_root = (
+        root == PREREGISTERED_READINESS_CALIBRATION_ROOT
+        or (root == TEST_ONLY_ROOT and allow_test_root)
+    )
+    if root in prohibited or root <= 0 or not allowed_root:
         raise PermissionError("calibration authorization root is reused, test-only, or prohibited")
     if payload["decision"] != "authorize-non-scientific-screen-readiness-calibration-only":
         raise PermissionError("calibration authorization decision mismatch")
@@ -1119,18 +1149,30 @@ def validate_core_receipt_release_equality(
             raise RuntimeError(f"readiness core/receipt mismatch for {field}")
 
 
-def readiness_historical_decomposition() -> dict[str, float]:
-    historical_wall = READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
-    historical_cpu = READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
+def readiness_accounting_decomposition() -> dict[str, Any]:
+    completed_wall = READINESS_COMPLETED_HISTORY_CHARGE["wall_seconds"]
+    completed_cpu = READINESS_COMPLETED_HISTORY_CHARGE["aggregate_cpu_seconds"]
     prior_wall = READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
     prior_cpu = READINESS_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
     return {
-        "historical_completed_calibration_wall_seconds": historical_wall,
-        "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
-        "historical_prior_superseded_wall_seconds_charged": prior_wall,
-        "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
-        "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
-        "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+        "completed_history_wall_seconds": completed_wall,
+        "completed_history_aggregate_cpu_seconds": completed_cpu,
+        "completed_prior_superseded_wall_seconds": prior_wall,
+        "completed_prior_superseded_aggregate_cpu_seconds": prior_cpu,
+        "completed_accepted_active_wall_seconds": completed_wall - prior_wall,
+        "completed_accepted_active_aggregate_cpu_seconds": completed_cpu - prior_cpu,
+        "failed_attempt_conservative_allowance_wall_seconds": (
+            ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["wall_seconds"]
+        ),
+        "failed_attempt_conservative_allowance_aggregate_cpu_seconds": (
+            ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["aggregate_cpu_seconds"]
+        ),
+        "failed_attempt_allowance_exact_internal_observation": False,
+        "failed_attempt_allowance_completed_work_claimed": False,
+        "carried_charge_wall_seconds": READINESS_CARRIED_CHARGE["wall_seconds"],
+        "carried_charge_aggregate_cpu_seconds": READINESS_CARRIED_CHARGE[
+            "aggregate_cpu_seconds"
+        ],
     }
 
 
@@ -1138,28 +1180,27 @@ def observed_readiness_recovery(
     *, active_wall: float, active_cpu: float, reused_wall: float,
     reused_cpu: float, peak_rss: int,
 ) -> dict[str, Any]:
-    historical = readiness_historical_decomposition()
+    accounting = readiness_accounting_decomposition()
     wall_total = (
-        historical["historical_completed_calibration_wall_seconds"]
+        accounting["carried_charge_wall_seconds"]
         + active_wall + reused_wall
     )
     cpu_total = (
-        historical["historical_completed_calibration_aggregate_cpu_seconds"]
+        accounting["carried_charge_aggregate_cpu_seconds"]
         + active_cpu + reused_cpu
     )
     return {
         "scope": "observed-launch-to-pre-outer-seal-sample-not-through-process-exit",
-        "accounting_formula": "historical_prior_superseded + historical_accepted_active + observed_pre_outer_seal_active + current_reused",
+        "accounting_formula": "completed_history + failed_attempt_conservative_allowance + observed_pre_outer_seal_active + current_reused",
         "prior_superseded_calibrations": list(READINESS_SUPERSEDED_CALIBRATIONS),
-        **historical,
+        **accounting,
+        "carried_charge_applied_exactly_once": True,
         "current_readiness_observed_pre_outer_seal_active_wall_seconds": active_wall,
         "current_readiness_observed_pre_outer_seal_active_aggregate_cpu_seconds": active_cpu,
         "current_readiness_reused_wall_seconds_charged": reused_wall,
         "current_readiness_reused_aggregate_cpu_seconds_charged": reused_cpu,
-        "cumulative_historical_prior_accepted_observed_active_reused_wall_seconds": wall_total,
-        "cumulative_historical_prior_accepted_observed_active_reused_aggregate_cpu_seconds": cpu_total,
-        "historical_plus_observed_active_and_reused_wall_seconds": wall_total,
-        "historical_plus_observed_active_and_reused_aggregate_cpu_seconds": cpu_total,
+        "cumulative_carried_observed_active_reused_wall_seconds": wall_total,
+        "cumulative_carried_observed_active_reused_aggregate_cpu_seconds": cpu_total,
         "observed_pre_outer_seal_peak_rss_bytes": int(peak_rss),
     }
 
@@ -1169,25 +1210,33 @@ def validate_observed_readiness_recovery(recovery: dict[str, Any]) -> None:
         raise RuntimeError("readiness observed recovery scope mismatch")
     if recovery.get("prior_superseded_calibrations") != list(READINESS_SUPERSEDED_CALIBRATIONS):
         raise RuntimeError("readiness observed superseded evidence mismatch")
-    historical = readiness_historical_decomposition()
-    for key, expected in historical.items():
-        if not math.isclose(float(recovery.get(key, -1)), expected, rel_tol=0, abs_tol=1e-9):
-            raise RuntimeError(f"readiness observed historical mismatch for {key}")
+    accounting = readiness_accounting_decomposition()
+    for key, expected in accounting.items():
+        observed = recovery.get(key)
+        if type(expected) is bool:
+            if observed is not expected:
+                raise RuntimeError(f"readiness observed accounting mismatch for {key}")
+        elif not math.isclose(float(observed), expected, rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError(f"readiness observed accounting mismatch for {key}")
+    if recovery.get("carried_charge_applied_exactly_once") is not True:
+        raise RuntimeError("readiness observed carried charge exact-once marker missing")
     for resource in ("wall", "aggregate_cpu"):
         active = float(recovery.get(f"current_readiness_observed_pre_outer_seal_active_{resource}_seconds", -1))
         reused = float(recovery.get(f"current_readiness_reused_{resource}_seconds_charged", -1))
-        prior = float(recovery[f"historical_prior_superseded_{resource}_seconds_charged"])
-        accepted = float(recovery[f"historical_accepted_active_{resource}_seconds"])
-        total = float(recovery.get(f"cumulative_historical_prior_accepted_observed_active_reused_{resource}_seconds", -1))
-        if min(active, reused, prior, accepted, total) < 0 or not math.isclose(
-            total, prior + accepted + active + reused, rel_tol=0, abs_tol=1e-6
+        completed = float(recovery[f"completed_history_{resource}_seconds"])
+        allowance = float(
+            recovery[f"failed_attempt_conservative_allowance_{resource}_seconds"]
+        )
+        carried = float(recovery[f"carried_charge_{resource}_seconds"])
+        total = float(recovery.get(f"cumulative_carried_observed_active_reused_{resource}_seconds", -1))
+        if min(active, reused, completed, allowance, carried, total) < 0:
+            raise RuntimeError(f"readiness observed cumulative {resource} is negative")
+        if not math.isclose(carried, completed + allowance, rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError(f"readiness observed carried {resource} mismatch")
+        if not math.isclose(
+            total, carried + active + reused, rel_tol=0, abs_tol=1e-6
         ):
             raise RuntimeError(f"readiness observed cumulative {resource} mismatch")
-        if not math.isclose(
-            float(recovery.get(f"historical_plus_observed_active_and_reused_{resource}_seconds", -1)),
-            total, rel_tol=0, abs_tol=1e-6,
-        ):
-            raise RuntimeError(f"readiness observed historical-plus-current {resource} mismatch")
     if int(recovery.get("observed_pre_outer_seal_peak_rss_bytes", 0)) <= 0:
         raise RuntimeError("readiness observed RSS missing")
 
@@ -1529,24 +1578,38 @@ def validate_readiness_calibration_receipt(
     if payload["full_fidelity"] is not True or payload["boundary"] != expected_boundary:
         raise RuntimeError("readiness calibration fidelity/scientific boundary mismatch")
     recovery = payload["recovery_charges"]
-    if not math.isclose(float(recovery.get("historical_completed_calibration_wall_seconds", 0)), READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"], abs_tol=1e-9) or not math.isclose(float(recovery.get("historical_completed_calibration_aggregate_cpu_seconds", 0)), READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"], abs_tol=1e-9):
-        raise RuntimeError("historical calibration charge mismatch")
     if recovery.get("scope") != "prepublication-provisional-snapshot-before-inner-publication":
         raise RuntimeError("readiness calibration provisional recovery scope mismatch")
     if recovery.get("prior_superseded_calibrations") != list(READINESS_SUPERSEDED_CALIBRATIONS):
         raise RuntimeError("readiness calibration superseded evidence list mismatch")
+    accounting = readiness_accounting_decomposition()
+    for key, expected in accounting.items():
+        observed = recovery.get(key)
+        if type(expected) is bool:
+            if observed is not expected:
+                raise RuntimeError(f"readiness provisional accounting mismatch for {key}")
+        elif not math.isclose(float(observed), expected, rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError(f"readiness provisional accounting mismatch for {key}")
+    if recovery.get("carried_charge_applied_exactly_once") is not True:
+        raise RuntimeError("readiness provisional carried exact-once marker missing")
     expected_orchestration = {
         "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
         "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
         "old_base_only_cache_loaded_or_saved": False,
         "fresh_augmented_warmup_before_repeat_cache_reuse": True,
-        "historical_and_superseded_charge_applied_exactly_once": True,
-        "guard_historical_and_superseded_wall_seconds": (
-            READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
+        "carried_charge_applied_exactly_once": True,
+        "guard_carried_wall_seconds": (
+            READINESS_CARRIED_CHARGE["wall_seconds"]
         ),
-        "guard_historical_and_superseded_aggregate_cpu_seconds": (
-            READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
+        "guard_carried_aggregate_cpu_seconds": (
+            READINESS_CARRIED_CHARGE["aggregate_cpu_seconds"]
         ),
+        "guard_configured_wall_ceiling_seconds": READINESS_CUMULATIVE_RUNAWAY_CEILINGS[
+            "wall_seconds"
+        ],
+        "guard_configured_aggregate_cpu_ceiling_seconds": READINESS_CUMULATIVE_RUNAWAY_CEILINGS[
+            "aggregate_cpu_seconds"
+        ],
         "reused_complete_augmented_repeat_indices": [
             int(record["repeat_index"])
             for record in repeats
@@ -1559,16 +1622,16 @@ def validate_readiness_calibration_receipt(
     for resource in ("wall", "aggregate_cpu"):
         active = float(recovery.get(f"prepublication_provisional_active_{resource}_seconds", 0))
         reused = float(recovery.get(f"prepublication_provisional_reused_{resource}_seconds_charged", 0))
-        prior = float(recovery.get(f"historical_prior_superseded_{resource}_seconds_charged", 0))
-        accepted = float(recovery.get(f"historical_accepted_active_{resource}_seconds", -1))
-        historical = float(recovery[f"historical_completed_calibration_{resource}_seconds"])
-        cumulative = float(recovery.get(f"prepublication_provisional_cumulative_{resource}_seconds", -1))
-        if min(active, reused, prior, accepted, cumulative) < 0 or not math.isclose(historical, prior + accepted, rel_tol=0, abs_tol=1e-6):
-            raise RuntimeError(f"readiness calibration historical decomposition {resource} mismatch")
-        if not math.isclose(cumulative, prior + accepted + active + reused, rel_tol=0, abs_tol=1e-6):
+        completed = float(recovery[f"completed_history_{resource}_seconds"])
+        allowance = float(recovery[f"failed_attempt_conservative_allowance_{resource}_seconds"])
+        carried = float(recovery[f"carried_charge_{resource}_seconds"])
+        cumulative = float(recovery.get(f"prepublication_provisional_cumulative_carried_active_reused_{resource}_seconds", -1))
+        if min(active, reused, completed, allowance, carried, cumulative) < 0:
+            raise RuntimeError(f"readiness calibration negative {resource} accounting")
+        if not math.isclose(carried, completed + allowance, rel_tol=0, abs_tol=1e-9):
+            raise RuntimeError(f"readiness calibration carried {resource} mismatch")
+        if not math.isclose(cumulative, carried + active + reused, rel_tol=0, abs_tol=1e-6):
             raise RuntimeError(f"readiness calibration cumulative {resource} charge mismatch")
-        if not math.isclose(float(recovery[f"prepublication_provisional_plus_historical_{resource}_seconds"]), historical + active + reused, rel_tol=0, abs_tol=1e-6):
-            raise RuntimeError(f"readiness calibration historical-plus-new {resource} mismatch")
     if int(recovery.get("prepublication_provisional_process_peak_rss_bytes", 0)) <= 0:
         raise RuntimeError("readiness calibration final process peak RSS missing")
     if base_artifact is not None:
@@ -1840,17 +1903,127 @@ def _bare_augmented_record(record: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def apply_readiness_historical_charge_once(guard: Any) -> None:
-    if getattr(guard, "readiness_historical_charge_applied", False):
-        raise RuntimeError("readiness cumulative historical charge applied more than once")
-    guard.prior_superseded_wall_seconds = READINESS_HISTORICAL_COMPLETED_CHARGE[
-        "wall_seconds"
-    ]
-    guard.prior_superseded_cpu_seconds = READINESS_HISTORICAL_COMPLETED_CHARGE[
+def apply_readiness_carried_charge_once(guard: Any) -> None:
+    if getattr(guard, "readiness_carried_charge_applied", False):
+        raise RuntimeError("readiness cumulative carried charge applied more than once")
+    if not math.isclose(
+        float(guard.wall_ceiling),
+        READINESS_CUMULATIVE_RUNAWAY_CEILINGS["wall_seconds"],
+        rel_tol=0,
+        abs_tol=1e-9,
+    ) or not math.isclose(
+        float(guard.cpu_ceiling),
+        READINESS_CUMULATIVE_RUNAWAY_CEILINGS["aggregate_cpu_seconds"],
+        rel_tol=0,
+        abs_tol=1e-9,
+    ):
+        raise RuntimeError("readiness guard ceilings differ from configured cumulative ceilings")
+    initial_wall = float(guard.prior_superseded_wall_seconds)
+    initial_cpu = float(guard.prior_superseded_cpu_seconds)
+    if not math.isclose(
+        initial_wall,
+        float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]),
+        rel_tol=0,
+        abs_tol=1e-9,
+    ) or not math.isclose(
+        initial_cpu,
+        float(cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]),
+        rel_tol=0,
+        abs_tol=1e-9,
+    ):
+        raise RuntimeError("readiness guard initial completed-history charge mismatch")
+    guard.readiness_initial_completed_history_wall_seconds = initial_wall
+    guard.readiness_initial_completed_history_cpu_seconds = initial_cpu
+    guard.prior_superseded_wall_seconds = READINESS_CARRIED_CHARGE["wall_seconds"]
+    guard.prior_superseded_cpu_seconds = READINESS_CARRIED_CHARGE[
         "aggregate_cpu_seconds"
     ]
-    guard.readiness_historical_charge_applied = True
-    guard("readiness:cumulative-historical-and-superseded-charge-applied-once")
+    guard.readiness_carried_charge_applied = True
+    guard.readiness_carried_charge_applied_exactly_once = True
+    guard("readiness:cumulative-carried-charge-applied-once")
+
+
+ROOT_20261160_PLANNING_CACHE_BINDINGS = {
+    "root": 20_261_160,
+    "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+    "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
+    "calibration_runner_sha256": CALIBRATION_RUNNER_SHA256,
+    "config_sha256": "2c6f04d3f3302c5ec7e0019176b4076cc66d56f8b7d63977dee1b4f54bc24c7c",
+    "resource_protocol_sha256": "f66c6df75238070e4af162eadff48f4dbbe5f04439a6ad42f77333074b82e52b",
+    "workload_sha256": "11151e62af2ee6eb6ac02fb32a290f6dd2155b95a97220033c30bace7b3b7c15",
+    "corpus_provenance_amendment_sha256": "9f2b3ab9f82a083adca05e21f08f23cfe0fdcedfce47afa656be89e87701def9",
+    "chronology_contract_sha256": "54c9e4384526a3f42f293489d951dcf4de45bc462aabbc01c8abb5d76720b623",
+}
+ROOT_20261160_PLANNING_CACHE_FILES = {
+    1: (
+        "repeat-1-3207e01b0318af83234079e8488a9431c66fa69e174dd9ad449bf798f1525788.json",
+        "98a69670a229c15de7193c5878571fcc28a6d013e9b3ae23a7ac52be92624d80",
+    ),
+    2: (
+        "repeat-2-0676d6cbc44c56f65daeb35d5d26d757047bbb9f937c12805a387bf68b16d59e.json",
+        "8e8115d2b41974c20adfad734a847ec2ac64e07f5636325301b8793ffb1adc68",
+    ),
+}
+
+
+def verify_root20261160_planning_caches(
+    *, scratch_screen: Path = SCRATCH_SCREEN_DIR,
+) -> dict[str, Any]:
+    """Verify historical cache bytes without making them executable or reusable."""
+    cache_root = scratch_screen / "augmented-repeat-cache/root-20261160"
+    attempt = (
+        scratch_screen
+        / "readiness-calibration-attempts/cal-9e1f63a9fe3c6613"
+    )
+    verified = []
+    for repeat_index, (name, expected_sha) in sorted(
+        ROOT_20261160_PLANNING_CACHE_FILES.items()
+    ):
+        path = cache_root / name
+        raw = path.read_bytes()
+        payload = json.loads(raw)
+        if raw != canonical_json_bytes(payload, pretty=True):
+            raise RuntimeError("root20261160 planning cache is noncanonical")
+        if sha256_bytes(raw) != expected_sha:
+            raise RuntimeError("root20261160 planning cache byte hash mismatch")
+        fields = payload.get("cache_key_fields", {})
+        for key, expected in ROOT_20261160_PLANNING_CACHE_BINDINGS.items():
+            if fields.get(key) != expected:
+                raise RuntimeError(
+                    f"root20261160 planning cache binding mismatch for {key}"
+                )
+        if fields.get("seed") != 20_261_160:
+            raise RuntimeError("root20261160 planning cache seed mismatch")
+        ordinal = f"{repeat_index:02d}-repeat-{repeat_index}"
+        seal_path = attempt / "augmented-chronology" / f"{ordinal}-seal.json"
+        unit_path = attempt / "augmented-units" / ordinal / "augmented-unit.json"
+        seal_raw = seal_path.read_bytes()
+        seal = json.loads(seal_raw)
+        if seal_raw != canonical_json_bytes(seal, pretty=True):
+            raise RuntimeError("root20261160 source seal is noncanonical")
+        if payload.get("source_seal_sha256") != sha256_bytes(seal_raw):
+            raise RuntimeError("root20261160 planning cache source seal mismatch")
+        chronology = payload.get("source_chronology", {})
+        if chronology.get("seal") != seal:
+            raise RuntimeError("root20261160 planning cache chronology/seal mismatch")
+        unit_raw = unit_path.read_bytes()
+        unit = json.loads(unit_raw)
+        if unit_raw != canonical_json_bytes(unit, pretty=True):
+            raise RuntimeError("root20261160 source augmented record is noncanonical")
+        if payload.get("record") != _bare_augmented_record(unit):
+            raise RuntimeError("root20261160 planning cache/source record mismatch")
+        verified.append({
+            "repeat_index": repeat_index,
+            "cache_sha256": expected_sha,
+            "source_seal_sha256": sha256_bytes(seal_raw),
+            "source_augmented_record_sha256": sha256_bytes(unit_raw),
+        })
+    return {
+        "root": 20_261_160,
+        "status": "planning-evidence-only-executable-reuse-permanently-denied",
+        "verified": verified,
+        "current_binding_match_or_reuse_claimed": False,
+    }
 
 
 def readiness_augmented_cache_key_fields(
@@ -2238,7 +2411,9 @@ def _execute_one_augmented_readiness_unit(
     config: dict[str, Any], ordinal: int, unit: str,
     repeat_index: int | None, predecessor: dict[str, Any] | None,
     launcher_timing: dict[str, Any] | None,
+    stage_context: dict[str, Any],
 ) -> dict[str, Any]:
+    stage_context["stage"] = f"{unit}:chronology-start"
     start = _write_readiness_chronology_start(
         attempt=attempt, root=int(experiment.root_seed),
         authorization_sha256=authorization_sha256,
@@ -2248,6 +2423,7 @@ def _execute_one_augmented_readiness_unit(
     predecessor_sha = None if predecessor is None else predecessor["seal_sha256"]
     output = attempt / "augmented-units" / f"{ordinal:02d}-{unit}"
     record_path = output / "augmented-unit.json"
+    stage_context["stage"] = f"{unit}:cache-lookup-and-validation"
     cached = None if repeat_index is None else load_augmented_repeat_cache(
         experiment=experiment, authorization_sha256=authorization_sha256,
         repeat_index=repeat_index, config=config,
@@ -2255,13 +2431,17 @@ def _execute_one_augmented_readiness_unit(
     if cached is not None:
         cache_payload, cache_path, cache_sha = cached
         record = copy.deepcopy(cache_payload["record"])
+        stage_context["stage"] = f"{unit}:cache-reuse-charge"
         experiment.guard.add_reused(
             float(record["total_timing"]["wall_seconds"]),
             float(record["total_timing"]["aggregate_cpu_seconds"]),
         )
+        stage_context["stage"] = f"{unit}:cache-acceptance-guard"
         experiment.guard(f"readiness:{unit}:complete-augmented-cache-accepted")
+        stage_context["stage"] = f"{unit}:cached-record-publication"
         _atomic_write(record_path, canonical_json_bytes(record, pretty=True))
         experiment.guard(f"readiness:{unit}:cached-augmented-record-published")
+        stage_context["stage"] = f"{unit}:reused-chronology-seal"
         reference = _write_readiness_chronology_seal(
             attempt=attempt, root=int(experiment.root_seed),
             authorization_sha256=authorization_sha256,
@@ -2280,6 +2460,7 @@ def _execute_one_augmented_readiness_unit(
         }
 
     base_name = f"readiness-{unit}-{time.time_ns()}"
+    stage_context["stage"] = f"{unit}:base-complete-unit"
     record = copy.deepcopy(experiment.execute_complete_unit(
         base_name, repeat_index=repeat_index
     ))
@@ -2287,15 +2468,18 @@ def _execute_one_augmented_readiness_unit(
     record["base_total_timing_before_readiness_additions"] = copy.deepcopy(
         record["total_timing"]
     )
+    stage_context["stage"] = f"{unit}:source-replay"
     replay = measure_actual_source_replay_unit(
         experiment, output / "source-replay", psutil.Process()
     )
     experiment.guard(f"readiness:{unit}:source-replay-complete")
+    stage_context["stage"] = f"{unit}:mlflow-probe"
     probe = measure_readiness_mlflow_probe(
         authorization_sha256=authorization_sha256, unit=unit,
         output=output / "mlflow-probe", process=psutil.Process(),
     )
     experiment.guard(f"readiness:{unit}:mlflow-probe-complete")
+    stage_context["stage"] = f"{unit}:readiness-infrastructure"
     infrastructure = measure_readiness_infrastructure_unit(
         record, output / "readiness-infrastructure", psutil.Process()
     )
@@ -2315,11 +2499,14 @@ def _execute_one_augmented_readiness_unit(
         record["base_total_timing_before_readiness_additions"],
         replay["timing"], probe["timing"], infrastructure["timing"],
     )
+    stage_context["stage"] = f"{unit}:augmented-validation"
     validate_complete_readiness_timing(record)
     cal.validate_calibration_repeat(record, config)
     experiment.guard(f"readiness:{unit}:augmented-validation-complete")
+    stage_context["stage"] = f"{unit}:augmented-record-publication"
     _atomic_write(record_path, canonical_json_bytes(record, pretty=True))
     experiment.guard(f"readiness:{unit}:augmented-record-published")
+    stage_context["stage"] = f"{unit}:fresh-chronology-seal"
     reference = _write_readiness_chronology_seal(
         attempt=attempt, root=int(experiment.root_seed),
         authorization_sha256=authorization_sha256,
@@ -2336,6 +2523,7 @@ def _execute_one_augmented_readiness_unit(
         "augmented_cache_path": None,
     }
     if repeat_index is not None:
+        stage_context["stage"] = f"{unit}:augmented-cache-publication"
         cache_path, _cache_sha = save_augmented_repeat_cache(
             experiment=experiment, authorization_sha256=authorization_sha256,
             repeat_index=repeat_index, config=config, record=result,
@@ -2348,6 +2536,7 @@ def _execute_one_augmented_readiness_unit(
 def execute_synchronous_augmented_readiness_units(
     *, experiment: Any, attempt: Path, authorization_sha256: str,
     config: dict[str, Any], launcher_timing: dict[str, Any],
+    stage_context: dict[str, Any],
 ) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
     records: list[dict[str, Any]] = []
     predecessor = None
@@ -2358,6 +2547,7 @@ def execute_synchronous_augmented_readiness_units(
             ordinal=ordinal, unit=unit, repeat_index=repeat_index,
             predecessor=predecessor,
             launcher_timing=launcher_timing if ordinal == 0 else None,
+            stage_context=stage_context,
         )
         records.append(record)
         predecessor = record["readiness_chronology"]
@@ -2376,6 +2566,7 @@ def execute_synchronous_augmented_readiness_units(
         "warmup": records[0], "repeats": records[1:],
         "chronology": chronology,
     }
+    stage_context["stage"] = "all-units:chronology-validation"
     validate_readiness_chronology(payload)
     experiment.guard("readiness:all-synchronous-augmented-units-sealed")
     return records[0], records[1:], chronology
@@ -2457,24 +2648,71 @@ def _read_readiness_attempt_state(path: Path) -> dict[str, Any]:
     base_keys = {
         "schema_version", "attempt_id", "authorization_sha256", "phase", "complete",
     }
-    allowed_keys = base_keys | {"completion_manifest_sha256"}
+    allowed_keys = base_keys | {
+        "completion_manifest_sha256", "exception_receipt_sha256",
+        "failure_publication_error",
+    }
     if not base_keys.issubset(state) or not set(state).issubset(allowed_keys):
         raise RuntimeError("existing readiness attempt state key schema mismatch")
     if state["schema_version"] != "exp648-readiness-calibration-attempt-v1":
         raise RuntimeError("existing readiness attempt state schema mismatch")
     if not isinstance(state["authorization_sha256"], str) or len(state["authorization_sha256"]) != 64:
         raise RuntimeError("existing readiness attempt authorization binding is invalid")
-    if state["phase"] not in {"authorized", "sealed"} or not isinstance(state["complete"], bool):
+    if state["phase"] not in {
+        "authorized", "sealed", "failed", "failure-publication-failed",
+    } or not isinstance(state["complete"], bool):
         raise RuntimeError("existing readiness attempt phase is invalid")
     if (state["phase"] == "sealed") is not state["complete"]:
         raise RuntimeError("existing readiness attempt terminal state is inconsistent")
-    if state["complete"]:
+    if state["phase"] == "sealed":
         digest = state.get("completion_manifest_sha256")
         if not isinstance(digest, str) or len(digest) != 64:
             raise RuntimeError("sealed readiness attempt completion binding is invalid")
-    elif "completion_manifest_sha256" in state:
+        if set(state) != base_keys | {"completion_manifest_sha256"}:
+            raise RuntimeError("sealed readiness attempt state key schema mismatch")
+    elif state["phase"] == "failed":
+        digest = state.get("exception_receipt_sha256")
+        if not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None:
+            raise RuntimeError("failed readiness attempt receipt binding is invalid")
+        if set(state) != base_keys | {"exception_receipt_sha256"}:
+            raise RuntimeError("failed readiness attempt state key schema mismatch")
+    elif state["phase"] == "failure-publication-failed":
+        failure = state.get("failure_publication_error")
+        if (
+            not isinstance(failure, dict)
+            or set(failure) != {"type", "module"}
+            or not all(isinstance(value, str) and value for value in failure.values())
+            or set(state) != base_keys | {"failure_publication_error"}
+        ):
+            raise RuntimeError("failed-publication attempt state binding is invalid")
+    elif set(state) != base_keys:
         raise RuntimeError("incomplete readiness attempt has a completion binding")
     return state
+
+
+def _validate_failed_attempt_receipt(
+    directory: Path, state: dict[str, Any]
+) -> dict[str, Any]:
+    path = directory / "catchable-exception-boundary.json"
+    raw = _read_regular_file_no_follow(path, label="catchable exception receipt")
+    try:
+        receipt = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as error:
+        raise RuntimeError("catchable exception receipt is malformed") from error
+    if not isinstance(receipt, dict) or raw != canonical_json_bytes(receipt, pretty=True):
+        raise RuntimeError("catchable exception receipt is noncanonical")
+    if sha256_bytes(raw) != state["exception_receipt_sha256"]:
+        raise RuntimeError("failed readiness attempt receipt hash mismatch")
+    context = receipt.get("context", {})
+    if (
+        receipt.get("schema_version") != "exp648-catchable-exception-boundary-v1"
+        or receipt.get("status") != "consumed-incomplete-non-scientific"
+        or receipt.get("complete") is not False
+        or context.get("attempt_id") != state["attempt_id"]
+        or context.get("authorization_sha256") != state["authorization_sha256"]
+    ):
+        raise RuntimeError("failed readiness attempt receipt/state binding mismatch")
+    return receipt
 
 
 def assert_readiness_authorization_not_sealed_or_published(
@@ -2484,16 +2722,45 @@ def assert_readiness_authorization_not_sealed_or_published(
     prior = [item for _, item in _parsed_readiness_attempt_directories(attempts_root, stem)]
     for directory in prior:
         state_path = directory / "attempt-state.json"
+        receipt_path = directory / "catchable-exception-boundary.json"
         if os.path.lexists(state_path):
             state = _read_readiness_attempt_state(state_path)
             if state["attempt_id"] != directory.name:
                 raise RuntimeError("existing readiness attempt ID binding mismatch")
             if state["authorization_sha256"] != authorization_sha256:
                 raise RuntimeError("existing readiness attempt provenance mismatch")
+            if state["phase"] == "failed":
+                _validate_failed_attempt_receipt(directory, state)
+                raise PermissionError(
+                    "failed readiness calibration attempt cannot be relaunched"
+                )
+            if state["phase"] == "failure-publication-failed":
+                if os.path.lexists(receipt_path):
+                    _read_regular_file_no_follow(
+                        receipt_path, label="unexpected catchable exception receipt"
+                    )
+                    raise RuntimeError(
+                        "failed-publication state unexpectedly has an exception receipt"
+                    )
+                raise PermissionError(
+                    "failed-publication readiness attempt cannot be relaunched"
+                )
+            if os.path.lexists(receipt_path):
+                _read_regular_file_no_follow(
+                    receipt_path, label="unbound catchable exception receipt"
+                )
+                raise RuntimeError(
+                    "catchable exception receipt exists without failed attempt state"
+                )
             if state["complete"] or state["phase"] == "sealed":
                 raise PermissionError(
                     "sealed readiness calibration attempt cannot be relaunched"
                 )
+        elif os.path.lexists(receipt_path):
+            _read_regular_file_no_follow(
+                receipt_path, label="orphan catchable exception receipt"
+            )
+            raise RuntimeError("catchable exception receipt lacks attempt state")
         seal_path = directory / "completion-seal.json"
         if os.path.lexists(seal_path):
             raw = _read_regular_file_no_follow(
@@ -2620,6 +2887,142 @@ def execute_readiness_calibration(
         )
 
 
+class CatchableExceptionReceiptPublicationError(RuntimeError):
+    """Fail-closed signal when an attempt failure receipt cannot be published."""
+
+    def __init__(self, original: Exception, publication: Exception) -> None:
+        super().__init__("catchable-exception boundary receipt publication failed")
+        self.original_exception = original
+        self.publication_exception = publication
+
+
+def _attempt_artifact_boundary(attempt: Path) -> dict[str, Any]:
+    receipt_name = "catchable-exception-boundary.json"
+    files = sorted(
+        path for path in attempt.rglob("*")
+        if path.is_file() and path.name != receipt_name
+    )
+    manifest = {
+        path.relative_to(attempt).as_posix(): sha256(path) for path in files
+    }
+    manifest_bytes = "".join(
+        f"{digest}  {name}\n" for name, digest in manifest.items()
+    ).encode("utf-8")
+    seals = sorted((attempt / "augmented-chronology").glob("*-seal.json"))
+    last_seal = None
+    if seals:
+        seal_path = seals[-1]
+        seal_raw = seal_path.read_bytes()
+        seal = json.loads(seal_raw)
+        if seal_raw != canonical_json_bytes(seal, pretty=True):
+            raise RuntimeError("last completed chronology seal is noncanonical")
+        last_seal = {
+            "path": seal_path.relative_to(attempt).as_posix(),
+            "sha256": sha256_bytes(seal_raw),
+            "ordinal": seal.get("ordinal"),
+            "unit": seal.get("unit"),
+            "augmented_record_sha256": seal.get("augmented_record_sha256"),
+        }
+    return {
+        "scope": "all-attempt-files-present-before-exception-receipt-publication",
+        "file_count": len(files),
+        "total_bytes": sum(path.stat().st_size for path in files),
+        "sha256sum_manifest_bytes": len(manifest_bytes),
+        "sha256sum_manifest_sha256": sha256_bytes(manifest_bytes),
+        "files": manifest,
+        "last_completed_chronology_seal": last_seal,
+    }
+
+
+def write_catchable_exception_boundary_receipt(
+    *, attempt: Path, attempt_id: str, root_seed: int,
+    authorization_sha256: str, stage: str, error: Exception,
+    launch_wall_started: float, launch_cpu_started: float,
+    launch_peak_rss: int, last_guard_check: dict[str, Any] | None,
+) -> dict[str, Any]:
+    artifact_boundary = _attempt_artifact_boundary(attempt)
+    process = psutil.Process()
+    cpu = process.cpu_times()
+    wall_sample = time.perf_counter()
+    observation = {
+        "monotonic_wall_seconds": wall_sample - launch_wall_started,
+        "process_user_plus_system_cpu_seconds": (
+            float(cpu.user + cpu.system) - launch_cpu_started
+        ),
+        "peak_rss_bytes": max(
+            int(launch_peak_rss), cal.process_peak_rss_bytes(process)
+        ),
+        "wall_sample_perf_counter": wall_sample,
+        "launch_wall_perf_counter": launch_wall_started,
+        "process_user_seconds_at_sample": float(cpu.user),
+        "process_system_seconds_at_sample": float(cpu.system),
+        "launch_process_user_plus_system_seconds": launch_cpu_started,
+    }
+    context = {
+        "stage": stage,
+        "root": int(root_seed),
+        "authorization_sha256": authorization_sha256,
+        "attempt_id": attempt_id,
+    }
+    payload = {
+        "schema_version": "exp648-catchable-exception-boundary-v1",
+        "status": "consumed-incomplete-non-scientific",
+        "context": context,
+        "exception": {
+            "type": type(error).__name__,
+            "module": type(error).__module__,
+            "message": str(error),
+        },
+        "resource_observation": observation,
+        "artifact_boundary": artifact_boundary,
+        "last_completed_chronology_seal": artifact_boundary[
+            "last_completed_chronology_seal"
+        ],
+        "last_guard_check": copy.deepcopy(last_guard_check),
+        "coverage": {
+            "ends_at": "catchable-exception-boundary-before-receipt-serialization",
+            "excluded": [
+                "receipt serialization",
+                "receipt atomic write and durability sync",
+                "terminal failed attempt-state serialization and atomic write",
+                "exception re-raise",
+                "stdout or stderr publication",
+                "stack unwind",
+                "context-manager and interpreter teardown",
+                "process exit",
+            ],
+            "post_exit_coverage_claimed": False,
+        },
+        "complete": False,
+        "scientific_accuracy_or_selection_reported": False,
+    }
+    _atomic_write(
+        attempt / "catchable-exception-boundary.json",
+        canonical_json_bytes(payload, pretty=True),
+    )
+    return payload
+
+
+def write_terminal_failed_attempt_state(
+    *, attempt: Path, attempt_id: str, authorization_sha256: str,
+    exception_receipt_sha256: str,
+) -> dict[str, Any]:
+    if re.fullmatch(r"[0-9a-f]{64}", exception_receipt_sha256) is None:
+        raise RuntimeError("terminal failed attempt receipt hash is invalid")
+    payload = {
+        "schema_version": "exp648-readiness-calibration-attempt-v1",
+        "attempt_id": attempt_id,
+        "authorization_sha256": authorization_sha256,
+        "phase": "failed",
+        "complete": False,
+        "exception_receipt_sha256": exception_receipt_sha256,
+    }
+    _atomic_write(
+        attempt / "attempt-state.json", canonical_json_bytes(payload, pretty=True)
+    )
+    return payload
+
+
 def _execute_readiness_calibration_locked(
     authorization: dict[str, Any], *, launch_wall_started: float,
     launch_cpu_started: float, launch_peak_rss: int,
@@ -2636,6 +3039,96 @@ def _execute_readiness_calibration_locked(
         "attempt_id": attempt_id, "authorization_sha256": auth_sha,
         "phase": "authorized", "complete": False,
     }, pretty=True))
+    stage_context: dict[str, Any] = {
+        "stage": "authorized-attempt-created",
+        "guard": None,
+    }
+    try:
+        return _execute_readiness_calibration_attempt_body(
+            authorization,
+            attempt_id=attempt_id,
+            attempt=attempt,
+            stage_context=stage_context,
+            launch_wall_started=launch_wall_started,
+            launch_cpu_started=launch_cpu_started,
+            launch_peak_rss=launch_peak_rss,
+        )
+    except Exception as error:
+        guard = stage_context.get("guard")
+        last_guard_check = None
+        if guard is not None and getattr(guard, "checks", None):
+            last_guard_check = copy.deepcopy(guard.checks[-1])
+        exception_context = {
+            "stage": stage_context["stage"],
+            "root": root_seed,
+            "authorization_sha256": auth_sha,
+            "attempt_id": attempt_id,
+            "last_guard_check": last_guard_check,
+        }
+        try:
+            error.exp648_attempt_context = exception_context
+        except Exception:
+            # Exception subclasses need not permit arbitrary attributes; that
+            # must never prevent the attempt-bound failure receipt itself.
+            pass
+        try:
+            write_catchable_exception_boundary_receipt(
+                attempt=attempt,
+                attempt_id=attempt_id,
+                root_seed=root_seed,
+                authorization_sha256=auth_sha,
+                stage=stage_context["stage"],
+                error=error,
+                launch_wall_started=launch_wall_started,
+                launch_cpu_started=launch_cpu_started,
+                launch_peak_rss=launch_peak_rss,
+                last_guard_check=last_guard_check,
+            )
+        except Exception as publication_error:
+            emergency = {
+                "schema_version": "exp648-readiness-calibration-attempt-v1",
+                "attempt_id": attempt_id,
+                "authorization_sha256": auth_sha,
+                "phase": "failure-publication-failed",
+                "complete": False,
+                "failure_publication_error": {
+                    "type": type(publication_error).__name__,
+                    "module": type(publication_error).__module__,
+                },
+            }
+            try:
+                _atomic_write(
+                    attempt / "attempt-state.json",
+                    canonical_json_bytes(emergency, pretty=True),
+                )
+            except Exception:
+                pass
+            raise CatchableExceptionReceiptPublicationError(
+                error, publication_error
+            ) from publication_error
+        receipt_path = attempt / "catchable-exception-boundary.json"
+        try:
+            write_terminal_failed_attempt_state(
+                attempt=attempt,
+                attempt_id=attempt_id,
+                authorization_sha256=auth_sha,
+                exception_receipt_sha256=sha256(receipt_path),
+            )
+        except Exception as publication_error:
+            raise CatchableExceptionReceiptPublicationError(
+                error, publication_error
+            ) from publication_error
+        raise
+
+
+def _execute_readiness_calibration_attempt_body(
+    authorization: dict[str, Any], *, attempt_id: str, attempt: Path,
+    stage_context: dict[str, Any], launch_wall_started: float,
+    launch_cpu_started: float, launch_peak_rss: int,
+) -> dict[str, Any]:
+    root_seed = int(authorization["calibration_root"])
+    auth_sha = authorization["authorization_sha256"]
+    stage_context["stage"] = "executed-config-publication"
     config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     config["resource_protocol"]["calibration"]["root"] = root_seed
     config["seed_roles"]["calibration_root"]["seed"] = root_seed
@@ -2653,11 +3146,14 @@ def _execute_readiness_calibration_locked(
         digest = sha256_bytes(payload)
         return {"sha256": digest, "bytes": len(payload), "raw_path": raw.relative_to(ROOT).as_posix(), "raw_sha256": digest, "tracked_path": tracked.relative_to(ROOT).as_posix(), "tracked_sha256": digest, "raw_tracked_byte_identical": True, "preserved_before_root_authorization": True}
     try:
+        stage_context["stage"] = "calibration-constructor"
         cal.CALIBRATION_ROOT = root_seed
         cal.ALLOWED_MODE_ROOTS["calibration"] = frozenset((root_seed,))
         cal.preserve_executed_config = preserve_local
         experiment = cal.CalibrationExperiment(config_path, attempt / "raw")
-        apply_readiness_historical_charge_once(experiment.guard)
+        stage_context["guard"] = experiment.guard
+        stage_context["stage"] = "cumulative-charge-application"
+        apply_readiness_carried_charge_once(experiment.guard)
         setup_process = psutil.Process()
         setup_cpu = setup_process.cpu_times()
         prewarmup_launcher = {
@@ -2666,17 +3162,20 @@ def _execute_readiness_calibration_locked(
             "peak_rss_bytes": max(launch_peak_rss, cal.process_peak_rss_bytes(setup_process)),
             "captured_before_warmup_and_repeats": True,
         }
+        stage_context["stage"] = "synchronous-augmented-unit-execution"
         warmup, repeats, chronology = execute_synchronous_augmented_readiness_units(
             experiment=experiment,
             attempt=attempt,
             authorization_sha256=auth_sha,
             config=config,
             launcher_timing=prewarmup_launcher,
+            stage_context=stage_context,
         )
     finally:
         cal.CALIBRATION_ROOT = original_root
         cal.ALLOWED_MODE_ROOTS["calibration"] = original_allowed
         cal.preserve_executed_config = original_preserve
+    stage_context["stage"] = "dynamic-budget-resolution"
     launcher = prewarmup_launcher
     budgets, component_resolution = resolve_readiness_screen_budgets(
         repeats, launcher, warmup
@@ -2689,34 +3188,33 @@ def _execute_readiness_calibration_locked(
     active_wall = time.perf_counter() - launch_wall_started
     active_cpu = float(final_cpu.user + final_cpu.system) - launch_cpu_started
     final_peak_rss = max(launch_peak_rss, cal.process_peak_rss_bytes(final_process))
-    historical_wall = READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
-    historical_cpu = READINESS_HISTORICAL_COMPLETED_CHARGE[
-        "aggregate_cpu_seconds"
-    ]
-    prior_wall = READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
-    prior_cpu = READINESS_SUPERSEDED_CALIBRATION_CHARGE[
-        "aggregate_cpu_seconds"
-    ]
+    accounting = readiness_accounting_decomposition()
     reused_wall = float(experiment.guard.reused_wall_seconds)
     reused_cpu = float(experiment.guard.reused_cpu_seconds)
     recovery = {
         "scope": "prepublication-provisional-snapshot-before-inner-publication",
-        "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
+        "accounting_formula": "completed_history + failed_attempt_conservative_allowance + prepublication_provisional_active + prepublication_provisional_reused",
         "augmented_unit_orchestration": {
             "chronology_contract_sha256": READINESS_CHRONOLOGY_CONTRACT_SHA256,
             "execution_order": [name for name, _ in READINESS_AUGMENTED_UNIT_ORDER],
             "old_base_only_cache_loaded_or_saved": False,
             "fresh_augmented_warmup_before_repeat_cache_reuse": True,
-            "historical_and_superseded_charge_applied_exactly_once": bool(
+            "carried_charge_applied_exactly_once": bool(
                 getattr(
-                    experiment.guard, "readiness_historical_charge_applied", False
+                    experiment.guard, "readiness_carried_charge_applied_exactly_once", False
                 )
             ),
-            "guard_historical_and_superseded_wall_seconds": float(
+            "guard_carried_wall_seconds": float(
                 experiment.guard.prior_superseded_wall_seconds
             ),
-            "guard_historical_and_superseded_aggregate_cpu_seconds": float(
+            "guard_carried_aggregate_cpu_seconds": float(
                 experiment.guard.prior_superseded_cpu_seconds
+            ),
+            "guard_configured_wall_ceiling_seconds": float(
+                experiment.guard.wall_ceiling
+            ),
+            "guard_configured_aggregate_cpu_ceiling_seconds": float(
+                experiment.guard.cpu_ceiling
             ),
             "reused_complete_augmented_repeat_indices": [
                 int(record["repeat_index"])
@@ -2726,20 +3224,14 @@ def _execute_readiness_calibration_locked(
             "all_augmented_units_validated_and_sealed_before_next_start": True,
         },
         "prior_superseded_calibrations": list(READINESS_SUPERSEDED_CALIBRATIONS),
-        "historical_completed_calibration_wall_seconds": historical_wall,
-        "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
-        "historical_prior_superseded_wall_seconds_charged": prior_wall,
-        "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
-        "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
-        "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+        **accounting,
+        "carried_charge_applied_exactly_once": True,
         "prepublication_provisional_active_wall_seconds": active_wall,
         "prepublication_provisional_active_aggregate_cpu_seconds": active_cpu,
         "prepublication_provisional_reused_wall_seconds_charged": reused_wall,
         "prepublication_provisional_reused_aggregate_cpu_seconds_charged": reused_cpu,
-        "prepublication_provisional_cumulative_wall_seconds": historical_wall + active_wall + reused_wall,
-        "prepublication_provisional_cumulative_aggregate_cpu_seconds": historical_cpu + active_cpu + reused_cpu,
-        "prepublication_provisional_plus_historical_wall_seconds": historical_wall + active_wall + reused_wall,
-        "prepublication_provisional_plus_historical_aggregate_cpu_seconds": historical_cpu + active_cpu + reused_cpu,
+        "prepublication_provisional_cumulative_carried_active_reused_wall_seconds": READINESS_CARRIED_CHARGE["wall_seconds"] + active_wall + reused_wall,
+        "prepublication_provisional_cumulative_carried_active_reused_aggregate_cpu_seconds": READINESS_CARRIED_CHARGE["aggregate_cpu_seconds"] + active_cpu + reused_cpu,
         "prepublication_provisional_process_peak_rss_bytes": final_peak_rss,
         "active_snapshot_boundary": "after synchronous base-to-augmentation validation and atomic chronology sealing for the warmup and all three repeats, including setup and launcher; before immutable evidence publication",
     }
@@ -2783,6 +3275,7 @@ def _execute_readiness_calibration_locked(
     }
     validate_core_receipt_release_equality(core, receipt_stub)
     # MLflow keys use the immutable core, not the pending final receipt.
+    stage_context["stage"] = "mlflow-probe-publication-and-verification"
     mlflow_receipt = log_and_verify_readiness_calibration_mlflow(receipt_stub, [core_path, environment_path, config_path])
     mlflow_path = attempt / "mlflow.json"
     _atomic_write(mlflow_path, canonical_json_bytes(mlflow_receipt, pretty=True))
@@ -2790,6 +3283,7 @@ def _execute_readiness_calibration_locked(
     validate_readiness_calibration_receipt(receipt)
     receipt_path = attempt / "readiness-calibration.json"
     _atomic_write(receipt_path, canonical_json_bytes(receipt, pretty=True))
+    stage_context["stage"] = "tracked-inner-artifact-publication"
     for source, name in ((receipt_path, "readiness-calibration.json"), (core_path, "readiness-calibration-core.json"), (environment_path, "readiness-calibration-environment.json"), (mlflow_path, "readiness-calibration-mlflow.json"), (config_path, "readiness-calibration-executed-config.yaml")):
         _atomic_write(TRACKED_SCREEN_DIR / name, source.read_bytes())
     manifest = {
@@ -2827,6 +3321,7 @@ def _execute_readiness_calibration_locked(
     }
     # All feasible inner hashing and lifecycle checks happen before the sample.
     # The remaining explicitly enumerated operations are outside observed totals.
+    stage_context["stage"] = "outer-resource-completion-publication"
     write_readiness_resource_completion(
         inner_paths=inner_paths,
         attempt_id=attempt_id,

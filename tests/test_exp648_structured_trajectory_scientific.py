@@ -4,6 +4,7 @@ import copy
 import importlib.util
 import inspect
 import json
+import shutil
 import time
 import types
 import subprocess
@@ -745,10 +746,7 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
         "readiness_infrastructure": warmup["components"]["readiness_infrastructure"],
     })
     budgets, components = module.resolve_readiness_screen_budgets(repeats, launcher, warmup)
-    prior_wall = module.READINESS_SUPERSEDED_CALIBRATION_CHARGE["wall_seconds"]
-    prior_cpu = module.READINESS_SUPERSEDED_CALIBRATION_CHARGE["aggregate_cpu_seconds"]
-    historical_wall = module.READINESS_HISTORICAL_COMPLETED_CHARGE["wall_seconds"]
-    historical_cpu = module.READINESS_HISTORICAL_COMPLETED_CHARGE["aggregate_cpu_seconds"]
+    accounting = module.readiness_accounting_decomposition()
     boundary = {
         "calibration_only": True, "screen_roots_opened": False,
         "confirmation_roots_opened": False,
@@ -767,33 +765,29 @@ def test_fresh_calibration_receipt_recomputes_all_dynamic_resources(module) -> N
         "repeats": repeats, "component_resolution": components, "resolved_screen_budgets": budgets,
         "recovery_charges": {
             "scope": "prepublication-provisional-snapshot-before-inner-publication",
-            "accounting_formula": "historical_prior_superseded + historical_accepted_active + prepublication_provisional_active + prepublication_provisional_reused",
+            "accounting_formula": "completed_history + failed_attempt_conservative_allowance + prepublication_provisional_active + prepublication_provisional_reused",
             "augmented_unit_orchestration": {
                 "chronology_contract_sha256": module.READINESS_CHRONOLOGY_CONTRACT_SHA256,
                 "execution_order": [name for name, _ in module.READINESS_AUGMENTED_UNIT_ORDER],
                 "old_base_only_cache_loaded_or_saved": False,
                 "fresh_augmented_warmup_before_repeat_cache_reuse": True,
-                "historical_and_superseded_charge_applied_exactly_once": True,
-                "guard_historical_and_superseded_wall_seconds": historical_wall,
-                "guard_historical_and_superseded_aggregate_cpu_seconds": historical_cpu,
+                "carried_charge_applied_exactly_once": True,
+                "guard_carried_wall_seconds": module.READINESS_CARRIED_CHARGE["wall_seconds"],
+                "guard_carried_aggregate_cpu_seconds": module.READINESS_CARRIED_CHARGE["aggregate_cpu_seconds"],
+                "guard_configured_wall_ceiling_seconds": 25000.0,
+                "guard_configured_aggregate_cpu_ceiling_seconds": 100000.0,
                 "reused_complete_augmented_repeat_indices": [],
                 "all_augmented_units_validated_and_sealed_before_next_start": True,
             },
             "prior_superseded_calibrations": list(module.READINESS_SUPERSEDED_CALIBRATIONS),
-            "historical_completed_calibration_wall_seconds": historical_wall,
-            "historical_completed_calibration_aggregate_cpu_seconds": historical_cpu,
-            "historical_prior_superseded_wall_seconds_charged": prior_wall,
-            "historical_prior_superseded_aggregate_cpu_seconds_charged": prior_cpu,
-            "historical_accepted_active_wall_seconds": historical_wall - prior_wall,
-            "historical_accepted_active_aggregate_cpu_seconds": historical_cpu - prior_cpu,
+            **accounting,
+            "carried_charge_applied_exactly_once": True,
             "prepublication_provisional_active_wall_seconds": 1,
             "prepublication_provisional_active_aggregate_cpu_seconds": 4,
             "prepublication_provisional_reused_wall_seconds_charged": 2,
             "prepublication_provisional_reused_aggregate_cpu_seconds_charged": 5,
-            "prepublication_provisional_cumulative_wall_seconds": historical_wall + 3,
-            "prepublication_provisional_cumulative_aggregate_cpu_seconds": historical_cpu + 9,
-            "prepublication_provisional_plus_historical_wall_seconds": historical_wall + 3,
-            "prepublication_provisional_plus_historical_aggregate_cpu_seconds": historical_cpu + 9,
+            "prepublication_provisional_cumulative_carried_active_reused_wall_seconds": module.READINESS_CARRIED_CHARGE["wall_seconds"] + 3,
+            "prepublication_provisional_cumulative_carried_active_reused_aggregate_cpu_seconds": module.READINESS_CARRIED_CHARGE["aggregate_cpu_seconds"] + 9,
             "prepublication_provisional_process_peak_rss_bytes": 123,
             "active_snapshot_boundary": "test",
         }, "full_fidelity": True, "environment": {"test": True}, "boundary": boundary,
@@ -912,12 +906,15 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
     monkeypatch.setattr(module, "load_augmented_repeat_cache", load_cache)
     monkeypatch.setattr(module, "save_augmented_repeat_cache", save_cache)
 
+    stage_context = {"stage": "test", "guard": None}
     warmup, repeats, chronology = module.execute_synchronous_augmented_readiness_units(
         experiment=FakeExperiment(), attempt=tmp_path / "attempt",
         authorization_sha256="a" * 64, config={},
         launcher_timing={"wall_seconds": 1.0, "aggregate_cpu_seconds": 4.0,
                          "peak_rss_bytes": 1_000_000},
+        stage_context=stage_context,
     )
+    assert stage_context["stage"] == "all-units:chronology-validation"
     assert chronology["complete"] is True
     assert len(repeats) == 3 and warmup["readiness_chronology"]["ordinal"] == 0
     for unit, _repeat_index in module.READINESS_AUGMENTED_UNIT_ORDER:
@@ -939,6 +936,16 @@ def test_augmented_readiness_units_execute_validate_and_seal_in_order(
         assert events.index(f"repeat-{repeat_index}:seal") < events.index(
             f"repeat-{repeat_index}:cache-save"
         )
+    source = inspect.getsource(module._execute_one_augmented_readiness_unit)
+    for component in (
+        "chronology-start", "cache-lookup-and-validation", "cache-reuse-charge",
+        "cache-acceptance-guard", "cached-record-publication",
+        "reused-chronology-seal", "base-complete-unit", "source-replay",
+        "mlflow-probe", "readiness-infrastructure", "augmented-validation",
+        "augmented-record-publication", "fresh-chronology-seal",
+        "augmented-cache-publication",
+    ):
+        assert component in source
 
 
 def test_old_post_hoc_readiness_records_without_chronology_are_rejected(module) -> None:
@@ -1024,26 +1031,96 @@ def test_consumed_readiness_root_is_denied_before_binding(module, monkeypatch) -
         )
 
 
-def test_cumulative_historical_charge_is_exact_and_applied_once(module) -> None:
-    class Guard:
-        prior_superseded_wall_seconds = 0.0
-        prior_superseded_cpu_seconds = 0.0
+def test_failed_root20261160_is_permanently_denied_before_binding(module, monkeypatch) -> None:
+    path = module.READINESS_CALIBRATION_AUTHORIZATION_PATH
+    raw = path.read_bytes()
+    monkeypatch.setattr(
+        module, "readiness_calibration_authorization_base",
+        lambda *_: (_ for _ in ()).throw(AssertionError("binding must not run")),
+    )
+    with pytest.raises(PermissionError, match="reused, test-only, or prohibited"):
+        module.verify_readiness_calibration_authorization(
+            path, committed_bytes=raw, allow_test_root=True
+        )
 
+
+def test_root20261160_caches_are_planning_only_and_fully_bound(module, tmp_path) -> None:
+    receipt = module.verify_root20261160_planning_caches()
+    assert receipt["status"] == (
+        "planning-evidence-only-executable-reuse-permanently-denied"
+    )
+    assert [item["cache_sha256"] for item in receipt["verified"]] == [
+        "98a69670a229c15de7193c5878571fcc28a6d013e9b3ae23a7ac52be92624d80",
+        "8e8115d2b41974c20adfad734a847ec2ac64e07f5636325301b8793ffb1adc68",
+    ]
+    copied = tmp_path / "screen"
+    source = module.SCRATCH_SCREEN_DIR
+    shutil.copytree(
+        source / "augmented-repeat-cache/root-20261160",
+        copied / "augmented-repeat-cache/root-20261160",
+    )
+    attempt_rel = "readiness-calibration-attempts/cal-9e1f63a9fe3c6613"
+    for subtree in ("augmented-chronology", "augmented-units"):
+        shutil.copytree(
+            source / attempt_rel / subtree,
+            copied / attempt_rel / subtree,
+        )
+    cache = next((copied / "augmented-repeat-cache/root-20261160").glob("repeat-1-*.json"))
+    payload = json.loads(cache.read_bytes())
+    payload["cache_key_fields"]["workload_sha256"] = "0" * 64
+    cache.write_bytes(module.canonical_json_bytes(payload, pretty=True))
+    with pytest.raises(RuntimeError, match="byte hash mismatch"):
+        module.verify_root20261160_planning_caches(scratch_screen=copied)
+
+
+def test_completed_allowance_and_carried_charge_are_separate_and_applied_once(module) -> None:
+    class Guard:
         def __init__(self):
             self.events = []
+            self.checks = []
+            self.wall_ceiling = 25000.0
+            self.cpu_ceiling = 100000.0
+            self.prior_superseded_wall_seconds = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE[
+                "wall_seconds"
+            ]
+            self.prior_superseded_cpu_seconds = module.cal.PRIOR_SUPERSEDED_CALIBRATION_CHARGE[
+                "aggregate_cpu_seconds"
+            ]
 
         def __call__(self, stage):
             self.events.append(stage)
 
     guard = Guard()
-    module.apply_readiness_historical_charge_once(guard)
-    assert guard.prior_superseded_wall_seconds == 9007.853947323996
-    assert guard.prior_superseded_cpu_seconds == 36721.035879589996
+    module.apply_readiness_carried_charge_once(guard)
+    assert module.READINESS_COMPLETED_HISTORY_CHARGE == {
+        "wall_seconds": 9007.853947323996,
+        "aggregate_cpu_seconds": 36721.035879589996,
+    }
+    assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["wall_seconds"] == 5294.4
+    assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["aggregate_cpu_seconds"] == 21000.0
+    assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["exact_internal_observation"] is False
+    assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["completed_work_claimed"] is False
+    assert module.READINESS_CARRIED_CHARGE == {
+        "wall_seconds": 14302.253947323995,
+        "aggregate_cpu_seconds": 57721.035879589996,
+    }
+    assert guard.prior_superseded_wall_seconds == 14302.253947323995
+    assert guard.prior_superseded_cpu_seconds == 57721.035879589996
+    assert guard.wall_ceiling == 25000.0
+    assert guard.cpu_ceiling == 100000.0
+    assert module.ROOT_20261160_FAILED_ATTEMPT_ALLOWANCE["semantics"] == (
+        "conservative-accounting-allowance-never-an-exact-internal-observation"
+    )
     assert guard.events == [
-        "readiness:cumulative-historical-and-superseded-charge-applied-once"
+        "readiness:cumulative-carried-charge-applied-once"
     ]
     with pytest.raises(RuntimeError, match="more than once"):
-        module.apply_readiness_historical_charge_once(guard)
+        module.apply_readiness_carried_charge_once(guard)
+
+    wrong_ceiling = Guard()
+    wrong_ceiling.wall_ceiling = 24999.0
+    with pytest.raises(RuntimeError, match="configured cumulative ceilings"):
+        module.apply_readiness_carried_charge_once(wrong_ceiling)
 
 
 def test_readiness_mlflow_expected_scope_excludes_scientific_and_candidate(module) -> None:
@@ -1142,9 +1219,9 @@ def test_outer_readiness_resource_completion_is_final_bound_and_observed(module,
         )
     inner["readiness-calibration-mlflow.json"].write_bytes(original_mlflow)
     arithmetic = copy.deepcopy(receipt)
-    arithmetic["recovery_charges"]["historical_plus_observed_active_and_reused_wall_seconds"] += 1
+    arithmetic["recovery_charges"]["cumulative_carried_observed_active_reused_wall_seconds"] += 1
     output.write_bytes(module.canonical_json_bytes(arithmetic, pretty=True))
-    with pytest.raises(RuntimeError, match="historical-plus-current wall"):
+    with pytest.raises(RuntimeError, match="cumulative wall"):
         module.load_and_validate_readiness_resource_completion(
             output, inner_paths=inner, expected_attempt_id=attempt_id,
             expected_authorization_sha256=auth,
@@ -1184,7 +1261,7 @@ def test_readiness_outer_seal_precedes_execute_return_and_cli_output(module, mon
     wrapper_source = inspect.getsource(module.execute_readiness_calibration)
     assert "with readiness_calibration_authorization_lock(" in wrapper_source
     assert "return _execute_readiness_calibration_locked(" in wrapper_source
-    execute_source = inspect.getsource(module._execute_readiness_calibration_locked)
+    execute_source = inspect.getsource(module._execute_readiness_calibration_attempt_body)
     assert "experiment.run()" not in execute_source
     assert "execute_synchronous_augmented_readiness_units(" in execute_source
     seal_position = execute_source.rindex("write_readiness_resource_completion(")
@@ -1225,6 +1302,190 @@ def test_readiness_outer_seal_precedes_execute_return_and_cli_output(module, mon
     )
     assert module.main(["--mode", "readiness-calibration"]) == 0
     assert events == ["outer-sealed", "stdout-written-and-flushed"]
+
+
+def test_catchable_exception_boundary_receipt_is_atomic_complete_and_reraises(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "7" * 64
+    scratch = tmp_path / "scratch"
+    tracked = tmp_path / "tracked"
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tracked)
+    writes = []
+    original_atomic_write = module._atomic_write
+
+    def recording_atomic_write(path, payload):
+        writes.append((Path(path), payload))
+        return original_atomic_write(path, payload)
+
+    monkeypatch.setattr(module, "_atomic_write", recording_atomic_write)
+
+    original = RuntimeError("unit failed")
+    last_guard_check = {
+        "stage": "readiness:repeat-2:source-replay-complete",
+        "charged_wall_seconds": 15000.0,
+        "charged_cpu_seconds": 60000.0,
+    }
+
+    def fail_body(*_args, stage_context, **_kwargs):
+        stage_context["stage"] = "repeat-3:source-replay"
+        stage_context["guard"] = types.SimpleNamespace(checks=[last_guard_check])
+        raise original
+
+    monkeypatch.setattr(
+        module, "_execute_readiness_calibration_attempt_body", fail_body
+    )
+    with pytest.raises(RuntimeError, match="unit failed") as caught:
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter() - 1.0,
+            launch_cpu_started=0.0,
+            launch_peak_rss=1,
+        )
+    assert caught.value is original
+    attempt = scratch / "readiness-calibration-attempts" / f"cal-{auth[:16]}"
+    receipt_path = attempt / "catchable-exception-boundary.json"
+    raw = receipt_path.read_bytes()
+    receipt = json.loads(raw)
+    assert raw == module.canonical_json_bytes(receipt, pretty=True)
+    assert receipt["context"] == {
+        "stage": "repeat-3:source-replay",
+        "root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+        "authorization_sha256": auth,
+        "attempt_id": f"cal-{auth[:16]}",
+    }
+    assert original.exp648_attempt_context == {
+        **receipt["context"], "last_guard_check": last_guard_check,
+    }
+    assert receipt["last_guard_check"] == last_guard_check
+    timing = receipt["resource_observation"]
+    assert timing["monotonic_wall_seconds"] >= 1.0
+    assert timing["process_user_plus_system_cpu_seconds"] >= 0.0
+    assert timing["peak_rss_bytes"] >= 1
+    assert receipt["artifact_boundary"]["file_count"] == 1
+    assert receipt["last_completed_chronology_seal"] is None
+    assert receipt["coverage"]["post_exit_coverage_claimed"] is False
+    assert "exception re-raise" in receipt["coverage"]["excluded"]
+    assert (
+        "terminal failed attempt-state serialization and atomic write"
+        in receipt["coverage"]["excluded"]
+    )
+    state = json.loads((attempt / "attempt-state.json").read_bytes())
+    assert state == {
+        "schema_version": "exp648-readiness-calibration-attempt-v1",
+        "attempt_id": f"cal-{auth[:16]}",
+        "authorization_sha256": auth,
+        "phase": "failed",
+        "complete": False,
+        "exception_receipt_sha256": module.sha256(receipt_path),
+    }
+    receipt_write = max(
+        index for index, (path, _payload) in enumerate(writes)
+        if path.name == "catchable-exception-boundary.json"
+    )
+    terminal_state_write = max(
+        index for index, (path, payload) in enumerate(writes)
+        if path.name == "attempt-state.json" and b'"phase": "failed"' in payload
+    )
+    assert receipt_write < terminal_state_write
+
+    actions = []
+    monkeypatch.setattr(
+        module, "_execute_readiness_calibration_attempt_body",
+        lambda *_args, **_kwargs: actions.append("body") or {},
+    )
+    with pytest.raises(PermissionError, match="failed readiness calibration attempt"):
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert actions == []
+
+
+def test_catchable_exception_receipt_publication_failure_fails_closed(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "8" * 64
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", tmp_path / "scratch")
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    original = ValueError("original")
+    publication = OSError("disk")
+    monkeypatch.setattr(
+        module, "_execute_readiness_calibration_attempt_body",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(original),
+    )
+    monkeypatch.setattr(
+        module, "write_catchable_exception_boundary_receipt",
+        lambda **_kwargs: (_ for _ in ()).throw(publication),
+    )
+    with pytest.raises(module.CatchableExceptionReceiptPublicationError) as caught:
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert caught.value.original_exception is original
+    assert caught.value.publication_exception is publication
+    attempt = (
+        tmp_path / "scratch/readiness-calibration-attempts" / f"cal-{auth[:16]}"
+    )
+    state = json.loads((attempt / "attempt-state.json").read_bytes())
+    assert state["phase"] == "failure-publication-failed"
+    with pytest.raises(PermissionError, match="failed-publication"):
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+
+
+def test_terminal_failed_state_publication_failure_retains_both_exceptions_and_blocks_retry(
+    module, tmp_path, monkeypatch
+) -> None:
+    auth = "9" * 64
+    scratch = tmp_path / "scratch"
+    monkeypatch.setattr(module, "SCRATCH_SCREEN_DIR", scratch)
+    monkeypatch.setattr(module, "TRACKED_SCREEN_DIR", tmp_path / "tracked")
+    original = LookupError("component")
+    publication = OSError("state disk")
+    monkeypatch.setattr(
+        module, "_execute_readiness_calibration_attempt_body",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(original),
+    )
+    monkeypatch.setattr(
+        module, "write_terminal_failed_attempt_state",
+        lambda **_kwargs: (_ for _ in ()).throw(publication),
+    )
+    with pytest.raises(module.CatchableExceptionReceiptPublicationError) as caught:
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
+    assert caught.value.original_exception is original
+    assert caught.value.publication_exception is publication
+    attempt = scratch / "readiness-calibration-attempts" / f"cal-{auth[:16]}"
+    assert (attempt / "catchable-exception-boundary.json").is_file()
+    assert json.loads((attempt / "attempt-state.json").read_bytes())["phase"] == "authorized"
+    with pytest.raises(RuntimeError, match="without failed attempt state"):
+        module.execute_readiness_calibration(
+            {"calibration_root": module.PREREGISTERED_READINESS_CALIBRATION_ROOT,
+             "authorization_sha256": auth},
+            launch_wall_started=time.perf_counter(),
+            launch_cpu_started=0.0,
+            launch_peak_rss=0,
+        )
 
 
 def test_authentication_rejects_bad_bytes_before_expensive_binding_actions(module, tmp_path, monkeypatch) -> None:

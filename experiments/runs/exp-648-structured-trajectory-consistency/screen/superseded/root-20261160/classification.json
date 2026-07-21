@@ -1,0 +1,65 @@
+{
+  "accounting": {
+    "cumulative_historical_carried_charge_after_allowance": {
+      "aggregate_cpu_seconds": 57721.035879589996,
+      "wall_seconds": 14302.253947323995
+    },
+    "failed_attempt_conservative_allowance": {
+      "aggregate_cpu_seconds": 21000.0,
+      "semantics": "conservative accounting allowance; never an exact internal observation",
+      "wall_seconds": 5294.4
+    },
+    "historical_charge_before_failed_attempt_allowance": {
+      "aggregate_cpu_seconds": 36721.035879589996,
+      "wall_seconds": 9007.853947323996
+    },
+    "independent_cumulative_runaway_ceilings": {
+      "aggregate_cpu_seconds": 100000.0,
+      "derivation": "prior + failed allowance + 1.5 * (1.25 * R + E), independently rounded upward",
+      "never_a_fidelity_cap_or_per_attempt_target": true,
+      "wall_seconds": 25000.0
+    },
+    "projection_inputs": {
+      "E_aggregate_cpu_seconds": 135.975487648,
+      "E_wall_seconds": 73.8932728219952,
+      "R_aggregate_cpu_seconds": 20967.89,
+      "R_wall_seconds": 5305.469600509008
+    }
+  },
+  "attempt": {
+    "attempt_id": "cal-9e1f63a9fe3c6613",
+    "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+    "canonical_sha256sum_manifest_bytes": 21780,
+    "canonical_sha256sum_manifest_sha256": "44e1d930823c319f2fe4ecd98af46014af5594b54343d513fc666ecdc3336f72",
+    "compact_sorted_json_manifest_sha256": "e0495b330014557d4764a560c58591d2964d21ac9d40b66a7a33b8df093f4284",
+    "file_count": 160,
+    "total_bytes": 27787830
+  },
+  "boundary": {
+    "candidate_or_promotion_evidence": false,
+    "checked_independent_official_private_opened": false,
+    "main_or_scientific_run_created": false,
+    "model_update_performed": false,
+    "repeat_3_completion_claimed": false,
+    "screen_or_confirmation_opened": false
+  },
+  "cache_policy": {
+    "executable_reuse_eligible": false,
+    "migration_permitted": false,
+    "preserved_repeat_indices": [
+      1,
+      2
+    ],
+    "role": "historical planning evidence only"
+  },
+  "complete": false,
+  "eligible_for_final_rates": false,
+  "eligible_for_launch": false,
+  "eligible_for_projection_rates": false,
+  "exception_boundary_limitation": "The historical process did not persist an attempt-scoped catchable-exception boundary receipt. Its exact exception-boundary wall, process user-plus-system CPU, RSS, stage, last completed seal, and artifact boundary therefore cannot be reconstructed. The conservative allowance is not substituted for those missing observations.",
+  "root": 20261160,
+  "schema_version": "exp648-readiness-failed-classification-v1",
+  "scientific_result": false,
+  "status": "consumed-incomplete-non-scientific-permanently-denied",
+  "superseded": true
+}

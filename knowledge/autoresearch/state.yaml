@@ -36,19 +36,21 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: corpus-complete-readiness-chronology-repair-pending-renewed-judge
-  evidence_status: The accepted immutable corpus remains unchanged. Calibration root 20261159 is consumed and preserved as complete-component non-scientific evidence, but the post-execution Judge rejected its post-hoc readiness-addition chronology. It is superseded and forbidden for launch, projection rates, and cache reuse. The runner now implements synchronous augmented-unit validation and predecessor-linked sealing. Distinct root 20261160 remains unopened, unconsumed, and unauthorized pending a renewed repaired-base Judge. No model was updated and no accuracy or selection evidence was produced.
+  status: approved-recovery-base-pending-commit-and-push
+  evidence_status: The accepted immutable corpus remains unchanged. Roots 20261159 and 20261160 are consumed non-scientific history and permanently denied. Root 20261160 failed during repeat 3 after a sealed warmup and repeats 1-2; it produced no main/scientific run, accuracy, selection, or model-update evidence. Its 160-file/27787830-byte attempt and three FINISHED probe runs are archived by exact hashes. Old repeat-1/2 caches are planning evidence only and cannot be executed or migrated. Root 20261161 is negative-use audited, authorized-pending-authentication-child, unopened, and unconsumed. Its canonical authorization child does not yet exist; the unchanged live root-20261160 authorization remains in the approved base tree until that sole-file child replaces it.
   readiness_gate:
     task: T-EXP648-SCREEN-READINESS
-    closure_audits: [APPROVE, APPROVE]
+    prior_closure_audits: [APPROVE, APPROVE]
+    recovery_closure_audits: [APPROVE, APPROVE]
     sequential_judge_gate: T648
-    status: prior-approval-superseded-by-root-20261159-chronology-rejection-repaired-base-pending-renewed-judge
+    sequential_judge_result: APPROVE
+    status: approved-recovery-base-pending-commit-and-push
   authorization:
     preregistration: judge-approved
-    implementation: chronology-repaired-base-pending-renewed-judge
-    calibration: root-20261159-consumed-rejected-superseded-root-20261160-unopened-unconsumed-not-authorized
+    implementation: approved-recovery-base-pending-commit-and-push
+    calibration: roots-20261159-and-20261160-consumed-non-scientific-permanently-denied-root-20261161-authorized-pending-authentication-child-unopened-unconsumed
     corpus: consumed-complete
-    screen: prohibited-pending-repaired-base-judge-root-20261160-authenticated-synchronous-augmented-calibration-and-separate-launch-judge
+    screen: prohibited-pending-approved-base-push-root-20261161-sole-file-authentication-child-fresh-calibration-and-separate-launch-judge
     confirmation: prohibited-until-screen-pass-and-separate-judge
     candidate_or_tier7_promotion: prohibited
   seed_roles:
@@ -61,22 +63,25 @@ current_hypothesis:
     confirmation_2_training_root_unopened_blocked: 20261157
     confirmation_2_evaluation_root_unopened_blocked: 20261158
     rejected_readiness_calibration_root_consumed_superseded: 20261159
-    next_readiness_calibration_root_unopened_unconsumed_not_authorized: 20261160
+    failed_readiness_calibration_root_consumed_incomplete_permanently_denied: 20261160
+    readiness_calibration_root_authorized_pending_authentication_child_unopened_unconsumed: 20261161
     scaffold_test_only_root_reserved_unopened: 648900001
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
   calibration_protocol:
-    ordered_transition: renewed-repaired-base-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261160-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-synchronous-augmented-warmup-and-three-synchronous-augmented-full-fidelity-repeats
+    ordered_transition: approved-recovery-base-commit-and-push -> sole-file-canonical-root-20261161-auth-child-commit-and-push-and-clean-upstream-verify -> stop-publication-task-before-execution -> fresh-synchronous-augmented-warmup-and-three-fresh-synchronous-augmented-full-fidelity-repeats-in-a-separate-execution-step
     warmups: 1
     timed_repeats: 3
     fidelity_reduction_allowed: false
-    initial_wall_guard_seconds: 14400
-    initial_process_user_plus_system_aggregate_cpu_guard_seconds: 57600
-    carried_historical_and_superseded_wall_seconds: 9007.853947323996
-    carried_historical_and_superseded_process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996
+    cumulative_wall_runaway_ceiling_seconds: 25000
+    cumulative_process_user_plus_system_aggregate_cpu_runaway_ceiling_seconds: 100000
+    runaway_ceiling_role: independent-cumulative-protection-only-never-per-attempt-target-fidelity-cap-or-scientific-gate
+    completed_history: {wall_seconds: 9007.853947323996, process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996}
+    failed_root_20261160_conservative_allowance: {wall_seconds: 5294.4, aggregate_cpu_seconds: 21000, exact_internal_observation: false, completed_work_claimed: false}
+    carried_charge_applied_exactly_once: {wall_seconds: 14302.253947323995, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
     carried_charge_policy: apply-exactly-once-to-planning-guard-and-accounting
     root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
     chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
-    cache_reuse: Only fully validated and sealed augmented repeats with exact root, authorization, checkpoint, evaluator, dataset/input, config, environment, runner, dependency, scientific-protocol, resource-protocol, workload, frozen-corpus, and chronology matches are reusable after a fresh augmented warmup; old base-only, partial, mismatched, tampered, or unverifiable units are prohibited, and valid reuse is charged to both wall and aggregate CPU.
+    cache_reuse: Root-20261160 repeat-1/2 caches are preserved with exact provenance only as planning evidence and are permanently barred from execution or migration. Authorized-pending-authentication-child root 20261161 requires a fresh warmup and all three fresh full-fidelity repeats in a separate execution step.
 locked_prior_hypotheses:
   exp-649-stochastic-trajectory-breadth:
     status: planned-formal-blocked-runtime-gate-miss
@@ -131,9 +136,10 @@ research_programs:
       - oracle-breadth-never-promotes
       - structural-operand-equivariance-is-legal-only-without-answer-benchmark-id-or-arithmetic-circuit-encoding
       - lotus-exact-traces-are-training-only-and-forbidden-from-submission-inference
-    root_20261160_status: unopened-unconsumed-unauthorized-unchanged
+    root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
+    root_20261161_status: authorized-pending-authentication-child-unopened-unconsumed-negative-use-audited
     experiments_authorized_by_contract: false
-next_action: Finish validation of the chronology-repaired readiness base and obtain a renewed Judge. Root 20261160 remains unopened, unconsumed, and unauthorized; do not create its authorization before that Judge. If approved, follow the approved-base and sole-file canonical authorization-child lifecycle, then execute one synchronous augmented warmup and three synchronous augmented full-fidelity repeats while charging exactly 9007.853947323996 wall / 36721.035879589996 aggregate-CPU historical and superseded seconds once. Screen, confirmation, checked, independent, official/private benchmark, candidate/Tier-7 promotion, Goal-completion, and EXP-649 formal surfaces remain prohibited. Candidate 005 stays at 59.5 percent checked / 59.3 percent independent and completion_eligible remains false.
+next_action: Commit and push the approved recovery base, then create, commit, and push only the canonical root-20261161 authorization child bound to that base and stop this publication task before execution. Root 20261160 is consumed-incomplete and permanently denied; its unchanged live authorization remains in the base tree and its archived copy is committed. Root 20261161 is authorized-pending-authentication-child, unopened, and unconsumed. Any later execution requires a fresh warmup and all three fresh full-fidelity repeats while applying exactly 14302.253947323995 wall / 57721.035879589996 aggregate-CPU carried charge once under independent cumulative ceilings of 25000 wall / 100000 aggregate CPU. All scientific and promotion surfaces remain prohibited.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -185,4 +191,4 @@ risks:
   - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
   - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
   - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Root 20261159 is now consumed but rejected/superseded because additions were post hoc rather than synchronously validated and sealed; its timings may inform conservative planning only and cannot supply launch, rates, or caches.
-  - The chronology-repaired readiness base requires a renewed Judge. Root 20261160 is distinct, unopened, unconsumed, and unauthorized; complete matched calibration evidence and a later launch Judge are still required before either screen root can open.
+  - Root 20261160 failed without the new catchable-exception boundary receipt, so exact exception-boundary resource observations are unavailable; conservative allowances are explicitly not observations. Recovery closure audits and final T648 Judge returned APPROVE, authorizing only the base-publication and sole-file root-20261161 authentication-child transition. Complete fresh calibration in a separate execution step plus a later launch Judge are still required before either screen root can open.

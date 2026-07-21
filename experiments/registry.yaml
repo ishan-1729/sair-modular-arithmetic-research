@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: corpus-complete-readiness-chronology-repair-pending-renewed-judge
+    status: approved-recovery-base-pending-commit-and-push
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -694,12 +694,14 @@ runs:
         aggregate_cpu_seconds: 10104.265504912
       scientific_evidence: none
     screen_readiness:
-      implementation: chronology-repaired-base-pending-renewed-judge
+      implementation: approved-recovery-base-pending-commit-and-push
       closure_audits:
         task: T-EXP648-SCREEN-READINESS
-        results: [APPROVE, APPROVE]
+        prior_results: [APPROVE, APPROVE]
+        recovery_results: [APPROVE, APPROVE]
       prior_sequential_judge_gate: T648-approved-before-root-20261159-execution
       post_execution_judge_gate: rejected-root-20261159-chronology-nonconforming
+      recovery_sequential_judge_gate: T648-APPROVE
       historical_calibration_valid_for_launch: false
       consumed_rejected_calibration:
         root: 20261159
@@ -718,22 +720,34 @@ runs:
           process_user_plus_system_aggregate_cpu_seconds: 12442.915271225
           peak_rss_bytes: 2675752960
         archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261159
-      next_calibration_root: 20261160
-      next_calibration_root_status: distinct-unopened-unconsumed-not-authorized-pending-repaired-base-judge
-      authorization_order: renewed-repaired-base-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261160-auth-child-commit-and-push-and-clean-upstream-verify -> exactly-one-synchronous-augmented-warmup-and-three-synchronous-augmented-full-fidelity-repeats
-      initial_resource_guards:
-        wall_seconds: 14400
-        process_user_plus_system_aggregate_cpu_seconds: 57600
-        role: cumulative-runaway-protection-only-never-a-fidelity-cap
-      cumulative_historical_and_superseded_charge:
-        wall_seconds: 9007.853947323996
-        process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996
-        charge_policy: apply-exactly-once-to-planning-guard-and-accounting
+      consumed_incomplete_calibration:
+        root: 20261160
+        status: consumed-incomplete-non-scientific-permanently-denied
+        authorization_sha256: 9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984
+        attempt_inventory: {files: 160, bytes: 27787830, sha256sum_manifest_sha256: 44e1d930823c319f2fe4ecd98af46014af5594b54343d513fc666ecdc3336f72}
+        archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261160
+        eligible_for_launch_or_final_rates: false
+        scientific_evidence: none
+        exception_boundary_limitation: Historical failure predates the catchable-exception receipt and has no exact persisted exception-boundary resource sample.
+      next_calibration_root: 20261161
+      next_calibration_root_status: authorized-pending-authentication-child-unopened-unconsumed-negative-use-audited
+      authorization_order: approved-recovery-base-commit-and-push -> sole-file-canonical-root-20261161-auth-child-commit-and-push-and-clean-upstream-verify -> stop-publication-task-before-execution -> fresh-warmup-and-three-fresh-synchronous-augmented-full-fidelity-repeats-in-a-separate-execution-step
+      live_readiness_calibration_authorization_in_base:
+        path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json
+        root: 20261160
+        sha256: 9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984
+        status: unchanged-old-live-authorization-preserved-until-sole-file-root-20261161-child
+      cumulative_runaway_guards:
+        wall_seconds: 25000
+        process_user_plus_system_aggregate_cpu_seconds: 100000
+        role: independently-rounded-cumulative-runaway-protection-only-never-per-attempt-target-scientific-gate-or-fidelity-cap
+      recovery_accounting:
+        completed_history: {wall_seconds: 9007.853947323996, process_user_plus_system_aggregate_cpu_seconds: 36721.035879589996}
+        failed_root_20261160_conservative_allowance: {wall_seconds: 5294.4, process_user_plus_system_aggregate_cpu_seconds: 21000, exact_internal_observation: false, completed_work_claimed: false}
+        carried_charge: {wall_seconds: 14302.253947323995, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996, apply_exactly_once: true}
       root_20261159_rate_policy: Preserved timings may inform conservative planning context only and are forbidden as projection rates.
       chronology: Each warmup or repeat must synchronously execute base -> source replay -> MLflow probe -> readiness infrastructure -> validation -> atomic record -> seal, and the next start must authenticate the predecessor seal.
-      cache_reuse: Only complete augmented repeats sealed after full validation and exactly bound to root, authorization, runner, config, checkpoint, environment, evaluator, dependency, protocols, workload, frozen corpus, and chronology may be reused after a fresh augmented warmup; old base-only caches are forbidden, and valid reuse is charged to both wall and aggregate CPU.
-      fresh_calibration_receipt: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration.json
-      observed_pre_outer_seal_resource_completion: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-resource-completion.json
+      cache_reuse: Root-20261160 repeat-1 and repeat-2 caches are preserved with exact bindings as planning evidence only; executable reuse or migration is permanently denied. A later authorized root requires a fresh warmup and all three fresh full-fidelity repeats.
       scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
       screen_authorization_manifest: experiments/runs/exp-648-structured-trajectory-consistency/screen/judge-authorization.json
       screen_roots_status: unopened-blocked
@@ -741,8 +755,9 @@ runs:
       limitations:
         - Corpus construction and resource/provenance evidence only; no model update, accuracy metric, selection metric, candidate promotion, or Goal-completion evidence.
         - Root 20261159 is consumed and preserved as non-scientific superseded evidence, but its post-hoc augmentation chronology forbids launch, projection-rate selection, and cache reuse.
-        - Root 20261160 is distinct, unopened, unconsumed, and not authorized; a renewed repaired-base Judge is required before an authentication child may exist.
+        - Root 20261160 is consumed-incomplete, non-scientific, permanently denied, and ineligible for launch, final/projection rates, or executable cache reuse; repeat 3 is not complete.
+        - Root 20261161 is negative-use audited, authorized-pending-authentication-child, unopened, and unconsumed; the approved base must be pushed before its sole-file canonical authorization child is created.
         - Candidate 005 remains at observed 59.5 percent checked-public / 59.3 percent independent accuracy, and completion_eligible remains false.
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
-    screen_status: prohibited-pending-repaired-base-judge-root-20261160-authenticated-synchronous-augmented-calibration-and-separate-launch-judge
+    screen_status: prohibited-pending-approved-base-push-root-20261161-sole-file-authentication-child-fresh-calibration-and-separate-launch-judge

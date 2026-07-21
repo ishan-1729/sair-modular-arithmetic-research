@@ -1,5 +1,5 @@
 run_id: exp-648-structured-trajectory-consistency
-status: implemented-resource-reaudit-repaired-calibrated-awaiting-post-calibration-judge
+status: failed-readiness-root-20261160-recovery-repaired-awaiting-closure-audits-and-judge
 hypothesis: A fixed K=8 endpoint-consistency loss on natural model-generated width-256 trajectories improves exact autonomous rollout by at least three percentage points over a matched clean-loss control without harming width-64 or width-128 retention.
 phase: matched-width256-screen-blocked-pending-corpus-hash-freeze-and-judge
 tracking: {experiment_name: sair-modular-arithmetic-wsl}
@@ -234,7 +234,7 @@ confirmation:
   direct_candidate_promotion: prohibited
 
 resource_protocol:
-  status: resource-reaudit-repaired-corrected-full-fidelity-recalibration-complete
+  status: failed-readiness-attempt-recovered-cumulative-accounting-repaired-no-retry-authorized
   binding_policy: knowledge/autoresearch/program.md#resource-budget-policy
   measurement:
     wall: external-monotonic-wall-seconds
@@ -259,8 +259,8 @@ resource_protocol:
     torch_threads: 4
     torch_interop_threads: 1
     rate_selection: slower-arm-and-maximum-complete-repeat-per-component
-    initial_planning_hard_ceiling_wall_seconds: 14400
-    initial_planning_hard_ceiling_aggregate_cpu_seconds: 57600
+    initial_planning_hard_ceiling_wall_seconds: 25000
+    initial_planning_hard_ceiling_aggregate_cpu_seconds: 100000
     planning_ceiling_basis: EXP-647-full-run-5141.6-wall-and-20465.9-aggregate-cpu-seconds
     planning_ceiling_role: generous-runaway-protection-only-never-a-fidelity-cap
   projections:
@@ -390,9 +390,39 @@ resource_protocol:
     fidelity_reduced: false
     scientific_accuracy_reported: false
     corpus_screen_confirmation_authorized: false
+  readiness_recovery:
+    schema_version: exp648-readiness-recovery-v2
+    failed_root:
+      seed: 20261160
+      authorization_sha256: 9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984
+      status: consumed-incomplete-non-scientific-permanently-denied
+      eligible_for_launch: false
+      eligible_for_final_or_projection_rates: false
+      executable_cache_reuse: false
+      repeat_3_completion_claimed: false
+      archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261160
+      attempt_inventory: {files: 160, bytes: 27787830, sha256sum_manifest_bytes: 21780, sha256sum_manifest_sha256: 44e1d930823c319f2fe4ecd98af46014af5594b54343d513fc666ecdc3336f72}
+      exception_boundary_limitation: historical-failure-did-not-persist-the-new-attempt-scoped-boundary-receipt
+    accounting:
+      completed_history: {wall_seconds: 9007.853947323996, aggregate_cpu_seconds: 36721.035879589996}
+      failed_attempt_conservative_allowance: {wall_seconds: 5294.4, aggregate_cpu_seconds: 21000.0, exact_internal_observation: false, completed_work_claimed: false}
+      carried_charge: {wall_seconds: 14302.253947323995, aggregate_cpu_seconds: 57721.035879589996, apply_exactly_once: true}
+      projection_inputs: {R_wall_seconds: 5305.469600509008, R_aggregate_cpu_seconds: 20967.89, E_wall_seconds: 73.8932728219952, E_aggregate_cpu_seconds: 135.975487648}
+      independently_rounded_cumulative_runaway_ceilings: {wall_seconds: 25000.0, aggregate_cpu_seconds: 100000.0, per_attempt_target: false, fidelity_cap: false, scientific_gate: false}
+    preserved_old_repeat_caches:
+      status: planning-evidence-only-never-executable-or-migrated
+      repeat_1_sha256: 98a69670a229c15de7193c5878571fcc28a6d013e9b3ae23a7ac52be92624d80
+      repeat_2_sha256: 8e8115d2b41974c20adfad734a847ec2ac64e07f5636325301b8793ffb1adc68
+      exact_binding_required: [root, authorization, checkpoint, evaluator, dependency_manifest, dataset, config, seed, environment, calibration_runner, scientific_runner, scientific_protocol, resource_protocol, workload, frozen_corpus_files, corpus_provenance_amendment, chronology_contract, source_seal, source_augmented_record]
+    candidate_root:
+      seed: 20261161
+      status: unopened-unconsumed-unauthorized-negative-use-audited
+      authorization_manifest_exists: false
+      opening_or_use_before_new-judge-and-auth-lifecycle: prohibited
+    future_execution_order: repaired-base-closure-audits-and-judge -> approved-base-commit-and-push -> sole-file-canonical-root-20261161-authorization-child-commit-and-push-and-clean-upstream-verification -> fresh-warmup-and-three-fresh-full-fidelity-repeats
 authorization:
-  implementation: complete
-  calibration: complete-non-scientific-corrected-full-fidelity-after-resource-reaudit-repair
+  implementation: catchable-exception-boundary-and-recovery-repair-complete-pending-audits
+  calibration: root-20261160-consumed-incomplete-permanently-denied-root-20261161-candidate-unopened-unconsumed-unauthorized
   corpus_root: unopened-and-blocked-pending-post-calibration-judge
   screen_roots: unopened-and-blocked-pending-corpus-hash-freeze-and-judge
   confirmation_roots: unopened-and-prohibited-until-screen-pass-and-separate-judge-approval

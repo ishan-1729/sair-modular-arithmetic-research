@@ -593,6 +593,11 @@ def test_scientific_resource_hashing_and_composite_cache_invalidation() -> None:
     config = load_config()
     science = module.scientific_protocol_sha256(config)
     resource = module.resource_protocol_sha256(config)
+    assert science == "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086"
+    assert resource == "a49983e9e72ebf2592a3fc61756ed55c48aca9aed4bd4471130f9d3026cad23f"
+    assert resource != "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198"
+    assert "readiness_recovery" not in config
+    assert "readiness_recovery" in config["resource_protocol"]
     resolved = copy.deepcopy(config)
     resolved["status"] = "calibration-complete-awaiting-judge"
     resolved["phase"] = "post-calibration"
@@ -1034,8 +1039,11 @@ def test_run_recovery_order_requires_fresh_warmup_before_reuse() -> None:
 def test_wall_and_cpu_planning_ceilings_are_distinct_and_fidelity_is_binding() -> None:
     config = load_config()
     calibration = config["resource_protocol"]["calibration"]
-    assert calibration["initial_planning_hard_ceiling_wall_seconds"] == 14_400
-    assert calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"] == 57_600
+    assert calibration["initial_planning_hard_ceiling_wall_seconds"] == 25_000
+    assert calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"] == 100_000
+    source = inspect.getsource(load_runner().CalibrationExperiment.__init__)
+    assert 'wall_ceiling=float(calibration["initial_planning_hard_ceiling_wall_seconds"])' in source
+    assert 'calibration["initial_planning_hard_ceiling_aggregate_cpu_seconds"]' in source
     assert config["resource_protocol"]["measurement"][
         "wall_and_cpu_are_not_interchangeable"
     ] is True

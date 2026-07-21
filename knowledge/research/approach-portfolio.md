@@ -60,7 +60,7 @@ After EXP-648 resolves, the staged portfolio order is structural equivariance; s
 
 Mature authoritative libraries are the default for Mamba/selective-SSM, graph, attention, and other specialized kernels. Dependencies must be pinned, licensed, provenance-recorded, and parity-tested against tiny reference fixtures. CUDA may accelerate offline training, but the frozen submission still requires a deterministic CPU path, cross-device parity where applicable, and candidate-shaped runtime evidence. Hand implementations are justified only when no suitable maintained implementation exists and a Judge accepts the parity and maintenance risk.
 
-This program is queued, not active. EXP-648 remains the only active hypothesis; its unopened and unauthorized root `20261160` is unchanged. EXP-650 through EXP-653 retain their established meanings and prerequisites. Candidate 005 remains the incumbent until a challenger passes the complete promotion contract.
+This program is queued, not active. EXP-648 remains the only active hypothesis. Readiness root `20261160` is consumed-incomplete, non-scientific, and permanently denied. Recovery closure audits returned `[APPROVE, APPROVE]` and final T648 Judge returned `APPROVE`; root `20261161` is now authorized-pending-authentication-child but remains unopened and unconsumed. That approval covers only the approved-base and sole-file authorization-child publication lifecycle, not execution or a scientific surface. EXP-650 through EXP-653 retain their established meanings and prerequisites. Candidate 005 remains the incumbent until a challenger passes the complete promotion contract.
 
 ## Stop conditions
 
