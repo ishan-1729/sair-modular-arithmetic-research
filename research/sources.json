@@ -6,13 +6,14 @@
       "id": "super-transformers-all",
       "description": "All formal arXiv papers cited by the supplied Super Transformers survey; blog and report URLs are intentionally excluded.",
       "source_files": [
-        "super_transformers.md"
+        "super_transformers.md",
+        "super_transformers_main_papers.md"
       ],
       "include_arxiv_citations": true
     },
     {
       "id": "super-transformers-core",
-      "description": "The survey's compact reading route, plus ACT and DEQ as explicitly elevated foundational ancestors.",
+      "description": "The survey's compact reading route, plus ACT and DEQ as explicitly elevated foundational ancestors and user-requested high-priority extensions.",
       "source_files": [
         "super_transformers.md"
       ],
@@ -36,7 +37,8 @@
         "2605.19943",
         "2605.21488",
         "2606.18206",
-        "2607.13491"
+        "2607.13491",
+        "2607.16051"
       ]
     },
     {
@@ -363,6 +365,17 @@
       "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
       "citation_match": "DreamCoder",
       "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2607.16051v2",
+      "collections": [
+        "super-transformers-all",
+        "super-transformers-core",
+        "autoresearch-backlog"
+      ],
+      "source_file": "knowledge/autoresearch/backlog.md",
+      "citation_match": "User-requested Loop the Loopies full-PDF review (arXiv 2607.16051)",
+      "resolution_note": "User-supplied primary arXiv URL; title and latest v2 revision were visibly verified with repository-local Playwright managed Chromium on 2026-07-21."
     }
   ],
   "web_papers": [

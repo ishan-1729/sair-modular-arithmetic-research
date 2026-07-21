@@ -1,7 +1,7 @@
 ---
 title: "Super Transformers"
 subtitle: "Recursive depth, neural computers, and tool-augmented intelligence"
-last_updated: "2026-07-17"
+last_updated: "2026-07-21"
 status: "Research synthesis; many recent works are preprints"
 ---
 
@@ -21,7 +21,7 @@ status: "Research synthesis; many recent works are preprints"
 > 2. **Neural Computers and Learned Execution** aim to turn neural models into programmable or learned runtimes that integrate computation, state, memory, and I/O.
 > 3. **Tool-Augmented and Agentic Systems** leave the base network mostly unchanged and extend it with recursive model calls, code execution, environments, voting, and subagents.
 >
-> **Universal Transformer (2018)** is the first clear Transformer-specific ancestor of the internal-recurrence line. **HRM (2025)** ignited the tiny-model ARC wave, and **TRM (2025)** simplified it into a broader recursive-reasoning family. **RLM** is a separate external-orchestration line, while **Neural Computers** pursue the different ambition of making a learned model function as the runtime itself.
+> **Universal Transformer (2018)** is the first clear Transformer-specific ancestor of the internal-recurrence line. **HRM (2025)** ignited the tiny-model ARC wave, and **TRM (2025)** simplified it into a broader recursive-reasoning family. **Loopie (2026)** adds a distinct fixed layer-local recurrence order and demonstrates operational capacity recycling at MoE scale. **RLM** is a separate external-orchestration line, while **Neural Computers** pursue the different ambition of making a learned model function as the runtime itself.
 
 ---
 
@@ -133,6 +133,7 @@ Within Recursive and Looped Transformers, two programs should be kept distinct:
 | Jun 2026 | Stable recurrence | FPRM and LOTUS | Convergence-based halting and supervised latent reasoning |
 | Jul 2026 | Tool agents | The Duck | Interactive ARC-AGI-3 REPL agent |
 | Jul 2026 | Stable recurrence | ERM and DeepLoop | Energy-guided selection and depth-aware residual scaling |
+| Jul 2026 | Layer-local recurrence | Loop the Loopies! | Fixed R=2 layer-loop ordering plus measured training-capacity recycling |
 
 #### 2.4 High-level map
 
@@ -1320,7 +1321,7 @@ The claimed system differs from learned looped reasoners:
 
 Status caveat:
 
-- as of July 17, 2026, this item is a technical blog claim;
+- as of July 21, 2026, this item is a technical blog claim;
 - no corresponding peer-reviewed paper or official public implementation was located for this synthesis;
 - it belongs in the map as a provocative adjacent development, not as established evidence equivalent to the cited papers.
 
@@ -1334,13 +1335,13 @@ The first is part of the recursive-depth lineage because repeated application of
 
 Published on April 7, 2026, **Neural Computers** proposes a broader machine form in which computation, memory, and I/O are unified inside a learned runtime state.
 
-The initial experiments instantiate Neural Computers as video models that roll out CLI or GUI screen states from:
+The initial experiments instantiate Neural Computers as **open-loop** video models that roll out CLI or GUI screen states from:
 
 - instructions;
 - pixels;
 - user actions.
 
-The authors report early success on I/O alignment and short-horizon control, while identifying routine reuse, controlled updating, and symbolic stability as open problems.
+The authors report early success on I/O alignment and short-horizon control, while identifying routine reuse, controlled updating, symbolic stability, and unbounded effective memory as open problems. Roughly half of arithmetic training captions contain the correct answer, and the paper cautions that reprompting may provide hints or outsource work to a text system; these are leakage/roadmap caveats, not measured evidence of a closed-loop reusable neural RAM.
 
 Why it is relevant:
 
@@ -1354,7 +1355,7 @@ Why it remains separate:
 
 Source: [arXiv:2604.06425](https://arxiv.org/abs/2604.06425)
 
-The Neural Computer program is broader than “a Transformer with more loops.” Its target is a machine form in which computation, persistent state, memory, and interface behavior are jointly represented and learned.
+The Neural Computer program is broader than “a Transformer with more loops.” Its target is a machine form in which computation, persistent state, memory, and interface behavior are jointly represented and learned; the paper's current video prototype does not yet demonstrate that complete target.
 
 ### 10. Compact specialist foundation models
 
@@ -1872,6 +1873,21 @@ There is no central canonical work in this cluster simply titled **“General Re
 
 ---
 
+#### 15.5 Loop the Loopies: layer-local recurrence is a different schedule
+
+**Loop the Loopies!** (arXiv:2607.16051v2, July 20) distinguishes whole-model looping from applying each stored block repeatedly before advancing. With fixed `R=2`:
+
+```text
+model-loop: B1, B2, ..., BL, B1, B2, ..., BL
+layer-loop: B1, B1, B2, B2, ..., BL, BL
+```
+
+The complete Attention/MoE block is shared across the two local visits. The schedule is the same layout that Mixture-of-Recursions calls Sequence sharing, but Loopie has only ordinary MoE expert routing—not MoR's learned recursion-depth router or adaptive-depth/KV policy. The architecture also has no learned exit, loop embedding, visit-specific adapter, or entropy depth allocator. The paper's second contribution is operational: checkpoint a recurrent block as a unit, use the reduced activation footprint to increase microbatch size, measure actual optimizer-step efficiency, and reinvest it in width/depth. Its selected model has roughly `1.424x` the paper's block-work proxy, so it is not a FLOP-matched claim.
+
+The source reports that layer-loop trails model-loop early and crosses it at roughly 1.2T tokens, and chooses `R=2` as the best marginal tradeoff among tested recurrence counts. Those results bundle MoE, scale, initialization, and systems effects; seeds, confidence intervals, inference compute, and several causal ablations are missing. The later target-only supervised post-training is also under-ablated and is a separate mechanism.
+
+For SAIR, the transferable test is dense-first: train layer-loop and model-loop arms with identical stored parameters, executed calls, data, seeds, updates, and full-fidelity evaluation, alongside `R=1`, untied/equal-compute, and measured capacity-reinvestment controls. MoE is a later factorial only if dense scheduling is viable. This is `ST-M043`/planned EXP-655; target-only continuation is conditional analogue `ST-M044`. No SAIR scientific evidence exists yet. See the [full-PDF project note](knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md).
+
 ### 16. Current status
 
 #### 16.1 The field is active and no longer one viral-paper story
@@ -1968,10 +1984,10 @@ The fastest-moving parts of the chronology are dominated by arXiv releases. Repo
 
 #### 16.7 The latest core status
 
-As of July 17, 2026:
+As of July 21, 2026:
 
 - **ERM (July 11)** is the latest major small structured-RRM selection paper in this map.
-- **DeepLoop (July 15)** is the latest clearly central looped-depth Transformer paper found.
+- **Loop the Loopies! (July 20)** is the latest clearly central looped-depth Transformer paper reviewed here; it adds fixed layer-local recurrence and operational capacity recycling rather than adaptive depth.
 - **T²MLR (July 17)** is a highly relevant adjacent recurrence paper, but it adds temporal middle-layer state across generated tokens rather than looping depth for the same token.
 
 ---
@@ -2095,6 +2111,7 @@ For the shortest route through the field, read these in order:
 13. [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488) — attractor interpretation.
 14. [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206) — stable convergence-based halting.
 15. [DeepLoop](https://arxiv.org/abs/2607.13491) — current tied-depth stability/scaling frontier.
+16. [Loop the Loopies!](https://arxiv.org/abs/2607.16051) — fixed layer-local recurrence and measured capacity recycling.
 
 For the broader neural-computer and tool-agent landscape:
 
@@ -2206,6 +2223,7 @@ For the broader neural-computer and tool-agent landscape:
   <https://arxiv.org/abs/2607.10128>
 - Li, S. et al. **DeepLoop: Depth Scaling for Looped Transformers.** 2026.  
   <https://arxiv.org/abs/2607.13491>
+- Gao, Z. et al. **Loop the Loopies!** 2026. <https://arxiv.org/abs/2607.16051>
 - **T²MLR: Transformer with Temporal Middle-Layer Recurrence.** 2026.  
   <https://arxiv.org/abs/2607.15178>
 

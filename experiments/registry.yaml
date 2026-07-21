@@ -806,3 +806,34 @@ runs:
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
     screen_status: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
+  - run_id: exp-655-layer-loop-compute-matched-recurrence
+    status: planned-blocked-awaiting-EXP648-and-separate-launch-judge
+    approach: dense-fixed-r2-layer-loop-versus-model-loop-schedule
+    preregistration: knowledge/autoresearch/ablations/exp-655-layer-loop-compute-matched-recurrence.md
+    source_note: knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md
+    coverage_record: ST-M043
+    cross_coverage_records: [ST-M009.a, ST-M043.a]
+    blocked_by:
+      - exp-648-structured-trajectory-consistency-current-phase
+      - separate-launch-judge
+    primary_match:
+      identical_stored_parameters: true
+      identical_executed_block_calls: true
+      identical_data_seeds_updates: true
+      full_evaluation_fidelity: required
+    required_controls:
+      - dense-model-loop-r2
+      - dense-layer-loop-r2
+      - dense-r1
+      - untied-equal-compute
+      - measured-capacity-reinvestment
+    later_factorials:
+      ordinary_moe: blocked-until-dense-viability-and-separate-gate
+      target_only_spt_analogue: separate-ST-M044-and-separate-gate
+    resource_policy: representative-complete-setup-training-checkpoint-full-evaluation-throughput-with-variability-headroom-separate-wall-and-aggregate-process-cpu-hash-valid-cache-reuse-and-full-fidelity
+    config: null
+    run_record: null
+    metrics: null
+    checkpoint: null
+    authorization: null
+    scientific_evidence: none

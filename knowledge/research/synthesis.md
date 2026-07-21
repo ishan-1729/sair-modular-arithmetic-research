@@ -5,7 +5,7 @@ description: Evidence-backed synthesis of the supplied memo, official baselines,
 status: active
 tags: [research, learned-algorithms, modular-arithmetic]
 timestamp: "2026-07-11T23:15:00+05:30"
-last_updated: "2026-07-18T04:42:24+05:30"
+last_updated: "2026-07-21T00:00:00+05:30"
 ---
 
 # Research synthesis
@@ -48,5 +48,11 @@ Programmable and compiled Transformer work strengthens the case that a shared ne
 The compliant transfer is architectural rather than algorithmic. A SAIR challenger may train persistent registers, trace writes, read/write addressing, execution transitions, and residue heads from generated trajectories. It may not import a compiled interpreter, modular solver, by-construction memory-update program, or hand-assigned execution weights. This distinction is stronger than the randomized-weight check alone because provenance determines whether weights contain learned capability or encoded software.
 
 The resulting neural-RAM hypothesis complements rather than replaces the learned Horner decomposition. Candidate 005 supplies a strong compact-state control; a trace executor is valuable only if addressable learned memory preserves information lost at hard residue boundaries, improves exact held-out width extrapolation, and remains CPU-feasible. EXP-654 tests that claim separately from a generic latent workspace.
+
+## Full-PDF Super Transformers reconciliation
+
+The [normative full-PDF ledger](../autoresearch/research/2026-07-21-super-transformers-full-pdf-audit.md) now separates 44 stable parent records into 81 atomic coverage components. It corrects several abstract-level conflations: symbol equivariance is not operand swapping; target-token DRM is not latent-boundary SPRM; EXP-654 is not a Universal-Transformer memory-token test; literal ERM depends on hand-constructed verifiers; the legal local call/return model is distinct from external SRLM; and Neural Computers demonstrates open-loop video rather than reusable neural RAM. No parent method or main Super Transformer method has faithful completed SAIR evidence; policy/source-only closures are reported separately.
+
+[Loop the Loopies](../autoresearch/research/2026-07-21-loop-the-loopies.md) contributes a promising but untested ordering hypothesis: apply each stored block twice locally rather than repeating the whole stack, and reinvest measured activation/throughput savings into capacity. Planned EXP-655 isolates the dense schedule under identical stored parameters and executed calls before any MoE factorial. Its target-only post-training is a separate conditional analogue. The paper's source claims, PDF acquisition, and blocked plan do not change Candidate 005 or authorize evaluation.
 
 The supplied memo is retained as an immutable source under [`sources/research/`](../../sources/research/).

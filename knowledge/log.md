@@ -45,3 +45,10 @@
 ## 2026-07-19
 
 - **Paper library**: Added a deduplicated 86-PDF private corpus covering the Super Transformers core and extended references, the supplied deep-research memo, experiment-driving research, repository-design literature, and the official SAIR bibliography; all 2,053 pages and 303,535,487 bytes have managed-Chromium provenance, SHA-256 coverage, parser verification, and Poppler first-page renders.
+
+## 2026-07-21
+
+- **Paper library**: Added arXiv:2607.16051v2, *Loop the Loopies!*, as a 38-page immutable PDF; the library now contains 87 PDFs, 2,091 pages, and 304,427,238 bytes, including 85 arXiv records.
+- **Full-PDF audit**: Reconciled Super Transformers into 44 stable parent records and 81 atomic coverage components with page anchors, implementation-library requirements, evidence classes, controls, verdicts, and terminal gaps. Zero parent/main methods have faithful completed SAIR evidence; six parents close only by exclusion, non-applicability, or supporting-source classification.
+- **Loopies planning**: Added M043 for fixed layer-local recurrence and operational capacity recycling, M044 for conditional target-only SPT, and blocked EXP-655 for a dense matched schedule test. No training, evaluation, authorization, or scientific result was produced.
+- **Resource governance**: Preserved EXP-649's historical fixed-gate evidence while superseding its generalized 225-second rule for future architectures; dynamic measured wall/aggregate-CPU budgets and full fidelity remain binding.

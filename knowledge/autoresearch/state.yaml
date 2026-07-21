@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-20T21:21:35+05:30
+updated_at: 2026-07-21T13:13:26+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -133,23 +133,31 @@ locked_prior_hypotheses:
 research_programs:
   super_transformers:
     contract: knowledge/autoresearch/research/2026-07-21-super-transformers-coverage-contract.md
+    normative_full_pdf_ledger: knowledge/autoresearch/research/2026-07-21-super-transformers-full-pdf-audit.md
+    loopies_full_pdf_note: knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md
     source_documents:
       - super_transformers.md
       - super_transformers_main_papers.md
-    mechanism_count: 42
-    stable_id_range: 42-consecutive-ST-mechanism-identifiers
-    status: exhaustive-contract-queued-behind-exp-648
+    stable_parent_record_count: 44
+    atomic_component_count: 81
+    stable_id_range: 44-consecutive-ST-mechanism-identifiers
+    faithful_completed_main_method_count: 0
+    scientifically_reproduced_parent_count: 0
+    coverage_complete_parent_count: 6
+    coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
+    status: full-pdf-reconciled-contract-queued-behind-exp-648
     mandate_status: queued-binding
     active_experiment: null
     blocked_by: exp-648-structured-trajectory-consistency
-    next_family: structural-equivariance
-    coverage_completion_rule: Every one of the 42 stable mechanisms requires durable faithful or bounded-faithful evidence, or an explicit legal/non-applicability exclusion with every transferable analogue resolved; supporting-only papers do not create mechanism IDs or completion evidence.
+    next_family: structural-equivariance-then-dense-layer-loop-schedule
+    coverage_completion_rule: Every applicable atomic component under each of the 44 stable parents requires an independent durable faithful, bounded-faithful, analogue, supporting-only, excluded, or non-applicable verdict with its terminal criterion met; a parent completes only when all applicable components complete.
     library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
     faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
     sole_active_task_unchanged: exp-648-structured-trajectory-consistency
     ordered_queue:
       - structural-equivariance
       - shared-recurrent-depth-including-looplm-controls
+      - exp-655-dense-layer-loop-versus-model-loop
       - trm-hrm-rim-rsm-answer-latent
       - separated-loopformer-drm-lotus
       - exp-651-visit-dilation-adapters
@@ -160,26 +168,28 @@ research_programs:
       - exp-653-winner-dependent-adaptive-compute
       - conditional-autoregressive-t2mlr
       - conditional-compact-structured-model-comparison
+      - conditional-target-only-spt-analogue
     preserved_experiment_meanings:
       EXP-650: library-backed-Mamba-or-linear-state-space-hybrid
       EXP-651: exact-initialized-visit-or-dilation-specific-low-rank-adapters
       EXP-652: answer-plus-latent-TRM-style-viability
       EXP-653: convergence-based-adaptive-inner-recurrence-after-stable-winner
+      EXP-655: planned-blocked-dense-layer-loop-schedule-before-capacity-reinvestment-or-moe
     rules:
       - one-active-task-only
       - faithful-and-analogue-evidence-must-not-be-conflated
       - literal-illegal-or-non-applicable-mechanisms-require-explicit-terminal-rationale
       - mature-authoritative-libraries-preferred-with-pins-provenance-and-parity-tests
       - cpu-submission-path-binding-cuda-training-only-with-cpu-and-cross-device-parity
-      - stochastic-reopen-requires-materially-different-formulation-new-roots-and-three-full-input-only-repeats
-      - stochastic-wall-gate-is-1.20-times-maximum-plus-5-at-most-225-seconds-with-separate-cpu-accounting
+      - future-resource-budgets-require-representative-setup-training-checkpoint-full-evaluation-throughput-variability-headroom-separate-wall-and-aggregate-cpu
+      - exp-649-fixed-285-second-decision-is-historical-only-and-its-225-second-generalization-is-superseded
       - oracle-breadth-never-promotes
       - structural-operand-equivariance-is-legal-only-without-answer-benchmark-id-or-arithmetic-circuit-encoding
       - lotus-exact-traces-are-training-only-and-forbidden-from-submission-inference
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Verify, commit, and push exactly the nine immutable readiness evidence files, seven governance registrations, and one focused lifecycle-regression test, then stop. Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable. Screen and every scientific, benchmark, selection, promotion, and Goal-completion surface remain blocked pending a separate launch Judge and an absent judge-authorization.json. The requested arXiv:2607.16051 review remains queued and unstarted.
+next_action: Obtain a separate EXP-648 screen-launch Judge and authenticated judge-authorization.json from a clean pushed base before any screen or scientific action. The arXiv 2607.16051v2 intake and 44-parent/81-component full-PDF reconciliation are complete and independently audited. Root 20261161 remains consumed-complete, non-scientific, sealed, and non-retryable. EXP-648 is the sole active scientific task; every benchmark, selection, promotion, and Goal-completion surface remains blocked. EXP-655 is planned-blocked-awaiting-EXP648-and-separate-launch-judge and has no config, authorization, run, checkpoint, metrics, or scientific evidence.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

@@ -10,7 +10,7 @@ timestamp: 2026-07-19
 
 The binary paper corpus lives under [`research/papers/`](../../research/papers/). It is deliberately outside the OKF bundle: `knowledge/` holds project-authored interpretation, while `research/` holds third-party PDFs and machine-readable provenance in their native formats.
 
-The PDF blobs are tracked with Git LFS so normal Git history contains compact content-addressed pointers rather than duplicating the 303.5 MB corpus. After cloning, install Git LFS and run `git lfs pull` before offline verification; the verifier deliberately rejects unresolved pointer files.
+The PDF blobs are tracked with Git LFS so normal Git history contains compact content-addressed pointers rather than duplicating the 304.4 MB corpus. After cloning, install Git LFS and run `git lfs pull` before offline verification; the verifier deliberately rejects unresolved pointer files.
 
 ## Scope
 
@@ -24,7 +24,7 @@ The source registry includes overlapping collections and deduplicates them by st
 
 The complete declarative selection is [`research/sources.json`](../../research/sources.json). Inclusion in this library preserves a source for study; it does not upgrade a source claim into reproduced project evidence. The binding autoresearch contract still requires a dated research note, falsifiable hypothesis, registered experiment, and durable result before a claim can drive promotion.
 
-The 2026-07-19 frozen snapshot contains **86 PDFs**, **2,053 pages**, and **303,535,487 bytes**. It comprises 84 arXiv papers, one primary AMS paper, and one managed-Chromium rendering of an interactive Distill article.
+The 2026-07-21 frozen snapshot contains **87 PDFs**, **2,091 pages**, and **304,427,238 bytes**. It comprises 85 arXiv papers, one primary AMS paper, and one managed-Chromium rendering of an interactive Distill article.
 
 ## Core reading route
 
@@ -49,12 +49,15 @@ The 2026-07-19 frozen snapshot contains **86 PDFs**, **2,053 pages**, and **303,
 | Attractor reasoning | [Equilibrium Reasoners](../../research/papers/arxiv-2605.21488.pdf) |
 | Convergence-based halting | [Fixed-Point Reasoners](../../research/papers/arxiv-2606.18206.pdf) |
 | Tied-depth stability | [DeepLoop](../../research/papers/arxiv-2607.13491.pdf) |
+| Layer-local recurrence | [Loop the Loopies!](../../research/papers/arxiv-2607.16051.pdf) |
 
 ## Provenance and integrity
 
 [`research/manifest.json`](../../research/manifest.json) records the title, authors and arXiv revision where applicable, primary landing page, resolved acquisition URL, repository citation locations, collection membership, retrieval timestamp, local path, byte count, SHA-256, and browser-access evidence. [`research/checksums.sha256`](../../research/checksums.sha256) is the compact content-integrity ledger.
 
 Acquisition uses repository-local Playwright with its matching managed Chromium. Each source is opened in a fresh read-only browser context, mutating HTTP methods and service workers are blocked, arXiv PDFs are pinned to the latest revision visible at retrieval time, and valid cached bytes are reused on later runs.
+
+The Loopies record is pinned to arXiv v2 (2026-07-20), 38 pages, SHA-256 `1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce`. All pages were rendered for visual QA. Linked official code/model previews were unavailable on 2026-07-21, so its project note makes PDF-level rather than code-level parity claims.
 
 One source needs special treatment: *Growing Neural Cellular Automata* is an interactive Distill publication with a DOI but no canonical article PDF. Its local file is a managed-Chromium print rendering and is labeled `browser_print` in the manifest; it is not represented as a publisher-supplied PDF.
 

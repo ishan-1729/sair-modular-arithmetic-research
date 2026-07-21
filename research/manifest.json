@@ -2,9 +2,9 @@
   "schema_version": 1,
   "kind": "sair-research-paper-library",
   "generated_at": "2026-07-18T18:54:58.279Z",
-  "updated_at": "2026-07-18T19:45:50.438Z",
+  "updated_at": "2026-07-21T07:39:45.868Z",
   "source_catalog": "research/sources.json",
-  "source_catalog_sha256": "cd2f5acd2ba2c04d9375b70dc5362ccc1fb537f124d3e8e3c1a296ad0845c5e4",
+  "source_catalog_sha256": "6416fe89c58439502992d005c4b88e556a82e8d49b73668a6586671320f0dfec",
   "selected_paper_ids": [
     "arxiv:1502.02206",
     "arxiv:1511.06279",
@@ -90,6 +90,7 @@
     "arxiv:2607.10681",
     "arxiv:2607.13491",
     "arxiv:2607.15178",
+    "arxiv:2607.16051",
     "web:ams-montgomery-1985",
     "web:distill-00023"
   ],
@@ -327,7 +328,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:51: | Adaptive inner compute: [Adaptive Computation Time](https://arxiv.org/abs/1603.08983), Fixed-Point Reasoners, and entropy/convergence halting from the supplied synthesis | Preserve the mandatory operand-bit scan but vary recurrent work inside each learned transition according to convergence or confidence. | Candidate 005 uses a fixed dilation schedule and conditional second orientation. | Runtime optimization only after exactness and calibration; never let early halting weaken full-set claims."
+          "citation_match": "knowledge/autoresearch/backlog.md:58: | Adaptive inner compute: [Adaptive Computation Time](https://arxiv.org/abs/1603.08983), Fixed-Point Reasoners, and entropy/convergence halting from the supplied synthesis | Preserve the mandatory operand-bit scan but vary recurrent work inside each learned transition according to convergence or confidence. | Candidate 005 uses a fixed dilation schedule and conditional second orientation. | Runtime optimization only after exactness and calibration; never let early halting weaken full-set claims."
         },
         {
           "source_file": "super_transformers.md",
@@ -335,11 +336,11 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2113: <https://arxiv.org/abs/1603.08983>"
+          "citation_match": "super_transformers.md:2130: <https://arxiv.org/abs/1603.08983>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:334: Source: [arXiv:1603.08983](https://arxiv.org/abs/1603.08983)"
+          "citation_match": "super_transformers.md:335: Source: [arXiv:1603.08983](https://arxiv.org/abs/1603.08983)"
         }
       ],
       "local_path": "research/papers/arxiv-1603.08983.pdf",
@@ -926,7 +927,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:41: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
+          "citation_match": "knowledge/autoresearch/backlog.md:47: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
         },
         {
           "source_file": "knowledge/autoresearch/research/2026-07-12-width-independent-arithmetic.md",
@@ -938,15 +939,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2083: 1. [Universal Transformers](https://arxiv.org/abs/1807.03819) — the Transformer-specific ancestor."
+          "citation_match": "super_transformers.md:2099: 1. [Universal Transformers](https://arxiv.org/abs/1807.03819) — the Transformer-specific ancestor."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2115: <https://arxiv.org/abs/1807.03819>"
+          "citation_match": "super_transformers.md:2132: <https://arxiv.org/abs/1807.03819>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:351: Source: [arXiv:1807.03819](https://arxiv.org/abs/1807.03819)"
+          "citation_match": "super_transformers.md:352: Source: [arXiv:1807.03819](https://arxiv.org/abs/1807.03819)"
         }
       ],
       "local_path": "research/papers/arxiv-1807.03819.pdf",
@@ -1160,11 +1161,11 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2117: <https://arxiv.org/abs/1909.01377>"
+          "citation_match": "super_transformers.md:2134: <https://arxiv.org/abs/1909.01377>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:375: Source: [arXiv:1909.01377](https://arxiv.org/abs/1909.01377)"
+          "citation_match": "super_transformers.md:376: Source: [arXiv:1909.01377](https://arxiv.org/abs/1909.01377)"
         }
       ],
       "local_path": "research/papers/arxiv-1909.01377.pdf",
@@ -1807,7 +1808,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:44: | Learned execution traces and fast indexed memory: [Looped Transformers as Programmable Computers](https://arxiv.org/abs/2301.13196) and [Percepta's executor](https://www.percepta.ai/blog/can-llms-be-computers); see the [verified applicability note](research/2026-07-18-learned-neural-execution.md) | Train an addressable neural-RAM runtime whose persistent registers and append-only trace preserve computational state that Candidate 005 discards at each hard residue decode. Low-dimensional learned"
+          "citation_match": "knowledge/autoresearch/backlog.md:50: | Learned execution traces and fast indexed memory: [Looped Transformers as Programmable Computers](https://arxiv.org/abs/2301.13196) and [Percepta's executor](https://www.percepta.ai/blog/can-llms-be-computers); see the [verified applicability note](research/2026-07-18-learned-neural-execution.md) | Train an addressable neural-RAM runtime whose persistent registers and append-only trace preserve computational state that Candidate 005 discards at each hard residue decode. Low-dimensional learned"
         },
         {
           "source_file": "knowledge/autoresearch/research/2026-07-18-learned-neural-execution.md",
@@ -1819,15 +1820,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2084: 2. [Looped Transformers as Programmable Computers](https://arxiv.org/abs/2301.13196) — why repeated shallow blocks can execute deep algorithms."
+          "citation_match": "super_transformers.md:2100: 2. [Looped Transformers as Programmable Computers](https://arxiv.org/abs/2301.13196) — why repeated shallow blocks can execute deep algorithms."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2119: <https://arxiv.org/abs/2301.13196>"
+          "citation_match": "super_transformers.md:2136: <https://arxiv.org/abs/2301.13196>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:400: Source: [arXiv:2301.13196](https://arxiv.org/abs/2301.13196)"
+          "citation_match": "super_transformers.md:401: Source: [arXiv:2301.13196](https://arxiv.org/abs/2301.13196)"
         }
       ],
       "local_path": "research/papers/arxiv-2301.13196.pdf",
@@ -2092,11 +2093,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2121: <https://arxiv.org/abs/2311.12424>"
+          "citation_match": "super_transformers.md:2138: <https://arxiv.org/abs/2311.12424>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:417: Source: [arXiv:2311.12424](https://arxiv.org/abs/2311.12424)"
+          "citation_match": "super_transformers.md:418: Source: [arXiv:2311.12424](https://arxiv.org/abs/2311.12424)"
         }
       ],
       "local_path": "research/papers/arxiv-2311.12424.pdf",
@@ -2598,15 +2599,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:41: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
+          "citation_match": "knowledge/autoresearch/backlog.md:47: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2123: <https://arxiv.org/abs/2409.15647>"
+          "citation_match": "super_transformers.md:2140: <https://arxiv.org/abs/2409.15647>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:432: Source: [arXiv:2409.15647](https://arxiv.org/abs/2409.15647)"
+          "citation_match": "super_transformers.md:433: Source: [arXiv:2409.15647](https://arxiv.org/abs/2409.15647)"
         }
       ],
       "local_path": "research/papers/arxiv-2409.15647.pdf",
@@ -2826,15 +2827,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:49: | Relaxed tying and depth-specific adaptation: [Relaxed Recursive Transformers](https://arxiv.org/abs/2410.20672) | Add exact-initialized, low-rank visit/dilation adapters around a shared core rather than fully untying depth. | EXP-617 tested one merged recurrent-core LoRA, not visit-specific adapters; it gained only 0.5 point. | Medium priority; require activation, merge, parameter, and runtime controls. |"
+          "citation_match": "knowledge/autoresearch/backlog.md:56: | Relaxed tying and depth-specific adaptation: [Relaxed Recursive Transformers](https://arxiv.org/abs/2410.20672) | Add exact-initialized, low-rank visit/dilation adapters around a shared core rather than fully untying depth. | EXP-617 tested one merged recurrent-core LoRA, not visit-specific adapters; it gained only 0.5 point. | Medium priority; require activation, merge, parameter, and runtime controls. |"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2125: <https://arxiv.org/abs/2410.20672>"
+          "citation_match": "super_transformers.md:2142: <https://arxiv.org/abs/2410.20672>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:451: Source: [arXiv:2410.20672](https://arxiv.org/abs/2410.20672)"
+          "citation_match": "super_transformers.md:452: Source: [arXiv:2410.20672](https://arxiv.org/abs/2410.20672)"
         }
       ],
       "local_path": "research/papers/arxiv-2410.20672.pdf",
@@ -2909,7 +2910,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:41: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
+          "citation_match": "knowledge/autoresearch/backlog.md:47: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
         },
         {
           "source_file": "super_transformers.md",
@@ -2917,15 +2918,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2085: 3. [Scaling up Test-Time Compute with Latent Reasoning](https://arxiv.org/abs/2502.05171) — the modern LLM-scale recurrent-depth wave."
+          "citation_match": "super_transformers.md:2101: 3. [Scaling up Test-Time Compute with Latent Reasoning](https://arxiv.org/abs/2502.05171) — the modern LLM-scale recurrent-depth wave."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2130: <https://arxiv.org/abs/2502.05171>"
+          "citation_match": "super_transformers.md:2147: <https://arxiv.org/abs/2502.05171>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:477: Source: [arXiv:2502.05171](https://arxiv.org/abs/2502.05171)"
+          "citation_match": "super_transformers.md:478: Source: [arXiv:2502.05171](https://arxiv.org/abs/2502.05171)"
         }
       ],
       "local_path": "research/papers/arxiv-2502.05171.pdf",
@@ -2999,7 +3000,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:41: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
+          "citation_match": "knowledge/autoresearch/backlog.md:47: | Shared recurrent depth and length extrapolation: [Universal Transformer](https://arxiv.org/abs/1807.03819), [Looped Transformers for Length Generalization](https://arxiv.org/abs/2409.15647), [Huginn](https://arxiv.org/abs/2502.05171), and [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) | Reuse one learned transition for more effective depth at wider moduli instead of growing stored parameters with width. | Candidate 005 already uses width-shared dilated recurrence, but its v"
         },
         {
           "source_file": "super_transformers.md",
@@ -3007,15 +3008,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2086: 4. [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) — theoretical and empirical depth argument."
+          "citation_match": "super_transformers.md:2102: 4. [Reasoning with Latent Thoughts](https://arxiv.org/abs/2502.17416) — theoretical and empirical depth argument."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2132: <https://arxiv.org/abs/2502.17416>"
+          "citation_match": "super_transformers.md:2149: <https://arxiv.org/abs/2502.17416>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:497: Source: [arXiv:2502.17416](https://arxiv.org/abs/2502.17416)"
+          "citation_match": "super_transformers.md:498: Source: [arXiv:2502.17416](https://arxiv.org/abs/2502.17416)"
         }
       ],
       "local_path": "research/papers/arxiv-2502.17416.pdf",
@@ -3150,7 +3151,11 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:45: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
+          "citation_match": "knowledge/autoresearch/backlog.md:51: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:7: https://arxiv.org/abs/2506.21734"
         },
         {
           "source_file": "super_transformers.md",
@@ -3158,15 +3163,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2087: 5. [Hierarchical Reasoning Model](https://arxiv.org/abs/2506.21734) — the paper that triggered the tiny ARC wave."
+          "citation_match": "super_transformers.md:2103: 5. [Hierarchical Reasoning Model](https://arxiv.org/abs/2506.21734) — the paper that triggered the tiny ARC wave."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2134: <https://arxiv.org/abs/2506.21734>"
+          "citation_match": "super_transformers.md:2151: <https://arxiv.org/abs/2506.21734>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:522: Source: [arXiv:2506.21734](https://arxiv.org/abs/2506.21734)"
+          "citation_match": "super_transformers.md:523: Source: [arXiv:2506.21734](https://arxiv.org/abs/2506.21734)"
         }
       ],
       "local_path": "research/papers/arxiv-2506.21734.pdf",
@@ -3314,11 +3319,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2136: <https://arxiv.org/abs/2507.08567>"
+          "citation_match": "super_transformers.md:2153: <https://arxiv.org/abs/2507.08567>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:539: Source: [arXiv:2507.08567](https://arxiv.org/abs/2507.08567)"
+          "citation_match": "super_transformers.md:540: Source: [arXiv:2507.08567](https://arxiv.org/abs/2507.08567)"
         }
       ],
       "local_path": "research/papers/arxiv-2507.08567.pdf",
@@ -3391,11 +3396,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2138: <https://arxiv.org/abs/2507.10524>"
+          "citation_match": "super_transformers.md:2155: <https://arxiv.org/abs/2507.10524>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:562: Source: [arXiv:2507.10524](https://arxiv.org/abs/2507.10524)"
+          "citation_match": "super_transformers.md:563: Source: [arXiv:2507.10524](https://arxiv.org/abs/2507.10524)"
         }
       ],
       "local_path": "research/papers/arxiv-2507.10524.pdf",
@@ -3473,20 +3478,24 @@
       ],
       "source_mentions": [
         {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:111: Paper: https://arxiv.org/abs/2509.03505"
+        },
+        {
           "source_file": "super_transformers.md",
           "citation_match": "explicit arXiv id 2509.03505"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1381: Source: [arXiv:2509.03505](https://arxiv.org/abs/2509.03505)"
+          "citation_match": "super_transformers.md:1382: Source: [arXiv:2509.03505](https://arxiv.org/abs/2509.03505)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2104: - [LimiX](https://arxiv.org/abs/2509.03505) — compact structured-data foundation models."
+          "citation_match": "super_transformers.md:2121: - [LimiX](https://arxiv.org/abs/2509.03505) — compact structured-data foundation models."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2223: <https://arxiv.org/abs/2509.03505>"
+          "citation_match": "super_transformers.md:2241: <https://arxiv.org/abs/2509.03505>"
         }
       ],
       "local_path": "research/papers/arxiv-2509.03505.pdf",
@@ -3589,7 +3598,11 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:45: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
+          "citation_match": "knowledge/autoresearch/backlog.md:51: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:17: https://arxiv.org/abs/2510.04871"
         },
         {
           "source_file": "super_transformers.md",
@@ -3597,15 +3610,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2089: 7. [Tiny Recursive Model](https://arxiv.org/abs/2510.04871) — the decisive simplification."
+          "citation_match": "super_transformers.md:2105: 7. [Tiny Recursive Model](https://arxiv.org/abs/2510.04871) — the decisive simplification."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2140: <https://arxiv.org/abs/2510.04871>"
+          "citation_match": "super_transformers.md:2157: <https://arxiv.org/abs/2510.04871>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:590: Source: [arXiv:2510.04871](https://arxiv.org/abs/2510.04871)"
+          "citation_match": "super_transformers.md:591: Source: [arXiv:2510.04871](https://arxiv.org/abs/2510.04871)"
         }
       ],
       "local_path": "research/papers/arxiv-2510.04871.pdf",
@@ -3665,20 +3678,24 @@
       ],
       "source_mentions": [
         {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:80: https://arxiv.org/abs/2510.25741"
+        },
+        {
           "source_file": "super_transformers.md",
           "citation_match": "explicit arXiv id 2510.25741"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2091: 9. [Ouro / LoopLM](https://arxiv.org/abs/2510.25741) — serious looped-LM pretraining."
+          "citation_match": "super_transformers.md:2107: 9. [Ouro / LoopLM](https://arxiv.org/abs/2510.25741) — serious looped-LM pretraining."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2142: <https://arxiv.org/abs/2510.25741>"
+          "citation_match": "super_transformers.md:2159: <https://arxiv.org/abs/2510.25741>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:612: Source: [arXiv:2510.25741](https://arxiv.org/abs/2510.25741)"
+          "citation_match": "super_transformers.md:613: Source: [arXiv:2510.25741](https://arxiv.org/abs/2510.25741)"
         }
       ],
       "local_path": "research/papers/arxiv-2510.25741.pdf",
@@ -3786,20 +3803,24 @@
       ],
       "source_mentions": [
         {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:122: https://arxiv.org/abs/2511.09030"
+        },
+        {
           "source_file": "super_transformers.md",
           "citation_match": "explicit arXiv id 2511.09030"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1690: Source: [arXiv:2511.09030](https://arxiv.org/abs/2511.09030)"
+          "citation_match": "super_transformers.md:1691: Source: [arXiv:2511.09030](https://arxiv.org/abs/2511.09030)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2101: - [Solving a Million-Step LLM Task with Zero Errors](https://arxiv.org/abs/2511.09030) — extreme decomposition and voting."
+          "citation_match": "super_transformers.md:2118: - [Solving a Million-Step LLM Task with Zero Errors](https://arxiv.org/abs/2511.09030) — extreme decomposition and voting."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2215: <https://arxiv.org/abs/2511.09030>"
+          "citation_match": "super_transformers.md:2233: <https://arxiv.org/abs/2511.09030>"
         }
       ],
       "local_path": "research/papers/arxiv-2511.09030.pdf",
@@ -3872,15 +3893,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2090: 8. [Independent TRM audit](https://arxiv.org/abs/2512.11847) — benchmark and mechanism caveats."
+          "citation_match": "super_transformers.md:2106: 8. [Independent TRM audit](https://arxiv.org/abs/2512.11847) — benchmark and mechanism caveats."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2144: <https://arxiv.org/abs/2512.11847>"
+          "citation_match": "super_transformers.md:2161: <https://arxiv.org/abs/2512.11847>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:648: Source: [arXiv:2512.11847](https://arxiv.org/abs/2512.11847)"
+          "citation_match": "super_transformers.md:649: Source: [arXiv:2512.11847](https://arxiv.org/abs/2512.11847)"
         }
       ],
       "local_path": "research/papers/arxiv-2512.11847.pdf",
@@ -3948,11 +3969,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2146: <https://arxiv.org/abs/2512.14693>"
+          "citation_match": "super_transformers.md:2163: <https://arxiv.org/abs/2512.14693>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:674: Source: [arXiv:2512.14693](https://arxiv.org/abs/2512.14693)"
+          "citation_match": "super_transformers.md:675: Source: [arXiv:2512.14693](https://arxiv.org/abs/2512.14693)"
         }
       ],
       "local_path": "research/papers/arxiv-2512.14693.pdf",
@@ -4027,20 +4048,24 @@
       ],
       "source_mentions": [
         {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:39: https://arxiv.org/abs/2512.24601"
+        },
+        {
           "source_file": "super_transformers.md",
           "citation_match": "explicit arXiv id 2512.24601"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1521: Source: [arXiv:2512.24601, current v3](https://arxiv.org/abs/2512.24601)"
+          "citation_match": "super_transformers.md:1522: Source: [arXiv:2512.24601, current v3](https://arxiv.org/abs/2512.24601)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2092: 10. [Recursive Language Models](https://arxiv.org/abs/2512.24601) — the separate external-recursion branch."
+          "citation_match": "super_transformers.md:2108: 10. [Recursive Language Models](https://arxiv.org/abs/2512.24601) — the separate external-recursion branch."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2153: <https://arxiv.org/abs/2512.24601>"
+          "citation_match": "super_transformers.md:2170: <https://arxiv.org/abs/2512.24601>"
         }
       ],
       "local_path": "research/papers/arxiv-2512.24601.pdf",
@@ -4175,7 +4200,7 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:693: Source: [arXiv:2601.07675](https://arxiv.org/abs/2601.07675)"
+          "citation_match": "super_transformers.md:694: Source: [arXiv:2601.07675](https://arxiv.org/abs/2601.07675)"
         }
       ],
       "local_path": "research/papers/arxiv-2601.07675.pdf",
@@ -4237,11 +4262,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2168: <https://arxiv.org/abs/2601.10679>"
+          "citation_match": "super_transformers.md:2185: <https://arxiv.org/abs/2601.10679>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:715: Source: [arXiv:2601.10679](https://arxiv.org/abs/2601.10679)"
+          "citation_match": "super_transformers.md:716: Source: [arXiv:2601.10679](https://arxiv.org/abs/2601.10679)"
         }
       ],
       "local_path": "research/papers/arxiv-2601.10679.pdf",
@@ -4306,7 +4331,7 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2232: <https://arxiv.org/abs/2601.10904>"
+          "citation_match": "super_transformers.md:2250: <https://arxiv.org/abs/2601.10904>"
         }
       ],
       "local_path": "research/papers/arxiv-2601.10904.pdf",
@@ -4369,11 +4394,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2170: <https://arxiv.org/abs/2602.02156>"
+          "citation_match": "super_transformers.md:2187: <https://arxiv.org/abs/2602.02156>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:737: Source: [arXiv:2602.02156](https://arxiv.org/abs/2602.02156)"
+          "citation_match": "super_transformers.md:738: Source: [arXiv:2602.02156](https://arxiv.org/abs/2602.02156)"
         }
       ],
       "local_path": "research/papers/arxiv-2602.02156.pdf",
@@ -4439,19 +4464,19 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:42: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
+          "citation_match": "knowledge/autoresearch/backlog.md:48: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
         },
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:47: | Denoising and trajectory consistency: [Denoising Recursion Models](https://arxiv.org/abs/2604.18839) and [LoopFormer](https://arxiv.org/abs/2602.11451) | Train intermediate recurrent states to recover toward the same exact endpoint and make shallow/deep predictions consistent. | Generic state corruption in EXP-610 collapsed because arbitrary corrupted residues were ambiguous. A structured self-consistency target has not been tested. | Medium-high priority with diagnosis-matched perturbations o"
+          "citation_match": "knowledge/autoresearch/backlog.md:53: | Denoising and trajectory consistency: [Denoising Recursion Models](https://arxiv.org/abs/2604.18839) and [LoopFormer](https://arxiv.org/abs/2602.11451) | Train intermediate recurrent states to recover toward the same exact endpoint and make shallow/deep predictions consistent. | Generic state corruption in EXP-610 collapsed because arbitrary corrupted residues were ambiguous. EXP-648 has a frozen 736-identity/512-pair natural corpus. Roots `20261159` and `20261160` are consumed non-scientific"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2172: <https://arxiv.org/abs/2602.11451>"
+          "citation_match": "super_transformers.md:2189: <https://arxiv.org/abs/2602.11451>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:760: Source: [arXiv:2602.11451](https://arxiv.org/abs/2602.11451)"
+          "citation_match": "super_transformers.md:761: Source: [arXiv:2602.11451](https://arxiv.org/abs/2602.11451)"
         }
       ],
       "local_path": "research/papers/arxiv-2602.11451.pdf",
@@ -4514,15 +4539,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:50: | Linear-time/state-space recurrent operators: [Mamba-2/TRM hybrid](https://arxiv.org/abs/2602.12078) and linear-time looped models from the supplied synthesis | Replace or augment expensive global-depth operations at width 256+ while retaining a shared learned rule. | EXP-634's small direct relative-attention model failed, while ConvGRU remains accurate but Tier-6 inference is expensive. | Medium priority; use proper external libraries and match parameters, updates, and CPU. |"
+          "citation_match": "knowledge/autoresearch/backlog.md:57: | Linear-time/state-space recurrent operators: [Mamba-2/TRM hybrid](https://arxiv.org/abs/2602.12078) and linear-time looped models from the supplied synthesis | Replace or augment expensive global-depth operations at width 256+ while retaining a shared learned rule. | EXP-634's small direct relative-attention model failed, while ConvGRU remains accurate but Tier-6 inference is expensive. | Medium priority; use proper external libraries and match parameters, updates, and CPU. |"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2174: <https://arxiv.org/abs/2602.12078>"
+          "citation_match": "super_transformers.md:2191: <https://arxiv.org/abs/2602.12078>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:777: Source: [arXiv:2602.12078](https://arxiv.org/abs/2602.12078)"
+          "citation_match": "super_transformers.md:778: Source: [arXiv:2602.12078](https://arxiv.org/abs/2602.12078)"
         }
       ],
       "local_path": "research/papers/arxiv-2602.12078.pdf",
@@ -4587,11 +4612,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1558: Source: [arXiv:2603.02112](https://arxiv.org/abs/2603.02112)"
+          "citation_match": "super_transformers.md:1559: Source: [arXiv:2603.02112](https://arxiv.org/abs/2603.02112)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2157: <https://arxiv.org/abs/2603.02112>"
+          "citation_match": "super_transformers.md:2174: <https://arxiv.org/abs/2603.02112>"
         }
       ],
       "local_path": "research/papers/arxiv-2603.02112.pdf",
@@ -4658,15 +4683,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:48: | Symmetry-aware recurrence: [Symbol-Equivariant Recurrent Reasoning Models](https://arxiv.org/abs/2603.02193) | Turn Candidate 005's useful operand-swap symmetry from inference-only diversity into a trained full-rollout consistency constraint. | The commutative route raises Tier-6 accuracy to the high nineties but doubles work on 40% of cases. | High priority if it can distill two orientations into one trajectory. |"
+          "citation_match": "knowledge/autoresearch/backlog.md:54: | Symbol-equivariant recurrence: [Symbol-Equivariant Recurrent Reasoning Models](https://arxiv.org/abs/2603.02193) | Alternate position/symbol attention over an explicit symbol/color axis; operand commutativity is only a separate SAIR analogue. | EXP-647 tests operand-swap consistency, not SE-RRM. | High priority with exact permutation residuals, broken-tying controls, and leakage audit. |"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2176: <https://arxiv.org/abs/2603.02193>"
+          "citation_match": "super_transformers.md:2193: <https://arxiv.org/abs/2603.02193>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:798: Source: [arXiv:2603.02193](https://arxiv.org/abs/2603.02193)"
+          "citation_match": "super_transformers.md:799: Source: [arXiv:2603.02193](https://arxiv.org/abs/2603.02193)"
         }
       ],
       "local_path": "research/papers/arxiv-2603.02193.pdf",
@@ -4731,15 +4756,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:45: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
+          "citation_match": "knowledge/autoresearch/backlog.md:51: | Answer/latent refinement: [HRM](https://arxiv.org/abs/2506.21734), [TRM](https://arxiv.org/abs/2510.04871), and [Recursive Inference Machines](https://arxiv.org/abs/2603.05234) | Maintain a learned candidate residue plus latent workspace and refine it with shared parameters. | Direct attention, hierarchical composition, and persistent-latent controls failed in EXP-620/633/634, but no candidate-shaped answer-plus-latent transition was tested at a viable small-width surface. | Medium priority; r"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2180: <https://arxiv.org/abs/2603.05234>"
+          "citation_match": "super_transformers.md:2197: <https://arxiv.org/abs/2603.05234>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:845: Source: [arXiv:2603.05234](https://arxiv.org/abs/2603.05234)"
+          "citation_match": "super_transformers.md:846: Source: [arXiv:2603.05234](https://arxiv.org/abs/2603.05234)"
         }
       ],
       "local_path": "research/papers/arxiv-2603.05234.pdf",
@@ -4803,11 +4828,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2182: <https://arxiv.org/abs/2603.08082>"
+          "citation_match": "super_transformers.md:2199: <https://arxiv.org/abs/2603.08082>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:865: Source: [arXiv:2603.08082](https://arxiv.org/abs/2603.08082)"
+          "citation_match": "super_transformers.md:866: Source: [arXiv:2603.08082](https://arxiv.org/abs/2603.08082)"
         }
       ],
       "local_path": "research/papers/arxiv-2603.08082.pdf",
@@ -4869,11 +4894,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2178: <https://arxiv.org/abs/2603.15641>"
+          "citation_match": "super_transformers.md:2195: <https://arxiv.org/abs/2603.15641>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:824: Source: [arXiv:2603.15641](https://arxiv.org/abs/2603.15641)"
+          "citation_match": "super_transformers.md:825: Source: [arXiv:2603.15641](https://arxiv.org/abs/2603.15641)"
         }
       ],
       "local_path": "research/papers/arxiv-2603.15641.pdf",
@@ -4933,11 +4958,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1581: Source: [arXiv:2603.15653](https://arxiv.org/abs/2603.15653)"
+          "citation_match": "super_transformers.md:1582: Source: [arXiv:2603.15653](https://arxiv.org/abs/2603.15653)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2159: <https://arxiv.org/abs/2603.15653>"
+          "citation_match": "super_transformers.md:2176: <https://arxiv.org/abs/2603.15653>"
         }
       ],
       "local_path": "research/papers/arxiv-2603.15653.pdf",
@@ -5000,20 +5025,24 @@
       ],
       "source_mentions": [
         {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:49: https://arxiv.org/abs/2603.20105"
+        },
+        {
           "source_file": "super_transformers.md",
           "citation_match": "explicit arXiv id 2603.20105"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1608: Source: [arXiv:2603.20105](https://arxiv.org/abs/2603.20105)"
+          "citation_match": "super_transformers.md:1609: Source: [arXiv:2603.20105](https://arxiv.org/abs/2603.20105)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2093: 11. [The Y-Combinator for LLMs](https://arxiv.org/abs/2603.20105) — typed recursive control."
+          "citation_match": "super_transformers.md:2109: 11. [The Y-Combinator for LLMs](https://arxiv.org/abs/2603.20105) — typed recursive control."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2161: <https://arxiv.org/abs/2603.20105>"
+          "citation_match": "super_transformers.md:2178: <https://arxiv.org/abs/2603.20105>"
         }
       ],
       "local_path": "research/papers/arxiv-2603.20105.pdf",
@@ -5079,7 +5108,11 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:43: | State capacity and learned workspace: [Universal Transformers Need Memory](https://arxiv.org/abs/2604.21999) and [Neural Computers](https://arxiv.org/abs/2604.06425) | A width-independent scratchpad may address the possibility that more depth cannot compensate for an undersized recurrent state. | EXP-654 now isolates a parameter-matched non-addressable workspace: it scores zero exact at trained width 16, while the wider decoded control reaches 94.33%. | Current formulation rejected. Reopen onl"
+          "citation_match": "knowledge/autoresearch/backlog.md:49: | State capacity and learned workspace: [Universal Transformers Need Memory](https://arxiv.org/abs/2604.21999) and [Neural Computers](https://arxiv.org/abs/2604.06425) | Direct learned UT memory tokens are distinct from Neural Computers' future memory roadmap. | EXP-654's soft RAM/workspace scores zero exact at trained width 16 but is not faithful to prepended sample-independent UT memory tokens. | Keep the direct 0/4/8/16/32/64 memory-token sweep open; treat Neural Computers' video system as no"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:144: https://arxiv.org/abs/2604.06425"
         },
         {
           "source_file": "super_transformers.md",
@@ -5087,15 +5120,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1355: Source: [arXiv:2604.06425](https://arxiv.org/abs/2604.06425)"
+          "citation_match": "super_transformers.md:1356: Source: [arXiv:2604.06425](https://arxiv.org/abs/2604.06425)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2103: - [Neural Computers](https://arxiv.org/abs/2604.06425) — learned neural runtimes."
+          "citation_match": "super_transformers.md:2120: - [Neural Computers](https://arxiv.org/abs/2604.06425) — learned neural runtimes."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2219: <https://arxiv.org/abs/2604.06425>"
+          "citation_match": "super_transformers.md:2237: <https://arxiv.org/abs/2604.06425>"
         }
       ],
       "local_path": "research/papers/arxiv-2604.06425.pdf",
@@ -5177,11 +5210,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2184: <https://arxiv.org/abs/2604.07822>"
+          "citation_match": "super_transformers.md:2201: <https://arxiv.org/abs/2604.07822>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:886: Source: [arXiv:2604.07822](https://arxiv.org/abs/2604.07822)"
+          "citation_match": "super_transformers.md:887: Source: [arXiv:2604.07822](https://arxiv.org/abs/2604.07822)"
         }
       ],
       "local_path": "research/papers/arxiv-2604.07822.pdf",
@@ -5245,15 +5278,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:47: | Denoising and trajectory consistency: [Denoising Recursion Models](https://arxiv.org/abs/2604.18839) and [LoopFormer](https://arxiv.org/abs/2602.11451) | Train intermediate recurrent states to recover toward the same exact endpoint and make shallow/deep predictions consistent. | Generic state corruption in EXP-610 collapsed because arbitrary corrupted residues were ambiguous. A structured self-consistency target has not been tested. | Medium-high priority with diagnosis-matched perturbations o"
+          "citation_match": "knowledge/autoresearch/backlog.md:53: | Denoising and trajectory consistency: [Denoising Recursion Models](https://arxiv.org/abs/2604.18839) and [LoopFormer](https://arxiv.org/abs/2602.11451) | Train intermediate recurrent states to recover toward the same exact endpoint and make shallow/deep predictions consistent. | Generic state corruption in EXP-610 collapsed because arbitrary corrupted residues were ambiguous. EXP-648 has a frozen 736-identity/512-pair natural corpus. Roots `20261159` and `20261160` are consumed non-scientific"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2186: <https://arxiv.org/abs/2604.18839>"
+          "citation_match": "super_transformers.md:2203: <https://arxiv.org/abs/2604.18839>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:902: Source: [arXiv:2604.18839](https://arxiv.org/abs/2604.18839)"
+          "citation_match": "super_transformers.md:903: Source: [arXiv:2604.18839](https://arxiv.org/abs/2604.18839)"
         }
       ],
       "local_path": "research/papers/arxiv-2604.18839.pdf",
@@ -5319,15 +5352,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:43: | State capacity and learned workspace: [Universal Transformers Need Memory](https://arxiv.org/abs/2604.21999) and [Neural Computers](https://arxiv.org/abs/2604.06425) | A width-independent scratchpad may address the possibility that more depth cannot compensate for an undersized recurrent state. | EXP-654 now isolates a parameter-matched non-addressable workspace: it scores zero exact at trained width 16, while the wider decoded control reaches 94.33%. | Current formulation rejected. Reopen onl"
+          "citation_match": "knowledge/autoresearch/backlog.md:49: | State capacity and learned workspace: [Universal Transformers Need Memory](https://arxiv.org/abs/2604.21999) and [Neural Computers](https://arxiv.org/abs/2604.06425) | Direct learned UT memory tokens are distinct from Neural Computers' future memory roadmap. | EXP-654's soft RAM/workspace scores zero exact at trained width 16 but is not faithful to prepended sample-independent UT memory tokens. | Keep the direct 0/4/8/16/32/64 memory-token sweep open; treat Neural Computers' video system as no"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2188: <https://arxiv.org/abs/2604.21999>"
+          "citation_match": "super_transformers.md:2205: <https://arxiv.org/abs/2604.21999>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:919: Source: [arXiv:2604.21999](https://arxiv.org/abs/2604.21999)"
+          "citation_match": "super_transformers.md:920: Source: [arXiv:2604.21999](https://arxiv.org/abs/2604.21999)"
         }
       ],
       "local_path": "research/papers/arxiv-2604.21999.pdf",
@@ -5395,11 +5428,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2190: <https://arxiv.org/abs/2605.12466>"
+          "citation_match": "super_transformers.md:2207: <https://arxiv.org/abs/2605.12466>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:940: Source: [arXiv:2605.12466](https://arxiv.org/abs/2605.12466)"
+          "citation_match": "super_transformers.md:941: Source: [arXiv:2605.12466](https://arxiv.org/abs/2605.12466)"
         }
       ],
       "local_path": "research/papers/arxiv-2605.12466.pdf",
@@ -5461,15 +5494,19 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:46: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128) | Generate complementary learned trajectories and select without labels using confidence, convergence, or a trained energy score. | EXP-640–642 prove that complementary commuted trajectories plus a target"
+          "citation_match": "knowledge/autoresearch/backlog.md:52: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128); see the [verified stochastic-recursion note](research/2026-07-20-stochastic-recursive-reasoning.md) | Generate complementary learned trajectories and select without labels using confidence, convergence,"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:102: https://arxiv.org/abs/2605.19376"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2192: <https://arxiv.org/abs/2605.19376>"
+          "citation_match": "super_transformers.md:2209: <https://arxiv.org/abs/2605.19376>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:974: Sources: [arXiv:2605.19376](https://arxiv.org/abs/2605.19376); [GRAM project page](https://ahn-ml.github.io/gram-website/)"
+          "citation_match": "super_transformers.md:975: Sources: [arXiv:2605.19376](https://arxiv.org/abs/2605.19376); [GRAM project page](https://ahn-ml.github.io/gram-website/)"
         }
       ],
       "local_path": "research/papers/arxiv-2605.19376.pdf",
@@ -5540,7 +5577,11 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:46: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128) | Generate complementary learned trajectories and select without labels using confidence, convergence, or a trained energy score. | EXP-640–642 prove that complementary commuted trajectories plus a target"
+          "citation_match": "knowledge/autoresearch/backlog.md:52: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128); see the [verified stochastic-recursion note](research/2026-07-20-stochastic-recursive-reasoning.md) | Generate complementary learned trajectories and select without labels using confidence, convergence,"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:25: https://arxiv.org/abs/2605.19943"
         },
         {
           "source_file": "super_transformers.md",
@@ -5548,15 +5589,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2094: 12. [Probabilistic TRM](https://arxiv.org/abs/2605.19943) — stochastic exploration."
+          "citation_match": "super_transformers.md:2110: 12. [Probabilistic TRM](https://arxiv.org/abs/2605.19943) — stochastic exploration."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2194: <https://arxiv.org/abs/2605.19943>"
+          "citation_match": "super_transformers.md:2211: <https://arxiv.org/abs/2605.19943>"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:996: Source: [arXiv:2605.19943](https://arxiv.org/abs/2605.19943)"
+          "citation_match": "super_transformers.md:997: Source: [arXiv:2605.19943](https://arxiv.org/abs/2605.19943)"
         }
       ],
       "local_path": "research/papers/arxiv-2605.19943.pdf",
@@ -5618,11 +5659,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1040: Source: [arXiv:2605.20613](https://arxiv.org/abs/2605.20613)"
+          "citation_match": "super_transformers.md:1041: Source: [arXiv:2605.20613](https://arxiv.org/abs/2605.20613)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2198: <https://arxiv.org/abs/2605.20613>"
+          "citation_match": "super_transformers.md:2215: <https://arxiv.org/abs/2605.20613>"
         }
       ],
       "local_path": "research/papers/arxiv-2605.20613.pdf",
@@ -5690,7 +5731,7 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1055: Source: [arXiv:2605.20670](https://arxiv.org/abs/2605.20670)"
+          "citation_match": "super_transformers.md:1056: Source: [arXiv:2605.20670](https://arxiv.org/abs/2605.20670)"
         }
       ],
       "local_path": "research/papers/arxiv-2605.20670.pdf",
@@ -5762,7 +5803,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:46: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128) | Generate complementary learned trajectories and select without labels using confidence, convergence, or a trained energy score. | EXP-640–642 prove that complementary commuted trajectories plus a target"
+          "citation_match": "knowledge/autoresearch/backlog.md:52: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128); see the [verified stochastic-recursion note](research/2026-07-20-stochastic-recursive-reasoning.md) | Generate complementary learned trajectories and select without labels using confidence, convergence,"
         },
         {
           "source_file": "super_transformers.md",
@@ -5770,15 +5811,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1018: Source: [arXiv:2605.21488](https://arxiv.org/abs/2605.21488)"
+          "citation_match": "super_transformers.md:1019: Source: [arXiv:2605.21488](https://arxiv.org/abs/2605.21488)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2095: 13. [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488) — attractor interpretation."
+          "citation_match": "super_transformers.md:2111: 13. [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488) — attractor interpretation."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2196: <https://arxiv.org/abs/2605.21488>"
+          "citation_match": "super_transformers.md:2213: <https://arxiv.org/abs/2605.21488>"
         }
       ],
       "local_path": "research/papers/arxiv-2605.21488.pdf",
@@ -5841,15 +5882,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:42: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
+          "citation_match": "knowledge/autoresearch/backlog.md:48: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1072: Source: [arXiv:2605.26733](https://arxiv.org/abs/2605.26733)"
+          "citation_match": "super_transformers.md:1073: Source: [arXiv:2605.26733](https://arxiv.org/abs/2605.26733)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2200: <https://arxiv.org/abs/2605.26733>"
+          "citation_match": "super_transformers.md:2217: <https://arxiv.org/abs/2605.26733>"
         }
       ],
       "local_path": "research/papers/arxiv-2605.26733.pdf",
@@ -5915,11 +5956,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1633: Source: [arXiv:2606.13643](https://arxiv.org/abs/2606.13643)"
+          "citation_match": "super_transformers.md:1634: Source: [arXiv:2606.13643](https://arxiv.org/abs/2606.13643)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2163: <https://arxiv.org/abs/2606.13643>"
+          "citation_match": "super_transformers.md:2180: <https://arxiv.org/abs/2606.13643>"
         }
       ],
       "local_path": "research/papers/arxiv-2606.13643.pdf",
@@ -5984,7 +6025,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:42: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
+          "citation_match": "knowledge/autoresearch/backlog.md:48: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
         },
         {
           "source_file": "super_transformers.md",
@@ -5992,15 +6033,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1094: Source: [arXiv:2606.18206](https://arxiv.org/abs/2606.18206)"
+          "citation_match": "super_transformers.md:1095: Source: [arXiv:2606.18206](https://arxiv.org/abs/2606.18206)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2096: 14. [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206) — stable convergence-based halting."
+          "citation_match": "super_transformers.md:2112: 14. [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206) — stable convergence-based halting."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2202: <https://arxiv.org/abs/2606.18206>"
+          "citation_match": "super_transformers.md:2219: <https://arxiv.org/abs/2606.18206>"
         }
       ],
       "local_path": "research/papers/arxiv-2606.18206.pdf",
@@ -6067,11 +6108,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1115: Source: [arXiv:2606.31779](https://arxiv.org/abs/2606.31779)"
+          "citation_match": "super_transformers.md:1116: Source: [arXiv:2606.31779](https://arxiv.org/abs/2606.31779)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2204: <https://arxiv.org/abs/2606.31779>"
+          "citation_match": "super_transformers.md:2221: <https://arxiv.org/abs/2606.31779>"
         }
       ],
       "local_path": "research/papers/arxiv-2606.31779.pdf",
@@ -6138,15 +6179,15 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:46: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128) | Generate complementary learned trajectories and select without labels using confidence, convergence, or a trained energy score. | EXP-640–642 prove that complementary commuted trajectories plus a target"
+          "citation_match": "knowledge/autoresearch/backlog.md:52: | Stochastic breadth and learned selection: [Generative Recursive Reasoning](https://arxiv.org/abs/2605.19376), [Probabilistic TRM](https://arxiv.org/abs/2605.19943), [Equilibrium Reasoners](https://arxiv.org/abs/2605.21488), and [Energy-guided Recursive Model](https://arxiv.org/abs/2607.10128); see the [verified stochastic-recursion note](research/2026-07-20-stochastic-recursive-reasoning.md) | Generate complementary learned trajectories and select without labels using confidence, convergence,"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1137: Source: [arXiv:2607.10128](https://arxiv.org/abs/2607.10128)"
+          "citation_match": "super_transformers.md:1138: Source: [arXiv:2607.10128](https://arxiv.org/abs/2607.10128)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2206: <https://arxiv.org/abs/2607.10128>"
+          "citation_match": "super_transformers.md:2223: <https://arxiv.org/abs/2607.10128>"
         }
       ],
       "local_path": "research/papers/arxiv-2607.10128.pdf",
@@ -6207,7 +6248,7 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1152: Source: [arXiv:2607.10681](https://arxiv.org/abs/2607.10681)"
+          "citation_match": "super_transformers.md:1153: Source: [arXiv:2607.10681](https://arxiv.org/abs/2607.10681)"
         }
       ],
       "local_path": "research/papers/arxiv-2607.10681.pdf",
@@ -6269,7 +6310,7 @@
       "source_mentions": [
         {
           "source_file": "knowledge/autoresearch/backlog.md",
-          "citation_match": "knowledge/autoresearch/backlog.md:42: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
+          "citation_match": "knowledge/autoresearch/backlog.md:48: | Tied-depth stability: [LoopFormer](https://arxiv.org/abs/2602.11451), [STARS](https://arxiv.org/abs/2605.26733), [Fixed-Point Reasoners](https://arxiv.org/abs/2606.18206), and [DeepLoop](https://arxiv.org/abs/2607.13491) | Shortcut consistency, spectral/Jacobian control, convergence-aware residual scaling, and visit-count-aware normalization may prevent state drift when recurrence depth grows. | EXP-603–619 show that near-perfect one-step transitions still accumulate rollout errors; generic co"
         },
         {
           "source_file": "super_transformers.md",
@@ -6277,15 +6318,15 @@
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1170: Source: [arXiv:2607.13491](https://arxiv.org/abs/2607.13491)"
+          "citation_match": "super_transformers.md:1171: Source: [arXiv:2607.13491](https://arxiv.org/abs/2607.13491)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2097: 15. [DeepLoop](https://arxiv.org/abs/2607.13491) — current tied-depth stability/scaling frontier."
+          "citation_match": "super_transformers.md:2113: 15. [DeepLoop](https://arxiv.org/abs/2607.13491) — current tied-depth stability/scaling frontier."
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2208: <https://arxiv.org/abs/2607.13491>"
+          "citation_match": "super_transformers.md:2225: <https://arxiv.org/abs/2607.13491>"
         }
       ],
       "local_path": "research/papers/arxiv-2607.13491.pdf",
@@ -6349,11 +6390,11 @@
       "source_mentions": [
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:1188: Source: [arXiv:2607.15178](https://arxiv.org/abs/2607.15178)"
+          "citation_match": "super_transformers.md:1189: Source: [arXiv:2607.15178](https://arxiv.org/abs/2607.15178)"
         },
         {
           "source_file": "super_transformers.md",
-          "citation_match": "super_transformers.md:2210: <https://arxiv.org/abs/2607.15178>"
+          "citation_match": "super_transformers.md:2228: <https://arxiv.org/abs/2607.15178>"
         }
       ],
       "local_path": "research/papers/arxiv-2607.15178.pdf",
@@ -6406,6 +6447,106 @@
       "retrieved_at": "2026-07-18T19:03:09.448Z",
       "bytes": 1577152,
       "sha256": "d5cd40f6dd1d689f7d48c0ed8de7fe378726e7fa05c199947f087914633ae80d",
+      "acquisition_attempts": 1
+    },
+    {
+      "id": "arxiv:2607.16051",
+      "kind": "arxiv",
+      "collections": [
+        "autoresearch-backlog",
+        "super-transformers-all",
+        "super-transformers-core"
+      ],
+      "source_mentions": [
+        {
+          "source_file": "knowledge/autoresearch/backlog.md",
+          "citation_match": "knowledge/autoresearch/backlog.md:41: EXP-648 remains the sole active task. Root `20261160` is consumed-incomplete, non-scientific, and permanently denied. Root `20261161` is consumed-complete, non-scientific, sealed, and non-retryable after fresh full-fidelity readiness calibration; completion audits return `[APPROVE, APPROVE]` and the Judge decision is `approved-complete-non-scientific-readiness-calibration`. Screen and scientific surfaces remain blocked pending a separate launch Judge and absent `judge-authorization.json`. No Sup"
+        },
+        {
+          "source_file": "knowledge/autoresearch/backlog.md",
+          "citation_match": "knowledge/autoresearch/backlog.md:55: | Layer-local recurrence: [Loop the Loopies!](https://arxiv.org/abs/2607.16051) | Compare fixed-R2 `B1,B1,...` layer-loop order with `B1,...,BL,B1,...` model-loop order; operationally reinvest measured efficiency. The schedule jointly covers MoR Sequence sharing M009.a, not its recursion-depth routing M009.b. | Full PDF and provenance are registered; no SAIR implementation or result exists. | EXP-655 planned-blocked: dense matched schedule first, R1/untied/capacity controls, MoE later only after"
+        },
+        {
+          "source_file": "knowledge/autoresearch/backlog.md",
+          "citation_match": "User-requested Loop the Loopies full-PDF review (arXiv 2607.16051)"
+        },
+        {
+          "source_file": "super_transformers_main_papers.md",
+          "citation_match": "super_transformers_main_papers.md:152: https://arxiv.org/abs/2607.16051"
+        },
+        {
+          "source_file": "super_transformers.md",
+          "citation_match": "explicit arXiv id 2607.16051"
+        },
+        {
+          "source_file": "super_transformers.md",
+          "citation_match": "super_transformers.md:1878: **Loop the Loopies!** (arXiv:2607.16051v2, July 20) distinguishes whole-model looping from applying each stored block repeatedly before advancing. With fixed `R=2`:"
+        },
+        {
+          "source_file": "super_transformers.md",
+          "citation_match": "super_transformers.md:2114: 16. [Loop the Loopies!](https://arxiv.org/abs/2607.16051) — fixed layer-local recurrence and measured capacity recycling."
+        },
+        {
+          "source_file": "super_transformers.md",
+          "citation_match": "super_transformers.md:2226: - Gao, Z. et al. **Loop the Loopies!** 2026. <https://arxiv.org/abs/2607.16051>"
+        }
+      ],
+      "local_path": "research/papers/arxiv-2607.16051.pdf",
+      "arxiv_id": "2607.16051",
+      "title": "Loop the Loopies!",
+      "authors": [
+        "Gao, Zitian",
+        "Chen, Yilong",
+        "Xiao, Yihao",
+        "Yang, Xinyu",
+        "Tao, Ran",
+        "Zhou, Joey",
+        "Dai, Bryan"
+      ],
+      "version": "v2",
+      "submitted_date": "Fri, 17 Jul 2026 15:28:43 UTC",
+      "latest_version_date": "Mon, 20 Jul 2026 15:59:50 UTC",
+      "versions": [
+        {
+          "version": "v1",
+          "submitted_at_raw": "Fri, 17 Jul 2026 15:28:43 UTC"
+        },
+        {
+          "version": "v2",
+          "submitted_at_raw": "Mon, 20 Jul 2026 15:59:50 UTC"
+        }
+      ],
+      "license": {
+        "label": "view license",
+        "url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      },
+      "landing_url": "https://arxiv.org/abs/2607.16051",
+      "pdf_url": "https://arxiv.org/pdf/2607.16051v2",
+      "http": {
+        "status": 200,
+        "content_type": "application/pdf",
+        "final_url": "https://arxiv.org/pdf/2607.16051v2"
+      },
+      "browser_evidence": {
+        "requested_url": "https://arxiv.org/abs/2607.16051",
+        "final_url": "https://arxiv.org/abs/2607.16051",
+        "status": 200,
+        "title": "[2607.16051] Loop the Loopies!",
+        "heading": "Computer Science > Computation and Language",
+        "visible_text_sample": "Skip to main content Search Submit Donate Log in Computer Science > Computation and Language [Submitted on 17 Jul 2026 (v1), last revised 20 Jul 2026 (this version, v2)] Loop the Loopies! Zitian Gao, Yilong Chen, Yihao Xiao, Xinyu Yang, Ran Tao, Joey Zhou, Bryan Dai We present the Loopie series, consisting of two Mixture-of-Experts (MoE) models: a 20B-parameter model with 2B active parameters and a 6B-parameter model with 0.6B active parameters. Looped Transformers have long faced a challenge: g",
+        "blocked_marker": null,
+        "diagnostics": {
+          "page_errors": [],
+          "console_errors": [],
+          "request_failures": [],
+          "http_failures": []
+        },
+        "context_closed": true
+      },
+      "status": "cached",
+      "retrieved_at": "2026-07-21T06:09:53.653Z",
+      "bytes": 891751,
+      "sha256": "1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce",
       "acquisition_attempts": 1
     },
     {
@@ -6574,5 +6715,5 @@
       "doi": "10.23915/distill.00023"
     }
   ],
-  "completed_at": "2026-07-18T19:45:50.438Z"
+  "completed_at": "2026-07-21T07:39:45.868Z"
 }

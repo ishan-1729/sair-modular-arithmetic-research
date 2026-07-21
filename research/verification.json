@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "verified_at": "2026-07-18T19:46:03.166523Z",
+  "verified_at": "2026-07-21T07:40:01.097986Z",
   "verifier": "tools/research/verify_paper_library.py",
-  "manifest_sha256": "a5050a18a563aa66bf7c2ca70ddd6c6c58e3efa1eebcc9efa1d963a22b69c9cc",
-  "checksums_sha256": "704b69ebf3162e72b2479852e2a951641b7e7e72bcc9b1261a7cdaf57bf99eb6",
-  "paper_count": 86,
-  "total_bytes": 303535487,
-  "total_pages": 2053,
+  "manifest_sha256": "f2e2e38631d4cd5ea286d6e34c315b19c90d2c12e1725b3958a3e90229f09c21",
+  "checksums_sha256": "a4f793a771b900719768977b2b78dd4beb487f3572c8f83c7c4d156a449825b8",
+  "paper_count": 87,
+  "total_bytes": 304427238,
+  "total_pages": 2091,
   "papers": [
     {
       "id": "arxiv:1502.02206",
@@ -762,6 +762,15 @@
       "bytes": 1577152,
       "page_count": 34,
       "first_page_text_characters": 3507,
+      "pdf_header": "%PDF-1.7"
+    },
+    {
+      "id": "arxiv:2607.16051",
+      "local_path": "research/papers/arxiv-2607.16051.pdf",
+      "sha256": "1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce",
+      "bytes": 891751,
+      "page_count": 38,
+      "first_page_text_characters": 1818,
       "pdf_header": "%PDF-1.7"
     },
     {
