@@ -1,5 +1,5 @@
 {
-  "approved_base_commit": "611eda058a6d14653ce87e08f3fadbf52be47752",
+  "approved_base_commit": "87384f92ab1c053c7791e8afd69a07936d5a7402",
   "approved_runtime_environment": {
     "dependencies": {
       "mlflow": "3.14.0",
@@ -22,7 +22,7 @@
     "torch_threads": 4,
     "torch_version": "2.5.1+cpu"
   },
-  "calibration_root": 20261160,
+  "calibration_root": 20261161,
   "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
   "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
   "decision": "authorize-non-scientific-screen-readiness-calibration-only",
@@ -31,14 +31,14 @@
   "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
   "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
   "experiment_id": "exp-648-structured-trajectory-consistency",
-  "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
-  "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+  "resolved_config_sha256": "ac6368db71d5d96a083242957e4621d746b2086c51325c02c5cfed8cf7e4fd60",
+  "resource_protocol_sha256": "a49983e9e72ebf2592a3fc61756ed55c48aca9aed4bd4471130f9d3026cad23f",
   "schema_version": "exp648-screen-readiness-calibration-authorization-v1",
   "scientific_accuracy_or_selection_authorized": false,
   "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
-  "scientific_runner_sha256": "1690fc3ba81c7f1747faa944594d78a896519da85eda9fabd772d5b71e7e1e3c",
-  "scientific_test_sha256": "ce4399465f5dd6925c7694c0c3d7ec6bb2ca17ea3ea254de3bc69e3edf7ed3df",
+  "scientific_runner_sha256": "8c389e88467d956debe244c895cbd9fb2db99ad3d3a5375b55eb2fdf1d72ffc9",
+  "scientific_test_sha256": "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5",
   "screen_roots_authorized": false,
-  "screen_workload_sha256": "11f2634e1dc130b317bde89d18c0e0b8ce7d4c1a040a8739ce34c6b4028ceeee",
+  "screen_workload_sha256": "998b620b5a5bbbe8ee56bc629c7b0951f4b6e8e86372002870c589c15619bfac",
   "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
 }
