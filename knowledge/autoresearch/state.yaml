@@ -36,21 +36,23 @@ current_hypothesis:
   run_id: exp-648-structured-trajectory-consistency
   statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
   promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
-  status: approved-recovery-base-pending-commit-and-push
-  evidence_status: The accepted immutable corpus remains unchanged. Roots 20261159 and 20261160 are consumed non-scientific history and permanently denied. Root 20261160 failed during repeat 3 after a sealed warmup and repeats 1-2; it produced no main/scientific run, accuracy, selection, or model-update evidence. Its 160-file/27787830-byte attempt and three FINISHED probe runs are archived by exact hashes. Old repeat-1/2 caches are planning evidence only and cannot be executed or migrated. Root 20261161 is negative-use audited, authorized-pending-authentication-child, unopened, and unconsumed. Its canonical authorization child does not yet exist; the unchanged live root-20261160 authorization remains in the approved base tree until that sole-file child replaces it.
+  status: approved-complete-non-scientific-readiness-calibration
+  evidence_status: The accepted immutable corpus remains unchanged. Roots 20261159 and 20261160 are consumed non-scientific history and permanently denied. Root 20261161 is now consumed-complete, non-scientific, sealed, and non-retryable after one fresh full-fidelity warmup and three fresh full-fidelity repeats with no cache reuse. Receipt SHA-256 is 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a. Five resource-only MLflow runs are FINISHED. The verifier succeeded; a subsequent KeyError came only from an incorrect external assertion path, not from the verifier or evidence. No model update, scientific accuracy, selection, screen, benchmark, or promotion surface opened.
   readiness_gate:
     task: T-EXP648-SCREEN-READINESS
     prior_closure_audits: [APPROVE, APPROVE]
     recovery_closure_audits: [APPROVE, APPROVE]
     sequential_judge_gate: T648
     sequential_judge_result: APPROVE
-    status: approved-recovery-base-pending-commit-and-push
+    calibration_completion_audits: [APPROVE, APPROVE]
+    calibration_completion_judge_result: approved-complete-non-scientific-readiness-calibration
+    status: approved-complete-non-scientific-readiness-calibration
   authorization:
     preregistration: judge-approved
-    implementation: approved-recovery-base-pending-commit-and-push
-    calibration: roots-20261159-and-20261160-consumed-non-scientific-permanently-denied-root-20261161-authorized-pending-authentication-child-unopened-unconsumed
+    implementation: approved-recovery-base-and-authorization-child-pushed
+    calibration: roots-20261159-and-20261160-permanently-denied-root-20261161-consumed-complete-non-scientific-sealed-non-retryable
     corpus: consumed-complete
-    screen: prohibited-pending-approved-base-push-root-20261161-sole-file-authentication-child-fresh-calibration-and-separate-launch-judge
+    screen: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
     confirmation: prohibited-until-screen-pass-and-separate-judge
     candidate_or_tier7_promotion: prohibited
   seed_roles:
@@ -64,11 +66,12 @@ current_hypothesis:
     confirmation_2_evaluation_root_unopened_blocked: 20261158
     rejected_readiness_calibration_root_consumed_superseded: 20261159
     failed_readiness_calibration_root_consumed_incomplete_permanently_denied: 20261160
-    readiness_calibration_root_authorized_pending_authentication_child_unopened_unconsumed: 20261161
+    readiness_calibration_root_consumed_complete_non_scientific_non_retryable: 20261161
     scaffold_test_only_root_reserved_unopened: 648900001
     excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
   calibration_protocol:
-    ordered_transition: approved-recovery-base-commit-and-push -> sole-file-canonical-root-20261161-auth-child-commit-and-push-and-clean-upstream-verify -> stop-publication-task-before-execution -> fresh-synchronous-augmented-warmup-and-three-fresh-synchronous-augmented-full-fidelity-repeats-in-a-separate-execution-step
+    completed_transition: approved-recovery-base-pushed -> sole-file-root-20261161-authentication-child-pushed -> fresh-warmup-and-three-fresh-full-fidelity-repeats-complete -> verifier-succeeded -> completion-judge-approved
+    next_transition: commit-and-push-this-exact-registration -> stop-before-screen-or-scientific-action -> obtain-separate-screen-launch-judge
     warmups: 1
     timed_repeats: 3
     fidelity_reduction_allowed: false
@@ -81,7 +84,44 @@ current_hypothesis:
     carried_charge_policy: apply-exactly-once-to-planning-guard-and-accounting
     root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
     chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
-    cache_reuse: Root-20261160 repeat-1/2 caches are preserved with exact provenance only as planning evidence and are permanently barred from execution or migration. Authorized-pending-authentication-child root 20261161 requires a fresh warmup and all three fresh full-fidelity repeats in a separate execution step.
+    cache_reuse: Root-20261160 repeat-1/2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and all three fresh full-fidelity repeats; reused wall and aggregate-CPU charges are both exactly zero.
+  observed_readiness_calibration:
+    root: 20261161
+    status: consumed-complete-non-scientific-sealed-non-retryable
+    receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
+    workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
+    mlflow:
+      status: five-FINISHED-resource-only-runs
+      main: c27161cb0f2a46228b94b47362769fb1
+      warmup: b49db1ca755e46e6b7b18e9e5c1fb859
+      repeat_1: 8f887966943d44a3a4bebea6ad5dddb9
+      repeat_2: cea11ae498ef4243ac222aa732e8ed06
+      repeat_3: f89f15cf84334df9acdc41ca6625b25d
+    canonical_outer_resource_boundary: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998, peak_rss_bytes: 2727993344, scope: observed-launch-to-pre-outer-seal-not-through-process-exit}
+    carried_charge_applied_once: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+    cumulative_charge: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173, below_wall_ceiling: 25000, below_aggregate_cpu_ceiling: 100000}
+    resolved_screen_budgets:
+      wall_seconds: {projected: 9385.25759757471, soft: 11748.364904834792, hard: 17622.547357252188}
+      aggregate_cpu_seconds: {projected: 36891.35438058306, soft: 46131.553842158, hard: 69197.330763237}
+      peak_rss_guard_bytes: 3409991680
+    coarse_tool_trace: {wall_seconds: 4727.1, canonical: false, clock_comparable: false, policy: never-substitute-average-or-infer-tail}
+    verifier: {succeeded: true, subsequent_key_error: incorrect-external-assertion-path, correct_field: "receipt['boundary']['scientific_accuracy_or_selection_reported']", failed_assertion_called_a_pass: false}
+    scientific_accuracy_or_selection_reported: false
+    registration_provenance:
+      approved_path_count: 17
+      scope: nine-immutable-readiness-files-plus-seven-governance-files-plus-one-focused-regression-test
+      approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402
+      immutable_scaffold_provenance_sha256: 593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6
+      execution_bound_focused_test_sha256: f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5
+      post_publication_regression_test_sha256: 967fdc7d4ce5e9b8deaf9d5ea0d4b0cd74d8b4729b66c75b5eadf461626cfb50
+      binding_policy: screen_readiness_binding-must-resolve-post-publication-test-sha-from-committed-registration-base
+      pre_repair_full_suite: {passed: 257, stale_lifecycle_failures: 2, stopped_before_commit: true}
+      targeted_regression_tests: {passed: 3, failed: 0}
+      first_focused_file_after_repair: {passed: 87, approved_base_fixture_failures: 4, stopped_before_commit: true}
+      expanded_targeted_regression_and_tamper_tests: {passed: 8, failed: 0}
+      focused_file: {passed: 91, failed: 0}
+      final_full_suite: {passed: 259, failed: 0}
+      project_validator: passed
 locked_prior_hypotheses:
   exp-649-stochastic-trajectory-breadth:
     status: planned-formal-blocked-runtime-gate-miss
@@ -137,9 +177,9 @@ research_programs:
       - structural-operand-equivariance-is-legal-only-without-answer-benchmark-id-or-arithmetic-circuit-encoding
       - lotus-exact-traces-are-training-only-and-forbidden-from-submission-inference
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
-    root_20261161_status: authorized-pending-authentication-child-unopened-unconsumed-negative-use-audited
+    root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Commit and push the approved recovery base, then create, commit, and push only the canonical root-20261161 authorization child bound to that base and stop this publication task before execution. Root 20261160 is consumed-incomplete and permanently denied; its unchanged live authorization remains in the base tree and its archived copy is committed. Root 20261161 is authorized-pending-authentication-child, unopened, and unconsumed. Any later execution requires a fresh warmup and all three fresh full-fidelity repeats while applying exactly 14302.253947323995 wall / 57721.035879589996 aggregate-CPU carried charge once under independent cumulative ceilings of 25000 wall / 100000 aggregate CPU. All scientific and promotion surfaces remain prohibited.
+next_action: Verify, commit, and push exactly the nine immutable readiness evidence files, seven governance registrations, and one focused lifecycle-regression test, then stop. Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable. Screen and every scientific, benchmark, selection, promotion, and Goal-completion surface remain blocked pending a separate launch Judge and an absent judge-authorization.json. The requested arXiv:2607.16051 review remains queued and unstarted.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -191,4 +231,4 @@ risks:
   - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
   - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
   - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Root 20261159 is now consumed but rejected/superseded because additions were post hoc rather than synchronously validated and sealed; its timings may inform conservative planning only and cannot supply launch, rates, or caches.
-  - Root 20261160 failed without the new catchable-exception boundary receipt, so exact exception-boundary resource observations are unavailable; conservative allowances are explicitly not observations. Recovery closure audits and final T648 Judge returned APPROVE, authorizing only the base-publication and sole-file root-20261161 authentication-child transition. Complete fresh calibration in a separate execution step plus a later launch Judge are still required before either screen root can open.
+  - Root 20261160 failed without the new catchable-exception boundary receipt, so exact exception-boundary resource observations remain unavailable and conservative allowances remain explicitly non-observational. Root 20261161 completed fresh full-fidelity readiness calibration and is non-retryable. Its canonical outer boundary excludes post-sample serialization, writes, return, stdout, unwind, teardown, and exit; the separate 4727.1-second tool trace is coarse, clock-incomparable, and cannot replace, average with, or imply a tail for the canonical 4770.442001834999-second observation. Screen still requires a separate Judge.

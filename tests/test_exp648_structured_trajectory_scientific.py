@@ -103,11 +103,11 @@ def test_historical_calibration_is_preserved_but_not_live_screen_calibration(mod
     )
     assert module.sha256(module.CALIBRATION_EVIDENCE_PATH) == module.PINNED["calibration_evidence_sha256"]
     lifecycle = module.readiness_calibration_publication_state()
-    assert lifecycle["status"] == "superseded-only-no-live-receipt"
-    assert lifecycle["superseded_root_20261159_preserved"] is True
-    assert lifecycle["superseded_receipt_sha256"] == (
-        module.ROOT_20261159_SUPERSEDED_CHARGE["receipt_sha256"]
+    assert lifecycle["status"] == "live-receipt-present"
+    assert lifecycle["live_receipt_sha256"] == (
+        "1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a"
     )
+    assert lifecycle["superseded_root_20261159_preserved"] is True
 
 
 def test_root_allowlist_uses_only_test_root_and_rejects_all_other_surfaces(module) -> None:
@@ -1032,8 +1032,17 @@ def test_consumed_readiness_root_is_denied_before_binding(module, monkeypatch) -
 
 
 def test_failed_root20261160_is_permanently_denied_before_binding(module, monkeypatch) -> None:
-    path = module.READINESS_CALIBRATION_AUTHORIZATION_PATH
+    path = (
+        module.ROOT_20261160_SUPERSEDED_DIR
+        / "readiness-calibration-authorization.json"
+    )
     raw = path.read_bytes()
+    payload = json.loads(raw)
+    assert raw == module.canonical_json_bytes(payload, pretty=True)
+    assert module.sha256(path) == (
+        "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984"
+    )
+    assert payload["calibration_root"] == 20261160
     monkeypatch.setattr(
         module, "readiness_calibration_authorization_base",
         lambda *_: (_ for _ in ()).throw(AssertionError("binding must not run")),
@@ -1510,12 +1519,24 @@ def test_authentication_rejects_bad_bytes_before_expensive_binding_actions(modul
 
 
 def mocked_readiness_authorization_base_blobs(module):
+    authorization_raw = module.READINESS_CALIBRATION_AUTHORIZATION_PATH.read_bytes()
+    authorization = json.loads(authorization_raw)
+    assert authorization_raw == module.canonical_json_bytes(
+        authorization, pretty=True
+    )
+    approved_base_commit = authorization["approved_base_commit"]
     provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
     source = provenance["readiness_calibration_authorization_source"]
     paths = {
         binding["path"]: (module.ROOT / binding["path"]).read_bytes()
         for binding in source["approved_base_file_bindings"].values()
     }
+    scientific_test_path = source["approved_base_file_bindings"][
+        "scientific_test"
+    ]["path"]
+    paths[scientific_test_path] = module._git_blob(
+        approved_base_commit, scientific_test_path
+    )
     provenance_path = (
         "experiments/runs/exp-648-structured-trajectory-consistency/"
         "readiness-scaffold/provenance.json"
@@ -1607,11 +1628,45 @@ def test_authorization_source_tampering_fails_before_root_data_model_mlflow_or_l
 
 
 def test_readiness_scaffold_provenance_matches_current_code_and_workload(module) -> None:
-    provenance = json.loads(module.READINESS_SCAFFOLD_PROVENANCE_PATH.read_text())
-    runner_sha256 = module.sha256(Path(module.__file__))
-    test_sha256 = module.sha256(Path(__file__))
-    config_sha256 = module.sha256(module.CONFIG_PATH)
-    config = module.yaml.safe_load(module.CONFIG_PATH.read_text())
+    authorization_raw = module.READINESS_CALIBRATION_AUTHORIZATION_PATH.read_bytes()
+    authorization = json.loads(authorization_raw)
+    assert authorization_raw == module.canonical_json_bytes(
+        authorization, pretty=True
+    )
+    approved_base_commit = authorization["approved_base_commit"]
+    assert approved_base_commit == "87384f92ab1c053c7791e8afd69a07936d5a7402"
+
+    provenance_relative = module.READINESS_SCAFFOLD_PROVENANCE_PATH.relative_to(
+        module.ROOT
+    ).as_posix()
+    provenance_raw = module._git_blob(approved_base_commit, provenance_relative)
+    assert module.sha256_bytes(provenance_raw) == (
+        "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
+    )
+    assert module.sha256(module.READINESS_SCAFFOLD_PROVENANCE_PATH) == (
+        "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
+    )
+    provenance = json.loads(provenance_raw)
+
+    runner_relative = Path(module.__file__).resolve().relative_to(
+        module.ROOT
+    ).as_posix()
+    test_relative = Path(__file__).resolve().relative_to(module.ROOT).as_posix()
+    config_relative = module.CONFIG_PATH.relative_to(module.ROOT).as_posix()
+    runner_sha256 = module._git_blob_sha256(
+        approved_base_commit, runner_relative
+    )
+    test_sha256 = module._git_blob_sha256(approved_base_commit, test_relative)
+    config_raw = module._git_blob(approved_base_commit, config_relative)
+    config_sha256 = module.sha256_bytes(config_raw)
+    config = module.yaml.safe_load(config_raw)
+    assert test_sha256 == (
+        "f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5"
+    )
+    assert module.sha256(Path(__file__)) != test_sha256
+    assert authorization["scientific_runner_sha256"] == runner_sha256
+    assert authorization["scientific_test_sha256"] == test_sha256
+    assert authorization["resolved_config_sha256"] == config_sha256
     expected_workload_sha256 = module.sha256_bytes(module.canonical_json_bytes(
         module.screen_workload_payload(
             scientific_runner_sha256=runner_sha256,
@@ -1655,7 +1710,9 @@ def test_readiness_scaffold_provenance_matches_current_code_and_workload(module)
         "data/corpus-manifest.json"
     ]
     for binding in source["approved_base_file_bindings"].values():
-        assert module.sha256(module.ROOT / binding["path"]) == binding["sha256"]
+        assert module._git_blob_sha256(
+            approved_base_commit, binding["path"]
+        ) == binding["sha256"]
 
 
 def test_screen_auth_bad_bytes_fail_before_binding(module, tmp_path, monkeypatch) -> None:

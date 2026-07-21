@@ -660,7 +660,7 @@ runs:
     metrics: evals/results/exp-649-stochastic-trajectory-breadth/metrics.json
     calibration_artifact: experiments/runs/exp-649-stochastic-trajectory-breadth/calibration.json
   - run_id: exp-648-structured-trajectory-consistency
-    status: approved-recovery-base-pending-commit-and-push
+    status: approved-complete-non-scientific-readiness-calibration
     approach: matched-natural-width256-k8-endpoint-consistency
     config: configs/exp_648_structured_trajectory_consistency.yaml
     preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
@@ -694,14 +694,16 @@ runs:
         aggregate_cpu_seconds: 10104.265504912
       scientific_evidence: none
     screen_readiness:
-      implementation: approved-recovery-base-pending-commit-and-push
+      implementation: approved-recovery-base-and-authorization-child-pushed
       closure_audits:
         task: T-EXP648-SCREEN-READINESS
         prior_results: [APPROVE, APPROVE]
         recovery_results: [APPROVE, APPROVE]
+        calibration_completion_results: [APPROVE, APPROVE]
       prior_sequential_judge_gate: T648-approved-before-root-20261159-execution
       post_execution_judge_gate: rejected-root-20261159-chronology-nonconforming
       recovery_sequential_judge_gate: T648-APPROVE
+      calibration_completion_judge_gate: approved-complete-non-scientific-readiness-calibration
       historical_calibration_valid_for_launch: false
       consumed_rejected_calibration:
         root: 20261159
@@ -729,14 +731,56 @@ runs:
         eligible_for_launch_or_final_rates: false
         scientific_evidence: none
         exception_boundary_limitation: Historical failure predates the catchable-exception receipt and has no exact persisted exception-boundary resource sample.
-      next_calibration_root: 20261161
-      next_calibration_root_status: authorized-pending-authentication-child-unopened-unconsumed-negative-use-audited
-      authorization_order: approved-recovery-base-commit-and-push -> sole-file-canonical-root-20261161-auth-child-commit-and-push-and-clean-upstream-verify -> stop-publication-task-before-execution -> fresh-warmup-and-three-fresh-synchronous-augmented-full-fidelity-repeats-in-a-separate-execution-step
-      live_readiness_calibration_authorization_in_base:
+      completed_readiness_calibration:
+        root: 20261161
+        status: consumed-complete-non-scientific-sealed-non-retryable
+        receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
+        workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
+        verifier: {succeeded: true, subsequent_key_error: incorrect-external-assertion-path, correct_field: "receipt['boundary']['scientific_accuracy_or_selection_reported']", failed_assertion_called_a_pass: false}
+        registration_provenance:
+          approved_path_count: 17
+          scope: nine-immutable-readiness-files-plus-seven-governance-files-plus-one-focused-regression-test
+          approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402
+          immutable_scaffold_provenance_sha256: 593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6
+          execution_bound_focused_test_sha256: f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5
+          post_publication_regression_test_sha256: 967fdc7d4ce5e9b8deaf9d5ea0d4b0cd74d8b4729b66c75b5eadf461626cfb50
+          binding_policy: screen_readiness_binding-must-resolve-post-publication-test-sha-from-committed-registration-base
+          pre_repair_full_suite: {passed: 257, stale_lifecycle_failures: 2, stopped_before_commit: true}
+          targeted_regression_tests: {passed: 3, failed: 0}
+          first_focused_file_after_repair: {passed: 87, approved_base_fixture_failures: 4, stopped_before_commit: true}
+          expanded_targeted_regression_and_tamper_tests: {passed: 8, failed: 0}
+          focused_file: {passed: 91, failed: 0}
+          final_full_suite: {passed: 259, failed: 0}
+          project_validator: passed
+        canonical_outer_resource_boundary: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998, peak_rss_bytes: 2727993344}
+        carried_charge_applied_once: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+        cumulative_charge: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173, wall_ceiling: 25000, aggregate_cpu_ceiling: 100000, both_below_ceiling: true}
+        resolved_screen_budgets:
+          wall_seconds: {projected: 9385.25759757471, soft: 11748.364904834792, hard: 17622.547357252188}
+          process_user_plus_system_aggregate_cpu_seconds: {projected: 36891.35438058306, soft: 46131.553842158, hard: 69197.330763237}
+          peak_rss_guard_bytes: 3409991680
+        coarse_tool_trace: {wall_seconds: 4727.1, canonical: false, clock_comparable: false, policy: never-substitute-average-or-infer-tail}
+        evidence:
+          receipt: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration.json, sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a}
+          core: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-core.json, sha256: 2181adb6fcfdde175dd9f0a2ee27335bfacde7f381bdcf3eae0356ec220baac8}
+          environment: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-environment.json, sha256: d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9}
+          mlflow: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-mlflow.json, sha256: 5ebcd2acf99dfb2cf9f583b988cf2d381f500bd9dde060e4e4786017d1eb8505}
+          executed_config: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-executed-config.yaml, sha256: 7f0277fd633764c0c20c8f04777c12c383e3e7972730f04bb35835980c2187a5}
+          completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-completion.json, sha256: 89b5b64a7f227f77c970ada2d6cd6d19df2fb498e526b22c0a9fca4abf60e1de}
+          attempt_state: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempt-state.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
+          launch_ledger: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-launch-ledger.json, sha256: 629674f08c20e2e7e9816fa63ba3f3e960b6f4374ff81cc038a45139d0fc50f5}
+          resource_completion: {path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-resource-completion.json, sha256: e22e9fd2e2829e86efb0148554e07a18cecd4d9e34acf84dfef1440062c7ee2a}
+        mlflow_runs:
+          - {role: warmup-resource-probe, run_id: b49db1ca755e46e6b7b18e9e5c1fb859, status: FINISHED}
+          - {role: repeat-1-resource-probe, run_id: 8f887966943d44a3a4bebea6ad5dddb9, status: FINISHED}
+          - {role: repeat-2-resource-probe, run_id: cea11ae498ef4243ac222aa732e8ed06, status: FINISHED}
+          - {role: repeat-3-resource-probe, run_id: f89f15cf84334df9acdc41ca6625b25d, status: FINISHED}
+          - {role: readiness-calibration-resource-only, run_id: c27161cb0f2a46228b94b47362769fb1, status: FINISHED}
+      live_readiness_calibration_authorization:
         path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json
-        root: 20261160
-        sha256: 9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984
-        status: unchanged-old-live-authorization-preserved-until-sole-file-root-20261161-child
+        root: 20261161
+        sha256: 0553c6434beb9528ea4f4fdb5a30c00bd4fe4b84aba1834d418526ea49e1b2fa
+        status: consumed-complete-non-scientific-sealed-non-retryable
       cumulative_runaway_guards:
         wall_seconds: 25000
         process_user_plus_system_aggregate_cpu_seconds: 100000
@@ -747,7 +791,7 @@ runs:
         carried_charge: {wall_seconds: 14302.253947323995, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996, apply_exactly_once: true}
       root_20261159_rate_policy: Preserved timings may inform conservative planning context only and are forbidden as projection rates.
       chronology: Each warmup or repeat must synchronously execute base -> source replay -> MLflow probe -> readiness infrastructure -> validation -> atomic record -> seal, and the next start must authenticate the predecessor seal.
-      cache_reuse: Root-20261160 repeat-1 and repeat-2 caches are preserved with exact bindings as planning evidence only; executable reuse or migration is permanently denied. A later authorized root requires a fresh warmup and all three fresh full-fidelity repeats.
+      cache_reuse: Root-20261160 repeat-1 and repeat-2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and three fresh full-fidelity repeats; reused charge is zero.
       scaffold_provenance: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json
       screen_authorization_manifest: experiments/runs/exp-648-structured-trajectory-consistency/screen/judge-authorization.json
       screen_roots_status: unopened-blocked
@@ -756,8 +800,9 @@ runs:
         - Corpus construction and resource/provenance evidence only; no model update, accuracy metric, selection metric, candidate promotion, or Goal-completion evidence.
         - Root 20261159 is consumed and preserved as non-scientific superseded evidence, but its post-hoc augmentation chronology forbids launch, projection-rate selection, and cache reuse.
         - Root 20261160 is consumed-incomplete, non-scientific, permanently denied, and ineligible for launch, final/projection rates, or executable cache reuse; repeat 3 is not complete.
-        - Root 20261161 is negative-use audited, authorized-pending-authentication-child, unopened, and unconsumed; the approved base must be pushed before its sole-file canonical authorization child is created.
+        - Root 20261161 is consumed-complete, non-scientific, sealed, and non-retryable; readiness evidence authorizes no screen or scientific surface.
+        - The 4727.1-second tool trace is a coarse noncanonical boundary from a different clock and must never be substituted for, averaged with, or used to infer a tail from the canonical 4770.442001834999-second outer observation.
         - Candidate 005 remains at observed 59.5 percent checked-public / 59.3 percent independent accuracy, and completion_eligible remains false.
         - Immutable run.json and MLflow metrics capture the pre-MLflow workload snapshot; mlflow.json verified final_resource_timing is authoritative end to end.
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
-    screen_status: prohibited-pending-approved-base-push-root-20261161-sole-file-authentication-child-fresh-calibration-and-separate-launch-judge
+    screen_status: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization

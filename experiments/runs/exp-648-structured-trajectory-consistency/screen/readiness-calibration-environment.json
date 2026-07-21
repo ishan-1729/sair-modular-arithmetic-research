@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "mlflow": "3.14.0",
+    "numpy": "2.5.1",
+    "psutil": "7.0.0",
+    "safetensors": "0.8.0",
+    "scipy": "1.18.0",
+    "sympy": "1.13.1",
+    "torch": "2.5.1+cpu"
+  },
+  "deterministic_algorithms": true,
+  "executable": "/home/ishan/.venvs/sair-mod-challenge/bin/python",
+  "machine": "x86_64",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "schema_version": "exp648-environment-v1",
+  "torch_device": "cpu",
+  "torch_interop_threads": 1,
+  "torch_threads": 4,
+  "torch_version": "2.5.1+cpu"
+}
