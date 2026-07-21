@@ -64,7 +64,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/optimize-sair-goal-run/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.1/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/optimize-sair-goal-run"
 
-active_task: T016
+active_task: T026
 
 tasks:
   - id: T001
@@ -1001,7 +1001,7 @@ tasks:
   - id: T016
     type: worker
     assignee: Worker
-    status: active
+    status: done
     reasoning_hint: low
     objective: >-
       Publish the complete rejected EXP657 package as one exact commit before
@@ -1050,6 +1050,641 @@ tasks:
     expected_output:
       - "One pushed EXP657 rejection commit"
       - "Clean index with unrelated PDF/LFS changes left unstaged"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_657_coupled_redundant_learned_state.yaml
+        - experiments/exp_657_coupled_redundant_learned_state/model.py
+        - experiments/exp_657_coupled_redundant_learned_state/run.py
+        - tests/test_exp657_coupled_redundant_learned_state.py
+        - knowledge/autoresearch/ablations/exp-657-coupled-redundant-learned-state.md
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/attempt-state.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/completion.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stderr.txt
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261170/worker-stdout.txt
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/attempt-state.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration-core.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/calibration.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/completion.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/coupled-redundant-challenger-calibration-weights.safetensors
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/environment.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/executed-config.yaml
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/mlflow.json
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/single-state-control-calibration-weights.safetensors
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stderr.txt
+        - experiments/runs/exp-657-coupled-redundant-learned-state/calibration-root-20261173/worker-stdout.txt
+        - docs/goals/optimize-sair-goal-run/state.yaml
+      commands:
+        - cmd: "git diff --cached --check and exact cached-path audit"
+          status: pass
+          evidence: "Exactly 25 approved paths; no PDF/LFS research paper, submission, EXP648, EXP656, source, or data path."
+        - cmd: "git commit -m 'exp657: reject redundant state on resource gate'"
+          status: pass
+          evidence: "Commit 35f1d1c0483cd6785b0d6d7ddca55e6d16ae4742, 25 files, 4700 insertions, 10 deletions."
+        - cmd: "git push"
+          status: pass
+          evidence: "Pushed 9c6b732..35f1d1c to origin/agent/submission-ready-horner-tcn9."
+        - cmd: "verify HEAD, upstream, remote, index, and filtered worktree"
+          status: pass
+          evidence: "HEAD/upstream/remote all 35f1d1c0483cd6785b0d6d7ddca55e6d16ae4742; index empty; only pre-existing research-paper worktree state remains."
+      summary: >-
+        Published the complete rejected EXP657 evidence and governance package
+        as one exact commit. The user-owned research-paper/LFS worktree changes
+        remained unstaged and untouched.
+      remaining_blockers: []
+      verification_attempts: 1
+      stopped_because: null
+  - id: T017
+    type: scout
+    assignee: Scout
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Produce the compliance-first architecture and experiment contract for one
+      EXP658 joint quotient/carry learned transducer package. Recover the exact
+      negative scope of EXP230 and Candidate005's existing quotient auxiliary
+      head; distinguish the proposed mechanism materially from expert routing;
+      specify a learned inference graph that exposes quotient/carry locality but
+      never performs explicit q*p subtraction, integer carry propagation,
+      division, modular reduction, or exact recombination; and define the
+      smallest width32/64 matched falsifier with rare-class, causal-dependence,
+      rollout, validity, determinism, and runtime gates.
+    inputs:
+      - "T004 rank-3 hypothesis and ambiguity receipt"
+      - "T014 EXP657 rejection and next-package decision"
+      - "EXP230 code/config/results/ablation/registry evidence"
+      - "Candidate005 model, training lineage, checkpoint, and quotient head"
+      - "Relevant local research papers and Super Transformers mechanism ledger"
+      - "knowledge/autoresearch/program.md trained-parameters and resource-budget policies"
+    constraints:
+      - "Read-only; do not edit, train, launch, authorize, stage, commit, or install dependencies."
+      - "Use observed evidence labels and distinguish source claims from hypotheses."
+      - "Reject any design whose inference graph explicitly applies predicted quotient/carry through an arithmetic circuit."
+      - "Require an exactly defined matched control, causal intervention, denominator, stop rule, and representative calibration workload."
+      - "Rank alternatives by expected information gain per remaining wall/aggregate-CPU compute; do not reopen EXP657 or EXP648."
+    expected_output:
+      - "Exact proposed model graph and causal variable"
+      - "Compliance proof and prohibited near-misses"
+      - "EXP230/Candidate005 deduplication"
+      - "L0/L1/L2/L3 protocol with exact gates and decision-safe stopping"
+      - "Resource calibration design and initial analytical feasibility bound"
+      - "Worker package with allowed_files, verify, and stop_if"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      summary: >-
+        EXP230 rejected discrete global quotient-to-expert routing, not learned
+        quotient/carry state. Candidate005 trains quotient heads but discards
+        every quotient output in inference, so it has no isolated head-causality
+        evidence. EXP658 should use one shared residue head and feed soft learned
+        quotient plus per-position signed-carry posteriors into the tied cellular
+        update. Both arms have identical tensors/compute; the control learns the
+        messages only through residue loss, while the challenger adds exact
+        offline q/c supervision. No predicted integer is branched on or applied
+        arithmetically.
+      evidence:
+        - "EXP230: 99.998% router accuracy, but predicted routing gained only 0.19 rollout point, forced expert0 lost 0.13 point, and oracle routing changed transition 99.786% to 99.794%."
+        - "Candidate005 retains q heads for checkpoint compatibility/training lineage but every rollout call discards their output with `_`."
+        - "Candidate005 pinned four-CPU inference is 156.0 wall seconds under a 285-second promotion ceiling, leaving a derived 129.0-second incremental allowance only in the same environment."
+        - "Offline trace hypothesis: q in {0,1,2}; signed carry vocabulary {-2,-1,0,1}; exact exhaustive/random L0 verification is required before calibration."
+      next_package:
+        id: EXP-658
+        name: joint-quotient-carry-learned-transducer
+        smallest_falsifier: "exact-source-initialized, parameter-identical width32/64 control/challenger with L0 first and no root"
+      limitations:
+        - "No local evidence yet shows that q/c messages become causal, improve rollout, extrapolate to width256, or meet runtime."
+        - "A Judge must approve the precise learned graph and offline label recurrence before implementation."
+  - id: T018
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Gate the exact EXP658 graph and L0-only Worker package proposed by T017.
+      Confirm or reject trained-parameters compliance, mathematical signed-carry
+      label correctness/vocabulary, exact source-initialization feasibility,
+      parameter-identical control geometry, causal interpretation, EXP230
+      deduplication, staged denominators/gates, and runtime comparability. If
+      approved, authorize implementation and L0 verification only—no
+      calibration or scientific root.
+    inputs:
+      - "T004, T014, and complete T017 receipts"
+      - "EXP230 implementation/config/metrics and Candidate005/EXP609 code/checkpoints"
+      - "knowledge/autoresearch/program.md"
+      - "Current repository and published EXP657 commit 35f1d1c0483cd6785b0d6d7ddca55e6d16ae4742"
+    constraints:
+      - "Read-only; do not edit, train, launch, authorize a root, stage, commit, install, or browse."
+      - "Reject any inference-time q/c argmax application, arithmetic recombination, explicit carry propagation, expert/candidate selection, division, or reduction."
+      - "Treat the proposed carry vocabulary as unverified until independently checked."
+      - "Require incumbent and challenger runtime to be measured in the same pinned environment or prohibit additive comparison."
+      - "Approve only the largest safe L0 implementation slice with exact allowed_files, verify, and stop_if."
+    expected_output:
+      - "approve-L0-only | required-repair | reject"
+      - "Compliance and mathematical gate rationale"
+      - "Exact Worker package if approved"
+      - "Explicit root/authorization prohibition"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: required-repair
+      full_outcome_complete: false
+      rationale: >-
+        The recurrence, vocabulary, compliance boundary, EXP230 deduplication,
+        matched arms, staged gates, and same-environment runtime rule are
+        defensible. The literal 98-to-102-channel recurrent-weight expansion
+        cannot satisfy exact source parity because it changes floating-point
+        accumulation order. Preserve every original 98-channel recurrent
+        convolution and add separate zero-initialized learned four-channel
+        message-convolution deltas to gate and candidate preactivations, then
+        renew the L0-only gate. No root is authorized.
+      evidence:
+        - "Independent exhaustive check: 1,991,546 legal prime-domain tuples; q={0,1,2}, kappa={-2,-1,0,1}, even recurrence numerators, terminal kappa zero."
+        - "Independent random check: 100,000 legal transitions each at widths32/64 passed."
+        - "Literal expansion max differences over 4,096 cases/width: W32 residue/q 5.72e-6/4.77e-6; W64 7.63e-6/5.72e-6."
+        - "Separate zero-initialized message-convolution deltas restored exact zero residue and quotient-logit differences on all 8,192 probes."
+        - "Repaired graph: 103522 parameters versus 99824 source, ratio 1.037045."
+      blocked_tasks:
+        - "EXP658 implementation under the unrepaired appended-channel graph."
+        - "All EXP658 calibration, formal, scientific, and authorization roots."
+      missing_evidence:
+        - "Repaired graph requires renewed L0-only authorization and implementation verification."
+  - id: T019
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Renew the EXP658 L0-only gate on the exact T018 repair. Freeze the
+      incumbent 98-channel stem/recurrent/residue/quotient operations and add
+      separate learned four-message-channel convolution deltas to gate and
+      candidate preactivations, initialized exactly to zero. Confirm that this
+      corrected graph, its parameter-identical control, L0 gates, seven-file
+      implementation boundary, and root prohibitions are ready for one Worker.
+    inputs:
+      - "Complete T017 and T018 receipts"
+      - "T018 independent parity and parameter observations"
+      - "EXP230/Candidate005/EXP609 local evidence and autoresearch policies"
+    constraints:
+      - "Read-only; do not edit, train, launch, authorize a root, stage, commit, install, or browse."
+      - "Source residue and quotient logits must have exact max difference 0, not merely equal thresholded predictions."
+      - "Control/challenger state dictionaries, initialization, parameters, data, optimizer, and forward computation must be identical; only auxiliary supervision weights may differ."
+      - "Approve implementation and L0 tests only; calibration, evidence registration, registry/governance edits, roots, authorization, staging, committing, and pushing remain prohibited."
+    expected_output:
+      - "approve-L0-only | required-repair | reject"
+      - "Exact seven-file Worker objective, verify, and stop_if"
+      - "Explicit zero-root boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-L0-only
+      full_outcome_complete: false
+      rationale: >-
+        The repaired split-convolution graph is compliant, parameter-matched,
+        function-preserving, and ready for one bounded L0 implementation
+        Worker. It leaves every incumbent 98-channel recurrent operation
+        unchanged and introduces learned message influence only through
+        separate zero-initialized convolution deltas. Control and challenger
+        share identical graphs, initialization, data, optimizer, and forward
+        computation; only future auxiliary-loss weights differ. No calibration,
+        training root, scientific evaluation, registration, or publication is
+        authorized.
+      evidence:
+        - "1,991,546 exhaustive tuples and 100,000 random legal transitions at each of widths32/64 establish q={0,1,2}, kappa={-2,-1,0,1}, even numerators, terminal zero."
+        - "Repaired split-convolution probes achieved exact zero residue/quotient-logit differences on 4,096 cases per width."
+        - "Repaired graph has exactly 103522 parameters versus 99824 source, ratio 1.037045."
+        - "EXP230 expert selection is materially distinct from soft learned q/kappa messages consumed by one residue path."
+      blocked_tasks:
+        - "EXP658 L1 calibration and every formal/scientific root."
+        - "Registry, autoresearch-governance, submission, candidate, commit, and push work."
+      missing_evidence:
+        - "No implemented L0 package or focused verification exists yet."
+        - "No runtime, training, rollout, causal, accuracy, or benchmark evidence is authorized or claimed."
+  - id: T020
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: medium
+    objective: >-
+      Implement the frozen EXP658 split-convolution architecture, exact offline
+      quotient/signed-carry trace generator, resolved preregistration/config,
+      fail-closed future runner scaffold, and exhaustive L0 tests. Preserve the
+      original EXP609 stem, normalization, residue head, quotient head,
+      98-channel gate convolution, and 98-channel candidate convolution
+      byte-for-byte and operation-for-operation. Add separate zero-initialized
+      learned four-message-channel gate and candidate convolution deltas. Build
+      two broadcast quotient-message channels and two local carry-message
+      channels only from softmax posteriors and learned embeddings. Instantiate
+      control and challenger identically; encode the sole future difference as
+      auxiliary-loss weights 0/0 versus 0.10/0.10. Do not train or create run
+      evidence.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/__init__.py
+      - experiments/exp_658_joint_quotient_carry_transducer/model.py
+      - experiments/exp_658_joint_quotient_carry_transducer/data.py
+      - experiments/exp_658_joint_quotient_carry_transducer/run.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py -q"
+      - "Focused tests exhaust all 1,991,546 tuples and 100,000 fresh legal transitions at each of widths32/64."
+      - "On 4,096 legal source-parity transitions per width, residue and quotient logits have exact maximum difference 0 and thresholded residues match."
+      - "Control/challenger state dictionaries have identical keys, shapes, values, parameter count, and initialization."
+      - "Parameter count is exactly 103522 and ratio to 99824 is <=1.05."
+      - "Inference-scoped AST rejects q/kappa argmax, integer conversion, arithmetic recombination, explicit carry propagation, division, reduction, expert selection, data-dependent message routing, and teacher-label inputs."
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check on exactly seven paths and audit zero root/authorization/run/registry/governance/submission/source/data/stage/commit/push changes."
+    stop_if:
+      - "EXP609 checkpoint is absent or SHA-256 differs from cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd."
+      - "Any label invariant, exact source-logit parity, matched-arm identity, exact 103522 parameter count, or <=1.05 ratio fails."
+      - "Original 98-channel recurrent convolutions are expanded, reordered, replaced, or numerically changed."
+      - "Inference requires a label, argmax message, predicted integer, arithmetic circuit, q/kappa branching or selection, division, reduction, or expert path."
+      - "Any file outside the seven-file boundary is needed."
+      - "Any calibration, training, MLflow run, root, authorization, evidence registration, registry/governance edit, staging, commit, push, or external write would occur."
+      - "Focused verification fails twice for a task-owned cause."
+    expected_output:
+      - "Seven-file L0 implementation"
+      - "Exact mathematical, parity, geometry, and inference-compliance evidence"
+      - "No root or run evidence"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: blocked
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/__init__.py
+        - experiments/exp_658_joint_quotient_carry_transducer/model.py
+        - experiments/exp_658_joint_quotient_carry_transducer/data.py
+        - experiments/exp_658_joint_quotient_carry_transducer/run.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+      commands:
+        - cmd: "python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py -q"
+          status: pass
+          evidence: "12 passed in 69.62s; exact exhaustive/random/parity/geometry/compliance L0 gates pass."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py tests/test_submission_candidate.py -q"
+          status: fail
+          evidence: "13 EXP658 tests passed; seven submission tests errored because EXP658 collection left its local module cached globally as `model`."
+      summary: >-
+        The frozen split-convolution model, offline mathematics, exact source
+        parity, 103522-parameter geometry, AST compliance, and zero-root
+        boundary pass. PM package review found two non-scientific contract
+        defects: test collection leaks the global `model` module, and the
+        future protocol in config/preregistration drifted from T017's approved
+        counts and gates. No root, optimizer step, MLflow run, evidence,
+        registry/governance edit, stage, commit, or push occurred.
+      remaining_blockers:
+        - "Transactionally restore sys.modules['model'] and sys.path around run.py test loading."
+        - "Restore the exact T017 L1/L2/L3 workload, denominators, gates, causal significance, and futility rules."
+      verification_attempts: 1
+      stopped_because: "Package-level import isolation and frozen future-protocol contract require a bounded repair before calibration review."
+  - id: T021
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Repair only EXP658 test import isolation and future-protocol drift. In the
+      focused test, snapshot/restore the exact prior sys.path and global
+      `model` module state around run.py loading. In config, preregistration,
+      and assertions, freeze T017's exact L1/L2/L3 workloads, denominators,
+      promotion gates, causal one-sided exact McNemar requirement, same-pinned-
+      environment runtime rule, and decision-safe futility. Preserve model.py,
+      data.py, run.py, __init__.py, all L0 mathematical/parity evidence, and the
+      zero-root boundary byte-for-byte.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py tests/test_submission_candidate.py -q"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "sha256sum model.py data.py run.py __init__.py and require T020 hashes"
+      - "git diff --check on exactly the three allowed files plus zero-root/stage audit"
+    stop_if:
+      - "Any model/data/runner/init byte or mathematical/parity/compliance gate would change."
+      - "The repaired protocol differs from: L1 warmup plus three fresh matched repeats and same-environment incumbent/challenger profiling; L2 400 updates/arm batch128 alternating widths32/64, 20000 transitions/width/arm, 1000 rollouts/width/arm, 2000 examples per q class/width, 2000 positions per kappa class/width, 500 paired q-cycle and 500 kappa-cycle cases/width, and 100 deterministic repeats/width."
+      - "L2 gates omit <=2 errors/2000 every q/kappa class, <=8 errors/20000 W64 transition, +30/1000 W64 rollout, -10/1000 W32 retention, >=10/500 damage plus one-sided exact McNemar p<=0.01 for each message, <=10 invalid/1000, integrity, or runtime."
+      - "L3 omits two serial fresh roots, its T017 exact denominators/gates, root-one early rejection, or +60/2000 aggregate gain."
+      - "Any root, authorization, run, registry/governance edit, stage, commit, push, or file outside the three-file boundary is needed."
+      - "Targeted verification fails twice for a task-owned cause."
+    expected_output:
+      - "Import-isolated L0 tests"
+      - "Exact restored T017 staged protocol"
+      - "Unchanged model/data/runner/init and zero-root evidence"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+      commands:
+        - cmd: "python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py tests/test_submission_candidate.py -q"
+          status: pass
+          evidence: "23 passed in 172.08s; exact import-state restoration."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "sha256sum model.py data.py run.py __init__.py"
+          status: pass
+          evidence: "Exact T020 hashes preserved."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "PM package regression: 315 passed in 363.54s."
+      summary: >-
+        Repaired EXP658 import isolation and restored T017's exact L1/L2/L3
+        future protocol. L1 freezes warmup plus three fresh matched repeats,
+        same-environment incumbent/challenger profiling, and dynamic separate
+        wall/CPU/RSS budgets. L2/L3 restore all exact counts, paired causal
+        significance, futility, serial-root, and aggregate gates. Model, data,
+        runner, init, L0 math/parity/geometry/compliance, and zero-root state
+        remain byte-preserved. Full project regression passes.
+      remaining_blockers:
+        - "L1 remains prohibited until a separate Judge authorizes a resource-only scaffold and later root lifecycle."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T022
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Audit the complete repaired EXP658 L0 package, PM's 315-test regression,
+      exact staged protocol, zero-root lifecycle, and publication readiness.
+      Decide whether to approve durable L0 publication and define the largest
+      safe next L1 resource-calibration scaffold package. Do not authorize or
+      launch a calibration/scientific root in this task.
+    inputs:
+      - "T017-T021 receipts"
+      - "Seven EXP658 files and their recorded hashes"
+      - "EXP609 source checkpoint/code and EXP230 negative evidence"
+      - "knowledge/autoresearch/program.md and T001-T004 run-control policy"
+      - "PM verification: validator 159 concepts/1100 records; full suite 315 passed in 363.54s"
+    constraints:
+      - "Read-only; do not edit, train, run EXP658, launch/authorize a root, stage, commit, install, or browse."
+      - "Require exact source logit parity, identical matched arms, compliance, import isolation, frozen future counts/gates, and no root artifacts."
+      - "Publication may include only explicitly approved L0/governance paths."
+      - "Any L1 Worker may build and test resource-only calibration machinery but may not consume a root; calibration execution requires a later committed-base and separate authorization gate."
+      - "Use dynamic same-environment wall/aggregate-CPU/RSS accounting and completed-evidence reuse; no arbitrary short cap or fidelity reduction."
+    expected_output:
+      - "approve-L0-publication-and-L1-scaffold | required-repair | reject"
+      - "Exact publication boundary"
+      - "Exact L1 scaffold Worker package with allowed_files, verify, and stop_if"
+      - "Explicit zero-root boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: required-repair
+      full_outcome_complete: false
+      rationale: >-
+        L0 math/model/parity/geometry/import/zero-root evidence passes, but the
+        future protocol is inconsistent: config/prose require posterior-cycle
+        interventions while model.py implements zero-message ablations; runtime
+        fixes a 129-second allowance even if the 156-second incumbent cache is
+        not environment-identical; and rare recall does not name its binding
+        arm. Freeze zero-message causality, dynamically derive allowance from a
+        same-environment incumbent, and bind rare recall to challenger outputs
+        before publication.
+      evidence:
+        - "315 tests and validator pass, but tests assert cycle labels while behavioral checks exercise zeroing."
+        - "Model.py exposes only zero-quotient-message and zero-signed-carry-message."
+        - "No EXP658 root, run, authorization, MLflow, registry, or evaluation artifact exists."
+      blocked_tasks:
+        - "EXP658 L0 publication/governance and all L1/root work."
+      missing_evidence:
+        - "Consistent future protocol, assertions, post-repair full regression, and renewed Judge gate."
+  - id: T023
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: low
+    objective: >-
+      Repair only EXP658's frozen future protocol and assertions. Adopt the
+      already implemented/T019-approved zero-message interventions consistently
+      across L1/L2/L3. Preserve every denominator, count, threshold, McNemar
+      requirement, futility rule, and default inference graph. Define the
+      Tier7 incremental allowance as A=285-I_same_environment, using cached
+      I=156/A=129 only after exact environment/artifact identity validation;
+      otherwise require fresh incumbent measurement. Bind q/kappa recall gates
+      to challenger outputs and report control recall on the same denominators
+      as nonbinding diagnostics.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py tests/test_submission_candidate.py -q"
+      - "Assert zero-message names/behavior everywhere and no posterior-cycle reference in the seven-file package."
+      - "Assert A=285-I_same_environment, exact-identity cache reuse, and fail-closed unavailable-I behavior."
+      - "Assert challenger-only binding rare recall and same-denominator nonbinding control reporting at L2/L3."
+      - "Require unchanged __init__/model/data/run hashes from T021."
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check on exactly three files plus zero-root/stage audit"
+    stop_if:
+      - "Any __init__, model, data, or runner byte or any L0 assertion changes."
+      - "Any denominator, update count, threshold, significance, or futility rule changes beyond exact semantic repair."
+      - "Runtime uses cross-environment addition, fixed 129 after cache invalidation, CPU as wall, or reduced fidelity."
+      - "Control recall becomes binding or challenger recall nonbinding."
+      - "Any file outside three allowed paths, root, authorization, execution, registration, stage, commit, or push is needed."
+      - "Targeted verification fails twice for a task-owned cause."
+    expected_output:
+      - "One consistent zero-message causal protocol"
+      - "Dynamic same-environment runtime allowance"
+      - "Challenger-binding rare recall with diagnostic control"
+      - "Preserved L0 bytes/evidence and zero-root state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+      commands:
+        - cmd: "python -m pytest tests/test_exp658_joint_quotient_carry_transducer.py tests/test_submission_candidate.py -q"
+          status: pass
+          evidence: "24 passed in 123.83s."
+        - cmd: "seven-file causal-semantics scan"
+          status: pass
+          evidence: "No posterior-cycle references; zero-message names/behavior consistent across L1/L2/L3."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "sha256sum frozen __init__/model/data/run files"
+          status: pass
+          evidence: "Exact T021 hashes preserved."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "PM post-repair regression: 316 passed in 301.81s."
+      summary: >-
+        Standardized every staged causal intervention on the implemented
+        zero-message semantics without changing counts or gates. Runtime now
+        derives A=285-I_same_environment and reuses 156/129 only after exact
+        artifact/environment identity; otherwise it remeasures and fails closed.
+        Rare q/kappa recall binds challenger outputs and reports control on the
+        same denominators diagnostically. Frozen L0 bytes/evidence and zero-root
+        state remain intact; full regression passes.
+      remaining_blockers:
+        - "L1 remains prohibited until renewed Judge approval."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T024
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Renew T022's publication/L1-scaffold gate after T023. Audit the repaired
+      causal semantics, dynamic same-environment runtime allowance,
+      challenger-binding rare recall, frozen counts/gates, unchanged L0 bytes,
+      316-test regression, validator, and zero-root state. Decide whether the L0
+      package is publication-ready and define the largest safe L1
+      resource-calibration scaffold package. Do not authorize or launch a root.
+    inputs:
+      - "T017-T023 receipts and current seven EXP658 files"
+      - "PM regression: 316 passed in 301.81s; validator: 159 concepts/1100 records"
+      - "Frozen hashes in T023"
+      - "Autoresearch resource/trained-parameters policies and T001-T004 run control"
+    constraints:
+      - "Read-only; no edits, training, EXP658 execution, root/authorization, registration, stage, commit, install, or browse."
+      - "Require no posterior-cycle drift, exact dynamic same-environment allowance, challenger-binding rare recall, unchanged denominators/gates, and zero roots."
+      - "Any L1 Worker may implement/test resource-only machinery but may not consume a root; execution requires committed base plus a later authorization gate."
+    expected_output:
+      - "approve-L0-publication-and-L1-scaffold | required-repair | reject"
+      - "Exact publication boundary"
+      - "Exact L1 scaffold Worker package"
+      - "Explicit zero-root boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-L0-publication-and-L1-scaffold
+      full_outcome_complete: false
+      rationale: >-
+        EXP658 L0 is internally consistent and publication-ready. Exact
+        recurrence, source parity, 103522-parameter matched geometry,
+        compliance, import isolation, zero-message causality, dynamic
+        same-environment runtime allowance, challenger-binding rare recall,
+        and zero-root lifecycle pass. Publish non-scientific L0 first; only
+        from the verified pushed base may one Worker build/unit-test the L1
+        scaffold. No root or calibration execution is authorized.
+      evidence:
+        - "Targeted 24 passed; PM full regression 316 passed in 301.81s; validator 159/1100."
+        - "Frozen seven-file hashes recorded by T024; no root, authorization, run, MLflow, registry entry, or staged EXP658 path."
+      blocked_tasks:
+        - "Any calibration execution/authorization and all scientific/candidate/benchmark work."
+      missing_evidence:
+        - "Pushed L0 base, reviewed L1 scaffold, later calibration authorization/evidence, and all scientific evidence."
+  - id: T025
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: low
+    objective: >-
+      Prepare the T024-approved EXP658 L0 governance for publication. Add one
+      registry record with status l0-verified-unrun and null run/metric/
+      checkpoint/MLflow/root/authorization fields; record source geometry and
+      all seven L0 hashes. Update autoresearch state/backlog/decision log so the
+      sole next package is L1 scaffold construction from a pushed L0 base while
+      active_stage remains L0 and authorization remains absent. Distinguish
+      verified static L0 properties from absent runtime/training/causal/
+      accuracy/benchmark evidence. Do not edit the frozen seven files or stage,
+      commit, push, or create a root.
+    allowed_files:
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    verify:
+      - "Verify all seven T024 frozen L0 hashes."
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check on exactly four governance files plus zero-root/authorization/stage audit"
+      - "Reuse PM's valid 316-test result because only governance files change."
+    stop_if:
+      - "Any frozen L0 hash changes or governance claims runtime, training, causality, accuracy, success, promotion, or benchmark evidence."
+      - "Any non-null run/metric/checkpoint/MLflow/root/authorization field is introduced."
+      - "Any file outside four governance paths, root, authorization, run, stage, commit, or push is needed."
+      - "Verification fails twice for a task-owned cause."
+    expected_output:
+      - "Publication-ready l0-verified-unrun governance"
+      - "Preserved seven-file hashes and zero-root state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+      commands:
+        - cmd: "sha256sum -c for all seven T024-frozen EXP658 files"
+          status: pass
+          evidence: "All seven hashes matched."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records."
+        - cmd: "governance diff/root/authorization/stage audit"
+          status: pass
+          evidence: "Four allowed files only; no root, authorization, run, or staged path."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Reused PM's valid governance-compatible regression: 316 passed in 301.81s."
+      summary: >-
+        Recorded EXP658 as l0-verified-unrun with frozen source and geometry
+        hashes and null runtime/output fields. State, backlog, and decision log
+        retain L0 as active and name pushed-base L1 scaffold construction as the
+        sole next package. No scientific, causal, accuracy, or benchmark claim
+        was introduced and no root was consumed.
+      remaining_blockers:
+        - "L1 scaffold construction depends on a verified pushed L0 base."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T026
+    type: worker
+    assignee: Worker
+    status: active
+    reasoning_hint: low
+    objective: >-
+      Publish the T024-approved, T025-governed EXP658 L0 package as one exact
+      commit and push. Stage exactly the seven frozen implementation files,
+      four governance files, and this PM-owned GoalBuddy state file. Verify the
+      remote identity and empty index afterward. This is publication of static,
+      non-scientific L0 evidence only; do not create or run calibration.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/__init__.py
+      - experiments/exp_658_joint_quotient_carry_transducer/model.py
+      - experiments/exp_658_joint_quotient_carry_transducer/data.py
+      - experiments/exp_658_joint_quotient_carry_transducer/run.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+      - docs/goals/optimize-sair-goal-run/state.yaml
+    verify:
+      - "Verify all seven T024 frozen hashes before staging."
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "Run git diff --check on exactly the twelve allowed paths."
+      - "Require exactly twelve cached paths and no run/eval/submission/source/data/external/paper/LFS/authorization/unrelated path."
+      - "Commit once, push normally, and verify HEAD/upstream/remote SHA identity."
+      - "Verify an empty index and no EXP658 root or authorization after publication."
+    stop_if:
+      - "Any frozen L0 hash changes."
+      - "Any governance claim exceeds static L0 evidence."
+      - "Any path outside the exact twelve-file boundary would be staged."
+      - "Any root, authorization, run/eval artifact, MLflow action, credential change, destructive Git action, or unrelated user change is required."
+    expected_output:
+      - "One pushed EXP658 L0 publication commit"
+      - "HEAD/upstream/remote identity and empty index"
+      - "Preserved zero-root and no-authorization state"
       - "goalbuddy_receipt_v1"
   - id: T999
     type: judge

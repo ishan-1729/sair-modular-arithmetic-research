@@ -33,11 +33,24 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
-  run_id: null
-  status: no-active-experiment-package-awaiting-preregistration
-  next_selected_family: joint-quotient-carry-learned-transducer
+  run_id: exp-658-joint-quotient-carry-transducer
+  status: l0-verified-unrun
+  active_stage: L0
   selection_basis: T014 directs one joint quotient/carry learned-transducer package after durable EXP657 publication, ranked next by expected information gain per remaining wall/CPU compute.
-  authorization: none
+  source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  source_parameters: 99824
+  geometry_parameters_each_arm: 103522
+  l0_evidence: verified-static-and-focused-tests-only
+  run_record: null
+  metrics: null
+  checkpoint: null
+  mlflow_run_id: null
+  root: null
+  authorization: null
+  absent_evidence: [observed-runtime-or-resource-calibration, optimizer-training, message-causality-effect, exact-answer-or-rollout-accuracy, checked-independent-official-or-private-benchmark, candidate-promotion-or-mechanism-success]
+  sole_next_package: L1-resource-calibration-scaffold-construction-and-unit-tests-only
+  next_package_prerequisite: verified-pushed-L0-base
+  next_package_status: pending-prerequisite-not-authorized-for-execution
 last_rejected_hypothesis:
   run_id: exp-657-coupled-redundant-learned-state
   statement: Two separately learned persistent residue-belief planes with learned syndrome, corrections, fusion, and decoder may recover naturally observed errors better than an exactly parameter-matched single-persistent-state control at widths 16 and 32.
@@ -256,15 +269,16 @@ research_programs:
     scientifically_reproduced_parent_count: 0
     coverage_complete_parent_count: 6
     coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
-    status: full-pdf-reconciled-contract-queued-behind-next-single-package
+    status: full-pdf-reconciled-contract-queued-behind-exp658-staged-program
     mandate_status: queued-binding
-    active_experiment: null
-    blocked_by: joint-quotient-carry-package-preregistration
+    active_experiment: exp-658-joint-quotient-carry-transducer
+    blocked_by: exp-658-staged-program
     next_family: structural-equivariance-then-dense-layer-loop-schedule
     coverage_completion_rule: Every applicable atomic component under each of the 44 stable parents requires an independent durable faithful, bounded-faithful, analogue, supporting-only, excluded, or non-applicable verdict with its terminal criterion met; a parent completes only when all applicable components complete.
     library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
     faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
     sole_active_task: null
+    sole_next_package: exp-658-L1-resource-calibration-scaffold-construction-after-verified-pushed-L0-base
     ordered_queue:
       - structural-equivariance
       - shared-recurrent-depth-including-looplm-controls
@@ -300,7 +314,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preregister one joint quotient/carry learned-transducer package as the next expected-information-gain experiment, beginning with static compliance and representative resource calibration. EXP657 formal roots 20261174/20261175 are closed, unopened, and unauthorized; EXP648 remains parked and scientifically unopened.
+next_action: Publish the verified EXP658 static L0 package, then construct and unit-test only its L1 resource-calibration scaffold from the verified pushed L0 base. No root, authorization, calibration execution, training, scientific evaluation, or benchmark surface is open; EXP657 formal roots 20261174/20261175 remain closed and EXP648 remains parked and scientifically unopened.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -316,6 +330,7 @@ git:
   last_validated_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
   dirty: true
 risks:
+  - EXP-658 is verified only at static L0: its source parity, exact offline recurrence, matched 103522-parameter geometry, compliance, import isolation, and zero-message protocol are not runtime, training, causal-effect, accuracy, rollout, benchmark, promotion, or success evidence.
   - EXP-657 is rejected before L2: its projected 100-case width-256 resources are 344.97 wall / 1279.50 aggregate CPU seconds versus the conjunctive 240/240 gate. Only the underlying two-case 4.5996-wall / 17.06-CPU component was measured; no scientific accuracy exists.
   - EXP-657 root 20261170 is immutable consumed-failed history; roots 20261171/20261172 are superseded-never-authorized, root 20261173 is consumed-complete non-scientific, and roots 20261174/20261175 are closed for this geometry while remaining unopened and unauthorized.
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.

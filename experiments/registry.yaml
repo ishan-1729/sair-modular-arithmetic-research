@@ -1039,3 +1039,62 @@ runs:
       - This resource rejection makes no scientific-accuracy, recovery, ablation, channel-collapse, or mechanism-success claim.
       - Calibration weights are non-scientific and cannot be promoted or used as benchmark evidence.
       - Candidate 005, submission files, EXP648, EXP656, checked, independent, and private evaluation remain unchanged.
+  - run_id: exp-658-joint-quotient-carry-transducer
+    status: l0-verified-unrun
+    active_stage: L0
+    approach: matched-joint-soft-quotient-and-signed-carry-message-transducer
+    decision: publish-static-L0-only
+    decision_authority: T024-approve-L0-publication-and-L1-scaffold
+    config: configs/exp_658_joint_quotient_carry_transducer.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+    run_record: null
+    metrics: null
+    checkpoint: null
+    challenger_checkpoint: null
+    mlflow_run_id: null
+    root: null
+    authorization: null
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    source_parameters: 99824
+    matched_geometry:
+      parameters_each_arm: 103522
+      source_parameters: 99824
+      parameter_ratio: 1.037045
+      identical_state_dictionaries_at_initialization: true
+    l0_static_evidence:
+      scope: verified-static-and-focused-tests-only
+      exhaustive_legal_recurrence_tuples: 1991546
+      fresh_transition_checks_per_width: 100000
+      fresh_transition_widths: [32, 64]
+      source_parity_transitions_per_width: 4096
+      source_parity_widths: [32, 64]
+      residue_max_logit_difference: 0.0
+      quotient_max_logit_difference: 0.0
+      thresholded_residue_predictions_match: true
+      inference_compliance: passed
+      import_isolation: passed
+      zero_message_intervention_protocol: statically-verified
+      frozen_hashes:
+        config: {path: configs/exp_658_joint_quotient_carry_transducer.yaml, sha256: 7f433b48b2eb24175dab6971569cb0b703c0117a986dabab74b5229287e3b3c6}
+        init: {path: experiments/exp_658_joint_quotient_carry_transducer/__init__.py, sha256: e323af4b994d471feef56a86ee0d993d316672e8786b5961ef686cddbb57547a}
+        model: {path: experiments/exp_658_joint_quotient_carry_transducer/model.py, sha256: 44ccbdbada2110313c982cff211e7e9fcc28c13a6f0ca8f793817a3f99c65dda}
+        data: {path: experiments/exp_658_joint_quotient_carry_transducer/data.py, sha256: c998e47e0867ed97f7ce176c8854835bf8b687cd33ff018bfef70443327eefba}
+        run: {path: experiments/exp_658_joint_quotient_carry_transducer/run.py, sha256: da669dc0771bc69708f96e2e23558b3f756fd9af8758f3240571a3c12a211d15}
+        preregistration: {path: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md, sha256: 255ad881f4879ea6aacf6226866b4ba71eb21adc02f1d5e8b8a97a32dfec125f}
+        test: {path: tests/test_exp658_joint_quotient_carry_transducer.py, sha256: c54dd895d0b6a6ccbe9744ab20ccf3c6b10429738c3009825b4ce919f8457dd7}
+    sole_next_package:
+      stage: L1
+      purpose: resource-calibration-scaffold-construction-and-unit-tests-only
+      prerequisite: verified-pushed-L0-base
+      status: pending-prerequisite-not-authorized-for-execution
+    scientific_evidence: none-static-L0-only
+    absent_evidence:
+      - observed-runtime-or-resource-calibration
+      - optimizer-training
+      - message-causality-effect
+      - exact-answer-or-rollout-accuracy
+      - checked-independent-official-or-private-benchmark
+      - candidate-promotion-or-mechanism-success
+    limitations:
+      - Static L0 verification does not establish runtime, training, causal effect, exact-answer accuracy, rollout accuracy, benchmark performance, promotion, or success.
+      - No root or authorization exists; L1 construction must begin only from a verified pushed L0 base, and later calibration execution requires a separate gate.
