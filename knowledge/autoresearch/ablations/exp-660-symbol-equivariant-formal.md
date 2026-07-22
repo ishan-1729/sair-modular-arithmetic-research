@@ -2,7 +2,7 @@
 type: experiment-preregistration
 title: EXP-660 Fresh Formal Symbol-Equivariant Recurrence
 description: Fresh ordinary-initialized matched formal falsifier for bounded-faithful symbol-axis recurrence.
-status: preregistered
+status: parked-before-science
 timestamp: "2026-07-22T10:00:00+05:30"
 tags: [symbol-equivariance, recurrent-reasoning, matched-controls, formal-falsifier]
 ---
@@ -71,3 +71,17 @@ contains no exact modular solver, answer lookup or checked/private data path.
 The result is a single-seed architecture decision only: even a pass is not a
 candidate, checked or independent benchmark result, official/private evidence,
 Tier 7 promotion, 85% completion, or Goal completion.
+
+## Outcome
+
+T047 repaired EXP649 source identity to the pinned canonical Git blobs and the
+checksum-bound EXP609 fixture to non-aliasing local bytes. PM-observed focused
+verification passed 54/54 and validation passed 163 concepts / 1,100 records.
+The exhausted full-project recovery finished at 367 passed / 6 failed. The
+ignored EXP658 cache lacks checksum-bound Dockerfile/generator/primes, while
+its scaffold-era zero-root assertion conflicts with accepted T045 park records;
+the temporary L0-test probe was restored to its exact frozen hash. The stop rule
+therefore parked EXP660 before fresh calibration, MLflow, training, evaluation,
+or seed use.
+This is a feasibility/verification-boundary park, not evidence against the
+scientific hypothesis.

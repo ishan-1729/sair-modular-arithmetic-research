@@ -1235,3 +1235,57 @@ runs:
       - This is a verification-boundary park, not a scientific rejection of symbol-equivariant recurrence.
       - No formal training, formal checkpoint, exact scientific metric, checked/independent/official/private evaluation, promotion, or completion evidence exists.
       - Reopening requires fresh PM authorization after resolving inherited cross-package verification conflicts.
+  - run_id: exp-660-symbol-equivariant-formal
+    status: parked-before-calibration-and-science-full-oracle-red
+    approach: fresh bounded-faithful symbol-axis recurrent core with position-only and broken-tying controls
+    decision: park-before-science
+    decision_authority: T047-clean-full-oracle-stop-rule
+    source_commit: 5febd058e89b27f14a7fc267ed60d1c57a11fc94
+    source_branch: codex/exp660-symbol-equivariant-formal
+    config: configs/exp_660_symbol_equivariant_formal.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-660-symbol-equivariant-formal.md
+    run_record: experiments/runs/exp-660-symbol-equivariant-formal/run.json
+    environment_record: experiments/runs/exp-660-symbol-equivariant-formal/environment.json
+    calibration_record: experiments/runs/exp-660-symbol-equivariant-formal/calibration.json
+    verification_record: experiments/runs/exp-660-symbol-equivariant-formal/verification.json
+    limitations_record: experiments/runs/exp-660-symbol-equivariant-formal/limitations.json
+    mlflow_record: experiments/runs/exp-660-symbol-equivariant-formal/mlflow.json
+    metrics: evals/results/exp-660-symbol-equivariant-formal/metrics.json
+    evaluation_decision: evals/results/exp-660-symbol-equivariant-formal/decision.json
+    evidence_sha256:
+      run: 56b741cd2bcdde47f2a30a4faa5b3c6fe453dbc780fdf8bc5e9903f22c22bf83
+      environment: 721ab0c7cd872a179e44207bee373417581b506b03bad0acb923b677204c1e8c
+      calibration: 32940781f5cabc683d56a220ae3848c10e8b758cdbce136f57bea356a9ebafc0
+      verification: 610dcf437b4d2494a2cb38f0e4d40f4769be70bbc6b2a959be2bfd00d024c0f2
+      limitations: 8c8a90ce298df0e4bcfa5d974988b6c81ff0bac4c3b2b09113ddb0c2ba739d27
+      mlflow: 4cfd253e558da385c4b414f933313102d47e3212366a7604efab4170d25c5b0e
+      metrics: d8d51ac9b7290491667e6ca1ca3ee1b3b27ae211dac7c2a45117c4f73f333784
+      decision: aa616468ff2f03fe3a2a7fe551f303770b773dc49054ab6b530fcb16b604b44f
+    checkpoint: null
+    checkpoint_sha256: null
+    mlflow_run_id: null
+    seed: 20261177
+    seed_status: unused-unopened-for-training
+    calibration_executed: false
+    formal_training_executed: false
+    scientific_evidence: none-prescience-park
+    verification:
+      focused: {passed: 54, failed: 0, pytest_seconds: 190.78, user_cpu_seconds: 476.39, system_cpu_seconds: 9.36, maximum_rss_kib: 508748}
+      validator: passed-163-concepts-1100-records-pinned-82510bba00a1
+      full_oracle: {passed: 367, failed: 6, pytest_seconds: 498.41, time_wall_seconds: 467.75, user_cpu_seconds: 960.0, system_cpu_seconds: 22.95, maximum_rss_kib: 709064}
+      remaining_failures: {EXP658: 6}
+      EXP649_remaining_failures: 0
+      EXP659_EXP660_remaining_failures: 0
+      fresh_probe: {temporary_EXP658_L0_test_change_restored: true, restored_L0_test_sha256: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6, missing_checksum_bound_cache_files: [Dockerfile, generator.py, primes.py], lifecycle_conflict: scaffold-era-zero-root-assertion-versus-accepted-T045-run-eval-park-records}
+    portability_repair:
+      official_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+      canonical_identity: pinned-git-blob-oid-and-blob-sha256
+      checkout_identity: separate-known-materialization-sha256
+      amendment: experiments/runs/exp-649-stochastic-trajectory-breadth/provenance-amendment.json
+      amendment_sha256: 01a0c462e576f8dafab674708fdb987d38d8dec2c9b9580401b8d1c08228314e
+      historical_observations_rewritten: false
+      EXP609_fixture: {sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, checksum_verified: true, non_aliasing_local_bytes: true}
+    limitations:
+      - No fresh confirmation, dynamic budget, model training, checkpoint, scientific metric, structural intervention, runtime result, or MLflow run exists.
+      - This is a clean-oracle feasibility park, not a scientific rejection of symbol-equivariant recurrence.
+      - No candidate, checked, independent, official/private, Tier7, 85%, or Goal-completion evidence changed.

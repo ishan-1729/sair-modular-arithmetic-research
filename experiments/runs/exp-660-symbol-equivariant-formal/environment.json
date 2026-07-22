@@ -1,0 +1,15 @@
+{
+  "schema_version": "exp660-prescience-environment-v1",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "torch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "numpy": "2.5.1",
+  "psutil": "7.0.0",
+  "device": "cpu",
+  "torch_threads": 4,
+  "torch_interop_threads": 1,
+  "deterministic_algorithms": true,
+  "worktree": "fresh-git-worktree-at-e2c48f3",
+  "official_submodule_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+}

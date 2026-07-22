@@ -19,6 +19,13 @@ equivariance applies only inside the learned symbol-axis core, while the binary
 arithmetic boundary is anchored and the legal task domain is not closed under
 global zero/one complementation.
 
+T047 then parked EXP-660 before science after the exhausted full-project
+recovery ended at 367 passed / 6 EXP658 failures. The ignored cache lacks three
+checksum-bound source files and its scaffold-era zero-root assertion conflicts
+with accepted T045 park records. This supplies no evidence for or against the
+paper's mechanism; seed `20261177`, fresh calibration, training and evaluation
+all remain unconsumed.
+
 The complete 18-page local paper `arxiv-2603.02193.pdf` was read before the
 EXP-659 preregistration was frozen. Its transferable mechanism is the explicit
 symbol axis and alternating position/symbol self-attention of §2.3, Equations

@@ -1,0 +1,15 @@
+{
+  "schema_version": "exp660-decision-v1",
+  "run_id": "exp-660-symbol-equivariant-formal",
+  "decision": "park-before-science",
+  "authority": "T047-stop-if-clean-full-oracle-fails-after-consolidated-repair",
+  "reason": "PM-observed full pytest completed with 367 passed and 6 EXP658 cache/lifecycle failures after the portable source and checksum-bound EXP609 fixture repairs; the final recovery budget is exhausted.",
+  "verification_resources": {"pytest_seconds": 498.41, "time_wall_seconds": 467.75, "user_cpu_seconds": 960.0, "system_cpu_seconds": 22.95, "maximum_rss_kib": 709064},
+  "formal_seed_opened": false,
+  "calibration_executed": false,
+  "formal_training_executed": false,
+  "scientific_hypothesis_rejected": false,
+  "candidate_or_goal_status_changed": false,
+  "resume_under_T047": false,
+  "next_material_decision": "Select the materially distinct full-fidelity vertical experiment with the highest expected decision value per total route cost."
+}
