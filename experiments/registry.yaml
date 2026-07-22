@@ -891,17 +891,20 @@ runs:
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
     screen_status: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
   - run_id: exp-655-layer-loop-compute-matched-recurrence
-    status: parked-before-calibration-and-science-final-source-oracle-red
+    status: completed-rejected-dense-layer-loop-schedule-formulation
     approach: dense-fixed-r2-layer-loop-versus-model-loop-schedule
     preregistration: knowledge/autoresearch/ablations/exp-655-layer-loop-compute-matched-recurrence.md
     source_note: knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md
     coverage_record: ST-M043
     cross_coverage_records: [ST-M009.a, ST-M043.a]
-    decision: park-before-science
-    decision_authority: T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction
+    decision: reject-exp655-dense-layer-loop-schedule-formulation
+    decision_authority: T049-complete-full-fidelity-conjunctive-formal-gate
     source_commit: 3047af97b79b712c2252054d909e1572ca5a6282
     source_tree: aa0e6e4b6a411800b9765fe7eb7365980af9f520
     source_provenance_commit: 1f7dc801d22f33c55a59764907821df19b72c72e
+    recovery_and_formal_source_commit: 3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a
+    recovery_source_pushed_before_science: true
+    formal_source_dirty: false
     source_branch: codex/exp655-layer-loop-formal
     source_hashes:
       config: de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842
@@ -922,42 +925,71 @@ runs:
       - dense-r1
       - untied-equal-compute
     later_factorials:
-      capacity_reinvestment: blocked-no-scientific-dense-verdict
-      ordinary_moe: blocked-no-scientific-dense-verdict-and-separate-gate
+      capacity_reinvestment: unresolved-after-dense-formulation-reject-and-requires-separate-gate
+      ordinary_moe: unresolved-after-dense-formulation-reject-and-requires-separate-gate
       target_only_spt_analogue: separate-ST-M044-and-separate-gate
     resource_policy: representative-complete-setup-training-checkpoint-full-evaluation-throughput-with-variability-headroom-separate-wall-and-aggregate-process-cpu-hash-valid-cache-reuse-and-full-fidelity
     config: configs/exp_655_layer_loop_compute_matched_recurrence.yaml
     run_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json
     records:
-      run: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json, sha256: 9f366b849407fad88f37ff8971fb7e11695edf22af420d110d0a8443f0b8f61c}
-      environment: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/environment.json, sha256: 46d37e4d4e54753403fc71137cf9afe92f0e1efc4c22e3a825966771bd19e53f}
-      verification: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json, sha256: 6ddad1fc96132cacde3cc5162bbcb92041f82303d8a2c1a250e483937b2f495f}
-      limitations: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/limitations.json, sha256: 3530b9fd62168cd13e02b777ffbc09ebf4bd5217711b5f8394b19999c70ae49f}
-      mlflow: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/mlflow.json, sha256: 37bfd049d6399a4ae9217a2a50bf4bb294388d64359dd9c440d4ec4056aa11c1, run_id: null}
-      metrics: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json, sha256: 655ccde02c52207ff648ce0185de45b67af03801482b6c953ed57af7f450e657}
-      decision: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json, sha256: 32e7b0bb99fb232d15f9623133cce52e6d89f4ec55f23612869c395cd0516475}
+      run: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json, sha256: 493b94737d613e82dbf131c9f03609ba8eba6e86d6778dafe0336c15a39e5319}
+      environment: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/environment.json, sha256: 60f3cc664a2cc77301bd1acc51f9d27bc4c12115f5d2b0166bb6de1ee6975b31}
+      verification: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json, sha256: 6cd77d18dfb2d85fd7c98e3e2fe15a4f83be9a00dd13b86e58f7cf6248cdf369}
+      limitations: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/limitations.json, sha256: 5cf72da201b71c4ad5f9c7f83f1da834dba3096ec58bbd8421d3d44d948f750c}
+      mlflow: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/mlflow.json, sha256: b3ffa6b7ff7114aa443e1d58c176dce093bd6083b435d4aef143e18804e9b064, run_id: ceeec9d504464b14a224150ebdf32c2b}
+      calibration: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/calibration.json, sha256: a3c75c389b72704230728a4442d698611dcd0eef48d864a5de6cd4fd658320f6}
+      admission: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/admission.json, sha256: 3e4ded167db12f3f4dfe26d570c1494dcb04d1c7f923fda9c1f326de1c8adaf9}
+      oracle: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/oracle.json, sha256: 4386527ceb4a59680dd150b4b0379f45f5b3c8ec4d69becce15398138b03daff}
+      portability: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/portability.json, sha256: dab283644d7e259609220e3b440de3891c96991a50385a0b094a6d09e64fe0b6}
+      portability_manifest: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/portability-manifest.json, sha256: 203b2429d6ee442f8dca49067dffc8905cbcaaf5ddfdb17f2dfa2eac54dabd46}
+      T048_archive_manifest: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/manifest.json, sha256: cee6bd60b7cea1befb3e4ab271edf2d8a29a6bdad648da8745ddfe1ab6e4ac7a}
+      runner_native_archive_manifest: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t049-runner-native/manifest.json, sha256: 4d53aab994c57c1c2e4802221d4dc068de1d6829d51668118f542a5c9df2218d}
+      T049_receipt: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/t049-receipt.json, sha256: e20e838b99c814b280c23d89077844e2379567f18d856c03f60b684f6f1b2060}
+      metrics: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json, sha256: 8a24ece888ba4be983a32001dfdda074c8caa3e60d068c5d8198201d81c98f5e}
+      decision: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json, sha256: e892f45727e802504489721f36d1db789fc3bacfe2370f15119bbbebeabde260}
     verification:
       focused: {passed: 69, failed: 0, pytest_seconds: 490.53, time_wall_seconds: 493.28, aggregate_cpu_seconds: 432.58, maximum_rss_kib: 478204}
       validator: {passed: true, concepts: 162, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
-      full_oracle: {passed: 382, failed: 9, total: 391, pytest_seconds: 656.76, time_wall_seconds: 659.49, aggregate_cpu_seconds: 874.02, maximum_rss_kib: 697272}
-      failure_partition: {EXP648_missing_ignored_historical_evidence: 8, EXP660_missing_ignored_fixture: 1}
+      full_oracle: {passed: 391, failed: 0, total: 391, pytest_seconds: 594.41, time_wall_seconds: 596.30, aggregate_cpu_seconds: 549.56, maximum_rss_kib: 705360}
+      T048_failure_preserved: {passed: 382, failed: 9, total: 391, archive_manifest: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/manifest.json}
+      portability: {files: 264, bytes: 26672030, inventory_sha256: b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b, regular_independent_bytes: true}
     roots:
-      calibration: {root: 20261178, status: unused-unopened}
+      calibration: {root: 20261178, status: completed-resource-only}
       formal:
-        - {root: 20261179, status: unused-unopened}
-        - {root: 20261180, status: unused-unopened}
-        - {root: 20261181, status: unused-unopened}
-    calibration: null
+        - {root: 20261179, status: completed, layer_width16_exact: 0.0, model_width16_exact: 0.01, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+        - {root: 20261180, status: completed, layer_width16_exact: 0.0, model_width16_exact: 0.006666666666666667, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+        - {root: 20261181, status: completed, layer_width16_exact: 0.0033333333333333335, model_width16_exact: 0.0033333333333333335, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+    calibration:
+      measured: {wall_seconds: 58.29647031601053, process_cpu_seconds: 195.96106899999998, cgroup_cpu_seconds: 231.40000000000146, peak_rss_bytes: 434581504}
+      expected_without_headroom: {wall_seconds: 1865, process_cpu_seconds: 7010, cgroup_cpu_seconds: 8204}
+      soft_budget: {wall_seconds: 2410, process_cpu_seconds: 9056, cgroup_cpu_seconds: 10598}
+      hard_budget: {wall_seconds: 3342, process_cpu_seconds: 12561, cgroup_cpu_seconds: 14700, peak_rss_bytes: 543226880}
+      decision: admit-full-three-root-falsifier
+      fidelity_reduced: false
+      calibration_checkpoints_reusable: false
+    formal:
+      executions: 1
+      arms_per_root: 4
+      updates_per_arm: 4000
+      cases_per_arm_root_width: {16: 300, 32: 300}
+      bootstrap_resamples_per_endpoint: 100000
+      comparison: {width16_mean_delta: -0.005555555555555556, width16_one_sided_95_lower: -0.012222222222222223, width32_mean_delta: 0.0, width32_one_sided_95_lower: 0.0, maximum_invalid_rate: 0.8833333333333333, minimum_trained_minus_randomized: 0.0}
+      resource: {wall_seconds: 1338.6443127590028, process_cpu_seconds: 5257.537295, cgroup_cpu_seconds: 6545.540000000001, peak_rss_bytes: 496414720, outer_wall_seconds: 1346.28, outer_aggregate_cpu_seconds: 5267.19}
+      passed_gates: [full_denominators, determinism, primary_initial_identity, complete_block_noncommutation, malformed_and_leakage, wall_budget, process_cpu_budget, cgroup_cpu_budget, rss_budget, width16_delta_each_root, width32_delta_each_root]
+      failed_gates: [primary_width16_each_root, any_primary_width32_each_root, validity, randomized_weight_dependence, width16_bootstrap_lower, width32_bootstrap_lower, width32_mean_delta]
     metrics: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json
-    checkpoint: null
-    authorization: null
-    mlflow_run_id: null
-    scientific_evidence: none-pre-science-verification-park
+    checkpoint: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/checkpoints/
+    checkpoint_count: 12
+    checkpoint_manifest_sha256: 8178b37459d5ba384b4eec9f01d6ee2ec12c2a0e1932dec571298a9034cd917b
+    authorization: T049-measured-dynamic-admission
+    mlflow_run_id: ceeec9d504464b14a224150ebdf32c2b
+    mlflow_runs: {total: 16, finished: 16}
+    scientific_evidence: bounded-faithful-negative-for-exact-dense-fixed-r2-formulation
     limitations:
-      - The final-source full oracle is red only on nine missing ignored historical EXP648/EXP660 artifact contracts outside T048's allowlist; exact node IDs, paths, hashes, counts, and manifests are in verification.json.
-      - No calibration, dynamic admission, training, checkpoint, scientific denominator, label/oracle, intervention, bootstrap, W256 profile, or MLflow run was opened.
-      - This is not a scientific rejection of the dense schedules or ST-M043.a/ST-M009.a and changes no candidate, benchmark, submission, promotion, 85-percent, or Goal-completion evidence.
-    next_material_decision: separately-decide-whether-to-authorize-hermetic-historical-evidence-portability-before-any-fresh-science-authorization
+      - The result rejects only the exact dense two-block fixed-R2 architecture/training/schedule formulation; it is not a full Loopies, MoR routing, capacity recycling, MoE, or post-training reproduction.
+      - Only fresh train-prime-disjoint W16/W32 identities were evaluated; no checked, prior-independent, official, private, candidate, submission, promotion, 85-percent, or Goal-completion surface changed.
+      - The twelve checkpoints are research evidence only and are not submission artifacts.
+    next_material_decision: PM-select-next-separately-authorized-experiment-by-expected-information-gain-per-unit-compute
   - run_id: exp-656-tensor-native-rollout-route
     status: completed-rejected
     approach: matched-input-only-legacy-bigint-versus-cached-tensor-rollout-route

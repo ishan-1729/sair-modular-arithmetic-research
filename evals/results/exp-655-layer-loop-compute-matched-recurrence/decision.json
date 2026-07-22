@@ -1,33 +1,140 @@
 {
-  "schema_version": "exp655-terminal-decision-v1",
-  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
-  "decision": "park-before-calibration-and-science",
-  "authority": "T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction",
-  "reason": "The exact final-source full pytest completed at 382 passed and 9 failed; every failure requires ignored historical EXP648 or EXP660 evidence outside T048's write allowlist, and T048 permits no repair, probe, calibration, or formal execution after this stop.",
-  "source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
-  "source_provenance_commit": "1f7dc801d22f33c55a59764907821df19b72c72e",
-  "verification_resources": {
-    "pytest_seconds": 656.76,
-    "time_wall_seconds": 659.49,
-    "user_cpu_seconds": 837.71,
-    "system_cpu_seconds": 36.31,
-    "aggregate_cpu_seconds": 874.02,
-    "maximum_rss_kib": 697272
+  "schema_version": "exp655-terminal-decision-v2",
+  "created_at": "2026-07-22T13:30:26.027000+00:00",
+  "authority": "T049-complete-full-fidelity-conjunctive-formal-gate",
+  "source_commit": "3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a",
+  "frozen_implementation_source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+  "formal_roots": [20261179, 20261180, 20261181],
+  "reason": "The complete three-root stage passed provenance, fidelity, denominator, determinism, identity, noncommutation, malformed/leakage, and resource gates but failed the preregistered viability, validity, randomized-weight-dependence, and schedule-effect gates.",
+  "decisive_observations": {
+    "primary_width16_exact_by_root_layer_then_model": [[0.0, 0.01], [0.0, 0.006666666666666667], [0.0033333333333333335, 0.0033333333333333335]],
+    "primary_width32_exact_by_root_layer_then_model": [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]],
+    "width16_layer_minus_model_mean": -0.005555555555555556,
+    "width16_one_sided_95_lower_bound": -0.012222222222222223,
+    "width32_layer_minus_model_mean": 0.0,
+    "width32_one_sided_95_lower_bound": 0.0,
+    "maximum_invalid_rate": 0.8833333333333333,
+    "minimum_trained_minus_randomized": 0.0
   },
-  "focused_gate": {"passed": 69, "failed": 0},
-  "project_validator_passed": true,
-  "calibration_root_opened": false,
-  "calibration_executed": false,
-  "formal_roots_opened": [],
-  "formal_training_executed": false,
-  "scientific_evaluation_executed": false,
-  "scientific_hypothesis_rejected": false,
-  "scientific_metrics": null,
-  "checkpoint": null,
-  "mlflow_run_id": null,
-  "candidate_or_goal_status_changed": false,
+  "resources": {
+    "wall_seconds": 1338.6443127590028,
+    "process_cpu_seconds": 5257.537295,
+    "cgroup_cpu_seconds": 6545.540000000001,
+    "peak_rss_bytes": 496414720,
+    "hard_wall_seconds": 3342,
+    "hard_process_cpu_seconds": 12561,
+    "hard_cgroup_cpu_seconds": 14700,
+    "hard_peak_rss_bytes": 543226880
+  },
+  "scientific_hypothesis_rejected": true,
+  "rejected_scope": "This exact dense two-block fixed-R2 architecture, training horizon, and layer-loop-versus-model-loop schedule formulation only.",
+  "candidate_005_changed": false,
   "benchmark_or_submission_status_changed": false,
-  "resume_under_T048": false,
-  "evidence_capable_of_changing_next_decision": "A separately authorized checksum-bound materializer that reconstructs the exact out-of-scope historical ignored evidence, followed by a 391-of-391 full oracle on byte-identical EXP655 source/tests, could establish implementation admission; it would still create no scientific result.",
-  "next_material_decision": "Decide whether the expected information gain justifies a separate hermetic historical-evidence portability package before selecting or reauthorizing any scientific experiment."
+  "promotion_or_goal_completion_changed": false,
+  "next_material_decision": "PM selection of the next separately authorized experiment package by expected information gain per unit compute after incorporating this dense-schedule rejection.",
+  "evidence_capable_of_changing_next_decision": "The durable EXP655 failure partition and resource/quality profile can down-rank dense fixed-R2 schedule-only work while leaving adaptive recurrence, routing, capacity recycling, and other separately gated mechanisms unresolved.",
+  "all_conjunctive_gates_passed": false,
+  "bounded_faithful_scope": [
+    "ST-M043.a",
+    "ST-M009.a"
+  ],
+  "comparison": {
+    "bootstrap": {
+      "16": {
+        "clusters": 3,
+        "distribution_sha256": "1cc16ede9fa11f3181847e8a28310817331303cbfac721f4473a5aeae4d7120b",
+        "mean": -0.005549711111111111,
+        "one_sided_95_lower_bound": -0.012222222222222223,
+        "paired_identities_per_cluster": 300,
+        "resamples": 100000,
+        "seed": 65595002,
+        "timing": {
+          "cgroup_cpu_seconds": 1.1600000000034925,
+          "peak_rss_bytes": 496414720,
+          "process_cpu_seconds": 0.5803219999997964,
+          "wall_seconds": 0.5802610559912864
+        }
+      },
+      "32": {
+        "clusters": 3,
+        "distribution_sha256": "8568d6b117678d53edec66018e6d52abe48837f64aebd6aee0153ddf2001ea51",
+        "mean": 0.0,
+        "one_sided_95_lower_bound": 0.0,
+        "paired_identities_per_cluster": 300,
+        "resamples": 100000,
+        "seed": 65595001,
+        "timing": {
+          "cgroup_cpu_seconds": 1.2160000000003492,
+          "peak_rss_bytes": 496414720,
+          "process_cpu_seconds": 0.6088239999999132,
+          "wall_seconds": 0.6088209409936098
+        }
+      }
+    },
+    "maximum_invalid_rate": 0.8833333333333333,
+    "minimum_trained_minus_randomized": 0.0,
+    "primary_width16_by_root": [
+      [
+        0.0,
+        0.01
+      ],
+      [
+        0.0,
+        0.006666666666666667
+      ],
+      [
+        0.0033333333333333335,
+        0.0033333333333333335
+      ]
+    ],
+    "primary_width32_by_root": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "width16_layer_minus_model_by_root": [
+      -0.01,
+      -0.006666666666666667,
+      0.0
+    ],
+    "width16_unweighted_mean_delta": -0.005555555555555556,
+    "width32_layer_minus_model_by_root": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "width32_unweighted_mean_delta": 0.0
+  },
+  "decision": "reject-exp655-dense-layer-loop-schedule-formulation",
+  "gate_results": {
+    "any_primary_width32_each_root": false,
+    "cgroup_cpu_budget": true,
+    "complete_block_noncommutation": true,
+    "determinism": true,
+    "full_denominators": true,
+    "malformed_and_leakage": true,
+    "primary_initial_identity": true,
+    "primary_width16_each_root": false,
+    "process_cpu_budget": true,
+    "randomized_weight_dependence": false,
+    "rss_budget": true,
+    "validity": false,
+    "wall_budget": true,
+    "width16_bootstrap_lower": false,
+    "width16_delta_each_root": true,
+    "width32_bootstrap_lower": false,
+    "width32_delta_each_root": true,
+    "width32_mean_delta": false
+  },
+  "not_candidate_benchmark_submission_or_goal_completion": true,
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence"
 }

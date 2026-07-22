@@ -1,13 +1,11 @@
 {
-  "schema_version": "exp655-limitations-v1",
   "limitations": [
-    "EXP655 was parked before calibration root 20261178 and before formal roots 20261179, 20261180, and 20261181 because the required final-source full-project oracle ended at 382 passed and 9 failed.",
-    "All nine failures require ignored historical EXP648 or EXP660 artifacts outside T048's write allowlist; the exact failing tests and available path/hash contracts are preserved in verification.json.",
-    "The 69-test focused package gate and project validator passed, but neither substitutes for the red full-project oracle.",
-    "The implementation and tests are published only as unadmitted implementation evidence; they were not calibrated, trained, evaluated scientifically, or promoted.",
-    "Calibration root 20261178 and its seed were never opened. Formal roots 20261179, 20261180, and 20261181 and all paired init/train/eval seeds were never opened.",
-    "No calibration budget, admission, model checkpoint, learning curve, exact transition result, exact rollout result, intervention result, bootstrap result, W256 runtime result, or MLflow run exists.",
-    "No checked, prior-independent, official, private, candidate, submission, promotion, 85-percent, or Goal-completion surface changed.",
-    "This park is not a scientific rejection of layer-loop recurrence, model-loop recurrence, ST-M043.a, or ST-M009.a."
+    "This is bounded-faithful evidence for dense recurrence ordering (ST-M043.a/ST-M009.a), not a reproduction of Loopie MoE, adaptive routing, capacity recycling, or post-training.",
+    "Only fresh generated train-prime-disjoint W16/W32 identities were evaluated; checked, prior-independent, official, and private answers were not read.",
+    "Exact Python arithmetic is confined to offline training labels and evaluation.",
+    "The completed failed conjunctive gate rejects only this exact dense two-block fixed-R2 schedule formulation; adaptive routing, MoE, capacity recycling, and post-training remain separately unresolved.",
+    "The twelve checkpoints are durable research evidence only and are not candidate or submission artifacts.",
+    "The calibration shell emitted a nonfatal missing-git-lfs filter warning after the Python process exited zero; the hash-bound calibration/admission records, clean source identity, and later formal execution were unaffected.",
+    "The result cannot promote a candidate, benchmark, submission, or Goal completion."
   ]
 }

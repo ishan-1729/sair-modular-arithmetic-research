@@ -1,0 +1,50 @@
+{
+  "calibration_checkpoints_reusable": false,
+  "calibration_path": ".scratch/exp-655-layer-loop-compute-matched-recurrence/calibration.json",
+  "calibration_sha256": "a3c75c389b72704230728a4442d698611dcd0eef48d864a5de6cd4fd658320f6",
+  "decision": "admit-full-three-root-falsifier",
+  "expected_without_headroom": {
+    "cgroup_cpu_seconds": 8204,
+    "process_cpu_seconds": 7010,
+    "wall_seconds": 1865
+  },
+  "fidelity_reduced": false,
+  "hard_budget": {
+    "cgroup_cpu_seconds": 14700,
+    "peak_rss_bytes": 543226880,
+    "process_cpu_seconds": 12561,
+    "wall_seconds": 3342
+  },
+  "reason": "complete representative route measured; derived hard guards preserve frozen fidelity and the matched schedule decision has high information value",
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
+  "schema_version": "exp655-dynamic-resource-admission-v1",
+  "soft_budget": {
+    "cgroup_cpu_seconds": 10598,
+    "process_cpu_seconds": 9056,
+    "wall_seconds": 2410
+  },
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842",
+    "dirty": false,
+    "fixtures_sha256": "4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba",
+    "model_sha256": "14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af",
+    "paper_sha256": "1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce",
+    "preregistration_sha256": "75c40c6b11d7203701a5e1b17d62d9cb0356a45f14cddc59c17a9113ba5a5d67",
+    "repository_branch": "codex/exp655-layer-loop-formal",
+    "repository_commit": "3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a",
+    "runner_sha256": "d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6"
+  },
+  "variability": {
+    "arm_wall_seconds_per_step": {
+      "layer_loop_r2": 0.03430594299003133,
+      "model_loop_r2": 0.04655847478003125,
+      "r1": 0.02720822700008284,
+      "untied_equal_compute": 0.036319586949975925
+    },
+    "coefficient_of_variation": 0.19178239509698847,
+    "maximum": 0.04655847478003125,
+    "mean": 0.03609805793003033,
+    "minimum": 0.02720822700008284
+  }
+}

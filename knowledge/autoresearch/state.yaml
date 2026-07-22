@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T22:30:00+05:30
+updated_at: 2026-07-22T19:05:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -34,40 +34,61 @@ incumbent:
   mlflow_model_version: "5"
 current_hypothesis:
   run_id: exp-655-layer-loop-compute-matched-recurrence
-  status: parked-before-calibration-and-science-final-source-oracle-red
-  active_stage: terminal-park
-  decision: park-before-science
-  decision_authority: T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction
+  status: completed-rejected-dense-layer-loop-schedule-formulation
+  active_stage: terminal-scientific-reject
+  decision: reject-exp655-dense-layer-loop-schedule-formulation
+  decision_authority: T049-complete-full-fidelity-conjunctive-formal-gate
   selection_basis: Bounded-faithful dense Loopies schedule falsifier selected by expected information gain after EXP660; implementation admission required one real final-source full oracle before calibration.
   source_commit: 3047af97b79b712c2252054d909e1572ca5a6282
   source_tree: aa0e6e4b6a411800b9765fe7eb7365980af9f520
   source_provenance_commit: 1f7dc801d22f33c55a59764907821df19b72c72e
+  recovery_and_formal_source_commit: 3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a
+  recovery_source_pushed_before_science: true
+  formal_source_dirty: false
   source_branch: codex/exp655-layer-loop-formal
   source_hashes: {config: de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842, init: 4102850fae7486e43fbdfb0b02c8e8a8c8fe4190051317cc91bc04a21aceb2a3, fixtures: 4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba, model: 14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af, runner: d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6, test: 2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1}
   verification:
     focused: {passed: 69, failed: 0, pytest_seconds: 490.53, time_wall_seconds: 493.28, aggregate_cpu_seconds: 432.58, maximum_rss_kib: 478204}
     validator: {passed: true, concepts: 162, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
-    full_oracle: {passed: 382, failed: 9, total: 391, pytest_seconds: 656.76, time_wall_seconds: 659.49, user_cpu_seconds: 837.71, system_cpu_seconds: 36.31, aggregate_cpu_seconds: 874.02, maximum_rss_kib: 697272}
-    failure_partition: {EXP648_missing_ignored_historical_evidence: 8, EXP660_missing_ignored_EXP609_fixture: 1}
-    exact_failure_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json
-  calibration: {root: 20261178, status: unused-unopened, executed: false, dynamic_budget: null, admission: null}
+    full_oracle: {passed: 391, failed: 0, total: 391, pytest_seconds: 594.41, time_wall_seconds: 596.30, user_cpu_seconds: 517.64, system_cpu_seconds: 31.92, aggregate_cpu_seconds: 549.56, maximum_rss_kib: 705360}
+    T048_failure_preserved: {passed: 382, failed: 9, total: 391, terminal_commit: ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575, archive: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/manifest.json}
+    record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json
+  portability: {files: 264, bytes: 26672030, inventory_sha256: b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b, independent_regular_bytes: true}
+  calibration:
+    root: 20261178
+    status: completed-resource-only
+    executed: true
+    measured: {wall_seconds: 58.29647031601053, process_cpu_seconds: 195.96106899999998, cgroup_cpu_seconds: 231.40000000000146, peak_rss_bytes: 434581504}
+    expected_without_headroom: {wall_seconds: 1865, process_cpu_seconds: 7010, cgroup_cpu_seconds: 8204}
+    soft_budget: {wall_seconds: 2410, process_cpu_seconds: 9056, cgroup_cpu_seconds: 10598}
+    hard_budget: {wall_seconds: 3342, process_cpu_seconds: 12561, cgroup_cpu_seconds: 14700, peak_rss_bytes: 543226880}
+    admission: admit-full-three-root-falsifier
+    fidelity_reduced: false
+    checkpoints_reusable: false
   formal_roots:
-    - {root: 20261179, status: unused-unopened}
-    - {root: 20261180, status: unused-unopened}
-    - {root: 20261181, status: unused-unopened}
-  formal_training_executed: false
-  scientific_evaluation_executed: false
-  scientific_evidence: none-pre-science-verification-park
+    - {root: 20261179, status: completed, init_seed: 65570001, train_seed: 65573001, eval_seed: 65574001, layer_width16_exact: 0.0, model_width16_exact: 0.01, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+    - {root: 20261180, status: completed, init_seed: 65570002, train_seed: 65573002, eval_seed: 65574002, layer_width16_exact: 0.0, model_width16_exact: 0.006666666666666667, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+    - {root: 20261181, status: completed, init_seed: 65570003, train_seed: 65573003, eval_seed: 65574003, layer_width16_exact: 0.0033333333333333335, model_width16_exact: 0.0033333333333333335, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+  formal_training_executed: true
+  scientific_evaluation_executed: true
+  scientific_evidence: bounded-faithful-negative-for-exact-dense-fixed-r2-formulation
+  comparison: {width16_mean_delta: -0.005555555555555556, width16_one_sided_95_lower: -0.012222222222222223, width32_mean_delta: 0.0, width32_one_sided_95_lower: 0.0, maximum_invalid_rate: 0.8833333333333333, minimum_trained_minus_randomized: 0.0}
+  passed_gates: [full_denominators, determinism, primary_initial_identity, complete_block_noncommutation, malformed_and_leakage, wall_budget, process_cpu_budget, cgroup_cpu_budget, rss_budget, width16_delta_each_root, width32_delta_each_root]
+  failed_gates: [primary_width16_each_root, any_primary_width32_each_root, validity, randomized_weight_dependence, width16_bootstrap_lower, width32_bootstrap_lower, width32_mean_delta]
+  formal_resource: {wall_seconds: 1338.6443127590028, process_cpu_seconds: 5257.537295, cgroup_cpu_seconds: 6545.540000000001, peak_rss_bytes: 496414720, outer_wall_seconds: 1346.28, outer_aggregate_cpu_seconds: 5267.19}
   metrics: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json
-  checkpoint: null
-  mlflow_run_id: null
+  checkpoint: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/checkpoints/
+  checkpoint_count: 12
+  checkpoint_manifest_sha256: 8178b37459d5ba384b4eec9f01d6ee2ec12c2a0e1932dec571298a9034cd917b
+  mlflow_run_id: ceeec9d504464b14a224150ebdf32c2b
+  mlflow_runs: {total: 16, finished: 16}
   promotion: null
   benchmark: null
   run_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json
   decision_record: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json
-  limitations: [full-oracle-red-on-out-of-scope-ignored-historical-evidence, implementation-unadmitted, no-calibration-training-checkpoint-label-or-scientific-metric, no-candidate-benchmark-submission-promotion-or-completion-change]
-  next_material_decision: decide-whether-to-authorize-checksum-bound-hermetic-historical-evidence-portability-before-any-fresh-science-authorization
-  evidence_capable_of_changing_next_decision: green-391-of-391-clean-worktree-oracle-on-unchanged-exp655-source-and-test-bytes-with-exact-hash-bound-historical-artifact-materialization
+  limitations: [exact-dense-two-block-fixed-r2-formulation-only, not-full-loopies-or-MoR-routing-or-capacity-recycling-or-post-training, no-checked-independent-official-private-candidate-submission-promotion-or-completion-change]
+  next_material_decision: PM-select-next-separately-authorized-experiment-by-expected-information-gain-per-unit-compute
+  evidence_capable_of_changing_next_decision: EXP655-failure-partition-down-ranks-dense-fixed-r2-schedule-only-reruns-but-leaves-adaptive-routing-capacity-recycling-and-other-families-unresolved
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red
@@ -422,7 +443,7 @@ research_programs:
       EXP-651: exact-initialized-visit-or-dilation-specific-low-rank-adapters
       EXP-652: answer-plus-latent-TRM-style-viability
       EXP-653: convergence-based-adaptive-inner-recurrence-after-stable-winner
-      EXP-655: planned-blocked-dense-layer-loop-schedule-before-capacity-reinvestment-or-moe
+      EXP-655: completed-rejected-exact-dense-fixed-r2-layer-loop-schedule-formulation-capacity-reinvestment-and-routing-unresolved
     rules:
       - one-active-task-only
       - faithful-and-analogue-evidence-must-not-be-conflated
