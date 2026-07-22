@@ -232,6 +232,9 @@ class Experiment:
         model_path = Path(__file__).with_name("model.py")
         generator = ROOT / "experiments/exp_300_width64_bit_tensor_transfer/run.py"
         preregistration = ROOT / self.config["preregistration"]
+        entrypoint = ROOT / self.config.get("source_contract", {}).get(
+            "entrypoint", "experiments/exp_659_symbol_equivariant_recurrence/run.py"
+        )
         return {
             "repository_commit": git_output("rev-parse", "HEAD"),
             "repository_branch": git_output("branch", "--show-current"),
@@ -239,6 +242,7 @@ class Experiment:
             "challenge_commit": CHALLENGE_COMMIT,
             "config_sha256": sha256(self.config_path),
             "runner_sha256": sha256(Path(__file__)),
+            "entrypoint_sha256": sha256(entrypoint),
             "model_sha256": sha256(model_path),
             "generator_sha256": sha256(generator),
             "preregistration_sha256": sha256(preregistration),
@@ -881,6 +885,13 @@ class Experiment:
     def calibration(self) -> dict[str, Any]:
         if self.config["resource_budget"]["calibration_status"] != "pending":
             raise RuntimeError("calibration mode requires pending resource status")
+        if self.source_at_start["dirty"]:
+            raise RuntimeError("calibration mode requires a clean tracked worktree")
+        required_branch = self.config.get("source_contract", {}).get(
+            "required_branch", "codex/exp659-symbol-equivariant"
+        )
+        if self.source_at_start["repository_branch"] != required_branch:
+            raise RuntimeError(f"calibration mode requires scoped branch {required_branch}")
         arms, controls = self.run_route()
         expected = {
             "wall_seconds": 0.0,
@@ -1000,10 +1011,21 @@ class Experiment:
         calibration = ROOT / budget["calibration_output"]
         if not calibration.exists() or sha256(calibration) != budget["calibration_output_sha256"]:
             raise RuntimeError("calibration evidence hash mismatch")
+        calibration_payload = json.loads(calibration.read_text(encoding="utf-8"))
+        if (
+            calibration_payload.get("source", {}).get("repository_commit")
+            != budget["calibration_repository_commit"]
+        ):
+            raise RuntimeError("calibration repository identity mismatch")
         if sha256(Path(__file__)) != budget["calibration_runner_sha256"]:
             raise RuntimeError("runner differs from calibrated bytes")
         if sha256(Path(__file__).with_name("model.py")) != budget["calibration_model_sha256"]:
             raise RuntimeError("model differs from calibrated bytes")
+        entrypoint = ROOT / self.config.get("source_contract", {}).get(
+            "entrypoint", "experiments/exp_659_symbol_equivariant_recurrence/run.py"
+        )
+        if sha256(entrypoint) != budget["calibration_entrypoint_sha256"]:
+            raise RuntimeError("entrypoint differs from calibrated bytes")
         for key in (
             "expected_formal_wall_seconds",
             "expected_formal_aggregate_cpu_seconds",
@@ -1094,29 +1116,39 @@ class Experiment:
         return results, comparison
 
     def publish_evidence(self, summary: dict[str, Any]) -> dict[str, Any]:
-        run_dir = ROOT / "experiments/runs/exp-659-symbol-equivariant-recurrence"
-        eval_dir = ROOT / "evals/results/exp-659-symbol-equivariant-recurrence"
+        run_slug = str(self.config["run_id"])
+        run_dir = ROOT / "experiments/runs" / run_slug
+        eval_dir = ROOT / "evals/results" / run_slug
         run_dir.mkdir(parents=True, exist_ok=True)
         eval_dir.mkdir(parents=True, exist_ok=True)
+        checkpoint_dir = run_dir / "checkpoints"
+        checkpoint_dir.mkdir(parents=True, exist_ok=True)
         checkpoint_hashes = {}
         for arm, result in summary["arms"].items():
-            source = ROOT / result["checkpoint"]["path"]
-            destination = run_dir / f"{arm}.safetensors"
-            shutil.copy2(source, destination)
-            checkpoint_hashes[arm] = {
-                "path": str(destination.relative_to(ROOT)),
-                "sha256": sha256(destination),
-                "bytes": destination.stat().st_size,
-            }
+            records = []
+            source_records = [("initial", result["initial_checkpoint"])]
+            source_records.extend(
+                (f"stage-{item['width']}-step-{item['step']}", item)
+                for item in result["stage_checkpoints"]
+            )
+            source_records.append(("final", result["checkpoint"]))
+            for label, source_record in source_records:
+                source = ROOT / source_record["path"]
+                destination = checkpoint_dir / f"{arm}-{label}.safetensors"
+                shutil.copy2(source, destination)
+                records.append(
+                    {
+                        "role": label,
+                        "path": str(destination.relative_to(ROOT)),
+                        "sha256": sha256(destination),
+                        "bytes": destination.stat().st_size,
+                    }
+                )
+            checkpoint_hashes[arm] = records
         learning_curves = {
             arm: result["training"]["history"] for arm, result in summary["arms"].items()
         }
         environment = summary["environment"]
-        hashes = {
-            "source": summary["source"],
-            "checkpoints": checkpoint_hashes,
-            "run_payload_sha256": sha256_json(summary),
-        }
         metrics = {
             "run_id": summary["run_id"],
             "seed": summary["seed"],
@@ -1129,31 +1161,56 @@ class Experiment:
             "decision": summary["decision"],
             "resource": summary["resource"],
         }
-        write_json(run_dir / "run.json", summary)
+        durable_summary = {
+            **summary,
+            "learning_curves": learning_curves,
+            "checkpoint_manifest": checkpoint_hashes,
+            "prepublication_run_payload_sha256": sha256_json(summary),
+        }
+        write_json(run_dir / "run.json", durable_summary)
         write_json(run_dir / "environment.json", environment)
-        write_json(run_dir / "hashes.json", hashes)
-        write_json(run_dir / "learning-curves.json", learning_curves)
         write_json(run_dir / "limitations.json", summary["limitations"])
         write_json(run_dir / "mlflow.json", summary["mlflow"])
-        write_json(eval_dir / "metrics.json", metrics)
+        calibration_source = ROOT / self.config["resource_budget"]["calibration_output"]
+        shutil.copy2(calibration_source, run_dir / "calibration.json")
         write_json(
-            eval_dir / "structural-controls.json",
+            run_dir / "verification.json",
             {
-                "core_equivariance": summary["controls"]["core_equivariance"],
-                "task_symmetry_applicability": summary["controls"]["task_symmetry_applicability"],
-                "deterministic_replay": summary["controls"]["deterministic_replay"],
-                "randomized_weight_dependence": summary["controls"]["randomized_weight_dependence"],
-                "static_leakage": summary["controls"]["static_leakage"],
+                "source": summary["source"],
+                "checkpoints": checkpoint_hashes,
+                "structural_controls": summary["controls"],
+                "gates": summary["gates"],
+                "resource": summary["resource"],
+                "calibration_sha256": sha256(run_dir / "calibration.json"),
             },
         )
-        return {"run_dir": str(run_dir.relative_to(ROOT)), "eval_dir": str(eval_dir.relative_to(ROOT)), "checkpoints": checkpoint_hashes}
+        write_json(eval_dir / "metrics.json", metrics)
+        write_json(
+            eval_dir / "decision.json",
+            {
+                "run_id": summary["run_id"],
+                "decision": summary["decision"],
+                "all_gates_passed": summary["gates"]["passed"],
+                "gate_results": summary["gates"]["results"],
+                "comparison": summary["comparison"],
+                "not_a_candidate_or_goal_completion": True,
+            },
+        )
+        return {
+            "run_dir": str(run_dir.relative_to(ROOT)),
+            "eval_dir": str(eval_dir.relative_to(ROOT)),
+            "checkpoints": checkpoint_hashes,
+        }
 
     def formal(self) -> dict[str, Any]:
         self.resolved_admission()
         if self.source_at_start["dirty"]:
             raise RuntimeError("formal mode requires a clean tracked worktree")
-        if self.source_at_start["repository_branch"] != "codex/exp659-symbol-equivariant":
-            raise RuntimeError("formal mode requires the scoped EXP-659 branch")
+        required_branch = self.config.get("source_contract", {}).get(
+            "required_branch", "codex/exp659-symbol-equivariant"
+        )
+        if self.source_at_start["repository_branch"] != required_branch:
+            raise RuntimeError(f"formal mode requires scoped branch {required_branch}")
         experiment_id = configure_mlflow(self.config["tracking"]["experiment_name"])
         run_ids = {}
         with mlflow.start_run(run_name=self.config["run_id"]) as parent:
@@ -1162,7 +1219,7 @@ class Experiment:
                 {
                     "canonical_run_id": self.config["run_id"],
                     "status": "running",
-                    "role": "matched-symbol-equivariant-recurrent-falsifier",
+                    "role": "fresh-formal-matched-symbol-equivariant-recurrent-falsifier",
                     "repository_commit": self.source_at_start["repository_commit"],
                     "repository_dirty": "false",
                 }
@@ -1209,7 +1266,7 @@ class Experiment:
             decision = (
                 "advance-symbol-equivariant-successor-confirmation"
                 if passed
-                else "reject-exp659-symbol-equivariant-formulation"
+                else f"reject-{self.config['run_id']}-symbol-equivariant-formulation"
             )
             summary = {
                 "run_id": self.config["run_id"],

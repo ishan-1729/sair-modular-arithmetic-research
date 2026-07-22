@@ -8,6 +8,17 @@ timestamp: 2026-07-22
 
 # Symbol-equivariant recurrence translation
 
+## Fresh formal successor
+
+EXP-660 preserves the bounded-faithful EXP-659 architecture and controls but
+uses the still-unused formal seed `20261177`, fresh ordinary initialization and
+a newly confirmed dynamic resource budget. It is the decision-producing
+successor after EXP-659 was parked before science by an inherited project-oracle
+provenance failure. The formulation remains explicitly bounded-faithful: exact
+equivariance applies only inside the learned symbol-axis core, while the binary
+arithmetic boundary is anchored and the legal task domain is not closed under
+global zero/one complementation.
+
 The complete 18-page local paper `arxiv-2603.02193.pdf` was read before the
 EXP-659 preregistration was frozen. Its transferable mechanism is the explicit
 symbol axis and alternating position/symbol self-attention of §2.3, Equations

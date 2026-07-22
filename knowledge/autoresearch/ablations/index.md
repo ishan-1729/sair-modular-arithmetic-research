@@ -56,3 +56,4 @@
 - [EXP-649 stochastic trajectory breadth](exp-649-stochastic-trajectory-breadth.md) - planned/formal-blocked frozen width-256 breadth study; full input-only calibration returns `runtime-gate-miss` without opening oracle evidence.
 - [EXP-655 layer-loop compute-matched recurrence](exp-655-layer-loop-compute-matched-recurrence.md) - planned/blocked dense layer-loop versus model-loop schedule test with R1, untied/equal-compute, and measured capacity-reinvestment controls.
 - [EXP-659 symbol-equivariant recurrence](exp-659-symbol-equivariant-recurrence.md) - full-fidelity explicit symbol-axis recurrent reasoner with matched position-only and broken-tying controls.
+- [EXP-660 fresh formal symbol-equivariant recurrence](exp-660-symbol-equivariant-formal.md) - fresh ordinary-initialized decision run after portable full-oracle repair.

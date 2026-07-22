@@ -32,8 +32,16 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 UPSTREAM_SRC = ROOT / "sources/github/modular-arithmetic-challenge/src"
-FROZEN_SCIENTIFIC_CONFIG_SHA256 = "ea70a40c01e1c407be05ce7d5e7740862e670a0dd36715635614c521cae3415a"
-FROZEN_RESOURCE_PROTOCOL_SHA256 = "8d13c0f5d6a859a36d9360ad4209b492bc10dae42a6e6be80c0d9bdc5b3fb7cd"
+FROZEN_SCIENTIFIC_CONFIG_SHA256 = "294d2e5ef8967c7992d89cd671c32fca0f60ab9ffc7d1a85b275a3a5c8c53b6a"
+FROZEN_RESOURCE_PROTOCOL_SHA256 = "a5803ef7b5312e7d540335aeaad9f6963d835aaff9e3d5a99d6c760883803f64"
+OFFICIAL_CANONICAL_PROVENANCE = {
+    "config": ("70995ab4f6c83d2243d9d0c0beb3832b6504138b", "927ae806f0cc5eeb9ffd0a6f1f010d695eb90c0b68c2dd725f43f11840b9e6c9"),
+    "generator": ("e042f779b031231bc7f0083f2de5b8464e4a1f81", "9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be"),
+    "primes": ("75e1e5dad777a66e994f0f9cf252b21fa9a46a67", "c4bd0e316bef7f40d92682d04f4b14eb9bad569897a5eee20ed9810031bbb29d"),
+    "pipeline": ("50b57dde5c3af2dc1d1e4cb9dad8a18d6665fde2", "2c5c1cb6a21c754690eaf8b0021ae4c63d0f1f2c0292738b12e57a01b5626def"),
+    "decoder": ("e75c0137541347861ff00f072ee899e573417efc", "b6b83926ca8d9a0e20058b3389be0c519a09f0c83a2e4330c4f65825fc1ac99f"),
+    "loader": ("f399e552faf334db3efcf4a3690b45114754f74d", "d95da1f4935bf350b51fdd2e834bfe6b86f77e3886c6e3c8109951e49d27e1fb"),
+}
 for import_root in (ROOT, UPSTREAM_SRC):
     if str(import_root) not in sys.path:
         sys.path.insert(0, str(import_root))
@@ -49,6 +57,10 @@ def sha256_text(value: str) -> str:
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
 
 
 def git_output(*args: str) -> str:
@@ -332,7 +344,17 @@ def validate_frozen_config(config: dict[str, Any]) -> None:
                 "sha256": "c4d12b876698b9651392b52a84edadbcfd485a5a1d1e79c5b183382d65bc215f",
             },
         },
+        "provenance_amendment": "experiments/runs/exp-649-stochastic-trajectory-breadth/provenance-amendment.json",
     }
+    for name, (blob_oid, canonical_sha256) in OFFICIAL_CANONICAL_PROVENANCE.items():
+        record = expected_official["source_files"][name]
+        record.update(
+            {
+                "git_blob_oid": blob_oid,
+                "canonical_blob_sha256": canonical_sha256,
+                "known_checkout_sha256": [record["sha256"], canonical_sha256],
+            }
+        )
     if official != expected_official or config.get("candidate_output_base") != "p":
         raise ValueError("the pinned official evaluator provenance changed")
     geometry = config["candidate_geometry"]
@@ -1089,11 +1111,29 @@ def formal_schema() -> dict[str, Any]:
     }
 
 
+def _confined_official_checkout(repository: Path, configured_path: str) -> Path:
+    checkout = ROOT / configured_path
+    if checkout.is_symlink():
+        raise RuntimeError("pinned official evaluator checkout may not be a symlink")
+    try:
+        resolved = checkout.resolve(strict=True)
+    except FileNotFoundError as exc:
+        raise RuntimeError("pinned official evaluator checkout is missing") from exc
+    if not resolved.is_relative_to(repository) or not resolved.is_file():
+        raise RuntimeError("pinned official evaluator checkout escaped its repository")
+    return resolved
+
+
 def verify_official_evaluator_sources(config: dict[str, Any]) -> dict[str, str]:
-    """Verify pinned evaluator bytes before importing or executing any of them."""
+    """Bind source identity to pinned Git blobs, independently of EOL checkout bytes."""
 
     official = config["official_evaluator"]
-    repository = (ROOT / official["repository"]).resolve()
+    configured_repository = ROOT / official["repository"]
+    if configured_repository.is_symlink():
+        raise RuntimeError("pinned official evaluator repository may not be a symlink")
+    repository = configured_repository.resolve(strict=True)
+    if not repository.is_relative_to(ROOT.resolve()) or not repository.is_dir():
+        raise RuntimeError("pinned official evaluator repository escaped project root")
     commit = subprocess.run(
         ["git", "-C", str(repository), "rev-parse", "HEAD"],
         check=True,
@@ -1105,10 +1145,32 @@ def verify_official_evaluator_sources(config: dict[str, Any]) -> dict[str, str]:
         raise RuntimeError("pinned official evaluator commit mismatch")
     official_hashes: dict[str, str] = {"official_evaluator_commit_sha": commit}
     for name, record in official["source_files"].items():
-        observed = sha256((ROOT / record["path"]).resolve())
-        if observed != record["sha256"]:
-            raise RuntimeError(f"pinned official evaluator {name} hash mismatch")
-        official_hashes[f"official_{name}_sha256"] = observed
+        checkout = _confined_official_checkout(repository, record["path"])
+        relative = checkout.relative_to(repository).as_posix()
+        observed_oid = subprocess.run(
+            ["git", "-C", str(repository), "rev-parse", f"{commit}:{relative}"],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        ).stdout.strip()
+        blob = subprocess.run(
+            ["git", "-C", str(repository), "cat-file", "blob", observed_oid],
+            check=True,
+            capture_output=True,
+            timeout=120,
+        ).stdout
+        canonical = sha256_bytes(blob)
+        checkout_sha256 = sha256(checkout)
+        if observed_oid != record["git_blob_oid"]:
+            raise RuntimeError(f"pinned official evaluator {name} Git blob mismatch")
+        if canonical != record["canonical_blob_sha256"]:
+            raise RuntimeError(f"pinned official evaluator {name} canonical blob hash mismatch")
+        if checkout_sha256 not in record["known_checkout_sha256"]:
+            raise RuntimeError(f"pinned official evaluator {name} checkout hash mismatch")
+        official_hashes[f"official_{name}_git_blob_oid"] = observed_oid
+        official_hashes[f"official_{name}_canonical_blob_sha256"] = canonical
+        official_hashes[f"official_{name}_checkout_sha256"] = checkout_sha256
     return official_hashes
 
 
@@ -1116,10 +1178,25 @@ def _expected_official_source_hashes(config: dict[str, Any]) -> dict[str, str]:
     return {
         "official_evaluator_commit_sha": config["official_evaluator"]["commit_sha"],
         **{
-            f"official_{name}_sha256": record["sha256"]
+            f"official_{name}_git_blob_oid": record["git_blob_oid"]
+            for name, record in config["official_evaluator"]["source_files"].items()
+        },
+        **{
+            f"official_{name}_canonical_blob_sha256": record["canonical_blob_sha256"]
             for name, record in config["official_evaluator"]["source_files"].items()
         },
     }
+
+
+def validate_official_source_receipt(
+    config: dict[str, Any], receipt: dict[str, str]
+) -> None:
+    expected = _expected_official_source_hashes(config)
+    if any(receipt.get(key) != value for key, value in expected.items()):
+        raise RuntimeError("official evaluator verification receipt is not the frozen receipt")
+    for name, record in config["official_evaluator"]["source_files"].items():
+        if receipt.get(f"official_{name}_checkout_sha256") not in record["known_checkout_sha256"]:
+            raise RuntimeError("official evaluator verification receipt has unknown checkout bytes")
 
 
 def current_source_hashes(
@@ -1131,8 +1208,7 @@ def current_source_hashes(
         if verified_official_hashes is None
         else copy.deepcopy(verified_official_hashes)
     )
-    if official_hashes != _expected_official_source_hashes(config):
-        raise RuntimeError("official evaluator verification receipt is not the frozen receipt")
+    validate_official_source_receipt(config, official_hashes)
     return {
         "source_checkpoint_sha256": sha256((ROOT / config["source_checkpoint"]).resolve()),
         "source_model_sha256": sha256((ROOT / config["source_model"]).resolve()),
@@ -1187,8 +1263,7 @@ def _build_label_free_official_inputs(
         if verified_official_hashes is None
         else verified_official_hashes
     )
-    if verified != _expected_official_source_hashes(config):
-        raise RuntimeError("official evaluator verification receipt is not the frozen receipt")
+    validate_official_source_receipt(config, verified)
     master_seed = _master_seed_bytes(root_seed)
     rows_per_tier = int(config["candidate_geometry"]["rows_per_tier"])
     primes_per_tier = int(config["data"]["primes_per_tier"])
@@ -1338,8 +1413,7 @@ def load_verified_official_decoder(
         if verified_official_hashes is None
         else verified_official_hashes
     )
-    if verified != _expected_official_source_hashes(config):
-        raise RuntimeError("official evaluator verification receipt is not the frozen receipt")
+    validate_official_source_receipt(config, verified)
     from modchallenge.evaluation.decoder import MalformedOutput, decode_answer
 
     return decode_answer, MalformedOutput
@@ -1353,8 +1427,7 @@ def load_frozen_models(
         if verified_official_hashes is None
         else verified_official_hashes
     )
-    if verified != _expected_official_source_hashes(config):
-        raise RuntimeError("official evaluator verification receipt is not the frozen receipt")
+    validate_official_source_receipt(config, verified)
     from safetensors.torch import load_file
 
     source_path = (ROOT / config["source_checkpoint"]).resolve()

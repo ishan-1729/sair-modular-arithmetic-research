@@ -1,0 +1,34 @@
+{
+  "schema_version": "exp649-canonical-git-blob-provenance-amendment-v1",
+  "run_id": "exp-649-stochastic-trajectory-breadth",
+  "status": "historical-evidence-preserved-portable-source-binding-added",
+  "recorded_at": "2026-07-22T10:00:00+05:30",
+  "amendment_scope": "Source identity only. No source bytes, observed calibration values, runtime measurements, scientific status, or historical artifacts were changed.",
+  "repository_base_commit": "e2c48f339ea43221b1fa1d9009573ed6be93d3eb",
+  "official_source": {
+    "repository": "sources/github/modular-arithmetic-challenge",
+    "commit_sha": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "identity_rule": "git_blob_oid_and_sha256_of_exact_blob_bytes_at_pinned_commit",
+    "checkout_rule": "checkout_sha256_is_recorded_separately_and_must_match_a_known_canonical-LF_or_historical-CRLF_materialization",
+    "files": {
+      "config": {"path": "src/modchallenge/config.py", "git_blob_oid": "70995ab4f6c83d2243d9d0c0beb3832b6504138b", "canonical_blob_sha256": "927ae806f0cc5eeb9ffd0a6f1f010d695eb90c0b68c2dd725f43f11840b9e6c9", "historical_checkout_sha256": "1c6dae879d0b3c183fce5f93bdbe8e06faaa17b74e49ab696e4165518adcdca8", "current_checkout_sha256": "927ae806f0cc5eeb9ffd0a6f1f010d695eb90c0b68c2dd725f43f11840b9e6c9"},
+      "generator": {"path": "src/modchallenge/testgen/generator.py", "git_blob_oid": "e042f779b031231bc7f0083f2de5b8464e4a1f81", "canonical_blob_sha256": "9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be", "historical_checkout_sha256": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0", "current_checkout_sha256": "9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be"},
+      "primes": {"path": "src/modchallenge/testgen/primes.py", "git_blob_oid": "75e1e5dad777a66e994f0f9cf252b21fa9a46a67", "canonical_blob_sha256": "c4bd0e316bef7f40d92682d04f4b14eb9bad569897a5eee20ed9810031bbb29d", "historical_checkout_sha256": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac", "current_checkout_sha256": "c4bd0e316bef7f40d92682d04f4b14eb9bad569897a5eee20ed9810031bbb29d"},
+      "pipeline": {"path": "src/modchallenge/evaluation/pipeline.py", "git_blob_oid": "50b57dde5c3af2dc1d1e4cb9dad8a18d6665fde2", "canonical_blob_sha256": "2c5c1cb6a21c754690eaf8b0021ae4c63d0f1f2c0292738b12e57a01b5626def", "historical_checkout_sha256": "b903f7bed3cfe658e32d58a64b30ddc83adc7b7f1b50be9f9f45dd6a0b3aadc9", "current_checkout_sha256": "2c5c1cb6a21c754690eaf8b0021ae4c63d0f1f2c0292738b12e57a01b5626def"},
+      "decoder": {"path": "src/modchallenge/evaluation/decoder.py", "git_blob_oid": "e75c0137541347861ff00f072ee899e573417efc", "canonical_blob_sha256": "b6b83926ca8d9a0e20058b3389be0c519a09f0c83a2e4330c4f65825fc1ac99f", "historical_checkout_sha256": "e785476ef1f2cd148c1a429248fe7eb413a029c1223b106b0ebb87bdfc6880e6", "current_checkout_sha256": "b6b83926ca8d9a0e20058b3389be0c519a09f0c83a2e4330c4f65825fc1ac99f"},
+      "loader": {"path": "src/modchallenge/evaluation/loader.py", "git_blob_oid": "f399e552faf334db3efcf4a3690b45114754f74d", "canonical_blob_sha256": "d95da1f4935bf350b51fdd2e834bfe6b86f77e3886c6e3c8109951e49d27e1fb", "historical_checkout_sha256": "c4d12b876698b9651392b52a84edadbcfd485a5a1d1e79c5b183382d65bc215f", "current_checkout_sha256": "d95da1f4935bf350b51fdd2e834bfe6b86f77e3886c6e3c8109951e49d27e1fb"}
+    }
+  },
+  "historical_bindings": {
+    "config_sha256_before_amendment": "848bedcea39410108a5c22053c1c242d3fe36668376d2b4d78f16a3137b6bf5d",
+    "runner_sha256_before_amendment": "04321d39de730cc653535faa8928ba7a0e975868d274503a5e53714f41daecda",
+    "calibration_sha256": "655e160539f72105da0ee5c809aaa7f716c8cad56c26f78d62e6ba207e44cbbf",
+    "environment_sha256": "3e3dfdc70a11ce5e4d9c93aa26af05ca01cbacfe5d9f64c9b0a452e2db54ff6f",
+    "run_sha256": "b57c09437a518ebaf7167b478a50ca4c3e9cb9f3693e701bbdd06fe673b998a6",
+    "metrics_sha256": "ea0296c9f41ae9f243f7d397153da52507c9923be84b6956121136a8cb76d397"
+  },
+  "limitations": [
+    "The legacy sha256 fields remain historical checkout-byte hashes and are not canonical Git identities.",
+    "This amendment repairs provenance portability only; EXP649 remains blocked by its observed runtime gate miss and has no scientific accuracy result."
+  ]
+}

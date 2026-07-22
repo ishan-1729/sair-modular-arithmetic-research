@@ -88,10 +88,24 @@ def test_frozen_k_mapping_and_correct_tier0_width256_geometry() -> None:
     assert module.sha256(ROOT / config["candidate_manifest"]) == config["candidate_manifest_sha256"]
     assert module.sha256(ROOT / config["candidate_artifact"]) == config["candidate_artifact_sha256"]
     assert module.sha256(ROOT / config["source_model"]) == config["source_model_sha256"]
+    portable_fixture = (
+        ROOT
+        / ".scratch/exp-660-symbol-equivariant-formal/fixtures/exp609-weights.safetensors"
+    )
+    assert portable_fixture.is_file() and not portable_fixture.is_symlink()
+    assert module.sha256(portable_fixture) == config["source_checkpoint_sha256"]
+    config["source_checkpoint"] = str(portable_fixture.relative_to(ROOT))
     hashes = module.current_source_hashes(config)
     assert hashes["official_evaluator_commit_sha"] == config["official_evaluator"]["commit_sha"]
     for name, record in config["official_evaluator"]["source_files"].items():
-        assert hashes[f"official_{name}_sha256"] == record["sha256"]
+        assert hashes[f"official_{name}_git_blob_oid"] == record["git_blob_oid"]
+        assert (
+            hashes[f"official_{name}_canonical_blob_sha256"]
+            == record["canonical_blob_sha256"]
+        )
+        assert hashes[f"official_{name}_checkout_sha256"] in record[
+            "known_checkout_sha256"
+        ]
     assert (
         hashes["seed_retirement_manifest_sha256"]
         == config["seed_retirement_manifest_sha256"]
@@ -147,7 +161,10 @@ def test_official_evaluator_verification_precedes_import_and_work(
     module = load_runner()
     config = load_config()
     invalid_receipt = module._expected_official_source_hashes(config)
-    invalid_receipt["official_decoder_sha256"] = "0" * 64
+    invalid_receipt["official_decoder_canonical_blob_sha256"] = "0" * 64
+    invalid_receipt["official_decoder_checkout_sha256"] = config[
+        "official_evaluator"
+    ]["source_files"]["decoder"]["canonical_blob_sha256"]
     imported_decoder = False
     real_import = builtins.__import__
 
@@ -168,6 +185,26 @@ def test_official_evaluator_verification_precedes_import_and_work(
     inputs = source.index("build_calibration_inputs")
     models = source.index("load_frozen_models")
     assert verification < decoder < inputs < models
+
+
+def test_official_source_identity_is_canonical_git_blob_and_confined() -> None:
+    module = load_runner()
+    config = load_config()
+    receipt = module.verify_official_evaluator_sources(config)
+    module.validate_official_source_receipt(config, receipt)
+    for name, record in config["official_evaluator"]["source_files"].items():
+        assert record["sha256"] == record["known_checkout_sha256"][0]
+        assert record["canonical_blob_sha256"] == record["known_checkout_sha256"][1]
+        assert receipt[f"official_{name}_git_blob_oid"] == record["git_blob_oid"]
+        assert (
+            receipt[f"official_{name}_canonical_blob_sha256"]
+            == record["canonical_blob_sha256"]
+        )
+
+    escaped = copy.deepcopy(config)
+    escaped["official_evaluator"]["source_files"]["config"]["path"] = "AGENTS.md"
+    with pytest.raises(RuntimeError, match="escaped its repository"):
+        module.verify_official_evaluator_sources(escaped)
 
 
 def test_frozen_runtime_is_configured_and_verified_before_formal_context(
