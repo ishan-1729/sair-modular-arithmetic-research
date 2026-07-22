@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T22:00:00+05:30
+updated_at: 2026-07-22T22:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,45 +33,53 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
-  run_id: exp-660-symbol-equivariant-formal
-  status: parked-before-calibration-and-science-full-oracle-red
+  run_id: exp-655-layer-loop-compute-matched-recurrence
+  status: parked-before-calibration-and-science-final-source-oracle-red
   active_stage: terminal-park
   decision: park-before-science
-  decision_authority: T047-clean-full-oracle-stop-rule
-  selection_basis: Fresh formal successor to EXP659 after one portable EXP649 provenance repair, preserving the exact bounded-faithful architecture, matched controls, full denominators and unused formal seed.
-  source_commit: 5febd058e89b27f14a7fc267ed60d1c57a11fc94
-  source_branch: codex/exp660-symbol-equivariant-formal
-  source_hashes: {config: 8b5ee1028d0ce3f0ed9b4ffaf74d56e48993e2d0ec6cb5cce360a346d78e8ea0, entrypoint: 49c3b315f29a9dc15ebd0b8716719eac39b6d391c7584d61da187bd4b8cf4ec6, model: 7c95f16078bfc7bccff29fa8e53dcd09ab665959826c76c93149e9c9d4bbb297, runner: 80c758086d0a46250e313cca7f3c256670079d79708a794d3233904f4da53f13, test: 56420a2f8973c674d4a5f0eda78c3da9ccb23ded3c655d35c288af1f3c293e05}
-  exp649_portability_repair:
-    status: focused-and-validator-passed
-    canonical_identity: exact-pinned-git-blob-oid-plus-blob-byte-sha256
-    checkout_identity: separate-known-LF-or-historical-CRLF-sha256
-    amendment: experiments/runs/exp-649-stochastic-trajectory-breadth/provenance-amendment.json
-    amendment_sha256: 01a0c462e576f8dafab674708fdb987d38d8dec2c9b9580401b8d1c08228314e
-    historical_observations_rewritten: false
-    immutable_source_bytes_changed: false
+  decision_authority: T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction
+  selection_basis: Bounded-faithful dense Loopies schedule falsifier selected by expected information gain after EXP660; implementation admission required one real final-source full oracle before calibration.
+  source_commit: 3047af97b79b712c2252054d909e1572ca5a6282
+  source_tree: aa0e6e4b6a411800b9765fe7eb7365980af9f520
+  source_provenance_commit: 1f7dc801d22f33c55a59764907821df19b72c72e
+  source_branch: codex/exp655-layer-loop-formal
+  source_hashes: {config: de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842, init: 4102850fae7486e43fbdfb0b02c8e8a8c8fe4190051317cc91bc04a21aceb2a3, fixtures: 4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba, model: 14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af, runner: d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6, test: 2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1}
   verification:
-    focused: {passed: 54, failed: 0, pytest_seconds: 190.78, user_cpu_seconds: 476.39, system_cpu_seconds: 9.36, maximum_rss_kib: 508748}
-    validator: {passed: true, concepts: 163, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
-    full_oracle: {passed: 367, failed: 6, pytest_seconds: 498.41, time_wall_seconds: 467.75, user_cpu_seconds: 960.0, system_cpu_seconds: 22.95, maximum_rss_kib: 709064}
-    remaining_failure_classes: [EXP658-ignored-cache-missing-checksum-bound-Dockerfile-generator-primes, EXP658-scaffold-era-zero-root-assertion-conflicts-with-accepted-T045-park-records]
-    temporary_EXP658_L0_test_change_restored: {restored: true, sha256: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
-    exp649_remaining_failures: 0
-  calibration: {status: not-run-full-oracle-red, fresh_confirmation: false, dynamic_budget: null, prior_evidence_role: planning-only}
-  formal_seed: 20261177
-  formal_seed_status: unused-unopened-for-training
+    focused: {passed: 69, failed: 0, pytest_seconds: 490.53, time_wall_seconds: 493.28, aggregate_cpu_seconds: 432.58, maximum_rss_kib: 478204}
+    validator: {passed: true, concepts: 162, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
+    full_oracle: {passed: 382, failed: 9, total: 391, pytest_seconds: 656.76, time_wall_seconds: 659.49, user_cpu_seconds: 837.71, system_cpu_seconds: 36.31, aggregate_cpu_seconds: 874.02, maximum_rss_kib: 697272}
+    failure_partition: {EXP648_missing_ignored_historical_evidence: 8, EXP660_missing_ignored_EXP609_fixture: 1}
+    exact_failure_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json
+  calibration: {root: 20261178, status: unused-unopened, executed: false, dynamic_budget: null, admission: null}
+  formal_roots:
+    - {root: 20261179, status: unused-unopened}
+    - {root: 20261180, status: unused-unopened}
+    - {root: 20261181, status: unused-unopened}
   formal_training_executed: false
-  scientific_evidence: none
-  metrics: null
+  scientific_evaluation_executed: false
+  scientific_evidence: none-pre-science-verification-park
+  metrics: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json
   checkpoint: null
   mlflow_run_id: null
   promotion: null
   benchmark: null
+  run_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json
+  decision_record: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json
+  limitations: [full-oracle-red-on-out-of-scope-ignored-historical-evidence, implementation-unadmitted, no-calibration-training-checkpoint-label-or-scientific-metric, no-candidate-benchmark-submission-promotion-or-completion-change]
+  next_material_decision: decide-whether-to-authorize-checksum-bound-hermetic-historical-evidence-portability-before-any-fresh-science-authorization
+  evidence_capable_of_changing_next_decision: green-391-of-391-clean-worktree-oracle-on-unchanged-exp655-source-and-test-bytes-with-exact-hash-bound-historical-artifact-materialization
+parked_exp660_hypothesis:
+  run_id: exp-660-symbol-equivariant-formal
+  status: parked-before-calibration-and-science-full-oracle-red
+  source_commit: 5febd058e89b27f14a7fc267ed60d1c57a11fc94
+  decision_authority: T047-clean-full-oracle-stop-rule
+  formal_seed: 20261177
+  formal_seed_status: unused-unopened-for-training
+  scientific_evidence: none
   run_record: experiments/runs/exp-660-symbol-equivariant-formal/run.json
   decision_record: evals/results/exp-660-symbol-equivariant-formal/decision.json
-  limitations: [clean-oracle-feasibility-park-not-scientific-rejection, no-calibration-training-checkpoint-or-exact-scientific-metrics, no-checked-independent-official-private-submission-promotion-or-completion-change]
-  next_material_decision: select-materially-distinct-full-fidelity-vertical-experiment-with-highest-expected-decision-value-per-total-route-cost
-  evidence_capable_of_changing_next_decision: authorized-decision-producing-measurement-with-exact-scientific-metrics-and-separated-wall-process-cgroup-CPU-RSS-evidence
+  verification: {focused_passed: 54, full_oracle_passed: 367, full_oracle_failed: 6}
+  limitations: [preserved-terminal-park, no-calibration-training-checkpoint-or-exact-scientific-metrics, no-candidate-benchmark-submission-promotion-or-completion-change]
 parked_exp658_hypothesis:
   run_id: exp-658-joint-quotient-carry-transducer
   status: parked-current-execution-formulation-after-two-repair-limit
