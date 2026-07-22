@@ -2,7 +2,7 @@
 type: research-note
 title: Loop the Loopies full-PDF review
 description: Full-PDF architecture, compute, training, ablation, and SAIR-transfer audit for arXiv:2607.16051v2.
-status: reviewed-no-sair-evidence
+status: reviewed-exp655-authorized-no-result
 timestamp: 2026-07-21
 ---
 
@@ -66,6 +66,6 @@ The later GSPO/DAPO reinforcement stages (pp. 18–19) depend on autoregressive 
 2. operational capacity recycling after measured memory/throughput gains;
 3. optional ordinary MoE route evolution, only after a dense schedule verdict.
 
-Planned [EXP-655](../ablations/exp-655-layer-loop-compute-matched-recurrence.md) isolates the schedule first. Its primary dense layer-loop and model-loop arms must have identical stored parameters, executed block calls, data, seeds, updates, and evaluation fidelity. `R=1`, untied equal-compute, and capacity-reinvestment controls prevent schedule, extra work, and width from being conflated. Budgets will be resolved from representative setup/train/checkpoint/evaluation throughput with variability headroom, separate monotonic wall and aggregate process CPU accounting, recoverable checkpoints, and hash-valid cache reuse. The 300-second limit applies only to final submission inference qualification.
+Authorized [EXP-655](../ablations/exp-655-layer-loop-compute-matched-recurrence.md) isolates the schedule first. Its primary dense layer-loop and model-loop arms have identical stored parameters, executed block calls, data, seeds, updates, evaluation fidelity, and byte-identical initial states. `R=1` and untied equal-compute controls prevent schedule and extra work from being conflated; capacity reinvestment remains outside this package. Root `20261178` resolves budgets from representative complete-route setup/train/checkpoint/evaluation throughput with variability headroom and separate wall, process CPU, cgroup CPU, and RSS accounting. The three formal roots are `20261179`–`20261181`; the 300-second limit still applies only to final submission inference qualification.
 
-EXP-655 is `planned-blocked-awaiting-EXP648-and-separate-launch-judge`. It has no config, authorization, run, checkpoint, metric, or scientific evidence.
+EXP-655 is `authorized-t048-full-fidelity` but still has no scientific result at this source boundary. Calibration evidence, formal checkpoints, metrics, and a dense-schedule advance/reject decision must be recorded before this note can claim SAIR evidence.
