@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T08:43:00+05:30
+updated_at: 2026-07-22T13:47:40+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -34,9 +34,10 @@ incumbent:
   mlflow_model_version: "5"
 current_hypothesis:
   run_id: exp-658-joint-quotient-carry-transducer
-  status: l1-scaffold-verified-inert-unrun
-  active_stage: L0
-  decision_authority: T041-approve-inert-scaffold-publication
+  status: parked-current-execution-formulation-after-two-repair-limit
+  active_stage: terminal-park
+  decision: park
+  decision_authority: T045-PM-two-repair-limit
   selection_basis: T014 directs one joint quotient/carry learned-transducer package after durable EXP657 publication, ranked next by expected information gain per remaining wall/CPU compute.
   source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
   source_parameters: 99824
@@ -86,24 +87,45 @@ current_hypothesis:
     T038: {disposition: superseded, config: 3fe4af5c83f7d78ac2b088bcb23e3b220b809ea1b650dac1ce7a6697f540c257, calibration: 0d44ef5b57991a59e5b0ff5f71f750395682e9c4bd9c45ad4af72a844bdefbc3, preregistration: 0dd8aa243f8b6c152c15a328aeeddf6f45ca68cda18b4ab8f9e1b24fcc7ab623, calibration_test: 41b7c29c1334e82a9d2a83cc9a67b404b1cf96d3a661ab06caf95641dca79394, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
     T039: {disposition: approved-inert-publication-not-enacted, hashes: null}
     T040: {disposition: current-T041-approved, config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f, calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756, preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
-  run_record: null
+  t045_terminal_park:
+    status: parked-current-execution-formulation-after-two-repair-limit
+    source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b
+    source_commit_pushed_ref: refs/heads/codex/exp658-l2-decision-recovered
+    source_hashes: {config: 59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177, execution: 1d4e7ecb86d6c213f67e87a8f7ddda62e3a319affe2d6ce20bb7cd1e247e0544, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6, execution_test: ac41e34938a0860b2b943ffd140a46851e29e59af4247a42b7af7e848dacc560, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, source_checkpoint: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+    records:
+      run: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json, sha256: 3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22}
+      environment: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json, sha256: 3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f}
+      failure: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json, sha256: 11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88}
+      evaluation_decision: {path: evals/results/exp-658-joint-quotient-carry-transducer/decision.json, sha256: ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9}
+    failed_attempt:
+      authorization: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/authorization.json, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json, bytes: 2933, file_sha256: 7e288cd25719fc999c78623a91cceb629a3e1697796e0b528a3e252aeb84933f, authorization_sha256: acdba3226161c4492f37a8a276ae0417527ae9aa827980de6971ac89bbf6cf69, non_scientific: true}
+      challenger_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/challenger.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/challenger.safetensors, bytes: 415912, sha256: 2b4a1ded31711ee8425457fe516358608f22da40c6f1ce374897bc0174c442c9, non_scientific: true}
+      control_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/control.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/control.safetensors, bytes: 415912, sha256: 8cfa448b59b21ea8e187e3e771d279dad9b73b6b67744e9b0fd94c0897fc5e6b, non_scientific: true}
+      failure: {phase: L1-post-repeat3-after-checkpoint-roundtrips-and-width256-profiling-before-persistence, exception: "KeyError: 'checkpoint_sha256'", source: experiments/exp_658_joint_quotient_carry_transducer/execution.py:547}
+      resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+    repair_limit: {attempts: 2, committed: 0, source_restored_to_pushed_bytes: true, third_repair_or_rerun_authorized: false}
+    validation_reused: {source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b, focused: 51-passed-in-492.40-seconds, full: 351-passed-in-543.06-seconds, basis: exact-restored-source-and-test-hashes}
+    boundary: {l1_canonical_calibration_persisted: false, l1_scientific_values_persisted: false, l2_executed: false, mlflow_run_id: null, candidate_005_changed: false, checked_independent_official_private_benchmarks_changed: false, goal_completion: false}
+    resume: prohibited-for-current-formulation-requires-materially-distinct-new-vertical-package-and-fresh-authorization
+  run_record: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json
   metrics: null
   checkpoint: null
   challenger_checkpoint: null
   mlflow_run_id: null
   root: null
-  authorization: null
-  output: null
-  resources: null
-  scientific_evidence: null
+  authorization: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json
+  output: experiments/runs/exp-658-joint-quotient-carry-transducer
+  resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+  scientific_evidence: none-failed-before-canonical-L1-persistence-L2-never-ran
   accuracy: null
   causality: null
   promotion: null
   benchmark: null
-  absent_evidence: [observed-runtime-or-resource-calibration, optimizer-training, message-causality-effect, exact-answer-or-rollout-accuracy, checked-independent-official-or-private-benchmark, candidate-promotion-or-mechanism-success]
-  sole_next_package: separately-reviewed-fixed-internal-operations-and-exact-component-measurement-scaffold-construction-and-unit-tests-only
-  next_package_prerequisite: independent-review-of-each-fixed-operation-and-canonical-input-binding
-  next_package_status: sole-active-package-not-authorized-for-measurement-or-execution
+  absent_evidence: [canonical-observed-runtime-or-resource-calibration, persisted-L1-scientific-values, message-causality-effect, exact-answer-or-rollout-accuracy, checked-independent-official-or-private-benchmark, candidate-promotion-or-mechanism-success]
+  prior_sole_next_package: separately-reviewed-fixed-internal-operations-and-exact-component-measurement-scaffold-construction-and-unit-tests-only
+  prior_next_package_status: closed-by-T045-terminal-park
+  next_material_decision: select-highest-expected-information-gain-materially-distinct-family-per-unit-wall-and-aggregate-CPU-compute
+  evidence_capable_of_changing_next_decision: separately-authorized-full-fidelity-vertical-falsifier-with-exact-scientific-metrics-and-separate-wall-aggregate-CPU-RSS-evidence
 last_rejected_hypothesis:
   run_id: exp-657-coupled-redundant-learned-state
   statement: Two separately learned persistent residue-belief planes with learned syndrome, corrections, fusion, and decoder may recover naturally observed errors better than an exactly parameter-matched single-persistent-state control at widths 16 and 32.
@@ -322,16 +344,16 @@ research_programs:
     scientifically_reproduced_parent_count: 0
     coverage_complete_parent_count: 6
     coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
-    status: full-pdf-reconciled-contract-queued-behind-exp658-staged-program
+    status: full-pdf-reconciled-contract-pending-post-exp658-material-package-selection
     mandate_status: queued-binding
-    active_experiment: exp-658-joint-quotient-carry-transducer
-    blocked_by: exp-658-staged-program
+    active_experiment: null
+    blocked_by: null
     next_family: structural-equivariance-then-dense-layer-loop-schedule
     coverage_completion_rule: Every applicable atomic component under each of the 44 stable parents requires an independent durable faithful, bounded-faithful, analogue, supporting-only, excluded, or non-applicable verdict with its terminal criterion met; a parent completes only when all applicable components complete.
     library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
     faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
     sole_active_task: null
-    sole_next_package: exp-658-separately-reviewed-fixed-internal-operations-and-exact-component-measurement-scaffold-construction-only
+    sole_next_package: post-exp658-highest-information-gain-materially-distinct-vertical-falsifier-to-be-selected-by-PM
     ordered_queue:
       - structural-equivariance
       - shared-recurrent-depth-including-looplm-controls
@@ -367,7 +389,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Keep EXP658 as the sole active experiment package at T041-approved l1-scaffold-verified-inert-unrun. The sole next package is separately reviewed fixed internal operations plus exact component-measurement scaffold construction and unit tests only; it is not measurement or execution authorization. No root, authorization, output, MLflow, resources, training, scientific evaluation, accuracy, causality, promotion, or benchmark surface is open. EXP648 remains parked and scientifically unopened, and rejected EXP656 remains unchanged.
+next_action: Close EXP658 at parked-current-execution-formulation-after-two-repair-limit and do not third-repair or rerun it. Select one materially distinct experiment family by expected information gain per unit wall and aggregate-CPU compute, then authorize one largest-safe reversible vertical falsifier or durable admission-reject package with full-fidelity execution, exact scientific metrics when admitted, separate wall/aggregate-CPU/RSS evidence, and a terminal receipt. Candidate 005, EXP648, EXP656, and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
@@ -383,7 +405,7 @@ git:
   last_validated_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
   dirty: true
 risks:
-  - EXP-658 is T041-approved only as l1-scaffold-verified-inert-unrun infrastructure. Its operation registry is empty and immutable; prior authorization, warmup records, and all seven categories covering 19 records across 17 exact classes are absent, with no coverage equivalences. This is not runtime, resource, training, causal-effect, accuracy, rollout, benchmark, promotion, or success evidence.
+  - EXP-658 is parked for its current execution formulation after two uncommitted repair attempts. The authorized L1 process ran through checkpoint roundtrips and width-256 profiling, then failed before canonical record/calibration persistence with KeyError 'checkpoint_sha256'; 381.7 seconds is outer wall only, aggregate CPU and peak RSS are null, L1 science was not persisted, and L2 never ran. No third repair or same-formulation rerun is authorized.
   - EXP-657 is rejected before L2: its projected 100-case width-256 resources are 344.97 wall / 1279.50 aggregate CPU seconds versus the conjunctive 240/240 gate. Only the underlying two-case 4.5996-wall / 17.06-CPU component was measured; no scientific accuracy exists.
   - EXP-657 root 20261170 is immutable consumed-failed history; roots 20261171/20261172 are superseded-never-authorized, root 20261173 is consumed-complete non-scientific, and roots 20261174/20261175 are closed for this geometry while remaining unopened and unauthorized.
   - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.

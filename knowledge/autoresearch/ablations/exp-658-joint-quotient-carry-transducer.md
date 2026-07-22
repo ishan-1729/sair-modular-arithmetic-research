@@ -1,8 +1,8 @@
 ---
 type: Experiment Preregistration
 title: EXP-658 joint quotient/carry learned transducer
-description: Frozen L0 contract plus a contract-complete, inert, zero-root L1 resource-calibration scaffold for soft learned quotient and signed-carry messages.
-status: preregistered-l1-scaffold-inert
+description: Frozen L0/L1 contract and the T045 terminal park evidence for the current joint quotient/carry execution formulation.
+status: parked-current-execution-formulation-after-two-repair-limit
 tags: [autoresearch, quotient, signed-carry, recurrent, transducer, neuro-symbolic]
 timestamp: "2026-07-22T02:00:00+00:00"
 ---
@@ -11,21 +11,77 @@ timestamp: "2026-07-22T02:00:00+00:00"
 
 ## Evidence boundary
 
-This package preserves the completed L0 graph, exact offline trace labels,
-source-parity tests, and frozen hashes. It additionally implements the complete
-T028-resolved L1 contract as an inert calibration module and unit-test surface.
-The CLI remains unconditionally fail-closed. This package does not perform an
-optimizer-backed calibration workload, open a calibration or scientific root,
-create an authorization or output directory, start MLflow, invoke Candidate
-005, write durable run evidence, edit the registry or autoresearch governance,
-change Candidate 005 or `submission/`, or report accuracy, loss, recall,
-prediction, error, correct-count, runtime, rollout, causal, or mechanism-success
-evidence. Its tests exercise only tiny synthetic mechanics and temporary files.
+The T024/T041 publication boundary preserved the completed L0 graph, exact
+offline trace labels, source-parity tests, frozen hashes, and inert
+T028-resolved L1 scaffold. T045 later authorized one source-bound vertical L1
+execution with conditional L2. The current terminal status is therefore no
+longer “inert, unrun”: the L1 process executed but failed before canonical
+resource/calibration persistence, and the formulation is parked after the
+PM-directed two-repair limit. The historical contract below remains frozen;
+the terminal evidence in the next section is authoritative for current status.
 
 The source is the EXP-609 straight-through-continuation checkpoint with SHA-256
 `cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd`.
 Its 99,824-parameter shared cellular model is preserved as the no-message
 function at initialization.
+
+## T045 terminal execution decision
+
+Source commit `25d21615c2c7d8b4302d2661c228b828ff07cb8b` was clean, pushed,
+and bound by authorization SHA-256
+`acdba3226161c4492f37a8a276ae0417527ae9aa827980de6971ac89bbf6cf69`.
+The restored executable, config, and L0-test hashes are respectively
+`1d4e7ecb86d6c213f67e87a8f7ddda62e3a319affe2d6ce20bb7cd1e247e0544`,
+`59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177`,
+and `8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6`.
+On those exact bytes, the focused source suite passed 51 tests in 492.40
+seconds and the complete source suite passed 351 tests in 543.06 seconds.
+
+The pinned CPU execution used image `modchallenge-sandbox:82510bba00a1`
+(image ID
+`0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423`),
+four CPUs with affinity `[0,1,2,3]`, 8 GiB memory, 2 GiB tmpfs, PyTorch
+2.5.1 CPU, deterministic algorithms, and full preregistered fidelity. It ran
+through matched L1 training/evaluation, both checkpoint roundtrips, the warmup
+width-256 profile, and all three fresh width-256 profiles. It then failed in
+`_post_repeat3` at `execution.py:547` while reading absent receipt key
+`checkpoint_sha256`; the canonical receipt key was `sha256`.
+
+The exact observed outer wall time is 381.7 seconds. Aggregate process-tree CPU
+time and peak RSS were not captured, so both remain null rather than inferred.
+The failure occurred before operation records, `l1-calibration.json`, a dynamic
+budget, an environment record, MLflow, or `decision.json` were persisted. No L1
+scientific accuracy, loss, recall, prediction, correct/error count, causal
+effect, or selection value is durable; L2 never ran.
+
+The raw authorization file (2,933 bytes, SHA-256
+`7e288cd25719fc999c78623a91cceb629a3e1697796e0b528a3e252aeb84933f`),
+challenger checkpoint (415,912 bytes, SHA-256
+`2b4a1ded31711ee8425457fe516358608f22da40c6f1ce374897bc0174c442c9`),
+and control checkpoint (415,912 bytes, SHA-256
+`8cfa448b59b21ea8e187e3e771d279dad9b73b6b67744e9b0fd94c0897fc5e6b`)
+are preserved as non-scientific ignored scratch evidence under
+`.scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/`.
+They are not portable, promotable, or authorized for checkpoint reuse.
+
+The first uncommitted repair corrected the receipt key but the full oracle
+stopped at 350 passed / one failed because the tracked failure archive violated
+the frozen zero-root regression. The second uncommitted repair changed that
+regression and stopped at 348 passed / three failed because the frozen L0-test
+identity changed. Both files were restored exactly to the pushed source bytes.
+The PM-directed limit forbids a third repair or rerun of this execution
+formulation. The durable decision is
+`parked-current-execution-formulation-after-two-repair-limit`. This is not a
+scientific falsification of learned quotient/carry messages and not Goal
+completion. Candidate 005, checked/independent/official/private evidence,
+`submission/`, EXP648, and EXP656 are unchanged.
+
+The next material decision is which materially distinct experiment family has
+the highest expected information gain per unit wall and aggregate-CPU compute.
+Evidence capable of changing that decision is one separately authorized,
+full-fidelity vertical falsifier that records exact scientific metrics and
+separate wall, aggregate CPU, and RSS measurements, or a durable admission
+reject for that family.
 
 ## Exact offline label recurrence
 

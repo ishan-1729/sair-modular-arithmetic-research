@@ -1040,23 +1040,23 @@ runs:
       - Calibration weights are non-scientific and cannot be promoted or used as benchmark evidence.
       - Candidate 005, submission files, EXP648, EXP656, checked, independent, and private evaluation remain unchanged.
   - run_id: exp-658-joint-quotient-carry-transducer
-    status: l1-scaffold-verified-inert-unrun
-    active_stage: L0
+    status: parked-current-execution-formulation-after-two-repair-limit
+    active_stage: terminal-park
     approach: matched-joint-soft-quotient-and-signed-carry-message-transducer
-    decision: publish-inert-L1-scaffold-only
-    decision_authority: T041-approve-inert-scaffold-publication
+    decision: park
+    decision_authority: T045-PM-two-repair-limit
     config: configs/exp_658_joint_quotient_carry_transducer.yaml
     preregistration: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
-    run_record: null
+    run_record: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json
     metrics: null
     checkpoint: null
     challenger_checkpoint: null
     mlflow_run_id: null
     root: null
-    authorization: null
-    output: null
-    resources: null
-    scientific_evidence: null
+    authorization: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json
+    output: experiments/runs/exp-658-joint-quotient-carry-transducer
+    resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+    scientific_evidence: none-failed-before-canonical-L1-persistence-L2-never-ran
     accuracy: null
     causality: null
     promotion: null
@@ -1139,19 +1139,63 @@ runs:
       T038: {disposition: superseded, config: 3fe4af5c83f7d78ac2b088bcb23e3b220b809ea1b650dac1ce7a6697f540c257, calibration: 0d44ef5b57991a59e5b0ff5f71f750395682e9c4bd9c45ad4af72a844bdefbc3, preregistration: 0dd8aa243f8b6c152c15a328aeeddf6f45ca68cda18b4ab8f9e1b24fcc7ab623, calibration_test: 41b7c29c1334e82a9d2a83cc9a67b404b1cf96d3a661ab06caf95641dca79394, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
       T039: {disposition: approved-inert-publication-not-enacted, hashes: null}
       T040: {disposition: current-T041-approved, config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f, calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756, preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
-    sole_next_package:
+    t045_terminal_park:
+      status: parked-current-execution-formulation-after-two-repair-limit
+      decision: park
+      source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b
+      source_commit_pushed_ref: refs/heads/codex/exp658-l2-decision-recovered
+      source_hashes:
+        config: {path: configs/exp_658_joint_quotient_carry_transducer.yaml, sha256: 59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177}
+        execution: {path: experiments/exp_658_joint_quotient_carry_transducer/execution.py, sha256: 1d4e7ecb86d6c213f67e87a8f7ddda62e3a319affe2d6ce20bb7cd1e247e0544}
+        l0_test: {path: tests/test_exp658_joint_quotient_carry_transducer.py, sha256: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+        execution_test: {path: tests/test_exp658_joint_quotient_carry_execution.py, sha256: ac41e34938a0860b2b943ffd140a46851e29e59af4247a42b7af7e848dacc560}
+        calibration_test: {path: tests/test_exp658_joint_quotient_carry_calibration.py, sha256: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5}
+        source_checkpoint: {path: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors, sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+      records:
+        run: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json, sha256: 3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22}
+        environment: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json, sha256: 3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f}
+        failure: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json, sha256: 11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88}
+        evaluation_decision: {path: evals/results/exp-658-joint-quotient-carry-transducer/decision.json, sha256: ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9}
+      failed_attempt:
+        authorization: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/authorization.json, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json, bytes: 2933, file_sha256: 7e288cd25719fc999c78623a91cceb629a3e1697796e0b528a3e252aeb84933f, authorization_sha256: acdba3226161c4492f37a8a276ae0417527ae9aa827980de6971ac89bbf6cf69, non_scientific: true}
+        challenger_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/challenger.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/challenger.safetensors, bytes: 415912, sha256: 2b4a1ded31711ee8425457fe516358608f22da40c6f1ce374897bc0174c442c9, non_scientific: true}
+        control_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/control.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/control.safetensors, bytes: 415912, sha256: 8cfa448b59b21ea8e187e3e771d279dad9b73b6b67744e9b0fd94c0897fc5e6b, non_scientific: true}
+        resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+        failure: {phase: L1-post-repeat3-after-checkpoint-roundtrips-and-width256-profiling-before-persistence, exception: "KeyError: 'checkpoint_sha256'", source: experiments/exp_658_joint_quotient_carry_transducer/execution.py:547}
+      repair_limit:
+        attempts: 2
+        committed: 0
+        source_restored_to_pushed_bytes: true
+        third_repair_or_rerun_authorized: false
+      validation_reused:
+        source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b
+        focused: 51-passed-in-492.40-seconds
+        full: 351-passed-in-543.06-seconds
+        basis: exact-restored-source-and-test-hashes
+      boundary:
+        l1_canonical_calibration_persisted: false
+        l1_scientific_values_persisted: false
+        l2_executed: false
+        mlflow_run_id: null
+        candidate_005_changed: false
+        checked_independent_official_private_benchmarks_changed: false
+        goal_completion: false
+      resume: prohibited-for-current-formulation-requires-materially-distinct-new-vertical-package-and-fresh-authorization
+      next_material_decision: select-highest-expected-information-gain-materially-distinct-family-per-unit-wall-and-aggregate-CPU-compute
+    prior_sole_next_package:
       stage: pre-execution-infrastructure-review
       purpose: fixed-internal-operations-and-exact-component-measurement-scaffold-construction-and-unit-tests-only
       prerequisite: separate-code-review-of-each-fixed-operation-and-canonical-input-binding
-      status: sole-active-package-not-authorized-for-measurement-or-execution
+      status: closed-by-T045-terminal-park
     absent_evidence:
-      - observed-runtime-or-resource-calibration
-      - optimizer-training
+      - canonical-observed-runtime-or-resource-calibration
+      - persisted-L1-scientific-values
       - message-causality-effect
       - exact-answer-or-rollout-accuracy
       - checked-independent-official-or-private-benchmark
       - candidate-promotion-or-mechanism-success
     limitations:
-      - T041 publishes inert infrastructure only; it does not establish runtime, resources, training, causal effect, exact-answer accuracy, rollout accuracy, benchmark performance, promotion, or success.
-      - No root, authorization, output, MLflow run, operation implementation, warmup record, or exact component record exists; a separately reviewed construction package must still remain inert and unrun.
-      - EXP-648 remains parked and scientifically unopened; rejected EXP-656 and every other historical experiment disposition remain unchanged.
+      - T045 attempted the complete L1 path but failed after checkpoint roundtrips and width-256 profiling, before canonical resource records or calibration were persisted; 381.7 seconds is observed outer wall only, while aggregate CPU and peak RSS are null.
+      - Two uncommitted repair attempts exhausted the PM-directed repair limit and were restored to pushed commit 25d21615 bytes; no third repair or rerun of this formulation is authorized.
+      - The raw authorization and checkpoints are non-scientific ignored scratch evidence referenced by hashes; they are not portable, promotable, or authorized for reuse.
+      - L1 science was not persisted, L2 never ran, Candidate 005 and all benchmark evidence remain unchanged, and this park is not Goal completion or a scientific falsification of quotient/carry messages.
