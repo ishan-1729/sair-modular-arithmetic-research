@@ -9,7 +9,7 @@ preregistration: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-t
 
 source:
   experiment: exp-609-tier6-straight-through-confirmation
-  checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
   checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
   model: experiments/exp_220_width_independent_cellular/model.py
   parameters: 99824
@@ -313,9 +313,9 @@ L1:
         submission_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
         sandbox_record: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json, sha256: bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa}
         sandbox_runner: {path: tools/run_official_sandbox.py, sha256: fc3e3794eed5f90030980e983f69d95c36275f5bbfe0ae7219ad7027a43d0493}
-        dockerfile: {path: sources/github/modular-arithmetic-challenge/docker/Dockerfile, sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41}
-        official_generator: {path: sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/generator.py, sha256: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0}
-        official_primes: {path: sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/primes.py, sha256: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+        dockerfile: {path: .scratch/exp-658-joint-quotient-carry-transducer/pinned_sources/Dockerfile, sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41}
+        official_generator: {path: .scratch/exp-658-joint-quotient-carry-transducer/pinned_sources/generator.py, sha256: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0}
+        official_primes: {path: .scratch/exp-658-joint-quotient-carry-transducer/pinned_sources/primes.py, sha256: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
         environment_record: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/environment.json, sha256: 4a33005e31c8515d92e6cd91f4af9935b80e90e8c46a2a1a1a8548e19315161c}
       sandbox_record_expectation:
         challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
@@ -688,6 +688,40 @@ resource_policy:
   fixed_short_wall_cap: null
   reduce_training_or_evaluation_fidelity_to_fit_budget: prohibited
   reuse_valid_frozen-source-evidence_by-hash: required
+
+T045_execution:
+  status: authorized-by-pm-phase-reset
+  module: experiments/exp_658_joint_quotient_carry_transducer/execution.py
+  authorization_schema: exp658-t045-source-authorization-v1
+  calibration_schema: exp658-t045-l1-calibration-v1
+  decision_schema: exp658-t045-decision-v1
+  source_commit_required_clean_and_pushed: true
+  internal_operation_registry: closed-canonical-physical-manifest-no-callbacks
+  environment:
+    image: modchallenge-sandbox:82510bba00a1
+    image_id: 0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423
+    cpus: 4
+    affinity: [0, 1, 2, 3]
+    memory_bytes: 8589934592
+    tmpfs_bytes: 2147483648
+  calibration:
+    attempt_allowance: 512
+    warmup_repeat: 0
+    fresh_repeats: [1, 2, 3]
+    soft_multiplier: 1.25
+    hard_multiplier: 1.75
+    rss_multiplier: 1.25
+  admission:
+    runtime_gate: frozen-L1-runtime-feasibility-contract
+    full_fidelity_required: true
+    no_scientific_values_from_L1: true
+  scientific_stage:
+    stage: L2
+    execute_automatically_if_admitted: true
+    updates_per_arm: 400
+    batch_size: 128
+    transition_denominator_per_arm_width: 20000
+    rollout_denominator_per_arm_width: 1000
 
 compliance:
   exact_arithmetic_scope: offline-label-generation-tests-and-evaluation-only
