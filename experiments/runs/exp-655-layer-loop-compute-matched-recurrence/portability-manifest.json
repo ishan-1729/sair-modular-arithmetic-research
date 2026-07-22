@@ -1,0 +1,77 @@
+{
+  "schema_version": "exp655-t049-portability-manifest-v1",
+  "created_at": "2026-07-22T12:46:35Z",
+  "source_workspace": "/mnt/d/Projects/SAIR_mod_challenge",
+  "destination_worktree": "/mnt/d/Projects/SAIR_mod_challenge_exp655_t048_wt",
+  "contract_source": {
+    "path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/verification.json",
+    "sha256": "6ddad1fc96132cacde3cc5162bbcb92041f82303d8a2c1a250e483937b2f495f",
+    "source_commit": "ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575"
+  },
+  "recipe": {
+    "path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/materialize-historical-evidence.sh",
+    "sha256": "f09988bbab74b019ca5be074728a2e65b443f8ee56ab51ebda1021f1483ce176"
+  },
+  "groups": {
+    "EXP609_checkpoint_copies": {
+      "file_count": 2,
+      "total_bytes": 801168,
+      "sha256_each": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+      "paths": [
+        ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+        ".scratch/exp-660-symbol-equivariant-formal/fixtures/exp609-weights.safetensors"
+      ]
+    },
+    "EXP648_live_calibration": {
+      "file_count": 1,
+      "total_bytes": 200509,
+      "path": ".scratch/exp-648-structured-trajectory-consistency/calibration.json",
+      "sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db"
+    },
+    "EXP648_superseded_calibrations": {
+      "file_count": 10,
+      "total_bytes": 649156,
+      "roots": [
+        ".scratch/exp-648-structured-trajectory-consistency/superseded/f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+        ".scratch/exp-648-structured-trajectory-consistency/superseded/d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6"
+      ],
+      "per_file_sha256_in_recipe": true
+    },
+    "EXP648_root20261161_scratch": {
+      "file_count": 218,
+      "total_bytes": 24573993,
+      "tracked_manifest": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/scratch-files.sha256",
+      "tracked_manifest_sha256": "c74a07dec1e0e9331917dea8d2f25cfcd6a2a7c17380fe35e24ada125d3c0c5e"
+    },
+    "EXP648_root20261161_mlflow": {
+      "file_count": 27,
+      "total_bytes": 252562,
+      "tracked_manifest": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/mlflow-artifacts.sha256",
+      "tracked_manifest_sha256": "7743b0fc1e77349378b06863c0506c3fa34cf98c66819a8f2db5dcbee19b70b8"
+    },
+    "EXP648_root20261160_planning": {
+      "file_count": 6,
+      "total_bytes": 194642,
+      "per_file_sha256": {
+        ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261160/repeat-1-3207e01b0318af83234079e8488a9431c66fa69e174dd9ad449bf798f1525788.json": "98a69670a229c15de7193c5878571fcc28a6d013e9b3ae23a7ac52be92624d80",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261160/repeat-2-0676d6cbc44c56f65daeb35d5d26d757047bbb9f937c12805a387bf68b16d59e.json": "8e8115d2b41974c20adfad734a847ec2ac64e07f5636325301b8793ffb1adc68",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-chronology/01-repeat-1-seal.json": "d0f48daff1ceb20adca98d255d3350a9384aa448f92e732f282d9243db36bbac",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-chronology/02-repeat-2-seal.json": "4911baa37cc3c16a67533effd23f228dc1b62077ce9a1958ed33a73093aabd20",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-units/01-repeat-1/augmented-unit.json": "eb107e8ba481738dfc4ea87c722ef1b3e31eb67ebb36416da7a947802dddc80a",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-units/02-repeat-2/augmented-unit.json": "c00bcc33473c0cd641910a4ccaa06d0e77fa1a34388117d55c0977ad52fb9b29"
+      }
+    }
+  },
+  "materialized_file_count": 264,
+  "materialized_total_bytes": 26672030,
+  "canonical_inventory_sha256": "b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b",
+  "copy_properties": {
+    "regular_files": true,
+    "symlinks": false,
+    "source_destination_inode_distinct": true,
+    "hardlink_count_one": true,
+    "reflink_disabled_by_copy_command": true,
+    "path_confinement_verified": true
+  },
+  "unrelated_primary_scratch_copied": false
+}
