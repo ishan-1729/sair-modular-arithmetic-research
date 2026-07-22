@@ -891,15 +891,26 @@ runs:
         - Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
     screen_status: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
   - run_id: exp-655-layer-loop-compute-matched-recurrence
-    status: planned-blocked-awaiting-EXP648-and-separate-launch-judge
+    status: parked-before-calibration-and-science-final-source-oracle-red
     approach: dense-fixed-r2-layer-loop-versus-model-loop-schedule
     preregistration: knowledge/autoresearch/ablations/exp-655-layer-loop-compute-matched-recurrence.md
     source_note: knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md
     coverage_record: ST-M043
     cross_coverage_records: [ST-M009.a, ST-M043.a]
-    blocked_by:
-      - exp-648-structured-trajectory-consistency-current-phase
-      - separate-launch-judge
+    decision: park-before-science
+    decision_authority: T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction
+    source_commit: 3047af97b79b712c2252054d909e1572ca5a6282
+    source_tree: aa0e6e4b6a411800b9765fe7eb7365980af9f520
+    source_provenance_commit: 1f7dc801d22f33c55a59764907821df19b72c72e
+    source_branch: codex/exp655-layer-loop-formal
+    source_hashes:
+      config: de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842
+      init: 4102850fae7486e43fbdfb0b02c8e8a8c8fe4190051317cc91bc04a21aceb2a3
+      fixtures: 4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba
+      model: 14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af
+      runner: d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6
+      test: 2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1
+      exp658_pointer_amendment: a9ca5f1f204336f4ebe80f913c709f3529ae566a870437532b377440b6b65bdb
     primary_match:
       identical_stored_parameters: true
       identical_executed_block_calls: true
@@ -910,17 +921,43 @@ runs:
       - dense-layer-loop-r2
       - dense-r1
       - untied-equal-compute
-      - measured-capacity-reinvestment
     later_factorials:
-      ordinary_moe: blocked-until-dense-viability-and-separate-gate
+      capacity_reinvestment: blocked-no-scientific-dense-verdict
+      ordinary_moe: blocked-no-scientific-dense-verdict-and-separate-gate
       target_only_spt_analogue: separate-ST-M044-and-separate-gate
     resource_policy: representative-complete-setup-training-checkpoint-full-evaluation-throughput-with-variability-headroom-separate-wall-and-aggregate-process-cpu-hash-valid-cache-reuse-and-full-fidelity
-    config: null
-    run_record: null
-    metrics: null
+    config: configs/exp_655_layer_loop_compute_matched_recurrence.yaml
+    run_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json
+    records:
+      run: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json, sha256: 9f366b849407fad88f37ff8971fb7e11695edf22af420d110d0a8443f0b8f61c}
+      environment: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/environment.json, sha256: 46d37e4d4e54753403fc71137cf9afe92f0e1efc4c22e3a825966771bd19e53f}
+      verification: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json, sha256: 6ddad1fc96132cacde3cc5162bbcb92041f82303d8a2c1a250e483937b2f495f}
+      limitations: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/limitations.json, sha256: 3530b9fd62168cd13e02b777ffbc09ebf4bd5217711b5f8394b19999c70ae49f}
+      mlflow: {path: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/mlflow.json, sha256: 37bfd049d6399a4ae9217a2a50bf4bb294388d64359dd9c440d4ec4056aa11c1, run_id: null}
+      metrics: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json, sha256: 655ccde02c52207ff648ce0185de45b67af03801482b6c953ed57af7f450e657}
+      decision: {path: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json, sha256: 32e7b0bb99fb232d15f9623133cce52e6d89f4ec55f23612869c395cd0516475}
+    verification:
+      focused: {passed: 69, failed: 0, pytest_seconds: 490.53, time_wall_seconds: 493.28, aggregate_cpu_seconds: 432.58, maximum_rss_kib: 478204}
+      validator: {passed: true, concepts: 162, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
+      full_oracle: {passed: 382, failed: 9, total: 391, pytest_seconds: 656.76, time_wall_seconds: 659.49, aggregate_cpu_seconds: 874.02, maximum_rss_kib: 697272}
+      failure_partition: {EXP648_missing_ignored_historical_evidence: 8, EXP660_missing_ignored_fixture: 1}
+    roots:
+      calibration: {root: 20261178, status: unused-unopened}
+      formal:
+        - {root: 20261179, status: unused-unopened}
+        - {root: 20261180, status: unused-unopened}
+        - {root: 20261181, status: unused-unopened}
+    calibration: null
+    metrics: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json
     checkpoint: null
     authorization: null
-    scientific_evidence: none
+    mlflow_run_id: null
+    scientific_evidence: none-pre-science-verification-park
+    limitations:
+      - The final-source full oracle is red only on nine missing ignored historical EXP648/EXP660 artifact contracts outside T048's allowlist; exact node IDs, paths, hashes, counts, and manifests are in verification.json.
+      - No calibration, dynamic admission, training, checkpoint, scientific denominator, label/oracle, intervention, bootstrap, W256 profile, or MLflow run was opened.
+      - This is not a scientific rejection of the dense schedules or ST-M043.a/ST-M009.a and changes no candidate, benchmark, submission, promotion, 85-percent, or Goal-completion evidence.
+    next_material_decision: separately-decide-whether-to-authorize-hermetic-historical-evidence-portability-before-any-fresh-science-authorization
   - run_id: exp-656-tensor-native-rollout-route
     status: completed-rejected
     approach: matched-input-only-legacy-bigint-versus-cached-tensor-rollout-route

@@ -1,8 +1,8 @@
 ---
 type: experiment-preregistration
 title: EXP-655 layer-loop compute-matched recurrence
-description: Planned dense causal test of layer-local versus whole-stack recurrence ordering, followed conditionally by capacity recycling and MoE.
-status: authorized-t048-full-fidelity
+description: Unadmitted dense layer-local versus whole-stack recurrence implementation parked before calibration because the final-source full oracle remained red.
+status: parked-before-calibration-and-science-final-source-oracle-red
 timestamp: 2026-07-22
 ---
 
@@ -10,14 +10,31 @@ timestamp: 2026-07-22
 
 ## Status and boundary
 
-T048 authorizes one bounded-faithful dense schedule falsifier after the accepted
-EXP660 pre-science park and the exact post-T045 EXP658 trust-pointer repair.
-The clean source branch is `codex/exp655-layer-loop-formal`. Calibration root
-`20261178` is resource-only and cannot seed formal work. Formal roots
+T048 implemented one bounded-faithful dense schedule falsifier after the
+accepted EXP660 pre-science park and completed the exact post-T045 EXP658
+trust-pointer repair. The package is now terminally parked before calibration
+and science: the final-source full-project oracle completed at 382 passed and
+nine failed, all on ignored historical EXP648/EXP660 evidence absent from the
+dedicated worktree and outside T048's write allowlist. The implementation is
+published only as unadmitted evidence at source commit
+`3047af97b79b712c2252054d909e1572ca5a6282`; the portable EXP658 pointer is in
+provenance commit `1f7dc801d22f33c55a59764907821df19b72c72e`.
+
+The 69-test focused package gate and project validator passed. They do not
+substitute for the red full oracle. Calibration root `20261178` is resource-only
+and cannot seed formal work. Formal roots
 `20261179`, `20261180`, and `20261181` use paired init/train/eval seed triples
 `(65570001,65573001,65574001)`, `(65570002,65573002,65574002)`, and
 `(65570003,65573003,65574003)`. Checked, prior-independent, official/private,
 candidate, benchmark, and submission surfaces remain excluded.
+
+None of those roots or seeds was opened. No calibration, dynamic admission,
+training, checkpoint, label/oracle, scientific denominator, intervention,
+bootstrap, W256 profile, MLflow run, or exact scientific metric exists. The
+canonical [verification record](../../../experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json)
+enumerates every failing node ID plus known path, hash, count, and manifest
+contract. This stop neither accepts nor rejects the schedule hypothesis or its
+`ST-M043.a`/`ST-M009.a` coverage.
 
 The dense model has two complete noncommuting attention-plus-MLP blocks. The
 primary schedules are `B1,B1,B2,B2` and `B1,B2,B1,B2`; their initial state
@@ -80,3 +97,9 @@ checkpoints and scientific values are non-reusable and non-persistent.
 ## Terminal criteria
 
 The dense schedule component receives a verdict only after all primary arms and controls complete at declared fidelity or a preregistered integrity/resource stop fires with completed evidence preserved. Capacity recycling is separate and conditional. MoE and `ST-M044` post-training require their own gates. Candidate 005 and Goal completion cannot change from this experiment plan.
+
+T048 fired the pre-science full-oracle stop, so this exact authorization is
+closed. A separate PM decision may authorize checksum-bound portability of the
+historical ignored evidence. Only a green 391-of-391 oracle on unchanged source
+and test bytes could establish implementation admission; it would not itself
+authorize calibration or constitute scientific evidence.

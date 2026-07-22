@@ -1,0 +1,38 @@
+{
+  "schema_version": "exp655-scientific-metrics-absent-v1",
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
+  "created_at": "2026-07-22T12:21:22Z",
+  "checkpoint_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "status": "parked-before-calibration-and-science",
+  "calibration_root": 20261178,
+  "calibration_root_opened": false,
+  "formal_roots": {
+    "20261179": {"opened": false, "width16_cases": 0, "width32_cases": 0},
+    "20261180": {"opened": false, "width16_cases": 0, "width32_cases": 0},
+    "20261181": {"opened": false, "width16_cases": 0, "width32_cases": 0}
+  },
+  "scientific_metrics": null,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "T048 applied its mandatory pre-science stop after the final-source full-project oracle completed with 382 passed and 9 missing-historical-artifact failures.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "checkpoint_absent": true,
+    "checkpoint_sha256_schema_sentinel": "all-zero-64-hex-is-not-an-artifact-hash",
+    "calibration_seed_unused": true,
+    "formal_seeds_unused": true,
+    "scientific_controls_not_performed": true,
+    "mlflow_run_absent": true,
+    "benchmark_not_opened": true
+  },
+  "runtime": {
+    "calibration": null,
+    "formal": null,
+    "width256": null
+  },
+  "limitations": [
+    "No scientific denominator was opened and no checkpoint exists; checkpoint_sha256 is an explicit schema sentinel.",
+    "The verification park cannot accept, reject, rank, or promote either recurrence schedule."
+  ]
+}
