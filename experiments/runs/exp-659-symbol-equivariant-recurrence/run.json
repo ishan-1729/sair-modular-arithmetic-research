@@ -1,0 +1,77 @@
+{
+  "schema_version": "exp659-t046-terminal-run-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "status": "failed",
+  "terminal_status": "parked-before-formal-verification-boundary",
+  "decision": "park",
+  "decision_authority": "T046-final-rejected-verification-recovery-terminal-rule",
+  "hypothesis": "An explicit symbol-axis recurrent core may improve learned modular-transition generalization over matched position-only and broken-tying controls.",
+  "seed": 20261177,
+  "config": "configs/exp_659_symbol_equivariant_recurrence.yaml",
+  "source": {
+    "repository_commit": "6974c91fc600b6d9edc19edf80f7dab56ef4870c",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "branch": "codex/exp659-symbol-equivariant",
+    "config_path": "configs/exp_659_symbol_equivariant_recurrence.yaml",
+    "config_sha256": "ce698fa81fb172401dc9f54d983c672d3092c4a06a4615d5e9264ffc3b0a0901",
+    "init_sha256": "063e6be05c4d4c5679df0b149084761f49a8551eeec845e407da7ae2d92620cd",
+    "model_sha256": "7c95f16078bfc7bccff29fa8e53dcd09ab665959826c76c93149e9c9d4bbb297",
+    "runner_sha256": "b66f37a8fe34e2fbb19961bec45bada8595ad51b32851ac728b412eabee49842",
+    "test_sha256": "6992d8300539f106a0212d4c93f4021cd543d588392dbf42e16331c0e780cde7",
+    "preregistration_sha256": "172e9af5b7d8aea84769301407b8b64a77bbff67dabf596c8c1529e42c42294e",
+    "paper_path": "research/papers/arxiv-2603.02193.pdf",
+    "paper_sha256": "5b7dfdc6474bb1060d7277677d7e17f8b7905b7a1fc4b2323a515ac1180ee058"
+  },
+  "calibration": {
+    "status": "complete-resource-only-non-scientific",
+    "scratch_evidence_path": ".scratch/exp-659-symbol-equivariant-recurrence/calibration.json",
+    "scratch_evidence_sha256": "e1e17f1756e530c4ea7fbaef5465464b7d5ae242411d7b0d358d861399a04b16",
+    "monotonic_wall_seconds": 18.397680725996906,
+    "process_user_plus_system_cpu_seconds": 47.2,
+    "cgroup_cpu_seconds": 66.292,
+    "peak_rss_bytes": 437198848,
+    "projected_formal": {"wall_seconds": 435, "process_cpu_seconds": 1552, "cgroup_cpu_seconds": 2111},
+    "soft_budget_1_25x": {"wall_seconds": 544, "process_cpu_seconds": 1940, "cgroup_cpu_seconds": 2638},
+    "hard_ceiling_1_75x": {"wall_seconds": 762, "process_cpu_seconds": 2715, "cgroup_cpu_seconds": 3693},
+    "peak_rss_guard_bytes": 546498560,
+    "fixed_short_wall_cap_used": false,
+    "fidelity_reduced": false
+  },
+  "verification": {
+    "exp659_focused": {"passed": 13, "failed": 0},
+    "initial_package_full_oracle": {"passed": 328, "failed": 36},
+    "post_materialization_full_oracle": {"passed": 348, "failed": 16},
+    "final_recovery_focused": {"passed": 235, "failed": 7, "seconds": 230.46},
+    "final_recovery_full_oracle": {"status": "not-run-after-terminal-focused-failure"},
+    "remaining_failure_classes": [
+      "EXP648 read-only copied fixture prevents its tamper-write test",
+      "EXP649 current pinned official-evaluator config hash differs from three frozen assertions",
+      "EXP658 calibration lifecycle expects a changed L0-test hash that conflicts with its own frozen L0 hash contract"
+    ]
+  },
+  "formal": {
+    "training_executed": false,
+    "scientific_evaluation_executed": false,
+    "checkpoint": null,
+    "checkpoint_sha256": null,
+    "metrics": null,
+    "mlflow_run_id": null,
+    "reason": "The one authorized rejected-verification recovery still failed at the focused package boundary; the terminal rule required a durable park before formal execution."
+  },
+  "artifacts": {
+    "checkpoint": "",
+    "metrics": "",
+    "environment": "experiments/runs/exp-659-symbol-equivariant-recurrence/environment.json",
+    "calibration": "experiments/runs/exp-659-symbol-equivariant-recurrence/calibration.json",
+    "verification": "experiments/runs/exp-659-symbol-equivariant-recurrence/verification.json",
+    "limitations": "experiments/runs/exp-659-symbol-equivariant-recurrence/limitations.json",
+    "decision": "evals/results/exp-659-symbol-equivariant-recurrence/decision.json"
+  },
+  "limitations": [
+    "This is a verification-boundary park, not a scientific rejection of symbol-equivariant recurrence.",
+    "Calibration exact-answer values came from a 100-update resource route and are not formal scientific metrics.",
+    "No formal training, formal checkpoint, MLflow formal run, checked, independent, official, private, submission, promotion, or completion surface was opened.",
+    "The seven remaining verification failures are inherited cross-package fixture and frozen-contract conflicts, not EXP659 focused-test failures."
+  ],
+  "next_material_decision": "Select a materially distinct family with higher expected decision yield per wall and aggregate CPU compute; reopening this exact EXP659 package requires fresh PM authorization and a resolved package-verification boundary."
+}

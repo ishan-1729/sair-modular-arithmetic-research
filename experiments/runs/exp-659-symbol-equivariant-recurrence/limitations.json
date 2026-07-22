@@ -1,0 +1,12 @@
+{
+  "schema_version": "exp659-limitations-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "limitations": [
+    "Verification-boundary park only; no scientific mechanism conclusion is supported.",
+    "The formal seed was reserved in the frozen protocol but never opened for formal training.",
+    "No formal checkpoint or exact-answer metrics exist.",
+    "Calibration-only checkpoints are ignored scratch artifacts and are not promotable.",
+    "No checked, independent, official, private, submission, promotion, or goal-completion evidence changed.",
+    "Reopening requires fresh authorization after resolving inherited package-verification conflicts."
+  ]
+}

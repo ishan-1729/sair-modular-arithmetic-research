@@ -1,0 +1,16 @@
+{
+  "schema_version": "exp659-t046-terminal-decision-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "status": "parked-before-formal-verification-boundary",
+  "decision": "park",
+  "reason": "The sole authorized rejected-verification recovery ended with 235 passed and 7 inherited cross-package failures; the terminal rule prohibited further repair and formal execution.",
+  "scientific_metrics": null,
+  "formal_training_executed": false,
+  "scientific_rejection": false,
+  "source_commit": "6974c91fc600b6d9edc19edf80f7dab56ef4870c",
+  "candidate_005": {"changed": false, "run_id": "candidate-005-tier6-conditional-commutative-integration"},
+  "goal_completion": false,
+  "evidence_capable_of_changing_next_decision": "A separately authorized full-fidelity vertical falsifier with exact scientific metrics and separate wall, aggregate CPU, and RSS evidence; another repair of this exact package is not authorized.",
+  "next_material_decision": "Choose a materially distinct family with the highest expected decision yield per unit compute.",
+  "limitations": ["This is not an accuracy, benchmark, promotion, or mechanism-success result.", "EXP659 focused tests passed 13/13; the terminal failures are inherited cross-package verification conflicts."]
+}

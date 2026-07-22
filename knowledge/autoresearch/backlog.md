@@ -5,7 +5,7 @@ description: Ranking-aware, compute-bounded queue of falsifiable model experimen
 status: active
 tags: [autoresearch, backlog, hypotheses]
 timestamp: "2026-07-12T02:20:00+05:30"
-last_updated: "2026-07-22T13:47:40+05:30"
+last_updated: "2026-07-22T21:30:00+05:30"
 ---
 
 # Autoresearch hypothesis backlog
@@ -86,6 +86,7 @@ Root `20261162` readiness is durable non-scientific evidence only. Receipt SHA-2
 | 5 | EXP-652 | Build a small answer-plus-latent recurrent Transformer/TRM-style viability rung at widths 16 and 32 before any Tier-7 scale-up. | Parameter- and compute-matched cellular control; fixed answer canvas, latent workspace, shared depth, and direct exact endpoint supervision. | Stop unless it reaches meaningful trained-width exact rollout and beats the matched control on width extrapolation; zero rollout closes the formulation. |
 | 5 | EXP-653 | Test convergence-based adaptive inner recurrence after a stable fixed-depth winner exists. | Fixed full-depth winner versus identical weights with preregistered convergence thresholds; retain the full operand scan. | Require bit-identical or statistically non-inferior exact accuracy across fresh seeds and material isolated CPU savings; never tune thresholds on checked answers. |
 | blocked | EXP-655 | Train dense fixed-R2 layer-loop and model-loop schedules with identical stored parameters, executed calls, data, seeds, updates, and full evaluation fidelity. | R1, untied/equal-compute, schedule-swap, and measured capacity-reinvestment controls; MoE only as a later factorial. | Await EXP-648 and separate launch Judge. Advance only on reproducible exact-answer schedule gain without retention/integrity/resource regression. |
+| parked before formal verification | EXP-659 | Test an explicit symbol-axis recurrent core against matched position-only and broken-tying controls on learned modular transitions. | Exact package passed 13/13 focused tests; resource-only calibration measured 18.398 wall / 47.20 process CPU / 66.292 cgroup CPU seconds and preserved full formal fidelity. | T046 recovery ended 235 passed / 7 inherited cross-package failures. Park without a scientific verdict; reopening requires fresh PM authorization and a resolved package-verification boundary. |
 
 ### Explicit exclusions from the submission research queue
 

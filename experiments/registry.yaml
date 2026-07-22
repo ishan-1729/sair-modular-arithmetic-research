@@ -1199,3 +1199,39 @@ runs:
       - Two uncommitted repair attempts exhausted the PM-directed repair limit and were restored to pushed commit 25d21615 bytes; no third repair or rerun of this formulation is authorized.
       - The raw authorization and checkpoints are non-scientific ignored scratch evidence referenced by hashes; they are not portable, promotable, or authorized for reuse.
       - L1 science was not persisted, L2 never ran, Candidate 005 and all benchmark evidence remain unchanged, and this park is not Goal completion or a scientific falsification of quotient/carry messages.
+  - run_id: exp-659-symbol-equivariant-recurrence
+    status: parked-before-formal-verification-boundary
+    approach: bounded-faithful explicit symbol-axis recurrent core with matched position-only and broken-tying controls
+    decision: park
+    decision_authority: T046-final-rejected-verification-recovery-terminal-rule
+    config: configs/exp_659_symbol_equivariant_recurrence.yaml
+    seed: 20261177
+    source_commit: 6974c91fc600b6d9edc19edf80f7dab56ef4870c
+    source_branch: codex/exp659-symbol-equivariant
+    preregistration: knowledge/autoresearch/ablations/exp-659-symbol-equivariant-recurrence.md
+    run_record: experiments/runs/exp-659-symbol-equivariant-recurrence/run.json
+    environment_record: experiments/runs/exp-659-symbol-equivariant-recurrence/environment.json
+    calibration_record: experiments/runs/exp-659-symbol-equivariant-recurrence/calibration.json
+    verification_record: experiments/runs/exp-659-symbol-equivariant-recurrence/verification.json
+    limitations_record: experiments/runs/exp-659-symbol-equivariant-recurrence/limitations.json
+    evaluation_decision: evals/results/exp-659-symbol-equivariant-recurrence/decision.json
+    checkpoint: null
+    checkpoint_sha256: null
+    metrics: null
+    mlflow_run_id: null
+    formal_training_executed: false
+    scientific_evidence: none-verification-boundary-park-before-formal
+    calibration:
+      evidence_sha256: e1e17f1756e530c4ea7fbaef5465464b7d5ae242411d7b0d358d861399a04b16
+      observed: {monotonic_wall_seconds: 18.397680725996906, process_user_plus_system_cpu_seconds: 47.2, cgroup_cpu_seconds: 66.292, peak_rss_bytes: 437198848}
+      projected_formal: {wall_seconds: 435, process_cpu_seconds: 1552, cgroup_cpu_seconds: 2111}
+      fixed_short_wall_cap_used: false
+      fidelity_reduced: false
+    verification:
+      exp659_focused: 13-passed
+      final_recovery_focused: 235-passed-7-failed-in-230.46-seconds
+      final_recovery_full_oracle: not-run-after-terminal-focused-failure
+    limitations:
+      - This is a verification-boundary park, not a scientific rejection of symbol-equivariant recurrence.
+      - No formal training, formal checkpoint, exact scientific metric, checked/independent/official/private evaluation, promotion, or completion evidence exists.
+      - Reopening requires fresh PM authorization after resolving inherited cross-package verification conflicts.

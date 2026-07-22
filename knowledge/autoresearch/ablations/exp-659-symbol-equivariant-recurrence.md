@@ -2,7 +2,7 @@
 type: experiment-preregistration
 title: EXP-659 symbol-equivariant recurrent-reasoner falsifier
 description: Frozen matched test of an explicit SE-RRM symbol axis for learned modular transitions.
-status: preregistered-before-formal-training
+status: terminal-parked-before-formal-verification
 timestamp: 2026-07-22
 ---
 
@@ -98,3 +98,22 @@ labels, exact evaluation, and property tests. Inference receives only bit
 tensors and returns learned logits. Checked, independent, official/private, and
 submission artifacts are out of scope. A one-seed advance would require a new
 preregistered confirmation; a reject does not close other SE-RRM formulations.
+
+## Terminal T046 outcome
+
+The exact source package is preserved at commit
+`6974c91fc600b6d9edc19edf80f7dab56ef4870c`. Its focused suite passed 13/13,
+and resource-only calibration completed without a short wall cap or fidelity
+reduction. The sole authorized rejected-verification recovery nevertheless
+ended at 235 passed / 7 failed across the package-boundary focused suite: one
+EXP648 copied-fixture permission conflict, three EXP649 frozen official-source
+hash conflicts, and three EXP658 mutually conflicting frozen-test lifecycle
+assertions. Under the T046 terminal rule, no further repair or formal execution
+was authorized.
+
+EXP659 is therefore parked before formal training at a verification boundary.
+No formal checkpoint, exact scientific metric, MLflow formal run, causal result,
+checked/independent/official/private result, promotion, or completion evidence
+exists. This outcome does not reject the symbol-equivariant mechanism; reopening
+this exact package requires fresh PM authorization and resolution of the
+cross-package verification boundary.

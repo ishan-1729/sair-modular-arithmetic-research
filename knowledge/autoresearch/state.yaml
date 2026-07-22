@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T13:47:40+05:30
+updated_at: 2026-07-22T21:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -33,6 +33,47 @@ incumbent:
   mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
   mlflow_model_version: "5"
 current_hypothesis:
+  run_id: exp-659-symbol-equivariant-recurrence
+  status: parked-before-formal-verification-boundary
+  active_stage: terminal-park
+  decision: park
+  decision_authority: T046-final-rejected-verification-recovery-terminal-rule
+  selection_basis: A bounded-faithful explicit symbol-axis recurrence was the materially distinct highest-information package after EXP658, with matched position-only and broken-tying controls.
+  source_commit: 6974c91fc600b6d9edc19edf80f7dab56ef4870c
+  source_branch: codex/exp659-symbol-equivariant
+  source_hashes: {config: ce698fa81fb172401dc9f54d983c672d3092c4a06a4615d5e9264ffc3b0a0901, init: 063e6be05c4d4c5679df0b149084761f49a8551eeec845e407da7ae2d92620cd, model: 7c95f16078bfc7bccff29fa8e53dcd09ab665959826c76c93149e9c9d4bbb297, runner: b66f37a8fe34e2fbb19961bec45bada8595ad51b32851ac728b412eabee49842, test: 6992d8300539f106a0212d4c93f4021cd543d588392dbf42e16331c0e780cde7, preregistration: 172e9af5b7d8aea84769301407b8b64a77bbff67dabf596c8c1529e42c42294e}
+  calibration:
+    status: complete-resource-only-non-scientific
+    evidence_path: .scratch/exp-659-symbol-equivariant-recurrence/calibration.json
+    evidence_sha256: e1e17f1756e530c4ea7fbaef5465464b7d5ae242411d7b0d358d861399a04b16
+    observed: {monotonic_wall_seconds: 18.397680725996906, process_user_plus_system_cpu_seconds: 47.2, cgroup_cpu_seconds: 66.292, peak_rss_bytes: 437198848}
+    projected_formal: {wall_seconds: 435, process_cpu_seconds: 1552, cgroup_cpu_seconds: 2111}
+    soft_budget_1_25x: {wall_seconds: 544, process_cpu_seconds: 1940, cgroup_cpu_seconds: 2638}
+    hard_ceiling_1_75x: {wall_seconds: 762, process_cpu_seconds: 2715, cgroup_cpu_seconds: 3693}
+    peak_rss_guard_bytes: 546498560
+    fixed_short_wall_cap_used: false
+    fidelity_reduced: false
+    structural_controls: {faithful_swap_max_residual: 1.1920928955078125e-7, broken_tying_swap_max_residual: 0.5381518602371216, deterministic_replay: true, task_bit_swap_applicable_cases: 0, task_bit_swap_exhausted_legal_cases: 48624}
+  verification:
+    exp659_focused: {passed: 13, failed: 0}
+    initial_package_full_oracle: {passed: 328, failed: 36}
+    post_materialization_full_oracle: {passed: 348, failed: 16}
+    final_recovery_focused: {passed: 235, failed: 7, seconds: 230.46}
+    final_recovery_full_oracle: not-run-after-terminal-focused-failure
+    remaining_failure_classes: [EXP648-copied-fixture-permission, EXP649-pinned-official-source-hash, EXP658-mutually-conflicting-frozen-test-lifecycle]
+  run_record: experiments/runs/exp-659-symbol-equivariant-recurrence/run.json
+  decision_record: evals/results/exp-659-symbol-equivariant-recurrence/decision.json
+  formal_training_executed: false
+  scientific_evidence: none
+  metrics: null
+  checkpoint: null
+  mlflow_run_id: null
+  promotion: null
+  benchmark: null
+  limitations: [verification-boundary-park-not-scientific-rejection, no-formal-training-or-exact-scientific-metrics, no-checked-independent-official-private-submission-promotion-or-completion-change]
+  next_material_decision: select-materially-distinct-family-with-highest-expected-decision-yield-per-wall-and-aggregate-CPU-compute
+  evidence_capable_of_changing_next_decision: separately-authorized-full-fidelity-vertical-falsifier-with-exact-scientific-metrics-and-separate-wall-aggregate-CPU-RSS-evidence
+parked_exp658_hypothesis:
   run_id: exp-658-joint-quotient-carry-transducer
   status: parked-current-execution-formulation-after-two-repair-limit
   active_stage: terminal-park
@@ -389,7 +430,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Close EXP658 at parked-current-execution-formulation-after-two-repair-limit and do not third-repair or rerun it. Select one materially distinct experiment family by expected information gain per unit wall and aggregate-CPU compute, then authorize one largest-safe reversible vertical falsifier or durable admission-reject package with full-fidelity execution, exact scientific metrics when admitted, separate wall/aggregate-CPU/RSS evidence, and a terminal receipt. Candidate 005, EXP648, EXP656, and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+next_action: Preserve EXP659 as parked before formal execution at the T046 verification boundary; do not repair or run this exact package without fresh PM authorization. Select a materially distinct family by expected decision yield per unit wall and aggregate-CPU compute, then authorize one largest-safe reversible vertical falsifier or durable admission-reject package with full-fidelity execution, exact scientific metrics when admitted, separate wall/aggregate-CPU/RSS evidence, and a terminal receipt. Candidate 005, EXP648, EXP656, and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

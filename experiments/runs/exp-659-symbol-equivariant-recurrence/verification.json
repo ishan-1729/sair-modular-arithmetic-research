@@ -1,0 +1,19 @@
+{
+  "schema_version": "exp659-terminal-verification-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "source_commit": "6974c91fc600b6d9edc19edf80f7dab56ef4870c",
+  "exp659_focused": {"command": "python -m pytest -q tests/test_exp659_symbol_equivariant_recurrence.py", "passed": 13, "failed": 0},
+  "initial_package_full_oracle": {"passed": 328, "failed": 36, "cause": "ignored historical evidence absent in the isolated worktree"},
+  "post_materialization_full_oracle": {"passed": 348, "failed": 16, "cause": "root confinement and stale cross-package assertions remained"},
+  "final_recovery_focused": {
+    "command": "python -m pytest -q tests/test_exp648_structured_trajectory_scientific.py tests/test_exp648_structured_trajectory_consistency.py tests/test_exp649_stochastic_trajectory_breadth.py tests/test_exp658_joint_quotient_carry_calibration.py tests/test_exp658_joint_quotient_carry_execution.py tests/test_exp658_joint_quotient_carry_transducer.py tests/test_exp659_symbol_equivariant_recurrence.py",
+    "passed": 235,
+    "failed": 7,
+    "seconds": 230.46,
+    "terminal": true
+  },
+  "remaining_failures": {"exp648": 1, "exp649": 3, "exp658": 3, "exp659": 0},
+  "full_oracle_after_recovery": "not-run-because-focused-recovery-failed-and-terminal-rule-prohibited-further-repair-or-rerun",
+  "wrong_invocation_excluded": "A prior plain-pytest invocation produced two collection errors from sys.path; the corrected python -m pytest result above is authoritative.",
+  "decision": "park-before-formal-verification-boundary"
+}
