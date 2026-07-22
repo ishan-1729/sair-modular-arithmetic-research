@@ -1,0 +1,13 @@
+{
+  "schema_version": "exp660-limitations-v1",
+  "limitations": [
+    "EXP660 was parked before fresh calibration and before formal training because the clean full-project oracle remained red.",
+    "Seed 20261177 was not used for training or scientific evaluation.",
+    "No checkpoint, learning curve, exact transition metric, exact rollout metric, structural intervention result, W256 runtime result, or MLflow run exists.",
+    "The final six failures are EXP658 ignored-cache and accepted-lifecycle conflicts; the recovery budget is exhausted and no further repair is authorized under T047.",
+    "The temporary EXP658 L0-test probe was restored exactly to SHA-256 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6.",
+    "The ignored EXP658 cache lacks checksum-bound Dockerfile, generator.py and primes.py, and its scaffold-era zero-root assertion conflicts with accepted T045 park records.",
+    "The portable source package and checksum-bound non-aliasing EXP609 fixture repair passed the PM-observed 54-test focused gate, but do not alter historical runtime or scientific status.",
+    "This is not a scientific rejection of symbol-equivariant recurrence and not candidate, checked, independent, official/private, Tier7, 85%, or Goal-completion evidence."
+  ]
+}

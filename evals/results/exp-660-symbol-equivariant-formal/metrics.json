@@ -1,0 +1,30 @@
+{
+  "schema_version": "exp660-scientific-metrics-absent-v1",
+  "run_id": "exp-660-symbol-equivariant-formal",
+  "created_at": "2026-07-22T22:00:00+05:30",
+  "checkpoint_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "status": "parked-before-science",
+  "seed": 20261177,
+  "formal_denominators_executed": {"width16": 0, "width24": 0, "width32": 0},
+  "evaluation": {
+    "not_performed": true,
+    "reason": "T047 parked before calibration and science after the exhausted full-oracle recovery ended with six EXP658 failures.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "checkpoint_absent": true,
+    "checkpoint_sha256_schema_sentinel": "all-zero-64-hex-is-not-an-artifact-hash",
+    "formal_seed_unused": true,
+    "scientific_controls_not_performed": true
+  },
+  "structural_controls": null,
+  "randomized_weight_dependence": null,
+  "determinism": null,
+  "invalid_outputs": null,
+  "width256_runtime_rss": null,
+  "scientific_claim": "none",
+  "limitations": [
+    "No scientific denominator was opened and no checkpoint exists; the required checkpoint_sha256 field contains an explicit all-zero schema sentinel, not an artifact identity.",
+    "The park is a verification-feasibility result only."
+  ]
+}

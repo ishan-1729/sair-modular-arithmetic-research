@@ -1,0 +1,20 @@
+{
+  "schema_version": "exp660-resource-confirmation-not-run-v1",
+  "run_id": "exp-660-symbol-equivariant-formal",
+  "status": "not-run-full-project-oracle-red",
+  "fresh_confirmation_executed": false,
+  "formal_route_admitted": false,
+  "fidelity_reduced": false,
+  "prior_design_evidence": {
+    "role": "planning-only-not-reused-as-current-confirmation",
+    "wall_seconds": 18.397680725996906,
+    "aggregate_process_cpu_seconds": 47.2,
+    "cgroup_cpu_seconds": 66.292,
+    "peak_rss_bytes": 437198848,
+    "projected_formal_wall_seconds": 435,
+    "projected_formal_process_cpu_seconds": 1552,
+    "projected_formal_cgroup_cpu_seconds": 2111
+  },
+  "dynamic_budget": null,
+  "reason": "The T047 clean full-oracle gate failed before fresh resource confirmation."
+}
