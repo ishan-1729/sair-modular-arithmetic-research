@@ -1,0 +1,171 @@
+{
+  "schema_version": "exp655-terminal-verification-boundary-v1",
+  "source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+  "source_tree": "aa0e6e4b6a411800b9765fe7eb7365980af9f520",
+  "source_provenance_commit": "1f7dc801d22f33c55a59764907821df19b72c72e",
+  "focused_command": "python -m pytest -q tests/test_exp658_joint_quotient_carry_transducer.py tests/test_exp658_joint_quotient_carry_calibration.py tests/test_exp658_joint_quotient_carry_execution.py tests/test_exp655_layer_loop_compute_matched_recurrence.py",
+  "clarified_repair_attempt": {
+    "passed": 66,
+    "failed": 3,
+    "pytest_seconds": 186.60,
+    "time_wall_seconds": 188.48,
+    "user_cpu_seconds": 472.34,
+    "system_cpu_seconds": 14.09,
+    "aggregate_cpu_seconds": 486.43,
+    "maximum_rss_kib": 479268,
+    "repair": "Corrected the historical calibration SHA-256 in the new post-T045 amendment; no historical byte changed."
+  },
+  "focused_fresh_probe": {
+    "passed": 69,
+    "failed": 0,
+    "pytest_seconds": 490.53,
+    "time_wall_seconds": 493.28,
+    "user_cpu_seconds": 396.39,
+    "system_cpu_seconds": 36.19,
+    "aggregate_cpu_seconds": 432.58,
+    "maximum_rss_kib": 478204
+  },
+  "validator_command": "python tools/validate_project.py",
+  "validator_result": {
+    "passed": true,
+    "concepts": 162,
+    "benchmark_records": 1100,
+    "pinned_upstream_prefix": "82510bba00a1",
+    "precondition": "The official submodule was initialized at its tracked commit after the first validator invocation correctly reported the absent checkout."
+  },
+  "full_oracle_command": "python -m pytest -q",
+  "full_oracle_result": {
+    "passed": 382,
+    "failed": 9,
+    "total": 391,
+    "pytest_seconds": 656.76,
+    "time_wall_seconds": 659.49,
+    "user_cpu_seconds": 837.71,
+    "system_cpu_seconds": 36.31,
+    "aggregate_cpu_seconds": 874.02,
+    "cpu_percent": 132,
+    "maximum_rss_kib": 697272,
+    "major_page_faults": 4349,
+    "minor_page_faults": 527808,
+    "file_system_inputs": 305160,
+    "file_system_outputs": 105360,
+    "exit_status": 1
+  },
+  "failing_tests": [
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_consistency.py::test_source_hash_shape_parameters_identical_clones_and_fresh_optimizers",
+      "missing_contract": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_consistency.py::test_superseded_calibration_evidence_is_preserved_byte_for_byte",
+      "missing_contract": ".scratch/exp-648-structured-trajectory-consistency/superseded/{f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4,d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6}/"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_consistency.py::test_raw_and_tracked_calibration_are_byte_identical_when_present",
+      "missing_contract": ".scratch/exp-648-structured-trajectory-consistency/calibration.json"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_scientific.py::test_historical_calibration_is_preserved_but_not_live_screen_calibration",
+      "missing_contract": "The 218-file root-20261161 scratch inventory and 27-file MLflow artifact inventory referenced by the tracked archive"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_scientific.py::test_root20261161_archive_tamper_and_crosslinks_fail_closed[scratch]",
+      "missing_contract": "The 218 regular files authenticated by scratch-files.sha256"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_scientific.py::test_root20261161_archive_tamper_and_crosslinks_fail_closed[mlflow]",
+      "missing_contract": "The 27 regular files authenticated by mlflow-artifacts.sha256"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_scientific.py::test_source_checkpoint_is_read_only_and_screen_code_has_no_hand_arithmetic",
+      "missing_contract": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors"
+    },
+    {
+      "nodeid": "tests/test_exp648_structured_trajectory_scientific.py::test_root20261160_caches_are_planning_only_and_fully_bound",
+      "missing_contract": ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261160 plus its cal-9e1f63a9fe3c6613 chronology/unit records"
+    },
+    {
+      "nodeid": "tests/test_exp649_stochastic_trajectory_breadth.py::test_frozen_k_mapping_and_correct_tier0_width256_geometry",
+      "missing_contract": ".scratch/exp-660-symbol-equivariant-formal/fixtures/exp609-weights.safetensors"
+    }
+  ],
+  "missing_artifact_contracts": {
+    "EXP609_checkpoint": {
+      "paths": [
+        ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+        ".scratch/exp-660-symbol-equivariant-formal/fixtures/exp609-weights.safetensors"
+      ],
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "EXP648_live_calibration_copy": {
+      "path": ".scratch/exp-648-structured-trajectory-consistency/calibration.json",
+      "sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db"
+    },
+    "EXP648_superseded_f522": {
+      "root": ".scratch/exp-648-structured-trajectory-consistency/superseded/f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+      "file_sha256": {
+        "calibration.json": "f522a8a5e645d99e575d56cd0cfcefdb300965606cd9947d4eb4ec74aac01df4",
+        "environment.json": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+        "provenance.json": "429508f0f2f16105ab2e3d06bc50adfa6d8b26b95c932088a12f03bd9cc1b86c",
+        "resolved-config.yaml": "5d1e30bdb7dbf67c1a448b725976e9f83daf144079c7d5bcde43e74e6948a0e7",
+        "run.py": "8dee04eaf6f45de2efe2a31d1a3d22031c11a35450d9930ce609a67f241c709b"
+      }
+    },
+    "EXP648_superseded_d965": {
+      "root": ".scratch/exp-648-structured-trajectory-consistency/superseded/d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6",
+      "file_sha256": {
+        "calibration.json": "d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6",
+        "environment.json": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+        "provenance.json": "4403531091863f1918cf87dc8b25be851414ee211b207ffce9b96b5f84f65641",
+        "resolved-config.yaml": "97877cec756125ec77e535290196eed015af77c470e442523fb0bbd049f12057",
+        "run.py": "3b7848227d21f46b9f3f67c40ccb7c29dfee57fbfa05e6312f18dca2aa871af8"
+      }
+    },
+    "EXP648_root20261161_scratch": {
+      "manifest": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/scratch-files.sha256",
+      "manifest_sha256": "c74a07dec1e0e9331917dea8d2f25cfcd6a2a7c17380fe35e24ada125d3c0c5e",
+      "file_count": 218,
+      "total_bytes": 24573993,
+      "scopes": [
+        ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261161",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/launch-mlflow-reverify/c27161cb0f2a46228b94b47362769fb1",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-0553c6434beb9528",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-locks/cal-0553c6434beb9528.lock",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-mlflow/c27161cb0f2a46228b94b47362769fb1"
+      ]
+    },
+    "EXP648_root20261161_mlflow": {
+      "manifest": "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/mlflow-artifacts.sha256",
+      "manifest_sha256": "7743b0fc1e77349378b06863c0506c3fa34cf98c66819a8f2db5dcbee19b70b8",
+      "file_count": 27,
+      "total_bytes": 252562,
+      "run_ids": [
+        "8f887966943d44a3a4bebea6ad5dddb9",
+        "b49db1ca755e46e6b7b18e9e5c1fb859",
+        "c27161cb0f2a46228b94b47362769fb1",
+        "cea11ae498ef4243ac222aa732e8ed06",
+        "f89f15cf84334df9acdc41ca6625b25d"
+      ]
+    },
+    "EXP648_root20261160_planning": {
+      "cache_sha256": [
+        "98a69670a229c15de7193c5878571fcc28a6d013e9b3ae23a7ac52be92624d80",
+        "8e8115d2b41974c20adfad734a847ec2ac64e07f5636325301b8793ffb1adc68"
+      ],
+      "required_scopes": [
+        ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261160",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-chronology",
+        ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-9e1f63a9fe3c6613/augmented-units"
+      ]
+    }
+  },
+  "out_of_scope_paths_needed_for_clean_oracle": [
+    ".scratch/exp-609-tier6-straight-through-confirmation/",
+    ".scratch/exp-648-structured-trajectory-consistency/",
+    ".scratch/exp-660-symbol-equivariant-formal/fixtures/",
+    ".scratch/mlflow/artifacts/"
+  ],
+  "stop_rule_applied": true,
+  "calibration_prohibited": true,
+  "formal_science_prohibited": true
+}

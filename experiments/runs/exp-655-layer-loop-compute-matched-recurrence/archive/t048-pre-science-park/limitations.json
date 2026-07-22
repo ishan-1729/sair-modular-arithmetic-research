@@ -1,0 +1,13 @@
+{
+  "schema_version": "exp655-limitations-v1",
+  "limitations": [
+    "EXP655 was parked before calibration root 20261178 and before formal roots 20261179, 20261180, and 20261181 because the required final-source full-project oracle ended at 382 passed and 9 failed.",
+    "All nine failures require ignored historical EXP648 or EXP660 artifacts outside T048's write allowlist; the exact failing tests and available path/hash contracts are preserved in verification.json.",
+    "The 69-test focused package gate and project validator passed, but neither substitutes for the red full-project oracle.",
+    "The implementation and tests are published only as unadmitted implementation evidence; they were not calibrated, trained, evaluated scientifically, or promoted.",
+    "Calibration root 20261178 and its seed were never opened. Formal roots 20261179, 20261180, and 20261181 and all paired init/train/eval seeds were never opened.",
+    "No calibration budget, admission, model checkpoint, learning curve, exact transition result, exact rollout result, intervention result, bootstrap result, W256 runtime result, or MLflow run exists.",
+    "No checked, prior-independent, official, private, candidate, submission, promotion, 85-percent, or Goal-completion surface changed.",
+    "This park is not a scientific rejection of layer-loop recurrence, model-loop recurrence, ST-M043.a, or ST-M009.a."
+  ]
+}

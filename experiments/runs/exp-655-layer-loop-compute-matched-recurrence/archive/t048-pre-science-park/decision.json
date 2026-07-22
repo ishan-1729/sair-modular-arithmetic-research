@@ -1,0 +1,33 @@
+{
+  "schema_version": "exp655-terminal-decision-v1",
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
+  "decision": "park-before-calibration-and-science",
+  "authority": "T048-final-source-full-oracle-stop-rule-and-PM-terminal-direction",
+  "reason": "The exact final-source full pytest completed at 382 passed and 9 failed; every failure requires ignored historical EXP648 or EXP660 evidence outside T048's write allowlist, and T048 permits no repair, probe, calibration, or formal execution after this stop.",
+  "source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+  "source_provenance_commit": "1f7dc801d22f33c55a59764907821df19b72c72e",
+  "verification_resources": {
+    "pytest_seconds": 656.76,
+    "time_wall_seconds": 659.49,
+    "user_cpu_seconds": 837.71,
+    "system_cpu_seconds": 36.31,
+    "aggregate_cpu_seconds": 874.02,
+    "maximum_rss_kib": 697272
+  },
+  "focused_gate": {"passed": 69, "failed": 0},
+  "project_validator_passed": true,
+  "calibration_root_opened": false,
+  "calibration_executed": false,
+  "formal_roots_opened": [],
+  "formal_training_executed": false,
+  "scientific_evaluation_executed": false,
+  "scientific_hypothesis_rejected": false,
+  "scientific_metrics": null,
+  "checkpoint": null,
+  "mlflow_run_id": null,
+  "candidate_or_goal_status_changed": false,
+  "benchmark_or_submission_status_changed": false,
+  "resume_under_T048": false,
+  "evidence_capable_of_changing_next_decision": "A separately authorized checksum-bound materializer that reconstructs the exact out-of-scope historical ignored evidence, followed by a 391-of-391 full oracle on byte-identical EXP655 source/tests, could establish implementation admission; it would still create no scientific result.",
+  "next_material_decision": "Decide whether the expected information gain justifies a separate hermetic historical-evidence portability package before selecting or reauthorizing any scientific experiment."
+}
