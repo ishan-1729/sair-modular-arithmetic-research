@@ -1,0 +1,188 @@
+{
+  "schema_version": "goalbuddy-exp655-t049-package-receipt-v1",
+  "created_at": "2026-07-22T13:49:15Z",
+  "task_id": "T049",
+  "board_path": "docs/goals/optimize-sair-goal-run/state.yaml",
+  "result": "completed-scientific-reject",
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
+  "decision": "reject-exp655-dense-layer-loop-schedule-formulation",
+  "source": {
+    "frozen_implementation_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+    "frozen_implementation_tree": "aa0e6e4b6a411800b9765fe7eb7365980af9f520",
+    "provenance_commit": "1f7dc801d22f33c55a59764907821df19b72c72e",
+    "recovery_and_formal_commit": "3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a",
+    "branch": "codex/exp655-layer-loop-formal",
+    "recovery_commit_pushed_before_science": true,
+    "formal_source_dirty": false,
+    "config_sha256": "de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842",
+    "runner_sha256": "d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6",
+    "model_sha256": "14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af",
+    "fixtures_sha256": "4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba",
+    "test_sha256": "2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1"
+  },
+  "portability": {
+    "materialized_files": 264,
+    "materialized_bytes": 26672030,
+    "inventory_sha256": "b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b",
+    "regular_independent_bytes": true,
+    "reflink_disabled": true,
+    "portability_receipt_sha256": "dab283644d7e259609220e3b440de3891c96991a50385a0b094a6d09e64fe0b6",
+    "portability_manifest_sha256": "203b2429d6ee442f8dca49067dffc8905cbcaaf5ddfdb17f2dfa2eac54dabd46",
+    "t048_archive_manifest_sha256": "cee6bd60b7cea1befb3e4ab271edf2d8a29a6bdad648da8745ddfe1ab6e4ac7a"
+  },
+  "recovery_oracle": {
+    "validator": {
+      "executions": 1,
+      "passed": true,
+      "concepts": 162,
+      "benchmark_records": 1100,
+      "wall_seconds": 10.90,
+      "aggregate_cpu_seconds": 1.63,
+      "maximum_rss_kib": 28512
+    },
+    "full_pytest": {
+      "executions": 1,
+      "passed": 391,
+      "failed": 0,
+      "total": 391,
+      "pytest_seconds": 594.41,
+      "wall_seconds": 596.30,
+      "aggregate_cpu_seconds": 549.56,
+      "maximum_rss_kib": 705360
+    },
+    "fresh_probe_required": false,
+    "oracle_sha256": "4386527ceb4a59680dd150b4b0379f45f5b3c8ec4d69becce15398138b03daff"
+  },
+  "calibration": {
+    "root": 20261178,
+    "status": "completed-resource-only",
+    "measured": {
+      "wall_seconds": 58.29647031601053,
+      "process_cpu_seconds": 195.96106899999998,
+      "cgroup_cpu_seconds": 231.40000000000146,
+      "peak_rss_bytes": 434581504
+    },
+    "coefficient_of_variation": 0.19178239509698847,
+    "expected_without_headroom": {
+      "wall_seconds": 1865,
+      "process_cpu_seconds": 7010,
+      "cgroup_cpu_seconds": 8204
+    },
+    "soft_budget": {
+      "wall_seconds": 2410,
+      "process_cpu_seconds": 9056,
+      "cgroup_cpu_seconds": 10598
+    },
+    "hard_budget": {
+      "wall_seconds": 3342,
+      "process_cpu_seconds": 12561,
+      "cgroup_cpu_seconds": 14700,
+      "peak_rss_bytes": 543226880
+    },
+    "admission": "admit-full-three-root-falsifier",
+    "fidelity_reduced": false,
+    "calibration_checkpoints_reusable": false,
+    "calibration_sha256": "a3c75c389b72704230728a4442d698611dcd0eef48d864a5de6cd4fd658320f6",
+    "admission_sha256": "3e4ded167db12f3f4dfe26d570c1494dcb04d1c7f923fda9c1f326de1c8adaf9"
+  },
+  "formal": {
+    "executions": 1,
+    "exit_status": 0,
+    "roots": [20261179, 20261180, 20261181],
+    "arms": ["layer_loop_r2", "model_loop_r2", "r1", "untied_equal_compute"],
+    "updates_per_arm": 4000,
+    "total_updates": 48000,
+    "cases_per_arm_root_width": {"16": 300, "32": 300},
+    "total_primary_and_control_evaluation_cases": 7200,
+    "total_intervention_cases": 7200,
+    "bootstrap_resamples_per_endpoint": 100000,
+    "bootstrap_total_resamples": 200000,
+    "checkpoint_count": 12,
+    "checkpoint_manifest_sha256": "8178b37459d5ba384b4eec9f01d6ee2ec12c2a0e1932dec571298a9034cd917b",
+    "mlflow_runs": 16,
+    "mlflow_finished": 16,
+    "mlflow_parent_run_id": "ceeec9d504464b14a224150ebdf32c2b",
+    "resource": {
+      "wall_seconds": 1338.6443127590028,
+      "process_cpu_seconds": 5257.537295,
+      "cgroup_cpu_seconds": 6545.540000000001,
+      "peak_rss_bytes": 496414720,
+      "outer_wall_seconds": 1346.28,
+      "outer_aggregate_cpu_seconds": 5267.19,
+      "within_all_hard_guards": true
+    }
+  },
+  "observations": {
+    "primary_width16_layer_then_model_by_root": [
+      [0.0, 0.01],
+      [0.0, 0.006666666666666667],
+      [0.0033333333333333335, 0.0033333333333333335]
+    ],
+    "primary_width32_layer_then_model_by_root": [
+      [0.0, 0.0],
+      [0.0, 0.0],
+      [0.0, 0.0]
+    ],
+    "width16_layer_minus_model_mean": -0.005555555555555556,
+    "width16_one_sided_95_lower_bound": -0.012222222222222223,
+    "width32_layer_minus_model_mean": 0.0,
+    "width32_one_sided_95_lower_bound": 0.0,
+    "maximum_invalid_rate": 0.8833333333333333,
+    "minimum_trained_minus_randomized": 0.0,
+    "passed_gates": [
+      "full_denominators",
+      "determinism",
+      "primary_initial_identity",
+      "complete_block_noncommutation",
+      "malformed_and_leakage",
+      "wall_budget",
+      "process_cpu_budget",
+      "cgroup_cpu_budget",
+      "rss_budget",
+      "width16_delta_each_root",
+      "width32_delta_each_root"
+    ],
+    "failed_gates": [
+      "primary_width16_each_root",
+      "any_primary_width32_each_root",
+      "validity",
+      "randomized_weight_dependence",
+      "width16_bootstrap_lower",
+      "width32_bootstrap_lower",
+      "width32_mean_delta"
+    ]
+  },
+  "records": {
+    "run": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json", "sha256": "493b94737d613e82dbf131c9f03609ba8eba6e86d6778dafe0336c15a39e5319"},
+    "environment": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/environment.json", "sha256": "60f3cc664a2cc77301bd1acc51f9d27bc4c12115f5d2b0166bb6de1ee6975b31"},
+    "verification": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json", "sha256": "6cd77d18dfb2d85fd7c98e3e2fe15a4f83be9a00dd13b86e58f7cf6248cdf369"},
+    "limitations": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/limitations.json", "sha256": "5cf72da201b71c4ad5f9c7f83f1da834dba3096ec58bbd8421d3d44d948f750c"},
+    "mlflow": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/mlflow.json", "sha256": "b3ffa6b7ff7114aa443e1d58c176dce093bd6083b435d4aef143e18804e9b064"},
+    "metrics": {"path": "evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json", "sha256": "8a24ece888ba4be983a32001dfdda074c8caa3e60d068c5d8198201d81c98f5e"},
+    "decision": {"path": "evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json", "sha256": "e892f45727e802504489721f36d1db789fc3bacfe2370f15119bbbebeabde260"},
+    "runner_native_archive": {"path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t049-runner-native/manifest.json", "sha256": "4d53aab994c57c1c2e4802221d4dc068de1d6829d51668118f542a5c9df2218d"}
+  },
+  "focused_package_verification": {
+    "command": "python .scratch/exp-655-layer-loop-compute-matched-recurrence/verify_formal_package.py",
+    "passed": true,
+    "schema_validation": true,
+    "root_arm_denominator_intervention_bootstrap_checkpoint_mlflow_resource_checks": true
+  },
+  "goalbuddy_checker": {
+    "command": "node check-goal-state.mjs docs/goals/optimize-sair-goal-run/state.yaml",
+    "ok": true,
+    "version": 2,
+    "goal_status": "active",
+    "active_task": "T049",
+    "errors": [],
+    "warnings": []
+  },
+  "limitations": [
+    "The rejection applies only to the exact dense two-block fixed-R2 architecture, training horizon, and schedule formulation.",
+    "This is not a faithful reproduction or rejection of adaptive routing, Mixture-of-Recursions, Loopie capacity recycling, MoE, or post-training.",
+    "No checked, prior-independent, official, private, candidate, submission, promotion, 85-percent, or Goal-completion surface was opened or changed.",
+    "The twelve checkpoints are durable research evidence only and are not submission artifacts."
+  ],
+  "next_material_decision": "PM selection of one separately authorized experiment package by expected information gain per unit compute after incorporating the EXP655 failure profile.",
+  "evidence_capable_of_changing_next_decision": "The complete low-accuracy/invalidity/dependence failure partition down-ranks another schedule-only dense fixed-R2 rerun while leaving adaptive recurrence, routing, capacity recycling, post-training, and other families unresolved."
+}

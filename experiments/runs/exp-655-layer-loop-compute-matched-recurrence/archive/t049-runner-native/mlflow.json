@@ -1,0 +1,25 @@
+{
+  "arm_runs": {
+    "20261179:layer_loop_r2": "0b8944f308184f2e8cbe21626b91a8d8",
+    "20261179:model_loop_r2": "e39e0086a51d4ae7b83a0179a8eec862",
+    "20261179:r1": "a0feb77b5c3d4cf7a842b2143394aebb",
+    "20261179:untied_equal_compute": "92b4f6ce273847739990968f5733fc83",
+    "20261180:layer_loop_r2": "4cc604201ca64b1585170a9e0dc1f7a8",
+    "20261180:model_loop_r2": "c315c26f3cd3435893f61835cd84b88d",
+    "20261180:r1": "b8ea55bd4b924a319e95e5de68519fa0",
+    "20261180:untied_equal_compute": "b86ee9e2d1484063a26d68f0e1a6b7e0",
+    "20261181:layer_loop_r2": "5e9e2766ca0342eaa568ae6460336f86",
+    "20261181:model_loop_r2": "8228ef01a64948219a77dcd045f340a1",
+    "20261181:r1": "1cb6b6d4c9574b4ca3a0f69e76cefbac",
+    "20261181:untied_equal_compute": "455b2343b5544325a7abc1ddc0ffca35"
+  },
+  "experiment_id": "1",
+  "experiment_name": "sair-modular-arithmetic-wsl",
+  "parent_run_id": "ceeec9d504464b14a224150ebdf32c2b",
+  "root_runs": {
+    "20261179": "6634341667754c5c9868dba1b50550ef",
+    "20261180": "9744aee9f6014554939cd85528de8006",
+    "20261181": "a0cbe27447d547ae983525425d531871"
+  },
+  "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge_exp655_t048_wt/.scratch/mlflow/mlflow.db"
+}

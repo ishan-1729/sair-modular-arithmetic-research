@@ -1,0 +1,358 @@
+{
+  "admission": {
+    "decision": "admit-full-three-root-falsifier",
+    "note": "The separately persisted admission binds this final calibration by SHA-256.",
+    "path": ".scratch/exp-655-layer-loop-compute-matched-recurrence/admission.json"
+  },
+  "arm_resources": {
+    "layer_loop_r2": {
+      "calibration_checkpoint_forbidden_for_formal": true,
+      "checkpoint_sha256": "1724e06b9a54c314e69e9efb3ce5ec5c2af290244e16c51d04dacbc3cad78be5",
+      "parameters": 17572,
+      "stage_timing": [
+        {
+          "cgroup_cpu_seconds": 1.4839999999967404,
+          "peak_rss_bytes": 415420416,
+          "process_cpu_seconds": 1.3076150000000002,
+          "wall_seconds": 0.3543099899980007
+        },
+        {
+          "cgroup_cpu_seconds": 2.9200000000055297,
+          "peak_rss_bytes": 417763328,
+          "process_cpu_seconds": 2.557399,
+          "wall_seconds": 0.6706967409991194
+        },
+        {
+          "cgroup_cpu_seconds": 10.819999999999709,
+          "peak_rss_bytes": 421548032,
+          "process_cpu_seconds": 9.232492999999998,
+          "wall_seconds": 2.3514661849912954
+        }
+      ],
+      "training_timing": {
+        "cgroup_cpu_seconds": 15.267999999996391,
+        "peak_rss_bytes": 421548032,
+        "process_cpu_seconds": 13.107417000000002,
+        "wall_seconds": 3.4305942990031326
+      }
+    },
+    "model_loop_r2": {
+      "calibration_checkpoint_forbidden_for_formal": true,
+      "checkpoint_sha256": "b22a94b10d71a06d50f03eb3540c56a3754ea589661456e0fbbab2ca00b56571",
+      "parameters": 17572,
+      "stage_timing": [
+        {
+          "cgroup_cpu_seconds": 2.948000000003958,
+          "peak_rss_bytes": 421548032,
+          "process_cpu_seconds": 2.5018759999999993,
+          "wall_seconds": 0.6703135679999832
+        },
+        {
+          "cgroup_cpu_seconds": 8.71600000000035,
+          "peak_rss_bytes": 421548032,
+          "process_cpu_seconds": 7.3038839999999965,
+          "wall_seconds": 1.8646092849958222
+        },
+        {
+          "cgroup_cpu_seconds": 9.567999999999302,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 8.088293,
+          "wall_seconds": 2.0650977959885495
+        }
+      ],
+      "training_timing": {
+        "cgroup_cpu_seconds": 21.28399999999965,
+        "peak_rss_bytes": 421699584,
+        "process_cpu_seconds": 17.904865000000004,
+        "wall_seconds": 4.655847478003125
+      }
+    },
+    "r1": {
+      "calibration_checkpoint_forbidden_for_formal": true,
+      "checkpoint_sha256": "8dfddc5c99352d098feffd5f0b2a115d2837b7a721939db7131c537741f9c4f4",
+      "parameters": 17572,
+      "stage_timing": [
+        {
+          "cgroup_cpu_seconds": 2.7560000000012224,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 2.3305429999999987,
+          "wall_seconds": 0.6276300409954274
+        },
+        {
+          "cgroup_cpu_seconds": 3.19199999999546,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 2.775074999999994,
+          "wall_seconds": 0.7352778130007209
+        },
+        {
+          "cgroup_cpu_seconds": 5.812000000005355,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 5.000940999999997,
+          "wall_seconds": 1.2934331910073524
+        }
+      ],
+      "training_timing": {
+        "cgroup_cpu_seconds": 11.807999999997264,
+        "peak_rss_bytes": 421699584,
+        "process_cpu_seconds": 10.119078000000002,
+        "wall_seconds": 2.7208227000082843
+      }
+    },
+    "untied_equal_compute": {
+      "calibration_checkpoint_forbidden_for_formal": true,
+      "checkpoint_sha256": "6979d3ea15eab32252cd550872e35cb6bf053ca93270c71f008503dfe7e06674",
+      "parameters": 34532,
+      "stage_timing": [
+        {
+          "cgroup_cpu_seconds": 2.8320000000021537,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 2.455038000000002,
+          "wall_seconds": 0.6657295470067766
+        },
+        {
+          "cgroup_cpu_seconds": 3.504000000000815,
+          "peak_rss_bytes": 421699584,
+          "process_cpu_seconds": 3.0796959999999913,
+          "wall_seconds": 0.8090289559913799
+        },
+        {
+          "cgroup_cpu_seconds": 9.419999999998254,
+          "peak_rss_bytes": 422440960,
+          "process_cpu_seconds": 8.204551000000002,
+          "wall_seconds": 2.096757286999491
+        }
+      ],
+      "training_timing": {
+        "cgroup_cpu_seconds": 15.824000000000524,
+        "peak_rss_bytes": 422621184,
+        "process_cpu_seconds": 13.752427999999995,
+        "wall_seconds": 3.631958694997593
+      }
+    }
+  },
+  "evaluation_resource_receipt": {
+    "bootstrap": {
+      "16": {
+        "clusters": 3,
+        "distribution_sha256": "8568d6b117678d53edec66018e6d52abe48837f64aebd6aee0153ddf2001ea51",
+        "mean": 0.0,
+        "one_sided_95_lower_bound": 0.0,
+        "paired_identities_per_cluster": 300,
+        "resamples": 100000,
+        "seed": 65595002,
+        "timing": {
+          "cgroup_cpu_seconds": 1.2079999999987194,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 0.9523360000000025,
+          "wall_seconds": 0.9004816550004762
+        }
+      },
+      "32": {
+        "clusters": 3,
+        "distribution_sha256": "8568d6b117678d53edec66018e6d52abe48837f64aebd6aee0153ddf2001ea51",
+        "mean": 0.0,
+        "one_sided_95_lower_bound": 0.0,
+        "paired_identities_per_cluster": 300,
+        "resamples": 100000,
+        "seed": 65595001,
+        "timing": {
+          "cgroup_cpu_seconds": 1.180000000000291,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 0.9343089999999847,
+          "wall_seconds": 0.9343370370042976
+        }
+      }
+    },
+    "deterministic_repeat_executed": true,
+    "interventions_executed": true,
+    "malformed_and_leakage_executed": true,
+    "noncommutation_executed": true,
+    "prediction_hashes": {
+      "layer_loop_r2": {
+        "16": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6",
+        "32": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6"
+      },
+      "model_loop_r2": {
+        "16": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6",
+        "32": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6"
+      },
+      "r1": {
+        "16": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6",
+        "32": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6"
+      },
+      "untied_equal_compute": {
+        "16": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6",
+        "32": "a2ef066ac88f15936c5f86f0c090e07475f2bf0e182940fe70e2d214d96c6fb6"
+      }
+    },
+    "randomized_weights_executed": true,
+    "runtime_width256": {
+      "layer_loop_r2": {
+        "all_prefix_exact_accuracy": null,
+        "any_invalid_residue_rate": 0.0,
+        "cases": 4,
+        "correct": null,
+        "correct_by_identity": null,
+        "exact_accuracy": null,
+        "first_error": null,
+        "prediction_sha256": "1c10b03518fff8fc374a20bbf5107c66496656bec0662d6c6db123d4a898f121",
+        "prefix_transition_exact_accuracy": null,
+        "timing": {
+          "cgroup_cpu_seconds": 14.891999999999825,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 13.681793000000027,
+          "wall_seconds": 3.422010255002533
+        }
+      },
+      "model_loop_r2": {
+        "all_prefix_exact_accuracy": null,
+        "any_invalid_residue_rate": 0.0,
+        "cases": 4,
+        "correct": null,
+        "correct_by_identity": null,
+        "exact_accuracy": null,
+        "first_error": null,
+        "prediction_sha256": "1c10b03518fff8fc374a20bbf5107c66496656bec0662d6c6db123d4a898f121",
+        "prefix_transition_exact_accuracy": null,
+        "timing": {
+          "cgroup_cpu_seconds": 18.07600000000093,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 16.558746000000014,
+          "wall_seconds": 4.1389887550030835
+        }
+      },
+      "r1": {
+        "all_prefix_exact_accuracy": null,
+        "any_invalid_residue_rate": 0.0,
+        "cases": 4,
+        "correct": null,
+        "correct_by_identity": null,
+        "exact_accuracy": null,
+        "first_error": null,
+        "prediction_sha256": "1c10b03518fff8fc374a20bbf5107c66496656bec0662d6c6db123d4a898f121",
+        "prefix_transition_exact_accuracy": null,
+        "timing": {
+          "cgroup_cpu_seconds": 6.540000000000873,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 5.9513720000000205,
+          "wall_seconds": 1.4873881639941828
+        }
+      },
+      "untied_equal_compute": {
+        "all_prefix_exact_accuracy": null,
+        "any_invalid_residue_rate": 0.0,
+        "cases": 4,
+        "correct": null,
+        "correct_by_identity": null,
+        "exact_accuracy": null,
+        "first_error": null,
+        "prediction_sha256": "1c10b03518fff8fc374a20bbf5107c66496656bec0662d6c6db123d4a898f121",
+        "prefix_transition_exact_accuracy": null,
+        "timing": {
+          "cgroup_cpu_seconds": 10.78799999999319,
+          "peak_rss_bytes": 434581504,
+          "process_cpu_seconds": 9.760802000000012,
+          "wall_seconds": 2.4409448499936843
+        }
+      }
+    }
+  },
+  "full_route": {
+    "all_arms": [
+      "layer_loop_r2",
+      "model_loop_r2",
+      "r1",
+      "untied_equal_compute"
+    ],
+    "bootstrap_resamples_per_endpoint": 100000,
+    "checkpoint_reload": true,
+    "evaluation_cases_per_arm": {
+      "16": 300,
+      "32": 300
+    },
+    "intervention_cases": 100,
+    "opposite_schedule_full_cases_per_primary": {
+      "16": 300,
+      "32": 300
+    },
+    "persistence": true,
+    "randomized_weight_cases_per_primary": 300,
+    "runtime_width256_cases_per_arm": 4,
+    "scientific_metrics_persisted": false,
+    "stage_steps_per_arm": 100
+  },
+  "identity": {
+    "file_sha256": "e14e3d7d5438f1faf3cd43e8467355f5493f0a66bd65cd03eb3afcada2cd0010",
+    "frozen_before_evaluation_labels": true,
+    "identity_sha256": "326c5b93fe3173dd18cd3680f0e69e067582f267801f595f13327668b3ee5b3e",
+    "path": ".scratch/exp-655-layer-loop-compute-matched-recurrence/identities/root-20261178.json"
+  },
+  "limitations": [
+    "Root 20261178 is resource-only; no accuracy or mechanism verdict is persisted.",
+    "Formal projection scales measured per-arm training and retains the measured full evaluation/control route for each of three roots.",
+    "Wall, process CPU, cgroup CPU, and peak RSS are independently named and are not substituted for one another."
+  ],
+  "measured_total": {
+    "cgroup_cpu_seconds": 231.40000000000146,
+    "peak_rss_bytes": 434581504,
+    "process_cpu_seconds": 195.96106899999998,
+    "wall_seconds": 58.29647031601053
+  },
+  "projection": {
+    "calibration_training_steps_per_arm": 100,
+    "expected_without_headroom": {
+      "cgroup_cpu_seconds": 8204,
+      "process_cpu_seconds": 7010,
+      "wall_seconds": 1865
+    },
+    "formal_roots": 3,
+    "formal_training_steps_per_arm": 4000,
+    "hard_budget": {
+      "cgroup_cpu_seconds": 14700,
+      "peak_rss_bytes": 543226880,
+      "process_cpu_seconds": 12561,
+      "wall_seconds": 3342
+    },
+    "hard_multiplier": 1.7917823950969884,
+    "soft_budget": {
+      "cgroup_cpu_seconds": 10598,
+      "process_cpu_seconds": 9056,
+      "wall_seconds": 2410
+    },
+    "soft_multiplier": 1.2917823950969884,
+    "training_scale": 40.0
+  },
+  "root": {
+    "eval_seed": 65574000,
+    "init_seed": 65570000,
+    "root": 20261178,
+    "train_seed": 65573000
+  },
+  "run_id": "exp-655-layer-loop-compute-matched-recurrence",
+  "schema_version": "exp655-root20261178-resource-calibration-v1",
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842",
+    "dirty": false,
+    "fixtures_sha256": "4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba",
+    "model_sha256": "14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af",
+    "paper_sha256": "1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce",
+    "preregistration_sha256": "75c40c6b11d7203701a5e1b17d62d9cb0356a45f14cddc59c17a9113ba5a5d67",
+    "repository_branch": "codex/exp655-layer-loop-formal",
+    "repository_commit": "3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a",
+    "runner_sha256": "d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6"
+  },
+  "status": "completed-resource-only",
+  "variability": {
+    "arm_wall_seconds_per_step": {
+      "layer_loop_r2": 0.03430594299003133,
+      "model_loop_r2": 0.04655847478003125,
+      "r1": 0.02720822700008284,
+      "untied_equal_compute": 0.036319586949975925
+    },
+    "coefficient_of_variation": 0.19178239509698847,
+    "maximum": 0.04655847478003125,
+    "mean": 0.03609805793003033,
+    "minimum": 0.02720822700008284
+  }
+}

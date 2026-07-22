@@ -1,0 +1,23 @@
+	Command being timed: "python -m experiments.exp_655_layer_loop_compute_matched_recurrence.run --mode formal"
+	User time (seconds): 5238.33
+	System time (seconds): 28.86
+	Percent of CPU this job got: 391%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 22:26.28
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 484780
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 161
+	Minor (reclaiming a frame) page faults: 4178352
+	Voluntary context switches: 73877
+	Involuntary context switches: 6956
+	Swaps: 0
+	File system inputs: 49472
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
