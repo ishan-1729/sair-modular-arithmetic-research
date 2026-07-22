@@ -161,7 +161,10 @@ def test_config_restores_exact_t017_data_and_l1_calibration_contract() -> None:
     }
     profile = l1["deployed_path_profile"]
     assert profile["environment"] == "same-pinned-four-cpu-candidate-environment"
-    assert profile["routes"] == ["candidate005-incumbent", "exp658-challenger"]
+    assert profile["profiled_model"] == "exp658-selected-reloaded-challenger-only"
+    assert profile["candidate005_role"] == (
+        "path-validated-cache-or-pinned-full1100-incumbent-measurement-only"
+    )
     assert profile["width"] == 256
     assert profile["warmup_batch_cases"] == 4
     assert profile["fresh_repeat_batches"] == 3
@@ -297,7 +300,9 @@ def test_config_restores_exact_t017_l2_denominators_gates_and_futility() -> None
     assert gates["determinism"] == "bit-exact-both-100-case-repeats"
     assert gates["integrity"] == {
         "artifact_hashes": "exact",
-        "parameter_equality": "exact",
+        "initialization_parameter_values": "exact",
+        "post_update_parameter_structure": "exact-keys-shapes-dtypes-devices-trainable-masks-topology-LR-scheduler-and-step-counts",
+        "post_update_parameter_values": "expected-to-diverge-under-auxiliary-supervision",
         "checkpoint_reload": "exact",
     }
     assert gates["resources"] == {

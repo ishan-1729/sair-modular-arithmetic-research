@@ -42,7 +42,8 @@ arms:
   matched:
     architecture_and_forward_graph: exact
     source_checkpoint: exact
-    state_dictionary_keys_shapes_values: exact
+    initialization_state_dictionary_keys_shapes_values: exact
+    post_step1_values: expected-to-diverge-under-auxiliary-supervision
     parameter_count: exact
     initialization: exact
     data_order: exact
@@ -60,6 +61,7 @@ stages:
   L1:
     status: prohibited-requires-separate-judge-package
     purpose: representative-resource-only-calibration
+    scaffold_status: contract-complete-inert-unrun-zero-root
   L2:
     status: prohibited-requires-L1-promotion-and-separate-authorization
     purpose: width32-width64-matched-scientific-falsifier
@@ -114,6 +116,17 @@ future_data:
 
 L1:
   status: prohibited-requires-separate-judge-package
+  scaffold:
+    status: contract-complete-inert-unrun-zero-root
+    constructed_from_l0_commit: fc4e0605388812f8da619956063c5d49d9b8d2e3
+    module: experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+    focused_test: tests/test_exp658_joint_quotient_carry_calibration.py
+    entrypoint: unconditional-fail-closed-until-later-judge-authorization
+    root: null
+    authorization: null
+    output: null
+    mlflow: prohibited
+    execution: prohibited
   mode: non-scientific-resource-and-feasibility-calibration
   warmup_repeats: 1
   fresh_matched_repeats: 3
@@ -125,6 +138,115 @@ L1:
     width_order: alternating
     batch_size: 128
     exact_formal_forward_loss_backward_clipping_optimizer_path: true
+  optimizer_and_loss:
+    optimizer: AdamW
+    optimizer_parameter_scope: all-103522-trainable-parameters-one-identical-name-group-per-arm
+    learning_rate: 0.000005
+    minimum_learning_rate: 0.0000005
+    weight_decay: 0.00002
+    source_resolved_AdamW_defaults:
+      betas: [0.9, 0.999]
+      eps: 0.00000001
+      amsgrad: false
+      maximize: false
+      foreach: null
+      capturable: false
+      differentiable: false
+      fused: null
+    scheduler: CosineAnnealingLR
+    scheduler_T_max: 400
+    scheduler_order: optimizer-step-then-scheduler-step
+    gradient_clip_global_max_norm: 2.0
+    residue_loss: mean-all-bit-BCE-plus-0.45-times-maximum-mean-per-position-BCE
+    residue_bce_reduction: none
+    worst_bit_weight: 0.45
+    quotient_loss: mean-cross-entropy-q-classes-0-1-2
+    signed_carry_loss: mean-cross-entropy-over-batch-times-width-with-class-map-minus2-minus1-0-1-to-0-1-2-3
+    compute_all_three_losses_in_both_arms: true
+    label_smoothing: 0.0
+    extra_regularizer: none
+    control_auxiliary_weights: {quotient: 0.0, signed_carry: 0.0}
+    challenger_auxiliary_weights: {quotient: 0.10, signed_carry: 0.10}
+    precision: CPU-FP32-no-AMP
+    deterministic_algorithms: true
+    intra_op_threads: 4
+    inter_op_threads: 1
+  pairing:
+    initialization_repeats: [0, 1, 2, 3]
+    namespace_seeded_extensions: true
+    challenger_initialization: exact-control-state-dict-copy-into-independent-model
+    immutable_batch_materialization: once-per-matched-step
+    torch_rng_restore_before_each_arm_forward: true
+    arm_order_formula: (repeat+global_step)-mod-2
+    even_order: [control, challenger]
+    odd_order: [challenger, control]
+    independent: [parameters, logits, hidden-state, gradients, optimizers, schedulers, forward-results]
+    initialization_equality: exact-values-keys-shapes-dtypes-devices-trainable-masks-and-empty-optimizer-topology
+    post_update_equality: keys-shapes-dtypes-devices-trainable-masks-topology-LR-scheduler-and-step-counts-only-never-values
+    post_step1_required_difference: at-least-one-auxiliary-connected-tensor-persistent-through-step16
+    multi_step_preflight: step1-values-exact-steps2-through16-geometry-storage-topology-LR-scheduler-counts-finite-parameters-and-gradients
+  seeds_and_splits:
+    base_seed: 20261176
+    derivation: low-63-bits-of-big-endian-first-eight-sha256-bytes-of-exp658-pipe-base-pipe-namespace-pipe-parts
+    namespaces: [split, init, train, eval_transition, eval_rollout, rare_q, rare_carry, profile_warmup, profile_fresh]
+    widths:
+      32: {prime_bits_min: 25, prime_bits_max: 32, train_identities: 512, test_identities: 128}
+      64: {prime_bits_min: 57, prime_bits_max: 64, train_identities: 512, test_identities: 128}
+      256: {prime_bits_min: 249, prime_bits_max: 256, stream: canonical-domain-separated-held-out, identities: 28, warmup: 4, fresh_by_repeat: 8}
+    split_algorithm: experiments/exp_300_width64_bit_tensor_transfer/run.py::bigint_prime_split
+    split_source_sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f
+    exact_algorithm: random.Random-domain-separated-split-seed-randrange-low-inclusive-high-exclusive-next-prime-strictly-above-discard-high-and-duplicates
+    arbitrary_width_prime_library: sympy==1.13.1-nextprime
+    expected_split_sha256:
+      32: f014bd47e7eeb0f3e3f8c43c7422cb154d9ce9fd93bc840cb6eaf473633a67bd
+      64: f49a8a17c3e3a40b8ee96d2ed5d8648038af79b46ed7e645d06b83e870025fd7
+    width256_stream_seed: profile_warmup/heldout-width256-prime-stream/256
+    expected_width256_stream_sha256: 623b459ecca48cd83dbebdd64c57afccf4d4dfd264da763f956c818e565582ee
+    independently_verify: primality-span-order-train-test-disjointness-and-canonical-hash
+    canonical_case_generation: internal-only-from-frozen-seeds-splits-source-BigIntSampler-semantics-quotas-and-future-numeric-attempt-allowance
+    transition_raw_identity: exactly-[state,multiplicand,modulus,operand_bit]-no-prefix-or-suffix
+    carry_raw_identity: exactly-[state,multiplicand,modulus,operand_bit,position]-no-other-suffix
+    rollout_and_profile_raw_identity: exactly-[multiplier,multiplicand,modulus]-no-prefix-or-suffix
+    training_identity_owner: train-only
+    evaluation_identity_owner: test-or-width256-held-out-only
+    checked_independent_private_official_answers: prohibited
+    repeat_zero: warmup-no-rate-or-evidence-denominator
+    fresh_repeats: [1, 2, 3]
+    unique_tuples_across_complete_repeat_stream: required
+    cross_stream_ownership_validation: training-train-only-evaluation-test-only-interventions-and-determinism-exact-reuse-rare-q-carry-disjoint-profile-heldout256-disjoint
+    persist_only_stream_and_split_hashes: true
+  apportionment:
+    strata_order: [natural, q2, boundary, rare_carry]
+    per_repeat_total: {natural: 1024, q2: 410, boundary: 307, rare_carry: 307, total: 2048}
+    width32_appearances:
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 25, 20, 19]
+      - [64, 25, 20, 19]
+      - [64, 25, 19, 20]
+    width64_appearances:
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 26, 19, 19]
+      - [64, 25, 19, 20]
+      - [64, 25, 19, 20]
+      - [64, 25, 20, 19]
+    precedence: natural-first-then-q2-excluding-selected-then-boundary-excluding-q2-and-selected-then-rare-carry-excluding-q2-boundary-and-selected
+    predicates:
+      q2: raw-q-equals-2-after-validating-q=floor((2s+ba)/p)
+      boundary: 20*min(abs(u-p),abs(u-2p))<=p
+      rare_carry: exact-offline-signed-carry-label-contains-minus2-or-plus1
+      caller_boolean_eligibility: prohibited
+    record_natural_semantic_overlap: true
+    deterministic_attempt_allowance: required-numeric-future-authorization-input-no-default
+    training_deficit_fallback: unique-natural-only-record-requested-realized-fallback
+    rare_evaluation_fallback: prohibited
+    L2_extension_cycles: 25
   evaluation_per_arm_width_repeat:
     natural_transitions: 512
     natural_rollouts: 32
@@ -134,13 +256,35 @@ L1:
   rare_diagnostics_per_width:
     examples_per_quotient_class: 256
     labeled_positions_per_signed_carry_class: 256
+  rare_diagnostic_ownership:
+    timing: after-fresh-repeat-3
+    owner: challenger-only
+    q_and_carry_datasets: disjoint
+    release_scientific_values: prohibited
+  resource_rate_coverage_probes:
+    quotient_forward: exact-width32-width64-control-and-challenger
+    signed_carry_forward: exact-width32-width64-control-and-challenger
+    role: resource-only-no-scientific-values
   checkpoint_integrity_per_arm:
     saves: 1
     sha256: required
     reload_equivalence: exact
+  checkpoint_ownership:
+    timing: after-fresh-repeat-3
+    total_cycles_per_arm: 1
+    tensor_equality: bit-exact
+    fixed_probe_equality: bit-exact
+    selected_profile_checkpoint: reloaded-challenger-by-ordinal-never-performance
+  determinism:
+    owner: fresh-repeat-3-reloaded-challenger
+    per_width_cases: 32
+    cases: first-32-normal-rollouts
+    extra_passes: 1
+    equality: bit-exact
   deployed_path_profile:
     environment: same-pinned-four-cpu-candidate-environment
-    routes: [candidate005-incumbent, exp658-challenger]
+    profiled_model: exp658-selected-reloaded-challenger-only
+    candidate005_role: path-validated-cache-or-pinned-full1100-incumbent-measurement-only
     width: 256
     warmup_batch_cases: 4
     fresh_repeat_batches: 3
@@ -148,6 +292,11 @@ L1:
     outer_wall_seconds: measured-separately
     aggregate_process_cpu_including_children_seconds: measured-separately
     peak_rss_bytes: measured-separately
+    checkpoint: selected-reloaded-fresh-repeat-3-challenger
+    checkpoint_handle: exact-model-returned-by-the-single-challenger-integrity-reload-no-second-reload
+    width256_stream: separately-domain-separated-held-out
+    case_disjointness: four-warmup-and-three-fresh-batches-mutually-disjoint
+    inner_and_outer_resources: required-each-fresh-batch
     cross_environment_addition: prohibited
     cached_candidate005:
       incumbent_wall_seconds: 156.0
@@ -158,6 +307,41 @@ L1:
       sandbox_record:
         path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json
         sha256: bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa
+      path_backed_artifacts:
+        submission_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+        submission_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+        submission_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+        sandbox_record: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json, sha256: bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa}
+        sandbox_runner: {path: tools/run_official_sandbox.py, sha256: fc3e3794eed5f90030980e983f69d95c36275f5bbfe0ae7219ad7027a43d0493}
+        dockerfile: {path: sources/github/modular-arithmetic-challenge/docker/Dockerfile, sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41}
+        official_generator: {path: sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/generator.py, sha256: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0}
+        official_primes: {path: sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/primes.py, sha256: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+        environment_record: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/environment.json, sha256: 4a33005e31c8515d92e6cd91f4af9935b80e90e8c46a2a1a1a8548e19315161c}
+      sandbox_record_expectation:
+        challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+        dockerfile_sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41
+        manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
+        model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
+        weights_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+        engine_command: podman
+        engine_version_sha256: 3931f1f1919b7f3e27ca7a7c8c3bfeb89ee7f9e65a85d4a6b79b2ee8f003aa92
+        image: modchallenge-sandbox:82510bba00a1
+        image_id: 0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423
+        seed: 1c82674f2826d26d7c5de0bf1933457ddc9ce824c30acff4a8a37578b3a566e4
+        total: 1100
+        timeout_seconds: 300
+        memory: 8g
+        cpus: "4"
+        tmpfs_size: 2g
+        result_status: completed
+        inference_wall_seconds: 156.0
+      environment_record_expectation:
+        platform: Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39
+        distribution: Ubuntu-24.04 WSL2
+        python: 3.12.3
+        pytorch: 2.5.1+cpu
+        device: cpu
+        torch_threads: 4
       exact_environment_identity:
         challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
         dockerfile_sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41
@@ -169,8 +353,25 @@ L1:
         memory: 8g
         tmpfs_size: 2g
         timeout_seconds: 300
+      T028_extended_identity:
+        official_seed: 1c82674f2826d26d7c5de0bf1933457ddc9ce824c30acff4a8a37578b3a566e4
+        official_total_cases: 1100
+        sandbox_runner_sha256: fc3e3794eed5f90030980e983f69d95c36275f5bbfe0ae7219ad7027a43d0493
+        generator_sha256: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0
+        primes_sha256: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac
+        environment_record_sha256: 4a33005e31c8515d92e6cd91f4af9935b80e90e8c46a2a1a1a8548e19315161c
+        device: cpu
+        precision: FP32-no-AMP
+        intra_op_threads: 4
+        inter_op_threads: 1
+        affinity: exact-four-cpu-container-cgroup
       reuse_requires: exact-artifact-sandbox-record-and-environment-identity-match
       invalidation: cached-I-and-A-unavailable-require-fresh-same-environment-incumbent-measurement
+      invalidation_replacement:
+        workload: unchanged-candidate005-exact-full-1100-case-official-input-surface
+        microprofile_substitution: prohibited
+        pinned_image: modchallenge-sandbox:82510bba00a1
+        command: python-tools/run_official_sandbox.py-engine-podman-image-modchallenge-sandbox:82510bba00a1-submission-submission-seed-frozen-total-1100-timeout-300-memory-8g-cpus-4-tmpfs-2g
   budget:
     expected: slowest-valid-repeated-rates-scaled-to-L2-plus-measured-fixed-work
     soft_wall_and_aggregate_cpu_multiplier: 1.25
@@ -178,6 +379,64 @@ L1:
     peak_rss_guard_multiplier: 1.25
     preserve_completed_checkpoints_and_evidence: true
     shrink_L2_denominators_to_fit: prohibited
+    provisional_numeric_envelope: absent-requires-later-source-bound-judge-authorization
+    comparable_sources_required: [EXP609, EXP643]
+    comparable_source_provenance:
+      EXP609:
+        identity_path: experiments/runs/exp-609-tier6-straight-through-confirmation/run.json
+        identity_sha256: a0d2a13201881bc64cbd8c7c0d3faffc5779be77ef4b46450614a2a04b337715
+        rate_path: evals/results/exp-609-tier6-straight-through-confirmation/metrics.json
+        rate_sha256: 535e3e90d76986ef204d71982a0bdf232ca5b7cff5fc0fe6fb8411374eefed6c
+        role: lineage-matched-training-and-evaluation
+      EXP643:
+        identity_path: experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/calibration.json
+        identity_sha256: f89cd5792cdc4f5a8abc73aa85be3b3e4a56ef755d609a9ff270e23ad9a64e70
+        rate_path: experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/calibration.json
+        rate_sha256: f89cd5792cdc4f5a8abc73aa85be3b3e4a56ef755d609a9ff270e23ad9a64e70
+        role: lineage-matched-width256-calibration
+    coarse_source_role: contextual-lineage-only-never-an-exact-component-rate
+    exact_component_rate_evidence: []
+    exact_component_coverage: exact-canonical-physical-unit-width-arm-source-no-collapse
+    explicit_width_arm_equivalences: {}
+    missing_exact_component_rates:
+      - q_shared_generation_case
+      - q_arm_forward_case
+      - carry_shared_generation_item
+      - carry_arm_forward_item
+      - determinism_extra_rollout_case
+      - checkpoint_cycle
+      - width256_profile_case
+    missing_exact_coverage_summary:
+      categories: 7
+      canonical_physical_records: 19
+      exact_width_arm_source_classes: 17
+      includes: width32-width64-control-challenger-q-c-two-checkpoint-arms-three-width256-profile-repeats
+    prior_phase_measurement_evidence:
+      authorization_path: null
+      authorization_sha256: null
+      warmup_records: []
+    authorization_numeric_envelope_fields: [expected-wall, expected-aggregate-CPU, maximum-observed-RSS, 1.25-soft-wall, 1.25-soft-CPU, 1.75-hard-wall, 1.75-hard-CPU, 1.25-RSS-guard]
+    fixed_short_wall_cap: null
+    loss_based_stop: prohibited
+    meter_scope:
+      wall: perf_counter
+      aggregate_cpu: cumulative-cgroup-tree-user-plus-system
+      rss: cumulative-cgroup-memory-peak
+      implementation: path-and-sha256-of-calibration.py-closed-internal-operation-registry-factory
+      provenance: exact-component-phase-repeat-source-units-width-arm-raw-counters-live-environment-prior-authorization-record-hash-meter-implementation-sha256-operation-id-and-input-manifest-descriptor
+      fresh_profile_inner_and_outer_wall: required-positive-finite-inner-no-greater-than-outer
+      wall_times_threads_substitution: prohibited
+      summed_serial_peak_RSS: prohibited
+    dynamic_projection:
+      after_warmup: canonical-remaining-L1-from-path-backed-prior-authorized-factory-metered-warmup-plus-one-to-one-exact-component-records
+      after_fresh_repeats: canonical-hash-bound-L2-derivation-from-maximum-exact-width-arm-source-matching-mean-rates
+      warmup_as_fresh_L2_rate: prohibited
+      missing_or_unmatched_component: fail-closed-with-category-and-exact-coverage-detail
+      current_blocker: empty-internal-operation-registry-and-all-seven-named-missing-exact-component-rate-categories-no-numeric-authorization-constructible
+      negative_zero_or_nonfinite_timing: prohibited
+      shared_generation: charge-once
+      model_execution: never-shared
+      reused_baseline: never-double-count
   runtime_feasibility:
     incumbent_symbol: I_same_environment
     candidate_promotion_ceiling_wall_seconds: 285.0
@@ -197,6 +456,60 @@ L1:
   decision_safe_stop:
     - do-not-start-L2-on-compliance-source-parity-parameter-memory-or-runtime-failure
     - do-not-shrink-L2-denominators-to-force-a-pass
+    - stop-only-on-independent-resource-ceiling-or-exact-impossibility-at-safe-preserved-checkpoint
+    - never-stop-on-training-loss
+  physical_projection_L2:
+    training: {shared_batches_generated: 400, shared_rows_generated: 51200, control_updates: 400, challenger_updates: 400, updates_per_width_per_arm: 200}
+    transitions: {shared_cases_generated_per_width: 20000, forward_cases_per_width_per_arm: 20000, batch_size: 128, batches_per_width_per_arm: 157, exact_final_partial: 32}
+    rollouts: {shared_cases_generated_per_width: 1000, normal_cases_per_width_per_arm: 1000, batch_size: 32, batches_per_width_per_arm: 32, exact_final_partial: 8}
+    quotient: {shared_cases_generated_per_width: 6000, forward_cases_per_width_per_arm: 6000, classes: 3, cases_per_class: 2000, batch_size: 256, batches_per_class: 8, exact_final_partial: 208}
+    signed_carry: {shared_items_generated_per_width: 8000, forward_items_per_width_per_arm: 8000, classes: 4, items_per_class: 2000, batch_size: 256, batches_per_class: 8, exact_final_partial: 208}
+    interventions: {baseline_cases: reuse-first-500-challenger-normal-per-width, extra_zero_quotient_cases_per_width: 500, extra_zero_signed_carry_cases_per_width: 500}
+    determinism: {pass1: reuse-first-100-challenger-normal-per-width, extra_identical_cases_per_width: 100}
+    fixed: [two-checkpoint-cycles, width256-profile, setup, split, model, optimizer, tracker, cache-invalid-full-1100-incumbent-rerun]
+    strict_manifests:
+      warmup: exact-component-phase-repeat-source-units-width-arm-meter-binding
+      remaining_L1: three-fresh-repeats-plus-repeat3-diagnostics-and-control-challenger-q-c-resource-rate-coverage-two-checkpoints-exact-reloaded-challenger-profile-and-cache-conditional-full1100
+      L2: per-width-per-arm-physical-operations-with-each-fixed-unit-disjoint
+      cache_input: validated-CacheVerdict-never-boolean
+      reused_baselines: absent-from-physical-units
+      overlapping_fixed_work: prohibited
+    shared_generation_charged_once: true
+    shared_model_execution: prohibited
+  authorization_binding:
+    status: absent
+    schema: exp658-l1-resource-calibration-authorization-v1
+    canonical_operation_registry: closed-internal-and-empty
+    caller_operation_registration: prohibited
+    authorized_operation_descriptor_fields: [operation-id, physical-key, rate-key, width, arm, source, units, input-or-workload-manifest-sha256, environment-sha256]
+    require_clean_committed_scaffold: true
+    require_pushed_head: true
+    binds:
+      - parent-L0-and-scaffold-commits
+      - scaffold-and-frozen-file-blobs-and-hashes
+      - source-checkpoint-sha256
+      - candidate005-evidence-and-artifact-hashes
+      - unused-root-and-output
+      - workload-seed-and-split-manifest
+      - internally-regenerated-workload-seed-split-and-raw-case-manifest
+      - live-probed-current-environment-and-separately-labeled-recorded-cache-provenance
+      - numeric-wall-aggregate-CPU-and-RSS-envelope
+      - exact-observation-projection-comparable-evidence-and-derivation-hashes
+      - exact-closed-expected-1.25-soft-1.75-hard-and-1.25-RSS-formulas
+      - path-backed-EXP609-and-EXP643-coarse-context-plus-distinct-one-to-one-exact-component-records
+      - path-backed-prior-warmup-authorization-raw-counters-derived-observations-and-record-hashes
+      - exact-per-physical-operation-descriptors-derived-only-from-the-reviewed-internal-registry
+      - later-measurement-record-path-file-record-prior-authorization-environment-meter-operation-and-physical-bindings
+      - numeric-deterministic-attempt-allowance-with-no-default
+      - independently-recomputed-unused-root-output-proof
+      - live-probed-pinned-Torch-CPU-FP32-no-AMP-determinism-4/1-threads-exact-four-CPU-affinity-cgroup-memory-tmpfs-and-meter
+    entrypoint_behavior_without_later_authorization: reject-before-mkdir-output-MLflow-model-optimizer-candidate-or-workload
+  receipt_boundary:
+    schema: exp658-l1-resource-calibration-receipt-v1
+    validation: exact-keys-and-types-at-every-nesting-level-no-free-form-metric-map
+    required_bindings: [authorization-sha256, environment-sha256, warmup-observations-sha256, warmup-measurement-evidence-sha256, workload-sha256, budget-derivation-sha256, cache-evidence-sha256, meter-implementation-sha256]
+    allowed: [identities, counts, hashes, shapes, integrity-booleans, determinism-booleans, fixed-root-physical-resource-record-descriptors, internally-derived-observations, canonical-post-L1-dynamic-budget-derivation, cache-verdict, pinned-command, closed-budgets]
+    prohibited: [loss, recall, prediction, error-count, correct-count, accuracy, scientific-score]
 
 L2:
   status: prohibited-requires-L1-promotion-and-separate-authorization
@@ -260,7 +573,9 @@ L2:
     determinism: bit-exact-both-100-case-repeats
     integrity:
       artifact_hashes: exact
-      parameter_equality: exact
+      initialization_parameter_values: exact
+      post_update_parameter_structure: exact-keys-shapes-dtypes-devices-trainable-masks-topology-LR-scheduler-and-step-counts
+      post_update_parameter_values: expected-to-diverge-under-auxiliary-supervision
       checkpoint_reload: exact
     resources:
       rss_wall_and_aggregate_cpu: within-L1-calibrated-gates

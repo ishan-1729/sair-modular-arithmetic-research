@@ -64,7 +64,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/optimize-sair-goal-run/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.1/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/optimize-sair-goal-run"
 
-active_task: T026
+active_task: T043
 
 tasks:
   - id: T001
@@ -1648,7 +1648,7 @@ tasks:
   - id: T026
     type: worker
     assignee: Worker
-    status: active
+    status: done
     reasoning_hint: low
     objective: >-
       Publish the T024-approved, T025-governed EXP658 L0 package as one exact
@@ -1685,6 +1685,1161 @@ tasks:
       - "One pushed EXP658 L0 publication commit"
       - "HEAD/upstream/remote identity and empty index"
       - "Preserved zero-root and no-authorization state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/__init__.py
+        - experiments/exp_658_joint_quotient_carry_transducer/model.py
+        - experiments/exp_658_joint_quotient_carry_transducer/data.py
+        - experiments/exp_658_joint_quotient_carry_transducer/run.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+        - docs/goals/optimize-sair-goal-run/state.yaml
+      commands:
+        - cmd: "seven frozen hashes, validator, exact cached-path, diff, root, and authorization audits"
+          status: pass
+          evidence: "159 concepts/1100 records; exactly twelve cached paths; zero EXP658 roots/authorizations."
+        - cmd: "git commit and push"
+          status: pass
+          evidence: "fc4e0605388812f8da619956063c5d49d9b8d2e3"
+        - cmd: "HEAD/upstream/remote and index verification"
+          status: pass
+          evidence: "All three refs identical at fc4e0605388812f8da619956063c5d49d9b8d2e3; zero cached paths."
+      summary: >-
+        Published the exact verified EXP658 static L0 package and governance in
+        one twelve-path commit. No calibration, root, authorization, run,
+        MLflow action, scientific metric, candidate change, or benchmark
+        surface was created.
+      remaining_blockers:
+        - "Only zero-root L1 scaffold construction is authorized next."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T027
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: medium
+    objective: >-
+      From pushed base fc4e0605388812f8da619956063c5d49d9b8d2e3,
+      implement and unit-test the complete EXP658 resource-only L1 calibration
+      scaffold as one vertical zero-root package. Encode the exact matched
+      workload, diagnostics, integrity checks, same-environment incumbent
+      validation, deployed profiling, distinct wall/aggregate-CPU/RSS meters,
+      dynamic projections, and fail-closed future authorization boundary. Do
+      not execute the preregistered calibration workload or consume a root.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+    verify:
+      - "Import the frozen model/data/run modules; do not duplicate their inference or label logic."
+      - "Unit-test one matched update, auxiliary losses, zero-message evaluations, save/hash/reload, meters, cache validation, projection arithmetic, and preflight rejection using temp/in-memory fixtures only."
+      - "Use mocked component counters to prove exact warmup and three-repeat workload counts without running it."
+      - "Prove malformed or mismatched authorization fails before root/output/MLflow/optimizer activity."
+      - "Require unchanged model/data/run/init hashes from T024."
+      - "Run the calibration tests, L0 tests, and tests/test_submission_candidate.py."
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "Run git diff --check on exactly the four scaffold paths; PM runs the full regression."
+    stop_if:
+      - "The pushed base or any frozen model/data/run/init byte differs from T024."
+      - "Any approved L1 count, denominator, causal semantic, matched-arm variable, dynamic-budget formula, or cache-identity rule changes."
+      - "Any arbitrary wall cap, cross-environment addition, wall/CPU conflation, fidelity reduction, or loss-based scientific stop is introduced."
+      - "Any root/output is allocated, authorization created, MLflow started, full L1 workload run, or durable evidence written."
+      - "Any registry/state/backlog/decision-log/GoalBuddy/submission/source/data-external/stage/commit/push/install/external write is required."
+      - "Verification fails twice for a task-owned cause."
+    expected_output:
+      - "Complete zero-root L1 calibration scaffold"
+      - "Exact workload and dynamic-budget tests"
+      - "Fail-closed committed-base authorization boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: blocked
+      changed_files: []
+      commands:
+        - cmd: "read-only exact-contract audit against pushed L0 and T024/T027"
+          status: fail-closed
+          evidence: >-
+            Optimizer/loss/data-stream values, rare-diagnostic ownership,
+            selected checkpoint, full incumbent replacement workload, RSS
+            scope, determinism accounting, and physical projection accounting
+            were not frozen tightly enough for an executable scaffold.
+        - cmd: "PM interruption and frozen-byte/root audit"
+          status: pass
+          evidence: "No task-owned edit, root, authorization, run, output, MLflow action, or frozen-byte change occurred."
+      summary: >-
+        Stopped scaffold implementation before silently inventing scientific or
+        resource variables. The pushed L0 remains unchanged. A bounded Judge
+        must resolve the exact L1 contract before implementation resumes.
+      remaining_blockers:
+        - "Judge-resolved optimizer, data, diagnostic, checkpoint, incumbent, RSS, determinism, and projection contract."
+      verification_attempts: 0
+      stopped_because: "The approved L1 contract was insufficiently resolved for a complete executable scaffold."
+  - id: T028
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Resolve the T027 fail-closed L1 contract gaps from repository evidence and
+      the binding resource policy. Freeze one coherent, matched, executable
+      resource-only calibration contract without running it. Decide whether a
+      bounded four-file repair/scaffold Worker is safe, and specify every value,
+      count, ownership rule, formula, lifecycle boundary, and stop condition it
+      must encode.
+    inputs:
+      - "Pushed EXP658 L0 base fc4e0605388812f8da619956063c5d49d9b8d2e3"
+      - "T024-T027 receipts and read-only contract-audit checklist"
+      - "EXP609 source training semantics and Candidate005 exact deployed evaluation evidence"
+      - "knowledge/autoresearch/program.md resource-budget and trained-parameters policies"
+    constraints:
+      - "Read-only; do not edit, train, calibrate, create authorization/root/output, use MLflow, install, stage, commit, push, or browse."
+      - "Ground scientific defaults in frozen source/baseline evidence; do not invent convenient values or reduce fidelity."
+      - "Define optimizer, schedule, LR, weight decay, clipping, all loss formulas, train/test identities and seed streams, exact stratum apportionment, and rollout construction."
+      - "Define arm/repeat/checkpoint ownership for rare diagnostics, interventions, checkpoint integrity, deployed profiling, and determinism."
+      - "Any invalid incumbent cache must be replaced only by the same full 1100-case deployed inference surface in the same environment."
+      - "Define RSS scope and physical-component L2 projection accounting without shared-forward double counting; keep wall and aggregate CPU distinct."
+      - "Scope exact parameter equality to initialization and geometry after divergent auxiliary losses."
+      - "Keep the entry point unconditionally fail-closed until a later Judge-approved committed authorization and preserve zero-root state."
+    expected_output:
+      - "approve-resolved-L1-scaffold | reject-or-require-more-evidence"
+      - "Exact resolved calibration contract"
+      - "Exact four-file Worker package, verify, and stop_if if approved"
+      - "Explicit zero-root/no-execution boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-resolved-L1-scaffold
+      full_outcome_complete: false
+      rationale: >-
+        Source evidence resolves every T027 ambiguity sufficiently for one
+        inert four-file scaffold. EXP609 supplies lineage-matched optimizer,
+        schedule, residue-loss, threading, and split defaults; T028 freezes the
+        new carry coefficient, streams, apportionment, ownership, checkpoint,
+        cache, meters, and physical projections. No execution or root is
+        authorized.
+      evidence:
+        - "T026 pushed base fc4e0605388812f8da619956063c5d49d9b8d2e3 is clean and root-free."
+        - "T027 stopped with zero task-owned edits before inventing unresolved variables."
+        - "EXP609 freezes AdamW, 5e-6/5e-7 learning rates, 2e-5 weight decay, clip 2.0, worst-bit weight 0.45, quotient weight 0.10, four threads, 512/128 identities, and a 400-step cosine horizon."
+        - "Candidate005 records 156.0 seconds on the exact 1100-case official input surface; reuse requires exact artifact/environment identity."
+      resolved_contract:
+        optimizer_and_loss:
+          optimizer: "Independent AdamW over all 103522 trainable parameters with identical name-to-group membership."
+          learning_rate: 0.000005
+          minimum_learning_rate: 0.0000005
+          weight_decay: 0.00002
+          scheduler: "CosineAnnealingLR T_max=400 eta_min=5e-7; optimizer step precedes scheduler step. L1 uses steps 1-16; L2 uses all 400."
+          gradient_clip: "Global clip_grad_norm_ max_norm=2.0 after backward and before optimizer step."
+          residue_loss: "BCEWithLogitsLoss(reduction=none); mean(all bits)+0.45*max(mean per bit over batch)."
+          quotient_loss: "Mean cross entropy over q classes 0,1,2."
+          carry_loss: "Map {-2,-1,0,1} to {0,1,2,3}; mean cross entropy over B*W positions."
+          arms: "Physically compute all three losses in both arms; weights are control 0/0 and challenger 0.10/0.10, with no smoothing or extra regularizer."
+          precision: "CPU FP32, no AMP, deterministic algorithms, intra-op threads 4, inter-op threads 1."
+        pairing:
+          initialization: "For warmup 0 and fresh repeats 1-3, build control from the frozen source plus namespace-seeded new tensors, then exact-copy its state dict into an independent challenger."
+          batches: "Materialize each immutable batch once; present it to both arms, restore identical Torch RNG before each forward, and counterbalance order by (repeat+global_step) mod 2."
+          independence: "Separate parameters, logits, hidden state, gradients, optimizers, schedulers, and forward results; identical empty optimizer topology/state."
+          equality_scope: "Exact tensor equality only at initialization; afterward require equal keys/shapes/dtypes/devices/trainable masks/topology/LR/step counts, finite values, and at least one auxiliary-connected tensor differing after step 1."
+        seeds_and_splits:
+          base_seed: 20261176
+          seed_function: "Low 63 bits of big-endian integer from first eight SHA-256 bytes of UTF-8 'exp658|20261176|'+namespace+'|'+pipe-joined parts."
+          namespaces: [split, init, train, eval_transition, eval_rollout, rare_q, rare_carry, profile_warmup, profile_fresh]
+          splits: "Per W32/W64 use frozen EXP609 algorithm and bit span W-7..W: 512 unique train and 128 unique test identities, disjoint; W256 has a separately domain-separated held-out stream."
+          ownership: "Training uses train identities only; all natural/rare/intervention/determinism/profile work uses test/held-out identities only; never read checked, independent, private, or official answers."
+          freshness: "Repeat 0 is warmup; repeats 1-3 use fresh initialization/streams; tuples are unique within repeat and stream/split hashes persist."
+        apportionment:
+          per_repeat_total: {natural: 1024, q2: 410, boundary: 307, rare_carry: 307, total: 2048}
+          w32: "Appearances 1-5 [64,26,19,19]; 6-8 [64,25,20,19], [64,25,20,19], [64,25,19,20]."
+          w64: "Appearances 1-5 [64,26,19,19]; 6-8 [64,25,19,20], [64,25,19,20], [64,25,20,19]."
+          precedence: "Natural first; q=2 excluding selected; boundary excluding q2/selected; rare carry excluding q2/boundary/selected. Record natural semantic overlap."
+          fallback: "After a frozen deterministic attempt allowance, fill only a training deficit with unique natural rows and record requested/realized/fallback; never reduce batch/update counts. Rare evaluation has no fallback."
+          l2_extension: "Repeat the 16-step schedule 25 times: 400 updates/arm, 200/width."
+        l1_workload:
+          repeats: "Warmup 0 executes the full matched core but contributes no rate/evidence denominator; fresh repeats 1-3 are independently reinitialized."
+          core: "Per repeat 16 alternating W32/W64 updates per arm; per arm/width 512 natural transitions and 32 normal rollouts; challenger/width 32 zero-q and 32 zero-carry rollouts paired to those normal cases."
+          rollout: "Start state zero, consume exactly W multiplier bits MSB-to-LSB, threshold residue logits at zero, decode little-endian only for next generic feature, retain invalid states, and never repair."
+          rare: "After repeat 3, challenger only: per width 256 unique transitions/q class and 256 unique transition-position items/carry class; q/c datasets disjoint; time them but release no scientific values at L1."
+          determinism: "Repeat once the first 32 normal rollout cases/width on fresh-repeat-3 challenger; outputs bit-exact."
+          checkpoint: "After repeat 3, exactly one save/hash/reload/integrity cycle per arm; tensor and fixed-probe equality bit-exact; select reloaded challenger by ordinal, never performance."
+          profile: "Pinned environment: selected reloaded challenger, four disjoint W256 warmup cases then three disjoint fresh batches of eight; record inner/outer wall, aggregate CPU, and RSS for every fresh batch."
+          receipt_boundary: "Persist only identities/counts/hashes/shapes/integrity/determinism booleans/resources/cache verdict/command/budgets, never loss/recall/prediction/error/correct-count/scientific score."
+        incumbent_runtime:
+          cache: "Reuse I=156.0 only if sandbox record, all artifact/image/engine/generator hashes, official seed and total=1100, host/runtime, CPU/affinity, four CPUs, 8GiB memory, 2GiB tmpfs, 300-second timeout, threads, and precision all match."
+          invalid_cache: "Rerun unchanged Candidate005 on the exact same full 1100-case official input surface using recorded seed 1c82674f2826d26d7c5de0bf1933457ddc9ce824c30acff4a8a37578b3a566e4 and tracked command/hashes; no microprofile substitute."
+          gate: "A=285-I; fail if I unavailable or I>=285. U100=1.25*100*max(t_i/8), L100=100*min(t_i/8): pass if U100<=A, fail if L100>A, else exact 100 cases and require 1.10*T100<=A."
+        resources:
+          meters: "perf_counter wall; actual process/cgroup-tree user+system CPU; maximum simultaneous tree RSS via cgroup memory.peak or recorded process-tree high-water meter, never wall*threads or summed serial peaks."
+          provisional: "A later authorization must derive numeric L1 expectations from comparable EXP609 and EXP643 physical evidence, with wall/CPU headroom 1.25, runaway 1.75, and RSS 1.25; fail closed if not comparable."
+          dynamic: "After warmup project remaining L1; after fresh repeats project L2 from maximum matching mean component rate. Sum serial physical and fixed work without double-counting shared generation or reused baselines."
+          stopping: "Only ceiling crossing or exact impossibility may stop at a safe checkpoint after preservation; never reduce fidelity or denominators. Use one foreground execution package and measured-time heartbeat, not control-plane polling."
+        l2_physical_projection:
+          training: "Generate 400 shared batches; execute 400 forward/backward/update operations per arm, 200/width."
+          transitions: "Per width generate 20000 once and execute 20000 forwards/arm, batch128 with exact final partial."
+          rollouts: "Per width generate 1000 once and execute 1000 normal rollouts/arm, batch32 with exact final partial."
+          q: "Per width 2000 unique transitions/class generated once; 6000 forwards/arm, class batches256 with exact partial."
+          carry: "Per width 2000 unique transition-position items/class generated once; 8000 forwards/arm, class batches256 with exact partial."
+          interventions: "Per width reuse first 500 challenger natural cases as baseline; execute 500 extra zero-q and 500 extra zero-carry rollouts."
+          determinism: "Per width reuse first 100 challenger normal cases as pass1; execute one extra identical 100-case pass."
+          fixed: "Charge two checkpoint cycles, W256 profile, setup/split/model/optimizer/tracker work, and exact full-1100 incumbent rerun only if cache invalid. Shared data generation is once; no model execution is shared."
+        lifecycle:
+          scaffold: "CLI rejects before mkdir/output/MLflow/model/optimizer/candidate/workload for missing or mismatched authorization."
+          authorization: "Later authorization binds clean committed scaffold and parent L0 commits, blobs/hashes for all scaffold/frozen files, exact source checkpoint SHA cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, Candidate005 evidence/artifact hashes, unused root/output, workload and seed/split manifest, environment, and numeric wall/CPU/RSS budget."
+          preservation: "EXP648 remains immutable parked evidence and EXP656 remains rejected evidence."
+      blocked_tasks:
+        - "Any L1 execution/root/authorization/output/MLflow/scientific result until a committed scaffold and later Judge gate."
+        - "All L2 and promotion work until valid L1 resource evidence."
+      missing_evidence:
+        - "Committed L1 scaffold and later numeric source-bound authorization."
+  - id: T029
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Implement the complete T028-resolved EXP658 L1 calibration scaffold and
+      preregistration as one inert four-file package. Unit-test every workload,
+      pairing, provenance, resource, and lifecycle invariant. Do not execute
+      calibration, allocate a root, create authorization/output, use MLflow,
+      expose science, stage, commit, or push.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+    verify:
+      - "Test exact seed derivation, disjoint/fresh splits/streams, apportionment matrices, ownership/fallback, and 25-cycle extension."
+      - "Test immutable paired batches, counterbalanced RNG/order, initialization equality, independent optimizers, structural post-update equality, finite state, and auxiliary-connected divergence."
+      - "Test exact losses, optimizer groups, cosine horizon, clipping/scheduler order."
+      - "Test exact L1/L2 physical counters and no shared-generation/reused-baseline double counting."
+      - "Test distinct wall/aggregate-CPU/RSS math, dynamic budgets, runtime gate, exact Candidate005 cache invalidation/full-1100 command, and decision-safe stops."
+      - "Test authorization rejection before every side effect in temporary/in-memory fixtures and receipt-schema exclusion of scientific values."
+      - "Require unchanged T024 hashes for model/data/run/init and unchanged L0 test hash."
+      - "Run L0 plus calibration-focused tests and tests/test_submission_candidate.py; run project validator; Worker may run full pytest once."
+      - "Run git diff --check and confirm exactly four task-owned paths plus PM-owned GoalBuddy state."
+    stop_if:
+      - "Any file outside four allowed paths must change or any overlapping edit cannot be preserved."
+      - "Any exact T028 count, seed, loss, checkpoint, cache identity, or resource formula requires guessing."
+      - "Any dependency install or frozen model/data/run/init/L0-test modification is required."
+      - "Any authorization/root/persistent output/MLflow/candidate run/L1 workload/science/stage/commit/push occurs."
+      - "A test would persist scientific loss/recall/prediction/error/correct-count data or read checked/private answers."
+      - "Verification fails twice for a task-owned cause."
+    expected_output:
+      - "Contract-complete inert L1 scaffold"
+      - "Exhaustive unit-test evidence without a root"
+      - "Preserved frozen L0 and benchmark boundaries"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+      commands:
+        - cmd: "python -m py_compile calibration.py and calibration tests"
+          status: pass
+        - cmd: "python -m pytest -q calibration, L0, and submission-isolation tests"
+          status: pass
+          evidence: "35 passed."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Worker: 327 passed; PM independent regression: 327 passed in 268.51s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "frozen hashes, exact scope, diff, root, authorization, output, MLflow, and stage audits"
+          status: pass
+          evidence: "Four task files plus PM board only; frozen L0 exact; zero side effects."
+      hashes:
+        config: 6a2945cdd12e6a957d4bb83abc15d745cd60c60b7c75ff2ef0492970f826e4f6
+        calibration: 10504fb573389e395e47a7c2d403c02f3e95a9304d7f8cd3815d37b06439e258
+        preregistration: 6bbff883424a171cbb11323d943a3ba388d02a3d3fd4853486dcdb3fcc6ebdf5
+        calibration_test: 86d578c1158796c014ec133ada9ebcb354233d7bb213a45d296e2633052c0722
+      summary: >-
+        Implemented the T028-resolved, inert L1 scaffold and exhaustive unit
+        tests for seeds/splits, apportionment, paired optimization, loss/order,
+        checkpointing, physical counters, resource formulas, incumbent cache,
+        authorization lifecycle, and receipt boundaries. No calibration,
+        root, authorization, persistent output, MLflow, scientific value,
+        stage, commit, or push occurred.
+      remaining_blockers:
+        - "Read-only Judge publication audit."
+        - "Execution remains prohibited pending committed scaffold, numeric source-bound envelope, unused root/output, and separate authorization."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T030
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Audit the complete T029 EXP658 L1 scaffold against every T028 resolved
+      invariant, its tests, PM's independent 327-test regression, frozen L0
+      hashes, and zero-side-effect lifecycle. Decide whether the four-file
+      scaffold is safe to publish as unexecuted infrastructure or requires a
+      bounded repair. Do not authorize or execute calibration.
+    inputs:
+      - "T028 resolved contract and T029 receipt"
+      - "Four T029 files and hashes"
+      - "Frozen model/data/run/init/L0-test hashes"
+      - "PM regression: 327 passed in 268.51s; validator 159/1100"
+    constraints:
+      - "Read-only; no edits, calibration, model/candidate run, root/output/authorization, MLflow, install, stage, commit, push, or browse."
+      - "Trace implementation and tests to every resolved count, formula, stream, identity, ownership, loss, pairing, cache, meter, projection, receipt, and pre-side-effect authorization rule."
+      - "Require CLI fail-closed behavior in the present null-authorization state and zero persistent side effects from tests."
+      - "Publication is scaffold-only; it cannot claim observed resources, training, causality, accuracy, promotion, or benchmark evidence."
+    expected_output:
+      - "approve-scaffold-publication | required-repair | reject"
+      - "Exact evidence and any repair boundary"
+      - "Explicit continued prohibition on calibration execution"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: required-repair
+      full_outcome_complete: false
+      rationale: >-
+        The hashes, frozen L0, 327-test regression, validator, inert CLI, and
+        zero-side-effect state are valid, but the tests cover a permissive
+        one-step surrogate. Multi-step pairing, exact source prime splits,
+        stream ownership, environment/meter provenance, cache/authorization
+        binding, physical projection, and nested receipt exclusion require one
+        bounded four-file repair before publication.
+      findings:
+        - "paired_update requires full arm value equality before every call, so intended step-1 divergence makes steps 2-16 impossible; tests cover only one fresh step."
+        - "Identity allocation accepts composites and does not reproduce or independently hash the frozen EXP609 random.Random plus next-prime split."
+        - "Tuple uniqueness is local to one pool; full-repeat, q/c diagnostic, intervention, determinism, and W256 profile ownership/disjointness are not validated."
+        - "Config/preregistration retain stale post-training exact-value equality and two-route microprofile language contrary to T028."
+        - "Deterministic CPU settings, exact AdamW defaults, raw stratum predicates, and process-tree/cgroup meters are not enforced."
+        - "Remaining-L1 and L2 resource observations lack strict phase/repeat/source/physical-unit/meter provenance and fixed-work disjointness."
+        - "Authorization and Candidate005 cache checks trust incomplete caller assertions; the full-1100 command lacks an explicit pinned image."
+        - "runtime_gate accepts invalid exact-100 timings and receipt filtering allows nested science leakage under permitted top-level keys."
+        - "Checkpoint helper does not return the exact reloaded challenger required for ordinal profiling."
+      evidence:
+        - "Four T029 hashes match; frozen model/data/run/init/L0-test hashes match."
+        - "PM full regression 327 passed and validator 159/1100 remain valid regression evidence only."
+        - "No root, authorization, output, MLflow action, staged path, or calibration execution exists."
+      blocked_tasks:
+        - "Scaffold publication and every EXP658 execution/scientific/promotion surface."
+      missing_evidence:
+        - "Repaired multi-step, source-split, provenance, cache, authorization, meter, projection, and receipt tests."
+        - "Fresh four-file hashes and full verification."
+  - id: T031
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Repair the inert EXP658 scaffold so every T028 invariant is represented
+      by fail-closed code and adversarial tests. Preserve all valid T029 work,
+      keep the CLI inert, and produce no calibration or scientific evidence.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+    required_repairs:
+      - "Support all 16 paired steps: value equality only before step1; later require matched geometry/masks/optimizer topology/LR/scheduler/step counts, independent storage, finite parameters/gradients, and persistent auxiliary-connected divergence. Test sequential two-step and lightweight 16-step execution."
+      - "Implement frozen split exactly: random.Random(domain-separated split seed), draw in [1<<(W-8),1<<W), choose next prime strictly above each draw, discard >=high and duplicates, allocate 512/128. Validate primality/span/disjointness and independently derived hashes."
+      - "Enforce unique tuples across the complete repeat stream and derive q2/boundary/rare-carry eligibility from raw u,p,q,carry labels, including the exact 0.05 predicate and {-2,+1}; never trust caller booleans."
+      - "Validate train/test ownership, rare q/c uniqueness and disjointness, paired normal/intervention identities, repeat3 diagnostics/checkpoints, determinism reuse, and disjoint W256 warmup/fresh cases."
+      - "Add deterministic CPU preflight for FP32/no AMP, deterministic algorithms, 4/1 threads, pinned Torch identity, and explicitly freeze/validate source-resolved AdamW defaults."
+      - "Remove stale post-training value-equality and two-route microprofile language; profile the selected reloaded challenger only, and use full official 1100 Candidate005 cases after invalid cache."
+      - "Return the exact reloaded model from checkpoint integrity or an equally exact handle so the ordinal challenger is the profiled object without an uncounted reload."
+      - "Define strict remaining-L1 and L2 physical manifests. Bind observations to component/phase/repeat/source/units/meter; reject warmup-as-fresh, missing, unmatched, negative/non-finite values, invalid RSS provenance, and overlapping fixed work."
+      - "Require an exact closed numeric authorization envelope with expected/1.25-soft/1.75-hard wall+CPU, 1.25 RSS, comparable EXP609/EXP643 provenance, workload/split hashes, future numeric attempt allowance, environment, every scaffold/frozen/Candidate hash, and unused root/output verified independently; reject missing or extra fields."
+      - "Validate every path-backed incumbent artifact and parsed sandbox record; pin the full-1100 rerun image/tag; projection accepts a validated CacheVerdict, not a boolean; reject non-positive/non-finite timings."
+      - "Replace receipt substring filtering with a strict nested resource-only schema and adversarial tests for hidden accuracy/loss/recall/prediction/error/correctness values."
+      - "Strengthen static lifecycle tests across calibration and frozen imports: no import-time filesystem/process/MLflow action and CLI rejection before every side-effect helper. Temp checkpoint files only are allowed in tests."
+    verify:
+      - "Run calibration, L0, and submission-isolation tests."
+      - "Run project validator and full pytest once."
+      - "Verify frozen model/data/run/init/L0-test hashes."
+      - "Run git diff --check and audit exact four task files plus PM board, empty index, and zero root/auth/output/MLflow/science."
+    stop_if:
+      - "Any file outside four allowed paths or any overlapping user edit must change."
+      - "Any root/authorization/output/MLflow/candidate/optimizer-backed representative workload/science/stage/commit/push/install occurs."
+      - "A numeric attempt allowance or execution budget must be invented; require it as a later authorization field instead."
+      - "Exact source split or tracked artifact identity cannot be reproduced."
+      - "Verification fails twice for a repair-owned cause."
+    expected_output:
+      - "Strict repaired inert scaffold"
+      - "Adversarial multi-step/provenance/lifecycle test evidence"
+      - "Preserved zero-root and frozen L0 state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+      commands:
+        - cmd: "python -m py_compile and focused calibration tests"
+          status: pass
+          evidence: "17 passed after one bounded repair cycle."
+        - cmd: "python -m pytest calibration, L0, and submission-isolation tests"
+          status: pass
+          evidence: "41 passed."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Worker 333 passed; PM independent regression 333 passed in 312.68s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "frozen hashes, path-backed cache, exact scope/index, and zero-side-effect audits"
+          status: pass
+          evidence: "Frozen L0 exact; four task files plus PM board only; empty index; zero EXP658 root/authorization/output/MLflow/science."
+      hashes:
+        config: 30ce404b82b6ac7dac4afdff40f14cafc442d5545b1e592312cab0d3792b805d
+        calibration: 90a6c2fe6dac7d675ff72d8f93878c26042092c2011c01be2a5438e3cc6e7f7a
+        preregistration: 59952b77856f35bb420b98975b66298f7144051d4f17f8d9698ca8878522be05
+        calibration_test: 8a50c038f5ac8537ab0499bb9c1057cf985928af87725a803c53c96af746fbec
+      summary: >-
+        Repaired multi-step matched updates, exact source prime splits, raw
+        strata and ownership, deterministic environment/optimizer validation,
+        reloaded-checkpoint identity, path-backed Candidate005 cache, strict
+        meters/manifests/authorization, nested receipt schema, and lifecycle
+        tests. No execution or persistent experiment side effect occurred.
+      remaining_blockers:
+        - "Renewed read-only publication Judge."
+        - "Calibration remains prohibited pending committed scaffold plus later numeric authorization."
+      verification_attempts: 2
+      stopped_because: null
+  - id: T032
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Renew T030's publication audit on the T031-repaired EXP658 L1 scaffold.
+      Trace each prior finding and every T028 invariant through code and
+      adversarial tests, PM's independent 333-test regression, frozen L0, and
+      zero-side-effect state. Decide whether the inert four-file scaffold may
+      be published; do not authorize or execute calibration.
+    inputs:
+      - "T028-T031 receipts"
+      - "Four repaired files and T031 hashes"
+      - "PM regression 333 passed in 312.68s; validator 159/1100"
+      - "Frozen T024 hashes and zero-root audit"
+    constraints:
+      - "Read-only; no edits, calibration/candidate run, root/output/authorization, MLflow, install, stage, commit, push, or browse."
+      - "Require concrete closure of all T030 multi-step/split/ownership/environment/meter/cache/authorization/projection/receipt/checkpoint/lifecycle findings."
+      - "Scaffold publication cannot claim observed resources, training, causality, accuracy, promotion, or benchmark evidence."
+    expected_output:
+      - "approve-scaffold-publication | required-repair | reject"
+      - "Finding-by-finding closure evidence"
+      - "Exact publication boundary or repair package"
+      - "Explicit continued calibration prohibition"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: required-repair
+      full_outcome_complete: false
+      rationale: >-
+        T031 closed the major multi-step, W32/W64 split, optimizer, cache,
+        checkpoint, timing, count, receipt, and inert-lifecycle findings. It did
+        not close canonical workload/environment/resource derivation and left
+        literal stale equality/two-route fields. These residual defects could
+        authorize reduced or incorrectly owned work, so publication remains
+        blocked while all valid T031 evidence is preserved.
+      closed_findings:
+        - "All 16 paired steps support intended divergence with matched structural and finite-state checks."
+        - "W32/W64 splits reproduce and independently verify the frozen source algorithm."
+        - "AdamW defaults, loss/order, deterministic Torch identity, path-backed Candidate005 evidence, pinned full-1100 command, CacheVerdict, positive timing, and reloaded checkpoint object have direct tests."
+        - "Physical counts, strict nested receipt fields, fail-closed CLI, and no import-time side effects are implemented."
+      residual_findings:
+        - "Stale exact post-training parameter-equality and two-route config/preregistration fields remain."
+        - "Authorization accepts a fabricated identity stream hash and caller-mutated nested workload instead of recomputing the canonical workload from validated identities/cache."
+        - "Rare labels and W256 held-out identities remain caller-supplied rather than raw-data/domain-stream verified."
+        - "Warmup cannot project all remaining-L1 components; dynamic budgets accept arbitrary projection subsets and formula-consistent but source-unbound expected values."
+        - "CPU affinity and meter implementation remain free-form assertions; resource receipt budgets/cache are not live-bound to authorization derivation."
+        - "Exact optimizer validation does not bind initial/base LR."
+      evidence:
+        - "T031 hashes exact; frozen T024 hashes exact; PM 333/333, validator 159/1100, empty index, zero root/auth/output/MLflow."
+      blocked_tasks:
+        - "Publication and all execution/scientific/promotion surfaces."
+      missing_evidence:
+        - "Canonical live workload/identity/cache/environment/budget derivation and adversarial mutation rejection."
+        - "Fresh repaired hashes and full verification."
+  - id: T033
+    type: worker
+    assignee: Worker
+    status: blocked
+    reasoning_hint: medium
+    objective: >-
+      Close the residual T032 publication defects while preserving every valid
+      T031 repair, the inert CLI, and zero-execution boundary. Make workload,
+      identity, cache, environment, meter, budget, and receipt bindings
+      canonical and independently recomputed, not caller-asserted.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+    required_repairs:
+      - "Remove legacy two-route fields/reinterpretation. Candidate005 is cache/full-1100 incumbent evidence only; EXP658 challenger alone gets 4+3x8 microprofile."
+      - "Replace every unscoped value/parameter-equality statement with initialization equality, post-update structural equality, and expected divergence; add a static config/prereg regression."
+      - "Build workload only from the complete identity manifest, exact W32/W64 splits, W256 stream, and validated CacheVerdict; invoke identity validation internally and recompute canonical nested workload during authorization. Reject every nested mutation."
+      - "Represent rare cases with raw transition/position fields and recompute q/carry labels; reject arbitrary labels, duplicate positions, and q/c overlap."
+      - "Generate and validate a domain-separated W256 held-out prime stream with lower bit span, positivity, primality, disjoint warmup/fresh cases, and persisted hash."
+      - "Bind checkpoint handles to repeat3/challenger/ordinal metadata before returning the exact reloaded profile object."
+      - "Add a canonical remaining-L1 resolver combining warmup with path-backed comparable EXP609/EXP643 rates for every unmatched q/c/checkpoint/profile/fixed/conditional-incumbent component; fail on any missing comparable rate."
+      - "Require the exact canonical stage/cache projection manifest; reject omitted/added/duplicated/altered units."
+      - "Bind numeric envelopes to validated derivations with observation/projection/comparable-evidence hashes, expected values, and exact 1.25/1.75/1.25 recomputation; arbitrary expected values fail."
+      - "Require and live-validate exactly four affinity CPUs plus recorded CPU/memory/tmpfs/timeout. Bind meters to a path-backed implementation hash and cumulative cgroup memory.peak or process-tree high-water semantics."
+      - "Bind strict resource-only receipts to exact authorization/scaffold/workload/budget derivation and the live path-backed CacheVerdict."
+      - "Bind AdamW initial LR/base_lrs and exact scheduler LR at the current step."
+      - "Keep main inert; add no execution path, default attempt allowance/budget, root/output/MLflow/candidate/science action."
+    verify:
+      - "Run calibration, L0, and submission-isolation tests; validator; full pytest once."
+      - "Verify frozen model/data/run/init/L0-test hashes and exact four-file scope plus PM board."
+      - "Audit empty index and zero root/authorization/output/MLflow/scientific evidence."
+    stop_if:
+      - "Any file outside four allowed paths or overlapping user edit must change."
+      - "Comparable tracked EXP609/EXP643 evidence cannot support an exact physical rate; stop instead of inventing one."
+      - "Any numeric attempt allowance/resource value must be invented rather than future-supplied and exactly derived."
+      - "Any execution/root/auth/output/MLflow/candidate/science/install/stage/commit/push/browse occurs."
+      - "Verification fails twice for a repair-owned cause."
+    expected_output:
+      - "Canonical independently bound inert scaffold"
+      - "Adversarial nested-mutation/environment/resource tests"
+      - "Preserved T031 closures, frozen L0, and zero-root state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: blocked
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+      commands:
+        - cmd: "python -m py_compile scaffold and tests"
+          status: pass
+        - cmd: "three previously failing focused tests"
+          status: pass
+          evidence: "3 passed."
+        - cmd: "calibration, frozen L0, and official sandbox tests"
+          status: fail
+          evidence: "39 passed, 2 frozen-L0 assertion failures reproduced by PM."
+      summary: >-
+        Implemented the four-file residual repair, then stopped because the
+        frozen L0 test requires the exact legacy two-route field and unscoped
+        post-training parameter equality that T032 orders removed. Correcting
+        verification requires a test-only scope expansion; no such expansion
+        was assumed.
+      remaining_blockers:
+        - "Judge decision on replacing exactly two stale config assertions in the frozen L0 test and refreezing its hash."
+      verification_attempts: 1
+      stopped_because: "Out-of-scope L0 test assertions contradict the T032 repair contract."
+  - id: T034
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Audit the T033 scope conflict and decide whether a narrowly expanded
+      Worker may update exactly the two stale config assertions in the L0 test,
+      refreeze its hash, and resume full T033 verification. Also audit the
+      preserved four-file T033 changes for the intended residual repairs before
+      authorizing any publication. Do not edit or execute calibration.
+    inputs:
+      - "T032-T033 receipts and current dirty four-file repair"
+      - "Two reproduced failures in tests/test_exp658_joint_quotient_carry_transducer.py"
+      - "T028 contract and T024 frozen L0 evidence"
+    constraints:
+      - "Read-only; no edits, calibration/candidate run, root/output/authorization, MLflow, install, stage, commit, push, or browse."
+      - "Any scope expansion must be limited to replacing assertions that encode the now-rejected two-route microprofile and post-training value equality; all mathematical/parity/compliance assertions remain unchanged."
+      - "Require a new L0-test hash and later governance update if the test changes; do not represent the old hash as current."
+      - "Audit whether T033 actually closes canonical workload/identity/cache/environment/meter/budget/receipt binding before defining resumed verification."
+    expected_output:
+      - "approve-test-only-scope-expansion | required-repair | reject"
+      - "Exact allowed assertions/files and refreeze requirements"
+      - "T033 residual finding audit"
+      - "Continued zero-execution boundary"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-five-file-resumed-repair-not-publication
+      full_outcome_complete: false
+      rationale: >-
+        The two failures are stale protocol assertions and may be replaced
+        without altering L0 science. The same hash-coupled package must refreeze
+        the L0 test, independently reconstruct W256 primes using the pinned
+        arbitrary-width library, and make current Torch/runtime authorization
+        fields live-derived or explicitly recorded-only. Renewed verification
+        and publication review remain mandatory.
+      approved_scope:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+      exact_l0_test_edits:
+        - "Replace only the legacy routes assertion with profiled_model=exp658-selected-reloaded-challenger-only and candidate005_role=path-validated-cache-or-pinned-full1100-incumbent-measurement-only."
+        - "Replace only unscoped parameter_equality with initialization exact, post-update structural exact, post-update values expected-divergent, while retaining exact artifact/checkpoint assertions."
+      additional_repairs:
+        - "Use SymPy nextprime for W256 and an independent reconstruction test that does not call calibration or frozen_data.is_prime."
+        - "Live-probe Torch version/default dtype/determinism/4-and-1 thread state; live-compare claimed current fields or label cache/image/engine fields recorded-only for later authorization."
+        - "Refreeze the L0-test hash in calibration and record all new five-file hashes."
+      evidence:
+        - "Exactly two old L0 assertions conflict; no mathematical/parity/geometry/compliance assertion requires alteration."
+        - "Frozen init/model/data/run remain exact and zero execution side effects persist."
+      blocked_tasks:
+        - "Publication and all execution/scientific work pending repair, verification, and renewed Judge."
+      missing_evidence:
+        - "Repaired five-file hashes, full verification, and later governance supersession of old current hashes."
+  - id: T035
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Reconcile T034's bounded approval with the independent code audit's
+      remaining authorization-chain findings. For each disputed claim, trace
+      the actual call graph and either cite the fail-closed recomputation that
+      disproves it or add an exact repair/adversarial test to the resumed
+      five-file package. Do not edit or execute calibration.
+    inputs:
+      - "Current T033 five-file candidate state and T032-T034 receipts"
+      - "Independent exp658_l1_code_audit receipt with file/line findings"
+    constraints:
+      - "Read-only; no edits, workload/candidate execution, root/auth/output/MLflow, install, stage, commit, push, or browse."
+      - "Adjudicate nested workload+expected co-mutation; seed-to-case stream regeneration and raw-identity suffix bypass; exact physical comparability versus synthesized rate reuse; meter observation path enforcement; live environment identity; and receipt observation-to-budget hash binding."
+      - "A claim is closed only by a mandatory production call path plus adversarial test, not by a helper that callers may bypass."
+      - "Preserve T034's approved two assertion edits, W256 independent-prime repair, live-runtime repair, and zero-execution boundary."
+    expected_output:
+      - "approve-T034-package-as-sufficient | expand-resumed-repair"
+      - "Finding-by-finding code-path evidence"
+      - "Exact consolidated five-file repair and tests"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: expand-resumed-five-file-repair
+      full_outcome_complete: false
+      rationale: >-
+        T034 alone is insufficient. Call-graph review confirms caller-co-mutated
+        authorization state, caller-authored/suffixable identity cases, coarse
+        aggregate rates relabeled as exact component rates, optional real-meter
+        use, and unbound receipt observations. Replace those trust roots with
+        canonical path-backed recomputation while preserving all prior valid
+        repairs. Current EXP609/EXP643 aggregates remain contextual only and
+        cannot construct a numeric remaining-L1 authorization.
+      confirmed_findings:
+        - "Co-mutating payload and caller expected plus self-hashes bypasses canonical workload rejection."
+        - "Identity validation does not seed-regenerate cases; suffixes can disguise duplicate/overlapping raw q/c identities."
+        - "EXP643/609 aggregates are reused/synthesized as multiple disjoint exact rates contrary to T033 stop policy."
+        - "The real cumulative meter has no production authorization call site; synthetic observations can currently authorize."
+        - "Receipt observations are not hashed back to authorization warmup_observations_sha256 or one live environment."
+        - "W256 arbitrary-width primality, live runtime identity, and one unscoped preregistration phrase remain."
+      preserved_closures:
+        - "Multi-step pairing, W32/W64 split, losses/optimizer order/base LR, path-backed cache, positive timing, checkpoint ownership, exact manifests, nested schema, and inert lifecycle."
+      blocked_tasks:
+        - "Publication and every EXP658 execution/scientific/promotion surface."
+        - "Numeric remaining-L1 authorization until exact path-backed component evidence is acquired later."
+      missing_evidence:
+        - "Canonical seed-to-case/raw identities, path-backed real-meter phase evidence, exact component rates, and receipt recomputation."
+        - "Independent W256/live runtime/L0 refreeze plus fresh verification."
+  - id: T036
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Complete the expanded five-file inert scaffold repair. Replace every
+      caller-asserted authorization, identity, comparable-rate, measurement,
+      environment, and receipt trust root with canonical path-backed production
+      recomputation. Preserve prior closures and fail closed on currently
+      missing exact component-rate evidence.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    required_repairs:
+      - "Production validator/inert entrypoint internally derives canonical authorization from config, live Git/cache/environment, canonical generated workload, authorized path-backed warmup records, and exact comparable evidence; no caller expected trust root. Reject fully co-mutated nested payload+expected+self-hashes."
+      - "Generate the complete L1 manifest from frozen seeds/splits/source sampler/quotas/future attempt allowance/held-out streams. Raw transition identity is exactly state,multiplicand,modulus,bit; carry adds exactly position; rollout/profile uses one exact documented raw tuple; suffixes prohibited."
+      - "Replace serial/cycled fixtures and adversarially reject different valid streams, suffix-hidden raw transition/carry duplicates, and q/c raw overlap."
+      - "Preserve W32/W64 split; use pinned SymPy nextprime for W256 and independently reconstruct all 28 values/hash without calibration helpers or frozen_data.is_prime."
+      - "Remove synthesized/duplicated aggregate component rates. Keep EXP609/643 coarse contextual provenance only. Current exact remaining-L1 resolver/authorization must fail closed naming each missing component; mechanics tests may use temporary one-to-one path-backed evidence only."
+      - "Only a path-backed prior-phase-authorized measurement record created by a factory that invokes the cumulative meter around an operation may feed production budgeting. Bind raw counters, derived observation, meter implementation, live environment, prior authorization, and record hash."
+      - "Budget validation recomputes exact canonical manifests/rates/expected wall-CPU-RSS/headroom and derivation hashes from validated records; self-consistent caller mutations fail."
+      - "Receipt bindings include authorization/environment/warmup-observations hashes; reparse and hash the canonical warmup subset, require every observation's environment/meter binding, and reject co-updated receipt-local mutations."
+      - "Live-probe Torch version/default dtype/determinism/4-and-1 threads and every field labeled current; image/engine without a live probe is recorded cache provenance only, never current-environment proof."
+      - "Scope the final preregistration parameter-equality wording. Apply exactly T034's two L0 assertion edits, independently refreeze the L0 test, and update only its calibration frozen binding."
+      - "Keep main inert and add no workload/candidate/root/auth/output/MLflow/science path or default numeric allowance/budget."
+    verify:
+      - "Focused adversarial tests for all T035 findings: co-mutated auth, stream/suffix attacks, missing exact comparables, mandatory meter invocation, warmup receipt mutation, live runtime mutation, independent W256, scoped wording."
+      - "Run calibration+L0+submission tests, validator, and one full pytest without arbitrary short timeout or fidelity reduction."
+      - "Verify unchanged init/model/data/run hashes; record all five new hashes; inspect L0-test diff as exactly two assertion blocks."
+      - "Run diff/scope/index audit and confirm zero root/authorization/output/MLflow/science."
+    stop_if:
+      - "Any exact rate must be inferred/duplicated/invented from aggregate EXP609/643 evidence; preserve the named missing-rate blocker."
+      - "Canonical streams require invented scientific behavior not grounded in source sampler and T028 seeds/quotas."
+      - "Any production path accepts caller expected, caller identity manifest, or unbound observations."
+      - "Any other L0 assertion, file outside five paths, frozen production file, submission, EXP648, or EXP656 changes."
+      - "Any execution/root/auth/output/MLflow/science/install/stage/commit/push/browse occurs."
+      - "Verification fails twice for a repair-owned cause."
+    expected_output:
+      - "Canonical path-backed fail-closed inert scaffold"
+      - "Named missing-rate blocker instead of fabricated numeric authorization"
+      - "New L0-test and final five-file hashes with full verification"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+        - tests/test_exp658_joint_quotient_carry_transducer.py
+      commands:
+        - cmd: "focused adversarial calibration suite"
+          status: pass
+          evidence: "30 passed."
+        - cmd: "calibration, L0, submission, and sandbox relevant suite"
+          status: pass
+          evidence: "55 passed."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Worker 346 passed in 404.02s; PM independent 346 passed in 428.95s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "five-file diff/hash/scope/index and side-effect audit"
+          status: pass
+          evidence: "Exactly two approved L0 assertion hunks; frozen production hashes exact; empty index; zero EXP658 root/auth/output/MLflow/science."
+      hashes:
+        config: 5ab77a8bf4602863290189b4241ab0380e66e69baedfb20d0a5c716f48c22e9e
+        calibration: 53393f546789f8201ab1f09c3d1b3bcab3b1e17a4a1e280ea456617bee297107
+        preregistration: ba4a6ff977c463e1fc81a462565f87e349b799d811e8690d1193d0f449f5f221
+        calibration_test: 79f1440c4a8a5ed8379f3bffc435a37925e604fcffcf17fd07eceb380a70eb4a
+        l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6
+      summary: >-
+        Completed canonical seed-regenerated raw workloads, independent SymPy
+        W256 verification, path-backed mandatory meter evidence, live runtime
+        binding, canonical authorization/budget recomputation, receipt warmup
+        and environment binding, scoped docs, and the two approved L0 assertion
+        edits. Production remains inert and cannot construct numeric
+        authorization from current coarse evidence.
+      remaining_blockers:
+        - "Exact one-to-one records are absent for q generation/forward, carry generation/forward, determinism extra rollout, checkpoint cycle, and W256 profile."
+        - "Publication requires renewed Judge; execution remains prohibited."
+      verification_attempts: 2
+      stopped_because: null
+  - id: T037
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Perform the renewed publication audit on the complete T036 five-file
+      scaffold. Trace every T030/T032/T035 finding through mandatory production
+      call paths and adversarial tests, verify the two-hunk L0 refreeze, full
+      regression, hashes, named missing-rate fail-close, and zero side effects.
+      Decide whether inert scaffold publication is now safe. Do not authorize
+      or execute any measurement or calibration.
+    inputs:
+      - "T028-T036 receipts and current five-file bytes/hashes"
+      - "PM regression 346 passed in 428.95s; validator 159/1100"
+      - "Exact two-hunk L0-test diff and frozen production hashes"
+    constraints:
+      - "Read-only; no edits, workload/candidate execution, root/auth/output/MLflow, install, stage, commit, push, or browse."
+      - "Require production-path canonical recomputation, not only pure helpers or caller fixtures."
+      - "Current missing exact rates must make numeric authorization impossible while still allowing scaffold publication."
+      - "Publication claims infrastructure only: no observed resources, training, causality, accuracy, promotion, or benchmark evidence."
+    expected_output:
+      - "approve-inert-scaffold-publication | required-repair | reject"
+      - "Finding-by-finding closure and named remaining blocker"
+      - "Exact publication/governance boundary"
+      - "Continued execution prohibition"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-inert-scaffold-publication-not-enacted
+      full_outcome_complete: false
+      rationale: >-
+        Judge approved publication based on canonical workload/budget/receipt
+        recomputation and named missing-rate fail-close. PM did not enact the
+        approval because an independent audit plus direct call-site inspection
+        demonstrated three remaining production trust-root bypasses. Preserve
+        all T036 evidence and repair those paths before publication.
+      judge_evidence:
+        - "Five T036 hashes, frozen production hashes, two-hunk L0 diff, PM 346/346, validator, empty index, and zero side effects pass."
+        - "Seven missing exact rates make the default numeric authorization fail closed."
+      pm_override_evidence:
+        - "validate_authorization_candidate and inert_entrypoint publicly accept caller config/evidence_root/repository_root overrides; tests use temporary exact evidence to bypass the default missing-rate state."
+        - "authorized_measurement_record binds declared physical metadata but accepts an arbitrary callback; lambda:None can be recorded as an exact component when caller authorization describes it."
+        - "resolve_dynamic_budget and resource receipts accept synthetic observation objects/hash-shaped record IDs without loading and validating the referenced path-backed record bytes."
+      blocked_tasks:
+        - "Publication and every execution/scientific surface pending T038 repair and renewed review."
+      missing_evidence:
+        - "Fixed-root production entrypoints, callable-bound measurement records, and record-loaded budget/receipt paths."
+  - id: T038
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Close the last three production trust-root bypasses in the inert EXP658
+      scaffold while preserving every T036 closure, current named missing-rate
+      fail-close, five-file scope, and zero-execution boundary.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    required_repairs:
+      - "Production validate_authorization_candidate, inert_entrypoint, receipt validation, and budget authorization load the tracked config and fixed repository/evidence roots internally; remove caller-overridable config/evidence/repository trust roots. Lower-level pure mechanics may remain testable but cannot be a production authorization API."
+      - "Current production authorization must still fail on the seven named missing exact rates. Unit tests exercise success mechanics only below the fixed-root production boundary, never by injecting a temporary complete evidence root into the production validator."
+      - "Bind each measured physical unit to an exact operation descriptor in its prior-phase authorization: canonical name, rate/physical key, callable module/qualname, code/source hash, input/workload manifest hash, and environment. authorized_measurement_record independently fingerprints the supplied callable and rejects mismatch; records and loaders preserve/recheck the descriptor. A lambda/no-op cannot masquerade as a different canonical component."
+      - "Production dynamic-budget and receipt paths accept record paths/descriptors, load canonical bytes from the authorized fixed evidence tree, validate file hash/record hash/prior authorization/environment/meter/operation/physical unit, and derive observations internally. Caller-created ResourceObservation sequences or hash-shaped IDs cannot authorize or validate a receipt."
+      - "Receipt observations include exact record path and hash; validation reloads each record and compares the full canonical derived observation. Warmup and later record sets rebind to their corresponding authorization hashes and one live environment."
+      - "Add adversarial tests for injected config/root rejection, co-mutated temporary evidence unable to pass production entrypoint, callback substitution/no-op, nonexistent or altered record path, synthetic observation with plausible hashes, and receipt-local co-mutation."
+      - "Correct preregistration claims so they describe mandatory fixed-root/operation-bound/record-loaded production paths exactly."
+      - "Keep the existing exact two-hunk L0 diff and refrozen hash unless task-owned calibration binding changes require only its stored hash reference; do not alter another L0 assertion."
+      - "No default numeric attempt allowance/budget, measurement execution, root/auth/output/MLflow/candidate/science path may be added."
+    verify:
+      - "Run new adversarial tests plus calibration/L0/submission tests, validator, and one full pytest."
+      - "Verify frozen init/model/data/run hashes; record new final hashes; inspect L0 diff remains exactly two hunks."
+      - "Run diff/scope/index audit and zero EXP658 root/auth/output/MLflow/science audit."
+    stop_if:
+      - "Any production authorization still accepts caller config/root/observation authority."
+      - "A callback cannot be independently bound to exact authorized operation identity."
+      - "Any exact rate is invented or any workload/root/auth/output/MLflow/candidate/science/install/stage/commit/push/browse action occurs."
+      - "Any file outside five allowed paths, other L0 assertion, frozen production file, submission, EXP648, or EXP656 changes."
+      - "Verification fails twice for a repair-owned cause."
+    expected_output:
+      - "Fixed-root operation-bound record-loaded inert production boundary"
+      - "Adversarial bypass rejection evidence"
+      - "Preserved named missing-rate blocker and zero-root state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+      commands:
+        - cmd: "focused adversarial calibration suite"
+          status: pass
+          evidence: "31 passed."
+        - cmd: "calibration/L0/submission/Candidate005 relevant suite"
+          status: pass
+          evidence: "57 passed."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Worker 347 passed in 598.99s; PM independent 347 passed in 324.34s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "hash, two-hunk L0, fixed-root, scope/index, and zero-side-effect audits"
+          status: pass
+          evidence: "Frozen production exact; index empty; no EXP658 run/eval/root/auth/output/MLflow/science."
+      hashes:
+        config: 3fe4af5c83f7d78ac2b088bcb23e3b220b809ea1b650dac1ce7a6697f540c257
+        calibration: 0d44ef5b57991a59e5b0ff5f71f750395682e9c4bd9c45ad4af72a844bdefbc3
+        preregistration: 0dd8aa243f8b6c152c15a328aeeddf6f45ca68cda18b4ab8f9e1b24fcc7ab623
+        calibration_test: 41b7c29c1334e82a9d2a83cc9a67b404b1cf96d3a661ab06caf95641dca79394
+        l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6
+      summary: >-
+        Fixed production roots, bound measurement records to exact callable
+        source/code/input/physical/environment identities, and made production
+        budgets/receipts reload canonical authorized records rather than trust
+        synthetic observations. Preserved the seven-rate numeric blocker and
+        inert no-execution boundary.
+      remaining_blockers:
+        - "Seven exact component records remain absent, so numeric authorization is impossible."
+        - "Final read-only publication audit."
+      verification_attempts: 1
+      stopped_because: null
+  - id: T039
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Perform the final inert-scaffold publication audit after T038. Attempt to
+      reproduce the three former production bypasses and require fixed-root,
+      operation-bound, record-loaded fail-closed behavior. Reconfirm every
+      earlier closure, final hashes, PM regression, two-hunk L0 refreeze,
+      seven-rate blocker, and zero side effects. Do not authorize or execute
+      measurement or calibration.
+    inputs:
+      - "T028-T038 receipts and final five-file bytes/hashes"
+      - "PM 347 passed in 324.34s; validator 159/1100"
+      - "Frozen production hashes and exact L0 diff"
+    constraints:
+      - "Read-only; no edits, workload/candidate execution, root/auth/output/MLflow, install, stage, commit, push, or browse."
+      - "Production success tests cannot inject config/repository/evidence roots or synthetic observations."
+      - "Measurement identity must bind the actual callback and exact input/workload; receipts/budgets must reload authorized record bytes."
+      - "Current seven missing rates must make numeric authorization impossible."
+      - "Publication is unrun infrastructure only and makes no resource/scientific/accuracy claim."
+    expected_output:
+      - "approve-inert-scaffold-publication | required-repair | reject"
+      - "Exploit-by-exploit closure evidence"
+      - "Exact five-file plus governance publication boundary"
+      - "Continued measurement/calibration prohibition"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-inert-scaffold-publication-not-enacted
+      full_outcome_complete: false
+      rationale: >-
+        Judge found the T038 fixed-root, operation-descriptor, and record-loader
+        repairs sufficient. PM did not enact publication because the independent
+        final audit demonstrated that source/code fingerprinting does not bind
+        runtime globals/closures, one record can satisfy a multi-width rate key,
+        and post-L1 dynamic budgets lack a durable derivation binding.
+      judge_evidence:
+        - "Final hashes, PM 347/347, validator, two-hunk L0 diff, frozen production, empty index, zero side effects, and seven missing rates pass."
+      pm_override_evidence:
+        - "A previously authorized named function can retain identical source/code hashes while its referenced global dispatch or captured closure value changes to a no-op."
+        - "Prior measurement manifests are generic, and the resolver accepts one W32 record for a rate key projected across W32/W64 instead of requiring canonical coverage and selecting the maximum matching rate."
+        - "Post-L1 resolve_dynamic_budget output lacks authorization/environment/cache/record/observation/derivation hashes and is not durably rebound by receipt validation."
+      blocked_tasks:
+        - "Publication and every measurement/calibration/scientific surface pending T040."
+      missing_evidence:
+        - "Closed operation registry, canonical width/arm evidence coverage, and durable post-L1 budget derivation."
+  - id: T040
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: >-
+      Remove the unsafe generic measurement-callable surface, require canonical
+      width/arm physical evidence coverage with maximum matching rates, and
+      make post-L1 dynamic budgets durably hash-bound. Preserve all T038
+      closures, five-file scope, missing-rate fail-close, and zero execution.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+    required_repairs:
+      - "Production measurement accepts no external callback. Replace arbitrary callable fingerprinting with a closed internal canonical-operation registry keyed by reviewed operation ID. Keep the registry empty in this inert scaffold so measurement authorization/factory fails closed; a later separately reviewed code package must register exact fixed operations."
+      - "Do not claim a generic source/code hash binds globals, closures, mutable module state, or actual inputs. Remove or correct that documentation."
+      - "Derive the future measurement authorization manifest only from canonical unresolved physical units and registered internal operations, including exact physical/rate key, width, arm, units, workload/input manifest, environment, and operation ID. Reject caller-authored manifests/descriptors."
+      - "Require exact comparable-evidence coverage for every canonical projected physical-unit equivalence class, including each required width and arm. Never let one W32 or one arm record satisfy W64/other-arm work unless an explicit preregistered width/arm-independent class exists. Select the maximum valid matching rate across all required records."
+      - "Current closed registry/evidence remains empty; fail closed with the seven named categories plus exact missing coverage detail. Tests may exercise pure coverage/rate-selection mechanics with internal fixtures but cannot make production measurement/authorization succeed."
+      - "Return a canonical post-L1 dynamic budget derivation that binds stage, authorization hash, live environment hash, CacheVerdict evidence hash, exact projection manifest/hash, loaded record descriptors/hashes, reconstructed observations/hash, selected maximum rates, expected wall/CPU/RSS, multipliers/envelopes, and final derivation hash."
+      - "Resource receipt schema includes this post-L1 derivation and validation independently reloads records/recomputes it; reject self-consistent local mutation or omission."
+      - "Add adversarial tests for global-dispatch/closure substitution being impossible through production API, caller-authored operation manifest rejection, W32-only/one-arm evidence insufficiency, maximum-rate selection, and post-L1 derivation/receipt mutation."
+      - "Keep fixed roots, record loading, canonical streams/W256/live runtime/cache, two-hunk L0 refreeze, seven-category blocker, and inert main unchanged."
+      - "Add no operation implementation, measurement execution, root/auth/output/MLflow/candidate/science path or default numeric allowance/budget."
+    verify:
+      - "Run new adversarial tests, relevant suites, validator, and one full pytest."
+      - "Verify frozen production hashes, final five hashes, exact two-hunk L0 diff, scope/index, and zero side effects."
+    stop_if:
+      - "Any external callable can reach the production measurement path or current production measurement authorization becomes constructible."
+      - "Any canonical coverage is collapsed without explicit frozen equivalence."
+      - "Any exact rate is invented or any execution/root/auth/output/MLflow/candidate/science/install/stage/commit/push/browse occurs."
+      - "Any file outside five paths, other L0 assertion, frozen production, submission, EXP648, or EXP656 changes."
+      - "Verification fails twice for a repair-owned cause."
+    expected_output:
+      - "Closed empty operation registry and unconstructible measurement authorization"
+      - "Canonical coverage-aware maximum-rate mechanics"
+      - "Durably bound post-L1 budget derivation and receipt validation"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - configs/exp_658_joint_quotient_carry_transducer.yaml
+        - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+        - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+        - tests/test_exp658_joint_quotient_carry_calibration.py
+      commands:
+        - cmd: "focused T040 adversarial subset"
+          status: pass
+          evidence: "6 passed after repairing explicit control/challenger optimizer-arm coverage."
+        - cmd: "calibration focused and relevant suites"
+          status: pass
+          evidence: "31 calibration tests; 57 relevant tests."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Worker 347 passed in 341.90s; PM independent 347 passed in 344.18s."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records, pinned upstream."
+        - cmd: "independent static exploit audit"
+          status: pass
+          evidence: "No P1/P2; empty registry, 19 units/17 exact coverage classes, max-rate and post-L1 binding verified."
+        - cmd: "hash/two-hunk/scope/index/zero-side-effect audits"
+          status: pass
+          evidence: "Frozen production exact; empty index; zero EXP658 run/eval/root/auth/output/MLflow/science."
+      hashes:
+        config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f
+        calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756
+        preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56
+        calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5
+        l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6
+      summary: >-
+        Removed external measurement callbacks; production uses an empty
+        immutable reviewed-operation registry and cannot construct measurement
+        authorization. Future evidence requires 19 exact records across 17
+        literal width/arm/source classes with maximum matching rates. Post-L1
+        budget derivations and receipts now bind and recompute the full trust
+        chain. No execution occurred.
+      remaining_blockers:
+        - "Seven categories covering 19 physical records/17 classes and reviewed fixed operations are absent."
+        - "Final publication Judge."
+      verification_attempts: 2
+      stopped_because: null
+  - id: T041
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: >-
+      Perform the terminal publication gate for the T040 inert scaffold. Audit
+      the empty closed operation registry, exact 19-unit/17-class coverage,
+      maximum-rate mechanics, durable post-L1 derivation/receipt binding, every
+      earlier closure, independent clean exploit review, hashes, regression,
+      L0 refreeze, and zero side effects. Decide publication only; do not open
+      measurement or calibration.
+    inputs:
+      - "T028-T040 receipts and final hashes"
+      - "PM 347 passed in 344.18s; validator 159/1100"
+      - "Independent final audit: clean, no P1/P2"
+    constraints:
+      - "Read-only; no edits, workload/candidate execution, root/auth/output/MLflow, install, stage, commit, push, or browse."
+      - "The current empty registry and absent records must make every measurement/numeric authorization unconstructible."
+      - "Publication is inert unrun infrastructure only, with no resource/scientific/accuracy claim."
+    expected_output:
+      - "approve-inert-scaffold-publication | required-repair | reject"
+      - "Exact finding closure and remaining blocker"
+      - "Exact five-file plus governance publication package"
+      - "Continued execution prohibition"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      decision: approve-inert-scaffold-publication
+      full_outcome_complete: false
+      rationale: >-
+        The immutable operation registry is empty, so no external callback,
+        measurement, or numeric authorization can be constructed. Future
+        evidence requires 19 exact records across 17 literal coverage classes,
+        maximum matching rates, and canonical post-L1 derivation/receipt
+        recomputation. Final hashes, exploit audit, regression, validator,
+        refrozen L0 assertions, frozen production, and zero side effects pass.
+      evidence:
+        - "T040 hashes exact; Worker and PM independently passed 347 tests; validator 159/1100; independent exploit audit clean."
+        - "CANONICAL_OPERATION_REGISTRY is an empty MappingProxyType and the measurement stub rejects before metering/execution."
+        - "Seven categories cover 19 physical records and 17 exact rate-width-arm-source classes; no equivalence collapse is allowed."
+        - "L0 diff is exactly two approved assertion hunks; init/model/data/run hashes remain exact."
+        - "No EXP658 run/eval/root/auth/output/MLflow/resource/scientific artifact exists."
+      blocked_tasks:
+        - "Every operation implementation, measurement, calibration, L2/L3, candidate, submission, and benchmark surface pending later gates."
+      missing_evidence:
+        - "Reviewed fixed operations, prior authorization, warmup records, all 19 exact records, numeric envelope, and separate execution authorization."
+  - id: T042
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: low
+    objective: >-
+      Prepare current governance for the T041-approved inert EXP658 L1 scaffold
+      publication. Supersede current hash pointers while preserving all prior
+      hashes and receipts as historical evidence. Record the exact blocker and
+      null execution/scientific fields. Do not edit the five audited files,
+      create evidence, stage, commit, or push.
+    allowed_files:
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+    required_updates:
+      - "Set EXP658 status L1-scaffold-verified-inert-unrun and decision authority T041."
+      - "Current hashes: config f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f; calibration 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756; prereg 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56; calibration test 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5; L0 test 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6."
+      - "Preserve T024 L0 hashes and every T029-T040 superseded scaffold hash as historical receipts; do not rewrite history."
+      - "Record empty immutable operation registry; no prior auth/warmup/exact records; seven categories, 19 records, 17 classes; no coverage equivalence."
+      - "Keep run, metrics, checkpoints, root, authorization, output, MLflow, resources, scientific, accuracy, causality, promotion, and benchmark fields null/absent."
+      - "The sole next package is a separately reviewed internal-operation and exact component-measurement scaffold, not execution; preserve one-active-package policy, EXP648, and rejected EXP656."
+    verify:
+      - "Verify all five T040 hashes plus frozen init/model/data/run hashes."
+      - "Run project validator and governance diff check."
+      - "Audit null fields, exact blocker, zero root/auth/output/MLflow/science, and empty index."
+      - "Reuse PM's valid 347-test regression because governance-only files change."
+    stop_if:
+      - "Any governance claim implies observed resources/training/causality/accuracy/success/promotion/benchmark evidence."
+      - "Any audited scaffold byte, historical receipt, file outside four paths, root/auth/output/MLflow/run/stage/commit/push changes."
+      - "Verification fails twice for a task-owned cause."
+    expected_output:
+      - "Publication-ready inert L1 governance"
+      - "Current and historical hash truth"
+      - "Exact authorization blocker and zero-science state"
+      - "goalbuddy_receipt_v1"
+    receipt:
+      result: done
+      changed_files:
+        - experiments/registry.yaml
+        - knowledge/autoresearch/state.yaml
+        - knowledge/autoresearch/backlog.md
+        - knowledge/autoresearch/decision-log.md
+      commands:
+        - cmd: "five current plus four frozen hash verification"
+          status: pass
+        - cmd: "YAML and governance semantic/null/history audit"
+          status: pass
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "159 concepts, 1100 records."
+        - cmd: "scope/index/zero-artifact audit"
+          status: pass
+          evidence: "Four governance files only; empty index; zero execution artifacts."
+      summary: >-
+        Recorded EXP658 as l1-scaffold-verified-inert-unrun under T041 with the
+        T040 current hashes, full historical receipt chain, null execution and
+        science fields, empty registry, and seven-category/19-record/17-class
+        blocker. The sole next package is inert fixed-operation and exact
+        component-measurement scaffold construction, not measurement.
+      remaining_blockers:
+        - "Publish the exact audited scaffold/governance transaction."
+      verification_attempts: 2
+      stopped_because: null
+  - id: T043
+    type: worker
+    assignee: Worker
+    status: active
+    reasoning_hint: low
+    objective: >-
+      Publish the T041-approved EXP658 inert L1 scaffold and T042 governance as
+      one exact ten-file commit. Verify hashes, scope, refs, empty index, and
+      zero execution artifacts. Do not create measurement or experiment state.
+    allowed_files:
+      - configs/exp_658_joint_quotient_carry_transducer.yaml
+      - experiments/exp_658_joint_quotient_carry_transducer/calibration.py
+      - knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
+      - tests/test_exp658_joint_quotient_carry_calibration.py
+      - tests/test_exp658_joint_quotient_carry_transducer.py
+      - experiments/registry.yaml
+      - knowledge/autoresearch/state.yaml
+      - knowledge/autoresearch/backlog.md
+      - knowledge/autoresearch/decision-log.md
+      - docs/goals/optimize-sair-goal-run/state.yaml
+    verify:
+      - "Verify five T040 hashes and four frozen production hashes."
+      - "Run validator and exact ten-file diff check; reuse PM347 regression."
+      - "Require exactly ten cached paths and no run/eval/submission/source/data-external/paper/LFS/authorization/unrelated path."
+      - "Commit once, push, and verify HEAD/upstream/remote identity and empty index."
+      - "Verify zero EXP658 run/root/auth/output/MLflow/resource/science after publication."
+    stop_if:
+      - "Any audited hash, scope, null/blocker truth, or historical receipt changes."
+      - "Any path outside ten files or any execution/external credential/destructive Git action is required."
+    expected_output:
+      - "One pushed inert-scaffold publication commit"
+      - "HEAD/upstream/remote identity and empty index"
+      - "Preserved zero-execution state"
       - "goalbuddy_receipt_v1"
   - id: T999
     type: judge

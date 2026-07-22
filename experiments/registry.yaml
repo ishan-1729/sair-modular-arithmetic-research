@@ -1040,11 +1040,11 @@ runs:
       - Calibration weights are non-scientific and cannot be promoted or used as benchmark evidence.
       - Candidate 005, submission files, EXP648, EXP656, checked, independent, and private evaluation remain unchanged.
   - run_id: exp-658-joint-quotient-carry-transducer
-    status: l0-verified-unrun
+    status: l1-scaffold-verified-inert-unrun
     active_stage: L0
     approach: matched-joint-soft-quotient-and-signed-carry-message-transducer
-    decision: publish-static-L0-only
-    decision_authority: T024-approve-L0-publication-and-L1-scaffold
+    decision: publish-inert-L1-scaffold-only
+    decision_authority: T041-approve-inert-scaffold-publication
     config: configs/exp_658_joint_quotient_carry_transducer.yaml
     preregistration: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md
     run_record: null
@@ -1054,6 +1054,13 @@ runs:
     mlflow_run_id: null
     root: null
     authorization: null
+    output: null
+    resources: null
+    scientific_evidence: null
+    accuracy: null
+    causality: null
+    promotion: null
+    benchmark: null
     source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
     source_parameters: 99824
     matched_geometry:
@@ -1063,6 +1070,7 @@ runs:
       identical_state_dictionaries_at_initialization: true
     l0_static_evidence:
       scope: verified-static-and-focused-tests-only
+      decision_authority: T024-approve-L0-publication-and-L1-scaffold
       exhaustive_legal_recurrence_tuples: 1991546
       fresh_transition_checks_per_width: 100000
       fresh_transition_widths: [32, 64]
@@ -1082,12 +1090,60 @@ runs:
         run: {path: experiments/exp_658_joint_quotient_carry_transducer/run.py, sha256: da669dc0771bc69708f96e2e23558b3f756fd9af8758f3240571a3c12a211d15}
         preregistration: {path: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md, sha256: 255ad881f4879ea6aacf6226866b4ba71eb21adc02f1d5e8b8a97a32dfec125f}
         test: {path: tests/test_exp658_joint_quotient_carry_transducer.py, sha256: c54dd895d0b6a6ccbe9744ab20ccf3c6b10429738c3009825b4ce919f8457dd7}
+    l1_inert_scaffold_publication:
+      scope: verified-inert-unrun-infrastructure-only
+      decision_authority: T041
+      decision: approve-inert-scaffold-publication
+      regression_evidence: PM-347-tests-passed-reused-governance-only
+      current_hashes:
+        config: {path: configs/exp_658_joint_quotient_carry_transducer.yaml, sha256: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f}
+        calibration: {path: experiments/exp_658_joint_quotient_carry_transducer/calibration.py, sha256: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756}
+        preregistration: {path: knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md, sha256: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56}
+        calibration_test: {path: tests/test_exp658_joint_quotient_carry_calibration.py, sha256: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5}
+        l0_test: {path: tests/test_exp658_joint_quotient_carry_transducer.py, sha256: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+      operation_registry:
+        implementation: immutable-MappingProxyType
+        immutable: true
+        entries: []
+      prior_measurement_authorization: null
+      prior_warmup_records: []
+      exact_component_records: []
+      missing_exact_component_categories:
+        - q_shared_generation_case
+        - q_arm_forward_case
+        - carry_shared_generation_item
+        - carry_arm_forward_item
+        - determinism_extra_rollout_case
+        - checkpoint_cycle
+        - width256_profile_case
+      missing_coverage:
+        categories: 7
+        canonical_physical_records: 19
+        exact_width_arm_source_classes: 17
+        explicit_coverage_equivalences: []
+      blocker: empty-immutable-operation-registry-no-prior-authorization-no-warmup-records-no-19-exact-component-records-across-17-literal-classes-no-coverage-equivalences
+      measurement_authorization_constructible: false
+      execution_authorized: false
+      one_active_experiment_package: exp-658-joint-quotient-carry-transducer
+    scaffold_receipt_history:
+      source: docs/goals/optimize-sair-goal-run/state.yaml
+      T029: {disposition: superseded, config: 6a2945cdd12e6a957d4bb83abc15d745cd60c60b7c75ff2ef0492970f826e4f6, calibration: 10504fb573389e395e47a7c2d403c02f3e95a9304d7f8cd3815d37b06439e258, preregistration: 6bbff883424a171cbb11323d943a3ba388d02a3d3fd4853486dcdb3fcc6ebdf5, calibration_test: 86d578c1158796c014ec133ada9ebcb354233d7bb213a45d296e2633052c0722}
+      T030: {disposition: required-repair, hashes: null}
+      T031: {disposition: superseded, config: 30ce404b82b6ac7dac4afdff40f14cafc442d5545b1e592312cab0d3792b805d, calibration: 90a6c2fe6dac7d675ff72d8f93878c26042092c2011c01be2a5438e3cc6e7f7a, preregistration: 59952b77856f35bb420b98975b66298f7144051d4f17f8d9698ca8878522be05, calibration_test: 8a50c038f5ac8537ab0499bb9c1057cf985928af87725a803c53c96af746fbec}
+      T032: {disposition: required-repair, hashes: null}
+      T033: {disposition: blocked-no-receipt-hashes, hashes: null}
+      T034: {disposition: approved-resumed-repair-not-publication, hashes: null}
+      T035: {disposition: expanded-resumed-repair, hashes: null}
+      T036: {disposition: superseded, config: 5ab77a8bf4602863290189b4241ab0380e66e69baedfb20d0a5c716f48c22e9e, calibration: 53393f546789f8201ab1f09c3d1b3bcab3b1e17a4a1e280ea456617bee297107, preregistration: ba4a6ff977c463e1fc81a462565f87e349b799d811e8690d1193d0f449f5f221, calibration_test: 79f1440c4a8a5ed8379f3bffc435a37925e604fcffcf17fd07eceb380a70eb4a, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+      T037: {disposition: approved-inert-publication-not-enacted, hashes: null}
+      T038: {disposition: superseded, config: 3fe4af5c83f7d78ac2b088bcb23e3b220b809ea1b650dac1ce7a6697f540c257, calibration: 0d44ef5b57991a59e5b0ff5f71f750395682e9c4bd9c45ad4af72a844bdefbc3, preregistration: 0dd8aa243f8b6c152c15a328aeeddf6f45ca68cda18b4ab8f9e1b24fcc7ab623, calibration_test: 41b7c29c1334e82a9d2a83cc9a67b404b1cf96d3a661ab06caf95641dca79394, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+      T039: {disposition: approved-inert-publication-not-enacted, hashes: null}
+      T040: {disposition: current-T041-approved, config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f, calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756, preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
     sole_next_package:
-      stage: L1
-      purpose: resource-calibration-scaffold-construction-and-unit-tests-only
-      prerequisite: verified-pushed-L0-base
-      status: pending-prerequisite-not-authorized-for-execution
-    scientific_evidence: none-static-L0-only
+      stage: pre-execution-infrastructure-review
+      purpose: fixed-internal-operations-and-exact-component-measurement-scaffold-construction-and-unit-tests-only
+      prerequisite: separate-code-review-of-each-fixed-operation-and-canonical-input-binding
+      status: sole-active-package-not-authorized-for-measurement-or-execution
     absent_evidence:
       - observed-runtime-or-resource-calibration
       - optimizer-training
@@ -1096,5 +1152,6 @@ runs:
       - checked-independent-official-or-private-benchmark
       - candidate-promotion-or-mechanism-success
     limitations:
-      - Static L0 verification does not establish runtime, training, causal effect, exact-answer accuracy, rollout accuracy, benchmark performance, promotion, or success.
-      - No root or authorization exists; L1 construction must begin only from a verified pushed L0 base, and later calibration execution requires a separate gate.
+      - T041 publishes inert infrastructure only; it does not establish runtime, resources, training, causal effect, exact-answer accuracy, rollout accuracy, benchmark performance, promotion, or success.
+      - No root, authorization, output, MLflow run, operation implementation, warmup record, or exact component record exists; a separately reviewed construction package must still remain inert and unrun.
+      - EXP-648 remains parked and scientifically unopened; rejected EXP-656 and every other historical experiment disposition remain unchanged.
