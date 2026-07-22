@@ -53,6 +53,28 @@ SOURCE_CHECKPOINT_SHA256 = (
     "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
 )
 L0_BASE_COMMIT = "fc4e0605388812f8da619956063c5d49d9b8d2e3"
+T045_SOURCE_COMMIT = "25d21615c2c7d8b4302d2661c228b828ff07cb8b"
+HISTORICAL_CALIBRATION_SHA256 = (
+    "19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756"
+)
+POST_T045_PROVENANCE_PATH = (
+    ROOT
+    / "experiments/runs/exp-658-joint-quotient-carry-transducer/provenance-amendment-post-t045.json"
+)
+ACCEPTED_T045_RECORDS = {
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/run.json": (
+        "3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22"
+    ),
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json": (
+        "3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f"
+    ),
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json": (
+        "11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88"
+    ),
+    "evals/results/exp-658-joint-quotient-carry-transducer/decision.json": (
+        "ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9"
+    ),
+}
 AUTHORIZATION_SCHEMA = "exp658-l1-resource-calibration-authorization-v1"
 RESOURCE_RECEIPT_SCHEMA = "exp658-l1-resource-calibration-receipt-v1"
 PRIOR_MEASUREMENT_AUTHORIZATION_SCHEMA = (
@@ -165,16 +187,101 @@ def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def _git_file_sha256(commit: str, relative: str) -> str:
+    try:
+        payload = subprocess.run(
+            ["git", "show", f"{commit}:{relative}"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            timeout=60,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+        raise ContractError(f"historical Git object is unavailable: {commit}:{relative}") from exc
+    return sha256_bytes(payload)
+
+
+def verify_post_t045_current_pointer(root: Path = ROOT) -> dict[str, str]:
+    """Cross-bind immutable T045 evidence to the current post-park test surface."""
+    amendment_path = root / POST_T045_PROVENANCE_PATH.relative_to(ROOT)
+    if not amendment_path.is_file():
+        raise ContractError("post-T045 provenance amendment is absent")
+    try:
+        amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ContractError("post-T045 provenance amendment is unreadable") from exc
+    expected_keys = {
+        "schema_version",
+        "rationale",
+        "historical_source_commit",
+        "new_clean_source_commit",
+        "historical_l0_test_sha256",
+        "current_l0_test_sha256",
+        "historical_calibration_sha256",
+        "current_calibration_sha256",
+        "accepted_t045_records",
+        "boundary",
+    }
+    if set(amendment) != expected_keys:
+        raise ContractError("post-T045 provenance amendment fields changed")
+    expected_boundary = {
+        "live_authorization": False,
+        "scientific_metrics": False,
+        "mlflow_run": False,
+        "promotion": False,
+        "candidate_change": False,
+    }
+    if (
+        amendment["schema_version"] != "exp658-post-t045-provenance-amendment-v1"
+        or amendment["historical_source_commit"] != T045_SOURCE_COMMIT
+        or amendment["historical_l0_test_sha256"]
+        != FROZEN_L0_HASHES["l0_test"][1]
+        or amendment["historical_calibration_sha256"]
+        != HISTORICAL_CALIBRATION_SHA256
+        or amendment["accepted_t045_records"] != ACCEPTED_T045_RECORDS
+        or amendment["boundary"] != expected_boundary
+    ):
+        raise ContractError("post-T045 provenance amendment binding changed")
+    current_commit = amendment["new_clean_source_commit"]
+    if not isinstance(current_commit, str) or len(current_commit) != 40:
+        raise ContractError("post-T045 current source commit is malformed")
+    current_paths = {
+        "current_l0_test_sha256": FROZEN_L0_HASHES["l0_test"][0],
+        "current_calibration_sha256": str(Path(__file__).resolve().relative_to(ROOT)),
+    }
+    observed: dict[str, str] = {}
+    for field, relative in current_paths.items():
+        path = root / relative
+        if not path.is_file():
+            raise ContractError(f"post-T045 current path is absent: {relative}")
+        current_sha = frozen_run.sha256(path)
+        if current_sha != amendment[field]:
+            raise ContractError(f"post-T045 current path SHA-256 mismatch: {relative}")
+        if root.resolve() == ROOT.resolve() and _git_file_sha256(current_commit, relative) != current_sha:
+            raise ContractError(f"post-T045 source commit does not bind: {relative}")
+        observed[field] = current_sha
+    for relative, expected in ACCEPTED_T045_RECORDS.items():
+        path = root / relative
+        if not path.is_file() or frozen_run.sha256(path) != expected:
+            raise ContractError(f"accepted T045 record changed: {relative}")
+    return observed
+
+
 def verify_frozen_l0_hashes(root: Path = ROOT) -> dict[str, str]:
     observed: dict[str, str] = {}
     for name, (relative, expected) in FROZEN_L0_HASHES.items():
-        path = root / relative
-        if not path.is_file():
-            raise ContractError(f"frozen {name} path is absent: {relative}")
-        actual = frozen_run.sha256(path)
+        if name == "l0_test" and root.resolve() == ROOT.resolve():
+            actual = _git_file_sha256(T045_SOURCE_COMMIT, relative)
+        else:
+            path = root / relative
+            if not path.is_file():
+                raise ContractError(f"frozen {name} path is absent: {relative}")
+            actual = frozen_run.sha256(path)
         if actual != expected:
             raise ContractError(f"frozen {name} SHA-256 mismatch")
         observed[name] = actual
+    if root.resolve() == ROOT.resolve():
+        verify_post_t045_current_pointer(root)
     return observed
 
 

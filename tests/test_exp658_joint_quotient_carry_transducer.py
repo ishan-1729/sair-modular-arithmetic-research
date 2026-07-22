@@ -6,6 +6,7 @@ import ast
 import hashlib
 import importlib.util
 import inspect
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -34,6 +35,27 @@ ALLOWED_PATHS = {
     "knowledge/autoresearch/ablations/exp-658-joint-quotient-carry-transducer.md",
     "tests/test_exp658_joint_quotient_carry_transducer.py",
 }
+HISTORICAL_L0_TEST_SHA256 = (
+    "8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6"
+)
+T045_RECORDS = {
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/run.json": (
+        "3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22"
+    ),
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json": (
+        "3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f"
+    ),
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json": (
+        "11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88"
+    ),
+    "evals/results/exp-658-joint-quotient-carry-transducer/decision.json": (
+        "ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9"
+    ),
+}
+POST_T045_AMENDMENT = (
+    ROOT
+    / "experiments/runs/exp-658-joint-quotient-carry-transducer/provenance-amendment-post-t045.json"
+)
 
 
 def load_module(name: str, path: Path):
@@ -690,14 +712,61 @@ def test_soft_messages_are_posterior_weighted_learned_channels_only() -> None:
     )
 
 
-def test_future_runner_is_fail_closed_and_zero_root_boundary_is_intact() -> None:
+def test_future_runner_is_fail_closed_and_post_t045_park_boundary_is_intact() -> None:
     payload = config()
     assert run_module.validate_l0_contract(payload).is_file()
     with pytest.raises(run_module.L0OnlyError, match="L0 only"):
         run_module.require_future_authorization()
-    assert not (ROOT / "experiments/runs/exp-658-joint-quotient-carry-transducer").exists()
-    assert not (ROOT / "evals/results/exp-658-joint-quotient-carry-transducer").exists()
-    assert not list(ROOT.glob("**/*exp-658*authorization*"))
+
+    run_root = ROOT / "experiments/runs/exp-658-joint-quotient-carry-transducer"
+    eval_root = ROOT / "evals/results/exp-658-joint-quotient-carry-transducer"
+    actual = {
+        str(path.relative_to(ROOT))
+        for parent in (run_root, eval_root)
+        for path in parent.rglob("*")
+        if path.is_file()
+    }
+    assert actual == set(T045_RECORDS) | {str(POST_T045_AMENDMENT.relative_to(ROOT))}
+    for relative, expected in T045_RECORDS.items():
+        assert sha256(ROOT / relative) == expected
+
+    run = json.loads((run_root / "run.json").read_text(encoding="utf-8"))
+    failure = json.loads((run_root / "failure.json").read_text(encoding="utf-8"))
+    decision = json.loads((eval_root / "decision.json").read_text(encoding="utf-8"))
+    assert run["decision"] == "park"
+    assert run["metrics"] is None and run["artifacts"]["metrics"] == ""
+    assert run["evidence"]["l1_scientific_evidence_persisted"] is False
+    assert run["evidence"]["l2_executed"] is False
+    assert run["evidence"]["mlflow_run_id"] is None
+    assert run["evidence"]["candidate_005_changed"] is False
+    assert failure["boundary"] == {
+        "candidate_005_changed": False,
+        "checked_evaluation_executed": False,
+        "l1_calibration_persisted": False,
+        "l1_scientific_values_persisted": False,
+        "l2_executed": False,
+        "mlflow_run_id": None,
+        "official_evaluation_executed": False,
+        "private_evaluation_executed": False,
+        "scientific_metrics": None,
+    }
+    assert decision["scientific_metrics"] is None
+    assert decision["goal_completion"] is False
+    assert decision["candidate_005"]["changed"] is False
+    assert not (run_root / "authorization.json").exists()
+    assert not (run_root / "l1-checkpoints").exists()
+
+    amendment = json.loads(POST_T045_AMENDMENT.read_text(encoding="utf-8"))
+    assert amendment["schema_version"] == "exp658-post-t045-provenance-amendment-v1"
+    assert amendment["historical_l0_test_sha256"] == HISTORICAL_L0_TEST_SHA256
+    assert amendment["accepted_t045_records"] == T045_RECORDS
+    assert amendment["boundary"] == {
+        "live_authorization": False,
+        "scientific_metrics": False,
+        "mlflow_run": False,
+        "promotion": False,
+        "candidate_change": False,
+    }
     cached = subprocess.run(
         ["git", "diff", "--cached", "--name-only", "--"],
         cwd=ROOT,

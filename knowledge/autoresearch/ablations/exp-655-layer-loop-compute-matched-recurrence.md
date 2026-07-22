@@ -2,15 +2,27 @@
 type: experiment-preregistration
 title: EXP-655 layer-loop compute-matched recurrence
 description: Planned dense causal test of layer-local versus whole-stack recurrence ordering, followed conditionally by capacity recycling and MoE.
-status: planned-blocked-awaiting-EXP648-and-separate-launch-judge
-timestamp: 2026-07-21
+status: authorized-t048-full-fidelity
+timestamp: 2026-07-22
 ---
 
 # EXP-655 — Layer-loop compute-matched recurrence
 
 ## Status and boundary
 
-This is a plan, not an authorization or result. EXP-648 remains the sole active scientific task. EXP-655 may not create a config, root, dataset, checkpoint, MLflow run, metric, or evaluation until EXP-648's current phase resolves and a separate launch Judge approves an authenticated package. Checked, prior-independent, and official/private identities are excluded from design and selection.
+T048 authorizes one bounded-faithful dense schedule falsifier after the accepted
+EXP660 pre-science park and the exact post-T045 EXP658 trust-pointer repair.
+The clean source branch is `codex/exp655-layer-loop-formal`. Calibration root
+`20261178` is resource-only and cannot seed formal work. Formal roots
+`20261179`, `20261180`, and `20261181` use paired init/train/eval seed triples
+`(65570001,65573001,65574001)`, `(65570002,65573002,65574002)`, and
+`(65570003,65573003,65574003)`. Checked, prior-independent, official/private,
+candidate, benchmark, and submission surfaces remain excluded.
+
+The dense model has two complete noncommuting attention-plus-MLP blocks. The
+primary schedules are `B1,B1,B2,B2` and `B1,B2,B1,B2`; their initial state
+bytes are identical and only execution order differs. R1 and untied
+equal-compute controls retain the declared data/order/optimizer contract.
 
 ## Hypothesis
 
@@ -55,6 +67,15 @@ The randomized-weight controls are frozen per arm and training seed: layer-loop 
 ## Dynamic resource-budget resolution
 
 Before launch, profile complete representative setup, training, checkpoint serialization, and full declared evaluation units for every materially different arm. Record per-unit wall time, aggregate descendant process CPU, peak RSS, and variability. Derive projected, soft, and hard budgets from measured throughput plus documented safety headroom; do not use an arbitrary short wall cap or lower evaluation fidelity to meet one. Preserve recoverable checkpoints, reuse only caches whose model/data/config/root/environment/evaluator hashes match, and charge reused work explicitly. CPU and wall limits are independent runaway protections. The competition's 300-second constraint is reserved for final submission inference qualification.
+
+Root `20261178` executes every materially different arm, the complete
+300-case-per-width evaluation route, opposite-schedule and causal
+interventions, randomized-weight and deterministic controls, the exact
+100,000-resample bootstrap kernels, checkpoint/reload/persistence, and W256
+runtime probes. It scales only the measured 100-update training segment to the
+frozen 4,000-update horizon, records wall, process CPU, cgroup CPU, RSS and
+cross-arm variability separately, and emits a checksum-bound admission. Its
+checkpoints and scientific values are non-reusable and non-persistent.
 
 ## Terminal criteria
 
