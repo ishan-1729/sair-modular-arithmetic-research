@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-662-ut-memory-token-transition",
+  "root": 20261199,
+  "selection": {"selected_route": "memory_0", "validation_rollout_exact": {"memory_0": 0.0, "memory_4": 0.0, "memory_8": 0.0, "memory_16": 0.0, "memory_32": 0.0, "memory_64": 0.0}, "validation_transition_exact": {"memory_0": 0.0, "memory_4": 0.0, "memory_8": 0.0, "memory_16": 0.0, "memory_32": 0.0, "memory_64": 0.0}},
+  "selected_test": {
+    "W16": {"transition_exact": 0.0, "bit_accuracy": 0.5833333333333334, "transition_invalid": 0.07291666666666667, "rollout_exact": 0.0, "prefix_transition_exact": 0.14583333333333334, "rollout_invalid": 0.0},
+    "W24": {"transition_exact": 0.0, "bit_accuracy": 0.5525173611111112, "transition_invalid": 0.08333333333333333, "rollout_exact": 0.0, "prefix_transition_exact": 0.11024305555555555, "rollout_invalid": 0.0},
+    "W32": {"transition_exact": 0.0, "bit_accuracy": 0.5172526041666666, "transition_invalid": 0.08333333333333333, "rollout_exact": 0.0, "prefix_transition_exact": 0.049479166666666664, "rollout_invalid": 0.0}
+  },
+  "all_route_rollout_exact": {"memory_0": [0.0, 0.0, 0.0], "memory_4": [0.0, 0.0, 0.0], "memory_8": [0.0, 0.0, 0.0], "memory_16": [0.0, 0.0, 0.0], "memory_32": [0.0, 0.0, 0.0], "memory_64": [0.0, 0.0, 0.0], "wider_no_memory": [0.0, 0.0, 0.0], "decoded_recurrent": [0.0, 0.0, 0.0], "fixed_depth_memory_16": [0.0, 0.0, 0.0], "default_bias_memory_16": [0.0, 0.0, 0.0]},
+  "diagnostics_w16_rollout_exact": {"randomized_weights": 0.0, "memory_reset": 0.0, "memory_zero": 0.0, "memory_randomize": 0.0, "memory_permute": 0.0, "no_type": 0.0, "no_index": 0.0, "fixed_depth_1_2_4_6_8": [0.0, 0.0, 0.0, 0.0, 0.0]},
+  "decision": "reject-current-ut-memory-token-transition"
+}

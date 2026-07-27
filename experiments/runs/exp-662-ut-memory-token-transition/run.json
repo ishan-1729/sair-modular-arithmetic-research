@@ -1,0 +1,12 @@
+{
+  "run_id": "exp-662-ut-memory-token-transition",
+  "status": "completed-rejected",
+  "decision": "reject-current-ut-memory-token-transition",
+  "decision_authority": "T057-root20261199-conjunctive-viability-gate",
+  "roots": {"calibration_20261198": "completed-admitted", "viability_20261199": "completed-reject", "confirmation_20261200": "unopened-gate-blocked", "confirmation_20261201": "unopened-gate-blocked"},
+  "calibration": {"complete_routes": true, "projected_wall_seconds": 106.24938941377968, "variability_ratio": 2.728679399548155, "headroom": 2.0, "soft_guard_wall_seconds": 266, "hard_guard_wall_seconds": 425, "peak_rss_bytes": 483131392, "admitted": true},
+  "formal": {"selected_route": "memory_0", "parameter_count_each": 9818, "updates_each": 300, "examples_each": 9600, "block_calls_each": 57600, "wall_seconds": 122.51121326700013, "process_cpu_seconds": 486.343652, "cgroup_cpu_seconds": 628.4319999999998, "peak_rss_bytes": 504414208, "mlflow_run_id": "1be3cfe3880347df8e4fc4377cff99c7"},
+  "verification": {"focused_initial": "10 passed", "project_validator": "passed: 170 concepts, 1100 benchmark records", "single_full_oracle": "429 passed, 7 errors from owned generic-model module cache contamination", "bounded_isolation_repair": "focused plus affected submission loader 18 passed; no second full oracle"},
+  "gate": {"passed": false, "passed": ["checkpoint_reload", "matched_examples_updates_calls", "parameter_match", "valid_residues", "validation_test_separation"], "failed": ["selected_w16", "selected_w24", "selected_w32", "transfer_gain_each_control", "trained_weight_dependence", "memory_causality", "representation_causality"]},
+  "limitations": ["This rejects only the bounded SAIR transition adaptation, not the source paper or larger-scale UT memory-token training.", "Every exact rollout score is zero, so causal-ablation equality is floor-limited.", "The selected memory count is zero by the frozen tie-break because all validation exact scores are zero.", "Confirmations were not authorized after viability rejection.", "No checked, independent, official/private, candidate, submission, promotion, or completion evidence was opened."]
+}

@@ -61,3 +61,4 @@
 - [EXP-651 visit/dilation-specific recurrent adapters](exp-651-visit-dilation-adapters.md) - bounded-faithful RRT analogue parked before calibration because the required full oracle remained red on absent ignored EXP658 hermetic evidence.
 - [EXP-652 answer-plus-latent TRM](exp-652-answer-latent-trm.md) - completed-rejected ST-M010.a SAIR adaptation; all matched arms are 0% exact at W16/W24/W32 and component confirmations remain unopened.
 - [EXP-661 LoopFormer width and budget extrapolation](exp-661-loopformer-width-extrapolation.md) - completed-rejected ST-M013.c SAIR adaptation; all seven arms and five budgets are 0% exact at W16/W24/W32, so confirmations remain unopened.
+- [EXP-662 Universal Transformer memory-token transition](exp-662-ut-memory-token-transition.md) - completed-rejected bounded-faithful UT adaptation; all memory counts and matched controls are 0% exact rollout at W16/W24/W32, so confirmations remain unopened.
