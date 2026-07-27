@@ -1,0 +1,38 @@
+{
+  "schema_version": "exp650-t054-fixture-manifest-summary-v1",
+  "full_file_level_manifest": {
+    "path": ".scratch/exp-650-library-backed-mamba/t054/fixture-manifest.json",
+    "sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d"
+  },
+  "canonical_file_entries": {
+    "path": ".scratch/exp-650-library-backed-mamba/t054/fixture-entries.tsv",
+    "sha256": "d3f7eea82456c0c4f5c967d54cc6e2afa0142eb9dd41e9e1afefabbe9ba0c969"
+  },
+  "file_count": 268,
+  "total_bytes": 27086830,
+  "groups": {
+    "EXP609-checkpoint": 1,
+    "EXP609-EXP649-compatibility": 1,
+    "EXP648-live-calibration": 1,
+    "EXP648-superseded": 10,
+    "EXP648-root20261160-planning": 6,
+    "EXP648-root20261161-scratch": 218,
+    "EXP648-root20261161-mlflow": 27,
+    "EXP658-checkpoint": 1,
+    "EXP658-pinned-source": 3
+  },
+  "tracked_group_manifests": [
+    "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/scratch-files.sha256",
+    "experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161/mlflow-artifacts.sha256"
+  ],
+  "properties": {
+    "all_sources_regular": true,
+    "all_destinations_regular": true,
+    "no_symlinks": true,
+    "destination_hardlink_count_one": true,
+    "source_destination_inode_distinct": true,
+    "reflink_disabled": true,
+    "primary_source_unchanged": true,
+    "answers_or_credentials_copied": false
+  }
+}

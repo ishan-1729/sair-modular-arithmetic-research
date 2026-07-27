@@ -1399,12 +1399,12 @@ runs:
       - T051's sole authorized checkpoint recovery succeeded, but six inherited EXP658 failures remain; no tracked EXP658 or frozen EXP651 source byte changed.
       - T052 is the terminal EXP651 phase reset. No T053 recovery, calibration, formal root, or scientific claim is allowed for this formulation.
   - run_id: exp-650-library-backed-mamba
-    status: parked-before-preregistration-calibration-and-science-package-oracle-red
+    status: failed-resource-calibration-oom
     approach: maintained-transformers-mamba2-mamba2-attention-mlp-postnorm-transition
-    decision: park-before-science
-    decision_authority: T053-package-boundary-stop-rule
-    source_base_commit: 93fb334c32e7f028688077f65b7695996c15d6af
-    source_branch: codex/exp650-library-mamba
+    decision: park-resource-calibration-oom
+    decision_authority: T054-root20261186-dynamic-resource-admission-stop-rule
+    source_base_commit: 2acb944c924288369fb6a3a99e089f49228202b1
+    source_branch: codex/exp650-library-mamba-formal
     config: configs/exp_650_library_backed_mamba.yaml
     preregistration: knowledge/autoresearch/ablations/exp-650-library-backed-mamba.md
     library_readiness: knowledge/autoresearch/research/2026-07-27-exp650-library-readiness.md
@@ -1414,20 +1414,25 @@ runs:
     mamba_implementation: transformers.models.mamba2.modeling_mamba2.Mamba2Mixer
     library_smoke_checkpoint_sha256: cb05cfb12382f2d9055f97b14971871574d60127a5df1eadd5ae4be1317ea735
     produced_checkpoint: null
-    mlflow_run_id: null
+    mlflow_run_id: b7f9d448b79b4467989b2e0ecbb0f357
     calibration_root: 20261186
-    calibration_executed: false
+    calibration_executed: true-incomplete-global-oom-before-complete-arm
+    calibration_admitted: false
+    calibration_failure: experiments/runs/exp-650-library-backed-mamba/roots/20261186/failure.json
+    preregistration_sha256: e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f
     formal_roots: [20261187, 20261188, 20261189]
     formal_training_executed: false
-    scientific_evidence: none-prescience-verification-park
+    scientific_evidence: none-calibration-incomplete-resource-park
     parameters: {mamba2_hybrid: 23601, convgru_control: 24049, attention_control: 22517}
     verification:
       playwright: managed-chromium-149.0.7827.55-playwright-1.61.1-all-task-owned-contexts-and-browser-closed
       cpu_forward_backward_reload: pass-transformers-5.14.1-naive-torch-forward
-      focused: 7-passed
+      fixture_manifest: 268-authenticated-independent-regular-files-sha256-cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d
+      exact_inherited_cone: 34-passed-in-493.79-seconds
+      focused: 8-passed-after-dynamic-resource-policy-correction
       validator: passed-165-concepts-1100-records-pinned-82510bba00a1
-      full_oracle: 371-passed-34-inherited-EXP648-EXP649-EXP658-failures-in-155.45-seconds
+      full_oracle: 405-passed-in-678.63-seconds
     limitations:
-      - This is a clean-worktree package-verification park, not a scientific rejection of the Mamba-2 transition family.
-      - No preregistration root, calibration, dynamic admission, training, formal checkpoint, MLflow run, transition/rollout metric, W16/W24/W32 evidence, benchmark, candidate, submission, promotion, or Goal-completion evidence exists.
-      - Reopening requires fresh PM authorization and a green clean-worktree package oracle with required ignored historical evidence available, or an explicitly changed verification boundary.
+      - The hermetic package oracle passed; full-fidelity calibration was globally OOM-killed at 7400644 KiB anonymous RSS before one arm completed, so this is a measured resource park rather than a scientific rejection.
+      - No valid process/cgroup CPU, variability, ETA, expected/soft/hard guard, transition/rollout, control, intervention, or formal checkpoint metric exists; nulls mean unavailable.
+      - Scientific roots 20261187-20261189 remained unopened. T054 forbids reduced fidelity, retry, or a further EXP650 recovery package.

@@ -688,10 +688,20 @@ def calibration_projection(payload: dict[str, Any], config: dict[str, Any]):
     ) * headroom
     budget = config["resource_budget"]
     peak = max(arm["peak_rss_bytes"] for arm in arms.values())
+    projected_values = (expected_wall, expected_process_cpu, expected_cgroup_cpu)
+    expected_widths = {str(width) for width in config["data"]["evaluation_widths"]}
+    complete_decision_route = set(arms) == set(ARM_ORDER) and all(
+        set(arm["evaluations"]) == expected_widths for arm in arms.values()
+    ) and {
+        "reverse",
+        "bidirectional",
+    }.issubset(arms["mamba2_hybrid"]["interventions"])
     checks = {
-        "wall": expected_wall <= float(budget["admission_maximum_expected_wall_seconds"]),
-        "cgroup_cpu": expected_cgroup_cpu
-        <= float(budget["admission_maximum_expected_cgroup_cpu_seconds"]),
+        "finite_positive_projection": all(
+            math.isfinite(value) and value > 0.0 for value in projected_values
+        ),
+        "complete_decision_route": complete_decision_route
+        or not bool(budget["require_complete_decision_route"]),
         "rss": peak <= int(budget["admission_maximum_peak_rss_bytes"]),
         "reload": all(arm["reload_exact"] for arm in arms.values()),
     }
@@ -713,6 +723,21 @@ def calibration_projection(payload: dict[str, Any], config: dict[str, Any]):
             "peak_rss_bytes": peak,
             "hard_runaway_ceiling_wall_seconds": expected_wall
             * float(budget["hard_runaway_multiplier"]),
+            "hard_runaway_ceiling_process_cpu_seconds": expected_process_cpu
+            * float(budget["hard_runaway_multiplier"]),
+            "hard_runaway_ceiling_cgroup_cpu_seconds": expected_cgroup_cpu
+            * float(budget["hard_runaway_multiplier"]),
+        },
+        "planning_references": {
+            "nonbinding": bool(budget["planning_references_are_nonbinding"]),
+            "wall_seconds": float(budget["planning_reference_wall_seconds"]),
+            "cgroup_cpu_seconds": float(
+                budget["planning_reference_cgroup_cpu_seconds"]
+            ),
+            "expected_wall_within_reference": expected_wall
+            <= float(budget["planning_reference_wall_seconds"]),
+            "expected_cgroup_cpu_within_reference": expected_cgroup_cpu
+            <= float(budget["planning_reference_cgroup_cpu_seconds"]),
         },
         "fidelity": {
             "formal_training_updates_per_arm": formal_steps,

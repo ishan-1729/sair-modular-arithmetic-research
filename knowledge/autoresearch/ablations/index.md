@@ -54,7 +54,7 @@
 - [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - matched full-rollout distillation of proven commutative trajectory diversity into one orientation.
 - [EXP-648 structured natural-trajectory consistency](exp-648-structured-trajectory-consistency.md) - selected/preregistered matched K=8 endpoint-consistency screen without synthetic state corruption.
 - [EXP-649 stochastic trajectory breadth](exp-649-stochastic-trajectory-breadth.md) - planned/formal-blocked frozen width-256 breadth study; full input-only calibration returns `runtime-gate-miss` without opening oracle evidence.
-- [EXP-650 library-backed Mamba-2 transition](exp-650-library-backed-mamba.md) - frozen faithful Mamba2-Mamba2-Attention-MLP postnorm comparison against matched ConvGRU and recurrent-attention controls.
+- [EXP-650 library-backed Mamba-2 transition](exp-650-library-backed-mamba.md) - hermetic oracle green; full-fidelity calibration globally OOM-killed before one complete arm, so scientific roots remain unopened.
 - [EXP-655 layer-loop compute-matched recurrence](exp-655-layer-loop-compute-matched-recurrence.md) - T049 restored a green unchanged-source 391/391 oracle, dynamically admitted and completed the full three-root comparison, and rejected this exact dense fixed-R2 schedule formulation.
 - [EXP-659 symbol-equivariant recurrence](exp-659-symbol-equivariant-recurrence.md) - full-fidelity explicit symbol-axis recurrent reasoner with matched position-only and broken-tying controls.
 - [EXP-660 fresh formal symbol-equivariant recurrence](exp-660-symbol-equivariant-formal.md) - fresh ordinary-initialized decision run after portable full-oracle repair.

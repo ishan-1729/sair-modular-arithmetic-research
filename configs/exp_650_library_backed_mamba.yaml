@@ -74,10 +74,12 @@ gates:
   require_deterministic_reload: true
   require_library_mamba2_mixers: 2
 resource_budget:
-  admission_maximum_expected_wall_seconds: 7200
-  admission_maximum_expected_cgroup_cpu_seconds: 28800
+  planning_reference_wall_seconds: 7200
+  planning_reference_cgroup_cpu_seconds: 28800
   admission_maximum_peak_rss_bytes: 8589934592
   eta_variability_headroom_floor: 1.25
   eta_variability_headroom_ceiling: 2.0
   hard_runaway_multiplier: 2.0
+  planning_references_are_nonbinding: true
+  require_complete_decision_route: true
   cache_completed_roots: true

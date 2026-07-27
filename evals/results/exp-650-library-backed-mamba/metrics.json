@@ -1,9 +1,16 @@
 {
   "run_id": "exp-650-library-backed-mamba",
-  "decision": "park-before-science-package-oracle-red",
-  "scientific_evidence": "none",
+  "created_at": "2026-07-27T17:24:11Z",
+  "checkpoint_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Root 20261186 full-fidelity calibration was globally OOM-killed before one complete arm; scientific roots were not opened.",
+    "labels_or_oracle_present": false
+  },
+  "decision": "park-resource-calibration-oom",
+  "scientific_evidence": "none-calibration-incomplete",
   "roots": {
-    "20261186": "unopened",
+    "20261186": "opened-calibration-failed-global-oom-before-complete-arm",
     "20261187": "unopened",
     "20261188": "unopened",
     "20261189": "unopened"
@@ -16,19 +23,33 @@
   "invalid_rate": null,
   "first_error": null,
   "trained_weight_intervention": null,
-  "controls": null,
-  "resource_admission": null,
+  "controls": {"not_performed": true, "reason": "calibration failed during the first hybrid arm"},
+  "resource_admission": {
+    "admitted": false,
+    "outer_wall_seconds": 34.3,
+    "wsl_mem_total_kib": 7928476,
+    "oom_anon_rss_kib": 7400644,
+    "process_cpu_seconds": null,
+    "cgroup_cpu_seconds": null,
+    "variability": null,
+    "eta": null,
+    "expected_soft_hard_guards": null,
+    "evidence": "experiments/runs/exp-650-library-backed-mamba/roots/20261186/failure.json"
+  },
   "observed_readiness": {
     "transformers_version": "5.14.1",
     "torch_version": "2.5.1+cpu",
     "cpu_forward_backward_reload": "pass",
-    "focused_tests": {"passed": 7, "failed": 0},
+    "focused_tests": {"passed": 8, "failed": 0},
     "project_validator": "pass",
-    "full_pytest": {"passed": 371, "failed": 34},
+    "exact_inherited_cone": {"passed": 34, "failed": 0},
+    "full_pytest": {"passed": 405, "failed": 0},
     "exp650_full_suite_tests": {"passed": 7, "failed": 0}
   },
   "limitations": [
     "Null scientific metrics mean not executed, not zero accuracy.",
-    "The package oracle failure is inherited clean-worktree evidence absence outside T053's allowed files."
+    "The all-zero checkpoint hash is an explicit schema sentinel; no trained scientific checkpoint exists.",
+    "Calibration failed before a complete arm, so null resource and scientific fields mean unavailable, not zero.",
+    "This resource park does not test the frozen scientific accuracy gates."
   ]
 }
