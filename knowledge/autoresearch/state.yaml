@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-22T19:05:00+05:30
+updated_at: 2026-07-27T22:05:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -89,6 +89,21 @@ current_hypothesis:
   limitations: [exact-dense-two-block-fixed-r2-formulation-only, not-full-loopies-or-MoR-routing-or-capacity-recycling-or-post-training, no-checked-independent-official-private-candidate-submission-promotion-or-completion-change]
   next_material_decision: PM-select-next-separately-authorized-experiment-by-expected-information-gain-per-unit-compute
   evidence_capable_of_changing_next_decision: EXP655-failure-partition-down-ranks-dense-fixed-r2-schedule-only-reruns-but-leaves-adaptive-routing-capacity-recycling-and-other-families-unresolved
+parked_exp650_hypothesis:
+  run_id: exp-650-library-backed-mamba
+  status: parked-before-preregistration-calibration-and-science-package-oracle-red
+  source_base_commit: 93fb334c32e7f028688077f65b7695996c15d6af
+  source_branch: codex/exp650-library-mamba
+  decision_authority: T053-package-boundary-stop-rule
+  dependency: transformers==5.14.1
+  library_cpu_smoke: deterministic-forward-backward-checkpoint-reload-pass
+  parameters: {mamba2_hybrid: 23601, convgru_control: 24049, attention_control: 22517}
+  roots: {calibration_20261186: unopened, viability_20261187: unopened, confirmation_20261188: unopened, confirmation_20261189: unopened}
+  scientific_evidence: none
+  run_record: experiments/runs/exp-650-library-backed-mamba/run.json
+  metrics: evals/results/exp-650-library-backed-mamba/metrics.json
+  verification: {focused_passed: 7, validator_passed: true, full_oracle_passed: 371, full_oracle_failed: 34, inherited_failure_families: [EXP648, EXP649, EXP658]}
+  limitations: [verification-boundary-park-not-scientific-rejection, no-calibration-training-checkpoint-mlflow-or-exact-scientific-metrics, no-candidate-benchmark-submission-promotion-or-completion-change]
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red
@@ -413,7 +428,7 @@ research_programs:
     scientifically_reproduced_parent_count: 0
     coverage_complete_parent_count: 6
     coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
-    status: full-pdf-reconciled-contract-pending-post-exp658-material-package-selection
+    status: exp650-prescience-verification-park-pending-pm-selection
     mandate_status: queued-binding
     active_experiment: null
     blocked_by: null
@@ -422,7 +437,7 @@ research_programs:
     library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
     faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
     sole_active_task: null
-    sole_next_package: post-exp658-highest-information-gain-materially-distinct-vertical-falsifier-to-be-selected-by-PM
+    sole_next_package: post-exp650-highest-information-gain-materially-distinct-vertical-falsifier-to-be-selected-by-PM
     ordered_queue:
       - structural-equivariance
       - shared-recurrent-depth-including-looplm-controls
@@ -439,7 +454,7 @@ research_programs:
       - conditional-compact-structured-model-comparison
       - conditional-target-only-spt-analogue
     preserved_experiment_meanings:
-      EXP-650: library-backed-Mamba-or-linear-state-space-hybrid
+      EXP-650: maintained-library-Mamba2-hybrid-implemented-but-prescience-package-oracle-parked
       EXP-651: exact-initialized-visit-or-dilation-specific-low-rank-adapters
       EXP-652: answer-plus-latent-TRM-style-viability
       EXP-653: convergence-based-adaptive-inner-recurrence-after-stable-winner
@@ -458,7 +473,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preserve EXP659 as parked before formal execution at the T046 verification boundary; do not repair or run this exact package without fresh PM authorization. Select a materially distinct family by expected decision yield per unit wall and aggregate-CPU compute, then authorize one largest-safe reversible vertical falsifier or durable admission-reject package with full-fidelity execution, exact scientific metrics when admitted, separate wall/aggregate-CPU/RSS evidence, and a terminal receipt. Candidate 005, EXP648, EXP656, and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+next_action: Preserve EXP650 as parked before root 20261186 at the T053 package-verification boundary; do not open its roots or rerun this exact package without fresh PM authorization and a green clean-worktree oracle. The PM must select the next materially distinct family by expected decision yield per unit wall and aggregate-CPU compute. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
