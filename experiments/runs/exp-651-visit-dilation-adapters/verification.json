@@ -1,0 +1,25 @@
+{
+  "focused": {
+    "command": "python -m pytest tests/test_exp_651_visit_dilation_adapters.py -q",
+    "status": "pass",
+    "evidence": "7 passed in 12.55s"
+  },
+  "validator_and_full_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "attempts": 2,
+    "validator_status": "pass",
+    "full_oracle_status": "fail",
+    "pytest_collected_nodeids": 398,
+    "pytest_failed_nodeids": 25,
+    "failure_scope": "EXP658 only",
+    "output_limitation": "Execution-wrapper timeouts detached both child processes; final status was recovered from the updated pytest cache and a focused failure probe."
+  },
+  "focused_failure_probe": {
+    "command": "python -m pytest tests/test_exp658_joint_quotient_carry_calibration.py::test_zero_root_config_frozen_hashes_and_path_backed_cache -q -x",
+    "status": "fail-as-diagnosed",
+    "exception": "FileNotFoundError",
+    "missing_path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors"
+  },
+  "stop_rule": "final-source oracle could not be established within two verification attempts",
+  "calibration_authorized": false
+}

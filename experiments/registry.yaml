@@ -1358,3 +1358,33 @@ runs:
       - No fresh confirmation, dynamic budget, model training, checkpoint, scientific metric, structural intervention, runtime result, or MLflow run exists.
       - This is a clean-oracle feasibility park, not a scientific rejection of symbol-equivariant recurrence.
       - No candidate, checked, independent, official/private, Tier7, 85%, or Goal-completion evidence changed.
+  - run_id: exp-651-visit-dilation-adapters
+    status: parked-before-calibration-full-oracle-red
+    approach: bounded-faithful-RRT-analogue-with-visit-dilation-specific-raw-kernel-adapters
+    decision: park-before-science
+    decision_authority: T050-full-oracle-two-attempt-stop-rule
+    source_commit: d8dd029eb5a64c15c5461a473779a4baba8b77bd
+    source_branch: codex/exp651-visit-dilation-adapters
+    config: configs/exp_651_visit_dilation_adapters.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-651-visit-dilation-adapters.md
+    run_record: experiments/runs/exp-651-visit-dilation-adapters/run.json
+    environment_record: experiments/runs/exp-651-visit-dilation-adapters/environment.json
+    verification_record: experiments/runs/exp-651-visit-dilation-adapters/verification.json
+    metrics: evals/results/exp-651-visit-dilation-adapters/metrics.json
+    evaluation_decision: evals/results/exp-651-visit-dilation-adapters/decision.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    produced_checkpoint: null
+    mlflow_run_id: null
+    calibration_root: 20261182
+    calibration_executed: false
+    formal_roots: [20261183, 20261184, 20261185]
+    formal_training_executed: false
+    scientific_evidence: none-prescience-verification-park
+    verification:
+      focused: 7-passed
+      validator: passed-before-pytest-opened
+      full_oracle: red-25-EXP658-only-failures-among-398-collected-nodeids
+      focused_failure_probe: absent-ignored-EXP658-source-checkpoint
+    limitations:
+      - No resource calibration, dynamic admission, training, formal checkpoint, MLflow run, transition/rollout metric, bootstrap, or scientific decision exists.
+      - This park does not reject visit/dilation adaptation and does not change Candidate005, submission, or any checked, independent, official, or private evidence.

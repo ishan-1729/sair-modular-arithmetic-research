@@ -1,0 +1,34 @@
+{
+  "run_id": "exp-651-visit-dilation-adapters",
+  "status": "parked-before-calibration-full-oracle-red",
+  "decision": "park-before-science",
+  "decision_authority": "T050-full-oracle-two-attempt-stop-rule",
+  "base_commit": "d8dd029eb5a64c15c5461a473779a4baba8b77bd",
+  "branch": "codex/exp651-visit-dilation-adapters",
+  "config": "configs/exp_651_visit_dilation_adapters.yaml",
+  "preregistration": "knowledge/autoresearch/ablations/exp-651-visit-dilation-adapters.md",
+  "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "source_hashes": {
+    "config": "3bed822d7feea4a39a11d4493f30afc8d6eb2f972ed01b0bf575d85f5fb06458",
+    "model": "1ee087edd7af5d69a68aff5e093265dd4d546b6e581684d76419d40de449c57e",
+    "runner": "d659a8180f1b1aa460592c700da031d87fe3e408773a4360736731a651e47c5f",
+    "tests": "c4feb0167c4a870a6203583829f850b049cff0ef5f94ea3cba5ac2176c5331ee"
+  },
+  "roots": {
+    "calibration_20261182": "unopened",
+    "formal_20261183": "unopened",
+    "formal_20261184": "unopened",
+    "formal_20261185": "unopened"
+  },
+  "calibration": null,
+  "admission": null,
+  "formal_training": false,
+  "produced_checkpoints": [],
+  "mlflow": null,
+  "scientific_metrics": null,
+  "limitations": [
+    "The required full-project oracle remained red after two attempts because ignored EXP658 hermetic evidence was absent from the isolated worktree.",
+    "This is a prescience verification park, not a scientific rejection of visit/dilation adapters.",
+    "Checked, prior-independent, official/private, submission and Candidate005 surfaces were not opened or changed."
+  ]
+}
