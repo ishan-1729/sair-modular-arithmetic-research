@@ -1483,10 +1483,10 @@ runs:
       - Confirmations and component-control causal verdicts were not authorized after viability failed.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
   - run_id: exp-662-ut-memory-token-transition
-    status: completed-rejected
+    status: parked-final-bytes-full-oracle-unverified
     approach: bounded-faithful-Universal-Transformer-learned-memory-token-transition
-    decision: reject-current-ut-memory-token-transition
-    decision_authority: T057-frozen-root20261199-conjunctive-gate
+    decision: park-unverified-diagnostic-zero-floor
+    decision_authority: T057-package-verification-stop-rule
     source_base_commit: e6e885a226a26e3c89f132088ed02ac823e33f47
     source_branch: codex/exp662-ut-memory-token-transition
     config: configs/exp_662_ut_memory_token_transition.yaml
@@ -1515,9 +1515,10 @@ runs:
       viability: {wall_seconds: 122.51121326700013, process_cpu_seconds: 486.343652, cgroup_cpu_seconds: 628.4319999999998, peak_rss_bytes: 504414208}
     verification: {focused: 10-passed, validator: 170-concepts-1100-records-green, full_oracle: 429-passed-7-owned-module-cache-errors, bounded_isolation_repair: 18-passed-no-second-full-oracle}
     limitations:
-      - This rejects only the exact small transition adaptation, not the source paper or larger data/compute settings.
+      - Root 20261199 is diagnostic and non-promotable because the sole full oracle was red on seven owned loader errors and final repaired bytes lack a full-oracle receipt.
+      - This park does not reject the exact small transition adaptation, source paper, or larger data/compute settings.
       - The zero-exact floor prevents a positive causal-memory or component conclusion.
-      - Confirmations were not authorized after viability rejection.
+      - Confirmations were not authorized after viability and verification failed.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
   - run_id: exp-661-loopformer-width-extrapolation
     status: completed-rejected

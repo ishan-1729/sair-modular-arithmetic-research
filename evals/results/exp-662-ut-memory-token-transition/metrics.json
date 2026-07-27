@@ -1,5 +1,7 @@
 {
   "run_id": "exp-662-ut-memory-token-transition",
+  "created_at": "2026-07-27T19:29:32Z",
+  "checkpoint_sha256": "70a6670d0fa954f2c9f84345b0b6005bbe2ee0eb73035e8d35f30b9f2a4941ad",
   "root": 20261199,
   "selection": {"selected_route": "memory_0", "validation_rollout_exact": {"memory_0": 0.0, "memory_4": 0.0, "memory_8": 0.0, "memory_16": 0.0, "memory_32": 0.0, "memory_64": 0.0}, "validation_transition_exact": {"memory_0": 0.0, "memory_4": 0.0, "memory_8": 0.0, "memory_16": 0.0, "memory_32": 0.0, "memory_64": 0.0}},
   "selected_test": {
@@ -9,5 +11,29 @@
   },
   "all_route_rollout_exact": {"memory_0": [0.0, 0.0, 0.0], "memory_4": [0.0, 0.0, 0.0], "memory_8": [0.0, 0.0, 0.0], "memory_16": [0.0, 0.0, 0.0], "memory_32": [0.0, 0.0, 0.0], "memory_64": [0.0, 0.0, 0.0], "wider_no_memory": [0.0, 0.0, 0.0], "decoded_recurrent": [0.0, 0.0, 0.0], "fixed_depth_memory_16": [0.0, 0.0, 0.0], "default_bias_memory_16": [0.0, 0.0, 0.0]},
   "diagnostics_w16_rollout_exact": {"randomized_weights": 0.0, "memory_reset": 0.0, "memory_zero": 0.0, "memory_randomize": 0.0, "memory_permute": 0.0, "no_type": 0.0, "no_index": 0.0, "fixed_depth_1_2_4_6_8": [0.0, 0.0, 0.0, 0.0, 0.0]},
-  "decision": "reject-current-ut-memory-token-transition"
+  "evaluation": {
+    "transition": {
+      "W16": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5833333333333334},
+      "W24": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5525173611111112},
+      "W32": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5172526041666666}
+    },
+    "rollout": {
+      "W16": {"cases": 48, "correct": 0, "exact_accuracy": 0.0},
+      "W24": {"cases": 48, "correct": 0, "exact_accuracy": 0.0},
+      "W32": {"cases": 48, "correct": 0, "exact_accuracy": 0.0}
+    }
+  },
+  "controls": {
+    "all_route_rollout_exact": {"memory_0": [0.0, 0.0, 0.0], "memory_4": [0.0, 0.0, 0.0], "memory_8": [0.0, 0.0, 0.0], "memory_16": [0.0, 0.0, 0.0], "memory_32": [0.0, 0.0, 0.0], "memory_64": [0.0, 0.0, 0.0], "wider_no_memory": [0.0, 0.0, 0.0], "decoded_recurrent": [0.0, 0.0, 0.0], "fixed_depth_memory_16": [0.0, 0.0, 0.0], "default_bias_memory_16": [0.0, 0.0, 0.0]},
+    "diagnostics_w16_rollout_exact": {"randomized_weights": 0.0, "memory_reset": 0.0, "memory_zero": 0.0, "memory_randomize": 0.0, "memory_permute": 0.0, "no_type": 0.0, "no_index": 0.0, "fixed_depth_1_2_4_6_8": [0.0, 0.0, 0.0, 0.0, 0.0]},
+    "selected_by_validation_only": true,
+    "confirmations_opened": false
+  },
+  "runtime": {"wall_seconds": 122.51121326700013, "process_cpu_seconds": 486.343652, "cgroup_cpu_seconds": 628.4319999999998, "peak_rss_bytes": 504414208},
+  "decision": "park-unverified-diagnostic-zero-floor",
+  "limitations": [
+    "The zero-exact root is diagnostic and non-promotable because the sole full-project oracle was red on seven owned loader errors and final repaired bytes were never verified by a full oracle.",
+    "This park does not reject the bounded SAIR transition adaptation, source paper, or larger-scale UT memory-token training.",
+    "Confirmations were not authorized, and no checked, independent, official/private, candidate, submission, promotion, or completion evidence was opened."
+  ]
 }

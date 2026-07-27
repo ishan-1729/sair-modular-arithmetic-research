@@ -1,8 +1,11 @@
 ---
-type: experiment
-status: completed-rejected
+type: Ablation
+title: EXP-662 Universal Transformer memory-token transition
+description: Bounded-faithful Universal Transformer learned-memory-token transition package, parked at its final-bytes oracle boundary.
+status: parked-final-bytes-full-oracle-unverified
 run_id: exp-662-ut-memory-token-transition
 date: 2026-07-28
+timestamp: "2026-07-28T00:59:32+05:30"
 ---
 
 # EXP-662 Universal Transformer memory-token transition
@@ -17,8 +20,8 @@ On fresh test identities the selected route scored 0% exact transition and 0% ex
 
 ## Decision
 
-Reject this exact small endpoint-supervised SAIR formulation. Roots `20261200` and `20261201` remain unopened. This does not reject the source paper, larger data/compute, or other memory-token training objectives. Candidate 005 and all benchmark, submission, promotion, and completion surfaces are unchanged.
+Park this exact package at the final-bytes verification boundary. The zero-exact root is diagnostic and non-promotable, not a compliant scientific rejection. Roots `20261200` and `20261201` remain unopened. This does not reject the SAIR formulation, source paper, larger data/compute, or other memory-token training objectives. Candidate 005 and all benchmark, submission, promotion, and completion surfaces are unchanged.
 
 ## Verification limitation
 
-The project validator passed. The single full pytest recorded 429 passes and seven late submission-loader errors caused by the EXP-662 test helper caching a generic `model` module. The bounded isolation repair was then verified by the EXP-662 plus affected submission-loader suites (18/18); the one-full-oracle rule prohibited a duplicate full run.
+The project validator passed. The single full pytest recorded 429 passes and seven late submission-loader errors caused by the EXP-662 test helper caching a generic `model` module. The bounded isolation repair was then verified by the EXP-662 plus affected submission-loader suites (18/18); the one-full-oracle rule prohibited a duplicate full run. Because science was opened after that red boundary, its results are retained only as diagnostic evidence.

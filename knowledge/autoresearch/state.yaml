@@ -159,14 +159,14 @@ rejected_exp661_hypothesis:
   metrics: evals/results/exp-661-loopformer-width-extrapolation/metrics.json
   verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 426, full_oracle_failed: 0}
   limitations: [exact-small-endpoint-formulation-only-not-source-paper, confirmations-and-independent-component-verdicts-unopened, hidden-collinearity-and-logit-stagnation-observed, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
-rejected_exp662_hypothesis:
+parked_exp662_hypothesis:
   run_id: exp-662-ut-memory-token-transition
-  status: completed-rejected-at-viability
+  status: parked-final-bytes-full-oracle-unverified
   source_base_commit: e6e885a226a26e3c89f132088ed02ac823e33f47
   source_branch: codex/exp662-ut-memory-token-transition
-  decision_authority: T057-frozen-root20261199-conjunctive-gate
+  decision_authority: T057-package-verification-stop-rule
   mechanism: bounded-faithful-UT-learned-memory-tokens-shared-cell-ACT-with-declared-SAIR-transition-adaptation
-  roots: {calibration_20261198: completed-admitted, viability_20261199: completed-reject, confirmation_20261200: unopened, confirmation_20261201: unopened}
+  roots: {calibration_20261198: completed-admitted-diagnostic, viability_20261199: completed-diagnostic-zero-floor, confirmation_20261200: unopened, confirmation_20261201: unopened}
   preregistration_sha256: 823219cb12ebae19be926a8366ef18d995f572e36938d0dcd06fddba90cb22a5
   selected_route: memory_0
   parameters_each: 9818
@@ -186,7 +186,7 @@ rejected_exp662_hypothesis:
   run_record: experiments/runs/exp-662-ut-memory-token-transition/run.json
   metrics: evals/results/exp-662-ut-memory-token-transition/metrics.json
   verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 429, full_oracle_errors: 7, isolation_repair_targeted_passed: 18, duplicate_full_oracle_run: false}
-  limitations: [exact-small-transition-formulation-only-not-source-paper, zero-floor-limits-causal-ablation-interpretation, confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+  limitations: [final-bytes-full-oracle-red-root-evidence-diagnostic-only, exact-small-transition-formulation-not-scientifically-rejected, zero-floor-limits-causal-ablation-interpretation, confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red

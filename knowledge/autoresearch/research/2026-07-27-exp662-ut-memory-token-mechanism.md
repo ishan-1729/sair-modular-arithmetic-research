@@ -35,3 +35,7 @@ This is direct learned-token workspace and is distinct from EXP-654's soft-addre
 ## Frozen causal and decision plan
 
 All count arms and controls use an identical parameter superset so stored parameters match exactly; inactive control modules are disclosed, while executed calls and analytical FLOPs record route differences. Count selection uses only disjoint W16 validation identities with the lexicographic rule `(autonomous exact, transition exact, -memory_count)`. Formal W16/W24/W32 test identities are untouched until after selection. Root `20261199` must pass every exactness, transfer, dependence, memory-causality, validity, separation, reload, matching, and resource conjunct to open roots `20261200` and `20261201`.
+
+## Terminal verification classification
+
+The sole full-project oracle ended with 429 passes and seven owned module-cache loader errors. The final isolation repair passed the focused and affected-loader cone 18/18, but no second full oracle was authorized. Root results are therefore diagnostic and non-promotable; EXP-662 is parked without a compliant scientific rejection, confirmations remain unopened, and no same-formulation recovery is authorized.

@@ -209,7 +209,7 @@ Native. EXP-610 and natural-endpoint EXP-648 are legal analogues, not faithful D
 
 ### ST-M020 — Universal-Transformer memory tokens (1 component)
 
-**PDF:** `2604.21999`, pp. 2–4 §2.1–3, pp. 4–6 Tables 2–5, p. 8 Tables 7–8, p. 9 Fig. 7. **Mechanism:** pre-norm UT with prepended sample-independent learned memory tokens, type/step embeddings, RoPE, QK/DerfNorm, ACT, and deep-start halt bias. Native. EXP-654's soft RAM/workspace is not faithful and does not close this record. Open: sweep memory 0/4/8/16/32/64, ACT/fixed depth and deep-start/default; reset/zero/permute memory and ablate type/index features.
+**PDF:** `2604.21999`, pp. 2–4 §2.1–3, pp. 4–6 Tables 2–5, p. 8 Tables 7–8, p. 9 Fig. 7. **Mechanism:** pre-norm UT with prepended sample-independent learned memory tokens, type/step embeddings, RoPE, QK/DerfNorm, ACT, and deep-start halt bias. Native. EXP-654's soft RAM/workspace is not faithful. EXP-662 implemented the bounded transition adaptation and produced a diagnostic all-zero 0/4/8/16/32/64 sweep, but its final bytes lack a green full oracle (429 passed / 7 errors, then targeted 18/18), so it is parked and does not close this record scientifically. No same-formulation recovery is authorized.
 
 ### ST-M021 — Attractor, EqR, and HRM diagnostic (3 components)
 
