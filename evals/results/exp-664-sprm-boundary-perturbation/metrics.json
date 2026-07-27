@@ -1,0 +1,62 @@
+{
+  "run_id": "exp-664-sprm-boundary-perturbation",
+  "created_at": "2026-07-27T23:05:00Z",
+  "checkpoint_sha256": "ce9e3edebaa91ccd19589d3dc198a02c198a57ed6b0e496bb2ed9dfe257f4e01",
+  "status": "completed-rejected",
+  "decision": "reject-current-sprm-boundary-adaptation",
+  "reason": "frozen W128 exact/transition/validity/inference conjunct failed",
+  "primary_route": "sprm_boundary",
+  "evaluation": {
+    "transition": {
+      "W128": {
+        "cases": 3000,
+        "correct": 2977,
+        "exact_accuracy": 0.9923333333333333,
+        "bit_accuracy": 0.9998020833333333,
+        "invalid_residue_rate": 0.0
+      }
+    },
+    "rollout": {
+      "W128": {
+        "cases": 300,
+        "correct": 131,
+        "exact_accuracy": 0.43666666666666665,
+        "all_prefix_exact_accuracy": 0.43666666666666665,
+        "transition_exact_accuracy": 0.6847395833333333,
+        "any_invalid_residue_rate": 0.006666666666666667,
+        "first_error_mean_position": 56.260355029585796
+      }
+    },
+    "stopped_after": "W128-primary-gate"
+  },
+  "controls": {
+    "formal_controls_opened": false,
+    "routes_trained_and_reload_verified": ["sprm_boundary", "clean_tbptt", "wrong_boundary", "unscaled_boundary"],
+    "frozen_source_reload_verified": true,
+    "stopped_by_w128_primary_gate": true
+  },
+  "inference_identity": {
+    "logits_equal": true,
+    "quotient_equal": true,
+    "rng_unchanged": true,
+    "wall_ratio": 0.9726817396482675,
+    "candidate_projected_wall_seconds": 133.09304069989594
+  },
+  "integrity": {
+    "checkpoint_reload_exact_all_routes": true,
+    "noise_free_forward_delegates_to_frozen_source_graph": true,
+    "confirmation_roots_opened": false
+  },
+  "unopened_surfaces": [
+    "clean/randomized W128",
+    "W64",
+    "W256",
+    "causal controls",
+    "roots 20261208 and 20261209"
+  ],
+  "limitations": [
+    "The frozen W128 primary gate stopped before matched formal controls, W64, W256, and confirmations.",
+    "This rejects only the exact bounded SAIR adaptation, not SPRM generally or the source paper.",
+    "No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

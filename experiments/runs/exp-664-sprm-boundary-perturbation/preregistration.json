@@ -1,0 +1,33 @@
+{
+  "run_id": "exp-664-sprm-boundary-perturbation",
+  "status": "frozen-before-science",
+  "root": 20261206,
+  "roots": {"calibration": 20261206, "viability": 20261207, "confirmations": [20261208, 20261209]},
+  "routes": ["frozen_source", "sprm_boundary", "clean_tbptt", "wrong_boundary", "unscaled_boundary"],
+  "trained_routes": ["sprm_boundary", "clean_tbptt", "wrong_boundary", "unscaled_boundary"],
+  "source": {
+    "repository_commit": "1022ca19b26b57985493f77ae3a0c78c43f60238",
+    "repository_branch": "codex/exp664-sprm-boundary-perturbation",
+    "files": {
+      "checkpoint": {"path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors", "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"},
+      "config": {"path": "configs/exp_664_sprm_boundary_perturbation.yaml", "sha256": "e4b4f05397d899d562258bc9f56d7b0cefbfd6367fa499cbcef7b98bd979935b"},
+      "mechanism": {"path": "knowledge/autoresearch/research/2026-07-28-exp664-sprm-boundary-mechanism.md", "sha256": "79aac28854c32fffca74b28577b8a6efc07705dc00e521c0b18df0a90d734a81"},
+      "model": {"path": "experiments/exp_664_sprm_boundary_perturbation/model.py", "sha256": "11484b73c1eecd60ac112a29dd6e8aeba91973f35c8b8d4593ffca4270f0bb69"},
+      "runner": {"path": "experiments/exp_664_sprm_boundary_perturbation/run.py", "sha256": "bed3b8bbd67942fe38056d169f96eaf6bac867ba9b8c4add6e7aa51fb9f02330"},
+      "test": {"path": "tests/test_exp_664_sprm_boundary_perturbation.py", "sha256": "996ea7ebd407a8b76ff133b5e3be18c9009234336bd14ce3675101e7bba75d21"},
+      "paper": {"path": "research/papers/arxiv-2604.18839.pdf", "sha256": "6939dc9065d2eca96be7a7e1bf8a7a3fc4ad6d4ea8dd98c036a25886929c00d8"}
+    }
+  },
+  "fixture_identity": {"files": 268, "bytes": 27086830, "manifest": "../t054/fixture-manifest.json", "sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d"},
+  "split_hashes": {
+    "64": {"train": "154f2e2c72f216f14bc814dec0bd17aab9bf726f37ed830a5d67d40b9d468c06", "validation": "38a5b74c5af2d1ca69bdd4a4b293cd2ae21460b740782909651424f44dfa0c40", "test": "8b3fce44c4b483741e47371d66fa1c871ad466f74286bf2f6882a8a0352514af"},
+    "128": {"train": "b06b2ed86c0f166c81edca48bab21e0ce2c03c1fbf3b21fcea02d19581bedecc", "validation": "2503f83ded3f4412f1b33b8020e60b1af2b0103d18a8013b2f3c870bbcf4bd81", "test": "b711914e27989cb9dfca0b03bfcf5cd10311ae54950dfc2df2c41b0a2ca8588c"},
+    "256": {"train": "77d0af273eafdf6ac39184d2bad2acca7d827a0e747ee1d7204b80d25d864636", "validation": "7655d70ce775cf3bbf80e165a44a94f2a97dd0e9722ae6bc318cc3758b6e1ab2", "test": "5e9e293dc50a2a7ed8765427677ea1d856deface9579154dc7f0d04f53710005"}
+  },
+  "training": {"updates_each": 400, "batch_size": 32, "schedule": [64, 128, 256, 128], "boundary_passes": 4, "beta_start": 0.0001, "beta_end": 0.02, "beta_steps": 1000},
+  "formal_counts": {"test_transitions_per_width": 3000, "test_rollouts_per_width": 300, "validation_transitions_per_width": 1000, "validation_rollouts_per_width": 100},
+  "gates": {"minimum_w64_sprm_rollout": 0.95, "minimum_w128_sprm_rollout": 0.85, "maximum_w128_loss_to_clean_tbptt": 0.02, "minimum_w128_transition": 0.998, "maximum_invalid_rollout_rate": 0.0, "minimum_trained_weight_drop_w128": 0.20, "minimum_w256_sprm_rollout": 0.10, "minimum_w256_gain_over_each_control": 0.05, "minimum_boundary_placement_gain_w256": 0.05, "minimum_state_scaling_gain_w256": 0.05, "maximum_inference_runtime_ratio": 1.02},
+  "decision_order": ["train-and-cache-all-arms", "full-sprm-w128-primary", "clean-randomized-w128-and-w64", "full-sprm-w256-primary", "remaining-validation-controls-causal-surfaces", "confirmations-only-after-complete-pass"],
+  "inference": "Exact direct SharedDilatedConvGRU forward; no noise, route, target, answer-dependent path, or added model call.",
+  "test_access_before_frozen_primary": false
+}
