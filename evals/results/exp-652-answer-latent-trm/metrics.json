@@ -1,0 +1,43 @@
+{
+  "run_id": "exp-652-answer-latent-trm",
+  "created_at": "2026-07-27T18:02:52Z",
+  "checkpoint_sha256": "ca84687b1cee19c3fc657c22b9940dd7ab2841bf80878a0b40424b724b97f240",
+  "evaluation": {
+    "transition": {
+      "W16": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5559895833333334},
+      "W24": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5447048611111112},
+      "W32": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5377604166666666}
+    },
+    "rollout": {
+      "W16": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5559895833333334},
+      "W24": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5447048611111112},
+      "W32": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5377604166666666}
+    },
+    "metric_semantics": "The endpoint-supervised TRM emits one autonomous full answer; transition and rollout schema slots therefore share the same exact endpoint denominator."
+  },
+  "controls": {
+    "decoded_cellular_ema": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+    "no_latent_ema": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+    "randomized_primary_ema_W16": 0.0,
+    "state_intervention_exact_W16": {"reset_y": 0.0, "reset_z": 0.0, "swap_y_z": 0.0, "randomize_y": 0.0, "randomize_z": 0.0},
+    "recursion_depth_exact_W16": {"1": 0.0, "2": 0.0, "3": 0.0, "4": 0.0},
+    "q_halt_exact_W16": 0.0
+  },
+  "decision": "reject-exact-formulation-at-viability",
+  "roots": {"20261190": "completed-admitted-calibration", "20261191": "completed-reject", "20261192": "unopened", "20261193": "unopened"},
+  "invalid_rate": {
+    "primary_raw": {"W16": 0.041666666666666664, "W24": 0.052083333333333336, "W32": 0.020833333333333332},
+    "primary_ema": {"W16": 0.0, "W24": 0.0, "W32": 0.0}
+  },
+  "first_error_mean_lsb_position": {"W16": 1.1354166666666667, "W24": 0.9375, "W32": 0.78125},
+  "resources": {
+    "calibration": {"wall_seconds": 7.184809631999997, "process_cpu_seconds": 22.409999999999997, "cgroup_cpu_seconds": 20.855999999999995, "peak_rss_bytes": 486719488},
+    "viability": {"wall_seconds": 61.26638212700004, "process_cpu_seconds": 258.82, "cgroup_cpu_seconds": 239.836, "peak_rss_bytes": 486707200}
+  },
+  "limitations": [
+    "Zero exact accuracy is observed on fresh generated held-out identities; bit accuracy is diagnostic only.",
+    "Q predicts the always-incorrect class and supplies no positive halting evidence.",
+    "Confirmations and their component controls were not authorized after viability failed.",
+    "No checked, prior-independent, official/private, benchmark, candidate, or submission evidence was used."
+  ]
+}

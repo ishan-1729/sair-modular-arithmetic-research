@@ -1436,3 +1436,49 @@ runs:
       - The hermetic package oracle passed; full-fidelity calibration was globally OOM-killed at 7400644 KiB anonymous RSS before one arm completed, so this is a measured resource park rather than a scientific rejection.
       - No valid process/cgroup CPU, variability, ETA, expected/soft/hard guard, transition/rollout, control, intervention, or formal checkpoint metric exists; nulls mean unavailable.
       - Scientific roots 20261187-20261189 remained unopened. T054 forbids reduced fidelity, retry, or a further EXP650 recovery package.
+  - run_id: exp-652-answer-latent-trm
+    status: completed-rejected
+    approach: bounded-faithful-ST-M010a-answer-y-latent-z-TRM
+    decision: reject-exact-formulation-at-viability
+    decision_authority: T055-frozen-root20261191-conjunctive-gate
+    source_base_commit: 746de1c69d7ae04a90c597c3bdcafea8ce5025b3
+    source_branch: codex/exp652-answer-latent-trm
+    config: configs/exp_652_answer_latent_trm.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-27-exp652-trm-mechanism.md
+    preregistration: experiments/runs/exp-652-answer-latent-trm/preregistration.json
+    preregistration_sha256: 04cffffc84d3c887245ea6ddc8c9e698e62492493861c7bc6982e5b6bd8537cf
+    run_record: experiments/runs/exp-652-answer-latent-trm/run.json
+    metrics: evals/results/exp-652-answer-latent-trm/metrics.json
+    calibration_root: 20261190
+    calibration_admitted: true
+    calibration_mlflow_run_id: 391833b7e15a4ac98d8e4482fc93b814
+    viability_root: 20261191
+    viability_mlflow_run_id: 588884abfac24cdc981c9f9be7c73760
+    confirmation_roots: {20261192: unopened-gate-blocked, 20261193: unopened-gate-blocked}
+    parameters_each: 8594
+    optimizer_updates_each: 300
+    trajectory_examples_each: 9600
+    exact_accuracy:
+      primary_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+      decoded_cellular_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+      no_latent_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+    primary_ema_bit_accuracy: {W16: 0.5559895833333334, W24: 0.5447048611111112, W32: 0.5377604166666666}
+    primary_raw_invalid_rate: {W16: 0.041666666666666664, W24: 0.052083333333333336, W32: 0.020833333333333332}
+    primary_ema_invalid_rate: {W16: 0.0, W24: 0.0, W32: 0.0}
+    checkpoints:
+      primary_raw: bafde8609ab2867a62467a91a2dc1f83e76575981417fb782cc67702a947f05a
+      primary_ema: ca84687b1cee19c3fc657c22b9940dd7ab2841bf80878a0b40424b724b97f240
+      decoded_raw: 3db140a214639ac1513f27ad083f2b31ca54ed561008a7f44c515f9d3c2b7402
+      decoded_ema: 1c3affb2295a8dcc15a3af3bb37585747a7dab89c801261de9e579205cd5cf2b
+      no_latent_raw: 38e5e8d2c75a391c6556cdae73a6feb864c50ba5b6b2638bf902edb3435ee5a4
+      no_latent_ema: bfde4edc5ece83cca2bdceabde90c3431292fa34896dc78e957f0e1baf0eb393
+    resources:
+      calibration: {wall_seconds: 7.184809631999997, process_cpu_seconds: 22.409999999999997, cgroup_cpu_seconds: 20.855999999999995, peak_rss_bytes: 486719488}
+      viability: {wall_seconds: 61.26638212700004, process_cpu_seconds: 258.82, cgroup_cpu_seconds: 239.836, peak_rss_bytes: 486707200}
+      projected_confirmation: {expected_wall_seconds: 121.63079052562516, soft_wall_seconds: 152.03848815703145, hard_wall_seconds: 243.26158105125032}
+    verification: {focused: 10-passed, validator: 167-concepts-1100-records-green, full_oracle: 416-passed-in-437.51-seconds}
+    limitations:
+      - This rejects only the exact bounded endpoint-supervised SAIR adaptation; it does not reject source-paper TRM, Tab-TRM, or other operators/budgets.
+      - Q learned the always-incorrect class; its threshold score is not positive halting evidence.
+      - Confirmations and component-control causal verdicts were not authorized after viability failed.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.

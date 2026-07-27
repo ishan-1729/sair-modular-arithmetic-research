@@ -1,0 +1,40 @@
+{
+  "admitted": true,
+  "checks": {
+    "all_route_classes": true,
+    "ema_reload": true,
+    "finite_positive_projection": true,
+    "raw_reload": true,
+    "rss": true
+  },
+  "fidelity": {
+    "all_potential_formal_routes_profiled": true,
+    "cases_per_width": 96,
+    "evaluation_contract_reduced": false,
+    "formal_updates_per_arm": 300,
+    "widths": [
+      16,
+      24,
+      32
+    ]
+  },
+  "projected_confirmation_route": {
+    "expected_cgroup_cpu_seconds": 464.64997686273756,
+    "expected_process_cpu_seconds": 504.1570960994844,
+    "expected_wall_seconds": 121.63079052562516,
+    "hard_cgroup_cpu_seconds": 929.2999537254751,
+    "hard_process_cpu_seconds": 1008.3141921989688,
+    "hard_wall_seconds": 243.26158105125032,
+    "peak_rss_bytes": 484917248,
+    "soft_cgroup_cpu_seconds": 580.8124710784219,
+    "soft_process_cpu_seconds": 630.1963701243556,
+    "soft_wall_seconds": 152.03848815703145
+  },
+  "variability": {
+    "headroom_multiplier": 1.5377206615612895,
+    "max_update_wall_seconds": 0.06124190100013038,
+    "median_update_wall_seconds": 0.03831696450004074,
+    "min_update_wall_seconds": 0.022169432000055167,
+    "samples": 12
+  }
+}
