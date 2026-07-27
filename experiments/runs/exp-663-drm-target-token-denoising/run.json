@@ -1,0 +1,81 @@
+{
+  "run_id": "exp-663-drm-target-token-denoising",
+  "status": "failed",
+  "hypothesis": "Cosine-corrupted target-token denoising with recurrent warmup and iterative remasking improves exact W128 retention and W256 transfer over clean-recurrent and nonrecursive controls.",
+  "seed": 20261202,
+  "decision": "park-before-viability-no-scientific-verdict",
+  "decision_authority": "T058 one-shot topology-repair wall guard",
+  "config": "configs/exp_663_drm_target_token_denoising.yaml",
+  "mechanism_map": "knowledge/autoresearch/research/2026-07-28-exp663-drm-target-token-mechanism.md",
+  "metrics": "evals/results/exp-663-drm-target-token-denoising/metrics.json",
+  "preregistration": "experiments/runs/exp-663-drm-target-token-denoising/preregistration.json",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-663-drm-target-token-denoising/metrics.json",
+    "preregistration": "experiments/runs/exp-663-drm-target-token-denoising/preregistration.json",
+    "preserved_scratch_path": ".scratch/exp-663-drm-target-token-denoising"
+  },
+  "source": {
+    "base_commit": "3b2ffbdb87c94620cf7eda76a878e6c677928c6a",
+    "repository_commit": "3b2ffbdb87c94620cf7eda76a878e6c677928c6a",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "branch": "codex/exp663-drm-target-token-denoising",
+    "paper_sha256": "6939dc9065d2eca96be7a7e1bf8a7a3fc4ad6d4ea8dd98c036a25886929c00d8",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "final_source_hashes": {
+      "config": "5889f86231f029290ec149acb478596078c4eb6ce6bc5052b053f1008f0f1098",
+      "mechanism_map": "c2092eb281f6cac2da5e442b004f40d8a6083b107ce295e4b71cdb50ab55a3c1",
+      "model": "682ac107b639d54d1f0af88cb6923deee60ceaf9bbf8732efb828d2324d19ea2",
+      "runner": "d6be59cbdd60497e72095803e12544a28ce15cdbd463cf6978ab6a6f40980b40",
+      "tests": "019984b1453c3587f690db26ae5a44a4fe02d94fbd5e54d32d3edbd82022bc58"
+    }
+  },
+  "verification": {
+    "focused_final": "14 passed in 8.34s",
+    "validator": "passed: 172 OKF concepts and 1100 benchmark records",
+    "full_pytest": "450 passed in 595.49s",
+    "full_oracle_wall_seconds": 612.08,
+    "full_oracle_user_seconds": 654.12,
+    "full_oracle_system_seconds": 35.18,
+    "full_oracle_peak_rss_kib": 930720,
+    "final_oracle_log_sha256": "e6ff84789ccd28a4e0be938df1df37b0aa8a5ca98cec9523509e285f41fd23ec"
+  },
+  "calibration": {
+    "root": 20261202,
+    "original_complete_receipt_sha256": "4917d3a7805f0200131c03700b3963f0cf7c4a97e4b913f7acdc8a7e7c16d41e",
+    "original_wall_seconds": 2703.140067628,
+    "original_process_cpu_seconds": 10802.591895,
+    "original_cgroup_cpu_seconds": 13394.771999999999,
+    "original_peak_rss_bytes": 1580789760,
+    "original_expected_formal_wall_seconds": 261353.39258405069,
+    "original_eta_formal_wall_seconds": 522706.78516810137,
+    "original_soft_guard_wall_seconds": 653384,
+    "original_hard_guard_wall_seconds": 1045414,
+    "repair_topology": "at-most-3-evaluator-processes-times-4-torch-threads-no-fourth-resident-model",
+    "repair_wall_guard_seconds": 2162.512054,
+    "repair_stop": "process tree terminated after guard crossing before calibration.json persistence",
+    "repair_observed_lower_bound_wall_seconds": 2162.512054,
+    "repair_last_pm_probe_wall_seconds_approx": 2240,
+    "repair_equivalence": "not-established-no-complete-candidate-receipt",
+    "repair_partial_artifacts_preserved": true,
+    "admitted": false
+  },
+  "roots": {
+    "20261202": "terminal-resource-park",
+    "20261203": "unopened",
+    "20261204": "unopened",
+    "20261205": "unopened"
+  },
+  "mlflow": {
+    "original_calibration_parent_run_id": "7b85c0f4cb1b4b3d974ff3c792b367fa",
+    "repair_complete_run": null,
+    "formal_runs": []
+  },
+  "limitations": [
+    "The only complete measurements are tiny non-scientific calibration diagnostics with two rollout cases per width.",
+    "The topology repair exceeded its frozen calibration wall guard before it could persist a complete receipt, so equivalence and repaired projections are unavailable.",
+    "Viability and confirmation roots were never opened; this package makes no scientific rejection of DRM, the source paper, or the SAIR adaptation.",
+    "No checked, independent, official/private, benchmark, candidate, submission, promotion, 85-percent, or goal-completion surface was opened."
+  ]
+}

@@ -1568,3 +1568,28 @@ runs:
       - Every exact-answer score is zero; bit accuracy and nominal deeper-budget retention are diagnostics only.
       - Confirmations and independent component causal verdicts were not authorized after viability failed.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-663-drm-target-token-denoising
+    status: parked-calibration-resource-guard
+    approach: bounded-faithful-DRM-target-token-denoising
+    decision: park-before-viability-no-scientific-verdict
+    decision_authority: T058-one-shot-topology-repair-wall-guard
+    source_base_commit: 3b2ffbdb87c94620cf7eda76a878e6c677928c6a
+    source_branch: codex/exp663-drm-target-token-denoising
+    config: configs/exp_663_drm_target_token_denoising.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-28-exp663-drm-target-token-mechanism.md
+    preregistration: experiments/runs/exp-663-drm-target-token-denoising/preregistration.json
+    run_record: experiments/runs/exp-663-drm-target-token-denoising/run.json
+    metrics: evals/results/exp-663-drm-target-token-denoising/metrics.json
+    roots: {20261202: terminal-resource-park, 20261203: unopened, 20261204: unopened, 20261205: unopened}
+    calibration:
+      original: {wall_seconds: 2703.140067628, process_cpu_seconds: 10802.591895, cgroup_cpu_seconds: 13394.771999999999, peak_rss_bytes: 1580789760}
+      original_projection: {expected_wall_seconds: 261353.39258405069, eta_wall_seconds: 522706.78516810137, soft_wall_seconds: 653384, hard_wall_seconds: 1045414}
+      repair: {wall_guard_seconds: 2162.512054, guard_crossed: true, complete_receipt: false, equivalence_established: false, admitted: false}
+    verification: {focused: 14-passed, validator: 172-concepts-1100-records-green, full_oracle: 450-passed}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Original two-rollout-per-width calibration metrics are non-scientific diagnostics only.
+      - The one-shot topology repair crossed its wall guard before persisting a complete equivalent calibration receipt.
+      - Viability and confirmation roots remain unopened; DRM and the source paper are not scientifically rejected.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
