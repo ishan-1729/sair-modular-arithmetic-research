@@ -105,3 +105,22 @@ artifacts, while three retain the previously documented scaffold-era cache/
 lifecycle expectations. T051 authorizes only the checkpoint copy and forbids
 tracked EXP658 changes, so its focused-cone stop rule fires. The full oracle,
 root 20261182, formal roots, and every scientific surface remain unopened.
+
+### T052 terminal phase reset
+
+T052 moved the accepted T049 hermetic worktree to integrated commit `ab48d8b`
+on `codex/exp651-visit-dilation-formal` without modifying tracked or ignored
+bytes. All four frozen EXP651 hashes and all four regular, single-link,
+non-symlink EXP658 fixture hashes passed. The exact six-node remainder process
+completed with an empty failed-node cache; its stdout receipt detached after
+the execution wrapper timed out, so no stronger timing claim is made.
+
+The required chained boundary then stopped in `tools/validate_project.py`
+before pytest. The validator reported ten inherited EXP651 evidence-schema
+violations: five missing metrics fields, four missing run fields, and the run
+status outside the allowed lifecycle enum. T052's terminal rule permits no
+repair-and-rerun chain after a red boundary. The evidence files are normalized
+only so this park itself is schema-shaped; the validator is not rerun and its
+red result is not reinterpreted. No full oracle, calibration, MLflow, training,
+checkpoint, evaluation identity, intervention, bootstrap, or scientific result
+opened. EXP651 is terminally parked with no T053 recovery.
