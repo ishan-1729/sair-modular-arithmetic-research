@@ -1482,6 +1482,43 @@ runs:
       - Q learned the always-incorrect class; its threshold score is not positive halting evidence.
       - Confirmations and component-control causal verdicts were not authorized after viability failed.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-662-ut-memory-token-transition
+    status: completed-rejected
+    approach: bounded-faithful-Universal-Transformer-learned-memory-token-transition
+    decision: reject-current-ut-memory-token-transition
+    decision_authority: T057-frozen-root20261199-conjunctive-gate
+    source_base_commit: e6e885a226a26e3c89f132088ed02ac823e33f47
+    source_branch: codex/exp662-ut-memory-token-transition
+    config: configs/exp_662_ut_memory_token_transition.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-27-exp662-ut-memory-token-mechanism.md
+    preregistration: experiments/runs/exp-662-ut-memory-token-transition/preregistration.json
+    preregistration_sha256: 823219cb12ebae19be926a8366ef18d995f572e36938d0dcd06fddba90cb22a5
+    run_record: experiments/runs/exp-662-ut-memory-token-transition/run.json
+    metrics: evals/results/exp-662-ut-memory-token-transition/metrics.json
+    calibration_root: 20261198
+    calibration_admitted: true
+    viability_root: 20261199
+    viability_mlflow_run_id: 1be3cfe3880347df8e4fc4377cff99c7
+    confirmation_roots: {20261200: unopened-gate-blocked, 20261201: unopened-gate-blocked}
+    selected_route: memory_0
+    parameters_each: 9818
+    optimizer_updates_each: 300
+    trajectory_examples_each: 9600
+    recurrent_block_calls_each: 57600
+    exact_accuracy:
+      selected_transition: {W16: 0.0, W24: 0.0, W32: 0.0}
+      selected_rollout: {W16: 0.0, W24: 0.0, W32: 0.0}
+      all_routes_rollout: {W16: 0.0, W24: 0.0, W32: 0.0}
+    selected_bit_accuracy: {W16: 0.5833333333333334, W24: 0.5525173611111112, W32: 0.5172526041666666}
+    resources:
+      calibration: {projected_wall_seconds: 106.24938941377968, soft_guard_wall_seconds: 266, hard_guard_wall_seconds: 425, peak_rss_bytes: 483131392}
+      viability: {wall_seconds: 122.51121326700013, process_cpu_seconds: 486.343652, cgroup_cpu_seconds: 628.4319999999998, peak_rss_bytes: 504414208}
+    verification: {focused: 10-passed, validator: 170-concepts-1100-records-green, full_oracle: 429-passed-7-owned-module-cache-errors, bounded_isolation_repair: 18-passed-no-second-full-oracle}
+    limitations:
+      - This rejects only the exact small transition adaptation, not the source paper or larger data/compute settings.
+      - The zero-exact floor prevents a positive causal-memory or component conclusion.
+      - Confirmations were not authorized after viability rejection.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
   - run_id: exp-661-loopformer-width-extrapolation
     status: completed-rejected
     approach: bounded-faithful-ST-M013c-LoopFormer-width-and-budget-extrapolation

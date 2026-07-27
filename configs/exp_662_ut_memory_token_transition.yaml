@@ -1,0 +1,91 @@
+run_id: exp-662-ut-memory-token-transition
+hypothesis: Direct sample-independent Universal-Transformer memory tokens improve exact decoded-transition autonomous width transfer over memory-zero and matched controls.
+preregistration: knowledge/autoresearch/ablations/exp-662-ut-memory-token-transition.md
+mechanism_map: knowledge/autoresearch/research/2026-07-27-exp662-ut-memory-token-mechanism.md
+roots:
+  calibration: 20261198
+  viability: 20261199
+  confirmations: [20261200, 20261201]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+model:
+  hidden: 16
+  heads: 4
+  ff_hidden: 32
+  wide_hidden: 24
+  max_memory_tokens: 64
+  max_steps: 6
+  act_epsilon: 0.01
+  deep_start_bias: -3.0
+  default_halt_bias: 0.0
+memory_counts: [0, 4, 8, 16, 32, 64]
+data:
+  training_widths: [8, 12, 16]
+  evaluation_widths: [16, 24, 32]
+  prime_bit_span: 6
+  train_prime_identities: 24
+  validation_prime_identities: 8
+  test_prime_identities: 8
+  split_seed_offset: 66200
+  training_pair_seed_offset: 66300
+  validation_pair_seed_offset: 66400
+  test_pair_seed_offset: 66500
+training:
+  steps_per_arm: 300
+  batch_size: 32
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.35
+  ponder_weight: 0.001
+  ponder_warmup_steps: 100
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 50
+calibration:
+  representative_updates_per_route: 2
+  transition_cases_per_width: 8
+  rollout_cases_per_width: 4
+  validation_rollout_cases: 8
+  route_classes:
+    - memory_0
+    - memory_4
+    - memory_8
+    - memory_16
+    - memory_32
+    - memory_64
+    - wider_no_memory
+    - decoded_recurrent
+    - fixed_depth_memory_16
+    - default_bias_memory_16
+evaluation:
+  transition_cases_per_width: 96
+  rollout_cases_per_width: 48
+  validation_transition_cases: 96
+  validation_rollout_cases: 64
+  fixed_depths: [1, 2, 4, 6, 8]
+  memory_interventions: [reset, zero, randomize, permute]
+  representation_interventions: [no_type, no_index]
+gates:
+  minimum_selected_w16_rollout: 0.80
+  minimum_selected_w24_rollout: 0.01
+  minimum_selected_w32_rollout: 0.01
+  minimum_transfer_gain_over_each_control: 0.02
+  minimum_trained_weight_drop_w16: 0.20
+  minimum_memory_causal_drop_w16: 0.10
+  maximum_invalid_rate: 0.0
+  maximum_parameter_ratio: 1.0
+  require_reload_exact: true
+  require_validation_test_separation: true
+confirmation:
+  require_both_roots_viability: true
+  component_controls: [fixed_depth_memory_16, default_bias_memory_16]
+  minimum_component_causal_drop_w16: 0.02
+resource_policy:
+  admission_maximum_peak_rss_bytes: 6442450944
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_route_classes: true
+  cache_completed_roots: true
