@@ -1,0 +1,84 @@
+{
+  "run_id": "exp-664-sprm-boundary-perturbation",
+  "status": "completed",
+  "seed": 20261207,
+  "hypothesis": "State-scaled Gaussian perturbation at detached TBPTT hidden-state boundaries improves width transfer while preserving the exact noise-free inference graph.",
+  "decision": "reject-current-sprm-boundary-adaptation",
+  "decision_authority": "T059 frozen W128-first conjunctive gate",
+  "config": "configs/exp_664_sprm_boundary_perturbation.yaml",
+  "mechanism_map": "knowledge/autoresearch/research/2026-07-28-exp664-sprm-boundary-mechanism.md",
+  "metrics": "evals/results/exp-664-sprm-boundary-perturbation/metrics.json",
+  "preregistration": "experiments/runs/exp-664-sprm-boundary-perturbation/preregistration.json",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-664-sprm-boundary-perturbation/metrics.json",
+    "preregistration": "experiments/runs/exp-664-sprm-boundary-perturbation/preregistration.json",
+    "preserved_scratch_path": ".scratch/exp-664-sprm-boundary-perturbation"
+  },
+  "roots": {
+    "20261206": "completed-admitted-calibration",
+    "20261207": "completed-rejected-at-w128-primary-gate",
+    "20261208": "unopened-gate-blocked",
+    "20261209": "unopened-gate-blocked"
+  },
+  "source": {
+    "base_commit": "1022ca19b26b57985493f77ae3a0c78c43f60238",
+    "branch": "codex/exp664-sprm-boundary-perturbation",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "6939dc9065d2eca96be7a7e1bf8a7a3fc4ad6d4ea8dd98c036a25886929c00d8",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "preregistration_sha256": "8589090d7f4238ad7920d0b53bac830d73f5bb4833c65da47c0d7f88912f0009",
+    "final_source_hashes": {
+      "config": "e4b4f05397d899d562258bc9f56d7b0cefbfd6367fa499cbcef7b98bd979935b",
+      "mechanism_map": "79aac28854c32fffca74b28577b8a6efc07705dc00e521c0b18df0a90d734a81",
+      "model": "11484b73c1eecd60ac112a29dd6e8aeba91973f35c8b8d4593ffca4270f0bb69",
+      "runner": "bed3b8bbd67942fe38056d169f96eaf6bac867ba9b8c4add6e7aa51fb9f02330",
+      "tests": "996ea7ebd407a8b76ff133b5e3be18c9009234336bd14ce3675101e7bba75d21"
+    }
+  },
+  "verification": {
+    "focused_final": "15 passed in 5.88s",
+    "validator": "passed: 174 OKF concepts and 1100 benchmark records",
+    "full_pytest": "465 passed in 454.84s",
+    "full_oracle_wall_seconds": 467.10,
+    "full_oracle_peak_rss_kib": 920312,
+    "final_oracle_log_sha256": "ebf527e280d8bc355c80169729d93291a3357b87d57503421f3833c055e971c6"
+  },
+  "calibration": {
+    "root": 20261206,
+    "admitted": true,
+    "receipt_sha256": "33870a3ae6bcdc3ea22276690ae694741e7abbdaeab24d2e65d5dfc4791350e7",
+    "wall_seconds": 63.72,
+    "peak_rss_kib": 785328,
+    "expected_formal_wall_seconds": 4989.4431208543265,
+    "eta_formal_wall_seconds": 7571.158472223232,
+    "hard_guard_wall_seconds": 15143
+  },
+  "formal": {
+    "root": 20261207,
+    "stage": "sprm-w128-primary-futility",
+    "summary_sha256": "c0d57cdc82f9de30dc62e02e7b028c38fbe715a454e53e737c9f409e325145f0",
+    "updates_per_trained_route": 400,
+    "parameters_per_route": 99824,
+    "wall_seconds": 665.5982705259994,
+    "peak_rss_bytes": 1229832192,
+    "aggregate_peak_rss_upper_bound_bytes": 2459664384
+  },
+  "mlflow": {
+    "parent_run_id": "80c03467e7d54d7eaed8476081c91518",
+    "route_run_ids": {
+      "frozen_source": "4ab52d485eb4467789684bf2e4b27a3d",
+      "sprm_boundary": "6e7357a27b054fc98da9639cc085a8e8",
+      "clean_tbptt": "33ecd33e1bae4da49ba323f848333486",
+      "wrong_boundary": "1d316dea878c42f0961463783bb6b70d",
+      "unscaled_boundary": "264572180bb94751ad64ab88d73d7bc1"
+    }
+  },
+  "limitations": [
+    "The decision-safe W128 primary gate stopped the package before clean/randomized comparisons, W64, W256, causal controls, and confirmation roots.",
+    "This rejects only the exact bounded SAIR SPRM adaptation, not SPRM generally or the source paper's language-model result.",
+    "Exact bigint arithmetic is confined to offline labels and evaluation.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

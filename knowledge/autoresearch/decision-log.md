@@ -9,6 +9,10 @@ timestamp: "2026-07-12T02:20:00+05:30"
 
 # Autoresearch decision log
 
+## 2026-07-28
+
+- **Reject EXP-664 exact bounded SPRM adaptation at the W128-first gate**: root `20261206` completed full-route calibration and admitted formal root `20261207`. After 400 updates per trained route, SPRM reached 99.233% exact on 3,000 W128 transitions but only 43.667% exact on 300 W128 rollouts, with 0.667% invalid rollouts. Noise-free logits, quotient outputs, and RNG state remained bit-identical to the source call graph. The frozen conjunctive gate blocks W64/W256, causal-control verdicts, and confirmation roots `20261208`/`20261209`. This rejects only the declared SAIR adaptation; Candidate 005 and all benchmark/promotion surfaces remain unchanged.
+
 ## 2026-07-12
 
 - **Continue incumbent** `candidate-001-horner-tcn9`: reproduced repository evidence establishes `highest_tier_above_90 = 2`, strong Tier-2 generalization, deterministic behavior, weight dependence, and sandbox headroom. It remains the release artifact until a challenger wins independently.

@@ -1593,3 +1593,29 @@ runs:
       - The one-shot topology repair crossed its wall guard before persisting a complete equivalent calibration receipt.
       - Viability and confirmation roots remain unopened; DRM and the source paper are not scientifically rejected.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-664-sprm-boundary-perturbation
+    status: completed-rejected
+    approach: bounded-faithful-SPRM-hidden-boundary-perturbation
+    decision: reject-current-sprm-boundary-adaptation
+    decision_authority: T059-frozen-W128-first-conjunctive-gate
+    source_base_commit: 1022ca19b26b57985493f77ae3a0c78c43f60238
+    source_branch: codex/exp664-sprm-boundary-perturbation
+    config: configs/exp_664_sprm_boundary_perturbation.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-28-exp664-sprm-boundary-mechanism.md
+    preregistration: experiments/runs/exp-664-sprm-boundary-perturbation/preregistration.json
+    preregistration_sha256: 8589090d7f4238ad7920d0b53bac830d73f5bb4833c65da47c0d7f88912f0009
+    run_record: experiments/runs/exp-664-sprm-boundary-perturbation/run.json
+    metrics: evals/results/exp-664-sprm-boundary-perturbation/metrics.json
+    roots: {20261206: completed-admitted-calibration, 20261207: completed-rejected-at-w128-primary-gate, 20261208: unopened-gate-blocked, 20261209: unopened-gate-blocked}
+    parameters_each: 99824
+    optimizer_updates_each_trained_route: 400
+    exact_accuracy: {W128_transition: 0.9923333333333333, W128_rollout: 0.43666666666666665}
+    validity: {W128_transition_invalid: 0.0, W128_rollout_any_invalid: 0.006666666666666667}
+    inference_identity: {logits_equal: true, quotient_equal: true, rng_unchanged: true, wall_ratio: 0.9726817396482675}
+    calibration: {admitted: true, wall_seconds: 63.72, expected_wall_seconds: 4989.4431208543265, eta_wall_seconds: 7571.158472223232, hard_guard_wall_seconds: 15143}
+    formal_resources: {wall_seconds: 665.5982705259994, process_cpu_seconds: 2650.648281, cgroup_cpu_seconds: 2897.148000000001, peak_rss_bytes: 1229832192}
+    verification: {focused: 15-passed, validator: 174-concepts-1100-records-green, full_oracle: 465-passed}
+    limitations:
+      - The frozen W128 primary gate stopped before clean/randomized W128, W64, W256, causal controls, and confirmations.
+      - This rejects only the exact bounded SAIR adaptation, not SPRM generally or the source paper.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.

@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-28T22:10:00+05:30
+updated_at: 2026-07-28T22:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -106,6 +106,34 @@ parked_exp650_hypothesis:
   metrics: evals/results/exp-650-library-backed-mamba/metrics.json
   verification: {fixture_count: 268, exact_cone_passed: 34, focused_passed: 8, validator_passed: true, full_oracle_passed: 405, full_oracle_failed: 0}
   limitations: [resource-park-not-scientific-rejection, calibration-incomplete-no-valid-cpu-variability-eta-guards-or-scientific-metrics, no-retry-reduced-fidelity-or-further-EXP650-recovery, no-candidate-benchmark-submission-promotion-or-completion-change]
+rejected_exp664_hypothesis:
+  run_id: exp-664-sprm-boundary-perturbation
+  status: completed-rejected-at-w128-primary-gate
+  source_base_commit: 1022ca19b26b57985493f77ae3a0c78c43f60238
+  source_branch: codex/exp664-sprm-boundary-perturbation
+  decision_authority: T059-frozen-W128-first-conjunctive-gate
+  mechanism: ST-M019b-bounded-faithful-state-scaled-Gaussian-perturbation-at-detached-TBPTT-boundaries
+  roots: {calibration_20261206: completed-admitted, formal_20261207: completed-rejected, confirmation_20261208: unopened, confirmation_20261209: unopened}
+  preregistration_sha256: 8589090d7f4238ad7920d0b53bac830d73f5bb4833c65da47c0d7f88912f0009
+  parameters_each: 99824
+  optimizer_updates_each_trained_route: 400
+  formal_primary:
+    width: 128
+    transitions: 3000
+    rollouts: 300
+    transition_exact_accuracy: 0.9923333333333333
+    rollout_exact_accuracy: 0.43666666666666665
+    rollout_transition_exact_accuracy: 0.6847395833333333
+    transition_invalid_rate: 0.0
+    rollout_any_invalid_rate: 0.006666666666666667
+  inference_identity: {logits_equal: true, quotient_equal: true, rng_unchanged: true, wall_ratio: 0.9726817396482675}
+  calibration: {admitted: true, wall_seconds: 63.72, expected_wall_seconds: 4989.4431208543265, eta_wall_seconds: 7571.158472223232, hard_guard_wall_seconds: 15143}
+  formal_resources: {wall_seconds: 665.5982705259994, process_cpu_seconds: 2650.648281, cgroup_cpu_seconds: 2897.148000000001, peak_rss_bytes: 1229832192}
+  mlflow_parent_run_id: 80c03467e7d54d7eaed8476081c91518
+  run_record: experiments/runs/exp-664-sprm-boundary-perturbation/run.json
+  metrics: evals/results/exp-664-sprm-boundary-perturbation/metrics.json
+  verification: {focused_passed: 15, validator_passed: true, full_oracle_passed: 465, full_oracle_failed: 0}
+  limitations: [exact-bounded-SAIR-adaptation-only, later-widths-controls-and-confirmations-gate-blocked, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 rejected_exp652_hypothesis:
   run_id: exp-652-answer-latent-trm
   status: completed-rejected-at-viability
