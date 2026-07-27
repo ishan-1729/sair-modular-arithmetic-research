@@ -1,0 +1,83 @@
+run_id: exp-650-library-backed-mamba
+hypothesis: A faithful library-backed Mamba2-Mamba2-Attention-MLP postnorm transition learns exact autonomous Horner rollouts better than matched ConvGRU and recurrent-attention controls.
+preregistration: knowledge/autoresearch/ablations/exp-650-library-backed-mamba.md
+roots:
+  calibration: 20261186
+  viability: 20261187
+  confirmations: [20261188, 20261189]
+dependency:
+  package: transformers
+  version: 5.14.1
+  implementation: transformers.models.mamba2.modeling_mamba2.Mamba2Mixer
+  cpu_path: torch_forward
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+data:
+  train_widths: [16]
+  evaluation_widths: [16, 24, 32]
+  prime_bit_span: 4
+  train_prime_identities: 64
+  test_prime_identities: 32
+  split_seed_offset: 65000
+  training_pair_seed_offset: 65100
+  evaluation_pair_seed_offset: 65200
+  calibration_seed: 20261186
+  formal_seeds:
+    20261187: 20261187
+    20261188: 20261188
+    20261189: 20261189
+models:
+  mamba2_hybrid:
+    hidden: 32
+    state_size: 8
+    conv_kernel: 4
+    expand: 2
+    head_dim: 8
+    n_groups: 1
+    attention_heads: 4
+    mlp_expansion: 2
+    cross_mixer: attention
+  convgru_control:
+    hidden: 48
+    cycles: 2
+  attention_control:
+    hidden: 52
+    heads: 4
+    feedforward: 104
+    iterations: 2
+training:
+  steps_per_arm: 800
+  batch_trajectories: 16
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00002
+  weight_decay: 0.0001
+  worst_bit_weight: 0.05
+  final_prefix_weight: 0.20
+  gradient_clip: 1.0
+  torch_threads: 4
+  log_every_steps: 50
+calibration:
+  updates_per_arm: 8
+evaluation:
+  cases_per_width: 96
+  randomized_weight_cases: 96
+  determinism_cases: 16
+  batch_size: 32
+gates:
+  minimum_w16_rollout_accuracy: 0.20
+  minimum_gain_over_each_control: 0.05
+  minimum_w24_rollout_accuracy: 0.01
+  minimum_w32_rollout_accuracy: 0.01
+  minimum_trained_gain_over_randomized_w16: 0.10
+  maximum_invalid_rate: 0.0
+  maximum_parameter_ratio: 1.10
+  require_deterministic_reload: true
+  require_library_mamba2_mixers: 2
+resource_budget:
+  admission_maximum_expected_wall_seconds: 7200
+  admission_maximum_expected_cgroup_cpu_seconds: 28800
+  admission_maximum_peak_rss_bytes: 8589934592
+  eta_variability_headroom_floor: 1.25
+  eta_variability_headroom_ceiling: 2.0
+  hard_runaway_multiplier: 2.0
+  cache_completed_roots: true

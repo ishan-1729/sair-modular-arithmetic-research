@@ -174,7 +174,7 @@ Native. EXP-648 endpoint consistency is not either method. Test components separ
 
 ### ST-M014 — Mamba-2/TRM hybrid (1 component)
 
-**PDF:** `2602.12078`, pp. 3–4 §3.1–3.3, p. 5 Tables 1–2, pp. 5–6 Table 3, p. 9 §7. **Mechanism:** Mamba2→Mamba2→Attention→MLP or MLP-t, postnorm RMSNorm, with reverse/bidirectional controls; pure causal Mamba is excluded from the faithful arm. **Library:** authoritative pinned Mamba-2 library required, with tiny-fixture, CPU, and device parity. EXP-650 remains planned. Terminal after exact transfer and measured wall/CPU/RSS against ConvGRU/attention controls.
+**PDF:** `2602.12078`, pp. 3–4 §3.1–3.3, p. 5 Tables 1–2, pp. 5–6 Table 3, p. 9 §7. **Mechanism:** Mamba2→Mamba2→Attention→MLP or MLP-t, postnorm RMSNorm, with reverse/bidirectional controls; pure causal Mamba is excluded from the faithful arm. **Library:** authoritative pinned Mamba-2 library required, with tiny-fixture, CPU, and device parity. EXP-650 proved maintained Transformers `5.14.1` CPU forward/backward/reload feasibility and implemented the bounded-faithful pipeline plus matched controls, but T053 parked before root `20261186` because the repaired clean-worktree full oracle remained red on 34 inherited EXP648/649/658 ignored-evidence failures. This is a verification-boundary park, not a scientific reproduction or rejection; exact transfer and wall/CPU/RSS remain open only under fresh authorization.
 
 ## Recursive reasoning offshoots
 
