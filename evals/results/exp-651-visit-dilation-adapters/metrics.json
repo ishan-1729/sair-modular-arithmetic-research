@@ -1,0 +1,15 @@
+{
+  "run_id": "exp-651-visit-dilation-adapters",
+  "status": "no-scientific-metrics-prescience-park",
+  "exact_initialization": "passed-by-focused-tests-at-widths-64-128-256",
+  "adapter_parameter_count": {
+    "visit_dilation_adapter": 110592,
+    "global_adapter_control": 110592
+  },
+  "transition_metrics": null,
+  "rollout_metrics": null,
+  "intervention_metrics": null,
+  "bootstrap_metrics": null,
+  "resource_calibration": null,
+  "mlflow_run_id": null
+}

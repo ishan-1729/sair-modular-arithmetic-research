@@ -1,0 +1,11 @@
+{
+  "run_id": "exp-651-visit-dilation-adapters",
+  "decision": "park-before-science",
+  "reason": "required full-project oracle remained red on 25 EXP658-only failures after the two-attempt Worker verification limit",
+  "scientific_hypothesis_decided": false,
+  "calibration_root_opened": false,
+  "formal_roots_opened": false,
+  "candidate005_changed": false,
+  "submission_changed": false,
+  "benchmark_answers_accessed": false
+}

@@ -57,3 +57,4 @@
 - [EXP-655 layer-loop compute-matched recurrence](exp-655-layer-loop-compute-matched-recurrence.md) - T049 restored a green unchanged-source 391/391 oracle, dynamically admitted and completed the full three-root comparison, and rejected this exact dense fixed-R2 schedule formulation.
 - [EXP-659 symbol-equivariant recurrence](exp-659-symbol-equivariant-recurrence.md) - full-fidelity explicit symbol-axis recurrent reasoner with matched position-only and broken-tying controls.
 - [EXP-660 fresh formal symbol-equivariant recurrence](exp-660-symbol-equivariant-formal.md) - fresh ordinary-initialized decision run after portable full-oracle repair.
+- [EXP-651 visit/dilation-specific recurrent adapters](exp-651-visit-dilation-adapters.md) - bounded-faithful RRT analogue parked before calibration because the required full oracle remained red on absent ignored EXP658 hermetic evidence.
