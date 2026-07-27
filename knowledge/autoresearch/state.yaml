@@ -132,6 +132,33 @@ rejected_exp652_hypothesis:
   metrics: evals/results/exp-652-answer-latent-trm/metrics.json
   verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 416, full_oracle_failed: 0}
   limitations: [exact-formulation-only-not-source-paper-or-Tab-TRM, Q-learned-always-incorrect-class, confirmations-and-component-verdicts-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+rejected_exp661_hypothesis:
+  run_id: exp-661-loopformer-width-extrapolation
+  status: completed-rejected-at-viability
+  source_base_commit: 15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8
+  source_branch: codex/exp661-loopformer-width-extrapolation
+  decision_authority: T056-frozen-root20261195-conjunctive-gate
+  mechanism: ST-M013c-bounded-faithful-loopformer-with-declared-SAIR-bit-token-endpoint-adaptations
+  loopvit_pixel_path_reproduced: false
+  learned_exit: false
+  roots: {calibration_20261194: completed-admitted, viability_20261195: completed-reject, confirmation_20261196: unopened, confirmation_20261197: unopened}
+  preregistration_sha256: ecd97076d67825f9c29e3b76ee0b712b738947796980e4e70fd3c9735de73275
+  parameters_each: 8553
+  optimizer_updates_each: 300
+  trajectory_examples_each: 9600
+  recurrent_block_calls_each: 3597
+  exact_accuracy:
+    loopformer_budget_1_2_4_8_16: {W16: [0.0, 0.0, 0.0, 0.0, 0.0], W24: [0.0, 0.0, 0.0, 0.0, 0.0], W32: [0.0, 0.0, 0.0, 0.0, 0.0]}
+    all_controls_budget8: {W16: 0.0, W24: 0.0, W32: 0.0}
+  primary_bit_accuracy_budget8: {W16: 0.544921875, W24: 0.5438368055555556, W32: 0.5182291666666666}
+  gate: {passed: false, passed_checks: [deeper_budget_retention, zero_invalid, reload_exact, parameter_match, example_update_call_match], failed_checks: [w16, w24, w32, all_transfer_gains, trained_weight_dependence, time_step_effect, shortcut_effect, short_loss_effect, consistency_effect]}
+  calibration: {admitted: true, wall_seconds: 6.6381154270000025, process_cpu_seconds: 18.580000000000002, cgroup_cpu_seconds: 17.432000000000016, peak_rss_bytes: 476811264, variability_headroom: 1.631761568192944, expected_wall_seconds: 580.3424265229701, eta_wall_seconds: 946.9804679920201, soft_wall_seconds: 1183.725584990025, hard_wall_seconds: 1893.9609359840401}
+  viability_resources: {wall_seconds: 83.64743734800004, process_cpu_seconds: 356.79, cgroup_cpu_seconds: 402.08799999999997, peak_rss_bytes: 489570304}
+  mlflow: {calibration_run_id: f3bbbf736a114c7193ce4c8d4e42ff92, viability_run_id: e68ad3f4bdc7460394e7cb89c1ae4ba7, statuses: [FINISHED, FINISHED]}
+  run_record: experiments/runs/exp-661-loopformer-width-extrapolation/run.json
+  metrics: evals/results/exp-661-loopformer-width-extrapolation/metrics.json
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 426, full_oracle_failed: 0}
+  limitations: [exact-small-endpoint-formulation-only-not-source-paper, confirmations-and-independent-component-verdicts-unopened, hidden-collinearity-and-logit-stagnation-observed, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red

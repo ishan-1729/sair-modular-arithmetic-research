@@ -1,0 +1,162 @@
+{
+  "budgets": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "confirmation": {
+    "component_controls": [
+      "no_time_step",
+      "no_shortcut",
+      "no_short_loss",
+      "no_consistency"
+    ],
+    "minimum_component_causal_drop_w16": 0.02,
+    "require_both_roots_viability": true
+  },
+  "gates": {
+    "maximum_deeper_budget_degradation": 0.02,
+    "maximum_invalid_rate": 0.0,
+    "maximum_parameter_ratio": 1.01,
+    "minimum_component_causal_drop_w16": 0.02,
+    "minimum_primary_w16_exact_accuracy": 0.8,
+    "minimum_primary_w24_exact_accuracy": 0.05,
+    "minimum_primary_w32_exact_accuracy": 0.05,
+    "minimum_trained_gain_over_randomized_w16": 0.2,
+    "minimum_transfer_gain_over_each_control": 0.02,
+    "require_reload_exact": true
+  },
+  "resource_policy": {
+    "admission_maximum_peak_rss_bytes": 6442450944,
+    "cache_completed_roots": true,
+    "hard_guard_multiplier": 2.0,
+    "require_complete_route_classes": true,
+    "soft_guard_multiplier": 1.25,
+    "variability_headroom_ceiling": 2.0,
+    "variability_headroom_floor": 1.25
+  },
+  "root_status": {
+    "20261194": "unopened",
+    "20261195": "unopened",
+    "20261196": "unopened",
+    "20261197": "unopened"
+  },
+  "roots": {
+    "20261194": {
+      "evaluation_cases_sha256": "908f44f960ba3c9b793bea359aa0c06cc7d8eb825bd926dcf8eab322d37a13ea",
+      "evaluation_pair_seeds": {
+        "16": 20327510,
+        "24": 20327518,
+        "32": 20327526
+      },
+      "root": 20261194,
+      "splits_sha256": "2bb00e4e49a5b09e9f0673505a7686ba7ab7bb1709806cf511a0354bebb8da15",
+      "training_pair_seeds": {
+        "12": 20327406,
+        "16": 20327410,
+        "8": 20327402
+      }
+    },
+    "20261195": {
+      "evaluation_cases_sha256": "6266f07e4f0f9b8ab378cd71f81228d60c21d4600d2dfff79c0f3e361dd5a7bb",
+      "evaluation_pair_seeds": {
+        "16": 20327511,
+        "24": 20327519,
+        "32": 20327527
+      },
+      "root": 20261195,
+      "splits_sha256": "2eb5dc10fb8c3bcea1730b1cabf84bcfa9f1542245ab164bfa42551ddee4cd83",
+      "training_pair_seeds": {
+        "12": 20327407,
+        "16": 20327411,
+        "8": 20327403
+      }
+    },
+    "20261196": {
+      "evaluation_cases_sha256": "fa64a9ab8ca14523dff9c3189604bbed858bf8cb95ef474d8c1751333f8176c4",
+      "evaluation_pair_seeds": {
+        "16": 20327512,
+        "24": 20327520,
+        "32": 20327528
+      },
+      "root": 20261196,
+      "splits_sha256": "4f7878f28c477e6482b1fa25ed469e705adcea555b8f695d381c154f51ce5dc4",
+      "training_pair_seeds": {
+        "12": 20327408,
+        "16": 20327412,
+        "8": 20327404
+      }
+    },
+    "20261197": {
+      "evaluation_cases_sha256": "6e751f958a567e5b580b2d5cfb7cd17cfb0bdc25667de432d9e2e40b45eaedba",
+      "evaluation_pair_seeds": {
+        "16": 20327513,
+        "24": 20327521,
+        "32": 20327529
+      },
+      "root": 20261197,
+      "splits_sha256": "bc8a2080c48368c3f823a92523b29a18fb304712fc13eacea2395bf09d62625a",
+      "training_pair_seeds": {
+        "12": 20327409,
+        "16": 20327413,
+        "8": 20327405
+      }
+    }
+  },
+  "route_classes": [
+    "loopformer",
+    "plain_looped_transformer",
+    "decoded_cellular_control",
+    "no_time_step",
+    "no_shortcut",
+    "no_short_loss",
+    "no_consistency"
+  ],
+  "run_id": "exp-661-loopformer-width-extrapolation",
+  "schema_version": "exp661-preregistration-v1",
+  "scientific_surfaces_excluded": [
+    "checked",
+    "prior-independent",
+    "official",
+    "private",
+    "submission",
+    "benchmark answers"
+  ],
+  "source": {
+    "base_commit": "15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8",
+    "config_sha256": "cf6a42136a03fb2f6f57be6c6dc70d3c61f34acc23239563446c0e489cae6bb3",
+    "fixture_manifest": {
+      "entries_tsv_sha256": "d3f7eea82456c0c4f5c967d54cc6e2afa0142eb9dd41e9e1afefabbe9ba0c969",
+      "file_count": 268,
+      "path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-650-library-backed-mamba/t054/fixture-manifest.json",
+      "properties": {
+        "all_destinations_regular": true,
+        "all_sources_regular": true,
+        "answers_or_credentials_copied": false,
+        "destination_hardlink_count_one": true,
+        "no_symlinks": true,
+        "primary_source_unchanged": true,
+        "reflink_disabled": true,
+        "source_destination_inode_distinct": true
+      },
+      "reuse_only_no_bytes_republished": true,
+      "schema_version": "exp650-t054-fixture-manifest-v1",
+      "sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d",
+      "total_bytes": 27086830
+    },
+    "generator_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "pdf_sha256": "92acdec9796ee1f5fdac8442c099322286eb2b3c078b64f12a505c7e77962c32",
+    "python": "3.12.3",
+    "source_hashes": {
+      "configs/exp_661_loopformer_width_extrapolation.yaml": "cf6a42136a03fb2f6f57be6c6dc70d3c61f34acc23239563446c0e489cae6bb3",
+      "experiments/exp_661_loopformer_width_extrapolation/model.py": "309a4bc0b65fdf108db1f4dc9eebb9b13f6f077f402d0f6fc4856877f490a539",
+      "experiments/exp_661_loopformer_width_extrapolation/run.py": "fab7eadaa9468a7408514f6f0eaa1bf6e06f1780a3da449fc83c92359d7e9f32",
+      "knowledge/autoresearch/research/2026-07-27-exp661-loopformer-mechanism.md": "679188e20869ffe2f8d7409a822dc994441b716f7f4ba124d773b99d305dc4c7",
+      "tests/test_exp_661_loopformer_width_extrapolation.py": "ff9c133f0292cb190f0f41a74796adf9b8b401cac5e0cdd5d47cb3e27cbce810"
+    },
+    "torch_version": "2.5.1+cpu"
+  },
+  "stopping": "Any viability conjunct miss rejects and leaves confirmation roots unopened."
+}
