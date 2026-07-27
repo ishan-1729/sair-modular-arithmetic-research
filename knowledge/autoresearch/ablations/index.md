@@ -62,3 +62,4 @@
 - [EXP-652 answer-plus-latent TRM](exp-652-answer-latent-trm.md) - completed-rejected ST-M010.a SAIR adaptation; all matched arms are 0% exact at W16/W24/W32 and component confirmations remain unopened.
 - [EXP-661 LoopFormer width and budget extrapolation](exp-661-loopformer-width-extrapolation.md) - completed-rejected ST-M013.c SAIR adaptation; all seven arms and five budgets are 0% exact at W16/W24/W32, so confirmations remain unopened.
 - [EXP-662 Universal Transformer memory-token transition](exp-662-ut-memory-token-transition.md) - completed-rejected bounded-faithful UT adaptation; all memory counts and matched controls are 0% exact rollout at W16/W24/W32, so confirmations remain unopened.
+- [EXP-663 DRM target-token denoising](exp-663-drm-target-token-denoising.md) - implementation and package oracle green, but the one-shot parallel calibration crossed its wall guard; viability and confirmations remain unopened with no scientific verdict.

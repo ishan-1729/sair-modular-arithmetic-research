@@ -56,7 +56,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M017.a autoregressive ladder | bounded-faithful | conditional on viable autoregressive model |
 | M018.a loop-count curriculum | bounded-faithful | open |
 | M018.b hop/halting curriculum | bounded-faithful | open |
-| M019.a DRM | bounded-faithful | open; EXP-610/648 non-faithful |
+| M019.a DRM | bounded-faithful | EXP-663 terminal resource park before science; EXP-610/648 non-faithful |
 | M019.b SPRM | bounded-faithful | open |
 | M020.a UT memory tokens | bounded-faithful | open; EXP-654 non-faithful |
 | M021.a Attractor Models | bounded-faithful | open |
@@ -206,6 +206,8 @@ Native. EXP-633 is neither. Terminal requires each decomposition, training contr
 - **M019.b SPRM:** Gaussian corruption only at TBPTT boundaries in latent state. It is not DRM target-token denoising.
 
 Native. EXP-610 and natural-endpoint EXP-648 are legal analogues, not faithful DRM. Offline target corruption is permitted for training; inference must operate only on model state without labels, teacher answers, or repair code. Terminal records DRM/SPRM separately with corruption/remasking, boundary-noise, and submission-artifact controls.
+
+EXP-663 implements the bounded-faithful M019.a target-token path with cosine corruption and iterative uniform remasking, but its sole parallel calibration repair crossed the frozen wall guard before a complete equivalent receipt. Viability and confirmation roots remain unopened, so M019.a has a terminal resource/expected-value park rather than a scientific verdict.
 
 ### ST-M020 — Universal-Transformer memory tokens (1 component)
 

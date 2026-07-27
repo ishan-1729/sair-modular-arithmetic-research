@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-28T18:30:00+05:30
+updated_at: 2026-07-28T22:10:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -612,3 +612,19 @@ risks:
   - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
   - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Root 20261159 is now consumed but rejected/superseded because additions were post hoc rather than synchronously validated and sealed; its timings may inform conservative planning only and cannot supply launch, rates, or caches.
   - Root 20261160 failed without the new catchable-exception boundary receipt, so exact exception-boundary resource observations remain unavailable and conservative allowances remain explicitly non-observational. Root 20261161 completed fresh full-fidelity readiness calibration and is non-retryable. Its canonical outer boundary excludes post-sample serialization, writes, return, stdout, unwind, teardown, and exit; the separate 4727.1-second tool trace is coarse, clock-incomparable, and cannot replace, average with, or imply a tail for the canonical 4770.442001834999-second observation. Screen still requires a separate Judge.
+parked_exp663_hypothesis:
+  run_id: exp-663-drm-target-token-denoising
+  status: parked-calibration-resource-guard
+  source_base_commit: 3b2ffbdb87c94620cf7eda76a878e6c677928c6a
+  source_branch: codex/exp663-drm-target-token-denoising
+  decision_authority: T058-one-shot-topology-repair-wall-guard
+  mechanism: bounded-faithful-DRM-cosine-target-token-denoising-with-declared-SAIR-adaptations
+  roots: {calibration_20261202: terminal-resource-park, viability_20261203: unopened, confirmation_20261204: unopened, confirmation_20261205: unopened}
+  original_calibration: {wall_seconds: 2703.140067628, process_cpu_seconds: 10802.591895, cgroup_cpu_seconds: 13394.771999999999, peak_rss_bytes: 1580789760, expected_formal_wall_seconds: 261353.39258405069}
+  topology_repair: {processes: 3, torch_threads_each: 4, wall_guard_seconds: 2162.512054, guard_crossed: true, complete_receipt: false, equivalence_established: false, admitted: false}
+  verification: {focused_passed: 14, validator_passed: true, full_oracle_passed: 450, full_oracle_failed: 0}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-663-drm-target-token-denoising/run.json
+  metrics: evals/results/exp-663-drm-target-token-denoising/metrics.json
+  limitations: [calibration-only-non-scientific-diagnostics, one-shot-repair-crossed-wall-guard, roots-20261203-through-20261205-unopened, no-drm-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]

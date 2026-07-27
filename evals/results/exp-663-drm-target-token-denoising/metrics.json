@@ -1,0 +1,60 @@
+{
+  "run_id": "exp-663-drm-target-token-denoising",
+  "created_at": "2026-07-28T16:40:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "calibration-only-non-scientific-resource-park",
+  "root": 20261202,
+  "complete_original_calibration": {
+    "cases_per_rollout_width": 2,
+    "optimizer_updates_per_trained_route": 2,
+    "route_rollout_exact_accuracy": {
+      "frozen_source": {"W64": 1.0, "W128": 1.0, "W256": 1.0},
+      "drm_cosine": {"W64": 0.0, "W128": 0.0, "W256": 0.0},
+      "clean_recurrent": {"W64": 0.0, "W128": 0.0, "W256": 0.0},
+      "masked_nonrecursive": {"W64": 1.0, "W128": 1.0, "W256": 1.0}
+    },
+    "route_rollout_invalid_rate": {
+      "frozen_source": {"W64": 0.0, "W128": 0.0, "W256": 0.0},
+      "drm_cosine": {"W64": 1.0, "W128": 1.0, "W256": 1.0},
+      "clean_recurrent": {"W64": 1.0, "W128": 1.0, "W256": 1.0},
+      "masked_nonrecursive": {"W64": 0.0, "W128": 0.0, "W256": 0.0}
+    },
+    "all_checkpoint_reload_exact": true,
+    "all_parameter_counts": 101436,
+    "receipt_sha256": "4917d3a7805f0200131c03700b3963f0cf7c4a97e4b913f7acdc8a7e7c16d41e"
+  },
+  "repair_calibration": {
+    "complete": false,
+    "wall_guard_seconds": 2162.512054,
+    "guard_crossed": true,
+    "calibration_json_persisted": false,
+    "equivalence_established": false,
+    "formal_admitted": false
+  },
+  "evaluation": {
+    "transition": {
+      "W64": {"cases": 8, "correct": 0, "exact_accuracy": 0.0},
+      "W128": {"cases": 8, "correct": 0, "exact_accuracy": 0.0},
+      "W256": {"cases": 8, "correct": 0, "exact_accuracy": 0.0}
+    },
+    "rollout": {
+      "W64": {"cases": 2, "correct": 0, "exact_accuracy": 0.0},
+      "W128": {"cases": 2, "correct": 0, "exact_accuracy": 0.0},
+      "W256": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}
+    }
+  },
+  "controls": {
+    "calibration_only": true,
+    "frozen_source_rollout_exact": {"W64": 1.0, "W128": 1.0, "W256": 1.0},
+    "clean_recurrent_rollout_exact": {"W64": 0.0, "W128": 0.0, "W256": 0.0},
+    "masked_nonrecursive_rollout_exact": {"W64": 1.0, "W128": 1.0, "W256": 1.0},
+    "formal_controls_opened": false
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "Evaluation entries are two-case-per-width calibration diagnostics, not scientific formal denominators.",
+    "The one-shot repair crossed its wall guard before a complete equivalent receipt was persisted.",
+    "Viability and confirmation roots remain unopened, so no DRM or source-paper verdict is supported."
+  ]
+}
