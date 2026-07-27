@@ -1359,10 +1359,10 @@ runs:
       - This is a clean-oracle feasibility park, not a scientific rejection of symbol-equivariant recurrence.
       - No candidate, checked, independent, official/private, Tier7, 85%, or Goal-completion evidence changed.
   - run_id: exp-651-visit-dilation-adapters
-    status: parked-before-calibration-full-oracle-red
+    status: parked-before-full-oracle-focused-cone-red
     approach: bounded-faithful-RRT-analogue-with-visit-dilation-specific-raw-kernel-adapters
     decision: park-before-science
-    decision_authority: T050-full-oracle-two-attempt-stop-rule
+    decision_authority: T051-focused-recovery-cone-stop-rule
     source_commit: d8dd029eb5a64c15c5461a473779a4baba8b77bd
     source_branch: codex/exp651-visit-dilation-adapters
     config: configs/exp_651_visit_dilation_adapters.yaml
@@ -1370,6 +1370,7 @@ runs:
     run_record: experiments/runs/exp-651-visit-dilation-adapters/run.json
     environment_record: experiments/runs/exp-651-visit-dilation-adapters/environment.json
     verification_record: experiments/runs/exp-651-visit-dilation-adapters/verification.json
+    portability_record: experiments/runs/exp-651-visit-dilation-adapters/portability.json
     metrics: evals/results/exp-651-visit-dilation-adapters/metrics.json
     evaluation_decision: evals/results/exp-651-visit-dilation-adapters/decision.json
     source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
@@ -1385,6 +1386,10 @@ runs:
       validator: passed-before-pytest-opened
       full_oracle: red-25-EXP658-only-failures-among-398-collected-nodeids
       focused_failure_probe: absent-ignored-EXP658-source-checkpoint
+      T051_checkpoint_copy: exact-independent-regular-nonreflink-copy
+      T051_focused_cone: 19-passed-6-failed-in-106.20-seconds
+      T051_full_oracle: not-opened-after-binding-focused-cone-failure
     limitations:
       - No resource calibration, dynamic admission, training, formal checkpoint, MLflow run, transition/rollout metric, bootstrap, or scientific decision exists.
       - This park does not reject visit/dilation adaptation and does not change Candidate005, submission, or any checked, independent, official, or private evidence.
+      - T051's sole authorized checkpoint recovery succeeded, but six inherited EXP658 failures remain; no tracked EXP658 or frozen EXP651 source byte changed.

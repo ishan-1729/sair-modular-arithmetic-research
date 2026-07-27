@@ -87,3 +87,21 @@ visit/dilation adapters. No calibration, admission, MLflow run, training,
 checkpoint, transition/rollout metric, intervention outcome, bootstrap,
 checked/prior-independent/official/private answer, submission mutation,
 candidate promotion, or Goal-completion evidence was created.
+
+### T051 consolidated recovery
+
+T051 copied the exact primary-workspace 400,584-byte checkpoint with
+`cp --reflink=never` into the ignored EXP658 path. Source and destination are
+regular, non-symlink, single-link files with the same `cbc4...4bd` SHA-256 and
+different inodes (`4503599628741895` versus `21673573208200621`), establishing
+an independent non-hardlink copy. A repeat validation left its identity
+unchanged.
+
+The exact cached 25-node EXP658 cone then completed at 19 passed and 6 failed
+in 106.20 pytest seconds (117.57 external wall, 426.93 user, 6.39 system CPU,
+329,732 KiB maximum RSS). Remaining failures are not checkpoint failures:
+three require absent ignored Candidate005 `Dockerfile`, generator, and primes
+artifacts, while three retain the previously documented scaffold-era cache/
+lifecycle expectations. T051 authorizes only the checkpoint copy and forbids
+tracked EXP658 changes, so its focused-cone stop rule fires. The full oracle,
+root 20261182, formal roots, and every scientific surface remain unopened.

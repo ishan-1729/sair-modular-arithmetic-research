@@ -20,6 +20,22 @@
     "exception": "FileNotFoundError",
     "missing_path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors"
   },
-  "stop_rule": "final-source oracle could not be established within two verification attempts",
+  "t051_recovery": {
+    "checkpoint_copy": "pass",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "focused_cone_command": "/usr/bin/time -v python -m pytest --lf -q",
+    "focused_cone_status": "fail",
+    "focused_cone_result": "19 passed, 6 failed in 106.20s; external wall 117.57s",
+    "process_user_seconds": 426.93,
+    "process_system_seconds": 6.39,
+    "maximum_rss_kib": 329732,
+    "remaining_failure_scope": {
+      "missing_ignored_candidate005_artifacts": ["Dockerfile", "generator.py", "primes.py"],
+      "inherited_exp658_lifecycle_cache_assertions": 3
+    },
+    "full_oracle_opened": false,
+    "calibration_opened": false
+  },
+  "stop_rule": "T051 focused inherited cone remained red after the sole authorized checkpoint materialization",
   "calibration_authorized": false
 }
