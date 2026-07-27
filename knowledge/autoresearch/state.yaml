@@ -91,19 +91,21 @@ current_hypothesis:
   evidence_capable_of_changing_next_decision: EXP655-failure-partition-down-ranks-dense-fixed-r2-schedule-only-reruns-but-leaves-adaptive-routing-capacity-recycling-and-other-families-unresolved
 parked_exp650_hypothesis:
   run_id: exp-650-library-backed-mamba
-  status: parked-before-preregistration-calibration-and-science-package-oracle-red
-  source_base_commit: 93fb334c32e7f028688077f65b7695996c15d6af
-  source_branch: codex/exp650-library-mamba
-  decision_authority: T053-package-boundary-stop-rule
+  status: failed-resource-calibration-oom
+  source_base_commit: 2acb944c924288369fb6a3a99e089f49228202b1
+  source_branch: codex/exp650-library-mamba-formal
+  decision_authority: T054-root20261186-dynamic-resource-admission-stop-rule
   dependency: transformers==5.14.1
   library_cpu_smoke: deterministic-forward-backward-checkpoint-reload-pass
   parameters: {mamba2_hybrid: 23601, convgru_control: 24049, attention_control: 22517}
-  roots: {calibration_20261186: unopened, viability_20261187: unopened, confirmation_20261188: unopened, confirmation_20261189: unopened}
-  scientific_evidence: none
+  roots: {calibration_20261186: opened-incomplete-global-oom, viability_20261187: unopened, confirmation_20261188: unopened, confirmation_20261189: unopened}
+  preregistration_sha256: e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f
+  calibration: {admitted: false, failure: global-oom-before-complete-arm, outer_wall_seconds: 34.3, wsl_mem_total_kib: 7928476, oom_anon_rss_kib: 7400644, mlflow_run_id: b7f9d448b79b4467989b2e0ecbb0f357, mlflow_status: KILLED}
+  scientific_evidence: none-calibration-incomplete
   run_record: experiments/runs/exp-650-library-backed-mamba/run.json
   metrics: evals/results/exp-650-library-backed-mamba/metrics.json
-  verification: {focused_passed: 7, validator_passed: true, full_oracle_passed: 371, full_oracle_failed: 34, inherited_failure_families: [EXP648, EXP649, EXP658]}
-  limitations: [verification-boundary-park-not-scientific-rejection, no-calibration-training-checkpoint-mlflow-or-exact-scientific-metrics, no-candidate-benchmark-submission-promotion-or-completion-change]
+  verification: {fixture_count: 268, exact_cone_passed: 34, focused_passed: 8, validator_passed: true, full_oracle_passed: 405, full_oracle_failed: 0}
+  limitations: [resource-park-not-scientific-rejection, calibration-incomplete-no-valid-cpu-variability-eta-guards-or-scientific-metrics, no-retry-reduced-fidelity-or-further-EXP650-recovery, no-candidate-benchmark-submission-promotion-or-completion-change]
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red

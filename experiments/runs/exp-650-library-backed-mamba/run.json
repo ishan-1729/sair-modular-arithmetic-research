@@ -1,16 +1,23 @@
 {
   "run_id": "exp-650-library-backed-mamba",
-  "status": "parked-before-preregistration-calibration-and-science-package-oracle-red",
-  "decision": "park-before-science",
-  "decision_authority": "T053 package-boundary stop rule after one bounded diagnosis",
-  "source_base_commit": "93fb334c32e7f028688077f65b7695996c15d6af",
-  "source_branch": "codex/exp650-library-mamba",
+  "status": "failed",
+  "hypothesis": "A faithful library-backed Mamba2-Mamba2-Attention-MLP postnorm transition learns exact autonomous Horner rollouts better than matched ConvGRU and recurrent-attention controls.",
+  "seed": 20261186,
+  "decision": "park-resource-calibration-oom",
+  "decision_authority": "T054 root-20261186 dynamic resource admission stop rule",
+  "source_base_commit": "2acb944c924288369fb6a3a99e089f49228202b1",
+  "source_branch": "codex/exp650-library-mamba-formal",
+  "source": {
+    "repository_commit": "2acb944c924288369fb6a3a99e089f49228202b1",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
   "config": "configs/exp_650_library_backed_mamba.yaml",
   "seed_contract": {
     "calibration_root": 20261186,
     "viability_root": 20261187,
     "confirmation_roots": [20261188, 20261189],
-    "status": "all-unopened-unused-for-training"
+    "status": "calibration-opened-and-failed-before-complete-arm; scientific-roots-unopened"
   },
   "dependency": {
     "selected": "transformers==5.14.1",
@@ -41,34 +48,49 @@
     "exact_arithmetic_scope": "offline labels, tests, and evaluator only"
   },
   "source_hashes": {
-    "config": "53f31c5f6dbe0fd7dd9b7683140046ca57fd050a771301e9806cfcc41eb6c384",
+    "config": "62c98c898ccb47560bc7dc51ccd695da268fcdf13db6d8124ebe8b02ff1d0be8",
     "model": "29ec41c210e7bf269b7193e597ecf933dcd6f916371e83540bf8767361a8aa14",
-    "runner": "71b5966f72547332796ec17a99de40d713e4a39d8b11ffb20e07907d66a1485b",
-    "tests": "56232111e3245ab833f8fdc1c1339f15da4eb728fc2650a3186ef37319896813",
+    "runner": "d752608c65157918e236a7e1094cdce60a19af6b4c9c915819bd55fa646d71d2",
+    "tests": "1a96c5b6357473828a8392d706f79607b96662104a0010e84107ba925142bf31",
     "pyproject": "97d351bf5439edddd2179e7f170a38269c48b66beadbc47c5b2453442bcbb950"
   },
   "verification": {
-    "focused": "7 passed in 9.11s",
-    "first_validator_attempt": "red because clean worktree submodule was uninitialized",
-    "bounded_repair": "initialized the already-pinned immutable challenge submodule at 82510bba00a1126649bd76dd1a451f14d0b3eb60",
-    "validator_after_repair": "passed: 165 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1",
-    "full_pytest_after_repair": "371 passed, 34 failed in 155.45s; EXP-650 7/7 passed",
-    "full_oracle_wall_seconds": 179.4,
-    "failure_families": {
-      "EXP648": "absent ignored source checkpoint, calibration, superseded provenance, and MLflow evidence",
-      "EXP649": "absent ignored frozen cache geometry evidence",
-      "EXP658": "absent ignored source checkpoint and checksum-bound cache/provenance artifacts"
-    }
+    "fixture_manifest": "268 authenticated independent regular-file copies; manifest SHA256 cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d",
+    "exact_inherited_cone": "34 passed in 493.79s",
+    "validator": "passed: 165 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1",
+    "full_pytest": "405 passed in 678.63s",
+    "full_oracle_outer_wall_seconds": 743.19,
+    "full_oracle_peak_rss_bytes": 942268416,
+    "focused_after_resource_policy_correction": "8 passed in 21.66s"
   },
-  "resource_calibration": null,
+  "preregistration_sha256": "e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f",
+  "resource_calibration": {
+    "root": 20261186,
+    "status": "failed",
+    "admitted": false,
+    "failure": "linux-global-oom-kill-during-mamba2-hybrid-training",
+    "outer_wall_seconds": 34.3,
+    "wsl_mem_total_kib": 7928476,
+    "oom_anon_rss_kib": 7400644,
+    "process_cpu_seconds": null,
+    "cgroup_cpu_seconds": null,
+    "eta": null,
+    "expected_soft_hard_guards": null,
+    "evidence": "experiments/runs/exp-650-library-backed-mamba/roots/20261186/failure.json"
+  },
   "scientific_training_executed": false,
   "checkpoint": null,
-  "mlflow_run_id": null,
+  "mlflow_run_id": "b7f9d448b79b4467989b2e0ecbb0f357",
   "metrics": "evals/results/exp-650-library-backed-mamba/metrics.json",
+  "artifacts": {
+    "checkpoint": "",
+    "metrics": "evals/results/exp-650-library-backed-mamba/metrics.json"
+  },
   "limitations": [
-    "This is a package-verification park, not a scientific rejection of Mamba-2 transitions.",
-    "Root 20261186 never opened, so no representative route admission, ETA, formal checkpoint, exact scientific metric, or MLflow run exists.",
+    "The hermetic package oracle passed, but full-fidelity calibration was OOM-killed before one complete arm; this is a measured resource park, not a scientific rejection of Mamba-2 transitions.",
+    "Because calibration could not complete, process/cgroup CPU, variability, ETA, expected/soft/hard guards, and exact scientific metrics are unavailable rather than zero.",
+    "Roots 20261187 through 20261189 remained unopened and no trained scientific checkpoint exists.",
     "No checked, prior-independent, official/private, benchmark, submission, promotion, or incumbent evidence was inspected or changed.",
-    "Reopening requires a fresh package whose clean-worktree full oracle has the required ignored cross-experiment evidence or a PM-approved verification boundary change."
+    "T054 forbids retrying with reduced fidelity or opening a further EXP650 recovery package."
   ]
 }

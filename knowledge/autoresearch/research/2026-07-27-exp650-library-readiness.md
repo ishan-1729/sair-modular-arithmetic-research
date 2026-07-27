@@ -77,3 +77,16 @@ scientific challenger.
 CPU fallback execution is scientifically suitable for this bounded transition
 test but does not establish candidate inference viability. Exact arithmetic is
 used only for offline Horner labels and evaluation truth.
+
+## T054 full-route resource observation
+
+The hermetic verification boundary passed before calibration: 34/34 inherited
+cone nodes and 405/405 complete project tests. Root `20261186` then exercised
+the frozen full-fidelity CPU route without shortening its training or evaluation
+contract. Linux globally OOM-killed Python during the first Mamba-hybrid arm,
+after its initial checkpoint and before one arm completed. Kernel evidence
+records 7,400,644 KiB anonymous RSS on a WSL instance with 7,928,476 KiB total
+memory. Consequently, representative throughput, variability, ETA, and dynamic
+expected/soft/hard guards could not be estimated. This observation rejects
+resource admission for this exact route; it is not an accuracy or mechanism
+result.

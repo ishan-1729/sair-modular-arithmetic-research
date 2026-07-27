@@ -2,7 +2,7 @@
 type: Ablation
 title: EXP-650 library-backed Mamba-2 transition viability
 description: Frozen matched comparison of a faithful ST-M014 hybrid with ConvGRU and recurrent-attention controls.
-status: parked-before-calibration
+status: parked-after-resource-calibration-oom
 tags: [autoresearch, exp-650, mamba-2, transition, exact-rollout]
 timestamp: "2026-07-27T21:25:00+05:30"
 ---
@@ -62,20 +62,25 @@ answers, prior-independent answers, official/private evaluation, or benchmarks.
 
 ## Decision
 
-Park before preregistration, calibration, or science at the binding package
-oracle. The focused EXP-650 suite passes `7/7`, and after initializing the exact
-pinned challenge submodule the project validator passes with 165 concepts,
-1,100 records, and upstream `82510bba00a1`. The single allowed repaired full
-oracle nevertheless ends `371 passed / 34 failed`: all failures belong to
-pre-existing EXP648, EXP649, and EXP658 tests whose ignored checkpoints, caches,
-or provenance/MLflow artifacts are absent from a clean worktree. EXP-650's seven
-tests pass inside that full collection.
+T054 recovered a hermetic package boundary using 268 authenticated, independent
+regular-file fixtures. The exact inherited cone passed `34/34`, the validator
+passed 165 concepts and 1,100 records, and the single complete project oracle
+passed `405/405`. A pre-science correction made the inherited 7,200/28,800
+second values explicitly nonbinding planning references; measured calibration
+now derives expected, soft, and hard guards. The corrected focused suite passed
+`8/8`, and preregistration froze at
+`e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f`.
 
-T053 requires a durable park when the package boundary remains red after one
-bounded owned-cause diagnosis. Therefore roots `20261186` through `20261189`
-remain unopened, no MLflow run or trained checkpoint exists, and no exact
-transition/rollout or resource-admission metric is claimed. This is a
-verification-boundary park, not scientific evidence against Mamba-2. Reopening
-requires fresh authorization and a clean-worktree oracle with the required
-cross-experiment evidence available, or an explicitly changed verification
-boundary owned by the PM.
+Park at root `20261186` resource admission. The full-fidelity calibration opened
+without shortening training or evaluation, but Linux globally OOM-killed Python
+during Mamba-hybrid training after only the 97,108-byte initial checkpoint was
+written. Kernel evidence records 7,400,644 KiB anonymous RSS against a
+7,928,476 KiB WSL memory total. No arm completed, so process/cgroup CPU,
+variability, ETA, projected guards, exact transition/rollout, controls, and
+interventions are unavailable rather than zero. MLflow run
+`b7f9d448b79b4467989b2e0ecbb0f357` is terminally `KILLED`.
+
+The calibration route is not admitted. T054 forbids reduced fidelity, a retry,
+or another EXP650 recovery package, so scientific roots `20261187`–`20261189`
+remain unopened. This is measured resource evidence and not a scientific
+rejection of the maintained-library Mamba-2 hypothesis.

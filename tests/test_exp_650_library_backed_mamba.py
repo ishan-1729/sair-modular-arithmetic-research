@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import inspect
 import io
+from copy import deepcopy
 
 import pytest
 import torch
@@ -17,10 +18,66 @@ from experiments.exp_650_library_backed_mamba.model import (
     TransposedSequenceMLP,
 )
 from experiments.exp_650_library_backed_mamba.run import (
+    calibration_projection,
     evaluate_cases,
     load_exp300,
     trajectory_batch,
 )
+
+
+def test_calibration_planning_references_are_nonbinding() -> None:
+    metric = {
+        "wall_seconds": 2.0,
+        "process_cpu_seconds": 3.0,
+        "cgroup_cpu_seconds": 4.0,
+    }
+    arm = {
+        "training_wall_seconds": 8.0,
+        "training_process_cpu_seconds": 12.0,
+        "training_cgroup_cpu_seconds": 16.0,
+        "update_wall_seconds": [1.0] * 8,
+        "peak_rss_bytes": 1024,
+        "reload_exact": True,
+        "evaluations": {str(width): deepcopy(metric) for width in (16, 24, 32)},
+        "interventions": {},
+        "randomized_weight": deepcopy(metric),
+    }
+    payload = {
+        "arms": {
+            "mamba2_hybrid": {
+                **deepcopy(arm),
+                "interventions": {
+                    "reverse": deepcopy(metric),
+                    "bidirectional": deepcopy(metric),
+                },
+            },
+            "convgru_control": deepcopy(arm),
+            "attention_control": deepcopy(arm),
+        }
+    }
+    config = {
+        "training": {"steps_per_arm": 800},
+        "calibration": {"updates_per_arm": 8},
+        "evaluation": {"cases_per_width": 96},
+        "data": {"evaluation_widths": [16, 24, 32]},
+        "resource_budget": {
+            "planning_reference_wall_seconds": 1,
+            "planning_reference_cgroup_cpu_seconds": 1,
+            "admission_maximum_peak_rss_bytes": 2048,
+            "eta_variability_headroom_floor": 1.25,
+            "eta_variability_headroom_ceiling": 2.0,
+            "hard_runaway_multiplier": 2.0,
+            "planning_references_are_nonbinding": True,
+            "require_complete_decision_route": True,
+        },
+    }
+    admission = calibration_projection(payload, config)
+    assert admission["admitted"]
+    assert not admission["planning_references"]["expected_wall_within_reference"]
+    assert not admission["planning_references"][
+        "expected_cgroup_cpu_within_reference"
+    ]
+    assert admission["checks"]["complete_decision_route"]
 
 
 def test_pinned_transformers_cpu_forward_backward_and_reload() -> None:
