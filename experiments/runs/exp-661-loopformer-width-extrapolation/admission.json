@@ -1,0 +1,71 @@
+{
+  "admitted": true,
+  "arbitrary_static_wall_cap": null,
+  "checks": {
+    "all_reload_exact": true,
+    "all_route_classes": true,
+    "finite_projection": true,
+    "rss": true
+  },
+  "observed_complete_route": {
+    "cgroup_cpu_seconds": 17.432000000000016,
+    "peak_rss_bytes": 476450816,
+    "process_cpu_seconds": 18.580000000000002,
+    "wall_seconds": 6.6381154270000025
+  },
+  "projected_confirmation_route": {
+    "cgroup_cpu_seconds": {
+      "eta": 489.4240377174534,
+      "expected": 299.9359999999599,
+      "hard": 978.8480754349068,
+      "soft": 611.7800471468167,
+      "variability_headroom": 1.631761568192944
+    },
+    "process_cpu_seconds": {
+      "eta": 3874.242538513463,
+      "expected": 2374.270000000001,
+      "hard": 7748.485077026926,
+      "soft": 4842.803173141829,
+      "variability_headroom": 1.631761568192944
+    },
+    "wall_seconds": {
+      "eta": 946.9804679920201,
+      "expected": 580.3424265229701,
+      "hard": 1893.9609359840401,
+      "soft": 1183.725584990025,
+      "variability_headroom": 1.631761568192944
+    }
+  },
+  "projected_formal_route": {
+    "cgroup_cpu_seconds": {
+      "eta": 489.4240377174534,
+      "expected": 299.9359999999599,
+      "hard": 978.8480754349068,
+      "soft": 611.7800471468167,
+      "variability_headroom": 1.631761568192944
+    },
+    "process_cpu_seconds": {
+      "eta": 3874.242538513463,
+      "expected": 2374.270000000001,
+      "hard": 7748.485077026926,
+      "soft": 4842.803173141829,
+      "variability_headroom": 1.631761568192944
+    },
+    "wall_seconds": {
+      "eta": 946.9804679920201,
+      "expected": 580.3424265229701,
+      "hard": 1893.9609359840401,
+      "soft": 1183.725584990025,
+      "variability_headroom": 1.631761568192944
+    }
+  },
+  "variability_ratios": [
+    1.1490276679030367,
+    1.631761568192944,
+    1.1163544984131382,
+    1.2953341219741612,
+    1.1542096063128695,
+    1.1086137669682463,
+    1.130383942551416
+  ]
+}

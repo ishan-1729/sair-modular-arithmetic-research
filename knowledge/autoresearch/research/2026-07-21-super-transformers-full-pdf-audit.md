@@ -170,7 +170,7 @@ Native recurrent modules suffice. Persistent-latent experiments are adjacent onl
 - **M013.b LoopViT transferable controls:** step embeddings, entropy exit, and task-specific test-time training from the same source are analogue-only and remain open.
 - **M013.c LoopFormer:** `2602.11451`, pp. 4–6 §3.1–3.3/Alg. 1 and pp. 8–10; normalized time/step RMSNorm/residual gates, full/short losses, stop-gradient hidden consistency, user budget—no learned exit.
 
-Native. EXP-648 endpoint consistency is not either method. Test components separately; terminal requires time/step, shortcut, consistency, and exit/budget causal verdicts.
+Native. EXP-648 endpoint consistency is not either method. EXP-661 now supplies a bounded-faithful M013.c viability result with time/step, shortcut, full/short-loss, hidden-consistency, fixed-budget, randomized, reload, curve, and matched-control evidence. All seven arms score 0% exact at W16/W24/W32 for budgets 1/2/4/8/16, so the exact small endpoint formulation is rejected and confirmation roots remain unopened. The source paper, LoopViT controls, and independent component-confirmation verdicts remain unresolved.
 
 ### ST-M014 — Mamba-2/TRM hybrid (1 component)
 

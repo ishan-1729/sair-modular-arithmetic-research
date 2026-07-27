@@ -1482,3 +1482,51 @@ runs:
       - Q learned the always-incorrect class; its threshold score is not positive halting evidence.
       - Confirmations and component-control causal verdicts were not authorized after viability failed.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-661-loopformer-width-extrapolation
+    status: completed-rejected
+    approach: bounded-faithful-ST-M013c-LoopFormer-width-and-budget-extrapolation
+    decision: reject-exact-bounded-loopformer-formulation-at-viability
+    decision_authority: T056-frozen-root20261195-conjunctive-gate
+    source_base_commit: 15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8
+    source_branch: codex/exp661-loopformer-width-extrapolation
+    config: configs/exp_661_loopformer_width_extrapolation.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-27-exp661-loopformer-mechanism.md
+    preregistration: experiments/runs/exp-661-loopformer-width-extrapolation/preregistration.json
+    preregistration_sha256: ecd97076d67825f9c29e3b76ee0b712b738947796980e4e70fd3c9735de73275
+    run_record: experiments/runs/exp-661-loopformer-width-extrapolation/run.json
+    metrics: evals/results/exp-661-loopformer-width-extrapolation/metrics.json
+    calibration_root: 20261194
+    calibration_admitted: true
+    calibration_mlflow_run_id: f3bbbf736a114c7193ce4c8d4e42ff92
+    viability_root: 20261195
+    viability_mlflow_run_id: e68ad3f4bdc7460394e7cb89c1ae4ba7
+    confirmation_roots: {20261196: unopened-gate-blocked, 20261197: unopened-gate-blocked}
+    parameters_each: 8553
+    optimizer_updates_each: 300
+    trajectory_examples_each: 9600
+    recurrent_block_calls_each: 3597
+    budgets: [1, 2, 4, 8, 16]
+    exact_accuracy:
+      loopformer: {W16: 0.0, W24: 0.0, W32: 0.0}
+      plain_looped_transformer: {W16: 0.0, W24: 0.0, W32: 0.0}
+      decoded_cellular_control: {W16: 0.0, W24: 0.0, W32: 0.0}
+      component_controls: {W16: 0.0, W24: 0.0, W32: 0.0}
+    primary_bit_accuracy_budget8: {W16: 0.544921875, W24: 0.5438368055555556, W32: 0.5182291666666666}
+    checkpoints:
+      loopformer: 0e4a7b1c3f7ea847bf1d7a075f4b1b339e0b81863d6bc53fb9d2d5efab33e99a
+      plain_looped_transformer: baba61af9de9ef5d79f02dec741f54760159f98ba6df307586a915c415e09dc0
+      decoded_cellular_control: 8a0fb2748e53a6a7cde1ca21a470ae7d9abaa85a1e606f8fbfa168f4e7a42d56
+      no_time_step: 095556ac5d811312e05b1ee886579acff2bf7681cba0f7e110faa190c271a057
+      no_shortcut: b4af46edcaf1ad13e89380577e5343c9fde850adca5b43399c39769baa3590ce
+      no_short_loss: 05eeacb79e49283f9d4569b963f07fa73fc4ff8a77bb438154783932ca8bd662
+      no_consistency: 16bc6677f2efa7eac7877d265d6afe1f62306bf1ff80cd0906f2cf97c6763c00
+    resources:
+      calibration: {wall_seconds: 6.6381154270000025, process_cpu_seconds: 18.580000000000002, cgroup_cpu_seconds: 17.432000000000016, peak_rss_bytes: 476811264}
+      viability: {wall_seconds: 83.64743734800004, process_cpu_seconds: 356.79, cgroup_cpu_seconds: 402.08799999999997, peak_rss_bytes: 489570304}
+      projected_formal_wall: {expected_seconds: 580.3424265229701, eta_seconds: 946.9804679920201, soft_seconds: 1183.725584990025, hard_seconds: 1893.9609359840401}
+    verification: {focused: 10-passed, validator: 169-concepts-1100-records-green, full_oracle: 426-passed}
+    limitations:
+      - This rejects only the exact small endpoint-supervised SAIR adaptation, not the source language-model result or larger data/compute settings.
+      - Every exact-answer score is zero; bit accuracy and nominal deeper-budget retention are diagnostics only.
+      - Confirmations and independent component causal verdicts were not authorized after viability failed.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
