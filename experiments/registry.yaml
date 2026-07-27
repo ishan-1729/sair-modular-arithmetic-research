@@ -1359,16 +1359,17 @@ runs:
       - This is a clean-oracle feasibility park, not a scientific rejection of symbol-equivariant recurrence.
       - No candidate, checked, independent, official/private, Tier7, 85%, or Goal-completion evidence changed.
   - run_id: exp-651-visit-dilation-adapters
-    status: parked-before-full-oracle-focused-cone-red
+    status: parked-terminally-before-calibration-validator-red
     approach: bounded-faithful-RRT-analogue-with-visit-dilation-specific-raw-kernel-adapters
     decision: park-before-science
-    decision_authority: T051-focused-recovery-cone-stop-rule
-    source_commit: d8dd029eb5a64c15c5461a473779a4baba8b77bd
-    source_branch: codex/exp651-visit-dilation-adapters
+    decision_authority: T052-terminal-phase-reset-validator-stop-rule
+    source_commit: ab48d8b1a36296b42b56f5842e01cecc53f0edf1
+    source_branch: codex/exp651-visit-dilation-formal
     config: configs/exp_651_visit_dilation_adapters.yaml
     preregistration: knowledge/autoresearch/ablations/exp-651-visit-dilation-adapters.md
     run_record: experiments/runs/exp-651-visit-dilation-adapters/run.json
     environment_record: experiments/runs/exp-651-visit-dilation-adapters/environment.json
+    environment_reuse_record: experiments/runs/exp-651-visit-dilation-adapters/environment-reuse.json
     verification_record: experiments/runs/exp-651-visit-dilation-adapters/verification.json
     portability_record: experiments/runs/exp-651-visit-dilation-adapters/portability.json
     metrics: evals/results/exp-651-visit-dilation-adapters/metrics.json
@@ -1389,7 +1390,11 @@ runs:
       T051_checkpoint_copy: exact-independent-regular-nonreflink-copy
       T051_focused_cone: 19-passed-6-failed-in-106.20-seconds
       T051_full_oracle: not-opened-after-binding-focused-cone-failure
+      T052_environment_reuse: exact-four-file-T049-fixture-set-and-frozen-EXP651-hashes
+      T052_validator: red-10-inherited-EXP651-durable-record-schema-issues
+      T052_full_oracle: pytest-not-opened-after-validator-failure
     limitations:
       - No resource calibration, dynamic admission, training, formal checkpoint, MLflow run, transition/rollout metric, bootstrap, or scientific decision exists.
       - This park does not reject visit/dilation adaptation and does not change Candidate005, submission, or any checked, independent, official, or private evidence.
       - T051's sole authorized checkpoint recovery succeeded, but six inherited EXP658 failures remain; no tracked EXP658 or frozen EXP651 source byte changed.
+      - T052 is the terminal EXP651 phase reset. No T053 recovery, calibration, formal root, or scientific claim is allowed for this formulation.

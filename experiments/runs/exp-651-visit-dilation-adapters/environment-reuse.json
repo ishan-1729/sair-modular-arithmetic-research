@@ -1,0 +1,23 @@
+{
+  "schema_version": "exp651-t052-t049-environment-reuse-v1",
+  "status": "verified",
+  "worktree": "/mnt/d/Projects/SAIR_mod_challenge_exp655_t048_wt",
+  "source_commit": "ab48d8b1a36296b42b56f5842e01cecc53f0edf1",
+  "branch": "codex/exp651-visit-dilation-formal",
+  "tracked_worktree_clean_before_execution": true,
+  "frozen_exp651_sha256": {
+    "config": "3bed822d7feea4a39a11d4493f30afc8d6eb2f972ed01b0bf575d85f5fb06458",
+    "model": "1ee087edd7af5d69a68aff5e093265dd4d546b6e581684d76419d40de449c57e",
+    "runner": "d659a8180f1b1aa460592c700da031d87fe3e408773a4360736731a651e47c5f",
+    "tests": "c4feb0167c4a870a6203583829f850b049cff0ef5f94ea3cba5ac2176c5331ee"
+  },
+  "ignored_exp658_fixtures": {
+    "source_checkpoint.safetensors": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "Dockerfile": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+    "generator.py": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0",
+    "primes.py": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac"
+  },
+  "fixture_properties": "all regular, non-symlink, single-link files",
+  "fixtures_copied_relinked_regenerated_or_edited_by_t052": false,
+  "tracked_exp651_or_exp658_bytes_changed": false
+}

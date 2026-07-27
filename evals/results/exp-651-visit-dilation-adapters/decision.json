@@ -1,7 +1,7 @@
 {
   "run_id": "exp-651-visit-dilation-adapters",
   "decision": "park-before-science",
-  "reason": "T051 exact-checkpoint recovery reduced the inherited EXP658 cone to 19 passed and 6 failed, but the binding focused-cone stop rule fired before the full oracle or calibration",
+  "reason": "T052 terminal validator found ten inherited EXP651 durable-record schema violations before pytest; the phase-reset rule prohibits repair-and-rerun or any further EXP651 recovery",
   "scientific_hypothesis_decided": false,
   "calibration_root_opened": false,
   "formal_roots_opened": false,
