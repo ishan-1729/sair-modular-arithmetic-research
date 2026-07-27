@@ -106,6 +106,32 @@ parked_exp650_hypothesis:
   metrics: evals/results/exp-650-library-backed-mamba/metrics.json
   verification: {fixture_count: 268, exact_cone_passed: 34, focused_passed: 8, validator_passed: true, full_oracle_passed: 405, full_oracle_failed: 0}
   limitations: [resource-park-not-scientific-rejection, calibration-incomplete-no-valid-cpu-variability-eta-guards-or-scientific-metrics, no-retry-reduced-fidelity-or-further-EXP650-recovery, no-candidate-benchmark-submission-promotion-or-completion-change]
+rejected_exp652_hypothesis:
+  run_id: exp-652-answer-latent-trm
+  status: completed-rejected-at-viability
+  source_base_commit: 746de1c69d7ae04a90c597c3bdcafea8ce5025b3
+  source_branch: codex/exp652-answer-latent-trm
+  decision_authority: T055-frozen-root20261191-conjunctive-gate
+  mechanism: ST-M010a-bounded-faithful-answer-y-latent-z-with-declared-SAIR-convolution-and-endpoint-BCE-adaptations
+  tab_trm_reproduced: false
+  roots: {calibration_20261190: completed-admitted, viability_20261191: completed-reject, confirmation_20261192: unopened, confirmation_20261193: unopened}
+  preregistration_sha256: 04cffffc84d3c887245ea6ddc8c9e698e62492493861c7bc6982e5b6bd8537cf
+  parameters_each: 8594
+  optimizer_updates_each: 300
+  trajectory_examples_each: 9600
+  exact_accuracy:
+    primary_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+    decoded_cellular_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+    no_latent_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+  primary_ema_bit_accuracy: {W16: 0.5559895833333334, W24: 0.5447048611111112, W32: 0.5377604166666666}
+  gate: {passed: false, passed_checks: [raw_reload, ema_reload, parameter_match, example_update_match], failed_checks: [w16, w24, w32, gain_over_decoded_w24, gain_over_no_latent_w24, gain_over_decoded_w32, gain_over_no_latent_w32, trained_weight_dependence, latent_causality, validity]}
+  calibration: {admitted: true, wall_seconds: 7.184809631999997, process_cpu_seconds: 22.409999999999997, cgroup_cpu_seconds: 20.855999999999995, peak_rss_bytes: 486719488, expected_wall_seconds: 121.63079052562516, soft_wall_seconds: 152.03848815703145, hard_wall_seconds: 243.26158105125032}
+  viability_resources: {wall_seconds: 61.26638212700004, process_cpu_seconds: 258.82, cgroup_cpu_seconds: 239.836, peak_rss_bytes: 486707200}
+  mlflow: {calibration_run_id: 391833b7e15a4ac98d8e4482fc93b814, viability_run_id: 588884abfac24cdc981c9f9be7c73760}
+  run_record: experiments/runs/exp-652-answer-latent-trm/run.json
+  metrics: evals/results/exp-652-answer-latent-trm/metrics.json
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 416, full_oracle_failed: 0}
+  limitations: [exact-formulation-only-not-source-paper-or-Tab-TRM, Q-learned-always-incorrect-class, confirmations-and-component-verdicts-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 parked_exp660_hypothesis:
   run_id: exp-660-symbol-equivariant-formal
   status: parked-before-calibration-and-science-full-oracle-red

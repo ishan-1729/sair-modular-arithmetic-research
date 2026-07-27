@@ -1,0 +1,118 @@
+{
+  "run_id": "exp-652-answer-latent-trm",
+  "status": "completed",
+  "hypothesis": "A bounded-faithful answer-y plus latent-z TRM learns strong width-16 exact modular multiplication and transfers materially better to widths 24 and 32 than matched decoded-cellular and no-latent controls.",
+  "seed": 20261191,
+  "decision": "reject-exact-formulation-at-viability",
+  "decision_authority": "T055 frozen conjunctive root-20261191 gate",
+  "source": {
+    "repository_commit": "746de1c69d7ae04a90c597c3bdcafea8ce5025b3",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_hashes": {
+      "config": "26fdc6c4d55300410828d4ff348332b253f0d036d0806cf7f2bbae11afdb6b50",
+      "model": "22cc7dc05ec93a15e8ced68318ff6234e048a1174ce9e9498a243a0be0560f34",
+      "runner": "8d2d1be52a576f3ff8aab4619d914815b57cbe0ed1dea2f95701a0b44a0c88bb",
+      "tests": "3ecc5447c628d3bac591bc01c34a66290af9ef6c79ebf1ab8ce71bdb98ceb305",
+      "mechanism_map": "8d2e891ff457079856a954c97fe629c3232136aafd708b05af65ec3dd28ccef8"
+    }
+  },
+  "config": "configs/exp_652_answer_latent_trm.yaml",
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-652-answer-latent-trm/roots/20261191/answer_latent_trm/ema.safetensors",
+    "metrics": "evals/results/exp-652-answer-latent-trm/metrics.json",
+    "preregistration": "experiments/runs/exp-652-answer-latent-trm/preregistration.json",
+    "calibration": "experiments/runs/exp-652-answer-latent-trm/roots/20261190/result.json",
+    "viability": "experiments/runs/exp-652-answer-latent-trm/roots/20261191/result.json"
+  },
+  "mechanism": {
+    "family": "ST-M010.a TRM",
+    "primary": "fixed answer y and latent z; n=6 shared z updates then y; T=3 with first T-1 blocks forward-only; full final-block backprop; detached deep supervision; learned correctness Q; EMA; one two-layer network",
+    "sair_adaptation": "width-shared local convolutional SwiGLU and endpoint bit BCE",
+    "tab_trm_reproduced": false,
+    "claim_to_code": "knowledge/autoresearch/research/2026-07-27-exp652-trm-mechanism.md"
+  },
+  "verification": {
+    "focused": "10 passed in 3.52s",
+    "validator": "passed: 167 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1",
+    "full_pytest": "416 passed in 437.51s",
+    "full_oracle_outer_wall_seconds": 475.38,
+    "full_oracle_peak_rss_bytes": 942006272,
+    "fixture_manifest_sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d"
+  },
+  "preregistration": {
+    "sha256": "04cffffc84d3c887245ea6ddc8c9e698e62492493861c7bc6982e5b6bd8537cf",
+    "roots": {
+      "20261190": "completed-non-scientific-calibration",
+      "20261191": "completed-scientific-viability-reject",
+      "20261192": "unopened-gate-blocked",
+      "20261193": "unopened-gate-blocked"
+    },
+    "viability_splits_sha256": "592e26881490f924650159af209bef690e11ae714e9970f1071f07c52a9dac9a",
+    "viability_evaluation_cases_sha256": "401cbdc3d2b6a690ab965f4fad366a17a790184a018b2adcfe1b1e8b79e50ccc"
+  },
+  "calibration": {
+    "admitted": true,
+    "root": 20261190,
+    "result_sha256": "0b064b6636535448faa76c0e73c9cffc06b37ac423fcdfd57b12a7033ca78f1f",
+    "wall_seconds": 7.184809631999997,
+    "process_cpu_seconds": 22.409999999999997,
+    "cgroup_cpu_seconds": 20.855999999999995,
+    "peak_rss_bytes": 486719488,
+    "headroom_multiplier": 1.5377206615612895,
+    "expected_wall_seconds": 121.63079052562516,
+    "soft_wall_seconds": 152.03848815703145,
+    "hard_wall_seconds": 243.26158105125032,
+    "expected_process_cpu_seconds": 504.1570960994844,
+    "soft_process_cpu_seconds": 630.1963701243556,
+    "hard_process_cpu_seconds": 1008.3141921989688,
+    "expected_cgroup_cpu_seconds": 464.64997686273756,
+    "soft_cgroup_cpu_seconds": 580.8124710784219,
+    "hard_cgroup_cpu_seconds": 929.2999537254751
+  },
+  "viability": {
+    "root": 20261191,
+    "result_sha256": "a9d27566d0aa159fef8f422435c7ff8478e823724274aad15e4e34164db133ef",
+    "passed": false,
+    "wall_seconds": 61.26638212700004,
+    "process_cpu_seconds": 258.82,
+    "cgroup_cpu_seconds": 239.836,
+    "peak_rss_bytes": 486707200,
+    "parameters_each": 8594,
+    "optimizer_updates_each": 300,
+    "trajectory_examples_each": 9600,
+    "primary_ema_exact_accuracy": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+    "control_ema_exact_accuracy": {
+      "decoded_cellular": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+      "no_latent": {"W16": 0.0, "W24": 0.0, "W32": 0.0}
+    },
+    "primary_ema_bit_accuracy": {"W16": 0.5559895833333334, "W24": 0.5447048611111112, "W32": 0.5377604166666666},
+    "primary_raw_invalid_rate": {"W16": 0.041666666666666664, "W24": 0.052083333333333336, "W32": 0.020833333333333332},
+    "primary_ema_invalid_rate": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+    "latent_causal_drop_w16": 0.0,
+    "trained_weight_exact_drop_w16": 0.0,
+    "raw_reload_exact": true,
+    "ema_reload_exact": true,
+    "failed_gates": ["w16", "w24", "w32", "gain_over_decoded_w24", "gain_over_no_latent_w24", "gain_over_decoded_w32", "gain_over_no_latent_w32", "trained_weight_dependence", "latent_causality", "validity"],
+    "passed_gates": ["raw_reload", "ema_reload", "parameter_match", "example_update_match"]
+  },
+  "checkpoints": {
+    "primary_raw": {"sha256": "bafde8609ab2867a62467a91a2dc1f83e76575981417fb782cc67702a947f05a", "bytes": 36336},
+    "primary_ema": {"sha256": "ca84687b1cee19c3fc657c22b9940dd7ab2841bf80878a0b40424b724b97f240", "bytes": 36336},
+    "decoded_raw": {"sha256": "3db140a214639ac1513f27ad083f2b31ca54ed561008a7f44c515f9d3c2b7402", "bytes": 36336},
+    "decoded_ema": {"sha256": "1c3affb2295a8dcc15a3af3bb37585747a7dab89c801261de9e579205cd5cf2b", "bytes": 36336},
+    "no_latent_raw": {"sha256": "38e5e8d2c75a391c6556cdae73a6feb864c50ba5b6b2638bf902edb3435ee5a4", "bytes": 36336},
+    "no_latent_ema": {"sha256": "bfde4edc5ece83cca2bdceabde90c3431292fa34896dc78e957f0e1baf0eb393", "bytes": 36336}
+  },
+  "mlflow": {
+    "calibration_run_id": "391833b7e15a4ac98d8e4482fc93b814",
+    "viability_run_id": "588884abfac24cdc981c9f9be7c73760"
+  },
+  "limitations": [
+    "This rejects only the exact bounded W16 endpoint-supervised SAIR TRM formulation; it does not reject the source paper, Tab-TRM, larger training budgets, or other operators.",
+    "All arms achieved zero exact answers, so Q's apparent correctness calibration reflects learning the always-incorrect class and is not useful halting evidence.",
+    "Bit accuracy around 53-56% is diagnostic and is not substituted for exact-answer accuracy.",
+    "Confirmation component controls stayed unopened because viability failed; no claim about deep-supervision, Q-loss, or EMA causality is made beyond the viability observations.",
+    "No checked, prior-independent, official/private, benchmark, candidate, submission, promotion, or goal-completion surface was opened."
+  ]
+}

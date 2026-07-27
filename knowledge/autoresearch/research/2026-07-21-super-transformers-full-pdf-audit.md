@@ -153,7 +153,7 @@ Native Transformer blocks suffice. EXP-634/EXP-643 are adjacent. Both remain ope
 - **M010.a TRM:** `2510.04871`, pp. 5–7 Fig. 3/§4, p. 5 Table 1, p. 8 Table 3, p. 11; `n` latent `z` updates then answer `y`, first `T-1` blocks forward-only, final backprop, detached deep supervision, Q halt, EMA.
 - **M010.b Tab-TRM application:** `2601.07675`, pp. 6–8 §2.2/2.4; distinct full-BPTT FNN without deep supervision or ACT. It is application evidence, not the same training contract.
 
-Native recurrent modules suffice. Persistent-latent experiments are adjacent only. Terminal requires answer/latent reset/swap, recursion curves, Q/EMA/deep-supervision controls, exact transfer, and separate classification of Tab-TRM.
+Native recurrent modules suffice. Persistent-latent experiments are adjacent only. EXP-652 now supplies a bounded-faithful M010.a implementation and viability result: answer/latent state, recursion/Q/randomized interventions, raw/EMA reload, and matched controls complete, but all arms score 0% exact at W16/W24/W32 and the formulation is rejected before gated component confirmations. Deep-supervision/Q/EMA causal attribution therefore remains unresolved. Tab-TRM remains separately classified and unreproduced.
 
 ### ST-M011 — LoopLM (2 components)
 

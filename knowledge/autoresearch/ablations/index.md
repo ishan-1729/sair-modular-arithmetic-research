@@ -59,3 +59,4 @@
 - [EXP-659 symbol-equivariant recurrence](exp-659-symbol-equivariant-recurrence.md) - full-fidelity explicit symbol-axis recurrent reasoner with matched position-only and broken-tying controls.
 - [EXP-660 fresh formal symbol-equivariant recurrence](exp-660-symbol-equivariant-formal.md) - fresh ordinary-initialized decision run after portable full-oracle repair.
 - [EXP-651 visit/dilation-specific recurrent adapters](exp-651-visit-dilation-adapters.md) - bounded-faithful RRT analogue parked before calibration because the required full oracle remained red on absent ignored EXP658 hermetic evidence.
+- [EXP-652 answer-plus-latent TRM](exp-652-answer-latent-trm.md) - completed-rejected ST-M010.a SAIR adaptation; all matched arms are 0% exact at W16/W24/W32 and component confirmations remain unopened.
