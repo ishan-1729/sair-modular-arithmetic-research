@@ -11,5 +11,6 @@
   "intervention_metrics": null,
   "bootstrap_metrics": null,
   "resource_calibration": null,
+  "t051_portability": "checkpoint-copy-passed-focused-cone-19-passed-6-failed",
   "mlflow_run_id": null
 }

@@ -1,0 +1,34 @@
+{
+  "schema_version": "exp651-t051-single-checkpoint-portability-v1",
+  "status": "materialized-and-verified",
+  "copy_command": "cp --reflink=never --preserve=mode,timestamps",
+  "source": {
+    "path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "bytes": 400584,
+    "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "device": 69,
+    "inode": 4503599628741895,
+    "links": 1,
+    "regular_file": true,
+    "symlink": false
+  },
+  "destination": {
+    "path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "bytes": 400584,
+    "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "device": 69,
+    "inode": 21673573208200621,
+    "links": 1,
+    "regular_file": true,
+    "symlink": false
+  },
+  "byte_identical": true,
+  "hardlink_alias": false,
+  "reflink_disabled_at_copy": true,
+  "idempotent_repeat_validation": true,
+  "tracked_exp651_or_exp658_bytes_changed": false,
+  "limitations": [
+    "Only the checkpoint authorized by T051 was copied.",
+    "The ignored destination is reproducible from the exact confined primary-workspace source and this receipt."
+  ]
+}
