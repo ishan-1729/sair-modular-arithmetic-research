@@ -226,7 +226,7 @@ class Experiment:
             raw = [2 * state + flag * value for state, flag, value in zip(teacher_states, bit, right)]
             target = [value % prime for value, prime in zip(raw, modulus)]
             quotient = torch.tensor([value // prime for value, prime in zip(raw, modulus)], dtype=torch.long)
-            features = self.exp300.features_from_soft_state(state_plane, right, modulus, bit, width)
+            features = self.exp300.features_from_soft_state(state_plane, right, modulus, bit, width) if hasattr(self.exp300, "features_from_soft_state") else self._soft_features(state_plane, right, modulus, bit, width)
             logits, qlogits = model(features)
             loss, _ = self.exp300.transition_loss(logits, qlogits, target, quotient, width, float(training["worst_bit_weight"]), 0.0)
             losses.append(loss)
@@ -234,6 +234,14 @@ class Experiment:
             state_plane = logits.ge(0).float() + probabilities - probabilities.detach()
             teacher_states = target
         return torch.stack(losses).mean()
+
+    def _soft_features(self, state_plane: torch.Tensor, right: list[int], modulus: list[int], bit: list[int], width: int) -> torch.Tensor:
+        """Build differentiable state features for historical EXP300 modules."""
+        batch = len(right)
+        bit_plane = torch.tensor(bit, dtype=torch.float32)[:, None].expand(batch, width)
+        lsb = torch.zeros(batch, width); msb = torch.zeros(batch, width)
+        lsb[:, 0] = 1; msb[:, -1] = 1
+        return torch.stack((state_plane, self.exp300.bits(right, width), self.exp300.bits(modulus, width), bit_plane, lsb, msb), dim=1).mul(2).sub(1)
 
     def train(self, model: nn.Module, spec: RootSpec, *, steps: int, seed_offset: int, label: str, timer: Timer) -> dict[str, Any]:
         random.seed(spec.train_seed + seed_offset); np.random.seed(spec.train_seed + seed_offset); torch.manual_seed(spec.train_seed + seed_offset)
