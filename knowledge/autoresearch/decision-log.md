@@ -315,3 +315,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Rebound those two hashes and the mechanically consequent repository commit (`32e331a` to pushed `903d3a4`) in the protocol. The resulting protocol SHA is `0375263ee2d335279d911351ff284dccff6bb7aabb2644b466836ad89a3d1b09`; JSON-normalized comparison has zero differences.
 - The sole full authentication nevertheless raises `current package/source bytes differ from frozen protocol` because deserialized JSON stringifies numeric evaluation-map keys while the live YAML-derived object retains integer keys. T077 permits no retry, implementation repair or same-boundary successor.
 - Permanently park this exact formulation before root `20261262`; roots `20261262`-`20261265`, calibration, training and science remain unopened. This is not negative scientific evidence for target-only continuation or M044.a.
+
+## 2026-07-30 — EXP-679 permanently parks before calibration on verified denominator conflict
+
+- Preserve config/model/runner/test hashes `7718c560...ae850`, `0cb923c3...3982`, `376c32eb...0583f`, and `a36c3256...1318`; reuse the accepted eight focused tests and validator without rerun.
+- The first complete project oracle passes 663/663 in 560.35 pytest seconds (548.40 outer wall, 712.07 aggregate process CPU seconds, 943,808 KiB RSS) under the dynamic 1,684.13765625-second hard guard.
+- Pre-root freeze inspection finds `evaluation.trajectory_loss_cases` and `evaluation.calibration_trajectory_loss_cases` required by the verified runner but absent from the verified config. Repair would invalidate the sole green package identity and is prohibited.
+- Permanently park before root `20261266`; roots `20261266`-`20261269`, MLflow, calibration, training, W128/W256, and confirmations remain unopened. M043.b remains scientifically unanswered.

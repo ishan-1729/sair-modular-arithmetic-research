@@ -1,0 +1,32 @@
+{
+  "schema_version": "exp679-metrics-v1",
+  "run_id": "exp-679-capacity-recycling",
+  "created_at": "2026-07-30T03:00:00+05:30",
+  "status": "permanent-pre-root-denominator-park",
+  "decision": "permanent-park-verified-config-calibration-denominator-conflict",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "focused_tests_passed": 8,
+  "package_oracle_invocations": 1,
+  "project_validator_passed_in_package_oracle": true,
+  "full_pytest_opened": true,
+  "full_pytest_passed": 663,
+  "calibration_opened": false,
+  "formal_opened": false,
+  "training_updates": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The verified config cannot construct runner-required calibration trajectory denominators without changing final verified bytes.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {"capacity_recycled": "unopened", "reduced_only": "unopened", "wider_full": "unopened", "standard_full": "unopened", "frozen_source": "unopened", "randomized_wider": "unopened"},
+  "runtime": {"full_pytest_outer_wall_seconds": 548.40, "full_pytest_process_cpu_seconds": 712.07, "full_pytest_peak_rss_kib": 943808},
+  "roots": {"20261266": "unopened-permanent-pre-root-denominator-park", "20261267": "unopened-permanent-pre-root-denominator-park", "20261268": "unopened-permanent-pre-root-denominator-park", "20261269": "unopened-permanent-pre-root-denominator-park"},
+  "limitations": [
+    "Focused and full-suite evidence is verification evidence only.",
+    "No calibration, capacity selection, training, route, resource, or exact-answer science metric was produced.",
+    "The exact EXP679 execution formulation is permanently closed without a repair successor.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion evaluation occurred."
+  ]
+}
