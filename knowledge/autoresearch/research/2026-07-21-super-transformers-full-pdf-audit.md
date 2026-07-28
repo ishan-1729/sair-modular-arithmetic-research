@@ -30,7 +30,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M004.a LLA | bounded-faithful | scientifically open; EXP676 resource-parked before formal science |
 | M004.b length schedule | bounded-faithful | open; EXP677 package-verification park before science |
 | M005.a RRT | bounded-faithful | open; EXP-617 non-faithful |
-| M006.a Huginn | bounded-faithful | open; EXP-634 adjacent only |
+| M006.a Huginn | bounded-faithful | exact Candidate005 transfer and 400-update de-novo fallback parked by EXP682; native from-scratch family remains open |
 | M006.b latent-thought regularizer | bounded-faithful | exact Candidate005 tied-weight mapping parked; untied architecture remains open |
 | M007.a H/L recurrence | bounded-faithful | open |
 | M007.b gradient/deep supervision | bounded-faithful | open |
@@ -388,6 +388,18 @@ under a `1e-12` numerical-zero threshold. A training-only untied hidden-state te
 reference, hidden-boundary, target, and detach semantics absent from the source and is not counted as
 M006.b evidence. This closes only the exact Candidate005 tied-weight transfer; no scientific accuracy
 surface or root was opened.
+
+## EXP-682 update — ST-M006.a
+
+EXP682 visually authenticated `2502.05171` pp.3-4/10-11 and encoded the full
+prelude/random-latent/reinjection/concat/sandwich-RMSNorm/lognormal-Poisson/TBPTT map.
+Candidate005's GroupNorm ConvGRU has no random latent or hidden `2h -> h` adapter, and
+native RMSNorm is not an identity replacement for its centered normalization. The
+executable probe shows that making the required additions causal changes checkpoint
+outputs; making them inert would fail the frozen component gate. The 400-update de-novo
+fallback is also parked against adjacent EXP634's 2/300 trained-width result after 4,000
+updates. All EXP682 roots remain unopened. This closes only the exact Candidate005
+transfer and frozen de-novo budget, not native from-scratch Huginn.
 
 ## Resource governance
 

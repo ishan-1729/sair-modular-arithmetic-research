@@ -80,3 +80,4 @@
 - [EXP-679 capacity recycling](exp-679-capacity-recycling.md) - exact preserved M043.b package passed 663 tests, then permanently parked before calibration on a verified config/runner trajectory-denominator conflict.
 - [EXP-680 Mixture-of-Recursions depth routing](exp-680-mor-depth-routing.md) - frozen bounded-faithful M009.b instance-level expert-choice hierarchy with matched depth and intervention controls.
 - [EXP-681 AbbIE recurrence extrapolation](exp-681-abbie-recurrence.md) - frozen bounded-faithful M008 head/body/tail C/D recurrence package with train-two and test 1/2/4/8.
+- [EXP-682 Huginn recurrent depth](exp-682-huginn-recurrent-depth.md) - source-complete ST-M006.a transfer package parked before roots because causal latent/concat/RMSNorm additions cannot exactly preserve Candidate005 and the 400-update de-novo fallback is not viable.

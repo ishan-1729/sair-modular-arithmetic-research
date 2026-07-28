@@ -1996,6 +1996,34 @@ runs:
       - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
       - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-682-huginn-recurrent-depth
+    status: parked-source-topology-feasibility
+    approach: bounded-faithful-ST-M006a-Huginn-latent-recurrent-depth
+    decision: park-no-exact-transfer-or-viable-de-novo-route
+    decision_authority: T084-source-topology-and-de-novo-viability-stop
+    source_base_commit: bf0e03e90d28d59168ec7a12cde6468f389b40cd
+    source_branch: codex/exp682-huginn-recurrent-depth
+    config: configs/exp_682_huginn_recurrent_depth.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp682-huginn-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-682-huginn-recurrent-depth.md
+    run_record: experiments/runs/exp-682-huginn-recurrent-depth/run.json
+    metrics: evals/results/exp-682-huginn-recurrent-depth/metrics.json
+    verification: experiments/runs/exp-682-huginn-recurrent-depth/verification.json
+    paper_sha256: 96f4543683a06a470ccb0b6b0db27a98f283fde9467d175e838f03a629a76c7b
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261278: unopened-topology-stop, 20261279: unopened-topology-stop, 20261280: unopened-topology-stop, 20261281: unopened-topology-stop}
+    transfer: {exact_checkpoint_transfer: false, causal_required_components: true, source_norm: GroupNorm, required_norm: RMSNorm}
+    de_novo_adjacent: {experiment: EXP634, updates: 4000, trained_width: 12, exact_correct: 2, exact_cases: 300, viable: false}
+    training_updates: 0
+    formal_calls_executed: 0
+    calibration: null
+    scientific_metrics: null
+    scientific_verdict: null
+    mlflow_run_id: null
+    limitations:
+      - This is a source/topology and de-novo-viability park, not a Huginn scientific rejection.
+      - Required causal latent, concat-adapter and sandwich-RMSNorm additions are not exact-function preserving for Candidate005.
+      - Roots 20261278-20261281 and every protected evaluation surface remained unopened.
   - run_id: exp-681-abbie-recurrence
     status: permanent-focused-verification-park
     approach: bounded-ST-M008-AbbIE-C-D-head-body-tail-recurrence-extrapolation

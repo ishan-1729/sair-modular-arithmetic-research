@@ -1,0 +1,100 @@
+{
+  "calibration": null,
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "completion_marker": "terminal-persisted",
+  "config": "configs/exp_682_huginn_recurrent_depth.yaml",
+  "controls": {
+    "deterministic_latent": "declared-unopened-topology-stop",
+    "fixed_mean_depth": "declared-unopened-topology-stop",
+    "frozen_source": "declared-unopened-topology-stop",
+    "full_bptt": "declared-unopened-topology-stop",
+    "full_huginn": "declared-unopened-topology-stop",
+    "no_concat": "declared-unopened-topology-stop",
+    "no_reinjection": "declared-unopened-topology-stop",
+    "no_rmsnorm": "declared-unopened-topology-stop",
+    "randomized_weights": "declared-unopened-topology-stop",
+    "reset_latent": "declared-unopened-topology-stop",
+    "shuffled_latent": "declared-unopened-topology-stop",
+    "zero_latent": "declared-unopened-topology-stop"
+  },
+  "created_at": "2026-07-28T12:59:21Z",
+  "de_novo_evidence": {
+    "cases": 300,
+    "correct": 2,
+    "exact_accuracy": 0.006666666666666667,
+    "inference": "400-update W128 de-novo fallback is not decision-worthy after 4000-update W12 adjacent failure",
+    "minimum_viability": 0.2,
+    "source": "EXP634 adjacent recurrent de-novo feasibility",
+    "trained_width": 12,
+    "updates": 4000
+  },
+  "decision": "park-no-exact-transfer-or-viable-de-novo-route",
+  "depth_distribution_probe": {
+    "draws": 400,
+    "histogram": {
+      "10": 15,
+      "11": 5,
+      "12": 13,
+      "2": 83,
+      "3": 62,
+      "4": 66,
+      "5": 47,
+      "6": 33,
+      "7": 36,
+      "8": 23,
+      "9": 17
+    },
+    "maximum": 12,
+    "mean": 4.997499942779541,
+    "median": 4.0,
+    "minimum": 2
+  },
+  "evaluation": {
+    "labels_or_oracle_present": false,
+    "not_performed": true,
+    "reason": "The exact-transfer and de-novo viability gates parked EXP682 before any calibration or scientific root was opened."
+  },
+  "formal_calls_executed": 0,
+  "limitations": [
+    "This is a source/topology and de-novo-viability park, not a scientific accuracy result or rejection of Huginn.",
+    "A source-complete causal latent/concat/RMSNorm route is not exactly function preserving for Candidate005; inert additions would violate the component-causality gate.",
+    "The de-novo viability conclusion is an evidence-backed inference from adjacent EXP634, not a direct EXP682 training measurement.",
+    "No calibration, formal W128/W256, confirmation, checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ],
+  "roots": {
+    "20261278": "unopened-topology-stop",
+    "20261279": "unopened-topology-stop",
+    "20261280": "unopened-topology-stop",
+    "20261281": "unopened-topology-stop"
+  },
+  "run_id": "exp-682-huginn-recurrent-depth",
+  "schema_version": "exp682-terminal-v1",
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "source": {
+    "authenticated": true,
+    "base_model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc",
+    "branch": "codex/exp682-huginn-recurrent-depth",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "exp634_metrics_sha256": "9cc189b36bd775df625314b8afe524483faac4b4a7fe09eebe7abcac7dbb67c5",
+    "exp643_metrics_sha256": "7623e2ec288fa2363a77dcaa25333c2f8479c950827fffda8057707d43e6701b",
+    "exp674_metrics_sha256": "b9c1acbe423b5349472dddecbd630cba9efd2180006c6bd1da24af10fd9a05ab",
+    "paper_sha256": "96f4543683a06a470ccb0b6b0db27a98f283fde9467d175e838f03a629a76c7b",
+    "repository_commit": "bf0e03e90d28d59168ec7a12cde6468f389b40cd",
+    "research_manifest_sha256": "f2e2e38631d4cd5ea286d6e34c315b19c90d2c12e1725b3958a3e90229f09c21"
+  },
+  "status": "parked-source-topology-feasibility",
+  "topology": {
+    "causal_required_components": true,
+    "exact_checkpoint_transfer": false,
+    "latent_seed_intervention_max_delta": 1.4553799629211426,
+    "required_norm_type": "RMSNorm",
+    "rmsnorm_intervention_max_delta": 25.828075408935547,
+    "source_has_concat_adapter": false,
+    "source_has_random_latent": false,
+    "source_norm_type": "GroupNorm",
+    "source_vs_required_max_delta": 19.0538330078125
+  },
+  "training_updates": 0
+}

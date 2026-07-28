@@ -932,3 +932,21 @@ rejected_exp669_hypothesis:
   run_record: experiments/runs/exp-669-stars-jvp-regularization/run.json
   metrics: evals/results/exp-669-stars-jvp-regularization/metrics.json
   limitations: [one-step-proxy-not-exact-spectral-radius, retention-dependence-formal-stability-W256-and-confirmations-unopened, M026b-M018a-closed, no-general-STARS-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp682_hypothesis:
+  run_id: exp-682-huginn-recurrent-depth
+  status: parked-source-topology-feasibility
+  source_base_commit: bf0e03e90d28d59168ec7a12cde6468f389b40cd
+  source_branch: codex/exp682-huginn-recurrent-depth
+  decision_authority: T084-source-topology-and-de-novo-viability-stop
+  mechanism: bounded-faithful-ST-M006a-Huginn-latent-recurrent-depth
+  roots: {calibration_20261278: unopened-topology-stop, formal_20261279: unopened-topology-stop, confirmation_20261280: unopened-topology-stop, confirmation_20261281: unopened-topology-stop}
+  transfer: {exact_checkpoint_transfer: false, causal_required_components: true, source_norm: GroupNorm, required_norm: RMSNorm}
+  de_novo_adjacent: {experiment: EXP634, updates: 4000, trained_width: 12, exact_correct: 2, exact_cases: 300, viable: false}
+  training_updates: 0
+  formal_calls_executed: 0
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-682-huginn-recurrent-depth/run.json
+  metrics: evals/results/exp-682-huginn-recurrent-depth/metrics.json
+  limitations: [topology-and-viability-park-not-Huginn-rejection, roots-20261278-through-20261281-unopened, no-checked-independent-official-private-candidate-submission-promotion-or-completion-evaluation]
