@@ -1,0 +1,85 @@
+run_id: exp-684-stars-random-depth-factorial
+status: frozen-source-complete-factorial
+hypothesis: Training-only normalized one-step power/JVP stability pressure and equal-work random exposure to Candidate005's existing recurrent cycles jointly improve exact W128 and W256 generalization.
+mechanism_map: knowledge/autoresearch/research/2026-07-30-exp684-stars-random-depth-factorial.md
+preregistration: knowledge/autoresearch/ablations/exp-684-stars-random-depth-factorial.md
+source:
+  base_commit: adcb8743eaf3a9f906ee38befdc4947649a916ad
+  checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  stars_paper: {path: research/papers/arxiv-2605.26733.pdf, sha256: 20791f73ae2d2f58b00150acd17f106177493327898277bab4efb90080e2d8db, pages: [4, 5, 6, 7, 8]}
+  count_paper: {path: research/papers/arxiv-2604.07822.pdf, sha256: f9d0469a7628396daa1c0a67425927b72733a1339e0c838a27594f571f0f237b, pages: [2, 4, 5, 6, 7, 8, 9, 10, 16]}
+  fixtures: {Dockerfile: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41, generator.py: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0, primes.py: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+dependency: {torch: 2.5.1, jvp_api: torch.func.jvp, sampling_api: torch.poisson, generator_api: torch.Generator, external_library_added: false}
+model: {width: 256, hidden: 92, cycles: 2}
+routes: [fixed_no_jvp, fixed_stars, random_no_jvp, random_stars, shuffled_random_stars, random_stop_gradient]
+trained_routes: [fixed_no_jvp, fixed_stars, random_no_jvp, random_stars, shuffled_random_stars, random_stop_gradient]
+primary_route: random_stars
+factorial:
+  fixed_no_jvp: {schedule: fixed, jvp: none}
+  fixed_stars: {schedule: fixed, jvp: normalized_one_step_power}
+  random_no_jvp: {schedule: balanced_clipped_poisson, jvp: none}
+  random_stars: {schedule: balanced_clipped_poisson, jvp: normalized_one_step_power}
+  shuffled_random_stars: {schedule: within_width_stratum_shuffle, jvp: normalized_one_step_power}
+  random_stop_gradient: {schedule: balanced_clipped_poisson, jvp: normalized_one_step_power_stop_gradient}
+count_schedule:
+  distribution: clipped_poisson
+  poisson_mean: 1.8
+  minimum_cycles: 1
+  maximum_cycles: 4
+  fixed_cycles: 2
+  seed: 68400826
+  balance_seed: 68400827
+  shuffle_seed: 68410826
+  frozen_updates: 400
+  width_position_cycle_sums: [200, 200, 200, 200]
+  total_cycles: 800
+  recurrent_visits_per_example: 5600
+  random_sha256: ded6967073df733f344bd776ae209bad599998c51d01861e85c7844eca025573
+  shuffled_sha256: 3178f58c3aed74bd0b2f04f7e8ab8757e643c1293dd24a4c5d3ceb73420a4704
+  sample_once_per_batch: true
+regularization:
+  lambda: 0.10
+  vector_epsilon: 0.000000000001
+  jvp_calls_per_update: 2
+  state_boundary: before-final-existing-core-recurrent-update
+  power_iterations: 1
+  exact_spectral_radius_claim: false
+inference: {source_graph_identical: true, fixed_cycles: 2, added_parameters: 0, added_calls: 0, jvp: false, random_schedule: false, target_free: true, validity_filter: false, repair: false}
+roots: {calibration: 20261286, viability: 20261287, confirmations: [20261288, 20261289]}
+data: {widths: [64, 128, 256], training_widths: [64, 128, 256], prime_bit_span: 8, train_prime_identities: 512, validation_prime_identities: 128, test_prime_identities: 128, split_seed_offset: 68400, training_seed_offset: 68500, validation_seed_offset: 68600, test_seed_offset: 68700}
+training: {steps_per_trained_route: 400, schedule: [64, 128, 256, 128], batch_size: 16, learning_rate: 0.00002, minimum_learning_rate: 0.000001, weight_decay: 0.00002, worst_bit_weight: 0.45, quotient_weight: 0.10, gradient_clip: 2.0, torch_threads: 4, log_every_steps: 25}
+calibration: {representative_updates_per_trained_route: 4, transition_cases_per_width: 8, rollout_cases_per_width: 2, stability_cases_per_width: 4, perturbation_epsilon: 0.0001}
+evaluation: {transition_cases_per_width: 3000, rollout_cases_per_width: 300, validation_transition_cases_per_width: 1000, validation_rollout_cases_per_width: 100, stability_cases_per_width: 300, perturbation_epsilon: 0.0001}
+gates:
+  minimum_w128_joint_rollout: 0.85
+  minimum_w128_transition: 0.998
+  maximum_invalid_rollout_rate: 0.0
+  maximum_w64_retention_loss: 0.02
+  minimum_additional_w128_correct_over_each_component: 3
+  minimum_factorial_interaction: 0.0
+  minimum_trained_weight_drop: 0.20
+  minimum_causal_correct_gain: 1
+  minimum_w256_joint_rollout: 0.10
+  minimum_w256_gain_over_each_component: 0.05
+  maximum_candidate_inference_wall_seconds: 300
+  maximum_candidate_headroom_wall_seconds: 285
+  require_reload_exact: true
+  require_split_separation: true
+  require_inference_identity: true
+resource_policy:
+  verification_wall_base_seconds: 564.53
+  verification_expected_wall_seconds: 762.1155
+  verification_soft_observation_seconds: 952.644375
+  verification_hard_runaway_seconds: 1333.702125
+  maximum_peak_rss_bytes: 6442450944
+  maximum_expected_formal_wall_seconds: 21600
+  incumbent_candidate_wall_seconds: 156.0
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_routes: true
+  cache_completed_roots: true

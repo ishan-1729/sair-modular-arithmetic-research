@@ -1,0 +1,99 @@
+{
+  "schema_version": "exp684-terminal-v1",
+  "run_id": "exp-684-stars-random-depth-factorial",
+  "status": "completed",
+  "decision": "park-root-20261286-resource-admission",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-28T14:56:16Z",
+  "config": "configs/exp_684_stars_random_depth_factorial.yaml",
+  "seed": 20261286,
+  "hypothesis": "Training-only normalized one-step power/JVP stability pressure and equal-work random exposure to Candidate005's existing recurrent cycles jointly improve exact W128 and W256 generalization.",
+  "source": {
+    "authenticated": true,
+    "repository_commit": "adcb8743eaf3a9f906ee38befdc4947649a916ad",
+    "branch": "codex/exp684-stars-random-depth-factorial",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "stars_paper_sha256": "20791f73ae2d2f58b00150acd17f106177493327898277bab4efb90080e2d8db",
+    "count_paper_sha256": "f9d0469a7628396daa1c0a67425927b72733a1339e0c838a27594f571f0f237b",
+    "config_sha256": "5c64d01cae87248a39a6aa7d17ad2034054a369e25f7bc40df7e68dadd21ed10",
+    "model_sha256": "fdb6f93be1c576bfd4d196b0e9b0e8e37bfbfed8da33d6c891da02d44bda6446",
+    "runner_sha256": "7aeed2ce1d9e3355f7167c683a0e2e8e227f6036f73a10431511758fc95905c7",
+    "test_sha256": "5cf5ed3bf8c89f1d0a5d058e3779a006765aa031d27be5ec75c32bd3cd9b18fd",
+    "frozen_protocol_sha256": "b4e541404831b1fe477c6f01d557252eb6fa11e23078d0dc4f004c955135d69e"
+  },
+  "roots": {
+    "20261286": "completed-calibration-resource-reject",
+    "20261287": "unopened-admission-blocked",
+    "20261288": "unopened-admission-blocked",
+    "20261289": "unopened-admission-blocked"
+  },
+  "calibration": {
+    "receipt": "experiments/runs/exp-684-stars-random-depth-factorial/calibration.json",
+    "receipt_sha256": "8264e0225efb3fc56f18317c8c9cf5c2ff56a3e9257109663cf3da67e4f01dbf",
+    "complete": true,
+    "admitted": false,
+    "checks": {
+      "candidate_inference": false,
+      "complete_routes": true,
+      "determinism": true,
+      "equal_full_work": true,
+      "expected_value": false,
+      "finite_jvp": true,
+      "inference_identity": true,
+      "memory": true,
+      "reload": true,
+      "split_separation": true
+    },
+    "projected_training_wall_seconds": 850.9090124000011,
+    "projected_evaluation_wall_seconds": 21804.62519947498,
+    "expected_wall_seconds": 22655.53421187498,
+    "eta_wall_seconds": 45311.06842374996,
+    "soft_guard_wall_seconds": 56639,
+    "hard_guard_wall_seconds": 90623,
+    "variability_ratio": 3.4747640813681735,
+    "headroom": 2.0,
+    "candidate_inference_wall_seconds": 156.0,
+    "candidate_inference_headroom_wall_seconds": 312.0,
+    "full_recurrent_work_per_example": 5600,
+    "routes": 6,
+    "training_updates": 24,
+    "training_examples": 384,
+    "recurrent_visits": 4320,
+    "jvp_calls": 512,
+    "resource": {
+      "wall_seconds": 180.58316723000002,
+      "process_tree_cpu_seconds": 696.8105479999999,
+      "cgroup_cpu_seconds": 712.784,
+      "peak_rss_bytes": 1133596672
+    },
+    "mlflow_run_id": "17be5e85a3b049cba786b43c37d33569"
+  },
+  "training_updates": 24,
+  "formal_calls_executed": 0,
+  "evaluation": {
+    "calibration_only": true,
+    "scientific_evaluation_performed": false,
+    "labels_or_answers_used_for_inference": false,
+    "checked_independent_official_private_candidate_submission_promotion": "not-opened"
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "config": "configs/exp_684_stars_random_depth_factorial.yaml",
+    "environment": "experiments/runs/exp-684-stars-random-depth-factorial/environment.json",
+    "verification": "experiments/runs/exp-684-stars-random-depth-factorial/verification.json",
+    "calibration": "experiments/runs/exp-684-stars-random-depth-factorial/calibration.json",
+    "metrics": "evals/results/exp-684-stars-random-depth-factorial/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-684-stars-random-depth-factorial.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp684-stars-random-depth-factorial.md"
+  },
+  "limitations": [
+    "Calibration is non-scientific resource/integrity evidence and does not test the W128/W256 hypothesis.",
+    "The one-step normalized-vector JVP squared-norm is a proxy, not an exact spectral radius.",
+    "JVP routes intentionally perform unmatched training-only gradient compute; formal inference remains identical.",
+    "Expected full-route wall exceeds 21,600 seconds and 156-second nominal candidate inference becomes 312 seconds under measured 2.0 headroom.",
+    "Roots 20261287-20261289 and all checked, independent, official/private, candidate, submission, promotion, and release surfaces remain unopened."
+  ]
+}

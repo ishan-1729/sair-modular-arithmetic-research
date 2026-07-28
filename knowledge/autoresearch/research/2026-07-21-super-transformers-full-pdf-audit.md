@@ -72,8 +72,8 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M024.d auto-guidance transfer | analogue | deferred/closed by T063 scope |
 | M025.a LT² mixer | bounded-faithful | open |
 | M025.b LT² gates | bounded-faithful | open |
-| M026.a JSR regularization | bounded-faithful | closed by EXP-669 W128-primary rejection of exact adaptation |
-| M026.b random loop counts | bounded-faithful | deferred/closed by T064 as separate M018.a mechanism |
+| M026.a JSR regularization | bounded-faithful | EXP669 standalone adaptation closed; joint factorial open in EXP684 |
+| M026.b random loop counts | bounded-faithful | existing-core mapping open in EXP684; EXP670 extra-operator route is separate history |
 | M027.a FPRM parameterization | bounded-faithful | open |
 | M027.b convergence halting | bounded-faithful | open |
 | M028.a LOTUS latent layout | bounded-faithful | open |
@@ -254,7 +254,7 @@ remained unopened. This is a guarded-runtime feasibility park only; M025.a/b rem
 
 ### ST-M026 — STARS (2 components)
 
-**PDF:** `2605.26733`, pp. 4–8. **Components:** (a) Jacobian Spectral Radius Regularization using a one-step power-iteration/JVP squared-norm proxy—not exact spectral radius; (b) random loop-count sampling. Use native JVP/autograd. EXP-643 does not test STARS. Terminal requires each component's causal effect, stability diagnostics, exact transfer, and compute cost.
+**PDF:** `2605.26733`, pp. 4–8. **Components:** (a) Jacobian Spectral Radius Regularization using a one-step power-iteration/JVP squared-norm proxy—not exact spectral radius; (b) random loop-count sampling. Use native JVP/autograd. EXP-643 does not test STARS. EXP669 closed its standalone M026.a adaptation at 84.333% W128 exact versus the 85% gate. EXP670 varied a separate refinement operator and did not test M026.b on Candidate005's existing visits. EXP684 implements the source-complete 2×2 existing-core factorial with exact width-stratified recurrent work, shuffled-count and stop-gradient controls, and unchanged fixed inference; root 20261286 verifies the mapping but parks before science because 22,655.53 expected formal wall exceeds 21,600 and 312 guarded candidate seconds exceed 285. Both components remain scientifically open. Terminal requires each component's causal effect, stability diagnostics, exact transfer, and compute cost.
 
 ### ST-M027 — Fixed-Point Reasoners (2 components)
 

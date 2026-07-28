@@ -2024,6 +2024,36 @@ runs:
       - This is a source/topology and de-novo-viability park, not a Huginn scientific rejection.
       - Required causal latent, concat-adapter and sandwich-RMSNorm additions are not exact-function preserving for Candidate005.
       - Roots 20261278-20261281 and every protected evaluation surface remained unopened.
+  - run_id: exp-684-stars-random-depth-factorial
+    status: parked-calibration-resource-admission
+    approach: source-complete-M026-STARS-by-random-existing-core-depth-factorial
+    decision: park-root-20261286-resource-admission
+    decision_authority: T087-root-20261286-complete-route-admission
+    source_base_commit: adcb8743eaf3a9f906ee38befdc4947649a916ad
+    source_branch: codex/exp684-stars-random-depth-factorial
+    config: configs/exp_684_stars_random_depth_factorial.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp684-stars-random-depth-factorial.md
+    preregistration: knowledge/autoresearch/ablations/exp-684-stars-random-depth-factorial.md
+    run_record: experiments/runs/exp-684-stars-random-depth-factorial/run.json
+    metrics: evals/results/exp-684-stars-random-depth-factorial/metrics.json
+    verification: experiments/runs/exp-684-stars-random-depth-factorial/verification.json
+    calibration_record: experiments/runs/exp-684-stars-random-depth-factorial/calibration.json
+    stars_paper_sha256: 20791f73ae2d2f58b00150acd17f106177493327898277bab4efb90080e2d8db
+    count_paper_sha256: f9d0469a7628396daa1c0a67425927b72733a1339e0c838a27594f571f0f237b
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261286: completed-calibration-resource-reject, 20261287: unopened-admission-blocked, 20261288: unopened-admission-blocked, 20261289: unopened-admission-blocked}
+    verification_summary: {focused: 13-passed, validator: green-214-concepts-1100-records, pytest: 716-passed-in-490.82s, pytest_outer_wall_seconds: 485.73, pytest_process_cpu_seconds: 642.30, pytest_peak_rss_kib: 922300, oracle_invocations: 1}
+    calibration: {admitted: false, complete_routes: true, equal_full_work: true, inference_identity: true, expected_wall_seconds: 22655.53421187498, expected_wall_ceiling_seconds: 21600, candidate_wall_seconds: 156.0, guarded_candidate_wall_seconds: 312.0, guarded_candidate_ceiling_seconds: 285, wall_seconds: 180.58316723000002, process_tree_cpu_seconds: 696.8105479999999, cgroup_cpu_seconds: 712.784, peak_rss_bytes: 1133596672}
+    training_updates: 24
+    formal_calls_executed: 0
+    mlflow_run_id: 17be5e85a3b049cba786b43c37d33569
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration is non-scientific and root 20261286 rejected before formal W128.
+      - JVP gradient compute is training-only, intentionally unmatched, and disclosed; inference remains exact Candidate005.
+      - Expected full-route wall and guarded candidate wall independently exceed their frozen ceilings.
+      - Roots 20261287-20261289 and all protected evaluation surfaces remain unopened.
   - run_id: exp-683-source-complete-hrm
     status: permanent-calibration-execution-park
     approach: source-complete-M007-HRM-unequal-HL-local-credit-deep-Q-ACT

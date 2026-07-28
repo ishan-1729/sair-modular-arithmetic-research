@@ -371,3 +371,37 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Consume root 20261282 and permanently park without repair or retry. Roots 20261283-20261285,
   W16/W128/W256 science, confirmations, and protected evaluation surfaces remain unopened.
   This is execution failure, not scientific evidence against HRM or M007.
+
+## 2026-07-30 — EXP-684 freezes the source-complete M026 factorial
+
+- Reuse EXP669's authenticated normalized one-step power/JVP proxy and only EXP670's
+  deterministic bounded count-schedule evidence. Do not import EXP670's separate residual
+  refinement operator or reopen either historical root family.
+- Cross fixed/random existing-core cycles with no-JVP/STARS, plus within-width-stratum
+  shuffled-random/STARS and random/stop-gradient controls. Every arm receives 400 updates,
+  identical batches/examples/optimizer work, and exactly 5,600 native recurrent visits per
+  example; JVP routes disclose two unmatched training-only products per example/update.
+- Freeze clipped-Poisson seed `68400826`, balance seed `68400827`, shuffle seed `68410826`,
+  count range 1-4, 200 cycles in each `[64,128,256,128]` position stratum, and hashes
+  `ded69670...5573` / `3178f58c...4704`. Inherited two-cycle Candidate005 inference remains
+  bit-identical in graph, parameters, inputs, calls, and initial outputs.
+- Root 20261286 alone may admit resources. Root 20261287 is W128-first with component,
+  factorial, shuffled, stop-gradient, trained-weight, reload, determinism, W64-retention,
+  transition and invalidity gates; W256 and roots 20261288/89 remain conditional.
+
+## 2026-07-30 — EXP-684 parks at complete-route resource admission
+
+- The focused suite passes 13/13 after one output-path portability fix. The one persistent
+  package oracle passes 214 concepts / 1,100 records and 716/716 tests in 490.82 seconds;
+  outer resources are 485.73 wall / 642.30 aggregate CPU seconds / 922,300 KiB RSS.
+- Root 20261286 completes four representative updates for all six routes: 24 updates,
+  384 examples, 4,320 observed recurrent visits and 512 JVP products. Instrumented resources
+  are 180.583 wall / 696.811 process-tree CPU / 712.784 cgroup CPU seconds with
+  1,133,596,672-byte peak RSS. MLflow run `17be5e85a3b049cba786b43c37d33569` is retained.
+- Complete routes, deterministic repeat, exact reload, finite JVP, split separation,
+  inherited inference identity, equal 5,600-visit full schedules, and memory all pass.
+  Expected full-route wall is 22,655.534 seconds above the 21,600 ceiling; variability 3.475
+  clamps to 2.0 headroom, turning 156 nominal candidate seconds into 312 above 285.
+- Park before root 20261287. Roots 20261287-20261289, formal W128, component causality,
+  W256, confirmations, and protected evaluation surfaces remain unopened. This is not a
+  scientific verdict on STARS, random existing-core depth, or M026.
