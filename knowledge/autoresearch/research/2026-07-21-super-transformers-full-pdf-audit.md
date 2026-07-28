@@ -243,6 +243,12 @@ EXP-666 implements a bounded ST-M022.a SAIR adaptation with exact-initialized fr
 
 **PDF:** `2605.20670`, pp. 3–5 and 8–11. **Components:** (a) genuinely shared loop with linear/sparse and hybrid mixers; (b) zero-initialized per-channel loop residual gates and SDPA output gate mitigating attention sinks. Prefer official `chili-lab/LT2` code after license/version/parity review; implementation unavailability is not a terminal path. No evidence. Terminal after component ablations and exact scaling/runtime curves.
 
+EXP-672 authenticates the BSD-3-Clause official repository at commit `adc2ba2f`, implements a bounded
+native-CPU shared linear/sparse hybrid around the frozen Candidate005 proposal, and passes 12 focused
+identity/parity/control tests. Its sole package oracle stopped before pytest on inherited, out-of-scope
+EXP671 schema records, so root 20261238 calibration and all scientific/resource gates remained
+unexecuted. This is a verification-feasibility park only; M025.a/b remain open.
+
 ### ST-M026 — STARS (2 components)
 
 **PDF:** `2605.26733`, pp. 4–8. **Components:** (a) Jacobian Spectral Radius Regularization using a one-step power-iteration/JVP squared-norm proxy—not exact spectral radius; (b) random loop-count sampling. Use native JVP/autograd. EXP-643 does not test STARS. Terminal requires each component's causal effect, stability diagnostics, exact transfer, and compute cost.

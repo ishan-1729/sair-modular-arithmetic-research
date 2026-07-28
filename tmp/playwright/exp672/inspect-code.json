@@ -1,0 +1,712 @@
+{
+  "playwrightVersion": "1.61.1",
+  "chromiumVersion": "149.0.7827.55",
+  "mode": "managed regular Chromium/new headless",
+  "records": [
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py",
+      "finalUrl": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py",
+      "status": 200,
+      "title": "LT2/apps/LT2/transformer.py at main · chili-lab/LT2 · GitHub",
+      "bodySample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2/apps/LT2 /transformer.py Latest commit History History File metadata and controls Code Blame 2839 lines (2462 loc) · 112 KB Raw 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497 498 499 500 501 502 503 504 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594 595 596 597 598 599 600 601 602 603 604 605 606 607 608 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 660 661 662 663 664 665 666 667 668 669 670 671 672 673 674 675 676 677 678 679 680 681 682 683 684 685 686 687 688 689 690 691 692 693 694 695 696 697 698 699 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732 733 734 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 752 753 754 755 756 757 758 759 760 761 762 763 764 765 766 767 768 769 770 771 772 773 774 775 776 777 778 779 780 781 782 783 784 785 786 787 788 789 790 791 792 793 794 795 796 797 798 799 800 801 802 803 804 805 806 807 808 809 810 811 812 813 814 815 816 817 818 819 820 821 822 823 824 825 826 827 828 829 830 831 832 833 834 835 836 837 838 839 840 841 842 843 844 845 846 847 848 849 850 851 852 853 854 855 856 857 858 859 860 861 862 863 864 865 866 867 868 869 870 871 872 873 874 875 876 877 878 879 880 881 882 883 884 885 886 887 888 889 890 891 892 893 894 895 896 897 898 899 900 901 902 903 904 905 906 907 908 909 910 911 912 913 914 915 916 917 918 919 920 921 922 923 924 925 926 927 928 929 930 931 93",
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py#start-of-content"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Please reload this page",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues 0",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests 0",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality 0",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "apps",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps/LT2"
+        },
+        {
+          "text": "History",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "apps",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps/LT2"
+        },
+        {
+          "text": "Raw",
+          "href": "https://github.com/chili-lab/LT2/raw/refs/heads/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "View remainder of file in raw view",
+          "href": "https://github.com/chili-lab/LT2/raw/refs/heads/main/apps/LT2/transformer.py"
+        }
+      ],
+      "evidence": [
+        "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2/apps/LT2 /transformer.py Latest commit History History File metadata and controls Code Blame 2839 lines (2462 loc) · 112 KB Raw 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299 300 301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402 403 404 405 406 407 408 409 410 411 412 413 414 415 416 417 418 419 420 421 422 423 424 425 426 427 428 429 430 431 432 433 434 435 436 437 438 439 440 441 442 443 444 445 446 447 448 449 450 451 452 453 454 455 456 457 458 459 460 461 462 463 464 465 466 467 468 469 470 471 472 473 474 475 476 477 478 479 480 481 482 483 484 485 486 487 488 489 490 491 492 493 494 495 496 497 498 499 500 501 502 503 504 505 506 507 508 509 510 511 512 513 514 515 516 517 518 519 520 521 522 523 524 525 526 527 528 529 530 531 532 533 534 535 536 537 538 539 540 541 542 543 544 545 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594 595 596 597 598 599 600 601 602 603 604 605 606 607 608 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652 653 654 655 656 657 658 659 660 661 662 663 664 665 666 667 668 669 670 671 672 673 674 675 676 677 678 679 680 681 682 683 684 685 686 687 688 689 690 691 692 693 694 695 696 697 698 699 700 701 702 703 704 705 706 707 708 709 710 711 712 713 714 715 716 717 718 719 720 721 722 723 724 725 726 727 728 729 730 731 732 733 734 735 736 737 738 739 740 741 742 743 744 745 746 747 748 749 750 751 752 753 754 755 756 757 758 759 760 761 762 763 764 765 766 767 768 769 770 771 772 773 774 775 776 777 778 779 780 781 782 783 784 785 786 787 788 789 790 791 792 793 794 795 796 797 798 799 800 801 802 803 804 805 806 807 808 809 810 811 812 813 814 815 816 817 818 819 820 821 822 823 824 825 826 827 828 829 830 831 832 833 834 835 836 837 838 839 840 841 842 843 844 845 846 847 848 849 850 851 852 853 854 855 856 857 858 859 860 861 862 863 864 865 866 867 868 869 870 871 872 873 874 875 876 877 878 879 880 881 882 883 884 885 886 887 888 889 890 891 892 893 894 895 896 897 898 899 900 901 902 903 904 905 906 907 908 909 910 911 912 913 914 915 916 917 918 919 920 921 922 923 924 925 926 927 928 929 930 931 932 933 934 935 936 937 938 939 940 941 942 943 944 945 946 947 948 949 950 951 952 953 954 955 956 957 958 959 960 961 962 963 964 965 966 967 968 969 970 971 972 973 974 975 976 977 978 979 980 981 982 983 984 985 986 987 988 989 990 991 992 993 994 995 996 997 998 999 1000 # Copyright (c) Meta Platforms, Inc.",
+        "import os from dataclasses import dataclass from typing import Optional, Tuple, Union, List import torch from torch import nn from torch.nn.attention.flex_attention import create_block_mask, BlockMask from torch.distributed._tensor import Replicate, Shard from torch.distributed.tensor.parallel import ( ColwiseParallel, RowwiseParallel, SequenceParallel, PrepareModuleInput, parallelize_module, ) import torch.nn.functional as F from xformers.ops import fmha, AttentionBias from lingua.transformer import ( BaseTransformer, BaseTransformerArgs, FeedForward, FlashAttnMask, RMSNorm, TiedLinear, cross_entropy, TransformerBlock, Attention, apply_rotary_emb, repeat_kv, _get_fa3_flash_attn_func, _sdpa_flash_attn3_fallback, flex_attention_comp, ) @torch.compiler.disable def create_causal_mask(seqlen, attn_impl, sliding_window): \"\"\"Create attention mask based on implementation and window size.\"\"\" if sliding_window is not None and attn_impl == \"fmha\": return fmha.attn_bias.LocalAttentionFromBottomRightMask( window_left=sliding_window - 1, window_right=0 ) elif attn_impl == \"fmha\": return fmha.attn_bias.LowerTriangularMask() elif attn_impl == \"flash_attn3\": # window_size=(left, right): left=sliding_window-1 matches fmha's window_left=sliding_window-1 # (N-1 tokens left of current + current itself = N tokens total) return FlashAttnMask( causal=True, window_size=(sliding_window - 1, 0) if sliding_window is not None else None, ) elif attn_impl == \"sdpa\": return \"causal\" elif attn_impl == \"flex_attention\": return create_block_mask(causal_mask, None, None, seqlen, seqlen) else: raise NotImplementedError( f\"Attention {attn_impl}",
+        "sliding window not implemented\" ) def attention_flops_per_token(n_layers, seq_len, dim, causal): # Formula from https://github.com/Dao-AILab/flash-attention/blob/main/benchmarks/benchmark_flash_attention.py#L27-L30 return 3.5 * (4 * n_layers * seq_len * dim // (2 if causal else 1)) def get_num_flop_per_token( num_non_embed_params: int, n_layers: int, dim: int, seq_len: int ) -> int: return 6 * num_non_embed_params + attention_flops_per_token( n_layers, seq_len, dim, True ) def causal_mask(b, h, q_idx, kv_idx): return q_idx >= kv_idx @torch.compiler.disable def generate_random_attention_pattern( pattern_type: str, window_count: int, full_count: int, n_layers: int, loop_count: int, default_sliding_window: Optional[int], seed: int, ) -> List[List[Optional[int]]]: \"\"\" Generate a random attention pattern for one forward pass.",
+        "Args: pattern_type: Either \"random\" or \"bookend_random\" window_count: Number of sliding window layers in ratio full_count: Number of full attention layers in ratio n_layers: Number of unique layers loop_count: Number of loop iterations default_sliding_window: Window size for SWA layers seed: Random seed for this forward pass Returns: List of lists (per iteration) with sliding window sizes \"\"\" import random total_ratio = window_count + full_count total_slots = n_layers * loop_count target_num_full = int(total_slots * full_count / total_ratio) rng = random.Random(seed) if pattern_type == \"random\": # Fully random distribution across all slots num_window = total_slots - target_num_full all_slots = [None]",
+        "for loop_idx in range(loop_count): start_idx = loop_idx * n_layers end_idx = start_idx + n_layers result.append(all_slots[start_idx:end_idx]) return result elif pattern_type == \"bookend_random\": # First and last layer of each loop are always full bookend_full_count = loop_count * 2 if n_layers < 2: raise ValueError( f\"Bookend random pattern requires at least 2 layers per loop, got {n_layers}\" ) if bookend_full_count > target_num_full: raise ValueError( f\"Bookend random pattern needs {bookend_full_count}",
+        "full attention layers, \" f\"but ratio allows only {target_num_full}",
+        "Increase full attention ratio.\" ) # Remaining full attention layers to randomly distribute remaining_full = target_num_full - bookend_full_count non_bookend_per_loop = n_layers - 2 total_non_bookend_slots = non_bookend_per_loop * loop_count # Create and shuffle non-bookend positions non_bookend_slots = [None]",
+        "non_bookend_idx = 0 for loop_idx in range(loop_count): iteration_pattern = []",
+        "for layer_idx in range(n_layers): if layer_idx == 0 or layer_idx == n_layers - 1: iteration_pattern.append(None) # Bookend: full attention else: iteration_pattern.append(non_bookend_slots[non_bookend_idx]) non_bookend_idx += 1 result.append(iteration_pattern) return result else: raise ValueError(f\"Unknown random pattern type: {pattern_type}\") def parse_attention_pattern(pattern: str, n_layers: int, default_sliding_window: Optional[int]",
+        "= 2048, loop_count: int = 1, seed: int = 42) -> Union[List[Optional[int]], List[List[Optional[int]]], dict]: \"\"\" Parse attention pattern specification into a list of sliding window sizes per layer.",
+        "Args: pattern: Can be one of: - Ratio string like \"4:1\" (4 sliding window layers per 1 full attention, interleaved) - Bookend pattern like \"bookend:2\" or \"sandwich:3\" (full attn at start/end, window in middle) The number specifies how many full attention layers at each end - Random ratio like \"random:4:1\" (4:1 ratio randomly distributed, sampled each forward pass) This creates a fully random pattern where no layer knows if it will get full or SWA - Bookend random like \"bookend_random:4:1\" (first/last of each loop are full, rest random) This creates a semi-stable pattern with guaranteed full attention at boundaries - Comma-separated list like \"2048,2048,None,2048,None\" where None means full attention - Per-iteration pattern like \"full->128->128->128\" (use \"->\" to separate iterations) Each iteration can use: \"full\" (full attention), \"SWA=N\" (sliding window with size N), or a layer pattern like \"4:1\" or \"bookend:2\" n_layers: Total number of unique layers (before looping) default_sliding_window: Default window size to use for sliding window layers loop_count: Number of loop iterations (used for per-iteration patterns) seed: Random seed for random patterns (only used for validation, actual seed comes from step) Returns: - If static pattern: List of sliding window sizes (None means full attention) - If per-iteration static pattern: List of lists - If dynamic random pattern: Dict with metadata for runtime generation Examples: \"4:1\" with 20 layers -> [2048]*4 + [None]",
+        "(explicit values) \"full->SWA=128->SWA=128->SWA=128\" with loop_count=4 -> [[None]*n_layers, [128]*n_layers, [128]*n_layers, [128]*n_layers]",
+        "pattern (got {pattern})\" ) # Validate the pattern is feasible if pattern_type == \"bookend_random\": total_slots = n_layers * loop_count target_num_full = int(total_slots * full_count / (window_count + full_count)) bookend_full_count = loop_count * 2 if n_layers < 2: raise ValueError(f\"Bookend random pattern requires at least 2 layers, got {n_layers}\") if bookend_full_count > target_num_full: raise ValueError( f\"Bookend random pattern needs {bookend_full_count}",
+        "\" f\"Increase full attention ratio or reduce loop_count.\" ) # Return metadata for dynamic generation return { \"type\": \"dynamic_random\", \"pattern_type\": pattern_type, \"window_count\": window_count, \"full_count\": full_count, \"default_sliding_window\": default_sliding_window, }",
+        "if len(iteration_patterns) != loop_count: raise ValueError( f\"Per-iteration pattern has {len(iteration_patterns)}",
+        "iterations \" f\"but loop_count is {loop_count}.",
+        "for iter_pattern in iteration_patterns: # Parse each iteration's pattern if iter_pattern.lower() == \"full\": # Full attention for all layers in this iteration result.append([None]",
+        "* n_layers) elif iter_pattern.lower().startswith(\"swa=\"): # Sliding window attention with specified size for all layers window_size = int(iter_pattern.split(\"=\")[1]) result.append([window_size]",
+        "* n_layers) else: # Recursively parse as a regular pattern (ratio, bookend, or explicit) iter_result = parse_attention_pattern( iter_pattern, n_layers, default_sliding_window, loop_count=1 ) result.append(iter_result) return result # Check if it's a bookend/sandwich pattern if pattern.startswith(\"bookend:\") or pattern.startswith(\"sandwich:\"): prefix, num_str = pattern.split(\":\") num_full_each_end = int(num_str) if num_full_each_end < 0: raise ValueError(f\"Number of full attention layers must be non-negative, got {num_full_each_end}\") if 2 * num_full_each_end > n_layers: raise ValueError( f\"Cannot have {num_full_each_end}",
+        "full attention layers at each end \" f\"with only {n_layers}",
+        "for i in range(n_layers): if i < num_full_each_end or i >= n_layers - num_full_each_end: result.append(None) # Full attention else: result.append(default_sliding_window) # Sliding window return result # Check if it's a ratio pattern (e.g., \"4:1\") if \":\" in pattern: parts = pattern.split(\":\") if len(parts) != 2: raise ValueError(f\"Ratio pattern must be 'window:full', got {pattern}\") window_count = int(parts[0]) full_count = int(parts[1]) pattern_length = window_count + full_count if pattern_length == 0: raise ValueError(\"Pattern must have at least one layer\") # Check if default_sliding_window is needed if window_count > 0 and default_sliding_window is None: raise ValueError( f\"default_sliding_window must be provided when pattern has sliding window layers \" f\"(pattern: {pattern})\" ) # Create the repeating pattern using default_sliding_window base_pattern = [default_sliding_window]",
+        "\" \"They must match or use ratio pattern like '4:1'\" ) return result def get_block_size(pattern: str, n_layers: int) -> int: \"\"\" Determine the block size from the attention pattern.",
+        ") # Linear-attention types that need CoT (chain-of-thought) state threaded through # the outer loop_count loop: at outer step k we pass current_cot_step=k and the # per-layer V cache from step k-1.",
+        "_COT_ATTN_TYPES = frozenset({\"cot_gdp\"}) def parse_layer_pattern(pattern: str, n_layers: int) -> List[str]: \"\"\" Parse a layer pattern into a list of fla/mamba mixer types or \"full\" per layer.",
+        "Pattern formats: - \"full\" : all layers are standard full/SWA TransformerBlock (default, backward-compatible) - \"gdn\" : all layers are GatedDeltaNet (fla) - \"retnet\" : all layers are MultiScaleRetention / RetNet (fla) - \"deltanet\" : all layers are DeltaNet (fla) - \"kda\" : all layers are KimiDeltaAttention (fla) - \"hgrn2\" : all layers are HGRN2Attention (fla) - \"mla\" : all layers are MultiheadLatentAttention (fla; needs flash-attn) - \"mamba2\" : all layers are Mamba2 (fla.layers.mamba2; causal_conv1d optional for fast path) - \"nsa\" : all layers are NativeSparseAttention (fla.layers.nsa; Triton NSA kernels) - \"interleaved:N:M:TYPE1:TYPE2\" : cycle of N TYPE1 layers then M TYPE2 layers TYPE1/TYPE2 ∈ {gdn, retnet, deltanet, kda, hgrn2, mla, mamba2, nsa, full}.",
+        "for i in range(n_layers): result.append(type1 if (i % cycle) < n_type1 else type2) return result class GatedAttention(Attention): \"\"\"Attention with an elementwise head-specific sigmoid gate after SDPA (G1 from the paper).",
+        "Following \"Gated Attention for Large Language Models\" (Qiu et al., NeurIPS 2025): - Gate position G1: applied to the concatenated SDPA output *before* the output projection wo.",
+        "- Gate scores are query-dependent (computed from the pre-norm input x), head-specific, and elementwise.",
+        "- Gate formula: gate = sigmoid(x @ W_gate.T), shape (B, S, n_heads * head_dim) - Output: sdpa_out = sdpa_out * gate, then sdpa_out @ wo This is the most effective variant from the paper (+0.2 PPL reduction, +2 MMLU points vs baseline).",
+        "It also eliminates attention sinks and massive activations, and improves training stability.",
+        "\"\"\" def __init__( self, dim: int, head_dim: int, n_heads: int, n_kv_heads: int, rope_theta: float, ): super().__init__(dim=dim, head_dim=head_dim, n_heads=n_heads, n_kv_heads=n_kv_heads, rope_theta=rope_theta) # Gate weight: maps pre-norm input (dim) -> gating scores (n_heads * head_dim) # Head-specific elementwise gate: each head dimension has its own gate score self.w_gate = nn.Linear(dim, n_heads * head_dim, bias=False) # Initialize to zero so gate starts as sigmoid(0) = 0.5 — a neutral multiplicative identity nn.init.zeros_(self.w_gate.weight) def forward( self, x: torch.Tensor, freq_cis: torch.Tensor, tok_idx=None, mask=None, attn_impl: str = \"sdpa\", ) -> torch.Tensor: bsz, seq_len, dim = x.shape xq = self.wq(x) xk = self.wk(x) xv = self.wv(x) output_shape = xq.shape xq = xq.view(bsz, seq_len, self.n_heads, self.head_dim) xk = xk.view(bsz, seq_len, self.n_kv_heads, self.head_dim) xv = xv.view(bsz, seq_len, self.n_kv_heads, self.head_dim) xq, xk = apply_rotary_emb(xq, xk, 1, freq_cis[0:seq_len]) if hasattr(self, \"kv_cache\"): xk, xv = self.kv_cache.update(xk, xv, tok_idx) xk = repeat_kv(xk, self.heads_per_group, dim=2) xv = repeat_kv(xv, self.heads_per_group, dim=2) if attn_impl == \"flex_attention\": assert mask is None or isinstance(mask, BlockMask) xq, xk, xv = map(lambda e: e.transpose(1, 2), (xq, xk, xv)) output = flex_attention_comp(xq, xk, xv, block_mask=mask) output = output.transpose(1, 2).contiguous() elif attn_impl == \"fmha\": assert mask is None or isinstance(mask, AttentionBias) output = fmha.memory_efficient_attention(xq, xk, xv, attn_bias=mask) elif attn_impl == \"sdpa\": xq, xk, xv = map(lambda e: e.transpose(1, 2), (xq, xk, xv)) assert mask is None or isinstance(mask, (str, torch.Tensor)) is_causal = (mask == \"causal\") if isinstance(mask, str) else False mask_t = mask if isinstance(mask, torch.Tensor) else None output = F.scaled_dot_product_attention(xq, xk, xv, is_causal=is_causal, attn_mask=mask_t) output = output.transpose(1, 2).contiguous() elif attn_impl == \"flash_attn3\": fa3 = _get_fa3_flash_attn_func() if fa3 is not None and xq.is_cuda: if mask is None: output, _ = fa3(xq, xk, xv, causal=False) elif isinstance(mask, FlashAttnMask): if not mask.causal: raise NotImplementedError(\"FlashAttnMask with causal=False is not supported for flash_attn3\") if mask.window_size is None: output, _ = fa3(xq, xk, xv, causal=True) else: wl, wr = mask.window_size output, _ = fa3(xq, xk, xv, causal=True, window_size=(int(wl), int(wr))) else: raise NotImplementedError(f\"flash_attn3 expects mask None or FlashAttnMask, got {type(mask)}\") else: output = _sdpa_flash_attn3_fallback(xq, xk, xv, mask) else: raise NotImplementedError(f\"Attention implementation {attn_impl}",
+        "not supported\") # G1 gate: elementwise head-specific sigmoid gate applied to SDPA output before wo # output: (B, S, n_heads, head_dim) -> flatten to (B, S, n_heads * head_dim) # gate: sigmoid(x @ w_gate.T) -> (B, S, n_heads * head_dim) output_flat = output.reshape(output_shape) # (B, S, n_heads * head_dim) gate = torch.sigmoid(self.w_gate(x)) # (B, S, n_heads * head_dim) output_flat = output_flat * gate return self.wo(output_flat) def reset_parameters(self, init_std=None, factor=1.0): super().reset_parameters(init_std, factor) # Keep gate weight at zero init so training starts from neutral sigmoid(0)=0.5 nn.init.zeros_(self.w_gate.weight) class GatedTransformerBlock(TransformerBlock): \"\"\"TransformerBlock with G1 gated attention (SDPA output sigmoid gate).",
+        "Drop-in replacement for TransformerBlock.",
+        "Swaps the standard Attention for GatedAttention; everything else (FFN, norms, residuals) is identical.",
+        "\"\"\" def __init__(self, args: \"BaseTransformerArgs\"): # Call nn.Module.__init__ directly to skip TransformerBlock's __init__ # which would create a plain Attention — we want GatedAttention instead.",
+        "nn.Module.__init__(self) assert (args.head_dim is not None) or (args.n_heads is not None), \\ \"Should specify at least head_dim or n_heads\" self.head_dim = args.head_dim or args.dim // args.n_heads self.n_heads = args.n_heads or args.dim // args.head_dim self.n_kv_heads = args.n_kv_heads or self.n_heads assert self.n_heads % self.n_kv_heads == 0 assert args.dim % self.n_heads == 0 self.attention = GatedAttention( dim=args.dim, head_dim=self.head_dim, n_heads=self.n_heads, n_kv_heads=self.n_kv_heads, rope_theta=args.rope_theta, ) self.feed_forward = FeedForward( dim=args.dim, hidden_dim=4 * args.dim, multiple_of=args.multiple_of, ffn_dim_multiplier=args.ffn_dim_multiplier, ) self.attention_norm = RMSNorm(args.dim, eps=args.norm_eps) self.ffn_norm = RMSNorm(args.dim, eps=args.norm_eps) class LinearAttentionBlock(nn.Module): \"\"\"Transformer block using Gated Delta Net (GDN) for the attention path.",
+        "Drop-in replacement for TransformerBlock in the looped-window architecture.",
+        "The sliding-window mask from attention_pattern is ignored for GDN layers (GDN uses its own linear recurrence); all other arguments are accepted for API compatibility but have no effect.",
+        "\"\"\" def __init__( self, dim: int, n_heads: int, ffn_dim_multiplier: Optional[float], multiple_of: int, norm_eps: float, allow_neg_eigval: bool = False, ): super().__init__() self.dim = dim self.n_heads = n_heads try: from fla.layers import GatedDeltaNet except ImportError as exc: raise ImportError( \"flash-linear-attention (fla) is not installed.",
+        "\" \"Please install it with: pip install flash-linear-attention\" ) from exc target_key_dim = int(0.75 * dim) if target_key_dim % n_heads != 0: raise ValueError( f\"GatedDeltaNet: 0.75 * dim ({target_key_dim}) must be divisible by \" f\"n_heads ({n_heads}).",
+        "Adjust n_heads.\" ) self.attention = GatedDeltaNet( hidden_size=dim, num_heads=n_heads, head_dim=target_key_dim // n_heads, allow_neg_eigval=allow_neg_eigval, ) self.feed_forward = FeedForward( dim=dim, hidden_dim=4 * dim, multiple_of=multiple_of, ffn_dim_multiplier=ffn_dim_multiplier, ) self.attention_norm = RMSNorm(dim, eps=norm_eps) self.ffn_norm = RMSNorm(dim, eps=norm_eps) def forward( self, x: torch.Tensor, freq_cis: torch.Tensor = None, # unused, kept for API compat tok_idx: torch.Tensor = None, # unused, kept for API compat mask=None, # unused, kept for API compat attn_impl: str = \"flash_attn3\", # unused, kept for API compat ) -> torch.Tensor: x_normed = self.attention_norm(x) attn_out = self.attention( x_normed, attention_mask=None, past_key_values=None, use_cache=False, output_attentions=False, ) if isinstance(attn_out, tuple): attn_out = attn_out[0]",
+        "h = x + attn_out return h + self.feed_forward(self.ffn_norm(h)) def init_weights(self, init_std=None, factor=1.0): import math init_std = init_std or (self.dim ** (-0.5)) attn = self.attention for proj_name in [\"q_proj\", \"k_proj\", \"v_proj\", \"g_proj\", \"o_proj\", \"a_proj\", \"b_proj\"]: if hasattr(attn, proj_name): proj = getattr(attn, proj_name) if isinstance(proj, nn.Linear): nn.init.trunc_normal_( proj.weight, mean=0.0, std=init_std, a=-3 * init_std, b=3 * init_std, ) if proj.bias is not None: nn.init.zeros_(proj.bias) if hasattr(attn, \"A_log\") and hasattr(attn, \"dt_bias\"): with torch.no_grad(): A = torch.empty_like(attn.A_log).uniform_(0, 16) attn.A_log.copy_(A.log()) dt = torch.empty_like(attn.dt_bias).uniform_(0, 1) dt = torch.exp( dt * (math.log(0.1) - math.log(0.001)) + math.log(0.001) ).clamp(min=1e-4) attn.dt_bias.copy_(dt + torch.log(-torch.expm1(-dt))) for attr in [\"o_norm\", \"rotary\", \"g_norm_swish_gate\", \"g_norm\"]: obj = getattr(attn, attr, None) if obj is not None and hasattr(obj, \"reset_parameters\"): obj.reset_parameters() break # only reset first matching norm for conv_name in [\"q_conv1d\", \"k_conv1d\", \"v_conv1d\"]: conv = getattr(attn, conv_name, None) if conv is not None and hasattr(conv, \"reset_parameters\"): conv.reset_parameters() self.attention_norm.reset_parameters() self.ffn_norm.reset_parameters() self.feed_forward.reset_parameters(init_std, factor) class RetNetLinearAttentionBlock(nn.Module): \"\"\"Transformer block using RetNet (MultiScaleRetention from fla) for the attention path.",
+        "Same outer contract as LinearAttentionBlock (GDN): ignores sliding-window masks from attention_pattern; RoPE and retention are handled inside fla.",
+        "= None, ): super().__init__() self.dim = dim self.n_heads = n_heads try: from fla.layers import MultiScaleRetention except ImportError as exc: raise ImportError( \"flash-linear-attention (fla) is not installed.",
+        "\" \"Please install it with: pip install flash-linear-attention\" ) from exc # Default expand_k=1, expand_v=2 in fla: head dims must divide dim and 2*dim by n_heads.",
+        "self.attention = MultiScaleRetention( mode=retention_mode, hidden_size=dim, num_heads=n_heads, layer_idx=layer_idx, ) self.feed_forward = FeedForward( dim=dim, hidden_dim=4 * dim, multiple_of=multiple_of, ffn_dim_multiplier=ffn_dim_multiplier, ) self.attention_norm = RMSNorm(dim, eps=norm_eps) self.ffn_norm = RMSNorm(dim, eps=norm_eps) def forward( self, x: torch.Tensor, freq_cis: torch.Tensor = None, tok_idx: torch.Tensor = None, mask=None, attn_impl: str = \"flash_attn3\", ) -> torch.Tensor: x_normed = self.attention_norm(x) attn_out = self.attention( x_normed, attention_mask=None, past_key_values=None, use_cache=False, output_attentions=False, ) if isinstance(attn_out, tuple): attn_out = attn_out[0]",
+        "h = x + attn_out return h + self.feed_forward(self.ffn_norm(h)) def init_weights(self, init_std=None, factor=1.0): init_std = init_std or (self.dim ** (-0.5)) attn = self.attention for proj_name in [\"q_proj\", \"k_proj\", \"v_proj\", \"g_proj\", \"o_proj\"]: if hasattr(attn, proj_name): proj = getattr(attn, proj_name) if isinstance(proj, nn.Linear): nn.init.trunc_normal_( proj.weight, mean=0.0, std=init_std, a=-3 * init_std, b=3 * init_std, ) if proj.bias is not None: nn.init.zeros_(proj.bias) for attr in [\"rotary\", \"g_norm_swish_gate\", \"g_norm\", \"o_norm\"]: obj = getattr(attn, attr, None) if obj is not None and hasattr(obj, \"reset_parameters\"): obj.reset_parameters() for conv_name in [\"q_conv1d\", \"k_conv1d\", \"v_conv1d\"]: conv = getattr(attn, conv_name, None) if conv is not None and hasattr(conv, \"reset_parameters\"): conv.reset_parameters() self.attention_norm.reset_parameters() self.ffn_norm.reset_parameters() self.feed_forward.reset_parameters(init_std, factor) class DeltaNetLinearAttentionBlock(nn.Module): \"\"\"Transformer block using DeltaNet (``fla.layers.DeltaNet``) for the attention path.",
+        "Same outer contract as LinearAttentionBlock / RetNet: ignores sliding-window masks; uses fla's chunk / fused_recurrent delta rule (default ``mode=\"chunk\"``).",
+        "= None, ): super().__init__() self.dim = dim self.n_heads = n_heads try: from fla.layers import DeltaNet except ImportError as exc: raise ImportError( \"flash-linear-attention (fla) is not installed.",
+        "\" \"Please install it with: pip install flash-linear-attention\" ) from exc if dim % n_heads != 0: raise ValueError( f\"DeltaNet (expand_k=expand_v=1): dim ({dim}) must be divisible by n_heads ({n_heads}).\" ) self.attention = DeltaNet( mode=deltanet_mode, hidden_size=dim, num_heads=n_heads, expand_k=1.0, expand_v=1.0, norm_eps=norm_eps, layer_idx=layer_idx, ) self.feed_forward = FeedForward( dim=dim, hidden_dim=4 * dim, multiple_of=multiple_of, ffn_dim_multiplier=ffn_dim_multiplier, ) self.attention_norm = RMSNorm(dim, eps=norm_eps) self.ffn_norm = RMSNorm(dim, eps=norm_eps) def forward( self, x: torch.Tensor, freq_cis: torch.Tensor = None, tok_idx: torch.Tensor = None, mask=None, attn_impl: str = \"flash_attn3\", ) -> torch.Tensor: x_normed = self.attention_norm(x) attn_out = self.attention( x_normed, attention_mask=None, past_key_values=None, use_cache=False, output_attentions=False, ) if isinstance(attn_out, tuple): attn_out = attn_out[0]",
+        "h = x + attn_out return h + self.feed_forward(self.ffn_norm(h)) def init_weights(self, init_std=None, factor=1.0): init_std = init_std or (self.dim ** (-0.5)) attn = self.attention for proj_name in [\"q_proj\", \"k_proj\", \"v_proj\", \"b_proj\", \"g_proj\", \"o_proj\"]: if hasattr(attn, proj_name): proj = getattr(attn, proj_name) if isinstance(proj, nn.Linear): nn.init.trunc_normal_( proj.weight, mean=0.0, std=init_std, a=-3 * init_std, b=3 * init_std, ) if proj.bias is not None: nn.init.zeros_(proj.bias) if hasattr(attn, \"o_norm\") and hasattr(attn.o_norm, \"reset_parameters\"): attn.o_norm.reset_parameters() for conv_name in [\"q_conv1d\", \"k_conv1d\", \"v_conv1d\"]: conv = getattr(attn, conv_name, None) if conv is not None and hasattr(conv, \"reset_parameters\"): conv.reset_parameters() self.attention_norm.reset_parameters() self.ffn_norm.reset_parameters() self.feed_forward.reset_parameters(init_std, factor) class KDALinearAttentionBlock(nn.Module): \"\"\"Transformer block using Kimi Delta Attention (``fla.layers.KimiDeltaAttention``).",
+        "= None, ): super().__init__() self.dim = dim self.n_heads = n_heads try: from fla.layers import KimiDeltaAttention except ImportError as exc: raise ImportError( \"flash-linear-attention (fla) is not installed.",
+        "\" \"Please install it with: pip install flash-linear-attention\" ) from exc if dim % n_heads != 0: raise ValueError( f\"KDA: dim ({dim}) must be divisible by n_heads ({n_heads}) for head_dim = dim // n_heads.\" ) head_dim = dim // n_heads self.attention = KimiDeltaAttention( hidden_size=dim, head_dim=head_dim, num_heads=n_heads, expand_v=expand_v, mode=kda_mode, norm_eps=norm_eps, layer_idx=layer_idx, ) self.feed_forward = FeedForward( dim=dim, hidden_dim=4 * dim, multiple_of=multiple_of, ffn_dim_multiplier=ffn_dim_multiplier, ) self.attention_norm = RMSNorm(dim, eps=norm_eps) self.ffn_norm = RMSNorm(dim, eps=norm_eps) def forward( View remainder of file in raw view Footer © 2026 GitHub, Inc."
+      ],
+      "diagnostics": {
+        "pageErrors": [],
+        "requestFailures": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          }
+        ],
+        "blockedMethods": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect"
+          }
+        ]
+      },
+      "contextClosed": true
+    },
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md",
+      "finalUrl": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md",
+      "status": 200,
+      "title": "LT2/apps/LT2/README.md at main · chili-lab/LT2 · GitHub",
+      "bodySample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2/apps/LT2 /README.md Latest commit History History File metadata and controls Preview Code Blame 173 lines (138 loc) · 4.82 KB Raw Looped Window Attention Transformer (LT2) A transformer variant combining looped layers (parameter-efficient depth) and hybrid attention (local + global mixing). Core Concepts Layer Looping Reuse the same layers multiple times to decouple depth from parameter count: model: n_layers: 16 # Physical layers (parameters) loop_count: 3 # Effective depth: 16 × 3 = 48 Attention implementation: attn_impl: \"fmha\" # or \"flex_attention\" — required for sliding window # \"sdpa\" ignores window settings (falls back to full) default_sliding_window: 2048 Stochastic Attention Patterns Two dynamic patterns that resample on every forward pass (useful as regularization): attention_pattern: \"random:4:1\" # Fully random distribution per step attention_pattern: \"bookend_random:4:1\" # First/last layer of each loop always full; rest random Deterministic: seed = base_seed + forward_step, reproducible across runs and GPUs @torch.compiler.disable on pattern generation — required for torch.compile compatibility Zero extra memory overhead Architecture & Implementation Forward pass (transformer.py): for loop_idx in range(self.loop_count): for layer_idx, layer in enumerate(self.layers): sliding_window = self.attention_windows[layer_idx] mask = create_causal_mask(seqlen, attn_impl, sliding_window) h = layer(h, freq_cis, tok_idx=tok_idx, mask=mask, attn_impl=attn_impl) FLOP accounting (train.py) includes looping: get_num_flop_per_token(..., n_layers=args.model.n_layers * args.model.loop_count, ...) Memory complexity: Looping adds no extra activation memory (same parameters reused) Sliding window attention: O(n × window) vs full O(n²) 4:1 pattern with 16 layers → ~80% attention memory savings File Structure LT2/ ├── transformer.py # Core model (LoopedWindowTransformer) ├── train.py # Training script ├── generate.py # Inference / generation ├── eval.py # LM harness evaluation ├── test_model.py # Unit tests └── configs/ ├── debug.yaml ├── looped_1B_4to1.yaml ├── looped_1B_alternating.yaml ├── looped_600M_random_4to1.yaml ├── looped_600M_bookend_random_4to1.yaml └── eval.yaml Quickstart Environment: conda activate /scratch/conda-envs/lindow cd <REPO_ROOT> Verify installation (30 sec): PYTHONPATH=<REPO_ROOT>:$PYTHONPATH python apps/LT2/test_model.py # Expected: ALL TESTS PASSED Training # Debug (1 GPU, ~100 steps) python apps/LT2/train.py config=apps/LT2/configs/debug.yaml # 1B model (8 GPUs) torchrun --nproc_per_node=8 apps/LT2/train.py config=apps/LT2/configs/looped_1B_4to1.yaml # Override parameters torchrun --nproc_per_node=8 apps/LT2/train.py \\ config=apps/LT2/configs/looped_1B_4to1.yaml \\ model.loop_count=4 \\ model.attention_pattern=\"1:1\" \\ model.default_sliding_window=1024 Generation & Evaluation # Generate python apps/LT2/generate.py ckpt=/path/to/checkpoint max_gen_len=256 temperature=0.7 # Evaluate torchrun --nproc_per_node=8 apps/LT2/eval.py \\ config=apps/LT2/configs/eval.yaml \\ ckpt_dir=/path/to/checkpoint Example Configs Debug (quick test): model: dim: 512 n_layers: 4 loop_count: 2 attention_pattern: \"3:1\" attn_impl: \"fmha\" default_sliding_window: 512 steps: 100 1B, 4:1 (recommended): model: dim: 2048 n_layers: 16 loop_count: 3 # 48 effective layers attention_pattern: \"4:1\" attn_impl: \"fmha\" default_sliding_window: 2048 steps: 255_000 seq_len: 4096 600M, stochastic (regularization): model: n_layers: 25 loop_count: 4 attention_pattern: \"random:4:1\" # or \"bookend_random:4:1\" default_sliding_window: 128 Troubleshooting Problem Solutions OOM Reduce batch_size / seq_len; use attention_pattern=\"7:1\"; reduce default_sliding_window Slow training Reduce loop_count; enable distributed.comp",
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#start-of-content"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md"
+        },
+        {
+          "text": "Please reload this page",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues 0",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests 0",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality 0",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "apps",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps/LT2"
+        },
+        {
+          "text": "History",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/README.md"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/README.md"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "apps",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main/apps/LT2"
+        },
+        {
+          "text": "Raw",
+          "href": "https://github.com/chili-lab/LT2/raw/refs/heads/main/apps/LT2/README.md"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#looped-window-attention-transformer-lt2"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#core-concepts"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#layer-looping"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#stochastic-attention-patterns"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#architecture--implementation"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#file-structure"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#quickstart"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#training"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#generation--evaluation"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#example-configs"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#troubleshooting"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/main/apps/LT2/README.md#architecture-comparison"
+        }
+      ],
+      "evidence": [
+        "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2/apps/LT2 /README.md Latest commit History History File metadata and controls Preview Code Blame 173 lines (138 loc) · 4.82 KB Raw Looped Window Attention Transformer (LT2) A transformer variant combining looped layers (parameter-efficient depth) and hybrid attention (local + global mixing).",
+        "Core Concepts Layer Looping Reuse the same layers multiple times to decouple depth from parameter count: model: n_layers: 16 # Physical layers (parameters) loop_count: 3 # Effective depth: 16 × 3 = 48 Attention implementation: attn_impl: \"fmha\" # or \"flex_attention\" — required for sliding window # \"sdpa\" ignores window settings (falls back to full) default_sliding_window: 2048 Stochastic Attention Patterns Two dynamic patterns that resample on every forward pass (useful as regularization): attention_pattern: \"random:4:1\" # Fully random distribution per step attention_pattern: \"bookend_random:4:1\" # First/last layer of each loop always full; rest random Deterministic: seed = base_seed + forward_step, reproducible across runs and GPUs @torch.compiler.disable on pattern generation — required for torch.compile compatibility Zero extra memory overhead Architecture & Implementation Forward pass (transformer.py): for loop_idx in range(self.loop_count): for layer_idx, layer in enumerate(self.layers): sliding_window = self.attention_windows[layer_idx]",
+        "mask = create_causal_mask(seqlen, attn_impl, sliding_window) h = layer(h, freq_cis, tok_idx=tok_idx, mask=mask, attn_impl=attn_impl) FLOP accounting (train.py) includes looping: get_num_flop_per_token(..., n_layers=args.model.n_layers * args.model.loop_count, ...) Memory complexity: Looping adds no extra activation memory (same parameters reused) Sliding window attention: O(n × window) vs full O(n²) 4:1 pattern with 16 layers → ~80% attention memory savings File Structure LT2/ ├── transformer.py # Core model (LoopedWindowTransformer) ├── train.py # Training script ├── generate.py # Inference / generation ├── eval.py # LM harness evaluation ├── test_model.py # Unit tests └── configs/ ├── debug.yaml ├── looped_1B_4to1.yaml ├── looped_1B_alternating.yaml ├── looped_600M_random_4to1.yaml ├── looped_600M_bookend_random_4to1.yaml └── eval.yaml Quickstart Environment: conda activate /scratch/conda-envs/lindow cd <REPO_ROOT> Verify installation (30 sec): PYTHONPATH=<REPO_ROOT>:$PYTHONPATH python apps/LT2/test_model.py # Expected: ALL TESTS PASSED Training # Debug (1 GPU, ~100 steps) python apps/LT2/train.py config=apps/LT2/configs/debug.yaml # 1B model (8 GPUs) torchrun --nproc_per_node=8 apps/LT2/train.py config=apps/LT2/configs/looped_1B_4to1.yaml # Override parameters torchrun --nproc_per_node=8 apps/LT2/train.py \\ config=apps/LT2/configs/looped_1B_4to1.yaml \\ model.loop_count=4 \\ model.attention_pattern=\"1:1\" \\ model.default_sliding_window=1024 Generation & Evaluation # Generate python apps/LT2/generate.py ckpt=/path/to/checkpoint max_gen_len=256 temperature=0.7 # Evaluate torchrun --nproc_per_node=8 apps/LT2/eval.py \\ config=apps/LT2/configs/eval.yaml \\ ckpt_dir=/path/to/checkpoint Example Configs Debug (quick test): model: dim: 512 n_layers: 4 loop_count: 2 attention_pattern: \"3:1\" attn_impl: \"fmha\" default_sliding_window: 512 steps: 100 1B, 4:1 (recommended): model: dim: 2048 n_layers: 16 loop_count: 3 # 48 effective layers attention_pattern: \"4:1\" attn_impl: \"fmha\" default_sliding_window: 2048 steps: 255_000 seq_len: 4096 600M, stochastic (regularization): model: n_layers: 25 loop_count: 4 attention_pattern: \"random:4:1\" # or \"bookend_random:4:1\" default_sliding_window: 128 Troubleshooting Problem Solutions OOM Reduce batch_size / seq_len; use attention_pattern=\"7:1\"; reduce default_sliding_window Slow training Reduce loop_count; enable distributed.compile=true; add GPUs Loss not decreasing Try optim.lr=1e-4; increase optim.warmup; reduce loop_count NaN gradients Lower LR; use distributed.model_dtype=bf16; check data torch.compile error with stochastic patterns Ensure @torch.compiler.disable is on generate_random_attention_pattern Architecture Comparison Config Params Effective Depth Attention Notes Vanilla 1B 1B 25 Full O(n²) Baseline Looped 4:1 1B 48 Mixed Recommended Looped 1:1 1B 40 Mixed More global Stochastic random ~600M 100 Mixed + random Regularization Footer © 2026 GitHub, Inc."
+      ],
+      "diagnostics": {
+        "pageErrors": [],
+        "requestFailures": [
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          },
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "blockedMethods": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect"
+          }
+        ]
+      },
+      "contextClosed": true
+    },
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/blob/main/requirements.txt",
+      "finalUrl": "https://github.com/chili-lab/LT2/blob/main/requirements.txt",
+      "status": 200,
+      "title": "LT2/requirements.txt at main · chili-lab/LT2 · GitHub",
+      "bodySample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2 /requirements.txt Latest commit History History File metadata and controls Code Blame 15 lines (15 loc) · 132 Bytes Raw 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 numpy omegaconf msgspec rouge-score sacrebleu sentencepiece tiktoken blobfile wandb viztracer lm-eval scipy pynvml datatrove orjson Footer © 2026 GitHub, Inc. Footer navigation Terms Privacy Security Status Community Docs Contact Manage cookies Do not share my personal information",
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "https://github.com/chili-lab/LT2/blob/main/requirements.txt#start-of-content"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/requirements.txt"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/requirements.txt"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/blob/main/requirements.txt"
+        },
+        {
+          "text": "Please reload this page",
+          "href": "https://github.com/chili-lab/LT2/blob/main/requirements.txt"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues 0",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests 0",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality 0",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "History",
+          "href": "https://github.com/chili-lab/LT2/commits/main/requirements.txt"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/commits/main/requirements.txt"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "Raw",
+          "href": "https://github.com/chili-lab/LT2/raw/refs/heads/main/requirements.txt"
+        }
+      ],
+      "evidence": [
+        "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2 /requirements.txt Latest commit History History File metadata and controls Code Blame 15 lines (15 loc) · 132 Bytes Raw 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 numpy omegaconf msgspec rouge-score sacrebleu sentencepiece tiktoken blobfile wandb viztracer lm-eval scipy pynvml datatrove orjson Footer © 2026 GitHub, Inc."
+      ],
+      "diagnostics": {
+        "pageErrors": [],
+        "requestFailures": [
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          },
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "blockedMethods": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect"
+          }
+        ]
+      },
+      "contextClosed": true
+    },
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py",
+      "finalUrl": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py",
+      "status": 200,
+      "title": "History for apps/LT2/transformer.py - chili-lab/LT2 · GitHub",
+      "bodySample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights Commits Breadcrumbs History for LT2appsLT2transformer.py onmain User selector All users All time Commit history Commits on May 18, 2026 Initial public release of LT2 Chunyuan Deng committed adc2ba2 Loading Footer © 2026 GitHub, Inc. Footer navigation Terms Privacy Security Status Community Docs Contact Manage cookies Do not share my personal information",
+      "links": [
+        {
+          "text": "Skip to content",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py#start-of-content"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Reload",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "Please reload this page",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues 0",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests 0",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality 0",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "Code",
+          "href": "https://github.com/chili-lab/LT2"
+        },
+        {
+          "text": "Issues",
+          "href": "https://github.com/chili-lab/LT2/issues"
+        },
+        {
+          "text": "Pull requests",
+          "href": "https://github.com/chili-lab/LT2/pulls"
+        },
+        {
+          "text": "Actions",
+          "href": "https://github.com/chili-lab/LT2/actions"
+        },
+        {
+          "text": "Projects",
+          "href": "https://github.com/chili-lab/LT2/projects"
+        },
+        {
+          "text": "Security and quality",
+          "href": "https://github.com/chili-lab/LT2/security"
+        },
+        {
+          "text": "Insights",
+          "href": "https://github.com/chili-lab/LT2/pulse"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/commits"
+        },
+        {
+          "text": "apps",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps"
+        },
+        {
+          "text": "LT2",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2"
+        },
+        {
+          "text": "transformer.py",
+          "href": "https://github.com/chili-lab/LT2/commits/main/apps/LT2/transformer.py"
+        },
+        {
+          "text": "main",
+          "href": "https://github.com/chili-lab/LT2/tree/main"
+        },
+        {
+          "text": "Initial public release of LT2",
+          "href": "https://github.com/chili-lab/LT2/commit/adc2ba2f2704ff82744700679d1d0a090314df6c"
+        },
+        {
+          "text": "adc2ba2",
+          "href": "https://github.com/chili-lab/LT2/commit/adc2ba2f2704ff82744700679d1d0a090314df6c"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/blob/adc2ba2f2704ff82744700679d1d0a090314df6c/apps/LT2/transformer.py"
+        },
+        {
+          "text": "",
+          "href": "https://github.com/chili-lab/LT2/tree/adc2ba2f2704ff82744700679d1d0a090314df6c"
+        }
+      ],
+      "evidence": [
+        "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights Commits Breadcrumbs History for LT2appsLT2transformer.py onmain User selector All users All time Commit history Commits on May 18, 2026 Initial public release of LT2 Chunyuan Deng committed adc2ba2 Loading Footer © 2026 GitHub, Inc."
+      ],
+      "diagnostics": {
+        "pageErrors": [],
+        "requestFailures": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          }
+        ],
+        "blockedMethods": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect"
+          }
+        ]
+      },
+      "contextClosed": true
+    }
+  ],
+  "cleanup": {
+    "browserClosed": true
+  }
+}

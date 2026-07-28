@@ -1,0 +1,102 @@
+{
+  "kind": "playwright-chromium-web-access",
+  "generatedAt": "2026-07-28T04:27:36.549Z",
+  "playwrightVersion": "1.61.1",
+  "chromiumMode": "managed-regular-chromium-new-headless",
+  "chromiumVersion": "149.0.7827.55",
+  "results": [
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/tree/main/lingua",
+      "finalUrl": "https://github.com/chili-lab/LT2/tree/main/lingua",
+      "status": 200,
+      "title": "LT2/lingua at main · chili-lab/LT2 · GitHub",
+      "heading": "Search code, repositories, users, issues, pull requests...",
+      "visibleTextSample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2 /lingua/ Directory actions More options Latest commit History History Folders and files Name Last commit message Last commit date parent directory .. __init__.py args.py checkpoint.py data.py distributed.py float8.py logger.py metrics.py optim.py",
+      "blockedMarker": null,
+      "accessible": true,
+      "diagnostics": {
+        "pageErrors": [],
+        "webErrors": [],
+        "consoleErrors": [
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: the server responded with a status of 401 ()",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+        ],
+        "requestFailures": [
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          },
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "httpFailures": [
+          {
+            "status": 401,
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab"
+          }
+        ]
+      },
+      "contextClosed": true,
+      "error": null
+    },
+    {
+      "requestedUrl": "https://github.com/chili-lab/LT2/tree/main/apps",
+      "finalUrl": "https://github.com/chili-lab/LT2/tree/main/apps",
+      "status": 200,
+      "title": "LT2/apps at main · chili-lab/LT2 · GitHub",
+      "heading": "Search code, repositories, users, issues, pull requests...",
+      "visibleTextSample": "Skip to content Navigation Menu Platform Solutions Resources Open Source Enterprise Pricing Sign in Sign up chili-lab / LT2 Public Notifications Fork 2 Star 49 Code Issues Pull requests Actions Projects Security and quality Insights main Breadcrumbs LT2 /apps/ Directory actions More options Latest commit History History Folders and files Name Last commit message Last commit date parent directory .. LT2 __init__.py Footer © 2026 GitHub, Inc. Footer navigation Terms Privacy Security Status Communi",
+      "blockedMarker": null,
+      "accessible": true,
+      "diagnostics": {
+        "pageErrors": [],
+        "webErrors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 401 ()",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+          "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+        ],
+        "requestFailures": [
+          {
+            "method": "GET",
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab",
+            "error": "net::ERR_ABORTED"
+          },
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          },
+          {
+            "method": "POST",
+            "url": "https://collector.github.com/github/collect",
+            "error": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+          }
+        ],
+        "httpFailures": [
+          {
+            "status": 401,
+            "url": "https://github.com/in-product-messaging/budget-threshold-banner?organization=chili-lab"
+          }
+        ]
+      },
+      "contextClosed": true,
+      "error": null
+    }
+  ],
+  "cleanup": {
+    "browserClosed": true,
+    "error": null
+  },
+  "error": null
+}

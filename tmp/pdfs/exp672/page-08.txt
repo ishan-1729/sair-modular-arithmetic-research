@@ -1,0 +1,109 @@
+LT2: Linear-Time Looped Transformers
+Table 3: Hybrid LT2 ablations. 1.3B / 𝑇=4 / 100B FineWeb-Edu tokens. Cream marks the best row in
+each group. Avg. is the eight-task mean from Table 2.
+Configuration
+Full:GDN
+Pattern / Schedule
+PPL (↓)
+Avg. (↑)
+▶(1) Hybrid ratio (depth-interleaved)
+Looped Transformer (ref)
+1:0
+—
+9.87
+59.27
+Hybrid 1:1
+1:1
+interleave
+9.41
+60.92
+Hybrid 1:4 (default)
+1:4
+interleave
+9.31
+61.39
+Hybrid 1:6
+1:6
+interleave
+9.36
+61.07
+Hybrid 1:12
+1:12
+interleave
+9.74
+59.51
+Looped GDN
+0:1
+—
+10.02
+58.42
+▶(2) Hybrid pattern (ratio fixed at 1:4, depth-level)
+Bookend
+1:4
+Full at top & bottom, GDN in middle
+9.27
+61.52
+Interleave (default)
+1:4
+every 5th layer is Full
+9.31
+61.39
+Front-loaded
+1:4
+all Full layers at the bottom of the stack
+9.45
+60.61
+Back-loaded
+1:4
+all Full layers at the top of the stack
+9.53
+60.43
+▶(3) Hybridization level (matched parameters)
+Random sample + majority vote (𝐾=5)
+1:4
+resample 1/5 Full per step; vote at eval
+9.26
+61.55
+Depth-level (default)
+1:4
+per-layer Full / GDN interleave
+9.31
+61.39
+Loop-level coarse→fine
+—
+Full →SWA-512 →SWA-256 →SWA-128
+9.36
+60.71
+Loop-level fine→coarse
+—
+SWA-128 →SWA-256 →SWA-512 →Full
+9.42
+61.10
+Linear-time mixers also extend the OOM frontier.
+As batch grows, the Looped Transformer OOMs
+progressively earlier (bs=4: cap near 16k, bs=8: cap near 8k), while Looped GDN reaches 32k at every
+batch size and Hybrid LT2 (GDN+Full) reaches 32k up to bs=8. Hybrid LT2 (GDN+DSA) sits between
+the two, since DSA still maintains a KV cache for top-𝑘selection but only reads a small slice of it per
+query. In practice this is the difference between serving long context at a useful batch size and not.
+3.3. Ablation: hybrid ratio, pattern, and hybridization level
+The hybrid LT2 in Section 3.1 fixes three design choices at once: how much attention sits in the loop,
+where it sits along depth, and at what level mixers are mixed. In this section we did a careful ablation
+study over this (Table 3).
+Ratio: clean inverse-U with the optimum at 1:4.
+Sweeping the Full:GDN ratio between Looped
+Transformer (1:0) and Looped GDN (0:1), the interior traces a clean inverse-U with 1:4 on top. Too much
+attention crowds out the recurrent regularization documented in Section 3.5; too little starves the loop of
+precise retrieval. 1:4 is the smallest amount of attention that still recovers full retrieval quality, matching
+standard hybrid Transformer baselines [38].
+Pattern: spreading beats concentrating.
+At fixed 1:4, bookend (Full at top and bottom, GDN in the
+middle) slightly edges out the uniform interleave, hinting at a small benefit from attention at both the
+input encoding and the final read-out. Concentrating the attention layers at one end — front-loaded or
+back-loaded — loses more than 0.7 points of average accuracy. Maybe the takeaway is that any reasonable
+spread along depth is much better than any concentration.
+Level: across-iteration heterogeneity does not help.
+We try three loop-level schedules in place of
+depth-level mixing: coarse-to-fine (Full→SWA-512→SWA-256→SWA-128), fine-to-coarse (the reverse),
+and a stochastic baseline that resamples a 1:4 depth-level hybrid every step and majority-votes 𝐾=5
+samples at eval. Coarse-to-fine wins on PPL but loses on downstream, it narrows the receptive field on the
+8

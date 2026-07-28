@@ -1,0 +1,131 @@
+LT2: Linear-Time Looped Transformers
+Table 1: Token mixers supported by LT2. Blue highlights gating/retention and burnt sienna highlights
+DPLR-style operations. Train FLOPs are reported per layer for a sequence of length 𝐿; cache/state memory
+is per layer at inference. 𝑤denotes the sparse-attention window/budget size with 𝑤≪𝐿.
+Family
+Mixer
+State update rule
+Train FLOPs
+Cache / State mem.
+Full attn.
+Softmax MHA
+(K𝑡, V𝑡) =
+(︀
+[K𝑡−1; k𝑡], [V𝑡−1; v𝑡]
+)︀
+𝒪(𝐿2𝑑)
+𝒪(𝐿𝑑)
+Linear attn. (LT2-LA)
+LA [35]
+S𝑡= S𝑡−1 + k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+RetNet [59]
+S𝑡= 𝛾S𝑡−1 + k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+Mamba2 [14]
+S𝑡= 𝛼𝑡S𝑡−1 + k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+GLA [71]
+S𝑡= Diag(𝛼𝑡)S𝑡−1 + k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+HGRN2 [50]
+S𝑡= Diag(𝛼𝑡)S𝑡−1 +
+(︀
+1 −𝛼𝑡
+)︀
+v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+DeltaNet [54, 72]
+S𝑡=
+(︀
+I −𝛽𝑡k𝑡k⊤
+𝑡
+)︀
+S𝑡−1 + 𝛽𝑡k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+GDN [70]
+S𝑡= 𝛼𝑡
+(︀
+I −𝛽𝑡k𝑡k⊤
+𝑡
+)︀
+S𝑡−1 + 𝛽𝑡k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+KDA [63]
+S𝑡=
+(︀
+I −𝛽𝑡k𝑡k⊤
+𝑡
+)︀
+Diag(𝛼𝑡)S𝑡−1 + 𝛽𝑡k𝑡v⊤
+𝑡
+𝒪(𝐿𝑑𝑘𝑑𝑣)
+𝒪(𝑑𝑘𝑑𝑣)
+Sparse attn. (LT2-SA)
+Window
+(K𝑡, V𝑡) = (K[𝑡−𝑤:𝑡], V[𝑡−𝑤:𝑡])
+(sliding cache)
+𝒪(𝐿𝑤𝑑)
+𝒪(𝑤𝑑)
+NSA [75]
+KV cache + compressed blocks; ℐ𝑡: top-𝑤selected indices
+𝒪(𝐿𝑤𝑑)
+𝒪(𝐿𝑑)
+DSA [15]
+KV cache; ℐ𝑡: top-𝑤via lightning indexer
+𝒪(𝐿𝑤𝑑)
+𝒪(𝐿𝑑)
+looped transformers can be efficiently converted into linear-time variants, lowering the cost barrier to
+adopting the LT2 family models.
+2. LT2: Linear-Time Looped Transformer
+2.1. Architecture
+Looped Transformer (LT). Let 𝐿denote sequence length and 𝑑the hidden dimension; we write the
+hidden-state sequence as h ∈R𝐿×𝑑and the state at position 𝑡as h𝑡∈R𝑑. A standard Transformer of
+depth 𝑁stacks 𝑁independently-parameterized blocks {ℱℓ}𝑁
+ℓ=1, each consisting of a token mixer and a
+position-wise FFN with residual connections:
+ℱℓ(h) = h′ + FFNℓ(h′),
+h′ = h + MHAℓ(h),
+(1)
+where MHAℓis multi-head self-attention (we omit pre-norm for brevity). A Looped Transformer (LT)
+reuses these 𝑁shared blocks for 𝑇iterations:
+h(0) = Emb(x),
+h(𝜏) =
+(︀ℱ𝑁∘· · · ∘ℱ1
+)︀(︀h(𝜏−1))︀,
+𝜏= 1, . . . , 𝑇,
+^y = Dec
+(︀h(𝑇))︀,
+(2)
+yielding effective depth 𝑇· 𝑁with only 𝑁unique parameter sets—a 𝑇× parameter reduction over a
+Transformer of equivalent depth. Following Ouro [76], we use a fixed 𝑇throughout pre-training and we
+discuss adaptive computation time in the Appendix A.
+LT2. LT2 simply replaces the MHA sub-layer in Eq. (1) with a subquadratic token mixer, so each shared
+block becomes
+ℱℓ(h) = h′ + FFNℓ(h′),
+h′ = h + LinearMixerℓ(h),
+(3)
+where LinearMixerℓis any linear- or sparse-attention primitive in Table 1. Throughout, q𝑡, k𝑡∈R𝑑𝑘
+and v𝑡∈R𝑑𝑣denote the query/key/value projections of h𝑡; S𝑡∈R𝑑𝑘×𝑑𝑣is the recurrent state of a
+linear-attention mixer. We additionally insert a zero-initialized, per-channel learned gate 𝜌𝜏∈R𝑑as a
+residual across loop iterations, h(𝜏) = ̃︀h(𝜏) + 𝜌𝜏⊙h(𝜏−1), where ̃︀h(𝜏) is the output of the looped block
+stack at iteration 𝜏(i.e., ̃︀h(𝜏) = (ℱ𝑁∘· · · ∘ℱ1)(h(𝜏−1))). Thus our setup includes two levels of residual
+connections: a traditional per-block identity residual connection and a learned per-loop residual.
+2.2. Beyond Efficiency: Benefits of Looping
+Subquadratic attention provides clear efficiency gains. A more interesting question is what looping adds
+to these attention variants. We make two claims: with 𝑇loop iterations, a diagonal-plus-low-rank (DPLR)
+3

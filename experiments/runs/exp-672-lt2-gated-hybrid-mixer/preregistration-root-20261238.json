@@ -1,0 +1,135 @@
+{
+  "adaptations": [
+    "native feature-map linear attention replaces GPU FLA GDN",
+    "native fixed-window attention replaces CUDA DSA",
+    "outer zero output residual gate preserves Candidate005 exactly"
+  ],
+  "gates": {
+    "maximum_candidate_inference_wall_seconds": 285,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_w128_loss_to_proposal": 0.02,
+    "minimum_gate_dependence_drop": 0.05,
+    "minimum_mixer_dependence_drop": 0.05,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w256_gain_over_controls": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "mode": "preregister",
+  "official_source": {
+    "chromium": "149.0.7827.55",
+    "commit": "adc2ba2f2704ff82744700679d1d0a090314df6c",
+    "license": "BSD-3-Clause",
+    "license_response_sha256": "8ef78c2d6e787b103a0548e73ba2cfe68bc469b5b0e6f5e7db649f1312f4f2a6",
+    "playwright": "1.61.1",
+    "repository": "https://github.com/chili-lab/LT2",
+    "transformer_response_sha256": "cb90a87723ba751a05abd7fee1457c53a54aec964d5159fcc54e94618e4e61bb",
+    "transformer_url": "https://raw.githubusercontent.com/chili-lab/LT2/adc2ba2f2704ff82744700679d1d0a090314df6c/apps/LT2/transformer.py"
+  },
+  "paper": {
+    "pages": [
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11
+    ],
+    "path": "research/papers/arxiv-2605.20670.pdf",
+    "sha256": "84f7f4de355928e5006e8aa85c958fb656752158e3f19bc5d7dc919922013d9b"
+  },
+  "prohibited": [
+    "exact arithmetic in inference",
+    "answer-dependent routing",
+    "validity filtering or repair",
+    "lookup or identity features",
+    "checked/private/candidate/submission evaluation"
+  ],
+  "resource_policy": {
+    "cache_completed_roots": true,
+    "hard_guard_multiplier": 2.0,
+    "health_probes": 1,
+    "incumbent_candidate_wall_seconds": 156.0,
+    "maximum_expected_formal_wall_seconds": 21600,
+    "maximum_peak_rss_bytes": 6442450944,
+    "require_complete_routes": true,
+    "soft_guard_multiplier": 1.25,
+    "variability_headroom_ceiling": 2.0,
+    "variability_headroom_floor": 1.25,
+    "verification_expected_upper_seconds": 1246,
+    "verification_hard_wall_seconds": 2492,
+    "verification_observed_seconds": 645.78
+  },
+  "root": 20261238,
+  "roots": {
+    "calibration": 20261238,
+    "confirmations": [
+      20261240,
+      20261241
+    ],
+    "viability": 20261239
+  },
+  "routes": [
+    "full_hybrid",
+    "gate_only",
+    "mixer_fixed_gate",
+    "shared_conv_control",
+    "proposal_only",
+    "reset",
+    "randomized"
+  ],
+  "run_id": "exp-672-lt2-gated-hybrid-mixer",
+  "source": {
+    "checkpoint": {
+      "path": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "files": {
+      "browser": {
+        "path": "tmp/playwright/exp672/official-pinned-parity.json",
+        "sha256": "51e67ae00c1c17b54e21e579b696d83d489f2ab1ecaff330035e6f3cd6842342"
+      },
+      "config": {
+        "path": "configs/exp_672_lt2_gated_hybrid_mixer.yaml",
+        "sha256": "68b8e77b7966b224fab7107b068c4632339a57b50f85e15e757c38401c42b497"
+      },
+      "mechanism": {
+        "path": "knowledge/autoresearch/research/2026-07-29-exp672-lt2-mechanism.md",
+        "sha256": "310717d1cd3a6dcfa328e49342e7aaceee63cc1385f91b3ff393e01f473cead2"
+      },
+      "model": {
+        "path": "experiments/exp_672_lt2_gated_hybrid_mixer/model.py",
+        "sha256": "b2861e7c6de09d58c8e24c94d1611c160545fd6218e5d71d73ae3f620bdf88c4"
+      },
+      "runner": {
+        "path": "experiments/exp_672_lt2_gated_hybrid_mixer/run.py",
+        "sha256": "212de453b51f4d38e5e2e154559641fa611c6965f6bfeeee9907466683496f48"
+      },
+      "test": {
+        "path": "tests/test_exp_672_lt2_gated_hybrid_mixer.py",
+        "sha256": "421f96dc0fd3ad33da771b4e7af69453ecfcfb8e564d6925e5dff95362961a7a"
+      }
+    },
+    "repository_branch": "codex/exp672-lt2-gated-hybrid-mixer",
+    "repository_commit": "b3c63a87df2560ded406550f6dc565b2a134ab42"
+  },
+  "splits": {
+    "128": {
+      "test": "19e002d1061ddc5ff7f19d64e1c893168c4de40e008b208d4fa89904b8621493",
+      "train": "d47ab4419cd646c8b6eb930c35960315e96898052b12b85bbefa3c5462f21e48",
+      "validation": "1f2fff588469eabde3a49ee3a7d90ac96d683deb36609a75a9e772bdeccd6911"
+    },
+    "256": {
+      "test": "2efb3d101807092e6120ec831377f645e768eefc4f0ed7d82cef9ad56e99e777",
+      "train": "9357bf0d5d843a0fd2a616628692ecc2a661c799cd1c3a1a541e8949cb61861c",
+      "validation": "f96c2645a4866fd45e9b6d07653d3b0418422396d158b79922790f0923cc660d"
+    },
+    "64": {
+      "test": "e5d95d1d5a5c5b9a90c504ff844b03119c74b6fa6c2d893617178a2c923ca179",
+      "train": "6b29b84ff71cb214066024a73903dd4e1e02e1f321cce8938406645d73a94f26",
+      "validation": "e0d9e8affa8662c2e50e7e6e0df940c5f8658648d95f619200afc9b26fb43f9f"
+    }
+  }
+}

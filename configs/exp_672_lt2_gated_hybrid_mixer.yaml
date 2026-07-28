@@ -1,0 +1,30 @@
+run_id: exp-672-lt2-gated-hybrid-mixer
+hypothesis: A genuinely shared LT2 linear/sparse hybrid correction with zero-initialized loop and output gates can preserve the frozen Candidate005 proposal exactly and learn a width-transfer path within the guarded CPU runtime.
+mechanism_map: knowledge/autoresearch/research/2026-07-29-exp672-lt2-mechanism.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+fixture_hashes: {Dockerfile: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41, generator.py: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0, primes.py: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+paper: {path: research/papers/arxiv-2605.20670.pdf, sha256: 84f7f4de355928e5006e8aa85c958fb656752158e3f19bc5d7dc919922013d9b, pages: [3, 4, 5, 8, 9, 10, 11]}
+official_source:
+  repository: https://github.com/chili-lab/LT2
+  commit: adc2ba2f2704ff82744700679d1d0a090314df6c
+  transformer_url: https://raw.githubusercontent.com/chili-lab/LT2/adc2ba2f2704ff82744700679d1d0a090314df6c/apps/LT2/transformer.py
+  transformer_response_sha256: cb90a87723ba751a05abd7fee1457c53a54aec964d5159fcc54e94618e4e61bb
+  license: BSD-3-Clause
+  license_response_sha256: 8ef78c2d6e787b103a0548e73ba2cfe68bc469b5b0e6f5e7db649f1312f4f2a6
+  playwright: 1.61.1
+  chromium: 149.0.7827.55
+roots: {calibration: 20261238, viability: 20261239, confirmations: [20261240, 20261241]}
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+dependency: {torch: 2.5.1, external_library_added: false, implementation: native_pytorch_cpu, optimizer: torch.optim.AdamW}
+model: {hidden: 92, cycles: 2, loop_count: 4, mixer_width: 24, linear_rank: 8, sparse_window: 5, control_inner: 24, fixed_mixer_scale: 0.05, epsilon: 0.000001}
+routes: [full_hybrid, gate_only, mixer_fixed_gate, shared_conv_control, proposal_only, reset, randomized]
+trained_routes: [full_hybrid, gate_only, mixer_fixed_gate, shared_conv_control]
+primary_route: full_hybrid
+inference: {fixed_loops: 4, target_free: true, validity_filter: false, repair: false, external_calls: false, answer_dependent_routing: false}
+data: {widths: [64, 128, 256], training_widths: [64, 128, 256], prime_bit_span: 8, train_prime_identities: 512, validation_prime_identities: 128, test_prime_identities: 128, split_seed_offset: 67200, training_seed_offset: 67300, validation_seed_offset: 67400, test_seed_offset: 67500}
+training: {steps_per_trained_route: 400, schedule: [64, 128, 256, 128], batch_size: 16, learning_rate: 0.00002, minimum_learning_rate: 0.000001, weight_decay: 0.00002, worst_bit_weight: 0.45, quotient_weight: 0.10, gradient_clip: 2.0, torch_threads: 4, log_every_steps: 25}
+calibration: {representative_updates_per_trained_route: 16, transition_cases_per_width: 16, rollout_cases_per_width: 4, repeats: 2, depth_counts: [1, 2, 3, 4]}
+evaluation: {transition_cases_per_width: 3000, rollout_cases_per_width: 300, validation_transition_cases_per_width: 1000, validation_rollout_cases_per_width: 100, depth_counts: [1, 2, 3, 4]}
+gates: {minimum_w128_primary_rollout: 0.85, maximum_w128_loss_to_proposal: 0.02, maximum_invalid_rollout_rate: 0.0, minimum_mixer_dependence_drop: 0.05, minimum_gate_dependence_drop: 0.05, minimum_w256_primary_rollout: 0.10, minimum_w256_gain_over_controls: 0.05, maximum_candidate_inference_wall_seconds: 285, require_reload_exact: true, require_split_separation: true}
+resource_policy: {verification_observed_seconds: 645.78, verification_expected_upper_seconds: 1246, verification_hard_wall_seconds: 2492, health_probes: 1, maximum_peak_rss_bytes: 6442450944, maximum_expected_formal_wall_seconds: 21600, incumbent_candidate_wall_seconds: 156.0, variability_headroom_floor: 1.25, variability_headroom_ceiling: 2.0, soft_guard_multiplier: 1.25, hard_guard_multiplier: 2.0, require_complete_routes: true, cache_completed_roots: true}
