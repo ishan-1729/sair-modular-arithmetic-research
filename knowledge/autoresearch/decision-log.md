@@ -258,3 +258,17 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
   unopened. Calibration exactness is non-scientific. The global control was inadvertently rank 8
   instead of intended matched rank 128, which makes control-matching evidence unavailable but does
   not change the independent runtime rejection. RRT/ST-M005 and the source paper remain scientifically open.
+
+## 2026-07-29 — EXP-676 parked at complete-route candidate-runtime admission
+
+- Visually authenticate local arXiv:2311.12424 pages 5-6 and map its repeated input injection plus
+  moving truncated endpoint window. Candidate005 already reinjects the same legal six-channel input
+  at every gate and candidate update, so EXP676 changes only training credit and preserves inference.
+- Nine focused tests and the one hermetic package oracle pass: 198 concepts / 1,100 records and
+  637/637 project tests. No bounded repair is consumed.
+- Root `20261254` completes five trained and two frozen/control routes across W64/W128/W256 in
+  233.668 wall / 780.700 process-tree CPU / 802.348 cgroup CPU seconds with 1,081,548,800-byte RSS.
+  Reinjection equivalence, exact formal inference identity, persistence, and fidelity checks pass.
+- The candidate projects to 533.876 seconds nominal and 720.733 seconds guarded, exceeding the
+  frozen 285-second ceiling. Park under the calibration stop rule; roots `20261255`-`20261257`
+  remain unopened. Calibration metrics are non-scientific, so LLA/ST-M004.a remains open.

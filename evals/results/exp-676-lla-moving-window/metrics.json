@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-07-29T15:00:00+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evaluation": {
+    "labels_or_oracle_present": false,
+    "not_performed": true,
+    "reason": "Root 20261254 rejected admission at the guarded candidate-runtime gate before formal scientific evaluation."
+  },
+  "controls": {
+    "calibration_only": true,
+    "formal_opened": false,
+    "endpoint_only": true,
+    "fixed_window": true,
+    "equal_work_multi_endpoint": true,
+    "shuffled_window": true,
+    "frozen_source": true,
+    "randomized_control": true
+  },
+  "run_id": "exp-676-lla-moving-window",
+  "status": "parked-calibration-resource-gate",
+  "decision": "park-resource-compliance-or-feasibility",
+  "roots_opened": [20261254],
+  "formal_calls_executed": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "calibration": {
+    "trained_arms": 5,
+    "control_arms": 2,
+    "updates_per_trained_arm": 2,
+    "transition_cases_per_width_per_arm": 16,
+    "rollout_cases_per_width_per_arm": 2,
+    "reinjection_equivalence": true,
+    "formal_inference_identity": true,
+    "candidate_nominal_seconds": 533.8759380796859,
+    "candidate_guarded_seconds": 720.732516407576,
+    "candidate_ceiling_seconds": 285,
+    "formal_eta_seconds": 29577.637828238538,
+    "artifact_bytes": 2804088,
+    "admitted": false
+  },
+  "limitations": [
+    "Calibration exactness and per-depth losses use tiny route-proving denominators and are not scientific evidence.",
+    "Formal W128/W256 and confirmations remained unopened because guarded candidate runtime failed admission.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion evaluation was performed."
+  ]
+}
