@@ -1,0 +1,70 @@
+{
+  "checked_independent_official_authorized": false,
+  "confirmation_authorized": false,
+  "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+  "decision": "authorized-after-corpus-freeze",
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "schema_version": "exp648-screen-judge-authorization-v1",
+  "screen_evaluation_root": 20261154,
+  "screen_readiness_binding": {
+    "approved_base_commit": "d4ae00c24ad35d3d59ae2919178fa746efa84504",
+    "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+    "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "corpus_provenance_amendment_sha256": "9f2b3ab9f82a083adca05e21f08f23cfe0fdcedfce47afa656be89e87701def9",
+    "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+    "dependency_sources": {
+      "cellular_model": {
+        "path": "experiments/exp_220_width_independent_cellular/model.py",
+        "sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc"
+      },
+      "exp300_data_evaluator": {
+        "path": "experiments/exp_300_width64_bit_tensor_transfer/run.py",
+        "sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f"
+      }
+    },
+    "evaluator_sha256": "2096db581b59a9b0068b9be790de6674520295601e2123007cbcd2ff7691c020",
+    "exact_teacher_source_sha256": "ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef",
+    "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+    "frozen_corpus_file_sha256": {
+      "data/corpus-manifest.json": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+      "data/identity-manifest.json": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+      "data/paired-corpus.json.gz": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+      "data/trajectory-manifest.json.gz": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a",
+      "evidence/environment.json": "cab308ec1c6148ee4e5a68764809dc2be5114f23026cf4f4dbc4d4572e89a957",
+      "evidence/integrity.json": "a0a00d09379cf77dab8a0c89c1b6796fffb9f238021409ab9f473b102ecd24fe",
+      "evidence/mlflow.json": "9fbac562324f141d76f8b7e255ff54490072f7e72ffa777e0570466cea1d4a3f",
+      "evidence/run.json": "de34592118392d2b1a158697b78a35c0d0e130ead36f33e2069e8715d2056a09"
+    },
+    "historical_corpus_commit": "8d960fa747b64bffa3b60581ae4ff518436a8887",
+    "preregistration_sha256": "1f42f0e8646016013c9ce6b97c9c70325412035dcea80d2964eeb7ad64cbb417",
+    "readiness_calibration_core_sha256": "3127c562b1ea627ca48979bbb059f9b57a5517ea3f846c987cce0c400d60262c",
+    "readiness_calibration_environment_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "readiness_calibration_mlflow_receipt_sha256": "540a4269e7a126ef2ee197d025011fd53951a671fd36d4d3b395f6092b5d9f69",
+    "readiness_calibration_root": 20261162,
+    "readiness_calibration_sha256": "7209d1b59f6b980c7cb829a2290fe7735ba32db98be10181dc98f230363186ff",
+    "readiness_observed_recovery_sha256": "827c47324380f61396570c11e22f5fe253bf02faed132ffeedef1c15154f868c",
+    "readiness_resource_completion_sha256": "e4ed46ad911882998676c6144b298d16b33699ffe21885ddaa2686e6f3bd9e44",
+    "resolved_config_sha256": "c306354929105afa20b5be3672d25513000cf68bd57c46b4e2b8e95bda9be067",
+    "resource_protocol_sha256": "2583c4c2d6958d13d187e829aa3e162ddd70a2da9931c18e25d80bff062cf627",
+    "runtime": {
+      "deterministic_algorithms": true,
+      "torch_interop_threads": 1,
+      "torch_threads": 4
+    },
+    "scientific_protocol_sha256": "b5145a3f61a8366d3d4ef647bf21ba7d02b509229c16c89d85a107212561e54b",
+    "scientific_runner_sha256": "e7ec10246fd259d0072ba9250a6730c8fb877542fe8deb72136c6e5b8b56b1bf",
+    "scientific_test_sha256": "0fa15edd01e474bfd9dfdfb6990dc046a75ab0a5d005c71b24d3f610e58f2d32",
+    "screen_workload_sha256": "2f703cda7d1a9e4afbc4bc4722d9032d2eac66b678cfbd0d29ca6c900717dfe1",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "source_model": {
+      "cycles": 2,
+      "hidden": 92,
+      "inference_architecture_changes": false,
+      "inference_semantics_changes": false,
+      "parameter_count": 99824,
+      "parameter_count_changes": false
+    }
+  },
+  "screen_readiness_binding_sha256": "e4773f9aad2c9cd67c21af3a269a1dcffbbb46cc258d50ab86d2fc0a7feff219",
+  "screen_training_root": 20261153
+}
