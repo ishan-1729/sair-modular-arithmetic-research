@@ -1,0 +1,78 @@
+{
+  "schema_version": "exp678-verification-v1",
+  "status": "terminal-pre-root-provenance-park",
+  "prechange_validator": {
+    "command": "python tools/validate_project.py",
+    "passed": true,
+    "wall_seconds": 9.35,
+    "user_seconds": 0.93,
+    "system_seconds": 0.68,
+    "peak_rss_kib": 28460,
+    "summary": "200 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1"
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_678_target_only_continuation.py",
+    "final_passed": 9,
+    "pytest_wall_seconds": 6.02,
+    "outer_wall_seconds": 7.65,
+    "user_seconds": 9.04,
+    "system_seconds": 1.17,
+    "peak_rss_kib": 377876,
+    "bounded_repair": "corrected the small 12-hidden test fixture parameter-count assertion from the unrelated full-model expectation to observed 2464"
+  },
+  "package_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "invocations": 1,
+    "exit_code": 1,
+    "validator": "failed-two-owned-frontmatter-description-fields",
+    "pytest": "not-opened-validator-short-circuit",
+    "wall_seconds": 8.45,
+    "process_cpu_seconds": 1.41,
+    "peak_rss_kib": 29276,
+    "console_sha256": "afd1218ad3b8bb1364544cdc74a6bdaba77320dbdd989fc3508468da15b1a96a",
+    "issues": [
+      "knowledge/autoresearch/ablations/exp-678-target-only-continuation.md required description frontmatter",
+      "knowledge/autoresearch/research/2026-07-30-exp678-target-only-mechanism.md required description frontmatter"
+    ],
+    "bounded_owned_diagnosis": "added only the two required description fields and terminal governance records",
+    "rerun": false
+  },
+  "dynamic_budget": {
+    "budget_sha256": "964161d06d4b9f647b84665f3e7824981042f8ae05a524bcf230eab7da34ec22",
+    "expected_wall_seconds": 769.8915,
+    "soft_guard_wall_seconds": 962.364375,
+    "hard_runaway_wall_seconds": 1684.13765625,
+    "headroom": 1.35,
+    "fidelity_reduced": false
+  },
+  "frozen_protocol_sha256": "cb9f6d96daeea3ac06fab51c659b2f814867895c5171d738c60096f6d438f8ef",
+  "t076_normalization": {
+    "exact_fields": 4,
+    "invariance_path": ".scratch/exp-678-target-only-continuation/t076-normalization-invariance.json",
+    "validator": "passed-202-concepts-1100-records",
+    "validator_wall_seconds": 9.88,
+    "validator_peak_rss_kib": 28828
+  },
+  "t076_full_pytest": {
+    "command": "python -m pytest",
+    "passed": 655,
+    "pytest_wall_seconds": 549.32,
+    "outer_wall_seconds": 538.61,
+    "process_cpu_seconds": 743.53,
+    "peak_rss_kib": 918004,
+    "log_sha256": "a456939e6ad8cb9927a85b66eb8cdc0e696c72b1f2e50edca3610707d83e23d4",
+    "hard_guard_wall_seconds": 1684.13765625,
+    "fidelity_reduced": false,
+    "invocations": 1
+  },
+  "pre_root_authentication": {
+    "status": "failed-governance-hash-mismatch",
+    "evidence": ".scratch/exp-678-target-only-continuation/t076-freeze-authentication.json",
+    "root_20261262_opened": false
+  },
+  "final_validator": {
+    "command": "python tools/validate_project.py",
+    "expected": "202 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1",
+    "status": "passed-terminal-bytes"
+  }
+}

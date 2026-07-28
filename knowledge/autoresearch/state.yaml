@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-30T00:00:00+05:30
+updated_at: 2026-07-30T01:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,25 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp678_hypothesis:
+  run_id: exp-678-target-only-continuation
+  status: parked-package-verification
+  decision: park-package-oracle-validator-schema-after-one-bounded-owned-diagnosis
+  decision_authority: T075-package-verification-stop-rule
+  source_base_commit: 32e331ac558a9ee71b5a22f896a238b409c0cfda
+  source_branch: codex/exp678-target-only-continuation
+  source_authentication: {paper_sha256: 1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60}
+  mechanism: target-only-continuation-CE-mask-with-matched-mixed-endpoint-weight-and-causal-controls
+  roots: {20261262: unopened-verification-blocked, 20261263: unopened-verification-blocked, 20261264: unopened-verification-blocked, 20261265: unopened-verification-blocked}
+  verification: {focused: 9-passed, validator: red-2-owned-description-fields, pytest: unopened-validator-short-circuit, full_oracle_invocations: 1, bounded_owned_diagnosis: descriptions-and-terminal-records, rerun: false}
+  dynamic_oracle_budget: {expected_wall_seconds: 769.8915, soft_wall_seconds: 962.364375, hard_wall_seconds: 1684.13765625, observed_wall_seconds: 8.45, process_cpu_seconds: 1.41, peak_rss_kib: 29276}
+  implementation_executed: true
+  calibration_executed: false
+  training_updates: 0
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: 8bda4a779fdd45f39a1459a4a7db85e9
+  limitations: [package-oracle-red-before-pytest, bounded-owned-schema-repair-without-rerun, all-roots-unopened, M044a-scientifically-open, no-checked-private-candidate-submission-surface]
 parked_exp677_hypothesis:
   run_id: exp-677-length-schedule
   status: parked-package-verification
@@ -781,7 +800,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preserve EXP674 as parked at the source/topology-faithfulness boundary; do not open roots 20261246-20261249 or relabel hidden-reference distillation as paper-faithful Eq. 3-4. A future untied compatible architecture or separately preregistered hidden-state distillation mechanism requires a new decision card. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+next_action: Preserve EXP678 as parked at package verification with roots 20261262-20261265 unopened. A separate PM decision is required before any verification recovery or new material package; Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
