@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T04:00:00+05:30
+updated_at: 2026-07-29T07:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,20 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp671_hypothesis:
+  run_id: exp-671-fixed-point-damping-halting
+  status: parked-calibration-expected-value
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T066-root-20261234-complete-route-resource-admission
+  source_base_commit: a50a2648d072db2ce8387009e58cef0ed461c527
+  source_branch: codex/exp671-fixed-point-damping-halting
+  focused_verification: {passed: 15, failed: 0, pytest_seconds: 18.69}
+  final_oracle: {validator_passed: true, concepts: 187, benchmark_records: 1100, pytest_passed: 600, pytest_seconds: 645.78, wall_seconds: 645.95, maximum_rss_kib: 899752}
+  roots: {20261234: completed-calibration-expected-value-park, 20261235: unopened-admission-blocked, 20261236: unopened-admission-blocked, 20261237: unopened-admission-blocked}
+  calibration: {wall_seconds: 642.3526618879996, process_tree_cpu_seconds: 2507.0781890000003, cgroup_cpu_seconds: 2853.8399999999997, peak_rss_bytes: 648990720, threshold: 0.1, threshold_validation_cases: 32, candidate_nominal_seconds: 220.3517998250104, candidate_headroom_seconds: 275.439749781263, expected_formal_wall_seconds: 22030.105487427452, maximum_expected_wall_seconds: 21600, admitted: false}
+  formal_science_executed: false
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, validation-threshold-evidence-only, formal-W128-W256-component-reliability-and-confirmations-unopened, no-checked-private-candidate-submission-surface]
 parked_exp670_hypothesis:
   run_id: exp-670-clipped-poisson-loop-curriculum
   status: parked-package-verification

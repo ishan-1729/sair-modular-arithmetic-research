@@ -1,0 +1,22 @@
+run_id: exp-671-fixed-point-damping-halting
+hypothesis: Exact-initialized PreNorm shared refinement with FPR damping and validation-calibrated residual halting retains W128 while adding adaptive width transfer.
+mechanism_map: knowledge/autoresearch/research/2026-07-29-exp671-fixed-point-reasoner-mechanism.md
+source_checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+fixture_hashes: {Dockerfile: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41, generator.py: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0, primes.py: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+paper: {path: research/papers/arxiv-2606.18206.pdf, sha256: 169dc66aca853f5e8d922a170eac8421e78e1829d0d39025976a01915ff11c3d, pages: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25, 27]}
+roots: {calibration: 20261234, viability: 20261235, confirmations: [20261236, 20261237]}
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+dependency: {torch: 2.5.1, external_library_added: false, normalization: torch.nn.GroupNorm, optimizer: torch.optim.AdamW}
+model: {hidden: 92, cycles: 2, operator_inner: 64, hard_max_iterations: 6, training_iterations: 6, tbptt_window: 2, initial_damping: 1.0, damping_decay: 0.5, patience: 2, residual_epsilon: 0.000000001}
+routes: [full_fpr, stabilization_fixed, damped_fixed, halt_without_damping, plain_fixed, proposal_only, reset, randomized]
+trained_routes: [full_fpr, stabilization_fixed, plain_fixed]
+primary_route: full_fpr
+threshold_calibration: {candidates: [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1], objective: validation_exact_retention_then_mean_iterations, minimum_iterations: 2, probability_smoothing: 1.0, test_labels_forbidden: true}
+inference: {target_free: true, answer_dependent_stopping: false, validity_filter: false, repair: false, hard_max_iterations: 6, patience: 2, damping_decay: 0.5, initial_damping: 1.0, active_batch_exit: true}
+data: {widths: [64, 128, 256], training_widths: [64, 128, 256], prime_bit_span: 8, train_prime_identities: 512, validation_prime_identities: 128, test_prime_identities: 128, split_seed_offset: 67100, training_seed_offset: 67200, validation_seed_offset: 67300, test_seed_offset: 67400}
+training: {steps_per_trained_route: 400, schedule: [64, 128, 256, 128], batch_size: 16, learning_rate: 0.00002, minimum_learning_rate: 0.000001, weight_decay: 0.00002, worst_bit_weight: 0.45, quotient_weight: 0.10, deep_supervision_weight: 1.0, gradient_clip: 2.0, torch_threads: 4, log_every_steps: 25}
+calibration: {updates_per_trained_route: 400, transition_cases_per_width: 16, rollout_cases_per_width: 4, threshold_transition_cases: 256, threshold_rollout_cases: 32, repeats: 2}
+evaluation: {transition_cases_per_width: 3000, rollout_cases_per_width: 300, validation_transition_cases_per_width: 1000, validation_rollout_cases_per_width: 100}
+gates: {minimum_w128_primary_rollout: 0.85, maximum_w128_loss_to_proposal_or_fixed: 0.02, maximum_invalid_rollout_rate: 0.0, minimum_stabilization_drop: 0.20, minimum_damping_accuracy_effect: 0.01, minimum_early_exit_rate: 0.05, maximum_hard_max_rate: 0.95, require_residual_reliability_better_than_constant: true, minimum_w256_primary_rollout: 0.10, minimum_w256_gain_over_controls: 0.05, maximum_candidate_inference_wall_seconds: 300, maximum_candidate_headroom_wall_seconds: 285, require_reload_exact: true, require_split_separation: true}
+resource_policy: {verification_expected_upper_seconds: 1246, verification_hard_wall_seconds: 2492, health_probes: 1, maximum_peak_rss_bytes: 6442450944, maximum_expected_formal_wall_seconds: 21600, incumbent_candidate_wall_seconds: 156.0, variability_headroom_floor: 1.25, variability_headroom_ceiling: 2.0, soft_guard_multiplier: 1.25, hard_guard_multiplier: 2.0, require_complete_routes: true, cache_completed_roots: true}

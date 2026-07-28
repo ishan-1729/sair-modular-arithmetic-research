@@ -178,3 +178,14 @@ The ST-M018.a/M026.b bounded implementation passed 12 focused tests. The one req
 in validation on an integrated EXP669 metrics schema error outside T065's allowed files. The explicit
 protected/unrelated-file stop condition therefore parks EXP-670 before calibration. No scientific, runtime,
 W128, W256, or confirmation claim is made; M018.b remains closed.
+
+## 2026-07-29 — EXP-671 parked at complete-route expected-value admission
+
+The bounded-faithful ST-M027 package passed 15 focused tests, validation at 187 concepts/1,100 records,
+and all 600 project tests. Root `20261234` trained all three matched arms for 400 updates and exercised
+every validation/test/control/intervention/persistence route. Validation froze residual threshold 0.1
+with two-call adaptive exit. Candidate runtime passes at 220.352 seconds nominal and 275.440 seconds
+with 1.25x headroom. Integrity, memory, reload, determinism, separation, and target-free thresholding
+also pass. The complete-route projection is 22,030.105 wall seconds versus the frozen 21,600 expected-
+value ceiling, so park before root `20261235`. Formal W128/W256 and confirmations remain unopened;
+there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change.

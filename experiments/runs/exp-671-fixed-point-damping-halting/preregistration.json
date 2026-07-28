@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-671-fixed-point-damping-halting",
+  "task_id": "T066",
+  "base_commit": "a50a2648d072db2ce8387009e58cef0ed461c527",
+  "branch": "codex/exp671-fixed-point-damping-halting",
+  "paper_sha256": "169dc66aca853f5e8d922a170eac8421e78e1829d0d39025976a01915ff11c3d",
+  "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "roots": {"calibration": 20261234, "viability": 20261235, "confirmations": [20261236, 20261237]},
+  "trained_routes": ["full_fpr", "stabilization_fixed", "plain_fixed"],
+  "derived_routes": ["damped_fixed", "halt_without_damping", "proposal_only", "reset", "randomized"],
+  "training": {"updates_per_trained_route": 400, "examples_per_trained_route": 6400, "calls_per_example": 6, "tbptt_window": 2, "deep_losses": 3},
+  "halting": {"threshold_candidates": [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1], "minimum_iterations": 2, "hard_max_iterations": 6, "initial_damping": 1.0, "patience": 2, "decay": 0.5},
+  "canonical_preregistration_sha256": "3286a8d42f4466c5b48bce07e4ae4f4c6991649ad4e472fda395ef79f42ecdd8"
+}

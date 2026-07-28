@@ -1771,3 +1771,31 @@ runs:
       - Calibration, W128, W256 and confirmations remained unopened.
       - This park is not evidence against the curriculum, ST-M018.a, ST-M026.b, or the source paper.
       - M018.b and all checked/private/candidate/submission surfaces remained closed.
+  - run_id: exp-671-fixed-point-damping-halting
+    status: parked-calibration-expected-value
+    approach: bounded-faithful-ST-M027-PreNorm-scaling-reinjection-TBPTT-damping-residual-halting
+    decision: park-resource-compliance-or-feasibility
+    decision_authority: T066-root-20261234-complete-route-resource-admission
+    source_base_commit: a50a2648d072db2ce8387009e58cef0ed461c527
+    source_branch: codex/exp671-fixed-point-damping-halting
+    config: configs/exp_671_fixed_point_damping_halting.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp671-fixed-point-reasoner-mechanism.md
+    preregistration: experiments/runs/exp-671-fixed-point-damping-halting/preregistration.json
+    run_record: experiments/runs/exp-671-fixed-point-damping-halting/run.json
+    metrics: evals/results/exp-671-fixed-point-damping-halting/metrics.json
+    roots: {20261234: completed-calibration-expected-value-park, 20261235: unopened-admission-blocked, 20261236: unopened-admission-blocked, 20261237: unopened-admission-blocked}
+    parameters_each: 142820
+    trainable_parameters_each: 42996
+    calibration_updates_each_trained_route: 400
+    calibration_examples_each_trained_route: 6400
+    calibration: {admitted: false, failed_check: expected_value, wall_seconds: 642.3526618879996, process_tree_cpu_seconds: 2507.0781890000003, cgroup_cpu_seconds: 2853.8399999999997, peak_rss_bytes: 648990720, expected_formal_wall_seconds: 22030.105487427452, maximum_expected_wall_seconds: 21600, eta_wall_seconds: 27537.631859284316, hard_guard_wall_seconds: 55076}
+    threshold: {selected: 0.1, validation_rollout_cases: 32, validation_exact_accuracy: 0.8125, mean_iterations: 2.0, labels: validation-only}
+    candidate_runtime: {nominal_projected_wall_seconds: 220.3517998250104, variability_headroom: 1.25, headroom_projected_wall_seconds: 275.439749781263, frozen_ceiling_seconds: 285.0}
+    verification: {focused: 15-passed, validator: 187-concepts-1100-records-green, full_oracle: 600-passed-in-645.78s}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration validation exactness selected the frozen residual threshold and is not formal scientific evidence.
+      - W128 formal viability, component/reliability gates, W256, and confirmations remained unopened.
+      - This resource park does not reject FPRM, ST-M027, the exact adaptation scientifically, or the source paper.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.

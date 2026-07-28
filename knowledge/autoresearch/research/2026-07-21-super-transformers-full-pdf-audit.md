@@ -251,6 +251,15 @@ EXP-666 implements a bounded ST-M022.a SAIR adaptation with exact-initialized fr
 
 **PDF:** `2606.18206`, pp. 5–14, 25, 27. **Components:** (a) PreNorm, learned layerwise residual scaling, iterationwise input reinjection, TBPTT and deep supervision; (b) damped convergence with patience/geometric decay and normalized infinity-norm residual halting. Native; use vetted convergence utilities if needed. Can be tested de novo, not only after a stable winner. Terminal requires residual-to-exactness calibration and component interventions.
 
+EXP-671 implements the declared bounded SAIR transfer with exact-zero per-channel residual scale,
+PreNorm shared Conv1d refinement, proposal/legal-input reinjection, two-step TBPTT with deep losses,
+finite damping, and validation-calibrated normalized-infinity-residual halting. Root `20261234` completed
+all three 400-update trained arms and every calibration/control route. Candidate runtime passed at 275.44
+seconds with headroom, but the complete formal route projected to 22,030.11 wall seconds versus the
+frozen 21,600 expected-value ceiling. The package is therefore parked before formal W128, component
+reliability, W256, and confirmations. This is a resource verdict only; both ST-M027 components remain
+scientifically unresolved.
+
 ### ST-M028 — LOTUS (2 components)
 
 **PDF:** `2606.31779`, pp. 3–13 and 25. **Components:** (a) K padded blocks of c latent positions, shared loop with input injection/prefix KV cache; (b) direct per-step latent supervision through the same LM head plus separate final-answer loss. Native. Exact traces are training-only and forbidden at inference. Test no-latent, padding/no-loop, direct/auxiliary decoder, both-loss ablations, and K/c/R sweeps. No evidence.
