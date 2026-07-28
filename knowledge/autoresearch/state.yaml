@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T15:00:00+05:30
+updated_at: 2026-07-30T00:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,24 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp677_hypothesis:
+  run_id: exp-677-length-schedule
+  status: parked-package-verification
+  decision: park-verification-out-of-scope-immutable-snapshot-absent
+  decision_authority: T074-package-verification-stop-rule
+  source_base_commit: aca5dceb6f31b93c2a07f5453ec73f5cf79eb145
+  source_branch: codex/exp677-length-schedule
+  source_authentication: {paper_sha256: 6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  mechanism: legal-width-known-physical-visit-final-endpoint-curriculum
+  roots: {20261258: unopened-verification-blocked, 20261259: unopened-verification-blocked, 20261260: unopened-verification-blocked, 20261261: unopened-verification-blocked}
+  verification: {focused: 9-passed, combined_cone: 18-passed, validator: red-9-inherited-worktree-materialization-issues, pytest: unopened-validator-short-circuit, full_oracle_invocations: 1, owned_repair: none-out-of-scope}
+  dynamic_oracle_budget: {lower_wall_seconds: 575.53, expected_wall_seconds: 776.9655, soft_wall_seconds: 971.206875, hard_wall_seconds: 1359.689625, observed_wall_seconds: 9.52, process_cpu_seconds: 1.69, peak_rss_kib: 28524}
+  implementation_executed: true
+  calibration_executed: false
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: c480f0e468bd4161b74d0996d87d7238
+  limitations: [package-oracle-red-outside-owned-scope, full-pytest-unopened, all-roots-unopened, M004b-scientifically-open, no-checked-private-candidate-submission-surface]
 parked_exp676_hypothesis:
   run_id: exp-676-lla-moving-window
   status: parked-calibration-runtime-headroom

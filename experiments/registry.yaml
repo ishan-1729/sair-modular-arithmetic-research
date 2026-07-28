@@ -1939,3 +1939,31 @@ runs:
       - Candidate runtime failed at 720.733 guarded seconds versus the frozen 285-second ceiling.
       - This park is not a scientific rejection of LLA, ST-M004.a, moving-window supervision, or the source paper.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
+  - run_id: exp-677-length-schedule
+    status: parked-package-verification
+    approach: ST-M004b-legal-width-known-physical-visit-final-endpoint-curriculum
+    decision: park-verification-out-of-scope-immutable-snapshot-absent
+    decision_authority: T074-package-verification-stop-rule
+    source_base_commit: aca5dceb6f31b93c2a07f5453ec73f5cf79eb145
+    source_branch: codex/exp677-length-schedule
+    config: configs/exp_677_length_schedule.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp677-length-schedule-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-677-length-schedule.md
+    run_record: experiments/runs/exp-677-length-schedule/run.json
+    metrics: evals/results/exp-677-length-schedule/metrics.json
+    paper_sha256: 6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261258: unopened-verification-blocked, 20261259: unopened-verification-blocked, 20261260: unopened-verification-blocked, 20261261: unopened-verification-blocked}
+    verification: {focused: 9-passed, combined_cone: 18-passed, validator: red-9-inherited-worktree-materialization-issues, pytest: unopened-validator-short-circuit, oracle_invocations: 1, owned_repair: null}
+    package_oracle: {lower_wall_seconds: 575.53, expected_wall_seconds: 776.9655, soft_wall_seconds: 971.206875, hard_wall_seconds: 1359.689625, observed_wall_seconds: 9.52, process_cpu_seconds: 1.69, peak_rss_kib: 28524, fidelity_reduced: false}
+    calibration: null
+    training_updates: 0
+    mlflow_run_id: c480f0e468bd4161b74d0996d87d7238
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Focused semantics are green, but the sole package oracle stopped in validation before pytest on the absent protected challenge snapshot.
+      - Repair requires paths outside T074 allowed files; no owned repair or second oracle is authorized.
+      - Calibration, W128, W256, and confirmations remained unopened.
+      - This park is not a scientific rejection of M004.b, length scheduling, Candidate005 transfer, or the source paper.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
