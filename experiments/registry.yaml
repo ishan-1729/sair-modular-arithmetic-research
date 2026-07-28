@@ -1619,3 +1619,32 @@ runs:
       - The frozen W128 primary gate stopped before clean/randomized W128, W64, W256, causal controls, and confirmations.
       - This rejects only the exact bounded SAIR adaptation, not SPRM generally or the source paper.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-665-attractor-equilibrium-family
+    status: completed-rejected
+    approach: proposal-injected-library-Anderson-attractor-equilibrium-family
+    decision: reject-current-attractor-equilibrium-adaptation
+    decision_authority: T060-frozen-W128-first-conjunctive-gate
+    source_base_commit: c042a7fa68ab143dbba0091928b475ce5de1bf65
+    source_branch: codex/exp665-attractor-equilibrium-family
+    dependency: {name: torchdeq, version: 0.1.0, license: MIT}
+    config: configs/exp_665_attractor_equilibrium_family.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp665-attractor-equilibrium-mechanism.md
+    preregistration: experiments/runs/exp-665-attractor-equilibrium-family/preregistration.json
+    preregistration_sha256: 55b6abcbe8fbbeb7a32dcff5ac7b8b63af59d4459e6eff753aa6dcd1cd9cba5d
+    run_record: experiments/runs/exp-665-attractor-equilibrium-family/run.json
+    metrics: evals/results/exp-665-attractor-equilibrium-family/metrics.json
+    roots: {20261210: completed-admitted-calibration, 20261211: completed-rejected-at-w128-primary-gate, 20261212: unopened-gate-blocked, 20261213: unopened-gate-blocked}
+    parameters_each: 142728
+    trainable_parameters_each: 42904
+    optimizer_updates_each_trained_route: 400
+    exact_accuracy: {W128_transition: 0.9993333333333333, W128_rollout: 0.85}
+    validity: {W128_transition_invalid: 0.0, W128_rollout_any_invalid: 0.0033333333333333335}
+    solver: {primary: anderson_phantom, mean_iterations: 3.0, transition_mean_relative_residual: 4.0559586923505366e-09, rollout_mean_relative_residual: 4.065231626375922e-09}
+    calibration: {admitted: true, wall_seconds: 75.35068526600298, expected_wall_seconds: 6587.048488575692, eta_wall_seconds: 9883.681929811231, hard_guard_wall_seconds: 19768}
+    formal_resources: {total_outer_wall_seconds_including_resume: 502.68, total_user_cpu_seconds_including_resume: 1930.77, maximum_rss_kib: 667912}
+    verification: {focused: 17-passed, validator: 176-concepts-1100-records-green, full_oracle: 482-passed}
+    limitations:
+      - The frozen W128 primary gate stopped before matched controls, convergence/basin diagnostics, W256, and confirmations.
+      - The primary met rollout, transition, residual, and runtime floors but failed the zero-invalid-rollout conjunct.
+      - This rejects only the exact bounded SAIR adaptation, not Attractor Models, Equilibrium Reasoners, HRM, or TorchDEQ generally.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.

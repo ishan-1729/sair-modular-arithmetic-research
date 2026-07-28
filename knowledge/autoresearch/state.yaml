@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-28T22:30:00+05:30
+updated_at: 2026-07-29T00:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -134,6 +134,37 @@ rejected_exp664_hypothesis:
   metrics: evals/results/exp-664-sprm-boundary-perturbation/metrics.json
   verification: {focused_passed: 15, validator_passed: true, full_oracle_passed: 465, full_oracle_failed: 0}
   limitations: [exact-bounded-SAIR-adaptation-only, later-widths-controls-and-confirmations-gate-blocked, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+rejected_exp665_hypothesis:
+  run_id: exp-665-attractor-equilibrium-family
+  status: completed-rejected-at-w128-primary-gate
+  source_base_commit: c042a7fa68ab143dbba0091928b475ce5de1bf65
+  source_branch: codex/exp665-attractor-equilibrium-family
+  decision_authority: T060-frozen-W128-first-conjunctive-gate
+  mechanism: ST-M021-bounded-proposal-injected-library-Anderson-attractor-equilibrium-family
+  dependency: {name: torchdeq, version: 0.1.0, license: MIT}
+  roots: {calibration_20261210: completed-admitted, formal_20261211: completed-rejected, confirmation_20261212: unopened, confirmation_20261213: unopened}
+  preregistration_sha256: 55b6abcbe8fbbeb7a32dcff5ac7b8b63af59d4459e6eff753aa6dcd1cd9cba5d
+  parameters_each: 142728
+  trainable_parameters_each: 42904
+  optimizer_updates_each_trained_route: 400
+  formal_primary:
+    route: anderson_phantom
+    width: 128
+    transitions: 3000
+    rollouts: 300
+    transition_exact_accuracy: 0.9993333333333333
+    rollout_exact_accuracy: 0.85
+    rollout_transition_exact_accuracy: 0.9268229166666667
+    transition_invalid_rate: 0.0
+    rollout_any_invalid_rate: 0.0033333333333333335
+    candidate_projected_wall_seconds: 168.97306546669765
+  calibration: {admitted: true, wall_seconds: 75.35068526600298, expected_wall_seconds: 6587.048488575692, eta_wall_seconds: 9883.681929811231, hard_guard_wall_seconds: 19768}
+  formal_resources: {total_outer_wall_seconds_including_resume: 502.68, total_user_cpu_seconds_including_resume: 1930.77, maximum_rss_kib: 667912}
+  mlflow_parent_run_ids: {calibration: b1d34996c2374016ba774b0a65fb53e0, formal_training_red: 01e6b588c5204dd2848f2b4bbd9665d0, formal_evaluation: 58aada0b54f34d3983d3fadd6da4a23a}
+  run_record: experiments/runs/exp-665-attractor-equilibrium-family/run.json
+  metrics: evals/results/exp-665-attractor-equilibrium-family/metrics.json
+  verification: {focused_passed: 17, validator_passed: true, full_oracle_passed: 482, full_oracle_failed: 0}
+  limitations: [exact-bounded-SAIR-primary-adaptation-only, solver-gradient-noise-damping-controls-and-convergence-basin-diagnostics-gate-blocked, W256-and-confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 rejected_exp652_hypothesis:
   run_id: exp-652-answer-latent-trm
   status: completed-rejected-at-viability
