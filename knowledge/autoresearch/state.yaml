@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T11:29:30+05:30
+updated_at: 2026-07-29T12:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,25 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp675_hypothesis:
+  run_id: exp-675-rrt-svd-teacher-uptraining
+  status: parked-calibration-runtime-headroom
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T071-root-20261250-complete-route-calibration-stop-rule
+  source_base_commit: c38349547f3891af5cfefe78ca413f48e793b602
+  implementation_commit: 5e5cab9bd2861a4ef6e891ff33f2965297e58954
+  source_branch: codex/exp675-rrt-svd-teacher-uptraining
+  source_authentication: {paper_sha256: 680a597088a3642bdd1c4eef51f687556c0e10d5ebc0b9f44736241a51cfbfb3, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, selected_library: torch.linalg.svd, torch: 2.5.1+cpu}
+  mechanism: exact-copied-visit-untied-teacher-centroid-shared-kernels-rank8-residual-SVD-joint-base-adapter-uptraining
+  roots: {20261250: completed-calibration-resource-gate-reject, 20261251: unopened-admission-blocked, 20261252: unopened-admission-blocked, 20261253: unopened-admission-blocked}
+  verification: {focused: 9-passed, post_repair_focused: 9-passed, validator: 196-concepts-1100-records-green, pytest: 628-passed-in-553.90s, full_oracle_invocations: 1, bounded_owned_repair: historical-soft-feature-fallback}
+  calibration: {wall_seconds: 119.77512461300103, process_tree_cpu_seconds: 388.34999999999997, cgroup_cpu_seconds: 497.6759999999995, peak_process_tree_rss_bytes: 1023324160, expected_formal_wall_seconds: 24254.46273413271, soft_guard_wall_seconds: 30318.07841766589, hard_guard_wall_seconds: 42445.30978473224, variability: 0.2700786778541766, guarded_candidate_seconds: 1863.361408432652, candidate_ceiling_seconds: 285, artifact_bytes: 9796600, admitted: false}
+  mechanics: {teacher_copy_identity: true, mean_svd_relative_error: 0.6372018326073885, mean_equal_norm_random_relative_error: 1.4133427888154984, full_base_update_norm_sum: 0.003431158934290579, full_adapter_update_norm_sum: 0.0024256141914520413}
+  calibration_control_limitation: global control instantiated at rank 8 rather than intended matched rank 128; independent runtime rejection remains binding
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: 57868a39927d4c20904b6bcad52e3c35
+  limitations: [calibration-denominators-non-scientific, global-control-matching-unavailable, formal-W128-W256-and-confirmations-unopened, RRT-and-ST-M005-remain-scientifically-open, no-checked-private-candidate-submission-surface]
 parked_exp674_hypothesis:
   run_id: exp-674-latent-thought-regularization
   status: parked-topology-feasibility

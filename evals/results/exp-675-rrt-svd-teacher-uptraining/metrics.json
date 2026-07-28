@@ -1,0 +1,44 @@
+{
+  "created_at": "2026-07-29T00:00:00+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evaluation": {
+    "labels_or_oracle_present": false,
+    "not_performed": true,
+    "reason": "Root 20261250 rejected admission at the guarded candidate-runtime gate."
+  },
+  "controls": {
+    "calibration_only": true,
+    "formal_opened": false,
+    "global_rank_mismatch_disclosed": true
+  },
+  "run_id": "exp-675-rrt-svd-teacher-uptraining",
+  "status": "parked-calibration-resource-gate",
+  "decision": "park-resource-compliance-or-feasibility",
+  "roots_opened": [20261250],
+  "formal_calls_executed": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "calibration": {
+    "cases_per_arm": {"transition": {"64": 16, "128": 16, "256": 16}, "rollout": {"64": 2, "128": 2, "256": 2}},
+    "teacher_copy_identity": true,
+    "all_arms_persisted": true,
+    "all_calibration_rollout_invalids": 0,
+    "full_rrt_exact_accuracy": {"64": 1.0, "128": 0.5, "256": 0.5},
+    "full_rrt_transition_exact_accuracy": {"64": 0.875, "128": 1.0, "256": 0.25},
+    "intervention_changed_predictions": {"zeroed": 0, "permuted": 0, "randomized": 0},
+    "svd_mean_relative_reconstruction_error": 0.6372018326073885,
+    "equal_norm_random_mean_relative_reconstruction_error": 1.4133427888154984,
+    "joint_base_update_norm_sum": 0.003431158934290579,
+    "joint_adapter_update_norm_sum": 0.0024256141914520413,
+    "guarded_candidate_seconds": 1863.361408432652,
+    "candidate_ceiling_seconds": 285,
+    "artifact_bytes": 9796600,
+    "admitted": false
+  },
+  "limitations": [
+    "Calibration exactness and interventions use tiny route-proving denominators and are not scientific evidence.",
+    "The global control was instantiated at rank 8 rather than the intended rank 128, so matching evidence is unavailable.",
+    "Root 20261251 and W128/W256 formal evaluation were blocked by calibration; confirmations 20261252/20261253 remain unopened.",
+    "No checked, independent, official/private, candidate, submission or promotion evaluation was performed."
+  ]
+}

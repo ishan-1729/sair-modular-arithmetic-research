@@ -238,3 +238,23 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Park under T070's source/topology-faithfulness stop. A training-only untied hidden reference would
   be a distinct representation-distillation mechanism. Roots `20261246`-`20261249`, calibration,
   training, formal W128/W256, controls and confirmations remain unopened; no scientific verdict follows.
+
+## 2026-07-29 — EXP-675 parked at complete-route candidate-runtime admission
+
+- Authenticated and visually mapped local arXiv:2410.20672 pages 3-5/10-11 to an exact-copied
+  visit-untied teacher, teacher-centroid shared kernels, rank-8 residual `torch.linalg.svd` factors,
+  and joint shared-base plus fixed physical-visit adapter uptraining. PEFT is absent and its raw
+  Conv1d-parameter placement/parity could not be proved non-fetchingly.
+- Nine focused tests pass. The one hermetic oracle validates 196 concepts/1,100 records and passes
+  all 628 tests in 553.90 seconds. Calibration initially exposed the historical EXP300 module's
+  missing soft-state feature helper; the sole bounded owned repair added the inherited local
+  differentiable builder and passed the focused suite 9/9. No second full pytest was run.
+- Root `20261250` completes teacher, SVD, seven training arms, W64/W128/W256 route checks,
+  interventions and persistence in 119.775 wall / 388.350 process-tree CPU / 497.676 cgroup CPU
+  seconds with 1,023,324,160-byte peak RSS. Exact teacher-copy identity passes; mean SVD residual
+  error is 0.6372 versus 1.4133 for equal-norm random subspaces; both shared and adapter tensors move.
+- The dynamically guarded 300-case candidate projection is 1,863.361 seconds, above the frozen
+  285-second ceiling. Park under the calibration stop rule; roots `20261251`-`20261253` remain
+  unopened. Calibration exactness is non-scientific. The global control was inadvertently rank 8
+  instead of intended matched rank 128, which makes control-matching evidence unavailable but does
+  not change the independent runtime rejection. RRT/ST-M005 and the source paper remain scientifically open.
