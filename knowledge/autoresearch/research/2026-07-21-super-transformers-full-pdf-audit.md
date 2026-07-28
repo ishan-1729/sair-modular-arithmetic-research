@@ -127,7 +127,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 
 ### ST-M005 — Relaxed Recursive Transformers (1 component)
 
-**PDF:** `2410.20672`, p. 3 §2.2, pp. 4–5 §2.3 Eq. 3–5, pp. 10–11. **Mechanism:** CYCLE shared base plus physical-layer-by-visit LoRA, SVD residual teacher initialization, then uptraining base and adapters. **Library:** PEFT is preferred if its exact adapter placement/parity is demonstrated; otherwise small native adapters. EXP-617 global LoRA is not RRT. **Verdict:** open. Terminal after visit-specific adapter use and matched base/shared/untied controls; do not assume frozen base or global merge.
+**PDF:** `2410.20672`, p. 3 §2.2, pp. 4–5 §2.3 Eq. 3–5, pp. 10–11. **Mechanism:** CYCLE shared base plus physical-layer-by-visit LoRA, SVD residual teacher initialization, then uptraining base and adapters. **Library:** PEFT is preferred if its exact adapter placement/parity is demonstrated; otherwise small native adapters. EXP-617 global LoRA is not RRT. **Verdict:** active as EXP675. Its authenticated visual map freezes exact-copied visit teacher continuation, Average/centroid tied kernels, native `torch.linalg.svd` residual factors, joint shared-base/adaptor uptraining and matched zero/global/shared/untied/random-subspace controls; EXP651 remains a parked omission-only precursor and supplies no science.
 
 ### ST-M006 — Recurrent-depth latent reasoning (2 components)
 
