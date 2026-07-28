@@ -418,3 +418,21 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
   No evaluation denominator, calibration summary, admission, or scientific metric exists.
 - Apply the post-root stop rule: no repair or retry. Roots `20261259`-`20261261` remain
   unopened, and this execution-integrity park is not a scientific verdict on M004.b.
+
+## 2026-07-30 — EXP-685 preregisters validity-constrained EXP665 continuation
+
+- Authenticate EXP665's immutable `a06103db...` Anderson/phantom checkpoint and
+  unchanged TorchDEQ 0.1.0 inference route.
+- Freeze a `0.05` training-only MSB-first probability-of-residue-`>=`-modulus
+  constraint against matched CE-only, shuffled-modulus, frozen and randomized controls.
+- Require rootless train/evaluate/reload/admission/serialization smoke and one package
+  oracle before root20261290; later W128, W256 and confirmation roots remain conditional.
+
+## 2026-07-28 — EXP-685 parks at its sole package oracle
+
+- Rootless all-mode smoke completed every required path; ten focused checks passed in
+  19.93 seconds with finite nonzero constraint gradients and exact EXP665 inference identity.
+- The one package oracle stopped during validation on seven owned canonical run/metrics
+  schema omissions. Pytest and all roots remained unopened.
+- Apply the single-oracle stop rule without rerun. This is no scientific evidence for or
+  against the validity constraint; EXP665's near-miss remains scientifically unresolved.

@@ -1996,6 +1996,30 @@ runs:
       - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
       - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-685-validity-constrained-attractor
+    status: permanent-package-verification-park
+    approach: training-only-differentiable-residue-validity-constraint-on-EXP665-Anderson-phantom
+    decision: park-exp685-at-package-verification
+    decision_authority: T089-single-package-oracle-stop-rule
+    source_base_commit: 0c3b12685e9430058dabf88aeb903523dc00c0b3
+    source_branch: codex/exp685-validity-constrained-attractor
+    config: configs/exp_685_validity_constrained_attractor.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp685-validity-constrained-attractor.md
+    preregistration: experiments/runs/exp-685-validity-constrained-attractor/preregistration.json
+    run_record: experiments/runs/exp-685-validity-constrained-attractor/run.json
+    metrics: evals/results/exp-685-validity-constrained-attractor/metrics.json
+    checkpoint_sha256: a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4
+    roots: {20261290: unopened-package-oracle-blocked, 20261291: unopened-package-oracle-blocked, 20261292: unopened-package-oracle-blocked, 20261293: unopened-package-oracle-blocked}
+    verification_summary: {rootless_smoke: passed, focused: 10-passed-in-19.93s, validator: red-7-owned-record-schema-issues, pytest: unopened-validator-short-circuit, package_oracle_invocations: 1}
+    calibration: null
+    training_updates: 0
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Rootless all-mode smoke and ten focused checks passed; the sole package oracle then stopped at project validation before pytest.
+      - Seven owned canonical-record schema omissions caused the validator failure; the bounded diagnosis did not implicate loss math, gradient flow or inference identity.
+      - The single-oracle stop rule prohibits rerun, so no root or scientific denominator opened.
+      - Exact arithmetic and the modulus comparator are offline-only; inference remains exact EXP665.
   - run_id: exp-682-huginn-recurrent-depth
     status: parked-source-topology-feasibility
     approach: bounded-faithful-ST-M006a-Huginn-latent-recurrent-depth
