@@ -81,10 +81,16 @@ only after the W128, validity, retention, dependence, reload, separation, and ru
 still pass. Confirmations open only after a complete viability pass. No checked, independent,
 official/private, candidate, submission, or promotion evaluation is authorized.
 
-## Terminal package boundary
+## Terminal calibration boundary
 
-The implementation and 12 focused tests completed, including exact initial Candidate005 identity and
-the frozen controls. The one final package command stopped in project validation on ten inherited
-EXP671 schema violations before pytest. A bounded probe proved both failing files are byte-identical to
-integrated base `b3c63a8`; they are outside T067's allowed files. Root 20261238 calibration therefore
-did not execute and no scientific or resource-admission verdict exists. ST-M025 remains open.
+T068 normalized the inherited EXP671 schema records without changing their scientific evidence and
+recovered a green 612-test package oracle after one bounded PyTorch inter-op-thread idempotence fix.
+Root `20261238` then completed all four trained arms and seven routes. It measured 239.649 wall,
+929.166 process-tree CPU, 995.840 cgroup CPU seconds, and 660,582,400-byte peak RSS. The complete
+formal route projects to 16,386.738 seconds, with 32,773.476-second ETA, 40,967-second soft guard, and
+65,547-second hard guard under 2.0 variability headroom.
+
+The candidate projection is 183.084 seconds nominal and 366.169 seconds guarded. The latter exceeds
+the frozen 285-second guarded ceiling, so root `20261239` and all formal W128/W256/confirmation work
+remain unopened. The raw calibration payload's admission flag checks nominal runtime only and does not
+override T068's binding guarded-runtime conjunct. This is a resource park; ST-M025 remains open.

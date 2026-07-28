@@ -1,6 +1,10 @@
 {
   "run_id": "exp-671-fixed-point-damping-halting",
-  "status": "parked-calibration-expected-value",
+  "status": "completed",
+  "terminal_status": "parked-calibration-expected-value",
+  "hypothesis": "Exact-initialized PreNorm shared refinement with FPR damping and validation-calibrated residual halting retains W128 while adding adaptive width transfer.",
+  "seed": 20261234,
+  "config": "configs/exp_671_fixed_point_damping_halting.yaml",
   "decision": "park-resource-compliance-or-feasibility",
   "decision_authority": "T066-root-20261234-complete-route-resource-admission",
   "source": {
@@ -47,6 +51,8 @@
     "failed_check": "expected_value"
   },
   "artifacts": {
+    "checkpoint": ".scratch/exp-671-fixed-point-damping-halting/calibration/root-20261234/full_fpr/model.safetensors",
+    "metrics": "evals/results/exp-671-fixed-point-damping-halting/metrics.json",
     "full_fpr_checkpoint_sha256": "42ad771fa373fe1581e764604c08fa951f847ca82ea1528fa30e2f9f71cf04ca",
     "stabilization_fixed_checkpoint_sha256": "804a33485ef72140ce86a1c69ebd0ba4f2893fe8164a05aec022cbb4b77d9d6c",
     "plain_fixed_checkpoint_sha256": "d92a998159ed530439d214e5921d2054017d54df2e09762369a622165c5d1be7",

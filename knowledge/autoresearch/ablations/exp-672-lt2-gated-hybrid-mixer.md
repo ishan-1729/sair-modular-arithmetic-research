@@ -1,7 +1,7 @@
 ---
 type: Ablation Study
 title: EXP-672 LT2 gated linear/sparse hybrid mixer
-description: Source-authenticated bounded ST-M025 transfer parked at the inherited package-verification boundary before calibration.
+description: Source-authenticated bounded ST-M025 transfer parked after complete calibration failed the guarded candidate-runtime gate.
 status: parked
 tags: [autoresearch, exp-672, lt2, linear-attention, sparse-attention, gating]
 timestamp: "2026-07-29T07:30:00+05:30"
@@ -22,16 +22,21 @@ PDF and official-code pins, exact proposal identity, linear prefix state, sparse
 shared-loop and gate equations, parameter/compute disclosure, bounded loop-depth curves, matched legal
 splits, learning/reload, separate reset/randomized interventions, determinism, and prohibited inference.
 
-The single authorized final package command was exactly
-`python tools/validate_project.py && python -m pytest`. It stopped after 16.6 seconds in validation;
-pytest was not opened. All ten validator findings are in inherited EXP671 `run.json` and `metrics.json`.
-The bounded owned-cause probe proved both files are unchanged from integrated base `b3c63a8`, with
-SHA-256 `d81aa58ecbaacbf6e4ba128905c67f54071c3b70ac933ec86faa344aab0ae547` and
-`704443296d09110a2478f51d26edb68388de82fa03630d24f6086bd4478bc1f1`. They are outside T067's
-allowed files, so the stop rule requires a terminal verification-feasibility park.
+T068 normalized exactly those two inherited EXP671 records without changing their decision, roots,
+resources, controls, or scientific meaning. The base validator passed. The first full oracle exposed
+one owned PyTorch inter-op-thread idempotence defect after 611 passing tests; the sole bounded correction
+then produced a green validator and all 612 tests passed in 527.29 seconds. T067's source and focused
+evidence was reused because its implementation/test bytes were otherwise unchanged.
 
-Root `20261238` was preregistered but calibration, MLflow, training, evaluation, intervention resource
-measurement, formal ETA, and admission were not executed. Roots `20261239`-`20261241`, complete W128,
-W256, and confirmations remain unopened. This is not a scientific rejection of ST-M025, LT2, its
-official implementation, or this bounded adaptation. Candidate005 and all checked, independent,
-official/private, candidate, submission, promotion, and Goal-completion evidence remain unchanged.
+Root `20261238` completed all four trained arms, all seven routes, validation/test evaluation, depth and
+determinism diagnostics, checkpoint reloads, and resource measurement in 239.65 wall seconds. It used
+929.17 process-tree CPU seconds, 995.84 cgroup CPU seconds, and 660,582,400 bytes peak RSS. Complete-route
+formal work projected to 16,386.74 wall seconds, with 32,773.48-second ETA, 40,967-second soft guard, and
+65,547-second hard guard under the calibrated 2.0 headroom.
+
+The nominal candidate projection was 183.084 seconds, but the binding guarded projection was 366.169
+seconds versus the frozen 285-second ceiling. The raw calibration payload's `admitted=true` flag checks
+nominal runtime only; T068's guarded-runtime conjunct therefore controls and rejects admission. Root
+`20261239`, complete W128, conditional W256, and confirmations `20261240/41` remained unopened. This is
+a runtime-feasibility park, not a scientific rejection of LT2, ST-M025, or the bounded adaptation. No
+checked, independent, official/private, candidate, submission, promotion, or completion surface opened.

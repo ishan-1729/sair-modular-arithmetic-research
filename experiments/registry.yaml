@@ -1800,26 +1800,30 @@ runs:
       - This resource park does not reject FPRM, ST-M027, the exact adaptation scientifically, or the source paper.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
   - run_id: exp-672-lt2-gated-hybrid-mixer
-    status: parked-package-verification
+    status: parked-calibration-runtime-headroom
     approach: bounded-faithful-ST-M025-shared-linear-sparse-hybrid-zero-loop-output-gates
-    decision: park-before-calibration
-    decision_authority: T067-final-package-verification-stop-rule
-    source_base_commit: b3c63a87df2560ded406550f6dc565b2a134ab42
-    source_branch: codex/exp672-lt2-gated-hybrid-mixer
+    decision: park-resource-compliance-or-feasibility
+    decision_authority: T068-root-20261238-guarded-candidate-runtime
+    source_base_commit: 1a7de1d2e29099908d875211f86f27d2a57e3f6b
+    source_branch: codex/exp672-lt2-gated-hybrid-recovery
+    implementation_commit: 8ae0c28cd35fb07f32f6f0287d646655966a260b
     config: configs/exp_672_lt2_gated_hybrid_mixer.yaml
     mechanism_map: knowledge/autoresearch/research/2026-07-29-exp672-lt2-mechanism.md
     preregistration: experiments/runs/exp-672-lt2-gated-hybrid-mixer/preregistration-root-20261238.json
     run_record: experiments/runs/exp-672-lt2-gated-hybrid-mixer/run.json
     metrics: evals/results/exp-672-lt2-gated-hybrid-mixer/metrics.json
     official_source: {repository: chili-lab/LT2, commit: adc2ba2f2704ff82744700679d1d0a090314df6c, license: BSD-3-Clause, transformer_response_sha256: cb90a87723ba751a05abd7fee1457c53a54aec964d5159fcc54e94618e4e61bb}
-    roots: {20261238: preregistered-calibration-unexecuted-package-verification-blocked, 20261239: unopened-admission-blocked, 20261240: unopened-admission-blocked, 20261241: unopened-admission-blocked}
-    verification: {focused: 12-passed-in-16.39s, validator: red-10-inherited-exp671-schema-violations, pytest: unopened-after-validator-red, oracle_invocations: 1}
-    blocker_identity: {exp671_metrics_sha256: 704443296d09110a2478f51d26edb68388de82fa03630d24f6086bd4478bc1f1, exp671_run_sha256: d81aa58ecbaacbf6e4ba128905c67f54071c3b70ac933ec86faa344aab0ae547, both_identical_to_b3c63a8: true}
-    calibration: null
+    roots: {20261238: completed-calibration-runtime-headroom-park, 20261239: unopened-admission-blocked, 20261240: unopened-admission-blocked, 20261241: unopened-admission-blocked}
+    verification: {focused: reused-T067-12-passed-in-16.39s, validator: passed-190-concepts-1100-records, pytest: 612-passed-in-527.29s, oracle_invocations: 2, bounded_correction: interop-thread-idempotence}
+    inherited_schema_normalization: {exp671_metrics_before_sha256: 704443296d09110a2478f51d26edb68388de82fa03630d24f6086bd4478bc1f1, exp671_run_before_sha256: d81aa58ecbaacbf6e4ba128905c67f54071c3b70ac933ec86faa344aab0ae547, semantic_evidence_unchanged: true}
+    calibration: {wall_seconds: 239.64869616600026, process_tree_cpu_seconds: 929.166189, cgroup_cpu_seconds: 995.8400000000001, peak_rss_bytes: 660582400, expected_formal_wall_seconds: 16386.73782497558, eta_wall_seconds: 32773.47564995116, soft_guard_wall_seconds: 40967, hard_guard_wall_seconds: 65547, variability_headroom: 2.0, candidate_nominal_wall_seconds: 183.08425380001245, candidate_guarded_wall_seconds: 366.1685076000249, candidate_guarded_ceiling_seconds: 285, admitted: false, failed_check: candidate_inference_guarded_headroom, raw_payload_admitted_nominal_only: true}
+    checkpoint_sha256: 309070de92a54315f0a3fe0f6fc2afee982b8d2cf99375079c11a5773a697ed1
+    mlflow_parent_run_id: 223e3be66dbc455b86c06536677c034f
     scientific_metrics: null
     scientific_verdict: null
     limitations:
-      - The final package oracle stopped before pytest on out-of-scope inherited EXP671 schema records.
-      - Calibration, formal ETA/admission, W128, W256, and confirmations remained unexecuted.
-      - This park is not scientific evidence against LT2, ST-M025, the official source, or the bounded transfer.
+      - Calibration completed every declared route, but guarded candidate runtime was 366.169 seconds versus the frozen 285-second ceiling.
+      - The raw runner admitted flag checks nominal runtime only; the binding T068 guarded-runtime conjunct controls the terminal decision.
+      - Formal W128, conditional W256, and confirmations remained unopened.
+      - This resource park is not scientific evidence against LT2, ST-M025, the official source, or the bounded transfer.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
