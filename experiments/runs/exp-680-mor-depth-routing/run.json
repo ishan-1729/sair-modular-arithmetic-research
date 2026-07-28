@@ -1,0 +1,57 @@
+{
+  "schema_version": "exp680-terminal-v1",
+  "run_id": "exp-680-mor-depth-routing",
+  "seed": 68073000,
+  "status": "completed",
+  "decision": "park-calibration-noncollapsed-load-gate",
+  "decision_authority": "T080-root-20261270-complete-route-admission",
+  "created_at": "2026-07-30T05:00:00+05:30",
+  "hypothesis": "Expert-choice hierarchical learned recursion-depth routing can retain Candidate005 W128, reduce recurrent calls, and transfer to W256.",
+  "source": {
+    "integrated_base_commit": "6f345a8f7681f8e99ded6a628fbca8d90e915e56",
+    "branch": "codex/exp680-mor-depth-routing",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "040b9467356aee6f30f27901eef06cb65738f362ad9054ca4b1ba5f408700b69",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "348e374798dc8c8adfe5e56584e3dbeb1aebea184f1a525181b08e6c2578e60e",
+    "model_sha256": "2d746394d88f8df4caef2f43cd5aca08d29b8ba2ebc1aaad28bc95b501bc6830",
+    "runner_sha256": "75a609722a785ed271d059a138a3f2f899b10752f191b52434fe0531ae9b7dfa",
+    "test_sha256": "041652ea971886a4f8c61fe26d32caee835bea281e09f998ee6e05b96168bea6"
+  },
+  "config": "configs/exp_680_mor_depth_routing.yaml",
+  "environment": "experiments/runs/exp-680-mor-depth-routing/environment.json",
+  "verification": "experiments/runs/exp-680-mor-depth-routing/verification.json",
+  "metrics": "evals/results/exp-680-mor-depth-routing/metrics.json",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-680-mor-depth-routing/calibration/root-20261270/expert_choice.safetensors",
+    "checkpoint_sha256": "845654d1baa575e405b836f2982947938b7d3a2305290e6ef49f91e000012405",
+    "metrics": "evals/results/exp-680-mor-depth-routing/metrics.json",
+    "frozen_protocol": ".scratch/exp-680-mor-depth-routing/frozen-protocol.json",
+    "frozen_protocol_sha256": "d7a12e177c9ad5b6c4ac29f371042ef707c9b13366a47df3c19c3c92ed2a6b60",
+    "preflight": ".scratch/exp-680-mor-depth-routing/preflight.json",
+    "preflight_sha256": "c0b1f39fa27fddc83a0ed87b4d51e84420653c18097c95d0424f9b9a2446aa6b",
+    "package_oracle_log": ".scratch/exp-680-mor-depth-routing/package-oracle.log",
+    "package_oracle_log_sha256": "ebfa8c1312e16ecf5a7fa9bcc8cb26b887b9a6ebe6c553e20c085c9d7489b926",
+    "calibration": ".scratch/exp-680-mor-depth-routing/calibration.json",
+    "calibration_sha256": "1ec4cf9637541e9c4eb73abe3d73724977c26b718f0020f9fbc9c9176e3a403d"
+  },
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "1",
+    "run_id": "77517f559fc44e749a4690d3fa7f9799",
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-650-library-backed-mamba/worktree/.scratch/mlflow/mlflow.db"
+  },
+  "roots": {"20261270": "completed-calibration-topology-gate-reject", "20261271": "unopened-admission-blocked", "20261272": "unopened-admission-blocked", "20261273": "unopened-admission-blocked"},
+  "training_updates": 20,
+  "formal_calls_executed": 0,
+  "calibration": "evals/results/exp-680-mor-depth-routing/metrics.json",
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "Instance-level routing is a bounded-faithful adaptation because Candidate005 convolutionally couples spatial positions; Transformer KV-cache claims are excluded.",
+    "Calibration is non-scientific: each trained arm received four route-proving updates and only tiny evaluation denominators.",
+    "The expert route used depths 8 and 14 but zero instances at depth 11; the required noncollapsed-load conjunct failed.",
+    "Root 20261271 and confirmations remained unopened, so no W128/W256 scientific verdict exists.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion evaluation occurred."
+  ]
+}

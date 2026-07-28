@@ -322,3 +322,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - The first complete project oracle passes 663/663 in 560.35 pytest seconds (548.40 outer wall, 712.07 aggregate process CPU seconds, 943,808 KiB RSS) under the dynamic 1,684.13765625-second hard guard.
 - Pre-root freeze inspection finds `evaluation.trajectory_loss_cases` and `evaluation.calibration_trajectory_loss_cases` required by the verified runner but absent from the verified config. Repair would invalidate the sole green package identity and is prohibited.
 - Permanently park before root `20261266`; roots `20261266`-`20261269`, MLflow, calibration, training, W128/W256, and confirmations remain unopened. M043.b remains scientifically unanswered.
+
+## 2026-07-30 — EXP-680 parks at complete-route noncollapsed-load admission
+
+- Visually authenticate immutable MoR pages 3-5, Table 1, Figure 2, Eq. 2.1-2.2 and Table 2. Map a source token to one complete convolution-coupled Candidate005 instance; freeze W64/W128/W256 depths `[7,9,12]`, `[8,11,14]`, `[9,13,16]`, hierarchical `1,2/3,1/3` capacity, token-choice, fixed/equal/random controls, and native PyTorch CPU routing.
+- Ten focused tests pass. Preflight constructs every mode, root and denominator. The one package oracle passes 206 concepts / 1,100 records and 673/673 tests in 479.88 seconds (476.49 outer wall, 610.23 process CPU, 931,884 KiB RSS).
+- Root `20261270` completes in 129.921 wall / 369.570 process-tree CPU / 383.924 cgroup CPU seconds with 1,961,058,304-byte RSS. Call reduction is 10.714%, expert route wall beats fixed-full, and guarded candidate projection is 68.870 seconds.
+- The expert W128 histogram is `{8:3,11:0,14:9}`. The frozen all-depth noncollapse conjunct fails, so roots `20261271`-`20261273` remain unopened without retuning. This is a topology park, not scientific evidence against MoR/M009.b.

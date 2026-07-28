@@ -1996,6 +1996,35 @@ runs:
       - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
       - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-680-mor-depth-routing
+    status: parked-calibration-noncollapsed-load
+    approach: bounded-ST-M009b-instance-level-hierarchical-expert-choice-depth-routing
+    decision: park-calibration-resource-or-topology
+    decision_authority: T080-root-20261270-complete-route-admission
+    source_base_commit: 6f345a8f7681f8e99ded6a628fbca8d90e915e56
+    source_branch: codex/exp680-mor-depth-routing
+    config: configs/exp_680_mor_depth_routing.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp680-mor-depth-routing-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-680-mor-depth-routing.md
+    run_record: experiments/runs/exp-680-mor-depth-routing/run.json
+    metrics: evals/results/exp-680-mor-depth-routing/metrics.json
+    verification: experiments/runs/exp-680-mor-depth-routing/verification.json
+    paper_sha256: 040b9467356aee6f30f27901eef06cb65738f362ad9054ca4b1ba5f408700b69
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261270: completed-calibration-topology-gate-reject, 20261271: unopened-admission-blocked, 20261272: unopened-admission-blocked, 20261273: unopened-admission-blocked}
+    verification_summary: {focused: 10-passed, validator: green-206-concepts-1100-records, pytest: 673-passed-in-479.88s, pytest_outer_wall_seconds: 476.49, pytest_process_cpu_seconds: 610.23, pytest_peak_rss_kib: 931884, oracle_invocations: 1}
+    calibration: {wall_seconds: 129.92078969199997, process_tree_cpu_seconds: 369.57, cgroup_cpu_seconds: 383.9240000000001, peak_rss_bytes: 1961058304, expected_formal_wall_seconds: 23761.84082970117, candidate_guarded_seconds: 68.86987362000092, expert_average_calls: 12.5, expert_call_reduction: 0.1071428571428571, expert_w128_histogram: {8: 3, 11: 0, 14: 9}, admitted: false}
+    training_updates: 20
+    formal_calls_executed: 0
+    mlflow_run_id: 77517f559fc44e749a4690d3fa7f9799
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Instance-level routing is a bounded-faithful adaptation; Transformer KV-cache claims are excluded.
+      - Calibration is non-scientific and used four updates per trained arm.
+      - Every admission conjunct except noncollapsed load passed; zero instances used depth 11.
+      - Formal W128/W256 and confirmations remained unopened, so no M009.b scientific verdict exists.
+      - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
   - run_id: exp-679-capacity-recycling
     status: permanent-pre-root-denominator-park
     approach: ST-M043b-resource-selected-reduced-call-exact-embedded-width-capacity-recycling

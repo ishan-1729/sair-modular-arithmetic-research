@@ -78,3 +78,4 @@
 - [EXP-677 known-step endpoint-length scheduling](exp-677-length-schedule.md) - source-faithful M004.b schedule implementation passes nine focused tests but parks before calibration because the sole package oracle lacks the protected challenge snapshot in the scoped worktree.
 - [EXP-678 target-only continuation](exp-678-target-only-continuation.md) - verified ST-M044.a package permanently parked before calibration after final raw-protocol authentication failure.
 - [EXP-679 capacity recycling](exp-679-capacity-recycling.md) - exact preserved M043.b package passed 663 tests, then permanently parked before calibration on a verified config/runner trajectory-denominator conflict.
+- [EXP-680 Mixture-of-Recursions depth routing](exp-680-mor-depth-routing.md) - frozen bounded-faithful M009.b instance-level expert-choice hierarchy with matched depth and intervention controls.
