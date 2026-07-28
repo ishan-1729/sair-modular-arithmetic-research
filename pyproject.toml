@@ -24,6 +24,7 @@ research = [
   "mlflow==3.14.0",
   "psutil==7.0.0",
   "sympy==1.13.1",
+  "torchdeq==0.1.0",
   "torch-geometric==2.8.0",
   "transformers==5.14.1",
 ]

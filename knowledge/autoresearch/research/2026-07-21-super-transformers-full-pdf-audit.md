@@ -223,6 +223,8 @@ EXP-664 implements bounded-faithful M019.b state-scaled Gaussian corruption only
 
 EXP-643/649 are not these methods. Terminal requires convergence-signature calibration, state perturbations, solver/gradient/noise/damping controls, and exact-answer selection evidence.
 
+EXP-665 implements the declared bounded SAIR proposal-plus-attractor family with `torchdeq==0.1.0`, matched fixed-depth/Picard/Anderson-gradient/EqR routes, exact checkpoint reload, and a W128-first decision order. Its Anderson/phantom primary reached exactly 85.0% W128 rollout and 99.933% one-step exactness, but one of 300 rollouts was invalid, failing the frozen zero-invalid conjunct. This is a negative verdict for the exact bounded primary adaptation only. The gate left matched solver/gradient/noise/damping controls, convergence-signature and basin evidence, residual-based EqR selection, W256, and confirmations unopened, so M021.a–c remain unresolved beyond this bounded result.
+
 ### ST-M022 — GRAM (2 components)
 
 **PDF:** `2605.19376`, pp. 3–5, 9–10, 15. **Components:** (a) high/low hierarchy with target-conditioned posterior versus inference prior, Gaussian mean/variance only on high state, KL/variational training, deep supervision/truncated gradients; (b) LPRM versus majority selection. Native distributions suffice. Required controls: stochastic-guidance, stochasticity-only, guidance-only, direct prediction, and random-initialization noise. EXP-649 is resource-only and unrelated. Open.

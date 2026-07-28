@@ -9,6 +9,10 @@ timestamp: "2026-07-12T02:20:00+05:30"
 
 # Autoresearch decision log
 
+## 2026-07-29
+
+- **Reject EXP-665 exact bounded attractor/equilibrium adaptation at the W128-first gate**: root `20261210` completed calibration for all six routes and admitted formal root `20261211`. The library-backed Anderson/phantom primary reached exactly 85.0% exact on 300 W128 rollouts and 99.933% exact on 3,000 W128 transitions, but one rollout was invalid (0.333%) against the frozen zero-invalid conjunct. Candidate runtime projected to 168.97 seconds. The gate left proposal/randomized controls, convergence/basin diagnostics, W256, and roots `20261212`/`20261213` unopened. This rejects only the declared bounded SAIR adaptation; the source methods, TorchDEQ, Candidate 005, and all benchmark/promotion surfaces remain unchanged.
+
 ## 2026-07-28
 
 - **Reject EXP-664 exact bounded SPRM adaptation at the W128-first gate**: root `20261206` completed full-route calibration and admitted formal root `20261207`. After 400 updates per trained route, SPRM reached 99.233% exact on 3,000 W128 transitions but only 43.667% exact on 300 W128 rollouts, with 0.667% invalid rollouts. Noise-free logits, quotient outputs, and RNG state remained bit-identical to the source call graph. The frozen conjunctive gate blocks W64/W256, causal-control verdicts, and confirmation roots `20261208`/`20261209`. This rejects only the declared SAIR adaptation; Candidate 005 and all benchmark/promotion surfaces remain unchanged.
