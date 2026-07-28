@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP675 RRT SVD Teacher Uptraining
 description: Source-complete ConvGRU transfer of Relaxed Recursive Transformer teacher, SVD and joint-uptraining mechanics.
-status: frozen-before-science
+status: parked-calibration-runtime-headroom
 tags: [autoresearch, rrt, svd, lora, recurrent]
 timestamp: "2026-07-29T00:00:00+05:30"
 ---
@@ -121,3 +121,25 @@ fixed visit adapters. It excludes the teacher, exact answer or validity filters,
 answer-dependent routing, repair, target canvases, programmed multiplication,
 division, reduction or CRT, lookup, private/checked data, and external calls.
 
+## Terminal result
+
+The one hermetic package oracle passed validation (196 concepts, 1,100 records)
+and all 628 tests in 553.90 seconds. After one bounded compatibility repair for
+the historical EXP300 soft-state helper, focused tests again passed 9/9; no
+second full pytest was run.
+
+Root 20261250 completed all declared route classes in 119.775 wall, 388.350
+process-tree CPU and 497.676 cgroup CPU seconds with 1,023,324,160-byte peak
+process-tree RSS. It proved exact copied-teacher identity, 0.6372 mean SVD
+relative reconstruction error versus 1.4133 for equal-norm random subspaces,
+joint shared/adaptor movement, persistence, and a 9,796,600-byte artifact set.
+Those tiny calibration denominators are not scientific accuracy evidence.
+
+The guarded candidate projection was 1,863.361 seconds against the frozen
+285-second ceiling, so the calibration stop rule parks the package and leaves
+roots 20261251-20261253 unopened. The runner also instantiated the calibration
+global control at rank 8 instead of the intended parameter-matched rank 128;
+control-matching evidence is therefore unavailable. This defect does not change
+the independent runtime rejection, but it is a binding limitation. There is no
+scientific RRT/ST-M005 verdict and no candidate, benchmark, submission or
+promotion change.

@@ -1,0 +1,94 @@
+{
+  "run_id": "exp-675-rrt-svd-teacher-uptraining",
+  "seed": 67573000,
+  "status": "completed",
+  "created_at": "2026-07-29T00:00:00+05:30",
+  "decision": "park-resource-compliance-or-feasibility",
+  "decision_authority": "T071-root-20261250-complete-route-calibration-stop-rule",
+  "hypothesis": "Source-complete RRT teacher, residual SVD and joint shared-base/visit-adapter uptraining retain W128 and improve W256 over matched controls.",
+  "config": "configs/exp_675_rrt_svd_teacher_uptraining.yaml",
+  "source": {
+    "branch": "codex/exp675-rrt-svd-teacher-uptraining",
+    "repository_commit": "5e5cab9bd2861a4ef6e891ff33f2965297e58954",
+    "integrated_base_commit": "c38349547f3891af5cfefe78ca413f48e793b602",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "680a597088a3642bdd1c4eef51f687556c0e10d5ebc0b9f44736241a51cfbfb3",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "966bede31ea6a7a94a365c59be9e4cbd0d06a19c8e41636693cbcc463370982c",
+    "model_sha256": "ede1f9b3e59315da25d6318e810190f5f8e857947f0b4aa29b91ad30da23d265",
+    "runner_sha256": "10b1ef4daa68796e7761d8c96f136d261b3c8fbfd03e98d5d84b399b806e9ffa",
+    "test_sha256": "f36af017001546c33432d8a443d98c19cc42db4274281d6aeb3d6138b52cad8e",
+    "dirty": false
+  },
+  "roots": {
+    "20261250": "completed-calibration-resource-gate-reject",
+    "20261251": "unopened-admission-blocked",
+    "20261252": "unopened-admission-blocked",
+    "20261253": "unopened-admission-blocked"
+  },
+  "calibration": {
+    "summary_path": ".scratch/exp-675-rrt-svd-teacher-uptraining/calibration/root-20261250-summary.json",
+    "summary_sha256": "988c00912f743650c782c92c17004b93be039c59f11d4349bd37c6f1d7aa59a2",
+    "admission_path": ".scratch/exp-675-rrt-svd-teacher-uptraining/admission.json",
+    "admission_sha256": "09e8f2d6c4ea48c8ec2eaf7f1ec9d19cb8ede863777a802ef05c4d7d5737ca31",
+    "wall_seconds": 119.77512461300103,
+    "process_tree_cpu_seconds": 388.34999999999997,
+    "cgroup_cpu_seconds": 497.6759999999995,
+    "peak_process_tree_rss_bytes": 1023324160,
+    "expected_formal_wall_seconds": 24254.46273413271,
+    "soft_guard_wall_seconds": 30318.07841766589,
+    "hard_guard_wall_seconds": 42445.30978473224,
+    "formal_eta_seconds": 24254.46273413271,
+    "variability": 0.2700786778541766,
+    "guarded_candidate_seconds": 1863.361408432652,
+    "candidate_ceiling_seconds": 285,
+    "artifact_bytes": 9796600,
+    "artifact_ceiling_bytes": 21474836480,
+    "complete_route": true,
+    "fidelity_reduced": false,
+    "admitted": false
+  },
+  "mechanics": {
+    "teacher_copy_weights_equal": true,
+    "teacher_copy_logits_equal": true,
+    "teacher_copy_quotient_equal": true,
+    "svd_mean_relative_reconstruction_error": 0.6372018326073885,
+    "equal_norm_random_mean_relative_reconstruction_error": 1.4133427888154984,
+    "subspace_shuffled_mean_relative_reconstruction_error": 1.8242584615945816,
+    "full_rrt_calibration_base_update_norm_sum": 0.003431158934290579,
+    "full_rrt_calibration_adapter_update_norm_sum": 0.0024256141914520413
+  },
+  "verification": {
+    "focused": "9-passed-in-10.51s; post-repair-9-passed-in-11.85s",
+    "full_oracle": {
+      "validator": "196-concepts-1100-records-green",
+      "pytest": "628-passed-in-553.90s",
+      "outer_wall_seconds": 552.55,
+      "user_seconds": 705.68,
+      "system_seconds": 26.65,
+      "peak_rss_kib": 928000,
+      "log_sha256": "597dc44f06b2ad15ebf4ba19107f30232d025112bb42c417c3976048dd1405c3",
+      "invocations": 1
+    },
+    "bounded_owned_repair": "historical EXP300 lacks features_from_soft_state; added the inherited differentiable local feature fallback, then reran only focused tests"
+  },
+  "mlflow": {
+    "experiment_id": "1",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "run_id": "57868a39927d4c20904b6bcad52e3c35"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-675-rrt-svd-teacher-uptraining/fixtures/exp609-weights.safetensors",
+    "environment": "experiments/runs/exp-675-rrt-svd-teacher-uptraining/environment.json",
+    "metrics": "evals/results/exp-675-rrt-svd-teacher-uptraining/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-675-rrt-svd-teacher-uptraining.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp675-rrt-mechanism.md"
+  },
+  "limitations": [
+    "Root 20261250 used calibration-only denominators (16 transitions and 2 rollouts per width per arm); its exactness values are non-scientific.",
+    "The guarded 1863.361-second candidate projection independently failed the frozen 285-second gate, so formal W128/W256 and confirmations were not opened.",
+    "The runner instantiated the declared global control with rank 8 rather than the intended parameter-matched rank 128. This did not affect the independent runtime rejection, but the calibration cannot validate control matching.",
+    "The sole bounded repair was consumed on the historical soft-feature compatibility defect; no further repair or calibration retry is authorized.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened. This is not a scientific rejection of RRT, ST-M005, or the source paper."
+  ]
+}
