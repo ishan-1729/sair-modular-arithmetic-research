@@ -1,0 +1,135 @@
+{
+  "decision_order": [
+    "train-and-cache-all",
+    "W128-primary-exact-validity-runtime",
+    "W128-retention-dependence-variational",
+    "W256-primary",
+    "W256-controls",
+    "confirmations"
+  ],
+  "dependency": {
+    "distributions": "torch.distributions",
+    "operators": [
+      "Normal",
+      "Independent",
+      "kl_divergence",
+      "rsample"
+    ],
+    "torch": "2.5.1"
+  },
+  "gates": {
+    "maximum_candidate_headroom_wall_seconds": 285,
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_mean_kl": 100.0,
+    "maximum_prior_scale": 10.0,
+    "maximum_w128_loss_to_proposal": 0.02,
+    "minimum_guidance_relative_norm": 1e-06,
+    "minimum_mean_kl": 1e-08,
+    "minimum_prior_scale": 0.001,
+    "minimum_trained_weight_drop_w128": 0.2,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w128_transition": 0.998,
+    "minimum_w256_gain_over_proposal": 0.05,
+    "minimum_w256_gain_over_stochasticity": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "inference": {
+    "adaptive_stopping": false,
+    "fixed_seed": 66624001,
+    "lprm_or_majority": false,
+    "target_free_prior_only": true,
+    "trajectories": 1
+  },
+  "mode": "preregister",
+  "paper": {
+    "pages": [
+      3,
+      4,
+      5,
+      9,
+      10,
+      15
+    ],
+    "path": "research/papers/arxiv-2605.19376.pdf",
+    "sha256": "c53be1192d945358fc0fa31cab4c9d8ffc09fbd686340161de504ebeb24de0f7"
+  },
+  "primary_route": "gram_full",
+  "prohibited": [
+    "posterior targets at inference",
+    "answer-dependent sampling or stopping",
+    "multi-trajectory breadth",
+    "programmed modular arithmetic",
+    "validity filter or repair",
+    "lookup",
+    "checked/private answers"
+  ],
+  "root": 20261214,
+  "roots": {
+    "calibration": 20261214,
+    "confirmations": [
+      20261216,
+      20261217
+    ],
+    "viability": 20261215
+  },
+  "routes": [
+    "proposal_only",
+    "gram_full",
+    "deterministic_mean",
+    "guidance_only_no_kl",
+    "stochasticity_only_no_posterior",
+    "direct_prediction",
+    "randomized_guidance"
+  ],
+  "run_id": "exp-666-gram-posterior-prior-guidance",
+  "source": {
+    "checkpoint": {
+      "path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "files": {
+      "config": {
+        "path": "configs/exp_666_gram_posterior_prior_guidance.yaml",
+        "sha256": "1b69b73d200d3e96a77bcd298b6a47f6d0d6065a5374f125a1b111d37d069c69"
+      },
+      "mechanism": {
+        "path": "knowledge/autoresearch/research/2026-07-29-exp666-gram-mechanism.md",
+        "sha256": "b9c961e3fcf27842625fc91f0c86a1554ba7fd1016c641c5ed3bbafd760c1bfe"
+      },
+      "model": {
+        "path": "experiments/exp_666_gram_posterior_prior_guidance/model.py",
+        "sha256": "43cd0449ef6db65fb20e2d439daa6b9874937e042df6cfa923b17a436ed3f52b"
+      },
+      "runner": {
+        "path": "experiments/exp_666_gram_posterior_prior_guidance/run.py",
+        "sha256": "1f002962d4f47b01d98aa0b176f648af5e83971aaa78e2b9b690b665038ff00c"
+      },
+      "test": {
+        "path": "tests/test_exp_666_gram_posterior_prior_guidance.py",
+        "sha256": "d0f1305c93eed3b81c58b3ed3fe70d48e49dcf1df58ec2675d82aa10bbb94a83"
+      }
+    },
+    "repository_branch": "codex/exp666-gram-posterior-prior-guidance",
+    "repository_commit": "e18978edaf6e84197a1ca6bb2ac3d7b03ea319cd"
+  },
+  "splits": {
+    "128": {
+      "test": "9a487e8dccb2386aceb35de8a027fe5a687abc6797b38514a89d1652bbc2b834",
+      "train": "f6498a53c11a569d54f54e6231b00826880a5e5f4c935a8041c9f700cf0d940e",
+      "validation": "5c3b74269e4e459d430bf4a1dd7e9f5648f94c0e55d95028fb85c61f801caa87"
+    },
+    "256": {
+      "test": "c78869ceca3eec4fe0e5e66521c8c406ea33d09087e4b4d97c84d8113ebf3700",
+      "train": "674e0871d34353353e655f36d016433fc0f7c75b1f00e7b33ba95f202b0b6b2d",
+      "validation": "e8dccd711635f8ca71c5ba06aa0a28b4587efa083910e95f28d5ed1e10b46bdc"
+    },
+    "64": {
+      "test": "102e1c24281b92d9bc4be519ae73e1d871b45a9b2f0e4fdd9fd2c92b06e385ee",
+      "train": "65a07aad666fe5da1951df63af18ef32f8331be2abd7dbcb531abef2a866301a",
+      "validation": "f1334fe8b78fbb47d18587a5906b9aa7ef9e15e2cb10d0d17956f5731dd0db04"
+    }
+  }
+}

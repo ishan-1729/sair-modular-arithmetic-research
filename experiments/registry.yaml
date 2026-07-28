@@ -1648,3 +1648,32 @@ runs:
       - The primary met rollout, transition, residual, and runtime floors but failed the zero-invalid-rollout conjunct.
       - This rejects only the exact bounded SAIR adaptation, not Attractor Models, Equilibrium Reasoners, HRM, or TorchDEQ generally.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-666-gram-posterior-prior-guidance
+    status: parked-calibration-runtime-headroom
+    approach: bounded-faithful-ST-M022a-single-trajectory-posterior-to-prior-guidance
+    decision: park-before-viability-runtime-headroom-gate
+    decision_authority: T061-root-20261214-corrected-complete-route-dynamic-admission
+    source_base_commit: e18978edaf6e84197a1ca6bb2ac3d7b03ea319cd
+    source_branch: codex/exp666-gram-posterior-prior-guidance
+    dependency: {torch: 2.5.1, distributions: native-Normal-Independent-rsample-kl_divergence}
+    config: configs/exp_666_gram_posterior_prior_guidance.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp666-gram-mechanism.md
+    preregistration: experiments/runs/exp-666-gram-posterior-prior-guidance/preregistration.json
+    preregistration_sha256: 8503043eb25a8157eedb75b87127854d47cc28c8be884c241bea9f75aa2bb010
+    run_record: experiments/runs/exp-666-gram-posterior-prior-guidance/run.json
+    metrics: evals/results/exp-666-gram-posterior-prior-guidance/metrics.json
+    roots: {20261214: completed-calibration-runtime-headroom-park, 20261215: unopened-admission-blocked, 20261216: unopened-admission-blocked, 20261217: unopened-admission-blocked}
+    parameters_each: 175600
+    trainable_parameters_each: 75776
+    calibration_updates_each_trained_route: 2
+    formal_optimizer_updates_each_trained_route: 0
+    calibration: {admitted: false, failed_check: candidate_inference, wall_seconds: 151.01981618699938, process_tree_cpu_seconds: 1242.764593, cgroup_cpu_seconds: 1318.112000000001, peak_rss_bytes: 557408256, expected_formal_wall_seconds: 14061.369512323654, eta_wall_seconds: 26266.122984127225, hard_guard_wall_seconds: 52533}
+    candidate_runtime: {nominal_projected_wall_seconds: 226.62907599999258, variability_headroom: 1.8679633559950966, headroom_projected_wall_seconds: 423.33480937101393, frozen_ceiling_seconds: 285.0}
+    verification: {focused: 24-passed, validator: 177-concepts-1100-records-green, full_oracle: 506-passed}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration diagnostics use two updates and tiny denominators and are non-scientific.
+      - Viability, formal controls, W256, confirmations, and M022.b breadth remain unopened.
+      - This resource park does not reject GRAM, ST-M022.a, the exact SAIR adaptation scientifically, or the source paper.
+      - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.

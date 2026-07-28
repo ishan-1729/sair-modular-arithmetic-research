@@ -229,6 +229,8 @@ EXP-665 implements the declared bounded SAIR proposal-plus-attractor family with
 
 **PDF:** `2605.19376`, pp. 3–5, 9–10, 15. **Components:** (a) high/low hierarchy with target-conditioned posterior versus inference prior, Gaussian mean/variance only on high state, KL/variational training, deep supervision/truncated gradients; (b) LPRM versus majority selection. Native distributions suffice. Required controls: stochastic-guidance, stochasticity-only, guidance-only, direct prediction, and random-initialization noise. EXP-649 is resource-only and unrelated. Open.
 
+EXP-666 implements a bounded ST-M022.a SAIR adaptation with exact-initialized frozen proposal, deterministic low state, diagonal-Gaussian high state, structurally training-only posterior targets, target-free one-trajectory prior inference, native reparameterization/KL, deep supervision, truncation, and all named cached controls. Root `20261214` completed resource/integrity calibration, but the 226.63-second nominal candidate projection became 423.33 seconds under measured variability headroom, failing the frozen 285-second gate. Formal root `20261215` stayed unopened. M022.a therefore has a resource park without scientific verdict; M022.b LPRM/majority/multi-trajectory breadth remains explicitly untested.
+
 ### ST-M023 — PTRM (2 components)
 
 **PDF:** `2605.19943`, pp. 2, 4–5, 8, 13. **Components:** (a) Gaussian noise at every deep-recursion/supervision step of a pretrained TRM; (b) K rollouts selected by its existing correctness Q head. Native. Test sigma/K curves, deterministic/sigma-zero, Q/mode/majority/pass@K and selector interventions. EXP-649 is not PTRM. Resource budgets are architecture-specific and dynamic; oracle breadth cannot promote.

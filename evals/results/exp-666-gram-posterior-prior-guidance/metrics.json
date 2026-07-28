@@ -1,0 +1,54 @@
+{
+  "run_id": "exp-666-gram-posterior-prior-guidance",
+  "created_at": "2026-07-28T19:30:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "calibration-only-non-scientific-runtime-park",
+  "decision": "park-before-viability-runtime-headroom-gate",
+  "root": 20261214,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Root-20261214 candidate-runtime headroom admission failed before formal root 20261215 could open.",
+    "labels_or_oracle_present": false
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {
+    "complete_calibration_routes": ["proposal_only", "gram_full", "deterministic_mean", "guidance_only_no_kl", "stochasticity_only_no_posterior", "direct_prediction", "randomized_guidance"],
+    "representative_updates_per_trained_route": 2,
+    "all_checkpoint_reload_exact": true,
+    "deterministic_repeat_equal": true,
+    "target_free_single_prior_trajectory": true,
+    "formal_controls_opened": false
+  },
+  "calibration_diagnostics": {
+    "cases": 8,
+    "guidance_relative_norm": 0.0000783510331530124,
+    "mean_kl": 0.0000017770589693100192,
+    "prior_scale_mean": 0.04978705197572708,
+    "posterior_scale_mean": 0.04978702589869499,
+    "posterior_prior_state_distance": 0.0000006734587714163354,
+    "target_shuffle_state_distance": 0.00000006180282241530222,
+    "evidence_scope": "resource-and-integrity-calibration-only"
+  },
+  "resource_admission": {
+    "admitted": false,
+    "checks": {"complete_routes": true, "expected_value": true, "memory": true, "candidate_inference": false, "determinism": true, "reload": true, "separation": true, "target_free_single_trajectory": true},
+    "candidate_projected_wall_seconds": 226.62907599999258,
+    "candidate_headroom_wall_seconds": 423.33480937101393,
+    "candidate_headroom_ceiling_seconds": 285.0,
+    "headroom": 1.8679633559950966,
+    "expected_formal_wall_seconds": 14061.369512323654,
+    "eta_formal_wall_seconds": 26266.122984127225,
+    "hard_guard_wall_seconds": 52533,
+    "observed_wall_seconds": 151.01981618699938,
+    "observed_process_tree_cpu_seconds": 1242.764593,
+    "observed_cgroup_cpu_seconds": 1318.112000000001,
+    "peak_rss_bytes": 557408256
+  },
+  "unopened_surfaces": ["root 20261215", "formal W128 primary", "W128 retention/dependence/variational gate", "W128 trained mechanism controls", "W256 primary and controls", "roots 20261216 and 20261217", "M022.b LPRM/majority/multi-trajectory breadth"],
+  "limitations": [
+    "Tiny calibration accuracy and variational values are not scientific evidence.",
+    "The runtime-headroom admission failure prohibited formal execution.",
+    "No GRAM, source-paper, adaptation, candidate, benchmark, promotion, or completion verdict follows."
+  ]
+}

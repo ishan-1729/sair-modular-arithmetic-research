@@ -38,6 +38,8 @@ The [GRAM paper](https://arxiv.org/abs/2605.19376) presents recursive reasoning 
 
 The inspected [GRAM project page](https://ahn-ml.github.io/gram-website/) displayed `Code (coming soon)`. Thus the browser observation on 2026-07-20 is that no released implementation was available from that project page.
 
+EXP-666 later implemented only a bounded single-trajectory ST-M022.a transfer using native PyTorch distributions around the frozen Candidate005 proposal. Its complete root-`20261214` calibration passed integrity, memory, expected-value, reload, separation, and target-free inference checks, but the candidate-shaped path projected to 423.33 seconds at measured variability headroom versus the frozen 285-second ceiling. Formal accuracy roots remained unopened. This resource result neither tests GRAM's paper claims scientifically nor opens LPRM, majority, or multi-trajectory breadth.
+
 ### Equilibrium Reasoners (EqR)
 
 The [EqR paper](https://arxiv.org/abs/2605.21488) frames generalizable recursive reasoning as convergence toward task-conditioned solution attractors and studies scaling across iterative depth and trajectory breadth. This is a source claim; convergence has not been established for Candidate 005.
