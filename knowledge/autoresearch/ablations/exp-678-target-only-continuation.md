@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP678 Target-Only Continuation
 description: Frozen ST-M044.a target-position CE-mask comparison on the unchanged Candidate005 recurrent core.
-status: parked-pre-root-provenance
+status: permanent-pre-root-authentication-park
 tags: [autoresearch, exp678, target-only, supervision, candidate005]
 timestamp: "2026-07-30T01:00:00+05:30"
 ---
@@ -43,3 +43,5 @@ No checked, independent, official/private, candidate, submission, promotion, or 
 Nine focused tests passed on the frozen package bytes. The sole dynamically budgeted package oracle stopped in project validation before pytest because this document and the mechanism map omitted the required `description` frontmatter field. The bounded owned repair adds only those fields and terminal records; a second package oracle is prohibited. Root `20261262` and roots `20261263`-`20261265` remain unopened. This is a verification park, not scientific evidence for or against target-only continuation or M044.a.
 
 T076 subsequently normalized the four validator-named canonical JSON fields without changing executable/config/test or scientific semantics, passed validation, and completed the first full project suite at 655/655. The mandatory pre-root authentication still rejects the accepted freeze because it binds this document and the mechanism map before T075's required description/terminal edits. T076 prohibits re-freezing or changing T075 bytes, so all roots remain unopened. The terminal classification is therefore a pre-root provenance park, still with no M044.a scientific evidence.
+
+T077 proved that only the two governance hashes and repository-commit provenance differ, rebound them exactly, and obtained zero differences after JSON normalization. The sole raw authentication still fails because serialized JSON uses string keys for numeric evaluation maps while the live YAML-derived protocol uses integer keys. No retry or same-boundary successor is authorized. This exact execution formulation is permanently parked before calibration with every root unopened.

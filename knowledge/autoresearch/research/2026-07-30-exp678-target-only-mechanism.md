@@ -2,7 +2,7 @@
 type: Research Note
 title: EXP678 Target-Only Supervision Mechanism Map
 description: Page-authenticated Loopies target-position masking map, SAIR analogue limits, and EXP678 terminal verification park.
-status: parked-pre-root-provenance
+status: permanent-pre-root-authentication-park
 tags: [autoresearch, loopies, M044, exp678]
 timestamp: "2026-07-30T01:00:00+05:30"
 ---
@@ -18,3 +18,5 @@ The primary comparison separates three questions: target-position selection (`ta
 The implementation and nine focused tests are complete, but the sole package oracle stopped at validator schema checks before pytest because the two new concept files lacked required `description` fields. The bounded repair records the terminal park. No calibration, training, W128/W256 science, or confirmation root opened, so M044.a remains scientifically open.
 
 T076 recovered the exact four canonical record fields, green validator, and first full pytest without changing the mechanism. Pre-root authentication then exposed that the accepted freeze binds the pre-description versions of this note and the preregistration. Because T076 prohibits re-freezing, no root opens; this remains provenance evidence only.
+
+T077 rebound exactly those two governance hashes after proving semantic equivalence. JSON-normalized protocol comparison is exact, but the one raw authentication fails on string-versus-integer evaluation-map keys. The exact package is permanently parked without opening calibration or science.
