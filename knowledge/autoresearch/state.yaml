@@ -800,7 +800,22 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preserve EXP678 as parked at package verification with roots 20261262-20261265 unopened. A separate PM decision is required before any verification recovery or new material package; Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+parked_exp679_hypothesis:
+  run_id: exp-679-capacity-recycling
+  status: permanent-pre-root-denominator-park
+  source_base_commit: 087a9a6329e4261eae7be10a4fcad0d16bb3d925
+  source_branch: codex/exp679-capacity-recycling
+  decision_authority: T079-pre-root-freeze-stop-rule
+  mechanism: bounded-ST-M043b-resource-selected-reduced-call-exact-embedded-capacity-recycling
+  roots: {calibration_20261266: unopened, viability_20261267: unopened, confirmation_20261268: unopened, confirmation_20261269: unopened}
+  verification: {focused_passed: 8, validator_passed: true, full_oracle_passed: 663, pytest_seconds: 560.35, outer_wall_seconds: 548.40, process_cpu_seconds: 712.07, peak_rss_kib: 943808}
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-679-capacity-recycling/run.json
+  metrics: evals/results/exp-679-capacity-recycling/metrics.json
+  limitations: [verified-config-omits-two-runner-required-trajectory-denominators, all-roots-unopened, no-M043b-scientific-verdict, no-candidate-benchmark-submission-promotion-or-completion-change]
+next_action: Execute the separately authorized EXP680 learned recursion-depth routing package from the exact pushed EXP679 terminal commit. Candidate 005 and all checked, independent, official/private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

@@ -1,0 +1,42 @@
+{
+  "schema_version": "exp679-verification-v1",
+  "status": "terminal-permanent-pre-root-denominator-park",
+  "preserved_identity": {
+    "evidence": ".scratch/exp-679-capacity-recycling/t079-preserved-byte-identity.json",
+    "config_sha256": "7718c56060e5be70e5c0744437b52a79b3c8c9b8a51befa03f8a10c2426ae850",
+    "model_sha256": "0cb923c37f732933b2e32a0d189ec605ca1533d9488ff56be835f33ed4cc3982",
+    "runner_sha256": "376c32eb46f488424d561d33f7295c07626af25d17711baa5bc4948cc2d0583f",
+    "test_sha256": "a36c325612b54324a5bc9b97724fcd00fe87886e2d4f909e74046a4ca0ee1318"
+  },
+  "focused": {
+    "command": "python -m pytest tests/test_exp_679_capacity_recycling.py -q",
+    "passed": 8,
+    "pytest_wall_seconds": 7.66,
+    "source": "accepted T078 evidence; not rerun during terminalization"
+  },
+  "package_oracle": {
+    "command": "python -m pytest",
+    "invocations": 1,
+    "passed": 663,
+    "pytest_wall_seconds": 560.35,
+    "outer_wall_seconds": 548.40,
+    "process_cpu_seconds": 712.07,
+    "peak_rss_kib": 943808,
+    "hard_guard_wall_seconds": 1684.13765625,
+    "fidelity_reduced": false,
+    "log": ".scratch/exp-679-capacity-recycling/t079-full-pytest.log",
+    "log_sha256": "dfd6387d4452abd72f663882fbfbf4d7c67650c02d9d9e7c7b599bdcab05239c"
+  },
+  "pre_root_freeze": {
+    "status": "failed-terminal-config-runner-denominator-conflict",
+    "frozen_protocol_sha256": "aa61ff54ad2d00ba7e46874fb840cd546861c8559d57d83dc90c72f687a260ef",
+    "missing_config_keys": ["evaluation.trajectory_loss_cases", "evaluation.calibration_trajectory_loss_cases"],
+    "root_20261266_opened": false,
+    "repair_or_retry": false
+  },
+  "terminalization": {
+    "implementation_config_test_rerun": false,
+    "implementation_config_test_changed": false,
+    "required_boundary_command": "python tools/validate_project.py"
+  }
+}

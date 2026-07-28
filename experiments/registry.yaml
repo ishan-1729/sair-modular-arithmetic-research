@@ -1996,3 +1996,31 @@ runs:
       - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
       - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-679-capacity-recycling
+    status: permanent-pre-root-denominator-park
+    approach: ST-M043b-resource-selected-reduced-call-exact-embedded-width-capacity-recycling
+    decision: permanent-park-verified-config-calibration-denominator-conflict
+    decision_authority: T079-pre-root-freeze-stop-rule
+    source_base_commit: 087a9a6329e4261eae7be10a4fcad0d16bb3d925
+    source_branch: codex/exp679-capacity-recycling
+    config: configs/exp_679_capacity_recycling.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp679-capacity-recycling-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-679-capacity-recycling.md
+    run_record: experiments/runs/exp-679-capacity-recycling/run.json
+    metrics: evals/results/exp-679-capacity-recycling/metrics.json
+    verification: experiments/runs/exp-679-capacity-recycling/verification.json
+    paper_sha256: 1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261266: unopened-permanent-pre-root-denominator-park, 20261267: unopened-permanent-pre-root-denominator-park, 20261268: unopened-permanent-pre-root-denominator-park, 20261269: unopened-permanent-pre-root-denominator-park}
+    verification_summary: {focused: reused-8-passed, validator: green-final-verified-bytes, pytest: 663-passed-in-560.35s, pytest_outer_wall_seconds: 548.40, pytest_process_cpu_seconds: 712.07, pytest_peak_rss_kib: 943808, full_pytest_invocations: 1}
+    calibration: null
+    training_updates: 0
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - The exact preserved implementation/config/test identity passed the complete package oracle.
+      - Pre-root freeze inspection found two runner-required trajectory denominators absent from the verified config; no post-oracle repair or recovery successor is authorized.
+      - Roots 20261266-20261269, MLflow, calibration, training, W128/W256 and confirmations remained unopened, so no M043.b scientific verdict exists.
+      - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
