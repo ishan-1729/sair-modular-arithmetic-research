@@ -473,3 +473,11 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Reuse EXP687's exact map/pruned bytes and add training-only selected hidden capture. The all-mode smoke, 53-test focused cone, validator, and sole 779/779 package oracle pass.
 - Root20261306 completes matched hidden-aligned/logit-only work, all controls, reload, warm-up, and three cold complete candidate routes at 150.457/147.061/146.250 seconds.
 - Frozen 2.0 variability headroom yields 300.913 seconds versus 285. Park before root20261307; roots20261308/09 remain unopened and the mechanism verdict is null.
+
+## 2026-07-30 — EXP-690 C1 parks at complete-route runtime admission
+
+- Implement the h48 one-outward-cycle Candidate-derived specialist with four learned 16-D case-local tokens. Primary and control have identical initial bytes, stored parameters, SDPA/GRU token updates, optimizer, data, and work; only token-to-core injection is masked.
+- Actual all-mode smoke completed in 35.19 seconds, the focused lineage cone passed 81/81, and the sole package oracle passed validation plus 824/824 tests in 604.86 seconds wall.
+- Root20261314 completed both four-update calibration arms, reload/determinism/equal-work checks, and three cold complete deployed routes at 158.0452/150.1241/153.2379 seconds. RSS was 1,091,407,872 bytes.
+- The frozen 2x rule gives 316.0903 seconds, above 285. Park C1 before root20261315. Roots20261316-22 also remain unopened; scientific metrics, confidence, and causal effects are null.
+- This is a resource verdict on C1's exact deployed formulation, not evidence against persistent memory. C1 is first by ID only and cannot cancel C2-C7.

@@ -1,0 +1,35 @@
+{
+  "schema_version": "exp690-terminal-v1",
+  "run_id": "exp-690-c1-persistent-memory-tokens",
+  "status": "completed",
+  "decision": "park-exp690-at-root20261314-resource-admission",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-30T00:00:00+05:30",
+  "checkpoint_sha256": "a22facb558059b15a0b820ac58fb73c9b587a6508a2799a07cd414c8e41c6d1a",
+  "roots": {"20261314": "completed-calibration-resource-reject", "20261315": "unopened-admission-blocked", "20261316": "unopened-admission-blocked", "20261317": "unopened-admission-blocked", "20261318": "unopened-admission-blocked", "20261319": "unopened-admission-blocked", "20261320": "unopened-admission-blocked", "20261321": "unopened-admission-blocked", "20261322": "unopened-admission-blocked"},
+  "resource_gate": {"cases_per_cold_route": 1100, "cold_wall_seconds": [158.04515034899998, 150.1241187490001, 153.2378851399999], "maximum_wall_seconds": 158.04515034899998, "guard_multiplier": 2.0, "guarded_wall_seconds": 316.09030069799996, "ceiling_seconds": 285.0, "passed": false, "peak_rss_bytes": 1091407872, "rss_ceiling_bytes": 6442450944, "rss_passed": true},
+  "integrity": {"complete_routes": true, "equal_work": true, "reload_exact": true, "deterministic_outputs": true, "candidate005_tiers1_6_route_unchanged": true, "operand_swap_route": false},
+  "training_updates": {"primary": 4, "access_masked_control": 4},
+  "formal_calls_executed": 0,
+  "paired_scientific_metrics": null,
+  "evaluation": {
+    "transition": {
+      "calibration_primary_w128": {"cases": 16, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_primary_w256": {"cases": 16, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_control_w128": {"cases": 16, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_control_w256": {"cases": 16, "correct": 0, "exact_accuracy": 0.0}
+    },
+    "rollout": {
+      "calibration_primary_w128": {"cases": 2, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_primary_w256": {"cases": 2, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_control_w128": {"cases": 2, "correct": 0, "exact_accuracy": 0.0},
+      "calibration_control_w256": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}
+    },
+    "scope": "root20261314-resource-calibration-only-not-scientific"
+  },
+  "controls": {"equal_storage": true, "equal_token_computation": true, "reload_exact": true, "determinism": true, "lower_tier_route_retained": true},
+  "confidence": null,
+  "causal_effects": null,
+  "scientific_verdict": null,
+  "limitations": ["Resource rejection occurred before full training and scientific evaluation.", "C2-C7 remain required."]
+}

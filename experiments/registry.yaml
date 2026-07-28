@@ -2279,3 +2279,35 @@ runs:
       - Guarded candidate runtime 300.913 seconds exceeds the frozen 285-second ceiling.
       - Root20261307 and confirmation roots20261308/09 remained unopened.
       - No protected candidate, submission, promotion or release surface opened.
+  - run_id: exp-690-c1-persistent-memory-tokens
+    status: parked-calibration-candidate-runtime-headroom
+    approach: candidate-derived-hidden48-one-cycle-four-persistent-token-primary-vs-access-masked-control
+    decision: park-exp690-at-root20261314-resource-admission
+    decision_authority: T096-root20261314-complete-route-resource-admission
+    source_base_commit: dd6d31cf8b7ec71ab1ba3f68e0fa53953cf6ce52
+    source_branch: codex/exp690-c1-persistent-memory-tokens
+    config: configs/exp_690_c1_persistent_memory_tokens.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-690-c1-persistent-memory-tokens.md
+    run_record: experiments/runs/exp-690-c1-persistent-memory-tokens/run.json
+    metrics: evals/results/exp-690-c1-persistent-memory-tokens/metrics.json
+    verification: experiments/runs/exp-690-c1-persistent-memory-tokens/verification.json
+    environment: experiments/runs/exp-690-c1-persistent-memory-tokens/environment.json
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    channel_map_sha256: 8c364e4fc62e663acde970d0ed04cd7a4850f780d77169535502d01ae4115555
+    pruned_state_sha256: 68b64bc9ebcd368363ab0f2f19a0b477b81d0229f7e86a2532c78630b742407f
+    roots: {20261314: completed-calibration-resource-reject, 20261315: unopened-admission-blocked, 20261316: unopened-admission-blocked, 20261317: unopened-admission-blocked, 20261318: unopened-admission-blocked, 20261319: unopened-admission-blocked, 20261320: unopened-admission-blocked, 20261321: unopened-admission-blocked, 20261322: unopened-admission-blocked}
+    verification_summary: {smoke: passed-all-modes-in-35.19s, focused: 81-passed-in-19.35s, validator: green-225-concepts-1100-records, pytest: 824-passed-in-618.62s, pytest_outer_wall_seconds: 604.86, pytest_process_cpu_seconds: 930.57, pytest_peak_rss_kib: 949068, oracle_invocations: 1}
+    calibration: {admitted: false, candidate_cold_wall_seconds: [158.04515034899998, 150.1241187490001, 153.2378851399999], candidate_guarded_wall_seconds: 316.09030069799996, candidate_guarded_ceiling_seconds: 285.0, expected_formal_wall_seconds: 6946.695154141637, soft_guard_wall_seconds: 8684, hard_guard_wall_seconds: 12157, wall_seconds: 574.658132209, process_cpu_seconds: 1924.836516, cgroup_cpu_seconds: 2025.528, peak_rss_bytes: 1091407872}
+    training_updates: {primary: 4, access_masked_control: 4}
+    formal_calls_executed: 0
+    mlflow_run_id: 17dfca0d26cd4c0d93a2c6e48f8ce559
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - Root20261314 calibration is resource/integrity evidence, not W128/W256 science.
+      - Guarded exact deployed-route runtime 316.0903 seconds exceeds the frozen 285-second ceiling.
+      - Root20261315 and roots20261316-22 remained unopened; four calibration updates per arm carry no scientific verdict.
+      - C1 was first by council ID, not a selected winner, and its park cannot cancel C2-C7.

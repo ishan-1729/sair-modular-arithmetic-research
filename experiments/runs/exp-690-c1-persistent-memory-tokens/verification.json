@@ -1,0 +1,10 @@
+{
+  "run_id": "exp-690-c1-persistent-memory-tokens",
+  "status": "passed-package-oracle-and-terminal-resource-park",
+  "smoke": {"status": "passed-all-modes", "wall_seconds": 35.19, "process_cpu_seconds": 54.91, "peak_rss_kib": 541684},
+  "focused": {"command": "python -m pytest -q tests/test_exp_687_compact_distilled_w256_specialist.py tests/test_exp_688_compact_hidden_trajectory_distillation.py tests/test_exp_689_hidden48_hidden_trajectory_distillation.py tests/test_exp_690_c1_persistent_memory_tokens.py", "status": "81-passed-in-19.35s"},
+  "package_oracle": {"invocations": 1, "validator": "225-concepts-1100-records", "pytest": "824-passed-in-618.62s", "outer_wall_seconds": 604.86, "process_cpu_seconds": 930.57, "peak_rss_kib": 949068, "hard_wall_seconds": 1333.702125},
+  "calibration": {"root": 20261314, "status": "completed-resource-reject", "wall_seconds": 574.658132209, "process_cpu_seconds": 1924.836516, "cgroup_cpu_seconds": 2025.528, "peak_rss_bytes": 1091407872},
+  "roots_opened": [20261314],
+  "roots_unopened": [20261315, 20261316, 20261317, 20261318, 20261319, 20261320, 20261321, 20261322]
+}
