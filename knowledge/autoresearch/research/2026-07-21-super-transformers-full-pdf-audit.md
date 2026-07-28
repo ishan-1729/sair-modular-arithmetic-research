@@ -358,7 +358,7 @@ This stable record retains the legal analogue historically tested by EXP-654: or
 
 ### ST-M044 — Target-only SPT analogue and conditional RL boundary (2 components)
 
-- **M044.a SPT analogue:** `2607.16051v2`, §4.1 pp. 16–18/Table 8 p. 38; target-only CE masking. The source's approximately 2T token positions and ten epochs are not a local requirement and the paper acknowledges inadequate ablation. On a compatible pretrained recurrent SAIR backbone, compare target-only continuation with matched mixed/trajectory supervision. Native. Conditional, analogue-only, no evidence.
+- **M044.a SPT analogue:** `2607.16051v2`, §4.1 pp. 16–18/Table 8 p. 38; target-only CE masking. The source's approximately 2T token positions and ten epochs are not a local requirement and the paper acknowledges inadequate ablation. EXP678 implements the compatible recurrent comparison with matched mixed/trajectory, endpoint-weight, shuffled-mask, frozen and randomized controls; focused tests, validator and the first 655-test suite pass. Pre-root authentication rejects two post-freeze governance-document hashes and T076 prohibits re-freezing, so all roots remain unopened. Native. Conditional, analogue-only, no scientific evidence.
 - **M044.b GSPO/DAPO:** §4.2 pp. 18–19; autoregressive group sampling, verifier-normalized advantage, clipping and prompt filtering. Non-applicable unless a compatible stochastic autoregressive model and separate legal plan exist. It is not M043 evidence.
 
 ## Main-paper mapping

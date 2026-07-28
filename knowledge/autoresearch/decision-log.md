@@ -293,3 +293,18 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Park at verification with roots `20261258`-`20261261` unopened. No calibration,
   scientific, candidate, checked, independent, official/private, submission,
   promotion or completion evidence follows; M004.b remains scientifically open.
+
+## 2026-07-30 — EXP-678 parked at package verification
+
+- Visually authenticated local arXiv:2607.16051v2 §4.1 pp.16-18 and Table 8 p.38. M044.a transfers only target-response-position CE masking; the paper's language-model scale, approximately 2T token budget, ten epochs, long context, MoE loss and downstream claims are excluded.
+- Proved the designated worktree tracked-clean apart from preserved untracked PDF fixtures, the nested challenge snapshot clean at `82510bba00a1126649bd76dd1a451f14d0b3eb60`, and switched that same fixture-bearing worktree to `codex/exp678-target-only-continuation` at integrated base `32e331ac558a9ee71b5a22f896a238b409c0cfda` without reset or clean.
+- Froze target-only, matched mixed/trajectory, equal-final-influence endpoint-weight, deterministic shuffled-mask, frozen-source and randomized-weight controls with identical 400 updates, data order, optimizer and computed CE tensors. Formal inference remains the original learned Candidate005 graph.
+- Nine focused tests pass. The one package oracle used 769.89-second expected, 962.36-second soft and 1,684.14-second hard wall guards, then stopped after 8.45 wall / 1.41 process CPU seconds and 29,276 KiB RSS because two new concept files lacked required `description` frontmatter. Pytest did not open.
+- The bounded owned diagnosis adds those fields and terminal records only. A second package oracle is prohibited, so root `20261262` and scientific roots `20261263`-`20261265` remain unopened. No training, calibration, scientific, checked, independent, official/private, candidate, submission, promotion or completion evidence follows; M044.a remains scientifically open.
+
+## 2026-07-30 — EXP-678 T076 recovery passes verification but parks before root authentication
+
+- Normalized exactly four canonical fields from already frozen facts: metrics timestamp from the run timestamp, seed `67873000` from calibration-root training seed, checkpoint from the existing authenticated source-checkpoint pointer, and metrics from the canonical run pointer. Config, model, runner, test and checkpoint hashes remain `74a657...dfa5`, `ca08d9...96cd`, `75ae08...73d7`, `d7cc7c...b5a7`, and `cbc4a1...d4bd`; masks, arms, roots, gates and science status are unchanged.
+- Project validation passes 202 concepts / 1,100 records. The first full pytest passes 655/655 in 549.32 seconds (538.61 outer wall / 743.53 aggregate process CPU / 918,004 KiB RSS), below the reused 1,684.137656-second dynamic hard guard.
+- The mandatory pre-root `assert_frozen_clean` then rejects current bytes because T075's accepted freeze binds preregistration SHA `91759b...b74` and mechanism-map SHA `4da342...a1c`, while T075's later required description/terminal repairs produced `e43d36...e95` and `5a085b...73d`. Every executable/config/test/checkpoint and scientific semantic remains invariant.
+- T076 explicitly prohibits re-freezing, changing existing T075 bytes, or changing code/config/test. Park before opening root `20261262`; roots `20261262`-`20261265`, training, calibration and science remain untouched. This is a provenance-authentication park, not evidence against M044.a.
