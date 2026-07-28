@@ -1,0 +1,28 @@
+{
+  "cache_key": "7d3b0a17fe5be78c9b818e8fe59f22582ae9afae94fccc1e0ae056c4af968886",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 400584,
+      "path": "experiments/runs/exp-669-stars-jvp-regularization/calibration/root-20261226/frozen_source/model.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "checkpoint_reload_exact": true,
+    "inference_calls_per_transition": 14,
+    "parameters": 99824,
+    "route": "frozen_source",
+    "training": {
+      "examples": 0,
+      "history": [],
+      "jvp_calls": 0,
+      "source_recurrent_calls": 0,
+      "timing": {
+        "cgroup_cpu_seconds": 0.18400000000019645,
+        "peak_rss_bytes": 424402944,
+        "process_cpu_seconds": 0.17990100000000098,
+        "wall_seconds": 0.06677917299975888
+      },
+      "updates": 0
+    }
+  }
+}

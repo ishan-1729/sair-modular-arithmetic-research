@@ -1,0 +1,93 @@
+{
+  "closed": [
+    "M026.b random loop counts / M018.a",
+    "inference JVP",
+    "exact spectral radius",
+    "checked/private/candidate/submission"
+  ],
+  "fixtures": {
+    "Dockerfile": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+    "generator.py": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0",
+    "primes.py": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac"
+  },
+  "gates": {
+    "maximum_candidate_headroom_wall_seconds": 285,
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_gradient_norm": 1000.0,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_w128_loss_to_source": 0.02,
+    "minimum_perturbation_reduction_fraction": 0.05,
+    "minimum_proxy_reduction_fraction": 0.05,
+    "minimum_trained_weight_drop": 0.2,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w128_transition": 0.998,
+    "minimum_w256_gain_over_lambda_zero": 0.05,
+    "minimum_w256_gain_over_random_control": 0.05,
+    "minimum_w256_gain_over_state_norm": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_inference_identity": true,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "mode": "calibration",
+  "paper": {
+    "pages": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "path": "research/papers/arxiv-2605.26733.pdf",
+    "sha256": "20791f73ae2d2f58b00150acd17f106177493327898277bab4efb90080e2d8db"
+  },
+  "regularization": {
+    "exact_spectral_radius_claim": false,
+    "jvp_calls_per_update": 2,
+    "lambda": 0.1,
+    "power_iterations": 1,
+    "state_boundary": "before-final-source-recurrent-update",
+    "vector_epsilon": 1e-12
+  },
+  "root": 20261226,
+  "roots": {
+    "calibration": 20261226,
+    "confirmations": [
+      20261228,
+      20261229
+    ],
+    "viability": 20261227
+  },
+  "routes": [
+    "frozen_source",
+    "stars",
+    "lambda_zero",
+    "state_norm",
+    "random_stop_gradient",
+    "randomized"
+  ],
+  "run_id": "exp-669-stars-jvp-regularization",
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "repository_branch": "codex/exp669-stars-jvp-regularization",
+    "repository_commit": "dcdec9d5707e7e24027cbae83c367153177b8f78"
+  },
+  "splits": {
+    "128": {
+      "test": "509fc1f37ff59c1a8e2940bcc98172af371cc60687d73646d4a4664f12e27da9",
+      "train": "a3c9f8efbb2878514a9985f11afd03317e16c18f0b0a8775ade17db47305d827",
+      "validation": "881d677b67131b0413d1a7a7a73b1f18e55cd2b3bf7a89a0c68e987e071361fc"
+    },
+    "256": {
+      "test": "9de3823c8d62b898a52d7da93a347c1ac8d963e7cb93c9b06e675f6ab248c7fc",
+      "train": "e2be77f1eb4e872b9832568efa4b20ad734236dafbe66acf0124aa06b4b81f80",
+      "validation": "2c60554b0cf5ca0391ee4deabd1d26edd771992bd06dc855eb2d4558cefd81fe"
+    },
+    "64": {
+      "test": "6dfabf5d03a5ae622c422270c108a943f703f0e1e3ad8cfbf056912d9c1b5d7c",
+      "train": "a69677aa97873adc47f448f3ddff4795cbd7b005dae6a854cb83d57e8cd0b436",
+      "validation": "762cf44991b73d9c728972d70f033e619c637ee8eaa6aaba3f22fca54f5d01b7"
+    }
+  }
+}

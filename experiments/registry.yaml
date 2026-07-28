@@ -1725,3 +1725,27 @@ runs:
       - M024.c language mechanisms and M024.d auto-guidance remained closed.
       - This park does not reject HRM-Text, H2L3, MagicNorm, warmup credit, or the bounded adaptation.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
+  - run_id: exp-669-stars-jvp-regularization
+    status: completed-rejected
+    approach: bounded-ST-M026a-native-one-step-power-JVP-proxy-regularization
+    decision: reject-current-stars-jvp-adaptation
+    decision_authority: T064-root-20261227-W128-primary-first-gate
+    source_base_commit: dcdec9d5707e7e24027cbae83c367153177b8f78
+    source_branch: codex/exp669-stars-jvp-regularization
+    config: configs/exp_669_stars_jvp_regularization.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp669-stars-mechanism.md
+    run_record: experiments/runs/exp-669-stars-jvp-regularization/run.json
+    metrics: evals/results/exp-669-stars-jvp-regularization/metrics.json
+    roots: {20261226: completed-admitted-calibration, 20261227: completed-rejected-w128-primary, 20261228: unopened-gate-blocked, 20261229: unopened-gate-blocked}
+    parameters_each: 99824
+    optimizer_updates_each_trained_route: 400
+    exact_accuracy: {W128_transition: 0.9983333333333333, W128_rollout: 0.8433333333333334}
+    validity: {W128_transition_invalid: 0.0, W128_rollout_any_invalid: 0.0}
+    calibration: {admitted: true, wall_seconds: 91.32661436900025, process_tree_cpu_seconds: 350.517496, cgroup_cpu_seconds: 396.25999999999976, peak_rss_bytes: 759463936, expected_formal_wall_seconds: 4625.5923974751795, eta_wall_seconds: 6894.077577979988, hard_guard_wall_seconds: 13789}
+    formal_resources: {wall_seconds: 532.055833247, process_tree_cpu_seconds: 2078.299365, cgroup_cpu_seconds: 2527.8719999999994, peak_rss_bytes: 1019494400}
+    verification: {focused: 16-passed, validator: 184-concepts-1100-records-green, full_oracle: 573-passed}
+    limitations:
+      - The W128 primary missed the 85-percent rollout floor by 0.667 percentage points.
+      - Retention/dependence controls, formal JVP/perturbation comparison, W256 and confirmations remained unopened.
+      - The metric is a one-step JVP squared-norm proxy, not exact spectral radius.
+      - M026.b/M018.a remained closed; no checked/private/candidate/submission surface was opened.
