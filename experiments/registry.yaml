@@ -1854,3 +1854,32 @@ runs:
       - Implementation, calibration, W128/W256, Jacobians, candidate timing, and confirmations remained unopened.
       - This park does not reject DeepLoop, LayerNorm dynamics, ST-M030, or a future from-scratch PostNorm recurrent architecture.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
+  - run_id: exp-674-latent-thought-regularization
+    status: parked-topology-feasibility
+    approach: bounded-faithful-ST-M006b-latent-thought-weight-cosine
+    decision: park-source-objective-mismatch-before-training
+    decision_authority: T070-source-topology-faithfulness-stop-rule
+    source_base_commit: 273961fcb98f6fa391aec99b7bb6f08f2c3140ff
+    source_branch: codex/exp674-latent-thought-regularization
+    config: configs/exp_674_latent_thought_regularization.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp674-latent-thought-mechanism.md
+    preregistration: experiments/runs/exp-674-latent-thought-regularization/preregistration.json
+    run_record: experiments/runs/exp-674-latent-thought-regularization/run.json
+    metrics: evals/results/exp-674-latent-thought-regularization/metrics.json
+    paper_sha256: a3aed7457446fa4c11c5f6cac89c38725ca42d0a66c44cc1935e2f8b6376882e
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261246: unopened-topology-feasibility-blocked, 20261247: unopened-topology-feasibility-blocked, 20261248: unopened-topology-feasibility-blocked, 20261249: unopened-topology-feasibility-blocked}
+    feasibility: {self_cosine_distance: 1.9637069748057456e-15, maximum_parameter_gradient: 2.220446049250313e-16, numerical_zero_tolerance: 1.0e-12, exact_reload_schema_tensors_calls_outputs: true}
+    verification: {focused: 7-passed, validator: 192-concepts-1100-records-green, full_oracle: 619-passed-in-575.53s, outer_wall_seconds: 572.96, peak_rss_kib: 920504, invocations: 1}
+    training_updates: 0
+    formal_calls_executed: 0
+    calibration: null
+    scientific_metrics: null
+    scientific_verdict: null
+    mlflow_run_id: ce49f8c8fc324b2284fa4e4297c22a6a
+    limitations:
+      - The source defines weight cosine across successive untied blocks, not hidden-reference trajectory alignment.
+      - Candidate005 already ties recurrent weights, so the source-faithful objective has no material gradient.
+      - Calibration, W128/W256, alignment controls, candidate timing, and confirmations remained unopened.
+      - This park does not reject the paper, ST-M006.b on an untied architecture, or separately preregistered hidden-state distillation.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.

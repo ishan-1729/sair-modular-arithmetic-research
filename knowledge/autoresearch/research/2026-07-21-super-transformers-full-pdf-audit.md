@@ -31,7 +31,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M004.b length schedule | bounded-faithful | open |
 | M005.a RRT | bounded-faithful | open; EXP-617 non-faithful |
 | M006.a Huginn | bounded-faithful | open; EXP-634 adjacent only |
-| M006.b latent-thought regularizer | bounded-faithful | open |
+| M006.b latent-thought regularizer | bounded-faithful | exact Candidate005 tied-weight mapping parked; untied architecture remains open |
 | M007.a H/L recurrence | bounded-faithful | open |
 | M007.b gradient/deep supervision | bounded-faithful | open |
 | M007.c deep-Q ACT | bounded-faithful | open |
@@ -134,7 +134,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 - **M006.a Huginn:** `2502.05171`, pp. 3–4 §3.1–3.3 Eq. 1–2 and pp. 10–11; prelude/core/coda, random latent, input reinjection, concatenation, sandwich RMSNorm, heavy-tailed loop sampling, TBPTT.
 - **M006.b latent-thought regularization:** `2502.17416`, pp. 2–4 and p. 10 §4 Eq. 3–4; vanilla shared `k x L` loop plus cosine regularizer toward untied layers.
 
-Native Transformer blocks suffice. EXP-634/EXP-643 are adjacent. Both remain open; terminal requires trained and extrapolated depth curves, component ablations, latent reset/randomization, and exact autonomous transfer.
+Native Transformer blocks suffice. EXP-634/EXP-643 are adjacent. EXP-674 authenticates that Eq. 3-4 acts on corresponding weights in successive untied blocks, not hidden trajectories or an external reference model. Its exact Candidate005 mapping is constant because the recurrent weights are already tied, so that mapping is parked before training; an untied compatible architecture remains open. Terminal evidence still requires trained and extrapolated depth curves, component ablations, latent reset/randomization where applicable, and exact autonomous transfer.
 
 ### ST-M007 — HRM (3 components)
 
@@ -375,6 +375,17 @@ reinjects the frozen proposal and legal input channels, an explicit adaptation b
 does not inject inputs during recurrence. The inherited mandatory operand-bit scan is unchanged. ST-M018.b's
 hop curriculum and KL/entropy adaptive halt remain closed. See
 `2026-07-29-exp670-loop-curriculum-mechanism.md` for the page-anchored map and exclusions.
+
+## EXP-674 update — ST-M006.b
+
+EXP-674 visually authenticated `2502.17416` pp.2-4/10 and isolated Eq. 3-4. The source regularizer
+pairs corresponding parameter tensors across successive untied blocks of one model. Candidate005 has
+one recurrent parameter set reused at all visits, so the literal mapping is self-cosine with no material
+gradient. The executable falsifier measured distance `1.9637e-15` and maximum gradient `2.2204e-16`
+under a `1e-12` numerical-zero threshold. A training-only untied hidden-state teacher would introduce
+reference, hidden-boundary, target, and detach semantics absent from the source and is not counted as
+M006.b evidence. This closes only the exact Candidate005 tied-weight transfer; no scientific accuracy
+surface or root was opened.
 
 ## Resource governance
 
