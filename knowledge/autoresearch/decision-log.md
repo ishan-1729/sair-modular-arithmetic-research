@@ -224,3 +224,17 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Park under T069's explicit topology stop rule. Roots `20261242`-`20261245`, implementation,
   focused behavioral tests, full oracle, calibration, training, Jacobians, W128/W256, candidate timing,
   and confirmations remain unopened. This is not a scientific rejection of DeepLoop or ST-M030.a/b.
+
+## 2026-07-29 — EXP-674 parked at source/topology faithfulness
+
+- Authenticated arXiv:2502.17416v1 SHA `a3aed7...6882e` and visually reviewed PDF pp.2-4/10.
+  Section 4 Eq. 3-4 regularizes corresponding weight tensors in successive untied blocks; it defines
+  no hidden-trajectory target, external reference model, or detach semantics.
+- Candidate005's frozen EXP609 checkpoint SHA is `cbc4a1...d4bd`; one 99,824-parameter recurrent
+  update is reused for every visit. The literal self-cosine distance is `1.9637e-15` and maximum
+  parameter gradient `2.2204e-16`, both below the frozen `1e-12` numerical-zero threshold.
+- Exact source reload/state schema/tensors/calls/outputs passed at W64/W128/W256. Seven focused tests
+  and the one hermetic package oracle passed (192 concepts, 1,100 records, 619 tests).
+- Park under T070's source/topology-faithfulness stop. A training-only untied hidden reference would
+  be a distinct representation-distillation mechanism. Roots `20261246`-`20261249`, calibration,
+  training, formal W128/W256, controls and confirmations remain unopened; no scientific verdict follows.

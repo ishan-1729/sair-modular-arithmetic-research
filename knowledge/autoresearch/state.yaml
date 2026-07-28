@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T08:30:00+05:30
+updated_at: 2026-07-29T11:29:30+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,25 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp674_hypothesis:
+  run_id: exp-674-latent-thought-regularization
+  status: parked-topology-feasibility
+  decision: park-source-objective-mismatch-before-training
+  decision_authority: T070-source-topology-faithfulness-stop-rule
+  source_base_commit: 273961fcb98f6fa391aec99b7bb6f08f2c3140ff
+  source_branch: codex/exp674-latent-thought-regularization
+  source_authentication: {paper_pdf_sha256: a3aed7457446fa4c11c5f6cac89c38725ca42d0a66c44cc1935e2f8b6376882e, model_sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  topology: {paper_object: corresponding-weights-in-successive-untied-blocks, candidate: already-tied-shared-dilated-ConvGRU, W64_visits: 12, W128_visits: 14, W256_visits: 16}
+  blocker: literal paper objective compares each Candidate005 recurrent tensor with itself; hidden-reference distillation is not Eq. 3-4
+  feasibility: {self_cosine_distance: 1.9637069748057456e-15, maximum_parameter_gradient: 2.220446049250313e-16, numerical_zero_tolerance: 1.0e-12, exact_reload_schema_tensors_calls_outputs: true}
+  verification: {focused: 7-passed, validator: 192-concepts-1100-records-green, pytest: 619-passed-in-575.53s, full_oracle_invocations: 1}
+  implementation_executed: false
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261246: unopened-topology-feasibility-blocked, 20261247: unopened-topology-feasibility-blocked, 20261248: unopened-topology-feasibility-blocked, 20261249: unopened-topology-feasibility-blocked}
+  mlflow_run_id: ce49f8c8fc324b2284fa4e4297c22a6a
+  scientific_verdict: null
+  limitations: [source-topology-feasibility-only, no-training-or-calibration, no-W128-W256-alignment-or-intervention-evidence, hidden-reference-distillation-untested, no-checked-private-candidate-submission-surface]
 parked_exp673_hypothesis:
   run_id: exp-673-deeploop-parameterization
   status: parked-topology-feasibility
@@ -707,7 +726,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preserve EXP672 as parked after root 20261238 complete-route calibration at the guarded candidate-runtime boundary; do not open roots 20261239-20261241 or rerun this exact package. The nominal candidate estimate is 183.084 seconds, but the binding 2.0-headroom estimate is 366.169 seconds versus the frozen 285-second ceiling. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+next_action: Preserve EXP674 as parked at the source/topology-faithfulness boundary; do not open roots 20261246-20261249 or relabel hidden-reference distillation as paper-faithful Eq. 3-4. A future untied compatible architecture or separately preregistered hidden-state distillation mechanism requires a new decision card. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db

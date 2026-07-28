@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "config": "configs/exp_674_latent_thought_regularization.yaml",
+    "environment": "experiments/runs/exp-674-latent-thought-regularization/environment.json",
+    "feasibility": ".scratch/exp-674-latent-thought-regularization/feasibility.json",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp674-latent-thought-mechanism.md",
+    "metrics": "evals/results/exp-674-latent-thought-regularization/metrics.json",
+    "preregistration": "experiments/runs/exp-674-latent-thought-regularization/preregistration.json"
+  },
+  "created_at": "2026-07-28T05:59:30Z",
+  "config": "configs/exp_674_latent_thought_regularization.yaml",
+  "decision": "park-source-objective-mismatch-before-training",
+  "decision_authority": "T070-source-topology-faithfulness-stop-rule",
+  "hypothesis": "Paper-faithful latent-thought cosine regularization can improve Candidate005 width transfer while formal inference remains bit-identical.",
+  "limitations": [
+    "The paper regularizes corresponding weights in successive untied blocks; it does not define a hidden-state teacher/reference objective.",
+    "The source-faithful Candidate005 image compares each already-shared tensor with itself and has no material gradient.",
+    "No training, calibration, formal evaluation, W128/W256 science, or candidate timing was opened.",
+    "This park does not reject hidden-state distillation, the paper, or ST-M006.b on an untied architecture.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ],
+  "mlflow": {
+    "experiment_id": "1",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "run_id": "ce49f8c8fc324b2284fa4e4297c22a6a"
+  },
+  "roots": {
+    "20261246": "unopened-topology-feasibility-blocked",
+    "20261247": "unopened-topology-feasibility-blocked",
+    "20261248": "unopened-topology-feasibility-blocked",
+    "20261249": "unopened-topology-feasibility-blocked"
+  },
+  "run_id": "exp-674-latent-thought-regularization",
+  "seed": 20261247,
+  "source": {
+    "branch": "codex/exp674-latent-thought-regularization",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "dirty": false,
+    "model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc",
+    "paper_sha256": "a3aed7457446fa4c11c5f6cac89c38725ca42d0a66c44cc1935e2f8b6376882e",
+    "repository_commit": "273961fcb98f6fa391aec99b7bb6f08f2c3140ff"
+  },
+  "status": "completed",
+  "verification": {
+    "feasibility_oracle": {"wall_seconds": 4.18, "user_seconds": 8.11, "system_seconds": 0.44, "peak_rss_bytes": 259833856, "sha256": "e0b372874e0a17ca91a186b9588842e3ab179f4a6f4871511efa3def4679fc17"},
+    "focused": "7-passed-in-6.88s-after-two-owned-numerical-schema-fixes",
+    "full_oracle": {"validator": "192-concepts-1100-records-green", "pytest": "619-passed-in-575.53s", "outer_wall_seconds": 572.96, "user_seconds": 619.44, "system_seconds": 29.49, "peak_rss_kib": 920504, "log_sha256": "cf2faf635b9556f4b3512a026092d40cf47c5b28a90d63b40726b940bca327f0", "time_sha256": "fb50c7476e244a9e5f56544f1d053dc849f5c5a809b1829843b0443726061f47", "invocations": 1},
+    "pdf_rendering": "pypdfium2-fallback-because-poppler-was-unavailable"
+  }
+}

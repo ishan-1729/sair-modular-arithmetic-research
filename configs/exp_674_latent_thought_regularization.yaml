@@ -1,0 +1,86 @@
+run_id: exp-674-latent-thought-regularization
+hypothesis: >-
+  The page-mapped latent-thought regularizer can improve Candidate005 width transfer while
+  leaving formal inference bit-identical.
+status: parked-topology-faithfulness
+decision: park-source-objective-mismatch-before-training
+seed: 20261247
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+source:
+  repository_commit: 273961fcb98f6fa391aec99b7bb6f08f2c3140ff
+  paper: research/papers/arxiv-2502.17416.pdf
+  paper_sha256: a3aed7457446fa4c11c5f6cac89c38725ca42d0a66c44cc1935e2f8b6376882e
+  paper_version: arxiv-v1
+  paper_license: CC-BY-4.0
+  manifest: research/manifest.json
+  checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  model: experiments/exp_220_width_independent_cellular/model.py
+  model_sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc
+paper_mechanism:
+  pages: [2, 3, 4, 10]
+  section: 4
+  equations: [3, 4]
+  object: corresponding-weight-tensors-in-successive-untied-k-layer-blocks
+  hidden_trajectory_target: absent
+  external_reference_model: absent
+  detach_semantics: none-both-corresponding-weights-are-jointly-trained
+  example: {L: 24, k: 4, lambda_reg: 10}
+  note: >-
+    The prose says to increase closeness while printed Eq. 3-4 adds Cosine to a minimized
+    loss. The topology result is sign-independent because self-cosine is constant.
+candidate_topology:
+  architecture: SharedDilatedConvGRU
+  hidden_channels: 92
+  cycles: 2
+  parameters: 99824
+  sharing: one-recurrent_update-parameter-set-reused-at-every-dilation-visit-and-width
+  source_formal_checkpoint_only: true
+feasibility_decision:
+  paper_faithful_mapping: >-
+    Corresponding paper weight groups collapse to the same Candidate005 tensor, so their
+    cosine is one and either similarity or cosine-distance has zero gradient.
+  requested_hidden_reference_mapping: >-
+    A training-only untied-depth teacher plus hidden-state cosine is representation
+    distillation, not Eq. 3-4 and not a bounded-faithful one-variable transfer.
+  stopped_before_implementation: true
+  stopped_before_calibration: true
+  scientific_claim: null
+frozen_counterfactual_package:
+  lambda_reg: 10.0
+  updates_per_trained_arm: 400
+  examples_per_trained_arm: 6400
+  batch_size: 16
+  arms:
+    - full_cosine
+    - lambda_zero
+    - norm_matched_l2
+    - shuffled_depth_reference
+    - randomized_reference
+    - frozen_source
+    - randomized_formal_inference
+  widths: [64, 128, 256]
+  roots:
+    20261246: unopened-topology-feasibility-blocked
+    20261247: unopened-topology-feasibility-blocked
+    20261248: unopened-topology-feasibility-blocked
+    20261249: unopened-topology-feasibility-blocked
+  formal_gate:
+    minimum_W128_rollout_exact: 0.85
+    maximum_W128_invalid: 0.0
+    maximum_loss_to_lambda_zero_or_source_points: 2.0
+    minimum_W256_rollout_exact: 0.10
+    minimum_W256_gain_over_controls_points: 5.0
+    maximum_guarded_candidate_wall_seconds: 285
+resource_budget:
+  historical_full_oracle_wall_seconds: 527.29
+  expected_full_oracle_wall_seconds: 1246
+  hard_full_oracle_wall_seconds: 2492
+  calibration: null
+  formal: null
+  note: feasibility stop prevents resource-root consumption
+safety:
+  exact_arithmetic_scope: offline-labels-and-tests-only
+  checked_independent_official_private_candidate_submission_promotion: forbidden
+  M006a_huginn: excluded
+  external_execution: forbidden
