@@ -1,0 +1,91 @@
+LT2: Linear-Time Looped Transformers
+(a) Depth-level Hybrid
+(b) Loop-level Hybrid
+GDN
+Full attn.
+GDN
+GDN
+GDN
+Full attn.
+GDN
+GDN
+Looping axias
+Depth axias
+GDN
+Full attn.
+GDN
+GDN
+GDN
+Full attn.
+GDN
+GDN
+GDN
+Full attn.
+GDN
+GDN
+GDN
+Full attn.
+GDN
+GDN
+Loop 1
+Loop 2
+Full attn.
+Full attn.
+Depth axias
+Loop 1
+Loop 2
+Looping axias
+Full attn.
+Full attn.
+Full attn.
+Full attn.
+Full attn.
+Full attn.
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window
+Window size = 256
+Window size = 128
+Figure 3: Two ways to hybridize LT2. (a) Depth-level interleaves full-attention layers among linear
+layers inside the shared block. (b) Loop-level varies the mixer across loop iterations, e.g. a full-attention
+loop first, then sliding-window loops with shrinking windows (256→128).
+3. Experiments
+We organize the main experiments around four questions. First, we test whether LT2 is competitive at
+standard language-modeling scale (§ 3.1) and under realistic long-context retrieval (§ 3.7). We then
+ablate the hybrid-design choices: where hybridization is applied, how mixers are arranged along depth,
+and what mixer ratio is used (§ 3.3). We then study the SDPA output gate, which mitigates attention-sink
+accumulation under looped processing (§ 3.4). Additional, we also did experiments cover synthetic
+recall/state tracking, long-context efficiency, and training stability (§ 3.5, 3.2, and 3.6).
+3.1. Language modeling
+We pre-train all models on FineWeb-Edu [46] at 0.6B and 1.3B parameters with a 100B-token budget,
+using T=4 loops for every looped variant. The hybrid ratio is 1:4 for both (Full:Linear) and (GDN:DSA)
+variants. The full setup is in Appendix C. Table 2 summarizes the results. We provide a detailed efficiency
+comparison in Section 3.2.
+Subquadratic Mixers Nearly Match the Full-Attention Loop.
+Looped GDN, KDA, and DSA all perform
+within roughly one average point of the Looped Transformer reference at both scales, while avoiding
+quadratic complexity. At the smaller 0.6B scale, looped GDN still slightly trails the Looped Transformer;
+however, at the larger 1.3B scale, it surpasses the Looped Transformer while preserving linear-time
+complexity. In the looped setting, we find that both gating and DPLR linear attention are important, with
+gating appearing to play an even larger role than the DPLR-style update formulation. In contrast, the
+looped pure DeltaNet variant is less stable in our study, which ultimately limits its performance.
+A Linear–Sparse Hybrid Loop Matches the Full-Attention Loop at a Fraction of the Cost.
+Looped
+Hybrid (GDN+DSA), which contains no full attention, matches the full-attention reference at both scales
+(9.72 vs. 9.87 PPL at 1.3B). It also delivers the greatest efficiency speedup: a 2.9× decode-throughput
+speedup at 32k context. We think this is an interesting hybrid setting where linear attention helps with
+global compression while sparse attention helps with exact KV position selection.
+5

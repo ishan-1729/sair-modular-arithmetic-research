@@ -1,0 +1,88 @@
+LT2: Linear-Time Looped Transformers
+linear-attention block turns its rank-1 state update into a rank-𝑇update, and a sliding-window block
+turns its window of size 𝑤into an effective receptive field of size 𝑇𝑤.
+Loop × DPLR linear attention: rank-𝑇update on recurrent memory.
+Frontier linear-attention
+architectures now use DPLR mixers, e.g. GDN [70], KDA [63], and RWKV7 [47]. We take KDA as our
+running example, which maintains a recurrent state S𝑡∈R𝑑𝑘×𝑑𝑣at sequence position 𝑡via
+S𝑡= A𝑡S𝑡−1 + 𝛽𝑡k𝑡v⊤
+𝑡,
+A𝑡= Diag(𝛼𝑡)
+(︀I −𝛽𝑡k𝑡k⊤
+𝑡
+)︀,
+(4)
+where 𝛼𝑡∈[0, 1]𝑑𝑘is a diagonal gate, so A𝑡is identity (I) plus a rank-1 (k𝑡k⊤
+𝑡) perturbation. Prior work
+shows that a single such block can only model permutations of two elements per token, and cannot solve
+the 𝑆𝑛word problem (𝑛≥3) in finite precision [27]. When the same shared block is looped 𝑇times,
+each loop iteration 𝜏∈{1, . . . , 𝑇} contributes a fresh DPLR factor A(𝜏)
+𝑡
+acting on the recurrent state at
+position 𝑡, so the cumulative per-token state-transition operator becomes
+Aeff
+𝑡
+=
+𝑇
+∏︁
+𝜏=1
+A(𝜏)
+𝑡
+=
+𝑇
+∏︁
+𝜏=1
+Diag
+(︀𝛼(𝜏)
+𝑡
+)︀(︁
+I −𝛽(𝜏)
+𝑡
+k(𝜏)
+𝑡
+k(𝜏)⊤
+𝑡
+)︁
+.
+(5)
+DeltaProduct [57] shows that the expressivity gains of looped DPLR depend on the relationships among
+the loop-specific keys {k(𝜏)
+𝑡
+}𝑇
+𝜏=1. In one extreme, if all keys are identical, then each loop iteration erases
+the same direction in recurrent memory, yielding no expressivity gain over the non-looped case. In the
+other extreme, if the keys from different loop iterations are orthogonal, then the loop erases historical
+information along 𝑇distinct directions. In this case, the original transition, which contains a single rank-1
+perturbation, is replaced by an effective transition with a rank-𝑇memory-erasure subspace. We detailed
+discuss the proof in Appendix B.1.
+Loop × sparse attention: receptive-field expansion.
+A single sliding-window block with window 𝑤
+lets each query at position 𝑡attend only to the last 𝑤tokens,
+ℐ(1)
+𝑡
+= {𝑡−𝑤+ 1, . . . , 𝑡},
+so the per-loop receptive field is 𝒪(𝑤) and anything beyond the 𝑤tokens is invisible. Looping the block
+re-runs the same window over the sequence, and information moves further with every loop iteration:
+at loop iteration 𝜏, position 𝑡attends to a window of loop-(𝜏−1) states, and those states have already
+absorbed information from their own windows at loop iteration 𝜏−2, and so on. Chaining this argument
+inductively (Appendix B.2) gives the receptive field after 𝑇loop iterations:
+ℐ(𝑇)
+𝑡
+⊇
+{︀max(1, 𝑡−𝑇𝑤+ 1), . . . , 𝑡
+}︀,
+⃒⃒ℐ(𝑇)
+𝑡
+⃒⃒= 𝒪(𝑇𝑤).
+(6)
+In other words, 𝑇loops of a window-𝑤block reach as far back as 𝑇stacked layers of window-𝑤
+attention [9], but with 𝑇× fewer parameters. Looping therefore turns compute into context: once 𝑇is
+moderately large, a small fixed window already covers long sequences, which makes sparse mixers a
+natural partner for looping in long-context settings.
+2.3. Hybrid LT2: Mixing Mixers Across Depth and Loops
+We further explore hybrid architectures in the loop setting. A common practice in hybrid models is to
+interleave linear blocks with full-attention blocks to achieve strong language modeling performance while
+restoring recall capability [41, 43, 64, 45]. We show that looped transformers open a second axis for such
+mixing: beyond varying the mixer along depth, we can also vary it across loop iterations. We explore both
+options (Figure 3) in following section 3.3.
+4

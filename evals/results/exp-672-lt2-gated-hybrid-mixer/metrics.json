@@ -1,0 +1,37 @@
+{
+  "run_id": "exp-672-lt2-gated-hybrid-mixer",
+  "created_at": "2026-07-29T02:00:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "parked-package-verification",
+  "decision": "park-before-calibration",
+  "root": 20261238,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Final package validation failed before root 20261238 calibration could execute.",
+    "labels_or_oracle_present": false
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {
+    "focused_tests_passed": 12,
+    "exact_initial_identity_verified": true,
+    "official_source_authenticated": true,
+    "formal_controls_opened": false
+  },
+  "resource_admission": {
+    "admitted": false,
+    "reason": "package-verification-blocked",
+    "oracle_wall_seconds": 16.6,
+    "calibration_executed": false
+  },
+  "unopened_surfaces": [
+    "root 20261238 calibration",
+    "root 20261239 viability",
+    "complete W128",
+    "W256",
+    "roots 20261240 and 20261241 confirmations"
+  ],
+  "limitations": [
+    "Validation was red only on inherited out-of-scope EXP671 schema records; no scientific conclusion follows."
+  ]
+}

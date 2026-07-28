@@ -189,3 +189,21 @@ with 1.25x headroom. Integrity, memory, reload, determinism, separation, and tar
 also pass. The complete-route projection is 22,030.105 wall seconds versus the frozen 21,600 expected-
 value ceiling, so park before root `20261235`. Formal W128/W256 and confirmations remain unopened;
 there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change.
+
+## 2026-07-29 — EXP-672 parked at inherited package-verification boundary
+
+- **Decision:** park the exact bounded ST-M025 LT2 gated-hybrid package before root `20261238`
+  calibration. This is a verification-feasibility park, not a scientific rejection.
+- **Source/design evidence:** local paper SHA-256 `84f7f4de...13d9b`; official BSD-3-Clause
+  `chili-lab/LT2` at commit `adc2ba2f...df6c`; repository-local Playwright 1.61.1 and managed
+  Chromium 149.0.7827.55; exact-zero Candidate005 identity and all named control routes implemented.
+- **Focused evidence:** 12 tests passed in 16.39 seconds, including equation/code parity, proposal
+  identity, matched controls, depth/sink diagnostics, deterministic reload, interventions, split and
+  prohibited-inference checks.
+- **Binding boundary:** the sole exact `python tools/validate_project.py && python -m pytest` oracle
+  stopped after 16.6 seconds on ten inherited EXP671 schema violations; pytest did not open. A single
+  bounded probe proved the two failing files are unchanged from integrated base `b3c63a8` at SHA-256
+  `70444329...bc1f1` and `d81aa58e...e547`. Both are outside T067 allowed files.
+- **Unopened:** calibration/MLflow/training/resource admission, complete W128, W256, and roots
+  `20261239`-`20261241`. Candidate005 and every checked, independent, official/private, candidate,
+  submission, promotion, and Goal-completion surface remain unchanged.

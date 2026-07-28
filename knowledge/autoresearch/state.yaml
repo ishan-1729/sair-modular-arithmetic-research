@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T07:00:00+05:30
+updated_at: 2026-07-29T07:30:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -9,6 +9,22 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp672_hypothesis:
+  run_id: exp-672-lt2-gated-hybrid-mixer
+  status: parked-package-verification
+  decision: park-before-calibration
+  decision_authority: T067-final-package-verification-stop-rule
+  source_base_commit: b3c63a87df2560ded406550f6dc565b2a134ab42
+  source_branch: codex/exp672-lt2-gated-hybrid-mixer
+  source_authentication: {paper_sha256: 84f7f4de355928e5006e8aa85c958fb656752158e3f19bc5d7dc919922013d9b, official_commit: adc2ba2f2704ff82744700679d1d0a090314df6c, license: BSD-3-Clause, playwright: 1.61.1, chromium: 149.0.7827.55}
+  focused_verification: {passed: 12, failed: 0, pytest_seconds: 16.39}
+  final_oracle: {invocations: 1, validator_passed: false, validator_issues: 10, pytest_opened: false, wall_seconds: 16.6}
+  blocker: inherited EXP671 run/metrics schema records are byte-identical to integrated b3c63a8 and outside T067 allowed_files
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261238: preregistered-calibration-unexecuted-package-verification-blocked, 20261239: unopened-admission-blocked, 20261240: unopened-admission-blocked, 20261241: unopened-admission-blocked}
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, no-calibration-resource-admission-or-accuracy-evidence, ST-M025-open, no-checked-private-candidate-submission-surface]
 parked_exp671_hypothesis:
   run_id: exp-671-fixed-point-damping-halting
   status: parked-calibration-expected-value
@@ -670,7 +686,7 @@ research_programs:
     root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
     root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
     experiments_authorized_by_contract: false
-next_action: Preserve EXP650 as parked before root 20261186 at the T053 package-verification boundary; do not open its roots or rerun this exact package without fresh PM authorization and a green clean-worktree oracle. The PM must select the next materially distinct family by expected decision yield per unit wall and aggregate-CPU compute. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
+next_action: Preserve EXP672 as parked before root 20261238 calibration at the T067 package-verification boundary; do not open its roots or rerun this exact package without fresh PM authorization and a green integrated oracle. Resolving the inherited EXP671 run/metrics schema records requires a separately authorized owner because they are outside T067. Candidate 005 and all checked, independent, official, private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
