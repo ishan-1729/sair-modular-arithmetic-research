@@ -148,6 +148,8 @@ Native Transformer blocks suffice. EXP-634/EXP-643 are adjacent. EXP-674 authent
 
 **PDF:** `2507.10524`, p. 3 §2.1/Table 1 and pp. 4–5 §2.2.1 Eq. 2.1–2.2/Fig. 2/Table 2. **Components:** (a) Cycle/Sequence/Middle sharing layouts; (b) expert-choice hierarchical top-k versus token-choice one-shot depth routing, including load, KV-cache, and CPU effects. Loopies' `B1,B1,B2,B2,...` schedule is MoR's Sequence-sharing layout, so M009.a and M043.a share one schedule-evidence slot; Loopies does not implement M009.b. Prefer official/maintained router kernels only after a dense recurrent winner; CPU parity is mandatory. Terminal requires route-causal exactness and savings versus fixed/equal-average/random routing; ordinary MoE expert routing alone is not the full MoR system.
 
+EXP680 implements the bounded-faithful M009.b instance-level mapping around Candidate005 with native CPU top-k, token-choice, fixed/equal-average controls, route/weight interventions and exact full-depth parity. Its complete calibration saves 10.714% of W128 calls and passes runtime/resources, but the expert histogram `{8:3,11:0,14:9}` fails the frozen all-depth noncollapse gate. Formal W128/W256 roots remain unopened, so M009.b is still scientifically unanswered and only this exact threshold formulation is parked.
+
 ### ST-M010 — TRM family (2 components)
 
 - **M010.a TRM:** `2510.04871`, pp. 5–7 Fig. 3/§4, p. 5 Table 1, p. 8 Table 3, p. 11; `n` latent `z` updates then answer `y`, first `T-1` blocks forward-only, final backprop, detached deep supervision, Q halt, EMA.

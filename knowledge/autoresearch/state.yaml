@@ -815,7 +815,22 @@ parked_exp679_hypothesis:
   run_record: experiments/runs/exp-679-capacity-recycling/run.json
   metrics: evals/results/exp-679-capacity-recycling/metrics.json
   limitations: [verified-config-omits-two-runner-required-trajectory-denominators, all-roots-unopened, no-M043b-scientific-verdict, no-candidate-benchmark-submission-promotion-or-completion-change]
-next_action: Execute the separately authorized EXP680 learned recursion-depth routing package from the exact pushed EXP679 terminal commit. Candidate 005 and all checked, independent, official/private, submission, promotion, and Goal-completion evidence remain unchanged.
+parked_exp680_hypothesis:
+  run_id: exp-680-mor-depth-routing
+  status: parked-calibration-noncollapsed-load
+  source_base_commit: 6f345a8f7681f8e99ded6a628fbca8d90e915e56
+  source_branch: codex/exp680-mor-depth-routing
+  decision_authority: T080-root-20261270-complete-route-admission
+  mechanism: bounded-ST-M009b-instance-level-hierarchical-expert-choice-depth-routing
+  roots: {calibration_20261270: completed-topology-gate-reject, viability_20261271: unopened, confirmation_20261272: unopened, confirmation_20261273: unopened}
+  calibration: {wall_seconds: 129.92078969199997, process_tree_cpu_seconds: 369.57, cgroup_cpu_seconds: 383.9240000000001, peak_rss_bytes: 1961058304, candidate_guarded_seconds: 68.86987362000092, expert_average_calls: 12.5, expert_call_reduction: 0.1071428571428571, expert_w128_histogram: {8: 3, 11: 0, 14: 9}, admitted: false}
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 673, pytest_seconds: 479.88, outer_wall_seconds: 476.49, process_cpu_seconds: 610.23, peak_rss_kib: 931884}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-680-mor-depth-routing/run.json
+  metrics: evals/results/exp-680-mor-depth-routing/metrics.json
+  limitations: [bounded-instance-level-not-literal-token-routing, calibration-only-non-scientific, middle-depth-empty, roots-20261271-through-20261273-unopened, no-candidate-benchmark-submission-promotion-or-completion-change]
+next_action: Preserve EXP680 as a complete-route topology park with roots 20261271-20261273 unopened. A separate PM decision is required for any materially distinct successor; Candidate 005 and all checked, independent, official/private, submission, promotion, and Goal-completion evidence remain unchanged.
 tracking:
   backend: sqlite
   tracking_uri: .scratch/mlflow/mlflow.db
