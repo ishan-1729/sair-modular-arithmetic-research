@@ -329,3 +329,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Ten focused tests pass. Preflight constructs every mode, root and denominator. The one package oracle passes 206 concepts / 1,100 records and 673/673 tests in 479.88 seconds (476.49 outer wall, 610.23 process CPU, 931,884 KiB RSS).
 - Root `20261270` completes in 129.921 wall / 369.570 process-tree CPU / 383.924 cgroup CPU seconds with 1,961,058,304-byte RSS. Call reduction is 10.714%, expert route wall beats fixed-full, and guarded candidate projection is 68.870 seconds.
 - The expert W128 histogram is `{8:3,11:0,14:9}`. The frozen all-depth noncollapse conjunct fails, so roots `20261271`-`20261273` remain unopened without retuning. This is a topology park, not scientific evidence against MoR/M009.b.
+
+## 2026-07-30 — EXP-681 permanently parks at focused verification
+
+- Preserve final config/model/runner/test hashes `683a0720...f939`, `7cf80995...b658`, `f31c9d77...506c`, and `0e432aec...3ca`.
+- The sole T082 focused run records 9 passed / 1 failed in 4.18 wall and 9.83 process CPU seconds with 251,992 KiB peak RSS.
+- The failure is exact and local: the topology assertion expects two flat quotient-tail parameter names, while Candidate005's copied sequential quotient tail exposes four indexed tensors.
+- T082 forbids code/config/test repair after launch. Full pytest and roots `20261274`-`20261277` remain permanently unopened; this is not an AbbIE scientific verdict.

@@ -1,0 +1,8 @@
+{
+  "schema_version": "exp681-environment-v1",
+  "platform": "Ubuntu-24.04-WSL2",
+  "python_environment": "/home/ishan/.venvs/sair-mod-challenge",
+  "torch": "2.5.1+cpu",
+  "device": "cpu",
+  "torch_threads": 4
+}
