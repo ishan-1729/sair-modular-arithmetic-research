@@ -466,3 +466,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Apply the one-oracle/out-of-scope stop rule. Roots 20261302-20261305 remain unopened; no
   candidate timing, W128/W256 science, confirmations, or protected surfaces opened. This is
   not scientific evidence for or against compact distillation.
+
+## 2026-07-30 — EXP-688 parks at complete-route candidate-runtime admission
+
+- Repair EXP686/687 lifecycle assertions without changing historical terminal records; 35/35 focused tests pass.
+- Reuse EXP687's exact map/pruned bytes and add training-only selected hidden capture. The all-mode smoke, 53-test focused cone, validator, and sole 779/779 package oracle pass.
+- Root20261306 completes matched hidden-aligned/logit-only work, all controls, reload, warm-up, and three cold complete candidate routes at 150.457/147.061/146.250 seconds.
+- Frozen 2.0 variability headroom yields 300.913 seconds versus 285. Park before root20261307; roots20261308/09 remain unopened and the mechanism verdict is null.

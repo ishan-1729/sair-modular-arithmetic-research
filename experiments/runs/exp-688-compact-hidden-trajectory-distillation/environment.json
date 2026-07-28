@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-688-compact-hidden-trajectory-distillation",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "numpy": "2.5.1",
+  "pyyaml": "6.0.3",
+  "pytest": "9.1.1",
+  "configured_torch_threads": 4,
+  "device": "cpu",
+  "repository_base_commit": "0d6554f3123c3bd0672b50a07941fff3b037ebe2",
+  "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+}

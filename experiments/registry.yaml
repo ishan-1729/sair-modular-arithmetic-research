@@ -2249,3 +2249,33 @@ runs:
       - The sole package oracle failed only because the reused worktree contained an ignored EXP686 canonical run record outside T092 allowed_files.
       - The one-oracle and out-of-scope stop rules prohibit a repair or rerun, so roots 20261302-20261305 remain unopened.
       - No complete candidate timing, calibration, formal W128/W256, confirmation, protected, candidate, submission, promotion or release surface opened.
+  - run_id: exp-688-compact-hidden-trajectory-distillation
+    status: parked-calibration-candidate-runtime-headroom
+    approach: exact-exp687-hidden56-logit-distillation-plus-selected-final-hidden-alignment
+    decision: park-exp688-at-root20261306-resource-admission
+    decision_authority: T093-root20261306-complete-route-resource-admission
+    source_base_commit: 0d6554f3123c3bd0672b50a07941fff3b037ebe2
+    source_branch: codex/exp688-compact-hidden-trajectory-distillation
+    config: configs/exp_688_compact_hidden_trajectory_distillation.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp688-hidden-trajectory-distillation.md
+    preregistration: knowledge/autoresearch/ablations/exp-688-compact-hidden-trajectory-distillation.md
+    run_record: experiments/runs/exp-688-compact-hidden-trajectory-distillation/run.json
+    metrics: evals/results/exp-688-compact-hidden-trajectory-distillation/metrics.json
+    verification: experiments/runs/exp-688-compact-hidden-trajectory-distillation/verification.json
+    environment: experiments/runs/exp-688-compact-hidden-trajectory-distillation/environment.json
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    channel_map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0
+    pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340
+    roots: {20261306: completed-calibration-resource-reject, 20261307: unopened-admission-blocked, 20261308: unopened-admission-blocked, 20261309: unopened-admission-blocked}
+    verification_summary: {smoke: passed-all-modes, historical_focused: 35-passed, focused: 53-passed, validator: green, pytest: 779-passed-in-554.72s, pytest_outer_wall_seconds: 535.35, pytest_process_cpu_seconds: 805.17, pytest_peak_rss_kib: 940508, oracle_invocations: 1}
+    calibration: {admitted: false, candidate_cold_wall_seconds: [150.45665882000003, 147.06114127600006, 146.24987629899988], candidate_guarded_wall_seconds: 300.91331764000006, candidate_guarded_ceiling_seconds: 285.0, expected_formal_wall_seconds: 13366.69620568246, wall_seconds: 565.2591884199999, process_cpu_seconds: 1898.9722680000002, cgroup_cpu_seconds: 2014.124, peak_rss_bytes: 1831120896}
+    training_updates: 8
+    formal_calls_executed: 0
+    mlflow_run_id: bef0946a17cc455286b870c2554f767d
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration denominators are resource evidence, not W128/W256 science.
+      - Guarded candidate runtime 300.913 seconds exceeds the frozen 285-second ceiling.
+      - Root20261307 and confirmation roots20261308/09 remained unopened.
+      - No protected candidate, submission, promotion or release surface opened.

@@ -1,0 +1,18 @@
+{
+  "schema_version": "exp688-terminal-v1",
+  "run_id": "exp-688-compact-hidden-trajectory-distillation",
+  "created_at": "2026-07-28T23:55:00+05:30",
+  "status": "parked-calibration-candidate-runtime-headroom",
+  "decision": "park-exp688-at-root20261306-resource-admission",
+  "completion_marker": "terminal-persisted",
+  "checkpoint_sha256": "e7d1b30b2899cae465505ae6392fda24d78da3fc020bb49b77001d0e2d32337e",
+  "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "initial_state_sha256": "f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340",
+  "roots": {"20261306": "completed-calibration-resource-reject", "20261307": "unopened-admission-blocked", "20261308": "unopened-admission-blocked", "20261309": "unopened-admission-blocked"},
+  "calibration": {"admitted": false, "training_updates_per_arm": 4, "hidden_calls_per_trained_arm": 32, "candidate_cases_per_cold_repetition": 1100, "candidate_cold_wall_seconds": [150.45665882000003, 147.06114127600006, 146.24987629899988], "candidate_guarded_wall_seconds": 300.91331764000006, "maximum_candidate_guarded_wall_seconds": 285.0, "expected_formal_wall_seconds": 13366.69620568246, "wall_seconds": 565.2591884199999, "process_cpu_seconds": 1898.9722680000002, "cgroup_cpu_seconds": 2014.124, "peak_rss_bytes": 1831120896},
+  "controls": {"hidden_aligned": "completed-calibration", "logit_only": "completed-calibration", "frozen_pruned": "completed-calibration", "randomized_control": "completed-calibration", "reset_control": "completed-calibration"},
+  "evaluation": {"not_performed": true, "reason": "Only 16-transition and 2-rollout calibration denominators ran; guarded candidate runtime rejected before formal W128/W256 science.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": ["Calibration accuracy is non-scientific and no primary-versus-control W256 delta is reportable.", "Formal root20261307 and confirmation roots20261308/09 remained unopened.", "No checked, independent, official/private, candidate, submission, promotion, or release surface opened."]
+}

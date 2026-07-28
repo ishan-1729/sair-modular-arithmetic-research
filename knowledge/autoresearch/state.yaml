@@ -9,6 +9,23 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp688_hypothesis:
+  run_id: exp-688-compact-hidden-trajectory-distillation
+  status: parked-calibration-candidate-runtime-headroom
+  decision: park-exp688-at-root20261306-resource-admission
+  decision_authority: T093-root20261306-complete-route-resource-admission
+  source_base_commit: 0d6554f3123c3bd0672b50a07941fff3b037ebe2
+  source_branch: codex/exp688-compact-hidden-trajectory-distillation
+  source_authentication: {checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, channel_map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0, pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340}
+  roots: {20261306: completed-calibration-resource-reject, 20261307: unopened-admission-blocked, 20261308: unopened-admission-blocked, 20261309: unopened-admission-blocked}
+  verification: {historical_focused: 35-passed, focused: 53-passed, validator: green-218-concepts-1100-records, pytest: 779-passed-in-554.72s, full_oracle_invocations: 1}
+  calibration: {wall_seconds: 565.2591884199999, process_cpu_seconds: 1898.9722680000002, cgroup_cpu_seconds: 2014.124, peak_rss_bytes: 1831120896, candidate_cold_wall_seconds: [150.45665882000003, 147.06114127600006, 146.24987629899988], candidate_guarded_wall_seconds: 300.91331764000006, candidate_ceiling_seconds: 285.0, expected_formal_wall_seconds: 13366.69620568246, admitted: false}
+  implementation_executed: true
+  calibration_executed: true
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: bef0946a17cc455286b870c2554f767d
+  limitations: [calibration-denominators-non-scientific, guarded-candidate-runtime-reject, formal-and-confirmation-roots-unopened, no-protected-candidate-submission-surface]
 parked_exp678_hypothesis:
   run_id: exp-678-target-only-continuation
   status: parked-package-verification

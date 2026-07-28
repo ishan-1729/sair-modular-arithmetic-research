@@ -1,0 +1,63 @@
+{
+  "schema_version": "exp688-terminal-v1",
+  "run_id": "exp-688-compact-hidden-trajectory-distillation",
+  "status": "completed",
+  "decision": "park-exp688-at-root20261306-resource-admission",
+  "decision_authority": "T093-root20261306-complete-route-resource-admission",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-28T23:55:00+05:30",
+  "config": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
+  "seed": 20261306,
+  "hypothesis": "Normalized selected-channel teacher/student final-hidden alignment at every recovery transition materially improves hidden56 W256 autonomous exactness over matched logit-only distillation.",
+  "source": {
+    "repository_commit": "0d6554f3123c3bd0672b50a07941fff3b037ebe2",
+    "dirty": true,
+    "branch": "codex/exp688-compact-hidden-trajectory-distillation",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409",
+    "runner_sha256": "62ffb511509fffac9636b4c08c3cf8a8d984a96ee4477db195e58b58af9a1d93",
+    "test_sha256": "28917e20d0dace2cf50a24fbbbc025efbf6330e5e2fe9220cf362b30d71b2c73",
+    "channel_map_sha256": "92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0",
+    "pruned_state_sha256": "f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340"
+  },
+  "roots": {"20261306": "completed-calibration-resource-reject", "20261307": "unopened-admission-blocked", "20261308": "unopened-admission-blocked", "20261309": "unopened-admission-blocked"},
+  "rootless_smoke": {"status": "completed", "scientific": false, "wall_seconds": 70.37, "process_cpu_seconds": 170.62, "peak_rss_kib": 669324, "sha256": "323056531aee536956d8c31fc1678893c0eef4ecdba411fb92bf5303b7d65f73"},
+  "calibration": {
+    "complete": true,
+    "admitted": false,
+    "checks": {"candidate_runtime": false, "candidate_three_complete_cold": true, "complete_routes": true, "expected_value": true, "matched_training": true, "memory": true, "no_fidelity_reduction": true, "reload_exact": true},
+    "candidate_cold_wall_seconds": [150.45665882000003, 147.06114127600006, 146.24987629899988],
+    "candidate_max_complete_wall_seconds": 150.45665882000003,
+    "candidate_headroom": 2.0,
+    "candidate_guarded_wall_seconds": 300.91331764000006,
+    "candidate_guarded_ceiling_seconds": 285.0,
+    "expected_formal_wall_seconds": 13366.69620568246,
+    "expected_formal_wall_ceiling_seconds": 21600.0,
+    "wall_seconds": 565.2591884199999,
+    "process_cpu_seconds": 1898.9722680000002,
+    "cgroup_cpu_seconds": 2014.124,
+    "peak_rss_bytes": 1831120896,
+    "mlflow_run_id": "bef0946a17cc455286b870c2554f767d"
+  },
+  "training_updates": 8,
+  "formal_calls_executed": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "artifacts": {
+    "checkpoint": ".scratch/exp-688-compact-hidden-trajectory-distillation/calibration/root-20261306/arms/hidden_aligned/model.safetensors",
+    "checkpoint_sha256": "e7d1b30b2899cae465505ae6392fda24d78da3fc020bb49b77001d0e2d32337e",
+    "metrics": "evals/results/exp-688-compact-hidden-trajectory-distillation/metrics.json",
+    "environment": "experiments/runs/exp-688-compact-hidden-trajectory-distillation/environment.json",
+    "verification": "experiments/runs/exp-688-compact-hidden-trajectory-distillation/verification.json",
+    "calibration": ".scratch/exp-688-compact-hidden-trajectory-distillation/calibration.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-688-compact-hidden-trajectory-distillation.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp688-hidden-trajectory-distillation.md"
+  },
+  "limitations": [
+    "Calibration denominators are route-integrity and resource evidence, not W128/W256 science.",
+    "All admission checks passed except guarded complete candidate runtime: 300.913 seconds exceeds the frozen 285-second ceiling.",
+    "Only four updates per trained arm ran; root20261307 formal science and roots20261308/09 confirmations remained unopened.",
+    "No checked, independent, official/private, candidate, submission, promotion, or release surface opened."
+  ]
+}

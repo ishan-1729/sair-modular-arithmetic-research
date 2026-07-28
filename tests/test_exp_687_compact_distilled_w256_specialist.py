@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import inspect
+import json
 from pathlib import Path
 
 import pytest
@@ -35,9 +36,32 @@ def test_exact_source_and_prior_hashes_authenticate(tmp_path: Path) -> None:
     assert len(experiment.manifest["selected_source_channels_ranked"]) == 56
 
 
-def test_no_canonical_result_placeholder_exists_before_oracle() -> None:
-    assert not (ROOT / "experiments/runs/exp-687-compact-distilled-w256-specialist/run.json").exists()
-    assert not (ROOT / "evals/results/exp-687-compact-distilled-w256-specialist/metrics.json").exists()
+def test_canonical_records_are_absent_before_or_exact_after_terminal_publication() -> None:
+    run_path = ROOT / "experiments/runs/exp-687-compact-distilled-w256-specialist/run.json"
+    metrics_path = ROOT / "evals/results/exp-687-compact-distilled-w256-specialist/metrics.json"
+    assert run_path.exists() == metrics_path.exists()
+    if not run_path.exists():
+        return
+
+    run_record = json.loads(run_path.read_text())
+    metrics = json.loads(metrics_path.read_text())
+    expected_roots = {
+        "20261302": "unopened-package-oracle-blocked",
+        "20261303": "unopened-package-oracle-blocked",
+        "20261304": "unopened-package-oracle-blocked",
+        "20261305": "unopened-package-oracle-blocked",
+    }
+    assert run_record["schema_version"] == "exp687-terminal-v1"
+    assert run_record["run_id"] == "exp-687-compact-distilled-w256-specialist"
+    assert run_record["status"] == "failed"
+    assert run_record["decision"] == "park-exp687-at-package-verification"
+    assert run_record["completion_marker"] == "terminal-persisted"
+    assert run_record["roots"] == expected_roots
+    assert metrics["schema_version"] == "exp687-terminal-v1"
+    assert metrics["run_id"] == run_record["run_id"]
+    assert metrics["status"] == "parked-package-verification"
+    assert metrics["decision"] == run_record["decision"]
+    assert metrics["roots"] == {root: "unopened" for root in expected_roots}
 
 
 def test_channel_map_is_answer_independent_deterministic_and_tie_broken() -> None:

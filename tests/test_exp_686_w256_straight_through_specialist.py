@@ -35,9 +35,33 @@ def test_exact_source_challenge_checkpoint_and_prior_hashes_authenticate(tmp_pat
     assert identity["source_contract"] == {name: value["sha256"] for name, value in CONFIG["source_contract"].items()}
 
 
-def test_no_canonical_result_placeholder_exists_before_oracle() -> None:
-    assert not (ROOT / "experiments/runs/exp-686-w256-straight-through-specialist/run.json").exists()
-    assert not (ROOT / "evals/results/exp-686-w256-straight-through-specialist/metrics.json").exists()
+def test_canonical_records_are_absent_before_or_exact_after_terminal_publication() -> None:
+    run_path = ROOT / "experiments/runs/exp-686-w256-straight-through-specialist/run.json"
+    metrics_path = ROOT / "evals/results/exp-686-w256-straight-through-specialist/metrics.json"
+    assert run_path.exists() == metrics_path.exists()
+    if not run_path.exists():
+        return
+
+    run_record = json.loads(run_path.read_text())
+    metrics = json.loads(metrics_path.read_text())
+    expected_roots = {
+        "20261294": "completed-calibration-resource-reject",
+        "20261295": "unopened-admission-blocked",
+        "20261296": "unopened-admission-blocked",
+        "20261297": "unopened-admission-blocked",
+    }
+    assert run_record["schema_version"] == "exp686-terminal-v1"
+    assert run_record["run_id"] == "exp-686-w256-straight-through-specialist"
+    assert run_record["status"] == "completed"
+    assert run_record["decision"] == "park-exp686-at-root20261294-resource-admission"
+    assert run_record["completion_marker"] == "terminal-persisted"
+    assert run_record["roots"] == expected_roots
+    assert metrics["schema_version"] == "exp686-terminal-v1"
+    assert metrics["run_id"] == run_record["run_id"]
+    assert metrics["status"] == "parked-calibration-candidate-runtime-headroom"
+    assert metrics["decision"] == run_record["decision"]
+    assert metrics["completion_marker"] == "terminal-persisted"
+    assert metrics["roots"] == expected_roots
 
 
 def test_hard_straight_through_is_hard_forward_with_sigmoid_gradient() -> None:
