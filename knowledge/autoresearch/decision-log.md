@@ -405,3 +405,16 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Park before root 20261287. Roots 20261287-20261289, formal W128, component causality,
   W256, confirmations, and protected evaluation surfaces remain unopened. This is not a
   scientific verdict on STARS, random existing-core depth, or M026.
+
+## 2026-07-28 — EXP-677 recovery parks on frozen runner/config mismatch
+
+- Authenticated the exact frozen EXP677 package and challenge snapshot, confirmed roots
+  `20261258`-`20261261` absent, and reused T074's focused 9/9 plus T087's green validator
+  and 716-test oracle evidence without rerunning either suite.
+- Opened calibration root `20261258` exactly once. All five arms materialized; the three
+  trained arms completed nine total updates and every trained step had a nonzero gradient.
+- The first calibration evaluation raised `KeyError: 'window'`: the inherited late-depth
+  method requires `config.window.size`, absent from the authenticated frozen EXP677 config.
+  No evaluation denominator, calibration summary, admission, or scientific metric exists.
+- Apply the post-root stop rule: no repair or retry. Roots `20261259`-`20261261` remain
+  unopened, and this execution-integrity park is not a scientific verdict on M004.b.

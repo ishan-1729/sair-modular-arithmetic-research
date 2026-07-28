@@ -1,11 +1,11 @@
 {
   "schema_version": "exp677-terminal-v1",
   "run_id": "exp-677-length-schedule",
-  "status": "completed",
+  "status": "failed",
   "hypothesis": "A known-step curriculum over legal operand widths and their full physical recurrent visit counts can retain Candidate005 W128 exactness and improve W256 transfer while formal inference remains unchanged.",
   "seed": 67773000,
-  "decision": "park-verification-out-of-scope-immutable-snapshot-absent",
-  "decision_authority": "T074-package-verification-stop-rule",
+  "decision": "park-exp677-after-root-20261258-runner-failure",
+  "decision_authority": "T088-post-root-runner-failure-stop-rule",
   "created_at": "2026-07-30T00:00:00+05:30",
   "source": {
     "repository_commit": "aca5dceb6f31b93c2a07f5453ec73f5cf79eb145",
@@ -38,19 +38,54 @@
     "tracking_uri": "sqlite:///.scratch/mlflow/mlflow.db"
   },
   "roots": {
-    "20261258": "unopened-verification-blocked",
-    "20261259": "unopened-verification-blocked",
-    "20261260": "unopened-verification-blocked",
-    "20261261": "unopened-verification-blocked"
+    "20261258": "opened-terminal-runner-error",
+    "20261259": "unopened-calibration-failed",
+    "20261260": "unopened-calibration-failed",
+    "20261261": "unopened-calibration-failed"
   },
-  "training_updates": 0,
+  "training_updates": 9,
   "scientific_metrics": null,
   "scientific_verdict": null,
+  "t088_recovery": {
+    "status": "terminal-calibration-runner-failure",
+    "repository_commit": "5dfc28e4fbc71ec140f5542795b0297e7fe3f109",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "started_at": "2026-07-28T15:10:40+00:00",
+    "finished_at": "2026-07-28T15:11:39+00:00",
+    "exit_code": 1,
+    "root": 20261258,
+    "completed_arms": [
+      "scheduled",
+      "fixed_incumbent_endpoint",
+      "equal_work_shuffled",
+      "frozen_source",
+      "randomized_control"
+    ],
+    "trained_updates": 9,
+    "trained_nonzero_gradient_steps": 9,
+    "failure": "KeyError: window in inherited late_depth_losses during the first calibration evaluation",
+    "progress": ".scratch/exp-677-length-schedule/calibration/root-20261258-progress.json",
+    "progress_sha256": "2926038498f3c0db0c31503f6ebb53ac1ed365d158a8fdb403603460c6e6a725",
+    "console": ".scratch/exp-677-length-schedule/t088/calibration.log",
+    "console_sha256": "e8a6657de1f06a663c56eb65c2bdf1b09dcc43aa8ddd42ab4c95c45bddcb7381",
+    "resource": {
+      "wall_seconds": 58.83,
+      "user_cpu_seconds": 159.27,
+      "system_cpu_seconds": 8.03,
+      "peak_rss_kib": 2926688,
+      "resource_sha256": "60b8914470443e8481d7ddef73464e261e95226f2b84baf36bdf4cf76470c91d"
+    },
+    "admission": null,
+    "retry_performed": false
+  },
   "limitations": [
-    "The implementation passed its focused semantic cone, but final package verification is red on inherited immutable-snapshot materialization outside T074 scope.",
-    "Validator short-circuit means the full pytest phase did not open; no second package oracle is permitted.",
-    "Calibration, formal W128, conditional W256, and confirmations remained unopened.",
-    "This verification park is not scientific evidence for or against M004.b, length scheduling, Candidate005 transfer, or the source paper.",
+    "T074's historical package-verification park remains preserved in verification.json; T088 reused later green validator and 716-test evidence after exact hash authentication.",
+    "Root 20261258 opened once and all five calibration arms were materialized, but evaluation stopped before any calibration summary or admission decision because inherited late-depth code requires an absent frozen config key.",
+    "The frozen runner/config mismatch was not repaired and root 20261258 was not retried; formal and confirmation roots remain unopened.",
+    "Historical T074 evidence: the implementation passed its focused semantic cone, while that task's package validation was red on inherited immutable-snapshot materialization outside its scope.",
+    "Historical T074 evidence: validator short-circuit meant its full pytest phase did not open; T088 later reused T087's authenticated green package oracle.",
+    "Historical T074 state: calibration, formal W128, conditional W256, and confirmations were then unopened.",
+    "Neither the historical verification park nor T088's runner failure is scientific evidence for or against M004.b, length scheduling, Candidate005 transfer, or the source paper.",
     "No checked, independent, official/private, candidate, submission, promotion or completion evaluation was opened."
   ]
 }
