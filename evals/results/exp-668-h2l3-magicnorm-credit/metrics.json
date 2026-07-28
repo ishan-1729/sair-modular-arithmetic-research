@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-668-h2l3-magicnorm-credit",
+  "created_at": "2026-07-28T21:30:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "verification-feasibility-park",
+  "decision": "park-before-calibration-full-oracle-timeout",
+  "root": 20261222,
+  "evaluation": {"not_performed": true, "reason": "The sole final package oracle timed out without a verdict before calibration authorization.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {"focused_routes_tested": ["proposal_only", "full", "hierarchy_only", "credit_only", "flat_compute_matched", "no_warmup_raw_gradient", "high_reset", "low_reset", "randomized"], "focused_passed": 26, "calibration_routes_opened": false, "formal_controls_opened": false},
+  "unopened_surfaces": ["root 20261222 calibration", "root 20261223 W128 primary", "W128 controls", "W256", "roots 20261224 and 20261225", "M024.c", "M024.d"],
+  "limitations": ["No scientific accuracy, validity, gradient, resource-admission, or candidate-runtime verdict follows.", "The timeout is a package-verification park, not a rejection of HRM-Text, H2L3, MagicNorm, warmup credit, or the bounded adaptation."]
+}

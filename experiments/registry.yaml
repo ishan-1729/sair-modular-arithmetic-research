@@ -1702,3 +1702,23 @@ runs:
       - Root 20261219, formal controls, W256 viability, and confirmations remain unopened.
       - M016.b RIM remained explicitly deferred and closed.
       - This resource park does not reject RSM, ST-M016.a, the exact SAIR adaptation scientifically, or the source paper.
+  - run_id: exp-668-h2l3-magicnorm-credit
+    status: parked-before-calibration-full-oracle-timeout
+    approach: bounded-ST-M024ab-H2L3-MagicNorm-warmup-credit
+    decision: park-before-calibration-full-oracle-timeout
+    decision_authority: T063-final-package-verification-boundary
+    source_base_commit: 8d038a590fa40954d6df0bdd394bd2e5e229d708
+    source_branch: codex/exp668-h2l3-magicnorm-credit
+    config: configs/exp_668_h2l3_magicnorm_credit.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md
+    run_record: experiments/runs/exp-668-h2l3-magicnorm-credit/run.json
+    metrics: evals/results/exp-668-h2l3-magicnorm-credit/metrics.json
+    roots: {20261222: unopened-verification-blocked, 20261223: unopened, 20261224: unopened, 20261225: unopened}
+    verification: {focused: 26-passed, full_boundary: timed-out-no-verdict, outer_wall_seconds: 904.037, fresh_probe: no-surviving-process-stale-inherited-lastfailed-only}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - No green full-project oracle was obtained, so calibration and science remained closed.
+      - M024.c language mechanisms and M024.d auto-guidance remained closed.
+      - This park does not reject HRM-Text, H2L3, MagicNorm, warmup credit, or the bounded adaptation.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
