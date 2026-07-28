@@ -338,6 +338,17 @@ This stable record retains the legal analogue historically tested by EXP-654: or
 
 The thirteen user-elevated entries map as follows: HRM→M007+M001 (M012/M021 supporting); TRM→M010; PTRM→M023; RLM→M036 with M037 split; lambda-RLM→M038; The Duck→M040; LoopLM→M011 plus generic M004/M006; GRAM→M022; LimiX→M035; MAKER→M041 including Appendix F; Percepta's web-only Transformers as Computers entry→M032/M033, with formal `2301.13196` retained separately at M003; Neural Computers→M034, with UT memory→M020 and the learned-RAM analogue→M042; Loopies→M043 and conditional M044. M029 is neither PTRM nor GRAM.
 
+## EXP-670 update — ST-M018.a and overlapping ST-M026.b
+
+EXP-670 implements the bounded dynamic-recurrence slice: one exact-zero-initialized, position-free shared
+residual operator; per-batch `clip(Poisson(4), 2, 8)` training counts from the Appendix F max-R=8 setting;
+and fixed target-free inference depth. The 400-draw source stream, fixed-mean arm, deterministic matched
+histogram, and separately shuffled count-independent arm all have mean 4 and 1,600 calls. The SAIR operator
+reinjects the frozen proposal and legal input channels, an explicit adaptation because the source architecture
+does not inject inputs during recurrence. The inherited mandatory operand-bit scan is unchanged. ST-M018.b's
+hop curriculum and KL/entropy adaptive halt remain closed. See
+`2026-07-29-exp670-loop-curriculum-mechanism.md` for the page-anchored map and exclusions.
+
 ## Resource governance
 
 Historical EXP-649's fixed 285-second decision and observed calibration remain historical evidence for that exact frozen formulation. Its formerly generalized `225`-second rule is invalid for GRAM, PTRM, learned-energy analogues, local recursive models, MAKER analogues, or any other architecture. Each new experiment must measure representative setup, training, checkpoint, and full-fidelity evaluation throughput; derive projected/soft/hard budgets with variability headroom; account for monotonic wall and aggregate process user-plus-system CPU separately; preserve recoverable checkpoints; and reuse only hash-valid caches with explicit charge. The 300-second constraint applies only to final submission inference qualification.
