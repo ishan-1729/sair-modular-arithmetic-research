@@ -122,7 +122,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 
 ### ST-M004 — Looped learning and length generalization (2 components)
 
-- **M004.a LLA:** `2311.12424`, p. 5 §4.1/Fig. 3 and pp. 5–6; input reinjection plus moving endpoint/window loss. Native. EXP-634 is a negative adjacent loop, not faithful.
+- **M004.a LLA:** `2311.12424`, p. 5 §4.1/Fig. 3 and pp. 5–6; input reinjection plus moving endpoint/window loss. Native. EXP-634 is a negative adjacent loop, not faithful. **Active as EXP676:** visual audit proves Candidate005 already performs non-additive legal-input reinjection at every physical visit, so the frozen test isolates the remaining progressive four-endpoint window loss with bit-identical formal inference and matched endpoint/fixed/equal-work/shuffled controls.
 - **M004.b length schedule:** `2409.15647`, pp. 5–7 §4.1–4.3 Eq. 2/Table 1, p. 9 §6.3, p. 10 §7; NoPE, first-order prediction, known step schedules, endpoint lengths, and per-sample confidence. No invented visit-embedding shuffle. Open. Terminal after each component is isolated against fixed/equal-work recurrence across unseen widths and visits.
 
 ### ST-M005 — Relaxed Recursive Transformers (1 component)
