@@ -1,0 +1,40 @@
+{
+  "run_id": "exp-685-validity-constrained-attractor",
+  "created_at": "2026-07-28T15:42:01Z",
+  "checkpoint_sha256": "a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4",
+  "status": "parked-package-verification",
+  "decision": "park-exp685-at-package-verification",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The sole package oracle stopped in project validation before pytest and before any root opened.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "validity_constrained": "rootless-smoke-only",
+    "ce_only": "rootless-smoke-only",
+    "shuffled_modulus": "rootless-smoke-only",
+    "frozen_source": "rootless-smoke-only",
+    "randomized_control": "rootless-smoke-only"
+  },
+  "rootless_smoke": {
+    "scientific": false,
+    "trained_updates": 3,
+    "transition_cases": 5,
+    "rollout_cases": 5,
+    "reload_exact": true,
+    "admission_math_exercised": true
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "roots": {
+    "20261290": "unopened-package-oracle-blocked",
+    "20261291": "unopened-package-oracle-blocked",
+    "20261292": "unopened-package-oracle-blocked",
+    "20261293": "unopened-package-oracle-blocked"
+  },
+  "limitations": [
+    "Rootless smoke is implementation evidence only and is not a scientific denominator.",
+    "Full pytest did not open because validation failed first; no second package oracle is authorized.",
+    "No calibration, W128, W256, confirmation, protected, candidate or promotion evaluation occurred."
+  ]
+}

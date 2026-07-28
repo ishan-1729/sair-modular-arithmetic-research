@@ -83,3 +83,4 @@
 - [EXP-682 Huginn recurrent depth](exp-682-huginn-recurrent-depth.md) - source-complete ST-M006.a transfer package parked before roots because causal latent/concat/RMSNorm additions cannot exactly preserve Candidate005 and the 400-update de-novo fallback is not viable.
 - [EXP-683 source-complete HRM](exp-683-source-complete-hrm.md) - full M007 H/L, one-step/deep-supervision, and learned-Q ACT package permanently parked on a root-20261282 checkpoint-reload execution failure before evaluation.
 - [EXP-684 STARS × random existing-core depth factorial](exp-684-stars-random-depth-factorial.md) - source-complete M026.a/b factorial parked at root-20261286 resource admission before W128 science.
+- [EXP-685 validity-constrained attractor continuation](exp-685-validity-constrained-attractor.md) - rootless all-mode smoke and 10 focused checks passed, but the sole package oracle stopped on owned canonical-record schema omissions before pytest; all roots remain unopened.
