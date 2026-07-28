@@ -12,6 +12,7 @@ timestamp: "2026-07-12T02:20:00+05:30"
 ## 2026-07-29
 
 - **Reject EXP-665 exact bounded attractor/equilibrium adaptation at the W128-first gate**: root `20261210` completed calibration for all six routes and admitted formal root `20261211`. The library-backed Anderson/phantom primary reached exactly 85.0% exact on 300 W128 rollouts and 99.933% exact on 3,000 W128 transitions, but one rollout was invalid (0.333%) against the frozen zero-invalid conjunct. Candidate runtime projected to 168.97 seconds. The gate left proposal/randomized controls, convergence/basin diagnostics, W256, and roots `20261212`/`20261213` unopened. This rejects only the declared bounded SAIR adaptation; the source methods, TorchDEQ, Candidate 005, and all benchmark/promotion surfaces remain unchanged.
+- **Park EXP-666 before viability on calibrated candidate-runtime headroom**: root `20261214` completed all seven routes, exact reload, fixed-seed replay, target-free single-prior-trajectory checks, tiny variational diagnostics, and corrected full-route resource projection. Nominal candidate inference projected to 226.63 seconds, but measured update variability `1.86796` raised the headroom bound to 423.33 seconds, above the frozen 285-second ceiling. All other admission checks passed. Root `20261215`, scientific W128/W256 evidence, controls, confirmations `20261216`/`20261217`, and M022.b breadth remain unopened. This is a resource park, not a scientific rejection of GRAM or ST-M022.a; Candidate 005 and all benchmark/promotion surfaces remain unchanged.
 
 ## 2026-07-28
 

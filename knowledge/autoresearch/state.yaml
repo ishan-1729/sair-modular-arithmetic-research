@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T00:00:00+05:30
+updated_at: 2026-07-29T01:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -165,6 +165,32 @@ rejected_exp665_hypothesis:
   metrics: evals/results/exp-665-attractor-equilibrium-family/metrics.json
   verification: {focused_passed: 17, validator_passed: true, full_oracle_passed: 482, full_oracle_failed: 0}
   limitations: [exact-bounded-SAIR-primary-adaptation-only, solver-gradient-noise-damping-controls-and-convergence-basin-diagnostics-gate-blocked, W256-and-confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+parked_exp666_hypothesis:
+  run_id: exp-666-gram-posterior-prior-guidance
+  status: parked-before-viability-runtime-headroom
+  source_base_commit: e18978edaf6e84197a1ca6bb2ac3d7b03ea319cd
+  source_branch: codex/exp666-gram-posterior-prior-guidance
+  decision_authority: T061-root-20261214-corrected-complete-route-dynamic-admission
+  mechanism: ST-M022a-bounded-single-trajectory-posterior-to-prior-GRAM-guidance
+  roots: {calibration_20261214: completed-runtime-headroom-park, viability_20261215: unopened, confirmation_20261216: unopened, confirmation_20261217: unopened}
+  preregistration_sha256: 8503043eb25a8157eedb75b87127854d47cc28c8be884c241bea9f75aa2bb010
+  parameters_each: 175600
+  trainable_parameters_each: 75776
+  formal_training_executed: false
+  scientific_evaluation_executed: false
+  scientific_metrics: null
+  scientific_verdict: null
+  calibration:
+    admitted: false
+    failed_check: candidate_inference
+    observed: {wall_seconds: 151.01981618699938, process_tree_cpu_seconds: 1242.764593, cgroup_cpu_seconds: 1318.112000000001, peak_rss_bytes: 557408256}
+    projection: {expected_wall_seconds: 14061.369512323654, eta_wall_seconds: 26266.122984127225, hard_guard_wall_seconds: 52533}
+    candidate_runtime: {nominal_wall_seconds: 226.62907599999258, variability_headroom: 1.8679633559950966, headroom_wall_seconds: 423.33480937101393, ceiling_seconds: 285.0}
+  mlflow_parent_run_id: 45c7d72c94bb4021a731d2210b5f5f8b
+  run_record: experiments/runs/exp-666-gram-posterior-prior-guidance/run.json
+  metrics: evals/results/exp-666-gram-posterior-prior-guidance/metrics.json
+  verification: {focused_passed: 24, validator_passed: true, full_oracle_passed: 506, full_oracle_failed: 0}
+  limitations: [calibration-diagnostics-non-scientific, formal-W128-W256-controls-and-confirmations-unopened, M022b-LPRM-majority-breadth-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
 rejected_exp652_hypothesis:
   run_id: exp-652-answer-latent-trm
   status: completed-rejected-at-viability
