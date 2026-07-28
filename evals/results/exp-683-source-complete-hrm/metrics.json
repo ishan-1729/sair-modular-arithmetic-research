@@ -1,0 +1,55 @@
+{
+  "schema_version": "exp683-terminal-v1",
+  "run_id": "exp-683-source-complete-hrm",
+  "status": "permanent-calibration-execution-park",
+  "decision": "permanent-park-calibration-execution-failure",
+  "created_at": "2026-07-28T14:11:24Z",
+  "config": "configs/exp_683_source_complete_hrm.yaml",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "roots": {
+    "20261282": "consumed-partial-non-scientific-calibration-execution-failure",
+    "20261283": "unopened-calibration-blocked",
+    "20261284": "unopened-calibration-blocked",
+    "20261285": "unopened-calibration-blocked"
+  },
+  "calibration": {
+    "admitted": false,
+    "complete": false,
+    "training_updates": 13,
+    "training_examples": 208,
+    "model_calls": 5120,
+    "failure_phase": "checkpoint-reload-before-evaluation",
+    "failure": "TypeError: unsupported operand type(s) for /: 'PosixPath' and 'dict'"
+  },
+  "controls": {
+    "full_hrm": "one-update-cache-persisted-evaluation-not-performed",
+    "equal_frequency": "one-update-cache-persisted-evaluation-not-performed",
+    "high_reset": "one-update-cache-persisted-evaluation-not-performed",
+    "low_reset": "one-update-cache-persisted-evaluation-not-performed",
+    "segment_detach_disabled": "one-update-cache-persisted-evaluation-not-performed",
+    "full_gradient": "one-update-cache-persisted-evaluation-not-performed",
+    "no_deep_supervision": "one-update-cache-persisted-evaluation-not-performed",
+    "fixed_depth": "one-update-cache-persisted-evaluation-not-performed",
+    "equal_average_act": "one-update-cache-persisted-evaluation-not-performed",
+    "random_act": "one-update-cache-persisted-evaluation-not-performed",
+    "q_disabled": "one-update-cache-persisted-evaluation-not-performed",
+    "q_shuffled": "one-update-cache-persisted-evaluation-not-performed",
+    "one_state": "one-update-cache-persisted-evaluation-not-performed",
+    "frozen": "zero-update-cache-persisted-evaluation-not-performed",
+    "randomized": "zero-update-cache-persisted-evaluation-not-performed",
+    "candidate005": "not-persisted-evaluation-not-performed"
+  },
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Root 20261282 failed during checkpoint reload before the first calibration evaluation.",
+    "labels_or_oracle_present": false
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "completion_marker": "terminal-persisted",
+  "limitations": [
+    "This is an execution park, not an HRM accuracy result.",
+    "Partial calibration training resource caches are retained but cannot support admission or scientific inference.",
+    "Roots 20261283-20261285 and every protected evaluation surface remain unopened."
+  ]
+}

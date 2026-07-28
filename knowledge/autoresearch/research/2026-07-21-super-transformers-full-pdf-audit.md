@@ -138,7 +138,7 @@ Native Transformer blocks suffice. EXP-634/EXP-643 are adjacent. EXP-674 authent
 
 ### ST-M007 — HRM (3 components)
 
-**PDF:** `2506.21734`, p. 4 §2.2 and pp. 6–9 §2.3–2.5/Fig. 5. **Components:** (a) interdependent unequal-frequency H/L recurrence with carried, not periodically reset, state; (b) detached deep supervision and one-step gradient; (c) deep-Q ACT. Native. EXP-620/633 are not HRM. Open. Required controls include equal-frequency, state reset/detach/carry, full versus one-step gradients, no deep supervision, and ACT versus fixed depth. Parent closes only after all three receive independent exact-answer and causal verdicts.
+**PDF:** `2506.21734`, p. 4 §2.2 and pp. 6–9 §2.3–2.5/Fig. 5. **Components:** (a) interdependent unequal-frequency H/L recurrence with carried, not periodically reset, state; (b) detached deep supervision and one-step gradient; (c) deep-Q ACT. Native. EXP-620/633 are not HRM. EXP683 visually authenticates and implements the complete de-novo package after proving exact Candidate005 transfer impossible. Its portable focused and full oracles pass, but root 20261282 fails on a checkpoint-path TypeError before evaluation or admission and is permanently parked without retry. No scientific component is closed. Required controls include equal-frequency, state reset/detach/carry, full versus one-step gradients, no deep supervision, and ACT versus fixed depth. Parent closes only after all three receive independent exact-answer and causal verdicts.
 
 ### ST-M008 — AbbIE (2 components)
 
