@@ -5,7 +5,28 @@
   "status": "completed-rejected",
   "decision": "reject-current-stars-jvp-adaptation",
   "root": 20261227,
-  "evaluation": {"width": 128, "transition_cases": 3000, "rollout_cases": 300, "decision_order": "primary-first"},
+  "evaluation": {
+    "transition": {
+      "W128": {
+        "cases": 3000,
+        "correct": 2995,
+        "exact_accuracy": 0.9983333333333333,
+        "bit_accuracy": 0.9999348958333333,
+        "invalid_residue_rate": 0.0
+      }
+    },
+    "rollout": {
+      "W128": {
+        "cases": 300,
+        "correct": 253,
+        "exact_accuracy": 0.8433333333333334,
+        "all_prefix_exact_accuracy": 0.8433333333333334,
+        "transition_exact_accuracy": 0.9189583333333333,
+        "any_invalid_residue_rate": 0.0
+      }
+    },
+    "decision_order": "primary-first"
+  },
   "controls": {"all_arms_trained_and_cached": true, "updates_each_trained_arm": 400, "examples_each_trained_arm": 6400, "jvp_calls_each_trained_arm": 12800, "inference_graph_identical": true, "later_formal_controls_opened": false},
   "w128_primary": {"transition_exact_accuracy": 0.9983333333333333, "bit_accuracy": 0.9999348958333333, "transition_invalid_residue_rate": 0.0, "rollout_exact_accuracy": 0.8433333333333334, "all_prefix_exact_accuracy": 0.8433333333333334, "rollout_transition_exact_accuracy": 0.9189583333333333, "rollout_any_invalid_residue_rate": 0.0},
   "gate": {"minimum_rollout": false, "minimum_transition": true, "zero_invalid_transition": true, "zero_invalid_rollout": true},
