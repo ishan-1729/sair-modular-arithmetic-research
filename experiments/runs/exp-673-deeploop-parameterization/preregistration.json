@@ -1,0 +1,10 @@
+{
+  "arms": ["full_deeploop", "alpha_beta_only", "visit_alignment_only", "fixed_scale_exponent_zero", "matched_source_continuation", "frozen", "reset", "randomized"],
+  "diagnostics": ["gradient_alignment", "gradient_norm", "activation_rms", "minimum_token_spread", "small_state_full_jacobian", "spectral_radius", "top_singular_value", "nonnormal_gap", "transient_gain"],
+  "frozen_at": "2026-07-29T03:45:00Z",
+  "gates": {"guarded_candidate_seconds_max": 285, "W128_rollout_min": 0.85, "W128_source_loss_max": 0.02, "W256_control_gain_min": 0.05, "W256_rollout_min": 0.10, "zero_invalids": true},
+  "roots": {"calibration": 20261242, "confirmations": [20261244, 20261245], "viability": 20261243},
+  "status": "frozen-but-unopened-topology-feasibility-blocked",
+  "updates_per_trained_arm": 400,
+  "visit_exponent": 0.5
+}

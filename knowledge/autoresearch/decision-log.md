@@ -209,3 +209,18 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - **Unopened:** complete W128, conditional W256 controls, roots `20261240/41`, and every checked,
   independent, official/private, candidate, submission, promotion, and Goal-completion surface. This
   is a resource-feasibility park, not a scientific rejection of LT2 or ST-M025.
+
+## 2026-07-29 — EXP-673 parked at topology faithfulness
+
+- Authenticated DeepLoop SHA `15f83b...023af4d` and visually reviewed pp.4-13/23; authenticated the
+  supporting LayerNorm-dynamics SHA `3509f2...150f9e` and visually reviewed pp.2/4-18.
+- Froze the source PostNorm recurrence, `alpha=(2N)^(1/2)`, one-time matrix initialization
+  `beta=(8N)^(-1/2)`, exponent 1/2, aligned-visit bound, Candidate005/checkpoint/fixture/data identities,
+  eight arms, 400 updates, roots, diagnostics, complete gates, and dynamic resource contract.
+- Candidate005 is instead a pretrained PreNorm/GroupNorm shared ConvGRU with an unnormalized gated
+  residual, no H module or outer detachment, and 14/16 fully gradient-visible visits at W128/W256.
+  Exact preservation requires a non-source bypass/zero gate, an alpha cancellation that makes the
+  component inert, or runtime beta/alpha correction scaling excluded as generic visit scaling.
+- Park under T069's explicit topology stop rule. Roots `20261242`-`20261245`, implementation,
+  focused behavioral tests, full oracle, calibration, training, Jacobians, W128/W256, candidate timing,
+  and confirmations remain unopened. This is not a scientific rejection of DeepLoop or ST-M030.a/b.
