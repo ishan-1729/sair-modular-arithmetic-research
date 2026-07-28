@@ -3,28 +3,12 @@
   "status": "completed",
   "seed": 20261222,
   "hypothesis": "Exact-initialized H2L3 hierarchy plus MagicNorm and warmup credit preserves W128 and creates nonzero W256 exact rollout.",
-  "decision": "park-before-calibration-full-oracle-timeout",
+  "decision": "park-before-viability-runtime-headroom-gate",
   "config": "configs/exp_668_h2l3_magicnorm_credit.yaml",
-  "source": {
-    "base_commit": "8d038a590fa40954d6df0bdd394bd2e5e229d708",
-    "branch": "codex/exp668-h2l3-magicnorm-credit",
-    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
-    "paper_sha256": "c3d8c51d8fcbd44e38c4a9284b75ef8b7d9c2c3e372e2a395672bf38a28a1372",
-    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
-  },
-  "artifacts": {
-    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
-    "metrics": "evals/results/exp-668-h2l3-magicnorm-credit/metrics.json",
-    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md"
-  },
-  "verification": {
-    "focused": "26 passed in 18.66s",
-    "full_boundary_command": "python tools/validate_project.py; python -m pytest",
-    "full_boundary_result": "tool-timeout-no-verdict",
-    "outer_wall_seconds": 904.037,
-    "fresh_probe": "no surviving pytest/validator process; stale inherited EXP648 lastfailed cache only",
-    "second_full_invocation_authorized": false
-  },
-  "roots": {"20261222": "unopened-verification-blocked", "20261223": "unopened", "20261224": "unopened", "20261225": "unopened"},
-  "limitations": ["No green full project oracle was obtained on final implementation bytes.", "Calibration, training, scientific labels, and formal accuracy were not opened.", "M024.c/d remained closed.", "No checked/private/candidate/submission surface was opened."]
+  "source": {"base_commit": "8d038a590fa40954d6df0bdd394bd2e5e229d708", "implementation_commit": "75da10fe6eb922254d237da9b8ef339278578fa1", "branch": "codex/exp668-h2l3-magicnorm-credit", "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "paper_sha256": "c3d8c51d8fcbd44e38c4a9284b75ef8b7d9c2c3e372e2a395672bf38a28a1372", "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"},
+  "artifacts": {"checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors", "metrics": "evals/results/exp-668-h2l3-magicnorm-credit/metrics.json", "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md", "calibration": "experiments/runs/exp-668-h2l3-magicnorm-credit/calibration.json", "preregistration": "experiments/runs/exp-668-h2l3-magicnorm-credit/preregistration-root-20261222.json"},
+  "verification": {"initial_full_boundary": {"result": "tool-timeout-no-verdict", "outer_wall_seconds": 904.037}, "judge_exception": "one identical-byte recovery authorized under dynamic-budget policy", "recovery": {"exit_code": 0, "validator": "182 OKF concepts and 1100 benchmark records", "pytest": "557 passed in 602.93s", "wall_seconds": 622.62, "user_seconds": 729.71, "system_seconds": 35.03, "maximum_rss_kib": 924512, "combined_log_sha256": "d60c9985dafa3013e31256cd965d6051906b040641dd06ada3f9707edd5d8f7e", "resource_trace_sha256": "3f1a10df032ae94d220c0a88e3bbfa049dc5a9d72dbc2746f0b8b47acaf6cca3", "process_sha256": "d96459eb02bdb840330ec1a81c4bb204831dd734a736149bfe6f03e3548a9932"}},
+  "calibration": {"receipt_sha256": "6d5e78f42946e74e4c52c044007de7bb8deb6c37cbfc17ac8e73dab1ee508dc8", "admitted": false, "failed_check": "candidate_inference", "instrumented_wall_seconds": 207.1421818629999, "process_tree_cpu_seconds": 807.1774469999999, "cgroup_cpu_seconds": 850.2919999999999, "peak_rss_bytes": 620048384, "candidate_wall_seconds": 277.1252813499982, "variability_headroom": 1.757660503418811, "candidate_headroom_wall_seconds": 487.0921615277175, "expected_formal_wall_seconds": 10485.418401250045, "eta_wall_seconds": 18429.80578569802, "hard_guard_wall_seconds": 36860},
+  "roots": {"20261222": "completed-calibration-runtime-headroom-park", "20261223": "unopened-admission-blocked", "20261224": "unopened-admission-blocked", "20261225": "unopened-admission-blocked"},
+  "limitations": ["The first oracle timeout is retained as history; the Judge-authorized identical-byte recovery was green.", "Calibration used two updates and tiny evaluation samples, so its accuracy is non-scientific.", "Formal viability and confirmations remained unopened after runtime-headroom rejection.", "M024.c/d remained closed and no checked/private/candidate/submission surface was opened."]
 }

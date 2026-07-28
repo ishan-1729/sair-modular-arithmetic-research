@@ -1703,22 +1703,25 @@ runs:
       - M016.b RIM remained explicitly deferred and closed.
       - This resource park does not reject RSM, ST-M016.a, the exact SAIR adaptation scientifically, or the source paper.
   - run_id: exp-668-h2l3-magicnorm-credit
-    status: parked-before-calibration-full-oracle-timeout
+    status: parked-calibration-runtime-headroom
     approach: bounded-ST-M024ab-H2L3-MagicNorm-warmup-credit
-    decision: park-before-calibration-full-oracle-timeout
-    decision_authority: T063-final-package-verification-boundary
+    decision: park-before-viability-runtime-headroom-gate
+    decision_authority: T063-root-20261222-complete-route-dynamic-admission
     source_base_commit: 8d038a590fa40954d6df0bdd394bd2e5e229d708
     source_branch: codex/exp668-h2l3-magicnorm-credit
     config: configs/exp_668_h2l3_magicnorm_credit.yaml
     mechanism_map: knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md
     run_record: experiments/runs/exp-668-h2l3-magicnorm-credit/run.json
     metrics: evals/results/exp-668-h2l3-magicnorm-credit/metrics.json
-    roots: {20261222: unopened-verification-blocked, 20261223: unopened, 20261224: unopened, 20261225: unopened}
-    verification: {focused: 26-passed, full_boundary: timed-out-no-verdict, outer_wall_seconds: 904.037, fresh_probe: no-surviving-process-stale-inherited-lastfailed-only}
+    roots: {20261222: completed-calibration-runtime-headroom-park, 20261223: unopened-admission-blocked, 20261224: unopened-admission-blocked, 20261225: unopened-admission-blocked}
+    verification: {focused: 26-passed, first_full_boundary: timed-out-no-verdict-at-904.037s, judge_exception: one-identical-byte-recovery, recovered_validator: 182-concepts-1100-records-green, recovered_full_oracle: 557-passed-in-602.93s, recovered_outer_wall_seconds: 622.62, recovered_peak_rss_kib: 924512}
+    calibration: {admitted: false, failed_check: candidate_inference, wall_seconds: 207.1421818629999, process_tree_cpu_seconds: 807.1774469999999, cgroup_cpu_seconds: 850.2919999999999, peak_rss_bytes: 620048384, expected_formal_wall_seconds: 10485.418401250045, eta_wall_seconds: 18429.80578569802, hard_guard_wall_seconds: 36860}
+    candidate_runtime: {nominal_projected_wall_seconds: 277.1252813499982, variability_headroom: 1.757660503418811, headroom_projected_wall_seconds: 487.0921615277175, frozen_ceiling_seconds: 285.0}
     scientific_metrics: null
     scientific_verdict: null
     limitations:
-      - No green full-project oracle was obtained, so calibration and science remained closed.
+      - The initial timeout is retained; the Judge-authorized identical-byte recovery was green.
+      - Calibration is non-scientific and formal viability remained closed after the runtime-headroom miss.
       - M024.c language mechanisms and M024.d auto-guidance remained closed.
       - This park does not reject HRM-Text, H2L3, MagicNorm, warmup credit, or the bounded adaptation.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.

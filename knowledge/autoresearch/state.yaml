@@ -713,3 +713,19 @@ parked_exp663_hypothesis:
   run_record: experiments/runs/exp-663-drm-target-token-denoising/run.json
   metrics: evals/results/exp-663-drm-target-token-denoising/metrics.json
   limitations: [calibration-only-non-scientific-diagnostics, one-shot-repair-crossed-wall-guard, roots-20261203-through-20261205-unopened, no-drm-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp668_hypothesis:
+  run_id: exp-668-h2l3-magicnorm-credit
+  status: parked-calibration-runtime-headroom
+  source_base_commit: 8d038a590fa40954d6df0bdd394bd2e5e229d708
+  implementation_commit: 75da10fe6eb922254d237da9b8ef339278578fa1
+  source_branch: codex/exp668-h2l3-magicnorm-credit
+  decision_authority: T063-root-20261222-complete-route-dynamic-admission
+  mechanism: bounded-ST-M024ab-H2L3-MagicNorm-warmup-credit
+  roots: {calibration_20261222: completed-runtime-headroom-park, viability_20261223: unopened, confirmation_20261224: unopened, confirmation_20261225: unopened}
+  oracle_recovery: {initial_timeout_seconds: 904.037, judge_exception: one-identical-byte-recovery, validator_concepts: 182, benchmark_records: 1100, pytest_passed: 557, pytest_seconds: 602.93, outer_wall_seconds: 622.62, peak_rss_kib: 924512}
+  calibration: {wall_seconds: 207.1421818629999, process_tree_cpu_seconds: 807.1774469999999, cgroup_cpu_seconds: 850.2919999999999, peak_rss_bytes: 620048384, candidate_nominal_seconds: 277.1252813499982, variability_headroom: 1.757660503418811, candidate_headroom_seconds: 487.0921615277175, ceiling_seconds: 285.0, admitted: false}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-668-h2l3-magicnorm-credit/run.json
+  metrics: evals/results/exp-668-h2l3-magicnorm-credit/metrics.json
+  limitations: [calibration-only-non-scientific-diagnostics, root-20261223-through-20261225-unopened, M024c-and-M024d-closed, no-HRM-Text-or-adaptation-scientific-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
