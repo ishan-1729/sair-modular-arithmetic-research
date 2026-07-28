@@ -1,0 +1,58 @@
+{
+  "cache_key": "1c418668679782a0d1632ed38d4b0db27b6fe589d9885f53575ebd0dd2eb3cd5",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 745368,
+      "path": "experiments/runs/exp-668-h2l3-magicnorm-credit/calibration/root-20261222/no_warmup_raw_gradient/model.safetensors",
+      "sha256": "fbce1db3f4d99c14902b4b2b43d530405da1a55ef74ee63fe3f34d3f0b949be6"
+    },
+    "checkpoint_reload_exact": true,
+    "parameters": 185632,
+    "route": "no_warmup_raw_gradient",
+    "trainable_parameters": 85808,
+    "training": {
+      "examples": 32,
+      "history": [
+        {
+          "batch_exact": 1.0,
+          "credit_horizon": 8,
+          "gradient_norm": 0.004484372213482857,
+          "loss": 0.001060846378095448,
+          "state_residual": 0.0,
+          "step": 1,
+          "timing": {
+            "cgroup_cpu_seconds": 0.35199999999997544,
+            "peak_rss_bytes": 620048384,
+            "process_cpu_seconds": 0.346444,
+            "wall_seconds": 0.08797682599993095
+          },
+          "width": 64
+        },
+        {
+          "batch_exact": 1.0,
+          "credit_horizon": 8,
+          "gradient_norm": 0.0075050038285553455,
+          "loss": 0.0010134839685633779,
+          "state_residual": 0.00012686937407124788,
+          "step": 2,
+          "timing": {
+            "cgroup_cpu_seconds": 0.5600000000000591,
+            "peak_rss_bytes": 620048384,
+            "process_cpu_seconds": 0.5493139999999972,
+            "wall_seconds": 0.13769866000006914
+          },
+          "width": 128
+        }
+      ],
+      "operator_calls": 256,
+      "timing": {
+        "cgroup_cpu_seconds": 1.0760000000000218,
+        "peak_rss_bytes": 620048384,
+        "process_cpu_seconds": 1.0494309999999984,
+        "wall_seconds": 0.2747866460000523
+      },
+      "updates": 2
+    }
+  }
+}

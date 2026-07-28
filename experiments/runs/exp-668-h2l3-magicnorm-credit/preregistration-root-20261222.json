@@ -1,0 +1,89 @@
+{
+  "closed": [
+    "M024.c response-only/PrefixLM/sigmoid language gating",
+    "M024.d auto-guidance",
+    "checked/private/candidate/submission surfaces"
+  ],
+  "fixtures": {
+    "Dockerfile": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+    "generator.py": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0",
+    "primes.py": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac"
+  },
+  "gates": {
+    "maximum_candidate_headroom_wall_seconds": 285,
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_gradient_norm": 1000.0,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_w128_loss_to_proposal": 0.02,
+    "minimum_component_state_distance": 1e-06,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w128_transition": 0.998,
+    "minimum_w256_gain_over_flat": 0.05,
+    "minimum_w256_gain_over_proposal": 0.05,
+    "minimum_w256_gain_over_single_component": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "mode": "calibration",
+  "paper": {
+    "pages": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      23,
+      24,
+      25,
+      26
+    ],
+    "path": "research/papers/arxiv-2605.20613.pdf",
+    "sha256": "c3d8c51d8fcbd44e38c4a9284b75ef8b7d9c2c3e372e2a395672bf38a28a1372"
+  },
+  "root": 20261222,
+  "roots": {
+    "calibration": 20261222,
+    "confirmations": [
+      20261224,
+      20261225
+    ],
+    "viability": 20261223
+  },
+  "routes": [
+    "proposal_only",
+    "full",
+    "hierarchy_only",
+    "credit_only",
+    "flat_compute_matched",
+    "no_warmup_raw_gradient",
+    "high_reset",
+    "low_reset",
+    "randomized"
+  ],
+  "run_id": "exp-668-h2l3-magicnorm-credit",
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "repository_branch": "codex/exp668-h2l3-magicnorm-credit",
+    "repository_commit": "75da10fe6eb922254d237da9b8ef339278578fa1"
+  },
+  "splits": {
+    "128": {
+      "test": "f4e7eefa9d3a919d9cd7f61da9f4ea2e36fbabe256b7973406e3befcf9f3fabb",
+      "train": "c0cc0c0a44987891029f2faac344ff02ecf012ed7c11c2bd46b457f5d4e05a89",
+      "validation": "1c316f22e6fe034d3c5b85f22b6dded691e659dcd00865b1a23220f23fe94064"
+    },
+    "256": {
+      "test": "e25b8df5a3223838ad4284f16c3363295fa875ccc0d0c29dfec712f7984a561a",
+      "train": "87d66ef1427b4b425a15df8a40844b710a820ab55044258460c499f28e1dc636",
+      "validation": "09d27591df6003317669d4b1d06cd8a71542319a2795f3ac9323484b56d7523a"
+    },
+    "64": {
+      "test": "40f9dbea13d8a79ee76aa0d993fa8e469707ded014827dd578d74a85e687ec63",
+      "train": "419c048fa97cb881c829c51a98bbe2471e1c5fed4231dc3b12c5dc734bcc34c6",
+      "validation": "a1983f6f76744118d3773f769924de8d96c0c8db061bb045a40c5b03868cb74b"
+    }
+  }
+}

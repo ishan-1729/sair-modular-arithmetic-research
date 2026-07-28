@@ -66,8 +66,8 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M022.b GRAM selection | bounded-faithful | open |
 | M023.a PTRM stochastic recursion | bounded-faithful | open |
 | M023.b PTRM Q selection | bounded-faithful | open |
-| M024.a H2L3 hierarchy | bounded-faithful | EXP-668 implemented; parked at full-oracle timeout before science |
-| M024.b MagicNorm/credit transfer | analogue | EXP-668 implemented; parked at full-oracle timeout before science |
+| M024.a H2L3 hierarchy | bounded-faithful | EXP-668 implemented/oracle-green; calibration resource park before science |
+| M024.b MagicNorm/credit transfer | analogue | EXP-668 implemented/oracle-green; calibration resource park before science |
 | M024.c language-loss/gating transfer | analogue | deferred/closed by T063 scope |
 | M024.d auto-guidance transfer | analogue | deferred/closed by T063 scope |
 | M025.a LT² mixer | bounded-faithful | open |
