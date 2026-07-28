@@ -2,7 +2,7 @@
 type: Research Note
 title: EXP676 LLA reinjection and moving-window map
 description: Visual source map from LLA input injection and moving truncated loss to Candidate005 physical visits.
-status: active
+status: parked-calibration-runtime-headroom
 tags: [autoresearch, LLA, moving-window, input-reinjection]
 timestamp: "2026-07-29T13:00:00+05:30"
 ---
@@ -30,3 +30,10 @@ W64/W128 while preserving the source's progressive contiguous-window rule.
 M004.b and every inference-time depth or selection mechanism remain excluded.
 Native PyTorch is sufficient; no external loss/sampling package improves source
 fidelity.
+
+The implemented mapping passed exact reinjection, trace/ordinary output,
+state-dict, reload, and call-count checks. Complete-route root `20261254` then
+failed only guarded candidate runtime: 720.733 seconds projected versus the
+frozen 285-second ceiling. Formal science and confirmations stayed unopened, so
+the map remains source-faithful implementation evidence rather than a scientific
+LLA verdict.

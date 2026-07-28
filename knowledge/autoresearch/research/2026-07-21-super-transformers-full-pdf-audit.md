@@ -27,7 +27,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M002.b DEQ | bounded-faithful | open; no solver evidence |
 | M003.a constructed executor | excluded | terminal-policy |
 | M003.b learned executor | analogue | open; EXP-654 adjacent only |
-| M004.a LLA | bounded-faithful | open; EXP-634 adjacent only |
+| M004.a LLA | bounded-faithful | scientifically open; EXP676 resource-parked before formal science |
 | M004.b length schedule | bounded-faithful | open |
 | M005.a RRT | bounded-faithful | open; EXP-617 non-faithful |
 | M006.a Huginn | bounded-faithful | open; EXP-634 adjacent only |
@@ -122,7 +122,7 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 
 ### ST-M004 — Looped learning and length generalization (2 components)
 
-- **M004.a LLA:** `2311.12424`, p. 5 §4.1/Fig. 3 and pp. 5–6; input reinjection plus moving endpoint/window loss. Native. EXP-634 is a negative adjacent loop, not faithful. **Active as EXP676:** visual audit proves Candidate005 already performs non-additive legal-input reinjection at every physical visit, so the frozen test isolates the remaining progressive four-endpoint window loss with bit-identical formal inference and matched endpoint/fixed/equal-work/shuffled controls.
+- **M004.a LLA:** `2311.12424`, p. 5 §4.1/Fig. 3 and pp. 5–6; input reinjection plus moving endpoint/window loss. Native. EXP-634 is a negative adjacent loop, not faithful. **EXP676 resource park:** visual audit and tests prove Candidate005 already performs non-additive legal-input reinjection at every physical visit and isolate the progressive four-endpoint loss with bit-identical inference and matched controls. Complete calibration rejected formal admission at 720.73 guarded candidate seconds versus 285, leaving the mechanism scientifically open.
 - **M004.b length schedule:** `2409.15647`, pp. 5–7 §4.1–4.3 Eq. 2/Table 1, p. 9 §6.3, p. 10 §7; NoPE, first-order prediction, known step schedules, endpoint lengths, and per-sample confidence. No invented visit-embedding shuffle. Open. Terminal after each component is isolated against fixed/equal-work recurrence across unseen widths and visits.
 
 ### ST-M005 — Relaxed Recursive Transformers (1 component)

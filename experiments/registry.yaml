@@ -1912,3 +1912,30 @@ runs:
       - The sole bounded repair was consumed; no further retry or same-formulation reopening is authorized.
       - This park is not a scientific rejection of RRT, ST-M005, the exact mechanism, or the source paper.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
+  - run_id: exp-676-lla-moving-window
+    status: parked-calibration-runtime-headroom
+    approach: ST-M004a-existing-input-reinjection-plus-progressive-four-endpoint-moving-window-supervision
+    decision: park-resource-compliance-or-feasibility
+    decision_authority: T072-root-20261254-complete-route-calibration-stop-rule
+    source_base_commit: abfec8c4b80d13add8d08f1fa9dee7beba05da13
+    source_branch: codex/exp676-lla-moving-window
+    implementation_commit: 39cb8648ee48cb0ec0881dcf09cb8b8d346866fa
+    config: configs/exp_676_lla_moving_window.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp676-lla-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-676-lla-moving-window.md
+    run_record: experiments/runs/exp-676-lla-moving-window/run.json
+    metrics: evals/results/exp-676-lla-moving-window/metrics.json
+    paper_sha256: 76b3be4b761409e6987a4f74a7caa80f434e59422bbb836ffec7b2092c34ebfc
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261254: completed-calibration-resource-gate-reject, 20261255: unopened-admission-blocked, 20261256: unopened-admission-blocked, 20261257: unopened-admission-blocked}
+    verification: {focused: 9-passed, validator: 198-concepts-1100-records-green, pytest: 637-passed-in-570.29s, oracle_invocations: 1, bounded_owned_repair: null}
+    calibration: {wall_seconds: 233.66776688199934, process_tree_cpu_seconds: 780.7, cgroup_cpu_seconds: 802.3479999999981, peak_rss_bytes: 1081548800, expected_formal_wall_seconds: 29577.637828238538, soft_guard_wall_seconds: 36972.04728529817, hard_guard_wall_seconds: 51760.86619941744, candidate_nominal_seconds: 533.8759380796859, candidate_guarded_seconds: 720.732516407576, candidate_ceiling_seconds: 285, artifact_bytes: 2804088, admitted: false}
+    mechanics: {reinjection_equivalence: true, exact_formal_inference_identity: true, parameters: 99824, loss_calls_per_transition: 4}
+    mlflow_run_id: 4326724f468848f0a274b892f42871ff
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration denominators and two-update arms are route-proving and non-scientific; formal W128/W256 and confirmations remained unopened.
+      - Candidate runtime failed at 720.733 guarded seconds versus the frozen 285-second ceiling.
+      - This park is not a scientific rejection of LLA, ST-M004.a, moving-window supervision, or the source paper.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.

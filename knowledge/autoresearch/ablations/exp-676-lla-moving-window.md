@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP676 LLA moving-window supervision
 description: Source-faithful ST-M004.a moving truncated endpoint-window loss on bit-identical Candidate005 recurrence.
-status: frozen-before-science
+status: parked-calibration-runtime-headroom
 tags: [autoresearch, looped-learning, moving-window, recurrent-credit]
 timestamp: "2026-07-29T13:00:00+05:30"
 ---
@@ -97,3 +97,20 @@ has no teacher, endpoint selector, exact answer/correctness/validity filter,
 answer-dependent depth, repair, target canvas, programmed multiplication,
 division, reduction or CRT, lookup, checked/private data, or external call.
 
+## Terminal result
+
+The final implementation passed nine focused tests and the one hermetic package
+oracle: validation reached 198 concepts / 1,100 records and all 637 tests passed.
+Root `20261254` then completed every calibration arm, width, intervention,
+persistence, and candidate-timing route in 233.668 wall / 780.700 process-tree
+CPU / 802.348 cgroup CPU seconds with 1,081,548,800-byte peak RSS. Reinjection
+equivalence, exact formal inference identity, complete-route execution, artifact
+size, and no-fidelity-reduction checks passed.
+
+The measured route projected 533.876 nominal and 720.733 guarded candidate
+seconds, above the frozen 285-second ceiling. The binding decision is therefore
+`reject-formal-at-calibration`; root `20261255` and confirmations `20261256/57`
+remain unopened. Calibration exactness/loss diagnostics use tiny route-proving
+denominators and are non-scientific. This resource park does not reject LLA,
+ST-M004.a, moving-window supervision, or the paper, and changes no candidate,
+benchmark, submission, promotion, or completion evidence.

@@ -1,0 +1,90 @@
+{
+  "run_id": "exp-676-lla-moving-window",
+  "seed": 67673000,
+  "status": "completed",
+  "created_at": "2026-07-29T15:00:00+05:30",
+  "decision": "park-resource-compliance-or-feasibility",
+  "decision_authority": "T072-root-20261254-complete-route-calibration-stop-rule",
+  "hypothesis": "Candidate005's existing per-visit legal-input reinjection plus progressive four-endpoint moving-window supervision can retain W128 and improve W256 without changing formal inference.",
+  "config": "configs/exp_676_lla_moving_window.yaml",
+  "source": {
+    "branch": "codex/exp676-lla-moving-window",
+    "repository_commit": "39cb8648ee48cb0ec0881dcf09cb8b8d346866fa",
+    "integrated_base_commit": "abfec8c4b80d13add8d08f1fa9dee7beba05da13",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "76b3be4b761409e6987a4f74a7caa80f434e59422bbb836ffec7b2092c34ebfc",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "3f0d58cbcd528f7bab00e7c42790adb1f1352738ba06d50ec7aeae96e7559085",
+    "model_sha256": "c498feaad1030a55e8ace1dbf6b903799b123397ca058800ed7107cfdf1a15c1",
+    "runner_sha256": "5b698a4a6ce3013a44c318662237baab1cc58aac340f05ec8d61f7613902978d",
+    "test_sha256": "ab1726666c0b0c2ef3507099513e75020a7748c6a3421245d01ecfcb9597735d",
+    "preregistration_sha256": "edd224ad405804911bddcd312c34802a4a4f40e28e5e72ec5a0e4b7dff385d5d",
+    "dirty": false
+  },
+  "roots": {
+    "20261254": "completed-calibration-resource-gate-reject",
+    "20261255": "unopened-admission-blocked",
+    "20261256": "unopened-admission-blocked",
+    "20261257": "unopened-admission-blocked"
+  },
+  "calibration": {
+    "summary_path": ".scratch/exp-676-lla-moving-window/calibration/root-20261254-summary.json",
+    "summary_sha256": "4dafac63cfe4d8bdcbd2b9cbe01e513f3fd310860f9037e66a2ecf849a56e3d2",
+    "admission_path": ".scratch/exp-676-lla-moving-window/admission.json",
+    "admission_sha256": "63cdc871486a1dfb0f0c2db0ab0b17098389d9c697006074de4fb19d6fda6da4",
+    "wall_seconds": 233.66776688199934,
+    "process_tree_cpu_seconds": 780.7,
+    "cgroup_cpu_seconds": 802.3479999999981,
+    "peak_process_tree_rss_bytes": 1081548800,
+    "expected_formal_wall_seconds": 29577.637828238538,
+    "soft_guard_wall_seconds": 36972.04728529817,
+    "hard_guard_wall_seconds": 51760.86619941744,
+    "candidate_nominal_seconds": 533.8759380796859,
+    "candidate_guarded_seconds": 720.732516407576,
+    "candidate_ceiling_seconds": 285,
+    "artifact_bytes": 2804088,
+    "complete_route": true,
+    "fidelity_reduced": false,
+    "admitted": false
+  },
+  "mechanics": {
+    "candidate_reinjects_legal_features_at_every_visit": true,
+    "formal_inference_identity": true,
+    "parameter_count": 99824,
+    "physical_visits": {"64": 12, "128": 14, "256": 16},
+    "loss_calls_per_transition": 4,
+    "calibration_steps_per_trained_arm": 2
+  },
+  "verification": {
+    "focused": "9-passed-in-7.48s",
+    "full_oracle": {
+      "validator": "198-concepts-1100-records-green",
+      "pytest": "637-passed-in-570.29s",
+      "outer_wall_seconds": 565.59,
+      "user_seconds": 707.45,
+      "system_seconds": 27.80,
+      "peak_rss_kib": 934920,
+      "log_sha256": "64be5c5b1344e5f66efb9906a330ba5cee46f36debbdc0c7b23cd84b916fe09c",
+      "invocations": 1
+    },
+    "bounded_owned_repair": null
+  },
+  "mlflow": {
+    "experiment_id": "1",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "run_id": "4326724f468848f0a274b892f42871ff"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-676-lla-moving-window/fixtures/exp609-weights.safetensors",
+    "environment": "experiments/runs/exp-676-lla-moving-window/environment.json",
+    "metrics": "evals/results/exp-676-lla-moving-window/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-676-lla-moving-window.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp676-lla-mechanism.md"
+  },
+  "limitations": [
+    "Root 20261254 used calibration-only denominators and two updates per trained arm; its exactness and loss values are non-scientific.",
+    "The 720.733-second guarded candidate projection exceeded the frozen 285-second gate, so formal root 20261255 and confirmations 20261256/20261257 were not opened.",
+    "No scientific W128/W256 comparison or verdict was produced; this is not a rejection of LLA, ST-M004.a, moving-window supervision, or the source paper.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ]
+}
