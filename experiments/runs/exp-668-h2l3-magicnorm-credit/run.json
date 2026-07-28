@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-668-h2l3-magicnorm-credit",
+  "status": "completed",
+  "seed": 20261222,
+  "hypothesis": "Exact-initialized H2L3 hierarchy plus MagicNorm and warmup credit preserves W128 and creates nonzero W256 exact rollout.",
+  "decision": "park-before-calibration-full-oracle-timeout",
+  "config": "configs/exp_668_h2l3_magicnorm_credit.yaml",
+  "source": {
+    "base_commit": "8d038a590fa40954d6df0bdd394bd2e5e229d708",
+    "branch": "codex/exp668-h2l3-magicnorm-credit",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "c3d8c51d8fcbd44e38c4a9284b75ef8b7d9c2c3e372e2a395672bf38a28a1372",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "metrics": "evals/results/exp-668-h2l3-magicnorm-credit/metrics.json",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md"
+  },
+  "verification": {
+    "focused": "26 passed in 18.66s",
+    "full_boundary_command": "python tools/validate_project.py; python -m pytest",
+    "full_boundary_result": "tool-timeout-no-verdict",
+    "outer_wall_seconds": 904.037,
+    "fresh_probe": "no surviving pytest/validator process; stale inherited EXP648 lastfailed cache only",
+    "second_full_invocation_authorized": false
+  },
+  "roots": {"20261222": "unopened-verification-blocked", "20261223": "unopened", "20261224": "unopened", "20261225": "unopened"},
+  "limitations": ["No green full project oracle was obtained on final implementation bytes.", "Calibration, training, scientific labels, and formal accuracy were not opened.", "M024.c/d remained closed.", "No checked/private/candidate/submission surface was opened."]
+}
