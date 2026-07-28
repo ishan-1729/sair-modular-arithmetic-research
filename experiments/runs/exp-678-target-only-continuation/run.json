@@ -3,8 +3,8 @@
   "run_id": "exp-678-target-only-continuation",
   "seed": 67873000,
   "status": "completed",
-  "decision": "park-pre-root-frozen-protocol-governance-hash-mismatch",
-  "decision_authority": "T076-pre-root-provenance-stop-rule",
+  "decision": "permanent-park-full-protocol-authentication-failed-after-exact-two-hash-rebind",
+  "decision_authority": "T077-final-authentication-stop-rule",
   "created_at": "2026-07-30T01:30:00+05:30",
   "hypothesis": "Target-only continuation CE can retain Candidate005 W128 and improve W256 relative to matched supervision controls without changing formal inference.",
   "source": {
@@ -28,25 +28,27 @@
     "source_checkpoint": ".scratch/exp-678-target-only-continuation/fixtures/exp609-weights.safetensors",
     "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
     "frozen_protocol": ".scratch/exp-678-target-only-continuation/frozen-protocol.json",
-    "frozen_protocol_sha256": "cb9f6d96daeea3ac06fab51c659b2f814867895c5171d738c60096f6d438f8ef",
+    "frozen_protocol_sha256": "0375263ee2d335279d911351ff284dccff6bb7aabb2644b466836ad89a3d1b09",
     "package_oracle_log": ".scratch/exp-678-target-only-continuation/package-oracle.log",
     "package_oracle_log_sha256": "afd1218ad3b8bb1364544cdc74a6bdaba77320dbdd989fc3508468da15b1a96a",
     "normalization_invariance": ".scratch/exp-678-target-only-continuation/t076-normalization-invariance.json",
     "freeze_authentication": ".scratch/exp-678-target-only-continuation/t076-freeze-authentication.json",
     "full_pytest_log": ".scratch/exp-678-target-only-continuation/t076-full-pytest.log",
-    "full_pytest_log_sha256": "a456939e6ad8cb9927a85b66eb8cdc0e696c72b1f2e50edca3610707d83e23d4"
+    "full_pytest_log_sha256": "a456939e6ad8cb9927a85b66eb8cdc0e696c72b1f2e50edca3610707d83e23d4",
+    "t077_semantic_rebind": ".scratch/exp-678-target-only-continuation/t077-semantic-rebind.json",
+    "t077_authentication": ".scratch/exp-678-target-only-continuation/t077-authentication.json"
   },
   "mlflow": {
     "experiment_name": "sair-modular-arithmetic-wsl",
     "experiment_id": "1",
-    "run_id": "454a3ac2ccee4a66bd0bc81bd4969623",
+    "run_id": "b6e345c454b74466a0dc23afdb9e3cf7",
     "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-650-library-backed-mamba/worktree/.scratch/mlflow/mlflow.db"
   },
   "roots": {
-    "20261262": "unopened-provenance-blocked",
-    "20261263": "unopened-provenance-blocked",
-    "20261264": "unopened-provenance-blocked",
-    "20261265": "unopened-provenance-blocked"
+    "20261262": "unopened-permanent-authentication-park",
+    "20261263": "unopened-permanent-authentication-park",
+    "20261264": "unopened-permanent-authentication-park",
+    "20261265": "unopened-permanent-authentication-park"
   },
   "training_updates": 0,
   "formal_calls_executed": 0,
@@ -54,9 +56,9 @@
   "scientific_metrics": null,
   "scientific_verdict": null,
   "limitations": [
-    "T076 normalized exactly four canonical JSON fields, passed the project validator and completed the first full pytest with 655/655 tests green.",
-    "Before root allocation, the accepted freeze rejected current bytes only because T075's required governance-description repairs changed preregistration and mechanism-map hashes after the freeze.",
-    "T076 prohibits re-freezing or changing existing T075 bytes, so all four roots remain unopened and no resource or scientific metric was produced.",
+    "T077 proved semantic equivalence and rebound exactly the two current governance-document hashes plus mechanically consequent repository/frozen-protocol provenance.",
+    "The one full-protocol authentication still failed because raw deserialized-JSON and live YAML-derived dictionaries use string versus integer evaluation-map keys, despite zero JSON-normalized differences.",
+    "T077 authorizes no repair, retry or same-boundary successor, so all four roots remain permanently unopened and no resource or scientific metric was produced.",
     "This verification park is not scientific evidence for or against target-only continuation, M044.a, or the Loopies source claims.",
     "No checked, independent, official/private, candidate, submission, promotion or completion evaluation occurred."
   ]

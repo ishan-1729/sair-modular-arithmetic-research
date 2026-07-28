@@ -1968,10 +1968,10 @@ runs:
       - This park is not a scientific rejection of M004.b, length scheduling, Candidate005 transfer, or the source paper.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
   - run_id: exp-678-target-only-continuation
-    status: parked-pre-root-provenance
+    status: permanent-pre-root-authentication-park
     approach: ST-M044a-target-only-CE-continuation-with-matched-mixed-endpoint-weight-and-causal-controls
-    decision: park-pre-root-frozen-protocol-governance-hash-mismatch
-    decision_authority: T076-pre-root-provenance-stop-rule
+    decision: permanent-park-full-protocol-authentication-failed-after-exact-two-hash-rebind
+    decision_authority: T077-final-authentication-stop-rule
     source_base_commit: 32e331ac558a9ee71b5a22f896a238b409c0cfda
     source_branch: codex/exp678-target-only-continuation
     config: configs/exp_678_target_only_continuation.yaml
@@ -1982,17 +1982,17 @@ runs:
     verification: experiments/runs/exp-678-target-only-continuation/verification.json
     paper_sha256: 1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce
     checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
-    roots: {20261262: unopened-provenance-blocked, 20261263: unopened-provenance-blocked, 20261264: unopened-provenance-blocked, 20261265: unopened-provenance-blocked}
+    roots: {20261262: unopened-permanent-authentication-park, 20261263: unopened-permanent-authentication-park, 20261264: unopened-permanent-authentication-park, 20261265: unopened-permanent-authentication-park}
     verification_summary: {focused: reused-9-passed, validator: green-202-concepts-1100-records, pytest: 655-passed-in-549.32s, pytest_outer_wall_seconds: 538.61, pytest_process_cpu_seconds: 743.53, pytest_peak_rss_kib: 918004, t076_full_pytest_invocations: 1}
     package_oracle: {expected_wall_seconds: 769.8915, soft_wall_seconds: 962.364375, hard_wall_seconds: 1684.13765625, observed_wall_seconds: 8.45, process_cpu_seconds: 1.41, peak_rss_kib: 29276, fidelity_reduced: false}
     calibration: null
     training_updates: 0
     formal_calls_executed: 0
-    mlflow_run_id: 454a3ac2ccee4a66bd0bc81bd4969623
+    mlflow_run_id: b6e345c454b74466a0dc23afdb9e3cf7
     scientific_metrics: null
     scientific_verdict: null
     limitations:
-      - T076 normalized the exact four missing JSON fields, proved executable/config/test/science invariance, passed validation and completed the first full pytest at 655/655.
-      - The accepted freeze then rejected only the two governance documents changed by T075's required description repair; T076 prohibited re-freezing or changing T075 bytes.
-      - Calibration root 20261262 and all W128/W256/confirmation roots remained unopened, so M044.a remains scientifically open.
+      - T077 proved semantic equivalence and rebound exactly two current governance hashes with all experiment identities and semantics unchanged.
+      - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
+      - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.

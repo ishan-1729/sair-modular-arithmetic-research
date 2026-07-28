@@ -1,6 +1,6 @@
 {
   "schema_version": "exp678-verification-v1",
-  "status": "terminal-pre-root-provenance-park",
+  "status": "terminal-permanent-pre-root-authentication-park",
   "prechange_validator": {
     "command": "python tools/validate_project.py",
     "passed": true,
@@ -45,7 +45,7 @@
     "headroom": 1.35,
     "fidelity_reduced": false
   },
-  "frozen_protocol_sha256": "cb9f6d96daeea3ac06fab51c659b2f814867895c5171d738c60096f6d438f8ef",
+  "frozen_protocol_sha256": "0375263ee2d335279d911351ff284dccff6bb7aabb2644b466836ad89a3d1b09",
   "t076_normalization": {
     "exact_fields": 4,
     "invariance_path": ".scratch/exp-678-target-only-continuation/t076-normalization-invariance.json",
@@ -66,9 +66,13 @@
     "invocations": 1
   },
   "pre_root_authentication": {
-    "status": "failed-governance-hash-mismatch",
-    "evidence": ".scratch/exp-678-target-only-continuation/t076-freeze-authentication.json",
-    "root_20261262_opened": false
+    "status": "failed-permanent-after-exact-two-hash-rebind",
+    "semantic_rebind": ".scratch/exp-678-target-only-continuation/t077-semantic-rebind.json",
+    "evidence": ".scratch/exp-678-target-only-continuation/t077-authentication.json",
+    "json_normalized_differences": 0,
+    "raw_failure": "string-versus-integer evaluation-map keys",
+    "root_20261262_opened": false,
+    "retry": false
   },
   "final_validator": {
     "command": "python tools/validate_project.py",

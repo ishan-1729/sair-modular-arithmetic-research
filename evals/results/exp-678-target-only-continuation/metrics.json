@@ -2,8 +2,8 @@
   "schema_version": "exp678-metrics-v1",
   "run_id": "exp-678-target-only-continuation",
   "created_at": "2026-07-30T01:30:00+05:30",
-  "status": "parked-pre-root-provenance",
-  "decision": "park-pre-root-frozen-protocol-governance-hash-mismatch",
+  "status": "permanent-pre-root-authentication-park",
+  "decision": "permanent-park-full-protocol-authentication-failed-after-exact-two-hash-rebind",
   "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
   "focused_tests_passed": 9,
   "package_oracle_invocations": 1,
@@ -17,7 +17,7 @@
   "scientific_verdict": null,
   "evaluation": {
     "not_performed": true,
-    "reason": "T076 recovered validation and full pytest, but the accepted pre-root freeze rejected two post-freeze governance-document hashes and T076 prohibited re-freezing.",
+    "reason": "T077 rebound the exact two governance hashes, but the single full authentication failed on raw JSON-string versus live YAML-integer evaluation-map keys despite semantic equivalence.",
     "labels_or_oracle_present": false
   },
   "controls": {
@@ -37,14 +37,15 @@
     ,"t076_full_pytest_peak_rss_kib": 918004
   },
   "roots": {
-    "20261262": "unopened-provenance-blocked",
-    "20261263": "unopened-provenance-blocked",
-    "20261264": "unopened-provenance-blocked",
-    "20261265": "unopened-provenance-blocked"
+    "20261262": "unopened-permanent-authentication-park",
+    "20261263": "unopened-permanent-authentication-park",
+    "20261264": "unopened-permanent-authentication-park",
+    "20261265": "unopened-permanent-authentication-park"
   },
   "limitations": [
     "T076 project validation passed and the first full pytest passed 655/655.",
-    "The accepted freeze binds two governance-document hashes that necessarily changed during T075's required schema repair; re-freezing is prohibited.",
+    "Exactly two governance hashes were rebound with zero normalized semantic difference, but raw protocol authentication failed on serialization key types.",
+    "No retry, code repair, or same-boundary successor is authorized by T077.",
     "No calibration or scientific exact-answer metric was measured.",
     "No checked, independent, official/private, candidate, submission, promotion or completion evaluation occurred."
   ]
