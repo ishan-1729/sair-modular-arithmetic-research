@@ -336,3 +336,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - The sole T082 focused run records 9 passed / 1 failed in 4.18 wall and 9.83 process CPU seconds with 251,992 KiB peak RSS.
 - The failure is exact and local: the topology assertion expects two flat quotient-tail parameter names, while Candidate005's copied sequential quotient tail exposes four indexed tensors.
 - T082 forbids code/config/test repair after launch. Full pytest and roots `20261274`-`20261277` remain permanently unopened; this is not an AbbIE scientific verdict.
+
+## 2026-07-30 — EXP-682 parks at the source/topology and de-novo viability gate
+
+- The immutable Huginn PDF was visually authenticated on pages 3-4 and 10-11. Candidate005 maps coarsely to prelude/shared core/coda, but its GroupNorm ConvGRU has no random latent, hidden-input `2h -> h` adapter, or sandwich RMSNorm.
+- An executable native-PyTorch probe proves that making the required components causal changes checkpoint outputs; neutralizing them would violate the frozen component-causality gate.
+- The preregistered de-novo fallback is not viable under 400 updates and a 95% W128 gate: adjacent EXP634 used 4,000 updates and reached only 2/300 exact at trained width 12.
+- Park before calibration under T084's explicit stop rule. Roots 20261278-20261281 remain unopened; training, formal science, confirmations, and protected evaluation surfaces are null. This does not reject Huginn or a separately justified native from-scratch program.
