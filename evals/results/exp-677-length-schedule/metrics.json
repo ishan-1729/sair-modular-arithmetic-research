@@ -1,0 +1,44 @@
+{
+  "schema_version": "exp677-metrics-v1",
+  "run_id": "exp-677-length-schedule",
+  "created_at": "2026-07-29T18:30:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "parked-package-verification",
+  "decision": "park-verification-out-of-scope-immutable-snapshot-absent",
+  "focused_tests_passed": 9,
+  "package_oracle_invocations": 1,
+  "project_validator_passed": false,
+  "full_pytest_opened": false,
+  "calibration_opened": false,
+  "formal_opened": false,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Package verification stopped before calibration on an absent protected challenge snapshot outside T074 allowed files.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "scheduled": "unopened",
+    "fixed_incumbent_endpoint": "unopened",
+    "equal_work_shuffled": "unopened",
+    "frozen_source": "unopened",
+    "randomized_control": "unopened"
+  },
+  "runtime": {
+    "package_oracle_wall_seconds": 9.52,
+    "package_oracle_process_cpu_seconds": 1.69,
+    "package_oracle_peak_rss_kib": 28524
+  },
+  "limitations": [
+    "The full pytest phase did not open because project validation failed first.",
+    "All calibration and science roots remain unopened.",
+    "No scientific, checked, independent, official/private, candidate, submission, promotion or completion evaluation occurred."
+  ],
+  "roots": {
+    "20261258": "unopened-verification-blocked",
+    "20261259": "unopened-verification-blocked",
+    "20261260": "unopened-verification-blocked",
+    "20261261": "unopened-verification-blocked"
+  }
+}

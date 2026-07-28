@@ -1,0 +1,56 @@
+{
+  "schema_version": "exp677-terminal-v1",
+  "run_id": "exp-677-length-schedule",
+  "status": "completed",
+  "hypothesis": "A known-step curriculum over legal operand widths and their full physical recurrent visit counts can retain Candidate005 W128 exactness and improve W256 transfer while formal inference remains unchanged.",
+  "seed": 67773000,
+  "decision": "park-verification-out-of-scope-immutable-snapshot-absent",
+  "decision_authority": "T074-package-verification-stop-rule",
+  "created_at": "2026-07-30T00:00:00+05:30",
+  "source": {
+    "repository_commit": "aca5dceb6f31b93c2a07f5453ec73f5cf79eb145",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "base_commit": "aca5dceb6f31b93c2a07f5453ec73f5cf79eb145",
+    "branch": "codex/exp677-length-schedule",
+    "challenge_commit_required": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "266793dd7b287d2ba2f994c4c082dc2a70de9c4e49797ab7954ddee2ba5c1b4b",
+    "model_sha256": "c095ca705c4e8f2201600d1a371f30324c832ac45485f37277e17d56656f71cf",
+    "runner_sha256": "6ad6f587fd7d876ed64c9a735d07758ce0b774d85c89133a66df0f4ed66237f3",
+    "test_sha256": "27c8eab11dac2a47bd8fac7243c869138419898122026fc7dbb8b73ade21ab55",
+    "paper_sha256": "6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "config": "configs/exp_677_length_schedule.yaml",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-677-length-schedule/fixtures/exp609-weights.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-677-length-schedule/metrics.json",
+    "verification": "experiments/runs/exp-677-length-schedule/verification.json"
+  },
+  "environment": "experiments/runs/exp-677-length-schedule/environment.json",
+  "verification": "experiments/runs/exp-677-length-schedule/verification.json",
+  "metrics": "evals/results/exp-677-length-schedule/metrics.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "1",
+    "run_id": "c480f0e468bd4161b74d0996d87d7238",
+    "tracking_uri": "sqlite:///.scratch/mlflow/mlflow.db"
+  },
+  "roots": {
+    "20261258": "unopened-verification-blocked",
+    "20261259": "unopened-verification-blocked",
+    "20261260": "unopened-verification-blocked",
+    "20261261": "unopened-verification-blocked"
+  },
+  "training_updates": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "The implementation passed its focused semantic cone, but final package verification is red on inherited immutable-snapshot materialization outside T074 scope.",
+    "Validator short-circuit means the full pytest phase did not open; no second package oracle is permitted.",
+    "Calibration, formal W128, conditional W256, and confirmations remained unopened.",
+    "This verification park is not scientific evidence for or against M004.b, length scheduling, Candidate005 transfer, or the source paper.",
+    "No checked, independent, official/private, candidate, submission, promotion or completion evaluation was opened."
+  ]
+}

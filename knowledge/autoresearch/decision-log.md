@@ -272,3 +272,24 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - The candidate projects to 533.876 seconds nominal and 720.733 seconds guarded, exceeding the
   frozen 285-second ceiling. Park under the calibration stop rule; roots `20261255`-`20261257`
   remain unopened. Calibration metrics are non-scientific, so LLA/ST-M004.a remains open.
+
+## 2026-07-30 — EXP-677 parked at package verification
+
+- Visually authenticated local arXiv:2409.15647 pages 5-7 and 9-10. M004.b uses
+  diverse lengths with known required steps, final-output supervision at that
+  step, and a smallest-to-maximum curriculum. EXP676 excluded this mechanism;
+  its “M004.b closed” sentence was stale relative to the authoritative ledger.
+- Froze a Candidate005-inference-identical schedule of `(W64,12)`, `(W128,14)`,
+  and `(W256,16)` final known endpoints against fixed W128 and exact-multiset
+  shuffled controls, with 400 matched updates, examples, optimizer work and loss
+  calls. Width-dependent FLOPs remain explicitly unmatched.
+- Nine focused tests pass; after scoped authenticated fixture materialization,
+  the combined EXP676/677 cone passes 18/18.
+- The one dynamic package oracle used a 575.53-second lower ETA, 776.97 expected,
+  971.21 soft and 1,359.69 hard guard. It stopped after 9.52 wall / 1.69 process
+  CPU seconds and 28,524 KiB RSS because project validation found eight broken
+  immutable-snapshot links and the wrong nested challenge commit. Pytest did not
+  open. Repair requires protected paths outside T074, so no retry is legal.
+- Park at verification with roots `20261258`-`20261261` unopened. No calibration,
+  scientific, candidate, checked, independent, official/private, submission,
+  promotion or completion evidence follows; M004.b remains scientifically open.
