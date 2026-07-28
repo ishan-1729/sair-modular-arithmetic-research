@@ -9,6 +9,23 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp673_hypothesis:
+  run_id: exp-673-deeploop-parameterization
+  status: parked-topology-feasibility
+  decision: park-topology-faithfulness-before-implementation
+  decision_authority: T069-topology-faithfulness-stop-rule
+  source_base_commit: f41308722d649f403aba5e1d3f712ea8a67111a1
+  source_branch: codex/exp673-deeploop-parameterization
+  source_authentication: {deeploop_pdf_sha256: 15f83b1ad3a092e00a2e2a7afe3cea91834b11ce2913653836e868673023af4d, layernorm_pdf_sha256: 3509f28429ce0c01ebf7a9fca94d70440a33d69073da9e248ddd8b65b2150f9e, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  topology: {candidate: PreNorm-GroupNorm-shared-dilated-ConvGRU, postnorm_residual_sublayers: 0, high_modules: 0, low_modules: 1, gradient_truncation: none, W128_visits: 14, W256_visits: 16}
+  blocker: exact Candidate005 preservation requires a non-source bypass, inert alpha cancellation, or forbidden generic runtime beta/alpha scaling
+  implementation_executed: false
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261242: unopened-topology-feasibility-blocked, 20261243: unopened-topology-feasibility-blocked, 20261244: unopened-topology-feasibility-blocked, 20261245: unopened-topology-feasibility-blocked}
+  mlflow_run_id: 969121a5c43d4847a7c3ac5ca81f69e7
+  scientific_verdict: null
+  limitations: [topology-feasibility-only, no-implementation-or-calibration, no-W128-W256-or-Jacobian-evidence, DeepLoop-and-ST-M030-remain-scientifically-open, no-checked-private-candidate-submission-surface]
 parked_exp672_hypothesis:
   run_id: exp-672-lt2-gated-hybrid-mixer
   status: parked-calibration-runtime-headroom

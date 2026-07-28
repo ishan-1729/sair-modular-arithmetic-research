@@ -1827,3 +1827,30 @@ runs:
       - Formal W128, conditional W256, and confirmations remained unopened.
       - This resource park is not scientific evidence against LT2, ST-M025, the official source, or the bounded transfer.
       - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.
+  - run_id: exp-673-deeploop-parameterization
+    status: parked-topology-feasibility
+    approach: bounded-faithful-ST-M030b-DeepLoop-proactive-parameterization
+    decision: park-topology-faithfulness-before-implementation
+    decision_authority: T069-topology-faithfulness-stop-rule
+    source_base_commit: f41308722d649f403aba5e1d3f712ea8a67111a1
+    source_branch: codex/exp673-deeploop-parameterization
+    config: configs/exp_673_deeploop_parameterization.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp673-deeploop-mechanism.md
+    preregistration: experiments/runs/exp-673-deeploop-parameterization/preregistration.json
+    run_record: experiments/runs/exp-673-deeploop-parameterization/run.json
+    metrics: evals/results/exp-673-deeploop-parameterization/metrics.json
+    source_papers: {deeploop_sha256: 15f83b1ad3a092e00a2e2a7afe3cea91834b11ce2913653836e868673023af4d, layernorm_dynamics_sha256: 3509f28429ce0c01ebf7a9fca94d70440a33d69073da9e248ddd8b65b2150f9e}
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261242: unopened-topology-feasibility-blocked, 20261243: unopened-topology-feasibility-blocked, 20261244: unopened-topology-feasibility-blocked, 20261245: unopened-topology-feasibility-blocked}
+    verification: {visual_pdf_pages: deeploop-4-13-and-23-layernorm-2-and-4-18, implementation: unopened, full_oracle: unopened-topology-stop-rule, first_validator: red-7-owned-schema-fields, bounded_repair: required-feasibility-schema-fields-only, final_validator: passed}
+    training_updates: 0
+    formal_calls_executed: 0
+    calibration: null
+    scientific_metrics: null
+    scientific_verdict: null
+    mlflow_run_id: 969121a5c43d4847a7c3ac5ca81f69e7
+    limitations:
+      - Exact Candidate005 preservation would require a non-source bypass, inert alpha cancellation, or excluded generic runtime scaling.
+      - Implementation, calibration, W128/W256, Jacobians, candidate timing, and confirmations remained unopened.
+      - This park does not reject DeepLoop, LayerNorm dynamics, ST-M030, or a future from-scratch PostNorm recurrent architecture.
+      - No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened.

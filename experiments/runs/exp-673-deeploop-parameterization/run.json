@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "config": "configs/exp_673_deeploop_parameterization.yaml",
+    "environment": "experiments/runs/exp-673-deeploop-parameterization/environment.json",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp673-deeploop-mechanism.md",
+    "metrics": "evals/results/exp-673-deeploop-parameterization/metrics.json",
+    "preregistration": "experiments/runs/exp-673-deeploop-parameterization/preregistration.json"
+  },
+  "created_at": "2026-07-29T03:45:00Z",
+  "config": "configs/exp_673_deeploop_parameterization.yaml",
+  "decision": "park-topology-faithfulness-before-implementation",
+  "decision_authority": "T069-topology-faithfulness-stop-rule",
+  "hypothesis": "DeepLoop proactive PostNorm alpha/beta initialization and aligned-visit depth scaling can preserve Candidate005 exactly and improve width transfer.",
+  "limitations": [
+    "No implementation, training, calibration, formal evaluation, Jacobian measurement, or candidate runtime measurement was opened.",
+    "The park rejects only exact-function ST-M030.b transfer onto the frozen Candidate005 graph.",
+    "It does not reject DeepLoop, LayerNorm dynamics, or a separately authorized from-scratch PostNorm recurrent architecture.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ],
+  "mlflow": {
+    "experiment_id": "1",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "run_id": "969121a5c43d4847a7c3ac5ca81f69e7"
+  },
+  "roots": {
+    "20261242": "unopened-topology-feasibility-blocked",
+    "20261243": "unopened-topology-feasibility-blocked",
+    "20261244": "unopened-topology-feasibility-blocked",
+    "20261245": "unopened-topology-feasibility-blocked"
+  },
+  "run_id": "exp-673-deeploop-parameterization",
+  "seed": 0,
+  "source": {
+    "branch": "codex/exp673-deeploop-parameterization",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "deeploop_pdf_sha256": "15f83b1ad3a092e00a2e2a7afe3cea91834b11ce2913653836e868673023af4d",
+    "layernorm_pdf_sha256": "3509f28429ce0c01ebf7a9fca94d70440a33d69073da9e248ddd8b65b2150f9e",
+    "dirty": false,
+    "repository_commit": "f41308722d649f403aba5e1d3f712ea8a67111a1",
+    "repository_tree": "52603b83a76b18ca2953ada23e7a2192d597a2a3"
+  },
+  "status": "completed",
+  "verification": {
+    "bounded_repair": "Added only the run/evaluation fields required by the repository schemas after the first validator reported seven omissions.",
+    "final_validator": "passed-after-bounded-schema-normalization",
+    "full_pytest": "unopened-because-topology-stop-rule-bound-before-implementation"
+  }
+}

@@ -283,6 +283,17 @@ scientifically unresolved.
 
 Native. EXP-643 does not close either. Terminal requires full-Jacobian/activation diagnostics and exact matched training, with components separated.
 
+EXP-673 authenticated and visually reviewed both required page sets, then parked ST-M030.b at the
+topology-faithfulness boundary before implementation. Candidate005 is a pretrained PreNorm/GroupNorm
+shared ConvGRU with 14 fully gradient-visible visits at W128 and 16 at W256; it has no PostNorm
+residual sublayers, separate H/L modules, or one-step outer-gradient truncation. Preserving the exact
+Candidate005 function while adding DeepLoop's PostNorm `alpha` requires a bypass/zero gate or an exact
+cancellation that makes `alpha` inert, while applying width-dependent `beta/alpha` to a correction at
+runtime contradicts the source's one-time initialization semantics and reduces to the excluded generic
+visit-scaling substitute. Roots `20261242`-`20261245` remained unopened. This closes only the exact
+transfer onto Candidate005; ST-M030.a remains diagnostic/supporting, and DeepLoop remains scientifically
+open for a separately authorized ordinary-initialized PostNorm recurrent architecture.
+
 ### ST-M031 — T²MLR (1 component)
 
 **PDF:** `2607.15178`, pp. 3–11. **Mechanism:** autoregressive KV-cache recurrence from `l_end` at token `t` into before `l_start` at `t+1`, exact zero-initialized gated fusion, recurrent cache update, temporal-parallel Jacobi training, sequential inference. Native. Candidate 005's bit scan is not T²MLR. Conditional analogue until an autoregressive SAIR decoder is justified; terminal requires cache/fusion causality and train/inference parity.

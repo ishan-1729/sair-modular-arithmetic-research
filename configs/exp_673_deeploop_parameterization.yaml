@@ -1,0 +1,73 @@
+run_id: exp-673-deeploop-parameterization
+status: parked-topology-feasibility
+hypothesis: >-
+  DeepLoop proactive PostNorm alpha/beta initialization and aligned-visit depth scaling can be
+  transferred to Candidate005 while preserving its exact initial function and formal call count.
+mechanism_map: knowledge/autoresearch/research/2026-07-29-exp673-deeploop-mechanism.md
+source:
+  repository_commit: f41308722d649f403aba5e1d3f712ea8a67111a1
+  repository_tree: 52603b83a76b18ca2953ada23e7a2192d597a2a3
+  branch: codex/exp673-deeploop-parameterization
+  checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+papers:
+  deeploop:
+    path: research/papers/arxiv-2607.13491.pdf
+    sha256: 15f83b1ad3a092e00a2e2a7afe3cea91834b11ce2913653836e868673023af4d
+    reviewed_pages: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 23]
+  layernorm_dynamics:
+    path: research/papers/arxiv-2607.10681.pdf
+    sha256: 3509f28429ce0c01ebf7a9fca94d70440a33d69073da9e248ddd8b65b2150f9e
+    reviewed_pages: [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+  manifest_sha256: f2e2e38631d4cd5ea286d6e34c315b19c90d2c12e1725b3958a3e90229f09c21
+  verification_sha256: cdf94b675d48261385cd43aabb735c7e081442106a42e9e046999146f0a7f58d
+  checksums_sha256: a4f793a771b900719768977b2b78dd4beb487f3572c8f83c7c4d156a449825b8
+fixtures:
+  Dockerfile: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41
+  generator.py: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0
+  primes.py: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac
+source_hashes:
+  candidate_topology: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc
+  data_sampler: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f
+  split_and_feature_route: bed3b8bbd67942fe38056d169f96eaf6bac867ba9b8c4add6e7aa51fb9f02330
+frozen_source_equations:
+  recurrence: x_next = Norm(alpha * x + f(x; phi))
+  alpha: (2 * N) ** 0.5
+  beta: (8 * N) ** -0.5
+  beta_semantics: one-time-residual-branch-matrix-initialization-gain-not-runtime-multiplier
+  visit_exponent: 0.5
+  update_ratio: beta / alpha = 1 / (4 * N)
+  aligned_bound: M * R * (beta / alpha) ** 2
+candidate_topology:
+  cell: shared-pre-GroupNorm-dilated-ConvGRU
+  recurrence: y = (1 - update) * x + update * candidate
+  postnorm_residual_sublayers: 0
+  high_modules: 0
+  low_modules: 1
+  gradient_truncation: none
+  W128: {forward_visits: 14, gradient_visible_visits: 14, alpha_if_literal_N14: 5.291502622129181, beta_if_literal_N14: 0.09449111825230681}
+  W256: {forward_visits: 16, gradient_visible_visits: 16, alpha_if_literal_N16: 5.656854249492381, beta_if_literal_N16: 0.08838834764831845}
+frozen_package_if_feasible:
+  updates_per_trained_arm: 400
+  arms: [full_deeploop, alpha_beta_only, visit_alignment_only, fixed_scale_exponent_zero, matched_source_continuation, frozen, reset, randomized]
+  roots: {calibration: 20261242, viability: 20261243, confirmations: [20261244, 20261245]}
+  gates: {minimum_W128_rollout: 0.85, maximum_W128_loss_to_source: 0.02, zero_invalids: true, minimum_W256_rollout: 0.10, minimum_W256_gain_over_each_control: 0.05, maximum_guarded_candidate_seconds: 285}
+decision:
+  result: park-before-implementation
+  authority: T069-topology-faithfulness-stop-rule
+  reason: >-
+    Candidate005 has neither the PostNorm residual form nor a fixed source depth. Exact preservation
+    would require a non-source bypass/zero gate, an alpha-cancelling identity term that makes alpha
+    cosmetic, or a runtime beta/alpha adapter. Those alternatives cannot provide a faithful and causal
+    test of ST-M030.b and the latter is the excluded generic visit-scaling substitute.
+  roots_opened: []
+  training_updates: 0
+  formal_calls_executed: 0
+resource_policy:
+  inherited_full_oracle_observation_seconds: 527.29
+  expected_full_oracle_seconds: 1246
+  hard_envelope_seconds: 2492
+  calibration_executed: false
+  formal_eta: null
+  guarded_candidate_runtime: null
+environment: {python: 3.12.3, torch: 2.5.1+cpu, device: cpu, platform: WSL2-x86_64}

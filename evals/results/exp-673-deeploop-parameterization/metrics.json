@@ -1,0 +1,20 @@
+{
+  "calibration": null,
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "controls": {"opened": false},
+  "created_at": "2026-07-29T03:45:00Z",
+  "decision": "park-topology-faithfulness-before-implementation",
+  "evaluation": {"labels_or_oracle_present": false, "not_performed": true, "reason": "The exact-function source-faithfulness topology gate failed before implementation."},
+  "formal_calls_executed": 0,
+  "roots_opened": [],
+  "run_id": "exp-673-deeploop-parameterization",
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "status": "parked-topology-feasibility",
+  "training_updates": 0,
+  "limitations": [
+    "No implementation, training, calibration, formal evaluation, or Jacobian diagnostic was opened.",
+    "The source checkpoint hash identifies the frozen comparator; EXP673 produced no challenger checkpoint.",
+    "This topology park is not a scientific rejection of DeepLoop or ST-M030."
+  ]
+}
