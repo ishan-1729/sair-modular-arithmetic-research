@@ -1,0 +1,71 @@
+{
+  "cache_key": "b6f262925cf8ed0ffd173b128fb48cfc394a0e3d464ca6fbbbf474e3df8e594b",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 400584,
+      "path": "experiments/runs/exp-669-stars-jvp-regularization/calibration/root-20261226/state_norm/model.safetensors",
+      "sha256": "4a1cfaf991995497f9107293fa727074cdc319216f7c97349aebb1455d9a8ff0"
+    },
+    "checkpoint_reload_exact": true,
+    "inference_calls_per_transition": 14,
+    "parameters": 99824,
+    "route": "state_norm",
+    "training": {
+      "examples": 32,
+      "history": [
+        {
+          "base_loss": 0.001076209475286305,
+          "batch_exact": 1.0,
+          "first_jvp_norm": 0.7749640941619873,
+          "gradient_norm": 0.06257746368646622,
+          "jvp_calls": 2,
+          "loss": 0.0280357226729393,
+          "proxy": 0.8455821871757507,
+          "proxy_parameter_gradient_enabled": false,
+          "regularizer": 0.2706713378429413,
+          "state_norm": 39.15494155883789,
+          "step": 1,
+          "timing": {
+            "cgroup_cpu_seconds": 0.40399999999999636,
+            "peak_rss_bytes": 704389120,
+            "process_cpu_seconds": 0.3970539999999989,
+            "wall_seconds": 0.10071807899976193
+          },
+          "vector_norm": 1.0,
+          "width": 64
+        },
+        {
+          "base_loss": 0.0021806403528898954,
+          "batch_exact": 1.0,
+          "first_jvp_norm": 0.7719142436981201,
+          "gradient_norm": 0.1829274743795395,
+          "jvp_calls": 2,
+          "loss": 0.0293490681797266,
+          "proxy": 0.81522136926651,
+          "proxy_parameter_gradient_enabled": false,
+          "regularizer": 0.2738649249076843,
+          "state_norm": 55.769012451171875,
+          "step": 2,
+          "timing": {
+            "cgroup_cpu_seconds": 0.8160000000002583,
+            "peak_rss_bytes": 710701056,
+            "process_cpu_seconds": 0.8070330000000006,
+            "wall_seconds": 0.2023912120002933
+          },
+          "vector_norm": 0.9999999403953552,
+          "width": 128
+        }
+      ],
+      "jvp_calls": 64,
+      "source_recurrent_calls": 416,
+      "timing": {
+        "cgroup_cpu_seconds": 1.4360000000001492,
+        "peak_rss_bytes": 710701056,
+        "process_cpu_seconds": 1.4003390000000024,
+        "wall_seconds": 0.3691990459997214
+      },
+      "updates": 2
+    }
+  }
+}

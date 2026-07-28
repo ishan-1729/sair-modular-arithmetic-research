@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-29T03:00:00+05:30
+updated_at: 2026-07-29T04:00:00+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -729,3 +729,17 @@ parked_exp668_hypothesis:
   run_record: experiments/runs/exp-668-h2l3-magicnorm-credit/run.json
   metrics: evals/results/exp-668-h2l3-magicnorm-credit/metrics.json
   limitations: [calibration-only-non-scientific-diagnostics, root-20261223-through-20261225-unopened, M024c-and-M024d-closed, no-HRM-Text-or-adaptation-scientific-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+rejected_exp669_hypothesis:
+  run_id: exp-669-stars-jvp-regularization
+  status: completed-rejected-w128-primary
+  source_base_commit: dcdec9d5707e7e24027cbae83c367153177b8f78
+  source_branch: codex/exp669-stars-jvp-regularization
+  decision_authority: T064-root-20261227-W128-primary-first-gate
+  mechanism: bounded-ST-M026a-native-one-step-power-JVP-squared-norm-proxy
+  roots: {calibration_20261226: completed-admitted, viability_20261227: completed-rejected-W128-primary, confirmation_20261228: unopened, confirmation_20261229: unopened}
+  calibration: {wall_seconds: 91.32661436900025, process_tree_cpu_seconds: 350.517496, cgroup_cpu_seconds: 396.25999999999976, peak_rss_bytes: 759463936, candidate_nominal_seconds: 158.80018574999303, candidate_headroom_seconds: 236.67904689476234, admitted: true}
+  formal: {wall_seconds: 532.055833247, process_tree_cpu_seconds: 2078.299365, cgroup_cpu_seconds: 2527.8719999999994, peak_rss_bytes: 1019494400, W128_transition_exact: 0.9983333333333333, W128_rollout_exact: 0.8433333333333334, W128_invalid: 0.0, required_rollout_exact: 0.85}
+  scientific_verdict: reject-exact-bounded-STARS-JVP-adaptation-at-W128-primary
+  run_record: experiments/runs/exp-669-stars-jvp-regularization/run.json
+  metrics: evals/results/exp-669-stars-jvp-regularization/metrics.json
+  limitations: [one-step-proxy-not-exact-spectral-radius, retention-dependence-formal-stability-W256-and-confirmations-unopened, M026b-M018a-closed, no-general-STARS-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]

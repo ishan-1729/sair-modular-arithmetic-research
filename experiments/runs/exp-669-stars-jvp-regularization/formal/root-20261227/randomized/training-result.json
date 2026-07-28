@@ -1,0 +1,28 @@
+{
+  "cache_key": "7a065de9ea8d6a78eae454819a810dda5cee1821a4b25cbc67fda81353605b7c",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 400584,
+      "path": "experiments/runs/exp-669-stars-jvp-regularization/formal/root-20261227/randomized/model.safetensors",
+      "sha256": "fbced4d2251737d738f727f9ffb316d313e72838f276149f549a6908cffc29ba"
+    },
+    "checkpoint_reload_exact": true,
+    "inference_calls_per_transition": 14,
+    "parameters": 99824,
+    "route": "randomized",
+    "training": {
+      "examples": 0,
+      "history": [],
+      "jvp_calls": 0,
+      "source_recurrent_calls": 0,
+      "timing": {
+        "cgroup_cpu_seconds": 0.20799999999962893,
+        "peak_rss_bytes": 1019494400,
+        "process_cpu_seconds": 0.16682199999991099,
+        "wall_seconds": 0.05260499799987883
+      },
+      "updates": 0
+    }
+  }
+}

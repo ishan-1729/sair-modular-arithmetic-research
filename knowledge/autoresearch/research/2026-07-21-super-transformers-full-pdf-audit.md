@@ -72,8 +72,8 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M024.d auto-guidance transfer | analogue | deferred/closed by T063 scope |
 | M025.a LT² mixer | bounded-faithful | open |
 | M025.b LT² gates | bounded-faithful | open |
-| M026.a JSR regularization | bounded-faithful | open; EXP-643 diagnostic only |
-| M026.b random loop counts | bounded-faithful | open |
+| M026.a JSR regularization | bounded-faithful | closed by EXP-669 W128-primary rejection of exact adaptation |
+| M026.b random loop counts | bounded-faithful | deferred/closed by T064 as separate M018.a mechanism |
 | M027.a FPRM parameterization | bounded-faithful | open |
 | M027.b convergence halting | bounded-faithful | open |
 | M028.a LOTUS latent layout | bounded-faithful | open |
