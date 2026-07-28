@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import inspect
+import json
+from pathlib import Path
 
 import torch
 from safetensors.torch import load_file, save_file
 
 from experiments.exp_220_width_independent_cellular.model import SharedDilatedConvGRU
 from experiments.exp_681_abbie_recurrence.model import AbbieConvGRU, randomize_body, source_identity_receipt
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def models(form: str = "C", *, recurrence: int = 2, untied: bool = False):
@@ -28,9 +33,40 @@ def test_head_body_tail_store_only_expected_parameters() -> None:
         "head.weight", "head.bias", "bodies.0.gate_weight", "bodies.0.gate_bias",
         "bodies.0.candidate_weight", "bodies.0.candidate_bias", "bodies.0.state_norm.weight",
         "bodies.0.state_norm.bias", "tail_norm.weight", "tail_norm.bias", "tail_local.weight",
-        "tail_local.bias", "tail_quotient.weight", "tail_quotient.bias",
+        "tail_local.bias", "tail_quotient.0.weight", "tail_quotient.0.bias",
+        "tail_quotient.2.weight", "tail_quotient.2.bias",
     }
     assert abbie.accounting(128, 2)["stored_parameters"] == sum(p.numel() for p in source.parameters())
+
+
+def test_historical_permanent_park_record_is_unchanged() -> None:
+    run = json.loads((ROOT / "experiments/runs/exp-681-abbie-recurrence/run.json").read_text())
+    metrics = json.loads((ROOT / "evals/results/exp-681-abbie-recurrence/metrics.json").read_text())
+    verification = json.loads(
+        (ROOT / "experiments/runs/exp-681-abbie-recurrence/verification.json").read_text()
+    )
+    parked_roots = {
+        str(root): "unopened-permanent-verification-park"
+        for root in range(20261274, 20261278)
+    }
+    assert run["status"] == "failed"
+    assert metrics["status"] == "permanent-focused-verification-park"
+    assert run["decision"] == metrics["decision"] == "permanent-park-focused-topology-schema-failure"
+    assert run["roots"] == metrics["roots"] == parked_roots
+    assert verification["focused"] == {
+        "command": "python -m pytest -q tests/test_exp_681_abbie_recurrence.py",
+        "result": "failed",
+        "passed": 9,
+        "failed": 1,
+        "wall_seconds": 4.18,
+        "process_cpu_seconds": 9.83,
+        "peak_rss_kib": 251992,
+        "log_sha256": "97f28a172b5d6bb41687c50852b49cc3c5b59eebdbc2e565ec265e09f614f385",
+    }
+    assert verification["package_oracle"] == {
+        "launched": False,
+        "reason": "Focused gate failed; T082 prohibits post-launch repair and requires terminal park.",
+    }
 
 
 def test_recurrence_counts_cover_frozen_test_grid() -> None:

@@ -1,0 +1,100 @@
+run_id: exp-683-source-complete-hrm
+status: frozen-source-complete-de-novo-package
+hypothesis: Full HRM hierarchy, local credit, deep supervision, and learned ACT can learn modular arithmetic better than flat recurrence.
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-683-source-complete-hrm.md
+mechanism_map: knowledge/autoresearch/research/2026-07-30-exp683-source-complete-hrm-mechanism.md
+source_contract:
+  base_commit: da549f4a26656fb8fde289b0dde4774cc096b295
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  paper_path: /mnt/d/Projects/SAIR_mod_challenge/research/papers/arxiv-2506.21734.pdf
+  paper_sha256: 81b05b03ebd92748b1bc0e59d4b6e0d8271e1e56b84d1d589a03430db79b6e25
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  checked_independent_official_private_candidate_submission_promotion: prohibited
+route_decision:
+  selected: source-meaningful-de-novo
+  exact_transfer: false
+  reason: Candidate005 has one GroupNorm ConvGRU state; HRM requires distinct H/L PostNorm-RMSNorm modules, fixed initial states, and a Q head.
+  updates: 4000
+library_decision:
+  selected: native-pytorch
+  torch: 2.5.1+cpu
+  license: BSD-3-Clause
+  primitives: [Linear, RMSNorm, scaled-dot-product-attention, AdamW]
+  official_repo_needed: false
+model:
+  hidden: 64
+  heads: 4
+  feedforward: 96
+  high_cycles: 2
+  low_steps: 2
+  maximum_segments: 4
+  initial_state_seed: 68321734
+routes:
+  full_hrm: {train: true, unequal_frequency: true, carry: true, one_step_gradient: true, deep_supervision: true, act: learned}
+  equal_frequency: {train: true, unequal_frequency: false, carry: true, one_step_gradient: true, deep_supervision: true, act: learned}
+  high_reset: {train: true, reset: high}
+  low_reset: {train: true, reset: low}
+  segment_detach_disabled: {train: true, carry: no_detach}
+  full_gradient: {train: true, one_step_gradient: false}
+  no_deep_supervision: {train: true, deep_supervision: false}
+  fixed_depth: {train: true, act: fixed_max}
+  equal_average_act: {train: true, act: fixed_two}
+  random_act: {train: true, act: deterministic_random}
+  q_disabled: {train: true, q_loss: false, act: fixed_max}
+  q_shuffled: {train: true, q_intervention: shuffled}
+  one_state: {train: true, states: one}
+  frozen: {train: false, initialization_only: true}
+  randomized: {train: false, randomized_weights: true}
+  candidate005: {train: false, comparator: frozen_EXP609}
+training:
+  steps_per_trained_route: 4000
+  batch_size: 16
+  widths: [8, 12, 16]
+  schedule: [8, 12, 16, 16]
+  learning_rate: 0.0003
+  minimum_learning_rate: 0.00001
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  q_weight: 1.0
+  torch_threads: 4
+data:
+  widths: [16, 64, 128, 256]
+  training_widths: [8, 12, 16]
+  prime_bit_span: 4
+  train_prime_identities: 24
+  validation_prime_identities: 8
+  test_prime_identities: 8
+  split_seed_offset: 683000
+  training_seed_offset: 683000
+  validation_seed_offset: 683100
+  test_seed_offset: 683200
+  calibration: {root: 20261282}
+  formal: {root: 20261283}
+  confirmations: [{root: 20261284}, {root: 20261285}]
+evaluation:
+  widths: [16, 64, 128, 256]
+  transition_cases_per_width: 3000
+  rollout_cases_per_width: 300
+  calibration_transition_cases_per_width: 4
+  calibration_rollout_cases_per_width: 1
+  diagnostic_cases: 4
+gates:
+  de_novo_w16_exact: 0.85
+  minimum_w128_exact: 0.85
+  minimum_w128_transition: 0.998
+  maximum_invalids: 0
+  minimum_w256_exact: 0.10
+  minimum_w256_control_gain: 0.05
+  minimum_intervention_delta: 1.0e-12
+  maximum_guarded_candidate_seconds: 285
+resource_policy:
+  calibration_updates_per_trained_route: 1
+  maximum_expected_formal_wall_seconds: 21600
+  headroom_floor: 1.35
+  headroom_ceiling: 2.0
+  maximum_peak_rss_bytes: 6442450944
+  fidelity_reduced: false
+  cache_completed_roots: true

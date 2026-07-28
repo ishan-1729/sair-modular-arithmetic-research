@@ -343,3 +343,31 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - An executable native-PyTorch probe proves that making the required components causal changes checkpoint outputs; neutralizing them would violate the frozen component-causality gate.
 - The preregistered de-novo fallback is not viable under 400 updates and a 95% W128 gate: adjacent EXP634 used 4,000 updates and reached only 2/300 exact at trained width 12.
 - Park before calibration under T084's explicit stop rule. Roots 20261278-20261281 remain unopened; training, formal science, confirmations, and protected evaluation surfaces are null. This does not reject Huginn or a separately justified native from-scratch program.
+
+## 2026-07-30 — EXP-683 selects the full 4,000-update de-novo HRM route
+
+- Visual authentication of HRM pages 4 and 6-9 freezes distinct carried H/L states at unequal frequency, local one-step credit, detached deep supervision, and learned-Q ACT.
+- Exact Candidate005 transfer is impossible because its single GroupNorm ConvGRU state has no distinct PostNorm-RMSNorm H/L modules or Q head.
+- The package therefore selects the mandated source-meaningful de-novo route with 4,000 updates per trained arm and W16 viability before W128; no 400-update cost surrogate is permitted.
+- Root 20261282 alone is authorized for complete-route admission. Later roots remain unopened unless every resource, determinism, reload, inference, and expected-value conjunct passes.
+
+## 2026-07-30 — EXP-683 permanently parks on calibration execution
+
+- Materialize six exact ignored fixtures from the authenticated read-only EXP650 worktree:
+  EXP658 Dockerfile/generator/primes hashes `1e04249c...0b41`, `77f4142f...5c0`, and
+  `5d7f494a...8bac`; EXP663 calibration/preregistration hashes `4917d3a7...d41e` and
+  `682c5059...2d0`; and EXP609 checkpoint `cbc4a1bc...d4bd`.
+- Repair only EXP681's current global invariant to expect the actual indexed sequential
+  quotient tail, while asserting its original 9-pass/1-fail receipt, permanent decision,
+  roots, and unopened package oracle remain unchanged.
+- The changed cone passes 156/156. The one persistent package oracle passes validation
+  (212 concepts, 1,100 records) and 703/703 tests in 519.53 seconds; outer resources are
+  513.35 wall / 632.40 aggregate CPU seconds and 934,568 KiB RSS.
+- Root 20261282 persists 13 trained one-update route caches and two untrained routes
+  (208 examples, 5,120 model calls), then fails before evaluation at checkpoint reload:
+  `ROOT / routes[route]["checkpoint"]` applies `/` to a route dictionary. Outer execution
+  is 13.51 wall / 16.21 aggregate CPU seconds / 478,568 KiB RSS; MLflow run
+  `36246d47a9c549c1a384fa32bdefa6cf` is `FAILED`.
+- Consume root 20261282 and permanently park without repair or retry. Roots 20261283-20261285,
+  W16/W128/W256 science, confirmations, and protected evaluation surfaces remain unopened.
+  This is execution failure, not scientific evidence against HRM or M007.

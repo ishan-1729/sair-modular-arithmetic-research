@@ -1,0 +1,84 @@
+{
+  "schema_version": "exp683-terminal-v1",
+  "run_id": "exp-683-source-complete-hrm",
+  "status": "completed",
+  "decision": "permanent-park-calibration-execution-failure",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-28T14:11:24Z",
+  "config": "configs/exp_683_source_complete_hrm.yaml",
+  "seed": 20261282,
+  "hypothesis": "Full HRM hierarchy, local credit, deep supervision, and learned ACT can learn modular arithmetic better than flat recurrence.",
+  "source": {
+    "authenticated": true,
+    "repository_commit": "da549f4a26656fb8fde289b0dde4774cc096b295",
+    "branch": "codex/exp683-source-complete-hrm",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "81b05b03ebd92748b1bc0e59d4b6e0d8271e1e56b84d1d589a03430db79b6e25",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "a726d629cd117b2706c5a84f1a51e2ad073ff02a908c51b57dbe034fd9b6b990",
+    "model_sha256": "55a41c8a44a0394ae03b38250bf277c1fe70fe80fce5ecc6635eacf6ec1f8001",
+    "runner_sha256": "c767a808454266bfc486d6279613a518e727f4d89a46d01f1ba086fd64701704",
+    "test_sha256": "05a56e7d99dbb9ca0bd087dfe2328b062cd982bb7bb6586c41968f069a5e1ea4",
+    "frozen_protocol_sha256": "8424bd4df13295bdc8a58d9a381f3346adcdff74c1aed83edd7e0d2b72666179"
+  },
+  "roots": {
+    "20261282": "consumed-partial-non-scientific-calibration-execution-failure",
+    "20261283": "unopened-calibration-blocked",
+    "20261284": "unopened-calibration-blocked",
+    "20261285": "unopened-calibration-blocked"
+  },
+  "calibration": {
+    "admitted": false,
+    "complete": false,
+    "failure_phase": "checkpoint-reload-before-evaluation",
+    "failure": "TypeError: unsupported operand type(s) for /: 'PosixPath' and 'dict'",
+    "trained_routes_persisted": 13,
+    "untrained_routes_persisted": 2,
+    "candidate_route_persisted": false,
+    "training_updates": 13,
+    "training_examples": 208,
+    "model_calls": 5120,
+    "route_resource_totals": {
+      "wall_seconds": 2.2193569810000042,
+      "process_cpu_seconds": 4.322345,
+      "cgroup_cpu_seconds": 4.711999999999982,
+      "peak_rss_bytes": 490053632
+    },
+    "outer_resource": {
+      "wall_seconds": 13.51,
+      "process_cpu_seconds": 16.21,
+      "peak_rss_kib": 478568
+    },
+    "expected_formal_wall_seconds": null,
+    "eta_wall_seconds": null,
+    "soft_guard_wall_seconds": null,
+    "hard_guard_wall_seconds": null,
+    "mlflow_run_id": "36246d47a9c549c1a384fa32bdefa6cf",
+    "mlflow_status": "FAILED"
+  },
+  "training_updates": 13,
+  "formal_calls_executed": 0,
+  "evaluation": {
+    "not_performed": true,
+    "labels_or_answers_used": false,
+    "checked_independent_official_private_candidate_submission_promotion": "not-opened"
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "artifacts": {
+    "checkpoint": ".scratch/exp-683-source-complete-hrm/fixtures/exp609.safetensors",
+    "config": "configs/exp_683_source_complete_hrm.yaml",
+    "environment": "experiments/runs/exp-683-source-complete-hrm/environment.json",
+    "verification": "experiments/runs/exp-683-source-complete-hrm/verification.json",
+    "metrics": "evals/results/exp-683-source-complete-hrm/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-683-source-complete-hrm.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp683-source-complete-hrm-mechanism.md",
+    "frozen_protocol": ".scratch/exp-683-source-complete-hrm/frozen-protocol.json"
+  },
+  "limitations": [
+    "Calibration opened root 20261282 and persisted 13 one-update trained routes plus two untrained routes, but failed before any evaluation or admission projection.",
+    "The failure is an execution-path checkpoint reload TypeError, not scientific evidence for or against HRM.",
+    "The frozen-root, single-oracle, no-repair rules prohibit patching, relaunching root 20261282, or opening roots 20261283-20261285.",
+    "No W16, W128, W256, confirmation, checked, independent, official/private, candidate, submission, promotion, or completion evaluation was opened."
+  ]
+}
