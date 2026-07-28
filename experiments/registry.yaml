@@ -2024,6 +2024,34 @@ runs:
       - This is a source/topology and de-novo-viability park, not a Huginn scientific rejection.
       - Required causal latent, concat-adapter and sandwich-RMSNorm additions are not exact-function preserving for Candidate005.
       - Roots 20261278-20261281 and every protected evaluation surface remained unopened.
+  - run_id: exp-683-source-complete-hrm
+    status: permanent-calibration-execution-park
+    approach: source-complete-M007-HRM-unequal-HL-local-credit-deep-Q-ACT
+    decision: permanent-park-calibration-execution-failure
+    decision_authority: T086-root-20261282-no-repair-stop-rule
+    source_base_commit: da549f4a26656fb8fde289b0dde4774cc096b295
+    source_branch: codex/exp683-source-complete-hrm
+    config: configs/exp_683_source_complete_hrm.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp683-source-complete-hrm-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-683-source-complete-hrm.md
+    run_record: experiments/runs/exp-683-source-complete-hrm/run.json
+    metrics: evals/results/exp-683-source-complete-hrm/metrics.json
+    verification: experiments/runs/exp-683-source-complete-hrm/verification.json
+    paper_sha256: 81b05b03ebd92748b1bc0e59d4b6e0d8271e1e56b84d1d589a03430db79b6e25
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261282: consumed-partial-non-scientific-calibration-execution-failure, 20261283: unopened-calibration-blocked, 20261284: unopened-calibration-blocked, 20261285: unopened-calibration-blocked}
+    verification_summary: {focused: 156-passed, validator: green-212-concepts-1100-records, pytest: 703-passed-in-519.53s, pytest_outer_wall_seconds: 513.35, pytest_process_cpu_seconds: 632.40, pytest_peak_rss_kib: 934568, oracle_invocations: 1}
+    calibration: {complete: false, admitted: false, trained_route_updates: 13, training_examples: 208, model_calls: 5120, failure_phase: checkpoint-reload-before-evaluation, wall_seconds: 13.51, process_cpu_seconds: 16.21, peak_rss_kib: 478568}
+    training_updates: 13
+    formal_calls_executed: 0
+    mlflow_run_id: 36246d47a9c549c1a384fa32bdefa6cf
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Root 20261282 failed before any evaluation or admission projection; partial route caches are non-scientific resource evidence only.
+      - The failure is a checkpoint-path TypeError and is not evidence for or against HRM or M007.
+      - Frozen-root and single-oracle rules prohibit patching, retrying root 20261282, or opening roots 20261283-20261285.
+      - No W16/W128/W256, confirmation, checked, independent, official/private, candidate, submission, promotion or completion surface opened.
   - run_id: exp-681-abbie-recurrence
     status: permanent-focused-verification-park
     approach: bounded-ST-M008-AbbIE-C-D-head-body-tail-recurrence-extrapolation
