@@ -245,9 +245,10 @@ EXP-666 implements a bounded ST-M022.a SAIR adaptation with exact-initialized fr
 
 EXP-672 authenticates the BSD-3-Clause official repository at commit `adc2ba2f`, implements a bounded
 native-CPU shared linear/sparse hybrid around the frozen Candidate005 proposal, and passes 12 focused
-identity/parity/control tests. Its sole package oracle stopped before pytest on inherited, out-of-scope
-EXP671 schema records, so root 20261238 calibration and all scientific/resource gates remained
-unexecuted. This is a verification-feasibility park only; M025.a/b remain open.
+identity/parity/control tests plus the recovered 612-test package oracle. Root `20261238` completed all
+calibration routes, but its 183.08-second nominal candidate projection became 366.17 seconds under the
+binding 2.0 variability headroom, above the frozen 285-second ceiling. Formal W128/W256 and confirmations
+remained unopened. This is a guarded-runtime feasibility park only; M025.a/b remain open.
 
 ### ST-M026 — STARS (2 components)
 

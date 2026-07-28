@@ -190,20 +190,22 @@ also pass. The complete-route projection is 22,030.105 wall seconds versus the f
 value ceiling, so park before root `20261235`. Formal W128/W256 and confirmations remain unopened;
 there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change.
 
-## 2026-07-29 — EXP-672 parked at inherited package-verification boundary
+## 2026-07-29 — EXP-672 parked at guarded candidate-runtime admission
 
-- **Decision:** park the exact bounded ST-M025 LT2 gated-hybrid package before root `20261238`
-  calibration. This is a verification-feasibility park, not a scientific rejection.
-- **Source/design evidence:** local paper SHA-256 `84f7f4de...13d9b`; official BSD-3-Clause
-  `chili-lab/LT2` at commit `adc2ba2f...df6c`; repository-local Playwright 1.61.1 and managed
-  Chromium 149.0.7827.55; exact-zero Candidate005 identity and all named control routes implemented.
-- **Focused evidence:** 12 tests passed in 16.39 seconds, including equation/code parity, proposal
-  identity, matched controls, depth/sink diagnostics, deterministic reload, interventions, split and
-  prohibited-inference checks.
-- **Binding boundary:** the sole exact `python tools/validate_project.py && python -m pytest` oracle
-  stopped after 16.6 seconds on ten inherited EXP671 schema violations; pytest did not open. A single
-  bounded probe proved the two failing files are unchanged from integrated base `b3c63a8` at SHA-256
-  `70444329...bc1f1` and `d81aa58e...e547`. Both are outside T067 allowed files.
-- **Unopened:** calibration/MLflow/training/resource admission, complete W128, W256, and roots
-  `20261239`-`20261241`. Candidate005 and every checked, independent, official/private, candidate,
-  submission, promotion, and Goal-completion surface remain unchanged.
+- **Recovery:** T068 normalized exactly the two inherited EXP671 schema records with their decision,
+  roots, resources, controls, and scientific meaning unchanged. The base validator passed. The first
+  full oracle found one owned repeated inter-op-thread initialization defect after 611 passes; the sole
+  bounded correction produced a green validator and 612/612 tests in 527.29 seconds.
+- **Calibration:** root `20261238` completed all four trained arms and seven validation/test/control
+  routes in 239.649 wall / 929.166 process-tree CPU / 995.840 cgroup CPU seconds with 660,582,400-byte
+  peak RSS. Reload, determinism, split separation, complete routes, memory, and expected value pass.
+- **Dynamic guards:** complete formal work projects to 16,386.738 seconds, ETA 32,773.476, soft guard
+  40,967, and hard guard 65,547 under the calibrated 2.0 headroom. The 183.084-second nominal candidate
+  projection becomes 366.169 seconds guarded, exceeding the frozen 285-second ceiling.
+- **Decision:** park before root `20261239`. The raw calibration payload reports `admitted=true` because
+  its implementation checks nominal runtime only; T068's binding guarded-runtime conjunct controls the
+  terminal decision. The one correction allowance is already consumed, so admission logic is not
+  repaired and formal science is not opened.
+- **Unopened:** complete W128, conditional W256 controls, roots `20261240/41`, and every checked,
+  independent, official/private, candidate, submission, promotion, and Goal-completion surface. This
+  is a resource-feasibility park, not a scientific rejection of LT2 or ST-M025.

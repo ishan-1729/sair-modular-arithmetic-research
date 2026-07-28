@@ -463,7 +463,11 @@ class Experiment:
         if self.mode == "preregister":
             return preregistration
         torch.set_num_threads(int(self.config["training"]["torch_threads"]))
-        torch.set_num_interop_threads(1)
+        try:
+            torch.set_num_interop_threads(1)
+        except RuntimeError as error:
+            if "cannot set number of interop threads" not in str(error).lower():
+                raise
         torch.use_deterministic_algorithms(True)
         configure_mlflow(self.config["tracking"]["experiment_name"])
         with mlflow.start_run(run_name=f"{self.config['run_id']}-{self.mode}-{self.root}") as tracking:
