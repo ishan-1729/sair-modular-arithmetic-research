@@ -51,8 +51,8 @@ For every legal implementation, exact autonomous answer accuracy and causal weig
 | M014.a Mamba-2/TRM | bounded-faithful | open; EXP-650 planned only |
 | M015.a symbol equivariance | bounded-faithful | open |
 | M015.b operand commutativity | analogue | exact EXP-647 formulation rejected; broader analogue open |
-| M016.a RSM | bounded-faithful | open |
-| M016.b RIM | bounded-faithful | open |
+| M016.a RSM | bounded-faithful | closed by EXP-667 calibration resource park; scientific verdict null |
+| M016.b RIM | bounded-faithful | deferred/closed by T062 scope |
 | M017.a autoregressive ladder | bounded-faithful | conditional on viable autoregressive model |
 | M018.a loop-count curriculum | bounded-faithful | open |
 | M018.b hop/halting curriculum | bounded-faithful | open |

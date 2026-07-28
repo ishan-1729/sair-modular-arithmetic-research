@@ -1,0 +1,62 @@
+{
+  "cache_key": "3c826c461ad38041924509e63fe159db0894d1f70bf78e13ad4afbaf8f8f2f4e",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 572792,
+      "path": "experiments/runs/exp-667-rsm-shallow-train-deep-infer/calibration/root-20261218/high_reset/model.safetensors",
+      "sha256": "2033f7b09263983ac3220f55af0ee65cc5cc4107963416401cf63d529a668154"
+    },
+    "checkpoint_reload_exact": true,
+    "parameters": 142728,
+    "route": "high_reset",
+    "trainable_parameters": 42904,
+    "training": {
+      "examples": 32,
+      "history": [
+        {
+          "batch_exact": 1.0,
+          "gradient_norm": 0.003732726676389575,
+          "high_depth": 2,
+          "loss": 0.00176461529918015,
+          "low_depth": 1,
+          "mean_iterations": 4.0,
+          "mean_relative_residual": 0.0,
+          "step": 1,
+          "timing": {
+            "cgroup_cpu_seconds": 0.31999999999970896,
+            "peak_rss_bytes": 535863296,
+            "process_cpu_seconds": 0.25932000000000066,
+            "wall_seconds": 0.06262642300134758
+          },
+          "width": 64
+        },
+        {
+          "batch_exact": 1.0,
+          "gradient_norm": 0.0020646201446652412,
+          "high_depth": 2,
+          "loss": 0.0012234936002641916,
+          "low_depth": 2,
+          "mean_iterations": 6.0,
+          "mean_relative_residual": 7.030405686236918e-05,
+          "step": 2,
+          "timing": {
+            "cgroup_cpu_seconds": 0.4919999999983702,
+            "peak_rss_bytes": 535863296,
+            "process_cpu_seconds": 0.40734899999999996,
+            "wall_seconds": 0.09966926600100123
+          },
+          "width": 128
+        }
+      ],
+      "operator_calls": 160,
+      "timing": {
+        "cgroup_cpu_seconds": 1.1200000000026193,
+        "peak_rss_bytes": 535863296,
+        "process_cpu_seconds": 0.8970720000000014,
+        "wall_seconds": 0.23874251400047797
+      },
+      "updates": 2
+    }
+  }
+}

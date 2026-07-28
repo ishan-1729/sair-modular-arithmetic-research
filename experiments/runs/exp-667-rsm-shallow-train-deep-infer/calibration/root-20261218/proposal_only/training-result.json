@@ -1,0 +1,27 @@
+{
+  "cache_key": "abed8cc4c765219351db05307e73a90e0ff531916e2cc7d1c61c2a9c4b9cb6d0",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 572792,
+      "path": "experiments/runs/exp-667-rsm-shallow-train-deep-infer/calibration/root-20261218/proposal_only/model.safetensors",
+      "sha256": "7dc655d0718cb40c8498eb82eab8fe40c6a1085b3c2b90760c12e39c2b6b3985"
+    },
+    "checkpoint_reload_exact": true,
+    "parameters": 142728,
+    "route": "proposal_only",
+    "trainable_parameters": 42904,
+    "training": {
+      "examples": 0,
+      "history": [],
+      "operator_calls": 0,
+      "timing": {
+        "cgroup_cpu_seconds": 0.2680000000036671,
+        "peak_rss_bytes": 424148992,
+        "process_cpu_seconds": 0.20313900000000018,
+        "wall_seconds": 0.06528615100251045
+      },
+      "updates": 0
+    }
+  }
+}
