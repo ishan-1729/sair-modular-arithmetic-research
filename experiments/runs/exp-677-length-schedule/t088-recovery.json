@@ -1,0 +1,59 @@
+{
+  "schema_version": "exp677-t088-recovery-v1",
+  "task_id": "T088",
+  "decision": "park-exp677-after-root-20261258-runner-failure",
+  "source": {
+    "repository_commit": "5dfc28e4fbc71ec140f5542795b0297e7fe3f109",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "266793dd7b287d2ba2f994c4c082dc2a70de9c4e49797ab7954ddee2ba5c1b4b",
+    "model_sha256": "c095ca705c4e8f2201600d1a371f30324c832ac45485f37277e17d56656f71cf",
+    "runner_sha256": "6ad6f587fd7d876ed64c9a735d07758ce0b774d85c89133a66df0f4ed66237f3",
+    "test_sha256": "27c8eab11dac2a47bd8fac7243c869138419898122026fc7dbb8b73ade21ab55",
+    "preregistration_sha256": "6794c581453e73db92c2183f1b9125756bd81646d1646a9e99270b70b7e73b87",
+    "mechanism_map_sha256": "2dc13aef364e9ababfbd413c694a485526db011ccc57eb3bc91ff44c417f66f5",
+    "paper_sha256": "6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "reused_verification": {
+    "focused": "T074: 9 passed",
+    "validator": "T087: 214 concepts / 1100 records",
+    "full_pytest": "T087: 716 passed",
+    "rerun": false
+  },
+  "execution": {
+    "command": "python -m experiments.exp_677_length_schedule.run --config configs/exp_677_length_schedule.yaml --output .scratch/exp-677-length-schedule --mode calibration --root 20261258",
+    "root": 20261258,
+    "started_at": "2026-07-28T15:10:40+00:00",
+    "finished_at": "2026-07-28T15:11:39+00:00",
+    "exit_code": 1,
+    "root_invocations": 1,
+    "completed_arms": {
+      "scheduled": {"steps": 3, "gradient_nonzero_steps": 3, "checkpoint_sha256": "58ff3407d55a84d66f3fda6589826961d02cb0a8eeed093d5d17547c6a1178cb"},
+      "fixed_incumbent_endpoint": {"steps": 3, "gradient_nonzero_steps": 3, "checkpoint_sha256": "2ebacd2c3da9210faa33427ae187fc871833d147ae8f79a1199b9f24c6cc9527"},
+      "equal_work_shuffled": {"steps": 3, "gradient_nonzero_steps": 3, "checkpoint_sha256": "abe1cc62e9ab8c58d626876eea42720c03230e4b60d07e812502f299f27c4484"},
+      "frozen_source": {"steps": 0, "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"},
+      "randomized_control": {"steps": 0, "checkpoint_sha256": "11fbd4b5f650fbbf7c20223c15637537201e696f99f12bf057d272377dac0a76"}
+    },
+    "failure_type": "KeyError",
+    "failure_key": "window",
+    "failure_site": "experiments.exp_676_lla_moving_window.run.Experiment.late_depth_losses",
+    "failure_context": "The inherited method reads self.config['window']['size']; the authenticated frozen EXP677 config has no window section.",
+    "progress_sha256": "2926038498f3c0db0c31503f6ebb53ac1ed365d158a8fdb403603460c6e6a725",
+    "console_sha256": "e8a6657de1f06a663c56eb65c2bdf1b09dcc43aa8ddd42ab4c95c45bddcb7381",
+    "resource_sha256": "60b8914470443e8481d7ddef73464e261e95226f2b84baf36bdf4cf76470c91d",
+    "resource": {"wall_seconds": 58.83, "user_cpu_seconds": 159.27, "system_cpu_seconds": 8.03, "peak_rss_kib": 2926688}
+  },
+  "terminal_state": {
+    "calibration_summary": null,
+    "admission": null,
+    "scientific_metrics": null,
+    "repair_attempted": false,
+    "retry_performed": false,
+    "roots": {
+      "20261258": "opened-terminal-runner-error",
+      "20261259": "unopened-calibration-failed",
+      "20261260": "unopened-calibration-failed",
+      "20261261": "unopened-calibration-failed"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 type: Experiment Preregistration
 title: EXP677 known-step endpoint-length scheduling
 description: Source-faithful ST-M004.b width/known-visit/final-endpoint curriculum around frozen Candidate005 inference.
-status: parked-package-verification
+status: parked-calibration-runner-failure
 tags: [autoresearch, length-generalization, curriculum, known-step]
 timestamp: "2026-07-30T00:00:00+05:30"
 ---
@@ -86,3 +86,22 @@ that protected snapshot is outside T074 allowed files. No owned repair or second
 oracle is legal. EXP677 is therefore parked at package verification; calibration
 root `20261258`, formal `20261259`, and confirmations `20261260/61` remain
 unopened. There is no scientific verdict on M004.b.
+
+## T088 authenticated recovery result
+
+T088 authenticated the unchanged frozen package, the exact challenge snapshot,
+and the absence of roots `20261258`-`20261261`. It reused T074's nine focused
+passes and T087's later green validator plus 716-test package oracle; neither
+suite was rerun. Calibration root `20261258` then opened exactly once.
+
+All five arms materialized. The scheduled, fixed-W128, and equal-work shuffled
+arms each completed three updates, and all nine trained steps had nonzero
+gradients. The first all-arm evaluation then raised `KeyError: 'window'` in the
+inherited `late_depth_losses` path: that base method reads
+`config["window"]["size"]`, while the authenticated frozen EXP677 config has no
+`window` section. No evaluation denominator, calibration summary, admission
+decision, or scientific metric completed.
+
+The frozen runner/config mismatch was not repaired and root `20261258` was not
+retried. Roots `20261259`-`20261261` remain unopened. EXP677 is terminally
+parked on execution integrity, and M004.b remains scientifically open.

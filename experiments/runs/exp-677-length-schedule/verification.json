@@ -1,6 +1,6 @@
 {
   "schema_version": "exp677-verification-v1",
-  "status": "terminal-verification-park",
+  "status": "terminal-calibration-runner-park",
   "focused": {
     "command": "python -m pytest -q tests/test_exp_677_length_schedule.py",
     "passed": 9,
@@ -39,5 +39,26 @@
     "hard_guard_wall_seconds": 1359.689625,
     "headroom": 1.35,
     "fidelity_reduced": false
+  },
+  "t088_recovery": {
+    "authentication": "passed",
+    "focused_reused": "T074: 9 passed",
+    "package_oracle_reused": {
+      "source_task": "T087",
+      "validator": "passed: 214 concepts / 1100 records",
+      "full_pytest": "716 passed",
+      "rerun": false
+    },
+    "calibration_command": "python -m experiments.exp_677_length_schedule.run --config configs/exp_677_length_schedule.yaml --output .scratch/exp-677-length-schedule --mode calibration --root 20261258",
+    "invocations_after_root_open": 1,
+    "exit_code": 1,
+    "failure": "KeyError: window in experiments.exp_676_lla_moving_window.run.Experiment.late_depth_losses",
+    "wall_seconds": 58.83,
+    "user_cpu_seconds": 159.27,
+    "system_cpu_seconds": 8.03,
+    "peak_rss_kib": 2926688,
+    "repair_attempted": false,
+    "retry": false,
+    "formal_and_confirmations_opened": false
   }
 }

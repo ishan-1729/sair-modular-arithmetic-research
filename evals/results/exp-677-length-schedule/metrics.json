@@ -3,42 +3,57 @@
   "run_id": "exp-677-length-schedule",
   "created_at": "2026-07-29T18:30:00Z",
   "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
-  "status": "parked-package-verification",
-  "decision": "park-verification-out-of-scope-immutable-snapshot-absent",
+  "status": "parked-calibration-runner-failure",
+  "decision": "park-exp677-after-root-20261258-runner-failure",
   "focused_tests_passed": 9,
   "package_oracle_invocations": 1,
   "project_validator_passed": false,
   "full_pytest_opened": false,
-  "calibration_opened": false,
+  "calibration_opened": true,
   "formal_opened": false,
   "scientific_metrics": null,
   "scientific_verdict": null,
   "evaluation": {
     "not_performed": true,
-    "reason": "Package verification stopped before calibration on an absent protected challenge snapshot outside T074 allowed files.",
+    "reason": "Root 20261258 stopped during the first all-arm calibration evaluation because inherited late-depth code requires config.window.size, absent from the frozen EXP677 config.",
     "labels_or_oracle_present": false
   },
   "controls": {
-    "scheduled": "unopened",
-    "fixed_incumbent_endpoint": "unopened",
-    "equal_work_shuffled": "unopened",
-    "frozen_source": "unopened",
-    "randomized_control": "unopened"
+    "scheduled": "trained-3-updates-no-evaluation",
+    "fixed_incumbent_endpoint": "trained-3-updates-no-evaluation",
+    "equal_work_shuffled": "trained-3-updates-no-evaluation",
+    "frozen_source": "materialized-no-evaluation",
+    "randomized_control": "materialized-no-evaluation"
   },
   "runtime": {
     "package_oracle_wall_seconds": 9.52,
     "package_oracle_process_cpu_seconds": 1.69,
-    "package_oracle_peak_rss_kib": 28524
+    "package_oracle_peak_rss_kib": 28524,
+    "t088_calibration_wall_seconds": 58.83,
+    "t088_calibration_user_cpu_seconds": 159.27,
+    "t088_calibration_system_cpu_seconds": 8.03,
+    "t088_calibration_peak_rss_kib": 2926688
   },
   "limitations": [
-    "The full pytest phase did not open because project validation failed first.",
-    "All calibration and science roots remain unopened.",
+    "T088 authenticated the frozen package and reused green validator/716-test evidence, then root 20261258 opened exactly once.",
+    "All five arms materialized, including nine total trained updates with nonzero gradients, but no evaluation denominator completed and no admission decision exists.",
+    "The frozen runner/config mismatch was not repaired or retried; formal and confirmation roots remain unopened.",
+    "Historical T074 evidence: its full pytest phase did not open because project validation failed first; T088 reused T087's later authenticated green package oracle.",
+    "Root 20261258 later opened and failed before evaluation; all formal and confirmation roots remain unopened.",
     "No scientific, checked, independent, official/private, candidate, submission, promotion or completion evaluation occurred."
   ],
   "roots": {
-    "20261258": "unopened-verification-blocked",
-    "20261259": "unopened-verification-blocked",
-    "20261260": "unopened-verification-blocked",
-    "20261261": "unopened-verification-blocked"
+    "20261258": "opened-terminal-runner-error",
+    "20261259": "unopened-calibration-failed",
+    "20261260": "unopened-calibration-failed",
+    "20261261": "unopened-calibration-failed"
+  },
+  "t088_recovery": {
+    "exit_code": 1,
+    "progress_sha256": "2926038498f3c0db0c31503f6ebb53ac1ed365d158a8fdb403603460c6e6a725",
+    "console_sha256": "e8a6657de1f06a663c56eb65c2bdf1b09dcc43aa8ddd42ab4c95c45bddcb7381",
+    "resource_sha256": "60b8914470443e8481d7ddef73464e261e95226f2b84baf36bdf4cf76470c91d",
+    "scientific_metrics": null,
+    "admission": null
   }
 }

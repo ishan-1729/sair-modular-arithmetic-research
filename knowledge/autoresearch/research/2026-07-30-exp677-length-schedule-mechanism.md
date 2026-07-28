@@ -2,7 +2,7 @@
 type: Research Note
 title: EXP677 M004.b known-step length-schedule map
 description: Page-anchored mapping of Looped Transformers for Length Generalization to Candidate005 training-only width and visit scheduling.
-status: parked-package-verification
+status: parked-calibration-runner-failure
 tags: [autoresearch, M004b, length-schedule, known-step]
 timestamp: "2026-07-30T00:00:00+05:30"
 ---
@@ -42,3 +42,10 @@ contain the protected immutable challenge snapshot required by project
 validation. All science roots remain unopened. This records a source-faithful
 implementation map and a verification park, not scientific completion of
 M004.b.
+
+T088 later authenticated the same frozen mechanism package and reused a green
+validator/716-test oracle from T087. Root `20261258` opened exactly once and all
+five arms materialized, but the first evaluation failed because inherited
+late-depth measurement reads a `window.size` config key absent from EXP677's
+frozen schema. The recovery performed no repair or retry; no calibration gate
+or science result exists, and formal/confirmation roots remain unopened.
