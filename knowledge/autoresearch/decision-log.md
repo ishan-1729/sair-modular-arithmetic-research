@@ -451,3 +451,18 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
   8,101.734 seconds and memory remains below 6 GiB.
 - Park before root 20261295. Roots 20261295-20261297 and all protected evaluation surfaces
   remain unopened; this is not scientific evidence about straight-through exposure or W256.
+
+## 2026-07-30 — EXP-687 parks at the sole package oracle
+
+- Freeze a deterministic answer-independent 56-of-92 incident-weight map and coherently slice
+  every hidden tensor. The compact initial state has 38,588 parameters and hash `f9938a97...b340`.
+- Both 2,400-update arms were preregistered for identical `[64,128,256,256]` curricula, batches,
+  eight learner calls, exact losses, and frozen-teacher work; only 0.10 residue MSE plus 0.05
+  quotient KL weights differ.
+- Real all-mode smoke passed in 63.71 seconds and 18/18 focused tests passed in 7.53 seconds.
+  The sole package oracle passed validation and 760/761 tests in 565.40 seconds.
+- The lone failure is EXP686's placeholder test observing a pre-existing ignored EXP686 run
+  record in the reused fixture worktree. That file is outside T092's allowlist.
+- Apply the one-oracle/out-of-scope stop rule. Roots 20261302-20261305 remain unopened; no
+  candidate timing, W128/W256 science, confirmations, or protected surfaces opened. This is
+  not scientific evidence for or against compact distillation.

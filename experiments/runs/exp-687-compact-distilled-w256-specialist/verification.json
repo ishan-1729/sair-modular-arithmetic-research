@@ -1,0 +1,31 @@
+{
+  "run_id": "exp-687-compact-distilled-w256-specialist",
+  "status": "failed-out-of-scope-preexisting-fixture",
+  "smoke": {
+    "command": "python -m experiments.exp_687_compact_distilled_w256_specialist.run --mode smoke",
+    "status": "passed",
+    "wall_seconds": 63.71,
+    "sha256": "1979340c528cba8c8ff4a4edaafbdde968f79edd15f9e7aa8b297b8efede0417"
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_687_compact_distilled_w256_specialist.py",
+    "status": "passed",
+    "tests": 18,
+    "seconds": 7.53
+  },
+  "package_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "invocations": 1,
+    "validator": "passed-218-OKF-concepts-1100-benchmark-records-upstream-82510bba00a1",
+    "pytest": "failed-760-passed-1-failed-in-565.40s",
+    "outer_wall_seconds": 552.29,
+    "user_cpu_seconds": 753.39,
+    "system_cpu_seconds": 25.05,
+    "peak_rss_kib": 937800,
+    "log_sha256": "383006af51927dbfb3ab92e16503bcec84efdbab808ba7e9b0dd6a5c3694e181",
+    "failure_test": "tests/test_exp_686_w256_straight_through_specialist.py::test_no_canonical_result_placeholder_exists_before_oracle",
+    "diagnosis": "The reused fixture worktree contains an ignored EXP686 canonical run record created before T092. It is outside T092 allowed_files. Removing it, changing its test, or rerunning with an exclusion is prohibited."
+  },
+  "roots_opened": 0,
+  "second_oracle_authorized": false
+}

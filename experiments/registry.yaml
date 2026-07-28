@@ -2219,3 +2219,33 @@ runs:
       - The complete 1,100-case candidate route passed nominal timing but failed the frozen variability-headroom cap.
       - Only four updates per trained arm ran; the 800-update formal comparison is unopened.
       - Roots 20261295-20261297 and all protected evaluation surfaces remain unopened.
+  - run_id: exp-687-compact-distilled-w256-specialist
+    status: parked-package-verification
+    approach: frozen-high-incident-hidden56-slice-equal-work-exact-only-vs-logit-distillation
+    decision: park-exp687-at-package-verification
+    decision_authority: T092-single-package-oracle-stop-rule
+    source_base_commit: 8f08b8f85711e798bdbdfb2b97cd6f15bde1e4d6
+    source_branch: codex/exp687-compact-distilled-w256-specialist
+    config: configs/exp_687_compact_distilled_w256_specialist.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp687-compact-distillation.md
+    preregistration: knowledge/autoresearch/ablations/exp-687-compact-distilled-w256-specialist.md
+    run_record: experiments/runs/exp-687-compact-distilled-w256-specialist/run.json
+    metrics: evals/results/exp-687-compact-distilled-w256-specialist/metrics.json
+    verification: experiments/runs/exp-687-compact-distilled-w256-specialist/verification.json
+    environment: experiments/runs/exp-687-compact-distilled-w256-specialist/environment.json
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    channel_map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0
+    pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340
+    roots: {20261302: unopened-package-oracle-blocked, 20261303: unopened-package-oracle-blocked, 20261304: unopened-package-oracle-blocked, 20261305: unopened-package-oracle-blocked}
+    verification_summary: {smoke: passed-all-modes-in-63.71s, focused: 18-passed-in-7.53s, validator: green-218-concepts-1100-records, pytest: 760-passed-1-failed-in-565.40s, pytest_outer_wall_seconds: 552.29, pytest_user_cpu_seconds: 753.39, pytest_system_cpu_seconds: 25.05, pytest_peak_rss_kib: 937800, oracle_invocations: 1}
+    calibration: null
+    training_updates: 0
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Rootless all-mode smoke and 18 focused tests passed; smoke is implementation evidence only.
+      - The sole package oracle failed only because the reused worktree contained an ignored EXP686 canonical run record outside T092 allowed_files.
+      - The one-oracle and out-of-scope stop rules prohibit a repair or rerun, so roots 20261302-20261305 remain unopened.
+      - No complete candidate timing, calibration, formal W128/W256, confirmation, protected, candidate, submission, promotion or release surface opened.

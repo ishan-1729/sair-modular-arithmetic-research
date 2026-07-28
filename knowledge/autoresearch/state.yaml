@@ -950,3 +950,21 @@ parked_exp682_hypothesis:
   run_record: experiments/runs/exp-682-huginn-recurrent-depth/run.json
   metrics: evals/results/exp-682-huginn-recurrent-depth/metrics.json
   limitations: [topology-and-viability-park-not-Huginn-rejection, roots-20261278-through-20261281-unopened, no-checked-independent-official-private-candidate-submission-promotion-or-completion-evaluation]
+parked_exp687_hypothesis:
+  run_id: exp-687-compact-distilled-w256-specialist
+  status: parked-package-verification
+  source_base_commit: 8f08b8f85711e798bdbdfb2b97cd6f15bde1e4d6
+  source_branch: codex/exp687-compact-distilled-w256-specialist
+  decision_authority: T092-single-package-oracle-stop-rule
+  mechanism: frozen-answer-independent-high-incident-hidden56-slice-with-equal-work-logit-distillation
+  roots: {calibration_20261302: unopened-package-oracle-blocked, formal_20261303: unopened-package-oracle-blocked, confirmation_20261304: unopened-package-oracle-blocked, confirmation_20261305: unopened-package-oracle-blocked}
+  channel_map: {source_hidden: 92, retained_hidden: 56, student_parameters: 38588, map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0, pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340}
+  verification: {smoke: passed-all-modes-in-63.71s, focused: 18-passed-in-7.53s, validator: green-218-concepts-1100-records, pytest: 760-passed-1-failed-in-565.40s, failure_scope: pre-existing-ignored-EXP686-run-record-outside-T092}
+  training_updates: 0
+  formal_calls_executed: 0
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-687-compact-distilled-w256-specialist/run.json
+  metrics: evals/results/exp-687-compact-distilled-w256-specialist/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-or-rerun, roots-20261302-through-20261305-unopened, no-complete-candidate-calibration-science-confirmation-protected-or-release-surface]
