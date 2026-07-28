@@ -1996,6 +1996,34 @@ runs:
       - The single full authentication still failed because raw JSON uses string evaluation-map keys while the live YAML object uses integers, despite zero normalized differences.
       - T077 permanently closes same-boundary recovery; calibration root 20261262 and all W128/W256/confirmation roots remain unopened, so no M044.a scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-681-abbie-recurrence
+    status: permanent-focused-verification-park
+    approach: bounded-ST-M008-AbbIE-C-D-head-body-tail-recurrence-extrapolation
+    decision: permanent-park-focused-topology-schema-failure
+    decision_authority: T082-final-focused-verification-gate
+    source_base_commit: 43f90ea230689c4b0cfe36c5b07881c4dadb7a88
+    source_branch: codex/exp681-abbie-recurrence
+    config: configs/exp_681_abbie_recurrence.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp681-abbie-recurrence-mechanism.md
+    preregistration: knowledge/autoresearch/ablations/exp-681-abbie-recurrence.md
+    run_record: experiments/runs/exp-681-abbie-recurrence/run.json
+    metrics: evals/results/exp-681-abbie-recurrence/metrics.json
+    verification: experiments/runs/exp-681-abbie-recurrence/verification.json
+    paper_sha256: c3c298534ad9d37a82c2dede5303a8befe43dce291a2c6ce347e16c78c708bce
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261274: unopened-permanent-verification-park, 20261275: unopened-permanent-verification-park, 20261276: unopened-permanent-verification-park, 20261277: unopened-permanent-verification-park}
+    verification_summary: {focused: 9-passed-1-failed-in-4.18s, validator: green-208-concepts-1100-records, pytest: unopened, oracle_invocations: 0}
+    calibration: null
+    training_updates: 0
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - The head/body/tail mapping is bounded-faithful and does not reproduce AbbIE's Transformer.
+      - The sole T082 focused run failed the frozen parameter-name topology assertion: Candidate005's sequential quotient tail has four indexed tensors while the test expects two flat names.
+      - Full pytest, calibration, training and all roots remain permanently unopened under the no-repair stop rule.
+      - No checked, independent, official/private, candidate, submission, promotion or completion surface may open.
   - run_id: exp-680-mor-depth-routing
     status: parked-calibration-noncollapsed-load
     approach: bounded-ST-M009b-instance-level-hierarchical-expert-choice-depth-routing
