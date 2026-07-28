@@ -2191,3 +2191,31 @@ runs:
       - Pre-root freeze inspection found two runner-required trajectory denominators absent from the verified config; no post-oracle repair or recovery successor is authorized.
       - Roots 20261266-20261269, MLflow, calibration, training, W128/W256 and confirmations remained unopened, so no M043.b scientific verdict exists.
       - No checked, independent, official/private, candidate, submission, promotion or completion surface was opened.
+  - run_id: exp-686-w256-straight-through-specialist
+    status: parked-calibration-candidate-runtime-headroom
+    approach: W256-only-eight-step-hard-forward-sigmoid-ST-vs-equal-call-teacher-forced
+    decision: park-exp686-at-root20261294-resource-admission
+    decision_authority: T091-root-20261294-complete-route-admission
+    source_base_commit: 2cdb842027d9e73381116b565941033aba12ff34
+    source_branch: codex/exp686-w256-straight-through-specialist
+    config: configs/exp_686_w256_straight_through_specialist.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-30-exp686-w256-specialist.md
+    preregistration: knowledge/autoresearch/ablations/exp-686-w256-straight-through-specialist.md
+    run_record: experiments/runs/exp-686-w256-straight-through-specialist/run.json
+    metrics: evals/results/exp-686-w256-straight-through-specialist/metrics.json
+    verification: experiments/runs/exp-686-w256-straight-through-specialist/verification.json
+    calibration_record: experiments/runs/exp-686-w256-straight-through-specialist/calibration.json
+    checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261294: completed-calibration-resource-reject, 20261295: unopened-admission-blocked, 20261296: unopened-admission-blocked, 20261297: unopened-admission-blocked}
+    verification_summary: {smoke: passed-all-modes, focused: 17-passed-in-17.67s, validator: green, pytest: 743-passed-in-562.09s, pytest_outer_wall_seconds: 559.36, pytest_aggregate_cpu_seconds: 772.12, pytest_peak_rss_kib: 932260, oracle_invocations: 1}
+    calibration: {admitted: false, complete_routes: true, matched_training: true, reload_exact: true, tensor_native_output_parity: true, tensor_native_minimum_margin_parity: true, candidate_cases: 1100, candidate_wall_seconds: 220.101587968, guarded_candidate_wall_seconds: 398.9658608219009, guarded_candidate_ceiling_seconds: 285, expected_wall_seconds: 8101.734065617995, expected_wall_ceiling_seconds: 21600, wall_seconds: 283.49073795100014, process_tree_cpu_seconds: 1055.451019, cgroup_cpu_seconds: 1103.368, peak_rss_bytes: 2602848256}
+    training_updates: 8
+    formal_calls_executed: 0
+    mlflow_run_id: a0c67bdff69543e4904b70cc422f9f23
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration is non-scientific and root 20261294 rejected before formal W256.
+      - The complete 1,100-case candidate route passed nominal timing but failed the frozen variability-headroom cap.
+      - Only four updates per trained arm ran; the 800-update formal comparison is unopened.
+      - Roots 20261295-20261297 and all protected evaluation surfaces remain unopened.

@@ -1,0 +1,31 @@
+{
+  "schema_version": "exp686-terminal-v1",
+  "run_id": "exp-686-w256-straight-through-specialist",
+  "status": "parked-calibration-candidate-runtime-headroom",
+  "decision": "park-exp686-at-root20261294-resource-admission",
+  "created_at": "2026-07-28T17:00:00Z",
+  "config": "configs/exp_686_w256_straight_through_specialist.yaml",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "roots": {"20261294": "completed-calibration-resource-reject", "20261295": "unopened-admission-blocked", "20261296": "unopened-admission-blocked", "20261297": "unopened-admission-blocked"},
+  "calibration": {
+    "admitted": false,
+    "candidate_actual_wall_seconds": 220.101587968,
+    "candidate_guarded_wall_seconds": 398.9658608219009,
+    "maximum_candidate_guarded_wall_seconds": 285,
+    "expected_wall_seconds": 8101.734065617995,
+    "maximum_expected_wall_seconds": 21600,
+    "wall_seconds": 283.49073795100014,
+    "process_tree_cpu_seconds": 1055.451019,
+    "cgroup_cpu_seconds": 1103.368,
+    "peak_rss_bytes": 2602848256,
+    "training_updates": 8,
+    "training_examples": 1024,
+    "candidate_cases": 1100
+  },
+  "controls": {"learner_straight_through": "completed-calibration", "teacher_forced": "completed-calibration", "frozen_source": "completed-calibration", "randomized_control": "completed-calibration", "reset_control": "completed-calibration"},
+  "evaluation": {"not_performed": true, "reason": "Only tiny non-scientific calibration denominators ran; candidate-runtime admission rejected before formal root 20261295.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "completion_marker": "terminal-persisted",
+  "limitations": ["Resource rejection is not scientific evidence for or against learner-state straight-through exposure.", "No formal W256, control, confirmation, or protected evaluation evidence was opened."]
+}

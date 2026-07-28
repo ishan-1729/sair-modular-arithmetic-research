@@ -436,3 +436,18 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
   schema omissions. Pytest and all roots remained unopened.
 - Apply the single-oracle stop rule without rerun. This is no scientific evidence for or
   against the validity constraint; EXP665's near-miss remains scientifically unresolved.
+
+## 2026-07-30 — EXP-686 parks at complete-route candidate-runtime admission
+
+- Freeze matched 800-update W256 continuation arms differing only in recurrent state
+  exposure: hard-forward sigmoid straight-through learner state versus exact teacher state.
+- Rootless smoke completes all modes, 17 focused checks pass, and the sole package oracle
+  passes validation plus 743/743 tests in 562.09 seconds.
+- Root 20261294 completes all five routes, exact reload, tensor-native output/minimum-margin
+  parity, and a label-free 1,100-case candidate route. All admission checks pass except
+  guarded candidate runtime.
+- The measured candidate route is 220.102 seconds; 1.81264 variability headroom raises it
+  to 398.966 seconds against the frozen 285-second cap. Expected full formal wall remains
+  8,101.734 seconds and memory remains below 6 GiB.
+- Park before root 20261295. Roots 20261295-20261297 and all protected evaluation surfaces
+  remain unopened; this is not scientific evidence about straight-through exposure or W256.

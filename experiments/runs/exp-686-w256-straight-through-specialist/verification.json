@@ -1,0 +1,43 @@
+{
+  "schema_version": "exp686-verification-v1",
+  "status": "green",
+  "smoke": {
+    "command": "python -m experiments.exp_686_w256_straight_through_specialist.run --mode smoke",
+    "status": "passed",
+    "wall_seconds": 80.4,
+    "peak_rss_kib": 2485672,
+    "receipt_sha256": "e226d9f57a12a6cfbcf155d660c357334008ac32d2bd86817b9d66dead474b74"
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_686_w256_straight_through_specialist.py",
+    "passed": 17,
+    "failed": 0,
+    "pytest_seconds": 17.67,
+    "outer_wall_seconds": 19.21,
+    "peak_rss_kib": 393764
+  },
+  "package_oracle": {
+    "invocations": 1,
+    "persistent": true,
+    "command": "python tools/validate_project.py && python -m pytest",
+    "validator": "passed",
+    "pytest": "743-passed-in-562.09-seconds",
+    "outer_wall_seconds": 559.36,
+    "aggregate_cpu_seconds": 772.12,
+    "peak_rss_kib": 932260,
+    "exit_status": 0,
+    "completion_marker": "package-oracle-terminal",
+    "log_sha256": "e5dda4f8d27b7502c56c2a18d028c8711789e466f81684cc00b6fa5b9a8ca691"
+  },
+  "calibration_execution": {
+    "root": 20261294,
+    "exit_status": 0,
+    "decision": "park-exp686-at-root20261294-resource-admission",
+    "outer_wall_seconds": 285.56,
+    "outer_aggregate_cpu_seconds": 1068.42,
+    "peak_rss_kib": 2541844,
+    "completion_marker": "root94-terminal",
+    "receipt_sha256": "6e16084f3ce68955a21d8a3006281d68123858c4537609ea2dd28cbe96c06f7d"
+  },
+  "final_validator": {"command": "python tools/validate_project.py", "status": "passed", "concepts": 218, "benchmark_records": 1100, "upstream_commit_prefix": "82510bba00a1"}
+}

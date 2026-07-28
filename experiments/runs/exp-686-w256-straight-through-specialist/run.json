@@ -1,0 +1,87 @@
+{
+  "schema_version": "exp686-terminal-v1",
+  "run_id": "exp-686-w256-straight-through-specialist",
+  "status": "completed",
+  "decision": "park-exp686-at-root20261294-resource-admission",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-28T17:00:00Z",
+  "config": "configs/exp_686_w256_straight_through_specialist.yaml",
+  "seed": 20261294,
+  "hypothesis": "Learner-exposed hard-forward sigmoid state during eight-step W256 continuation improves exact rollout over equal-call teacher forcing without changing the inherited model family.",
+  "source": {
+    "authenticated": true,
+    "repository_commit": "77ccab3a0bd21ce1a3a4cbe5a4b2f79ec3c4af58",
+    "branch": "codex/exp686-w256-straight-through-specialist",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1",
+    "runner_sha256": "d6ee23edf034a1a8270f766cbc94f0f68deeb7562ea4e9e97065179fb5147340",
+    "test_sha256": "9187ce3c9e50bc029e472ca0163a681b146bae65e70d9c51975179e7eab8ec6d"
+  },
+  "roots": {
+    "20261294": "completed-calibration-resource-reject",
+    "20261295": "unopened-admission-blocked",
+    "20261296": "unopened-admission-blocked",
+    "20261297": "unopened-admission-blocked"
+  },
+  "calibration": {
+    "receipt": "experiments/runs/exp-686-w256-straight-through-specialist/calibration.json",
+    "complete": true,
+    "admitted": false,
+    "checks": {
+      "candidate_complete_1100": true,
+      "candidate_runtime": false,
+      "complete_routes": true,
+      "expected_value": true,
+      "matched_training": true,
+      "memory": true,
+      "no_fidelity_reduction": true,
+      "reload_exact": true,
+      "tensor_native_minimum_margin_parity": true,
+      "tensor_native_output_parity": true
+    },
+    "candidate_actual_wall_seconds": 220.101587968,
+    "candidate_guarded_wall_seconds": 398.9658608219009,
+    "candidate_guarded_ceiling_seconds": 285,
+    "headroom": 1.8126441726531557,
+    "expected_wall_seconds": 8101.734065617995,
+    "expected_wall_ceiling_seconds": 21600,
+    "eta_wall_seconds": 14685.561042428018,
+    "projected_training_wall_seconds": 4486.398902799988,
+    "projected_evaluation_wall_seconds": 3395.2335748500072,
+    "resource": {
+      "wall_seconds": 283.49073795100014,
+      "process_tree_cpu_seconds": 1055.451019,
+      "cgroup_cpu_seconds": 1103.368,
+      "peak_rss_bytes": 2602848256
+    },
+    "mlflow_run_id": "a0c67bdff69543e4904b70cc422f9f23"
+  },
+  "training_updates": 8,
+  "formal_calls_executed": 0,
+  "evaluation": {
+    "calibration_only": true,
+    "scientific_evaluation_performed": false,
+    "labels_or_answers_used_for_candidate_inference": false,
+    "candidate_cases": 1100,
+    "checked_independent_official_private_candidate_submission_promotion": "not-opened"
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "config": "configs/exp_686_w256_straight_through_specialist.yaml",
+    "environment": "experiments/runs/exp-686-w256-straight-through-specialist/environment.json",
+    "verification": "experiments/runs/exp-686-w256-straight-through-specialist/verification.json",
+    "calibration": "experiments/runs/exp-686-w256-straight-through-specialist/calibration.json",
+    "metrics": "evals/results/exp-686-w256-straight-through-specialist/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-686-w256-straight-through-specialist.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp686-w256-specialist.md"
+  },
+  "limitations": [
+    "Calibration denominators are integrity and resource evidence, not accuracy science.",
+    "The guarded 398.966-second candidate route exceeds the frozen 285-second cap despite passing the nominal 220.102-second measurement.",
+    "Only four calibration updates per trained arm ran; the preregistered 800-update formal routes did not open.",
+    "Roots 20261295-20261297 and all checked, independent, official/private, candidate, submission, promotion, and release surfaces remain unopened."
+  ]
+}
