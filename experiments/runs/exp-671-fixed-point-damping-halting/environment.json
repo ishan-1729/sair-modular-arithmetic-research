@@ -1,0 +1,9 @@
+{
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "device": "cpu",
+  "torch_threads": 4,
+  "platform": "Ubuntu-24.04 WSL2",
+  "tracking_backend": "local MLflow",
+  "mlflow_parent_run_id": "c0896b91e32445fa9b08a721c7693746"
+}
