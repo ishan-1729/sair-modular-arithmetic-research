@@ -9,6 +9,21 @@ success_threshold:
   official_required_when_available: true
   achieved: false
 completion_eligible: false
+parked_exp670_hypothesis:
+  run_id: exp-670-clipped-poisson-loop-curriculum
+  status: parked-package-verification
+  decision: park-before-calibration
+  decision_authority: T065-final-package-verification-stop-rule
+  source_base_commit: 84c40e18e41ac285135d54b178a9d2c736fc57a2
+  source_branch: codex/exp670-clipped-poisson-loop-curriculum
+  focused_verification: {passed: 12, failed: 0, pytest_seconds: 11.64}
+  final_oracle: {invocations: 1, validator_passed: false, pytest_opened: false, wall_seconds: 9.29, maximum_rss_kib: 29188}
+  blocker: evals/results/exp-669-stars-jvp-regularization/metrics.json evaluation schema is outside T065 allowed_files
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261230: unopened-package-verification-blocked, 20261231: unopened-admission-blocked, 20261232: unopened-admission-blocked, 20261233: unopened-admission-blocked}
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, no-calibration-or-accuracy-evidence, M018b-closed, no-checked-private-candidate-submission-surface]
 incumbent:
   run_id: candidate-005-tier6-conditional-commutative-integration
   checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca

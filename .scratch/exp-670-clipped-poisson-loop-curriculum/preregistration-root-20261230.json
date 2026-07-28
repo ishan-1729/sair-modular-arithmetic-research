@@ -1,0 +1,114 @@
+{
+  "adaptations": [
+    "Conv1d residual operator replaces language attention/FFN",
+    "proposal and six legal input channels are reinjected each loop"
+  ],
+  "closed": [
+    "M018.b hop/KL/entropy halting curriculum",
+    "adaptive inference stopping",
+    "language-only attention/FFN behavior",
+    "checked/private/candidate/submission"
+  ],
+  "count_hashes": {
+    "clipped_poisson": "b75bd3a30c0321570266812467938100cd70d09e2d944f80f40204a261b4d337",
+    "fixed_mean": "261e65e9720d059d489ecb8f5af5d3638658bf93d6f43f6c6fb4243fe55572a6",
+    "matched_histogram": "23bddccf7cf082644c43323135ba35538299f1b2affb7a359b86d4892baa38d6",
+    "shuffled_count_independent": "a432275fd087852fc9f1803cf4cccfbc0e8ca70b923907a7ef9b614a876f1717"
+  },
+  "count_schedule": {
+    "fixed_mean": 4,
+    "frozen_schedule_updates": 400,
+    "frozen_total_calls": 1600,
+    "maximum": 8,
+    "minimum": 2,
+    "poisson_mean": 4.0,
+    "sample_once_per_batch": true,
+    "seed": 67000825,
+    "shuffle_seed": 67010825
+  },
+  "fixtures": {
+    "Dockerfile": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+    "generator.py": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0",
+    "primes.py": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac"
+  },
+  "gates": {
+    "maximum_candidate_headroom_wall_seconds": 285,
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_w128_loss_to_source": 0.02,
+    "minimum_count_curriculum_drop": 0.05,
+    "minimum_trained_weight_drop": 0.2,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w256_gain_over_controls": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_count_histogram": true,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "inference": {
+    "answer_dependent_stopping": false,
+    "fixed_count": 4,
+    "outer_scan_unchanged": true,
+    "positional_embedding": false,
+    "repair": false,
+    "target_free": true,
+    "validity_filter": false
+  },
+  "mode": "preregister",
+  "paper": {
+    "pages": [
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      16
+    ],
+    "path": "research/papers/arxiv-2604.07822.pdf",
+    "sha256": "f9d0469a7628396daa1c0a67425927b72733a1339e0c838a27594f571f0f237b"
+  },
+  "root": 20261230,
+  "roots": {
+    "calibration": 20261230,
+    "confirmations": [
+      20261232,
+      20261233
+    ],
+    "viability": 20261231
+  },
+  "routes": [
+    "proposal_only",
+    "clipped_poisson",
+    "fixed_mean",
+    "matched_histogram",
+    "shuffled_count_independent",
+    "randomized"
+  ],
+  "run_id": "exp-670-clipped-poisson-loop-curriculum",
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "repository_branch": "codex/exp670-clipped-poisson-loop-curriculum",
+    "repository_commit": "84c40e18e41ac285135d54b178a9d2c736fc57a2"
+  },
+  "splits": {
+    "128": {
+      "test": "9e5cb6c0992bffa57abc8dca64f64e589fa6f9a420692df64696645155752712",
+      "train": "2bd2e01441ce32689812f468de7b356a4fe64fb5028552fe4b09e803416ae810",
+      "validation": "beb66f936bdf514c205a4e5ca985b2db7b127e779344acb6148d88cdc03f3434"
+    },
+    "256": {
+      "test": "f9241f4e69d8b323d9ec802119bc6faadd36276e7a2337bd8467d573236a22cf",
+      "train": "6552ccddbff354563f1ada4504251c24cb6ea1171dcc1d04cec9f72e8edf4892",
+      "validation": "c8019406408a370732c429f4937ffdf6cd2d9c139e9050f6969e90d88cd9e905"
+    },
+    "64": {
+      "test": "38e3152952edd2f1c3dae9dd8d52c4a9a893849fa8e05620761453c4f1c2d764",
+      "train": "f954b0c772d482fe8b46a2bddb1714916434d21c8fde99e660ab9c9a74b8ae9e",
+      "validation": "a92c29d851b8b39015921a1d282b670ecf5504c8e744a24da6493405b13ecd66"
+    }
+  }
+}

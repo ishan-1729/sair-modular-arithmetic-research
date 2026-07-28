@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-670-clipped-poisson-loop-curriculum",
+  "status": "parked-package-verification",
+  "seed": 20261230,
+  "hypothesis": "Clipped-Poisson training depths can make an exact-initialized shared refinement depth-agnostic at fixed inference depth.",
+  "decision": "park-final-package-verification-out-of-scope-integrated-schema-failure",
+  "config": "configs/exp_670_clipped_poisson_loop_curriculum.yaml",
+  "source": {"base_commit": "84c40e18e41ac285135d54b178a9d2c736fc57a2", "branch": "codex/exp670-clipped-poisson-loop-curriculum", "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "paper_sha256": "f9d0469a7628396daa1c0a67425927b72733a1339e0c838a27594f571f0f237b", "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"},
+  "artifacts": {"mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp670-loop-curriculum-mechanism.md", "preregistration": ".scratch/exp-670-clipped-poisson-loop-curriculum/preregistration-root-20261230.json", "metrics": "evals/results/exp-670-clipped-poisson-loop-curriculum/metrics.json"},
+  "verification": {"focused": "12 passed in 11.64s", "validator": "failed after 9.29s: three owned frontmatter omissions and one out-of-scope integrated EXP669 metrics schema error", "pytest": "not opened because validator failed", "maximum_rss_kib": 29188, "final_package_oracle_invocations": 1},
+  "roots": {"20261230": "unopened-package-verification-blocked", "20261231": "unopened-admission-blocked", "20261232": "unopened-admission-blocked", "20261233": "unopened-admission-blocked"},
+  "limitations": ["No calibration or scientific evaluation was opened.", "The package-verification failure is not evidence against the loop curriculum.", "The integrated EXP669 metrics file is outside T065 allowed_files and was not changed.", "M018.b remained closed.", "No checked/private/candidate/submission surface was opened."]
+}
