@@ -1677,3 +1677,28 @@ runs:
       - Viability, formal controls, W256, confirmations, and M022.b breadth remain unopened.
       - This resource park does not reject GRAM, ST-M022.a, the exact SAIR adaptation scientifically, or the source paper.
       - No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened.
+  - run_id: exp-667-rsm-shallow-train-deep-infer
+    status: parked-calibration-runtime-headroom
+    approach: bounded-faithful-ST-M016a-two-state-shared-operator-RSM
+    decision: park-resource-compliance-or-feasibility
+    decision_authority: T062-root-20261218-corrected-complete-route-dynamic-admission
+    source_base_commit: 3c9eae74bee6a667472a1e2da93efd786ff96ce3
+    source_branch: codex/exp667-rsm-shallow-train-deep-infer
+    config: configs/exp_667_rsm_shallow_train_deep_infer.yaml
+    mechanism_map: knowledge/autoresearch/research/2026-07-29-exp667-rsm-mechanism.md
+    preregistration: experiments/runs/exp-667-rsm-shallow-train-deep-infer/preregistration-root-20261218.json
+    preregistration_sha256: 4f6e445b44655341d3ddbd1ece1278962c0d06304fe9fdf70fb4e99830e5f57d
+    run_record: experiments/runs/exp-667-rsm-shallow-train-deep-infer/run.json
+    metrics: evals/results/exp-667-rsm-shallow-train-deep-infer/metrics.json
+    roots: {20261218: completed-calibration-runtime-headroom-park, 20261219: unopened-admission-blocked, 20261220: unopened-admission-blocked, 20261221: unopened-admission-blocked}
+    calibration_updates_each_trained_route: 2
+    formal_optimizer_updates_each_trained_route: 0
+    calibration: {admitted: false, failed_check: candidate_inference, wall_seconds: 180.31585637399985, process_tree_cpu_seconds: 713.345081, cgroup_cpu_seconds: 735.3120000000054, peak_rss_bytes: 536109056, expected_formal_wall_seconds: 9041.181039800995, eta_wall_seconds: 14473.589539967665, hard_guard_wall_seconds: 28948}
+    candidate_runtime: {nominal_projected_wall_seconds: 244.9771333499084, variability_headroom: 1.6008516449623313, headroom_projected_wall_seconds: 392.17204690135725, frozen_ceiling_seconds: 285.0}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations:
+      - Calibration diagnostics use two updates and tiny denominators and are non-scientific.
+      - Root 20261219, formal controls, W256 viability, and confirmations remain unopened.
+      - M016.b RIM remained explicitly deferred and closed.
+      - This resource park does not reject RSM, ST-M016.a, the exact SAIR adaptation scientifically, or the source paper.
