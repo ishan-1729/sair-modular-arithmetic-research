@@ -1003,3 +1003,21 @@ parked_exp690_c1:
   run_record: experiments/runs/exp-690-c1-persistent-memory-tokens/run.json
   metrics: evals/results/exp-690-c1-persistent-memory-tokens/metrics.json
   limitations: [resource-park-not-memory-rejection, roots-20261315-through-20261322-unopened, no-paired-confidence-or-causal-science, C1-result-cannot-cancel-C2-through-C7]
+rejected_exp691_c2:
+  run_id: exp-691-c2-hard-indexed-trace
+  status: completed-rejected-full-budget-science
+  source_base_commit: 2fe87f3a343a5db4ebbe011a1bcb475d4b24ad04
+  source_branch: codex/exp691-c2-hard-indexed-trace
+  decision_authority: T097-root20261324-full-budget-scientific-and-causal-gates
+  mechanism: hidden48-one-cycle-append-only-32d-trace-hard-block-slot-retrieval-vs-correction-masked-control
+  roots: {calibration_20261323: completed-resource-admitted, formal_20261324: completed-scientific-reject, confirmation_20261325: unopened-formal-gate-failed, confirmation_20261326: unopened-formal-gate-failed, independent_20261327_20261331: unopened-confirmation-gate-failed}
+  verification: {smoke: passed-all-modes-in-45.86s, validator: green-226-concepts-1100-records, pytest: 859-passed-in-543.95s, oracle_invocations: 1}
+  calibration: {admitted: true, cold_wall_seconds: [126.82862309400014, 135.41222915799995, 127.85685412199996], guarded_wall_seconds: 270.8244583159999, ceiling_seconds: 285.0, wall_seconds: 484.27, process_cpu_seconds: 1643.61, cgroup_cpu_seconds: 1727.984, peak_rss_bytes: 1072676864}
+  training_updates: {primary: 2400, correction_masked_control: 2400}
+  formal: {wall_seconds: 5862.790506222, process_cpu_seconds: 21990.650255, cgroup_cpu_seconds: 23422.088, peak_rss_bytes: 1531633664}
+  scientific_metrics: {primary_w128_transition: 0.0, control_w128_transition: 0.0, primary_w256_transition: 0.0, control_w256_transition: 0.0, primary_w128_rollout: 0.0, control_w128_rollout: 0.0, primary_w256_rollout: 0.0, control_w256_rollout: 0.0, paired_w256_gain: 0.0}
+  scientific_verdict: reject-this-exact-c2-formulation
+  causal_effects: {erase_gain_erasure: 0.0, permute_gain_erasure: 0.0, uniform_gain_erasure: 0.0, random_pointer_gain_erasure: 0.0, supported: false}
+  run_record: experiments/runs/exp-691-c2-hard-indexed-trace/run.json
+  metrics: evals/results/exp-691-c2-hard-indexed-trace/metrics.json
+  limitations: [both-arms-zero-exact-on-all-formal-denominators, pointer-noncollapse-without-causal-output-effect, roots-20261325-through-20261331-unopened, no-checked-private-candidate-submission-promotion-release-or-winner-claim, C2-result-cannot-cancel-C3-through-C7]

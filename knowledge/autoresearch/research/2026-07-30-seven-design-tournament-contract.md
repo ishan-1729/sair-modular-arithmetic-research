@@ -32,3 +32,11 @@ Only complete primary W256 at least 85%, with every common/causal gate passing, 
 ## Chair package
 
 For every entrant the chair receives identities/hashes, checkpoints, work counts, paired predictions, full denominators, confidence evidence, first-error/invalid metrics, causal interventions, randomized-weight evidence, lower-tier parity, reload/determinism, wall/process/cgroup CPU/RSS, root lifecycle, MLflow IDs, limitations, verification, and pushed equality. Missing healthy control, short-rung negatives, unchecked caches, or resource-as-accuracy reasoning invalidates that entrant comparison, not other entrants.
+
+## C2 frozen instantiation
+
+EXP691 instantiates C2 as an h48 one-cycle Candidate-derived specialist with one learned 32-D record appended after each Horner step to `[B,ceil(W/16),16,32]`. It uses learned block then slot logits, hard argmax/gather forward, straight-through soft gradients, and an exact-zero-initialized read-conditioned spatial correction. Its matched control computes and stores the identical trace, pointers, gathers, diagnostics, losses, and work while masking only correction access. Roots are 20261323-31. Erase, chronological permutation, uniform pointer, and random-pointer interventions must erase at least half any paired gain; pointer collapse without causal output dependence fails mechanism support. C2 remains required independently and cannot alter the obligation to execute C3-C7.
+
+## C2 terminal outcome
+
+Observed EXP691 evidence: the sole package oracle passed, root20261323 admitted the complete deployed route at 270.824 guarded seconds, and root20261324 completed all 2,400 updates for both matched arms. Both arms were zero-exact on every W128/W256 transition and rollout denominator; the W256 comparison was 0 wins, 0 losses, and 600 ties. All four causal intervention erasures were zero. The exact C2 formulation is rejected, roots20261325-31 remain unopened, and C3-C7 remain independently required.

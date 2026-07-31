@@ -2311,3 +2311,37 @@ runs:
       - Guarded exact deployed-route runtime 316.0903 seconds exceeds the frozen 285-second ceiling.
       - Root20261315 and roots20261316-22 remained unopened; four calibration updates per arm carry no scientific verdict.
       - C1 was first by council ID, not a selected winner, and its park cannot cancel C2-C7.
+  - run_id: exp-691-c2-hard-indexed-trace
+    status: completed-rejected-full-budget-science
+    approach: candidate-derived-hidden48-one-cycle-append-only-hard-indexed-trace-vs-correction-masked-control
+    decision: reject-exp691-c2-hard-indexed-trace
+    decision_authority: T097-root20261324-full-budget-scientific-and-causal-gates
+    source_base_commit: 2fe87f3a343a5db4ebbe011a1bcb475d4b24ad04
+    source_branch: codex/exp691-c2-hard-indexed-trace
+    config: configs/exp_691_c2_hard_indexed_trace.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-691-c2-hard-indexed-trace.md
+    run_record: experiments/runs/exp-691-c2-hard-indexed-trace/run.json
+    metrics: evals/results/exp-691-c2-hard-indexed-trace/metrics.json
+    verification: experiments/runs/exp-691-c2-hard-indexed-trace/verification.json
+    environment: experiments/runs/exp-691-c2-hard-indexed-trace/environment.json
+    checkpoint_sha256: 36f4988fd9bb0867cab9750b0c8089c591fa29b4da05358a436ad44c61de56c3
+    control_checkpoint_sha256: fa4a712d8e9cd83175400cf16180f2dac3e9b678e0b403dd869d07ebc412c7d9
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    channel_map_sha256: 8c364e4fc62e663acde970d0ed04cd7a4850f780d77169535502d01ae4115555
+    pruned_state_sha256: 68b64bc9ebcd368363ab0f2f19a0b477b81d0229f7e86a2532c78630b742407f
+    roots: {20261323: completed-calibration-resource-admitted, 20261324: completed-full-budget-scientific-reject, 20261325: unopened-formal-gate-failed, 20261326: unopened-formal-gate-failed, 20261327: unopened-confirmation-gate-failed, 20261328: unopened-confirmation-gate-failed, 20261329: unopened-confirmation-gate-failed, 20261330: unopened-confirmation-gate-failed, 20261331: unopened-confirmation-gate-failed}
+    verification_summary: {smoke: passed-all-modes-in-45.86s, validator: green-226-concepts-1100-records, pytest: 859-passed-in-543.95s, pytest_outer_wall_seconds: 527.93, pytest_process_cpu_seconds: 822.02, pytest_peak_rss_kib: 944956, oracle_invocations: 1}
+    calibration: {admitted: true, candidate_cold_wall_seconds: [126.82862309400014, 135.41222915799995, 127.85685412199996], candidate_guarded_wall_seconds: 270.8244583159999, candidate_guarded_ceiling_seconds: 285.0, expected_formal_wall_seconds: 5766.7159972916215, soft_guard_wall_seconds: 7209, hard_guard_wall_seconds: 10092, wall_seconds: 484.27, process_cpu_seconds: 1643.61, cgroup_cpu_seconds: 1727.984, peak_rss_bytes: 1072676864}
+    training_updates: {primary: 2400, correction_masked_control: 2400}
+    formal_calls_executed: 1
+    mlflow_run_id: f1614e3633db42338fd3b0623753cd74
+    scientific_metrics: {primary_w128_transition: 0.0, control_w128_transition: 0.0, primary_w256_transition: 0.0, control_w256_transition: 0.0, primary_w128_rollout: 0.0, control_w128_rollout: 0.0, primary_w256_rollout: 0.0, control_w256_rollout: 0.0, paired_w256_gain: 0.0}
+    scientific_verdict: reject-this-exact-c2-formulation
+    causal_effects: {erase_gain_erasure: 0.0, permute_gain_erasure: 0.0, uniform_gain_erasure: 0.0, random_pointer_gain_erasure: 0.0, supported: false}
+    limitations:
+      - Both full-budget arms were zero-exact on all formal transition and rollout denominators.
+      - Noncollapsed learned pointers did not produce exact output gain or causal intervention erasure.
+      - Roots20261325-31 remained unopened; no checked/private, candidate, submission, promotion, release, or winner claim exists.
+      - C2's rejection cannot cancel or weaken C3-C7.

@@ -88,3 +88,4 @@
 - [EXP-687 compact distilled W256 specialist](exp-687-compact-distilled-w256-specialist.md) - frozen high-incident hidden56 transfer and equal-work distillation package passed smoke and 18 focused checks, then parked before roots on one pre-existing out-of-scope EXP686 full-suite fixture failure.
 - [EXP-688 compact hidden-trajectory distillation](exp-688-compact-hidden-trajectory-distillation.md) - matched hidden56 logit distillation plus selected-channel hidden alignment, parked at guarded candidate runtime.
 - [EXP-690 C1 persistent memory tokens](exp-690-c1-persistent-memory-tokens.md) - four case-local cross-step tokens versus identical access-masked computation in the seven-design tournament.
+- [EXP-691 C2 hard indexed trace](exp-691-c2-hard-indexed-trace.md) - resource-admitted full-budget append-only trace versus correction-masked equal work; both arms were zero-exact and the frozen scientific/causal gates rejected the formulation.

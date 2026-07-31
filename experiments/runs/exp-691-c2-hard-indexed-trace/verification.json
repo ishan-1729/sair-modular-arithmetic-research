@@ -1,0 +1,10 @@
+{
+  "run_id": "exp-691-c2-hard-indexed-trace",
+  "status": "passed-package-oracle-and-completed-terminal-scientific-reject",
+  "smoke": {"status": "passed-all-modes", "wall_seconds": 45.86, "process_cpu_seconds": 61.24, "peak_rss_kib": 533724, "artifact_sha256": "9c1da4f45f1ab8a8f8d6352d547ca8b274f4eaeb79655d34aee06901e3ccdf70"},
+  "package_oracle": {"invocations": 1, "validator": "226-concepts-1100-records", "pytest": "859-passed-in-543.95s", "outer_wall_seconds": 527.93, "process_cpu_seconds": 822.02, "peak_rss_kib": 944956, "log_sha256": "c7a32efe7e740ed6e168aa2d6326f4d758147d0acafac0a499e38e18d4fc19aa", "time_sha256": "b42cfdceb85fa3a1cf6a5a9400c7c9832451d9ed9e22e5687df6075ec881137d"},
+  "calibration": {"root": 20261323, "status": "completed-resource-admitted", "root_summary_sha256": "ad72889b5021dd79c0fddee62f74a4b9fc497fb6c481281a6332ef1f7e169797", "guarded_wall_seconds": 270.8244583159999, "peak_rss_bytes": 1072676864},
+  "formal": {"root": 20261324, "status": "completed-full-budget-scientific-reject", "root_summary_sha256": "11a997334724cff546b70ffc033f795e9acb945afc9044793e78614b0b928df5", "terminal_summary_sha256": "51f2eed179f658472189abccf1beaa9872e0a363fc3140b4e1ccea8fb062fdbf", "updates_per_arm": 2400, "wall_seconds": 5862.790506222, "process_cpu_seconds": 21990.650255, "cgroup_cpu_seconds": 23422.088, "peak_rss_bytes": 1531633664},
+  "roots_opened": [20261323, 20261324],
+  "roots_unopened": [20261325, 20261326, 20261327, 20261328, 20261329, 20261330, 20261331]
+}

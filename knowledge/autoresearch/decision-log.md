@@ -481,3 +481,11 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Root20261314 completed both four-update calibration arms, reload/determinism/equal-work checks, and three cold complete deployed routes at 158.0452/150.1241/153.2379 seconds. RSS was 1,091,407,872 bytes.
 - The frozen 2x rule gives 316.0903 seconds, above 285. Park C1 before root20261315. Roots20261316-22 also remain unopened; scientific metrics, confidence, and causal effects are null.
 - This is a resource verdict on C1's exact deployed formulation, not evidence against persistent memory. C1 is first by ID only and cannot cancel C2-C7.
+
+## 2026-07-31 — EXP-691 C2 rejects after the full resource-admitted first rung
+
+- The all-mode smoke passed in 45.86 seconds. The sole package oracle passed validation (226 concepts / 1,100 records) and all 859 tests in 543.95 seconds of pytest time; it was not rerun after terminal documentation.
+- Root20261323 completed both calibration arms and three cold complete 1,100-case deployed routes at 126.829/135.412/127.857 seconds. The frozen 2x guard was 270.824 seconds against 285, so root20261324 was legally admitted.
+- Root20261324 completed 2,400 updates per matched arm. Each arm executed 19,200 trace appends, hard block/slot reads, correction computations, student calls, teacher calls, and exact-loss calls. Formal resource use was 5,862.791 wall / 21,990.650 process CPU / 23,422.088 cgroup CPU seconds with 1,531,633,664-byte peak RSS.
+- Primary and control were both 0/3,000 at W128 transition, 0/3,000 at W256 transition, 0/300 at W128 rollout, and 0/600 at W256 rollout. The W256 paired evidence was 0 wins, 0 losses, and 600 ties; erase, chronological permutation, uniform pointer, and random pointer each erased zero gain.
+- Reject this exact hard-indexed append-only trace formulation. Addressing remained noncollapsed, but pointer diagnostics without exact output gain or causal erasure do not support the mechanism. Roots20261325-31 remain unopened. C3-C7 remain required regardless.
