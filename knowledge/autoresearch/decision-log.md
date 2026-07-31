@@ -495,3 +495,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Implement the h48 one-cycle Candidate-derived quotient/carry specialist and matched access-masked control. Rootless all-mode smoke and 28 focused tests pass; the primary FiLM gradient is nonzero, control access gradient is exactly zero, and both auxiliary heads train in both arms.
 - The exactly-once package oracle stops in project validation with 357 historical-worktree fixture issues before pytest: absent nested challenge Git metadata, broken snapshot links, and unhydrated research PDFs. Those files are outside T098.
 - Apply the frozen mechanical stop rule. Roots20261332-40 remain unopened, no resource/scientific/causal verdict exists, and C4-C7 remain independently required.
+
+## 2026-07-31 — EXP-693 C4 parks at the sole package oracle
+
+- Implement the h56 one-cycle Candidate-derived specialist, offline untied physical-slot teacher, shared centroid, native rank-4 raw-kernel SVD direction/high-dilation factors, and identical access-masked control.
+- The fixture preflight passes with 87 Git-LFS paths byte-identical and the clean nested challenge snapshot at exact `82510bba`. The real all-mode smoke completes in 70.4 seconds and 25 focused tests pass.
+- The exactly-once package oracle stops during project validation on six pre-existing EXP692 canonical-record/schema defects before pytest. Those files are outside T099.
+- Apply the frozen mechanical stop rule. Roots20261341-49 remain unopened, no resource/scientific/causal verdict exists, and C5-C7 remain independently required.

@@ -2375,3 +2375,33 @@ runs:
       - The sole package oracle failed on missing nested challenge Git metadata and unhydrated research PDFs in the historical worktree, all outside T098.
       - The one-oracle stop rule prohibits repair, rerun, or root20261332 admission after this failure.
       - C3 is mechanically parked and cannot cancel or weaken C4-C7.
+  - run_id: exp-693-c4-dilation-factored-adapters
+    status: failed
+    approach: candidate-derived-hidden56-one-cycle-rank4-direction-high-dilation-adapters-vs-access-masked-control
+    decision: park-exp693-at-package-oracle
+    decision_authority: T099-single-package-oracle-stop-rule
+    source_base_commit: b057190c4e3291467a886b5734348b49bd813e33
+    source_branch: codex/exp693-c4-dilation-factored-adapters
+    config: configs/exp_693_c4_dilation_factored_adapters.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-693-c4-dilation-factored-adapters.md
+    run_record: experiments/runs/exp-693-c4-dilation-factored-adapters/run.json
+    metrics: evals/results/exp-693-c4-dilation-factored-adapters/metrics.json
+    verification: experiments/runs/exp-693-c4-dilation-factored-adapters/verification.json
+    environment: experiments/runs/exp-693-c4-dilation-factored-adapters/environment.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261341: unopened-package-oracle-blocked, 20261342: unopened-package-oracle-blocked, 20261343: unopened-package-oracle-blocked, 20261344: unopened-package-oracle-blocked, 20261345: unopened-package-oracle-blocked, 20261346: unopened-package-oracle-blocked, 20261347: unopened-package-oracle-blocked, 20261348: unopened-package-oracle-blocked, 20261349: unopened-package-oracle-blocked}
+    verification_summary: {fixture_preflight: 87-lfs-zero-mismatch-and-clean-challenge-82510bba, smoke: passed-all-modes-in-70.4s, focused: 25-passed-in-21.60s, validator: failed-6-pre-existing-exp692-schema-issues, pytest: not-started-after-validator-failure, oracle_invocations: 1}
+    calibration: null
+    training_updates: {teacher: 1, primary: 1, access_masked_control: 1, scope: rootless-smoke-only}
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - Rootless smoke and focused tests are implementation evidence only; no resource or accuracy denominator was opened.
+      - The sole package oracle failed on six pre-existing EXP692 canonical-record/schema defects outside T099.
+      - The one-oracle stop rule prohibits repair, rerun, or root20261341 admission after this failure.
+      - C4 is mechanically parked and cannot cancel or weaken C5-C7.

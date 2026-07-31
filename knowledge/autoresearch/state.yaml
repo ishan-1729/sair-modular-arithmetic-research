@@ -1037,3 +1037,19 @@ parked_exp692_c3:
   run_record: experiments/runs/exp-692-c3-quotient-carry-conditioning/run.json
   metrics: evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json
   limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C3-result-cannot-cancel-C4-through-C7]
+parked_exp693_c4:
+  run_id: exp-693-c4-dilation-factored-adapters
+  status: failed-package-oracle
+  source_base_commit: b057190c4e3291467a886b5734348b49bd813e33
+  source_branch: codex/exp693-c4-dilation-factored-adapters
+  decision_authority: T099-single-package-oracle-stop-rule
+  mechanism: hidden56-one-cycle-rank4-direction-and-high-dilation-raw-kernel-adapters-vs-access-masked-control
+  roots: {calibration_20261341: unopened-package-oracle-blocked, formal_20261342: unopened-package-oracle-blocked, confirmation_20261343_20261344: unopened-package-oracle-blocked, independent_20261345_20261349: unopened-package-oracle-blocked}
+  verification: {fixture_preflight: passed-87-lfs-zero-mismatch-clean-challenge, smoke: passed-all-modes-in-70.4s, focused: 25-passed, validator: failed-6-pre-existing-exp692-schema-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {teacher: 1, primary: 1, access_masked_control: 1, scope: rootless-smoke-only}
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-693-c4-dilation-factored-adapters/run.json
+  metrics: evals/results/exp-693-c4-dilation-factored-adapters/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C5-C7-remain-required]

@@ -40,3 +40,7 @@ EXP691 instantiates C2 as an h48 one-cycle Candidate-derived specialist with one
 ## C2 terminal outcome
 
 Observed EXP691 evidence: the sole package oracle passed, root20261323 admitted the complete deployed route at 270.824 guarded seconds, and root20261324 completed all 2,400 updates for both matched arms. Both arms were zero-exact on every W128/W256 transition and rollout denominator; the W256 comparison was 0 wins, 0 losses, and 600 ties. All four causal intervention erasures were zero. The exact C2 formulation is rejected, roots20261325-31 remain unopened, and C3-C7 remain independently required.
+
+## C4 terminal outcome
+
+Observed EXP693 evidence: the fixture-complete preflight and real all-mode smoke passed, and 25 focused topology/SVD/matching/lifecycle/safety tests passed. The sole package oracle then stopped during validation on six pre-existing EXP692 canonical-record/schema defects before pytest. T099 cannot edit those files or invoke a second oracle. Roots20261341-49 remain unopened, the C4 scientific/resource verdict is null, and C5-C7 remain independently required.
