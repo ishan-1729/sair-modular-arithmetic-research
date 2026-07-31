@@ -2345,3 +2345,33 @@ runs:
       - Noncollapsed learned pointers did not produce exact output gain or causal intervention erasure.
       - Roots20261325-31 remained unopened; no checked/private, candidate, submission, promotion, release, or winner claim exists.
       - C2's rejection cannot cancel or weaken C3-C7.
+  - run_id: exp-692-c3-quotient-carry-conditioning
+    status: parked-package-oracle
+    approach: candidate-derived-hidden48-one-cycle-learned-quotient-carry-posterior-film-vs-access-masked-control
+    decision: park-exp692-at-package-oracle
+    decision_authority: T098-single-package-oracle-stop-rule
+    source_base_commit: d8ea29e6c3474664897efa0ecb905e78166db60d
+    source_branch: codex/exp692-c3-quotient-carry
+    config: configs/exp_692_c3_quotient_carry_conditioning.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-692-c3-quotient-carry-conditioning.md
+    run_record: experiments/runs/exp-692-c3-quotient-carry-conditioning/run.json
+    metrics: evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json
+    verification: experiments/runs/exp-692-c3-quotient-carry-conditioning/verification.json
+    environment: experiments/runs/exp-692-c3-quotient-carry-conditioning/environment.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261332: unopened-package-oracle-blocked, 20261333: unopened-package-oracle-blocked, 20261334: unopened-package-oracle-blocked, 20261335: unopened-package-oracle-blocked, 20261336: unopened-package-oracle-blocked, 20261337: unopened-package-oracle-blocked, 20261338: unopened-package-oracle-blocked, 20261339: unopened-package-oracle-blocked, 20261340: unopened-package-oracle-blocked}
+    verification_summary: {smoke: passed-all-modes, focused: 28-passed-in-17.69s, validator: failed-357-historical-fixture-issues, pytest: not-started-after-validator-failure, oracle_invocations: 1}
+    calibration: null
+    training_updates: {primary: 1, access_masked_control: 1}
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - Rootless smoke and focused tests are implementation evidence only; no accuracy denominator was opened.
+      - The sole package oracle failed on missing nested challenge Git metadata and unhydrated research PDFs in the historical worktree, all outside T098.
+      - The one-oracle stop rule prohibits repair, rerun, or root20261332 admission after this failure.
+      - C3 is mechanically parked and cannot cancel or weaken C4-C7.

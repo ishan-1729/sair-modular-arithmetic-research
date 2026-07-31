@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-692-c3-quotient-carry-conditioning",
+  "status": "failed-package-oracle-mechanical-park",
+  "smoke": {
+    "command": "python experiments/exp_692_c3_quotient_carry_conditioning/run.py --mode smoke",
+    "status": "passed",
+    "all_modes": ["train", "reload", "evaluate", "zero-quotient", "zero-carry", "zero-joint", "permute", "randomize-heads", "randomize-full", "admit", "serialize"]
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_692_c3_quotient_carry_conditioning.py",
+    "status": "passed",
+    "passed": 28,
+    "seconds": 17.69
+  },
+  "package_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "status": "failed",
+    "invocations": 1,
+    "validator_issues": 357,
+    "pytest_started": false,
+    "failure_scope": "historical-worktree-fixture",
+    "observed_causes": [
+      "sources/github/modular-arithmetic-challenge lacks its nested .git metadata, so validator resolves the outer d8ea29e commit instead of 82510bba",
+      "research paper files are unhydrated placeholders and fail PDF signature, byte-count, and checksum checks",
+      "knowledge links into the absent nested-source layout are reported broken"
+    ]
+  },
+  "roots_opened": [],
+  "roots_unopened": [20261332, 20261333, 20261334, 20261335, 20261336, 20261337, 20261338, 20261339, 20261340]
+}

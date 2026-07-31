@@ -1,0 +1,60 @@
+{
+  "schema_version": "exp692-terminal-v1",
+  "run_id": "exp-692-c3-quotient-carry-conditioning",
+  "status": "parked-package-oracle",
+  "completion_marker": "terminal-persisted",
+  "decision": "park-exp692-at-package-oracle",
+  "decision_authority": "T098-single-package-oracle-stop-rule",
+  "created_at": "2026-07-31T00:00:00+05:30",
+  "seed": 692000,
+  "hypothesis": "Learned global quotient and per-position signed-carry posteriors can condition a compact Candidate005-derived h48 recurrence and reduce rare autonomous W256 errors.",
+  "source": {
+    "repository_base_commit": "d8ea29e6c3474664897efa0ecb905e78166db60d",
+    "branch": "codex/exp692-c3-quotient-carry",
+    "challenge_commit_expected": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c",
+    "runner_sha256": "cedcabc2545e50822466c7eb363a623340af55a771c35fc44616350b282cf6fe",
+    "test_sha256": "ef9f25f1712c271be96a91156f8811dddcf7d65d46be88505d788852c30735b3",
+    "smoke_sha256": "1ccf47cd91709494949cc257378f2e352c7c32b9a6f8960ffece319f39aa0f4d"
+  },
+  "config": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
+  "roots": {
+    "20261332": "unopened-package-oracle-blocked",
+    "20261333": "unopened-package-oracle-blocked",
+    "20261334": "unopened-package-oracle-blocked",
+    "20261335": "unopened-package-oracle-blocked",
+    "20261336": "unopened-package-oracle-blocked",
+    "20261337": "unopened-package-oracle-blocked",
+    "20261338": "unopened-package-oracle-blocked",
+    "20261339": "unopened-package-oracle-blocked",
+    "20261340": "unopened-package-oracle-blocked"
+  },
+  "verification": {
+    "focused": "28-passed-in-17.69s",
+    "smoke": "passed-rootless-all-mode",
+    "package_oracle": "failed-validator-before-pytest-with-357-fixture-issues",
+    "oracle_invocations": 1,
+    "pytest_started": false
+  },
+  "training_updates": {"primary": 1, "access_masked_control": 1},
+  "formal_calls_executed": 0,
+  "calibration": null,
+  "scientific_metrics": null,
+  "gates": null,
+  "checkpoints": null,
+  "mlflow_run_id": null,
+  "artifacts": {
+    "metrics": "evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json",
+    "verification": "experiments/runs/exp-692-c3-quotient-carry-conditioning/verification.json",
+    "environment": "experiments/runs/exp-692-c3-quotient-carry-conditioning/environment.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-692-c3-quotient-carry-conditioning.md"
+  },
+  "limitations": [
+    "Rootless smoke and focused tests are implementation evidence only and contain no scientific accuracy denominator.",
+    "The sole package oracle failed before pytest because the historical worktree lacks nested challenge Git metadata and contains placeholder research PDFs; repairing those files is outside T098.",
+    "The frozen one-oracle stop rule prohibits rerunning the oracle or opening root20261332 after this failure.",
+    "No calibration, full-budget science, causal verdict, confirmation, independent-seed, checked/private, candidate, submission, promotion, or completion claim exists.",
+    "C3 remains a mechanical park and cannot cancel or weaken C4-C7."
+  ]
+}

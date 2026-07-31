@@ -1021,3 +1021,19 @@ rejected_exp691_c2:
   run_record: experiments/runs/exp-691-c2-hard-indexed-trace/run.json
   metrics: evals/results/exp-691-c2-hard-indexed-trace/metrics.json
   limitations: [both-arms-zero-exact-on-all-formal-denominators, pointer-noncollapse-without-causal-output-effect, roots-20261325-through-20261331-unopened, no-checked-private-candidate-submission-promotion-release-or-winner-claim, C2-result-cannot-cancel-C3-through-C7]
+parked_exp692_c3:
+  run_id: exp-692-c3-quotient-carry-conditioning
+  status: parked-package-oracle
+  source_base_commit: d8ea29e6c3474664897efa0ecb905e78166db60d
+  source_branch: codex/exp692-c3-quotient-carry
+  decision_authority: T098-single-package-oracle-stop-rule
+  mechanism: hidden48-one-cycle-global-quotient-and-local-signed-carry-posterior-film-vs-access-masked-control
+  roots: {calibration_20261332: unopened-package-oracle-blocked, formal_20261333: unopened-package-oracle-blocked, confirmation_20261334_20261335: unopened-package-oracle-blocked, independent_20261336_20261340: unopened-package-oracle-blocked}
+  verification: {smoke: passed-all-modes, focused: 28-passed, validator: failed-357-historical-fixture-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {primary: 1, access_masked_control: 1}
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-692-c3-quotient-carry-conditioning/run.json
+  metrics: evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C3-result-cannot-cancel-C4-through-C7]

@@ -89,3 +89,4 @@
 - [EXP-688 compact hidden-trajectory distillation](exp-688-compact-hidden-trajectory-distillation.md) - matched hidden56 logit distillation plus selected-channel hidden alignment, parked at guarded candidate runtime.
 - [EXP-690 C1 persistent memory tokens](exp-690-c1-persistent-memory-tokens.md) - four case-local cross-step tokens versus identical access-masked computation in the seven-design tournament.
 - [EXP-691 C2 hard indexed trace](exp-691-c2-hard-indexed-trace.md) - resource-admitted full-budget append-only trace versus correction-masked equal work; both arms were zero-exact and the frozen scientific/causal gates rejected the formulation.
+- [EXP-692 C3 quotient/carry posterior conditioning](exp-692-c3-quotient-carry-conditioning.md) - h48 learned quotient/carry FiLM versus access-masked equal work; mechanically parked before roots when the sole package oracle hit out-of-scope historical-worktree fixture failures.

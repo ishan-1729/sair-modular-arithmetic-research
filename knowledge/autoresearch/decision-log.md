@@ -489,3 +489,9 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Root20261324 completed 2,400 updates per matched arm. Each arm executed 19,200 trace appends, hard block/slot reads, correction computations, student calls, teacher calls, and exact-loss calls. Formal resource use was 5,862.791 wall / 21,990.650 process CPU / 23,422.088 cgroup CPU seconds with 1,531,633,664-byte peak RSS.
 - Primary and control were both 0/3,000 at W128 transition, 0/3,000 at W256 transition, 0/300 at W128 rollout, and 0/600 at W256 rollout. The W256 paired evidence was 0 wins, 0 losses, and 600 ties; erase, chronological permutation, uniform pointer, and random pointer each erased zero gain.
 - Reject this exact hard-indexed append-only trace formulation. Addressing remained noncollapsed, but pointer diagnostics without exact output gain or causal erasure do not support the mechanism. Roots20261325-31 remain unopened. C3-C7 remain required regardless.
+
+## 2026-07-31 — EXP-692 C3 parks at the sole package oracle
+
+- Implement the h48 one-cycle Candidate-derived quotient/carry specialist and matched access-masked control. Rootless all-mode smoke and 28 focused tests pass; the primary FiLM gradient is nonzero, control access gradient is exactly zero, and both auxiliary heads train in both arms.
+- The exactly-once package oracle stops in project validation with 357 historical-worktree fixture issues before pytest: absent nested challenge Git metadata, broken snapshot links, and unhydrated research PDFs. Those files are outside T098.
+- Apply the frozen mechanical stop rule. Roots20261332-40 remain unopened, no resource/scientific/causal verdict exists, and C4-C7 remain independently required.
