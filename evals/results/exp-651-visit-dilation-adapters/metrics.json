@@ -1,0 +1,34 @@
+{
+  "run_id": "exp-651-visit-dilation-adapters",
+  "created_at": "2026-07-27T20:30:00+05:30",
+  "checkpoint_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "status": "parked-before-science",
+  "exact_initialization": "passed-by-focused-tests-at-widths-64-128-256",
+  "adapter_parameter_count": {
+    "visit_dilation_adapter": 110592,
+    "global_adapter_control": 110592
+  },
+  "transition_metrics": null,
+  "rollout_metrics": null,
+  "intervention_metrics": null,
+  "bootstrap_metrics": null,
+  "resource_calibration": null,
+  "t051_portability": "checkpoint-copy-passed-focused-cone-19-passed-6-failed",
+  "mlflow_run_id": null,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "T052 terminal validator failed on inherited EXP651 durable-record schema before the full oracle or calibration opened.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "checkpoint_absent": true,
+    "checkpoint_sha256_schema_sentinel": "all-zero-64-hex-is-not-an-artifact-hash",
+    "calibration_seed_unused": true,
+    "formal_roots_unused": true,
+    "scientific_controls_not_performed": true
+  },
+  "limitations": [
+    "No scientific denominator was opened and no checkpoint exists; checkpoint_sha256 is an explicit all-zero schema sentinel.",
+    "This terminal result is verification feasibility only and does not decide the adapter hypothesis."
+  ]
+}

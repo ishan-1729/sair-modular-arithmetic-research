@@ -1,0 +1,282 @@
+{
+  "authorization_boundary": {
+    "calibration_root_opened_by_this_runner": false,
+    "checked_public_prior_independent_official_private_opened": false,
+    "confirmation_roots_opened": false,
+    "corpus_root": 20261152,
+    "corpus_root_opened": true,
+    "exp649_formal_root_opened": false,
+    "screen_execution_authorized": false,
+    "screen_roots_opened": false
+  },
+  "budgets": {
+    "aggregate_cpu_seconds": {
+      "hard": 18152.68586300287,
+      "projected": 9669.030946256997,
+      "soft": 12101.790575335246
+    },
+    "fidelity_reduced": false,
+    "identity_trajectories": {
+      "hard": 1440,
+      "projected": 768,
+      "soft": 960
+    },
+    "soft_budgets_are_telemetry_only": true,
+    "wall_seconds": {
+      "hard": 4548.96946414426,
+      "projected": 2420.4370715340046,
+      "soft": 3032.646309429507
+    }
+  },
+  "cache": {
+    "complete_batches": [
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0000-32-1d55cda1bdb6cd169c441d2d6f318ba456e07156a932455f468aa3ee29a0b7d5.json.gz",
+        "reused": false,
+        "sha256": "37244f544055462a5018c50dca349b00c6ec6fa415aa4689f208716d13eb9532",
+        "start": 0
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0032-32-dee292a9c1acd7832a9878a85ca83e527bf79a554071a9b8366e9673e26900f0.json.gz",
+        "reused": false,
+        "sha256": "f231c9fa601a5c3502082c7fddc1227ef7dd7ebd9641f929f606e867f2ca0459",
+        "start": 32
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0064-32-799f51d99f2fe59f7e88e9c10d77ce7c519ae9da43220d8ba6a899f285cb15e8.json.gz",
+        "reused": false,
+        "sha256": "7e06c541053c9d9e03f5bc22b4fd610000d0bc539bffdc5ff0ffabf06dfca8bc",
+        "start": 64
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0096-32-80d1544f07159c36e265422ea5c0cfe2b4c3366b8488da26d5371df0b0c8d0ec.json.gz",
+        "reused": false,
+        "sha256": "8514d6d0ccedc178b4088478c33505140e30ed43c5e11594fd356dbd9d7ff603",
+        "start": 96
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0128-32-172040d5d3243d6358a3cda0ea221444aba216504530a667892cdd2d155db91b.json.gz",
+        "reused": false,
+        "sha256": "c4cf414957539420a9d1bcc57d125a9bb73d32e0586f24c35f27cfa93bb3a327",
+        "start": 128
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0160-32-c45c4feabdab93db2872e8b51b2481c05fd8a328d592a287c9a9ee55b396e26b.json.gz",
+        "reused": false,
+        "sha256": "89b26fdddd201bdc5d08a5c7298126647ca6ce09a9cc34c4f1d641c4731f3db3",
+        "start": 160
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0192-32-07878efcafe01a49b608735e5f13fc80e52293f4567888d0cc97e73932891593.json.gz",
+        "reused": false,
+        "sha256": "9024ed5e1a500cf3485d02beaef043a9e9f7ced2b1591d6f90767e998bf35629",
+        "start": 192
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0224-32-199971edf7d45211c0491cfc017f538935717b23a071b45eb10b2a4d4ea56efb.json.gz",
+        "reused": false,
+        "sha256": "c0a6bb6579314b7a23ef441e5bc3c0c262aad4b55374a672e55428b63c4fe598",
+        "start": 224
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0256-32-5fb8729bfbc432d149f1aca8ad3350c157cf12be2b8cc2c41a75819a70f655d3.json.gz",
+        "reused": false,
+        "sha256": "69a89d42caed3122b98bb490f0c6b390821bd64b9f78c53f8975ce50e48fa6ae",
+        "start": 256
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0288-32-b1df1e7cb9f4f4106e25e62ff085bbe4a5b9267ddfbbfe3f2c9c781c30f3b59c.json.gz",
+        "reused": false,
+        "sha256": "2be41840bf91b7291cdead7267d21fc555920d0f9549cabbeac33c72ca5376d8",
+        "start": 288
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0320-32-87b2bf6fdcd0d842126bf1c7320dc6741976c6e7f8d97f145855bbf2ea0bcfab.json.gz",
+        "reused": false,
+        "sha256": "c92facaa7dbf766f7a4ffe2f02ab2d536ee57e551b4f33b49938cbb73014cdca",
+        "start": 320
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0352-32-21ff869bdf42dcae7d060548b288a9c535defb7ff2214ec08c082f19fb69ff2f.json.gz",
+        "reused": false,
+        "sha256": "42b7ddae41aa38039b2c36a31e619271822ff713d211b8fe9c8ceef305b068df",
+        "start": 352
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0384-32-e286a7d662991b63aef07929de95b520d3c00be0c4c13499bd44e2fbeb8c99d4.json.gz",
+        "reused": false,
+        "sha256": "130b16b6ab5d022cd0bab1dc7c3b1264ce23db5a85e1f14a5d4b0c99e96c0c2f",
+        "start": 384
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0416-32-1bfdbf909882e0e2927c2446f5e5ae87eb350d112c585681e0afc40caf11df54.json.gz",
+        "reused": false,
+        "sha256": "3e429e48585ab5b370eec2daa2eaac7cb20a2d44be0c1add0f0731b14d993fad",
+        "start": 416
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0448-32-8588878e419c8967178253db57df5c14ef76bdf25eb3d40ed03977bf1530081d.json.gz",
+        "reused": false,
+        "sha256": "3f36158e51813caf1c94ccbb47db7d7e981448b21fa324dd36a087b58cb287b7",
+        "start": 448
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0480-32-fc72df9220fabab360186da1b0e4a7abd874f9d5144a4162fa829d0d2dd1751c.json.gz",
+        "reused": false,
+        "sha256": "a1b287bff65ba681c6a0293a78e81d580b0cce6e837399e5a415818753339456",
+        "start": 480
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0512-32-8f4884be597c55999a54b8f6ce5aec3c22aba1bc229d7c95253d675639cf3e46.json.gz",
+        "reused": false,
+        "sha256": "bcf2b1a86db2cda43f11615006848e8979a0e9a5873c3561275c3285869fb9ef",
+        "start": 512
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0544-32-89a6d842877647b24ec3f02ff15eeedad443f2390bc26f5db8c34aee081774de.json.gz",
+        "reused": false,
+        "sha256": "b94c151f1aabfd8b8a6f28501132d680d0d8dcae24bb298b9d96d721a53e63f1",
+        "start": 544
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0576-32-d94473680bcde54a49ec8973814f03d130d7ef872a87e357ec07622f0d7df92a.json.gz",
+        "reused": false,
+        "sha256": "0f61104182ba3a73d5233b0ac0937cd80e11e181d2ee9a08cc22a10bc96f184e",
+        "start": 576
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0608-32-76f09b52321bfb52dbe7e1f4dbeeee2b9cc783f7fe7be4548ecf002c040a2b5a.json.gz",
+        "reused": false,
+        "sha256": "775b0d1c782b2dd2c2558df2813ea284f1715a40a0a9dd4372e61c3b7cec3c30",
+        "start": 608
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0640-32-388464dc89d5b92a7c57baf0f9569a2be83f0e2ec461bcef6a4bbe09c56286f3.json.gz",
+        "reused": false,
+        "sha256": "13efa6e866d952f9ca50b3e0e9ab990fa1386009c9365247c042613845f5c4f1",
+        "start": 640
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0672-32-63e9a2084589bb64c4972b19df7f8a1dc2fc463d04b5df10dfe11c5dbe2531a5.json.gz",
+        "reused": false,
+        "sha256": "70d40afd2399c6cd61948305683f7b42e1578776a1ce93a1414f934b0a47a568",
+        "start": 672
+      },
+      {
+        "count": 32,
+        "path": ".scratch/exp-648-structured-trajectory-consistency/corpus/cache/batch-0704-32-a0e2ff888e4c536c49c2a9cc8f6f9743b57534d3b34ad2469237ed87d1ed9680.json.gz",
+        "reused": false,
+        "sha256": "3de1b360814032ec1994fc86d7db76e4813c17660f29ed07a8b863a0341784f4",
+        "start": 704
+      }
+    ],
+    "deterministic_resume_order": true,
+    "key_fields": {
+      "calibration_runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+      "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+      "config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+      "dataset_sha256": "69ab9b7a2399757561c638e0b2830c4af92ba9acc37d2ad7752f74eff0a81165",
+      "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+      "environment_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+      "evaluator_sha256": "137738928d8b0c7a2fefba9e910206355a01e9379816861adc06e7a860d09053",
+      "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+      "repository_head": "9f2226873a66e1938dbf30d87acbc876e528c622",
+      "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+      "root": 20261152,
+      "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
+      "scientific_runner_sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
+      "workload_sha256": "8dd16cb11b092a9cae9acdc3359aabecdbd6babc57f9a6e285cf8e79b498631e"
+    },
+    "reused_complete_batches": 0,
+    "reused_wall_and_cpu_charged": true
+  },
+  "counts": {
+    "failure_windows": 512,
+    "identity_trajectories": 736,
+    "matched_pairs": 512,
+    "success_windows": 512,
+    "window_length": 8
+  },
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "hashes": {
+    "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "environment_canonical_sha256": "be46229ebbf2164b85165107408406e48954a038c715ef91b8cb73404f99223c",
+    "identity_manifest_canonical_sha256": "13f9b68641c4f882a4db5b4b8ed43d80baf89405acb9b88b3af4d9240d8f64cb",
+    "identity_manifest_file_sha256": "b7143c486979c7667a24e5c3419774b5420240fc1bffe9e2cc039526adf97ae7",
+    "paired_corpus_canonical_sha256": "2ff624e2d91c637a1a2d7faece89416233c7372ac12cedb05538d3588c408353",
+    "paired_corpus_gzip_sha256": "51a61aa3f98bfa7cebfe98f5e9ba620219bc1ef9624177b0b947341abbae86c0",
+    "source_checkpoint_file_after_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "source_checkpoint_file_before_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "source_state_after_sha256": "04848527ae5d161ca10e1d96106919468bc03e71b91221ce7c8ff7762f7bc5b8",
+    "source_state_before_sha256": "04848527ae5d161ca10e1d96106919468bc03e71b91221ce7c8ff7762f7bc5b8",
+    "trajectory_manifest_canonical_sha256": "26054172371496c05f34e1e1687f00ee06d5b7aa3bf7b727d7d57ca72b72c9d4",
+    "trajectory_manifest_gzip_sha256": "22de663d23b8b799b28104b3b62597fadd7d37fd64395f61643ca4fad91d910a"
+  },
+  "limitations": [
+    "This run constructs generated training-split corpus data only and is not scientific accuracy evidence.",
+    "Screen execution remains fail-closed pending a separate exact-hash Judge authorization manifest.",
+    "No checked, public, prior-independent, official-private, confirmation, or EXP-649 formal surface was opened.",
+    "Soft resource thresholds are telemetry; hard count, wall, and process user+system CPU ceilings are runaway guards and did not reduce fidelity."
+  ],
+  "non_scientific_declaration": {
+    "candidate_registration": false,
+    "evaluation_performed": false,
+    "model_update_performed": false,
+    "scientific_accuracy_reported": false,
+    "selection_metric_reported": false,
+    "training_data_construction_only": true
+  },
+  "role": "generated-training-split-corpus-only",
+  "root": 20261152,
+  "schema_version": "exp648-corpus-run-v1",
+  "status": "complete-corpus-only-awaiting-screen-judge",
+  "timing": {
+    "charged_aggregate_cpu_seconds": 10103.335504912,
+    "charged_wall_seconds": 2505.7548506850003,
+    "first_quarter_guard_checked": true,
+    "launcher_plus_active_aggregate_cpu_seconds": 10103.335504912,
+    "launcher_plus_active_wall_seconds": 2505.754810802,
+    "peak_rss_bytes": 669806592,
+    "reused_aggregate_cpu_seconds_charged": 0.0,
+    "reused_wall_seconds_charged": 0.0,
+    "soft_cpu_crossed_telemetry_only": false,
+    "soft_wall_crossed_telemetry_only": false
+  },
+  "workload": {
+    "deterministic_gzip_mtime": 0,
+    "full_source_replays_per_identity": 2,
+    "identity_batch_size": 32,
+    "matching": "exact-stratum-first-unused-no-reuse-no-relaxation",
+    "mode": "corpus",
+    "root": 20261152,
+    "schema_version": "exp648-corpus-workload-v1",
+    "screen_training_or_evaluation": false,
+    "target_failure_windows": 512,
+    "target_pairs": 512,
+    "target_success_windows": 512,
+    "width": 256,
+    "window_length": 8
+  }
+}

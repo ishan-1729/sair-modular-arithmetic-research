@@ -1,0 +1,109 @@
+{
+  "run_id": "exp-661-loopformer-width-extrapolation",
+  "status": "completed",
+  "hypothesis": "A bounded-faithful small LoopFormer learns exact W16 modular products and extrapolates across fixed loop budgets and untouched W24/W32 widths better than matched controls.",
+  "seed": 20261195,
+  "config": "configs/exp_661_loopformer_width_extrapolation.yaml",
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-661-loopformer-width-extrapolation/roots/20261195/loopformer/checkpoint.safetensors",
+    "metrics": "evals/results/exp-661-loopformer-width-extrapolation/metrics.json",
+    "preregistration": "experiments/runs/exp-661-loopformer-width-extrapolation/preregistration.json",
+    "calibration": "experiments/runs/exp-661-loopformer-width-extrapolation/roots/20261194/result.json",
+    "viability": "experiments/runs/exp-661-loopformer-width-extrapolation/roots/20261195/result.json"
+  },
+  "decision": "reject-exact-bounded-loopformer-formulation-at-viability",
+  "decision_authority": "T056 frozen conjunctive root-20261195 gate",
+  "source": {
+    "repository_commit": "15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "base_commit": "15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8",
+    "branch": "codex/exp661-loopformer-width-extrapolation",
+    "source_hashes": {
+      "config": "cf6a42136a03fb2f6f57be6c6dc70d3c61f34acc23239563446c0e489cae6bb3",
+      "mechanism_map": "679188e20869ffe2f8d7409a822dc994441b716f7f4ba124d773b99d305dc4c7",
+      "model": "309a4bc0b65fdf108db1f4dc9eebb9b13f6f077f402d0f6fc4856877f490a539",
+      "runner": "fab7eadaa9468a7408514f6f0eaa1bf6e06f1780a3da449fc83c92359d7e9f32",
+      "tests": "ff9c133f0292cb190f0f41a74796adf9b8b401cac5e0cdd5d47cb3e27cbce810"
+    }
+  },
+  "mechanism": {
+    "family": "ST-M013.c bounded-faithful LoopFormer",
+    "primary": "shared cyclic Transformer block with sinusoidal normalized time/step, RMSNorm scale modulation, learned residual gates, full/short endpoint losses, stop-gradient hidden consistency, and fixed user budgets",
+    "sair_adaptations": ["bit-position tokens", "generic learned positions", "endpoint BCE", "budget-16 depth extrapolation"],
+    "excluded": ["LoopViT pixel path", "learned exit", "puzzle/evaluation identity", "programmed arithmetic", "answer repair"]
+  },
+  "verification": {
+    "focused_initial": "10 passed in 7.50s",
+    "focused_after_identity-count_repair": "10 passed in 3.53s",
+    "validator": "final publication pass: 169 OKF concepts and 1100 benchmark records",
+    "full_pytest": "426 collected and passed; empty failure cache after completion",
+    "fixture_manifest_sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d"
+  },
+  "preregistration": {
+    "sha256": "ecd97076d67825f9c29e3b76ee0b712b738947796980e4e70fd3c9735de73275",
+    "roots": {
+      "20261194": "completed-non-scientific-calibration-admitted",
+      "20261195": "completed-scientific-viability-reject",
+      "20261196": "unopened-gate-blocked",
+      "20261197": "unopened-gate-blocked"
+    },
+    "viability_splits_sha256": "2eb5dc10fb8c3bcea1730b1cabf84bcfa9f1542245ab164bfa42551ddee4cd83",
+    "viability_evaluation_cases_sha256": "6266f07e4f0f9b8ab378cd71f81228d60c21d4600d2dfff79c0f3e361dd5a7bb"
+  },
+  "calibration": {
+    "root": 20261194,
+    "result_sha256": "04492de18e5db56b18b6c87e06991e89f3652d220f06d89df033294f35de5e93",
+    "admitted": true,
+    "wall_seconds": 6.6381154270000025,
+    "process_cpu_seconds": 18.580000000000002,
+    "cgroup_cpu_seconds": 17.432000000000016,
+    "peak_rss_bytes": 476811264,
+    "variability_headroom": 1.631761568192944,
+    "formal_wall_guards": {"expected": 580.3424265229701, "eta": 946.9804679920201, "soft": 1183.725584990025, "hard": 1893.9609359840401},
+    "formal_process_cpu_guards": {"expected": 2374.270000000001, "eta": 3874.242538513463, "soft": 4842.803173141829, "hard": 7748.485077026926},
+    "formal_cgroup_cpu_guards": {"expected": 299.9359999999599, "eta": 489.4240377174534, "soft": 611.7800471468167, "hard": 978.8480754349068},
+    "projection_limitation": "The conservative arm-duration projection scales full per-arm train/checkpoint/evaluation duration with update count, so it overestimates expected formal time; observed raw route and per-update samples remain canonical."
+  },
+  "viability": {
+    "root": 20261195,
+    "result_sha256": "7d49d1e3cbd266fd7cba6a9e68b042a1025787335a6eef00152c481db4b42ac6",
+    "passed": false,
+    "wall_seconds": 83.64743734800004,
+    "process_cpu_seconds": 356.79,
+    "cgroup_cpu_seconds": 402.08799999999997,
+    "peak_rss_bytes": 489570304,
+    "parameters_each": 8553,
+    "optimizer_updates_each": 300,
+    "trajectory_examples_each": 9600,
+    "recurrent_block_calls_each": 3597,
+    "primary_exact_accuracy_at_budget_8": {"W16": 0.0, "W24": 0.0, "W32": 0.0},
+    "primary_bit_accuracy_at_budget_8": {"W16": 0.544921875, "W24": 0.5438368055555556, "W32": 0.5182291666666666},
+    "primary_exact_by_budget": {
+      "W16": {"1": 0.0, "2": 0.0, "4": 0.0, "8": 0.0, "16": 0.0},
+      "W24": {"1": 0.0, "2": 0.0, "4": 0.0, "8": 0.0, "16": 0.0},
+      "W32": {"1": 0.0, "2": 0.0, "4": 0.0, "8": 0.0, "16": 0.0}
+    },
+    "passed_gates": ["deeper_budget_retention", "zero_invalid", "reload_exact", "parameter_match", "example_update_call_match"],
+    "failed_gates": ["w16_exact", "w24_exact", "w32_exact", "all_control_transfer_gains", "trained_weight_dependence", "all_trained_component_effects", "time_step_inference_effect", "shortcut_inference_effect"]
+  },
+  "checkpoints": {
+    "loopformer": "0e4a7b1c3f7ea847bf1d7a075f4b1b339e0b81863d6bc53fb9d2d5efab33e99a",
+    "plain_looped_transformer": "baba61af9de9ef5d79f02dec741f54760159f98ba6df307586a915c415e09dc0",
+    "decoded_cellular_control": "8a0fb2748e53a6a7cde1ca21a470ae7d9abaa85a1e606f8fbfa168f4e7a42d56",
+    "no_time_step": "095556ac5d811312e05b1ee886579acff2bf7681cba0f7e110faa190c271a057",
+    "no_shortcut": "b4af46edcaf1ad13e89380577e5343c9fde850adca5b43399c39769baa3590ce",
+    "no_short_loss": "05eeacb79e49283f9d4569b963f07fa73fc4ff8a77bb438154783932ca8bd662",
+    "no_consistency": "16bc6677f2efa7eac7877d265d6afe1f62306bf1ff80cd0906f2cf97c6763c00"
+  },
+  "mlflow": {
+    "calibration": {"run_id": "f3bbbf736a114c7193ce4c8d4e42ff92", "status": "FINISHED"},
+    "viability": {"run_id": "e68ad3f4bdc7460394e7cb89c1ae4ba7", "status": "FINISHED"}
+  },
+  "limitations": [
+    "This rejects only the exact small endpoint-supervised SAIR LoopFormer formulation, not the source language-model result or larger compute/data settings.",
+    "All exact-answer scores are zero, so bit accuracy and the nominal deeper-budget retention check are diagnostic only.",
+    "Primary hidden states become nearly collinear with very large recurrent deltas while logits stagnate; this is observed collapse, not a general LoopFormer claim.",
+    "The viability miss prohibited both confirmations, so independent component causal verdicts are unavailable.",
+    "No checked, prior-independent, official/private, benchmark, candidate, submission, promotion, or goal-completion surface was opened."
+  ]
+}

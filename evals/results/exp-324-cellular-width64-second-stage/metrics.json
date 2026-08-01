@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-324-cellular-width64-second-stage",
+  "created_at": "2026-07-12T07:00:00Z",
+  "checkpoint_sha256": "61b9600bfa6e04f108e41d26d794fad2a4470bf7df42094530658e54d78a75d7",
+  "evaluation": {
+    "transition": {"source_width64": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999}, "trained_width56": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999}, "trained_width64": {"cases": 5000, "correct": 4994, "exact_accuracy": 0.9988}},
+    "rollout": {"source_width64": {"cases": 500, "correct": 451, "exact_accuracy": 0.902}, "trained_width56": {"cases": 300, "correct": 282, "exact_accuracy": 0.94}, "trained_width64": {"cases": 1500, "correct": 1378, "exact_accuracy": 0.9186666666666666}}
+  },
+  "controls": {"width64_rollout_gain": 0.016666666666666607, "width64_invalid_rollout_rate": 0.004666666666666667, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 535.222445939, "parameters": 99824},
+  "decision": "reject-cellular-official-width64",
+  "limitations": ["Generated selection evidence only; no checked, consumed independent, or private answers were read."]
+}

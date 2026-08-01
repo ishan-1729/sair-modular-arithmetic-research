@@ -1,0 +1,9 @@
+{
+  "schema_version": "exp681-verification-v1",
+  "status": "terminal-focused-failure",
+  "focused": {"command": "python -m pytest -q tests/test_exp_681_abbie_recurrence.py", "result": "failed", "passed": 9, "failed": 1, "wall_seconds": 4.18, "process_cpu_seconds": 9.83, "peak_rss_kib": 251992, "log_sha256": "97f28a172b5d6bb41687c50852b49cc3c5b59eebdbc2e565ec265e09f614f385"},
+  "preflight": {"status": "reused-passed", "sha256": "f67fe89bf80b705e22e95d9030d723ed5c09a01663bffc9fcf17390ea4e57f87"},
+  "package_oracle": {"launched": false, "reason": "Focused gate failed; T082 prohibits post-launch repair and requires terminal park."},
+  "calibration": null,
+  "terminal_validator": {"command": "python tools/validate_project.py", "result": "passed-208-concepts-1100-records", "log_sha256": "6b881f7869a36cf4be4648512e6336e0a44018f393f172cc0a2f46f273915fda", "required_after_terminal_persistence": true}
+}

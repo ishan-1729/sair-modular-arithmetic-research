@@ -1,0 +1,92 @@
+{
+  "schema_version": "exp687-terminal-v1",
+  "run_id": "exp-687-compact-distilled-w256-specialist",
+  "status": "failed",
+  "decision": "park-exp687-at-package-verification",
+  "decision_authority": "T092-single-package-oracle-stop-rule",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-28T19:00:00+05:30",
+  "config": "configs/exp_687_compact_distilled_w256_specialist.yaml",
+  "seed": 687000,
+  "hypothesis": "A deterministic high-incident hidden56 slice of Candidate005 can recover W256 exact rollouts, with frozen-teacher logit distillation outperforming an otherwise identical exact-label-only arm.",
+  "source": {
+    "authenticated": true,
+    "repository_commit": "8f08b8f85711e798bdbdfb2b97cd6f15bde1e4d6",
+    "branch": "codex/exp687-compact-distilled-w256-specialist",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f",
+    "runner_sha256": "3644bbdc9c25f77daa96ca3322fa024831603886dd9dbf8612a4bb6ba2bfd3ff",
+    "test_sha256": "cdf5d103775b3f7e901fd2eb9683cab26dc498bc87a0ea8ec9e3bfe316b5f8c4",
+    "channel_map_sha256": "92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0",
+    "pruned_state_sha256": "f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340"
+  },
+  "channel_map": {
+    "method": "sum of per-term mean-normalized squared incident parameters with ascending-index tie-break",
+    "answer_independent": true,
+    "source_hidden": 92,
+    "student_hidden": 56,
+    "student_parameters": 38588,
+    "selected_source_channels_ranked": [75, 49, 21, 85, 2, 33, 90, 55, 27, 80, 36, 39, 43, 46, 6, 71, 8, 63, 76, 57, 4, 15, 23, 51, 54, 83, 44, 10, 17, 87, 74, 67, 19, 30, 34, 7, 62, 89, 37, 82, 22, 86, 79, 28, 31, 16, 56, 69, 25, 41, 84, 11, 61, 47, 78, 88],
+    "implementation": "native PyTorch index_select for explicit auditable axes; no runtime pruning dependency"
+  },
+  "roots": {
+    "20261302": "unopened-package-oracle-blocked",
+    "20261303": "unopened-package-oracle-blocked",
+    "20261304": "unopened-package-oracle-blocked",
+    "20261305": "unopened-package-oracle-blocked"
+  },
+  "rootless_smoke": {
+    "status": "completed",
+    "scientific": false,
+    "wall_seconds": 63.71,
+    "trained_updates": 2,
+    "trained_arms": 2,
+    "routes": 5,
+    "widths": [128, 256],
+    "transition_cases": 10,
+    "rollout_cases": 10,
+    "identical_initial_bytes": true,
+    "identical_teacher_work": true,
+    "reload_exact": true,
+    "randomized_reset_differ": true,
+    "candidate_route_executed": true,
+    "admission_math_exercised": true,
+    "all_mode_serialization": true,
+    "sha256": "1979340c528cba8c8ff4a4edaafbdde968f79edd15f9e7aa8b297b8efede0417"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "smoke": ".scratch/exp-687-compact-distilled-w256-specialist/smoke.json",
+    "config": "configs/exp_687_compact_distilled_w256_specialist.yaml",
+    "environment": "experiments/runs/exp-687-compact-distilled-w256-specialist/environment.json",
+    "verification": "experiments/runs/exp-687-compact-distilled-w256-specialist/verification.json",
+    "metrics": "evals/results/exp-687-compact-distilled-w256-specialist/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-687-compact-distilled-w256-specialist.md",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp687-compact-distillation.md"
+  },
+  "verification": {
+    "focused": "18-passed-in-7.53s",
+    "validator": "green-218-concepts-1100-records",
+    "pytest": "760-passed-1-failed-in-565.40s",
+    "pytest_outer_wall_seconds": 552.29,
+    "pytest_user_cpu_seconds": 753.39,
+    "pytest_system_cpu_seconds": 25.05,
+    "pytest_peak_rss_kib": 937800,
+    "oracle_invocations": 1,
+    "failure": "tests/test_exp_686_w256_straight_through_specialist.py::test_no_canonical_result_placeholder_exists_before_oracle observed a pre-existing ignored EXP686 run.json in the reused fixture worktree",
+    "failure_scope": "outside T092 allowed_files"
+  },
+  "training_updates": 0,
+  "formal_calls_executed": 0,
+  "calibration": null,
+  "mlflow_run_id": null,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "The real all-mode smoke and all 18 focused tests passed, but the sole package oracle remained red on one pre-existing out-of-scope EXP686 fixture assertion.",
+    "The stop rule and Worker allowlist prohibit deleting the EXP686 fixture or rerunning/weaking the full suite; roots 20261302-20261305 remain unopened.",
+    "Rootless smoke is implementation evidence only, so this park is not scientific evidence for or against compact distillation.",
+    "No candidate-shaped complete timing, calibration, formal W128/W256 science, MLflow root, checked, independent, official/private, candidate, submission, promotion or release surface opened."
+  ]
+}

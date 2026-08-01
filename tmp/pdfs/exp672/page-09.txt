@@ -1,0 +1,105 @@
+LT2: Linear-Time Looped Transformers
+loop 1
+loop 2
+loop 3
+loop 4
+0.00
+0.25
+0.50
+0.75
+1.00
+first-token attention mass
+(a) attention sink
+loop 1
+loop 2
+loop 3
+loop 4
+101
+102
+103
+max FFN-residual activation (log)
+(b) massive activations
+loop 1
+loop 2
+loop 3
+loop 4
+0
+5
+10
+15
+20
+residual-stream RMS norm
+(c) residual RMS norm
+Looped Transformer (without gate)
+Looped Transformer (with SDPA output gate)
+Figure 5: Unrolled diagnostics for the Looped Transformer (𝑇=4, 24 layers). The x-axis runs through
+the unrolled computation, with dashed lines marking loop boundaries. (a) First-token attention mass
+forms a sawtooth that intensifies each loop — the sink is re-injected rather than reset. (b) Max FFN-
+residual activation follows the same compounding pattern (log scale). (c) Residual-stream RMS norm
+grows with both within-loop depth and across loop iterations. The SDPA output gate flattens (a)/(b) and
+substantially mitigates — though does not eliminate — the across-loop growth in (c).
+final iteration over-fits local statistics. Fine-to-coarse inverts the trade. Random-vote is the best overall
+but at 5× inference compute, which is hard to justify against the simple fixed interleave.
+3.4. Ablation: attention sinks and the SDPA output gate
+A natural concern with weight-shared loops is that pathologies of the underlying attention block (in
+particular, the attention sink [68]) where a small set of tokens absorb a disproportionate share of softmax
+mass [58] may compound across loop iterations: the same softmax block is re-applied to a residual stream
+that already carries the sink from the previous pass. Gated Attention [51] show that a head-specific
+sigmoid gate after Scaled Dot-Product Attention (SDPA) eliminates the sink in standard transformers. We
+ask the same question for our looped models and adopt the same fix, applied inside the looped block so
+𝑊𝜃is reused on every iteration. We add this gate to the three LT2 variants, keep the FFN width matched
+in parameter count, and re-train at 1.3B/𝑇=4 on 100B FineWeb-Edu tokens.
+Table 4: Effect of the SDPA output gate on the
+three softmax-containing LT2 variants. 1.3B / 𝑇=4
+/ 100B tokens. We report the mean over the eight
+zero-shot benchmarks of Table 2.
+Model
+Gate
+PPL (↓)
+Avg. (↑)
+Looped Transformer
+—
+9.87
+59.27
+✓
+9.39
+60.70
+Δ
+−0.48
++1.43
+LT2-Hybrid (Full+GDN)
+—
+9.31
+61.39
+✓
+9.03
+62.33
+Δ
+−0.28
++0.94
+LT2-Hybrid (GDN+DSA)
+—
+9.72
+59.23
+✓
+9.53
+59.96
+Δ
+−0.19
++0.73
+The sink is real and compounds across
+loops.
+Figure 5 unrolls the Looped Trans-
+former along the trajectory (loop 1, layer 1) →
+(loop 1, layer 24) →(loop 2, layer 1) →· · · . The
+first-token attention mass traces a sawtooth that
+intensifies across loops: the sink learned in loop 𝑡
+is re-injected into loop 𝑡+1 rather than reset, so
+each successive iteration starts already biased
+toward the sink. The maximum residual acti-
+vation follows the same compounding pattern,
+consistent with the established literature [58].
+And the residual-stream RMS norm grows along
+both within-loop depth and across loop iterations,
+reaching ∼20 times by the end of loop 4.
+9

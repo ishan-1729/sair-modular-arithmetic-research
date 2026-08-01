@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-326-cellular-width64-weight-soup-retry",
+  "status": "completed",
+  "created_at": "2026-07-12T07:25:00Z",
+  "hypothesis": "Interpolating consecutive diverse width-64 checkpoints reduces rare transition variance and improves exact rollout without inference cost.",
+  "seed": 20260714,
+  "source": {"repository_commit": "4f248cdd71cbd45dfb30f0844d02a90817b43470", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "3bc5fd10bb778ea387e34acee5836736242e1dcd054b1d3dd1ff52b0c5fa3894", "config_sha256": "98e14041d0ebce586ef4ef8f1c0e28e4b6e99f014af7598d443d8beeaa5c2098"},
+  "config": "configs/exp_326_cellular_width64_soup_retry.yaml",
+  "environment": "experiments/runs/exp-326-cellular-width64-weight-soup-retry/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "a7d55a8efce64d96b4c9d0feabe00b82"},
+  "artifacts": {"checkpoint": ".scratch/exp-326-cellular-width64-soup-retry/weights.safetensors", "checkpoint_sha256": "87d11a01976aaf5573f68d80e19fbfc24acfcdc11bf5096caa616c953ac38484", "metrics": "evals/results/exp-326-cellular-width64-weight-soup-retry/metrics.json"},
+  "decision": "reject-cellular-width64-weight-soup",
+  "notes": ["The 50/50 soup is best at 91.2 percent rollout.", "It gains exactly one point over the better endpoint but misses the 93 percent absolute gate.", "Offline weight interpolation is closed."]
+}

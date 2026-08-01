@@ -1,0 +1,25 @@
+{
+  "run_id": "exp-662-ut-memory-token-transition",
+  "source_base_commit": "e6e885a226a26e3c89f132088ed02ac823e33f47",
+  "source_branch": "codex/exp662-ut-memory-token-transition",
+  "roots": {"calibration": 20261198, "viability": 20261199, "confirmations": [20261200, 20261201]},
+  "route_order": ["memory_0", "memory_4", "memory_8", "memory_16", "memory_32", "memory_64", "wider_no_memory", "decoded_recurrent", "fixed_depth_memory_16", "default_bias_memory_16"],
+  "selection": {"split": "validation", "order": ["rollout_exact_accuracy", "transition_exact_accuracy", "negative_memory_count"], "test_access_before_selection": false},
+  "source_sha256": {
+    "config": "2488d8e9e24443b5c487fe43873f93b22b83ed6a618f4a98e692f6d26c309e01",
+    "runner": "b32c4ee85d20fc9a8de8ca0ceecf5be0e2448e81af7eb1bab9e518c705772f7d",
+    "model": "0a79d163235bd27da3ca9787901ed5f93e2348d23c9ee24ffb19cb8d5dd8d7e2",
+    "test": "d55ec1578c615616cd08cb4525b6ac784fd729652fbe6dab73812c9113174348",
+    "mechanism": "d78a39507db73887fb58cdb50380f00b0a2d928cd1c326cc16f2ffdbeadad7c6",
+    "generator": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "paper": "151499a2f992f6fe335730b90e1cbca3eae9ad7a7705607653eae0117dffbe22"
+  },
+  "fixture_identity": {"manifest_path": "../t054/fixture-manifest.json", "manifest_sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d", "entries_tsv_sha256": "d3f7eea82456c0c4f5c967d54cc6e2afa0142eb9dd41e9e1afefabbe9ba0c969", "files": 268, "bytes": 27086830},
+  "frozen_viability_split_hashes": {
+    "8": {"train": "4e69724dd51ff8ee922d5fa4b26657bf51669d3131826ed6a183842fcb4ba5b6", "validation": "943a9ca8240a2f90dcd25ea491caf4ba57666add406ea00db6a7becd0efbe230", "test": "6145eda87b8965551ae30ea9652b6e0d49b13219bcefed20047c72854a1f8fb6"},
+    "12": {"train": "c72f54a33248aa23567a6cdabdd36e5131e098aa897658628efc55b6891d4af2", "validation": "7412b3025b6223f5650a1ffcc9a67ba263451b87fc0a311f541b10d353efe1f4", "test": "0fe167946da3885d93eb77ba8436cf8eead28ff8c784d40cb75eacee96332b62"},
+    "16": {"train": "060e899cb0f172886ff9c078f1d32a69ba990f077ce509f2e6a1694700ecbd75", "validation": "a92e9a3c6537233abd7565d95efd0ba1900b0448862d3154ce8084f3f8d54111", "test": "633fddb2d4f8bc95232eb0adb6516a3d282d88609480bb95f990024133cc0538"},
+    "24": {"train": "cf5a078d51fa05fcc1e79499649c12debc8319b0332a476770756c24d241c3a6", "validation": "a005b2828f1ab1154fb3106fe21b94c95270955f78fbe9f73730f73f98966d1c", "test": "120e3edd2c140533e005af554c9de8585189cf65531bd9332a7a4f0d8b7410e9"},
+    "32": {"train": "c01190d15e19f7460651e1de97c28e32b406a90d75b6ecbf8f10f841e6db7031", "validation": "37b761d888257231a78c5ef1f5acd901e45941b8551e439649c6d8007f37c124", "test": "3ff896d4d25f647fe6faae93fe016816b55b3a6819c605bf287f5cbf9ed15341"}
+  }
+}

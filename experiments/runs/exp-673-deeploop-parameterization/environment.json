@@ -1,0 +1,9 @@
+{
+  "device": "cpu",
+  "mlflow": "3.14.0",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "torch_threads": 4,
+  "venv": "/home/ishan/.venvs/sair-mod-challenge"
+}

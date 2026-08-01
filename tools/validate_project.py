@@ -19,11 +19,23 @@ ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
 CANDIDATE_SHA256 = {
-    "manifest.json": "53d37db02c6d91343531a52006ca2f4815ae65ed69f1de84d2f9b1acdf23364c",
-    "model.py": "370d43b16eb55f5d141a8071c6c702c5794154d0e6c659999e98ec994e3c721c",
-    "weights.safetensors": "22c78b5d1db0136a8cb93d6c010cce025c251d70b62baef79bebc50e016af585",
+    "manifest.json": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
+    "model.py": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
+    "weights.safetensors": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
 }
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
+ARXIV_PATTERNS = (
+    re.compile(
+        r"https?://(?:www\.)?arxiv\.org/(?:abs|pdf|html)/"
+        r"((?:[a-z-]+(?:\.[A-Z]{2})?/\d{7}|\d{4}\.\d{4,5})(?:v\d+)?)"
+        r"(?:\.pdf)?",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\barXiv\s*:\s*((?:[a-z-]+(?:\.[A-Z]{2})?/\d{7}|\d{4}\.\d{4,5})(?:v\d+)?)",
+        re.IGNORECASE,
+    ),
+)
 REQUIRED_DIRS = (
     "knowledge",
     "configs",
@@ -31,6 +43,7 @@ REQUIRED_DIRS = (
     "evals",
     "experiments",
     "pocs",
+    "research",
     "submission",
     "sources",
     "tests",
@@ -44,6 +57,51 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def expected_research_paper_ids(catalog: dict[str, Any]) -> set[str]:
+    """Derive the selected paper IDs directly from the source catalog and citations."""
+
+    if catalog.get("schema_version") != 1:
+        raise ValueError("schema_version must be 1")
+    collections = catalog.get("collections")
+    resolved = catalog.get("resolved_arxiv_papers")
+    web_papers = catalog.get("web_papers")
+    if not isinstance(collections, list) or not isinstance(resolved, list) or not isinstance(web_papers, list):
+        raise ValueError("collection arrays are malformed")
+
+    def base(identifier: str) -> str:
+        return re.sub(r"v\d+$", "", identifier, flags=re.IGNORECASE)
+
+    identifiers: set[str] = set()
+    for collection in collections:
+        if not isinstance(collection, dict):
+            raise ValueError("collection entry is not an object")
+        for identifier in collection.get("explicit_arxiv_ids", []):
+            identifiers.add(f"arxiv:{base(str(identifier))}")
+        if not collection.get("include_arxiv_citations"):
+            continue
+        for relative in collection.get("source_files", []):
+            path = (ROOT / str(relative)).resolve()
+            try:
+                path.relative_to(ROOT)
+            except ValueError as exc:
+                raise ValueError(f"catalog source escapes repository: {relative}") from exc
+            text = path.read_text(encoding="utf-8")
+            for pattern in ARXIV_PATTERNS:
+                identifiers.update(
+                    f"arxiv:{base(match.group(1))}"
+                    for match in pattern.finditer(text)
+                )
+    for paper in resolved:
+        if not isinstance(paper, dict) or not paper.get("arxiv_id"):
+            raise ValueError("resolved_arxiv_papers entry is malformed")
+        identifiers.add(f"arxiv:{base(str(paper['arxiv_id']))}")
+    for paper in web_papers:
+        if not isinstance(paper, dict) or not paper.get("id"):
+            raise ValueError("web_papers entry is malformed")
+        identifiers.add(f"web:{paper['id']}")
+    return identifiers
 
 
 def parse_frontmatter(path: Path) -> tuple[dict[str, Any] | None, str]:
@@ -184,6 +242,137 @@ def validate_checksum_file() -> list[str]:
     return errors
 
 
+def validate_research_library() -> list[str]:
+    """Validate the frozen PDF inventory without accessing the network."""
+
+    errors: list[str] = []
+    research = ROOT / "research"
+    manifest_path = research / "manifest.json"
+    sources_path = research / "sources.json"
+    checksums_path = research / "checksums.sha256"
+    verification_path = research / "verification.json"
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return [f"research/manifest.json: cannot parse: {exc}"]
+    try:
+        sources = json.loads(sources_path.read_text(encoding="utf-8"))
+        expected_ids = expected_research_paper_ids(sources)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        return [f"research/sources.json: cannot derive paper IDs: {exc}"]
+    try:
+        verification = json.loads(verification_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return [f"research/verification.json: cannot parse: {exc}"]
+    try:
+        checksum_lines = checksums_path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as exc:
+        return [f"research/checksums.sha256: cannot read: {exc}"]
+
+    if manifest.get("schema_version") != 1:
+        errors.append("research/manifest.json: schema_version must be 1")
+    if not sources_path.is_file():
+        errors.append("research/sources.json: missing source catalog")
+    elif manifest.get("source_catalog_sha256") != sha256(sources_path):
+        errors.append("research/manifest.json: source catalog hash is stale")
+    papers = manifest.get("papers")
+    if not isinstance(papers, list) or not papers:
+        return errors + ["research/manifest.json: papers must be a non-empty list"]
+    if manifest.get("sync_complete") is not True:
+        errors.append("research/manifest.json: sync_complete must be true")
+    selected_ids = manifest.get("selected_paper_ids")
+    if not isinstance(selected_ids, list) or not all(isinstance(item, str) for item in selected_ids):
+        errors.append("research/manifest.json: selected_paper_ids must be a list of strings")
+    elif set(selected_ids) != expected_ids:
+        errors.append("research/manifest.json: selected IDs differ from source catalog")
+
+    checksums: dict[str, str] = {}
+    for line_number, line in enumerate(checksum_lines, start=1):
+        if not line.strip():
+            continue
+        try:
+            expected, relative = line.split(maxsplit=1)
+        except ValueError:
+            errors.append(f"research/checksums.sha256:{line_number}: malformed line")
+            continue
+        relative = relative.strip()
+        if relative in checksums:
+            errors.append(f"research/checksums.sha256:{line_number}: duplicate path {relative}")
+        checksums[relative] = expected
+
+    seen_ids: set[str] = set()
+    seen_paths: set[str] = set()
+    for index, paper in enumerate(papers):
+        if not isinstance(paper, dict):
+            errors.append(f"research/manifest.json: entry {index} is not an object")
+            continue
+        identifier = paper.get("id")
+        label = str(identifier or f"entry {index}")
+        if not isinstance(identifier, str) or not identifier:
+            errors.append(f"research/manifest.json: entry {index} has no id")
+        elif identifier in seen_ids:
+            errors.append(f"research/manifest.json: duplicate id {identifier}")
+        seen_ids.add(label)
+        if paper.get("status") not in {"downloaded", "cached"}:
+            errors.append(f"research/manifest.json: {label} is not successfully acquired")
+        relative = paper.get("local_path")
+        if not isinstance(relative, str) or not relative.startswith("research/papers/"):
+            errors.append(f"research/manifest.json: {label} has unsafe local_path")
+            continue
+        path = (ROOT / relative).resolve()
+        try:
+            path.relative_to((research / "papers").resolve())
+        except ValueError:
+            errors.append(f"research/manifest.json: {label} escapes research/papers")
+            continue
+        if relative in seen_paths:
+            errors.append(f"research/manifest.json: duplicate local_path {relative}")
+        seen_paths.add(relative)
+        if not path.is_file():
+            errors.append(f"research/manifest.json: missing {relative}")
+            continue
+        with path.open("rb") as handle:
+            if not handle.read(8).startswith(b"%PDF-"):
+                errors.append(f"{relative}: missing PDF signature")
+        actual_hash = sha256(path)
+        if paper.get("sha256") != actual_hash:
+            errors.append(f"{relative}: hash differs from manifest")
+        if paper.get("bytes") != path.stat().st_size:
+            errors.append(f"{relative}: byte count differs from manifest")
+        if checksums.get(relative) != actual_hash:
+            errors.append(f"{relative}: hash differs from research/checksums.sha256")
+
+    if set(checksums) != seen_paths:
+        errors.append("research/checksums.sha256: path coverage differs from manifest")
+    if seen_ids != expected_ids:
+        errors.append("research/manifest.json: paper IDs differ from source catalog")
+    disk_paths = {
+        path.relative_to(ROOT).as_posix()
+        for path in (research / "papers").rglob("*.pdf")
+    }
+    if disk_paths != seen_paths:
+        errors.append("research/papers: PDF set differs from manifest")
+
+    if verification.get("schema_version") != 1:
+        errors.append("research/verification.json: schema_version must be 1")
+    if verification.get("manifest_sha256") != sha256(manifest_path):
+        errors.append("research/verification.json: manifest hash is stale")
+    if verification.get("checksums_sha256") != sha256(checksums_path):
+        errors.append("research/verification.json: checksum-file hash is stale")
+    verified = verification.get("papers")
+    if not isinstance(verified, list):
+        errors.append("research/verification.json: papers must be a list")
+    else:
+        verified_ids = {item.get("id") for item in verified if isinstance(item, dict)}
+        if verified_ids != seen_ids:
+            errors.append("research/verification.json: paper IDs differ from manifest")
+        for item in verified:
+            if not isinstance(item, dict) or not isinstance(item.get("page_count"), int) or item["page_count"] < 1:
+                errors.append("research/verification.json: every paper needs a positive page_count")
+                break
+    return errors
+
+
 def validate_json_instances(instance_glob: str, schema_path: Path) -> list[str]:
     errors: list[str] = []
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
@@ -259,8 +448,8 @@ def validate_submission_artifact() -> list[str]:
         if path.is_file() and sha256(path) != expected_hash:
             errors.append(f"submission/{name}: candidate hash mismatch")
     clean_bytes = sum((submission / name).stat().st_size for name in required if (submission / name).is_file())
-    if clean_bytes != 352_254:
-        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 352254")
+    if clean_bytes != 1_915_885:
+        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 1915885")
     return errors
 
 
@@ -269,6 +458,7 @@ def collect_errors() -> list[str]:
     errors.extend(validate_knowledge())
     errors.extend(validate_dataset())
     errors.extend(validate_checksum_file())
+    errors.extend(validate_research_library())
     errors.extend(validate_upstream_snapshot())
     errors.extend(validate_release_boundary())
     errors.extend(validate_submission_artifact())

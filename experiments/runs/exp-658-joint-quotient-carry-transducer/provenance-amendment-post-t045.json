@@ -1,0 +1,23 @@
+{
+  "accepted_t045_records": {
+    "evals/results/exp-658-joint-quotient-carry-transducer/decision.json": "ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9",
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json": "3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f",
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json": "11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88",
+    "experiments/runs/exp-658-joint-quotient-carry-transducer/run.json": "3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22"
+  },
+  "boundary": {
+    "candidate_change": false,
+    "live_authorization": false,
+    "mlflow_run": false,
+    "promotion": false,
+    "scientific_metrics": false
+  },
+  "current_calibration_sha256": "11ea65bb23d8492aecd5985f3ddb077f9b68150f7f9bcbcc39c639c3ee9703d4",
+  "current_l0_test_sha256": "38de8ed93369891bef103d492ffcb14dc55f080c17289a8d772b116ffef711fc",
+  "historical_calibration_sha256": "19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756",
+  "historical_l0_test_sha256": "8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6",
+  "historical_source_commit": "25d21615c2c7d8b4302d2661c228b828ff07cb8b",
+  "new_clean_source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+  "rationale": "T048 preserves the accepted T045 park records byte-for-byte while cross-binding the post-park L0 test and calibration verifier to a clean source commit. This amendment authorizes no live EXP658 execution and records no scientific metric.",
+  "schema_version": "exp658-post-t045-provenance-amendment-v1"
+}

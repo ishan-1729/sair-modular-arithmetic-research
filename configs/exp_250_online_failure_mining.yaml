@@ -1,0 +1,36 @@
+run_id: exp-250-online-failure-mining
+hypothesis: model-dependent exact-failure mining with uniform replay removes the distributed rare-transition tail
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+source_checkpoint: .scratch/exp-230-quotient-routed-experts/single-head-control/weights.safetensors
+source_checkpoint_sha256: c26e34af9581b6b0f3d26e72715c512823b07250bee48a56ae63cf32cffe5baa
+model:
+  width: 32
+  hidden: 48
+  blocks: 7
+training:
+  steps: 400
+  batch_size: 256
+  candidate_pool_factor: 8
+  hard_fraction: 0.5
+  learning_rate: 0.0002
+  minimum_learning_rate: 0.00002
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+evaluation:
+  prime_bits_min: 17
+  prime_bits_max: 32
+  transition_cases: 50000
+  rollout_cases: 20000
+gates:
+  minimum_transition_gain: 0.001
+  minimum_rollout_gain: 0.02
+  minimum_challenger_transition: 0.999
+  minimum_challenger_rollout: 0.94
+  maximum_invalid_rollout_rate: 0.005
+resource_cap:
+  cpu_minutes: 10

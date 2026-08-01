@@ -1,0 +1,8 @@
+{
+  "experiment_id": "2",
+  "experiment_name": "sair-modular-arithmetic-wsl",
+  "metrics_scope": "resource-only-no-accuracy-or-selection",
+  "run_id": "baea166d0eee497ba0f9bbb3ef871913",
+  "status": "FINISHED",
+  "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db"
+}

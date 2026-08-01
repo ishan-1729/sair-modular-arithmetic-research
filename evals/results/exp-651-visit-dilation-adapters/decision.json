@@ -1,0 +1,11 @@
+{
+  "run_id": "exp-651-visit-dilation-adapters",
+  "decision": "park-before-science",
+  "reason": "T052 terminal validator found ten inherited EXP651 durable-record schema violations before pytest; the phase-reset rule prohibits repair-and-rerun or any further EXP651 recovery",
+  "scientific_hypothesis_decided": false,
+  "calibration_root_opened": false,
+  "formal_roots_opened": false,
+  "candidate005_changed": false,
+  "submission_changed": false,
+  "benchmark_answers_accessed": false
+}

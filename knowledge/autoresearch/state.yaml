@@ -1,0 +1,1135 @@
+program_status: active
+updated_at: 2026-08-01T22:04:48+05:30
+success_threshold:
+  metric: exact_overall_accuracy
+  minimum: 0.85
+  checked_public_required: true
+  independent_full_seeds_required: 5
+  minimum_each_independent_seed: 0.85
+  official_required_when_available: true
+  achieved: false
+completion_eligible: false
+parked_exp688_hypothesis:
+  run_id: exp-688-compact-hidden-trajectory-distillation
+  status: parked-calibration-candidate-runtime-headroom
+  decision: park-exp688-at-root20261306-resource-admission
+  decision_authority: T093-root20261306-complete-route-resource-admission
+  source_base_commit: 0d6554f3123c3bd0672b50a07941fff3b037ebe2
+  source_branch: codex/exp688-compact-hidden-trajectory-distillation
+  source_authentication: {checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, channel_map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0, pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340}
+  roots: {20261306: completed-calibration-resource-reject, 20261307: unopened-admission-blocked, 20261308: unopened-admission-blocked, 20261309: unopened-admission-blocked}
+  verification: {historical_focused: 35-passed, focused: 53-passed, validator: green-218-concepts-1100-records, pytest: 779-passed-in-554.72s, full_oracle_invocations: 1}
+  calibration: {wall_seconds: 565.2591884199999, process_cpu_seconds: 1898.9722680000002, cgroup_cpu_seconds: 2014.124, peak_rss_bytes: 1831120896, candidate_cold_wall_seconds: [150.45665882000003, 147.06114127600006, 146.24987629899988], candidate_guarded_wall_seconds: 300.91331764000006, candidate_ceiling_seconds: 285.0, expected_formal_wall_seconds: 13366.69620568246, admitted: false}
+  implementation_executed: true
+  calibration_executed: true
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: bef0946a17cc455286b870c2554f767d
+  limitations: [calibration-denominators-non-scientific, guarded-candidate-runtime-reject, formal-and-confirmation-roots-unopened, no-protected-candidate-submission-surface]
+parked_exp678_hypothesis:
+  run_id: exp-678-target-only-continuation
+  status: parked-package-verification
+  decision: park-package-oracle-validator-schema-after-one-bounded-owned-diagnosis
+  decision_authority: T075-package-verification-stop-rule
+  source_base_commit: 32e331ac558a9ee71b5a22f896a238b409c0cfda
+  source_branch: codex/exp678-target-only-continuation
+  source_authentication: {paper_sha256: 1abfc7644b0253119b53b86327011471a0d017c2904d648461fc9d6a10b074ce, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60}
+  mechanism: target-only-continuation-CE-mask-with-matched-mixed-endpoint-weight-and-causal-controls
+  roots: {20261262: unopened-verification-blocked, 20261263: unopened-verification-blocked, 20261264: unopened-verification-blocked, 20261265: unopened-verification-blocked}
+  verification: {focused: 9-passed, validator: red-2-owned-description-fields, pytest: unopened-validator-short-circuit, full_oracle_invocations: 1, bounded_owned_diagnosis: descriptions-and-terminal-records, rerun: false}
+  dynamic_oracle_budget: {expected_wall_seconds: 769.8915, soft_wall_seconds: 962.364375, hard_wall_seconds: 1684.13765625, observed_wall_seconds: 8.45, process_cpu_seconds: 1.41, peak_rss_kib: 29276}
+  implementation_executed: true
+  calibration_executed: false
+  training_updates: 0
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: 8bda4a779fdd45f39a1459a4a7db85e9
+  limitations: [package-oracle-red-before-pytest, bounded-owned-schema-repair-without-rerun, all-roots-unopened, M044a-scientifically-open, no-checked-private-candidate-submission-surface]
+parked_exp677_hypothesis:
+  run_id: exp-677-length-schedule
+  status: parked-package-verification
+  decision: park-verification-out-of-scope-immutable-snapshot-absent
+  decision_authority: T074-package-verification-stop-rule
+  source_base_commit: aca5dceb6f31b93c2a07f5453ec73f5cf79eb145
+  source_branch: codex/exp677-length-schedule
+  source_authentication: {paper_sha256: 6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  mechanism: legal-width-known-physical-visit-final-endpoint-curriculum
+  roots: {20261258: unopened-verification-blocked, 20261259: unopened-verification-blocked, 20261260: unopened-verification-blocked, 20261261: unopened-verification-blocked}
+  verification: {focused: 9-passed, combined_cone: 18-passed, validator: red-9-inherited-worktree-materialization-issues, pytest: unopened-validator-short-circuit, full_oracle_invocations: 1, owned_repair: none-out-of-scope}
+  dynamic_oracle_budget: {lower_wall_seconds: 575.53, expected_wall_seconds: 776.9655, soft_wall_seconds: 971.206875, hard_wall_seconds: 1359.689625, observed_wall_seconds: 9.52, process_cpu_seconds: 1.69, peak_rss_kib: 28524}
+  implementation_executed: true
+  calibration_executed: false
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: c480f0e468bd4161b74d0996d87d7238
+  limitations: [package-oracle-red-outside-owned-scope, full-pytest-unopened, all-roots-unopened, M004b-scientifically-open, no-checked-private-candidate-submission-surface]
+parked_exp676_hypothesis:
+  run_id: exp-676-lla-moving-window
+  status: parked-calibration-runtime-headroom
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T072-root-20261254-complete-route-calibration-stop-rule
+  source_base_commit: abfec8c4b80d13add8d08f1fa9dee7beba05da13
+  implementation_commit: 39cb8648ee48cb0ec0881dcf09cb8b8d346866fa
+  source_branch: codex/exp676-lla-moving-window
+  source_authentication: {paper_sha256: 76b3be4b761409e6987a4f74a7caa80f434e59422bbb836ffec7b2092c34ebfc, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  mechanism: existing-per-visit-legal-input-reinjection-plus-progressive-four-endpoint-moving-window-loss
+  roots: {20261254: completed-calibration-resource-gate-reject, 20261255: unopened-admission-blocked, 20261256: unopened-admission-blocked, 20261257: unopened-admission-blocked}
+  verification: {focused: 9-passed, validator: 198-concepts-1100-records-green, pytest: 637-passed-in-570.29s, full_oracle_invocations: 1, bounded_owned_repair: null}
+  calibration: {wall_seconds: 233.66776688199934, process_tree_cpu_seconds: 780.7, cgroup_cpu_seconds: 802.3479999999981, peak_process_tree_rss_bytes: 1081548800, expected_formal_wall_seconds: 29577.637828238538, soft_guard_wall_seconds: 36972.04728529817, hard_guard_wall_seconds: 51760.86619941744, variability: 0.16293399828404387, candidate_nominal_seconds: 533.8759380796859, candidate_guarded_seconds: 720.732516407576, candidate_ceiling_seconds: 285, artifact_bytes: 2804088, admitted: false}
+  mechanics: {reinjection_equivalence: true, exact_formal_inference_identity: true, parameters: 99824, loss_calls_per_transition: 4}
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: 4326724f468848f0a274b892f42871ff
+  limitations: [calibration-denominators-non-scientific, formal-W128-W256-and-confirmations-unopened, LLA-and-ST-M004a-remain-scientifically-open, no-checked-private-candidate-submission-surface]
+parked_exp675_hypothesis:
+  run_id: exp-675-rrt-svd-teacher-uptraining
+  status: parked-calibration-runtime-headroom
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T071-root-20261250-complete-route-calibration-stop-rule
+  source_base_commit: c38349547f3891af5cfefe78ca413f48e793b602
+  implementation_commit: 5e5cab9bd2861a4ef6e891ff33f2965297e58954
+  source_branch: codex/exp675-rrt-svd-teacher-uptraining
+  source_authentication: {paper_sha256: 680a597088a3642bdd1c4eef51f687556c0e10d5ebc0b9f44736241a51cfbfb3, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd, selected_library: torch.linalg.svd, torch: 2.5.1+cpu}
+  mechanism: exact-copied-visit-untied-teacher-centroid-shared-kernels-rank8-residual-SVD-joint-base-adapter-uptraining
+  roots: {20261250: completed-calibration-resource-gate-reject, 20261251: unopened-admission-blocked, 20261252: unopened-admission-blocked, 20261253: unopened-admission-blocked}
+  verification: {focused: 9-passed, post_repair_focused: 9-passed, validator: 196-concepts-1100-records-green, pytest: 628-passed-in-553.90s, full_oracle_invocations: 1, bounded_owned_repair: historical-soft-feature-fallback}
+  calibration: {wall_seconds: 119.77512461300103, process_tree_cpu_seconds: 388.34999999999997, cgroup_cpu_seconds: 497.6759999999995, peak_process_tree_rss_bytes: 1023324160, expected_formal_wall_seconds: 24254.46273413271, soft_guard_wall_seconds: 30318.07841766589, hard_guard_wall_seconds: 42445.30978473224, variability: 0.2700786778541766, guarded_candidate_seconds: 1863.361408432652, candidate_ceiling_seconds: 285, artifact_bytes: 9796600, admitted: false}
+  mechanics: {teacher_copy_identity: true, mean_svd_relative_error: 0.6372018326073885, mean_equal_norm_random_relative_error: 1.4133427888154984, full_base_update_norm_sum: 0.003431158934290579, full_adapter_update_norm_sum: 0.0024256141914520413}
+  calibration_control_limitation: global control instantiated at rank 8 rather than intended matched rank 128; independent runtime rejection remains binding
+  formal_science_executed: false
+  scientific_verdict: null
+  mlflow_run_id: 57868a39927d4c20904b6bcad52e3c35
+  limitations: [calibration-denominators-non-scientific, global-control-matching-unavailable, formal-W128-W256-and-confirmations-unopened, RRT-and-ST-M005-remain-scientifically-open, no-checked-private-candidate-submission-surface]
+parked_exp674_hypothesis:
+  run_id: exp-674-latent-thought-regularization
+  status: parked-topology-feasibility
+  decision: park-source-objective-mismatch-before-training
+  decision_authority: T070-source-topology-faithfulness-stop-rule
+  source_base_commit: 273961fcb98f6fa391aec99b7bb6f08f2c3140ff
+  source_branch: codex/exp674-latent-thought-regularization
+  source_authentication: {paper_pdf_sha256: a3aed7457446fa4c11c5f6cac89c38725ca42d0a66c44cc1935e2f8b6376882e, model_sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  topology: {paper_object: corresponding-weights-in-successive-untied-blocks, candidate: already-tied-shared-dilated-ConvGRU, W64_visits: 12, W128_visits: 14, W256_visits: 16}
+  blocker: literal paper objective compares each Candidate005 recurrent tensor with itself; hidden-reference distillation is not Eq. 3-4
+  feasibility: {self_cosine_distance: 1.9637069748057456e-15, maximum_parameter_gradient: 2.220446049250313e-16, numerical_zero_tolerance: 1.0e-12, exact_reload_schema_tensors_calls_outputs: true}
+  verification: {focused: 7-passed, validator: 192-concepts-1100-records-green, pytest: 619-passed-in-575.53s, full_oracle_invocations: 1}
+  implementation_executed: false
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261246: unopened-topology-feasibility-blocked, 20261247: unopened-topology-feasibility-blocked, 20261248: unopened-topology-feasibility-blocked, 20261249: unopened-topology-feasibility-blocked}
+  mlflow_run_id: ce49f8c8fc324b2284fa4e4297c22a6a
+  scientific_verdict: null
+  limitations: [source-topology-feasibility-only, no-training-or-calibration, no-W128-W256-alignment-or-intervention-evidence, hidden-reference-distillation-untested, no-checked-private-candidate-submission-surface]
+parked_exp673_hypothesis:
+  run_id: exp-673-deeploop-parameterization
+  status: parked-topology-feasibility
+  decision: park-topology-faithfulness-before-implementation
+  decision_authority: T069-topology-faithfulness-stop-rule
+  source_base_commit: f41308722d649f403aba5e1d3f712ea8a67111a1
+  source_branch: codex/exp673-deeploop-parameterization
+  source_authentication: {deeploop_pdf_sha256: 15f83b1ad3a092e00a2e2a7afe3cea91834b11ce2913653836e868673023af4d, layernorm_pdf_sha256: 3509f28429ce0c01ebf7a9fca94d70440a33d69073da9e248ddd8b65b2150f9e, checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+  topology: {candidate: PreNorm-GroupNorm-shared-dilated-ConvGRU, postnorm_residual_sublayers: 0, high_modules: 0, low_modules: 1, gradient_truncation: none, W128_visits: 14, W256_visits: 16}
+  blocker: exact Candidate005 preservation requires a non-source bypass, inert alpha cancellation, or forbidden generic runtime beta/alpha scaling
+  implementation_executed: false
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261242: unopened-topology-feasibility-blocked, 20261243: unopened-topology-feasibility-blocked, 20261244: unopened-topology-feasibility-blocked, 20261245: unopened-topology-feasibility-blocked}
+  mlflow_run_id: 969121a5c43d4847a7c3ac5ca81f69e7
+  scientific_verdict: null
+  limitations: [topology-feasibility-only, no-implementation-or-calibration, no-W128-W256-or-Jacobian-evidence, DeepLoop-and-ST-M030-remain-scientifically-open, no-checked-private-candidate-submission-surface]
+parked_exp672_hypothesis:
+  run_id: exp-672-lt2-gated-hybrid-mixer
+  status: parked-calibration-runtime-headroom
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T068-root-20261238-guarded-candidate-runtime
+  source_base_commit: 1a7de1d2e29099908d875211f86f27d2a57e3f6b
+  source_branch: codex/exp672-lt2-gated-hybrid-recovery
+  implementation_commit: 8ae0c28cd35fb07f32f6f0287d646655966a260b
+  source_authentication: {paper_sha256: 84f7f4de355928e5006e8aa85c958fb656752158e3f19bc5d7dc919922013d9b, official_commit: adc2ba2f2704ff82744700679d1d0a090314df6c, license: BSD-3-Clause, playwright: 1.61.1, chromium: 149.0.7827.55}
+  focused_verification: {passed: 12, failed: 0, pytest_seconds: 16.39}
+  final_oracle: {invocations: 2, validator_passed: true, concepts: 190, benchmark_records: 1100, pytest_passed: 612, pytest_seconds: 527.29, bounded_correction: interop-thread-idempotence}
+  inherited_schema_normalization: {exp671_metrics_before_sha256: 704443296d09110a2478f51d26edb68388de82fa03630d24f6086bd4478bc1f1, exp671_run_before_sha256: d81aa58ecbaacbf6e4ba128905c67f54071c3b70ac933ec86faa344aab0ae547, semantic_evidence_unchanged: true}
+  blocker: guarded candidate runtime 366.1685076000249 seconds exceeds frozen 285-second ceiling
+  calibration_executed: true
+  formal_science_executed: false
+  roots: {20261238: completed-calibration-runtime-headroom-park, 20261239: unopened-admission-blocked, 20261240: unopened-admission-blocked, 20261241: unopened-admission-blocked}
+  calibration: {wall_seconds: 239.64869616600026, process_tree_cpu_seconds: 929.166189, cgroup_cpu_seconds: 995.8400000000001, peak_rss_bytes: 660582400, expected_formal_wall_seconds: 16386.73782497558, eta_wall_seconds: 32773.47564995116, soft_guard_wall_seconds: 40967, hard_guard_wall_seconds: 65547, variability_headroom: 2.0, candidate_nominal_wall_seconds: 183.08425380001245, candidate_guarded_wall_seconds: 366.1685076000249, candidate_guarded_ceiling_seconds: 285, admitted: false, failed_check: candidate_inference_guarded_headroom, raw_payload_admitted_nominal_only: true}
+  mlflow_parent_run_id: 223e3be66dbc455b86c06536677c034f
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, calibration-route-evidence-non-scientific, raw-runner-admission-checks-nominal-only, formal-W128-W256-and-confirmations-unopened, ST-M025-open, no-checked-private-candidate-submission-surface]
+parked_exp671_hypothesis:
+  run_id: exp-671-fixed-point-damping-halting
+  status: parked-calibration-expected-value
+  decision: park-resource-compliance-or-feasibility
+  decision_authority: T066-root-20261234-complete-route-resource-admission
+  source_base_commit: a50a2648d072db2ce8387009e58cef0ed461c527
+  source_branch: codex/exp671-fixed-point-damping-halting
+  focused_verification: {passed: 15, failed: 0, pytest_seconds: 18.69}
+  final_oracle: {validator_passed: true, concepts: 187, benchmark_records: 1100, pytest_passed: 600, pytest_seconds: 645.78, wall_seconds: 645.95, maximum_rss_kib: 899752}
+  roots: {20261234: completed-calibration-expected-value-park, 20261235: unopened-admission-blocked, 20261236: unopened-admission-blocked, 20261237: unopened-admission-blocked}
+  calibration: {wall_seconds: 642.3526618879996, process_tree_cpu_seconds: 2507.0781890000003, cgroup_cpu_seconds: 2853.8399999999997, peak_rss_bytes: 648990720, threshold: 0.1, threshold_validation_cases: 32, candidate_nominal_seconds: 220.3517998250104, candidate_headroom_seconds: 275.439749781263, expected_formal_wall_seconds: 22030.105487427452, maximum_expected_wall_seconds: 21600, admitted: false}
+  formal_science_executed: false
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, validation-threshold-evidence-only, formal-W128-W256-component-reliability-and-confirmations-unopened, no-checked-private-candidate-submission-surface]
+parked_exp670_hypothesis:
+  run_id: exp-670-clipped-poisson-loop-curriculum
+  status: parked-package-verification
+  decision: park-before-calibration
+  decision_authority: T065-final-package-verification-stop-rule
+  source_base_commit: 84c40e18e41ac285135d54b178a9d2c736fc57a2
+  source_branch: codex/exp670-clipped-poisson-loop-curriculum
+  focused_verification: {passed: 12, failed: 0, pytest_seconds: 11.64}
+  final_oracle: {invocations: 1, validator_passed: false, pytest_opened: false, wall_seconds: 9.29, maximum_rss_kib: 29188}
+  blocker: evals/results/exp-669-stars-jvp-regularization/metrics.json evaluation schema is outside T065 allowed_files
+  calibration_executed: false
+  formal_science_executed: false
+  roots: {20261230: unopened-package-verification-blocked, 20261231: unopened-admission-blocked, 20261232: unopened-admission-blocked, 20261233: unopened-admission-blocked}
+  scientific_verdict: null
+  limitations: [bounded-SAIR-adaptation-only, no-calibration-or-accuracy-evidence, M018b-closed, no-checked-private-candidate-submission-surface]
+incumbent:
+  run_id: candidate-005-tier6-conditional-commutative-integration
+  checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+  checked_public_overall_accuracy: 0.595
+  independent_overall_accuracy: 0.593
+  checked_public_tier_1_accuracy: 1.0
+  checked_public_tier_2_accuracy: 0.99
+  independent_tier_2_accuracy: 0.99
+  checked_public_tier_3_accuracy: 1.0
+  independent_tier_3_accuracy: 0.97
+  checked_public_tier_4_accuracy: 0.98
+  independent_tier_4_accuracy: 0.97
+  checked_public_tier_5_accuracy: 0.94
+  independent_tier_5_accuracy: 0.94
+  checked_public_tier_6_accuracy: 0.96
+  independent_tier_6_accuracy: 0.98
+  tier_6_five_seed_accuracy: 0.974
+  tier_6_minimum_seed_accuracy: 0.95
+  highest_tier_above_90: 6
+  artifact_bytes: 1915885
+  sandbox_inference_seconds: 156.0
+  mlflow_run_id: d6faefe251054857aa8a24bb1b7f1594
+  mlflow_model_version: "5"
+current_hypothesis:
+  run_id: exp-655-layer-loop-compute-matched-recurrence
+  status: completed-rejected-dense-layer-loop-schedule-formulation
+  active_stage: terminal-scientific-reject
+  decision: reject-exp655-dense-layer-loop-schedule-formulation
+  decision_authority: T049-complete-full-fidelity-conjunctive-formal-gate
+  selection_basis: Bounded-faithful dense Loopies schedule falsifier selected by expected information gain after EXP660; implementation admission required one real final-source full oracle before calibration.
+  source_commit: 3047af97b79b712c2252054d909e1572ca5a6282
+  source_tree: aa0e6e4b6a411800b9765fe7eb7365980af9f520
+  source_provenance_commit: 1f7dc801d22f33c55a59764907821df19b72c72e
+  recovery_and_formal_source_commit: 3d9dc701167f8a9b7da6f20f3e9b9ec433a82c0a
+  recovery_source_pushed_before_science: true
+  formal_source_dirty: false
+  source_branch: codex/exp655-layer-loop-formal
+  source_hashes: {config: de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842, init: 4102850fae7486e43fbdfb0b02c8e8a8c8fe4190051317cc91bc04a21aceb2a3, fixtures: 4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba, model: 14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af, runner: d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6, test: 2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1}
+  verification:
+    focused: {passed: 69, failed: 0, pytest_seconds: 490.53, time_wall_seconds: 493.28, aggregate_cpu_seconds: 432.58, maximum_rss_kib: 478204}
+    validator: {passed: true, concepts: 162, benchmark_records: 1100, pinned_upstream_prefix: 82510bba00a1}
+    full_oracle: {passed: 391, failed: 0, total: 391, pytest_seconds: 594.41, time_wall_seconds: 596.30, user_cpu_seconds: 517.64, system_cpu_seconds: 31.92, aggregate_cpu_seconds: 549.56, maximum_rss_kib: 705360}
+    T048_failure_preserved: {passed: 382, failed: 9, total: 391, terminal_commit: ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575, archive: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/manifest.json}
+    record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json
+  portability: {files: 264, bytes: 26672030, inventory_sha256: b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b, independent_regular_bytes: true}
+  calibration:
+    root: 20261178
+    status: completed-resource-only
+    executed: true
+    measured: {wall_seconds: 58.29647031601053, process_cpu_seconds: 195.96106899999998, cgroup_cpu_seconds: 231.40000000000146, peak_rss_bytes: 434581504}
+    expected_without_headroom: {wall_seconds: 1865, process_cpu_seconds: 7010, cgroup_cpu_seconds: 8204}
+    soft_budget: {wall_seconds: 2410, process_cpu_seconds: 9056, cgroup_cpu_seconds: 10598}
+    hard_budget: {wall_seconds: 3342, process_cpu_seconds: 12561, cgroup_cpu_seconds: 14700, peak_rss_bytes: 543226880}
+    admission: admit-full-three-root-falsifier
+    fidelity_reduced: false
+    checkpoints_reusable: false
+  formal_roots:
+    - {root: 20261179, status: completed, init_seed: 65570001, train_seed: 65573001, eval_seed: 65574001, layer_width16_exact: 0.0, model_width16_exact: 0.01, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+    - {root: 20261180, status: completed, init_seed: 65570002, train_seed: 65573002, eval_seed: 65574002, layer_width16_exact: 0.0, model_width16_exact: 0.006666666666666667, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+    - {root: 20261181, status: completed, init_seed: 65570003, train_seed: 65573003, eval_seed: 65574003, layer_width16_exact: 0.0033333333333333335, model_width16_exact: 0.0033333333333333335, layer_width32_exact: 0.0, model_width32_exact: 0.0}
+  formal_training_executed: true
+  scientific_evaluation_executed: true
+  scientific_evidence: bounded-faithful-negative-for-exact-dense-fixed-r2-formulation
+  comparison: {width16_mean_delta: -0.005555555555555556, width16_one_sided_95_lower: -0.012222222222222223, width32_mean_delta: 0.0, width32_one_sided_95_lower: 0.0, maximum_invalid_rate: 0.8833333333333333, minimum_trained_minus_randomized: 0.0}
+  passed_gates: [full_denominators, determinism, primary_initial_identity, complete_block_noncommutation, malformed_and_leakage, wall_budget, process_cpu_budget, cgroup_cpu_budget, rss_budget, width16_delta_each_root, width32_delta_each_root]
+  failed_gates: [primary_width16_each_root, any_primary_width32_each_root, validity, randomized_weight_dependence, width16_bootstrap_lower, width32_bootstrap_lower, width32_mean_delta]
+  formal_resource: {wall_seconds: 1338.6443127590028, process_cpu_seconds: 5257.537295, cgroup_cpu_seconds: 6545.540000000001, peak_rss_bytes: 496414720, outer_wall_seconds: 1346.28, outer_aggregate_cpu_seconds: 5267.19}
+  metrics: evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json
+  checkpoint: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/checkpoints/
+  checkpoint_count: 12
+  checkpoint_manifest_sha256: 8178b37459d5ba384b4eec9f01d6ee2ec12c2a0e1932dec571298a9034cd917b
+  mlflow_run_id: ceeec9d504464b14a224150ebdf32c2b
+  mlflow_runs: {total: 16, finished: 16}
+  promotion: null
+  benchmark: null
+  run_record: experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json
+  decision_record: evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json
+  limitations: [exact-dense-two-block-fixed-r2-formulation-only, not-full-loopies-or-MoR-routing-or-capacity-recycling-or-post-training, no-checked-independent-official-private-candidate-submission-promotion-or-completion-change]
+  next_material_decision: PM-select-next-separately-authorized-experiment-by-expected-information-gain-per-unit-compute
+  evidence_capable_of_changing_next_decision: EXP655-failure-partition-down-ranks-dense-fixed-r2-schedule-only-reruns-but-leaves-adaptive-routing-capacity-recycling-and-other-families-unresolved
+parked_exp650_hypothesis:
+  run_id: exp-650-library-backed-mamba
+  status: failed-resource-calibration-oom
+  source_base_commit: 2acb944c924288369fb6a3a99e089f49228202b1
+  source_branch: codex/exp650-library-mamba-formal
+  decision_authority: T054-root20261186-dynamic-resource-admission-stop-rule
+  dependency: transformers==5.14.1
+  library_cpu_smoke: deterministic-forward-backward-checkpoint-reload-pass
+  parameters: {mamba2_hybrid: 23601, convgru_control: 24049, attention_control: 22517}
+  roots: {calibration_20261186: opened-incomplete-global-oom, viability_20261187: unopened, confirmation_20261188: unopened, confirmation_20261189: unopened}
+  preregistration_sha256: e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f
+  calibration: {admitted: false, failure: global-oom-before-complete-arm, outer_wall_seconds: 34.3, wsl_mem_total_kib: 7928476, oom_anon_rss_kib: 7400644, mlflow_run_id: b7f9d448b79b4467989b2e0ecbb0f357, mlflow_status: KILLED}
+  scientific_evidence: none-calibration-incomplete
+  run_record: experiments/runs/exp-650-library-backed-mamba/run.json
+  metrics: evals/results/exp-650-library-backed-mamba/metrics.json
+  verification: {fixture_count: 268, exact_cone_passed: 34, focused_passed: 8, validator_passed: true, full_oracle_passed: 405, full_oracle_failed: 0}
+  limitations: [resource-park-not-scientific-rejection, calibration-incomplete-no-valid-cpu-variability-eta-guards-or-scientific-metrics, no-retry-reduced-fidelity-or-further-EXP650-recovery, no-candidate-benchmark-submission-promotion-or-completion-change]
+rejected_exp664_hypothesis:
+  run_id: exp-664-sprm-boundary-perturbation
+  status: completed-rejected-at-w128-primary-gate
+  source_base_commit: 1022ca19b26b57985493f77ae3a0c78c43f60238
+  source_branch: codex/exp664-sprm-boundary-perturbation
+  decision_authority: T059-frozen-W128-first-conjunctive-gate
+  mechanism: ST-M019b-bounded-faithful-state-scaled-Gaussian-perturbation-at-detached-TBPTT-boundaries
+  roots: {calibration_20261206: completed-admitted, formal_20261207: completed-rejected, confirmation_20261208: unopened, confirmation_20261209: unopened}
+  preregistration_sha256: 8589090d7f4238ad7920d0b53bac830d73f5bb4833c65da47c0d7f88912f0009
+  parameters_each: 99824
+  optimizer_updates_each_trained_route: 400
+  formal_primary:
+    width: 128
+    transitions: 3000
+    rollouts: 300
+    transition_exact_accuracy: 0.9923333333333333
+    rollout_exact_accuracy: 0.43666666666666665
+    rollout_transition_exact_accuracy: 0.6847395833333333
+    transition_invalid_rate: 0.0
+    rollout_any_invalid_rate: 0.006666666666666667
+  inference_identity: {logits_equal: true, quotient_equal: true, rng_unchanged: true, wall_ratio: 0.9726817396482675}
+  calibration: {admitted: true, wall_seconds: 63.72, expected_wall_seconds: 4989.4431208543265, eta_wall_seconds: 7571.158472223232, hard_guard_wall_seconds: 15143}
+  formal_resources: {wall_seconds: 665.5982705259994, process_cpu_seconds: 2650.648281, cgroup_cpu_seconds: 2897.148000000001, peak_rss_bytes: 1229832192}
+  mlflow_parent_run_id: 80c03467e7d54d7eaed8476081c91518
+  run_record: experiments/runs/exp-664-sprm-boundary-perturbation/run.json
+  metrics: evals/results/exp-664-sprm-boundary-perturbation/metrics.json
+  verification: {focused_passed: 15, validator_passed: true, full_oracle_passed: 465, full_oracle_failed: 0}
+  limitations: [exact-bounded-SAIR-adaptation-only, later-widths-controls-and-confirmations-gate-blocked, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+rejected_exp665_hypothesis:
+  run_id: exp-665-attractor-equilibrium-family
+  status: completed-rejected-at-w128-primary-gate
+  source_base_commit: c042a7fa68ab143dbba0091928b475ce5de1bf65
+  source_branch: codex/exp665-attractor-equilibrium-family
+  decision_authority: T060-frozen-W128-first-conjunctive-gate
+  mechanism: ST-M021-bounded-proposal-injected-library-Anderson-attractor-equilibrium-family
+  dependency: {name: torchdeq, version: 0.1.0, license: MIT}
+  roots: {calibration_20261210: completed-admitted, formal_20261211: completed-rejected, confirmation_20261212: unopened, confirmation_20261213: unopened}
+  preregistration_sha256: 55b6abcbe8fbbeb7a32dcff5ac7b8b63af59d4459e6eff753aa6dcd1cd9cba5d
+  parameters_each: 142728
+  trainable_parameters_each: 42904
+  optimizer_updates_each_trained_route: 400
+  formal_primary:
+    route: anderson_phantom
+    width: 128
+    transitions: 3000
+    rollouts: 300
+    transition_exact_accuracy: 0.9993333333333333
+    rollout_exact_accuracy: 0.85
+    rollout_transition_exact_accuracy: 0.9268229166666667
+    transition_invalid_rate: 0.0
+    rollout_any_invalid_rate: 0.0033333333333333335
+    candidate_projected_wall_seconds: 168.97306546669765
+  calibration: {admitted: true, wall_seconds: 75.35068526600298, expected_wall_seconds: 6587.048488575692, eta_wall_seconds: 9883.681929811231, hard_guard_wall_seconds: 19768}
+  formal_resources: {total_outer_wall_seconds_including_resume: 502.68, total_user_cpu_seconds_including_resume: 1930.77, maximum_rss_kib: 667912}
+  mlflow_parent_run_ids: {calibration: b1d34996c2374016ba774b0a65fb53e0, formal_training_red: 01e6b588c5204dd2848f2b4bbd9665d0, formal_evaluation: 58aada0b54f34d3983d3fadd6da4a23a}
+  run_record: experiments/runs/exp-665-attractor-equilibrium-family/run.json
+  metrics: evals/results/exp-665-attractor-equilibrium-family/metrics.json
+  verification: {focused_passed: 17, validator_passed: true, full_oracle_passed: 482, full_oracle_failed: 0}
+  limitations: [exact-bounded-SAIR-primary-adaptation-only, solver-gradient-noise-damping-controls-and-convergence-basin-diagnostics-gate-blocked, W256-and-confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+parked_exp666_hypothesis:
+  run_id: exp-666-gram-posterior-prior-guidance
+  status: parked-before-viability-runtime-headroom
+  source_base_commit: e18978edaf6e84197a1ca6bb2ac3d7b03ea319cd
+  source_branch: codex/exp666-gram-posterior-prior-guidance
+  decision_authority: T061-root-20261214-corrected-complete-route-dynamic-admission
+  mechanism: ST-M022a-bounded-single-trajectory-posterior-to-prior-GRAM-guidance
+  roots: {calibration_20261214: completed-runtime-headroom-park, viability_20261215: unopened, confirmation_20261216: unopened, confirmation_20261217: unopened}
+  preregistration_sha256: 8503043eb25a8157eedb75b87127854d47cc28c8be884c241bea9f75aa2bb010
+  parameters_each: 175600
+  trainable_parameters_each: 75776
+  formal_training_executed: false
+  scientific_evaluation_executed: false
+  scientific_metrics: null
+  scientific_verdict: null
+  calibration:
+    admitted: false
+    failed_check: candidate_inference
+    observed: {wall_seconds: 151.01981618699938, process_tree_cpu_seconds: 1242.764593, cgroup_cpu_seconds: 1318.112000000001, peak_rss_bytes: 557408256}
+    projection: {expected_wall_seconds: 14061.369512323654, eta_wall_seconds: 26266.122984127225, hard_guard_wall_seconds: 52533}
+    candidate_runtime: {nominal_wall_seconds: 226.62907599999258, variability_headroom: 1.8679633559950966, headroom_wall_seconds: 423.33480937101393, ceiling_seconds: 285.0}
+  mlflow_parent_run_id: 45c7d72c94bb4021a731d2210b5f5f8b
+  run_record: experiments/runs/exp-666-gram-posterior-prior-guidance/run.json
+  metrics: evals/results/exp-666-gram-posterior-prior-guidance/metrics.json
+  verification: {focused_passed: 24, validator_passed: true, full_oracle_passed: 506, full_oracle_failed: 0}
+  limitations: [calibration-diagnostics-non-scientific, formal-W128-W256-controls-and-confirmations-unopened, M022b-LPRM-majority-breadth-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+rejected_exp652_hypothesis:
+  run_id: exp-652-answer-latent-trm
+  status: completed-rejected-at-viability
+  source_base_commit: 746de1c69d7ae04a90c597c3bdcafea8ce5025b3
+  source_branch: codex/exp652-answer-latent-trm
+  decision_authority: T055-frozen-root20261191-conjunctive-gate
+  mechanism: ST-M010a-bounded-faithful-answer-y-latent-z-with-declared-SAIR-convolution-and-endpoint-BCE-adaptations
+  tab_trm_reproduced: false
+  roots: {calibration_20261190: completed-admitted, viability_20261191: completed-reject, confirmation_20261192: unopened, confirmation_20261193: unopened}
+  preregistration_sha256: 04cffffc84d3c887245ea6ddc8c9e698e62492493861c7bc6982e5b6bd8537cf
+  parameters_each: 8594
+  optimizer_updates_each: 300
+  trajectory_examples_each: 9600
+  exact_accuracy:
+    primary_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+    decoded_cellular_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+    no_latent_ema: {W16: 0.0, W24: 0.0, W32: 0.0}
+  primary_ema_bit_accuracy: {W16: 0.5559895833333334, W24: 0.5447048611111112, W32: 0.5377604166666666}
+  gate: {passed: false, passed_checks: [raw_reload, ema_reload, parameter_match, example_update_match], failed_checks: [w16, w24, w32, gain_over_decoded_w24, gain_over_no_latent_w24, gain_over_decoded_w32, gain_over_no_latent_w32, trained_weight_dependence, latent_causality, validity]}
+  calibration: {admitted: true, wall_seconds: 7.184809631999997, process_cpu_seconds: 22.409999999999997, cgroup_cpu_seconds: 20.855999999999995, peak_rss_bytes: 486719488, expected_wall_seconds: 121.63079052562516, soft_wall_seconds: 152.03848815703145, hard_wall_seconds: 243.26158105125032}
+  viability_resources: {wall_seconds: 61.26638212700004, process_cpu_seconds: 258.82, cgroup_cpu_seconds: 239.836, peak_rss_bytes: 486707200}
+  mlflow: {calibration_run_id: 391833b7e15a4ac98d8e4482fc93b814, viability_run_id: 588884abfac24cdc981c9f9be7c73760}
+  run_record: experiments/runs/exp-652-answer-latent-trm/run.json
+  metrics: evals/results/exp-652-answer-latent-trm/metrics.json
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 416, full_oracle_failed: 0}
+  limitations: [exact-formulation-only-not-source-paper-or-Tab-TRM, Q-learned-always-incorrect-class, confirmations-and-component-verdicts-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+rejected_exp661_hypothesis:
+  run_id: exp-661-loopformer-width-extrapolation
+  status: completed-rejected-at-viability
+  source_base_commit: 15d50b014b9bcc8f96c6c7f1504f2722b1cc75b8
+  source_branch: codex/exp661-loopformer-width-extrapolation
+  decision_authority: T056-frozen-root20261195-conjunctive-gate
+  mechanism: ST-M013c-bounded-faithful-loopformer-with-declared-SAIR-bit-token-endpoint-adaptations
+  loopvit_pixel_path_reproduced: false
+  learned_exit: false
+  roots: {calibration_20261194: completed-admitted, viability_20261195: completed-reject, confirmation_20261196: unopened, confirmation_20261197: unopened}
+  preregistration_sha256: ecd97076d67825f9c29e3b76ee0b712b738947796980e4e70fd3c9735de73275
+  parameters_each: 8553
+  optimizer_updates_each: 300
+  trajectory_examples_each: 9600
+  recurrent_block_calls_each: 3597
+  exact_accuracy:
+    loopformer_budget_1_2_4_8_16: {W16: [0.0, 0.0, 0.0, 0.0, 0.0], W24: [0.0, 0.0, 0.0, 0.0, 0.0], W32: [0.0, 0.0, 0.0, 0.0, 0.0]}
+    all_controls_budget8: {W16: 0.0, W24: 0.0, W32: 0.0}
+  primary_bit_accuracy_budget8: {W16: 0.544921875, W24: 0.5438368055555556, W32: 0.5182291666666666}
+  gate: {passed: false, passed_checks: [deeper_budget_retention, zero_invalid, reload_exact, parameter_match, example_update_call_match], failed_checks: [w16, w24, w32, all_transfer_gains, trained_weight_dependence, time_step_effect, shortcut_effect, short_loss_effect, consistency_effect]}
+  calibration: {admitted: true, wall_seconds: 6.6381154270000025, process_cpu_seconds: 18.580000000000002, cgroup_cpu_seconds: 17.432000000000016, peak_rss_bytes: 476811264, variability_headroom: 1.631761568192944, expected_wall_seconds: 580.3424265229701, eta_wall_seconds: 946.9804679920201, soft_wall_seconds: 1183.725584990025, hard_wall_seconds: 1893.9609359840401}
+  viability_resources: {wall_seconds: 83.64743734800004, process_cpu_seconds: 356.79, cgroup_cpu_seconds: 402.08799999999997, peak_rss_bytes: 489570304}
+  mlflow: {calibration_run_id: f3bbbf736a114c7193ce4c8d4e42ff92, viability_run_id: e68ad3f4bdc7460394e7cb89c1ae4ba7, statuses: [FINISHED, FINISHED]}
+  run_record: experiments/runs/exp-661-loopformer-width-extrapolation/run.json
+  metrics: evals/results/exp-661-loopformer-width-extrapolation/metrics.json
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 426, full_oracle_failed: 0}
+  limitations: [exact-small-endpoint-formulation-only-not-source-paper, confirmations-and-independent-component-verdicts-unopened, hidden-collinearity-and-logit-stagnation-observed, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+parked_exp662_hypothesis:
+  run_id: exp-662-ut-memory-token-transition
+  status: parked-final-bytes-full-oracle-unverified
+  source_base_commit: e6e885a226a26e3c89f132088ed02ac823e33f47
+  source_branch: codex/exp662-ut-memory-token-transition
+  decision_authority: T057-package-verification-stop-rule
+  mechanism: bounded-faithful-UT-learned-memory-tokens-shared-cell-ACT-with-declared-SAIR-transition-adaptation
+  roots: {calibration_20261198: completed-admitted-diagnostic, viability_20261199: completed-diagnostic-zero-floor, confirmation_20261200: unopened, confirmation_20261201: unopened}
+  preregistration_sha256: 823219cb12ebae19be926a8366ef18d995f572e36938d0dcd06fddba90cb22a5
+  selected_route: memory_0
+  parameters_each: 9818
+  optimizer_updates_each: 300
+  trajectory_examples_each: 9600
+  recurrent_block_calls_each: 57600
+  exact_accuracy:
+    all_validation_memory_sweep: 0.0
+    selected_transition: {W16: 0.0, W24: 0.0, W32: 0.0}
+    selected_rollout: {W16: 0.0, W24: 0.0, W32: 0.0}
+    all_route_rollout: {W16: 0.0, W24: 0.0, W32: 0.0}
+  selected_bit_accuracy: {W16: 0.5833333333333334, W24: 0.5525173611111112, W32: 0.5172526041666666}
+  gate: {passed: false, passed_checks: [checkpoint_reload, matched_examples_updates_calls, parameter_match, valid_rollouts, validation_test_separation], failed_checks: [selected_w16, selected_w24, selected_w32, transfer_gain_each_control, trained_weight_dependence, memory_causality, representation_causality]}
+  calibration: {admitted: true, projected_wall_seconds: 106.24938941377968, soft_guard_wall_seconds: 266, hard_guard_wall_seconds: 425, peak_rss_bytes: 483131392}
+  viability_resources: {wall_seconds: 122.51121326700013, process_cpu_seconds: 486.343652, cgroup_cpu_seconds: 628.4319999999998, peak_rss_bytes: 504414208}
+  mlflow: {viability_run_id: 1be3cfe3880347df8e4fc4377cff99c7, status: FINISHED}
+  run_record: experiments/runs/exp-662-ut-memory-token-transition/run.json
+  metrics: evals/results/exp-662-ut-memory-token-transition/metrics.json
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 429, full_oracle_errors: 7, isolation_repair_targeted_passed: 18, duplicate_full_oracle_run: false}
+  limitations: [final-bytes-full-oracle-red-root-evidence-diagnostic-only, exact-small-transition-formulation-not-scientifically-rejected, zero-floor-limits-causal-ablation-interpretation, confirmations-unopened, no-checked-independent-official-private-benchmark-candidate-submission-promotion-or-completion-change]
+parked_exp660_hypothesis:
+  run_id: exp-660-symbol-equivariant-formal
+  status: parked-before-calibration-and-science-full-oracle-red
+  source_commit: 5febd058e89b27f14a7fc267ed60d1c57a11fc94
+  decision_authority: T047-clean-full-oracle-stop-rule
+  formal_seed: 20261177
+  formal_seed_status: unused-unopened-for-training
+  scientific_evidence: none
+  run_record: experiments/runs/exp-660-symbol-equivariant-formal/run.json
+  decision_record: evals/results/exp-660-symbol-equivariant-formal/decision.json
+  verification: {focused_passed: 54, full_oracle_passed: 367, full_oracle_failed: 6}
+  limitations: [preserved-terminal-park, no-calibration-training-checkpoint-or-exact-scientific-metrics, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp658_hypothesis:
+  run_id: exp-658-joint-quotient-carry-transducer
+  status: parked-current-execution-formulation-after-two-repair-limit
+  active_stage: terminal-park
+  decision: park
+  decision_authority: T045-PM-two-repair-limit
+  selection_basis: T014 directs one joint quotient/carry learned-transducer package after durable EXP657 publication, ranked next by expected information gain per remaining wall/CPU compute.
+  source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  source_parameters: 99824
+  geometry_parameters_each_arm: 103522
+  l0_evidence:
+    status: verified-static-and-focused-tests-only
+    decision_authority: T024-approve-L0-publication-and-L1-scaffold
+    frozen_hashes:
+      config: 7f433b48b2eb24175dab6971569cb0b703c0117a986dabab74b5229287e3b3c6
+      init: e323af4b994d471feef56a86ee0d993d316672e8786b5961ef686cddbb57547a
+      model: 44ccbdbada2110313c982cff211e7e9fcc28c13a6f0ca8f793817a3f99c65dda
+      data: c998e47e0867ed97f7ce176c8854835bf8b687cd33ff018bfef70443327eefba
+      run: da669dc0771bc69708f96e2e23558b3f756fd9af8758f3240571a3c12a211d15
+      preregistration: 255ad881f4879ea6aacf6226866b4ba71eb21adc02f1d5e8b8a97a32dfec125f
+      test: c54dd895d0b6a6ccbe9744ab20ccf3c6b10429738c3009825b4ce919f8457dd7
+  l1_scaffold_publication:
+    status: verified-inert-unrun-infrastructure-only
+    decision_authority: T041
+    regression_evidence: PM-347-tests-passed-reused-governance-only
+    current_hashes:
+      config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f
+      calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756
+      preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56
+      calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5
+      l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6
+    operation_registry: {implementation: immutable-MappingProxyType, immutable: true, entries: []}
+    prior_measurement_authorization: null
+    prior_warmup_records: []
+    exact_component_records: []
+    missing_exact_component_categories: [q_shared_generation_case, q_arm_forward_case, carry_shared_generation_item, carry_arm_forward_item, determinism_extra_rollout_case, checkpoint_cycle, width256_profile_case]
+    missing_coverage: {categories: 7, canonical_physical_records: 19, exact_width_arm_source_classes: 17, explicit_coverage_equivalences: []}
+    blocker: empty-immutable-operation-registry-no-prior-authorization-no-warmup-records-no-19-exact-component-records-across-17-literal-classes-no-coverage-equivalences
+    measurement_authorization_constructible: false
+    execution_authorized: false
+    one_active_experiment_package: exp-658-joint-quotient-carry-transducer
+  scaffold_receipt_history:
+    source: docs/goals/optimize-sair-goal-run/state.yaml
+    T029: {disposition: superseded, config: 6a2945cdd12e6a957d4bb83abc15d745cd60c60b7c75ff2ef0492970f826e4f6, calibration: 10504fb573389e395e47a7c2d403c02f3e95a9304d7f8cd3815d37b06439e258, preregistration: 6bbff883424a171cbb11323d943a3ba388d02a3d3fd4853486dcdb3fcc6ebdf5, calibration_test: 86d578c1158796c014ec133ada9ebcb354233d7bb213a45d296e2633052c0722}
+    T030: {disposition: required-repair, hashes: null}
+    T031: {disposition: superseded, config: 30ce404b82b6ac7dac4afdff40f14cafc442d5545b1e592312cab0d3792b805d, calibration: 90a6c2fe6dac7d675ff72d8f93878c26042092c2011c01be2a5438e3cc6e7f7a, preregistration: 59952b77856f35bb420b98975b66298f7144051d4f17f8d9698ca8878522be05, calibration_test: 8a50c038f5ac8537ab0499bb9c1057cf985928af87725a803c53c96af746fbec}
+    T032: {disposition: required-repair, hashes: null}
+    T033: {disposition: blocked-no-receipt-hashes, hashes: null}
+    T034: {disposition: approved-resumed-repair-not-publication, hashes: null}
+    T035: {disposition: expanded-resumed-repair, hashes: null}
+    T036: {disposition: superseded, config: 5ab77a8bf4602863290189b4241ab0380e66e69baedfb20d0a5c716f48c22e9e, calibration: 53393f546789f8201ab1f09c3d1b3bcab3b1e17a4a1e280ea456617bee297107, preregistration: ba4a6ff977c463e1fc81a462565f87e349b799d811e8690d1193d0f449f5f221, calibration_test: 79f1440c4a8a5ed8379f3bffc435a37925e604fcffcf17fd07eceb380a70eb4a, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+    T037: {disposition: approved-inert-publication-not-enacted, hashes: null}
+    T038: {disposition: superseded, config: 3fe4af5c83f7d78ac2b088bcb23e3b220b809ea1b650dac1ce7a6697f540c257, calibration: 0d44ef5b57991a59e5b0ff5f71f750395682e9c4bd9c45ad4af72a844bdefbc3, preregistration: 0dd8aa243f8b6c152c15a328aeeddf6f45ca68cda18b4ab8f9e1b24fcc7ab623, calibration_test: 41b7c29c1334e82a9d2a83cc9a67b404b1cf96d3a661ab06caf95641dca79394, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+    T039: {disposition: approved-inert-publication-not-enacted, hashes: null}
+    T040: {disposition: current-T041-approved, config: f6a22d7b26f253bf3025c8a3a15ef9541bde2b125a1eaef0963451388f4cba4f, calibration: 19455e8bbc7408d35bcfb7ec2ed7139578d081582882a4a1054ba3b6733fc756, preregistration: 15b20cdc6d800d6c3a40f58e1e91f2155b2c59ad6fc2dcd6a6ca496708a85b56, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6}
+  t045_terminal_park:
+    status: parked-current-execution-formulation-after-two-repair-limit
+    source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b
+    source_commit_pushed_ref: refs/heads/codex/exp658-l2-decision-recovered
+    source_hashes: {config: 59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177, execution: 1d4e7ecb86d6c213f67e87a8f7ddda62e3a319affe2d6ce20bb7cd1e247e0544, l0_test: 8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6, execution_test: ac41e34938a0860b2b943ffd140a46851e29e59af4247a42b7af7e848dacc560, calibration_test: 11b03347d6651f68cb3de2b73564a0394f9010197f169ddf7268adb542d96ef5, source_checkpoint: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd}
+    records:
+      run: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json, sha256: 3fc7788268ef54d097edf3db198c19782507f023843acd1f9c7ee17e3f6a5e22}
+      environment: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/environment.json, sha256: 3b4886ab656c1c64f9add7248aa95fec0d99f0492a71e43ca64148ce61a2216f}
+      failure: {path: experiments/runs/exp-658-joint-quotient-carry-transducer/failure.json, sha256: 11aff543b63ae8e4cf7144d612d64d8d8c63146fc734e900db30d9e0d46f6e88}
+      evaluation_decision: {path: evals/results/exp-658-joint-quotient-carry-transducer/decision.json, sha256: ebf0e3d997d52100c68b3d6d838306b6e1d291852f3d9afe4a1721487dfc36e9}
+    failed_attempt:
+      authorization: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/authorization.json, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json, bytes: 2933, file_sha256: 7e288cd25719fc999c78623a91cceb629a3e1697796e0b528a3e252aeb84933f, authorization_sha256: acdba3226161c4492f37a8a276ae0417527ae9aa827980de6971ac89bbf6cf69, non_scientific: true}
+      challenger_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/challenger.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/challenger.safetensors, bytes: 415912, sha256: 2b4a1ded31711ee8425457fe516358608f22da40c6f1ce374897bc0174c442c9, non_scientific: true}
+      control_checkpoint: {original_path: experiments/runs/exp-658-joint-quotient-carry-transducer/l1-checkpoints/control.safetensors, preserved_path: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/l1-checkpoints/control.safetensors, bytes: 415912, sha256: 8cfa448b59b21ea8e187e3e771d279dad9b73b6b67744e9b0fd94c0897fc5e6b, non_scientific: true}
+      failure: {phase: L1-post-repeat3-after-checkpoint-roundtrips-and-width256-profiling-before-persistence, exception: "KeyError: 'checkpoint_sha256'", source: experiments/exp_658_joint_quotient_carry_transducer/execution.py:547}
+      resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+    repair_limit: {attempts: 2, committed: 0, source_restored_to_pushed_bytes: true, third_repair_or_rerun_authorized: false}
+    validation_reused: {source_commit: 25d21615c2c7d8b4302d2661c228b828ff07cb8b, focused: 51-passed-in-492.40-seconds, full: 351-passed-in-543.06-seconds, basis: exact-restored-source-and-test-hashes}
+    boundary: {l1_canonical_calibration_persisted: false, l1_scientific_values_persisted: false, l2_executed: false, mlflow_run_id: null, candidate_005_changed: false, checked_independent_official_private_benchmarks_changed: false, goal_completion: false}
+    resume: prohibited-for-current-formulation-requires-materially-distinct-new-vertical-package-and-fresh-authorization
+  run_record: experiments/runs/exp-658-joint-quotient-carry-transducer/run.json
+  metrics: null
+  checkpoint: null
+  challenger_checkpoint: null
+  mlflow_run_id: null
+  root: null
+  authorization: .scratch/exp-658-joint-quotient-carry-transducer/failed-attempt-25d216-runtime-keyerror/authorization.json
+  output: experiments/runs/exp-658-joint-quotient-carry-transducer
+  resources: {wall_seconds: 381.7, wall_meter: outer-tool-wall-clock, aggregate_cpu_seconds: null, peak_rss_bytes: null}
+  scientific_evidence: none-failed-before-canonical-L1-persistence-L2-never-ran
+  accuracy: null
+  causality: null
+  promotion: null
+  benchmark: null
+  absent_evidence: [canonical-observed-runtime-or-resource-calibration, persisted-L1-scientific-values, message-causality-effect, exact-answer-or-rollout-accuracy, checked-independent-official-or-private-benchmark, candidate-promotion-or-mechanism-success]
+  prior_sole_next_package: separately-reviewed-fixed-internal-operations-and-exact-component-measurement-scaffold-construction-and-unit-tests-only
+  prior_next_package_status: closed-by-T045-terminal-park
+  next_material_decision: select-highest-expected-information-gain-materially-distinct-family-per-unit-wall-and-aggregate-CPU-compute
+  evidence_capable_of_changing_next_decision: separately-authorized-full-fidelity-vertical-falsifier-with-exact-scientific-metrics-and-separate-wall-aggregate-CPU-RSS-evidence
+last_rejected_hypothesis:
+  run_id: exp-657-coupled-redundant-learned-state
+  statement: Two separately learned persistent residue-belief planes with learned syndrome, corrections, fusion, and decoder may recover naturally observed errors better than an exactly parameter-matched single-persistent-state control at widths 16 and 32.
+  status: rejected-before-L2-resource-gate
+  evidence_status: Resource-only calibration exercised every arm, update kind, planned evaluation component, causal ablation shape, collapse diagnostic, width-256 shape, serialization/reload/hash path, MLflow publication, and child-exit boundary without releasing scientific accuracy or selection evidence.
+  roots:
+    consumed_failed_calibration: 20261170
+    superseded_never_authorized: [20261171, 20261172]
+    consumed_complete_calibration: 20261173
+    reserved_formal_unopened_unauthorized: [20261174, 20261175]
+  matched_geometry:
+    parameters_each_arm: 17832
+    parameter_count_difference: 0
+    separate_channel_parameters: true
+    parameter_signature_sha256: 893bf71c262ce989bb8d19d4a7bafd687c6b93c7197527ac7cd59941f83d49a6
+  calibration:
+    receipt_sha256: f8471f45acd0eb8cae508c0436b17f6d669ff123ba2a09beefee99f0ab698616
+    completion_sha256: 261d65af75acf434ac7d50300cce981018965d9a4a62c0904cdf48b87a9c40dc
+    mlflow_run_id: baea166d0eee497ba0f9bbb3ef871913
+    resources: {monotonic_wall_seconds: 19.261643565999293, process_user_plus_system_aggregate_cpu_seconds: 39.670866, peak_rss_bytes: 487632896}
+    projected_formal: {monotonic_wall_seconds: 315.67735660561084, process_user_plus_system_aggregate_cpu_seconds: 1135.1608660000004}
+    soft_budget: {monotonic_wall_seconds: 483.03303216141694, process_user_plus_system_aggregate_cpu_seconds: 1703.3008660000005}
+    hard_runaway_ceiling: {monotonic_wall_seconds: 724.5495482421254, process_user_plus_system_aggregate_cpu_seconds: 2554.9512990000007}
+    peak_rss_guard_bytes: 609541120
+    width256_100_case_projection: {monotonic_wall_seconds: 344.9691852749538, process_user_plus_system_aggregate_cpu_seconds: 1279.5000000000002}
+    measured_width256_component: {cases: 2, bit_steps: 512, monotonic_wall_seconds: 4.599589136999384, process_user_plus_system_aggregate_cpu_seconds: 17.060000000000002}
+    width256_projection_formula: (measured component / 2 cases) * 100 cases * 1.50
+    fixed_short_wall_cap_used: false
+    fidelity_reduced: false
+    scientific_accuracy_or_selection_reported: false
+  promotion_gate: L2 remains conjunctively bound to at least 50 percent recovery of exactly 256 held-out natural control errors, at least two-point dependence on each channel, at least three width-32 rollout points, no more than one width-16 retention point or 0.05 transition point lost, trained-width nonzero rollout, collapse/diversity, validity, determinism, integrity, and width-256 runtime gates.
+  decision:
+    authority: T014
+    verdict: approve-publication-and-reject-before-L2
+    rationale: The projected 100-case width-256 wall and aggregate-CPU resources are 1.437 and 5.331 times the conjunctive 240/240 gate; unmeasured L2 accuracy cannot make this exact geometry promotable.
+    evidence_scope: resource-gate-only-no-scientific-accuracy-recovery-ablation-collapse-or-mechanism-claim
+  next_gate: none-current-geometry-closed-before-L2
+  authorization: {formal: absent, formal_roots_opened: [], formal_roots_closed_unopened: [20261174, 20261175], L3: prohibited}
+parked_exp648_hypothesis:
+  run_id: exp-648-structured-trajectory-consistency
+  statement: A fixed K=8 exact endpoint loss on natural width-256 pre-first-error trajectories may reduce accumulated autonomous drift by at least three rollout points without synthetic state corruption or width-64/128 retention loss.
+  promotion_gate: The 200-update matched screen changes only lambda_endpoint from 0.0 to 0.1 and advances only if width-256 exact rollout gains at least three points, mean clipped first-error movement is nonnegative, width-64/128 deltas are each at least minus one point, width-256 transition is at least 99.5 percent, invalid rollout is at most one percent, and determinism/integrity pass. A pass authorizes only a separately judged two-pair 400-update confirmation, never direct promotion.
+  status: root162-consumed-complete-non-scientific-awaiting-completion-audits-and-separate-screen-judge
+  evidence_status: The accepted immutable corpus remains unchanged. Root 20261161 remains consumed-complete historical evidence and cannot authorize repaired bytes. Root 20261162 completed one fresh warmup and three fresh full-fidelity timed repeats with zero cache reuse, no fidelity reduction, and five recorded FINISHED resource-only MLflow runs. Its nine canonical evidence files are preserved byte-for-byte and verifier-valid. This is non-scientific readiness evidence only; no model update, accuracy, selection, screen root, benchmark, confirmation, promotion, or Goal-completion surface opened, and screen remains prohibited pending completion audits and a separate Judge.
+  readiness_gate:
+    evidence_class: historical-pre-r2-repair-approvals-not-current-root162-authorization
+    task: T-EXP648-SCREEN-READINESS
+    prior_closure_audits: [APPROVE, APPROVE]
+    recovery_closure_audits: [APPROVE, APPROVE]
+    sequential_judge_gate: T648
+    sequential_judge_result: APPROVE
+    calibration_completion_audits: [APPROVE, APPROVE]
+    calibration_completion_judge_result: approved-complete-non-scientific-readiness-calibration
+    status: root162-consumed-complete-non-scientific-completion-audit-required
+  authorization:
+    preregistration: judge-approved
+    implementation: repaired-scaffold-root161-preserved-root162-full-fidelity-calibration-consumed-complete-awaiting-completion-audit
+    calibration: roots-20261159-and-20261160-permanently-denied-root-20261161-consumed-complete-historical-only-root-20261162-consumed-complete-non-scientific-sealed-non-retryable
+    corpus: consumed-complete
+    screen: prohibited-pending-separate-screen-launch-judge-and-absent-judge-authorization
+    confirmation: prohibited-until-screen-pass-and-separate-judge
+    candidate_or_tier7_promotion: prohibited
+  seed_roles:
+    calibration_root_consumed_non_scientific: 20261151
+    corpus_root_consumed_complete: 20261152
+    screen_training_root_unopened_blocked: 20261153
+    screen_evaluation_root_unopened_blocked: 20261154
+    confirmation_1_training_root_unopened_blocked: 20261155
+    confirmation_1_evaluation_root_unopened_blocked: 20261156
+    confirmation_2_training_root_unopened_blocked: 20261157
+    confirmation_2_evaluation_root_unopened_blocked: 20261158
+    rejected_readiness_calibration_root_consumed_superseded: 20261159
+    failed_readiness_calibration_root_consumed_incomplete_permanently_denied: 20261160
+    readiness_calibration_root_consumed_complete_non_scientific_non_retryable: 20261161
+    post_repair_readiness_calibration_root_consumed_complete_non_scientific_non_retryable: 20261162
+    scaffold_test_only_root_reserved_unopened: 648900001
+    excluded: checked-public, prior-independent, official-private, and EXP-649-formal-root-20261149
+  calibration_protocol:
+    completed_transition: root161-preserved -> root162-v2-base-pushed -> sole-file-root162-authorization-child-pushed -> fresh-warmup-and-three-fresh-full-fidelity-repeats-complete -> verifier-succeeded
+    next_transition: completion-audits-and-Judge -> separate-screen-Judge
+    warmups: 1
+    timed_repeats: 3
+    fidelity_reduction_allowed: false
+    cumulative_wall_runaway_ceiling_seconds: 30000
+    cumulative_process_user_plus_system_aggregate_cpu_runaway_ceiling_seconds: 120000
+    runaway_ceiling_role: independent-cumulative-protection-only-never-per-attempt-target-fidelity-cap-or-scientific-gate
+    completed_history_including_root_20261161: {wall_seconds: 13778.295949158995, process_user_plus_system_aggregate_cpu_seconds: 55378.175260172996}
+    failed_root_20261160_conservative_allowance: {wall_seconds: 5294.4, aggregate_cpu_seconds: 21000, exact_internal_observation: false, completed_work_claimed: false}
+    pre_root_20261161_carried_charge: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+    root_20261161_canonical_charge: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998}
+    carried_charge_applied_exactly_once: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173}
+    planning_inputs: {R_wall_seconds: 5305.469600509008, R_aggregate_cpu_seconds: 20967.89, E_wall_seconds: 73.8932728219952, E_aggregate_cpu_seconds: 135.975487648}
+    budget_formula: new_carried_charge + 1.5 * (1.25 * R + E)
+    budget_formula_results: {wall_seconds: 29131.291359346378, process_user_plus_system_aggregate_cpu_seconds: 115896.932241645}
+    carried_charge_policy: apply-exactly-once-to-planning-guard-and-accounting
+    root_20261159_rate_policy: conservative-planning-context-only-never-projection-rates
+    chronology: synchronous-base-replay-probe-infrastructure-validation-atomic-record-seal-before-next-start
+    cache_reuse: Root-20261160 repeat-1/2 caches remain planning evidence only and were not reused or migrated. Root 20261161 used a fresh warmup and all three fresh full-fidelity repeats; reused wall and aggregate-CPU charges are both exactly zero.
+    post_repair_cache_policy: Root-20261161 caches are prohibited for repaired runner/config/workload bindings; root 20261162 requires one fresh warmup and three fresh full-fidelity timed segments with both cross-root and same-root segment-cache reuse disabled.
+  post_repair_scaffold:
+    trajectory_repeat: complete-ordered-prediction-trace-digest-with-independent-recomputation
+    endpoint_equal_intermediate_different_regression: required-and-passing
+    matched_work: independent-per-arm-counts-and-ordered-digests-distinct-from-paired-data-order
+    checkpoint_lifecycle: immutable-attempt-specific-paths-completion-and-failure-bind-preserved-bytes
+    root_20261162: consumed-complete-non-scientific-sealed-non-retryable
+    authorization_source_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/authorization-source.json
+    scaffold_provenance_v2: experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/provenance.json
+    live_authorization_manifest: committed-authenticated-and-consumed-calibration-only
+    corpus: consumed-complete-immutable-historical
+    root_20261161: consumed-historical-not-current-launch-evidence
+    old_authorization_source_and_scaffold: immutable-pre-r3-v1-history-cannot-bind-repaired-bytes
+    root_20261161_archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+    root_20261161_scratch_inventory: {files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+    root_20261161_mlflow_inventory: {runs: 5, finished: 5, artifact_files: 27, artifact_bytes: 252562, api_requeried_during_archive: false}
+    shared_screen_execution_schedule: {scientific_ledger_writes: 216, outer_launch_ledger_writes: 3, total_ledger_writes: 219, cache_units: 7, checkpoint_save_reload_verifications: 2, atomic_evidence_writes: 29, first_quarter_scientific_ledger_writes: 54, per_arm_declared_total: 110298, per_arm_declared_events: 1630, per_arm_fresh_actual_events: 423}
+    shared_schedule_derivation: totals-derived-from-update-counts-and-named-write-declared-and-actual-operation-dictionaries-with-config-mutation-regression
+    declared_to_actual_cross_binding: required-and-covered-by-identical-undercount-regressions
+    evaluation_cache_truthfulness: fresh-evaluator-and-validated-cache-reuse-are-distinct-bound-paths
+    readiness_cache_profile:
+      schema_version: exp648-shape-matched-evaluation-cache-profile-v2
+      units: 7
+      cases: 4640
+      prediction_trace_elements_both_arms: 200960
+      teacher_trace_elements_both_arms: 200960
+      deterministic_value_fixture: modulus-equals-two-to-width-minus-159-and-base-equals-one-shifted-by-width-minus-one-with-exact-teacher-trajectories
+      minimum_nonzero_width_bearing_bits: width-minus-1
+      actual_cache_schema: projected-and-hashed
+      conservative_envelope: raw-cases-specification-value-width-audit-plus-16384-byte-per-unit-padding
+      external_reference_minimum_payload_bytes: 20147941
+      local_deterministic_diagnostic_payload_bytes: {envelope: 31567530, actual_schema_projection: 30080731, envelope_extra: 1486799, scientific_or_rate_evidence: false}
+      validation: canonical-roundtrip-actual-projection-core-cases-width-contract-traces-receipts-results-and-semantics
+      timing: fixture-construction-plus-fresh-serialization-plus-recovery-plus-complete-set-with-wall-cpu-rss-separated
+      projection: measured-complete-set-direct-no-tiny-payload-extrapolation
+    checkpoint_failure_inventory: every-regular-artifact-hashed-and-explicitly-bound-or-unbound-no-vacuous-success
+    completion_seal: pointer-seal-state-attempt-and-authorization-bindings-required
+    scientific_evidence: none
+  historical_observed_readiness_calibration_root_20261161:
+    root: 20261161
+    status: consumed-complete-pre-r3-binding-byte-archived-historical-only
+    archive: experiments/runs/exp-648-structured-trajectory-consistency/screen/superseded/root-20261161
+    original_authorization_history: {authorization_commit: 16d903301f50e54e3f6d9ab8cb6435e61f0d648f, approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402, original_path: experiments/runs/exp-648-structured-trajectory-consistency/screen/readiness-calibration-authorization.json, historical_v1_nonlaunch_only: true}
+    scratch_inventory: {files: 218, bytes: 24573993, copied: false, preserved_in_place: true}
+    mlflow_artifact_inventory: {files: 27, bytes: 252562, api_requeried_during_archive: false}
+    receipt_sha256: 1da93f456a54bfb61a36b4085cfb70b517953c4153d7378190237c872ff4167a
+    workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
+    mlflow:
+      status: five-FINISHED-resource-only-runs
+      main: c27161cb0f2a46228b94b47362769fb1
+      warmup: b49db1ca755e46e6b7b18e9e5c1fb859
+      repeat_1: 8f887966943d44a3a4bebea6ad5dddb9
+      repeat_2: cea11ae498ef4243ac222aa732e8ed06
+      repeat_3: f89f15cf84334df9acdc41ca6625b25d
+    canonical_outer_resource_boundary: {wall_seconds: 4770.442001834999, process_user_plus_system_aggregate_cpu_seconds: 18657.139380582998, peak_rss_bytes: 2727993344, scope: observed-launch-to-pre-outer-seal-not-through-process-exit}
+    carried_charge_applied_once: {wall_seconds: 14302.253947323996, process_user_plus_system_aggregate_cpu_seconds: 57721.035879589996}
+    cumulative_charge: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173, below_wall_ceiling: 25000, below_aggregate_cpu_ceiling: 100000}
+    resolved_screen_budgets:
+      wall_seconds: {projected: 9385.25759757471, soft: 11748.364904834792, hard: 17622.547357252188}
+      aggregate_cpu_seconds: {projected: 36891.35438058306, soft: 46131.553842158, hard: 69197.330763237}
+      peak_rss_guard_bytes: 3409991680
+    coarse_tool_trace: {wall_seconds: 4727.1, canonical: false, clock_comparable: false, policy: never-substitute-average-or-infer-tail}
+    verifier: {succeeded: true, subsequent_key_error: incorrect-external-assertion-path, correct_field: "receipt['boundary']['scientific_accuracy_or_selection_reported']", failed_assertion_called_a_pass: false}
+    scientific_accuracy_or_selection_reported: false
+    registration_provenance:
+      approved_path_count: 17
+      scope: nine-immutable-readiness-files-plus-seven-governance-files-plus-one-focused-regression-test
+      approved_base_commit: 87384f92ab1c053c7791e8afd69a07936d5a7402
+      immutable_scaffold_provenance_sha256: 593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6
+      execution_bound_focused_test_sha256: f66fb2c7e510171bb92a5cab20b842b9b08d9dd023fc44f37ee1e8b74ef08ef5
+      post_publication_regression_test_sha256: 967fdc7d4ce5e9b8deaf9d5ea0d4b0cd74d8b4729b66c75b5eadf461626cfb50
+      binding_policy: screen_readiness_binding-must-resolve-post-publication-test-sha-from-committed-registration-base
+      pre_repair_full_suite: {passed: 257, stale_lifecycle_failures: 2, stopped_before_commit: true}
+      targeted_regression_tests: {passed: 3, failed: 0}
+      first_focused_file_after_repair: {passed: 87, approved_base_fixture_failures: 4, stopped_before_commit: true}
+      expanded_targeted_regression_and_tamper_tests: {passed: 8, failed: 0}
+      focused_file: {passed: 91, failed: 0}
+      final_full_suite: {passed: 259, failed: 0}
+      project_validator: passed
+  observed_readiness_calibration_root_20261162:
+    root: 20261162
+    status: consumed-complete-non-scientific-sealed-non-retryable
+    attempt_id: cal-2dd822120fe60e69
+    authorization: {approved_base_commit: 964cdbbb0828a929dba8244ed73c010e352c1a74, authorization_commit: 91113dce3696e2d9f1bf27aa88592175a293a855, sha256: 2dd822120fe60e69f576f894461d333429dd568144a7ea87cadda74b607fd11b, verification_mode: launch-false-approved-base-git-blobs}
+    workload: {fresh_warmups: 1, fresh_timed_repeats: 3, cache_reuse: false, fidelity_reduced: false}
+    canonical_outer_resource_boundary: {wall_seconds: 2709.3675591950014, process_user_plus_system_aggregate_cpu_seconds: 10192.559990214, peak_rss_bytes: 2761617408, scope: observed-launch-to-pre-outer-seal-sample-not-through-process-exit}
+    carried_charge_applied_once: {wall_seconds: 19072.695949158995, process_user_plus_system_aggregate_cpu_seconds: 76378.175260173}
+    cumulative_charge: {wall_seconds: 21782.063508353996, process_user_plus_system_aggregate_cpu_seconds: 86570.73525038699, wall_ceiling: 30000, aggregate_cpu_ceiling: 120000}
+    resolved_screen_budgets:
+      wall_seconds: {projected: 4137.60510254003, soft: 5208.394643682034, hard: 7812.591965523052}
+      aggregate_cpu_seconds: {projected: 15845.32999021402, soft: 19824.44384750587, hard: 29736.665771258806}
+      peak_rss_guard_bytes: 3452021760
+    evidence_sha256: {attempt_state: 814a86e8f14ad519b8c0580cca19b961747724791e143d79d2a36265c9e7aec9, completion: 845c35d17475fd61320e0d82134d5b0c64804547ef7e0147b056bb3935cfa022, core: 3127c562b1ea627ca48979bbb059f9b57a5517ea3f846c987cce0c400d60262c, environment: d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9, executed_config: b4bd239120e130f77b19edced2ce85684c05b0c3505aad8355a6700f9d968554, launch_ledger: 814a86e8f14ad519b8c0580cca19b961747724791e143d79d2a36265c9e7aec9, mlflow: 540a4269e7a126ef2ee197d025011fd53951a671fd36d4d3b395f6092b5d9f69, resource_completion: e4ed46ad911882998676c6144b298d16b33699ffe21885ddaa2686e6f3bd9e44, receipt: 7209d1b59f6b980c7cb829a2290fe7735ba32db98be10181dc98f230363186ff}
+    mlflow_run_ids: {warmup: e85ed75266a6431498883444088c66d3, repeat_1: be37f281769f4568b33165556a48fe8b, repeat_2: 0318b0f26a5043368a9db1e136752e83, repeat_3: 30fbf063630c417b85aa9738009e7e45, canonical: 1c7249dd4cbd4816a8cfab9b064cbacb}
+    registration_provenance: {execution_bound_focused_test_sha256: f94b309c83609285c3c2009327e7ea8dc78b7280dc05df6e73fa6c39360a0514, repaired_descendant_focused_test_sha256: 0fa15edd01e474bfd9dfdfb6990dc046a75ab0a5d005c71b24d3f610e58f2d32, overwrite_execution_provenance: false}
+    limitations: non-scientific-readiness-only-no-model-update-accuracy-selection-screen-benchmark-confirmation-promotion-or-goal-completion; post-sample-seal-return-stdout-unwind-teardown-and-exit-excluded
+    screen_authorized: false
+locked_prior_hypotheses:
+  exp-649-stochastic-trajectory-breadth:
+    status: planned-formal-blocked-runtime-gate-miss
+    evidence_status: Full input-only calibration measured runtime and integrity only; stochastic breadth and accuracy remain untested.
+    formal_root: 20261149
+    formal_root_status: unopened-permanently-locked-for-this-frozen-formulation
+    prohibited: [formal-input-generation, collision-audit, scoring, selector, voting, tuning, promotion]
+    incumbent_changed: false
+research_programs:
+  super_transformers:
+    contract: knowledge/autoresearch/research/2026-07-21-super-transformers-coverage-contract.md
+    normative_full_pdf_ledger: knowledge/autoresearch/research/2026-07-21-super-transformers-full-pdf-audit.md
+    loopies_full_pdf_note: knowledge/autoresearch/research/2026-07-21-loop-the-loopies.md
+    source_documents:
+      - super_transformers.md
+      - super_transformers_main_papers.md
+    stable_parent_record_count: 44
+    atomic_component_count: 81
+    stable_id_range: 44-consecutive-ST-mechanism-identifiers
+    faithful_completed_main_method_count: 0
+    scientifically_reproduced_parent_count: 0
+    coverage_complete_parent_count: 6
+    coverage_complete_parent_ids: [ST-M033, ST-M034, ST-M036, ST-M038, ST-M039, ST-M040]
+    status: exp650-prescience-verification-park-pending-pm-selection
+    mandate_status: queued-binding
+    active_experiment: null
+    blocked_by: null
+    next_family: structural-equivariance-then-dense-layer-loop-schedule
+    coverage_completion_rule: Every applicable atomic component under each of the 44 stable parents requires an independent durable faithful, bounded-faithful, analogue, supporting-only, excluded, or non-applicable verdict with its terminal criterion met; a parent completes only when all applicable components complete.
+    library_policy: Prefer mature authoritative pinned libraries with license and provenance records, tiny-fixture parity, a deterministic CPU submission path, and cross-device parity whenever CUDA accelerates offline training.
+    faithfulness_policy: Faithful, bounded-faithful, analogue, supporting-only, and excluded evidence must remain explicitly distinct; a negative result closes only the tested formulation, and no analogue may be reported as a faithful reproduction.
+    sole_active_task: null
+    sole_next_package: post-exp650-highest-information-gain-materially-distinct-vertical-falsifier-to-be-selected-by-PM
+    ordered_queue:
+      - structural-equivariance
+      - shared-recurrent-depth-including-looplm-controls
+      - exp-655-dense-layer-loop-versus-model-loop
+      - trm-hrm-rim-rsm-answer-latent
+      - separated-loopformer-drm-lotus
+      - exp-651-visit-dilation-adapters
+      - exp-650-library-backed-mamba-linear-state-space
+      - materially-new-learned-memory-execution
+      - conditional-signature-gated-stability-fixed-points
+      - runtime-qualified-stochastic-breadth-energy-selection
+      - exp-653-winner-dependent-adaptive-compute
+      - conditional-autoregressive-t2mlr
+      - conditional-compact-structured-model-comparison
+      - conditional-target-only-spt-analogue
+    preserved_experiment_meanings:
+      EXP-650: maintained-library-Mamba2-hybrid-implemented-but-prescience-package-oracle-parked
+      EXP-651: exact-initialized-visit-or-dilation-specific-low-rank-adapters
+      EXP-652: answer-plus-latent-TRM-style-viability
+      EXP-653: convergence-based-adaptive-inner-recurrence-after-stable-winner
+      EXP-655: completed-rejected-exact-dense-fixed-r2-layer-loop-schedule-formulation-capacity-reinvestment-and-routing-unresolved
+    rules:
+      - one-active-task-only
+      - faithful-and-analogue-evidence-must-not-be-conflated
+      - literal-illegal-or-non-applicable-mechanisms-require-explicit-terminal-rationale
+      - mature-authoritative-libraries-preferred-with-pins-provenance-and-parity-tests
+      - cpu-submission-path-binding-cuda-training-only-with-cpu-and-cross-device-parity
+      - future-resource-budgets-require-representative-setup-training-checkpoint-full-evaluation-throughput-variability-headroom-separate-wall-and-aggregate-cpu
+      - exp-649-fixed-285-second-decision-is-historical-only-and-its-225-second-generalization-is-superseded
+      - oracle-breadth-never-promotes
+      - structural-operand-equivariance-is-legal-only-without-answer-benchmark-id-or-arithmetic-circuit-encoding
+      - lotus-exact-traces-are-training-only-and-forbidden-from-submission-inference
+    root_20261160_status: consumed-incomplete-non-scientific-permanently-denied
+    root_20261161_status: consumed-complete-non-scientific-sealed-non-retryable
+    experiments_authorized_by_contract: false
+parked_exp679_hypothesis:
+  run_id: exp-679-capacity-recycling
+  status: permanent-pre-root-denominator-park
+  source_base_commit: 087a9a6329e4261eae7be10a4fcad0d16bb3d925
+  source_branch: codex/exp679-capacity-recycling
+  decision_authority: T079-pre-root-freeze-stop-rule
+  mechanism: bounded-ST-M043b-resource-selected-reduced-call-exact-embedded-capacity-recycling
+  roots: {calibration_20261266: unopened, viability_20261267: unopened, confirmation_20261268: unopened, confirmation_20261269: unopened}
+  verification: {focused_passed: 8, validator_passed: true, full_oracle_passed: 663, pytest_seconds: 560.35, outer_wall_seconds: 548.40, process_cpu_seconds: 712.07, peak_rss_kib: 943808}
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-679-capacity-recycling/run.json
+  metrics: evals/results/exp-679-capacity-recycling/metrics.json
+  limitations: [verified-config-omits-two-runner-required-trajectory-denominators, all-roots-unopened, no-M043b-scientific-verdict, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp680_hypothesis:
+  run_id: exp-680-mor-depth-routing
+  status: parked-calibration-noncollapsed-load
+  source_base_commit: 6f345a8f7681f8e99ded6a628fbca8d90e915e56
+  source_branch: codex/exp680-mor-depth-routing
+  decision_authority: T080-root-20261270-complete-route-admission
+  mechanism: bounded-ST-M009b-instance-level-hierarchical-expert-choice-depth-routing
+  roots: {calibration_20261270: completed-topology-gate-reject, viability_20261271: unopened, confirmation_20261272: unopened, confirmation_20261273: unopened}
+  calibration: {wall_seconds: 129.92078969199997, process_tree_cpu_seconds: 369.57, cgroup_cpu_seconds: 383.9240000000001, peak_rss_bytes: 1961058304, candidate_guarded_seconds: 68.86987362000092, expert_average_calls: 12.5, expert_call_reduction: 0.1071428571428571, expert_w128_histogram: {8: 3, 11: 0, 14: 9}, admitted: false}
+  verification: {focused_passed: 10, validator_passed: true, full_oracle_passed: 673, pytest_seconds: 479.88, outer_wall_seconds: 476.49, process_cpu_seconds: 610.23, peak_rss_kib: 931884}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-680-mor-depth-routing/run.json
+  metrics: evals/results/exp-680-mor-depth-routing/metrics.json
+  limitations: [bounded-instance-level-not-literal-token-routing, calibration-only-non-scientific, middle-depth-empty, roots-20261271-through-20261273-unopened, no-candidate-benchmark-submission-promotion-or-completion-change]
+next_action: Preserve EXP680 as a complete-route topology park with roots 20261271-20261273 unopened. A separate PM decision is required for any materially distinct successor; Candidate 005 and all checked, independent, official/private, submission, promotion, and Goal-completion evidence remain unchanged.
+tracking:
+  backend: sqlite
+  tracking_uri: .scratch/mlflow/mlflow.db
+  artifact_root: .scratch/mlflow/artifacts
+  experiment_name: sair-modular-arithmetic-wsl
+  experiment_id: "2"
+  registered_model: sair-modular-arithmetic-candidate
+  incumbent_model_version: "5"
+git:
+  branch: agent/submission-ready-horner-tcn9
+  formal_source_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
+  formal_source_dirty: false
+  last_validated_commit: 5519b5173118e7a0166096e0d5fdbca13c4ef2b4
+  dirty: true
+risks:
+  - EXP-658 is parked for its current execution formulation after two uncommitted repair attempts. The authorized L1 process ran through checkpoint roundtrips and width-256 profiling, then failed before canonical record/calibration persistence with KeyError 'checkpoint_sha256'; 381.7 seconds is outer wall only, aggregate CPU and peak RSS are null, L1 science was not persisted, and L2 never ran. No third repair or same-formulation rerun is authorized.
+  - EXP-657 is rejected before L2: its projected 100-case width-256 resources are 344.97 wall / 1279.50 aggregate CPU seconds versus the conjunctive 240/240 gate. Only the underlying two-case 4.5996-wall / 17.06-CPU component was measured; no scientific accuracy exists.
+  - EXP-657 root 20261170 is immutable consumed-failed history; roots 20261171/20261172 are superseded-never-authorized, root 20261173 is consumed-complete non-scientific, and roots 20261174/20261175 are closed for this geometry while remaining unopened and unauthorized.
+  - Candidate 005 clears Tier 6 across five seeds but reaches only 59.3 to 59.5 percent overall because Tiers 7-10 remain unsolved.
+  - Candidate 005 currently has no learned inference path above 128 bits; EXP-649 invokes the raw cellular checkpoint at width 256 only as a frozen research diagnostic.
+  - Width-128 labels and evaluation require Python big integers while inference must remain tensor-native.
+  - CPU-only training makes indiscriminate sweeps infeasible.
+  - Public benchmark inputs must not become a model-selection surface.
+  - Widths above 63 bits require a Python-bigint offline sampler and tensor-native model inputs.
+  - Five complete independent 1,100-case seeds are not yet warranted because the current zero fallback above Tier 6 structurally prevents the 85 percent overall gate.
+  - Progressive teacher-forced width scaling regresses width-128 rollout from 57 to 49 percent despite 99.7 percent transition accuracy, indicating autonomous state drift.
+  - Proper PyG GCN, GATv2, and max-MessagePassing bit-position graphs underperform the cellular control and produce zero rollout at the matched 1,200-update budget.
+  - The cellular finite-data probe reaches memorization but shows no reproducible delayed-generalization signature under 0 or 1e-2 weight decay.
+  - Proper PyG max-MPNN generalizes concurrently while TCN memorizes and plateaus; neither shows a reproducible delayed-generalization signature.
+  - Balanced replay of exact model-mined first-error transitions regresses fresh width-128 rollout by 1.33 points and slightly misses transition accuracy despite majority uniform replay.
+  - Coarse target-free modulus and operand groups show at most 1.30x training and 1.43x validation failure enrichment, below the twofold authorization gate.
+  - Complementary bootstrap-trained output heads create trajectory disagreement but regress width-128 exact rollout by 1.67 points and perform one point below randomized heads.
+  - The hierarchical composition tree learns up to 60.83 percent exact internal nodes but zero exact roots at width 16 and zero exact width-32 products after 2,400 updates.
+  - Compact recurrent relative attention ties direct dilated convolution at 0.667 percent exact width 12 and both have zero exact width-24 transfer; trained attention shows no exact-answer advantage over randomized weights.
+  - Independent cellular diversity is strong at width 16 but the staged width-64 lineage reaches only 68.83 percent rollout; target-free routing adds one point to the 94 percent incumbent and misses its gain/runtime gates.
+  - Teacher distillation lifts compressed radix-4 transition accuracy only at widths 16/32 and regresses width 64; one-cycle phase 2 remains inaccurate even on exact intermediate states, causing zero rollout above width 16.
+  - Full-depth continuous macro state is viable on training identities and gains only one net width-64 case over hard composition; held-out width-128 benefit remains unmeasured.
+  - Full-depth continuous adaptation regresses fresh width-128 rollout from 82.67 percent hard-frozen to 80.67 percent trained and misses transition/runtime gates; close the soft-boundary training surface.
+  - Commutative operand swapping yields 97 percent fixed-selector accuracy and 98.33 percent oracle union on consumed width-128 cases, but unconditional double inference projects to 318.62 seconds and requires conditional routing.
+  - The fixed 40 percent conditional commutative route preserves 96.67 percent consumed accuracy with a 212.66-second projection; fresh confirmation is mandatory before integration.
+  - The exact conditional route confirms at 97.2 percent on 500 fresh width-128 cases with 99.933 percent transition and 113.81-second projection; full candidate and wider-width gates remain outstanding.
+  - EXP-643 preserves 99.7 percent width-256 transition accuracy but reaches only 22 and 32 percent autonomous rollout across two seeds; zero overthinking and sub-0.81 late gain proxies reject recurrent-depth instability as the primary supported cause.
+  - EXP-654's addressable neural RAM and non-addressable workspace both score zero exact even at trained width 16 after 4,000 updates; nearly uniform addressing and zero ablation/dependence drops reject the current latent-executor formulation before scale-up.
+  - EXP-654's parameter-matched decoded wider control improves trained-width exactness from 85.33 to 94.33 percent but still scores zero exact at widths 24 and 32, so added state capacity alone does not transfer.
+  - EXP-647's endpoint consistency retains width-64 and is deterministic but regresses original width-128/256 rollout by 1.67/2.5 points, misses transition, validity, and runtime gates, and does not authorize Tier-7 or candidate promotion.
+  - EXP-649's six-path choice comes only from a hypothetical independence calculation on the related EXP-647 challenger's 47.5 percent union; it is not matched Candidate-005 evidence and could miss breadth or runtime immediately.
+  - EXP-649 calibration root 20261148 is permanently retired because a scaffold parity test computed official-reference labels for its 1,100 identities in memory; no label was inspected or persisted, but only audited replacement root 20261150 may be used input-only after the clean scaffold gate.
+  - EXP-649's first implementation-readiness audit rejected calibration launch because sigma-zero controls did not retain every decoded prefix, runaway enforcement was only stage-end, formal compatibility omitted three provenance hashes, and retirement lacked a pinned machine-readable manifest; these are scaffold blockers, not experiment results.
+  - EXP-649 completed its full-fidelity input-only calibration but misses the wall gate by more than an order of magnitude: 3150.892 seconds projected versus 285 seconds allowed. Formal root 20261149 remains unopened; no oracle, accuracy, breadth, selector, voting, tuning, candidate-promotion, or Goal-completion claim is authorized.
+  - EXP-648's natural K=8 endpoint objective is untested; complete ordered prediction-trajectory repeats, independent per-arm matched-work evidence, both drift directions, and first-error movement are binding gates.
+  - EXP-648 corpus construction succeeded with 512 exact start-index, modulus-bit-length, and normalized-band matches from 736 identities; those frozen strata and counts cannot be weakened or rematched after observing the corpus.
+  - EXP-648 corpus evidence was executed at repository HEAD 9f2226873a66e1938dbf30d87acbc876e528c622 with the scientific runner and focused test absent from HEAD; the execution worktree was dirty and its exact complete dirty set is unavailable, so the scoped provenance amendment and byte hashes are binding limitations.
+  - EXP-648 run.json and MLflow metrics preserve the immutable pre-MLflow workload snapshot at 2505.754850685 wall / 10103.335504912 aggregate-CPU seconds; mlflow.json final_resource_timing is authoritative for the 2508.171222396 wall / 10104.265504912 aggregate-CPU-second end-to-end total. Numeric first-quarter checkpoint telemetry was not serialized, although the fail-closed pass is recorded.
+  - EXP-648's historical calibration root 20261151 predates the hardened screen workload and cannot authorize it. Root 20261159 is now consumed but rejected/superseded because additions were post hoc rather than synchronously validated and sealed; its timings may inform conservative planning only and cannot supply launch, rates, or caches.
+  - Root 20261160 failed without the new catchable-exception boundary receipt, so exact exception-boundary resource observations remain unavailable and conservative allowances remain explicitly non-observational. Root 20261161 completed fresh full-fidelity readiness calibration and is non-retryable. Its canonical outer boundary excludes post-sample serialization, writes, return, stdout, unwind, teardown, and exit; the separate 4727.1-second tool trace is coarse, clock-incomparable, and cannot replace, average with, or imply a tail for the canonical 4770.442001834999-second observation. Screen still requires a separate Judge.
+parked_exp663_hypothesis:
+  run_id: exp-663-drm-target-token-denoising
+  status: parked-calibration-resource-guard
+  source_base_commit: 3b2ffbdb87c94620cf7eda76a878e6c677928c6a
+  source_branch: codex/exp663-drm-target-token-denoising
+  decision_authority: T058-one-shot-topology-repair-wall-guard
+  mechanism: bounded-faithful-DRM-cosine-target-token-denoising-with-declared-SAIR-adaptations
+  roots: {calibration_20261202: terminal-resource-park, viability_20261203: unopened, confirmation_20261204: unopened, confirmation_20261205: unopened}
+  original_calibration: {wall_seconds: 2703.140067628, process_cpu_seconds: 10802.591895, cgroup_cpu_seconds: 13394.771999999999, peak_rss_bytes: 1580789760, expected_formal_wall_seconds: 261353.39258405069}
+  topology_repair: {processes: 3, torch_threads_each: 4, wall_guard_seconds: 2162.512054, guard_crossed: true, complete_receipt: false, equivalence_established: false, admitted: false}
+  verification: {focused_passed: 14, validator_passed: true, full_oracle_passed: 450, full_oracle_failed: 0}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-663-drm-target-token-denoising/run.json
+  metrics: evals/results/exp-663-drm-target-token-denoising/metrics.json
+  limitations: [calibration-only-non-scientific-diagnostics, one-shot-repair-crossed-wall-guard, roots-20261203-through-20261205-unopened, no-drm-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp668_hypothesis:
+  run_id: exp-668-h2l3-magicnorm-credit
+  status: parked-calibration-runtime-headroom
+  source_base_commit: 8d038a590fa40954d6df0bdd394bd2e5e229d708
+  implementation_commit: 75da10fe6eb922254d237da9b8ef339278578fa1
+  source_branch: codex/exp668-h2l3-magicnorm-credit
+  decision_authority: T063-root-20261222-complete-route-dynamic-admission
+  mechanism: bounded-ST-M024ab-H2L3-MagicNorm-warmup-credit
+  roots: {calibration_20261222: completed-runtime-headroom-park, viability_20261223: unopened, confirmation_20261224: unopened, confirmation_20261225: unopened}
+  oracle_recovery: {initial_timeout_seconds: 904.037, judge_exception: one-identical-byte-recovery, validator_concepts: 182, benchmark_records: 1100, pytest_passed: 557, pytest_seconds: 602.93, outer_wall_seconds: 622.62, peak_rss_kib: 924512}
+  calibration: {wall_seconds: 207.1421818629999, process_tree_cpu_seconds: 807.1774469999999, cgroup_cpu_seconds: 850.2919999999999, peak_rss_bytes: 620048384, candidate_nominal_seconds: 277.1252813499982, variability_headroom: 1.757660503418811, candidate_headroom_seconds: 487.0921615277175, ceiling_seconds: 285.0, admitted: false}
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-668-h2l3-magicnorm-credit/run.json
+  metrics: evals/results/exp-668-h2l3-magicnorm-credit/metrics.json
+  limitations: [calibration-only-non-scientific-diagnostics, root-20261223-through-20261225-unopened, M024c-and-M024d-closed, no-HRM-Text-or-adaptation-scientific-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+rejected_exp669_hypothesis:
+  run_id: exp-669-stars-jvp-regularization
+  status: completed-rejected-w128-primary
+  source_base_commit: dcdec9d5707e7e24027cbae83c367153177b8f78
+  source_branch: codex/exp669-stars-jvp-regularization
+  decision_authority: T064-root-20261227-W128-primary-first-gate
+  mechanism: bounded-ST-M026a-native-one-step-power-JVP-squared-norm-proxy
+  roots: {calibration_20261226: completed-admitted, viability_20261227: completed-rejected-W128-primary, confirmation_20261228: unopened, confirmation_20261229: unopened}
+  calibration: {wall_seconds: 91.32661436900025, process_tree_cpu_seconds: 350.517496, cgroup_cpu_seconds: 396.25999999999976, peak_rss_bytes: 759463936, candidate_nominal_seconds: 158.80018574999303, candidate_headroom_seconds: 236.67904689476234, admitted: true}
+  formal: {wall_seconds: 532.055833247, process_tree_cpu_seconds: 2078.299365, cgroup_cpu_seconds: 2527.8719999999994, peak_rss_bytes: 1019494400, W128_transition_exact: 0.9983333333333333, W128_rollout_exact: 0.8433333333333334, W128_invalid: 0.0, required_rollout_exact: 0.85}
+  scientific_verdict: reject-exact-bounded-STARS-JVP-adaptation-at-W128-primary
+  run_record: experiments/runs/exp-669-stars-jvp-regularization/run.json
+  metrics: evals/results/exp-669-stars-jvp-regularization/metrics.json
+  limitations: [one-step-proxy-not-exact-spectral-radius, retention-dependence-formal-stability-W256-and-confirmations-unopened, M026b-M018a-closed, no-general-STARS-or-paper-rejection, no-candidate-benchmark-submission-promotion-or-completion-change]
+parked_exp682_hypothesis:
+  run_id: exp-682-huginn-recurrent-depth
+  status: parked-source-topology-feasibility
+  source_base_commit: bf0e03e90d28d59168ec7a12cde6468f389b40cd
+  source_branch: codex/exp682-huginn-recurrent-depth
+  decision_authority: T084-source-topology-and-de-novo-viability-stop
+  mechanism: bounded-faithful-ST-M006a-Huginn-latent-recurrent-depth
+  roots: {calibration_20261278: unopened-topology-stop, formal_20261279: unopened-topology-stop, confirmation_20261280: unopened-topology-stop, confirmation_20261281: unopened-topology-stop}
+  transfer: {exact_checkpoint_transfer: false, causal_required_components: true, source_norm: GroupNorm, required_norm: RMSNorm}
+  de_novo_adjacent: {experiment: EXP634, updates: 4000, trained_width: 12, exact_correct: 2, exact_cases: 300, viable: false}
+  training_updates: 0
+  formal_calls_executed: 0
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-682-huginn-recurrent-depth/run.json
+  metrics: evals/results/exp-682-huginn-recurrent-depth/metrics.json
+  limitations: [topology-and-viability-park-not-Huginn-rejection, roots-20261278-through-20261281-unopened, no-checked-independent-official-private-candidate-submission-promotion-or-completion-evaluation]
+parked_exp687_hypothesis:
+  run_id: exp-687-compact-distilled-w256-specialist
+  status: parked-package-verification
+  source_base_commit: 8f08b8f85711e798bdbdfb2b97cd6f15bde1e4d6
+  source_branch: codex/exp687-compact-distilled-w256-specialist
+  decision_authority: T092-single-package-oracle-stop-rule
+  mechanism: frozen-answer-independent-high-incident-hidden56-slice-with-equal-work-logit-distillation
+  roots: {calibration_20261302: unopened-package-oracle-blocked, formal_20261303: unopened-package-oracle-blocked, confirmation_20261304: unopened-package-oracle-blocked, confirmation_20261305: unopened-package-oracle-blocked}
+  channel_map: {source_hidden: 92, retained_hidden: 56, student_parameters: 38588, map_sha256: 92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0, pruned_state_sha256: f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340}
+  verification: {smoke: passed-all-modes-in-63.71s, focused: 18-passed-in-7.53s, validator: green-218-concepts-1100-records, pytest: 760-passed-1-failed-in-565.40s, failure_scope: pre-existing-ignored-EXP686-run-record-outside-T092}
+  training_updates: 0
+  formal_calls_executed: 0
+  calibration: null
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-687-compact-distilled-w256-specialist/run.json
+  metrics: evals/results/exp-687-compact-distilled-w256-specialist/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-or-rerun, roots-20261302-through-20261305-unopened, no-complete-candidate-calibration-science-confirmation-protected-or-release-surface]
+parked_exp690_c1:
+  run_id: exp-690-c1-persistent-memory-tokens
+  status: parked-calibration-candidate-runtime-headroom
+  source_base_commit: dd6d31cf8b7ec71ab1ba3f68e0fa53953cf6ce52
+  source_branch: codex/exp690-c1-persistent-memory-tokens
+  decision_authority: T096-root20261314-complete-route-resource-admission
+  mechanism: hidden48-one-cycle-four-case-local-persistent-tokens-vs-identical-access-masked-control
+  roots: {calibration_20261314: completed-resource-reject, formal_20261315: unopened-admission-blocked, confirmation_20261316: unopened-admission-blocked, confirmation_20261317: unopened-admission-blocked, independent_20261318_20261322: unopened-admission-blocked}
+  verification: {smoke: passed-all-modes-in-35.19s, focused: 81-passed, validator: green-225-concepts-1100-records, pytest: 824-passed, oracle_invocations: 1}
+  calibration: {admitted: false, cold_wall_seconds: [158.04515034899998, 150.1241187490001, 153.2378851399999], guarded_wall_seconds: 316.09030069799996, ceiling_seconds: 285.0, wall_seconds: 574.658132209, process_cpu_seconds: 1924.836516, cgroup_cpu_seconds: 2025.528, peak_rss_bytes: 1091407872}
+  training_updates: {primary: 4, access_masked_control: 4}
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-690-c1-persistent-memory-tokens/run.json
+  metrics: evals/results/exp-690-c1-persistent-memory-tokens/metrics.json
+  limitations: [resource-park-not-memory-rejection, roots-20261315-through-20261322-unopened, no-paired-confidence-or-causal-science, C1-result-cannot-cancel-C2-through-C7]
+rejected_exp691_c2:
+  run_id: exp-691-c2-hard-indexed-trace
+  status: completed-rejected-full-budget-science
+  source_base_commit: 2fe87f3a343a5db4ebbe011a1bcb475d4b24ad04
+  source_branch: codex/exp691-c2-hard-indexed-trace
+  decision_authority: T097-root20261324-full-budget-scientific-and-causal-gates
+  mechanism: hidden48-one-cycle-append-only-32d-trace-hard-block-slot-retrieval-vs-correction-masked-control
+  roots: {calibration_20261323: completed-resource-admitted, formal_20261324: completed-scientific-reject, confirmation_20261325: unopened-formal-gate-failed, confirmation_20261326: unopened-formal-gate-failed, independent_20261327_20261331: unopened-confirmation-gate-failed}
+  verification: {smoke: passed-all-modes-in-45.86s, validator: green-226-concepts-1100-records, pytest: 859-passed-in-543.95s, oracle_invocations: 1}
+  calibration: {admitted: true, cold_wall_seconds: [126.82862309400014, 135.41222915799995, 127.85685412199996], guarded_wall_seconds: 270.8244583159999, ceiling_seconds: 285.0, wall_seconds: 484.27, process_cpu_seconds: 1643.61, cgroup_cpu_seconds: 1727.984, peak_rss_bytes: 1072676864}
+  training_updates: {primary: 2400, correction_masked_control: 2400}
+  formal: {wall_seconds: 5862.790506222, process_cpu_seconds: 21990.650255, cgroup_cpu_seconds: 23422.088, peak_rss_bytes: 1531633664}
+  scientific_metrics: {primary_w128_transition: 0.0, control_w128_transition: 0.0, primary_w256_transition: 0.0, control_w256_transition: 0.0, primary_w128_rollout: 0.0, control_w128_rollout: 0.0, primary_w256_rollout: 0.0, control_w256_rollout: 0.0, paired_w256_gain: 0.0}
+  scientific_verdict: reject-this-exact-c2-formulation
+  causal_effects: {erase_gain_erasure: 0.0, permute_gain_erasure: 0.0, uniform_gain_erasure: 0.0, random_pointer_gain_erasure: 0.0, supported: false}
+  run_record: experiments/runs/exp-691-c2-hard-indexed-trace/run.json
+  metrics: evals/results/exp-691-c2-hard-indexed-trace/metrics.json
+  limitations: [both-arms-zero-exact-on-all-formal-denominators, pointer-noncollapse-without-causal-output-effect, roots-20261325-through-20261331-unopened, no-checked-private-candidate-submission-promotion-release-or-winner-claim, C2-result-cannot-cancel-C3-through-C7]
+parked_exp692_c3:
+  run_id: exp-692-c3-quotient-carry-conditioning
+  status: parked-package-oracle
+  source_base_commit: d8ea29e6c3474664897efa0ecb905e78166db60d
+  source_branch: codex/exp692-c3-quotient-carry
+  decision_authority: T098-single-package-oracle-stop-rule
+  mechanism: hidden48-one-cycle-global-quotient-and-local-signed-carry-posterior-film-vs-access-masked-control
+  roots: {calibration_20261332: unopened-package-oracle-blocked, formal_20261333: unopened-package-oracle-blocked, confirmation_20261334_20261335: unopened-package-oracle-blocked, independent_20261336_20261340: unopened-package-oracle-blocked}
+  verification: {smoke: passed-all-modes, focused: 28-passed, validator: failed-357-historical-fixture-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {primary: 1, access_masked_control: 1}
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-692-c3-quotient-carry-conditioning/run.json
+  metrics: evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C3-result-cannot-cancel-C4-through-C7]
+parked_exp693_c4:
+  run_id: exp-693-c4-dilation-factored-adapters
+  status: failed-package-oracle
+  source_base_commit: b057190c4e3291467a886b5734348b49bd813e33
+  source_branch: codex/exp693-c4-dilation-factored-adapters
+  decision_authority: T099-single-package-oracle-stop-rule
+  mechanism: hidden56-one-cycle-rank4-direction-and-high-dilation-raw-kernel-adapters-vs-access-masked-control
+  roots: {calibration_20261341: unopened-package-oracle-blocked, formal_20261342: unopened-package-oracle-blocked, confirmation_20261343_20261344: unopened-package-oracle-blocked, independent_20261345_20261349: unopened-package-oracle-blocked}
+  verification: {fixture_preflight: passed-87-lfs-zero-mismatch-clean-challenge, smoke: passed-all-modes-in-70.4s, focused: 25-passed, validator: failed-6-pre-existing-exp692-schema-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {teacher: 1, primary: 1, access_masked_control: 1, scope: rootless-smoke-only}
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-693-c4-dilation-factored-adapters/run.json
+  metrics: evals/results/exp-693-c4-dilation-factored-adapters/metrics.json
+  limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C5-C7-remain-required]
+parked_exp694_c5:
+  run_id: exp-694-routed-antithetic-quorum
+  status: failed-calibration-lifecycle
+  source_base_commit: eca3edaba5bb9d12d942ec574989cc6eeaf97ab2
+  source_branch: codex/exp694-c5-antithetic-quorum
+  decision_authority: T100-frozen-root-lifecycle-stop-rule
+  mechanism: hidden56-sparse-exact-one-per-four-three-way-antithetic-quorum-vs-target-independent-random-routing
+  roots: {calibration_20261350: opened-consumed-lifecycle-failure-before-evaluation, formal_20261351: unopened, confirmation_20261352_20261353: unopened, independent_20261354_20261358: unopened}
+  verification: {fixture_preflight: passed, smoke: passed-all-modes-in-36.3s, focused: 37-passed, validator: green-228-concepts-1100-records, pytest: 949-passed-in-459.94s, full_oracle_invocations: 1}
+  calibration: {resource_admission_performed: false, cold_complete_routes: 0, failure: ArmView-missing-width-at-first-transition-evaluator, failure_wall_seconds: 13.37, process_cpu_seconds: 36.66, peak_rss_kib: 1147148}
+  training_updates: {primary: 4, random_routing_control: 4, scope: calibration-only-non-scientific}
+  mechanics: {parameters_per_arm: 54551, initial_state_equal: true, exact_one_per_four_quota: true, eligible_examples_per_arm: 512, routed_examples_per_arm: 128, proposal_calls_per_arm: 768, reload_exact: true}
+  resource_admission: null
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-694-routed-antithetic-quorum/run.json
+  metrics: evals/results/exp-694-routed-antithetic-quorum/metrics.json
+  limitations: [consumed-calibration-root-cannot-be-reused-after-executable-repair, no-transition-rollout-or-cold-route-denominator, resource-and-scientific-verdicts-null, C5-unresolved, C6-C7-remain-required]
+parked_exp697_c5_recovery:
+  run_id: exp-697-c5-routed-antithetic-quorum-recovery
+  status: failed-package-oracle
+  source_base_commit: db7eea9539d62130c0210a3b78ac86c714f90428
+  source_branch: codex/exp697-c5-interface-recovery
+  decision_authority: T109-single-package-oracle-stop-rule
+  mechanism: immutable-exp694-hidden56-sparse-one-per-four-three-way-antithetic-quorum-with-read-only-armview-width-recovery
+  roots: {calibration_20261359: unopened-package-oracle-blocked, formal_20261360: unopened-package-oracle-blocked, confirmation_20261361_20261362: unopened-package-oracle-blocked, independent_20261363_20261367: unopened-package-oracle-blocked}
+  verification: {fixture_preflight: passed, source_ast_equivalence: passed, focused: 38-passed-in-12.92s, smoke: passed-all-modes-in-43.57s, validator: failed-2-pre-existing-exp694-schema-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {primary: 1, random_routing_control: 1, scope: rootless-smoke-only}
+  resource_admission: null
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-697-c5-routed-antithetic-quorum-recovery/run.json
+  metrics: evals/results/exp-697-c5-routed-antithetic-quorum-recovery/metrics.json
+  limitations: [only-approved-read-only-width-getter, package-oracle-failed-on-immutable-exp694-records-before-pytest, roots-20261359-through-20261367-unopened, resource-and-scientific-verdicts-null, C6-C7-and-final-chair-remain-mandatory]
+parked_exp695_c6:
+  run_id: exp-695-cycle-factorized-distillation
+  status: parked-calibration-resource-admission
+  source_base_commit: b2c7b837ab281a08d974eee45e6404737915de45
+  source_branch: codex/exp695-c6-cycle-factorized
+  decision_authority: T101-frozen-resource-admission-stop-rule
+  mechanism: hidden48-sixteen-outward-inward-shared-core-visits-with-direction-dilation-hidden-coefficients-vs-zero-coefficient-control
+  baseline_normalization: {exp694_metrics_before_sha256: 7e96ab0f7afabd5e4d18622589b068392128ffc61048ea2e1040503f9ff5c957, exp694_metrics_after_sha256: 0b047341809d9da9885c2ef08d96ef2460cff130d4cbbe6aa2475a6fe3d6ac27, exp694_run_before_sha256: 5b68565db76fd948d3482f31654f3e4c6253c678b58eb99ec9bbd7ee0037a587, exp694_run_after_sha256: b5208cf98949a62a13b74b5dbf4dbcd8035b22f5f11f21303ae3e13ff1e39619, semantic_evidence_unchanged: true}
+  roots: {calibration_20261377: completed-resource-reject, formal_20261378: unopened-admission-blocked, confirmation_20261379_20261380: unopened-admission-blocked, independent_20261381_20261385: unopened-admission-blocked}
+  verification: {fixture_preflight: 87-lfs-byte-identical-clean-challenge-82510bba, smoke: passed-all-modes-in-41.6s, focused: 22-passed-in-10.63s, validator: green-230-concepts-1100-records, pytest: 1009-passed-in-471.53s, full_oracle_invocations: 1}
+  calibration: {admitted: false, cold_wall_seconds: [212.90704653300008, 119.9308813780001, 129.48888186700015, 122.15805489100012, 121.82968177899988], guarded_wall_seconds: 425.81409306600017, ceiling_seconds: 285.0, wall_seconds: 1220.429311594, process_cpu_seconds: 4664.703249, cgroup_cpu_seconds: 4451.912, peak_rss_bytes: 2262302720, expected_formal_wall_seconds: 6129.0721898788315, soft_guard_wall_seconds: 7662, hard_guard_wall_seconds: 10726}
+  training_updates: {teacher: 400, primary: 4, zero_coefficient_control: 4, scope: calibration-only-non-scientific}
+  mechanics: {teacher_slots: 16, parameters_per_arm: 29084, initial_state_sha256: f3254f75a7b95dd1bdb44617da23f8fe33909e69dc2648758415508c5ba272e4, equal_calls_and_work: true, teacher_frozen_before_students: true, teacher_absent_from_inference: true, both_reload_exact: true}
+  checkpoints: {teacher_sha256: b8ecc040647333f9415b664e1c1a1b2223a7ede05e0d12ec19dbc4e17874edbe, primary_sha256: 6908f67108fb39ae2e262ada1aa71d7be5b542232e156d19c004c53dd43eb0dc, zero_coefficient_control_sha256: 67b7a2e45222281248f8089c9871bbec1db3eac9c944c374c98ac49c8cf6bfdc}
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  mlflow_run_id: 81b94aa9dd8a4d6980b3ae1d15dfe170
+  run_record: experiments/runs/exp-695-cycle-factorized-distillation/run.json
+  metrics: evals/results/exp-695-cycle-factorized-distillation/metrics.json
+  limitations: [calibration-denominators-non-scientific, guarded-candidate-runtime-reject, roots-20261378-through-20261385-unopened, C5-scientifically-unresolved, C7-and-final-chair-remain-mandatory]
+completed_exp696_c7:
+  run_id: exp-696-qcm48-factorial
+  status: completed-non-comparative-unhealthy-neither
+  source_base_commit: c2997696f18c809aa64ea86602f14caf8d42578c
+  source_branch: codex/exp696-c7-qcm48-factorial
+  decision_authority: T102-root20261369-complete-factorial-health-stop-rule
+  mechanism: hidden48-rank4-learned-quotient-carry-by-four-case-local-persistent-token-factorial
+  roots: {calibration_20261368: completed-admitted, formal_20261369: completed-non-comparative, confirmation_20261370_20261371: unopened-formal-gates-failed, independent_20261372_20261376: unopened-formal-gates-failed}
+  verification: {fixture_preflight: hydrated-lfs-dual-checkpoint-clean-challenge-c1-c3-hashes, smoke: passed-all-modes-in-46.4s, focused: 33-passed-in-17.12s, validator: green-232-concepts-1100-records, pytest: 1042-passed-in-522.75s, full_oracle_invocations: 1}
+  calibration: {admitted: true, cold_wall_seconds: [95.01480934999995, 90.33540124599995, 94.92149232299994], guarded_wall_seconds: 190.0296186999999, ceiling_seconds: 285.0, wall_seconds: 408.3974875120002, process_cpu_seconds: 1390.718822, cgroup_cpu_seconds: 1295.644, peak_rss_bytes: 1165512704, expected_formal_wall_seconds: 13302.006036641624, soft_guard_wall_seconds: 16628, hard_guard_wall_seconds: 23279}
+  training_updates: {neither: 2400, qc_only: 2400, token_only: 2400, both: 2400}
+  mechanics: {parameters_per_arm: 34836, initial_state_sha256: 417110c415fdaaf284b6e5975d3cc8d708e18c94492ae85e825f44b89f26d5c3, calls_per_kind_per_arm: 19200, equal_work: true, all_reload_exact: true}
+  formal_resources: {wall_seconds: 10597.650260553, process_cpu_seconds: 43408.58639, cgroup_cpu_seconds: 42462.16, peak_rss_bytes: 1676750848, outer_wall_seconds: 10968.0}
+  scientific_metrics: {neither_w128_transition: 0.0, all_arm_w128_transition: 0.0, all_arm_w256_transition: 0.0, all_arm_w128_rollout: 0.0, all_arm_w256_rollout: 0.0, both_w256_invalid_rate: 0.965, paired_gain: 0.0, wins: 0, losses: 0, ties: 600, factorial_interaction: 0.0, factorial_confidence_lower: -0.2632305805232825, factorial_confidence_upper: 0.2632305805232825}
+  auxiliary_both: {w128_quotient_accuracy: 0.5166666507720947, w256_quotient_accuracy: 0.5376666784286499, w128_carry_accuracy: 0.569085955619812, w256_carry_accuracy: 0.5629270672798157, w128_quotient_ece: 0.038915854752063744, w256_quotient_ece: 0.021953489492336907, w128_carry_ece: 0.13858760982084395, w256_carry_ece: 0.14552119993554272}
+  causal_effects: {qc_zero: 0.0, qc_permute: 0.0, qc_randomize: 0.0, token_reset: 0.0, token_freeze: 0.0, token_permute: 0.0, token_randomize: 0.0, cross_zero: 0.0, supported: false}
+  mlflow_run_id: 8ac035048fd34b59a2957d9b19fe3421
+  run_record: experiments/runs/exp-696-qcm48-factorial/run.json
+  metrics: evals/results/exp-696-qcm48-factorial/metrics.json
+  limitations: [unhealthy-neither-makes-result-non-comparative, all-arms-zero-exact-on-complete-formal-denominators, positive-interaction-and-causal-gates-failed, roots-20261370-through-20261376-unopened, no-checked-private-candidate-submission-promotion-release-winner-or-goal-completion-claim, C5-unresolved-final-seven-member-chair-mandatory]

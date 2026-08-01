@@ -1,0 +1,17 @@
+{
+  "schema_version": "exp659-calibration-summary-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "evidence_class": "resource-only-non-scientific",
+  "scratch_evidence": {"path": ".scratch/exp-659-symbol-equivariant-recurrence/calibration.json", "sha256": "e1e17f1756e530c4ea7fbaef5465464b7d5ae242411d7b0d358d861399a04b16"},
+  "observed": {"monotonic_wall_seconds": 18.397680725996906, "process_user_plus_system_cpu_seconds": 47.2, "cgroup_cpu_seconds": 66.292, "peak_rss_bytes": 437198848},
+  "projected_formal": {"wall_seconds": 435, "process_cpu_seconds": 1552, "cgroup_cpu_seconds": 2111},
+  "soft_budget_1_25x": {"wall_seconds": 544, "process_cpu_seconds": 1940, "cgroup_cpu_seconds": 2638},
+  "hard_ceiling_1_75x": {"wall_seconds": 762, "process_cpu_seconds": 2715, "cgroup_cpu_seconds": 3693},
+  "peak_rss_guard_bytes": 546498560,
+  "structural_controls": {"faithful_swap_max_residual": 1.1920928955078125e-7, "broken_tying_swap_max_residual": 0.5381518602371216, "deterministic_replay": true, "task_bit_swap_applicable_cases": 0, "task_bit_swap_exhausted_legal_cases": 48624},
+  "calibration_checkpoint_sha256": {"position_only_initial": "cf74", "position_only_final": "910795", "faithful_initial": "09ab42", "faithful_final": "b7ce0a", "broken_initial": "bbae8", "broken_final": "438762"},
+  "checkpoint_hash_note": "Prefixes identify ignored calibration-only checkpoints; they are non-formal, non-promotable, and must not be reused as scientific evidence.",
+  "formal_metrics": null,
+  "fixed_short_wall_cap_used": false,
+  "fidelity_reduced": false
+}

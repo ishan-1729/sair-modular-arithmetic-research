@@ -1,0 +1,334 @@
+{
+  "run_id": "exp-315-cellular-independent-tier4-five-seed",
+  "status": "completed",
+  "checkpoint": {
+    "path": ".scratch/exp-314-cellular-width32-smoke/weights.safetensors",
+    "sha256": "a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241"
+  },
+  "generator": {
+    "implementation": "modchallenge.testgen.generator._generate_tier_cases",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "checked_public_used": false,
+  "tier": 4,
+  "seeds": {
+    "08851e5345fcca63": {
+      "seed_sha256": "08851e5345fcca639dd3858d331a6bcdeea6164796a20679b343ebc0f967026c",
+      "cases": 100,
+      "correct": 97,
+      "exact_accuracy": 0.9700000286102295,
+      "invalid_residues": 0,
+      "inference_seconds": 2.142352050000227,
+      "per_prime": {
+        "249383741": {
+          "cases": 17,
+          "correct": 17,
+          "exact_accuracy": 1.0
+        },
+        "1286755699": {
+          "cases": 24,
+          "correct": 24,
+          "exact_accuracy": 1.0
+        },
+        "2283479963": {
+          "cases": 17,
+          "correct": 16,
+          "exact_accuracy": 0.9411764705882353
+        },
+        "2706165871": {
+          "cases": 25,
+          "correct": 24,
+          "exact_accuracy": 0.96
+        },
+        "3404468629": {
+          "cases": 17,
+          "correct": 16,
+          "exact_accuracy": 0.9411764705882353
+        }
+      },
+      "errors": [
+        {
+          "index": 23,
+          "p": 3404468629,
+          "predicted": 2318670703,
+          "expected": 1971489610
+        },
+        {
+          "index": 41,
+          "p": 2283479963,
+          "predicted": 252690195,
+          "expected": 235912979
+        },
+        {
+          "index": 64,
+          "p": 2706165871,
+          "predicted": 560885000,
+          "expected": 426667272
+        }
+      ]
+    },
+    "a4d962de745a13d5": {
+      "seed_sha256": "a4d962de745a13d59608f9102f5418fda386c6db960f6748110d596ac0627544",
+      "cases": 100,
+      "correct": 96,
+      "exact_accuracy": 0.9599999785423279,
+      "invalid_residues": 0,
+      "inference_seconds": 2.352224035999825,
+      "per_prime": {
+        "1565390591": {
+          "cases": 21,
+          "correct": 20,
+          "exact_accuracy": 0.9523809523809523
+        },
+        "1738577717": {
+          "cases": 21,
+          "correct": 21,
+          "exact_accuracy": 1.0
+        },
+        "2267735363": {
+          "cases": 22,
+          "correct": 22,
+          "exact_accuracy": 1.0
+        },
+        "2826057763": {
+          "cases": 14,
+          "correct": 14,
+          "exact_accuracy": 1.0
+        },
+        "4149549121": {
+          "cases": 22,
+          "correct": 19,
+          "exact_accuracy": 0.8636363636363636
+        }
+      },
+      "errors": [
+        {
+          "index": 33,
+          "p": 1565390591,
+          "predicted": 1314387144,
+          "expected": 599525066
+        },
+        {
+          "index": 45,
+          "p": 4149549121,
+          "predicted": 1437367244,
+          "expected": 1437365196
+        },
+        {
+          "index": 59,
+          "p": 4149549121,
+          "predicted": 2295932423,
+          "expected": 1846792684
+        },
+        {
+          "index": 97,
+          "p": 4149549121,
+          "predicted": 1641193260,
+          "expected": 3046900687
+        }
+      ]
+    },
+    "5bfc3906897f4ad4": {
+      "seed_sha256": "5bfc3906897f4ad4a72387a8369139a907779255722b8b0c60669f1aa39dd3ca",
+      "cases": 100,
+      "correct": 96,
+      "exact_accuracy": 0.9599999785423279,
+      "invalid_residues": 0,
+      "inference_seconds": 2.080501696999818,
+      "per_prime": {
+        "1467436829": {
+          "cases": 27,
+          "correct": 26,
+          "exact_accuracy": 0.9629629629629629
+        },
+        "1983385499": {
+          "cases": 20,
+          "correct": 19,
+          "exact_accuracy": 0.95
+        },
+        "3152321363": {
+          "cases": 22,
+          "correct": 22,
+          "exact_accuracy": 1.0
+        },
+        "3608370971": {
+          "cases": 15,
+          "correct": 14,
+          "exact_accuracy": 0.9333333333333333
+        },
+        "4003104641": {
+          "cases": 16,
+          "correct": 15,
+          "exact_accuracy": 0.9375
+        }
+      },
+      "errors": [
+        {
+          "index": 20,
+          "p": 4003104641,
+          "predicted": 2772838051,
+          "expected": 1371743173
+        },
+        {
+          "index": 34,
+          "p": 3608370971,
+          "predicted": 3582965205,
+          "expected": 3515872725
+        },
+        {
+          "index": 36,
+          "p": 1467436829,
+          "predicted": 33620575,
+          "expected": 31523423
+        },
+        {
+          "index": 97,
+          "p": 1983385499,
+          "predicted": 1811697856,
+          "expected": 1778143424
+        }
+      ]
+    },
+    "e1c2d0ff3f6f85d8": {
+      "seed_sha256": "e1c2d0ff3f6f85d8ecfb971e7374d2589f03049258cff5850e5e5a9d15734011",
+      "cases": 100,
+      "correct": 98,
+      "exact_accuracy": 0.9800000190734863,
+      "invalid_residues": 0,
+      "inference_seconds": 1.9180789440001718,
+      "per_prime": {
+        "258241507": {
+          "cases": 17,
+          "correct": 17,
+          "exact_accuracy": 1.0
+        },
+        "354786577": {
+          "cases": 17,
+          "correct": 17,
+          "exact_accuracy": 1.0
+        },
+        "1442215097": {
+          "cases": 23,
+          "correct": 23,
+          "exact_accuracy": 1.0
+        },
+        "1840079561": {
+          "cases": 19,
+          "correct": 18,
+          "exact_accuracy": 0.9473684210526315
+        },
+        "2372802721": {
+          "cases": 24,
+          "correct": 23,
+          "exact_accuracy": 0.9583333333333334
+        }
+      },
+      "errors": [
+        {
+          "index": 74,
+          "p": 2372802721,
+          "predicted": 774012336,
+          "expected": 161744832
+        },
+        {
+          "index": 92,
+          "p": 1840079561,
+          "predicted": 923213189,
+          "expected": 1299018048
+        }
+      ]
+    },
+    "93db6a7f969d6aeb": {
+      "seed_sha256": "93db6a7f969d6aeb90e99c9ee8938843d7678073123ff0a4cc04dc5eca63e59f",
+      "cases": 100,
+      "correct": 96,
+      "exact_accuracy": 0.9599999785423279,
+      "invalid_residues": 0,
+      "inference_seconds": 1.984484559000066,
+      "per_prime": {
+        "317350097": {
+          "cases": 18,
+          "correct": 16,
+          "exact_accuracy": 0.8888888888888888
+        },
+        "2003585011": {
+          "cases": 21,
+          "correct": 19,
+          "exact_accuracy": 0.9047619047619048
+        },
+        "2631076211": {
+          "cases": 19,
+          "correct": 19,
+          "exact_accuracy": 1.0
+        },
+        "2662297591": {
+          "cases": 27,
+          "correct": 27,
+          "exact_accuracy": 1.0
+        },
+        "4091300909": {
+          "cases": 15,
+          "correct": 15,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": [
+        {
+          "index": 41,
+          "p": 317350097,
+          "predicted": 72872179,
+          "expected": 34096061
+        },
+        {
+          "index": 60,
+          "p": 317350097,
+          "predicted": 58563866,
+          "expected": 58572058
+        },
+        {
+          "index": 70,
+          "p": 2003585011,
+          "predicted": 1259823005,
+          "expected": 961029824
+        },
+        {
+          "index": 88,
+          "p": 2003585011,
+          "predicted": 344331098,
+          "expected": 1811045197
+        }
+      ]
+    }
+  },
+  "aggregate": {
+    "cases": 500,
+    "correct": 483,
+    "exact_accuracy": 0.966,
+    "passing_seeds": 5,
+    "minimum_seed_accuracy": 0.9599999785423279
+  },
+  "gates": {
+    "minimum_aggregate_accuracy": 0.9,
+    "minimum_passing_seeds": 5,
+    "per_seed_passing_accuracy": 0.9,
+    "minimum_single_seed_accuracy": 0.9,
+    "passed": true
+  },
+  "decision": "promote-cellular-tier4-integration",
+  "runtime": {
+    "wall_seconds": 11.388967801000035,
+    "device": "cpu",
+    "torch_threads": 4
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "4ba31e7df52f4a40897f86ba986ca3c0"
+  },
+  "limitations": [
+    "Five independent seeds cannot reproduce the unknowable private seed.",
+    "Tier 4 only; full integration evaluation remains required.",
+    "Checked-public Tier-4 answers were not read."
+  ]
+}

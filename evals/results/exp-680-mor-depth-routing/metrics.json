@@ -1,0 +1,51 @@
+{
+  "schema_version": "exp680-metrics-v1",
+  "run_id": "exp-680-mor-depth-routing",
+  "created_at": "2026-07-30T05:00:00+05:30",
+  "status": "parked-calibration-noncollapsed-load",
+  "decision": "park-calibration-resource-or-topology",
+  "checkpoint_sha256": "845654d1baa575e405b836f2982947938b7d3a2305290e6ef49f91e000012405",
+  "focused_tests_passed": 10,
+  "full_pytest_passed": 673,
+  "calibration_opened": true,
+  "formal_opened": false,
+  "training_updates": 20,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Root 20261270 executed only non-scientific route/resource calibration; formal W128/W256 roots remained unopened.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "expert_choice": "completed-calibration-non-scientific",
+    "token_choice": "completed-calibration-non-scientific",
+    "fixed_full": "completed-calibration-non-scientific",
+    "equal_average_fixed": "completed-calibration-non-scientific",
+    "equal_average_two_point": "completed-calibration-non-scientific",
+    "frozen_source": "completed-calibration-non-scientific",
+    "route_and_weight_interventions": "completed-calibration-non-scientific"
+  },
+  "calibration": {
+    "root": 20261270,
+    "wall_seconds": 129.92078969199997,
+    "process_tree_cpu_seconds": 369.57,
+    "cgroup_cpu_seconds": 383.9240000000001,
+    "peak_rss_bytes": 1961058304,
+    "expected_formal_wall_seconds": 23761.84082970117,
+    "eta_lower_wall_seconds": 17601.36357755642,
+    "soft_guard_wall_seconds": 29702.30103712646,
+    "hard_guard_wall_seconds": 41583.22145197705,
+    "candidate_nominal_seconds": 51.01472120000068,
+    "candidate_guarded_seconds": 68.86987362000092,
+    "artifact_bytes": 2430216,
+    "expert_w128_histogram": {"8": 3, "11": 0, "14": 9},
+    "expert_average_calls": 12.5,
+    "expert_call_reduction": 0.1071428571428571,
+    "expert_route_wall_seconds": 0.04150325399996291,
+    "fixed_full_route_wall_seconds": 0.046915125000055014,
+    "checks": {"complete_route": true, "all_modes_calibrated": true, "fixed_full_parity": true, "deterministic_cpu": true, "call_reduction": true, "route_wall": true, "candidate_runtime": true, "artifact": true, "memory": true, "expected_value": true, "no_fidelity_reduction": true, "noncollapsed_load": false}
+  },
+  "roots": {"20261270": "completed-calibration-topology-gate-reject", "20261271": "unopened-admission-blocked", "20261272": "unopened-admission-blocked", "20261273": "unopened-admission-blocked"},
+  "limitations": ["Calibration denominators are route-proving and non-scientific.", "The missing middle-depth load rejects formal admission without post-result retuning.", "No W128/W256 scientific or promotion surface was opened."]
+}

@@ -1,0 +1,67 @@
+run_id: exp-634-direct-relative-attention-feasibility
+seed: 20260831
+hypothesis: Recurrently shared global attention with fixed relative position features learns direct modular products and zero-shot width transfer better than parameter-matched direct dilated convolution.
+preregistration: knowledge/autoresearch/ablations/exp-634-direct-relative-attention-feasibility.md
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+data:
+  prime_bit_span: 4
+  train_prime_identities: 512
+  test_prime_identities: 128
+  train_prime_identities_by_width: {8: 40, 12: 400}
+  test_prime_identities_by_width: {8: 8, 12: 100}
+training:
+  widths: [8, 12]
+  steps: 4000
+  batch_size: 64
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00002
+  weight_decay: 0.0001
+  worst_bit_weight: 0.05
+  gradient_clip: 1.0
+  torch_threads: 4
+  checkpoint_every_steps: 100
+control_model:
+  hidden: 72
+  cycles: 2
+attention_model:
+  hidden: 80
+  heads: 4
+  feedforward: 160
+  depth_multiplier: 2
+  dropout: 0.0
+evaluation:
+  widths: [12, 24]
+  cases: 300
+  randomized_width24_cases: 100
+  determinism_cases: 20
+gates:
+  minimum_attention_width12_accuracy: 0.20
+  minimum_width12_gain_over_control: 0.05
+  minimum_attention_width24_accuracy: 0.02
+  minimum_width24_gain_over_control: 0.02
+  minimum_trained_gain_over_randomized_width24: 0.10
+  maximum_invalid_rate: 0.05
+  maximum_parameter_ratio: 1.15
+  maximum_projected_integrated_seconds: 260
+  require_determinism: true
+resource_budget:
+  status: calibrated
+  limit_unit: wall_seconds
+  calibration_updates_per_arm: 30
+  calibration_inference_cases_per_width: 20
+  formal_training_steps_per_arm: 4000
+  formal_cases_per_arm_per_width: 300
+  measured_control_training_wall_seconds: 4.820312046009349
+  measured_control_training_aggregate_cpu_seconds: 18.044270457
+  measured_attention_training_wall_seconds: 4.774610287000542
+  measured_attention_training_aggregate_cpu_seconds: 17.921088855
+  projected_training_wall_seconds: 1279.3229777346519
+  projected_training_aggregate_cpu_seconds: 4795.3812416
+  projected_evaluation_wall_seconds: 3.0425173799449112
+  projected_evaluation_aggregate_cpu_seconds: 11.354304090000156
+  expected_total_wall_seconds: 1463
+  expected_total_aggregate_cpu_minutes: 81
+  soft_budget_wall_seconds: 1980
+  hard_runaway_ceiling_wall_seconds: 2940
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 196

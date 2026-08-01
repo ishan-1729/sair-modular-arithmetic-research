@@ -1,0 +1,71 @@
+{
+  "archive_integrity": {
+    "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+    "core_sha256": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+    "receipt_sha256": "cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981",
+    "resource_completion_sha256": "9eeb228450ba8e684adbe34bb95ad057036ffdedc643fe3942a0aaf846cf1ab0"
+  },
+  "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+  "canonical_resource_boundary": {
+    "aggregate_cpu_seconds": 12442.915271225,
+    "peak_rss_bytes": 2675752960,
+    "post_sample_tail_excluded": true,
+    "scope": "observed launch-to-pre-outer-seal sample after inner publication and validation, but before outer resource-completion serialization, atomic seal, CLI output, interpreter teardown, and process exit",
+    "wall_seconds": 3107.4547687239974
+  },
+  "chronology_finding": {
+    "finding": "The base warmup and three base repeats completed before readiness source replay, MLflow probe, and infrastructure additions were measured post hoc; therefore the evidence does not prove the required synchronous base-to-augmentation-to-validation-to-seal order.",
+    "required_repair": "A distinct root must execute and atomically seal each complete augmented unit before the next unit starts.",
+    "scientific_result_invalidated": false
+  },
+  "classification": "consumed-complete-components-but-chronology-nonconforming",
+  "cumulative_historical_and_superseded_charge": {
+    "aggregate_cpu_seconds": 36721.035879589996,
+    "charged_exactly_once_to_next_planning_guard": true,
+    "wall_seconds": 9007.853947323996
+  },
+  "eligible_for_cache_reuse": false,
+  "eligible_for_launch": false,
+  "eligible_for_projection_rates": false,
+  "main_mlflow_run_id": "4dc1cef0b5ab4269a838bdc52eebcf48",
+  "next_root": {
+    "authorization_created": false,
+    "judge_review_required_before_authorization": true,
+    "root": 20261160,
+    "status": "distinct-unopened-unconsumed-not-authorized"
+  },
+  "non_scientific": true,
+  "probe_mlflow_run_ids": {
+    "repeat-1": "ad3665262ba4480882dbbdf22f3481f9",
+    "repeat-2": "25d8179afd8b48bba96a9caaa9103de9",
+    "repeat-3": "7633a4befe91490181844c157e7f7978",
+    "warmup": "80fdf14e207c451e8c27e81d33becc84"
+  },
+  "prohibitions": [
+    "screen launch",
+    "confirmation launch",
+    "checked independent evaluation",
+    "official or private benchmark access",
+    "projection-rate selection",
+    "cache reuse"
+  ],
+  "root": 20261159,
+  "schema_version": "exp648-readiness-superseded-classification-v1",
+  "scratch_evidence": {
+    "bytes": 24515513,
+    "digest_method": "SHA-256 of UTF-8 compact canonical JSON mapping scope-relative POSIX paths to lowercase file SHA-256 values, followed by one LF",
+    "file_count": 207,
+    "preserved_in_place": true,
+    "scope": ".scratch/exp-648-structured-trajectory-consistency/screen",
+    "tree_sha256": "8a6cf48a181ac02cc2ae46334d032463fdac656b1f2cc9c35228f3251bcdd20a"
+  },
+  "status": "consumed-complete-components-but-chronology-nonconforming",
+  "superseded": true,
+  "wrapper_wall_observation": {
+    "eligible_as_canonical_resource_evidence": false,
+    "persistence": "agentic shell-command trace only; not persisted by the readiness process",
+    "precision_seconds": 0.1,
+    "scope": "shell command launch through process exit",
+    "seconds": 3166.1
+  }
+}

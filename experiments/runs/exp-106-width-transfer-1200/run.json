@@ -1,0 +1,42 @@
+{
+  "run_id": "exp-106-width-transfer-1200",
+  "status": "completed",
+  "created_at": "2026-07-11T20:36:00Z",
+  "hypothesis": "The learned-transfer advantage persists at 1,200 matched steps and reaches a rollout regime worth scaling to the full budget.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "26dca358a4588a2f87cbd9a4ecfb8cd0f2bfc8528135a0efa44961c05a18e14d",
+    "config_sha256": "e93405e74b4a585b9d8cbd2dd8dc5d40f4d0a3add50de7d77a0826b3873975c5",
+    "transfer_checkpoint_sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192"
+  },
+  "config": "configs/exp_106_width_transfer_1200.yaml",
+  "environment": "experiments/runs/exp-106-width-transfer-1200/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "parent_run_id": "0c6e64318ef64de6ac385f13a04dedcd",
+    "arm_run_ids": {
+      "width16-random": "6a425e42f4ca4bd985cd716397e48725",
+      "width16-transfer": "27ceefcd6d6649aea9130226de831fcb"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-106-width-transfer-1200/width16-transfer/weights.safetensors",
+    "checkpoint_sha256": "e22363be39f57d81ab827ed232f6ee7f27a6f49e54cc2be2e40c3e1536cef6a4",
+    "metrics": "evals/results/exp-106-width-transfer-1200/metrics.json",
+    "raw_summary": "experiments/runs/exp-106-width-transfer-1200/raw-summary.json",
+    "random_metrics": "experiments/runs/exp-106-width-transfer-1200/width16-random-metrics.json",
+    "transfer_metrics": "experiments/runs/exp-106-width-transfer-1200/width16-transfer-metrics.json",
+    "error_diagnosis": "experiments/runs/exp-106-width-transfer-1200/transition-error-diagnosis.json"
+  },
+  "decision": "revise-curriculum-before-full-budget",
+  "notes": [
+    "Transfer remained the clear winner at matched 1,200-step compute.",
+    "The winner missed the preregistered 97% transition and 60% rollout full-budget gate.",
+    "A 100,000-transition diagnostic identifies quotient-2 reductions as the dominant error class.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

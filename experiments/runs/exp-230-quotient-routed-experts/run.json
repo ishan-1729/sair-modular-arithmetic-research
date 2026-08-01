@@ -1,0 +1,31 @@
+{
+  "run_id": "exp-230-quotient-routed-experts",
+  "status": "completed",
+  "created_at": "2026-07-12T03:22:00Z",
+  "hypothesis": "Learned quotient routing among learned residue experts improves exact high-bit rollout over matched one-head continuation.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "23e576208873bce7978aab13b5fac5fbe66fd3e7",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "fc0285affd7fc5bdb0416675819c2783853d40bd349f6fee2b0e5d588b399240",
+    "model_sha256": "a616d102177f4baa13c6036260d3213dda7757296c9a34024ff88d923fe8392e",
+    "config_sha256": "3ceb5c0322c739a82ba845eb79c39cb2f6e6e72b15dafd2f2cfb1594da1e1358"
+  },
+  "config": "configs/exp_230_quotient_routed_experts.yaml",
+  "environment": "experiments/runs/exp-230-quotient-routed-experts/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "fd20373f13ef459bb3cc782d663ac20a", "control_run_id": "9aaf7d8570394a599aaef8e132324892", "challenger_run_id": "4ff7ba6852c2432284ebd116966a7c9a"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-230-quotient-routed-experts/routed-expert-challenger/weights.safetensors",
+    "checkpoint_sha256": "71d5960a23db351176c761b391983418cfd75fdad9f74861afbcfe87aaecc16f",
+    "metrics": "evals/results/exp-230-quotient-routed-experts/metrics.json",
+    "raw_summary": "experiments/runs/exp-230-quotient-routed-experts/raw-summary.json"
+  },
+  "decision": "reject-quotient-routed-experts",
+  "notes": [
+    "Source output and router logits matched exactly before training, and all expert distances began at zero.",
+    "Router accuracy reached 99.998 percent, but oracle routing did not improve transition accuracy.",
+    "Routed rollout gained only 0.19 points and forced expert 0 reduced rollout by only 0.13 points.",
+    "No exact symbolic arithmetic was used in inference or evaluation selection."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "decision_order": [
+    "train-and-cache-all",
+    "W128-primary-exact-validity-runtime",
+    "W128-proposal-randomized-convergence-basin",
+    "W256-primary",
+    "W256-controls",
+    "confirmations"
+  ],
+  "dependency": {
+    "compatibility": "cpu-pytorch-2.5.1-deterministic-probe-pass",
+    "license": "MIT",
+    "name": "torchdeq",
+    "source": "https://github.com/locuslab/torchdeq",
+    "version": "0.1.0",
+    "visible_latest_commit_date": "2023-10-31"
+  },
+  "gates": {
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_mean_relative_residual": 0.05,
+    "maximum_w128_loss_to_proposal": 0.02,
+    "minimum_perturbation_return_fraction": 0.75,
+    "minimum_residual_correctness_auc": 0.6,
+    "minimum_trained_weight_drop_w128": 0.2,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w128_transition": 0.998,
+    "minimum_w256_gain_over_fixed_depth": 0.05,
+    "minimum_w256_gain_over_proposal": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "mode": "preregister",
+  "primary_route": "anderson_phantom",
+  "prohibited": [
+    "answer-dependent stopping",
+    "oracle residual selection",
+    "programmed modular arithmetic",
+    "lookup",
+    "repair",
+    "checked/private answers"
+  ],
+  "root": 20261210,
+  "roots": {
+    "calibration": 20261210,
+    "confirmations": [20261212, 20261213],
+    "viability": 20261211
+  },
+  "routes": [
+    "proposal_only",
+    "fixed_depth_shared",
+    "plain_picard_phantom",
+    "anderson_phantom",
+    "anderson_implicit",
+    "eqr_finite"
+  ],
+  "run_id": "exp-665-attractor-equilibrium-family",
+  "source": {
+    "checkpoint": {
+      "path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "files": {
+      "config": {"path": "configs/exp_665_attractor_equilibrium_family.yaml", "sha256": "c5a07c72ca9598db82ff93d279f8f90230fb511392b0ebc1c37bf7a4d48d5251"},
+      "mechanism": {"path": "knowledge/autoresearch/research/2026-07-29-exp665-attractor-equilibrium-mechanism.md", "sha256": "a34c6722b663d63a8188ae9e4e7abff4a9bd4458105d903c48d65ff4e245ac6d"},
+      "model": {"path": "experiments/exp_665_attractor_equilibrium_family/model.py", "sha256": "72e72ddd68e62f353d4319d7995dfa037636ebe0aa016d2d643ab184d7dd9636"},
+      "runner": {"path": "experiments/exp_665_attractor_equilibrium_family/run.py", "sha256": "ab0aa02d0deac1432330a719c7da5f6b33fcce4ec701e64e252a0ebc1737e3ae"},
+      "test": {"path": "tests/test_exp_665_attractor_equilibrium_family.py", "sha256": "b60793b9a13cc2d32f943e36fbf561a3f2354105a38c2064afc34ae20f72be28"}
+    },
+    "repository_branch": "codex/exp665-attractor-equilibrium-family",
+    "repository_commit": "c042a7fa68ab143dbba0091928b475ce5de1bf65"
+  },
+  "splits": {
+    "128": {"test": "bfccc961838b23092a35d86f6f2789c5863178f752028b5178c1e9679638652c", "train": "63eb7f72615dee3844ee6208f9955b0d7b8bcfbc111862f6e4bc4d2a73e34275", "validation": "abbd18a2bdf2b24459e78a5231de880b1a1e37f03d9f6cfd817012fe43a1e635"},
+    "256": {"test": "f9c63fa4e9b40d07b919a9f5f8fbce0aae4c5f8d94568348a5295aa51f8c268e", "train": "1be0813232797deaf398835df46435549d1c05f4bd31fc4c57ad0ae9687557c0", "validation": "8437b4bd6993c61a374f3267fe51208bd4aef4f3eb84594a53e1c07f161e709f"},
+    "64": {"test": "69f9a6f727bd1fd4f601f88038602354e1d3a6b9dc05f9b6796476db36d52d52", "train": "656e34fdf8fbdead9f41c13633aaad266ae34dddd9007529719b9fd8092cf614", "validation": "95a579b8ec489b310439cf379e764fac16151c32787cfa4de381f1e51203a38e"}
+  }
+}

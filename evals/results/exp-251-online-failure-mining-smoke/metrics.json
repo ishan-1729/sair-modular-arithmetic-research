@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-251-online-failure-mining-smoke",
+  "created_at": "2026-07-12T04:24:00Z",
+  "checkpoint_sha256": "e83a1714dcc12ed02746505491eaf266babae2e4c438b2d0d7c64398511df426",
+  "evaluation": {
+    "transition": {
+      "uniform_control": {"cases": 20000, "correct": 19956, "exact_accuracy": 0.9978},
+      "online_mining": {"cases": 20000, "correct": 19954, "exact_accuracy": 0.9977}
+    },
+    "rollout": {
+      "uniform_control": {"cases": 5000, "correct": 4595, "exact_accuracy": 0.919},
+      "online_mining": {"cases": 5000, "correct": 4643, "exact_accuracy": 0.9286}
+    }
+  },
+  "controls": {
+    "transition_gain": -0.0001,
+    "rollout_gain": 0.0096,
+    "challenger_invalid_rollout_rate": 0.0022,
+    "control_pool_failure_fraction": 0.003115234375,
+    "challenger_pool_failure_fraction": 0.002314453125,
+    "challenger_selected_failure_fraction": 0.0092578125,
+    "gates_passed": false
+  },
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 203.03080153000008},
+  "decision": "reject-online-failure-mining",
+  "limitations": [
+    "This was a 100-step successive-halving smoke test with 5,000 rollout cases per arm.",
+    "No consumed independent seed or checked-public answer was read."
+  ]
+}

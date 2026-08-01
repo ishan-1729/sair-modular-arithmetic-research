@@ -1,0 +1,91 @@
+run_id: exp-695-cycle-factorized-distillation
+hypothesis: Hidden-channel cycle coefficients factorized over direction and dilation and distilled from a frozen untied 16-slot teacher improve autonomous exactness over an exactly matched zero-coefficient control.
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+source_contract:
+  exp220_model: {path: experiments/exp_220_width_independent_cellular/model.py, sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc}
+  exp300_runner: {path: experiments/exp_300_width64_bit_tensor_transfer/run.py, sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f}
+  exp687_runner: {path: experiments/exp_687_compact_distilled_w256_specialist/run.py, sha256: 3644bbdc9c25f77daa96ca3322fa024831603886dd9dbf8612a4bb6ba2bfd3ff}
+  candidate_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+  candidate_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+  candidate_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+roots:
+  calibration: 20261377
+  formal: 20261378
+  confirmations: [20261379, 20261380]
+  independent_seeds: [20261381, 20261382, 20261383, 20261384, 20261385]
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model:
+  source_hidden: 92
+  hidden: 48
+  width: 256
+  cycles: 1
+  factor_rank: 4
+  coefficient_scale: 0.125
+  outward_dilations: [1, 2, 4, 8, 16, 32, 64, 128]
+  inward_dilations: [128, 64, 32, 16, 8, 4, 2, 1]
+pruning: {method: normalized-squared-incident-weight, tie_break: ascending-source-channel-index, retained_channels: 48}
+teacher: {updates: 400, calibration_updates: 400, initialization: deterministic-candidate005-top48-generic-copy}
+routes:
+  primary: {trained: true, hidden_coefficient_access: true}
+  zero_coefficient_control: {trained: true, hidden_coefficient_access: false}
+data:
+  curriculum: [64, 128, 256, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 70100
+  training_seed_offset: 70200
+  teacher_seed_offset: 70300
+  test_seed_offset: 70400
+training:
+  updates: 2400
+  calibration_updates: 4
+  horizon: 8
+  batch_size: 16
+  learning_rate: 0.00001
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  residue_distillation_weight: 0.10
+  quotient_distillation_weight: 0.05
+  trajectory_distillation_weight: 0.05
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_updates: 100
+calibration:
+  transition_cases_per_arm_width: 16
+  rollout_cases_per_arm_width: 2
+  cold_repetitions: 3
+  extra_cold_repetitions: 2
+  variability_trigger: 1.10
+evaluation:
+  transition_cases_per_width: 3000
+  w128_rollout_cases: 300
+  w256_sequential_blocks: [200, 300, 450, 600]
+  confidence_level: 0.99
+  holm_family_size: 4
+gates:
+  minimum_control_w128_transition: 0.99
+  minimum_primary_w256_transition: 0.998
+  minimum_primary_w256_rollout: 0.50
+  maximum_invalid_rate: 0.01
+  minimum_paired_gain: 0.05
+  maximum_w128_loss: 0.05
+  minimum_intervention_erasure_fraction: 0.50
+  confirmation_admission_rollout: 0.85
+  independent_seed_minimum: 0.90
+  independent_aggregate_minimum: 0.93
+  maximum_candidate_guarded_wall_seconds: 285.0
+resource_policy:
+  package_oracle_observed_wall_seconds: null
+  package_oracle_observed_process_cpu_seconds: null
+  calibration_hard_wall_seconds: 14400
+  maximum_peak_rss_bytes: 6871947673
+  candidate_headroom_fixed: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 1.75
+  fidelity_reduced: false
+prohibited: [checked-or-private-answers, inference-answer-selection, output-repair, hand-coded-reduction, programmed-visit-algorithm, teacher-in-inference, root-reuse, post-result-retuning, operand-swap-route]

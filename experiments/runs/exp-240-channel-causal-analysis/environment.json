@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-07-12T03:50:00Z",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "distribution": "Ubuntu-24.04 WSL2",
+  "python": "3.12.3",
+  "pytorch": "2.5.1+cpu",
+  "numpy": "2.5.1",
+  "mlflow": "3.14.0",
+  "psutil": "7.0.0",
+  "sympy": "1.13.1",
+  "device": "cpu",
+  "torch_threads": 4,
+  "cpu_count": 22,
+  "mlflow_tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db"
+}

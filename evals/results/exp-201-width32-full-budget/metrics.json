@@ -1,0 +1,39 @@
+{
+  "run_id": "exp-201-width32-full-budget",
+  "created_at": "2026-07-12T02:12:00Z",
+  "checkpoint_sha256": "ced89e4ca8cbb5cfae3e093af7ff422ce264abfaaf19a42846644f8b7240351c",
+  "evaluation": {
+    "transition": {
+      "width32_transfer_heldout_primes": {"cases": 50000, "correct": 49824, "exact_accuracy": 0.99648, "bit_accuracy": 0.9997625}
+    },
+    "rollout": {
+      "width32_transfer_heldout_primes": {"cases": 20000, "correct": 18093, "exact_accuracy": 0.90465}
+    }
+  },
+  "controls": {
+    "valid_residue_rate": 0.99984,
+    "invalid_rollout_rate": 0.0051,
+    "all_steps_exact_accuracy": 0.9063,
+    "selected_quotient2_fraction": 0.35563720703125,
+    "selected_boundary_fraction": 0.1932666015625,
+    "final_100_step_batch_exact_delta": 0.00390625,
+    "transition_gate_margin": -0.00052,
+    "rollout_gate_margin": 0.00465
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 260.87998967300007,
+    "training_seconds": 169.16479753199997,
+    "network_training_examples": 409600,
+    "offline_candidate_examples": 1638400,
+    "peak_rss_bytes": 627040256,
+    "parameters": 126276
+  },
+  "decision": "revise-width32-before-independent",
+  "limitations": [
+    "Heldout-prime full-budget gate; no official Tier-4 score was produced.",
+    "The overall transition gate was narrowly missed, with the lowest accuracy in the 30-32 bit bands.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

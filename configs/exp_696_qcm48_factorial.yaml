@@ -1,0 +1,104 @@
+run_id: exp-696-qcm48-factorial
+hypothesis: A bounded rank-4 quotient/carry-by-persistent-token composition improves exact W256 rollout beyond both component main effects on an otherwise identical Candidate-derived h48 core.
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+source_contract:
+  c1_runner: {path: experiments/exp_690_c1_persistent_memory_tokens/run.py, sha256: aeaed1afc32e02e076185343b0a2ca6c33ce13c52ce5845181fbd08ab72316a8}
+  c1_config: {path: configs/exp_690_c1_persistent_memory_tokens.yaml, sha256: 4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f}
+  c3_runner: {path: experiments/exp_692_c3_quotient_carry_conditioning/run.py, sha256: cedcabc2545e50822466c7eb363a623340af55a771c35fc44616350b282cf6fe}
+  c3_config: {path: configs/exp_692_c3_quotient_carry_conditioning.yaml, sha256: 79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c}
+  exp220_model: {path: experiments/exp_220_width_independent_cellular/model.py, sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc}
+  exp300_runner: {path: experiments/exp_300_width64_bit_tensor_transfer/run.py, sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f}
+  exp687_runner: {path: experiments/exp_687_compact_distilled_w256_specialist/run.py, sha256: 3644bbdc9c25f77daa96ca3322fa024831603886dd9dbf8612a4bb6ba2bfd3ff}
+  candidate_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+  candidate_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+  candidate_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+roots:
+  calibration: 20261368
+  formal: 20261369
+  confirmations: [20261370, 20261371]
+  independent_seeds: [20261372, 20261373, 20261374, 20261375, 20261376]
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model:
+  source_hidden: 92
+  hidden: 48
+  width: 256
+  cycles: 1
+  outward_dilations: [1, 2, 4, 8, 16, 32, 64, 128]
+  memory_tokens: 4
+  token_dimension: 16
+  quotient_classes: 3
+  signed_carry_classes: 4
+  posterior_embedding_dimension: 4
+  codec_rank: 4
+  fusion_placement: pre-recurrence-stem-film-residual
+  codec_formula: tanh(up_qc(tanh(down_qc(qc))))+tanh(up_token(tanh(down_token(read))))+tanh(up_cross(tanh(down_qc(qc))*tanh(down_token(read))))
+pruning: {method: normalized-squared-incident-weight, tie_break: ascending-source-channel-index, retained_channels: 48}
+routes:
+  neither: {trained: true, qc_access: false, token_access: false}
+  qc_only: {trained: true, qc_access: true, token_access: false}
+  token_only: {trained: true, qc_access: false, token_access: true}
+  both: {trained: true, qc_access: true, token_access: true}
+data:
+  curriculum: [64, 128, 256, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 69600
+  training_seed_offset: 69700
+  test_seed_offset: 69800
+training:
+  updates: 2400
+  calibration_updates: 4
+  horizon: 8
+  batch_size: 16
+  learning_rate: 0.00001
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  carry_weight: 0.10
+  residue_distillation_weight: 0.10
+  quotient_distillation_weight: 0.05
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_updates: 100
+calibration:
+  transition_cases_per_arm_width: 16
+  rollout_cases_per_arm_width: 2
+  cold_repetitions: 3
+  extra_cold_repetitions: 2
+  variability_trigger: 1.10
+evaluation:
+  transition_cases_per_width: 3000
+  w128_rollout_cases: 300
+  w256_sequential_blocks: [200, 300, 450, 600]
+  confidence_level: 0.99
+  holm_family_size: 9
+gates:
+  minimum_neither_w128_transition: 0.99
+  minimum_both_w256_transition: 0.998
+  minimum_both_w256_rollout: 0.50
+  maximum_invalid_rate: 0.01
+  minimum_paired_gain: 0.05
+  maximum_w128_loss: 0.05
+  minimum_intervention_erasure_fraction: 0.50
+  require_positive_interaction: true
+  confirmation_admission_rollout: 0.85
+  independent_seed_minimum: 0.90
+  independent_aggregate_minimum: 0.93
+  maximum_candidate_guarded_wall_seconds: 285.0
+resource_policy:
+  package_oracle_planning_basis: EXP695 final-byte oracle ran 1009 tests in 471.53 wall seconds; allow 540 seconds expected for the added C7 cone.
+  package_oracle_expected_wall_seconds: 540
+  package_oracle_soft_wall_seconds: 675
+  package_oracle_hard_wall_seconds: 945
+  calibration_hard_wall_seconds: 2400
+  maximum_peak_rss_bytes: 6871947673
+  candidate_headroom_fixed: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 1.75
+  fidelity_reduced: false
+library_decision: Native PyTorch SDPA, GRUCell, convolution, einsum, safetensors, NumPy, and MLflow cover the tiny deterministic codec and lifecycle without a fidelity-improving external primitive.
+prohibited: [checked-or-private-answers, inference-answer-selection, output-repair, hand-coded-reduction, programmed-carry-or-quotient-semantics, barrett, montgomery, crt, root-reuse, post-result-retuning, operand-swap-route]

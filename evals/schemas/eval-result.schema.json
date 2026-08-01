@@ -9,13 +9,27 @@
     "created_at": { "type": "string", "format": "date-time" },
     "checkpoint_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "evaluation": {
-      "type": "object",
-      "required": ["transition", "rollout"],
-      "properties": {
-        "transition": { "$ref": "#/$defs/splitMetricsMap" },
-        "rollout": { "$ref": "#/$defs/splitMetricsMap" }
-      },
-      "additionalProperties": true
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["transition", "rollout"],
+          "properties": {
+            "transition": { "$ref": "#/$defs/splitMetricsMap" },
+            "rollout": { "$ref": "#/$defs/splitMetricsMap" }
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["not_performed", "reason", "labels_or_oracle_present"],
+          "properties": {
+            "not_performed": { "const": true },
+            "reason": { "type": "string", "minLength": 1 },
+            "labels_or_oracle_present": { "const": false }
+          },
+          "additionalProperties": true
+        }
+      ]
     },
     "controls": { "type": "object" },
     "runtime": { "type": "object" },

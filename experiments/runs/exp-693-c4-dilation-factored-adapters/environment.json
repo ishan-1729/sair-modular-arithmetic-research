@@ -1,0 +1,11 @@
+{
+  "run_id": "exp-693-c4-dilation-factored-adapters",
+  "repository_base_commit": "b057190c4e3291467a886b5734348b49bd813e33",
+  "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "torch_threads": 4,
+  "mlflow": {"version": "3.14.0", "run_id": null},
+  "fixture_preflight": {"git_lfs_paths": 87, "mismatches": 0, "nested_challenge_clean": true}
+}

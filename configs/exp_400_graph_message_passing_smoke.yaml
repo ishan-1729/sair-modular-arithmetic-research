@@ -1,0 +1,66 @@
+run_id: exp-400-graph-message-passing-smoke
+hypothesis: explicit bit-position graph relations improve width transfer and exact rollout beyond a matched local cellular control
+preregistration: knowledge/autoresearch/ablations/exp-400-graph-message-passing-smoke.md
+seed: 20260717
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+architectures:
+  cellular: {hidden: 92, cycles: 2}
+  gcn: {hidden: 92, cycles: 2}
+  gat: {hidden: 92, cycles: 2}
+  mpnn: {hidden: 80, cycles: 2, edge_hidden: 8}
+training:
+  widths: [8, 12, 16]
+  prime_bit_span: 4
+  steps: 200
+  batch_size: 128
+  learning_rate: 0.002
+  minimum_learning_rate: 0.0001
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  random_state_fraction: 0.15
+  composite_fraction: 0.15
+  torch_threads: 4
+hard_mining:
+  candidate_pool_factor: 4
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+evaluation:
+  width16_transition_cases: 5000
+  width16_rollout_cases: 1000
+  width32_transition_cases: 5000
+  width32_rollout_cases: 500
+  width32_prime_bits_min: 17
+  width32_prime_bits_max: 32
+gates:
+  minimum_graph_width16_transition: 0.75
+  minimum_graph_width16_rollout: 0.02
+  minimum_width16_rollout_gain_over_control: 0.03
+  minimum_zero_width32_transition_gain_over_control: 0.05
+  maximum_parameter_ratio: 1.25
+  maximum_training_time_ratio: 2.0
+resource_budget:
+  limit_unit: wall_seconds
+  profile_batch_size: 256
+  profile_updates_per_arm: 20
+  profile_wall_seconds:
+    cellular: 19.532973237999613
+    gcn: 22.85189206599898
+    gat: 27.383315098999446
+    mpnn: 30.08484785300061
+  profile_aggregate_cpu_seconds:
+    cellular: 71.536468146
+    gcn: 83.866707157
+    gat: 100.170062608
+    mpnn: 110.445681879
+  projected_training_wall_seconds_at_profile_batch: 998.5302825599865
+  projected_evaluation_and_setup_wall_seconds: 300
+  projected_total_wall_seconds: 1298.5302825599865
+  soft_budget_wall_seconds: 1800
+  hard_runaway_ceiling_wall_seconds: 2700
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 180
+  cache_completed_arms: true

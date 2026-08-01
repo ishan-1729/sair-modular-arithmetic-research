@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-301-width64-hard-mining",
+  "created_at": "2026-07-12T04:54:00Z",
+  "checkpoint_sha256": "eaec2dca9600cfdaafa907bda8e4da39da591897dfbeb027a3137ff849d97566",
+  "evaluation": {
+    "transition": {"frozen_source": {"cases": 20000, "correct": 16458, "exact_accuracy": 0.8229}, "hard_mined": {"cases": 20000, "correct": 18706, "exact_accuracy": 0.9353}},
+    "rollout": {"hard_mined": {"cases": 5000, "correct": 115, "exact_accuracy": 0.023, "all_steps_exact_accuracy": 0.022}}
+  },
+  "controls": {"transition_gain": 0.1124, "valid_residue_rate": 0.9989, "invalid_rollout_rate": 0.0594, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 212.611959753, "parameters": 281444},
+  "decision": "reject-width64-hard-mined-tcn",
+  "limitations": ["Python bigint arithmetic is confined to offline data, labels, mining, and evaluation.", "No checked or consumed independent answer was read."]
+}

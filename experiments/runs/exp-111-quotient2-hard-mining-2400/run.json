@@ -1,0 +1,34 @@
+{
+  "run_id": "exp-111-quotient2-hard-mining-2400",
+  "status": "completed",
+  "created_at": "2026-07-12T02:24:00Z",
+  "hypothesis": "Full-budget transferred hard mining crosses 90 percent width-16 heldout rollout.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "c6c31dbbf8ce710cf2459b9ca0a2241a9af9bc141a916d2d9f520945c2333b25",
+    "config_sha256": "a7a7ba8d764e5a19aef004207cc01c21b26566be6ede3aea7dbf6377cef01dbf"
+  },
+  "config": "configs/exp_111_hard_mining_2400.yaml",
+  "environment": "experiments/runs/exp-111-quotient2-hard-mining-2400/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "parent_run_id": "c2af444961ea45759aa8f757a0e5dbc0",
+    "arm_run_id": "a6b92d55f6fb495da029a668d6010858"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors",
+    "checkpoint_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94",
+    "metrics": "evals/results/exp-111-quotient2-hard-mining-2400/metrics.json",
+    "raw_summary": "experiments/runs/exp-111-quotient2-hard-mining-2400/raw-summary.json"
+  },
+  "decision": "advance-five-independent-tier3-seeds",
+  "notes": [
+    "All preregistered heldout transition, rollout, and validity gates passed.",
+    "No checked public expected answers were read or evaluated.",
+    "Passing authorized independent Tier-3 seeds but did not itself promote the model."
+  ]
+}

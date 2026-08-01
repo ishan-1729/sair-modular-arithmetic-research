@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-314-cellular-width32-smoke",
+  "created_at": "2026-07-12T05:55:00Z",
+  "checkpoint_sha256": "a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241",
+  "evaluation": {
+    "transition": {"source_width32": {"cases": 10000, "correct": 9948, "exact_accuracy": 0.9948}, "trained_width24": {"cases": 5000, "correct": 4996, "exact_accuracy": 0.9992}, "trained_width32": {"cases": 10000, "correct": 9991, "exact_accuracy": 0.9991}},
+    "rollout": {"source_width32": {"cases": 3000, "correct": 2494, "exact_accuracy": 0.8313333333333334}, "trained_width24": {"cases": 1000, "correct": 987, "exact_accuracy": 0.987}, "trained_width32": {"cases": 3000, "correct": 2837, "exact_accuracy": 0.9456666666666667}}
+  },
+  "controls": {"width32_rollout_gain": 0.11433333333333329, "width32_invalid_rollout_rate": 0.003, "gates_passed": true},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 341.86550890200033, "parameters": 99824},
+  "decision": "advance-cellular-independent-tier4",
+  "limitations": ["Fresh official-numeric identities only; no consumed independent or checked answer was used.", "Passing authorizes independent Tier-4 evaluation but does not itself promote a submission."]
+}

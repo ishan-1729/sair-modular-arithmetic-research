@@ -1,0 +1,41 @@
+run_id: exp-328-cellular-width64-logit-ensemble-retry
+preregistration: knowledge/autoresearch/ablations/exp-328-cellular-width64-logit-ensemble-retry.md
+hypothesis: averaging logits from complementary diverse cellular checkpoints improves width-64 exact rollout beyond either endpoint
+seed: 20260715
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+checkpoint_a: .scratch/exp-323-cellular-width64-diverse/weights.safetensors
+checkpoint_a_sha256: f948b75d5578860ff16520ecd9daa2de339fd6af67b126d18b06c3fbf76f43f2
+checkpoint_b: .scratch/exp-324-cellular-width64-second-stage/weights.safetensors
+checkpoint_b_sha256: 61b9600bfa6e04f108e41d26d794fad2a4470bf7df42094530658e54d78a75d7
+architecture:
+  width: 64
+  hidden: 92
+  cycles: 2
+ensemble:
+  alpha_b: 0.5
+data:
+  prime_bits_min: 33
+  prime_bits_max: 64
+  train_prime_identities: 1
+  test_prime_identities: 128
+evaluation:
+  transition_cases_per_arm: 1000
+  rollout_cases_per_arm: 500
+gates:
+  minimum_ensemble_transition: 0.998
+  minimum_ensemble_rollout: 0.93
+  minimum_gain_over_best_endpoint: 0.01
+  maximum_ensemble_invalid_rollout_rate: 0.005
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-326-cellular-width64-weight-soup-retry
+  calibration_wall_seconds: 593.2379679740006
+  calibration_model_equivalent_arms: 5
+  projected_model_equivalent_arms: 4
+  projected_wall_seconds: 474.5903743792005
+  soft_budget_wall_seconds: 1200
+  hard_runaway_ceiling_wall_seconds: 1800
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 120
+  cache_completed_arms: true

@@ -2,16 +2,17 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository now contains a sandbox-validated submission candidate, not just a POC. The 85,021-parameter width-9 learned Horner TCN passes the pinned official interface, static scanner, isolation check, determinism check, decoder, scorer, and Python 3.12/PyTorch 2.5.1 container. Across the exact 1,100-row public set it scores **21.5% overall**, with **Tier 1 at 100% and Tier 2 at 99%**; a full independently seeded set scores 21.3%, with Tier 2 at 97%. Randomizing the weights collapses Tier 2 to 1%.
+The repository contains a submission-ready 470,049-parameter learned TCN/cellular ensemble with target-free conditional commutative inference at Tier 6. On a complete independent official-generator 1,100-case set it scores **59.3% overall**, with **Tiers 1–6 at 100%/99%/97%/97%/94%/98%**, advancing `highest_tier_above_90` to 6. The checked post-selection regression scores 59.5%, randomized Tier-6 weights collapse to 2%, and the pinned official container reproduces the independent score with 156.0-second inference. This is an intermediate incumbent: it remains far below the binding 85% completion threshold.
 
 ## Start here
 
 - [Knowledge bundle](knowledge/index.md) — the OKF v0.1-compatible project map.
 - [Competition contract](knowledge/competition/task-contract.md) — task, interface, scoring, and hard constraints.
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
+- [Research paper library](knowledge/research/paper-library.md) — core reading order, complete PDF inventory, provenance, and verification.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
-- [Submission candidate](knowledge/submissions/candidate-001-horner-tcn9.md) — model card, compliance rationale, release state, and hashes.
-- [Full-set evaluation](knowledge/evals/candidate-001-results.md) — checked, independent-seed, sandbox, and perturbation results.
+- [Submission candidate](knowledge/submissions/candidate-005-tier6-conditional-cellular.md) — current model card, compliance rationale, release state, and hashes.
+- [Full-set evaluation](knowledge/evals/candidate-005-results.md) — independent, checked, pinned-runtime, five-seed, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
 - [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
 
@@ -33,6 +34,7 @@ data/            immutable external data, generated/interim/processed zones, Cro
 evals/           evaluation configs, result schemas, and durable result artifacts
 experiments/     machine-readable registry and one directory per run
 pocs/            executable proofs of concept and reference checkpoints
+research/        versioned paper PDFs, source registry, hashes, and parser verification
 submission/      clean three-file Hugging Face release artifact
 sources/         captured SAIR pages, research memo, and pinned official-repo submodule
 tests/           fast contract and regression tests

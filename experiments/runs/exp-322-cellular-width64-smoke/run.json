@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-322-cellular-width64-smoke",
+  "status": "completed",
+  "created_at": "2026-07-12T06:35:00Z",
+  "hypothesis": "Compute-bounded official-numeric width-64 continuation improves the cellular model enough to justify Tier-5 confirmation.",
+  "seed": 20260712,
+  "source": {"repository_commit": "595fc47a5356c8ca2f71443a3e67a984446e8fe8", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "c728e394850b86fd8e6361031cffdeb83d67be063ac49477156a5ad54c22632e", "config_sha256": "89913a31e24ae9d0b39d1155b55734b59b23452f4757e41241cea2925c9deb2a"},
+  "config": "configs/exp_322_cellular_width64_smoke.yaml",
+  "environment": "experiments/runs/exp-322-cellular-width64-smoke/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "957cd09f647142c0b96a598ef94b10e9"},
+  "artifacts": {"checkpoint": ".scratch/exp-322-cellular-width64-smoke/weights.safetensors", "checkpoint_sha256": "c128c9b75bc3114f84511f892bbb5ec76e737ec01b14a55788ccdc10e55819ec", "metrics": "evals/results/exp-322-cellular-width64-smoke/metrics.json"},
+  "decision": "reject-cellular-official-width64",
+  "notes": ["Frozen-source width-64 rollout was 84 percent.", "Continuation reached 83 percent and increased invalid rollouts to 0.667 percent.", "The 128-prime training set was insufficiently diverse; test higher identity diversity at lower rate."]
+}

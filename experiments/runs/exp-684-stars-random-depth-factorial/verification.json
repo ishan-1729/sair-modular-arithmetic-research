@@ -1,0 +1,44 @@
+{
+  "schema_version": "exp684-verification-v1",
+  "status": "green",
+  "preflight": {
+    "status": "passed",
+    "inference_identity": true,
+    "equal_full_work": true,
+    "schedule_hashes": true,
+    "split_separation": true
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_684_stars_random_depth_factorial.py",
+    "passed": 13,
+    "failed": 0,
+    "seconds": 15.12,
+    "fix_attempts": 1
+  },
+  "package_oracle": {
+    "invocations": 1,
+    "persistent": true,
+    "validator": "passed-214-concepts-1100-records-pinned-82510bba00a1",
+    "pytest": "716-passed-in-490.82-seconds",
+    "wall_seconds": 485.73,
+    "process_cpu_seconds": 642.30,
+    "peak_rss_kib": 922300,
+    "exit_status": 0,
+    "completion_marker": "package-oracle-terminal",
+    "log_sha256": "848fed428123f1887dfa63dff2b02622cf839c2f6975825dda3af058ad12f74c"
+  },
+  "calibration_execution": {
+    "root": 20261286,
+    "exit_status": 0,
+    "decision": "park-root-20261286-resource-admission",
+    "outer_wall_seconds": 188.67,
+    "outer_process_cpu_seconds": 710.35,
+    "peak_rss_kib": 1107028,
+    "completion_marker": "calibration-terminal",
+    "receipt_sha256": "8264e0225efb3fc56f18317c8c9cf5c2ff56a3e9257109663cf3da67e4f01dbf"
+  },
+  "final_validator": {
+    "command": "python tools/validate_project.py",
+    "status": "passed"
+  }
+}

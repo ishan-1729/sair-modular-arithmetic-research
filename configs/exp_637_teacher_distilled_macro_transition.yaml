@@ -1,0 +1,85 @@
+run_id: exp-637-teacher-distilled-macro-transition
+hypothesis: two one-cycle learned phases with exact intermediate supervision and masked radix-2 teacher-logit distillation can form an accurate radix-4 macro-transition while retaining substantial recurrent-runtime savings
+seed: 20260826
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-637-teacher-distilled-macro-transition.md
+teacher_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+teacher_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+direct_control_checkpoint: .scratch/exp-630-radix4-cellular-transition/weights.safetensors
+direct_control_checkpoint_sha256: eb756657c042287b9d2e2efd560c5c742ecdb63d3ce9787527bd98e2dfb2fae5
+model:
+  hidden: 92
+  teacher_cycles: 2
+  student_cycles_per_phase: 1
+  phase1_reverse_dilations: false
+  phase2_reverse_dilations: true
+  intermediate_temperature: 1.0
+data:
+  prime_bit_span: 4
+  train_prime_identities: 256
+  test_prime_identities: 64
+  width8_train_prime_identities: 32
+  width8_test_prime_identities: 8
+training:
+  widths: [8, 12, 16, 20, 24, 32]
+  steps: 1600
+  batch_size: 128
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  intermediate_hard_weight: 0.50
+  teacher_forced_final_weight: 0.50
+  teacher_distillation_weight: 0.25
+  teacher_distillation_temperature: 2.0
+  torch_threads: 4
+  save_every_steps: 50
+evaluation:
+  widths: [16, 32, 64]
+  transition_cases: 2000
+  rollout_cases: 200
+  initialized_control_transition_cases: 400
+  initialized_control_rollout_cases: 40
+  determinism_cases: 20
+gates:
+  minimum_width16_rollout: 0.90
+  minimum_width32_rollout: 0.70
+  minimum_width64_rollout: 0.20
+  minimum_width32_transition: 0.98
+  minimum_width64_transition: 0.80
+  minimum_width64_transition_gain_over_direct: 0.50
+  minimum_width64_transition_gain_over_initialized: 0.50
+  maximum_width64_invalid_rollout_rate: 0.10
+  maximum_width64_student_to_radix2_wall_ratio: 0.70
+  require_determinism: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_status: complete
+  calibration_json: .scratch/exp-637-teacher-distilled-macro-transition/calibration.json
+  calibration_json_sha256: 25cc3f78d9d8fa43effb3f6f014bc75202c8293ac8c6fd990232a89546ff148c
+  calibration_console: .scratch/exp-637-teacher-distilled-macro-transition/calibration-console.log
+  calibration_console_sha256: 235ab9a21c5fdda1efd5b35672fa6c6f7a417a08e58fff75d5de79399afe95e9
+  calibration_external_wall_seconds: 49.31
+  calibration_external_user_cpu_seconds: 153.30
+  calibration_external_system_cpu_seconds: 3.45
+  calibration_external_percent_cpu: 317
+  calibration_maximum_resident_set_kib: 765308
+  profile_updates_per_width: 3
+  profile_batch_size: 128
+  profile_widths: [8, 12, 16, 20, 24, 32]
+  profile_transition_cases_per_width: 96
+  profile_rollout_cases_per_width: 6
+  projected_training_wall_seconds: 1686.3037921785792
+  projected_training_aggregate_cpu_seconds: 6299.677202133333
+  projected_evaluation_wall_seconds: 338.48031348259
+  projected_evaluation_aggregate_cpu_seconds: 1267.9138434600009
+  setup_tracking_artifact_wall_seconds: 180
+  expected_total_wall_seconds: 2205
+  expected_total_aggregate_cpu_minutes: 133
+  soft_budget_wall_seconds: 3000
+  hard_runaway_ceiling_wall_seconds: 4440
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 296
+  checkpoint_every_steps: 50
+  torch_threads: 4

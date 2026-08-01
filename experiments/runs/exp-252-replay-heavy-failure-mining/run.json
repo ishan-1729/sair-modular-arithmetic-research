@@ -1,0 +1,24 @@
+{
+  "run_id": "exp-252-replay-heavy-failure-mining",
+  "status": "completed",
+  "created_at": "2026-07-12T04:31:00Z",
+  "hypothesis": "Lower-intensity online failure mining preserves transition accuracy while retaining the rollout gain.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "80ee434167c56bdf579817ca0df1ff2d579c5768",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "a37b8c637f50d5a7fb428bb971d42a313f7d75895c73d0d7dbeba73fc0ab0406",
+    "config_sha256": "378ddee75df6d29fa498d6cfbe8f1e68e310dc9d7162c8541cd9783b05457160"
+  },
+  "config": "configs/exp_252_replay_heavy_failure_mining.yaml",
+  "environment": "experiments/runs/exp-252-replay-heavy-failure-mining/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "ec33c6962d7e4e8ebaf5f0afa4a4b274", "control_run_id": "c1bb5c36ac8747daaf659c75909c5e13", "challenger_run_id": "4dbf1c6e5df64287b182d7e2e94a7ee3"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-252-replay-heavy-failure-mining/online-failure-mining-challenger/weights.safetensors",
+    "checkpoint_sha256": "f6fde8325c1a0556098f6855b40dcb0396b15de5274af13314a4740617377803",
+    "metrics": "evals/results/exp-252-replay-heavy-failure-mining/metrics.json"
+  },
+  "decision": "reject-online-failure-mining",
+  "notes": ["The challenger preserved transition accuracy but improved rollout by only 0.36 point versus the 1.00-point gate.", "Online loss-ranking selection is closed."]
+}

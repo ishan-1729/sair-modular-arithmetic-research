@@ -1,0 +1,63 @@
+{
+  "status": "completed",
+  "benchmark": {
+    "kind": "checked-public-jsonl",
+    "directory": "data/external/public_benchmark",
+    "cases": 1100,
+    "sha256": {
+      "tier_0.jsonl": "7f6501c35ad1687dcac4086dd74eac5863ae149b68dccf970ab0d4cd22a5f062",
+      "tier_1.jsonl": "09f02e38d4c56d78bad92f2db4496a85c3c07767bae232f8b5a00e052439bbdb",
+      "tier_2.jsonl": "ae169d3acf554fdff4b8c4b13a3e518303f94d6b6d67aa5161ead327a9332fdf",
+      "tier_3.jsonl": "7bdffc28e83cb97a9777fe36a89b16d2abe29b5562cab523097ea1b4d6988bef",
+      "tier_4.jsonl": "cb4fcd9bf0498e374e1b46851c17228690d9d7d34f429ec060bbbf1c1359d54d",
+      "tier_5.jsonl": "42eb90d3912cda7e52972f0ebd273c124f19ea403f3ef4b3aa3ee33f5742a15a",
+      "tier_6.jsonl": "1c271263a2abcc35ba2d8b6c1850e015e5c8e4fc9b299626e44e4dbf0b848455",
+      "tier_7.jsonl": "20eaf3f3dc3d33259c51c30e9512eb22a8d22a95972e258f3a2e36b4de60c0bc",
+      "tier_8.jsonl": "4c1cc8e1ffc8c7d7199f18a65f58d688a8ebdc885ed73d443f17ba1d497b45a8",
+      "tier_9.jsonl": "c06cb31074b62b078575f3fd5c188886dde03ce7b9de3420ea7257f737c70502",
+      "tier_10.jsonl": "d8cdfe0daea5d50da7c1285582329cd525c1b59564db70c4f60796a020743f4e"
+    }
+  },
+  "evaluator": {
+    "implementation": "pinned-official-pipeline-with-checked-jsonl-adapter",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "submission": {
+    "directory": "submission",
+    "entry_class": "model.Tier2HornerModel",
+    "output_base": "p",
+    "artifact_bytes": 1915885
+  },
+  "checks": {
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true
+  },
+  "timing_seconds": {
+    "load": 2.025139614000068,
+    "preprocess_isolation": 0.0005874710000171035,
+    "determinism": 0.9725072460000774,
+    "inference": 50.950036391000026
+  },
+  "result": {
+    "overall_accuracy": 0.595,
+    "highest_tier_above_90": 6,
+    "deterministic": true,
+    "tiers": [
+      {"tier_id": 0, "total": 100, "correct": 39, "accuracy": 0.39, "completed": true},
+      {"tier_id": 1, "total": 100, "correct": 100, "accuracy": 1.0, "completed": true},
+      {"tier_id": 2, "total": 100, "correct": 99, "accuracy": 0.99, "completed": true},
+      {"tier_id": 3, "total": 100, "correct": 100, "accuracy": 1.0, "completed": true},
+      {"tier_id": 4, "total": 100, "correct": 98, "accuracy": 0.98, "completed": true},
+      {"tier_id": 5, "total": 100, "correct": 94, "accuracy": 0.94, "completed": true},
+      {"tier_id": 6, "total": 100, "correct": 96, "accuracy": 0.96, "completed": true},
+      {"tier_id": 7, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 8, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 9, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+      {"tier_id": 10, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true}
+    ],
+    "repo_id": "",
+    "revision": "",
+    "eval_period": ""
+  }
+}

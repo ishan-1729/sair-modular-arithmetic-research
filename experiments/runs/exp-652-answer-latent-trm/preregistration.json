@@ -1,0 +1,123 @@
+{
+  "confirmation": {
+    "component_controls": [
+      "no_deep_supervision",
+      "no_q_loss",
+      "no_ema"
+    ],
+    "minimum_component_causal_drop_w16": 0.02,
+    "require_both_roots_viability": true
+  },
+  "created_at": "2026-07-27T18:00:25Z",
+  "evaluation": {
+    "batch_size": 32,
+    "cases_per_width": 96,
+    "fixed_depths": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "interventions": [
+      "reset_y",
+      "reset_z",
+      "swap_y_z",
+      "randomize_y",
+      "randomize_z"
+    ],
+    "q_halt_threshold": 0.5
+  },
+  "gates": {
+    "maximum_invalid_rate": 0.0,
+    "maximum_parameter_ratio": 1.01,
+    "minimum_latent_causal_drop_w16": 0.1,
+    "minimum_primary_w16_exact_accuracy": 0.8,
+    "minimum_primary_w24_exact_accuracy": 0.05,
+    "minimum_primary_w32_exact_accuracy": 0.05,
+    "minimum_trained_gain_over_randomized_w16": 0.2,
+    "minimum_transfer_gain_over_each_control": 0.02,
+    "require_ema_reload_exact": true,
+    "require_raw_reload_exact": true
+  },
+  "identities": {
+    "20261190": {
+      "evaluation_cases_sha256": "e9c6f54776c0d2d214b0e8c35a947cd2c4e338f09caffafcf62f662a31f41f33",
+      "seed": 20261190,
+      "splits_sha256": "ee65f9764c4196ef6b7557df6d2a749a7e87eda365792816301b9a653db544e1"
+    },
+    "20261191": {
+      "evaluation_cases_sha256": "401cbdc3d2b6a690ab965f4fad366a17a790184a018b2adcfe1b1e8b79e50ccc",
+      "seed": 20261191,
+      "splits_sha256": "592e26881490f924650159af209bef690e11ae714e9970f1071f07c52a9dac9a"
+    },
+    "20261192": {
+      "evaluation_cases_sha256": "a8373ccc397619d651eb46c0f45518a4e464d2d618dc2ab99208579bb3ebab35",
+      "seed": 20261192,
+      "splits_sha256": "96417f9aad2316e415b73bc8a88e0578c89cce25846f8c4bbe3869df6d69a3ef"
+    },
+    "20261193": {
+      "evaluation_cases_sha256": "c654f39ea48df85cafbb2a5824a0433069b1d3a52f875fd9f3327e48b8fba87b",
+      "seed": 20261193,
+      "splits_sha256": "ab9f163485d4542c4d9dbf6edcb1b4265630ad782c19566f77cdd2d0638b9e73"
+    }
+  },
+  "mechanism_scope": {
+    "exact_arithmetic_scope": "offline-labels-tests-evaluator-only",
+    "family": "ST-M010.a TRM",
+    "sair_adaptation": true,
+    "tab_trm_reproduced": false
+  },
+  "model": {
+    "ema_decay": 0.999,
+    "hidden": 24,
+    "latent_updates": 6,
+    "outer_recursions": 3,
+    "supervision_steps": 2
+  },
+  "resource_policy": {
+    "admission_maximum_peak_rss_bytes": 6442450944,
+    "cache_completed_roots": true,
+    "hard_guard_multiplier": 2.0,
+    "require_complete_route_classes": true,
+    "soft_guard_multiplier": 1.25,
+    "variability_headroom_ceiling": 2.0,
+    "variability_headroom_floor": 1.25
+  },
+  "roots": {
+    "calibration": 20261190,
+    "confirmations": [
+      20261192,
+      20261193
+    ],
+    "viability": 20261191
+  },
+  "source": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "26fdc6c4d55300410828d4ff348332b253f0d036d0806cf7f2bbae11afdb6b50",
+    "generator_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.12.3",
+    "repository_base_commit": "746de1c69d7ae04a90c597c3bdcafea8ce5025b3",
+    "repository_dirty": true,
+    "source_hashes": {
+      "configs/exp_652_answer_latent_trm.yaml": "26fdc6c4d55300410828d4ff348332b253f0d036d0806cf7f2bbae11afdb6b50",
+      "experiments/exp_652_answer_latent_trm/model.py": "22cc7dc05ec93a15e8ced68318ff6234e048a1174ce9e9498a243a0be0560f34",
+      "experiments/exp_652_answer_latent_trm/run.py": "8d2d1be52a576f3ff8aab4619d914815b57cbe0ed1dea2f95701a0b44a0c88bb",
+      "knowledge/autoresearch/research/2026-07-27-exp652-trm-mechanism.md": "8d2e891ff457079856a954c97fe629c3232136aafd708b05af65ec3dd28ccef8",
+      "tests/test_exp_652_answer_latent_trm.py": "3ecc5447c628d3bac591bc01c34a66290af9ef6c79ebf1ab8ce71bdb98ceb305"
+    },
+    "torch_version": "2.5.1+cpu"
+  },
+  "status": "frozen-before-scientific-training",
+  "training": {
+    "batch_size": 32,
+    "gradient_clip": 2.0,
+    "learning_rate": 0.001,
+    "log_every_steps": 50,
+    "minimum_learning_rate": 5e-05,
+    "q_loss_weight": 0.2,
+    "steps_per_arm": 300,
+    "torch_threads": 4,
+    "weight_decay": 2e-05
+  }
+}

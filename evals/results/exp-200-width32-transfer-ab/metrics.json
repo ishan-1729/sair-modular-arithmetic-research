@@ -1,0 +1,46 @@
+{
+  "run_id": "exp-200-width32-transfer-ab",
+  "created_at": "2026-07-12T02:01:00Z",
+  "checkpoint_sha256": "6696fdac23eb52fc0a183b4c24f8cb41e609cd676acfa671c83e5c1bc972b40a",
+  "evaluation": {
+    "transition": {
+      "width32_random_heldout_primes": {"cases": 10000, "correct": 4412, "exact_accuracy": 0.4412, "bit_accuracy": 0.7933125},
+      "width32_transfer_heldout_primes": {"cases": 10000, "correct": 9821, "exact_accuracy": 0.9821, "bit_accuracy": 0.998890625}
+    },
+    "rollout": {
+      "width32_random_heldout_primes": {"cases": 5000, "correct": 0, "exact_accuracy": 0.0},
+      "width32_transfer_heldout_primes": {"cases": 5000, "correct": 3084, "exact_accuracy": 0.6168}
+    }
+  },
+  "controls": {
+    "matched_random_initialization": true,
+    "transition_gain": 0.5409,
+    "rollout_gain": 0.6168,
+    "random_invalid_rollout_rate": 0.3888,
+    "transfer_invalid_rollout_rate": 0.0212,
+    "transfer_valid_residue_rate": 0.999,
+    "train_prime_identities": 2048,
+    "validation_prime_identities": 512,
+    "test_prime_identities": 512,
+    "prime_identity_overlap": 0,
+    "selected_quotient2_fraction": 0.355888671875,
+    "selected_boundary_fraction": 0.193408203125
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 143.329159678,
+    "random_training_seconds": 44.133205111,
+    "transfer_training_seconds": 44.72546002899999,
+    "network_training_examples_per_arm": 102400,
+    "offline_candidate_examples_per_arm": 409600,
+    "parameters_per_arm": 126276
+  },
+  "decision": "advance-width32-full-budget",
+  "limitations": [
+    "Heldout-prime smoke test; no official Tier-4 score was produced.",
+    "Width 32 is an int64-compatible stepping stone and does not solve long-width scaling.",
+    "The sampled prime split is bounded rather than exhaustive, with identities disjoint across splits.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

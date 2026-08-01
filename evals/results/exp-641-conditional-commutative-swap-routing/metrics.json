@@ -1,0 +1,53 @@
+{
+  "run_id": "exp-641-conditional-commutative-swap-routing",
+  "created_at": "2026-07-17T09:16:28Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evidence_scope": "consumed-exp640-paired-cache",
+  "evaluation": {
+    "transition": {
+      "cached_exp639_hard_width128": {"cases": 3000, "correct": 2989, "exact_accuracy": 0.9963333333333333}
+    },
+    "rollout": {
+      "original_width128": {"cases": 300, "correct": 248, "exact_accuracy": 0.8266666666666667, "invalid_rate": 0.0},
+      "conditional_selected_width128": {"cases": 300, "correct": 290, "exact_accuracy": 0.9666666666666667, "invalid_rate": 0.0},
+      "routed_oracle_width128": {"cases": 300, "correct": 293, "exact_accuracy": 0.9766666666666667}
+    }
+  },
+  "controls": {
+    "route_fraction": 0.4,
+    "routed_cases": 120,
+    "selected_swapped": 99,
+    "recoveries": 44,
+    "losses": 2,
+    "cached_output_reproduction": true,
+    "determinism": {"cases": 20, "passed": true},
+    "integrated_candidate_wall_seconds": 212.66494152700008
+  },
+  "gates": {
+    "routed_oracle": true,
+    "selected_accuracy": true,
+    "validity": true,
+    "cached_output_reproduction": true,
+    "runtime": true,
+    "determinism": true,
+    "passed": true
+  },
+  "runtime": {
+    "original_wall_seconds": 349.69399880700075,
+    "routed_swapped_wall_seconds": 177.60082577399953,
+    "conditional_wall_seconds": 527.2948245810003,
+    "runner_wall_seconds": 593.8711162090003,
+    "runner_aggregate_cpu_seconds": 2183.8739403739996,
+    "external_wall_seconds": 569.99,
+    "external_user_cpu_seconds": 2125.60,
+    "external_system_cpu_seconds": 70.48,
+    "peak_rss_bytes": 557338624
+  },
+  "resource_budget": {"expected_total_wall_seconds": 795, "soft_budget_wall_seconds": 1200, "hard_runaway_ceiling_wall_seconds": 1800, "fidelity_reduced": false},
+  "decision": "authorize-fresh-conditional-swap-confirmation",
+  "limitations": [
+    "Consumed EXP-640 evidence only; passing authorizes fresh confirmation rather than promotion.",
+    "The routed oracle is exact-answer offline coverage and is not an inference selector.",
+    "Official isolated runtime remains required before integration."
+  ]
+}

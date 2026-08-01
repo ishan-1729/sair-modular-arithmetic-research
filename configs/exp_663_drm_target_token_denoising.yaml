@@ -1,0 +1,95 @@
+run_id: exp-663-drm-target-token-denoising
+hypothesis: Cosine target-token corruption plus shared multi-step denoising preserves W128 and produces nonzero W256 autonomous exactness beyond matched controls.
+mechanism_map: knowledge/autoresearch/research/2026-07-28-exp663-drm-target-token-mechanism.md
+preregistration: experiments/runs/exp-663-drm-target-token-denoising/preregistration.json
+source_checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+roots:
+  calibration: 20261202
+  viability: 20261203
+  confirmations: [20261204, 20261205]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+model:
+  hidden: 92
+  cycles: 2
+  canvas_embedding: 16
+  warmup_steps: 2
+  gradient_steps: 4
+  inference_steps: 16
+routes:
+  - frozen_source
+  - drm_cosine
+  - clean_recurrent
+  - masked_nonrecursive
+data:
+  widths: [64, 128, 256]
+  training_widths: [64, 128, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 66300
+  training_seed_offset: 66400
+  validation_seed_offset: 66500
+  test_seed_offset: 66600
+training:
+  steps_per_trained_route: 400
+  schedule: [64, 128, 256, 128]
+  batch_size: 32
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 25
+calibration:
+  representative_updates_per_trained_route: 2
+  transition_cases_per_width: 8
+  rollout_cases_per_width: 2
+  intervention_cases_w128: 2
+evaluation:
+  transition_cases_per_width: 3000
+  rollout_cases_per_width: 300
+  validation_transition_cases: 1000
+  validation_rollout_cases: 100
+  deterministic_repeats: 2
+  interventions: [all_mask, linear_schedule, single_step, no_warmup, no_remask]
+gates:
+  minimum_w128_drm_rollout: 0.80
+  maximum_w128_loss_to_clean_recurrent: 0.05
+  minimum_w256_drm_rollout: 0.10
+  minimum_w256_gain_over_each_control: 0.05
+  maximum_invalid_rollout_rate: 0.0
+  minimum_trained_weight_drop_w128: 0.20
+  minimum_recursive_drop_w128: 0.10
+  minimum_cosine_drop_w128: 0.02
+  minimum_remasking_drop_w128: 0.02
+  require_reload_exact: true
+  require_split_separation: true
+resource_policy:
+  maximum_peak_rss_bytes: 6442450944
+  evaluator_processes: 3
+  evaluator_torch_threads_each: 4
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_routes: true
+  cache_completed_roots: true
+  repair_reference_calibration: .scratch/exp-663-drm-target-token-denoising/calibration.json
+  repair_reference_preregistration: .scratch/exp-663-drm-target-token-denoising/preregistration-root-20261202.json
+  repair_guards:
+    maximum_calibration_wall_seconds: 2162.512054
+    maximum_aggregate_process_tree_cpu_seconds: 11882.851085
+    maximum_aggregate_peak_rss_bytes: 6442450944
+    maximum_expected_wall_seconds: 261353.392584
+    maximum_eta_wall_seconds: 522706.785168
+    maximum_soft_guard_wall_seconds: 653384
+    maximum_hard_guard_wall_seconds: 1045414
+confirmation:
+  require_both: true
+  reproduce_w128_rollout: 0.80
+  reproduce_w256_rollout: 0.10
+  reproduce_w256_gain: 0.05

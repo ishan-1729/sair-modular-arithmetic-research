@@ -1,0 +1,118 @@
+run_id: exp-685-validity-constrained-attractor
+hypothesis: A training-only lexicographic residue-validity constraint can remove EXP665's sole W128 invalid rollout without changing its formal Anderson/phantom inference.
+mechanism_map: knowledge/autoresearch/research/2026-07-30-exp685-validity-constrained-attractor.md
+preregistration: experiments/runs/exp-685-validity-constrained-attractor/preregistration.json
+source_checkpoint: .scratch/exp-685-validity-constrained-attractor/fixtures/exp665-anderson-phantom.safetensors
+source_checkpoint_sha256: a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4
+source_contract:
+  exp665_config_sha256: c5a07c72ca9598db82ff93d279f8f90230fb511392b0ebc1c37bf7a4d48d5251
+  exp665_model_sha256: 72e72ddd68e62f353d4319d7995dfa037636ebe0aa016d2d643ab184d7dd9636
+  exp665_runner_sha256: ab0aa02d0deac1432330a719c7da5f6b33fcce4ec701e64e252a0ebc1737e3ae
+  exp665_test_sha256: b60793b9a13cc2d32f943e36fbf561a3f2354105a38c2064afc34ae20f72be28
+  exp665_preregistration_sha256: 55b6abcbe8fbbeb7a32dcff5ac7b8b63af59d4459e6eff753aa6dcd1cd9cba5d
+  exp665_mechanism_sha256: a34c6722b663d63a8188ae9e4e7abff4a9bd4458105d903c48d65ff4e245ac6d
+  attractor_paper_sha256: c379c509c442023dceff9428e41bec4807e86fad8dedd62416d21e3cab921346
+  equilibrium_paper_sha256: 986b4a6a150b08a42d2e42fc3e0f5965ff8d654e001dd18f216bf85f959783c6
+roots:
+  calibration: 20261290
+  formal: 20261291
+  confirmations: [20261292, 20261293]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+dependency:
+  name: torchdeq
+  version: 0.1.0
+routes:
+  validity_constrained: {kind: validity, trained: true}
+  ce_only: {kind: ce_only, trained: true}
+  shuffled_modulus: {kind: shuffled_modulus, trained: true}
+  frozen_source: {kind: frozen, trained: false}
+  randomized_control: {kind: randomized, trained: false}
+primary_route: validity_constrained
+model:
+  hidden: 92
+  cycles: 2
+  correction_hidden: 64
+  correction_scale: 0.25
+  fixed_depth: 4
+  solver_max_iterations: 6
+  solver_tolerance: 0.001
+  anderson_history: 4
+  anderson_regularization: 0.0001
+  implicit_backward_iterations: 6
+  implicit_backward_tolerance: 0.0001
+  eqr_damping: 0.05
+  eqr_noise: 0.01
+  eqr_initialization_std: 0.05
+  eqr_training_breadth: 1
+  eqr_inference_breadth: 2
+data:
+  widths: [64, 128, 256]
+  training_widths: [64, 128, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 68500
+  training_seed_offset: 68600
+  validation_seed_offset: 68700
+  test_seed_offset: 68800
+training:
+  steps: 200
+  calibration_steps: 4
+  schedule: [64, 128, 256, 128]
+  batch_size: 32
+  learning_rate: 0.00002
+  minimum_learning_rate: 0.000001
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  residual_weight: 0.02
+  validity_weight: 0.05
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 25
+calibration:
+  transition_cases_per_width: 8
+  rollout_cases_per_width: 2
+  candidate_runtime_cases_w128: 8
+  candidate_runtime_repeats: 12
+evaluation:
+  transition_cases_per_width: 3000
+  rollout_cases_per_width: 300
+  validation_transition_cases_per_width: 1000
+  validation_rollout_cases_per_width: 100
+gates:
+  minimum_w128_primary_rollout: 0.85
+  minimum_w128_transition: 0.998
+  maximum_invalid_rollouts: 0
+  maximum_w128_loss_to_frozen: 0.02
+  maximum_w128_loss_to_ce: 0.02
+  minimum_trained_weight_drop_w128: 0.20
+  minimum_constraint_gradient_norm: 1.0e-12
+  require_better_validation_brier_than_ce: true
+  require_better_validation_brier_than_shuffled: true
+  minimum_w256_primary_rollout: 0.10
+  minimum_w256_gain_over_ce: 0.05
+  minimum_w256_gain_over_shuffled: 0.05
+  maximum_candidate_inference_wall_seconds: 285
+resource_policy:
+  evaluator_processes: 3
+  evaluator_torch_threads_each: 4
+  maximum_peak_rss_bytes: 6442450944
+  maximum_expected_formal_wall_seconds: 21600
+  incumbent_candidate_wall_seconds: 156.0
+  variability_headroom_floor: 1.35
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 1.75
+  fidelity_reduced: false
+confirmation:
+  require_both: true
+prohibited:
+  - inference-time validity comparator
+  - inference-time exact arithmetic
+  - output filtering or repair
+  - answer-dependent selection
+  - new inference parameters or calls
+  - checked or private answers

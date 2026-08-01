@@ -1,0 +1,52 @@
+{
+  "schema_version": "exp683-verification-v1",
+  "status": "green-before-calibration-execution-park",
+  "fixture_provenance": {
+    "source_worktree": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-650-library-backed-mamba/worktree",
+    "source_worktree_mode": "read-only",
+    "dockerfile_sha256": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+    "generator_sha256": "77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0",
+    "primes_sha256": "5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac",
+    "exp663_calibration_sha256": "4917d3a7805f0200131c03700b3963f0cf7c4a97e4b913f7acdc8a7e7c16d41e",
+    "exp663_preregistration_sha256": "682c5059d1493c137e678314d1a9909e1018dc46e92c973b025fcb9c08aa92d0",
+    "exp609_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp658_joint_quotient_carry_calibration.py tests/test_exp_663_drm_target_token_denoising.py tests/test_exp_668_h2l3_magicnorm_credit.py tests/test_exp_669_stars_jvp_regularization.py tests/test_exp_670_clipped_poisson_loop_curriculum.py tests/test_exp_671_fixed_point_damping_halting.py tests/test_exp_672_lt2_gated_hybrid_mixer.py tests/test_exp_676_lla_moving_window.py tests/test_exp_681_abbie_recurrence.py tests/test_exp_683_source_complete_hrm.py",
+    "passed": 156,
+    "failed": 0,
+    "pytest_seconds": 274.10,
+    "wall_seconds": 267.78,
+    "process_cpu_seconds": 202.24,
+    "peak_rss_kib": 531680,
+    "log_sha256": "cc83543eb2e0c63c7db3f6e77306b21527e2e9151942ecab33d78c23d7c2440e"
+  },
+  "package_oracle": {
+    "invocations": 1,
+    "persistent": true,
+    "validator": "passed-212-concepts-1100-records-pinned-82510bba00a1",
+    "pytest": "703-passed-in-519.53-seconds",
+    "wall_seconds": 513.35,
+    "process_cpu_seconds": 632.40,
+    "peak_rss_kib": 934568,
+    "exit_status": 0,
+    "completion_marker": "package-oracle-terminal",
+    "log_sha256": "22af3c57f720974bfd2199b3f879dfcab7f1e51e611d557b87abbaada8872fba"
+  },
+  "calibration_execution": {
+    "root": 20261282,
+    "exit_status": 1,
+    "failure": "TypeError: unsupported operand type(s) for /: 'PosixPath' and 'dict'",
+    "failure_site": "experiments/exp_683_source_complete_hrm/run.py:95 checkpoint reload before evaluation",
+    "wall_seconds": 13.51,
+    "process_cpu_seconds": 16.21,
+    "peak_rss_kib": 478568,
+    "mlflow_run_id": "36246d47a9c549c1a384fa32bdefa6cf",
+    "mlflow_status": "FAILED",
+    "completion_marker": "calibration-terminal"
+  },
+  "final_validator": {
+    "command": "python tools/validate_project.py",
+    "status": "passed"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "run_id": "exp-240-channel-causal-analysis",
+  "status": "completed",
+  "created_at": "2026-07-12T03:50:00Z",
+  "hypothesis": "A small hidden-channel subset causally controls high-bit and quotient-2 transition failures.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "23e576208873bce7978aab13b5fac5fbe66fd3e7",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "c356b89a70eca856d1ce67ec3244b3cf849b7b63be234ca17b56bffacf785a81",
+    "config_sha256": "07a275fb18701d0f590d636b1b5a9f9a0493bfe0d0f82507f959209ca316fcee"
+  },
+  "config": "configs/exp_240_channel_causal_analysis.yaml",
+  "environment": "experiments/runs/exp-240-channel-causal-analysis/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "10eed4ca5dcf43aa88c50cad8f2ca175"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-230-quotient-routed-experts/single-head-control/weights.safetensors",
+    "checkpoint_sha256": "c26e34af9581b6b0f3d26e72715c512823b07250bee48a56ae63cf32cffe5baa",
+    "metrics": "evals/results/exp-240-channel-causal-analysis/metrics.json",
+    "analysis": "knowledge/autoresearch/analysis/exp-240-channel-causal.md"
+  },
+  "decision": "distributed-representation-no-channel-surgery",
+  "notes": [
+    "All 48 interventions used the same 5,000 generated transitions and a paired unablated reference.",
+    "No individual channel crossed the preregistered overall or quotient-2 critical threshold.",
+    "The four strongest channels jointly reduced exact transition accuracy by 1.7 points."
+  ]
+}

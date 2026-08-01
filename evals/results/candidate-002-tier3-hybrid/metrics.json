@@ -1,0 +1,84 @@
+{
+  "run_id": "candidate-002-tier3-hybrid",
+  "created_at": "2026-07-12T02:28:00Z",
+  "checkpoint_sha256": "69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157",
+  "evaluation": {
+    "transition": {
+      "tier3_frozen_heldout": {
+        "cases": 50000,
+        "correct": 49954,
+        "exact_accuracy": 0.99908,
+        "bit_accuracy": 0.9999175
+      }
+    },
+    "rollout": {
+      "independent_official_scored_tiers": {
+      "cases": 1000,
+      "correct": 310,
+      "exact_accuracy": 0.31,
+      "highest_tier_above_90": 3,
+      "tier_1_accuracy": 1.0,
+      "tier_2_accuracy": 0.97,
+      "tier_3_accuracy": 0.99
+    },
+      "checked_public_scored_tiers": {
+      "cases": 1000,
+      "correct": 313,
+      "exact_accuracy": 0.313,
+      "highest_tier_above_90": 3,
+      "tier_1_accuracy": 1.0,
+      "tier_2_accuracy": 0.99,
+      "tier_3_accuracy": 1.0
+      }
+    }
+  },
+  "controls": {
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true,
+    "randomized_weights_overall_accuracy": 0.079,
+    "randomized_weights_tier_3_accuracy": 0.02,
+    "randomized_weights_highest_tier_above_90": -1
+  },
+  "runtime": {
+    "device": "cpu",
+    "artifact_bytes_clean": 704185,
+    "load_seconds": 2.045744000002742,
+    "inference_seconds": 0.36921150000125635,
+    "pinned_python_3_12_torch_2_5_inference_seconds": 2.1,
+    "pinned_python_3_12_torch_2_5_load_seconds": 36.2,
+    "parameters": 170577,
+    "official_container": {
+      "engine": "native rootless podman 4.9.3 on Ubuntu 24.04 WSL2",
+      "image_id": "7c195652b14c7470b636194e63679e5d1eec1587471e177665df27eae67d4399",
+      "dockerfile_sha256": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41",
+      "network": "none",
+      "read_only": true,
+      "cpus": 4,
+      "memory_gib": 8,
+      "timeout_seconds": 300,
+      "inference_seconds": 1.7,
+      "overall_accuracy": 0.313,
+      "highest_tier_above_90": 3,
+      "passed": true
+    },
+    "official_container_independent": {
+      "engine": "native rootless podman 4.9.3 on Ubuntu 24.04 WSL2",
+      "image_id": "7c195652b14c7470b636194e63679e5d1eec1587471e177665df27eae67d4399",
+      "seed_sha256": "11b7c34d82eae606588d6fc7917f8c55e9d3a12214ed49b277b0bca38b7e396e",
+      "container_wall_seconds": 44.46569311799999,
+      "inference_seconds": 1.8,
+      "overall_accuracy": 0.31,
+      "highest_tier_above_90": 3,
+      "result_sha256": "129546be6ac2c736f12c45db7984510d2a6beb31db7306a2b6277cee7be00ea8",
+      "passed": true
+    }
+  },
+  "decision": "promote",
+  "limitations": [
+    "Tier 4 and above remain at edge-case baseline accuracy.",
+    "The official private seed is unknowable; one independent full generator seed and five additional Tier-3 seeds were used.",
+    "The checked public benchmark was a post-selection release regression only.",
+    "The official image was executed through native rootless Podman on Ubuntu WSL2 rather than Docker; the pinned Dockerfile, entrypoint, isolation flags, and resource envelope were unchanged."
+  ]
+}

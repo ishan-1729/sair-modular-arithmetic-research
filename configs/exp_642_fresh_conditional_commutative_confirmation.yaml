@@ -1,0 +1,55 @@
+run_id: exp-642-fresh-conditional-commutative-confirmation
+hypothesis: the exact fixed 40 percent conditional commutative policy reproduces at least 90 percent width128 exact rollout and a five-point gain on 500 fresh cases while retaining transition validity determinism and runtime gates
+seed: 20260842
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-642-fresh-conditional-commutative-confirmation.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+fresh_evidence:
+  width: 128
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+  split_seed_offset: 64200
+  transition_seed_offset: 642700
+  pair_seed_offset: 642800
+routing:
+  fraction: 0.40
+  score: lowest_original_minimum_trajectory_absolute_logit_margin
+  route_tie_break: lowest_case_index
+  orientation_selector: higher_minimum_trajectory_absolute_logit_margin
+  orientation_tie_break: original
+evaluation:
+  transition_cases: 3000
+  rollout_cases: 500
+  determinism_cases: 20
+  torch_threads: 4
+runtime_projection:
+  incumbent_non_tier6_seconds: 36.9
+  official_tier6_cases: 100
+gates:
+  minimum_width128_transition_accuracy: 0.998
+  minimum_routed_oracle_accuracy: 0.92
+  minimum_selected_accuracy: 0.90
+  minimum_selected_gain_over_original: 0.05
+  maximum_selected_invalid_rate: 0.01
+  maximum_integrated_candidate_wall_seconds: 285
+  require_determinism: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_status: complete-reused-exp639-exp641
+  conditional_throughput_source: .scratch/exp-641-conditional-commutative-swap-routing/summary.json
+  conditional_throughput_source_sha256: fbb53dd81b5504141fe9547ea370be0622d590c94ece26fefa6a165e9b356e60
+  transition_throughput_source: .scratch/exp-639-full-depth-soft-boundary-adaptation/summary.json
+  transition_throughput_source_sha256: 3310550ef23f15ff55767a3590d0b47ce9e2fd996da6dfafd29b549383ecfbb2
+  projected_evaluation_wall_seconds: 990
+  projected_evaluation_aggregate_cpu_seconds: 3660
+  setup_artifact_wall_seconds: 60
+  expected_total_wall_seconds: 1050
+  expected_total_aggregate_cpu_minutes: 63
+  soft_budget_wall_seconds: 1500
+  hard_runaway_ceiling_wall_seconds: 2400
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 160
+  cache_completed_evaluation: true
+  fidelity_reduced: false

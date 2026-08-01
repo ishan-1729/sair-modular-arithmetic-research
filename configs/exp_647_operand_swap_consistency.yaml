@@ -1,0 +1,95 @@
+run_id: exp-647-operand-swap-consistency
+hypothesis: confidence-routed endpoint consistency across paired commuted full rollouts distills at least half of Candidate 005's proven two-orientation gain into one original-orientation trajectory and improves width-256 exact rollout
+seed: 20261057
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-647-operand-swap-consistency.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+training:
+  steps: 240
+  width_schedule: [64, 128, 256, 128]
+  batch_size: 4
+  bptt_chunk_steps: 16
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.0
+  torch_threads: 4
+  log_every_steps: 20
+arms:
+  paired_rollout_control:
+    confidence_consistency_weight: 0.0
+  confidence_consistency:
+    confidence_consistency_weight: 0.10
+    teacher_rule: higher_minimum_complete_trajectory_absolute_logit_margin
+    teacher_gradient: stopped
+data:
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+evaluation:
+  transition_cases: {64: 1000, 128: 3000, 256: 3000}
+  paired_rollout_cases: {64: 300, 128: 300, 256: 200}
+  rollout_batch_size: 64
+  determinism_width: 128
+  determinism_cases: 20
+gates:
+  minimum_challenger_width128_original_rollout: 0.90
+  minimum_width128_original_gain_over_control: 0.065
+  minimum_challenger_width256_original_rollout: 0.45
+  minimum_width256_original_gain_over_control: 0.05
+  minimum_challenger_width64_original_rollout: 0.95
+  minimum_challenger_width128_transition: 0.998
+  minimum_challenger_width256_transition: 0.997
+  maximum_challenger_invalid_rate: 0.01
+  require_exact_determinism: true
+  maximum_incremental_width256_100_case_wall_seconds: 100
+calibration:
+  updates_per_width_per_arm: 1
+  transition_cases_per_width_per_arm: 64
+  paired_rollout_cases_per_width_per_arm: 4
+resource_budget:
+  limit_units: [wall_seconds, aggregate_cpu_seconds]
+  calibration_status: complete
+  calibration_output: .scratch/exp-647-operand-swap-consistency/calibration.json
+  throughput_safety_multiplier: 1.50
+  setup_and_serialization_headroom_wall_seconds: 300
+  setup_and_serialization_headroom_aggregate_cpu_seconds: 600
+  hard_ceiling_multiplier_over_soft: 1.50
+  cache_completed_training: true
+  cache_completed_evaluation: true
+  preserve_completed_arms: true
+  fidelity_reduced: false
+  resolved:
+    calibration_output_sha256: a76feb8f06b5f08d13a310b32b8db08e14ce5d3b528183a5f3fdd36cbf8acfde
+    calibration_repository_commit: 43e9e6c397b9de25619de8b6cdfd24466a5fd46a
+    calibration_runner_sha256: 308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326
+    calibration_scientific_config_sha256: 903e770466bcfd131cff4b6639bf2e0649957c6895b348751b09a871f9fb24fa
+    calibration_dataset_sha256: 886a8d286c1c1bf571966ff9cdd1ed3e0f0d510668e34501bec71c0af58d2b2e
+    calibration_wall_seconds: 278.0807529039994
+    calibration_aggregate_cpu_seconds: 1088.398703972
+    calibration_peak_rss_bytes: 2797797376
+    formal_update_counts_by_width_per_arm: {64: 60, 128: 120, 256: 60}
+    component_projection:
+      paired_rollout_control:
+        projected_wall_seconds: 9904.223617396086
+        projected_aggregate_cpu_seconds: 39592.05759949062
+      confidence_consistency:
+        projected_wall_seconds: 8599.216639259394
+        projected_aggregate_cpu_seconds: 34367.426269632524
+    projected_formal_wall_seconds: 18504
+    projected_formal_aggregate_cpu_seconds: 73960
+    setup_and_serialization_headroom_wall_seconds: 300
+    setup_and_serialization_headroom_aggregate_cpu_seconds: 600
+    throughput_safety_multiplier: 1.50
+    soft_budget_wall_seconds: 28056
+    soft_budget_aggregate_cpu_seconds: 111540
+    hard_runaway_ceiling_wall_seconds: 42084
+    hard_runaway_ceiling_aggregate_cpu_seconds: 167310
+    cache_completed_training: true
+    cache_completed_evaluation: true
+    preserve_completed_arms: true
+    fidelity_reduced: false

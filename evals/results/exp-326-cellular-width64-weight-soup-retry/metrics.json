@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-326-cellular-width64-weight-soup-retry",
+  "created_at": "2026-07-12T07:25:00Z",
+  "checkpoint_sha256": "87d11a01976aaf5573f68d80e19fbfc24acfcdc11bf5096caa616c953ac38484",
+  "evaluation": {
+    "transition": {"alpha_0": {"cases": 1000, "correct": 997, "exact_accuracy": 0.997}, "alpha_0_5": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999}, "alpha_1": {"cases": 1000, "correct": 997, "exact_accuracy": 0.997}},
+    "rollout": {"alpha_0": {"cases": 500, "correct": 442, "exact_accuracy": 0.884}, "alpha_0_5": {"cases": 500, "correct": 456, "exact_accuracy": 0.912}, "alpha_1": {"cases": 500, "correct": 451, "exact_accuracy": 0.902}}
+  },
+  "controls": {"best_alpha": 0.5, "gain_over_best_endpoint": 0.01, "best_invalid_rollout_rate": 0.002, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 593.2379679740006, "parameters": 99824},
+  "decision": "reject-cellular-width64-weight-soup",
+  "limitations": ["Reduced-fidelity generated selection evidence only.", "No checked, consumed independent, or private answers were read."]
+}

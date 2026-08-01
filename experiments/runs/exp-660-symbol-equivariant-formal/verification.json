@@ -1,0 +1,33 @@
+{
+  "schema_version": "exp660-verification-boundary-v1",
+  "source_commit": "5febd058e89b27f14a7fc267ed60d1c57a11fc94",
+  "focused_command": "python -m pytest -q tests/test_exp649_stochastic_trajectory_breadth.py tests/test_exp659_symbol_equivariant_recurrence.py tests/test_exp660_symbol_equivariant_formal.py",
+  "focused_result": {"passed": 54, "failed": 0, "pytest_seconds": 190.78, "user_cpu_seconds": 476.39, "system_cpu_seconds": 9.36, "maximum_rss_kib": 508748},
+  "validator_command": "python tools/validate_project.py",
+  "validator_result": {"passed": true, "concepts": 163, "benchmark_records": 1100, "pinned_upstream_prefix": "82510bba00a1"},
+  "publication_validator_result": {"passed": true, "concepts": 162, "benchmark_records": 1100, "pinned_upstream_prefix": "82510bba00a1"},
+  "full_oracle_command": "python -m pytest -q",
+  "full_oracle_result": {"passed": 367, "failed": 6, "pytest_seconds": 498.41, "time_wall_seconds": 467.75, "user_cpu_seconds": 960.0, "system_cpu_seconds": 22.95, "maximum_rss_kib": 709064},
+  "failure_partition": {
+    "EXP658": {
+      "count": 6,
+      "classes": [
+        "ignored cache lacks checksum-bound Dockerfile, generator.py and primes.py",
+        "original scaffold-era zero-root assertion conflicts with accepted T045 run/evaluation park records"
+      ]
+    }
+  },
+  "portable_EXP649_proof": {
+    "focused_tests_passed": 17,
+    "canonical_blob_count": 6,
+    "path_confinement": "fail-closed-and-tested",
+    "current_checkout": "regular-LF-files-at-pinned-submodule-commit",
+    "historical_checkout_hashes_preserved": true,
+    "provenance_amendment": "experiments/runs/exp-649-stochastic-trajectory-breadth/provenance-amendment.json"
+  },
+  "fixture_materialization": {"EXP609_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd", "checksum_verified": true, "non_aliasing_local_bytes": true},
+  "fresh_probe": {"temporary_EXP658_L0_test_change_restored": true, "restored_L0_test_sha256": "8c6a4b3352e2229d3fded622637f350b56f6a99ec42771f664cb5a98f33ebbd6"},
+  "repair_attempts": 1,
+  "out_of_scope_files_needed_for_clean_oracle": [".scratch/exp-658-joint-quotient-carry-transducer/"],
+  "stop_rule_applied": true
+}

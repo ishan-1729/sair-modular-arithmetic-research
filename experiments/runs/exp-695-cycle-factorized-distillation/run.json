@@ -1,0 +1,125 @@
+{
+  "schema_version": "exp695-terminal-v1",
+  "run_id": "exp-695-cycle-factorized-distillation",
+  "status": "failed",
+  "decision": "park-exp695-at-root20261377-resource-admission",
+  "decision_authority": "T101-frozen-resource-admission-stop-rule",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-08-01T22:04:48+05:30",
+  "seed": 20261377,
+  "hypothesis": "Hidden-channel cycle coefficients factorized over direction and dilation and distilled from a frozen untied 16-slot teacher improve autonomous exactness over an exactly matched zero-coefficient control.",
+  "config": "configs/exp_695_cycle_factorized_distillation.yaml",
+  "source": {
+    "repository_commit": "b2c7b837ab281a08d974eee45e6404737915de45",
+    "repository_base_commit": "b2c7b837ab281a08d974eee45e6404737915de45",
+    "branch": "codex/exp695-c6-cycle-factorized",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd",
+    "runner_sha256": "64a457286c017d17b31c95c067604e93298ad6574eb09d0bc70acc288ede7023",
+    "test_sha256": "e68dff03258f8a3d9eac88877499edcf9ced30eb08a4189f61210dc96989c0ca",
+    "channel_map_sha256": "8c364e4fc62e663acde970d0ed04cd7a4850f780d77169535502d01ae4115555",
+    "pruned_state_sha256": "68b64bc9ebcd368363ab0f2f19a0b477b81d0229f7e86a2532c78630b742407f"
+  },
+  "environment": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.5.1+cpu",
+    "mlflow": "3.14.0",
+    "numpy": "2.5.1",
+    "pyyaml": "6.0.3",
+    "configured_torch_threads": 4,
+    "configured_interop_threads": 1,
+    "precision": "CPU FP32 deterministic algorithms"
+  },
+  "baseline_normalization": {
+    "metrics_before_sha256": "7e96ab0f7afabd5e4d18622589b068392128ffc61048ea2e1040503f9ff5c957",
+    "metrics_after_sha256": "0b047341809d9da9885c2ef08d96ef2460cff130d4cbbe6aa2475a6fe3d6ac27",
+    "run_before_sha256": "5b68565db76fd948d3482f31654f3e4c6253c678b58eb99ec9bbd7ee0037a587",
+    "run_after_sha256": "b5208cf98949a62a13b74b5dbf4dbcd8035b22f5f11f21303ae3e13ff1e39619",
+    "changed_fields": ["metrics.evaluation schema alias/envelope", "run.artifacts.checkpoint pointer"],
+    "semantic_evidence_unchanged": true
+  },
+  "roots": {
+    "20261377": "opened-completed-calibration-resource-reject",
+    "20261378": "unopened-resource-admission-blocked",
+    "20261379": "unopened-resource-admission-blocked",
+    "20261380": "unopened-resource-admission-blocked",
+    "20261381": "unopened-resource-admission-blocked",
+    "20261382": "unopened-resource-admission-blocked",
+    "20261383": "unopened-resource-admission-blocked",
+    "20261384": "unopened-resource-admission-blocked",
+    "20261385": "unopened-resource-admission-blocked"
+  },
+  "verification": {
+    "fixture_preflight": "87-lfs-paths-byte-identical-to-primary-and-clean-challenge-82510bba",
+    "focused": "22-passed-in-10.63s",
+    "smoke": "passed-all-modes-in-41.6s",
+    "smoke_sha256": "41ceb6e9b2d1f31f94f3a62ed9d9f110c2d91ac923472200cf7725b0ce19a5eb",
+    "package_oracle_invocations": 1,
+    "validator": "passed-230-concepts-1100-records",
+    "pytest": "1009-passed-in-471.53s",
+    "oracle_wall_seconds": 500.76,
+    "oracle_process_cpu_seconds": 805.97,
+    "oracle_peak_rss_kib": 936488
+  },
+  "calibration": {
+    "root_opened_sha256": "e7362069a9e74a0afdaaace800ecf640b2373e1e87c79144937588cac6e8519e",
+    "progress_sha256": "c901264e99b3c379fc0c4d53502c12e9319992eb789e3bee147f71a0b19b2c8f",
+    "root_summary_sha256": "56f15a5ae073c2c24b8952d3bc1dd61978057fd39ab8ccbf17e2591b3df0c518",
+    "teacher_updates": 400,
+    "primary_updates": 4,
+    "zero_coefficient_control_updates": 4,
+    "candidate_cold_wall_seconds": [212.90704653300008, 119.9308813780001, 129.48888186700015, 122.15805489100012, 121.82968177899988],
+    "candidate_guarded_wall_seconds": 425.81409306600017,
+    "candidate_ceiling_seconds": 285.0,
+    "wall_seconds": 1220.429311594,
+    "process_cpu_seconds": 4664.703249,
+    "cgroup_cpu_seconds": 4451.912,
+    "peak_rss_bytes": 2262302720
+  },
+  "dynamic_budget": {
+    "teacher_wall_seconds": 346.24724330800007,
+    "projected_training_wall_seconds": 5085.451626600025,
+    "projected_evaluation_wall_seconds": 697.3733199708068,
+    "expected_wall_seconds": 6129.0721898788315,
+    "soft_guard_wall_seconds": 7662,
+    "hard_guard_wall_seconds": 10726
+  },
+  "training": {
+    "teacher": {"updates": 400, "physical_slots": 16, "initial_state_sha256": "2affa3d7809bef0ba57d5eb7330404061647ee9bc7df03974c5bc248c6b1677f", "checkpoint_sha256": "b8ecc040647333f9415b664e1c1a1b2223a7ede05e0d12ec19dbc4e17874edbe", "checkpoint_bytes": 1633504, "frozen_before_students": true},
+    "initial_student_state_sha256": "f3254f75a7b95dd1bdb44617da23f8fe33909e69dc2648758415508c5ba272e4",
+    "parameters_per_arm": 29084,
+    "student_calls_per_arm": 32,
+    "teacher_calls_per_arm": 32,
+    "coefficient_calls_per_arm": 512,
+    "trajectory_slot_calls_per_arm": 512,
+    "exact_loss_calls_per_arm": 32
+  },
+  "checkpoints": {
+    "teacher": {"sha256": "b8ecc040647333f9415b664e1c1a1b2223a7ede05e0d12ec19dbc4e17874edbe", "bytes": 1633504},
+    "primary": {"sha256": "6908f67108fb39ae2e262ada1aa71d7be5b542232e156d19c004c53dd43eb0dc", "bytes": 117920, "reload_exact": true},
+    "zero_coefficient_control": {"sha256": "67b7a2e45222281248f8089c9871bbec1db3eac9c944c374c98ac49c8cf6bfdc", "bytes": 117920, "reload_exact": true}
+  },
+  "resource_admission": {"admitted": false, "failed_check": "candidate_runtime", "all_other_checks_passed": true},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "causal_effects": null,
+  "mlflow_run_id": "81b94aa9dd8a4d6980b3ae1d15dfe170",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-695-cycle-factorized-distillation/calibration/root-20261377/arms/primary/model.safetensors",
+    "teacher_checkpoint": ".scratch/exp-695-cycle-factorized-distillation/calibration/root-20261377/teacher.safetensors",
+    "metrics": "evals/results/exp-695-cycle-factorized-distillation/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-695-cycle-factorized-distillation.md",
+    "smoke": ".scratch/exp-695-cycle-factorized-distillation/smoke.json",
+    "root_summary": ".scratch/exp-695-cycle-factorized-distillation/calibration/root-20261377/root-summary.json"
+  },
+  "notes": [
+    "The complete 400-update teacher was frozen before either matched student arm; the teacher is absent from deployed inference.",
+    "Five complete cold 1,100-case primary routes were required because the first three had max/median greater than 1.10.",
+    "The guarded candidate route was 425.814 seconds, exceeding the frozen 285-second ceiling; resource admission therefore failed.",
+    "Calibration denominators are route-integrity evidence only; no formal comparison or causal result exists.",
+    "C5 remains scientifically unresolved; C7 and the final seven-member adversarial chair remain mandatory."
+  ]
+}

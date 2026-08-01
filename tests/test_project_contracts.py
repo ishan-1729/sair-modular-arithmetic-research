@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import yaml
+
 from tools.validate_project import (
     validate_checksum_file,
     validate_dataset,
     validate_knowledge,
     validate_release_boundary,
+    validate_research_library,
     validate_submission_artifact,
     validate_upstream_snapshot,
 )
@@ -23,6 +26,31 @@ def test_okf_knowledge_bundle_is_valid() -> None:
 def test_public_benchmark_metadata_and_hashes_are_valid() -> None:
     assert validate_dataset() == []
     assert validate_checksum_file() == []
+
+
+def test_research_paper_library_is_frozen_and_verified() -> None:
+    assert validate_research_library() == []
+
+
+def test_ci_hydrates_lfs_papers_without_duplicate_branch_runs() -> None:
+    workflow = yaml.load(
+        (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8"),
+        Loader=yaml.BaseLoader,
+    )
+    assert workflow["on"]["push"]["branches"] == ["main"]
+    checkout = next(
+        step
+        for step in workflow["jobs"]["validate"]["steps"]
+        if step.get("uses") == "actions/checkout@v4"
+    )
+    assert checkout["with"]["lfs"] == "true"
+    assert checkout["with"]["submodules"] == "recursive"
+    install = next(
+        step
+        for step in workflow["jobs"]["validate"]["steps"]
+        if step.get("name") == "Install project"
+    )
+    assert install["run"] == 'python -m pip install -e ".[dev,research]"'
 
 
 def test_official_source_is_pinned() -> None:

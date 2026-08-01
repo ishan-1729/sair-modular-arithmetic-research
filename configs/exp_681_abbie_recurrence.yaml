@@ -1,0 +1,108 @@
+run_id: exp-681-abbie-recurrence
+status: frozen-source-grounded-ST-M008-package
+hypothesis: >-
+  Training Candidate005 with two applications of its complete recurrent body will
+  preserve W128 exactness and allow useful test-time scaling to four and eight
+  applications at W256, with dependence on recurrence, state, and body weights.
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-681-abbie-recurrence.md
+mechanism_map: knowledge/autoresearch/research/2026-07-30-exp681-abbie-recurrence-mechanism.md
+source_contract:
+  integrated_base_commit: 43f90ea230689c4b0cfe36c5b07881c4dadb7a88
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  paper_path: research/papers/arxiv-2507.08567.pdf
+  paper_sha256: c3c298534ad9d37a82c2dede5303a8befe43dce291a2c6ce347e16c78c708bce
+  research_manifest_sha256: f2e2e38631d4cd5ea286d6e34c315b19c90d2c12e1725b3958a3e90229f09c21
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  base_model_sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc
+  exp300_sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f
+  exp329_sha256: a921ee8702dd274ccc8bad3f0135615d52acff17a620188bd43feff1cd81db96
+  generator_sha256: 9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be
+  checked_independent_official_private_candidate_submission_promotion: prohibited
+source_mapping:
+  source_pages: [3, 4]
+  source_elements: [Figure-2, Equation-3, Equation-4, Equation-5]
+  head: Candidate005 input stem
+  body: one complete Candidate005 dilation schedule B
+  tail: Candidate005 output normalization and bit/quotient readouts
+  form_C: h_next=B(h)
+  form_D: h_next=B(h)+h
+  training_recurrence: 2
+  test_recurrences: [1, 2, 4, 8]
+  exclusions: [input-chunk-recurrence, transformer-claims, token-KV-cache, exact-arithmetic-routing]
+library_decision:
+  selected: native-pytorch
+  torch: 2.5.1+cpu
+  license: BSD-3-Clause
+  reason: Existing convolutional GRU modules exactly express the paper equations without a new dependency.
+model: {hidden: 92, cycles: 2}
+recurrence: {train: 2, test: [1, 2, 4, 8], release_form: C}
+arms:
+  abbie_c: {train: true, kind: mixed, form: C, untied: false, randomized_body: false}
+  abbie_d: {train: true, kind: mixed, form: D, untied: false, randomized_body: false}
+  untied_body: {train: true, kind: mixed, form: C, untied: true, randomized_body: false}
+  randomized_body: {train: true, kind: mixed, form: C, untied: false, randomized_body: true}
+  frozen_source: {train: false, kind: mixed, form: C, untied: false, randomized_body: false}
+primary_arm: abbie_c
+interventions: [recurrence_one, fixed_two, reset_state, shuffle_state, head_zeroed, body_bypassed, tail_zeroed, randomized_body]
+training:
+  steps: 400
+  calibration_steps: 4
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+data:
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+  split_seed_offset: 681000
+  calibration: {root: 20261274, train_seed: 68173000, eval_seed: 68174000}
+  formal: {root: 20261275, train_seed: 68173001, eval_seed: 68174001}
+  confirmations:
+    - {root: 20261276, train_seed: 68173002, eval_seed: 68174002}
+    - {root: 20261277, train_seed: 68173003, eval_seed: 68174003}
+evaluation:
+  widths: [64, 128, 256]
+  transition_cases: {64: 3000, 128: 3000, 256: 3000}
+  rollout_cases: {64: 300, 128: 300, 256: 300}
+  trajectory_loss_cases: 32
+  calibration_transition_cases: {64: 16, 128: 16, 256: 16}
+  calibration_rollout_cases: {64: 2, 128: 2, 256: 2}
+  calibration_trajectory_loss_cases: 2
+  recurrence_diagnostic_cases: 12
+  deterministic_repeat_cases: 8
+  candidate_timing_width: 128
+  candidate_timing_cases: 8
+  candidate_projection_cases: 100
+gates:
+  minimum_w128_exact: 0.95
+  minimum_w128_transition: 0.998
+  maximum_invalids: 0
+  maximum_w128_loss_vs_source: 0.02
+  maximum_w128_loss_vs_fixed_two: 0.02
+  minimum_body_update_norm: 0.000000000001
+  minimum_intervention_logit_delta: 0.000000000001
+  minimum_w256_exact: 0.10
+  minimum_w256_gain_vs_controls: 0.05
+  minimum_deeper_recurrence_gain: 0.00
+  maximum_guarded_candidate_seconds: 285
+  maximum_artifact_bytes: 21474836480
+resource_budget:
+  maximum_formal_wall_seconds: 479.88
+  formal_headroom: 1.35
+  soft_multiplier: 1.25
+  hard_multiplier: 1.75
+  rss_headroom: 1.30
+  fidelity_reduced: false
+  frozen_protocol_path: .scratch/exp-681-abbie-recurrence/frozen-protocol.json
+  preflight_path: .scratch/exp-681-abbie-recurrence/preflight.json
+  admission_path: .scratch/exp-681-abbie-recurrence/admission.json
+  completion_marker_path: .scratch/exp-681-abbie-recurrence/completion.json

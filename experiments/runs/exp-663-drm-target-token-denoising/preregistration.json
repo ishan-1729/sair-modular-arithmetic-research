@@ -1,0 +1,31 @@
+{
+  "run_id": "exp-663-drm-target-token-denoising",
+  "status": "frozen-terminal-resource-park",
+  "calibration_root": 20261202,
+  "viability_root": 20261203,
+  "confirmation_roots": [20261204, 20261205],
+  "routes": ["frozen_source", "drm_cosine", "clean_recurrent", "masked_nonrecursive"],
+  "widths": [64, 128, 256],
+  "formal_counts": {
+    "optimizer_updates_per_trained_route": 400,
+    "transitions_per_width": 3000,
+    "rollouts_per_width": 300,
+    "validation_transitions_per_width": 1000,
+    "validation_rollouts_per_width": 100
+  },
+  "inference": {
+    "initial_canvas": "fully_masked",
+    "steps": 16,
+    "remasking": "uniform-target-independent-fixed-seed"
+  },
+  "frozen_source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "fixture_manifest_sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d",
+  "original_scratch_preregistration_sha256": "682c5059d1493c137e678314d1a9909e1018dc46e92c973b025fcb9c08aa92d0",
+  "root_status": {
+    "20261202": "calibration-only-terminal-resource-park",
+    "20261203": "unopened-resource-gate-blocked",
+    "20261204": "unopened-resource-gate-blocked",
+    "20261205": "unopened-resource-gate-blocked"
+  },
+  "test_access_before_frozen_primary": false
+}

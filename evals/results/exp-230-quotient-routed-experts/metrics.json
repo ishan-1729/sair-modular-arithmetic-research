@@ -1,0 +1,45 @@
+{
+  "run_id": "exp-230-quotient-routed-experts",
+  "created_at": "2026-07-12T03:22:00Z",
+  "checkpoint_sha256": "71d5960a23db351176c761b391983418cfd75fdad9f74861afbcfe87aaecc16f",
+  "evaluation": {
+    "transition": {
+      "routed_predicted": {"cases": 50000, "correct": 49893, "exact_accuracy": 0.99786},
+      "routed_oracle_teacher": {"cases": 50000, "correct": 49897, "exact_accuracy": 0.99794}
+    },
+    "rollout": {
+      "single_head_control": {"cases": 20000, "correct": 18396, "exact_accuracy": 0.9198},
+      "routed_predicted": {"cases": 20000, "correct": 18434, "exact_accuracy": 0.9217},
+      "routed_forced_expert0": {"cases": 20000, "correct": 18408, "exact_accuracy": 0.9204}
+    }
+  },
+  "controls": {
+    "source_output_logit_max_difference": 0.0,
+    "source_router_logit_max_difference": 0.0,
+    "router_accuracy": 0.99998,
+    "rollout_gain": 0.0019,
+    "forced_expert0_rollout_drop": 0.0013,
+    "invalid_rollout_rate": 0.00265,
+    "parameter_ratio": 1.7797681269599923,
+    "training_time_ratio": 1.1412937126756066,
+    "expert_distance_0_1": 1.660481572151184,
+    "expert_distance_0_2": 1.5458805561065674,
+    "expert_distance_1_2": 1.5857070684432983
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 429.502176822,
+    "control_training_seconds": 84.66852766100001,
+    "challenger_training_seconds": 96.631658281,
+    "control_parameters": 126276,
+    "challenger_parameters": 224742,
+    "challenger_peak_rss_bytes": 705458176
+  },
+  "decision": "reject-quotient-routed-experts",
+  "limitations": [
+    "Quotient classes were offline supervision only; inference routing and all outputs were learned.",
+    "Forced routing was a diagnostic control and is not a submission mode.",
+    "No consumed independent seed or checked public answer was used."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "run_id": "exp-661-loopformer-width-extrapolation",
+  "created_at": "2026-07-27T19:00:00Z",
+  "checkpoint_sha256": "0e4a7b1c3f7ea847bf1d7a075f4b1b339e0b81863d6bc53fb9d2d5efab33e99a",
+  "decision": "reject-exact-bounded-loopformer-formulation-at-viability",
+  "roots": {"20261194": "completed-admitted-calibration", "20261195": "completed-reject", "20261196": "unopened", "20261197": "unopened"},
+  "evaluation": {
+    "transition": {
+      "W16": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.544921875},
+      "W24": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5438368055555556},
+      "W32": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5182291666666666}
+    },
+    "rollout": {
+      "W16": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.544921875},
+      "W24": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5438368055555556},
+      "W32": {"cases": 96, "correct": 0, "exact_accuracy": 0.0, "bit_accuracy": 0.5182291666666666}
+    },
+    "metric_semantics": "The endpoint model emits one full answer; transition and rollout schema slots share the budget-8 endpoint denominator. Full budget curves are retained under controls."
+  },
+  "controls": {
+    "budgets": [1, 2, 4, 8, 16],
+    "primary_exact_accuracy": {"W16": [0.0, 0.0, 0.0, 0.0, 0.0], "W24": [0.0, 0.0, 0.0, 0.0, 0.0], "W32": [0.0, 0.0, 0.0, 0.0, 0.0]},
+    "primary_bit_accuracy": {"W16": [0.544921875, 0.544921875, 0.544921875, 0.544921875, 0.544921875], "W24": [0.5438368055555556, 0.5438368055555556, 0.5438368055555556, 0.5438368055555556, 0.5438368055555556], "W32": [0.5182291666666666, 0.5182291666666666, 0.5182291666666666, 0.5182291666666666, 0.5182291666666666]},
+    "budget8_w16_controls": {
+      "plain_looped_transformer": {"exact_accuracy": 0.0, "bit_accuracy": 0.5494791666666666, "invalid_rate": 0.0},
+      "decoded_cellular_control": {"exact_accuracy": 0.0, "bit_accuracy": 0.544921875, "invalid_rate": 0.0},
+      "no_time_step": {"exact_accuracy": 0.0, "bit_accuracy": 0.455078125, "invalid_rate": 1.0},
+      "no_shortcut": {"exact_accuracy": 0.0, "bit_accuracy": 0.455078125, "invalid_rate": 1.0},
+      "no_short_loss": {"exact_accuracy": 0.0, "bit_accuracy": 0.544921875, "invalid_rate": 0.0},
+      "no_consistency": {"exact_accuracy": 0.0, "bit_accuracy": 0.546875, "invalid_rate": 0.0}
+    },
+    "inference_interventions_w16_budget8": {
+      "no_time_step": {"exact_accuracy": 0.0, "bit_accuracy": 0.544921875, "invalid_rate": 0.0},
+      "no_shortcut": {"exact_accuracy": 0.0, "bit_accuracy": 0.544921875, "invalid_rate": 0.0}
+    },
+    "randomized_weights_w16_budget8": {"exact_accuracy": 0.0, "bit_accuracy": 0.5345052083333334, "invalid_rate": 0.0},
+    "primary_hidden_logit_curve_w16_budget8": {
+      "hidden_cosine": [0.9999889731407166, 0.9999988079071045, 0.9999995231628418, 0.9999998807907104, 1.0, 1.0, 0.9999998807907104],
+      "hidden_rms_delta": [319.208740234375, 315.2588195800781, 335.73980712890625, 294.4135437011719, 287.54730224609375, 278.2915954589844, 249.18820190429688],
+      "logit_rms_delta": [0.0004707500629592687, 0.00015649855777155608, 0.0000768061145208776, 0.00008473818888887763, 0.00008039973909035325, 0.000056087184930220246, 0.000037248693843139336]
+    },
+    "roots": {"20261194": "completed-admitted-calibration", "20261195": "completed-reject", "20261196": "unopened", "20261197": "unopened"}
+  },
+  "invalid_rate": {"primary": {"W16": 0.0, "W24": 0.0, "W32": 0.0}},
+  "matching": {"parameters_each": 8553, "optimizer_updates_each": 300, "trajectory_examples_each": 9600, "recurrent_block_calls_each": 3597, "reload_exact_all": true},
+  "resources": {
+    "calibration": {"wall_seconds": 6.6381154270000025, "process_cpu_seconds": 18.580000000000002, "cgroup_cpu_seconds": 17.432000000000016, "peak_rss_bytes": 476811264},
+    "viability": {"wall_seconds": 83.64743734800004, "process_cpu_seconds": 356.79, "cgroup_cpu_seconds": 402.08799999999997, "peak_rss_bytes": 489570304}
+  },
+  "limitations": ["Exact accuracy, not bit accuracy, controls the decision.", "Confirmations remained unopened after the conjunctive viability miss.", "No checked/private/official/submission evidence was used."]
+}

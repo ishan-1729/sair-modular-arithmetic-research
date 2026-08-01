@@ -1,0 +1,20 @@
+run_id: exp-668-h2l3-magicnorm-credit
+hypothesis: Exact-initialized H2L3 hierarchy plus MagicNorm and warmup credit preserves W128 and creates nonzero W256 exact rollout.
+mechanism_map: knowledge/autoresearch/research/2026-07-29-exp668-h2l3-magicnorm-mechanism.md
+source_checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+fixture_hashes: {Dockerfile: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41, generator.py: 77f4142fe097ef66f2bd4452547b465ef3f75646191ed8258c508f5e3caa85c0, primes.py: 5d7f494a1560efbfeb74ed02ddd67a17001bc9ebeb6345e1567bca1bf7dc8bac}
+paper: {path: research/papers/arxiv-2605.20613.pdf, sha256: c3d8c51d8fcbd44e38c4a9284b75ef8b7d9c2c3e372e2a395672bf38a28a1372, pages: [3, 4, 5, 6, 7, 8, 23, 24, 25, 26]}
+roots: {calibration: 20261222, viability: 20261223, confirmations: [20261224, 20261225]}
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model: {hidden: 92, cycles: 2, inner: 64, transition_scale: 0.10, high_cycles: 2, low_cycles: 3, warmup_start_horizon: 2, warmup_end_horizon: 5}
+routes: [proposal_only, full, hierarchy_only, credit_only, flat_compute_matched, no_warmup_raw_gradient, high_reset, low_reset, randomized]
+trained_routes: [full, hierarchy_only, credit_only, flat_compute_matched, no_warmup_raw_gradient, high_reset, low_reset]
+primary_route: full
+inference: {fixed_schedule: H2L3, total_steps: 8, target_free: true, answer_dependent_depth: false, validity_filter: false, repair: false, auto_guidance: false}
+data: {widths: [64, 128, 256], training_widths: [64, 128, 256], prime_bit_span: 8, train_prime_identities: 512, validation_prime_identities: 128, test_prime_identities: 128, split_seed_offset: 66800, training_seed_offset: 66900, validation_seed_offset: 67000, test_seed_offset: 67100}
+training: {steps_per_trained_route: 400, schedule: [64, 128, 256, 128], batch_size: 16, learning_rate: 0.00002, minimum_learning_rate: 0.000001, weight_decay: 0.00002, worst_bit_weight: 0.45, quotient_weight: 0.10, gradient_clip: 2.0, torch_threads: 4, log_every_steps: 25}
+calibration: {representative_updates_per_trained_route: 2, transition_cases_per_width: 8, rollout_cases_per_width: 2, gradient_diagnostic_cases_w128: 8}
+evaluation: {transition_cases_per_width: 3000, rollout_cases_per_width: 300, validation_transition_cases_per_width: 1000, validation_rollout_cases_per_width: 100, gradient_diagnostic_cases_w128: 300}
+gates: {minimum_w128_primary_rollout: 0.85, maximum_w128_loss_to_proposal: 0.02, minimum_w128_transition: 0.998, maximum_invalid_rollout_rate: 0.0, minimum_component_state_distance: 0.000001, maximum_gradient_norm: 1000.0, minimum_w256_primary_rollout: 0.10, minimum_w256_gain_over_proposal: 0.05, minimum_w256_gain_over_flat: 0.05, minimum_w256_gain_over_single_component: 0.05, maximum_candidate_inference_wall_seconds: 300, maximum_candidate_headroom_wall_seconds: 285, require_reload_exact: true, require_split_separation: true}
+resource_policy: {evaluator_processes: 3, evaluator_torch_threads_each: 4, maximum_peak_rss_bytes: 6442450944, maximum_expected_formal_wall_seconds: 21600, incumbent_candidate_wall_seconds: 156.0, variability_headroom_floor: 1.25, variability_headroom_ceiling: 2.0, soft_guard_multiplier: 1.25, hard_guard_multiplier: 2.0, require_complete_routes: true, cache_completed_roots: true}

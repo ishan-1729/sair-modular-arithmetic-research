@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-520-tier5-recovery-delta-patching",
+  "status": "completed",
+  "created_at": "2026-07-12T13:00:00Z",
+  "hypothesis": "A localized subset of the recovery-trained parameter delta provides Tier-5 rollout gain without countervailing full-checkpoint changes.",
+  "seed": 20260725,
+  "source": {"repository_commit": "413c210a523379763774efac818fb4ecfca4ca49", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "dc0835178c4cf9638dec2f72d9c16162560e01609a8a25579ede3cfd016f336c", "config_sha256": "815b506de86107ad03194465ed31f8f24a780ed9b02617f4c5d6df04691815c3", "dataset_sha256": "d36842fe565adf930d8b912869d77928a17c92cca6a78d38fd1b5d1c7ff967ef"},
+  "config": "configs/exp_520_tier5_recovery_delta_patching.yaml",
+  "environment": "experiments/runs/exp-520-tier5-recovery-delta-patching/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "361a7e941b19467084fb5a101769ec7f"},
+  "artifacts": {"checkpoint": ".scratch/exp-520-tier5-recovery-delta-patching/full-challenger/weights.safetensors", "checkpoint_sha256": "d4f8b3c57a0c4ed3a9a5c370e27cbe94f53519d61afb3b42b984208e91abdd4d", "source_checkpoint_sha256": "050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7", "metrics": "evals/results/exp-520-tier5-recovery-delta-patching/metrics.json", "summary_sha256": "9e4c5ce8d05745656b40e09980f54d081931d531bca1039a42352bc2845d6a33"},
+  "decision": "reject-tier5-recovery-delta-patches",
+  "notes": ["The quotient negative control is prediction-identical to control.", "Gate/candidate/core patches recover progressively more rollout, but full challenger remains best at 96.4 percent.", "The full endpoint receives a new five-seed confirmation preregistration based on two fresh selection sets; EXP-329 is not retroactively reclassified."]
+}

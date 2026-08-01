@@ -1,0 +1,45 @@
+run_id: exp-603-tier6-recovery-continuation
+hypothesis: a lower-rate continuation from EXP-602 converts the monotonic recovery gain into at least 85 percent width-128 rollout while retaining the Tier-5 boundary
+seed: 20260730
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-603-tier6-recovery-continuation.md
+source_checkpoint: .scratch/exp-602-tier6-recovery-full-budget/weights.safetensors
+source_checkpoint_sha256: eaeece8bf81a28818083f306f0882ef403f885dd7b6821bb1aafe0120d9a59fa
+model: {hidden: 92, cycles: 2}
+training:
+  steps: 600
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 32
+  recovery_chunk_steps: 4
+  scheduled_prediction_probability_start: 0.9
+  scheduled_prediction_probability_end: 1.0
+  learning_rate: 0.000025
+  minimum_learning_rate: 0.0000025
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation: {transition_cases: 3000, rollout_cases: 300}
+gates:
+  minimum_width128_rollout: 0.85
+  minimum_width128_gain_over_source: 0.03
+  minimum_retained_width64_rollout: 0.92
+  minimum_width128_transition: 0.997
+  maximum_width128_invalid_rollout_rate: 0.01
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-602-observed-phase-throughput
+  exp602_training_400_updates_wall_seconds: 634.522330233
+  training_fidelity_multiplier: 1.5
+  projected_training_600_updates_wall_seconds: 951.78349535
+  exp602_paired_evaluation_setup_wall_seconds: 452.607982994
+  projected_total_wall_seconds: 1404.391478344
+  soft_budget_wall_seconds: 2100
+  hard_runaway_ceiling_wall_seconds: 3000
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 220
+  cache_completed_source_control: true

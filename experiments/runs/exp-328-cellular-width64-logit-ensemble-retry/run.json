@@ -1,0 +1,35 @@
+{
+  "run_id": "exp-328-cellular-width64-logit-ensemble-retry",
+  "status": "completed",
+  "created_at": "2026-07-12T07:55:00Z",
+  "hypothesis": "Averaging logits from complementary diverse cellular checkpoints improves width-64 exact rollout beyond either endpoint.",
+  "seed": 20260715,
+  "source": {
+    "repository_commit": "933db513d09d8e30d1461bc3a4bf0b1138ef36db",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "a8afe28308a77985fcddb32d35292aa18d1281866ba89d82e2705187271fc308",
+    "config_sha256": "e2d853e01744110b4f6ee7461e614c9204428af1ebc48a6a2624b19a577fcf86",
+    "evaluator_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "dataset_sha256": "25bee51b2455a92c2cf30833947dda0af705f4df8579ff53f9b52e53de88e5f1"
+  },
+  "config": "configs/exp_328_cellular_width64_logit_ensemble_retry.yaml",
+  "environment": "experiments/runs/exp-328-cellular-width64-logit-ensemble-retry/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "cf27e7fb7af346728c63c388dbb89372"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-328-cellular-width64-logit-ensemble-retry/weights.safetensors",
+    "checkpoint_sha256": "0a2c0dcde627aee3edcc0c33a27960e0c9931e093660892099ebf05b8e39cc1a",
+    "metrics": "evals/results/exp-328-cellular-width64-logit-ensemble-retry/metrics.json",
+    "summary_sha256": "d730dacad6b929f366f9c2385ef6e5aba6c2574052f3fd0e9765e7cc7821ee4"
+  },
+  "decision": "reject-cellular-width64-logit-ensemble",
+  "notes": [
+    "The ensemble reaches 90.8 percent exact rollout, exactly one point above the better endpoint.",
+    "It passes transition, gain, and invalid-state gates but misses the 93 percent absolute rollout gate.",
+    "The full-fidelity comparison completed inside the throughput-calibrated wall budget."
+  ]
+}

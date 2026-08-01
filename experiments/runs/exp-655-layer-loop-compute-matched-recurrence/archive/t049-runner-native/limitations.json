@@ -1,0 +1,8 @@
+{
+  "limitations": [
+    "This is bounded-faithful evidence for dense recurrence ordering (ST-M043.a/ST-M009.a), not a reproduction of Loopie MoE, adaptive routing, capacity recycling, or post-training.",
+    "Only fresh generated train-prime-disjoint W16/W32 identities were evaluated; checked, prior-independent, official, and private answers were not read.",
+    "Exact Python arithmetic is confined to offline training labels and evaluation.",
+    "A pass authorizes only a separately judged width64 confirmation; it cannot promote a candidate, benchmark, submission, or Goal completion."
+  ]
+}

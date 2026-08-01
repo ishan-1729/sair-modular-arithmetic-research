@@ -1,0 +1,10 @@
+{
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "torch_threads_configured": 4,
+  "host_logical_cpu_count": 22,
+  "base_commit": "d8dd029eb5a64c15c5461a473779a4baba8b77bd",
+  "branch": "codex/exp651-visit-dilation-adapters"
+}

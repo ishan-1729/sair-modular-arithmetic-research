@@ -1,0 +1,60 @@
+{
+  "run_id": "exp-106-width-transfer-1200",
+  "created_at": "2026-07-11T20:36:00Z",
+  "checkpoint_sha256": "e22363be39f57d81ab827ed232f6ee7f27a6f49e54cc2be2e40c3e1536cef6a4",
+  "evaluation": {
+    "transition": {
+      "width16_random_heldout_primes": {
+        "cases": 20000,
+        "correct": 17552,
+        "exact_accuracy": 0.8776,
+        "bit_accuracy": 0.965115625
+      },
+      "width16_transfer_heldout_primes": {
+        "cases": 20000,
+        "correct": 18867,
+        "exact_accuracy": 0.94335,
+        "bit_accuracy": 0.993290625
+      }
+    },
+    "rollout": {
+      "width16_random_heldout_primes": {
+        "cases": 10000,
+        "correct": 2348,
+        "exact_accuracy": 0.2348
+      },
+      "width16_transfer_heldout_primes": {
+        "cases": 10000,
+        "correct": 4707,
+        "exact_accuracy": 0.4707
+      }
+    }
+  },
+  "controls": {
+    "random_invalid_rollout_rate": 0.073,
+    "transfer_invalid_rollout_rate": 0.029,
+    "transition_gain": 0.06575,
+    "rollout_gain": 0.2359,
+    "invalid_rate_change": -0.044,
+    "trajectory_transition_accuracy": 0.94514,
+    "random_state_transition_accuracy": 0.93406,
+    "trajectory_quotient_0_accuracy": 0.9975311499440651,
+    "trajectory_quotient_1_accuracy": 0.9891247516469727,
+    "trajectory_quotient_2_accuracy": 0.5009089072914563
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 322.30283300000883,
+    "random_training_seconds": 149.719154700011,
+    "transfer_training_seconds": 147.96857740001,
+    "parameters_per_arm": 85556
+  },
+  "decision": "revise-curriculum-before-full-budget",
+  "limitations": [
+    "Intermediate heldout-prime A/B; no official tier score was produced.",
+    "The transfer winner missed the preregistered absolute full-budget gate.",
+    "The quotient analysis is diagnostic and requires a matched intervention test.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

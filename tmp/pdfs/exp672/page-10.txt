@@ -1,0 +1,100 @@
+LT2: Linear-Time Looped Transformers
+Overall, attention sinks and massive activations
+are not artifacts of standard transformers alone. weight-shared loops mildly amplify them by re-applying
+the same softmax to a residual that already carries the sink. A single head-specific sigmoid gate inside
+the loop suppresses the compounding and yields a small but consistent improvement on every softmax-
+containing LT2 variant. We recommend adopting this gate in all such variants in looped setting.
+3.5. Training stability
+A practical concern with looped models is that repeatedly applying the same block can amplify activations
+and destabilize optimization. We track the language-modeling loss and global gradient norm throughout
+pre-training and find that the choice of mixer inside the loop has a pronounced effect on stability.
+0
+5000
+10000 15000 20000
+training steps
+4
+6
+8
+10
+loss
+Language-modeling loss
+Looped Transformer
+Looped RetNet
+Looped DeltaNet
+Looped Mamba2
+Looped GDN
+0
+5000
+10000 15000 20000
+training steps
+100
+101
+global grad norm
+Gradient norm
+Figure 6: Looped GDN trains with the smoothest loss and
+the smallest gradient norms across all linear and full-attention
+variants; Looped RetNet, which lacks both data-dependent
+gating and a delta rule, diverges.
+Gating and the delta rule keep the
+linear loop bounded.
+Figure 6 com-
+pares the looped Transformer against
+four subquadratic mixers. Looped Ret-
+Net exhibits persistently large gradi-
+ent norms and frequent spikes through-
+out training, consistent with its diver-
+gence in Table 2. Looped DeltaNet and
+Looped Mamba2 are noticeably better
+but still display occasional spikes that
+propagate into the loss. In contrast,
+Looped GDN tracks below the Looped
+Transformer in gradient norm for es-
+sentially the entire run and produces
+the smoothest loss curve of any variant.
+Two ingredients appear to matter: a
+data-dependent gate, which lets the recurrence forget stale state instead of letting it accumulate across
+iterations, and the delta rule, which bounds updates to the recurrent memory. Mixers that have only one
+of the two (Mamba2 has gating without the delta rule; DeltaNet has the delta rule with weaker gating)
+are stable but visibly noisier than GDN, while RetNet, which has neither, is unstable.
+0
+5000
+10000 15000 20000
+training steps
+4
+6
+8
+10
+loss
+Language-modeling loss
+Looped Transformer
+Looped Window
+Looped NSA
+Looped DSA
+0
+5000
+10000 15000 20000
+training steps
+100
+101
+global grad norm
+Gradient norm
+Figure 7: Sparse looped variants train without the spikes seen
+in the full-attention loop, but reach a slightly higher final loss
+than the Looped Transformer.
+Sparse attention is stable but slightly
+less capable.
+Figure 7 reports the
+same diagnostics for sparse-attention
+loops. All three sparse variants (Win-
+dow, NSA, DSA) train smoothly: their
+gradient norms sit at or below the
+Looped Transformer for the entire run,
+and none of them shows the sharp
+spikes that occasionally appear in the
+full-attention loop around the middle
+of training. The price is a small but con-
+sistent gap in language-modeling loss
+— restricting each iteration to a sparse
+receptive field caps the per-loop compu-
+tation and slows convergence relative
+10

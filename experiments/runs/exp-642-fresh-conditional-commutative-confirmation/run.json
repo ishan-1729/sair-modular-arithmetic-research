@@ -1,0 +1,69 @@
+{
+  "run_id": "exp-642-fresh-conditional-commutative-confirmation",
+  "status": "completed",
+  "created_at": "2026-07-17T09:38:42Z",
+  "hypothesis": "The exact fixed 40 percent conditional commutative policy reproduces at least 90 percent width-128 exact rollout and a five-point gain on 500 fresh cases while retaining transition, validity, determinism, and runtime gates.",
+  "seed": 20260842,
+  "source": {
+    "repository_commit": "8f07f86baef31313b5a1890b4732bc7a9d383aca",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "bc1ca5381162424712e6562169a991b6bd22db51d63997c0e942a2de04a1d316",
+    "runner_sha256": "373c03cbe86cc03b1274344ed6eab47327e559e91e0b886f02ffef9199de92a6",
+    "exp640_runner_sha256": "a87b6c66b2af3ea53637608a18ff25e1814943370238d980cb29c38cb85d2c9e",
+    "exp641_runner_sha256": "95995667c5c87dcc602905675c0841d4891ed2bae81d18d5ad27510067d1ff91",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "split_sha256": "28461734d3b3250819590b74b825e30a7d00fc59b9055d2f749277324a239db0"
+  },
+  "config": "configs/exp_642_fresh_conditional_commutative_confirmation.yaml",
+  "environment": "experiments/runs/exp-642-fresh-conditional-commutative-confirmation/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "fd4e28f98d1b4cdb8a53ebac3611c2d2"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-642-fresh-conditional-commutative-confirmation/metrics.json",
+    "scratch_summary": ".scratch/exp-642-fresh-conditional-commutative-confirmation/summary.json",
+    "scratch_summary_sha256": "89230c00881a81ea346e32487d94b88e31c316c34d61483f11678dbbc69f5671",
+    "fresh_cache": ".scratch/exp-642-fresh-conditional-commutative-confirmation/fresh-5ce234906b1bcd02e30b502ce960016b482df6c27be624c7088ff9dfeddb42ea.json",
+    "fresh_cache_sha256": "8bacb7b5b6f8723a9a87df0ef66441478da7b0dbe6b03a5593948a8745fdb8b1",
+    "formal_console": ".scratch/exp-642-fresh-conditional-commutative-confirmation/formal-console.log",
+    "formal_console_sha256": "649eb491091a8a676f3c63a0e4ba978fb4a87e205af535d3d55c1c59459fc843"
+  },
+  "evidence_scope": "fresh-generated-width128-prime-disjoint",
+  "controls": {
+    "fixed_route_fraction": 0.4,
+    "fresh_prime_split": true,
+    "full_workload_completed": true,
+    "determinism_passed": true,
+    "all_gates_passed": true
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 1050,
+    "expected_total_aggregate_cpu_minutes": 63,
+    "soft_budget_wall_seconds": 1500,
+    "hard_runaway_ceiling_wall_seconds": 2400,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 160,
+    "runner_wall_seconds": 438.9492145589975,
+    "runner_aggregate_cpu_seconds": 1603.6986681570002,
+    "runner_aggregate_cpu_minutes": 26.728311135950002,
+    "external_wall_seconds": 433.47,
+    "external_user_cpu_seconds": 1603.74,
+    "external_system_cpu_seconds": 10.47,
+    "external_percent_cpu": 372,
+    "timing_discrepancy_seconds": 5.47921455899752,
+    "fidelity_reduced": false,
+    "valid_throughput_evidence_reused": true
+  },
+  "decision": "authorize-tier6-candidate-integration-and-wider-feasibility",
+  "notes": [
+    "On 500 fresh width-128 cases, original scores 84.2 percent and the fixed conditional policy scores 97.2 percent, a thirteen-point gain.",
+    "The policy routes exactly 200 cases, chooses swapped 161 times, recovers 66 original failures, loses one original success, and has zero selected invalidity.",
+    "Fresh transition exactness is 99.933 percent, routed oracle is 97.6 percent, exact determinism passes, and integrated runtime projects to 113.81 seconds.",
+    "This authorizes candidate-shaped Tier-6 integration and wider-width feasibility only; full overall and release gates remain pending."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "run_id": "candidate-003-tier4-cellular-hybrid",
+  "created_at": "2026-07-12T05:41:00Z",
+  "checkpoint_sha256": "a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514",
+  "evaluation": {
+    "transition": {"tier4_frozen_heldout": {"cases": 10000, "correct": 9991, "exact_accuracy": 0.9991}},
+    "rollout": {
+      "independent_official_scored_tiers": {"cases": 1000, "correct": 404, "exact_accuracy": 0.404, "highest_tier_above_90": 4, "tier_1_accuracy": 1.0, "tier_2_accuracy": 0.98, "tier_3_accuracy": 0.99, "tier_4_accuracy": 0.95},
+      "checked_public_scored_tiers": {"cases": 1000, "correct": 409, "exact_accuracy": 0.409, "highest_tier_above_90": 4, "tier_1_accuracy": 1.0, "tier_2_accuracy": 0.99, "tier_3_accuracy": 1.0, "tier_4_accuracy": 0.98}
+    }
+  },
+  "controls": {"static_analysis": "clean", "preprocess_isolated": true, "deterministic": true, "randomized_weights_overall_accuracy": 0.077, "randomized_weights_tier_4_accuracy": 0.0, "randomized_weights_highest_tier_above_90": -1},
+  "runtime": {
+    "device": "cpu",
+    "artifact_bytes_clean": 1109234,
+    "load_seconds": 2.397371022000698,
+    "inference_seconds": 2.632469549999769,
+    "parameters": 270401,
+    "official_container_independent": {"engine": "native rootless podman 4.9.3 on Ubuntu 24.04 WSL2", "image_id": "0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423", "dockerfile_sha256": "1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41", "seed_sha256": "a791075e4357a6bc629b8753d1e1b05fcc9003c3038c72d9becca9cc5e4d41c2", "container_wall_seconds": 34.28426174000015, "inference_seconds": 7.9, "overall_accuracy": 0.404, "highest_tier_above_90": 4, "result_sha256": "d173a1957c5b03f6c293973b71095a310d332f75612542da3d69659311c90ca1", "passed": true}
+  },
+  "decision": "promote",
+  "limitations": ["Tier 5 and above remain at the edge-case baseline.", "The official private seed is unavailable.", "The checked benchmark was read only after the frozen independent gate passed.", "The official image ran through rootless Podman with the pinned Dockerfile and unchanged isolation envelope."]
+}

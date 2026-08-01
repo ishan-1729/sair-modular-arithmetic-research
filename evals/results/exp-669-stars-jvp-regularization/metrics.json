@@ -1,0 +1,37 @@
+{
+  "run_id": "exp-669-stars-jvp-regularization",
+  "created_at": "2026-07-28T22:30:00Z",
+  "checkpoint_sha256": "4d3accb4e0fcc3e6e1a0446b5e904bd5fe36184d14a559d865c5872b919d9556",
+  "status": "completed-rejected",
+  "decision": "reject-current-stars-jvp-adaptation",
+  "root": 20261227,
+  "evaluation": {
+    "transition": {
+      "W128": {
+        "cases": 3000,
+        "correct": 2995,
+        "exact_accuracy": 0.9983333333333333,
+        "bit_accuracy": 0.9999348958333333,
+        "invalid_residue_rate": 0.0
+      }
+    },
+    "rollout": {
+      "W128": {
+        "cases": 300,
+        "correct": 253,
+        "exact_accuracy": 0.8433333333333334,
+        "all_prefix_exact_accuracy": 0.8433333333333334,
+        "transition_exact_accuracy": 0.9189583333333333,
+        "any_invalid_residue_rate": 0.0
+      }
+    },
+    "decision_order": "primary-first"
+  },
+  "controls": {"all_arms_trained_and_cached": true, "updates_each_trained_arm": 400, "examples_each_trained_arm": 6400, "jvp_calls_each_trained_arm": 12800, "inference_graph_identical": true, "later_formal_controls_opened": false},
+  "w128_primary": {"transition_exact_accuracy": 0.9983333333333333, "bit_accuracy": 0.9999348958333333, "transition_invalid_residue_rate": 0.0, "rollout_exact_accuracy": 0.8433333333333334, "all_prefix_exact_accuracy": 0.8433333333333334, "rollout_transition_exact_accuracy": 0.9189583333333333, "rollout_any_invalid_residue_rate": 0.0},
+  "gate": {"minimum_rollout": false, "minimum_transition": true, "zero_invalid_transition": true, "zero_invalid_rollout": true},
+  "scientific_verdict": "reject-exact-bounded-stars-jvp-adaptation-at-w128-primary",
+  "resource": {"wall_seconds": 532.055833247, "process_tree_cpu_seconds": 2078.299365, "cgroup_cpu_seconds": 2527.8719999999994, "peak_rss_bytes": 1019494400},
+  "unopened_surfaces": ["W128 frozen-source retention", "W128 lambda-zero/state-norm/randomized dependence", "formal JVP/perturbation comparison", "W256", "roots 20261228 and 20261229", "M026.b/M018.a"],
+  "limitations": ["No exact spectral-radius claim is made.", "Decision-safe stopping prevents causal proxy and wider-width conclusions.", "No STARS/source-paper/candidate/benchmark/promotion/completion verdict follows beyond this exact adaptation."]
+}

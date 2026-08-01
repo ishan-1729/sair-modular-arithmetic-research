@@ -1,0 +1,57 @@
+{
+  "focused": {
+    "command": "python -m pytest tests/test_exp_651_visit_dilation_adapters.py -q",
+    "status": "pass",
+    "evidence": "7 passed in 12.55s"
+  },
+  "validator_and_full_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "attempts": 2,
+    "validator_status": "pass",
+    "full_oracle_status": "fail",
+    "pytest_collected_nodeids": 398,
+    "pytest_failed_nodeids": 25,
+    "failure_scope": "EXP658 only",
+    "output_limitation": "Execution-wrapper timeouts detached both child processes; final status was recovered from the updated pytest cache and a focused failure probe."
+  },
+  "focused_failure_probe": {
+    "command": "python -m pytest tests/test_exp658_joint_quotient_carry_calibration.py::test_zero_root_config_frozen_hashes_and_path_backed_cache -q -x",
+    "status": "fail-as-diagnosed",
+    "exception": "FileNotFoundError",
+    "missing_path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors"
+  },
+  "t051_recovery": {
+    "checkpoint_copy": "pass",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "focused_cone_command": "/usr/bin/time -v python -m pytest --lf -q",
+    "focused_cone_status": "fail",
+    "focused_cone_result": "19 passed, 6 failed in 106.20s; external wall 117.57s",
+    "process_user_seconds": 426.93,
+    "process_system_seconds": 6.39,
+    "maximum_rss_kib": 329732,
+    "remaining_failure_scope": {
+      "missing_ignored_candidate005_artifacts": ["Dockerfile", "generator.py", "primes.py"],
+      "inherited_exp658_lifecycle_cache_assertions": 3
+    },
+    "full_oracle_opened": false,
+    "calibration_opened": false
+  },
+  "stop_rule": "T051 focused inherited cone remained red after the sole authorized checkpoint materialization",
+  "calibration_authorized": false,
+  "t052_terminal_phase_reset": {
+    "worktree": "/mnt/d/Projects/SAIR_mod_challenge_exp655_t048_wt",
+    "branch": "codex/exp651-visit-dilation-formal",
+    "source_commit": "ab48d8b1a36296b42b56f5842e01cecc53f0edf1",
+    "frozen_exp651_hashes": "pass",
+    "four_file_ignored_fixture_inventory": "pass",
+    "focused_six_node_remainder": "completed-with-empty-lastfailed-cache-output-detached-after-wrapper-timeout",
+    "validator_command": "python tools/validate_project.py",
+    "validator_status": "fail",
+    "validator_issues": 10,
+    "validator_failure_scope": "inherited EXP651 run.json and metrics.json schema",
+    "full_project_pytest_opened": false,
+    "calibration_opened": false,
+    "formal_roots_opened": false,
+    "terminal_no_t053": true
+  }
+}

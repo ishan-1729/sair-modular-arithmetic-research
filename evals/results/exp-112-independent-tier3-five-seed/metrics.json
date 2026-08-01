@@ -1,0 +1,41 @@
+{
+  "run_id": "exp-112-independent-tier3-five-seed",
+  "created_at": "2026-07-12T02:26:00Z",
+  "checkpoint_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94",
+  "evaluation": {
+    "transition": {
+      "frozen_exp111_heldout": {
+        "cases": 50000,
+        "correct": 49954,
+        "exact_accuracy": 0.99908,
+        "bit_accuracy": 0.9999175
+      }
+    },
+    "rollout": {
+      "official_generator_five_seed": {
+        "cases": 500,
+        "correct": 499,
+        "exact_accuracy": 0.998,
+        "passing_seeds": 5,
+        "minimum_seed_accuracy": 0.99
+      }
+    }
+  },
+  "controls": {
+    "checked_public_used": false,
+    "checkpoint_frozen": true,
+    "generator_commit_matched": true
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 1.2898895999969682,
+    "parameters": 85556
+  },
+  "decision": "promote-to-submission-integration",
+  "limitations": [
+    "Five independent seeds cannot reproduce the unknowable official private seed.",
+    "This gate evaluated Tier 3 only; full-tier integration evaluation followed separately.",
+    "Checked public Tier-3 answers were not read."
+  ]
+}

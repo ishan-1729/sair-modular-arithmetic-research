@@ -1,0 +1,38 @@
+{
+  "attempt_checkpoint_artifact_inventory": {
+    "all_artifacts_receipt_bound": false,
+    "all_entries_regular_files": true,
+    "artifacts": [],
+    "checkpoint_directory": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp-648-structured-trajectory-consistency/screen/absent-attempt/checkpoints",
+    "directory_present": false,
+    "unsafe_entries": []
+  },
+  "attempt_id": "launch-227cdb630938e509-e4773f9aad2c",
+  "authorization_sha256": "227cdb630938e509795b46e1b72d45db890d38d6d452f13be8625c4804bd18bc",
+  "budgets": null,
+  "cache_receipts": [],
+  "candidate_changed": false,
+  "checked_independent_official_private_opened": false,
+  "completed_evaluation_units": [],
+  "completed_updates": {},
+  "environment_sha256": null,
+  "error": "Run with id=1c7249dd4cbd4816a8cfab9b064cbacb not found",
+  "error_type": "MlflowException",
+  "final_timing": null,
+  "first_quarter": null,
+  "gates_computed": false,
+  "launch_attempt_id": "launch-227cdb630938e509-e4773f9aad2c",
+  "launch_failure_timing": {
+    "aggregate_cpu_seconds": 11.076833403,
+    "peak_rss_bytes": 472993792,
+    "sampled_fresh_at_exception_boundary": true,
+    "wall_seconds": 19.323248807000027
+  },
+  "phase": "authorized-screen",
+  "preserved_checkpoint_bytes": {},
+  "recovery_instructions": "Reuse only complete hash-validated checkpoints/evaluation units under the same committed authorization and binding; otherwise start a new attempt.",
+  "schema_version": "exp648-screen-incomplete-v1",
+  "stage": "authorized-screen",
+  "status": "generic-error",
+  "verified_checkpoints": {}
+}

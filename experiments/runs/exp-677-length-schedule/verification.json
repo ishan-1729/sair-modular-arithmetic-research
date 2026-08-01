@@ -1,0 +1,64 @@
+{
+  "schema_version": "exp677-verification-v1",
+  "status": "terminal-calibration-runner-park",
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_677_length_schedule.py",
+    "passed": 9,
+    "wall_seconds": 8.56,
+    "process_cpu_seconds": 13.81,
+    "peak_rss_kib": 374300
+  },
+  "broader_focused_after_fixture_materialization": {
+    "command": "python -m pytest -q tests/test_exp_676_lla_moving_window.py tests/test_exp_677_length_schedule.py",
+    "passed": 18
+  },
+  "package_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "invocations": 1,
+    "exit_code": 1,
+    "validator": "failed",
+    "pytest": "not-opened-validator-short-circuit",
+    "wall_seconds": 9.52,
+    "process_cpu_seconds": 1.69,
+    "peak_rss_kib": 28524,
+    "console_sha256": "3747df77bdb3e9ead05c49022f4d2cb34611501e3029f8534def6cb037edd9ff",
+    "resource_sha256": "3a3593e767dceea7c3628eb43765e1595b43aa5ad2edd3a60b5978f24e9c2551",
+    "issues": [
+      "Eight knowledge links target files under the absent worktree-local immutable challenge snapshot.",
+      "The validator resolves the empty nested challenge directory to repository commit aca5dceb6f31b93c2a07f5453ec73f5cf79eb145 instead of required challenge commit 82510bba00a1126649bd76dd1a451f14d0b3eb60."
+    ],
+    "ownership": "outside-T074-allowed-files",
+    "repair_attempted": false,
+    "rerun": false
+  },
+  "dynamic_budget": {
+    "profile_sha256": "3e1d1018135484c128b556a9f5e22d6e50afdfd5d539e70020f5421e016cd43a",
+    "lower_eta_wall_seconds": 575.53,
+    "expected_wall_seconds": 776.9655,
+    "soft_guard_wall_seconds": 971.206875,
+    "hard_guard_wall_seconds": 1359.689625,
+    "headroom": 1.35,
+    "fidelity_reduced": false
+  },
+  "t088_recovery": {
+    "authentication": "passed",
+    "focused_reused": "T074: 9 passed",
+    "package_oracle_reused": {
+      "source_task": "T087",
+      "validator": "passed: 214 concepts / 1100 records",
+      "full_pytest": "716 passed",
+      "rerun": false
+    },
+    "calibration_command": "python -m experiments.exp_677_length_schedule.run --config configs/exp_677_length_schedule.yaml --output .scratch/exp-677-length-schedule --mode calibration --root 20261258",
+    "invocations_after_root_open": 1,
+    "exit_code": 1,
+    "failure": "KeyError: window in experiments.exp_676_lla_moving_window.run.Experiment.late_depth_losses",
+    "wall_seconds": 58.83,
+    "user_cpu_seconds": 159.27,
+    "system_cpu_seconds": 8.03,
+    "peak_rss_kib": 2926688,
+    "repair_attempted": false,
+    "retry": false,
+    "formal_and_confirmations_opened": false
+  }
+}

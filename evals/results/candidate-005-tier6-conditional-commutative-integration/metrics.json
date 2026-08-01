@@ -1,0 +1,99 @@
+{
+  "run_id": "candidate-005-tier6-conditional-commutative-integration",
+  "created_at": "2026-07-17T10:35:00Z",
+  "completed_at": "2026-07-17T18:21:50Z",
+  "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+  "evidence_scope": "five-preregistered-tier6-seeds-one-complete-independent-official-generator-set-and-complete-checked-release-regression",
+  "evaluation": {
+    "transition": {
+      "frozen_artifact_load": {"cases": 1, "correct": 1, "exact_accuracy": 1.0}
+    },
+    "rollout": {
+      "independent_official_scored_tiers": {"cases": 1000, "correct": 593, "exact_accuracy": 0.593, "highest_tier_above_90": 6},
+      "checked_public_scored_tiers": {"cases": 1000, "correct": 595, "exact_accuracy": 0.595, "highest_tier_above_90": 6},
+      "tier6_five_seed": {"cases": 500, "correct": 487, "exact_accuracy": 0.974, "minimum_seed_accuracy": 0.95}
+    }
+  },
+  "independent_full": {
+    "cases": 1100,
+    "overall_accuracy": 0.593,
+    "highest_tier_above_90": 6,
+    "tier_accuracy": {"0": 0.39, "1": 1.0, "2": 0.99, "3": 0.97, "4": 0.97, "5": 0.94, "6": 0.98, "7": 0.02, "8": 0.02, "9": 0.02, "10": 0.02},
+    "canonical_path": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/independent-full.json",
+    "canonical_sha256": "0a8014f9c23c1961b2d720c89343fad31e80f805a39b2515adb7908661edb1be"
+  },
+  "checked_full": {
+    "cases": 1100,
+    "overall_accuracy": 0.595,
+    "highest_tier_above_90": 6,
+    "tier_accuracy": {"0": 0.39, "1": 1.0, "2": 0.99, "3": 1.0, "4": 0.98, "5": 0.94, "6": 0.96, "7": 0.02, "8": 0.02, "9": 0.02, "10": 0.02},
+    "canonical_path": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/checked-full.json",
+    "canonical_sha256": "335c29b76dc2e1cf883052a6bfbcaf25dd49a1946c68ff3b696bacbfb81d70d3"
+  },
+  "tier6_five_seed": {
+    "cases": 500,
+    "correct": 487,
+    "aggregate_accuracy": 0.974,
+    "minimum_seed_accuracy": 0.95,
+    "seeds": {
+      "seed1": {"cases": 100, "correct": 98, "exact_accuracy": 0.98, "source": "independent_full"},
+      "seed2": {"cases": 100, "correct": 96, "exact_accuracy": 0.96, "valid_output_rate": 1.0},
+      "seed3": {"cases": 100, "correct": 95, "exact_accuracy": 0.95, "valid_output_rate": 1.0},
+      "seed4": {"cases": 100, "correct": 99, "exact_accuracy": 0.99, "valid_output_rate": 1.0},
+      "seed5": {"cases": 100, "correct": 99, "exact_accuracy": 0.99, "valid_output_rate": 1.0}
+    }
+  },
+  "controls": {
+    "lower_tier_prediction_equivalence": {"cases": 500, "equal": 500, "passed": true},
+    "determinism": {"local_cases": 20, "local_repeats": 2, "official_full": true, "checked_full": true, "passed": true},
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "valid_outputs": true,
+    "randomized_tier6": {"cases": 100, "correct": 2, "exact_accuracy": 0.02, "passed": true},
+    "clean_three_file_artifact": true
+  },
+  "runtime": {
+    "local_gate_wall_seconds": 678.9334947539974,
+    "local_gate_aggregate_cpu_seconds": 2554.601245529,
+    "local_gate_aggregate_cpu_minutes": 42.57668768393333,
+    "local_gate_peak_rss_bytes": 479965184,
+    "isolated_inference_wall_seconds": 156.0,
+    "isolated_container_wall_seconds": 178.407940837,
+    "checked_inference_wall_seconds": 50.950036391000026,
+    "isolated_promotion_ceiling_seconds": 285,
+    "official_timeout_seconds": 300,
+    "fidelity_reduced": false
+  },
+  "artifact": {
+    "manifest_sha256": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
+    "model_sha256": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
+    "weights_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+    "parameters": 470049,
+    "bytes": 1915885
+  },
+  "sandbox": {
+    "canonical_path": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json",
+    "canonical_sha256": "bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa",
+    "image_id": "0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423"
+  },
+  "gates": {
+    "every_tier6_seed": true,
+    "lower_tier_prediction_equivalence": true,
+    "determinism": true,
+    "trained_weight_dependence": true,
+    "static_and_artifact": true,
+    "preprocess_isolation": true,
+    "independent_full": true,
+    "checked_release_regression": true,
+    "isolated_runtime": true,
+    "candidate_promotion_passed": true,
+    "goal_85_percent_passed": false
+  },
+  "decision": "promote-candidate005-intermediate",
+  "limitations": [
+    "Only one complete independent 1100-case seed was warranted because the frozen artifact is structurally zero-fallback above Tier 6 and cannot approach the 85 percent goal on additional full seeds.",
+    "The complete five-seed evidence covers Tier 6, not overall accuracy across five full seeds.",
+    "The legitimate official private benchmark is unavailable.",
+    "Candidate 005 reaches only 59.3 percent independent and 59.5 percent checked overall, far below the binding 85 percent completion threshold."
+  ]
+}

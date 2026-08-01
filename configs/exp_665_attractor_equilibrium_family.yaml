@@ -1,0 +1,110 @@
+run_id: exp-665-attractor-equilibrium-family
+hypothesis: An exact-initialized proposal-conditioned attractor can preserve W128 exact rollout and create a calibrated convergence basin with nonzero W256 transfer.
+mechanism_map: knowledge/autoresearch/research/2026-07-29-exp665-attractor-equilibrium-mechanism.md
+preregistration: experiments/runs/exp-665-attractor-equilibrium-family/preregistration.json
+source_checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+roots:
+  calibration: 20261210
+  viability: 20261211
+  confirmations: [20261212, 20261213]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+dependency:
+  name: torchdeq
+  version: 0.1.0
+  license: MIT
+  source: https://github.com/locuslab/torchdeq
+  visible_latest_commit_date: "2023-10-31"
+  compatibility: cpu-pytorch-2.5.1-deterministic-probe-pass
+model:
+  hidden: 92
+  cycles: 2
+  correction_hidden: 64
+  correction_scale: 0.25
+  fixed_depth: 4
+  solver_max_iterations: 6
+  solver_tolerance: 0.001
+  anderson_history: 4
+  anderson_regularization: 0.0001
+  implicit_backward_iterations: 6
+  implicit_backward_tolerance: 0.0001
+  eqr_damping: 0.05
+  eqr_noise: 0.01
+  eqr_initialization_std: 0.05
+  eqr_training_breadth: 1
+  eqr_inference_breadth: 2
+routes: [proposal_only, fixed_depth_shared, plain_picard_phantom, anderson_phantom, anderson_implicit, eqr_finite]
+trained_routes: [fixed_depth_shared, plain_picard_phantom, anderson_phantom, anderson_implicit, eqr_finite]
+primary_route: anderson_phantom
+data:
+  widths: [64, 128, 256]
+  training_widths: [64, 128, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 66500
+  training_seed_offset: 66600
+  validation_seed_offset: 66700
+  test_seed_offset: 66800
+training:
+  steps_per_trained_route: 400
+  schedule: [64, 128, 256, 128]
+  batch_size: 32
+  learning_rate: 0.00002
+  minimum_learning_rate: 0.000001
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  residual_weight: 0.02
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 25
+calibration:
+  representative_updates_per_trained_route: 2
+  transition_cases_per_width: 8
+  rollout_cases_per_width: 2
+  convergence_cases_w128: 8
+  perturbation_cases_w128: 4
+  candidate_runtime_cases_w128: 8
+evaluation:
+  transition_cases_per_width: 3000
+  rollout_cases_per_width: 300
+  validation_transition_cases_per_width: 1000
+  validation_rollout_cases_per_width: 100
+  convergence_cases_w128: 300
+  perturbation_cases_w128: 100
+  deterministic_repeats: 2
+gates:
+  minimum_w128_primary_rollout: 0.85
+  maximum_w128_loss_to_proposal: 0.02
+  minimum_w128_transition: 0.998
+  maximum_invalid_rollout_rate: 0.0
+  minimum_trained_weight_drop_w128: 0.20
+  maximum_mean_relative_residual: 0.05
+  minimum_residual_correctness_auc: 0.60
+  minimum_perturbation_return_fraction: 0.75
+  minimum_w256_primary_rollout: 0.10
+  minimum_w256_gain_over_proposal: 0.05
+  minimum_w256_gain_over_fixed_depth: 0.05
+  maximum_candidate_inference_wall_seconds: 300
+  require_reload_exact: true
+  require_split_separation: true
+resource_policy:
+  evaluator_processes: 3
+  evaluator_torch_threads_each: 4
+  maximum_peak_rss_bytes: 6442450944
+  maximum_expected_formal_wall_seconds: 21600
+  incumbent_candidate_wall_seconds: 156.0
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_routes: true
+  cache_completed_roots: true
+confirmation:
+  require_both: true
+  reproduce_w128_rollout: 0.85
+  reproduce_w256_rollout: 0.10
+  reproduce_w256_gain: 0.05

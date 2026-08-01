@@ -1,0 +1,83 @@
+{
+  "run_id": "exp-666-gram-posterior-prior-guidance",
+  "status": "completed",
+  "seed": 20261214,
+  "hypothesis": "A target-conditioned variational posterior can teach a target-free single-trajectory high-state prior that preserves W128 behavior and creates nonzero W256 exact rollout.",
+  "decision": "park-before-viability-runtime-headroom-gate",
+  "decision_authority": "T061 root-20261214 corrected complete-route dynamic admission",
+  "config": "configs/exp_666_gram_posterior_prior_guidance.yaml",
+  "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp666-gram-mechanism.md",
+  "metrics": "evals/results/exp-666-gram-posterior-prior-guidance/metrics.json",
+  "preregistration": "experiments/runs/exp-666-gram-posterior-prior-guidance/preregistration.json",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-666-gram-posterior-prior-guidance/metrics.json",
+    "preregistration": "experiments/runs/exp-666-gram-posterior-prior-guidance/preregistration.json",
+    "preserved_scratch_path": ".scratch/exp-666-gram-posterior-prior-guidance"
+  },
+  "roots": {
+    "20261214": "completed-calibration-runtime-headroom-park",
+    "20261215": "unopened-admission-blocked",
+    "20261216": "unopened-admission-blocked",
+    "20261217": "unopened-admission-blocked"
+  },
+  "source": {
+    "base_commit": "e18978edaf6e84197a1ca6bb2ac3d7b03ea319cd",
+    "branch": "codex/exp666-gram-posterior-prior-guidance",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "c53be1192d945358fc0fa31cab4c9d8ffc09fbd686340161de504ebeb24de0f7",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "preregistration_sha256": "8503043eb25a8157eedb75b87127854d47cc28c8be884c241bea9f75aa2bb010",
+    "final_source_hashes": {
+      "config": "1b69b73d200d3e96a77bcd298b6a47f6d0d6065a5374f125a1b111d37d069c69",
+      "mechanism_map": "b9c961e3fcf27842625fc91f0c86a1554ba7fd1016c641c5ed3bbafd760c1bfe",
+      "model": "43cd0449ef6db65fb20e2d439daa6b9874937e042df6cfa923b17a436ed3f52b",
+      "runner": "1f002962d4f47b01d98aa0b176f648af5e83971aaa78e2b9b690b665038ff00c",
+      "tests": "d0f1305c93eed3b81c58b3ed3fe70d48e49dcf1df58ec2675d82aa10bbb94a83"
+    }
+  },
+  "verification": {
+    "focused_final": "24 passed in 11.32s",
+    "validator": "passed: 177 OKF concepts and 1100 benchmark records",
+    "full_pytest": "506 passed in 469.89s",
+    "full_oracle_wall_seconds": 482.07,
+    "full_oracle_user_seconds": 645.87,
+    "full_oracle_system_seconds": 25.79,
+    "full_oracle_peak_rss_kib": 926448,
+    "final_oracle_log_sha256": "f60e2bed04934e6af623fb7e4ad8dc01c8c33921cb0b8fff530e901d06211ce1"
+  },
+  "calibration": {
+    "root": 20261214,
+    "receipt_sha256": "272d38620bd561c30d366254964a17d1d543eb4921d0bf7406212e6163e0c91f",
+    "admitted": false,
+    "decision": "park-resource-compliance-or-feasibility",
+    "failed_check": "candidate_inference",
+    "candidate_projected_wall_seconds": 226.62907599999258,
+    "candidate_headroom_wall_seconds": 423.33480937101393,
+    "candidate_headroom_ceiling_seconds": 285.0,
+    "variability_headroom": 1.8679633559950966,
+    "expected_formal_wall_seconds": 14061.369512323654,
+    "eta_formal_wall_seconds": 26266.122984127225,
+    "hard_guard_wall_seconds": 52533,
+    "expected_process_tree_cpu_seconds": 121355.34908749997,
+    "expected_cgroup_cpu_seconds": 327031.25000000856,
+    "instrumented_wall_seconds": 151.01981618699938,
+    "outer_wall_seconds": 158.40,
+    "observed_process_tree_cpu_seconds": 1242.764593,
+    "observed_cgroup_cpu_seconds": 1318.112000000001,
+    "peak_rss_bytes": 557408256,
+    "aggregate_peak_rss_upper_bound_bytes": 2229633024,
+    "all_other_checks_passed": true
+  },
+  "mlflow": {
+    "calibration_parent_run_id": "45c7d72c94bb4021a731d2210b5f5f8b",
+    "formal_runs": []
+  },
+  "limitations": [
+    "Calibration used two updates, eight transitions, and two rollouts per width per route; its accuracy and variational values are non-scientific diagnostics only.",
+    "The measured 226.63-second nominal candidate projection passed 300 seconds but its 423.33-second calibrated-headroom bound failed the frozen 285-second gate.",
+    "Viability, W128/W256 scientific controls, M022.b breadth, and confirmation roots were never opened, so neither GRAM nor the exact SAIR adaptation receives a scientific accuracy verdict.",
+    "No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

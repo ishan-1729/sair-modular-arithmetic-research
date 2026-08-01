@@ -1,0 +1,78 @@
+{
+  "schema_version": "exp655-t049-portability-receipt-v1",
+  "created_at": "2026-07-22T12:46:35Z",
+  "status": "complete-hermetic-materialization-and-green-unchanged-byte-full-oracle-awaiting-clean-push",
+  "source_workspace": "/mnt/d/Projects/SAIR_mod_challenge",
+  "destination_worktree": "/mnt/d/Projects/SAIR_mod_challenge_exp655_t048_wt",
+  "source_identity": {
+    "source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+    "source_tree": "aa0e6e4b6a411800b9765fe7eb7365980af9f520",
+    "T048_terminal_commit": "ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575",
+    "config_sha256": "de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842",
+    "init_sha256": "4102850fae7486e43fbdfb0b02c8e8a8c8fe4190051317cc91bc04a21aceb2a3",
+    "fixtures_sha256": "4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba",
+    "model_sha256": "14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af",
+    "runner_sha256": "d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6",
+    "EXP655_test_sha256": "2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1",
+    "EXP658_test_sha256": "38de8ed93369891bef103d492ffcb14dc55f080c17289a8d772b116ffef711fc",
+    "EXP658_calibration_sha256": "11ea65bb23d8492aecd5985f3ddb077f9b68150f7f9bcbcc39c639c3ee9703d4",
+    "EXP658_pointer_amendment_sha256": "a9ca5f1f204336f4ebe80f913c709f3529ae566a870437532b377440b6b65bdb",
+    "tracked_source_config_test_changed": false
+  },
+  "T048_archive": {
+    "path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park",
+    "manifest_sha256": "cee6bd60b7cea1befb3e4ab271edf2d8a29a6bdad648da8745ddfe1ab6e4ac7a",
+    "record_count": 7,
+    "total_bytes": 19605,
+    "byte_identical": true,
+    "historical_result_rewritten": false
+  },
+  "materialization": {
+    "recipe": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/materialize-historical-evidence.sh",
+    "recipe_sha256": "f09988bbab74b019ca5be074728a2e65b443f8ee56ab51ebda1021f1483ce176",
+    "manifest": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/portability-manifest.json",
+    "manifest_sha256": "203b2429d6ee442f8dca49067dffc8905cbcaaf5ddfdb17f2dfa2eac54dabd46",
+    "file_count": 264,
+    "total_bytes": 26672030,
+    "canonical_inventory_sha256": "b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b",
+    "first_execution": {"copied_files": 264, "reused_files": 0},
+    "idempotence_execution": {"copied_files": 0, "reused_files": 264},
+    "regular_files": true,
+    "source_destination_inode_distinct": true,
+    "hardlink_count_one": true,
+    "symlinks": false,
+    "reflink_disabled": true,
+    "source_and_destination_confinement_verified": true,
+    "tracked_manifest_file_count_and_bytes_verified": true,
+    "per_file_sha256_verified": true,
+    "unrelated_309_MB_copied": false
+  },
+  "science_boundary": {
+    "calibration_root": 20261178,
+    "calibration_root_opened": false,
+    "formal_roots": [20261179, 20261180, 20261181],
+    "formal_roots_opened": [],
+    "training_executed": false,
+    "evaluation_labels_read": false,
+    "checkpoints_created": 0,
+    "mlflow_run_id": null,
+    "scientific_metrics": null,
+    "candidate_or_benchmark_changed": false
+  },
+  "publication_commit_binding": "The containing clean pushed recovery commit is the authoritative Git identity; no circular self-hash is embedded in this receipt.",
+  "full_oracle": {
+    "path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/oracle.json",
+    "sha256": "4386527ceb4a59680dd150b4b0379f45f5b3c8ec4d69becce15398138b03daff",
+    "passed": 391,
+    "failed": 0,
+    "total": 391
+  },
+  "full_oracle_authorized": true,
+  "full_oracle_executed": true,
+  "calibration_authorized_after_clean_pushed_recovery_commit": true,
+  "calibration_authorized": false,
+  "limitations": [
+    "This receipt establishes portable local prerequisites only; it is not a green full-oracle, calibration, admission, or scientific result.",
+    "Root-20261160 materialization includes only the two frozen caches and their two referenced seal/unit pairs, not unrelated readiness artifacts."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "run_id": "exp-672-lt2-gated-hybrid-mixer",
+  "created_at": "2026-07-29T02:00:00Z",
+  "checkpoint_sha256": "309070de92a54315f0a3fe0f6fc2afee982b8d2cf99375079c11a5773a697ed1",
+  "status": "parked-calibration-runtime-headroom",
+  "decision": "park-resource-compliance-or-feasibility",
+  "root": 20261238,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Formal scientific evaluation was not performed because the guarded candidate-runtime admission conjunct failed after calibration.",
+    "labels_or_oracle_present": false
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {
+    "complete_routes": true,
+    "deterministic": true,
+    "checkpoint_reload_exact": true,
+    "split_separation": true,
+    "fixed_target_free_routes": true,
+    "formal_controls_opened": false
+  },
+  "resource_admission": {
+    "admitted": false,
+    "failed_check": "candidate_inference_guarded_headroom",
+    "wall_seconds": 239.64869616600026,
+    "process_tree_cpu_seconds": 929.166189,
+    "cgroup_cpu_seconds": 995.8400000000001,
+    "peak_rss_bytes": 660582400,
+    "expected_formal_wall_seconds": 16386.73782497558,
+    "maximum_expected_formal_wall_seconds": 21600,
+    "eta_wall_seconds": 32773.47564995116,
+    "soft_guard_wall_seconds": 40967,
+    "hard_guard_wall_seconds": 65547,
+    "variability_headroom": 2.0,
+    "candidate_nominal_wall_seconds": 183.08425380001245,
+    "candidate_guarded_wall_seconds": 366.1685076000249,
+    "candidate_guarded_ceiling_seconds": 285,
+    "raw_payload_admitted_nominal_only": true
+  },
+  "unopened_surfaces": [
+    "root 20261239 complete W128 viability",
+    "conditional W256 controls",
+    "roots 20261240 and 20261241 confirmations"
+  ],
+  "limitations": [
+    "Calibration-only route and resource evidence; formal scientific labels remained unopened.",
+    "The raw runner admission flag uses nominal runtime, while the binding T068 decision uses guarded runtime."
+  ]
+}

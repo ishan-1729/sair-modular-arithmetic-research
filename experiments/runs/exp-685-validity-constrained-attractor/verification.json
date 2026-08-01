@@ -1,0 +1,44 @@
+{
+  "schema_version": "exp685-verification-v1",
+  "status": "terminal-package-verification-park",
+  "authentication": {
+    "checkpoint": "passed",
+    "frozen_exp665_source": "passed",
+    "torchdeq_0_1_0": "passed",
+    "challenge_82510bba": "passed"
+  },
+  "rootless_smoke": {
+    "status": "passed",
+    "sha256": "926cbc1b0754201ac218e60fb4cb9de7a01081cfc23e5d130f8af0894445e5bf",
+    "evidence": "Three real one-update trained arms, five save/reloads, five one-case transition/rollout evaluations, admission math, and three terminal-mode serializations."
+  },
+  "focused": {
+    "command": "python -m pytest -q tests/test_exp_685_validity_constrained_attractor.py",
+    "passed": 10,
+    "wall_seconds": 19.93,
+    "outer_wall_seconds": 20.51,
+    "user_cpu_seconds": 50.56,
+    "system_cpu_seconds": 1.32,
+    "peak_rss_kib": 449192
+  },
+  "package_oracle": {
+    "command": "python tools/validate_project.py && python -m pytest",
+    "invocations": 1,
+    "exit_code": 1,
+    "validator": "failed-seven-owned-canonical-record-schema-omissions",
+    "pytest": "unopened-validator-short-circuit",
+    "wall_seconds": 10.05,
+    "user_cpu_seconds": 0.96,
+    "system_cpu_seconds": 0.66,
+    "peak_rss_kib": 29440,
+    "console_sha256": "0a47675f072d904e9462c5486037580053c668d7687c466759944120931f4933",
+    "resource_sha256": "a999b62be6a770f24a5e79f17856cfcfd499f3dcff1372b54179aca52e759d23",
+    "issues": [
+      "metrics record missing created_at and controls",
+      "metrics evaluation was null rather than an explicit not-performed record",
+      "run record missing hypothesis, seed, source and artifacts"
+    ],
+    "bounded_diagnosis": "All seven failures are owned persistence-schema omissions; executable loss, runner and focused semantics were not implicated.",
+    "rerun": false
+  }
+}

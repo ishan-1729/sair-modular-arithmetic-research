@@ -1,0 +1,20 @@
+{
+  "schema_version": "exp681-metrics-v1",
+  "run_id": "exp-681-abbie-recurrence",
+  "created_at": "2026-07-30T06:00:00+05:30",
+  "status": "permanent-focused-verification-park",
+  "decision": "permanent-park-focused-topology-schema-failure",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "focused_tests_passed": 9,
+  "full_pytest_passed": null,
+  "calibration_opened": false,
+  "formal_opened": false,
+  "training_updates": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "evaluation": {"not_performed": true, "reason": "The focused package gate failed before the full suite or any root could open.", "labels_or_oracle_present": false},
+  "controls": {"abbie_c": "unopened", "abbie_d": "unopened", "untied_body": "unopened", "randomized_body": "unopened", "frozen_source": "unopened", "state_and_weight_interventions": "unopened"},
+  "calibration": null,
+  "roots": {"20261274": "unopened-permanent-verification-park", "20261275": "unopened-permanent-verification-park", "20261276": "unopened-permanent-verification-park", "20261277": "unopened-permanent-verification-park"},
+  "limitations": ["Focused result is 9 passed and 1 failed in 4.18 wall / 9.83 process CPU seconds with 251,992 KiB peak RSS.", "The failure is an exact test/model parameter-name mismatch; no training or scientific evaluation occurred."]
+}

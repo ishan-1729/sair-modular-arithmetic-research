@@ -1,0 +1,61 @@
+{
+  "run_id": "exp-636-independent-cellular-tier5-bootstrap",
+  "status": "completed",
+  "created_at": "2026-07-17T05:47:08Z",
+  "hypothesis": "The EXP-635 independent width-16 cellular learner can traverse a matched progressive curriculum to width 64 while preserving exploitable error diversity.",
+  "seed": 20260832,
+  "source": {
+    "repository_commit": "a430e4bad729d3bb7bc6c6bdb2994281bbaab70a",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "8322f3e2f129d6eedeb0d3184e6cc965564081bfb3eb10871b1decd1b98581e2",
+    "runner_sha256": "c1bad50312a6c04df96e2af1266294ef3a997b593d50a9595382c8f2f855fd41",
+    "dataset_sha256": "9fe66be6129852a458896457b7cd4727a60337a300a30e5993b1811bf7f1c94d",
+    "source_checkpoint_sha256": "3cce3160c405c68fd71223ed31a6a9be0995a7162de9e23d231c8b55e0e22dc4",
+    "incumbent_checkpoint_sha256": "050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7"
+  },
+  "config": "configs/exp_636_independent_cellular_tier5_bootstrap.yaml",
+  "environment": "experiments/runs/exp-636-independent-cellular-tier5-bootstrap/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "7c0e4e0d4c984f758f7cfe2370726a0a"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-636-independent-cellular-tier5-bootstrap/stage-4-recovery/weights.safetensors",
+    "checkpoint_sha256": "fac8de3b124b13abb3111acb06457c42452d37d94116e3d55114be96ee01bf93",
+    "checkpoint_bytes": 400584,
+    "metrics": "evals/results/exp-636-independent-cellular-tier5-bootstrap/metrics.json",
+    "scratch_summary": ".scratch/exp-636-independent-cellular-tier5-bootstrap/summary.json",
+    "scratch_summary_sha256": "ae2baaeb87b2ee1ca1664d3ea84a591517fb97a73a0a4dcf3cfa33b8557f1c15",
+    "paired_evidence": ".scratch/exp-636-independent-cellular-tier5-bootstrap/paired-evidence.json",
+    "paired_evidence_sha256": "b7e804ed5835118a5051c017be65ff39d7e6574e84dd915c88cb1f5eeab796a4",
+    "console_log": ".scratch/exp-636-independent-cellular-tier5-bootstrap/formal-console.log",
+    "console_log_sha256": "286ad336c979826215fb215bd3d3eebc842166de39f0c771e9928ff280f88cce"
+  },
+  "controls": {"total_updates": 3200, "all_updates_completed": true, "full_evaluation_completed": true, "trained_dependence_passed": true, "determinism_passed": true, "all_gates_passed": false},
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 5153,
+    "expected_total_aggregate_cpu_minutes": 323,
+    "soft_budget_wall_seconds": 6960,
+    "hard_runaway_ceiling_wall_seconds": 10320,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 688,
+    "final_resume_runner_wall_seconds": 1521.063835377001,
+    "final_resume_aggregate_cpu_seconds": 5693.97245366,
+    "final_resume_external_wall_seconds": 1453.75,
+    "final_resume_external_user_cpu_seconds": 5595.54,
+    "final_resume_external_system_cpu_seconds": 114.26,
+    "reconstructed_cumulative_active_wall_seconds": 3145.3497209469897,
+    "reconstructed_cumulative_aggregate_cpu_seconds": 12046.892114754632,
+    "reconstructed_cumulative_aggregate_cpu_minutes": 200.78153524591053,
+    "known_exact_cumulative_wall_lower_bound_seconds": 3044.885131853989,
+    "known_exact_cumulative_cpu_lower_bound_seconds": 8247.110845979001,
+    "reconstruction_note": "Two external orchestration wrappers ended after exact partial checkpoints. Missing width-wide and Tier-5 segment CPU was reconstructed from measured same-stage CPU/wall ratios; observed wall segments and the final detached invocation are exact and all scientific work is hash-preserved.",
+    "fidelity_reduced": false,
+    "valid_stage_caches_reused": true
+  },
+  "decision": "reject-independent-cellular-tier5-bootstrap",
+  "notes": [
+    "The independent model scores 68.833 percent width-64 rollout and 99.367 percent width-64 transition.",
+    "Target-free routing scores 95.0 percent versus the 94.0 percent incumbent; oracle union is 96.0 percent.",
+    "Width-32 retention, transition, rollout, oracle gain, routed gain, validity, and paired-runtime gates fail.",
+    "Close this exact 3,200-update bootstrap schedule; do not advance this checkpoint to Tier 6."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "run_id": "exp-105-width-transfer-smoke",
+  "status": "completed",
+  "created_at": "2026-07-11T20:27:00Z",
+  "hypothesis": "Learned width-9 transition features accelerate width-16 learning relative to matched random initialization.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "70106c8c906c4c9a8f049924ebc1f8e7dd91808c6a8301b7ce7e953f9d2b7e05",
+    "config_sha256": "9adfd1508188951744e949257aa534316e8ec740d2ea4e21583997d598c8fb59",
+    "transfer_checkpoint_sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192"
+  },
+  "config": "configs/exp_105_width_transfer_smoke.yaml",
+  "environment": "experiments/runs/exp-105-width-transfer-smoke/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "parent_run_id": "081f07e1684d469ca4d8ba3cafc46784",
+    "arm_run_id": "8657b531685944f39d63ae15a8ea46bb",
+    "baseline_run_id": "f065353fb10f435da8867936d8327cf4"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-105-width-transfer-smoke/width16-transfer/weights.safetensors",
+    "checkpoint_sha256": "0bf544d958a82ace1b35eda9701389efa6b5f1246b3cbe15672da6c088954974",
+    "metrics": "evals/results/exp-105-width-transfer-smoke/metrics.json",
+    "raw_summary": "experiments/runs/exp-105-width-transfer-smoke/raw-summary.json",
+    "arm_metrics": "experiments/runs/exp-105-width-transfer-smoke/width16-transfer-metrics.json"
+  },
+  "decision": "pass-continue-matched-1200",
+  "notes": [
+    "Transfer copied 66 same-shape trained tensors and five LSB-aligned overlap blocks.",
+    "The exact EXP-100 random-initialized width-16 arm is the deterministic matched control.",
+    "All preregistered smoke gates passed; this authorizes only the matched 1,200-step comparison.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

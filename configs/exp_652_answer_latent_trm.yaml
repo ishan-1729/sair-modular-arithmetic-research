@@ -1,0 +1,78 @@
+run_id: exp-652-answer-latent-trm
+hypothesis: A bounded-faithful answer-y plus latent-z TRM learns strong width-16 exact modular multiplication and transfers materially better to widths 24 and 32 than matched decoded-cellular and no-latent controls.
+preregistration: knowledge/autoresearch/ablations/exp-652-answer-latent-trm.md
+mechanism_map: knowledge/autoresearch/research/2026-07-27-exp652-trm-mechanism.md
+roots:
+  calibration: 20261190
+  viability: 20261191
+  confirmations: [20261192, 20261193]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+model:
+  hidden: 24
+  latent_updates: 6
+  outer_recursions: 3
+  supervision_steps: 2
+  ema_decay: 0.999
+data:
+  train_width: 16
+  evaluation_widths: [16, 24, 32]
+  prime_bit_span: 4
+  train_prime_identities: 64
+  test_prime_identities: 32
+  split_seed_offset: 65200
+  train_pair_seed_offset: 65300
+  evaluation_pair_seed_offset: 65400
+training:
+  steps_per_arm: 300
+  batch_size: 32
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  q_loss_weight: 0.20
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 50
+calibration:
+  representative_updates_per_route: 2
+  route_classes:
+    - answer_latent_trm
+    - decoded_cellular_control
+    - no_latent_control
+    - no_deep_supervision
+    - no_q_loss
+    - no_ema
+evaluation:
+  cases_per_width: 96
+  batch_size: 32
+  fixed_depths: [1, 2, 3, 4]
+  q_halt_threshold: 0.5
+  interventions:
+    - reset_y
+    - reset_z
+    - swap_y_z
+    - randomize_y
+    - randomize_z
+gates:
+  minimum_primary_w16_exact_accuracy: 0.80
+  minimum_primary_w24_exact_accuracy: 0.05
+  minimum_primary_w32_exact_accuracy: 0.05
+  minimum_transfer_gain_over_each_control: 0.02
+  minimum_trained_gain_over_randomized_w16: 0.20
+  minimum_latent_causal_drop_w16: 0.10
+  maximum_invalid_rate: 0.0
+  maximum_parameter_ratio: 1.01
+  require_raw_reload_exact: true
+  require_ema_reload_exact: true
+confirmation:
+  require_both_roots_viability: true
+  component_controls: [no_deep_supervision, no_q_loss, no_ema]
+  minimum_component_causal_drop_w16: 0.02
+resource_policy:
+  admission_maximum_peak_rss_bytes: 6442450944
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_route_classes: true
+  cache_completed_roots: true

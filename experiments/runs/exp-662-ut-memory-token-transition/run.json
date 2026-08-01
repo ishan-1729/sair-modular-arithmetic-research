@@ -1,0 +1,30 @@
+{
+  "run_id": "exp-662-ut-memory-token-transition",
+  "status": "failed",
+  "hypothesis": "Direct sample-independent Universal-Transformer memory tokens improve exact decoded-transition autonomous width transfer over memory-zero and matched controls.",
+  "seed": 20261199,
+  "source": {
+    "repository_commit": "e6e885a226a26e3c89f132088ed02ac823e33f47",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "branch": "codex/exp662-ut-memory-token-transition",
+    "source_base_commit": "e6e885a226a26e3c89f132088ed02ac823e33f47"
+  },
+  "config": "configs/exp_662_ut_memory_token_transition.yaml",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-650-library-backed-mamba/worktree/.scratch/exp-662-ut-memory-token-transition/formal/root-20261199/memory_0/model.safetensors",
+    "checkpoint_sha256": "70a6670d0fa954f2c9f84345b0b6005bbe2ee0eb73035e8d35f30b9f2a4941ad",
+    "metrics": "evals/results/exp-662-ut-memory-token-transition/metrics.json",
+    "preregistration": "experiments/runs/exp-662-ut-memory-token-transition/preregistration.json",
+    "preserved_source_worktree_path": ".scratch/exp-650-library-backed-mamba/worktree/.scratch/exp-662-ut-memory-token-transition"
+  },
+  "decision": "park-unverified-diagnostic-zero-floor",
+  "decision_authority": "T057-package-verification-stop-rule; root-20261199 is diagnostic-only",
+  "roots": {"calibration_20261198": "completed-admitted-diagnostic", "viability_20261199": "completed-diagnostic-zero-floor", "confirmation_20261200": "unopened-verification-gate-blocked", "confirmation_20261201": "unopened-verification-gate-blocked"},
+  "calibration": {"complete_routes": true, "projected_wall_seconds": 106.24938941377968, "variability_ratio": 2.728679399548155, "headroom": 2.0, "soft_guard_wall_seconds": 266, "hard_guard_wall_seconds": 425, "peak_rss_bytes": 483131392, "admitted": true},
+  "formal": {"selected_route": "memory_0", "selected_checkpoint_sha256": "70a6670d0fa954f2c9f84345b0b6005bbe2ee0eb73035e8d35f30b9f2a4941ad", "parameter_count_each": 9818, "updates_each": 300, "examples_each": 9600, "block_calls_each": 57600, "wall_seconds": 122.51121326700013, "process_cpu_seconds": 486.343652, "cgroup_cpu_seconds": 628.4319999999998, "peak_rss_bytes": 504414208, "mlflow_run_id": "1be3cfe3880347df8e4fc4377cff99c7"},
+  "environment": {"python": "3.12.3", "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39", "torch": "2.5.1+cpu", "mlflow": "3.14.0", "logical_cores": 22},
+  "verification": {"focused_initial": "10 passed", "project_validator": "passed: 170 concepts, 1100 benchmark records", "single_full_oracle": "429 passed, 7 errors from owned generic-model module cache contamination", "bounded_isolation_repair": "focused plus affected submission loader 18 passed; no second full oracle"},
+  "gate": {"overall_passed": false, "passed_checks": ["checkpoint_reload", "matched_examples_updates_calls", "parameter_match", "valid_residues", "validation_test_separation"], "failed_checks": ["selected_w16", "selected_w24", "selected_w32", "transfer_gain_each_control", "trained_weight_dependence", "memory_causality", "representation_causality"]},
+  "limitations": ["The zero-exact root is diagnostic and non-promotable because the sole full-project oracle was red on seven owned loader errors and final repaired bytes were never verified by a full oracle.", "This park does not reject the bounded SAIR transition adaptation, source paper, or larger-scale UT memory-token training.", "Every exact rollout score is zero, so causal-ablation equality is floor-limited.", "The selected memory count is zero by the frozen tie-break because all validation exact scores are zero.", "Confirmations were not authorized after the viability and verification failures.", "No checked, independent, official/private, candidate, submission, promotion, or completion evidence was opened."]
+}

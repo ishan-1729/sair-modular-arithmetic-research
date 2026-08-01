@@ -1,0 +1,55 @@
+{
+  "run_id": "exp-685-validity-constrained-attractor",
+  "status": "failed",
+  "seed": 685000,
+  "hypothesis": "A training-only lexicographic residue-validity constraint can remove EXP665's sole W128 invalid rollout without changing its formal Anderson/phantom inference.",
+  "decision": "park-exp685-at-package-verification",
+  "decision_authority": "T089-single-package-oracle-stop-rule",
+  "config": "configs/exp_685_validity_constrained_attractor.yaml",
+  "preregistration": "experiments/runs/exp-685-validity-constrained-attractor/preregistration.json",
+  "mechanism_map": "knowledge/autoresearch/research/2026-07-30-exp685-validity-constrained-attractor.md",
+  "metrics": "evals/results/exp-685-validity-constrained-attractor/metrics.json",
+  "verification": "experiments/runs/exp-685-validity-constrained-attractor/verification.json",
+  "source": {
+    "base_commit": "0c3b12685e9430058dabf88aeb903523dc00c0b3",
+    "branch": "codex/exp685-validity-constrained-attractor",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4",
+    "config_sha256": "7b9cb8996bd93dad6dcb4a1570e46066cf721aa6487edff27338fcb223bcff96",
+    "model_sha256": "30459d4a242ada69a0663d59bf819d2b4984b45f94e1242d8b3982d462d0a3e1",
+    "runner_sha256": "8ffce2913a2790bca7074a6c08c5d3f24d3ea4fed14929fc5a9d9e7a02298f4e",
+    "test_sha256": "07c4d862f554a8aaf676235e37626161d8fd53651a6095724cbf9bf40db9f1d6",
+    "preregistration_sha256": "4e995b4c6f7a24fa510c412c03d7c12598c29b7be5670c02be77833aa5e2f8b1"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-685-validity-constrained-attractor/fixtures/exp665-anderson-phantom.safetensors",
+    "smoke": ".scratch/exp-685-validity-constrained-attractor/smoke.json",
+    "metrics": "evals/results/exp-685-validity-constrained-attractor/metrics.json",
+    "verification": "experiments/runs/exp-685-validity-constrained-attractor/verification.json"
+  },
+  "roots": {
+    "20261290": "unopened-package-oracle-blocked",
+    "20261291": "unopened-package-oracle-blocked",
+    "20261292": "unopened-package-oracle-blocked",
+    "20261293": "unopened-package-oracle-blocked"
+  },
+  "rootless_smoke": {
+    "status": "completed",
+    "trained_updates": 3,
+    "all_five_arms": true,
+    "transition_and_rollout_cases_per_arm": 1,
+    "reload_exact": true,
+    "admission_math": true,
+    "all_mode_serialization": true,
+    "sha256": "926cbc1b0754201ac218e60fb4cb9de7a01081cfc23e5d130f8af0894445e5bf"
+  },
+  "training_updates": 0,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "The real rootless smoke and 10 focused checks passed, but the sole package oracle stopped in validation on seven owned canonical-record schema omissions before full pytest opened.",
+    "The single-oracle stop rule prohibits a second package oracle; all roots and scientific denominators remain unopened.",
+    "This verification park is not evidence for or against the validity constraint or EXP665 continuation hypothesis.",
+    "No checked, independent, official/private, candidate, submission, promotion or completion surface was opened."
+  ]
+}

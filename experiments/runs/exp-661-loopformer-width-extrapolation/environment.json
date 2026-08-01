@@ -1,0 +1,15 @@
+{
+  "environment": "T054 authenticated Ubuntu-24.04 WSL2 hermetic worktree",
+  "fixture_manifest": {
+    "entries_tsv_sha256": "d3f7eea82456c0c4f5c967d54cc6e2afa0142eb9dd41e9e1afefabbe9ba0c969",
+    "file_count": 268,
+    "manifest_sha256": "cd57ff0bb21c616bf91bb0245ca854fa71968b3e43754c24065548394ec3552d",
+    "total_bytes": 27086830
+  },
+  "mlflow": "3.14.0",
+  "numpy": "2.5.1",
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "torch_interop_threads": 1,
+  "torch_threads": 4
+}

@@ -1,0 +1,26 @@
+run_id: candidate-003-tier4-cellular-hybrid
+submission:
+  directory: submission
+  model_sha256: d909fdd03a9ea897cc9fae0bef79eb2007a2cd39c98571de887f3e0858fb6b89
+  manifest_sha256: 503efdc37a8460d298af72be7f7911554a40358712f9c4659c9f1ba0025a2804
+  weights_sha256: a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514
+  parameters: 270401
+sources:
+  tier2_tier3_weights_sha256: 69a53615904386bfeb6d07c0ab79c612297e7c18a706ca2058545b0cc2271157
+  tier4_checkpoint_sha256: a07bcfc9b7f990a7a5b62001fb40ab4533c4776d9317099808bd60f56b0be241
+evaluation:
+  independent_seed_hex: a791075e4357a6bc629b8753d1e1b05fcc9003c3038c72d9becca9cc5e4d41c2
+  total_cases: 1100
+  timeout_seconds: 300
+gates:
+  minimum_overall_accuracy: 0.40
+  minimum_tier1_accuracy: 0.99
+  minimum_tier2_accuracy: 0.95
+  minimum_tier3_accuracy: 0.95
+  minimum_tier4_accuracy: 0.90
+  minimum_highest_tier_above_90: 4
+  maximum_inference_seconds: 240
+  require_static_clean: true
+  require_determinism: true
+  require_weight_dependence: true
+  require_official_sandbox: true

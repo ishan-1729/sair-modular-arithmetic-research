@@ -1,0 +1,55 @@
+{
+  "run_id": "exp-650-library-backed-mamba",
+  "root": 20261186,
+  "mode": "calibration",
+  "status": "failed",
+  "decision": "park-resource-calibration-oom",
+  "preregistration_sha256": "e7116ef343725585fb39065ae71ba9b1078af2b09671659069aa718bd397986f",
+  "failure": {
+    "kind": "linux-global-oom-kill",
+    "phase": "mamba2_hybrid-training-after-initial-checkpoint-before-first-complete-arm",
+    "python_traceback_present": false,
+    "kernel_evidence": "oom-kill constraint=CONSTRAINT_NONE global_oom task=python pid=46761; anon-rss=7400644kB file-rss=1408kB shmem-rss=0kB total-vm=13886320kB",
+    "outer_wall_seconds": 34.3
+  },
+  "resources": {
+    "wsl_mem_total_kib": 7928476,
+    "wsl_swap_total_kib": 2097152,
+    "oom_anon_rss_kib": 7400644,
+    "oom_file_rss_kib": 1408,
+    "oom_total_vm_kib": 13886320,
+    "process_cpu_seconds": null,
+    "cgroup_cpu_seconds": null,
+    "variability": null,
+    "expected_soft_hard_guards": null,
+    "eta": null
+  },
+  "partial_artifacts": {
+    "mamba2_hybrid_initial_checkpoint": {
+      "path": "experiments/runs/exp-650-library-backed-mamba/roots/20261186/mamba2_hybrid/initial.safetensors",
+      "bytes": 97108,
+      "sha256": "7612bafd55a6c00aec8ed7ba19f1ec38856d1f8c3858a907e2237f38adb57113"
+    }
+  },
+  "mlflow": {
+    "run_id": "b7f9d448b79b4467989b2e0ecbb0f357",
+    "terminal_status": "KILLED",
+    "end_time_unix_ms": 1785172975597
+  },
+  "admission": {
+    "admitted": false,
+    "reason": "The full-fidelity representative route exhausted the available WSL memory before a complete arm, so no valid throughput projection or expected-value admission could be produced.",
+    "retry_authorized": false,
+    "fidelity_reduction_authorized": false
+  },
+  "scientific_roots": {
+    "20261187": "unopened",
+    "20261188": "unopened",
+    "20261189": "unopened"
+  },
+  "limitations": [
+    "Calibration failed before a complete arm, so transition, rollout, control, intervention, variability, ETA, and projected guard metrics are unavailable rather than zero.",
+    "The partial initial checkpoint contains untrained initialization only and is not scientific evidence.",
+    "This resource park does not test or reject the Mamba-2 scientific hypothesis."
+  ]
+}

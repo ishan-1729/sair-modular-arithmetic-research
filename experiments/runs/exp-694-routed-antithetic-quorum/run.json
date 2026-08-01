@@ -1,0 +1,111 @@
+{
+  "schema_version": "exp694-terminal-v1",
+  "run_id": "exp-694-routed-antithetic-quorum",
+  "status": "failed",
+  "decision": "park-exp694-after-consumed-calibration-root-lifecycle-defect",
+  "decision_authority": "T100-frozen-root-lifecycle-stop-rule",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-08-01T20:42:50+05:30",
+  "seed": 20261350,
+  "hypothesis": "A learned survival-Q router with sparse three-way antithetic proposal quorum improves exact rollout over target-independent random routing at identical quota and work.",
+  "config": "configs/exp_694_routed_antithetic_quorum.yaml",
+  "source": {
+    "repository_commit": "eca3edaba5bb9d12d942ec574989cc6eeaf97ab2",
+    "repository_base_commit": "eca3edaba5bb9d12d942ec574989cc6eeaf97ab2",
+    "branch": "codex/exp694-c5-antithetic-quorum",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "config_sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59",
+    "runner_sha256": "6309cba7cda57ebc1849b94d58cdcbd85fb6f620581a10bb6b8903bc6cb92f66",
+    "test_sha256": "72c1728b36498c8a9ed7dcc19167d6c717618318c70ff318c8585dc6024e0820",
+    "channel_map_sha256": "92d315073b9d92fa02bad609a7a5b1c10f9e6943d597543389062e5602b48cc0",
+    "pruned_state_sha256": "f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340"
+  },
+  "environment": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.5.1+cpu",
+    "mlflow": "3.14.0",
+    "numpy": "2.5.1",
+    "pyyaml": "6.0.3",
+    "configured_torch_threads": 4,
+    "configured_interop_threads": 1,
+    "precision": "CPU FP32 deterministic algorithms"
+  },
+  "roots": {
+    "20261350": "opened-consumed-calibration-lifecycle-failure-before-evaluation-or-cold-route",
+    "20261351": "unopened-calibration-gate-unavailable",
+    "20261352": "unopened-formal-gate-unavailable",
+    "20261353": "unopened-formal-gate-unavailable",
+    "20261354": "unopened-confirmation-gate-unavailable",
+    "20261355": "unopened-confirmation-gate-unavailable",
+    "20261356": "unopened-confirmation-gate-unavailable",
+    "20261357": "unopened-confirmation-gate-unavailable",
+    "20261358": "unopened-confirmation-gate-unavailable"
+  },
+  "verification": {
+    "fixture_preflight": "git-lfs-fsck-green-hydrated-checkpoints-and-clean-challenge-82510bba",
+    "focused_attempt_1": "34-passed-3-failed",
+    "focused_attempt_2": "36-passed-1-failed",
+    "focused_final": "37-passed-in-11.64s",
+    "smoke": "passed-all-modes-in-36.3s",
+    "smoke_sha256": "b9e4190d790a9b46ffe0467400c262bce2dffca66b50cb43561dee309e7924cb",
+    "package_oracle_invocations": 1,
+    "validator": "passed-228-concepts-1100-records",
+    "pytest": "949-passed-in-459.94s",
+    "oracle_wall_seconds": 502.49,
+    "oracle_process_cpu_seconds": 790.85,
+    "oracle_peak_rss_kib": 938452
+  },
+  "calibration": {
+    "root_opened_sha256": "9e7248ea474e3b14b13b8dec0a63de2afe34b7fbc6806335f45adede132919c5",
+    "progress_sha256": "4b1f30e1c0b8d28f7a9b656d625b2a5f548f8e3a9dfaf5ffd58506381641c7b4",
+    "failure": "AttributeError: ArmView has no attribute width",
+    "failure_phase": "first W128 transition evaluator call after both matched four-update arms and checkpoint reloads",
+    "process_exit_status": 1,
+    "failure_wall_seconds": 13.37,
+    "failure_user_cpu_seconds": 35.05,
+    "failure_system_cpu_seconds": 1.61,
+    "failure_peak_rss_kib": 1147148,
+    "resource_admission_performed": false,
+    "cold_complete_routes": 0,
+    "accuracy_denominators_opened": false
+  },
+  "training_updates": {
+    "primary": 4,
+    "random_routing_control": 4,
+    "scope": "calibration-only-non-scientific",
+    "identical_initial_state_sha256": "2bf6a240e9de72938b67cde9e7ab5ec23fc0fc797719352b92d6ea4dbf29cd83",
+    "parameters_per_arm": 54551,
+    "student_calls_per_arm": 32,
+    "teacher_calls_per_arm": 32,
+    "eligible_examples_per_arm": 512,
+    "routed_examples_per_arm": 128,
+    "proposal_calls_per_arm": 768,
+    "exact_loss_calls_per_arm": 32
+  },
+  "checkpoints": {
+    "primary": {"sha256": "d503b74438f5a318b28519ca9648a77dcda496ad3f63e7cb9d4fdd6087d878a7", "bytes": 220452, "reload_exact": true},
+    "random_routing_control": {"sha256": "0901fc58899f017e1693f9a381fcebf385860f73d4d1959d74c63d147962c784", "bytes": 220452, "reload_exact": true}
+  },
+  "resource_admission": null,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "causal_effects": null,
+  "mlflow_run_id": null,
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "metrics": "evals/results/exp-694-routed-antithetic-quorum/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-694-routed-antithetic-quorum.md",
+    "smoke": ".scratch/exp-694-routed-antithetic-quorum/smoke.json",
+    "root_open": ".scratch/exp-694-routed-antithetic-quorum/calibration/root-20261350/root-opened.json",
+    "progress": ".scratch/exp-694-routed-antithetic-quorum/calibration/root-20261350/progress.json"
+  },
+  "notes": [
+    "Both calibration arms completed identical four-update work with exactly one routed example per eligible group of four and exact checkpoint reloads.",
+    "No transition, rollout, cold full-1100 route, resource admission, formal comparison, causal intervention denominator, confirmation, or independent-seed result was produced.",
+    "Root20261350 is immutable and consumed; changing the runner and reusing it would violate the frozen root contract, while no alternative calibration root is authorized.",
+    "The C5 hypothesis remains scientifically unresolved; this is a lifecycle/feasibility park and cannot cancel or weaken C6-C7."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "run_id": "exp-220-width-independent-cellular",
+  "status": "completed",
+  "created_at": "2026-07-12T03:10:00Z",
+  "hypothesis": "A shared dilated ConvGRU learns width-16 modular transitions and transfers nontrivially to width 32 without width-specific parameters.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "c7d24fb3f776e02eafbbbb436b63a76cd0c8a1ed",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "7a2428ecaded4b7af9a8a9f44ab942881f85c78ea020e4ab3182ac59085b125c",
+    "model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc",
+    "config_sha256": "e261a6aca93d708cc9162472a17faf0fe58d303aa4c42a5fd2aea40badd4bfa3"
+  },
+  "config": "configs/exp_220_width_independent_cellular.yaml",
+  "environment": "experiments/runs/exp-220-width-independent-cellular/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "ba4c31b49ccd4f57a3f14242142b05ff", "control_run_id": "1052ef10f42545f1871d2bb1de70579f", "challenger_run_id": "d88ebfa48c5d45e1beb4fe0d0758f74a"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-220-width-independent-cellular/shared-cellular-challenger/weights.safetensors",
+    "checkpoint_sha256": "dcfb6ee1dc7ac6abccd955e3bf1f9d374195b0df68347cdb37f6a168b99920f0",
+    "metrics": "evals/results/exp-220-width-independent-cellular/metrics.json",
+    "raw_summary": "experiments/runs/exp-220-width-independent-cellular/raw-summary.json"
+  },
+  "decision": "reject-shared-dilated-convgru",
+  "notes": [
+    "The first invocation was terminated before training because a split helper requested more small-width prime identities than exist; the corrected retry changed only split infrastructure.",
+    "The cellular state dict has identical tensors and 99,824 parameters at widths 16, 32, and 64.",
+    "Structural length transfer produced 61.935 percent zero-shot width-32 transition but zero exact rollout.",
+    "The challenger failed width-16 learning, zero-shot rollout, and training-time-ratio gates."
+  ]
+}

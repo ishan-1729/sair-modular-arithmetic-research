@@ -1,0 +1,9 @@
+{
+  "schema_version": "exp680-verification-v1",
+  "status": "terminal-calibration-topology-park",
+  "focused": {"command": "python -m pytest -q tests/test_exp_680_mor_depth_routing.py", "passed": 10, "final_pytest_seconds": 3.39},
+  "preflight": {"status": "passed", "path": ".scratch/exp-680-mor-depth-routing/preflight.json", "sha256": "c0b1f39fa27fddc83a0ed87b4d51e84420653c18097c95d0424f9b9a2446aa6b", "constructed_roots": [20261270, 20261271, 20261272, 20261273]},
+  "package_oracle": {"command": "python tools/validate_project.py && python -m pytest", "invocations": 1, "validator": "passed-206-concepts-1100-records", "passed": 673, "pytest_seconds": 479.88, "outer_wall_seconds": 476.49, "process_cpu_seconds": 610.23, "peak_rss_kib": 931884, "hard_guard_wall_seconds": 1691.3596875, "fidelity_reduced": false, "log_sha256": "ebfa8c1312e16ecf5a7fa9bcc8cb26b887b9a6ebe6c553e20c085c9d7489b926"},
+  "calibration": {"root": 20261270, "status": "completed-topology-gate-reject", "summary_sha256": "45da0ac2b8e44ce0f96b3a2577689ab2867c1beb19e95147d826559c5db01b1d", "formal_opened": false},
+  "terminal_validator": {"command": "python tools/validate_project.py", "required_after_terminal_persistence": true}
+}

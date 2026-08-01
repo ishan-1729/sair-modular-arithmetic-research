@@ -1,0 +1,84 @@
+{
+  "run_id": "exp-665-attractor-equilibrium-family",
+  "status": "completed",
+  "seed": 20261211,
+  "hypothesis": "A proposal-injected equilibrium correction, solved with library-backed Anderson acceleration and phantom gradients, improves exact long-rollout transfer while residual diagnostics remain target-free.",
+  "decision": "reject-current-attractor-equilibrium-adaptation",
+  "decision_authority": "T060 frozen W128-first conjunctive gate",
+  "config": "configs/exp_665_attractor_equilibrium_family.yaml",
+  "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp665-attractor-equilibrium-mechanism.md",
+  "metrics": "evals/results/exp-665-attractor-equilibrium-family/metrics.json",
+  "preregistration": "experiments/runs/exp-665-attractor-equilibrium-family/preregistration.json",
+  "artifacts": {
+    "checkpoint": ".scratch/exp-665-attractor-equilibrium-family/formal/formal/root-20261211/anderson_phantom/model.safetensors",
+    "metrics": "evals/results/exp-665-attractor-equilibrium-family/metrics.json",
+    "source_checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "primary_checkpoint": ".scratch/exp-665-attractor-equilibrium-family/formal/formal/root-20261211/anderson_phantom/model.safetensors",
+    "primary_checkpoint_sha256": "a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4",
+    "preserved_scratch_path": ".scratch/exp-665-attractor-equilibrium-family"
+  },
+  "roots": {
+    "20261210": "completed-admitted-calibration",
+    "20261211": "completed-rejected-at-w128-primary-gate",
+    "20261212": "unopened-gate-blocked",
+    "20261213": "unopened-gate-blocked"
+  },
+  "source": {
+    "base_commit": "c042a7fa68ab143dbba0091928b475ce5de1bf65",
+    "branch": "codex/exp665-attractor-equilibrium-family",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "preregistration_sha256": "55b6abcbe8fbbeb7a32dcff5ac7b8b63af59d4459e6eff753aa6dcd1cd9cba5d",
+    "final_source_hashes": {
+      "config": "c5a07c72ca9598db82ff93d279f8f90230fb511392b0ebc1c37bf7a4d48d5251",
+      "mechanism_map": "a34c6722b663d63a8188ae9e4e7abff4a9bd4458105d903c48d65ff4e245ac6d",
+      "model": "72e72ddd68e62f353d4319d7995dfa037636ebe0aa016d2d643ab184d7dd9636",
+      "runner": "ab0aa02d0deac1432330a719c7da5f6b33fcce4ec701e64e252a0ebc1737e3ae",
+      "tests": "b60793b9a13cc2d32f943e36fbf561a3f2354105a38c2064afc34ae20f72be28"
+    }
+  },
+  "verification": {
+    "focused_final": "17 passed in 10.20s",
+    "validator": "passed: 176 OKF concepts and 1100 benchmark records",
+    "full_pytest": "482 passed in 456.89s",
+    "full_oracle_wall_seconds": 467.84,
+    "full_oracle_peak_rss_kib": 918980,
+    "final_oracle_log_sha256": "0715746e0444f31fec915ee924c319dbd74ee3964691683991eff52d9060171c"
+  },
+  "calibration": {
+    "root": 20261210,
+    "admitted": true,
+    "receipt_sha256": "a68ace5c5c955e56d92f8ca15281f54046f8e896e506d86566288b4ce3f13969",
+    "outer_wall_seconds": 85.09,
+    "instrumented_wall_seconds": 75.35068526600298,
+    "peak_rss_kib": 564448,
+    "expected_formal_wall_seconds": 6587.048488575692,
+    "eta_formal_wall_seconds": 9883.681929811231,
+    "hard_guard_wall_seconds": 19768
+  },
+  "formal": {
+    "root": 20261211,
+    "stage": "w128-primary-futility",
+    "summary_sha256": "dbfd61dd626058d05c16cdd6387c77909a1ddd6880b12426e624009393d2f9eb",
+    "updates_per_trained_route": 400,
+    "parameters_per_route": 142728,
+    "trainable_parameters_per_route": 42904,
+    "total_outer_wall_seconds_including_bounded_resume": 502.68,
+    "total_user_cpu_seconds_including_bounded_resume": 1930.77,
+    "maximum_rss_kib": 667912,
+    "bounded_resume": "The first invocation trained and cached all arms, then stopped before evaluation because the admitted calibration receipt was in a sibling output directory. The receipt was checksum-copied to the required path and the same root resumed from exact cached checkpoints without source changes."
+  },
+  "mlflow": {
+    "calibration_parent_run_id": "b1d34996c2374016ba774b0a65fb53e0",
+    "formal_training_parent_run_id": "01e6b588c5204dd2848f2b4bbd9665d0",
+    "formal_evaluation_parent_run_id": "58aada0b54f34d3983d3fadd6da4a23a"
+  },
+  "limitations": [
+    "The W128 primary gate stopped the package before matched controls, convergence/basin diagnostics, W256, and confirmation roots.",
+    "This rejects only the exact bounded SAIR attractor/equilibrium adaptation, not Attractor Models, Equilibrium Reasoners, HRM, or TorchDEQ generally.",
+    "The primary met the 85% rollout floor and transition/runtime gates but failed the zero-invalid-rollout conjunct.",
+    "Exact bigint arithmetic is confined to offline labels and evaluation.",
+    "No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "run_id": "exp-656-tensor-native-rollout-route",
+  "created_at": "2026-07-21T16:03:06.190261+00:00",
+  "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+  "status": "completed",
+  "experiment_class": "input-only-route-performance",
+  "scientific_accuracy_reported": false,
+  "source": {
+    "candidate_model_sha256": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
+    "candidate_manifest_sha256": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
+    "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca"
+  },
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Input-only route performance A/B; no answer labels or oracle were generated or read.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "semantic_and_performance_gates": {
+      "semantic_parity": true,
+      "width128_non_regression": true,
+      "width256_minimum_20_percent_wall_reduction": false,
+      "all_passed": false
+    },
+    "matched_input_only_route_comparison": true
+  },
+  "benchmark": {
+    "128": {
+      "width": 128,
+      "batch_size": 16,
+      "input_sha256": "4a81118bf75f6bf1108481de145693392304e7513259894eda4ee49ade4a8879",
+      "warmup": {
+        "routes": [
+          "legacy",
+          "tensor_native"
+        ],
+        "exact_output_parity": true,
+        "exact_minimum_margin_parity": true,
+        "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+        "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+      },
+      "repeats": [
+        {
+          "repeat": 1,
+          "order": [
+            "legacy",
+            "tensor_native"
+          ],
+          "legacy": {
+            "wall_seconds": 8.786884633,
+            "aggregate_process_cpu_seconds": 34.12,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "tensor_native": {
+            "wall_seconds": 4.6555202839999765,
+            "aggregate_process_cpu_seconds": 17.970000000000013,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 2,
+          "order": [
+            "tensor_native",
+            "legacy"
+          ],
+          "legacy": {
+            "wall_seconds": 5.200699446000044,
+            "aggregate_process_cpu_seconds": 20.140000000000015,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "tensor_native": {
+            "wall_seconds": 4.545211780999921,
+            "aggregate_process_cpu_seconds": 17.580000000000013,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 3,
+          "order": [
+            "legacy",
+            "tensor_native"
+          ],
+          "legacy": {
+            "wall_seconds": 4.701128351000079,
+            "aggregate_process_cpu_seconds": 18.22,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "tensor_native": {
+            "wall_seconds": 4.861980565999943,
+            "aggregate_process_cpu_seconds": 18.870000000000033,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 4,
+          "order": [
+            "tensor_native",
+            "legacy"
+          ],
+          "legacy": {
+            "wall_seconds": 5.653823710999973,
+            "aggregate_process_cpu_seconds": 21.980000000000018,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "tensor_native": {
+            "wall_seconds": 5.22262879099992,
+            "aggregate_process_cpu_seconds": 20.269999999999982,
+            "output_sha256": "d045a1cc36da871bf3ea2d3a4e8eae0779cf53ce8ef9abc416494794e9bb4f6d",
+            "minimum_margin_sha256": "563b3ae86abb3efc4bc95f59a403106e41bdb6aeb652e635780dbf23929cc47f"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        }
+      ],
+      "summary": {
+        "legacy_median_wall_seconds": 5.4272615785000085,
+        "tensor_native_median_wall_seconds": 4.75875042499996,
+        "tensor_to_legacy_wall_ratio": 0.8768234875303702,
+        "wall_reduction_fraction": 0.1231765124696298,
+        "legacy_median_aggregate_process_cpu_seconds": 21.060000000000016,
+        "tensor_native_median_aggregate_process_cpu_seconds": 18.420000000000023,
+        "tensor_to_legacy_aggregate_cpu_ratio": 0.874643874643875,
+        "all_exact_output_parity": true,
+        "all_exact_minimum_margin_parity": true
+      }
+    },
+    "256": {
+      "width": 256,
+      "batch_size": 16,
+      "input_sha256": "a36160792a0d4f245c427a0965388931171eddd9572ae0834e5c019868e24914",
+      "warmup": {
+        "routes": [
+          "legacy",
+          "tensor_native"
+        ],
+        "exact_output_parity": true,
+        "exact_minimum_margin_parity": true,
+        "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+        "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+      },
+      "repeats": [
+        {
+          "repeat": 1,
+          "order": [
+            "legacy",
+            "tensor_native"
+          ],
+          "legacy": {
+            "wall_seconds": 25.74543939499995,
+            "aggregate_process_cpu_seconds": 99.58999999999997,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "tensor_native": {
+            "wall_seconds": 24.741703825999934,
+            "aggregate_process_cpu_seconds": 96.00999999999999,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 2,
+          "order": [
+            "tensor_native",
+            "legacy"
+          ],
+          "legacy": {
+            "wall_seconds": 27.389582910999934,
+            "aggregate_process_cpu_seconds": 106.01999999999998,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "tensor_native": {
+            "wall_seconds": 23.905942505999974,
+            "aggregate_process_cpu_seconds": 92.70000000000005,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 3,
+          "order": [
+            "legacy",
+            "tensor_native"
+          ],
+          "legacy": {
+            "wall_seconds": 25.189596968999922,
+            "aggregate_process_cpu_seconds": 97.45999999999992,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "tensor_native": {
+            "wall_seconds": 22.645821876000014,
+            "aggregate_process_cpu_seconds": 87.91000000000008,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        },
+        {
+          "repeat": 4,
+          "order": [
+            "tensor_native",
+            "legacy"
+          ],
+          "legacy": {
+            "wall_seconds": 26.857637171999954,
+            "aggregate_process_cpu_seconds": 103.92000000000007,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "tensor_native": {
+            "wall_seconds": 22.968331272,
+            "aggregate_process_cpu_seconds": 88.91999999999996,
+            "output_sha256": "f36aaf66689c448f70545f18c1eddefe914a3ea7d658120772deba55508158a9",
+            "minimum_margin_sha256": "bdaa1c3433f3701e59bea603f86b56a604cc72006f4ad28bcaf7f4ec200650ee"
+          },
+          "exact_output_parity": true,
+          "exact_minimum_margin_parity": true
+        }
+      ],
+      "summary": {
+        "legacy_median_wall_seconds": 26.30153828349995,
+        "tensor_native_median_wall_seconds": 23.437136888999987,
+        "tensor_to_legacy_wall_ratio": 0.8910937693596073,
+        "wall_reduction_fraction": 0.10890623064039273,
+        "legacy_median_aggregate_process_cpu_seconds": 101.75500000000002,
+        "tensor_native_median_aggregate_process_cpu_seconds": 90.81,
+        "tensor_to_legacy_aggregate_cpu_ratio": 0.892437718048253,
+        "all_exact_output_parity": true,
+        "all_exact_minimum_margin_parity": true
+      }
+    }
+  },
+  "gates": {
+    "semantic_parity": true,
+    "width128_non_regression": true,
+    "width256_minimum_20_percent_wall_reduction": false,
+    "all_passed": false
+  },
+  "decision": "reject-tensor-native-route",
+  "resource": {
+    "wall_seconds": 315.284159608,
+    "aggregate_process_cpu_seconds": 1177.47,
+    "peak_rss_bytes": 447901696,
+    "hard_wall_seconds": 900.0,
+    "hard_aggregate_process_cpu_seconds": 3600.0
+  },
+  "runtime": {
+    "wall_seconds": 315.284159608,
+    "aggregate_process_cpu_seconds": 1177.47,
+    "peak_rss_bytes": 447901696,
+    "hard_wall_seconds": 900.0,
+    "hard_aggregate_process_cpu_seconds": 3600.0
+  },
+  "limitations": [
+    "This input-only A/B reports no exact-answer accuracy and cannot promote a candidate.",
+    "The width-256 network invocation is a research-route probe; Candidate005 still returns zero above its learned 128-bit submission boundary.",
+    "Timings are local CPU measurements from a dirty research worktree and require confirmation before submission integration.",
+    "Python big integers are used only to generate inputs and by the frozen legacy representation; neither route performs arithmetic repair."
+  ],
+  "schema_normalization": {
+    "normalized_at": "2026-07-21T16:12:00+00:00",
+    "reason": "Add repository-required no-evaluation, controls, checkpoint, and runtime envelope fields after package-boundary validation.",
+    "pre_normalization_sha256": "4451cf9c22933ba5cc39e8593cdb23e373e9e860401cd327ddd9a46348f76197",
+    "executed_runner_sha256": "22b7445e823206837cb8322c48f49698ea063713ba4fc96c466706387b59b713",
+    "benchmark_fields_changed": false,
+    "decision_changed": false
+  }
+}

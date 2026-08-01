@@ -1,0 +1,40 @@
+{
+  "schema_version": "exp648-superseded-calibration-v2",
+  "status": "superseded-pre-corpus-resource-projection-repair-required",
+  "preserved_at_reason": "The resource re-audit found that the screen projection omitted the complete strong semantic integrity replay of all 1,024 mined windows. Lifecycle and executed-config provenance also required clarification before any corpus or scientific root was opened.",
+  "source_evidence": {
+    "calibration_sha256": "d965d944330fe66f4c333a09479e12b2db893ad19c18492f60ea24dbf68a8ad6",
+    "environment_payload_canonical_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+    "environment_file_bytes_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "resolved_config_sha256": "97877cec756125ec77e535290196eed015af77c470e442523fb0bbd049f12057",
+    "runner_sha256": "3b7848227d21f46b9f3f67c40ccb7c29dfee57fbfa05e6312f18dca2aa871af8",
+    "calibration_evidence_core_sha256": "6901cd33207820fcf97a50d6ffabbbce36758cd77a7d27a4c4f921b46b476f82"
+  },
+  "executed_pre_resolution_config": {
+    "recorded_sha256": "cbc50fd22333126db992c74de307b9f344be8e6769a7d8f46d0f954678c3f491",
+    "bytes_preserved": false,
+    "independently_reconstructable": false,
+    "limitation": "The exact executed pre-resolution config bytes were not preserved before post-calibration resolution and cannot be independently reconstructed. The hash remains a source claim inside the preserved calibration artifact, not a byte-verifiable file receipt."
+  },
+  "completed_calibration_charge": {
+    "wall_seconds": 2334.745863933,
+    "aggregate_cpu_seconds": 9676.689662108,
+    "eligible_for_new_projection_rates": false,
+    "classified_as_reused_repeat": false,
+    "charged_to_cumulative_planning_ceiling": true
+  },
+  "root_audit": {
+    "calibration_root_opened": 20261151,
+    "corpus_root_opened": false,
+    "screen_or_confirmation_root_opened": false,
+    "checked_independent_private_opened": false,
+    "exp649_formal_root_opened": false
+  },
+  "preservation": {
+    "calibration_byte_for_byte": true,
+    "environment_byte_for_byte": true,
+    "resolved_config_byte_for_byte": true,
+    "runner_byte_for_byte": true,
+    "old_units_and_repeat_caches_deleted": false
+  }
+}

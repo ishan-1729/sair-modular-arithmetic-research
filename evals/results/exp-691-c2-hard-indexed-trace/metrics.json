@@ -1,0 +1,55 @@
+{
+  "schema_version": "exp691-terminal-v1",
+  "run_id": "exp-691-c2-hard-indexed-trace",
+  "status": "completed",
+  "decision": "reject-exp691-c2-hard-indexed-trace",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-07-31T13:31:28+05:30",
+  "checkpoint_sha256": "36f4988fd9bb0867cab9750b0c8089c591fa29b4da05358a436ad44c61de56c3",
+  "control_checkpoint_sha256": "fa4a712d8e9cd83175400cf16180f2dac3e9b678e0b403dd869d07ebc412c7d9",
+  "roots": {"20261323": "completed-calibration-resource-admitted", "20261324": "completed-full-budget-scientific-reject", "20261325": "unopened-formal-gate-failed", "20261326": "unopened-formal-gate-failed", "20261327": "unopened-confirmation-gate-failed", "20261328": "unopened-confirmation-gate-failed", "20261329": "unopened-confirmation-gate-failed", "20261330": "unopened-confirmation-gate-failed", "20261331": "unopened-confirmation-gate-failed"},
+  "resource_gate": {"cases_per_cold_route": 1100, "cold_wall_seconds": [126.82862309400014, 135.41222915799995, 127.85685412199996], "maximum_wall_seconds": 135.41222915799995, "guard_multiplier": 2.0, "guarded_wall_seconds": 270.8244583159999, "ceiling_seconds": 285.0, "passed": true, "peak_rss_bytes": 1072676864, "rss_ceiling_bytes": 6871947673, "rss_passed": true},
+  "training": {"primary_updates": 2400, "control_updates": 2400, "parameters_per_arm": 43220, "trace_appends_per_arm": 19200, "equal_work": true, "reload_exact": true},
+  "transition": {
+    "primary_w128": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0, "valid_residue_rate": 0.8283333333333334},
+    "control_w128": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0, "valid_residue_rate": 0.867},
+    "primary_w256": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0, "valid_residue_rate": 0.8036666666666666},
+    "control_w256": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0, "valid_residue_rate": 0.8136666666666666}
+  },
+  "rollout": {
+    "primary_w128": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.92, "prediction_sha256": "76decaeda5380d34904a8dd35761ce83e584f504080dc6c8261aedcd5852563b"},
+    "control_w128": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9233333333333333, "prediction_sha256": "daab6e76430ac2043de5d2eafb105d15a6bb63adabe29b97dfebe1dbeb445845"},
+    "primary_w256": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.95, "prediction_sha256": "efbd73d4d7387de5da2be1d01e0079b0390e8827c96729fbd3e6ea4e65360bd6"},
+    "control_w256": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9733333333333334, "prediction_sha256": "4257d29e7bde8b59dad06106d5876907d86b7ddaaf20e51b87cd30aef24acaa7"},
+    "paired_w256": {"wins": 0, "losses": 0, "ties": 600, "gain": 0.0, "confidence_sequence_99": [-0.12902251528503, 0.12902251528503]}
+  },
+  "sequential_w256": [{"cases": 200, "primary_accuracy": 0.0, "control_accuracy": 0.0}, {"cases": 300, "primary_accuracy": 0.0, "control_accuracy": 0.0}, {"cases": 450, "primary_accuracy": 0.0, "control_accuracy": 0.0}, {"cases": 600, "primary_accuracy": 0.0, "control_accuracy": 0.0}],
+  "pointer_diagnostics": {"unique_addresses": 240, "last_address_fraction": 0.105078125, "block_entropy": 1.8974784035235643, "slot_entropy": 2.170607788837515, "mean_read_age": 69.67791513859056, "trace_shape": [600, 16, 16, 32], "nonzero_records": 153600},
+  "interventions": {
+    "erase": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9916666666666667, "erasure_of_gain": 0.0, "prediction_sha256": "f92180c2e2fc82f3b819625349519c0f03a25162db0f09c17c6724e1cf942c2f"},
+    "permute": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9466666666666667, "erasure_of_gain": 0.0, "prediction_sha256": "31924e781543c5e03d5ade176c379fcebbb0083b8370a8220108e0408c6df9f3"},
+    "uniform": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9416666666666667, "erasure_of_gain": 0.0, "prediction_sha256": "5144d4fc9b6630b7c37221d0dfaf32735b82890cc521179e33b0b5097a6f2008"},
+    "random_pointer": {"cases": 600, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.9466666666666667, "erasure_of_gain": 0.0, "prediction_sha256": "56e91fa213936590fda81319725359d9029a018392e3c71af1a72fa8307ac042"}
+  },
+  "evaluation": {
+    "transition": {
+      "primary_w128": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0},
+      "control_w128": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0},
+      "primary_w256": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0},
+      "control_w256": {"cases": 3000, "correct": 0, "exact_accuracy": 0.0}
+    },
+    "rollout": {
+      "primary_w128": {"cases": 300, "correct": 0, "exact_accuracy": 0.0},
+      "control_w128": {"cases": 300, "correct": 0, "exact_accuracy": 0.0},
+      "primary_w256": {"cases": 600, "correct": 0, "exact_accuracy": 0.0},
+      "control_w256": {"cases": 600, "correct": 0, "exact_accuracy": 0.0}
+    },
+    "scope": "fresh-generated-root20261324-full-budget-first-rung",
+    "labels_or_oracle_present_in_inference": false,
+    "checked_independent_official_private_candidate_submission_promotion": "not-opened"
+  },
+  "controls": {"correction_masked_control": "completed-2400-updates-and-full-denominators", "equal_trace_storage": true, "equal_pointer_computation": true, "equal_training_work": true, "reload_exact": true, "candidate005_tiers1_6_route_unchanged": true},
+  "gates": {"causal_erasure": false, "complete_updates": true, "confirmation_threshold": false, "equal_work": true, "healthy_control": false, "invalid_rate": false, "paired_gain": false, "pointer_noncollapse": true, "primary_w256_rollout": false, "primary_w256_transition": false, "reload_exact": true, "runtime_admitted": true, "w128_retention": true},
+  "scientific_verdict": "reject-this-exact-c2-formulation",
+  "limitations": ["Both arms were zero-exact on all formal transition and rollout denominators.", "Pointer noncollapse without output gain or causal erasure is not mechanism support.", "Confirmations and independent seeds remained unopened.", "C3-C7 remain independently required."]
+}

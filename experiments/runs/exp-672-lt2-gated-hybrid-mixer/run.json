@@ -1,0 +1,69 @@
+{
+  "run_id": "exp-672-lt2-gated-hybrid-mixer",
+  "status": "completed",
+  "seed": 20261238,
+  "hypothesis": "A genuinely shared LT2 linear/sparse hybrid correction with exact-zero loop/output gates can preserve Candidate005 and learn a width-transfer path within guarded CPU runtime.",
+  "decision": "park-resource-compliance-or-feasibility",
+  "decision_authority": "T068-root-20261238-guarded-candidate-runtime",
+  "config": "configs/exp_672_lt2_gated_hybrid_mixer.yaml",
+  "source": {
+    "base_commit": "1a7de1d2e29099908d875211f86f27d2a57e3f6b",
+    "branch": "codex/exp672-lt2-gated-hybrid-recovery",
+    "implementation_commit": "8ae0c28cd35fb07f32f6f0287d646655966a260b",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "paper_sha256": "84f7f4de355928e5006e8aa85c958fb656752158e3f19bc5d7dc919922013d9b",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "official_commit": "adc2ba2f2704ff82744700679d1d0a090314df6c"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-672-lt2-gated-hybrid-mixer/calibration/root-20261238/full_hybrid/model.safetensors",
+    "checkpoint_sha256": "309070de92a54315f0a3fe0f6fc2afee982b8d2cf99375079c11a5773a697ed1",
+    "calibration": ".scratch/exp-672-lt2-gated-hybrid-mixer/calibration.json",
+    "calibration_sha256": "f4b6ff1e558714236375d649acb5e5c372809a12cf124f22cab10407f12241a2",
+    "mechanism_map": "knowledge/autoresearch/research/2026-07-29-exp672-lt2-mechanism.md",
+    "preregistration": "experiments/runs/exp-672-lt2-gated-hybrid-mixer/preregistration-root-20261238.json",
+    "metrics": "evals/results/exp-672-lt2-gated-hybrid-mixer/metrics.json"
+  },
+  "verification": {
+    "focused": "reused T067: 12 passed in 16.39s",
+    "base_validator": "passed: 190 OKF concepts and 1100 benchmark records",
+    "first_full_oracle": "611 passed, 1 failed in 544.54s; owned repeated inter-op thread initialization masked the calibration root lock",
+    "bounded_correction": "tolerate only PyTorch's already-initialized inter-op thread-pool RuntimeError",
+    "final_full_oracle": "validator passed; 612 passed in 527.29s",
+    "final_package_oracle_invocations": 2
+  },
+  "roots": {
+    "20261238": "completed-calibration-runtime-headroom-park",
+    "20261239": "unopened-admission-blocked",
+    "20261240": "unopened-admission-blocked",
+    "20261241": "unopened-admission-blocked"
+  },
+  "calibration": {
+    "wall_seconds": 239.64869616600026,
+    "process_tree_cpu_seconds": 929.166189,
+    "cgroup_cpu_seconds": 995.8400000000001,
+    "peak_rss_bytes": 660582400,
+    "expected_formal_wall_seconds": 16386.73782497558,
+    "eta_wall_seconds": 32773.47564995116,
+    "soft_guard_wall_seconds": 40967,
+    "hard_guard_wall_seconds": 65547,
+    "variability_headroom": 2.0,
+    "candidate_nominal_wall_seconds": 183.08425380001245,
+    "candidate_guarded_wall_seconds": 366.1685076000249,
+    "candidate_guarded_ceiling_seconds": 285,
+    "admitted": false,
+    "failed_check": "candidate_inference_guarded_headroom"
+  },
+  "mlflow": {
+    "parent_run_id": "223e3be66dbc455b86c06536677c034f"
+  },
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "Calibration exactness is validation/test route-exercise evidence and is not a formal scientific result.",
+    "The calibration payload's admitted=true flag checks nominal candidate runtime only; T068's binding guarded-runtime conjunct rejects 366.169 seconds against the 285-second ceiling.",
+    "Root 20261239 W128, conditional W256 controls, and roots 20261240/20261241 remained unopened.",
+    "The park rejects only guarded runtime feasibility for this exact bounded adaptation, not LT2 or ST-M025 scientifically.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

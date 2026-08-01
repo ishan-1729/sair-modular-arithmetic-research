@@ -1,0 +1,63 @@
+{
+  "schema_version": "exp655-t049-unchanged-source-oracle-v1",
+  "created_at": "2026-07-22T12:59:40Z",
+  "status": "passed",
+  "source_identity": {
+    "source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+    "source_tree": "aa0e6e4b6a411800b9765fe7eb7365980af9f520",
+    "T048_terminal_commit": "ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575",
+    "config_sha256": "de5a0802636a2f2c7ce8e1a231d21c2cd2cce924bf51ae156d39d7d1435f9842",
+    "runner_sha256": "d9cccecf10d037ead765f451226ab8c5a73234e6838e9fcfb59237b197a063b6",
+    "model_sha256": "14084225bc89bd97f449ff36fba541959364ab335a20b25727e73f7fc094b9af",
+    "fixtures_sha256": "4e1b51169b2c6c6f11486013662142ba8e7204c3d822811c42fd5990a05ac8ba",
+    "EXP655_test_sha256": "2ddde85a3bb300ce9fb1cc705f1c2b809ea6d1aa366ce74d5bc62423f8533ba1",
+    "EXP658_test_sha256": "38de8ed93369891bef103d492ffcb14dc55f080c17289a8d772b116ffef711fc",
+    "EXP658_calibration_sha256": "11ea65bb23d8492aecd5985f3ddb077f9b68150f7f9bcbcc39c639c3ee9703d4",
+    "tracked_source_config_test_changed": false
+  },
+  "portability_identity": {
+    "materialized_file_count": 264,
+    "materialized_total_bytes": 26672030,
+    "canonical_inventory_sha256": "b8e80eb686dfd8aeb180beb4f210be8a8fa95eb72011913190559b6fbe7a1e7b",
+    "manifest_sha256": "203b2429d6ee442f8dca49067dffc8905cbcaaf5ddfdb17f2dfa2eac54dabd46",
+    "recipe_sha256": "f09988bbab74b019ca5be074728a2e65b443f8ee56ab51ebda1021f1483ce176",
+    "T048_archive_manifest_sha256": "cee6bd60b7cea1befb3e4ab271edf2d8a29a6bdad648da8745ddfe1ab6e4ac7a"
+  },
+  "validator": {
+    "command": "python tools/validate_project.py",
+    "executions": 1,
+    "passed": true,
+    "concepts": 162,
+    "benchmark_records": 1100,
+    "pinned_upstream_prefix": "82510bba00a1",
+    "time_wall_seconds": 10.90,
+    "user_cpu_seconds": 0.94,
+    "system_cpu_seconds": 0.69,
+    "maximum_rss_kib": 28512
+  },
+  "full_pytest": {
+    "command": "python -m pytest -q",
+    "executions": 1,
+    "passed": 391,
+    "failed": 0,
+    "total": 391,
+    "pytest_seconds": 594.41,
+    "time_wall_seconds": 596.30,
+    "user_cpu_seconds": 517.64,
+    "system_cpu_seconds": 31.92,
+    "aggregate_cpu_seconds": 549.56,
+    "cpu_percent": 92,
+    "maximum_rss_kib": 705360,
+    "major_page_faults": 7278,
+    "minor_page_faults": 537343,
+    "file_system_inputs": 851064,
+    "file_system_outputs": 105872,
+    "exit_status": 0
+  },
+  "fresh_probe_required": false,
+  "calibration_root_opened": false,
+  "formal_roots_opened": [],
+  "scientific_metrics": null,
+  "candidate_or_benchmark_changed": false,
+  "decision": "implementation-admitted-for-clean-pushed-root20261178-calibration-only"
+}

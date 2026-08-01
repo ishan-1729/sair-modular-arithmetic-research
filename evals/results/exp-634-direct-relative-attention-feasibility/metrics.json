@@ -1,0 +1,71 @@
+{
+  "run_id": "exp-634-direct-relative-attention-feasibility",
+  "created_at": "2026-07-13T12:17:32Z",
+  "checkpoint_sha256": "6c821350b75bcd21bd3d9b2b00bae853bb0f7a7cf7b3561abd584b02b9e2e3ea",
+  "control_checkpoint_sha256": "b7399188efcd84583497d19ff6b85baa8bfabc2a5d3d9f9311fbd8cb6a6fdd5e",
+  "evaluation": {
+    "transition": {
+      "direct_prediction_width12": {
+        "cases": 300,
+        "correct": 2,
+        "exact_accuracy": 0.006666666666666667,
+        "valid_residue_rate": 1.0,
+        "reason": "The direct model has no Horner transition; its width-12 exact root predictions are the applicable prediction unit."
+      }
+    },
+    "rollout": {
+      "control_width12": {"cases": 300, "correct": 2, "exact_accuracy": 0.006666666666666667, "invalid_rate": 0.0, "wall_seconds": 0.17827044399746228},
+      "attention_width12": {"cases": 300, "correct": 2, "exact_accuracy": 0.006666666666666667, "invalid_rate": 0.0, "wall_seconds": 0.15424538700608537},
+      "control_width24": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0, "wall_seconds": 0.30950157799816225},
+      "attention_width24": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0, "wall_seconds": 0.3365468659903854}
+    }
+  },
+  "controls": {
+    "matched_updates": 4000,
+    "matched_examples": 256000,
+    "parameters": {"control": 52345, "attention": 53122, "ratio": 1.0148438246250835},
+    "randomized_width24": {
+      "trained_matched": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0},
+      "randomized": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 1.0},
+      "trained_gain": 0.0
+    },
+    "determinism": {"predictions_equal": true, "metrics_equal": true, "passed": true}
+  },
+  "comparison": {
+    "width12_gain": 0.0,
+    "width24_gain": 0.0,
+    "runtime_scaling_exponent_12_to_24": 1.1255800784411543,
+    "projected_integrated_seconds": 37.71210515319935
+  },
+  "gates": {
+    "minimum_attention_width12_accuracy": 0.2,
+    "minimum_width12_gain_over_control": 0.05,
+    "minimum_attention_width24_accuracy": 0.02,
+    "minimum_width24_gain_over_control": 0.02,
+    "minimum_trained_gain_over_randomized_width24": 0.1,
+    "maximum_invalid_rate": 0.05,
+    "maximum_parameter_ratio": 1.15,
+    "maximum_projected_integrated_seconds": 260,
+    "require_determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "wall_seconds": 940.5570494690037,
+    "aggregate_cpu_seconds": 3474.3753263040003,
+    "external_elapsed_wall_seconds": 900.52,
+    "external_user_cpu_seconds": 3465.19,
+    "external_system_cpu_seconds": 21.99,
+    "external_percent_cpu": 387,
+    "torch_threads": 4,
+    "runner_peak_rss_bytes": 522231808,
+    "external_maximum_resident_set_kib": 510696,
+    "clock_note": "Runner perf_counter exceeded external elapsed time by about 40 seconds under WSL scheduling; aggregate CPU measures agree closely and both wall measures are reported."
+  },
+  "decision": "reject-direct-relative-attention-feasibility",
+  "limitations": [
+    "Fresh generated feasibility evidence only; checked, independent, official, and private answers were not read.",
+    "Exact bigint arithmetic is confined to offline labels and evaluation truth.",
+    "The arms match updates, examples, widths, labels, and optimizer schedule, but their operations differ by design.",
+    "The result rejects this compact recurrent shared-attention prescription, not all transformer arithmetic or scratchpad decoding."
+  ]
+}

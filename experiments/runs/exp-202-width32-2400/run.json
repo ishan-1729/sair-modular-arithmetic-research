@@ -1,0 +1,36 @@
+{
+  "run_id": "exp-202-width32-2400",
+  "status": "completed",
+  "created_at": "2026-07-12T02:25:00Z",
+  "hypothesis": "Extending the validated width-32 transfer curriculum to 2,400 steps clears the unchanged independent-evaluation gate.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "05ccc758ddb838927818bfa705a46052dff20d48",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "7673ea405aec19c2c76f84f32bd5031860edc7f5b4117ac86164ada3a8d60040",
+    "config_sha256": "854e4e17c1221164c8dc4078606e61823f40fb9645b53c09c732b15b83195dfa"
+  },
+  "config": "configs/exp_202_width32_2400.yaml",
+  "environment": "experiments/runs/exp-202-width32-2400/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "917806511746470f92a3bed459c555e1",
+    "arm_run_id": "d6e7171c133e4f8ea357a0ed2ea55196"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-202-width32-2400/width32-transfer-hard-mining/weights.safetensors",
+    "checkpoint_sha256": "047cbfb0599b2ea12af9aeed5171cf832f0c4ec179a09596518b668b14644eed",
+    "metrics": "evals/results/exp-202-width32-2400/metrics.json",
+    "raw_summary": "experiments/runs/exp-202-width32-2400/raw-summary.json",
+    "arm_metrics": "experiments/runs/exp-202-width32-2400/arm-metrics.json"
+  },
+  "decision": "advance-five-independent-tier4-seeds",
+  "notes": [
+    "All unchanged transition, rollout, and validity gates passed.",
+    "The checkpoint was initialized from frozen width 16, not continued from EXP-201.",
+    "Passing authorizes independent Tier-4 evaluation but not candidate promotion.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "run_id": "exp-400-graph-message-passing-smoke",
+  "created_at": "2026-07-12T09:15:00Z",
+  "checkpoint_sha256": "24d925b723cba15e88c24c091bf66bb20efff1fd383fb81d01c5fc9ac7c927db",
+  "evaluation": {
+    "transition": {
+      "cellular_width16": {"cases": 5000, "correct": 1874, "exact_accuracy": 0.3748},
+      "cellular_zero_width32": {"cases": 5000, "correct": 2237, "exact_accuracy": 0.4474},
+      "gcn_width16": {"cases": 5000, "correct": 844, "exact_accuracy": 0.1688},
+      "gcn_zero_width32": {"cases": 5000, "correct": 1336, "exact_accuracy": 0.2672},
+      "gat_width16": {"cases": 5000, "correct": 845, "exact_accuracy": 0.169},
+      "gat_zero_width32": {"cases": 5000, "correct": 1336, "exact_accuracy": 0.2672},
+      "mpnn_width16": {"cases": 5000, "correct": 830, "exact_accuracy": 0.166},
+      "mpnn_zero_width32": {"cases": 5000, "correct": 1220, "exact_accuracy": 0.244}
+    },
+    "rollout": {
+      "cellular_width16": {"cases": 1000, "correct": 0, "exact_accuracy": 0.0},
+      "cellular_zero_width32": {"cases": 500, "correct": 0, "exact_accuracy": 0.0},
+      "gcn_width16": {"cases": 1000, "correct": 0, "exact_accuracy": 0.0},
+      "gat_width16": {"cases": 1000, "correct": 0, "exact_accuracy": 0.0},
+      "mpnn_width16": {"cases": 1000, "correct": 0, "exact_accuracy": 0.0}
+    }
+  },
+  "controls": {"eligible_graph_arms": 0, "gates_passed": false, "interpretation": "minimal-reference-baseline-only"},
+  "runtime": {"runner_wall_seconds": 894.7655104280002, "runner_aggregate_cpu_seconds": 3120.78840772, "external_elapsed_wall_seconds": 833.69, "external_user_cpu_seconds": 2950.35, "external_system_cpu_seconds": 190.46, "external_percent_cpu": 376, "maximum_resident_set_kib": 1395176, "torch_threads": 4},
+  "decision": "reject-minimal-reference-operators-continue-library-backed-graph-track",
+  "limitations": ["Declared 200-update successive-halving rung only.", "The graph operators are repository-native reference implementations, not PyG or DGL primitives.", "Generated evidence only; checked, consumed independent, and private answers were not read."]
+}

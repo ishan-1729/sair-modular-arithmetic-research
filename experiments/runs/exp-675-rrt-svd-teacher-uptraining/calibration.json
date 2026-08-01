@@ -1,0 +1,21 @@
+{
+  "root": 20261250,
+  "status": "completed",
+  "decision": "reject-formal-at-calibration",
+  "summary_path": ".scratch/exp-675-rrt-svd-teacher-uptraining/calibration/root-20261250-summary.json",
+  "summary_sha256": "988c00912f743650c782c92c17004b93be039c59f11d4349bd37c6f1d7aa59a2",
+  "admission_sha256": "09e8f2d6c4ea48c8ec2eaf7f1ec9d19cb8ede863777a802ef05c4d7d5737ca31",
+  "wall_seconds": 119.77512461300103,
+  "process_tree_cpu_seconds": 388.34999999999997,
+  "cgroup_cpu_seconds": 497.6759999999995,
+  "peak_process_tree_rss_bytes": 1023324160,
+  "formal_expected_wall_seconds": 24254.46273413271,
+  "formal_soft_guard_wall_seconds": 30318.07841766589,
+  "formal_hard_guard_wall_seconds": 42445.30978473224,
+  "guarded_candidate_seconds": 1863.361408432652,
+  "candidate_ceiling_seconds": 285,
+  "artifact_bytes": 9796600,
+  "complete_route": true,
+  "fidelity_reduced": false,
+  "admitted": false
+}

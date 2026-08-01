@@ -1,0 +1,40 @@
+{
+  "run_id": "exp-240-channel-causal-analysis",
+  "created_at": "2026-07-12T03:50:00Z",
+  "checkpoint_sha256": "c26e34af9581b6b0f3d26e72715c512823b07250bee48a56ae63cf32cffe5baa",
+  "evaluation": {
+    "transition": {"fresh_baseline": {"cases": 20000, "correct": 19954, "exact_accuracy": 0.9977}},
+    "rollout": {"source_checkpoint_context": {"cases": 20000, "correct": 18396, "exact_accuracy": 0.9198, "measured_in": "exp-230-quotient-routed-experts"}},
+    "fresh_transition_baseline": {"cases": 20000, "correct": 19954, "exact_accuracy": 0.9977},
+    "paired_ablation_baseline": {"cases": 5000, "correct": 4984, "exact_accuracy": 0.9968},
+    "paired_combined_top4": {"cases": 5000, "correct": 4899, "exact_accuracy": 0.9798},
+    "source_checkpoint_rollout_context": {"cases": 20000, "correct": 18396, "exact_accuracy": 0.9198, "measured_in": "exp-230-quotient-routed-experts"}
+  },
+  "quotient_transition": {
+    "q0": {"cases": 8682, "correct": 8669, "exact_accuracy": 0.99850264915918},
+    "q1": {"cases": 9022, "correct": 8990, "exact_accuracy": 0.9964531146087342},
+    "q2": {"cases": 2296, "correct": 2295, "exact_accuracy": 0.9995644599303136}
+  },
+  "causal": {
+    "critical_channel_count": 0,
+    "top_channels": [5, 38, 30, 47],
+    "largest_single_overall_drop": 0.0034,
+    "largest_single_q2_drop": 0.008787346221441172,
+    "combined_top4_overall_drop": 0.017,
+    "critical_overall_drop": 0.005,
+    "critical_q2_drop": 0.02
+  },
+  "controls": {
+    "paired_identical_ablation_cases": true,
+    "paired_ablation_baseline_accuracy": 0.9968,
+    "source_checkpoint_frozen": true,
+    "checked_or_consumed_independent_answers_read": false
+  },
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 69.90670604300001},
+  "decision": "distributed-representation-no-channel-surgery",
+  "limitations": [
+    "Final-normalization channel ablation tests one causal site, not every internal use of a channel.",
+    "Transition effects do not directly establish autonomous-rollout effects.",
+    "Fresh generated identities were used; no consumed independent or checked answer was read."
+  ]
+}

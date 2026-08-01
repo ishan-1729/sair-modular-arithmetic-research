@@ -1,0 +1,104 @@
+run_id: exp-677-length-schedule
+status: frozen-source-faithful-ST-M004b-package
+hypothesis: >-
+  A known-step curriculum over legal operand widths and their full physical
+  recurrent visit counts can retain Candidate005 W128 exactness and improve
+  W256 transfer while formal inference remains byte/schema/call/output compatible.
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-677-length-schedule.md
+mechanism_map: knowledge/autoresearch/research/2026-07-30-exp677-length-schedule-mechanism.md
+source_contract:
+  base_commit: aca5dceb6f31b93c2a07f5453ec73f5cf79eb145
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  paper_path: research/papers/arxiv-2409.15647.pdf
+  paper_sha256: 6207287dd6bef2e9fad57b2d3010a264a196d55c3cb67d8327391fee6440ac00
+  manifest_sha256: f2e2e38631d4cd5ea286d6e34c315b19c90d2c12e1725b3958a3e90229f09c21
+  verification_sha256: cdf94b675d48261385cd43aabb735c7e081442106a42e9e046999146f0a7f58d
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  exp609_config_sha256: c2b1e51716cb49156c87cc0c81642d21f307fc445915cbf0e1a15fbd589291b0
+  base_model_sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc
+  exp300_sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f
+  exp329_sha256: a921ee8702dd274ccc8bad3f0135615d52acff17a620188bd43feff1cd81db96
+  checked_independent_official_private_candidate_submission_promotion: prohibited
+  formal_inference: original-SharedDilatedConvGRU-only
+library_decision:
+  selected: native-pytorch
+  reason: The changed variable is a deterministic data schedule over existing legal tensors and physical visits; no external package improves fidelity.
+  torch: 2.5.1+cpu
+  license: BSD-3-Clause
+model: {hidden: 92, cycles: 2}
+schedule:
+  steps: 400
+  tuples:
+    - {start: 1, end: 100, width: 64, physical_visits: 12, supervised_endpoint_length: 64}
+    - {start: 101, end: 250, width: 128, physical_visits: 14, supervised_endpoint_length: 128}
+    - {start: 251, end: 400, width: 256, physical_visits: 16, supervised_endpoint_length: 256}
+  scheduled: ordered-small-to-maximum-known-step-tuples
+  fixed: {width: 128, physical_visits: 14, supervised_endpoint_length: 128}
+  equal_work_shuffled: deterministic-permutation-of-the-exact-scheduled-tuple-multiset
+  supervision: final-known-physical-visit-only
+  inference_schedule_changed: false
+arms:
+  scheduled: {kind: scheduled, train: true}
+  fixed_incumbent_endpoint: {kind: fixed, train: true}
+  equal_work_shuffled: {kind: equal_work_shuffled, train: true}
+  frozen_source: {kind: frozen, train: false}
+  randomized_control: {kind: randomized, train: false}
+primary_arm: scheduled
+training:
+  steps: 400
+  calibration_steps: 3
+  batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+data:
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+  split_seed_offset: 677000
+  calibration: {root: 20261258, train_seed: 67773000, eval_seed: 67774000}
+  formal: {root: 20261259, train_seed: 67773001, eval_seed: 67774001}
+  confirmations:
+    - {root: 20261260, train_seed: 67773002, eval_seed: 67774002}
+    - {root: 20261261, train_seed: 67773003, eval_seed: 67774003}
+evaluation:
+  widths: [64, 128, 256]
+  transition_cases: {64: 3000, 128: 3000, 256: 3000}
+  rollout_cases: {64: 300, 128: 300, 256: 300}
+  calibration_transition_cases: {64: 16, 128: 16, 256: 16}
+  calibration_rollout_cases: {64: 2, 128: 2, 256: 2}
+  late_depth_cases: 128
+  calibration_late_depth_cases: 4
+  candidate_timing_width: 128
+  candidate_timing_cases: 64
+  candidate_projection_cases: 300
+  deterministic_repeat_cases: 32
+gates:
+  minimum_w128_exact: 0.95
+  minimum_w128_transition: 0.998
+  maximum_invalids: 0
+  maximum_w128_loss_vs_fixed: 0.02
+  maximum_w128_loss_vs_source: 0.02
+  minimum_trained_minus_randomized_w128: 0.10
+  minimum_schedule_gradient_norm: 0.000000001
+  minimum_w256_exact: 0.10
+  minimum_w256_gain_vs_controls: 0.05
+  maximum_guarded_candidate_seconds: 285
+  maximum_artifact_bytes: 21474836480
+resource_budget:
+  package_profile_command: python -m pytest -q tests/test_exp_677_length_schedule.py
+  package_headroom: 1.35
+  package_soft_multiplier: 1.25
+  package_hard_multiplier: 1.75
+  formal_headroom: 1.35
+  soft_multiplier: 1.25
+  hard_multiplier: 1.75
+  rss_headroom: 1.30
+  fidelity_reduced: false
+  admission_path: .scratch/exp-677-length-schedule/admission.json

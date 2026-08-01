@@ -1,0 +1,22 @@
+{
+  "copied_into_archive": false,
+  "eligible_for_cache_reuse": false,
+  "eligible_for_launch": false,
+  "eligible_for_projection_rates": false,
+  "file_count": 218,
+  "manifest_bytes": 53197,
+  "manifest_format": "lowercase SHA-256, two ASCII spaces, repository-relative POSIX path, one LF; sorted bytewise by path",
+  "manifest_path": "scratch-files.sha256",
+  "manifest_sha256": "c74a07dec1e0e9331917dea8d2f25cfcd6a2a7c17380fe35e24ada125d3c0c5e",
+  "preserved_in_place": true,
+  "root": 20261161,
+  "schema_version": "exp648-readiness-scratch-inventory-v1",
+  "scopes": [
+    ".scratch/exp-648-structured-trajectory-consistency/screen/augmented-repeat-cache/root-20261161",
+    ".scratch/exp-648-structured-trajectory-consistency/screen/launch-mlflow-reverify/c27161cb0f2a46228b94b47362769fb1",
+    ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-attempts/cal-0553c6434beb9528",
+    ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-locks/cal-0553c6434beb9528.lock",
+    ".scratch/exp-648-structured-trajectory-consistency/screen/readiness-calibration-mlflow/c27161cb0f2a46228b94b47362769fb1"
+  ],
+  "total_bytes": 24573993
+}

@@ -1,0 +1,90 @@
+run_id: exp-659-symbol-equivariant-recurrence
+hypothesis: an explicit symbol-axis recurrent core with faithful internal symbol-permutation equivariance improves exact length extrapolation over matched non-equivariant controls
+seed: 20261177
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-659-symbol-equivariant-recurrence.md
+paper: {path: research/papers/arxiv-2603.02193.pdf, sha256: 5b7dfdc6474bb1060d7277677d7e17f8b7905b7a1fc4b2323a515ac1180ee058}
+arms: [position_only, symbol_equivariant, broken_tying]
+model:
+  hidden: 32
+  position_hidden: 36
+  heads: 4
+  recurrent_steps: 2
+  expansion: 2
+training:
+  stages:
+    - {width: 8, steps: 800}
+    - {width: 12, steps: 1200}
+    - {width: 16, steps: 2000}
+  total_steps_per_arm: 4000
+  batch_size: 64
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.15
+  validation_interval: 200
+  validation_cases: 128
+  torch_threads: 4
+data:
+  prime_bit_span: 4
+  train_prime_identities: 32
+  test_prime_identities: 16
+  split_seed_offset: 659000
+  training_pair_seed_offset: 659100
+  evaluation_pair_seed_offset: 659200
+  calibration_seed: 20261176
+  formal_seed: 20261177
+evaluation:
+  widths: [16, 24, 32]
+  rollout_cases: {16: 300, 24: 200, 32: 200}
+  transition_cases: {16: 300, 24: 300, 32: 300}
+  deterministic_replay_cases: 64
+  randomized_dependence_cases: 100
+  runtime_probe_width: 256
+  runtime_probe_cases: 4
+  official_tier7_cases: 100
+calibration:
+  stage_steps: {8: 20, 12: 30, 16: 50}
+  batch_size: 64
+  rollout_cases: {16: 12, 24: 8, 32: 8}
+  transition_cases: {16: 16, 24: 12, 32: 12}
+  deterministic_replay_cases: 8
+  randomized_dependence_cases: 8
+  runtime_probe_cases: 1
+gates:
+  minimum_symbol_equivariant_width16_rollout: 0.80
+  minimum_symbol_equivariant_width32_rollout: 0.05
+  minimum_width32_gain_over_best_control: 0.05
+  maximum_core_swap_residual: 0.000001
+  minimum_broken_tying_swap_residual: 0.0001
+  maximum_invalid_rate: 0.02
+  minimum_randomized_dependence_drop: 0.20
+  minimum_control_parameter_ratio: 0.75
+  maximum_control_parameter_ratio: 1.25
+resource_budget:
+  calibration_status: complete
+  calibration_output: .scratch/exp-659-symbol-equivariant-recurrence/calibration.json
+  calibration_output_sha256: e1e17f1756e530c4ea7fbaef5465464b7d5ae242411d7b0d358d861399a04b16
+  calibration_repository_commit: d943ee6c6f38de9a516b3b05dd26821434b635de
+  calibration_runner_sha256: b66f37a8fe34e2fbb19961bec45bada8595ad51b32851ac728b412eabee49842
+  calibration_model_sha256: 7c95f16078bfc7bccff29fa8e53dcd09ab665959826c76c93149e9c9d4bbb297
+  calibration_operational_runaway_wall_seconds: 21600
+  calibration_operational_runaway_aggregate_cpu_seconds: 86400
+  expected_formal_wall_seconds: 435
+  expected_formal_aggregate_cpu_seconds: 1552
+  expected_formal_cgroup_cpu_seconds: 2111
+  soft_budget_wall_seconds: 544
+  soft_budget_aggregate_cpu_seconds: 1940
+  soft_budget_cgroup_cpu_seconds: 2638
+  hard_budget_wall_seconds: 762
+  hard_budget_aggregate_cpu_seconds: 2715
+  hard_budget_cgroup_cpu_seconds: 3693
+  hard_peak_rss_bytes: 546498560
+  soft_multiplier: 1.25
+  hard_multiplier: 1.75
+  rss_multiplier: 1.25
+  preserve_stage_checkpoints: true
+  reuse_completed_arms: true
+  fidelity_reduced: false

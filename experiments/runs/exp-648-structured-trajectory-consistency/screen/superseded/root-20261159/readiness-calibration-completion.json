@@ -1,0 +1,13 @@
+{
+  "artifacts": {
+    "readiness-calibration-core.json": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+    "readiness-calibration-environment.json": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "readiness-calibration-executed-config.yaml": "e5487e1f356381352208cf6661eb5272bc0594afe1ac67db503dfce317352160",
+    "readiness-calibration-mlflow.json": "adbae4cedcc7782e544d6e31d2f0cc50a9704c04e23ee6e3f102252533516890",
+    "readiness-calibration.json": "cd27fabbd47683677c9b6465db00444445569ce32a0b8e8a595a42d11da82981"
+  },
+  "attempt_id": "cal-d3aa35008f646edf",
+  "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+  "complete": true,
+  "schema_version": "exp648-readiness-calibration-completion-v1"
+}

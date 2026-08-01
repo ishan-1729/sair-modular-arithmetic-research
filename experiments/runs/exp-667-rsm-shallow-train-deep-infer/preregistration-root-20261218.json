@@ -1,0 +1,104 @@
+{
+  "gates": {
+    "maximum_candidate_headroom_wall_seconds": 285,
+    "maximum_candidate_inference_wall_seconds": 300,
+    "maximum_invalid_rollout_rate": 0.0,
+    "maximum_w128_loss_to_proposal": 0.02,
+    "minimum_deep_gain_over_fixed_depth": 0.05,
+    "minimum_deep_gain_over_one_state": 0.05,
+    "minimum_state_dependence": 1e-06,
+    "minimum_w128_primary_rollout": 0.85,
+    "minimum_w128_transition": 0.998,
+    "minimum_w256_gain_over_fixed_depth": 0.05,
+    "minimum_w256_gain_over_one_state": 0.05,
+    "minimum_w256_gain_over_proposal": 0.05,
+    "minimum_w256_primary_rollout": 0.1,
+    "require_reload_exact": true,
+    "require_split_separation": true
+  },
+  "mode": "calibration",
+  "paper": {
+    "pages": [
+      5,
+      6,
+      7
+    ],
+    "path": "research/papers/arxiv-2603.15641.pdf",
+    "sha256": "c1cb3a00564e9bc4828c0ddd1b8161d702b32da445eb34920ffe6aab81261c17"
+  },
+  "prohibited": [
+    "answer-dependent depth or stopping",
+    "programmed arithmetic",
+    "validity filter or repair",
+    "lookup",
+    "checked/private answers"
+  ],
+  "root": 20261218,
+  "roots": {
+    "calibration": 20261218,
+    "confirmations": [
+      20261220,
+      20261221
+    ],
+    "viability": 20261219
+  },
+  "routes": [
+    "proposal_only",
+    "rsm_full",
+    "one_state",
+    "deep_supervision",
+    "full_gradient_no_detach",
+    "fixed_depth",
+    "high_reset",
+    "low_reset",
+    "randomized_states"
+  ],
+  "run_id": "exp-667-rsm-shallow-train-deep-infer",
+  "source": {
+    "checkpoint": {
+      "path": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "files": {
+      "config": {
+        "path": "configs/exp_667_rsm_shallow_train_deep_infer.yaml",
+        "sha256": "99583eff36d16415ea359c98afc5fd884ac287b5faf48b41b9665e97d2e0b19f"
+      },
+      "mechanism": {
+        "path": "knowledge/autoresearch/research/2026-07-29-exp667-rsm-mechanism.md",
+        "sha256": "254bb4f81c70ccc1d6eb2ef97669bc0ad690e166a4ac827aad801032d0e5ae37"
+      },
+      "model": {
+        "path": "experiments/exp_667_rsm_shallow_train_deep_infer/model.py",
+        "sha256": "780a8c52fd768916c8afa24acbcfa543f18dc1eb67fca3b0ce1f597d6eab3e13"
+      },
+      "runner": {
+        "path": "experiments/exp_667_rsm_shallow_train_deep_infer/run.py",
+        "sha256": "98026f743fae3b97c873319bf55eaba419b88727beb037a9c786ad30ce2b0d29"
+      },
+      "test": {
+        "path": "tests/test_exp_667_rsm_shallow_train_deep_infer.py",
+        "sha256": "884ad6dbcfcb75070231fbeb9c588aae06b266d97abb8a3786ed59b13f7222da"
+      }
+    },
+    "repository_branch": "codex/exp667-rsm-shallow-train-deep-infer",
+    "repository_commit": "3c9eae74bee6a667472a1e2da93efd786ff96ce3"
+  },
+  "splits": {
+    "128": {
+      "test": "70b0ebd44e0f42ba1a152895e2cd85982c945197af618500de8f633702f68e1a",
+      "train": "49a814878de74e656f39173f8ec97cdf4396aa9dfcfce440b3bd475e73d64061",
+      "validation": "b9125f3dacc18a807360b56f38f0677a0b0e63526d4b7adf2df981787efa8cad"
+    },
+    "256": {
+      "test": "cac22849eb18091bf0bac2425c4a9ca28c4ad0005a39f46ad0adf7fb47683e1d",
+      "train": "478c9f7a87f1fb5d956a8001e3ee806fc4d651c64b74f2eb180daf2505ec5449",
+      "validation": "d1401c7293e2528cf7b12597c22bc0de33c2c9db2771f89b38a72e119678d24e"
+    },
+    "64": {
+      "test": "8e9dbe9fe6a43380c5becff915bd862c3662e49730a9ec36f876d79a63fba4eb",
+      "train": "943b5928bbc6ea6ec81b480adfe49609e0c576971f4114405ea206a146081f50",
+      "validation": "1f63566958740a0075e3c67588ecbcf64e920c437c3d4ce7472be22175a42efd"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "run_id": "exp-100-width16-shared-context-smoke",
+  "created_at": "2026-07-11T20:18:00Z",
+  "checkpoint_sha256": "556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0",
+  "evaluation": {
+    "transition": {
+      "width9_heldout_primes": {
+        "cases": 10000,
+        "correct": 9177,
+        "exact_accuracy": 0.9177,
+        "bit_accuracy": 0.9804333333333333
+      },
+      "width16_heldout_primes": {
+        "cases": 10000,
+        "correct": 6431,
+        "exact_accuracy": 0.6431,
+        "bit_accuracy": 0.8733
+      }
+    },
+    "rollout": {
+      "width9_heldout_primes": {
+        "cases": 5000,
+        "correct": 2840,
+        "exact_accuracy": 0.568
+      },
+      "width16_heldout_primes": {
+        "cases": 5000,
+        "correct": 26,
+        "exact_accuracy": 0.0052
+      }
+    }
+  },
+  "controls": {
+    "width9_untrained_transition_accuracy": 0.124,
+    "width9_untrained_rollout_accuracy": 0.039,
+    "width16_untrained_transition_accuracy": 0.064,
+    "width16_untrained_rollout_accuracy": 0.001,
+    "width9_valid_residue_rate": 0.9874,
+    "width9_rollout_invalid_residue_rate": 0.0722,
+    "width16_valid_residue_rate": 0.9355,
+    "width16_rollout_invalid_residue_rate": 0.5482
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 82.4639333999949,
+    "width9_training_seconds": 32.2830290999991,
+    "width16_training_seconds": 41.1973600999918,
+    "width9_parameters": 75469,
+    "width16_parameters": 85556
+  },
+  "decision": "inconclusive-revise",
+  "limitations": [
+    "Smoke-scale comparison only; no official tier score was produced.",
+    "Width bands differ by construction because the question is scaling to Tier 3.",
+    "The width-16 result missed the preregistered continuation rollout gate and is not promoted.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "run_id": "exp-201-width32-full-budget",
+  "status": "completed",
+  "created_at": "2026-07-12T02:12:00Z",
+  "hypothesis": "Full-budget width-16 transfer plus hard mining crosses 90 percent exact width-32 rollout.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "05ccc758ddb838927818bfa705a46052dff20d48",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "7673ea405aec19c2c76f84f32bd5031860edc7f5b4117ac86164ada3a8d60040",
+    "config_sha256": "46455ed2acd1fa98623e239a6e6ceedffc7d19d6d22cf97a6e3d97a4439445b4"
+  },
+  "config": "configs/exp_201_width32_full_budget.yaml",
+  "environment": "experiments/runs/exp-201-width32-full-budget/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "parent_run_id": "97716b2b31c447c98a062150795e2806",
+    "arm_run_id": "83aa8fc86ad54f7299b8ad058d84c29d"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-201-width32-full-budget/width32-transfer-hard-mining/weights.safetensors",
+    "checkpoint_sha256": "ced89e4ca8cbb5cfae3e093af7ff422ce264abfaaf19a42846644f8b7240351c",
+    "metrics": "evals/results/exp-201-width32-full-budget/metrics.json",
+    "raw_summary": "experiments/runs/exp-201-width32-full-budget/raw-summary.json",
+    "arm_metrics": "experiments/runs/exp-201-width32-full-budget/arm-metrics.json"
+  },
+  "decision": "revise-width32-before-independent",
+  "notes": [
+    "Rollout and validity gates passed, but transition accuracy missed the frozen 99.7 percent threshold by 0.052 percentage points.",
+    "The gate was not relaxed after observing the result.",
+    "A positive final training slope and the narrow miss authorize one separately preregistered 2,400-step confirmation.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

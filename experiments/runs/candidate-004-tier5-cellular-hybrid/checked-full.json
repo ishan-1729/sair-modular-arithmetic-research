@@ -1,0 +1,24 @@
+{
+  "status": "completed",
+  "kind": "checked-public-jsonl-full-1100-post-selection",
+  "overall_accuracy": 0.501,
+  "highest_tier_above_90": 5,
+  "deterministic": true,
+  "static_analysis": "clean",
+  "preprocess_isolated": true,
+  "tiers": [
+    {"tier_id": 0, "total": 100, "correct": 29, "accuracy": 0.29},
+    {"tier_id": 1, "total": 100, "correct": 100, "accuracy": 1.0},
+    {"tier_id": 2, "total": 100, "correct": 99, "accuracy": 0.99},
+    {"tier_id": 3, "total": 100, "correct": 100, "accuracy": 1.0},
+    {"tier_id": 4, "total": 100, "correct": 98, "accuracy": 0.98},
+    {"tier_id": 5, "total": 100, "correct": 94, "accuracy": 0.94},
+    {"tier_id": 6, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 7, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 8, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 9, "total": 100, "correct": 2, "accuracy": 0.02},
+    {"tier_id": 10, "total": 100, "correct": 2, "accuracy": 0.02}
+  ],
+  "timing_seconds": {"load": 2.1783278310031164, "preprocess_isolation": 0.0007814590026100632, "determinism": 2.337068749999162, "inference": 24.87171848300204},
+  "raw_result_sha256": "b7b4927b610cf5167b7605460b1ed4ff2c5cd85ece69e068ca4b9d36e2d00fc4"
+}

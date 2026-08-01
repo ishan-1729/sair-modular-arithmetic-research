@@ -1,0 +1,73 @@
+{
+  "run_id": "exp-633-hierarchical-learned-composition-feasibility",
+  "created_at": "2026-07-13T11:42:49Z",
+  "checkpoint_sha256": "473828b7e9c0760abf8205b1eb11cd0a438ceae5987bfe56ab63a24c884e6028",
+  "control_checkpoint_sha256": "9b94b7eff85caf779598d9fff13a6598db3c195ffd66408545d23a1745af1b6c",
+  "evaluation": {
+    "transition": {
+      "direct_prediction_width16": {
+        "cases": 300,
+        "correct": 0,
+        "exact_accuracy": 0.0,
+        "valid_residue_rate": 1.0,
+        "reason": "The schema requires an exact prediction unit; this direct-product model has no Horner transition, so its width-16 root predictions are reported without relabeling internal-node training diagnostics."
+      }
+    },
+    "rollout": {
+      "control_width16": {"cases": 300, "correct": 260, "exact_accuracy": 0.8666666666666667, "invalid_rate": 0.02, "wall_seconds": 7.8608846940041985, "aggregate_cpu_seconds": 29.66295180799898},
+      "tree_width16": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0, "wall_seconds": 2.7148321979912, "aggregate_cpu_seconds": 10.201519570000528},
+      "control_width32": {"cases": 300, "correct": 3, "exact_accuracy": 0.01, "invalid_rate": 0.15666666666666668, "wall_seconds": 32.24145750400203, "aggregate_cpu_seconds": 121.43234912099979},
+      "tree_width32": {"cases": 300, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0, "wall_seconds": 11.347628364994307, "aggregate_cpu_seconds": 42.79336662900096}
+    }
+  },
+  "controls": {
+    "matched_updates": 2400,
+    "matched_trajectory_examples": 76800,
+    "parameters": {"control": 99824, "tree": 94025, "ratio": 0.9419077576534701},
+    "randomized_width32": {
+      "trained_matched": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.0},
+      "randomized": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "invalid_rate": 0.15},
+      "trained_gain": 0.0
+    },
+    "determinism": {"predictions_equal": true, "metrics_equal": true, "passed": true}
+  },
+  "comparison": {
+    "width16_gain": -0.8666666666666667,
+    "width32_gain": -0.01,
+    "best_logged_tree_internal_node_exactness": 0.6083333492279053,
+    "best_logged_tree_root_exactness": 0.0,
+    "runtime_scaling_exponent_16_to_32": 2.06345587435575,
+    "projected_integrated_seconds": 109.59436721162282
+  },
+  "gates": {
+    "minimum_tree_width16_accuracy": 0.2,
+    "minimum_tree_width16_gain_over_control": -0.02,
+    "minimum_tree_width32_accuracy": 0.05,
+    "minimum_tree_width32_gain_over_control": 0.05,
+    "minimum_trained_gain_over_randomized_width32": 0.1,
+    "maximum_invalid_rate": 0.05,
+    "maximum_parameter_ratio": 1.15,
+    "maximum_projected_integrated_seconds": 260,
+    "require_determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "wall_seconds": 4044.2216743019962,
+    "aggregate_cpu_seconds": 15147.537987308,
+    "external_elapsed_wall_seconds": 3840.0,
+    "external_user_cpu_seconds": 15063.97,
+    "external_system_cpu_seconds": 107.91,
+    "external_percent_cpu": 395,
+    "torch_threads": 4,
+    "runner_peak_rss_bytes": 812834816,
+    "external_maximum_resident_set_kib": 821776,
+    "clock_note": "Runner perf_counter exceeded external elapsed time by about 204 seconds under WSL scheduling; aggregate CPU measures agree closely and both wall measures are reported."
+  },
+  "decision": "reject-hierarchical-composition-feasibility",
+  "limitations": [
+    "Fresh generated feasibility evidence only; checked, independent, official, and private answers were not read.",
+    "Exact bigint arithmetic is confined to offline node labels and evaluation truth.",
+    "The arms match updates, trajectories, widths, and labeled states closely, but their network operations differ by design.",
+    "The result rejects this shared latent tree operator and training prescription, not every possible parallel or attention architecture."
+  ]
+}

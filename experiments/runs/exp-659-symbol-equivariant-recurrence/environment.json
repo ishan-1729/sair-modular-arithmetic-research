@@ -1,0 +1,12 @@
+{
+  "schema_version": "exp659-environment-v1",
+  "run_id": "exp-659-symbol-equivariant-recurrence",
+  "source_commit": "6974c91fc600b6d9edc19edf80f7dab56ef4870c",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "packages": {"torch": "2.5.1+cpu", "mlflow": "3.14.0", "numpy": "2.5.1", "psutil": "7.0.0"},
+  "device": "cpu",
+  "torch_threads": 4,
+  "deterministic_algorithms": true,
+  "formal_execution": false
+}

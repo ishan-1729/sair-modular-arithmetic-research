@@ -1,0 +1,23 @@
+{
+  "run_id": "exp-310-chunk-shared-recurrent-reduction",
+  "created_at": "2026-07-12T05:10:00Z",
+  "checkpoint_sha256": "1c3487c83aed4a581a8552e7d7274c9cb1d8057144906f3ccd48aa95db824925",
+  "evaluation": {
+    "transition": {
+      "cellular_width16": {"cases": 20000, "correct": 18238, "exact_accuracy": 0.9119},
+      "chunk_gru_width16": {"cases": 20000, "correct": 7667, "exact_accuracy": 0.38335},
+      "cellular_zero_width32": {"cases": 20000, "correct": 15023, "exact_accuracy": 0.75115},
+      "chunk_gru_zero_width32": {"cases": 20000, "correct": 8887, "exact_accuracy": 0.44435}
+    },
+    "rollout": {
+      "cellular_width16": {"cases": 5000, "correct": 1410, "exact_accuracy": 0.282},
+      "chunk_gru_width16": {"cases": 5000, "correct": 0, "exact_accuracy": 0.0},
+      "cellular_zero_width32": {"cases": 5000, "correct": 10, "exact_accuracy": 0.002},
+      "chunk_gru_zero_width32": {"cases": 5000, "correct": 0, "exact_accuracy": 0.0}
+    }
+  },
+  "controls": {"challenger_transition_gain": -0.52855, "challenger_rollout_gain": -0.282, "cellular_parameters": 99824, "chunk_gru_parameters": 72903, "gates_passed": false},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 324.482559972},
+  "decision": "reject-chunk-shared-bidirectional-gru-advance-mixed-width-cellular-control",
+  "limitations": ["Mixed-width architecture smoke test; no consumed independent or checked answer was used.", "Zero-shot width 32 measures length transfer, not Tier-4 readiness."]
+}

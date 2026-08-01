@@ -1,0 +1,41 @@
+run_id: exp-520-tier5-recovery-delta-patching
+hypothesis: a localized subset of the recovery-trained parameter delta provides Tier-5 rollout gain without countervailing full-checkpoint changes
+preregistration: knowledge/autoresearch/ablations/exp-520-tier5-recovery-delta-patching.md
+analysis: knowledge/autoresearch/analysis/exp-520-tier5-recovery-delta-localization.md
+seed: 20260725
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+control_checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/teacher-forced-control/weights.safetensors
+control_checkpoint_sha256: b741fdcb4b55446ad5f2aadf0f5b0bf15b184679ed782474d6481d124fcd8560
+challenger_checkpoint: .scratch/exp-329-cellular-width64-autonomous-state-recovery/state-recovery-challenger/weights.safetensors
+challenger_checkpoint_sha256: 050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7
+architecture: {width: 64, hidden: 92, cycles: 2}
+patches:
+  control: []
+  quotient-negative-control: [quotient_head]
+  input-state: [stem, state_norm]
+  recurrent-gate: [gate_weight, gate_bias]
+  recurrent-candidate: [candidate_weight, candidate_bias]
+  recurrent-core: [gate_weight, gate_bias, candidate_weight, candidate_bias]
+  readout: [output_norm, local_head]
+  full-challenger: ["*"]
+data: {prime_bits_min: 33, prime_bits_max: 64, train_prime_identities: 1, test_prime_identities: 128}
+evaluation: {transition_cases_per_arm: 1000, rollout_cases_per_arm: 500}
+gates:
+  minimum_patch_transition: 0.998
+  minimum_patch_rollout: 0.94
+  minimum_rollout_gain_over_full_challenger: 0.01
+  maximum_patch_invalid_rollout_rate: 0.005
+  maximum_one_sided_mcnemar_p: 0.10
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-328-full-fidelity-single-model-arms
+  calibration_max_single_model_arm_wall_seconds: 161.2974932069992
+  model_arms: 8
+  projected_evaluation_wall_seconds: 1290.3799456559936
+  projected_setup_and_checkpoint_wall_seconds: 60
+  projected_total_wall_seconds: 1350.3799456559936
+  soft_budget_wall_seconds: 2100
+  hard_runaway_ceiling_wall_seconds: 3000
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 200
+  cache_completed_arms: true

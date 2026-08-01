@@ -1,0 +1,11 @@
+{
+  "run_id": "exp-688-compact-hidden-trajectory-distillation",
+  "status": "passed-package-oracle-and-terminal-resource-park",
+  "historical_focused": {"command": "python -m pytest -q tests/test_exp_686_w256_straight_through_specialist.py tests/test_exp_687_compact_distilled_w256_specialist.py", "status": "35-passed-in-18.19s"},
+  "focused": {"command": "python -m pytest -q tests/test_exp_686_w256_straight_through_specialist.py tests/test_exp_687_compact_distilled_w256_specialist.py tests/test_exp_688_compact_hidden_trajectory_distillation.py", "status": "53-passed-in-19.92s"},
+  "smoke": {"command": "python -m experiments.exp_688_compact_hidden_trajectory_distillation.run --mode smoke", "status": "passed-all-modes", "wall_seconds": 70.37, "process_cpu_seconds": 170.62, "peak_rss_kib": 669324},
+  "package_oracle": {"command": "python tools/validate_project.py && python -m pytest", "invocations": 1, "validator": "passed-218-OKF-concepts-1100-benchmark-records-upstream-82510bba00a1", "pytest": "779-passed-in-554.72s", "outer_wall_seconds": 535.35, "user_cpu_seconds": 780.57, "system_cpu_seconds": 24.60, "peak_rss_kib": 940508, "log_sha256": "11db83956c6c05913ad104238e5d3c8a710af0bdff563d5a3b6eaae592962f0e"},
+  "calibration": {"command": "python -m experiments.exp_688_compact_hidden_trajectory_distillation.run --mode calibration --root 20261306", "status": "completed-resource-reject", "receipt_sha256": "9e6918c532c855504daef6cc1ed19679606bbdba23c8502c7bf5563e6d777e9a"},
+  "roots_opened": [20261306],
+  "roots_unopened": [20261307, 20261308, 20261309]
+}

@@ -1,0 +1,24 @@
+{
+  "run_id": "exp-300-width64-bit-tensor-transfer",
+  "status": "completed",
+  "created_at": "2026-07-12T04:47:00Z",
+  "hypothesis": "Learned width-32 transfer accelerates width-64 learning once exact labels are converted to tensor-native inputs offline.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "0acf39f4009d50ebaf9db4503937c2f21185bf01",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "config_sha256": "0a11410172018249106ab224247c340c541a199dd5efaa59516701a1a9c889d0"
+  },
+  "config": "configs/exp_300_width64_bit_tensor_transfer.yaml",
+  "environment": "experiments/runs/exp-300-width64-bit-tensor-transfer/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "parent_run_id": "9b962a480fb64c4381e44f2116565a86", "random_run_id": "af0416037ba44036a1ba7066afb0191c", "transfer_run_id": "006f4aea10ae4099beb3d83c072ef570"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-300-width64-bit-tensor-transfer/width64-transfer/weights.safetensors",
+    "checkpoint_sha256": "6d35ce8e062b3b7575590b2401206f6425917b678c73a9aa3b375aa71a70ac61",
+    "metrics": "evals/results/exp-300-width64-bit-tensor-transfer/metrics.json"
+  },
+  "decision": "reject-width64-transfer-smoke",
+  "notes": ["Transfer improved transition by 59.9 points to 82.38 percent.", "Both arms remained at zero exact rollouts, so the preregistered gate failed.", "The tensor-native model path is valid above signed int64 and supports a hard-mined continuation experiment."]
+}

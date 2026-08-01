@@ -1,0 +1,715 @@
+{
+  "run_id": "exp-100-width16-shared-context-smoke",
+  "status": "completed",
+  "hypothesis": "shared bit-conditioned Horner transitions remain learnable at width 16",
+  "mlflow": {
+    "tracking_uri": "sqlite:///D:/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic",
+    "parent_run_id": "5a831506933a41e1803bcffa79c6a24c",
+    "arm_run_ids": {
+      "width9-control": "7b3639d380e1458a944195129eefdd01",
+      "width16-challenger": "f065353fb10f435da8867936d8327cf4"
+    }
+  },
+  "source": {
+    "repository_commit": "669a27c8c1bc8aa6e5755b4d46474e46a661cf1a",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "sha256": {
+      "config": "52d2c45b1accce10302522bdf289ee4367f071f456932f1cf1092cab5c6c255c",
+      "model": "182614346a5ea9f5ab207395a351af0ac96a11ff56a0cd87ed6ea3550fb96c6e",
+      "runner": "25e2b8e1a888d31bbcb85bcbd030839595bdb3fe4af23bdc5036a234c1d1cf5d",
+      "data_checksums": "1baa3fa16bd649da210e23d5af5758dc54d0e378555c95ae347713f96101cbb8"
+    }
+  },
+  "environment": {
+    "python": "3.13.5",
+    "pytorch": "2.12.1+cpu",
+    "numpy": "2.3.3",
+    "mlflow": "3.14.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "device": "cpu",
+    "torch_threads": 4,
+    "cpu_count": 22
+  },
+  "resource": {
+    "wall_seconds": 82.46393339999486,
+    "cap_cpu_minutes": 5
+  },
+  "decision": "inconclusive-revise",
+  "results": {
+    "width9-control": {
+      "arm": {
+        "name": "width9-control",
+        "width": 9,
+        "prime_bits_min": 4,
+        "prime_bits_max": 8
+      },
+      "parameters": 75469,
+      "prime_split": {
+        "train": 39,
+        "validation": 5,
+        "test": 6,
+        "sha256": "41dce3a899a1f4820f229f3fce8a759ca610ffa159396d001409bc4479cfc40f"
+      },
+      "training": {
+        "steps": 400,
+        "examples": 204800,
+        "seconds": 32.28302909999911,
+        "peak_rss_bytes": 531812352,
+        "final_100_step_batch_exact_delta": 0.06640625,
+        "history": [
+          {
+            "step": 1,
+            "elapsed_seconds": 0.09390320000238717,
+            "learning_rate": 0.0024999959219366217,
+            "gradient_norm": 2.2043275833129883,
+            "loss": 1.1608434915542603,
+            "mean_bce": 0.6595234870910645,
+            "worst_bit_bce": 0.8236294388771057,
+            "quotient_ce": 1.3068674802780151,
+            "batch_exact": 0.083984375
+          },
+          {
+            "step": 50,
+            "elapsed_seconds": 3.6511132000014186,
+            "learning_rate": 0.0024898193850348346,
+            "gradient_norm": 0.3681749999523163,
+            "loss": 0.48431503772735596,
+            "mean_bce": 0.2676747739315033,
+            "worst_bit_bce": 0.41918766498565674,
+            "quotient_ce": 0.28005847334861755,
+            "batch_exact": 0.61328125
+          },
+          {
+            "step": 100,
+            "elapsed_seconds": 7.705334199999925,
+            "learning_rate": 0.0024594517332839918,
+            "gradient_norm": 0.4863971173763275,
+            "loss": 0.42086195945739746,
+            "mean_bce": 0.23514291644096375,
+            "worst_bit_bce": 0.3754311501979828,
+            "quotient_ce": 0.16775019466876984,
+            "batch_exact": 0.603515625
+          },
+          {
+            "step": 150,
+            "elapsed_seconds": 11.899439899993013,
+            "learning_rate": 0.002409416643688433,
+            "gradient_norm": 0.36756768822669983,
+            "loss": 0.296207994222641,
+            "mean_bce": 0.15761345624923706,
+            "worst_bit_bce": 0.28755536675453186,
+            "quotient_ce": 0.0919463038444519,
+            "batch_exact": 0.73828125
+          },
+          {
+            "step": 200,
+            "elapsed_seconds": 15.807380199999898,
+            "learning_rate": 0.0023405702305034854,
+            "gradient_norm": 0.6531344652175903,
+            "loss": 0.23215216398239136,
+            "mean_bce": 0.11844643205404282,
+            "worst_bit_bce": 0.23476287722587585,
+            "quotient_ce": 0.08062432706356049,
+            "batch_exact": 0.77734375
+          },
+          {
+            "step": 250,
+            "elapsed_seconds": 20.346301700003096,
+            "learning_rate": 0.002254090474946574,
+            "gradient_norm": 0.42958468198776245,
+            "loss": 0.18298682570457458,
+            "mean_bce": 0.09050021320581436,
+            "worst_bit_bce": 0.19353020191192627,
+            "quotient_ce": 0.05398040637373924,
+            "batch_exact": 0.837890625
+          },
+          {
+            "step": 300,
+            "elapsed_seconds": 24.14053769999009,
+            "learning_rate": 0.002151457069611994,
+            "gradient_norm": 0.7531769275665283,
+            "loss": 0.18561333417892456,
+            "mean_bce": 0.08885162323713303,
+            "worst_bit_bce": 0.20407281816005707,
+            "quotient_ce": 0.04928944632411003,
+            "batch_exact": 0.85546875
+          },
+          {
+            "step": 350,
+            "elapsed_seconds": 28.240705599993817,
+            "learning_rate": 0.002034426100520378,
+            "gradient_norm": 0.8816952109336853,
+            "loss": 0.13753430545330048,
+            "mean_bce": 0.057290978729724884,
+            "worst_bit_bce": 0.174172043800354,
+            "quotient_ce": 0.018659016117453575,
+            "batch_exact": 0.88671875
+          },
+          {
+            "step": 400,
+            "elapsed_seconds": 32.269210700003896,
+            "learning_rate": 0.0019049999999999983,
+            "gradient_norm": 1.0711232423782349,
+            "loss": 0.09619760513305664,
+            "mean_bce": 0.041860200464725494,
+            "worst_bit_bce": 0.11678947508335114,
+            "quotient_ce": 0.01782139576971531,
+            "batch_exact": 0.921875
+          }
+        ]
+      },
+      "controls": {
+        "untrained_transition": {
+          "cases": 2000,
+          "correct": 248,
+          "exact_accuracy": 0.124,
+          "bit_accuracy": 0.6747222222222222,
+          "valid_residue_rate": 0.585,
+          "by_modulus_bits": {
+            "4": {
+              "correct": 60,
+              "cases": 344,
+              "exact_accuracy": 0.1744186046511628
+            },
+            "5": {
+              "correct": 146,
+              "cases": 335,
+              "exact_accuracy": 0.43582089552238806
+            },
+            "6": {
+              "correct": 4,
+              "cases": 375,
+              "exact_accuracy": 0.010666666666666666
+            },
+            "7": {
+              "correct": 25,
+              "cases": 294,
+              "exact_accuracy": 0.08503401360544217
+            },
+            "8": {
+              "correct": 13,
+              "cases": 652,
+              "exact_accuracy": 0.019938650306748466
+            }
+          }
+        },
+        "untrained_rollout": {
+          "cases": 1000,
+          "correct": 39,
+          "exact_accuracy": 0.039,
+          "all_steps_correct": 13,
+          "all_steps_exact_accuracy": 0.013,
+          "any_invalid_residue_rate": 0.755,
+          "first_error_by_step": [
+            761,
+            10,
+            25,
+            27,
+            14,
+            74,
+            53,
+            15,
+            8
+          ],
+          "by_modulus_bits": {
+            "4": {
+              "correct": 18,
+              "cases": 166,
+              "exact_accuracy": 0.10843373493975904
+            },
+            "5": {
+              "correct": 14,
+              "cases": 175,
+              "exact_accuracy": 0.08
+            },
+            "6": {
+              "correct": 1,
+              "cases": 150,
+              "exact_accuracy": 0.006666666666666667
+            },
+            "7": {
+              "correct": 3,
+              "cases": 176,
+              "exact_accuracy": 0.017045454545454544
+            },
+            "8": {
+              "correct": 3,
+              "cases": 333,
+              "exact_accuracy": 0.009009009009009009
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "heldout_transition": {
+          "cases": 10000,
+          "correct": 9177,
+          "exact_accuracy": 0.9177,
+          "bit_accuracy": 0.9804333333333334,
+          "valid_residue_rate": 0.9874,
+          "by_modulus_bits": {
+            "4": {
+              "correct": 1659,
+              "cases": 1712,
+              "exact_accuracy": 0.9690420560747663
+            },
+            "5": {
+              "correct": 1648,
+              "cases": 1747,
+              "exact_accuracy": 0.9433314253005152
+            },
+            "6": {
+              "correct": 1565,
+              "cases": 1677,
+              "exact_accuracy": 0.9332140727489565
+            },
+            "7": {
+              "correct": 1439,
+              "cases": 1591,
+              "exact_accuracy": 0.9044626021370208
+            },
+            "8": {
+              "correct": 2866,
+              "cases": 3273,
+              "exact_accuracy": 0.8756492514512679
+            }
+          }
+        },
+        "heldout_rollout": {
+          "cases": 5000,
+          "correct": 2840,
+          "exact_accuracy": 0.568,
+          "all_steps_correct": 2834,
+          "all_steps_exact_accuracy": 0.5668,
+          "any_invalid_residue_rate": 0.0722,
+          "first_error_by_step": [
+            0,
+            0,
+            69,
+            207,
+            342,
+            345,
+            400,
+            414,
+            389
+          ],
+          "by_modulus_bits": {
+            "4": {
+              "correct": 709,
+              "cases": 816,
+              "exact_accuracy": 0.8688725490196079
+            },
+            "5": {
+              "correct": 604,
+              "cases": 850,
+              "exact_accuracy": 0.7105882352941176
+            },
+            "6": {
+              "correct": 522,
+              "cases": 827,
+              "exact_accuracy": 0.6311970979443773
+            },
+            "7": {
+              "correct": 402,
+              "cases": 852,
+              "exact_accuracy": 0.47183098591549294
+            },
+            "8": {
+              "correct": 603,
+              "cases": 1655,
+              "exact_accuracy": 0.36435045317220544
+            }
+          }
+        }
+      },
+      "checkpoint": {
+        "path": ".scratch\\exp-100-width16-shared-context-smoke\\width9-control\\weights.safetensors",
+        "sha256": "6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192",
+        "bytes": 307772
+      },
+      "limitations": [
+        "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+        "No checked public expected answers were read or evaluated.",
+        "The width bands differ by construction; this tests scaling, not equal task difficulty."
+      ]
+    },
+    "width16-challenger": {
+      "arm": {
+        "name": "width16-challenger",
+        "width": 16,
+        "prime_bits_min": 9,
+        "prime_bits_max": 16
+      },
+      "parameters": 85556,
+      "prime_split": {
+        "train": 5190,
+        "validation": 649,
+        "test": 649,
+        "sha256": "8906190d5a46a87606e618a65d8d86c3902d3da4da88543caeb2e32313cab07e"
+      },
+      "training": {
+        "steps": 400,
+        "examples": 204800,
+        "seconds": 41.19736009999178,
+        "peak_rss_bytes": 554209280,
+        "final_100_step_batch_exact_delta": 0.0546875,
+        "history": [
+          {
+            "step": 1,
+            "elapsed_seconds": 0.11558919999515638,
+            "learning_rate": 0.0024999959219366217,
+            "gradient_norm": 1.413325309753418,
+            "loss": 1.1864402294158936,
+            "mean_bce": 0.6600372195243835,
+            "worst_bit_bce": 0.9376225471496582,
+            "quotient_ce": 1.0447287559509277,
+            "batch_exact": 0.060546875
+          },
+          {
+            "step": 50,
+            "elapsed_seconds": 4.9609299000003375,
+            "learning_rate": 0.0024898193850348346,
+            "gradient_norm": 0.5472050905227661,
+            "loss": 0.9045078754425049,
+            "mean_bce": 0.5361016392707825,
+            "worst_bit_bce": 0.7008711099624634,
+            "quotient_ce": 0.5301429033279419,
+            "batch_exact": 0.34765625
+          },
+          {
+            "step": 100,
+            "elapsed_seconds": 10.023975000003702,
+            "learning_rate": 0.0024594517332839918,
+            "gradient_norm": 0.7793105244636536,
+            "loss": 0.6712377071380615,
+            "mean_bce": 0.40788698196411133,
+            "worst_bit_bce": 0.5159363746643066,
+            "quotient_ce": 0.31179338693618774,
+            "batch_exact": 0.40625
+          },
+          {
+            "step": 150,
+            "elapsed_seconds": 15.656578499998432,
+            "learning_rate": 0.002409416643688433,
+            "gradient_norm": 1.1425143480300903,
+            "loss": 0.636910080909729,
+            "mean_bce": 0.38979923725128174,
+            "worst_bit_bce": 0.5065131187438965,
+            "quotient_ce": 0.19179965555667877,
+            "batch_exact": 0.400390625
+          },
+          {
+            "step": 200,
+            "elapsed_seconds": 20.498735200002557,
+            "learning_rate": 0.0023405702305034854,
+            "gradient_norm": 0.7558242678642273,
+            "loss": 0.5951896905899048,
+            "mean_bce": 0.36553746461868286,
+            "worst_bit_bce": 0.4820990562438965,
+            "quotient_ce": 0.12707646191120148,
+            "batch_exact": 0.4140625
+          },
+          {
+            "step": 250,
+            "elapsed_seconds": 26.175656199993682,
+            "learning_rate": 0.002254090474946574,
+            "gradient_norm": 1.4576525688171387,
+            "loss": 0.5748239159584045,
+            "mean_bce": 0.3239430785179138,
+            "worst_bit_bce": 0.5231738090515137,
+            "quotient_ce": 0.15452609956264496,
+            "batch_exact": 0.45703125
+          },
+          {
+            "step": 300,
+            "elapsed_seconds": 31.22332849999657,
+            "learning_rate": 0.002151457069611994,
+            "gradient_norm": 0.4595468044281006,
+            "loss": 0.38924095034599304,
+            "mean_bce": 0.2400730401277542,
+            "worst_bit_bce": 0.3131900131702423,
+            "quotient_ce": 0.08232427388429642,
+            "batch_exact": 0.623046875
+          },
+          {
+            "step": 350,
+            "elapsed_seconds": 36.06089399999473,
+            "learning_rate": 0.002034426100520378,
+            "gradient_norm": 0.6328660845756531,
+            "loss": 0.40508031845092773,
+            "mean_bce": 0.23743869364261627,
+            "worst_bit_bce": 0.34624379873275757,
+            "quotient_ce": 0.11831924319267273,
+            "batch_exact": 0.623046875
+          },
+          {
+            "step": 400,
+            "elapsed_seconds": 41.18689209999866,
+            "learning_rate": 0.0019049999999999983,
+            "gradient_norm": 0.5431163907051086,
+            "loss": 0.3508184850215912,
+            "mean_bce": 0.2088547646999359,
+            "worst_bit_bce": 0.29691702127456665,
+            "quotient_ce": 0.08351053297519684,
+            "batch_exact": 0.677734375
+          }
+        ]
+      },
+      "controls": {
+        "untrained_transition": {
+          "cases": 2000,
+          "correct": 128,
+          "exact_accuracy": 0.064,
+          "bit_accuracy": 0.6049375,
+          "valid_residue_rate": 0.9985,
+          "by_modulus_bits": {
+            "9": {
+              "correct": 2,
+              "cases": 11,
+              "exact_accuracy": 0.18181818181818182
+            },
+            "10": {
+              "correct": 6,
+              "cases": 18,
+              "exact_accuracy": 0.3333333333333333
+            },
+            "11": {
+              "correct": 6,
+              "cases": 40,
+              "exact_accuracy": 0.15
+            },
+            "12": {
+              "correct": 10,
+              "cases": 87,
+              "exact_accuracy": 0.11494252873563218
+            },
+            "13": {
+              "correct": 12,
+              "cases": 154,
+              "exact_accuracy": 0.07792207792207792
+            },
+            "14": {
+              "correct": 27,
+              "cases": 250,
+              "exact_accuracy": 0.108
+            },
+            "15": {
+              "correct": 33,
+              "cases": 501,
+              "exact_accuracy": 0.0658682634730539
+            },
+            "16": {
+              "correct": 32,
+              "cases": 939,
+              "exact_accuracy": 0.03407880724174654
+            }
+          }
+        },
+        "untrained_rollout": {
+          "cases": 1000,
+          "correct": 1,
+          "exact_accuracy": 0.001,
+          "all_steps_correct": 1,
+          "all_steps_exact_accuracy": 0.001,
+          "any_invalid_residue_rate": 0.0,
+          "first_error_by_step": [
+            510,
+            140,
+            125,
+            81,
+            55,
+            34,
+            21,
+            21,
+            5,
+            3,
+            2,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "by_modulus_bits": {
+            "9": {
+              "correct": 1,
+              "cases": 8,
+              "exact_accuracy": 0.125
+            },
+            "10": {
+              "correct": 0,
+              "cases": 20,
+              "exact_accuracy": 0.0
+            },
+            "11": {
+              "correct": 0,
+              "cases": 21,
+              "exact_accuracy": 0.0
+            },
+            "12": {
+              "correct": 0,
+              "cases": 43,
+              "exact_accuracy": 0.0
+            },
+            "13": {
+              "correct": 0,
+              "cases": 55,
+              "exact_accuracy": 0.0
+            },
+            "14": {
+              "correct": 0,
+              "cases": 144,
+              "exact_accuracy": 0.0
+            },
+            "15": {
+              "correct": 0,
+              "cases": 224,
+              "exact_accuracy": 0.0
+            },
+            "16": {
+              "correct": 0,
+              "cases": 485,
+              "exact_accuracy": 0.0
+            }
+          }
+        }
+      },
+      "evaluation": {
+        "heldout_transition": {
+          "cases": 10000,
+          "correct": 6431,
+          "exact_accuracy": 0.6431,
+          "bit_accuracy": 0.8733,
+          "valid_residue_rate": 0.9355,
+          "by_modulus_bits": {
+            "9": {
+              "correct": 46,
+              "cases": 61,
+              "exact_accuracy": 0.7540983606557377
+            },
+            "10": {
+              "correct": 94,
+              "cases": 129,
+              "exact_accuracy": 0.7286821705426356
+            },
+            "11": {
+              "correct": 148,
+              "cases": 204,
+              "exact_accuracy": 0.7254901960784313
+            },
+            "12": {
+              "correct": 285,
+              "cases": 390,
+              "exact_accuracy": 0.7307692307692307
+            },
+            "13": {
+              "correct": 506,
+              "cases": 722,
+              "exact_accuracy": 0.7008310249307479
+            },
+            "14": {
+              "correct": 920,
+              "cases": 1360,
+              "exact_accuracy": 0.6764705882352942
+            },
+            "15": {
+              "correct": 1525,
+              "cases": 2427,
+              "exact_accuracy": 0.6283477544293367
+            },
+            "16": {
+              "correct": 2907,
+              "cases": 4707,
+              "exact_accuracy": 0.6175908221797323
+            }
+          }
+        },
+        "heldout_rollout": {
+          "cases": 5000,
+          "correct": 26,
+          "exact_accuracy": 0.0052,
+          "all_steps_correct": 26,
+          "all_steps_exact_accuracy": 0.0052,
+          "any_invalid_residue_rate": 0.5482,
+          "first_error_by_step": [
+            0,
+            115,
+            550,
+            853,
+            862,
+            735,
+            539,
+            458,
+            296,
+            226,
+            155,
+            72,
+            48,
+            36,
+            18,
+            11
+          ],
+          "by_modulus_bits": {
+            "9": {
+              "correct": 1,
+              "cases": 31,
+              "exact_accuracy": 0.03225806451612903
+            },
+            "10": {
+              "correct": 4,
+              "cases": 89,
+              "exact_accuracy": 0.0449438202247191
+            },
+            "11": {
+              "correct": 1,
+              "cases": 100,
+              "exact_accuracy": 0.01
+            },
+            "12": {
+              "correct": 4,
+              "cases": 210,
+              "exact_accuracy": 0.01904761904761905
+            },
+            "13": {
+              "correct": 5,
+              "cases": 340,
+              "exact_accuracy": 0.014705882352941176
+            },
+            "14": {
+              "correct": 2,
+              "cases": 672,
+              "exact_accuracy": 0.002976190476190476
+            },
+            "15": {
+              "correct": 2,
+              "cases": 1192,
+              "exact_accuracy": 0.0016778523489932886
+            },
+            "16": {
+              "correct": 7,
+              "cases": 2366,
+              "exact_accuracy": 0.0029585798816568047
+            }
+          }
+        }
+      },
+      "checkpoint": {
+        "path": ".scratch\\exp-100-width16-shared-context-smoke\\width16-challenger\\weights.safetensors",
+        "sha256": "556b45759a93b500fcb79f3950b5be73514a7164ba71a2917cf31f4a01012ea0",
+        "bytes": 348128
+      },
+      "limitations": [
+        "Smoke-scale checkpoint selected only by preregistered heldout-prime gates.",
+        "No checked public expected answers were read or evaluated.",
+        "The width bands differ by construction; this tests scaling, not equal task difficulty."
+      ]
+    }
+  },
+  "limitations": [
+    "Smoke-scale A/B; no public expected answers consulted.",
+    "The prime bands differ because the ranking question is width scaling.",
+    "A continuation decision is not candidate promotion."
+  ]
+}

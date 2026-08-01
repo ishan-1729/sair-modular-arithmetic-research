@@ -1,0 +1,78 @@
+run_id: exp-688-compact-hidden-trajectory-distillation
+hypothesis: Normalized selected-channel teacher/student final-hidden alignment at every recovery transition materially improves hidden56 W256 autonomous exactness over matched logit-only distillation.
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+source_contract:
+  exp220_model: {path: experiments/exp_220_width_independent_cellular/model.py, sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc}
+  exp300_runner: {path: experiments/exp_300_width64_bit_tensor_transfer/run.py, sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f}
+  exp687_runner: {path: experiments/exp_687_compact_distilled_w256_specialist/run.py, sha256: 3644bbdc9c25f77daa96ca3322fa024831603886dd9dbf8612a4bb6ba2bfd3ff}
+  candidate_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+  candidate_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+  candidate_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+roots:
+  calibration: 20261306
+  formal: 20261307
+  confirmations: [20261308, 20261309]
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model: {source_hidden: 92, hidden: 56, width: 256, cycles: 2, parameters: 38588}
+pruning:
+  method: normalized-squared-incident-weight
+  tie_break: ascending-source-channel-index
+  library: native-pytorch-index-select
+  retained_channels: 56
+routes:
+  hidden_aligned: {trained: true, residue_distillation_weight: 0.10, quotient_distillation_weight: 0.05, hidden_distillation_weight: 0.05}
+  logit_only: {trained: true, residue_distillation_weight: 0.10, quotient_distillation_weight: 0.05, hidden_distillation_weight: 0.0}
+  frozen_pruned: {trained: false}
+  randomized_control: {trained: false}
+  reset_control: {trained: false}
+data:
+  curriculum: [64, 128, 256, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 68800
+  training_seed_offset: 68900
+  test_seed_offset: 69000
+training:
+  updates: 2400
+  calibration_updates: 4
+  horizon: 8
+  batch_size: 16
+  learning_rate: 0.00001
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  residue_distillation_weight: 0.10
+  quotient_distillation_weight: 0.05
+  hidden_distillation_weight: 0.05
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_updates: 100
+calibration: {transition_cases_per_route: 16, rollout_cases_per_route: 2, candidate_repetitions: 3}
+evaluation: {transition_cases_per_width: 3000, rollout_cases_per_width: 300, widths: [128, 256]}
+gates:
+  minimum_primary_w256_rollout: 0.50
+  minimum_primary_w256_transition: 0.998
+  maximum_invalid_rate: 0.01
+  minimum_gain_over_logit_only: 0.10
+  maximum_w128_loss_to_logit_only: 0.05
+  confirmation_admission_rollout: 0.85
+  minimum_trained_weight_drop: 0.20
+  maximum_candidate_guarded_wall_seconds: 285.0
+resource_policy:
+  package_oracle_observed_wall_seconds: 552.29
+  package_oracle_observed_process_cpu_seconds: 753.39
+  package_oracle_hard_wall_seconds: 1333.702125
+  calibration_hard_wall_seconds: 1333.702125
+  calibration_hard_process_cpu_seconds: 6000.0
+  maximum_expected_formal_wall_seconds: 21600.0
+  maximum_peak_rss_bytes: 6442450944
+  candidate_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 1.75
+  fidelity_reduced: false
+prohibited: [checked-or-private-answers, inference-answer-selection, output-repair, hand-coded-reduction, root-reuse, post-result-retuning]

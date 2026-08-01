@@ -1,0 +1,104 @@
+{
+  "creation_method": "backfill-without-root-open-or-reexecution",
+  "experiment_id": "2",
+  "experiment_name": "sair-modular-arithmetic-wsl",
+  "limitations": [
+    "Backfilled from immutable completed calibration evidence; no generator, model, corpus, training, evaluation, or root-consuming function was invoked.",
+    "This run records timing, resource, provenance, and integrity facts only; no scientific accuracy or selection metric is present.",
+    "Calibration root 20261151 was already consumed only by the validated non-scientific calibration; corpus, screen, confirmation, checked, independent, private, and EXP-649 formal roots remain unopened.",
+    "This receipt does not register a candidate, authorize screen execution, or provide promotion or Goal-completion evidence."
+  ],
+  "run_id": "d4d472194df54e1ca1bdff4fab3201fe",
+  "run_name": "exp-648-structured-trajectory-consistency-calibration-only",
+  "run_status": "FINISHED",
+  "schema_version": "exp648-mlflow-receipt-v1",
+  "source_hashes": {
+    "calibration_core_sha256": "45f34f3c7e436af2e7468060d734937780c3cda36a758cd841a378484f2aceff",
+    "calibration_sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db",
+    "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+    "environment_file_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+    "environment_payload_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+    "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+    "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+    "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+    "runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+    "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "workload_sha256": "ab7279be43dce8a56cd5e64a91918b1d4845cb33f8bb0e22fb0840c05adcc835"
+  },
+  "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+  "verified": {
+    "artifacts": [
+      {
+        "downloaded_sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db",
+        "path": "calibration-only/calibration.json",
+        "source_path": "experiments/runs/exp-648-structured-trajectory-consistency/calibration.json",
+        "source_sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+        "path": "calibration-only/environment.json",
+        "source_path": "experiments/runs/exp-648-structured-trajectory-consistency/environment.json",
+        "source_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+        "path": "calibration-only/executed-config.yaml",
+        "source_path": "experiments/runs/exp-648-structured-trajectory-consistency/executed-config.yaml",
+        "source_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+        "verified": true
+      },
+      {
+        "downloaded_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+        "path": "calibration-only/exp_648_structured_trajectory_consistency.yaml",
+        "source_path": "configs/exp_648_structured_trajectory_consistency.yaml",
+        "source_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+        "verified": true
+      }
+    ],
+    "metrics": {
+      "cumulative_calibration_aggregate_cpu_seconds": 24278.120608365,
+      "cumulative_calibration_wall_seconds": 5900.399178599999,
+      "current_active_aggregate_cpu_seconds": 8516.110946257,
+      "current_active_wall_seconds": 2087.629991938,
+      "max_peak_rss_bytes": 2697101312.0,
+      "screen_hard_aggregate_cpu_seconds": 38681.43836300284,
+      "screen_hard_wall_seconds": 9556.470423034601,
+      "screen_projected_aggregate_cpu_seconds": 20617.570946256983,
+      "screen_projected_wall_seconds": 5090.880926700058,
+      "screen_soft_aggregate_cpu_seconds": 25787.625575335227,
+      "screen_soft_wall_seconds": 6370.980282023068
+    },
+    "no_accuracy_or_selection_metrics": true,
+    "params": {
+      "calibration_root": "20261151",
+      "calibration_root_role": "resource-calibration-only",
+      "dependency_manifest_sha256": "a07662d9562e154494f8db189e19beaa5b10a050d89e88905bee675c09bceecc",
+      "environment_file_sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+      "environment_payload_sha256": "f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a",
+      "executed_config_sha256": "28bbbaaedf10929bdd133a764ddfe688e8b9a98f0196b8c768930895b5407127",
+      "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+      "resource_protocol_sha256": "f0800dff74038df7465abff8360fe572f603bdab4af26f547b130286e169b198",
+      "runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+      "scientific_protocol_sha256": "f09a235072f36c5703a8fb58c0eb62b8de0070adbee599df94eb650edf206086",
+      "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+      "workload_sha256": "ab7279be43dce8a56cd5e64a91918b1d4845cb33f8bb0e22fb0840c05adcc835"
+    },
+    "run_name": true,
+    "status": true,
+    "tags": {
+      "calibration_core_sha256": "45f34f3c7e436af2e7468060d734937780c3cda36a758cd841a378484f2aceff",
+      "calibration_sha256": "716852e1fea2ad21401016cdeb3e5e9ef5e529ca263b91a6079904e6075770db",
+      "candidate_registration": "false",
+      "canonical_run_id": "exp-648-structured-trajectory-consistency",
+      "fidelity_reduced": "false",
+      "resolved_config_sha256": "7ec4eb7b31a93fc7d6cdcb8967abbaeed25f674248296ca6f63b395b51c63263",
+      "role": "calibration-only-non-scientific",
+      "runner_sha256": "f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672",
+      "scientific_accuracy_reported": "false",
+      "status": "complete-non-scientific-resource-calibration"
+    }
+  }
+}

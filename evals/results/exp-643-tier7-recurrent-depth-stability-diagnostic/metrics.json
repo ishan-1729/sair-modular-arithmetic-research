@@ -1,0 +1,75 @@
+{
+  "run_id": "exp-643-tier7-recurrent-depth-stability-diagnostic",
+  "created_at": "2026-07-18T00:35:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "completed",
+  "evidence_scope": "two-fresh-generated-width128-width256-prime-disjoint-diagnostic-seeds",
+  "evaluation": {
+    "transition": {
+      "stability_a_width128": {"cases": 2000, "correct": 1999, "exact_accuracy": 0.9995},
+      "stability_a_width256": {"cases": 2000, "correct": 1995, "exact_accuracy": 0.9975},
+      "stability_b_width128": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999},
+      "stability_b_width256": {"cases": 2000, "correct": 1994, "exact_accuracy": 0.997}
+    },
+    "rollout": {
+      "stability_a_width128": {"cases": 100, "correct": 85, "exact_accuracy": 0.85},
+      "stability_a_width256": {"cases": 100, "correct": 22, "exact_accuracy": 0.22},
+      "stability_b_width128": {"cases": 100, "correct": 81, "exact_accuracy": 0.81},
+      "stability_b_width256": {"cases": 100, "correct": 32, "exact_accuracy": 0.32}
+    }
+  },
+  "controls": {
+    "checkpoint_frozen": true,
+    "ordinary_instrumented_threshold_parity_all_cells": true,
+    "overthinking_events_all_cells": 0,
+    "public_or_prior_independent_answers_read": false
+  },
+  "formal_seeds": {
+    "stability_a": {
+      "seed": 20261044,
+      "width128": {
+        "transition": {"cases": 2000, "correct": 1999, "exact_accuracy": 0.9995, "valid_residue_rate": 1.0},
+        "rollout": {"cases": 100, "correct": 85, "exact_accuracy": 0.85, "all_steps_exact_accuracy": 0.85, "invalid_rate": 0.0, "mean_first_error_position": 69.4},
+        "instrumented": {"cases": 16, "rollout_exact_accuracy": 0.875, "transition_exact_accuracy": 0.91455078125, "overthinking_fraction_of_errors": 0.0, "ordinary_threshold_parity": true},
+        "late_spectral_gain": 0.7649025917053223
+      },
+      "width256": {
+        "transition": {"cases": 2000, "correct": 1995, "exact_accuracy": 0.9975, "valid_residue_rate": 1.0},
+        "rollout": {"cases": 100, "correct": 22, "exact_accuracy": 0.22, "all_steps_exact_accuracy": 0.22, "invalid_rate": 0.02, "mean_first_error_position": 99.48717948717949},
+        "instrumented": {"cases": 16, "rollout_exact_accuracy": 0.375, "transition_exact_accuracy": 0.614501953125, "overthinking_fraction_of_errors": 0.0, "failure_success_late_flip_ratio": 1.0304996876733845, "failure_success_late_state_delta_ratio": 1.0050911424211353, "ordinary_threshold_parity": true},
+        "late_spectral_gain": 0.7644113302230835
+      }
+    },
+    "stability_b": {
+      "seed": 20261045,
+      "width128": {
+        "transition": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999, "valid_residue_rate": 1.0},
+        "rollout": {"cases": 100, "correct": 81, "exact_accuracy": 0.81, "all_steps_exact_accuracy": 0.81, "invalid_rate": 0.0, "mean_first_error_position": 58.68421052631579},
+        "instrumented": {"cases": 16, "rollout_exact_accuracy": 0.9375, "transition_exact_accuracy": 0.9677734375, "overthinking_fraction_of_errors": 0.0, "ordinary_threshold_parity": true},
+        "late_spectral_gain": 0.7945476174354553
+      },
+      "width256": {
+        "transition": {"cases": 2000, "correct": 1994, "exact_accuracy": 0.997, "valid_residue_rate": 1.0},
+        "rollout": {"cases": 100, "correct": 32, "exact_accuracy": 0.32, "all_steps_exact_accuracy": 0.31, "invalid_rate": 0.01, "mean_first_error_position": 106.42028985507247},
+        "instrumented": {"cases": 16, "rollout_exact_accuracy": 0.1875, "transition_exact_accuracy": 0.590576171875, "overthinking_fraction_of_errors": 0.0, "failure_success_late_flip_ratio": 1.051658179030309, "failure_success_late_state_delta_ratio": 1.0174491749040735, "ordinary_threshold_parity": true},
+        "late_spectral_gain": 0.8025874495506287
+      }
+    }
+  },
+  "gates": {
+    "width128_retention_reproduced": false,
+    "overthinking_axis_reproduced": false,
+    "failure_dynamics_axis_reproduced": false,
+    "spectral_corroboration_reproduced": false,
+    "stability_primary_cause_supported": false
+  },
+  "decision": "reject-stability-as-primary-cause-and-change-architecture-track",
+  "resource_budget": {"soft_wall_seconds": 3604, "soft_aggregate_cpu_seconds": 14116, "hard_wall_seconds": 5406, "hard_aggregate_cpu_seconds": 21174, "fidelity_reduced": false},
+  "runtime": {"wall_seconds": 1523.3225286800007, "aggregate_cpu_seconds": 5980.3099999999995, "peak_rss_bytes": 634134528},
+  "limitations": [
+    "Fresh generated diagnostic evidence is not an official private score or a completion-gate seed.",
+    "The Jacobian statistic is a random-direction lower-bound gain proxy, not a spectral norm.",
+    "The negative result rejects the preregistered instability signature, not every possible depth intervention."
+  ],
+  "raw_evidence": "experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/formal-summary.json"
+}

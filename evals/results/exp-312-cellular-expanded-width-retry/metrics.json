@@ -1,0 +1,21 @@
+{
+  "run_id": "exp-312-cellular-expanded-width-retry",
+  "created_at": "2026-07-12T05:35:00Z",
+  "checkpoint_sha256": "d1f2bbd22ca944aa49fb6bcedc57d1c4738fd44d4c30c27095d7794a57de1029",
+  "evaluation": {
+    "transition": {
+      "width16": {"cases": 5000, "correct": 4996, "exact_accuracy": 0.9992},
+      "width24": {"cases": 10000, "correct": 9988, "exact_accuracy": 0.9988},
+      "width32_zero_shot": {"cases": 10000, "correct": 9940, "exact_accuracy": 0.994}
+    },
+    "rollout": {
+      "width16": {"cases": 1000, "correct": 990, "exact_accuracy": 0.99},
+      "width24": {"cases": 2000, "correct": 1924, "exact_accuracy": 0.962},
+      "width32_zero_shot": {"cases": 2000, "correct": 1700, "exact_accuracy": 0.85}
+    }
+  },
+  "controls": {"source_width32_transition": 0.6943, "width32_transition_gain": 0.2997, "width32_invalid_rollout_rate": 0.0015, "gates_passed": true},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 560.1595277780002, "parameters": 99824},
+  "decision": "advance-cellular-direct-width32",
+  "limitations": ["Reduced-fidelity architecture gate; no consumed independent or checked answer was used.", "Width-32 result is zero-shot transfer on a generated high-bit selection split."]
+}

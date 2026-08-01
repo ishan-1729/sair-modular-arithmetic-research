@@ -1,0 +1,37 @@
+{
+  "run_id": "exp-671-fixed-point-damping-halting",
+  "created_at": "2026-07-28T04:14:51Z",
+  "checkpoint_sha256": "42ad771fa373fe1581e764604c08fa951f847ca82ea1528fa30e2f9f71cf04ca",
+  "status": "parked-calibration-expected-value",
+  "decision": "park-resource-compliance-or-feasibility",
+  "root": 20261234,
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Formal scientific evaluation was not performed because complete-route expected-value admission failed after calibration.",
+    "labels_or_oracle_present": false
+  },
+  "calibration_evidence": {
+    "formal_science_performed": false,
+    "validation_threshold_calibration": {"cases": 32, "selected_threshold": 0.1, "exact_accuracy": 0.8125, "mean_iterations": 2.0},
+    "formal_w128": null,
+    "formal_w256": null,
+    "confirmations": null
+  },
+  "resource_admission": {
+    "admitted": false,
+    "failed_check": "expected_value",
+    "expected_wall_seconds": 22030.105487427452,
+    "maximum_expected_wall_seconds": 21600,
+    "candidate_wall_seconds": 220.3517998250104,
+    "candidate_headroom_wall_seconds": 275.439749781263,
+    "candidate_headroom_ceiling_seconds": 285,
+    "wall_seconds": 642.3526618879996,
+    "process_tree_cpu_seconds": 2507.0781890000003,
+    "cgroup_cpu_seconds": 2853.8399999999997,
+    "peak_rss_bytes": 648990720
+  },
+  "integrity": {"complete_routes": true, "deterministic": true, "checkpoint_reload_exact": true, "split_separation": true, "target_free_threshold": true},
+  "controls": {"integrity": {"complete_routes": true, "deterministic": true, "checkpoint_reload_exact": true, "split_separation": true, "target_free_threshold": true}},
+  "scientific_verdict": null,
+  "limitations": ["Calibration-only validation evidence; formal test labels remained unopened."]
+}

@@ -1,0 +1,47 @@
+{
+  "run_id": "exp-329-cellular-width64-autonomous-state-recovery",
+  "created_at": "2026-07-12T08:40:00Z",
+  "checkpoint_sha256": "050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7",
+  "evaluation": {
+    "transition": {
+      "control_width64": {"cases": 5000, "correct": 4993, "exact_accuracy": 0.9986},
+      "challenger_width64": {"cases": 5000, "correct": 4996, "exact_accuracy": 0.9992},
+      "challenger_width56": {"cases": 1000, "correct": 1000, "exact_accuracy": 1.0}
+    },
+    "rollout": {
+      "control_width64": {"cases": 1500, "correct": 1397, "exact_accuracy": 0.9313333333333333, "invalid_rate": 0.0026666666666666666},
+      "challenger_width64": {"cases": 1500, "correct": 1414, "exact_accuracy": 0.9426666666666667, "invalid_rate": 0.0013333333333333333},
+      "challenger_width56": {"cases": 500, "correct": 484, "exact_accuracy": 0.968, "invalid_rate": 0.002}
+    }
+  },
+  "controls": {
+    "width64_transition_change": 0.0006,
+    "width64_rollout_gain": 0.0113333333333333,
+    "required_rollout_gain": 0.015,
+    "gates_passed": false,
+    "parameters": 99824
+  },
+  "runtime": {
+    "runner_wall_seconds": 1755.0252201210005,
+    "runner_aggregate_cpu_seconds": 6367.65724336,
+    "external_elapsed_wall_seconds": 1620.08,
+    "external_user_cpu_seconds": 6352.67,
+    "external_system_cpu_seconds": 29.08,
+    "external_percent_cpu": 393,
+    "maximum_resident_set_kib": 1279588,
+    "device": "cpu",
+    "torch_threads": 4
+  },
+  "resource_budget": {
+    "projected_wall_seconds": 1338.0561148475,
+    "soft_budget_wall_seconds": 2400,
+    "hard_runaway_ceiling_wall_seconds": 3600,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 240
+  },
+  "decision": "reject-cellular-autonomous-state-recovery",
+  "limitations": [
+    "Generated identity-disjoint selection evidence only; checked, consumed independent, and private answers were not read.",
+    "Trajectory exposure and training-distribution mixture change together.",
+    "The external and in-process wall timers differ by 134.9 seconds; both observations are retained."
+  ]
+}

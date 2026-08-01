@@ -1,0 +1,117 @@
+{
+  "created_at": "2026-07-27T17:20:47Z",
+  "evaluation": {
+    "batch_size": 32,
+    "cases_per_width": 96,
+    "determinism_cases": 16,
+    "randomized_weight_cases": 96
+  },
+  "gates": {
+    "maximum_invalid_rate": 0.0,
+    "maximum_parameter_ratio": 1.1,
+    "minimum_gain_over_each_control": 0.05,
+    "minimum_trained_gain_over_randomized_w16": 0.1,
+    "minimum_w16_rollout_accuracy": 0.2,
+    "minimum_w24_rollout_accuracy": 0.01,
+    "minimum_w32_rollout_accuracy": 0.01,
+    "require_deterministic_reload": true,
+    "require_library_mamba2_mixers": 2
+  },
+  "identities": {
+    "20261186": {
+      "evaluation_cases_sha256": "cf120a887795117b09b3077d7dc3835ba8497febe32616909966563e41cfc1e7",
+      "seed": 20261186,
+      "splits_sha256": "53c303bc3f437ac8fae63c16921f1d789b0d47b013ffff61f5a10478282dc137"
+    },
+    "20261187": {
+      "evaluation_cases_sha256": "e9c5ccc29169cc181e188642dc96d7df188bc10fdb8b103d54d04da8c3f462cb",
+      "seed": 20261187,
+      "splits_sha256": "a317a5c960741858ad76f2e1b9e22a399c2190f6a14c8418ef726d48a7ba76e2"
+    },
+    "20261188": {
+      "evaluation_cases_sha256": "6cc605e8e9e224799b2082325e77813fadbadc2addbd24997482dad62e269a03",
+      "seed": 20261188,
+      "splits_sha256": "7e7a3908334b1ebe4d9f6a72a93a8aff89afc232a8de30cd07f0452e756c4f4d"
+    },
+    "20261189": {
+      "evaluation_cases_sha256": "ca656592ecd9617753e86e527afeec717f677b8df21709bfbe37f80871783933",
+      "seed": 20261189,
+      "splits_sha256": "4c9c30b0eb24b7dd74d585dd1a685bbd92156c2d110461022f241d5a539ae12b"
+    }
+  },
+  "limitations": [
+    "Roots use fresh generated train/test prime identities and no checked, prior-independent, official, or private answers.",
+    "Exact arithmetic appears only in offline labels and evaluation truth.",
+    "Transformers Mamba2 uses its deterministic naive torch_forward CPU path, not CUDA/Triton fast kernels."
+  ],
+  "models": {
+    "attention_control": {
+      "feedforward": 104,
+      "heads": 4,
+      "hidden": 52,
+      "iterations": 2
+    },
+    "convgru_control": {
+      "cycles": 2,
+      "hidden": 48
+    },
+    "mamba2_hybrid": {
+      "attention_heads": 4,
+      "conv_kernel": 4,
+      "cross_mixer": "attention",
+      "expand": 2,
+      "head_dim": 8,
+      "hidden": 32,
+      "mlp_expansion": 2,
+      "n_groups": 1,
+      "state_size": 8
+    }
+  },
+  "resource_budget": {
+    "admission_maximum_peak_rss_bytes": 8589934592,
+    "cache_completed_roots": true,
+    "eta_variability_headroom_ceiling": 2.0,
+    "eta_variability_headroom_floor": 1.25,
+    "hard_runaway_multiplier": 2.0,
+    "planning_reference_cgroup_cpu_seconds": 28800,
+    "planning_reference_wall_seconds": 7200,
+    "planning_references_are_nonbinding": true,
+    "require_complete_decision_route": true
+  },
+  "roots": {
+    "calibration": 20261186,
+    "confirmations": [
+      20261188,
+      20261189
+    ],
+    "viability": 20261187
+  },
+  "source": {
+    "config_sha256": "62c98c898ccb47560bc7dc51ccd695da268fcdf13db6d8124ebe8b02ff1d0be8",
+    "generator_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "repository_base_commit": "2acb944c924288369fb6a3a99e089f49228202b1",
+    "source_hashes": {
+      "configs/exp_650_library_backed_mamba.yaml": "62c98c898ccb47560bc7dc51ccd695da268fcdf13db6d8124ebe8b02ff1d0be8",
+      "experiments/exp_650_library_backed_mamba/model.py": "29ec41c210e7bf269b7193e597ecf933dcd6f916371e83540bf8767361a8aa14",
+      "experiments/exp_650_library_backed_mamba/run.py": "d752608c65157918e236a7e1094cdce60a19af6b4c9c915819bd55fa646d71d2",
+      "tests/test_exp_650_library_backed_mamba.py": "1a96c5b6357473828a8392d706f79607b96662104a0010e84107ba925142bf31"
+    },
+    "torch_version": "2.5.1+cpu",
+    "transformers_version": "5.14.1"
+  },
+  "status": "frozen-before-scientific-training",
+  "training": {
+    "batch_trajectories": 16,
+    "final_prefix_weight": 0.2,
+    "gradient_clip": 1.0,
+    "learning_rate": 0.001,
+    "log_every_steps": 50,
+    "minimum_learning_rate": 2e-05,
+    "steps_per_arm": 800,
+    "torch_threads": 4,
+    "weight_decay": 0.0001,
+    "worst_bit_weight": 0.05
+  }
+}

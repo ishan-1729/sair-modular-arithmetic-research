@@ -1,0 +1,63 @@
+{
+  "schema_version": "exp695-terminal-v1",
+  "run_id": "exp-695-cycle-factorized-distillation",
+  "created_at": "2026-08-01T22:04:48+05:30",
+  "checkpoint_sha256": "6908f67108fb39ae2e262ada1aa71d7be5b542232e156d19c004c53dd43eb0dc",
+  "completion_marker": "terminal-persisted",
+  "decision": "park-exp695-at-root20261377-resource-admission",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "Only calibration route-integrity denominators ran; guarded complete-route runtime rejected C6 before formal W128/W256 science.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "identical_initial_state": true,
+    "equal_parameter_count": true,
+    "equal_updates": true,
+    "equal_data_and_rng_streams": true,
+    "equal_optimizer_scheduler_and_losses": true,
+    "equal_teacher_calls": true,
+    "equal_coefficient_calls": true,
+    "equal_trajectory_slot_calls": true,
+    "control_masks_only_hidden_coefficient_access": true,
+    "both_reload_exact": true,
+    "teacher_frozen_before_students": true,
+    "teacher_absent_from_inference": true
+  },
+  "runtime": {
+    "resource_admission_performed": true,
+    "admitted": false,
+    "candidate_cold_wall_seconds": [212.90704653300008, 119.9308813780001, 129.48888186700015, 122.15805489100012, 121.82968177899988],
+    "candidate_guarded_wall_seconds": 425.81409306600017,
+    "candidate_ceiling_seconds": 285.0,
+    "calibration_wall_seconds": 1220.429311594,
+    "calibration_process_cpu_seconds": 4664.703249,
+    "calibration_cgroup_cpu_seconds": 4451.912,
+    "calibration_peak_rss_bytes": 2262302720,
+    "expected_formal_wall_seconds": 6129.0721898788315,
+    "soft_guard_wall_seconds": 7662,
+    "hard_guard_wall_seconds": 10726
+  },
+  "calibration_accuracy": {
+    "primary": {"w128_transition": {"cases": 16, "correct": 0, "exact_accuracy": 0.0}, "w256_transition": {"cases": 16, "correct": 0, "exact_accuracy": 0.0}, "w128_rollout": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}, "w256_rollout": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}},
+    "zero_coefficient_control": {"w128_transition": {"cases": 16, "correct": 0, "exact_accuracy": 0.0}, "w256_transition": {"cases": 16, "correct": 0, "exact_accuracy": 0.0}, "w128_rollout": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}, "w256_rollout": {"cases": 2, "correct": 0, "exact_accuracy": 0.0}}
+  },
+  "coefficient_diagnostics": {
+    "primary_final_calibration_update": {"l1": 0.009444165043532848, "l2": 0.0004949680878780782, "entropy": 6.195558547973633, "minimum": -0.00010097498307004571, "maximum": 0.00006847835174994543, "mean": -4.00917429033143e-7, "std": 1.7867758288048208e-5, "shape": [2, 8, 48]},
+    "control_final_calibration_update": {"l1": 0.009452950209379196, "l2": 0.0004955262411385775, "entropy": 6.19528865814209, "minimum": -0.0001010806008707732, "maximum": 0.00006862018926767632, "mean": -4.026357203201769e-7, "std": 1.788787812984083e-5, "shape": [2, 8, 48]}
+  },
+  "teacher_student_per_slot_trajectory_errors": {
+    "primary_final_calibration_update": [0.0001558980147819966, 0.00044980584061704576, 0.0010892237769439816, 0.0020614583045244217, 0.0032847970724105835, 0.004479910712689161, 0.005535665433853865, 0.006343018263578415, 0.007226590067148209, 0.00807631853967905, 0.00912133976817131, 0.01038829144090414, 0.011786534450948238, 0.013374867849051952, 0.015213223174214363, 0.016095010563731194],
+    "control_final_calibration_update": [0.00015589802933391184, 0.0004498056950978935, 0.0010892233112826943, 0.0020614671520888805, 0.0032848198898136616, 0.004479941911995411, 0.005535701289772987, 0.006343055982142687, 0.0072266291826963425, 0.008076361380517483, 0.009121382609009743, 0.010388334281742573, 0.011786561459302902, 0.013374877162277699, 0.015213226899504662, 0.016094999387860298]
+  },
+  "exact_answer_metrics": null,
+  "causal_interventions": null,
+  "comparison_interpretable": false,
+  "scientific_verdict": null,
+  "limitations": [
+    "Calibration exact-answer denominators are non-scientific and cannot support a mechanism comparison.",
+    "The complete deployed route failed the frozen runtime headroom gate, so root20261378 and all later roots remain unopened.",
+    "No full 2,400-update arms, formal W128/W256 denominators, interventions, confirmations, or independent seeds ran.",
+    "C5 remains scientifically unresolved; C7 and the final chair remain mandatory."
+  ]
+}

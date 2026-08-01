@@ -1,0 +1,11 @@
+{
+  "limitations": [
+    "This is bounded-faithful evidence for dense recurrence ordering (ST-M043.a/ST-M009.a), not a reproduction of Loopie MoE, adaptive routing, capacity recycling, or post-training.",
+    "Only fresh generated train-prime-disjoint W16/W32 identities were evaluated; checked, prior-independent, official, and private answers were not read.",
+    "Exact Python arithmetic is confined to offline training labels and evaluation.",
+    "The completed failed conjunctive gate rejects only this exact dense two-block fixed-R2 schedule formulation; adaptive routing, MoE, capacity recycling, and post-training remain separately unresolved.",
+    "The twelve checkpoints are durable research evidence only and are not candidate or submission artifacts.",
+    "The calibration shell emitted a nonfatal missing-git-lfs filter warning after the Python process exited zero; the hash-bound calibration/admission records, clean source identity, and later formal execution were unaffected.",
+    "The result cannot promote a candidate, benchmark, submission, or Goal completion."
+  ]
+}

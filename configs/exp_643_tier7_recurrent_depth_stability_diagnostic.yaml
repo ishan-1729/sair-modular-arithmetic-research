@@ -1,0 +1,73 @@
+run_id: exp-643-tier7-recurrent-depth-stability-diagnostic
+hypothesis: frozen Candidate 005 fails at width 256 because additional recurrent visits become dynamically unstable or overthink otherwise correct intermediate predictions
+seed: 20261043
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-643-tier7-recurrent-depth-stability-diagnostic.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+fresh_evidence:
+  widths: [128, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+  split_seed_offset: 643000
+  transition_seed_offset: 643100
+  rollout_seed_offset: 643200
+  diagnostic_seed_offset: 643300
+  spectral_seed_offset: 643400
+  calibration_seed: 20261046
+  formal_seeds:
+    stability_a: 20261044
+    stability_b: 20261045
+evaluation:
+  transition_cases_per_width_seed: 2000
+  rollout_cases_per_width_seed: 100
+  instrumented_rollout_cases_per_width_seed: 16
+  spectral_transitions_per_width_seed: 1
+  spectral_directions_per_visit: 3
+  spectral_visit_fractions: [0.0, 0.4, 0.6, 1.0]
+  rollout_batch_size: {128: 25, 256: 16}
+  torch_threads: 4
+calibration:
+  transition_cases_per_width: 64
+  rollout_cases_per_width: 2
+  instrumented_rollout_cases_per_width: 1
+  spectral_transitions_per_width: 1
+  spectral_directions_per_visit: 1
+decision_rule:
+  width128_minimum_transition_accuracy: 0.995
+  width128_minimum_rollout_accuracy: 0.85
+  overthinking_minimum_error_fraction: 0.10
+  overthinking_minimum_width_ratio: 2.0
+  failure_success_late_dynamics_ratio: 1.5
+  spectral_minimum_late_gain: 1.10
+  spectral_minimum_width_ratio: 1.15
+  reproducible_seed_count: 2
+  advance_rule: overthinking_axis_or_failure_dynamics_axis_with_spectral_corroboration_on_both_seeds
+resource_budget:
+  limit_units: [wall_seconds, aggregate_cpu_seconds]
+  calibration_status: complete
+  calibration_output: .scratch/exp-643-tier7-recurrent-depth-stability-diagnostic/calibration.json
+  calibration_output_sha256: f89cd5792cdc4f5a8abc73aa85be3b3e4a56ef755d609a9ff270e23ad9a64e70
+  calibration_repository_commit: 57baa0041b85ce84bf2d47b751f9dc3b2bfbbcbb
+  calibration_runner_sha256: 273600fd7bdf313fd1827335a33a9542c31367a4e225963764fdd7f5f810da65
+  formal_runner_sha256: ca7ac1acf7e3a7f784492127dd6deda88fc5465f47f50a309c064e5e8007a8d1
+  post_calibration_runner_change: finite-JSON ratio serialization guard only; no model evaluation instrumentation or throughput path changed
+  measured_calibration_wall_seconds: 55.57292640699961
+  measured_calibration_aggregate_cpu_seconds: 188.85999999999999
+  measured_calibration_peak_rss_bytes: 527339520
+  calibration_hard_runaway_ceiling_wall_seconds: 1800
+  calibration_hard_runaway_ceiling_aggregate_cpu_seconds: 7200
+  projected_formal_wall_seconds: 2325
+  projected_formal_aggregate_cpu_seconds: 9287
+  setup_and_serialisation_headroom_wall_seconds: 117
+  setup_and_serialisation_headroom_aggregate_cpu_seconds: 186
+  throughput_safety_multiplier: 1.50
+  soft_budget_wall_seconds: 3604
+  soft_budget_aggregate_cpu_seconds: 14116
+  hard_runaway_ceiling_wall_seconds: 5406
+  hard_runaway_ceiling_aggregate_cpu_seconds: 21174
+  cache_completed_evidence: true
+  preserve_partial_evidence: true
+  fidelity_reduced: false

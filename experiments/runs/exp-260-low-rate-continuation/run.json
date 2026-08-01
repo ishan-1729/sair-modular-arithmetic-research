@@ -1,0 +1,24 @@
+{
+  "run_id": "exp-260-low-rate-continuation",
+  "status": "completed",
+  "created_at": "2026-07-12T04:38:00Z",
+  "hypothesis": "Longer low-rate uniform continuation removes the remaining width-32 transition tail without curriculum distortion.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "74da231af91cadf3f6959b3f7ea1ce3fe88fcf82",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "4fda9a2e79e7cea83c2b079e39a782f191a56f5ec76b80a08209d0df9014b322",
+    "config_sha256": "4fd27ed8426be4f09845a5da00c51f2a1f285e22dcbd6cdf49d27a18d99ac8ec"
+  },
+  "config": "configs/exp_260_low_rate_continuation.yaml",
+  "environment": "experiments/runs/exp-260-low-rate-continuation/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "713c5648c37540cfa7a12647fb785ee4"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-260-low-rate-continuation/trained/weights.safetensors",
+    "checkpoint_sha256": "591c2ca0bfa070b73836d73f5882fcc068c5a7d31523be38a025f2337ca09e94",
+    "metrics": "evals/results/exp-260-low-rate-continuation/metrics.json"
+  },
+  "decision": "reject-further-fixed-width-continuation",
+  "notes": ["Fresh-split rollout improved by 0.63 point but missed the 1.00-point and 94 percent gates.", "Transition reached 99.826 percent, below the 99.85 percent gate."]
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "exp-320-cellular-width64-curriculum",
+  "created_at": "2026-07-12T06:15:00Z",
+  "checkpoint_sha256": "564b9c380539541b206e6c4372c932177954e4097dd24588b56c84bb27ed9a23",
+  "evaluation": {
+    "transition": {"source_width64": {"cases": 2000, "correct": 1975, "exact_accuracy": 0.9875}, "trained_width32": {"cases": 2000, "correct": 1998, "exact_accuracy": 0.999}, "trained_width56": {"cases": 5000, "correct": 4990, "exact_accuracy": 0.998}, "zero_width64": {"cases": 5000, "correct": 4984, "exact_accuracy": 0.9968}},
+    "rollout": {"source_width64": {"cases": 500, "correct": 224, "exact_accuracy": 0.448}, "trained_width32": {"cases": 500, "correct": 486, "exact_accuracy": 0.972}, "trained_width56": {"cases": 1000, "correct": 890, "exact_accuracy": 0.89}, "zero_width64": {"cases": 1000, "correct": 822, "exact_accuracy": 0.822}}
+  },
+  "controls": {"zero_width64_invalid_rollout_rate": 0.002, "gates_passed": true},
+  "runtime": {"device": "cpu", "torch_threads": 4, "wall_seconds": 491.21321791399987, "parameters": 99824},
+  "decision": "advance-cellular-direct-width64",
+  "limitations": ["Python bigint arithmetic is confined to offline data, labels, hard mining, and evaluation truth.", "No checked, consumed independent, or private answers were read."]
+}

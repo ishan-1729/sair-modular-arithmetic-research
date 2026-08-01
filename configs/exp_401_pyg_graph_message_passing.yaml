@@ -1,0 +1,56 @@
+run_id: exp-401-pyg-graph-message-passing
+hypothesis: canonical PyG graph normalization, dynamic attention, or tested max aggregation improves graph algorithm learning beyond the minimal reference operators and matched cellular control
+preregistration: knowledge/autoresearch/ablations/exp-401-pyg-graph-message-passing.md
+seed: 20260718
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+library: {name: torch-geometric, version: 2.8.0, torch: 2.5.1+cpu}
+architectures:
+  cellular: {hidden: 92, cycles: 2}
+  pyg_gcn: {hidden: 92, cycles: 2}
+  pyg_gatv2: {hidden: 92, cycles: 2, heads: 4}
+  pyg_mpnn: {hidden: 80, cycles: 2}
+training:
+  widths: [8, 12, 16]
+  prime_bit_span: 4
+  steps: 1200
+  batch_size: 128
+  learning_rate: 0.002
+  minimum_learning_rate: 0.0001
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  random_state_fraction: 0.15
+  composite_fraction: 0.15
+  torch_threads: 4
+hard_mining: {candidate_pool_factor: 4, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+evaluation:
+  width16_transition_cases: 5000
+  width16_rollout_cases: 1000
+  width32_transition_cases: 5000
+  width32_rollout_cases: 500
+  width32_prime_bits_min: 17
+  width32_prime_bits_max: 32
+gates:
+  minimum_graph_width16_transition: 0.85
+  minimum_graph_width16_rollout: 0.10
+  minimum_width16_rollout_gain_over_control: 0.05
+  minimum_zero_width32_transition_gain_over_control: 0.10
+  maximum_parameter_ratio: 1.25
+  maximum_training_time_ratio: 3.0
+resource_budget:
+  limit_unit: wall_seconds
+  cellular_training_projection_source: exp-400-cellular-84.190-seconds-per-200-updates
+  projected_cellular_training_wall_seconds: 505.14223543200205
+  pyg_profile_batch_size: 128
+  pyg_profile_updates_per_arm: 10
+  pyg_profile_wall_seconds: {gcn: 3.1886041770012525, gatv2: 5.483869405001315, mpnn: 5.522724993999873}
+  pyg_profile_aggregate_cpu_seconds: {gcn: 11.591558673000002, gatv2: 20.038494651, mpnn: 20.231371468}
+  projected_pyg_training_wall_seconds: 1703.4238291202928
+  exp400_measured_evaluation_and_setup_wall_seconds: 473.4858602589972
+  projected_total_wall_seconds: 2682.051924811292
+  soft_budget_wall_seconds: 4200
+  hard_runaway_ceiling_wall_seconds: 6000
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 400
+  cache_completed_arms: true

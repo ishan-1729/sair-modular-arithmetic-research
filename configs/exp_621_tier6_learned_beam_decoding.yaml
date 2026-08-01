@@ -1,0 +1,41 @@
+run_id: exp-621-tier6-learned-beam-decoding
+hypothesis: a width-2 learned-likelihood beam that branches on the least-confident output bit improves frozen width-128 exact rollout by at least three points to at least 90 percent versus greedy decoding
+seed: 20260817
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-621-tier6-learned-beam-decoding.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+data: {prime_bit_span: 8, train_prime_identities: 512, test_prime_identities: 128}
+evaluation:
+  beam_width: 2
+  rollout_cases: 200
+  transition_cases: 5000
+  determinism_cases: 20
+  torch_threads: 4
+runtime_projection:
+  incumbent_sandbox_seconds: 36.9
+  tier6_cases: 100
+  integration_overhead_seconds: 15
+gates:
+  minimum_beam_width128_rollout: 0.90
+  minimum_width128_gain: 0.03
+  minimum_beam_width64_rollout: 0.95
+  maximum_beam_invalid_rate: 0.01
+  maximum_projected_candidate_seconds: 240
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-621-greedy-beam-profile
+  profile_width128_cases: 20
+  profile_greedy_wall_seconds: 16.786617196004954
+  profile_greedy_aggregate_cpu_seconds: 64.654369806
+  profile_beam_wall_seconds: 32.31474208300642
+  profile_beam_aggregate_cpu_seconds: 124.610570992
+  projected_main_paired_wall_seconds: 615
+  projected_determinism_transition_setup_wall_seconds: 120
+  projected_total_wall_seconds: 735
+  soft_budget_wall_seconds: 1150
+  hard_runaway_ceiling_wall_seconds: 1700
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 113.34
+  torch_threads: 4
+  cache_paired_predictions: true

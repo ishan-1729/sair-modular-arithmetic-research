@@ -1,0 +1,93 @@
+# Autoresearch Ablations
+
+- [EXP-100 width scaling smoke test](exp-100-width16-shared-context.md) - matched shared-context width-9/width-16 preregistration.
+- [EXP-105 learned width transfer](exp-105-width-transfer.md) - matched random-versus-transferred initialization at width 16.
+- [EXP-106 matched 1,200-step continuation](exp-106-width-transfer-1200.md) - persistence and absolute-readiness gate for width transfer.
+- [EXP-110 quotient-2 hard mining](exp-110-quotient2-hard-mining.md) - matched curriculum intervention for the dominant transition error class.
+- [EXP-111 full-budget hard mining](exp-111-hard-mining-2400.md) - authorized 2,400-step gate before independent Tier-3 evaluation.
+- [EXP-112 independent Tier 3](exp-112-independent-tier3.md) - frozen five-seed official-generator gate before integration.
+- [EXP-200 width-32 transfer A/B](exp-200-width32-transfer-ab.md) - matched Tier-4 random-versus-transfer smoke test.
+- [EXP-201 width-32 full-budget gate](exp-201-width32-full-budget.md) - full-budget heldout gate before independent Tier-4 evaluation.
+- [EXP-202 width-32 2,400-step confirmation](exp-202-width32-2400.md) - unchanged-gate confirmation after EXP-201's narrow miss.
+- [EXP-203 independent Tier 4](exp-203-independent-tier4.md) - frozen five-seed official-generator gate before integration.
+- [EXP-204 official-distribution fine-tune](exp-204-official-distribution-finetune.md) - paired correction of the high-bit Tier-4 distribution mismatch.
+- [EXP-210 rollout-aware width-32 A/B](exp-210-rollout-aware-width32.md) - matched scheduled learned-state intervention.
+- [EXP-220 width-independent cellular architecture](exp-220-width-independent-cellular.md) - matched width-16 learning and zero-shot width-32 transfer.
+- [EXP-230 learned quotient-routed experts](exp-230-quotient-routed-experts.md) - compliant neuro-symbolic learned routing A/B.
+- [EXP-240 causal channel analysis](exp-240-channel-causal-analysis.md) - activation stratification and single-channel interventions.
+- [EXP-250 online exact-failure mining](exp-250-online-failure-mining.md) - matched model-dependent failure-tail training with uniform replay.
+- [EXP-251 online failure-mining smoke](exp-251-online-failure-mining-smoke.md) - compute-bounded successive-halving retry after EXP-250 exceeded its cap.
+- [EXP-252 replay-heavy failure mining](exp-252-replay-heavy-failure-mining.md) - lower-intensity confirmation of the narrow EXP-251 rollout gain.
+- [EXP-260 low-rate continuation](exp-260-low-rate-continuation.md) - clean fresh-split continuation after closing online ranking.
+- [EXP-300 width-64 bit-tensor transfer](exp-300-width64-bit-tensor-transfer.md) - matched random-versus-transfer smoke beyond signed `int64`.
+- [EXP-301 width-64 hard-mined continuation](exp-301-width64-hard-mining.md) - full-budget reduction curriculum for autonomous rollout.
+- [EXP-310 chunk-shared recurrent reduction](exp-310-chunk-shared-recurrent-reduction.md) - matched mixed-width recurrent architecture and length-transfer test.
+- [EXP-311 expanded-width cellular curriculum](exp-311-cellular-expanded-width-curriculum.md) - continue the rescued cellular control through width 24.
+- [EXP-312 expanded-width cellular retry](exp-312-cellular-expanded-width-retry.md) - resource-corrected identical-training retry.
+- [EXP-313 cellular official width 32](exp-313-cellular-official-width32.md) - direct fresh official-distribution continuation before the independent Tier-4 gate.
+- [EXP-314 cellular width-32 smoke](exp-314-cellular-width32-smoke.md) - compute-bounded retry after EXP-313's throughput projection.
+- [EXP-315 cellular independent Tier 4](exp-315-cellular-independent-tier4.md) - five untouched official-generator seeds for the frozen checkpoint.
+- [Candidate 003 integration gate](candidate-003-integration-gate.md) - frozen full-artifact independent and release checks.
+- [EXP-320 cellular width-64 curriculum](exp-320-cellular-width64-curriculum.md) - bigint-backed progressive Tier-5-length training.
+- [EXP-321 cellular official width 64](exp-321-cellular-official-width64.md) - direct Tier-5 distribution continuation before independent evaluation.
+- [EXP-322 cellular width-64 smoke](exp-322-cellular-width64-smoke.md) - compute-bounded retry after EXP-321's runtime projection.
+- [EXP-323 diverse width-64 cellular continuation](exp-323-cellular-width64-diverse.md) - 16x prime-identity diversity at lower learning rate.
+- [EXP-324 width-64 cellular second stage](exp-324-cellular-width64-second-stage.md) - fresh-identity lower-rate Tier-5 continuation.
+- [EXP-325 width-64 cellular weight soup](exp-325-cellular-width64-weight-soup.md) - no-cost interpolation of consecutive diverse checkpoints.
+- [EXP-326 cellular weight-soup retry](exp-326-cellular-width64-soup-retry.md) - resource-corrected five-alpha comparison.
+- [EXP-327 cellular width-64 logit ensemble](exp-327-cellular-width64-logit-ensemble.md) - paired complementary-checkpoint ensemble test.
+- [EXP-328 cellular width-64 logit-ensemble retry](exp-328-cellular-width64-logit-ensemble-retry.md) - resource-corrected paired ensemble screen.
+- [EXP-329 cellular width-64 autonomous-state recovery](exp-329-cellular-width64-autonomous-state-recovery.md) - matched teacher-forced versus learner-state recovery training.
+- [EXP-400 graph message-passing smoke](exp-400-graph-message-passing-smoke.md) - cellular, GCN, GAT, and typed max-MPNN successive-halving rung.
+- [EXP-401 PyG graph message passing](exp-401-pyg-graph-message-passing.md) - proper library-backed full-training GCNConv, GATv2Conv, and MessagePassing comparison.
+- [EXP-500 cellular grokking probe](exp-500-cellular-grokking-probe.md) - three-seed finite-data weight-decay delayed-generalization study.
+- [EXP-510 multi-architecture grokking feasibility](exp-510-multiarchitecture-grokking-feasibility.md) - proper PyG graph and materially different TCN delayed-generalization probes.
+- [EXP-520 Tier-5 recovery delta patching](exp-520-tier5-recovery-delta-patching.md) - causal tensor-group transplants for the strongest Tier-5 pair.
+- [EXP-521 Tier-5 recovery independent gate](exp-521-tier5-recovery-independent.md) - five untouched official-generator seeds for the full recovery checkpoint.
+- [EXP-629 Tier-6 balanced first-error replay](exp-629-tier6-balanced-first-error-replay.md) - matched low-rate full-cell continuation with paired ordinary or model-mined first-error replay.
+- [EXP-630 radix-4 cellular transition](exp-630-radix4-cellular-transition.md) - progressive learned two-bit-per-step transition viability test with a frozen radix-2 control.
+- [EXP-632 shared-core diverse output heads](exp-632-tier6-shared-core-diverse-output-heads.md) - exact-initialized complementary bootstrap head ensemble over the frozen core.
+- [EXP-633 hierarchical learned composition](exp-633-hierarchical-learned-composition-feasibility.md) - matched viability test of a shared binary latent-composition tree against sequential recurrence.
+- [EXP-634 direct relative attention](exp-634-direct-relative-attention-feasibility.md) - matched direct-product test of recurrent shared attention and dilated convolution with fixed position features.
+- [EXP-643 Tier-7 recurrent-depth stability](exp-643-tier7-recurrent-depth-stability-diagnostic.md) - frozen width-128/256 mechanistic diagnosis of overthinking and recurrent stability.
+- [EXP-654 learned neural-RAM executor](exp-654-neural-ram-executor-viability.md) - matched ordinary-initialized addressable-memory viability rung and controls.
+- [EXP-647 operand-swap endpoint consistency](exp-647-operand-swap-consistency.md) - matched full-rollout distillation of proven commutative trajectory diversity into one orientation.
+- [EXP-648 structured natural-trajectory consistency](exp-648-structured-trajectory-consistency.md) - selected/preregistered matched K=8 endpoint-consistency screen without synthetic state corruption.
+- [EXP-649 stochastic trajectory breadth](exp-649-stochastic-trajectory-breadth.md) - planned/formal-blocked frozen width-256 breadth study; full input-only calibration returns `runtime-gate-miss` without opening oracle evidence.
+- [EXP-650 library-backed Mamba-2 transition](exp-650-library-backed-mamba.md) - hermetic oracle green; full-fidelity calibration globally OOM-killed before one complete arm, so scientific roots remain unopened.
+- [EXP-655 layer-loop compute-matched recurrence](exp-655-layer-loop-compute-matched-recurrence.md) - T049 restored a green unchanged-source 391/391 oracle, dynamically admitted and completed the full three-root comparison, and rejected this exact dense fixed-R2 schedule formulation.
+- [EXP-659 symbol-equivariant recurrence](exp-659-symbol-equivariant-recurrence.md) - full-fidelity explicit symbol-axis recurrent reasoner with matched position-only and broken-tying controls.
+- [EXP-660 fresh formal symbol-equivariant recurrence](exp-660-symbol-equivariant-formal.md) - fresh ordinary-initialized decision run after portable full-oracle repair.
+- [EXP-651 visit/dilation-specific recurrent adapters](exp-651-visit-dilation-adapters.md) - bounded-faithful RRT analogue parked before calibration because the required full oracle remained red on absent ignored EXP658 hermetic evidence.
+- [EXP-652 answer-plus-latent TRM](exp-652-answer-latent-trm.md) - completed-rejected ST-M010.a SAIR adaptation; all matched arms are 0% exact at W16/W24/W32 and component confirmations remain unopened.
+- [EXP-661 LoopFormer width and budget extrapolation](exp-661-loopformer-width-extrapolation.md) - completed-rejected ST-M013.c SAIR adaptation; all seven arms and five budgets are 0% exact at W16/W24/W32, so confirmations remain unopened.
+- [EXP-662 Universal Transformer memory-token transition](exp-662-ut-memory-token-transition.md) - completed-rejected bounded-faithful UT adaptation; all memory counts and matched controls are 0% exact rollout at W16/W24/W32, so confirmations remain unopened.
+- [EXP-663 DRM target-token denoising](exp-663-drm-target-token-denoising.md) - implementation and package oracle green, but the one-shot parallel calibration crossed its wall guard; viability and confirmations remain unopened with no scientific verdict.
+- [EXP-664 SPRM hidden-boundary perturbation](exp-664-sprm-boundary-perturbation.md) - full-fidelity calibration admitted the formal root, but the frozen W128-first gate rejected the exact adaptation at 43.67% rollout exactness; later widths, controls, and confirmations remain unopened.
+- [EXP-666 GRAM posterior-to-prior guidance](exp-666-gram-posterior-prior-guidance.md) - all-route calibration passed integrity and expected-value checks but failed the 285-second candidate headroom gate; formal accuracy controls and M022.b breadth remain unopened.
+- [EXP-667 RSM shallow train / deep inference](exp-667-rsm-shallow-train-deep-infer.md) - complete-route calibration passed integrity, expected-value, memory, nominal runtime, and determinism but failed the 285-second variability-headroom candidate gate; formal roots remain unopened and M016.b RIM is closed.
+- [EXP-668 H2L3 plus MagicNorm and warmup credit](exp-668-h2l3-magicnorm-credit.md) - Judge-authorized identical-byte recovery passed 557 tests; complete-route calibration then failed the 285-second variability-headroom gate, leaving formal science and M024.c/d unopened.
+- [EXP-669 STARS JVP regularization](exp-669-stars-jvp-regularization.md) - inference-identical native JVP continuation admitted resources but rejected at the W128-primary gate with 84.33% rollout versus the frozen 85% floor; later controls, W256, M026.b, and confirmations remain unopened.
+- [EXP-670 clipped-Poisson loop curriculum](exp-670-clipped-poisson-loop-curriculum.md) - bounded ST-M018.a/M026.b implementation and focused checks are green, but the required package oracle stopped on an out-of-scope integrated EXP669 metrics schema error; calibration and scientific roots remain unopened.
+- [EXP-671 Fixed-Point Reasoner damping and halting](exp-671-fixed-point-damping-halting.md) - bounded-faithful ST-M027 package passed its oracle and candidate runtime gate, but complete-route expected value exceeded the frozen admission ceiling; formal science remains unopened.
+- [EXP-672 LT2 gated hybrid mixer](exp-672-lt2-gated-hybrid-mixer.md) - recovered the inherited schema/oracle boundary and completed all calibration routes, then parked because the 366.17-second guarded candidate projection exceeded the frozen 285-second ceiling; formal science remains unopened.
+- [EXP-673 DeepLoop proactive parameterization](exp-673-deeploop-parameterization.md) - authenticated both local PDFs and froze the complete package, then parked before implementation because Candidate005 cannot receive the source PostNorm alpha/beta parameterization while preserving its exact function and shared width-dependent graph.
+- [EXP-674 latent-thought cosine regularization](exp-674-latent-thought-regularization.md) - authenticated Eq. 3-4 and executed the tied-topology falsifier, then parked because the paper's untied weight-cosine objective is constant on Candidate005's already-shared recurrent tensors; hidden-reference distillation remains separately untested.
+- [EXP-675 RRT SVD teacher and joint uptraining](exp-675-rrt-svd-teacher-uptraining.md) - source-complete mechanism route parked before formal science because guarded candidate inference projected to 1,863.36 seconds versus 285; calibration control-matching limitation disclosed.
+- [EXP-676 LLA moving-window supervision](exp-676-lla-moving-window.md) - source-faithful progressive endpoint-window package parked before formal science because its 720.73-second guarded candidate projection exceeded the frozen 285-second ceiling.
+- [EXP-677 known-step endpoint-length scheduling](exp-677-length-schedule.md) - authenticated recovery opened calibration root 20261258 once, materialized all five arms, then terminally parked when inherited late-depth evaluation required an absent frozen `window.size` key; no scientific metric or admission exists.
+- [EXP-678 target-only continuation](exp-678-target-only-continuation.md) - verified ST-M044.a package permanently parked before calibration after final raw-protocol authentication failure.
+- [EXP-679 capacity recycling](exp-679-capacity-recycling.md) - exact preserved M043.b package passed 663 tests, then permanently parked before calibration on a verified config/runner trajectory-denominator conflict.
+- [EXP-680 Mixture-of-Recursions depth routing](exp-680-mor-depth-routing.md) - frozen bounded-faithful M009.b instance-level expert-choice hierarchy with matched depth and intervention controls.
+- [EXP-681 AbbIE recurrence extrapolation](exp-681-abbie-recurrence.md) - frozen bounded-faithful M008 head/body/tail C/D recurrence package with train-two and test 1/2/4/8.
+- [EXP-682 Huginn recurrent depth](exp-682-huginn-recurrent-depth.md) - source-complete ST-M006.a transfer package parked before roots because causal latent/concat/RMSNorm additions cannot exactly preserve Candidate005 and the 400-update de-novo fallback is not viable.
+- [EXP-683 source-complete HRM](exp-683-source-complete-hrm.md) - full M007 H/L, one-step/deep-supervision, and learned-Q ACT package permanently parked on a root-20261282 checkpoint-reload execution failure before evaluation.
+- [EXP-684 STARS × random existing-core depth factorial](exp-684-stars-random-depth-factorial.md) - source-complete M026.a/b factorial parked at root-20261286 resource admission before W128 science.
+- [EXP-685 validity-constrained attractor continuation](exp-685-validity-constrained-attractor.md) - rootless all-mode smoke and 10 focused checks passed, but the sole package oracle stopped on owned canonical-record schema omissions before pytest; all roots remain unopened.
+- [EXP-686 W256 straight-through specialist](exp-686-w256-straight-through-specialist.md) - matched learner-state/teacher-forced package passed smoke, 17 focused checks, and a 743-test oracle; root-20261294 calibration then parked on the guarded candidate-runtime cap before formal W256 science.
+- [EXP-687 compact distilled W256 specialist](exp-687-compact-distilled-w256-specialist.md) - frozen high-incident hidden56 transfer and equal-work distillation package passed smoke and 18 focused checks, then parked before roots on one pre-existing out-of-scope EXP686 full-suite fixture failure.
+- [EXP-688 compact hidden-trajectory distillation](exp-688-compact-hidden-trajectory-distillation.md) - matched hidden56 logit distillation plus selected-channel hidden alignment, parked at guarded candidate runtime.
+- [EXP-690 C1 persistent memory tokens](exp-690-c1-persistent-memory-tokens.md) - four case-local cross-step tokens versus identical access-masked computation in the seven-design tournament.
+- [EXP-691 C2 hard indexed trace](exp-691-c2-hard-indexed-trace.md) - resource-admitted full-budget append-only trace versus correction-masked equal work; both arms were zero-exact and the frozen scientific/causal gates rejected the formulation.
+- [EXP-692 C3 quotient/carry posterior conditioning](exp-692-c3-quotient-carry-conditioning.md) - h48 learned quotient/carry FiLM versus access-masked equal work; mechanically parked before roots when the sole package oracle hit out-of-scope historical-worktree fixture failures.
+- [EXP-693 C4 dilation-factored adapters](exp-693-c4-dilation-factored-adapters.md) - h56 one-cycle rank-4 direction/high-dilation adapters versus access-masked equal work; mechanically parked before roots when the sole package oracle hit out-of-scope EXP692 record-schema failures.

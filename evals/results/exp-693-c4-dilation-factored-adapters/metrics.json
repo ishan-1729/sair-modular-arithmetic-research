@@ -1,0 +1,27 @@
+{
+  "schema_version": "exp693-terminal-v1",
+  "run_id": "exp-693-c4-dilation-factored-adapters",
+  "created_at": "2026-07-31T14:46:09+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "completion_marker": "terminal-persisted",
+  "decision": "park-exp693-at-package-oracle",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The sole package oracle failed before pytest; frozen roots and all scientific denominators remained unopened.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "rootless_smoke_only": true,
+    "identical_initial_storage": true,
+    "equal_teacher_distillation_reconstruction_adapter_work": true,
+    "control_adapter_access_exactly_zero": true,
+    "candidate005_tiers1_6_route_unchanged": true
+  },
+  "runtime": {"resource_admission_performed": false, "root20261341_opened": false},
+  "limitations": [
+    "No resource calibration or accuracy denominator was executed.",
+    "Smoke update losses and outputs are not scientific evidence.",
+    "The package was mechanically parked due to out-of-scope EXP692 validation defects.",
+    "C5-C7 remain independently required."
+  ]
+}

@@ -13,6 +13,14 @@
   },
   "config": "configs/candidate_001_horner_tcn9.yaml",
   "environment": "experiments/runs/candidate-001-horner-tcn9/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic",
+    "experiment_id": "1",
+    "run_id": "5151828690ee4cfaa31b085b970a2fdc",
+    "registered_model": "sair-modular-arithmetic-candidate",
+    "model_version": "1",
+    "aliases": ["incumbent", "validated"]
+  },
   "training": {
     "steps": 2400,
     "batch_size": 768,

@@ -1,0 +1,30 @@
+run_id: exp-325-cellular-width64-weight-soup
+hypothesis: interpolating consecutive diverse width-64 checkpoints reduces rare transition variance and improves exact rollout without inference cost
+seed: 20260714
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+checkpoint_a: .scratch/exp-323-cellular-width64-diverse/weights.safetensors
+checkpoint_a_sha256: f948b75d5578860ff16520ecd9daa2de339fd6af67b126d18b06c3fbf76f43f2
+checkpoint_b: .scratch/exp-324-cellular-width64-second-stage/weights.safetensors
+checkpoint_b_sha256: 61b9600bfa6e04f108e41d26d794fad2a4470bf7df42094530658e54d78a75d7
+architecture:
+  width: 64
+  hidden: 92
+  cycles: 2
+interpolation:
+  alphas: [0.0, 0.25, 0.5, 0.75, 1.0]
+data:
+  prime_bits_min: 33
+  prime_bits_max: 64
+  train_prime_identities: 1
+  test_prime_identities: 128
+evaluation:
+  transition_cases_per_alpha: 2000
+  rollout_cases_per_alpha: 1000
+gates:
+  minimum_best_rollout: 0.93
+  minimum_gain_over_best_endpoint: 0.01
+  minimum_best_transition: 0.998
+  maximum_best_invalid_rollout_rate: 0.005
+resource_cap:
+  cpu_minutes: 12

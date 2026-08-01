@@ -1,0 +1,88 @@
+{
+  "run_id": "exp-643-tier7-recurrent-depth-stability-diagnostic",
+  "created_at": "2026-07-18T00:35:00Z",
+  "status": "completed",
+  "seed": 20261043,
+  "config": "configs/exp_643_tier7_recurrent_depth_stability_diagnostic.yaml",
+  "hypothesis": "Candidate 005's frozen width-shared cell fails at width 256 because recurrent-depth dynamics become unstable or overthink.",
+  "parent_run": "candidate-005-tier6-conditional-commutative-integration",
+  "ab_group": "frozen-width128-retention-versus-width256-depth-diagnostic",
+  "source": {
+    "repository_commit": "bd5e0c59eb61b08619835e095d220d7b14708d18",
+    "repository_dirty_at_start": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "61708798e2d386daf286db18285908892bdcba3e9868bf89a917da511c09293f",
+    "runner_sha256": "ca7ac1acf7e3a7f784492127dd6deda88fc5465f47f50a309c064e5e8007a8d1",
+    "preregistration_sha256": "998c7bc26c02d59136355a3ae471fb41366b3ee5026243f67209f0cba59b067e",
+    "cell_model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc",
+    "generator_runner_sha256": "9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f"
+  },
+  "checkpoint": {
+    "path": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "parameters": 99824,
+    "frozen": true
+  },
+  "data": {
+    "formal_seeds": {"stability_a": 20261044, "stability_b": 20261045},
+    "widths": [128, 256],
+    "train_prime_identities_per_width_seed_unused": 512,
+    "heldout_prime_identities_per_width_seed": 128,
+    "transition_cases_per_width_seed": 2000,
+    "rollout_cases_per_width_seed": 100,
+    "instrumented_rollout_cases_per_width_seed": 16,
+    "public_or_prior_independent_answers_read": false
+  },
+  "metrics": {
+    "stability_a": {
+      "width128": {"transition_exact": 0.9995, "rollout_exact": 0.85},
+      "width256": {"transition_exact": 0.9975, "rollout_exact": 0.22}
+    },
+    "stability_b": {
+      "width128": {"transition_exact": 0.999, "rollout_exact": 0.81},
+      "width256": {"transition_exact": 0.997, "rollout_exact": 0.32}
+    },
+    "overthinking_fraction_of_instrumented_errors_all_cells": 0.0,
+    "ordinary_instrumented_threshold_parity_all_cells": true,
+    "maximum_late_random_direction_gain": 0.8025874495506287
+  },
+  "decision": {
+    "stability_primary_cause_supported": false,
+    "outcome": "reject-stability-as-primary-cause-and-change-architecture-track",
+    "reason": "Neither overthinking nor failure-linked late dynamics nor expanding Jacobian-gain corroboration reproduced; one width-128 retention control also missed its floor."
+  },
+  "resource": {
+    "wall_seconds": 1523.3225286800007,
+    "aggregate_cpu_seconds": 5980.3099999999995,
+    "peak_rss_bytes": 634134528,
+    "soft_budget_wall_seconds": 3604,
+    "soft_budget_aggregate_cpu_seconds": 14116,
+    "hard_ceiling_wall_seconds": 5406,
+    "hard_ceiling_aggregate_cpu_seconds": 21174,
+    "fidelity_reduced": false
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_id": "2",
+    "run_id": "83e287d7648c41e082f7e4bf5cfdd396"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "calibration": {
+      "path": "experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/calibration.json",
+      "sha256": "f89cd5792cdc4f5a8abc73aa85be3b3e4a56ef755d609a9ff270e23ad9a64e70"
+    },
+    "formal_summary": {
+      "path": "experiments/runs/exp-643-tier7-recurrent-depth-stability-diagnostic/formal-summary.json",
+      "sha256": "27ea61885baffce5de0ed98bab470a9a44542b62ee127053de6ddc0384fbe7af"
+    },
+    "metrics": "evals/results/exp-643-tier7-recurrent-depth-stability-diagnostic/metrics.json"
+  },
+  "limitations": [
+    "Fresh generated diagnostic evidence is not an official private score or a completion-gate seed.",
+    "The Jacobian statistic is a random-direction lower-bound gain proxy, not a spectral norm.",
+    "The negative result rejects the preregistered instability signature, not every possible depth intervention.",
+    "Python exact arithmetic was confined to generation, teachers, and evaluation."
+  ]
+}

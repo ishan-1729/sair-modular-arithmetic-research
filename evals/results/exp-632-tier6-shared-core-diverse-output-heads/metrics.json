@@ -1,0 +1,77 @@
+{
+  "run_id": "exp-632-tier6-shared-core-diverse-output-heads",
+  "created_at": "2026-07-13T10:03:01Z",
+  "checkpoint_sha256": "9b57bde42e3f7f2184a0fb724a7f2599941fadbbc96e8fdcb43f558c75fd2fb8",
+  "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evaluation": {
+    "transition": {
+      "width64": {"cases": 3000, "correct": 2998, "exact_accuracy": 0.9993333333333333, "valid_residue_rate": 1.0, "head_disagreement_rate": 0.0},
+      "width128": {"cases": 3000, "correct": 2997, "exact_accuracy": 0.999, "valid_residue_rate": 1.0, "head_disagreement_rate": 0.001}
+    },
+    "rollout": {
+      "control_width64": {"cases": 300, "correct": 289, "exact_accuracy": 0.9633333333333334, "invalid_rate": 0.0},
+      "challenger_width64": {"cases": 300, "correct": 283, "exact_accuracy": 0.9433333333333334, "invalid_rate": 0.0, "head_disagreement_rate": 0.023333333333333334},
+      "control_width128": {"cases": 300, "correct": 251, "exact_accuracy": 0.8366666666666667, "invalid_rate": 0.0033333333333333335},
+      "challenger_width128": {"cases": 300, "correct": 246, "exact_accuracy": 0.82, "invalid_rate": 0.0033333333333333335, "head_disagreement_rate": 0.09666666666666666}
+    }
+  },
+  "controls": {
+    "exact_initialization": {"all_head_logits_equal": true, "vote_predictions_equal": true, "quotient_equal": true},
+    "randomized_heads": {
+      "trained_matched": {"cases": 100, "correct": 83, "exact_accuracy": 0.83, "invalid_rate": 0.0, "head_disagreement_rate": 0.14},
+      "randomized": {"cases": 100, "correct": 84, "exact_accuracy": 0.84, "invalid_rate": 0.01, "head_disagreement_rate": 0.12},
+      "trained_gain": -0.010000000000000009
+    },
+    "determinism": {"predictions_equal": true, "metrics_equal": true, "passed": true}
+  },
+  "comparison": {
+    "control_width128_rollout": 0.8366666666666667,
+    "challenger_width128_rollout": 0.82,
+    "width128_rollout_gain": -0.01666666666666672,
+    "control_width64_rollout": 0.9633333333333334,
+    "challenger_width64_rollout": 0.9433333333333334,
+    "width64_rollout_gain": -0.020000000000000018,
+    "projected_integrated_seconds": 207.18422460719546
+  },
+  "gates": {
+    "minimum_challenger_width128_rollout": 0.9,
+    "minimum_width128_gain_over_control": 0.03,
+    "minimum_challenger_width64_rollout": 0.95,
+    "minimum_challenger_width128_transition": 0.998,
+    "maximum_challenger_width128_invalid_rollout_rate": 0.01,
+    "minimum_head_disagreement_rate": 0.01,
+    "minimum_trained_gain_over_randomized_heads": 0.02,
+    "maximum_projected_integrated_seconds": 260,
+    "require_determinism": true,
+    "passed": false
+  },
+  "runtime": {
+    "wall_seconds": 2019.688826491998,
+    "aggregate_cpu_seconds": 7487.578100262,
+    "external_elapsed_wall_seconds": 1926.31,
+    "external_user_cpu_seconds": 7486.27,
+    "external_system_cpu_seconds": 20.17,
+    "external_percent_cpu": 389,
+    "training_wall_seconds": 281.42614407499786,
+    "training_aggregate_cpu_seconds": 1055.350056578,
+    "torch_threads": 4,
+    "runner_peak_rss_bytes": 555782144,
+    "external_maximum_resident_set_kib": 939228,
+    "clock_note": "Runner perf_counter exceeded external elapsed time by about 93 seconds under WSL scheduling; aggregate CPU measures agree closely and both wall measures are reported."
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 1331,
+    "soft_budget_wall_seconds": 2100,
+    "hard_runaway_ceiling_wall_seconds": 3400,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 226.67,
+    "fidelity_reduced": false
+  },
+  "decision": "reject-tier6-diverse-heads",
+  "limitations": [
+    "Fresh generated selection evidence only; checked, consumed independent, and private answers were not read.",
+    "Training reuses only content-hashed training records.",
+    "The randomized-head control matches global trained residual mean and standard deviation.",
+    "This single preregistered mask/bootstrap/vote formulation does not exclude every possible learned ensemble."
+  ]
+}

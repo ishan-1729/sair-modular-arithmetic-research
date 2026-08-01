@@ -1,0 +1,51 @@
+{
+  "run_id": "exp-656-tensor-native-rollout-route",
+  "created_at": "2026-07-21T16:03:06.190261+00:00",
+  "status": "completed",
+  "hypothesis": "caching loop-invariant bit planes and retaining recurrent state as a tensor materially reduces width-256 rollout time without changing the frozen learned computation",
+  "seed": 20260721,
+  "source": {
+    "repository_commit": "91113dce3696e2d9f1bf27aa88592175a293a855",
+    "dirty": true,
+    "repository_dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "22b7445e823206837cb8322c48f49698ea063713ba4fc96c466706387b59b713",
+    "config_sha256": "7e72514f1dd6b633443d0138bb874d1d161ca29139a0ed14574cd8f2d7dbd36a",
+    "candidate_model_sha256": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
+    "candidate_manifest_sha256": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
+    "checkpoint_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca"
+  },
+  "config": "configs/exp_656_tensor_native_rollout_route.yaml",
+  "artifacts": {
+    "checkpoint": "submission/weights.safetensors",
+    "metrics": "evals/results/exp-656-tensor-native-rollout-route/metrics.json"
+  },
+  "executed_config": "experiments/runs/exp-656-tensor-native-rollout-route/executed-config.yaml",
+  "environment": "experiments/runs/exp-656-tensor-native-rollout-route/environment.json",
+  "metrics": "evals/results/exp-656-tensor-native-rollout-route/metrics.json",
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "cae18b9e8a1b441b973178536052d9f3"
+  },
+  "decision": "reject-tensor-native-route",
+  "limitations": [
+    "This input-only A/B reports no exact-answer accuracy and cannot promote a candidate.",
+    "The width-256 network invocation is a research-route probe; Candidate005 still returns zero above its learned 128-bit submission boundary.",
+    "Timings are local CPU measurements from a dirty research worktree and require confirmation before submission integration.",
+    "Python big integers are used only to generate inputs and by the frozen legacy representation; neither route performs arithmetic repair."
+  ],
+  "notes": [
+    "Input-only route performance evidence; no scientific evaluation was performed.",
+    "Post-run schema normalization changed only the canonical envelope; benchmark values and decision are unchanged."
+  ],
+  "schema_normalization": {
+    "normalized_at": "2026-07-21T16:12:00+00:00",
+    "reason": "Add repository-required canonical run envelope fields after package-boundary validation.",
+    "pre_normalization_sha256": "f868ea4527b7f38791c2a36bd8756bbda2ba72ee4ccd61182300ad2b97ecf49e",
+    "executed_runner_sha256": "22b7445e823206837cb8322c48f49698ea063713ba4fc96c466706387b59b713",
+    "benchmark_fields_changed": false,
+    "decision_changed": false
+  }
+}

@@ -13,10 +13,11 @@
       "name": "SAIR Modular Arithmetic Research",
       "description": "Private research workspace, evidence bundle, benchmark snapshot, evaluation contracts, learned-transition experiments, and a sandbox-validated submission candidate for the SAIR Modular Arithmetic Challenge.",
       "datePublished": "2026-07-11",
-      "dateModified": "2026-07-12",
+      "dateModified": "2026-07-19",
       "author": { "@id": "https://github.com/ishan-1729" },
       "hasPart": [
         { "@id": "knowledge/" },
+        { "@id": "research/" },
         { "@id": "data/croissant.json" },
         { "@id": "data/external/public_benchmark/" },
         { "@id": "sources/research/modular_arithmetic_challenge_deep_research.md" },
@@ -52,6 +53,56 @@
       "@type": "File",
       "name": "Knowledge bundle index",
       "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "research/",
+      "@type": "Dataset",
+      "name": "SAIR primary-paper library",
+      "description": "Deduplicated private corpus of version-pinned research PDFs with source provenance, checksums, and offline parser verification.",
+      "about": { "@id": "knowledge/research/paper-library.md" },
+      "hasPart": [
+        { "@id": "research/sources.json" },
+        { "@id": "research/manifest.json" },
+        { "@id": "research/checksums.sha256" },
+        { "@id": "research/verification.json" },
+        { "@id": "research/papers/" }
+      ]
+    },
+    {
+      "@id": "knowledge/research/paper-library.md",
+      "@type": "CreativeWork",
+      "name": "Research paper library guide",
+      "encodingFormat": "text/markdown"
+    },
+    {
+      "@id": "research/sources.json",
+      "@type": "File",
+      "name": "Declarative paper selection registry",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@id": "research/manifest.json",
+      "@type": "File",
+      "name": "Resolved paper provenance manifest",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@id": "research/checksums.sha256",
+      "@type": "File",
+      "name": "Research PDF SHA-256 ledger",
+      "encodingFormat": "text/plain"
+    },
+    {
+      "@id": "research/verification.json",
+      "@type": "File",
+      "name": "Offline PDF parser verification report",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@id": "research/papers/",
+      "@type": "Dataset",
+      "name": "Version-pinned primary-paper PDFs",
+      "encodingFormat": "application/pdf"
     },
     {
       "@id": "data/croissant.json",

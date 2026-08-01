@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-324-cellular-width64-second-stage",
+  "status": "completed",
+  "created_at": "2026-07-12T07:00:00Z",
+  "hypothesis": "A fresh-identity lower-rate second stage converts the diverse width-64 checkpoint into Tier-5 independent readiness.",
+  "seed": 20260713,
+  "source": {"repository_commit": "bc244f66d82120b650b50e5b45f3353e8a351a00", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "c728e394850b86fd8e6361031cffdeb83d67be063ac49477156a5ad54c22632e", "config_sha256": "02686713d428c3e92521d151ccb7e5c0b246277c3da268f9fd4faf1d97f5f3e7"},
+  "config": "configs/exp_324_cellular_width64_second_stage.yaml",
+  "environment": "experiments/runs/exp-324-cellular-width64-second-stage/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "fa8b4a607b9b4a32a72e48d59fcf763c"},
+  "artifacts": {"checkpoint": ".scratch/exp-324-cellular-width64-second-stage/weights.safetensors", "checkpoint_sha256": "61b9600bfa6e04f108e41d26d794fad2a4470bf7df42094530658e54d78a75d7", "metrics": "evals/results/exp-324-cellular-width64-second-stage/metrics.json"},
+  "decision": "reject-cellular-official-width64",
+  "notes": ["Width-64 rollout reaches 91.867 percent and transition 99.88 percent.", "The run misses the 92 percent and three-point gates.", "Continuation closes; test a no-cost weight interpolation on fresh identities."]
+}

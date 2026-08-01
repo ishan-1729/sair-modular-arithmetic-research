@@ -1,0 +1,16 @@
+{
+  "run_id": "exp-667-rsm-shallow-train-deep-infer",
+  "status": "completed",
+  "seed": 20261218,
+  "hypothesis": "A two-state shared transition trained at shallow independent H/L depths can preserve W128 and improve W256 when run deeper at inference.",
+  "decision": "park-resource-compliance-or-feasibility",
+  "root": 20261218,
+  "calibration": "calibration.json",
+  "formal_root_20261219": "unopened-admission-blocked",
+  "confirmation_roots": {"20261220": "unopened", "20261221": "unopened"},
+  "reason": "candidate inference passed the 300-second nominal ceiling but failed the 285-second variability-headroom ceiling",
+  "m016b_rim": "deferred-closed"
+  ,"config": "configs/exp_667_rsm_shallow_train_deep_infer.yaml"
+  ,"source": {"base_commit": "3c9eae74bee6a667472a1e2da93efd786ff96ce3", "branch": "codex/exp667-rsm-shallow-train-deep-infer", "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "paper_sha256": "c1cb3a00564e9bc4828c0ddd1b8161d702b32da445eb34920ffe6aab81261c17", "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"}
+  ,"artifacts": {"checkpoint": ".scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors", "calibration": "experiments/runs/exp-667-rsm-shallow-train-deep-infer/calibration.json", "metrics": "evals/results/exp-667-rsm-shallow-train-deep-infer/metrics.json"}
+}

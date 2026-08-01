@@ -4,7 +4,9 @@
   "private": true,
   "description": "Repository-local browser tooling for SAIR research and evidence collection.",
   "scripts": {
-    "web:check": "node .codex/skills/playwright-chromium-web/scripts/check-web-access.mjs"
+    "web:check": "node .codex/skills/playwright-chromium-web/scripts/check-web-access.mjs",
+    "research:sync": "node tools/research/sync-paper-library.mjs",
+    "research:verify": "python tools/research/verify_paper_library.py --write-report"
   },
   "devDependencies": {
     "playwright": "1.61.1",

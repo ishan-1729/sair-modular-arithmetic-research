@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-320-cellular-width64-curriculum",
+  "status": "completed",
+  "created_at": "2026-07-12T06:15:00Z",
+  "hypothesis": "The validated width-independent cellular model learns progressively wider bigint-labeled transitions and transfers nontrivially to width 64.",
+  "seed": 20260712,
+  "source": {"repository_commit": "1e0ef3186ff7b64b0b0696ac11b7254c440d9bc4", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "88e0cb12f4577374235e48f13f22883fc2e5e53a6475a5d1bb23da3506d7fdf5", "config_sha256": "c02cac71f55c78428674e3ccac1e09ded9b4319d2f54830bb3767e45b683061b"},
+  "config": "configs/exp_320_cellular_width64_curriculum.yaml",
+  "environment": "experiments/runs/exp-320-cellular-width64-curriculum/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "dafd3b34e5f543579ff94f8410ca86ec"},
+  "artifacts": {"checkpoint": ".scratch/exp-320-cellular-width64-curriculum/weights.safetensors", "checkpoint_sha256": "564b9c380539541b206e6c4372c932177954e4097dd24588b56c84bb27ed9a23", "metrics": "evals/results/exp-320-cellular-width64-curriculum/metrics.json"},
+  "decision": "advance-cellular-direct-width64",
+  "notes": ["Width-56 transition/rollout reached 99.8/89 percent.", "Zero-shot width-64 transition/rollout reached 99.68/82.2 percent.", "All gates passed with tensor-only learned inference."]
+}

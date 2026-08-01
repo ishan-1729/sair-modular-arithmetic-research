@@ -1,0 +1,44 @@
+{
+  "artifacts": [
+    {
+      "path": "calibration-core.json",
+      "sha256": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+      "verified": true
+    },
+    {
+      "path": "environment.json",
+      "sha256": "d5754d46d762643e9488a85924208ccd83a959206a14c7b7041cea7d332819c9",
+      "verified": true
+    },
+    {
+      "path": "executed-config.yaml",
+      "sha256": "e5487e1f356381352208cf6661eb5272bc0594afe1ac67db503dfce317352160",
+      "verified": true
+    }
+  ],
+  "exact_metrics_verified": true,
+  "exact_params_verified": true,
+  "exact_tags_verified": true,
+  "expected_metrics": {
+    "peak_rss_guard_bytes": 3344691200.0,
+    "projected_aggregate_cpu_seconds": 25604.81027122502,
+    "projected_wall_seconds": 6310.995793021486
+  },
+  "expected_params": {
+    "calibration_evidence_core_sha256": "dae882cefc44cdff89ca4b3a4c18a6ebd55e1415a62fb9bd323e1f1b65f0dd6f",
+    "calibration_root": "20261159",
+    "scientific_runner_sha256": "2b2a6d2241b784ef699b0947cd78554c6900208e3f125a9d40ebc8b13e633c49",
+    "screen_workload_sha256": "c928d60f431788da7e27c0e7bf2f63f4e550568f7eea513e833417689c53cae5"
+  },
+  "expected_tags": {
+    "authorization_sha256": "d3aa35008f646edf5171771056cea523e60d0415083d58970cf5efadc7492a96",
+    "candidate_registration": "false",
+    "canonical_run_id": "exp-648-structured-trajectory-consistency",
+    "role": "screen-readiness-calibration-only",
+    "scientific_accuracy_reported": "false"
+  },
+  "reused": false,
+  "run_id": "4dc1cef0b5ab4269a838bdc52eebcf48",
+  "schema_version": "exp648-screen-readiness-calibration-mlflow-v1",
+  "status": "FINISHED"
+}

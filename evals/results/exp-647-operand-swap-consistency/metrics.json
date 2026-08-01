@@ -1,0 +1,57 @@
+{
+  "run_id": "exp-647-operand-swap-consistency",
+  "created_at": "2026-07-19T20:07:10+00:00",
+  "status": "completed-rejected",
+  "seed": 20261057,
+  "checkpoint_sha256": "b782c46b9ebb2570a309c89950b83a16c9be7a653d81dbbc650af3730b026b44",
+  "evidence_scope": "one matched fresh generated identity-disjoint full-fidelity training seed",
+  "evaluation": {
+    "transition": {
+      "control_width64": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999},
+      "control_width128": {"cases": 3000, "correct": 2992, "exact_accuracy": 0.9973333333333333},
+      "control_width256": {"cases": 3000, "correct": 2987, "exact_accuracy": 0.9956666666666667},
+      "challenger_width64": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999},
+      "challenger_width128": {"cases": 3000, "correct": 2992, "exact_accuracy": 0.9973333333333333},
+      "challenger_width256": {"cases": 3000, "correct": 2987, "exact_accuracy": 0.9956666666666667}
+    },
+    "rollout": {
+      "control_original_width64": {"cases": 300, "correct": 288, "exact_accuracy": 0.96},
+      "control_original_width128": {"cases": 300, "correct": 234, "exact_accuracy": 0.78},
+      "control_original_width256": {"cases": 200, "correct": 55, "exact_accuracy": 0.275},
+      "challenger_original_width64": {"cases": 300, "correct": 289, "exact_accuracy": 0.9633333333333334},
+      "challenger_original_width128": {"cases": 300, "correct": 229, "exact_accuracy": 0.7633333333333333},
+      "challenger_original_width256": {"cases": 200, "correct": 50, "exact_accuracy": 0.25}
+    },
+    "paired_rollout_control": {
+      "64": {"transition": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999}, "original": {"cases": 300, "correct": 288, "exact_accuracy": 0.96, "invalid_rate": 0.0033333333333333335}, "swapped": {"cases": 300, "correct": 290, "exact_accuracy": 0.9666666666666667}, "selected": {"cases": 300, "correct": 299, "exact_accuracy": 0.9966666666666667}, "oracle": {"cases": 300, "correct": 299, "exact_accuracy": 0.9966666666666667}},
+      "128": {"transition": {"cases": 3000, "correct": 2992, "exact_accuracy": 0.9973333333333333}, "original": {"cases": 300, "correct": 234, "exact_accuracy": 0.78, "invalid_rate": 0.0033333333333333335}, "swapped": {"cases": 300, "correct": 255, "exact_accuracy": 0.85}, "selected": {"cases": 300, "correct": 282, "exact_accuracy": 0.94}, "oracle": {"cases": 300, "correct": 287, "exact_accuracy": 0.9566666666666667}},
+      "256": {"transition": {"cases": 3000, "correct": 2987, "exact_accuracy": 0.9956666666666667}, "original": {"cases": 200, "correct": 55, "exact_accuracy": 0.275, "invalid_rate": 0.01}, "swapped": {"cases": 200, "correct": 64, "exact_accuracy": 0.32}, "selected": {"cases": 200, "correct": 82, "exact_accuracy": 0.41}, "oracle": {"cases": 200, "correct": 100, "exact_accuracy": 0.5}}
+    },
+    "confidence_consistency": {
+      "64": {"transition": {"cases": 1000, "correct": 999, "exact_accuracy": 0.999}, "original": {"cases": 300, "correct": 289, "exact_accuracy": 0.9633333333333334, "invalid_rate": 0.0033333333333333335}, "swapped": {"cases": 300, "correct": 290, "exact_accuracy": 0.9666666666666667}, "selected": {"cases": 300, "correct": 299, "exact_accuracy": 0.9966666666666667}, "oracle": {"cases": 300, "correct": 299, "exact_accuracy": 0.9966666666666667}},
+      "128": {"transition": {"cases": 3000, "correct": 2992, "exact_accuracy": 0.9973333333333333}, "original": {"cases": 300, "correct": 229, "exact_accuracy": 0.7633333333333333, "invalid_rate": 0.0033333333333333335}, "swapped": {"cases": 300, "correct": 256, "exact_accuracy": 0.8533333333333334}, "selected": {"cases": 300, "correct": 281, "exact_accuracy": 0.9366666666666666}, "oracle": {"cases": 300, "correct": 286, "exact_accuracy": 0.9533333333333334}},
+      "256": {"transition": {"cases": 3000, "correct": 2987, "exact_accuracy": 0.9956666666666667}, "original": {"cases": 200, "correct": 50, "exact_accuracy": 0.25, "invalid_rate": 0.015}, "swapped": {"cases": 200, "correct": 62, "exact_accuracy": 0.31}, "selected": {"cases": 200, "correct": 80, "exact_accuracy": 0.4}, "oracle": {"cases": 200, "correct": 95, "exact_accuracy": 0.475}},
+      "determinism": {"width": 128, "cases": 20, "predictions_equal": true, "margins_equal": true, "invalid_equal": true, "passed": true}
+    }
+  },
+  "matched_comparison": {
+    "original_rollout": {
+      "64": {"control_correct": 288, "challenger_correct": 289, "cases": 300, "control_accuracy": 0.96, "challenger_accuracy": 0.9633333333333334, "gain_points": 0.33333333333333337},
+      "128": {"control_correct": 234, "challenger_correct": 229, "cases": 300, "control_accuracy": 0.78, "challenger_accuracy": 0.7633333333333333, "gain_points": -1.666666666666672},
+      "256": {"control_correct": 55, "challenger_correct": 50, "cases": 200, "control_accuracy": 0.275, "challenger_accuracy": 0.25, "gain_points": -2.500000000000002}
+    },
+    "paired_arm_stats": {
+      "64": {"cases": 300, "both_correct": 288, "control_only_correct": 0, "challenger_only_correct": 1, "neither_correct": 11, "discordant_cases": 1, "exact_two_sided_mcnemar_p": 1.0},
+      "128": {"cases": 300, "both_correct": 229, "control_only_correct": 5, "challenger_only_correct": 0, "neither_correct": 66, "discordant_cases": 5, "exact_two_sided_mcnemar_p": 0.0625},
+      "256": {"cases": 200, "both_correct": 49, "control_only_correct": 6, "challenger_only_correct": 1, "neither_correct": 144, "discordant_cases": 7, "exact_two_sided_mcnemar_p": 0.125}
+    }
+  },
+  "runtime_gate": {"width": 256, "challenger_original_cases": 200, "wall_seconds": 262.6266247679996, "projected_100_case_wall_seconds": 131.3133123839998, "maximum_seconds": 100, "passed": false, "interpretation": "absolute challenger throughput only; cached cross-run arm timing is not causal"},
+  "controls": {"matched_initial_checkpoint": true, "matched_examples_steps_schedule_and_optimizer": true, "valid_frozen_control_cache_reused": true, "fresh_identity_disjoint_evaluation": true, "checked_prior_independent_official_private_answers_read": false, "full_fidelity": true},
+  "gates": {"width128_absolute": false, "width128_gain": false, "width256_absolute": false, "width256_gain": false, "width64_retention": true, "width128_transition": false, "width256_transition": false, "validity": false, "determinism": true, "runtime": false, "accuracy_passed": false, "passed": false},
+  "resource": {"retry3_actual_wall_seconds": 5141.599420917999, "retry3_actual_aggregate_cpu_seconds": 20465.856237935, "cumulative_charged_wall_seconds": 20337.479420917996, "cumulative_charged_aggregate_cpu_seconds": 95775.856237935, "soft_headroom_wall_seconds": 7718.520579082004, "soft_headroom_aggregate_cpu_seconds": 15764.143762065, "fidelity_reduced": false, "control_cache_reused": true},
+  "decision": "reject-current-commutative-consistency-formulation",
+  "decision_scope": "completed-rejected; no Tier-7 or candidate promotion",
+  "raw_evidence": {"summary": "experiments/runs/exp-647-operand-swap-consistency/formal-summary.json", "paired_cases": "experiments/runs/exp-647-operand-swap-consistency/paired-evidence.json"},
+  "limitations": ["One matched training seed only.", "Checked, prior independent-full, official, and private answers were not read.", "Cross-run control/challenger timing is not a causal speed comparison."]
+}

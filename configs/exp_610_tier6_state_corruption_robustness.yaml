@@ -1,0 +1,48 @@
+run_id: exp-610-tier6-state-corruption-robustness
+hypothesis: training from diagnosis-matched one- and two-bit state corruptions reduces the shared autonomous drift tail more effectively than clean straight-through recovery
+seed: 20260806
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-610-tier6-state-corruption-robustness.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+model: {hidden: 92, cycles: 2}
+training:
+  steps: 200
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  learning_rate: 0.00001
+  minimum_learning_rate: 0.000001
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+arms:
+  clean_straight_through: {differentiable_soft_state: true, state_mode: straight_through}
+  corrupted_straight_through:
+    differentiable_soft_state: true
+    state_mode: straight_through
+    initial_state_corruption: {widths: [128], one_bit_probability: 0.75, two_bit_probability: 0.25, position_distribution: uniform}
+comparison: {control_arm: clean_straight_through, challenger_arm: corrupted_straight_through}
+hard_mining: {candidate_pool_factor: 2, quotient2_fraction: 0.35, boundary_fraction: 0.15, boundary_relative_margin: 0.05}
+data: {prime_bit_span: 8, train_prime_identities: 256, test_prime_identities: 128}
+evaluation: {transition_cases: 2000, rollout_cases: 200}
+gates:
+  minimum_challenger_width128_rollout: 0.90
+  minimum_width128_gain_over_control: 0.03
+  minimum_challenger_width64_rollout: 0.95
+  minimum_challenger_width128_transition: 0.998
+  maximum_challenger_width128_invalid_rollout_rate: 0.01
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-608-exp609-observed-arm-throughput
+  projected_two_arm_wall_seconds: 800
+  projected_setup_overhead_wall_seconds: 25
+  projected_total_wall_seconds: 825
+  soft_budget_wall_seconds: 1500
+  hard_runaway_ceiling_wall_seconds: 2400
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 170
+  cache_completed_arms: true

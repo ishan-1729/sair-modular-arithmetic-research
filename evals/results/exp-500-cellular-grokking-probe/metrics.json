@@ -1,0 +1,27 @@
+{
+  "run_id": "exp-500-cellular-grokking-probe",
+  "created_at": "2026-07-12T11:10:00Z",
+  "checkpoint_sha256": "79baacb88c3642031ac8ccf7e485214a34638024d117f239b5a48daea3f2e858",
+  "evaluation": {
+    "transition": {
+      "control_seed_20260719": {"cases": 4096, "correct": 3374, "exact_accuracy": 0.82373046875},
+      "decay_seed_20260719": {"cases": 4096, "correct": 3379, "exact_accuracy": 0.824951171875},
+      "control_seed_20260720": {"cases": 4096, "correct": 3340, "exact_accuracy": 0.8154296875},
+      "decay_seed_20260720": {"cases": 4096, "correct": 3301, "exact_accuracy": 0.805908203125},
+      "control_seed_20260721": {"cases": 4096, "correct": 3480, "exact_accuracy": 0.849609375},
+      "decay_seed_20260721": {"cases": 4096, "correct": 3591, "exact_accuracy": 0.876708984375}
+    },
+    "rollout": {
+      "control_seed_20260719": {"cases": 500, "correct": 145, "exact_accuracy": 0.29},
+      "decay_seed_20260719": {"cases": 500, "correct": 143, "exact_accuracy": 0.286},
+      "control_seed_20260720": {"cases": 500, "correct": 150, "exact_accuracy": 0.30},
+      "decay_seed_20260720": {"cases": 500, "correct": 149, "exact_accuracy": 0.298},
+      "control_seed_20260721": {"cases": 500, "correct": 165, "exact_accuracy": 0.33},
+      "decay_seed_20260721": {"cases": 500, "correct": 195, "exact_accuracy": 0.39}
+    }
+  },
+  "controls": {"signature_counts": {"no_decay": 0, "decay_1e_2": 0}, "mean_final_heldout": {"no_decay": 0.82958984375, "decay_1e_2": 0.8358561197916666}, "mean_final_rollout": {"no_decay": 0.30666666666666664, "decay_1e_2": 0.32466666666666666}, "paired_heldout_deltas": [0.001220703125, -0.009521484375, 0.027099609375], "paired_rollout_deltas": [-0.004, -0.002, 0.06], "gates_passed": false, "parameters": 99824},
+  "runtime": {"runner_wall_seconds": 5544.206367250001, "runner_aggregate_cpu_seconds": 21324.393225517, "external_elapsed_wall_seconds": 5378.0, "external_user_cpu_seconds": 21183.38, "external_system_cpu_seconds": 153.10, "external_percent_cpu": 396, "maximum_resident_set_kib": 541720, "torch_threads": 4},
+  "decision": "reject-cellular-grokking-signature",
+  "limitations": ["Width-9 finite-data feasibility evidence only.", "The 0 versus 1e-2 decay contrast is project-defined, not claimed as an exact reproduction of every original paper setting.", "Generated prime-disjoint evidence only; checked, consumed independent, and private answers were not read."]
+}

@@ -1,0 +1,39 @@
+{
+  "run_id": "exp-210-rollout-aware-width32",
+  "created_at": "2026-07-12T02:48:00Z",
+  "checkpoint_sha256": "02870c160e6c5e089b6370425b7e4a587236f730f1e27497537d2d7032b5c0ff",
+  "evaluation": {
+    "transition": {
+      "one_step_control": {"cases": 50000, "correct": 49897, "exact_accuracy": 0.99794},
+      "scheduled_state_challenger": {"cases": 50000, "correct": 49914, "exact_accuracy": 0.99828}
+    },
+    "rollout": {
+      "one_step_control": {"cases": 20000, "correct": 18144, "exact_accuracy": 0.9072},
+      "scheduled_state_challenger": {"cases": 20000, "correct": 18285, "exact_accuracy": 0.91425}
+    }
+  },
+  "controls": {
+    "matched_source_checkpoint": true,
+    "matched_transition_equivalent_examples": true,
+    "transition_change": 0.00034,
+    "rollout_gain": 0.00705,
+    "challenger_invalid_rollout_rate": 0.00175,
+    "detached_hard_feedback": true
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 447.41893513800017,
+    "control_training_seconds": 63.42524490599999,
+    "challenger_training_seconds": 113.12019570900009,
+    "transition_equivalent_examples_per_arm": 102400,
+    "challenger_peak_rss_bytes": 667885568,
+    "parameters": 126276
+  },
+  "decision": "reject-scheduled-state-formulation",
+  "limitations": [
+    "Transition-equivalent labels were matched, but rollout chunks require more forward passes and wall time.",
+    "Hard predicted states were detached; this is scheduled recovery training, not differentiable BPTT through decisions.",
+    "No consumed independent seed or checked public answer was used."
+  ]
+}

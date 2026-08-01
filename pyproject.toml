@@ -10,6 +10,7 @@ requires-python = ">=3.12,<3.14"
 dependencies = [
   "jsonschema>=4.23,<5",
   "numpy>=1.26,<3",
+  "pypdf>=6,<7",
   "PyYAML>=6,<7",
   "safetensors>=0.4.5,<1",
   "torch>=2.2,<3",
@@ -18,6 +19,14 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "pytest>=8,<10",
+]
+research = [
+  "mlflow==3.14.0",
+  "psutil==7.0.0",
+  "sympy==1.13.1",
+  "torchdeq==0.1.0",
+  "torch-geometric==2.8.0",
+  "transformers==5.14.1",
 ]
 
 [tool.setuptools.packages.find]

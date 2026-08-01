@@ -1,0 +1,16 @@
+{
+  "schema_version": "exp687-terminal-v1",
+  "run_id": "exp-687-compact-distilled-w256-specialist",
+  "created_at": "2026-07-28T19:00:00+05:30",
+  "status": "parked-package-verification",
+  "decision": "park-exp687-at-package-verification",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "student_initial_state_sha256": "f9938a9783dd25a356c1bd129829195e18c6624b017f68dc7b62c46ae17fb340",
+  "roots": {"20261302": "unopened", "20261303": "unopened", "20261304": "unopened", "20261305": "unopened"},
+  "rootless_smoke": {"scientific": false, "status": "completed", "trained_updates": 2, "transition_cases": 10, "rollout_cases": 10, "reload_exact": true, "identical_initial_bytes": true, "identical_teacher_work": true, "candidate_limit_cases": 1},
+  "controls": {"distilled": "rootless-smoke-only", "exact_only": "rootless-smoke-only", "frozen_pruned": "rootless-smoke-only", "randomized_control": "rootless-smoke-only", "reset_control": "rootless-smoke-only"},
+  "evaluation": {"not_performed": true, "reason": "The sole package oracle failed on a pre-existing out-of-scope EXP686 fixture before root20261302 could open.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": ["Smoke accuracy is not a scientific denominator.", "No complete 1,100-case candidate timing, W128/W256 science, confirmation or protected evaluation occurred."]
+}

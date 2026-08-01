@@ -1,0 +1,96 @@
+run_id: exp-654-neural-ram-executor-viability
+hypothesis: trained addressable registers and an append-only latent trace retain prefix information lost at hard residue boundaries and improve exact width extrapolation beyond decoded wider-state and non-addressable controls
+seed: 20261054
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-654-neural-ram-executor-viability.md
+models:
+  decoded_control: {hidden: 58, cycles: 2}
+  decoded_wider: {hidden: 80, cycles: 2}
+  nonaddressable_workspace: {hidden: 88, microsteps: 2}
+  neural_ram:
+    canvas_hidden: 48
+    controller_hidden: 48
+    memory_dim: 32
+    register_slots: 8
+    attention_heads: 4
+    canvas_microsteps: 2
+    condition_dim: 16
+training:
+  stages:
+    - {width: 8, steps: 800}
+    - {width: 12, steps: 1200}
+    - {width: 16, steps: 2000}
+  total_steps: 4000
+  batch_size: 64
+  learning_rate: 0.001
+  minimum_learning_rate: 0.00005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  final_prefix_weight: 0.50
+  torch_threads: 4
+data:
+  prime_bit_span: 4
+  train_prime_identities: 32
+  test_prime_identities: 16
+  split_seed_offset: 654000
+  training_pair_seed_offset: 654100
+  evaluation_pair_seed_offset: 654200
+  calibration_seed: 20261056
+  formal_seed: 20261055
+evaluation:
+  widths: [16, 24, 32]
+  rollout_cases: {16: 300, 24: 200, 32: 200}
+  ablation_cases: {16: 100, 32: 100}
+  randomized_dependence_cases: 100
+  runtime_probe_width: 256
+  runtime_probe_cases: 4
+  official_tier7_cases: 100
+  torch_threads: 4
+calibration:
+  stage_steps: {8: 10, 12: 10, 16: 20}
+  batch_size: 64
+  rollout_cases: {16: 10, 24: 10, 32: 10}
+  ablation_cases: {16: 5, 32: 5}
+  randomized_dependence_cases: 5
+  runtime_probe_cases: 1
+gates:
+  minimum_neural_ram_width16_rollout: 0.80
+  minimum_neural_ram_width32_rollout: 0.05
+  minimum_width32_gain_over_best_control: 0.05
+  minimum_width16_memory_ablation_drop: 0.10
+  minimum_register_delta_rms: 0.005
+  minimum_mean_maximum_write_probability: 0.145
+  maximum_invalid_rate: 0.02
+  minimum_randomized_dependence_drop: 0.20
+  minimum_parameter_ratio_to_wider_control: 0.90
+  maximum_parameter_ratio_to_wider_control: 1.10
+  maximum_incremental_tier7_wall_seconds: 100
+resource_budget:
+  limit_units: [wall_seconds, aggregate_cpu_seconds]
+  calibration_status: complete
+  calibration_output: .scratch/exp-654-neural-ram-executor-viability/calibration.json
+  calibration_output_sha256: 571fabcb986a47f3b2c8ed34b7acb3cfceb0e606d0e4fdf164a64f915748b7d1
+  calibration_repository_commit: cb7f8ea3fa5e7b0e580742aba7ce3166827332f4
+  calibration_runner_sha256: 8e09a99915720c3386ec6bd4567e05583d16415ba2e5ed4c94552e88aa8d4a12
+  measured_resume_wall_seconds: 4.8687220020001405
+  measured_resume_aggregate_cpu_seconds: 2.8
+  measured_resume_peak_rss_bytes: 382930944
+  calibration_reuse_partial: .scratch/exp-654-neural-ram-executor-viability/calibration/partial.json
+  calibration_reuse_partial_sha256: e7da9c6987c1c25a61968c8238f8111cedf23e34e6201943d1ddbe9bc1f5ebab
+  calibration_reuse_runner_sha256: 391f1715433e53f430bb48bcaaf6f2272b68f586e2365fd821ea310b6c16bdf1
+  calibration_reuse_scope: completed arm training, normal evaluation, memory ablations, and randomized dependence; width256 timing incomplete
+  calibration_hard_runaway_ceiling_wall_seconds: 1800
+  calibration_hard_runaway_ceiling_aggregate_cpu_seconds: 7200
+  projected_formal_wall_seconds: 6632
+  projected_formal_aggregate_cpu_seconds: 26503
+  setup_and_serialisation_headroom_wall_seconds: 332
+  setup_and_serialisation_headroom_aggregate_cpu_seconds: 531
+  throughput_safety_multiplier: 1.50
+  soft_budget_wall_seconds: 10279
+  soft_budget_aggregate_cpu_seconds: 40284
+  hard_runaway_ceiling_wall_seconds: 15419
+  hard_runaway_ceiling_aggregate_cpu_seconds: 60426
+  cache_completed_arms: true
+  preserve_completed_arms: true
+  fidelity_reduced: false

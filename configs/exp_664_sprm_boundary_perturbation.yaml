@@ -1,0 +1,89 @@
+run_id: exp-664-sprm-boundary-perturbation
+hypothesis: Training-only variance-preserving Gaussian perturbation at detached latent TBPTT boundaries preserves W128 exactness and creates nonzero W256 autonomous transfer.
+mechanism_map: knowledge/autoresearch/research/2026-07-28-exp664-sprm-boundary-mechanism.md
+preregistration: experiments/runs/exp-664-sprm-boundary-perturbation/preregistration.json
+source_checkpoint: .scratch/exp-658-joint-quotient-carry-transducer/source_checkpoint.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+roots:
+  calibration: 20261206
+  viability: 20261207
+  confirmations: [20261208, 20261209]
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+model:
+  hidden: 92
+  cycles: 2
+  boundary_passes: 4
+  beta_start: 0.0001
+  beta_end: 0.02
+  beta_steps: 1000
+routes: [frozen_source, sprm_boundary, clean_tbptt, wrong_boundary, unscaled_boundary]
+trained_routes: [sprm_boundary, clean_tbptt, wrong_boundary, unscaled_boundary]
+data:
+  widths: [64, 128, 256]
+  training_widths: [64, 128, 256]
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 66400
+  training_seed_offset: 66500
+  validation_seed_offset: 66600
+  test_seed_offset: 66700
+training:
+  steps_per_trained_route: 400
+  schedule: [64, 128, 256, 128]
+  batch_size: 32
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  gradient_clip: 2.0
+  torch_threads: 4
+  log_every_steps: 25
+calibration:
+  representative_updates_per_trained_route: 2
+  transition_cases_per_width: 8
+  rollout_cases_per_width: 2
+  boundary_diagnostic_cases_per_width: 4
+  candidate_runtime_cases_w128: 8
+evaluation:
+  transition_cases_per_width: 3000
+  rollout_cases_per_width: 300
+  validation_transition_cases_per_width: 1000
+  validation_rollout_cases_per_width: 100
+  deterministic_repeats: 2
+  boundary_diagnostic_cases_per_width: 64
+gates:
+  minimum_w64_sprm_rollout: 0.95
+  minimum_w128_sprm_rollout: 0.85
+  maximum_w128_loss_to_clean_tbptt: 0.02
+  minimum_w128_transition: 0.998
+  maximum_invalid_rollout_rate: 0.0
+  minimum_trained_weight_drop_w128: 0.20
+  minimum_w256_sprm_rollout: 0.10
+  minimum_w256_gain_over_each_control: 0.05
+  minimum_boundary_placement_gain_w256: 0.05
+  minimum_state_scaling_gain_w256: 0.05
+  maximum_inference_runtime_ratio: 1.02
+  require_inference_bit_identity: true
+  require_reload_exact: true
+  require_split_separation: true
+resource_policy:
+  evaluator_processes: 3
+  evaluator_torch_threads_each: 4
+  maximum_peak_rss_bytes: 6442450944
+  maximum_expected_formal_wall_seconds: 21600
+  maximum_candidate_inference_wall_seconds: 300
+  variability_headroom_floor: 1.25
+  variability_headroom_ceiling: 2.0
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 2.0
+  require_complete_routes: true
+  cache_completed_roots: true
+confirmation:
+  require_both: true
+  reproduce_w128_rollout: 0.85
+  reproduce_w256_rollout: 0.10
+  reproduce_w256_gain: 0.05

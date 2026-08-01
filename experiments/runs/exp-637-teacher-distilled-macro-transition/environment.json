@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-07-17T06:42:28Z",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "distribution": "Ubuntu-24.04 WSL2",
+  "python": "3.12.3",
+  "pytorch": "2.5.1+cpu",
+  "mlflow": "3.14.0",
+  "device": "cpu",
+  "torch_threads": 4,
+  "external_maximum_resident_set_kib": 970744
+}

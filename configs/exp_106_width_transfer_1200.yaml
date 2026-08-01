@@ -1,0 +1,21 @@
+run_id: exp-106-width-transfer-1200
+hypothesis: learned width-transfer remains advantageous at the matched 1200-step budget
+seed: 20260712
+base_config: configs/exp_100_width16_shared_context_smoke.yaml
+transfer_checkpoint: .scratch/exp-100-width16-shared-context-smoke/width9-control/weights.safetensors
+transfer_checkpoint_sha256: 6f8d3598e2954e30ce4b999590ede22b7a211787c7206d1d4f56190710fa0192
+training:
+  steps: 1200
+evaluation:
+  heldout_transition_cases: 20000
+  rollout_cases: 10000
+gates:
+  minimum_transfer_rollout_gain: 0.05
+  maximum_transfer_transition_loss: 0.01
+  maximum_transfer_invalid_rate_change: 0.0
+  full_budget_transition: 0.97
+  full_budget_rollout: 0.60
+  independent_gate_rollout: 0.90
+resource_cap:
+  aggregate_cpu_minutes: 12
+  next_full_steps: 2400

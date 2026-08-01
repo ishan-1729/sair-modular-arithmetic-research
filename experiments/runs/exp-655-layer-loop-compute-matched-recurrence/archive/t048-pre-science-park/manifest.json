@@ -1,0 +1,63 @@
+{
+  "schema_version": "exp655-t048-terminal-archive-v1",
+  "archive_created_for": "T049-before-any-current-pointer-replacement",
+  "source_commit": "ec2f166990bd39e2a53d5ee7a9c0c5ed7d63b575",
+  "source_tree": "51bb74e41e7fabd6fc8394b94cb6cfdde2f71479",
+  "exp655_source_commit": "3047af97b79b712c2252054d909e1572ca5a6282",
+  "exp655_source_tree": "aa0e6e4b6a411800b9765fe7eb7365980af9f520",
+  "records": [
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/run.json",
+      "source_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/run.json",
+      "bytes": 4221,
+      "sha256": "9f366b849407fad88f37ff8971fb7e11695edf22af420d110d0a8443f0b8f61c",
+      "git_blob_oid": "212d9eb95a983972aa50ec02d2910f73e80d3154"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/environment.json",
+      "source_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/environment.json",
+      "bytes": 1079,
+      "sha256": "46d37e4d4e54753403fc71137cf9afe92f0e1efc4c22e3a825966771bd19e53f",
+      "git_blob_oid": "cc2461b1a5c49f37143b9ea572b2c467697ddcf0"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/verification.json",
+      "source_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/verification.json",
+      "bytes": 9163,
+      "sha256": "6ddad1fc96132cacde3cc5162bbcb92041f82303d8a2c1a250e483937b2f495f",
+      "git_blob_oid": "658e80b091dfd4412e038ea02109fa2dac08d296"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/limitations.json",
+      "source_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/limitations.json",
+      "bytes": 1405,
+      "sha256": "3530b9fd62168cd13e02b777ffbc09ebf4bd5217711b5f8394b19999c70ae49f",
+      "git_blob_oid": "79b75fcd556ebac13bc01203a0fae6cf0be7fe9e"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/mlflow.json",
+      "source_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/mlflow.json",
+      "bytes": 237,
+      "sha256": "37bfd049d6399a4ae9217a2a50bf4bb294388d64359dd9c440d4ec4056aa11c1",
+      "git_blob_oid": "2d27e25b40bf3f253c2e76ee8f7106a07b110564"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/metrics.json",
+      "source_path": "evals/results/exp-655-layer-loop-compute-matched-recurrence/metrics.json",
+      "bytes": 1559,
+      "sha256": "655ccde02c52207ff648ce0185de45b67af03801482b6c953ed57af7f450e657",
+      "git_blob_oid": "f2a7fef5aa4744bcf9df60ec8ccdb10c889c0a10"
+    },
+    {
+      "archive_path": "experiments/runs/exp-655-layer-loop-compute-matched-recurrence/archive/t048-pre-science-park/decision.json",
+      "source_path": "evals/results/exp-655-layer-loop-compute-matched-recurrence/decision.json",
+      "bytes": 1941,
+      "sha256": "32e7b0bb99fb232d15f9623133cce52e6d89f4ec55f23612869c395cd0516475",
+      "git_blob_oid": "706797e6f0c1e196b531694b1948ce6b0f0b9c6c"
+    }
+  ],
+  "record_count": 7,
+  "total_bytes": 19605,
+  "byte_identical_regular_copies": true,
+  "historical_result_rewritten": false
+}

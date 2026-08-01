@@ -1,0 +1,76 @@
+{
+  "run_id": "exp-639-full-depth-soft-boundary-adaptation",
+  "status": "completed",
+  "created_at": "2026-07-17T08:05:57Z",
+  "hypothesis": "Low-rate shared-weight macro recovery through a full-depth continuous intermediate state improves fresh width-128 rollout beyond both frozen hard composition and frozen continuous initialization while retaining width 64.",
+  "seed": 20260839,
+  "source": {
+    "repository_commit": "8ab8fc6e5c3de50de0ed385a1cae8616379ebeba",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "c20604f6b9ad11aa6f34c850db89bede6d357b03fe17a6d1979314ae19315c4c",
+    "runner_sha256": "398e8d68d103afbd6e0e31853dada348b187d5176a054b04ba0ccae5a6cffa8d",
+    "macro_data_sha256": "6a50a751f5d0b8a6c154c6bc2b6857b50982eedbed73bf4cae4fadf153b98ad1",
+    "cellular_model_sha256": "9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc",
+    "split_sha256": "4985a022ef12d6070f2707da14cf64300f5d42c0b9b369f44f43bcbc3fb0db19",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "config": "configs/exp_639_full_depth_soft_boundary_adaptation.yaml",
+  "environment": "experiments/runs/exp-639-full-depth-soft-boundary-adaptation/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "700dcb73e90a49bbb61afd71382809f2"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-639-full-depth-soft-boundary-adaptation/weights.safetensors",
+    "checkpoint_sha256": "a033ba8d5a2b013c432591422443c116960b16a72c44efb31f13c2c9105b61ac",
+    "metrics": "evals/results/exp-639-full-depth-soft-boundary-adaptation/metrics.json",
+    "scratch_summary": ".scratch/exp-639-full-depth-soft-boundary-adaptation/summary.json",
+    "scratch_summary_sha256": "3310550ef23f15ff55767a3590d0b47ce9e2fd996da6dfafd29b549383ecfbb2",
+    "evaluation_cache": ".scratch/exp-639-full-depth-soft-boundary-adaptation/evaluation-7d837cc15364e9029c50e142ba9b6c79f1b73ebc0f8c85ff82f469ea1208b4ef.partial.json",
+    "evaluation_cache_sha256": "44315f34f11d090defd4cd45ff1f2b42dd39bf1fb1c7d6d3996b5ec5e5f0ea5b",
+    "training_state": ".scratch/exp-639-full-depth-soft-boundary-adaptation/training-89303f159de39398f2eaa35d639ba893f7f850788030dd6e38b50aebc32ba850.partial.pt",
+    "training_state_sha256": "f5ef9832f75c802668e90b77b163b3e6407a191700e5a46394f5a552eb234979",
+    "formal_console": ".scratch/exp-639-full-depth-soft-boundary-adaptation/formal-console.log",
+    "formal_console_sha256": "c3e7bb5d2f46784b9a0ba682e36c3167e4278faddefd713a3fb41950d3bc9a8e"
+  },
+  "evidence_scope": "fresh-generated-held-out-prime-identities",
+  "controls": {
+    "paired_hard_frozen": true,
+    "paired_continuous_initialized": true,
+    "shared_weights_across_macro_phases": true,
+    "full_workload_completed": true,
+    "determinism_passed": true,
+    "all_gates_passed": false
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 3832,
+    "expected_total_aggregate_cpu_minutes": 234,
+    "soft_budget_wall_seconds": 5220,
+    "hard_runaway_ceiling_wall_seconds": 7680,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 511,
+    "runner_wall_seconds": 2312.411377114,
+    "runner_aggregate_cpu_seconds": 8531.040269695999,
+    "runner_aggregate_cpu_minutes": 142.18400449493332,
+    "training_wall_seconds": 1028.960878558999,
+    "training_aggregate_cpu_seconds": 3836.571457476,
+    "evaluation_active_wall_seconds": 1276.1803805719974,
+    "evaluation_arm_aggregate_cpu_seconds": 4638.834332400002,
+    "external_wall_seconds": 2174.28,
+    "external_user_cpu_seconds": 8520.47,
+    "external_system_cpu_seconds": 24.81,
+    "external_percent_cpu": 393,
+    "timing_discrepancy_seconds": 138.13137711400012,
+    "fidelity_reduced": false,
+    "valid_throughput_evidence_reused": true
+  },
+  "decision": "reject-full-depth-soft-boundary-adaptation",
+  "notes": [
+    "The trained width-128 continuous macro scores 80.67 percent versus 82.67 percent hard-frozen and 81.67 percent initialized continuous on 300 paired rollouts.",
+    "The trained arm passes width-64 retention, validity, and exact determinism but misses width-128 rollout, causal gain, transition, and runtime gates.",
+    "The full run finishes below every calibrated wall and aggregate-CPU allowance without reducing training or evaluation fidelity.",
+    "Runner monotonic wall exceeds GNU time elapsed by 138.13 seconds; both measurements are preserved rather than silently conflated."
+  ]
+}

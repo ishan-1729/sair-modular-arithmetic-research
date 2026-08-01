@@ -1,0 +1,233 @@
+{
+  "run_id": "exp-112-independent-tier3-five-seed",
+  "status": "completed",
+  "checkpoint": {
+    "path": ".scratch/exp-111-hard-mining-2400/width16-transfer-hard-mining-2400/weights.safetensors",
+    "sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94"
+  },
+  "generator": {
+    "implementation": "modchallenge.testgen.generator._generate_tier_cases",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "checked_public_used": false,
+  "tier": 3,
+  "seeds": {
+    "62fe2851dfaf6602": {
+      "seed_sha256": "62fe2851dfaf66020e6025d3a1998a211abb3da4765e33db6893442f009b2360",
+      "cases": 100,
+      "correct": 100,
+      "exact_accuracy": 1.0,
+      "invalid_residues": 0,
+      "inference_seconds": 0.11431109999830369,
+      "per_prime": {
+        "6299": {
+          "cases": 23,
+          "correct": 23,
+          "exact_accuracy": 1.0
+        },
+        "7207": {
+          "cases": 19,
+          "correct": 19,
+          "exact_accuracy": 1.0
+        },
+        "20929": {
+          "cases": 19,
+          "correct": 19,
+          "exact_accuracy": 1.0
+        },
+        "52067": {
+          "cases": 16,
+          "correct": 16,
+          "exact_accuracy": 1.0
+        },
+        "62347": {
+          "cases": 23,
+          "correct": 23,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": []
+    },
+    "56e22cefaadc3d59": {
+      "seed_sha256": "56e22cefaadc3d5981d4adcad9190f9e97c62e609d7106eb69eead8ea99e7a20",
+      "cases": 100,
+      "correct": 100,
+      "exact_accuracy": 1.0,
+      "invalid_residues": 0,
+      "inference_seconds": 0.10560819999955129,
+      "per_prime": {
+        "4127": {
+          "cases": 18,
+          "correct": 18,
+          "exact_accuracy": 1.0
+        },
+        "37117": {
+          "cases": 19,
+          "correct": 19,
+          "exact_accuracy": 1.0
+        },
+        "54973": {
+          "cases": 24,
+          "correct": 24,
+          "exact_accuracy": 1.0
+        },
+        "55127": {
+          "cases": 25,
+          "correct": 25,
+          "exact_accuracy": 1.0
+        },
+        "60761": {
+          "cases": 14,
+          "correct": 14,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": []
+    },
+    "a1ca5f63e27ae4a9": {
+      "seed_sha256": "a1ca5f63e27ae4a999cead1021b4203c9d9c99812c55e278f8c21e64b88e3bb0",
+      "cases": 100,
+      "correct": 100,
+      "exact_accuracy": 1.0,
+      "invalid_residues": 0,
+      "inference_seconds": 0.10864239999500569,
+      "per_prime": {
+        "15859": {
+          "cases": 21,
+          "correct": 21,
+          "exact_accuracy": 1.0
+        },
+        "18013": {
+          "cases": 19,
+          "correct": 19,
+          "exact_accuracy": 1.0
+        },
+        "19373": {
+          "cases": 16,
+          "correct": 16,
+          "exact_accuracy": 1.0
+        },
+        "40507": {
+          "cases": 20,
+          "correct": 20,
+          "exact_accuracy": 1.0
+        },
+        "56167": {
+          "cases": 24,
+          "correct": 24,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": []
+    },
+    "e2e6ffee45595a0a": {
+      "seed_sha256": "e2e6ffee45595a0a41dc9557df3b8beabab4da63e8ea8f043248ef8dffe93c89",
+      "cases": 100,
+      "correct": 100,
+      "exact_accuracy": 1.0,
+      "invalid_residues": 0,
+      "inference_seconds": 0.10438229999272153,
+      "per_prime": {
+        "4783": {
+          "cases": 21,
+          "correct": 21,
+          "exact_accuracy": 1.0
+        },
+        "24763": {
+          "cases": 16,
+          "correct": 16,
+          "exact_accuracy": 1.0
+        },
+        "29123": {
+          "cases": 24,
+          "correct": 24,
+          "exact_accuracy": 1.0
+        },
+        "41023": {
+          "cases": 21,
+          "correct": 21,
+          "exact_accuracy": 1.0
+        },
+        "41387": {
+          "cases": 18,
+          "correct": 18,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": []
+    },
+    "be3ce21885ce16da": {
+      "seed_sha256": "be3ce21885ce16da81b1f896594dae9c6ab7cbc6286057f209ae222ef41fe4a7",
+      "cases": 100,
+      "correct": 99,
+      "exact_accuracy": 0.9900000095367432,
+      "invalid_residues": 0,
+      "inference_seconds": 0.10119750000012573,
+      "per_prime": {
+        "12263": {
+          "cases": 16,
+          "correct": 16,
+          "exact_accuracy": 1.0
+        },
+        "25969": {
+          "cases": 18,
+          "correct": 18,
+          "exact_accuracy": 1.0
+        },
+        "29717": {
+          "cases": 18,
+          "correct": 17,
+          "exact_accuracy": 0.9444444444444444
+        },
+        "30427": {
+          "cases": 18,
+          "correct": 18,
+          "exact_accuracy": 1.0
+        },
+        "64151": {
+          "cases": 30,
+          "correct": 30,
+          "exact_accuracy": 1.0
+        }
+      },
+      "errors": [
+        {
+          "index": 37,
+          "p": 29717,
+          "predicted": 27130,
+          "expected": 18716
+        }
+      ]
+    }
+  },
+  "aggregate": {
+    "cases": 500,
+    "correct": 499,
+    "exact_accuracy": 0.998,
+    "passing_seeds": 5,
+    "minimum_seed_accuracy": 0.9900000095367432
+  },
+  "gates": {
+    "minimum_aggregate_accuracy": 0.9,
+    "minimum_passing_seeds": 4,
+    "per_seed_passing_accuracy": 0.9,
+    "minimum_single_seed_accuracy": 0.85,
+    "passed": true
+  },
+  "decision": "promote-to-submission-integration",
+  "runtime": {
+    "wall_seconds": 1.2898895999969682,
+    "device": "cpu",
+    "torch_threads": 4
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:///D:/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic",
+    "run_id": "ca531d66bb0b4d03a60de2550d9ec67d"
+  },
+  "limitations": [
+    "Five independent generator seeds; the official private seed is unknowable.",
+    "Tier 3 only; full-tier integration evaluation remains required.",
+    "Checked public Tier 3 answers were not read."
+  ]
+}

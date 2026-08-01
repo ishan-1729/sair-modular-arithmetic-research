@@ -1,0 +1,27 @@
+{
+  "cache_key": "aa0b62e7a6d248934e7a9fef1c2c012bc770667e9f6e8012fdc6f93773b720e3",
+  "result": {
+    "cached": false,
+    "checkpoint": {
+      "bytes": 745368,
+      "path": "experiments/runs/exp-668-h2l3-magicnorm-credit/calibration/root-20261222/randomized/model.safetensors",
+      "sha256": "fa8c8cd4487b87de59744d15df45c16b1a1c8c5ad1a69fe30e6f1baafa51d798"
+    },
+    "checkpoint_reload_exact": true,
+    "parameters": 185632,
+    "route": "randomized",
+    "trainable_parameters": 85808,
+    "training": {
+      "examples": 0,
+      "history": [],
+      "operator_calls": 0,
+      "timing": {
+        "cgroup_cpu_seconds": 0.17200000000002547,
+        "peak_rss_bytes": 620048384,
+        "process_cpu_seconds": 0.15207699999999846,
+        "wall_seconds": 0.0456324350000159
+      },
+      "updates": 0
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "run_id":"exp-610-tier6-state-corruption-robustness","created_at":"2026-07-12T18:45:00Z","checkpoint_sha256":"e26e11f9b8563d2ab76e550ee48c47dde96116af25ff94196b089bc22aabda4f",
+  "evaluation":{"transition":{"clean_width128":{"cases":2000,"correct":1998,"exact_accuracy":0.999},"corrupted_width128":{"cases":2000,"correct":1997,"exact_accuracy":0.9985}},"rollout":{"clean_width64":{"cases":200,"correct":192,"exact_accuracy":0.96,"invalid_rate":0.0},"clean_width128":{"cases":200,"correct":175,"exact_accuracy":0.875,"invalid_rate":0.0},"corrupted_width64":{"cases":200,"correct":191,"exact_accuracy":0.955,"invalid_rate":0.0},"corrupted_width128":{"cases":200,"correct":150,"exact_accuracy":0.75,"invalid_rate":0.005}}},
+  "controls":{"matched_clean_control":true,"width128_rollout_gain":-0.125,"all_gates_passed":false},
+  "runtime":{"runner_wall_seconds":735.396470244,"runner_aggregate_cpu_seconds":2898.176619155,"external_elapsed_wall_seconds":740.14,"external_user_cpu_seconds":2888.05,"external_system_cpu_seconds":17.85,"external_percent_cpu":392,"maximum_resident_set_kib":1929988,"torch_threads":4},"decision":"reject-tier6-state-corruption-robustness","limitations":["Fresh generated selection evidence only.","The intervention injects generic bit corruptions, not model-conditioned perturbations.","No checked, independent, or private answers were read."]
+}

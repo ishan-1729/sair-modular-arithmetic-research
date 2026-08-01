@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "kind": "deterministic-randomized-weight-checked-control",
+  "seed": 20260726,
+  "weights_sha256": "ba0d7876f19048a390d1519451996e77a0cab24fd34af930713c604d98421778",
+  "overall_accuracy": 0.079,
+  "highest_tier_above_90": -1,
+  "tier_5_accuracy": 0.0,
+  "deterministic": true,
+  "static_analysis": "clean",
+  "preprocess_isolated": true,
+  "raw_result_sha256": "b2fa9d1dd847480b114587573627d2f8756a46db9ffb4a1cdbb43bb517403e8f"
+}

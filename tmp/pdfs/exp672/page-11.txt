@@ -1,0 +1,92 @@
+LT2: Linear-Time Looped Transformers
+to dense attention. Among the sparse choices, Looped DSA is the strongest, which is why we adopt it as
+the sparse component of LT2 in the remainder of the paper.
+0
+5000
+10000 15000 20000
+training steps
+4
+6
+8
+10
+loss
+Language-modeling loss
+Looped Transformer
+Looped Hybrid (GDN+DSA)
+Looped Hybrid (Full+GDN)
+0
+5000
+10000 15000 20000
+training steps
+100
+101
+global grad norm
+Gradient norm
+Figure 8: Both hybrid variants match or beat the Looped Trans-
+former in loss while producing smaller and smoother gradient
+norms throughout training.
+Hybrid mixers combine stability and
+capability.
+Figure 8 shows that the
+two hybrid configurations inherit the
+best of both worlds.
+Looped Hy-
+brid (GDN+DSA) and Looped Hybrid
+(Full+GDN) both track the Looped
+Transformer in loss from the very begin-
+ning of training and pull slightly ahead
+by the end, while their gradient norms
+remain consistently smaller and free of
+the spikes that the full-attention loop
+occasionally produces. Pairing a recur-
+rent mixer with either sparse or dense
+attention thus appears to regularize the
+loop: the linear branch keeps the gra-
+dient norm bounded across iterations, while the attention branch supplies the precise retrieval that pure
+linear models lack.
+Across all three comparisons the same picture emerges. Mixers with data-dependent gating and a delta
+rule (GDN, and the hybrids that include it) train more stably than vanilla full attention under looping,
+and sparse attention, while less expressive, never destabilizes. This motivates the two LT2 instantiations
+used in the rest of the paper: LT2-sparse (Looped Hybrid with DSA) when stability is the priority, and
+LT2-linear (Looped Hybrid with GDN) when capability is.
+3.6. Synthetic Tasks: State-tracking + Recall
+State tracking and long-range retrieval are usually treated as opposite stress tests: state tracking favors
+recurrent depth, while retrieval favors precise attention to a long history. The first synthetic experiment
+we use to probe LT2 puts both pressures on the same task. We follow the state-based recall construction
+of Olmo-hybrid [43].
+bits = [ 1,0,1,1,0,0,1,0,1,1,0,1,0,1,1,0,0,1,0,1,0,1,1,0,1,0,1,1,0,0,1,0 ]
+recall target
+a, b, c, d, e = 11, 27, 4, 19, 30
+pointer state: (a,b,c,d,e)=(11,27,4,19,30)
+a, c = c, a;
+swap a↔c
+a=4, c=11
+b, d = d, b;
+swap b↔d
+b=19, d=27
+a, e = e, a;
+swap a↔e
+a=30, e=4
+c, d = d, c;
+swap c↔d
+c=27, d=11
+d, e = e, d;
+swap d↔e
+d=4, e=11
+a, b = b, a;
+swap a↔b
+a=19, b=30
+b, c = c, b;
+swap b↔c
+b=27, c=30
+a, d = d, a;
+swap a↔d
+a=4, d=19
+assert bits[a] ==
+?
+final query: a=4, so target = bits[4] = 0
+Task and setup.
+Each example is a short Python-like program (see below for 𝑚=32, 𝑛=8): a bit array
+bits of length 𝑚is written, five variables a–e are bound to five distinct indices in [0, 𝑚), then 𝑛swap lines
+are emitted with an assert bits[a] == ? after every swap. The model is supervised on each ? token.
+11

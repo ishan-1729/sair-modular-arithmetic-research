@@ -1,0 +1,15 @@
+{
+  "run_id": "exp-668-h2l3-magicnorm-credit",
+  "created_at": "2026-07-28T21:30:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "calibration-only-non-scientific-runtime-park",
+  "decision": "park-before-viability-runtime-headroom-gate",
+  "root": 20261222,
+  "evaluation": {"not_performed": true, "reason": "Candidate variability-headroom admission failed before root 20261223 could open.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {"complete_calibration_routes": ["proposal_only", "full", "hierarchy_only", "credit_only", "flat_compute_matched", "no_warmup_raw_gradient", "high_reset", "low_reset", "randomized"], "representative_updates_per_trained_route": 2, "all_checkpoint_reload_exact": true, "deterministic_repeat_equal": true, "gradient_finite": true, "target_free_fixed_h2l3": true, "formal_controls_opened": false},
+  "resource_admission": {"admitted": false, "checks": {"complete_routes": true, "expected_value": true, "memory": true, "candidate_inference": false, "determinism": true, "reload": true, "separation": true, "gradient_finite": true, "target_free_fixed_h2l3": true}, "candidate_projected_wall_seconds": 277.1252813499982, "candidate_headroom_wall_seconds": 487.0921615277175, "candidate_headroom_ceiling_seconds": 285.0, "headroom": 1.757660503418811, "expected_formal_wall_seconds": 10485.418401250045, "eta_formal_wall_seconds": 18429.80578569802, "hard_guard_wall_seconds": 36860, "observed_wall_seconds": 207.1421818629999, "observed_process_tree_cpu_seconds": 807.1774469999999, "observed_cgroup_cpu_seconds": 850.2919999999999, "peak_rss_bytes": 620048384},
+  "unopened_surfaces": ["root 20261223", "full W128 primary", "W128 controls", "W256", "roots 20261224 and 20261225", "M024.c", "M024.d"],
+  "limitations": ["Calibration values are resource/integrity diagnostics, not scientific evidence.", "The runtime-headroom miss prohibited formal execution.", "No HRM-Text, H2L3, MagicNorm, warmup-credit, candidate, benchmark, promotion, or completion verdict follows."]
+}

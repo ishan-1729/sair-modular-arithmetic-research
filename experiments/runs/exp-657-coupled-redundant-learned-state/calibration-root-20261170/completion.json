@@ -1,0 +1,17 @@
+{
+  "formal_root_opened": false,
+  "outer_resource_boundary": {
+    "child_exit_code": 1,
+    "monotonic_wall_seconds": 9.60841893900033,
+    "peak_rss_bytes": 481116160,
+    "process_user_plus_system_aggregate_cpu_seconds": 8.918745000000001,
+    "scope": "parent-prelaunch-through-observed-child-process-exit"
+  },
+  "root": 20261170,
+  "run_id": "exp-657-coupled-redundant-learned-state",
+  "schema_version": "exp657-calibration-completion-v1",
+  "scientific_accuracy_or_selection_reported": false,
+  "stage": "L1-resource-only",
+  "status": "failed-child-exited",
+  "stderr_sha256": "72f5af7d49b1397fd98fd96e594a2feaa93c692480a14323975360a001203ca6"
+}

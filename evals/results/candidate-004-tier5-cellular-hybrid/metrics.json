@@ -1,0 +1,22 @@
+{
+  "run_id": "candidate-004-tier5-cellular-hybrid",
+  "created_at": "2026-07-12T12:50:00Z",
+  "checkpoint_sha256": "fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4",
+  "evaluation": {
+    "transition": {"tier5_frozen_checkpoint_load": {"cases": 1, "correct": 1, "exact_accuracy": 1.0}},
+    "rollout": {
+      "independent_official_scored_tiers": {"cases": 1000, "correct": 495, "exact_accuracy": 0.495, "highest_tier_above_90": 5, "tier_1_accuracy": 1.0, "tier_2_accuracy": 0.96, "tier_3_accuracy": 0.99, "tier_4_accuracy": 0.95, "tier_5_accuracy": 0.95},
+      "checked_public_scored_tiers": {"cases": 1000, "correct": 501, "exact_accuracy": 0.501, "highest_tier_above_90": 5, "tier_1_accuracy": 1.0, "tier_2_accuracy": 0.99, "tier_3_accuracy": 1.0, "tier_4_accuracy": 0.98, "tier_5_accuracy": 0.94}
+    }
+  },
+  "controls": {"static_analysis": "clean", "preprocess_isolated": true, "deterministic": true, "randomized_weights_overall_accuracy": 0.079, "randomized_weights_tier_5_accuracy": 0.0, "randomized_weights_highest_tier_above_90": -1},
+  "runtime": {
+    "device": "cpu",
+    "artifact_bytes_clean": 1512567,
+    "parameters": 370225,
+    "checked_inference_seconds": 24.87171848300204,
+    "official_container_independent": {"engine": "native rootless podman 4.9.3 on Ubuntu 24.04 WSL2", "image_id": "0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423", "container_wall_seconds": 75.49431246199674, "inference_seconds": 36.9, "overall_accuracy": 0.495, "highest_tier_above_90": 5, "passed": true}
+  },
+  "decision": "promote",
+  "limitations": ["Tier 6 and above remain at the edge-case baseline.", "The official private seed is unavailable.", "The checked benchmark was read only after the frozen independent gate passed.", "49.5 to 50.1 percent overall is well below the binding 85 percent completion threshold."]
+}

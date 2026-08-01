@@ -1,0 +1,66 @@
+{
+  "run_id": "exp-665-attractor-equilibrium-family",
+  "created_at": "2026-07-28T18:00:00Z",
+  "checkpoint_sha256": "a06103dbe216bd9ae2570cf78f7bdb017a10398bc1e3fa4f9a667101eb1d25e4",
+  "status": "completed-rejected",
+  "decision": "reject-current-attractor-equilibrium-adaptation",
+  "reason": "frozen W128 exact/transition/validity/runtime conjunct failed only on nonzero invalid-rollout rate",
+  "primary_route": "anderson_phantom",
+  "evaluation": {
+    "transition": {
+      "W128": {
+        "cases": 3000,
+        "correct": 2998,
+        "exact_accuracy": 0.9993333333333333,
+        "bit_accuracy": 0.9999947916666667,
+        "invalid_residue_rate": 0.0,
+        "mean_iterations": 3.0,
+        "mean_relative_residual": 4.0559586923505366e-09
+      }
+    },
+    "rollout": {
+      "W128": {
+        "cases": 300,
+        "correct": 255,
+        "exact_accuracy": 0.85,
+        "all_prefix_exact_accuracy": 0.85,
+        "transition_exact_accuracy": 0.9268229166666667,
+        "any_invalid_residue_rate": 0.0033333333333333335,
+        "first_error_mean_position": 65.55555555555556,
+        "mean_iterations": 3.0,
+        "mean_relative_residual": 4.065231626375922e-09
+      }
+    },
+    "stopped_after": "W128-primary-gate"
+  },
+  "gates": {
+    "rollout_floor": {"threshold": 0.85, "observed": 0.85, "passed": true},
+    "transition_floor": {"threshold": 0.998, "observed": 0.9993333333333333, "passed": true},
+    "invalid_rollout_ceiling": {"threshold": 0.0, "observed": 0.0033333333333333335, "passed": false},
+    "candidate_wall_ceiling": {"threshold_seconds": 300, "observed_seconds": 168.97306546669765, "passed": true}
+  },
+  "controls": {
+    "formal_controls_opened": false,
+    "routes_trained_and_reload_verified": ["fixed_depth_shared", "plain_picard_phantom", "anderson_phantom", "anderson_implicit", "eqr_finite"],
+    "proposal_only_reload_verified": true,
+    "stopped_by_w128_primary_gate": true
+  },
+  "integrity": {
+    "checkpoint_reload_exact_all_routes": true,
+    "train_and_cache_all_before_formal_evaluation": true,
+    "library_solver": "torchdeq==0.1.0",
+    "confirmation_roots_opened": false
+  },
+  "unopened_surfaces": [
+    "W128 proposal/randomized controls",
+    "convergence and basin diagnostics",
+    "W256 primary and controls",
+    "roots 20261212 and 20261213"
+  ],
+  "limitations": [
+    "The frozen W128 primary gate stopped before matched controls, diagnostics, W256, and confirmations.",
+    "Residual/exactness selection and EqR breadth were not scientifically evaluated because their gate remained unopened.",
+    "This rejects only the declared bounded SAIR adaptation, not the source methods or library.",
+    "No checked, independent, official/private, benchmark, candidate, submission, promotion, or completion evidence was opened."
+  ]
+}

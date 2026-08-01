@@ -1,0 +1,36 @@
+run_id: exp-300-width64-bit-tensor-transfer
+hypothesis: learned width-32 transfer accelerates width-64 learning once exact labels are converted to tensor-native inputs offline
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+source_checkpoint: .scratch/exp-260-low-rate-continuation/trained/weights.safetensors
+source_checkpoint_sha256: 591c2ca0bfa070b73836d73f5882fcc068c5a7d31523be38a025f2337ca09e94
+model:
+  width: 64
+  hidden: 48
+  blocks: 7
+training:
+  steps: 400
+  batch_size: 256
+  learning_rate: 0.0003
+  minimum_learning_rate: 0.00003
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+data:
+  prime_bits_min: 33
+  prime_bits_max: 64
+  train_prime_identities: 128
+  test_prime_identities: 32
+evaluation:
+  transition_cases: 10000
+  rollout_cases: 2000
+gates:
+  minimum_transfer_transition_gain: 0.15
+  minimum_transfer_rollout_gain: 0.05
+  minimum_transfer_transition: 0.50
+  maximum_invalid_rollout_rate: 0.50
+resource_cap:
+  cpu_minutes: 8

@@ -1,0 +1,27 @@
+{
+  "run_id": "exp-510-multiarchitecture-grokking-feasibility",
+  "created_at": "2026-07-12T12:30:00Z",
+  "checkpoint_sha256": "66ead96be074519186fbe03f8b83aac50c703c476d40d2f21c99e6a1e7d1e51f",
+  "evaluation": {
+    "transition": {
+      "tcn_seed_20260722": {"cases": 4096, "correct": 3279, "exact_accuracy": 0.800537109375},
+      "graph_seed_20260722": {"cases": 4096, "correct": 3440, "exact_accuracy": 0.83984375},
+      "tcn_seed_20260723": {"cases": 4096, "correct": 3086, "exact_accuracy": 0.75341796875},
+      "graph_seed_20260723": {"cases": 4096, "correct": 3423, "exact_accuracy": 0.835693359375},
+      "tcn_seed_20260724": {"cases": 4096, "correct": 3190, "exact_accuracy": 0.77880859375},
+      "graph_seed_20260724": {"cases": 4096, "correct": 3428, "exact_accuracy": 0.8369140625}
+    },
+    "rollout": {
+      "tcn_seed_20260722": {"cases": 500, "correct": 145, "exact_accuracy": 0.29},
+      "graph_seed_20260722": {"cases": 500, "correct": 162, "exact_accuracy": 0.324},
+      "tcn_seed_20260723": {"cases": 500, "correct": 94, "exact_accuracy": 0.188},
+      "graph_seed_20260723": {"cases": 500, "correct": 137, "exact_accuracy": 0.274},
+      "tcn_seed_20260724": {"cases": 500, "correct": 107, "exact_accuracy": 0.214},
+      "graph_seed_20260724": {"cases": 500, "correct": 159, "exact_accuracy": 0.318}
+    }
+  },
+  "controls": {"signature_counts": {"shared_context_tcn": 0, "pyg_max_mpnn": 0}, "mean_final_heldout": {"shared_context_tcn": 0.777587890625, "pyg_max_mpnn": 0.8374837239583334}, "mean_final_rollout": {"shared_context_tcn": 0.23066666666666666, "pyg_max_mpnn": 0.30533333333333335}, "gates_passed": false, "parameters": {"shared_context_tcn": 75469, "pyg_max_mpnn": 72484}},
+  "runtime": {"runner_wall_seconds": 4463.781010809002, "runner_aggregate_cpu_seconds": 17695.677783902, "external_elapsed_wall_seconds": 4476.0, "external_user_cpu_seconds": 17526.93, "external_system_cpu_seconds": 182.76, "external_percent_cpu": 395, "maximum_resident_set_kib": 598048, "torch_threads": 4},
+  "decision": "reject-multiarchitecture-grokking-signature",
+  "limitations": ["Width-9 finite-data architecture feasibility evidence only.", "Architectures are parameter-matched but not compute-matched.", "Generated prime-disjoint evidence only; checked, consumed independent, and private answers were not read."]
+}

@@ -1,0 +1,15 @@
+{
+  "run_id": "exp-670-clipped-poisson-loop-curriculum",
+  "created_at": "2026-07-28T23:30:00Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "status": "parked-package-verification",
+  "decision": "park-before-calibration",
+  "root": 20261230,
+  "evaluation": {"not_performed": true, "reason": "Final package validation failed before root 20261230 calibration could open.", "labels_or_oracle_present": false},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "controls": {"focused_tests_passed": 12, "source_schedule_frozen": true, "formal_controls_opened": false},
+  "resource_admission": {"admitted": false, "reason": "package-verification-blocked", "oracle_wall_seconds": 9.29, "maximum_rss_kib": 29188},
+  "unopened_surfaces": ["root 20261230 calibration", "root 20261231 viability", "W128", "W256", "roots 20261232 and 20261233", "M018.b"],
+  "limitations": ["Final package validation was red on an out-of-scope integrated EXP669 schema record; no scientific conclusion follows."]
+}

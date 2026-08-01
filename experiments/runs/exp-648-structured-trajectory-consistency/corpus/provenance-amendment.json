@@ -1,0 +1,73 @@
+{
+  "schema_version": "exp648-corpus-provenance-amendment-v1",
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "phase": "corpus-only",
+  "task_id": "T-EXP648-CORPUS-FREEZE",
+  "execution": {
+    "repository_head": "9f2226873a66e1938dbf30d87acbc876e528c622",
+    "dirty_during_execution": true,
+    "dirty_reason": "The scientific runner and focused scientific test bytes used by the corpus execution were absent from the execution repository HEAD.",
+    "exact_dirty_set_available": false,
+    "exact_dirty_set_limitation": "The exact complete worktree dirty set at execution time was not serialized and cannot be reconstructed retrospectively.",
+    "scoped_executed_bytes": {
+      "scientific_runner": {
+        "path": "experiments/exp_648_structured_trajectory_consistency/scientific.py",
+        "sha256": "83181524cfa4cdfb7a90b020f41cf32c0d598628f97379086bbd81f6172fd9e2",
+        "absent_from_execution_head": true
+      },
+      "focused_scientific_test": {
+        "path": "tests/test_exp648_structured_trajectory_scientific.py",
+        "sha256": "938b92e151d96ba2bd7b18b83ccf9cbc6e78c02609c6ebb47426dedd334b4a6b",
+        "absent_from_execution_head": true
+      }
+    }
+  },
+  "frozen_evidence": {
+    "root": 20261152,
+    "identity_trajectories": 736,
+    "matched_pairs": 512,
+    "corpus_manifest_sha256": "1bf059fb97cc31d4aac3075c53a4d16918afddc8cff6a35143953a44449df12d",
+    "integrity_sha256": "a0a00d09379cf77dab8a0c89c1b6796fffb9f238021409ab9f473b102ecd24fe",
+    "mlflow_receipt_sha256": "9fbac562324f141d76f8b7e255ff54490072f7e72ffa777e0570466cea1d4a3f",
+    "mlflow_run_id": "6f79fb322d9f4dfb85e19051365b309c",
+    "authoritative_end_to_end_timing": {
+      "source": "mlflow.json.verified.final_resource_timing",
+      "charged_wall_seconds": 2508.171222396,
+      "charged_aggregate_cpu_seconds": 10104.265504912
+    },
+    "immutable_pre_mlflow_workload_snapshot": {
+      "sources": [
+        "run.json.timing",
+        "mlflow.json.verified.metrics"
+      ],
+      "charged_wall_seconds": 2505.754850685,
+      "charged_aggregate_cpu_seconds": 10103.335504912
+    }
+  },
+  "scope": {
+    "training_split_corpus_construction_only": true,
+    "model_update_performed": false,
+    "evaluation_performed": false,
+    "accuracy_evidence": false,
+    "selection_evidence": false,
+    "candidate_or_promotion_evidence": false,
+    "screen_opened": false,
+    "confirmation_opened": false,
+    "checked_public_opened": false,
+    "independent_opened": false,
+    "official_private_opened": false,
+    "exp649_formal_opened": false
+  },
+  "limitations": [
+    "The exact complete dirty set at execution time is unavailable; the amendment binds only the recorded execution HEAD and hash-identified runner/test bytes.",
+    "run.json and MLflow metrics are immutable pre-MLflow workload snapshots; mlflow.json verified final_resource_timing is authoritative for end-to-end resource totals.",
+    "Numeric first-quarter checkpoint telemetry was not serialized, although run.json and integrity.json record its fail-closed pass."
+  ],
+  "disposition": {
+    "corpus_accepted_without_rerun": true,
+    "screen_status": "blocked-pending-readiness-repair-fresh-full-fidelity-recalibration-post-repair-judge",
+    "confirmation_and_benchmark_surfaces_prohibited": true,
+    "candidate_005_changed": false,
+    "completion_eligible_changed": false
+  }
+}

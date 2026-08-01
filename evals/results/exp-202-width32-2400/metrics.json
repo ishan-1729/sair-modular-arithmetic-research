@@ -1,0 +1,38 @@
+{
+  "run_id": "exp-202-width32-2400",
+  "created_at": "2026-07-12T02:25:00Z",
+  "checkpoint_sha256": "047cbfb0599b2ea12af9aeed5171cf832f0c4ec179a09596518b668b14644eed",
+  "evaluation": {
+    "transition": {
+      "width32_transfer_heldout_primes": {"cases": 50000, "correct": 49907, "exact_accuracy": 0.99814, "bit_accuracy": 0.999894375}
+    },
+    "rollout": {
+      "width32_transfer_heldout_primes": {"cases": 20000, "correct": 18898, "exact_accuracy": 0.9449}
+    }
+  },
+  "controls": {
+    "valid_residue_rate": 0.99986,
+    "invalid_rollout_rate": 0.0015,
+    "all_steps_exact_accuracy": 0.9471,
+    "selected_quotient2_fraction": 0.35567057291666665,
+    "selected_boundary_fraction": 0.1933349609375,
+    "transition_gate_margin": 0.00114,
+    "rollout_gate_margin": 0.0449
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 482.10324247699987,
+    "training_seconds": 395.31107975300006,
+    "network_training_examples": 614400,
+    "offline_candidate_examples": 2457600,
+    "peak_rss_bytes": 620212224,
+    "parameters": 126276
+  },
+  "decision": "advance-five-independent-tier4-seeds",
+  "limitations": [
+    "Heldout-prime confirmation; no official Tier-4 score was produced in this run.",
+    "The 32-bit band remains weaker than shorter represented widths.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

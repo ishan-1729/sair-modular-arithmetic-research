@@ -1,0 +1,61 @@
+run_id: exp-329-cellular-width64-autonomous-state-recovery
+hypothesis: learner-induced state recovery updates improve exact width-64 rollout beyond matched teacher-forced continuation
+preregistration: knowledge/autoresearch/ablations/exp-329-cellular-width64-autonomous-state-recovery.md
+seed: 20260716
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+source_checkpoint: .scratch/exp-324-cellular-width64-second-stage/weights.safetensors
+source_checkpoint_sha256: 61b9600bfa6e04f108e41d26d794fad2a4470bf7df42094530658e54d78a75d7
+model:
+  hidden: 92
+  cycles: 2
+training:
+  widths: [56, 64]
+  steps: 400
+  batch_size: 128
+  learning_rate: 0.00015
+  minimum_learning_rate: 0.000015
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  recovery_quotient_weight: 0.0
+  torch_threads: 4
+  recovery_update_period: 4
+  recovery_batch_size: 32
+  recovery_chunk_steps: 4
+  scheduled_prediction_probability_start: 0.5
+  scheduled_prediction_probability_end: 1.0
+hard_mining:
+  candidate_pool_factor: 2
+  quotient2_fraction: 0.35
+  boundary_fraction: 0.15
+  boundary_relative_margin: 0.05
+data:
+  train_prime_identities: 2048
+  test_prime_identities: 128
+evaluation:
+  width56_transition_cases: 1000
+  width56_rollout_cases: 500
+  width64_transition_cases: 5000
+  width64_rollout_cases: 1500
+gates:
+  minimum_challenger_width64_transition: 0.998
+  minimum_challenger_width64_rollout: 0.93
+  minimum_width64_rollout_gain_over_control: 0.015
+  maximum_width64_transition_regression: 0.001
+  maximum_challenger_invalid_rollout_rate: 0.005
+  minimum_retained_width56_rollout: 0.92
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: exp-324-cellular-width64-second-stage
+  calibration_wall_seconds_per_arm: 535.222445939
+  matched_arms: 2
+  projected_base_wall_seconds: 1070.444891878
+  recovery_training_overhead_factor: 1.25
+  projected_wall_seconds: 1338.0561148475
+  soft_budget_wall_seconds: 2400
+  hard_runaway_ceiling_wall_seconds: 3600
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound: 240
+  cache_completed_arms: true

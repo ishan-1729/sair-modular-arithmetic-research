@@ -1,0 +1,53 @@
+{
+  "schema_version": "exp686-calibration-summary-v1",
+  "run_id": "exp-686-w256-straight-through-specialist",
+  "mode": "calibration",
+  "root": 20261294,
+  "status": "completed",
+  "decision": "park-exp686-at-root20261294-resource-admission",
+  "scratch_receipt_sha256": "6e16084f3ce68955a21d8a3006281d68123858c4537609ea2dd28cbe96c06f7d",
+  "matched_training": {
+    "learner_straight_through": {"updates": 4, "examples": 512, "supervision_calls": 32, "checkpoint_sha256": "2db3399dbf97c29d1746eae7d1be1bcae5168244d4f8d2876566366fdb2a66e8"},
+    "teacher_forced": {"updates": 4, "examples": 512, "supervision_calls": 32, "checkpoint_sha256": "3e46b19c5caca495e526916cf2c08bbb1d600114e0e0b488448071e7cb5d3edf"},
+    "calls_per_update": 8,
+    "initial_state_sha256": "3f0a441f7b53da00eb6c47384275d8510eceb7929e8ba4477dae95410e633f10"
+  },
+  "controls": {
+    "frozen_source": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "reset_control": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "randomized_control": "388ea712b945ad46f6208a53cd93c654692aa2fff15617734222ca205097db74"
+  },
+  "candidate_runtime": {
+    "cases": 1100,
+    "lower_incumbent_cases": 640,
+    "w256_specialist_cases": 110,
+    "above_w256_zero_fallback_cases": 350,
+    "labels_available_to_timed_route": false,
+    "output_count": 1100,
+    "wall_seconds": 220.101587968,
+    "process_cpu_seconds": 842.460958,
+    "cgroup_cpu_seconds": 880.936,
+    "peak_rss_bytes": 2602848256
+  },
+  "parity": {
+    "cases": 2,
+    "exact_outputs": true,
+    "exact_minimum_margins": true,
+    "output_sha256": "63b70559140f614e5046b6b3497be0d2eddff796ed6a74692ef6209377a651fe",
+    "minimum_margin_sha256": "7182870859c8419cd47d0f881edcc862656f804b94059bfe512f6efab76491ec"
+  },
+  "admission": {
+    "admitted": false,
+    "failed_check": "candidate_runtime",
+    "candidate_guarded_wall_seconds": 398.9658608219009,
+    "candidate_guarded_ceiling_seconds": 285,
+    "headroom": 1.8126441726531557,
+    "expected_wall_seconds": 8101.734065617995,
+    "expected_wall_ceiling_seconds": 21600,
+    "expected_peak_rss_bytes": 4718037723,
+    "peak_rss_ceiling_bytes": 6442450944,
+    "fidelity_reduced": false
+  },
+  "scientific_metrics": null,
+  "limitations": ["Tiny calibration accuracy is non-scientific.", "Formal roots remain unopened after resource rejection."]
+}

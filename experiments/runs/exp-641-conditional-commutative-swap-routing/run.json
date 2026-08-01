@@ -1,0 +1,69 @@
+{
+  "run_id": "exp-641-conditional-commutative-swap-routing",
+  "status": "completed",
+  "created_at": "2026-07-17T09:16:28Z",
+  "hypothesis": "Routing only the lowest-original-margin 40 percent through swapped inference preserves at least 90 percent width-128 exact rollout while restoring the integrated path below 285 seconds.",
+  "seed": 20260841,
+  "source": {
+    "repository_commit": "1b99c3d38adb1cde554c9006687965aafa1473dd",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "5da0948761ad2d2f55fdac6adc9a710e5efd09b00f74df1b40ef7e9fad08dc87",
+    "runner_sha256": "95995667c5c87dcc602905675c0841d4891ed2bae81d18d5ad27510067d1ff91",
+    "exp640_runner_sha256": "a87b6c66b2af3ea53637608a18ff25e1814943370238d980cb29c38cb85d2c9e",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "split_sha256": "9e788a5d8a60bfe1c39cef468c04a908898541c8aebc59690c94c4f82cd671fb",
+    "paired_cache_sha256": "4f295bbbea499d06796d48c0ac1959d2626bb3e44a3413aa3ab0dfe67065a5dd"
+  },
+  "config": "configs/exp_641_conditional_commutative_swap_routing.yaml",
+  "environment": "experiments/runs/exp-641-conditional-commutative-swap-routing/environment.json",
+  "mlflow": {
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "72b0be7ef31f4293bb8d2c0a31330035"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "metrics": "evals/results/exp-641-conditional-commutative-swap-routing/metrics.json",
+    "scratch_summary": ".scratch/exp-641-conditional-commutative-swap-routing/summary.json",
+    "scratch_summary_sha256": "fbb53dd81b5504141fe9547ea370be0622d590c94ece26fefa6a165e9b356e60",
+    "conditional_cache": ".scratch/exp-641-conditional-commutative-swap-routing/conditional-963474eda9ba5c1ff4d88b400ee73d92cfc66cef405a7fcf34c69065cca6a7e9.json",
+    "conditional_cache_sha256": "ce08b849a82bd98d5363e5672280e4a235af027827e324fef89cb6a400080677",
+    "formal_console": ".scratch/exp-641-conditional-commutative-swap-routing/formal-console.log",
+    "formal_console_sha256": "6a6685dae2148190d1177e8cca9e56f6509f83c052e0b7bad669015cfe38288e"
+  },
+  "evidence_scope": "consumed-exp640-paired-cache",
+  "controls": {
+    "fixed_route_fraction": 0.4,
+    "cached_outputs_reproduced": true,
+    "full_conditional_workload_completed": true,
+    "determinism_passed": true,
+    "all_gates_passed": true
+  },
+  "resource_budget": {
+    "limit_unit": "wall_seconds",
+    "expected_total_wall_seconds": 795,
+    "expected_total_aggregate_cpu_minutes": 48,
+    "soft_budget_wall_seconds": 1200,
+    "hard_runaway_ceiling_wall_seconds": 1800,
+    "hard_ceiling_aggregate_cpu_minutes_upper_bound": 120,
+    "runner_wall_seconds": 593.8711162090003,
+    "runner_aggregate_cpu_seconds": 2183.8739403739996,
+    "runner_aggregate_cpu_minutes": 36.39789900623333,
+    "external_wall_seconds": 569.99,
+    "external_user_cpu_seconds": 2125.60,
+    "external_system_cpu_seconds": 70.48,
+    "external_percent_cpu": 385,
+    "timing_discrepancy_seconds": 23.88111620900031,
+    "fidelity_reduced": false,
+    "valid_throughput_evidence_reused": true
+  },
+  "decision": "authorize-fresh-conditional-swap-confirmation",
+  "notes": [
+    "The fixed 40 percent conditional policy scores 290/300, or 96.67 percent exact, versus 82.67 percent original and 97.67 percent routed oracle coverage.",
+    "It recovers 44 original failures, loses two original successes, selects swapped for 99 cases, and produces zero invalid selected trajectories.",
+    "Every original and routed-swapped prediction, minimum margin, and validity flag exactly reproduces the EXP-640 cache; determinism passes.",
+    "Measured original-all plus routed-swapped work projects an integrated 212.66-second path, passing the 285-second gate and authorizing fresh confirmation only."
+  ]
+}

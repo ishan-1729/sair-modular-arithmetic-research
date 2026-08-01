@@ -1,0 +1,25 @@
+{
+  "approved_base_file_bindings_sha256": "64cf321a799684e0249d3fb1c871a81de493dacf3797df0665236dacd783ef6b",
+  "authorization_manifest_present": false,
+  "authorization_source_path": "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/root-20261162/authorization-source.json",
+  "derived_bindings_sha256": "2c9f9556919c3e0a9516716056a4d1250331e0ba9f8630e31f105dc9c57689b1",
+  "dynamic_authorization_fields": [
+    "approved_base_commit",
+    "authorization_source_blob_sha256",
+    "calibration_root",
+    "scaffold_provenance_blob_sha256"
+  ],
+  "experiment_id": "exp-648-structured-trajectory-consistency",
+  "frozen_corpus_file_bindings_sha256": "3810a28f295dadc5805bccc0d3221c03f5e075c90054dbc96b37ea119253beff",
+  "historical_scaffold": {
+    "path": "experiments/runs/exp-648-structured-trajectory-consistency/readiness-scaffold/provenance.json",
+    "role": "immutable-pre-r3-v1-history-never-a-root20261162-source",
+    "sha256": "593d18523ff2888c1d57d8626d81f4ebb07a234427573efa3afc226e98e2c5a6"
+  },
+  "root": 20261162,
+  "root20261161_archive_classification_sha256": "25df42834a00cb4f3338d5f16e2a33d1d207d5e50e5debf34f6377c9fedd293b",
+  "schema_version": "exp648-readiness-scaffold-provenance-v2",
+  "scientific_action_authorized": false,
+  "screen_workload_sha256": "2f703cda7d1a9e4afbc4bc4722d9032d2eac66b678cfbd0d29ca6c900717dfe1",
+  "status": "reserved-unopened-unauthorized"
+}

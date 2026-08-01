@@ -1,0 +1,81 @@
+{
+  "run_id": "exp-647-operand-swap-consistency",
+  "completed_at": "2026-07-19T20:07:10+00:00",
+  "status": "completed",
+  "seed": 20261057,
+  "config": "configs/exp_647_operand_swap_consistency.yaml",
+  "hypothesis": "Confidence-routed endpoint consistency across paired commuted full rollouts distills at least half of Candidate 005's proven two-orientation gain into one original-orientation trajectory and improves width-256 exact rollout.",
+  "source": {
+    "repository_commit": "94a3f63d429ea5024852197bbf02eeedac25ae5c",
+    "repository_dirty_at_start": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "d216ceaaedf2be11fbb4e3e82a3b841d1922913e87114beec77901dc052ac91f",
+    "scientific_config_sha256": "903e770466bcfd131cff4b6639bf2e0649957c6895b348751b09a871f9fb24fa",
+    "runner_sha256": "308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326",
+    "preregistration_sha256": "639ee5a22513a41c8650914b53547a03db2190416d25915e9d631164c831d940",
+    "dataset_sha256": "886a8d286c1c1bf571966ff9cdd1ed3e0f0d510668e34501bec71c0af58d2b2e",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "arms": {
+    "paired_rollout_control": {
+      "cached": true,
+      "parameters": 99824,
+      "checkpoint_sha256": "b3c8c3f247f42dfe82d28732d3474737ac621ddffc116573fbe0145d3c292ac0",
+      "training_cache_key": "9145dbe16314ed9e09d00145dbbb8ef874211cf93b3828daf69c5ab87c1878df",
+      "training_cache_sha256": "bb973255165e79e153e6d7540e60be16be1ec69847ee5691b76411355af955ba",
+      "evaluation_cache_key": "09ddf4ca0d562425a4c32002281eb0ee4dcd547c22ac23ed413e65561e63f5ee",
+      "evaluation_cache_sha256": "eaecdc2b168abb49e8db175f6d1845835e46bf02efec0572447b479d94216357"
+    },
+    "confidence_consistency": {
+      "cached": false,
+      "parameters": 99824,
+      "checkpoint_sha256": "b782c46b9ebb2570a309c89950b83a16c9be7a653d81dbbc650af3730b026b44",
+      "training_cache_key": "78cf7318f926c0f8c0fa155c57775a265e611d9cc6080de55f43bb98ed1dd8d9",
+      "training_cache_sha256": "8050dbc3bd7efe79575d6cb70052f246375cf8d14a1fa7011dd2b66b9c120698",
+      "evaluation_cache_key": "948ec4f1f062c8ae02d02ebc4ed29af2b7f7858db56657915172adef09fef7d3",
+      "evaluation_cache_sha256": "0c0865520bb1f132030d8c10a00720ae6a77bf1cce8ad4d4236b059a592df568"
+    }
+  },
+  "decision": {
+    "gates_passed": false,
+    "outcome": "reject-current-commutative-consistency-formulation",
+    "reason": "The challenger regressed original-orientation rollout by 1.667 points at width 128 and 2.5 points at width 256, missed transition, validity, and runtime gates, and passed only width-64 retention and determinism. No Tier-7 or candidate promotion is authorized."
+  },
+  "resource": {
+    "retry3_actual_wall_seconds": 5141.599420917999,
+    "retry3_actual_aggregate_cpu_seconds": 20465.856237935,
+    "cumulative_charged_wall_seconds": 20337.479420917996,
+    "cumulative_charged_aggregate_cpu_seconds": 95775.856237935,
+    "soft_headroom_wall_seconds": 7718.520579082004,
+    "soft_headroom_aggregate_cpu_seconds": 15764.143762065,
+    "soft_budget_wall_seconds": 28056,
+    "soft_budget_aggregate_cpu_seconds": 111540,
+    "hard_budget_wall_seconds": 42084,
+    "hard_budget_aggregate_cpu_seconds": 167310,
+    "fidelity_reduced": false,
+    "control_cache_reused": true,
+    "interrupted_attempts": "Three prior challenger attempts were host-lifecycle interrupted, conservatively charged, and produced no scientific result or resumable checkpoint."
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/mlflow.db",
+    "experiment_id": "2",
+    "parent_run_id": "80e508353dcb4883a1efc336b2f0bb31",
+    "arm_run_ids": {
+      "paired_rollout_control": "befd34ac9b2f40beb4fa9f03ea521bcf",
+      "confidence_consistency": "d19c40e41a60406f94b61b3ebfde280b"
+    }
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-647-operand-swap-consistency/formal/confidence_consistency/weights.safetensors",
+    "formal_summary": {"path": "experiments/runs/exp-647-operand-swap-consistency/formal-summary.json", "sha256": "0b530aa97165cc34a1ff8ab798b8f15e9cb1406a95e5991e52f867da9a04d572"},
+    "paired_evidence": {"path": "experiments/runs/exp-647-operand-swap-consistency/paired-evidence.json", "sha256": "f92741d77620cbe9da7d5d97a9516d1c8772c11ff5e8a5d6e63435a94d10c759"},
+    "metrics": "evals/results/exp-647-operand-swap-consistency/metrics.json",
+    "environment": "experiments/runs/exp-647-operand-swap-consistency/environment.json"
+  },
+  "limitations": [
+    "One matched training seed is a selection rung, not independent confirmation.",
+    "Fresh generated identity-disjoint evidence only; checked, prior independent-full, official, and private answers were not read.",
+    "Cross-run control/challenger timing is not a causal speed comparison because the control was cached; only the challenger's absolute runtime gate is interpreted.",
+    "Exact bigint arithmetic was confined to offline labels and evaluation truth."
+  ]
+}

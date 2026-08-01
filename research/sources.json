@@ -1,0 +1,423 @@
+{
+  "schema_version": 1,
+  "description": "Declarative source inventory for the private SAIR research-paper library. The sync tool resolves metadata and version-pinned PDFs from primary landing pages.",
+  "collections": [
+    {
+      "id": "super-transformers-all",
+      "description": "All formal arXiv papers cited by the supplied Super Transformers survey; blog and report URLs are intentionally excluded.",
+      "source_files": [
+        "super_transformers.md",
+        "super_transformers_main_papers.md"
+      ],
+      "include_arxiv_citations": true
+    },
+    {
+      "id": "super-transformers-core",
+      "description": "The survey's compact reading route, plus ACT and DEQ as explicitly elevated foundational ancestors and user-requested high-priority extensions.",
+      "source_files": [
+        "super_transformers.md"
+      ],
+      "include_arxiv_citations": false,
+      "explicit_arxiv_ids": [
+        "1603.08983",
+        "1807.03819",
+        "1909.01377",
+        "2301.13196",
+        "2502.05171",
+        "2502.17416",
+        "2506.21734",
+        "2509.03505",
+        "2510.04871",
+        "2510.25741",
+        "2511.09030",
+        "2512.11847",
+        "2512.24601",
+        "2603.20105",
+        "2604.06425",
+        "2605.19943",
+        "2605.21488",
+        "2606.18206",
+        "2607.13491",
+        "2607.16051"
+      ]
+    },
+    {
+      "id": "autoresearch-backlog",
+      "description": "Paper claims currently mapped into the binding autoresearch backlog, whether or not independently verified by an experiment note yet.",
+      "source_files": [
+        "knowledge/autoresearch/backlog.md"
+      ],
+      "include_arxiv_citations": true
+    },
+    {
+      "id": "verified-experiment-research",
+      "description": "Primary papers independently checked and used to design or interpret concrete project experiments.",
+      "source_files": [
+        "knowledge/autoresearch/research/2026-07-12-graph-algorithmic-reasoning.md",
+        "knowledge/autoresearch/research/2026-07-12-grokking-delayed-generalization.md",
+        "knowledge/autoresearch/research/2026-07-12-width-independent-arithmetic.md",
+        "knowledge/autoresearch/research/2026-07-13-learned-beam-reranking.md",
+        "knowledge/autoresearch/research/2026-07-18-learned-neural-execution.md"
+      ],
+      "include_arxiv_citations": true
+    },
+    {
+      "id": "official-sair-literature",
+      "description": "Formal papers listed by the official SAIR Modular Arithmetic Challenge literature page.",
+      "source_files": [
+        "sources/sair-competition/literature.md"
+      ],
+      "include_arxiv_citations": true
+    },
+    {
+      "id": "repository-design",
+      "description": "Research papers used to define durable model and repository documentation practices.",
+      "source_files": [
+        "knowledge/research/format-landscape.md"
+      ],
+      "include_arxiv_citations": false
+    },
+    {
+      "id": "supplied-deep-research",
+      "description": "Formal papers materially cited by the supplied modular-arithmetic deep-research memo, including title-only citations resolved against primary sources.",
+      "source_files": [
+        "sources/research/modular_arithmetic_challenge_deep_research.md"
+      ],
+      "include_arxiv_citations": true
+    }
+  ],
+  "resolved_arxiv_papers": [
+    {
+      "arxiv_id": "2205.15659",
+      "collections": [
+        "verified-experiment-research"
+      ],
+      "source_file": "knowledge/autoresearch/research/2026-07-12-graph-algorithmic-reasoning.md",
+      "citation_match": "The CLRS Algorithmic Reasoning Benchmark",
+      "resolution_note": "Resolved from the cited PMLR landing page to the authors' arXiv record using repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1810.03993",
+      "collections": [
+        "repository-design"
+      ],
+      "source_file": "knowledge/research/format-landscape.md",
+      "citation_match": "Model Cards for Model Reporting",
+      "resolution_note": "Resolved from the Google Research publication page to its open arXiv record using repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2406.02550",
+      "collections": [
+        "official-sair-literature"
+      ],
+      "source_file": "sources/sair-competition/literature.md",
+      "citation_match": "Learning to grok: Emergence of in-context learning and skill composition in modular arithmetic tasks",
+      "resolution_note": "The captured official bibliography omits a link; title search on arXiv was verified with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2402.19254",
+      "collections": [
+        "official-sair-literature"
+      ],
+      "source_file": "sources/sair-competition/literature.md",
+      "citation_match": "Machine Learning for Modular Multiplication",
+      "resolution_note": "The captured official bibliography names the book chapter but omits its open preprint link; title search on arXiv was verified with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2207.04785",
+      "collections": [
+        "official-sair-literature"
+      ],
+      "source_file": "sources/sair-competition/literature.md",
+      "citation_match": "SALSA: Attacking Lattice Cryptography with Transformers",
+      "resolution_note": "The captured official bibliography omits a link; title search on arXiv was verified with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1511.08228",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Neural GPU",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "1910.10593",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Neural Execution of Graph Algorithms",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2201.02177",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Power et al. introduced the grokking setup",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2205.15659",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "CLRS benchmark",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2207.04785",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "later SALSA-style LWE attacks",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2301.02679",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Gromov then showed that simple two-layer networks can grok modular arithmetic tasks",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2301.05217",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Nanda et al.",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2306.17844",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "clock structure, and the alternative pizza mechanism",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2402.19254",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Lauter et al. investigate modular multiplication directly",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2402.09469",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "recent transformer studies show that small models can learn modular addition and even discover Fourier-like structure",
+      "resolution_note": "Already present through the official literature collection; this mapping preserves the supplied memo's grouped literature provenance."
+    },
+    {
+      "arxiv_id": "2405.17399",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Transformers Can Do Arithmetic with the Right Embeddings",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2406.02550",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "recent transformer studies show that small models can learn modular addition",
+      "resolution_note": "Already present through the official literature collection; this mapping preserves the supplied memo's grouped literature provenance."
+    },
+    {
+      "arxiv_id": "2406.03495",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "modular polynomials ... remain substantially harder",
+      "resolution_note": "Already present through the official literature collection; this mapping preserves the supplied memo's grouped literature provenance."
+    },
+    {
+      "arxiv_id": "2410.03569",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "custom data distributions, angular embeddings, and a custom regularized loss",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2410.07041",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "repeated examples can materially improve learning",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2505.18266",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "approximate Chinese Remainder Theorem algorithm",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2506.23679",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "modular exponentiation",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2601.04283",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "position shifts",
+      "resolution_note": "Already present through another collection; this mapping preserves the supplied memo's provenance."
+    },
+    {
+      "arxiv_id": "2307.03381v1",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Teaching Arithmetic to Small Transformers",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2402.14903v1",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "tokenization direction",
+      "resolution_note": "The Singh and Strouse citation was resolved to Tokenization counts using repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1511.06279v4",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Neural Programmer-Interpreter",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1704.06611v1",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "work on recursion",
+      "resolution_note": "The Cai et al. citation was resolved to Making Neural Programming Architectures Generalize via Recursion using repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1808.00508v1",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Neural Arithmetic Logic Units",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1611.01989v2",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "DeepCoder",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "1804.01186v2",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Neural-Guided Deductive Search",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2006.08381v1",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "DreamCoder",
+      "resolution_note": "Title-only citation resolved to the primary arXiv record with repository-local Playwright."
+    },
+    {
+      "arxiv_id": "2607.16051v2",
+      "collections": [
+        "super-transformers-all",
+        "super-transformers-core",
+        "autoresearch-backlog"
+      ],
+      "source_file": "knowledge/autoresearch/backlog.md",
+      "citation_match": "User-requested Loop the Loopies full-PDF review (arXiv 2607.16051)",
+      "resolution_note": "User-supplied primary arXiv URL; title and latest v2 revision were visibly verified with repository-local Playwright managed Chromium on 2026-07-21."
+    }
+  ],
+  "web_papers": [
+    {
+      "id": "distill-00023",
+      "title": "Growing Neural Cellular Automata",
+      "authors": [
+        "Alexander Mordvintsev",
+        "Ettore Randazzo",
+        "Eyvind Niklasson",
+        "Michael Levin"
+      ],
+      "publication_year": 2020,
+      "doi": "10.23915/distill.00023",
+      "url": "https://distill.pub/2020/growing-ca/",
+      "collections": [
+        "verified-experiment-research"
+      ],
+      "source_file": "knowledge/autoresearch/research/2026-07-12-width-independent-arithmetic.md",
+      "citation_match": "Growing Neural Cellular Automata",
+      "acquisition_mode": "browser_print",
+      "local_path": "research/papers/distill-2020-growing-neural-cellular-automata.pdf",
+      "resolution_note": "Distill exposes the research article as an interactive HTML publication and no canonical article PDF. This local PDF is a managed-Chromium print rendering, not a publisher-supplied PDF."
+    },
+    {
+      "id": "ams-montgomery-1985",
+      "title": "Modular Multiplication Without Trial Division",
+      "authors": [
+        "Peter L. Montgomery"
+      ],
+      "publication_year": 1985,
+      "doi": "10.1090/S0025-5718-1985-0777282-X",
+      "url": "https://doi.org/10.1090/S0025-5718-1985-0777282-X",
+      "pdf_url": "https://www.ams.org/journals/mcom/1985-44-170/S0025-5718-1985-0777282-X/S0025-5718-1985-0777282-X.pdf",
+      "collections": [
+        "supplied-deep-research"
+      ],
+      "source_file": "sources/research/modular_arithmetic_challenge_deep_research.md",
+      "citation_match": "Montgomery's 1985 method",
+      "acquisition_mode": "direct_pdf",
+      "local_path": "research/papers/ams-1985-modular-multiplication-without-trial-division.pdf",
+      "resolution_note": "Primary AMS landing page and PDF verified with repository-local Playwright; DOI 10.1090/S0025-5718-1985-0777282-X."
+    }
+  ]
+}

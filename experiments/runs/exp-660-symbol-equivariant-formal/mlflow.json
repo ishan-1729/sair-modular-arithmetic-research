@@ -1,0 +1,8 @@
+{
+  "schema_version": "exp660-mlflow-not-run-v1",
+  "tracking": "local",
+  "experiment_name": "sair-modular-arithmetic-wsl",
+  "run_id": null,
+  "status": "not-started-full-project-oracle-red",
+  "private_data_transmitted": false
+}

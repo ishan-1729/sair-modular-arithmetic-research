@@ -1,0 +1,14 @@
+{
+  "run_id": "exp-401-pyg-graph-message-passing",
+  "status": "completed",
+  "created_at": "2026-07-12T09:40:00Z",
+  "hypothesis": "Canonical PyG graph normalization, dynamic attention, or tested max aggregation improves graph algorithm learning beyond the minimal reference operators and matched cellular control.",
+  "seed": 20260718,
+  "source": {"repository_commit": "bc1089f3230e7ab6ccf8b35fefed224fc050774e", "dirty": false, "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60", "runner_sha256": "05b1ad917ec4ad2d4c6dfd33e003d1d0885bbb1299933c17d8c9cb51af478cec", "config_sha256": "bd6a076e176d7a855cde4457b8b5437f68e1a5c8416acb13a722b1884d5915d7", "model_sha256": "8ac98e9f9de7b2e7a916d05117dea53cd1c74fccf272fb44fa73fecc59b1746c"},
+  "config": "configs/exp_401_pyg_graph_message_passing.yaml",
+  "environment": "experiments/runs/exp-401-pyg-graph-message-passing/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "c342591adebd41ceb3dbc5c5576c9cd8"},
+  "artifacts": {"checkpoint": ".scratch/exp-401-pyg-graph-message-passing/pyg-max-mpnn/weights.safetensors", "checkpoint_sha256": "58eaf24ddd1e76f04c3afe3863dc0d00f22b9084abdd00eb15f07d34bc6e589c", "control_checkpoint_sha256": "813a82ffd04cbb6be6db0c2f2f97df86cb7bf28e33cdcbec5568e802d49ab4e1", "gcn_checkpoint_sha256": "ba2189c06d9692067c490c3e41bde5ae4f0b3b0a933b6ac19291823ed6380acd", "gatv2_checkpoint_sha256": "db2b3999cf0a051e4be8bbdacd99718d69b6b7694de90c2f6fe994695ade5102", "metrics": "evals/results/exp-401-pyg-graph-message-passing/metrics.json", "summary_sha256": "063fe4766e04466516b7b49584750fa2cf4d0459648ba8ae8abffdc665732e6c"},
+  "decision": "reject-pyg-graph-formulations",
+  "notes": ["Pinned PyG 2.8.0 canonical operators were used, not repository-native approximations.", "No PyG arm approaches the matched cellular control or produces a correct autonomous rollout.", "The required GCN, GAT, and general message-passing graph family has now received both reference and proper-library matched tests."]
+}

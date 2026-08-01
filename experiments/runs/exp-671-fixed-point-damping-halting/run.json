@@ -1,0 +1,73 @@
+{
+  "run_id": "exp-671-fixed-point-damping-halting",
+  "status": "completed",
+  "terminal_status": "parked-calibration-expected-value",
+  "hypothesis": "Exact-initialized PreNorm shared refinement with FPR damping and validation-calibrated residual halting retains W128 while adding adaptive width transfer.",
+  "seed": 20261234,
+  "config": "configs/exp_671_fixed_point_damping_halting.yaml",
+  "decision": "park-resource-compliance-or-feasibility",
+  "decision_authority": "T066-root-20261234-complete-route-resource-admission",
+  "source": {
+    "base_commit": "a50a2648d072db2ce8387009e58cef0ed461c527",
+    "branch": "codex/exp671-fixed-point-damping-halting",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "paper_sha256": "169dc66aca853f5e8d922a170eac8421e78e1829d0d39025976a01915ff11c3d",
+    "config_sha256": "194bfed69f7877220d7e4acb7284793f37246a3bff6ce08ada3297af1ffb374b",
+    "model_sha256": "95bb50205829c2ed09ea18714b6001cc66d6235cb6d7f90b88afa73a52fdd8ce",
+    "runner_sha256": "22007e0b51e3b825d2dac64024b12f23ea03eb5e47b229865bebe24f73582500",
+    "tests_sha256": "0091c63dfd283973c481e7c9f8d071d07d8bc51585a9250941bc12ffb37c5a08"
+  },
+  "roots": {"20261234": "completed-calibration-expected-value-park", "20261235": "unopened-admission-blocked", "20261236": "unopened-admission-blocked", "20261237": "unopened-admission-blocked"},
+  "verification": {
+    "focused": "15 passed in 18.69s",
+    "validator": "passed: 187 OKF concepts and 1100 benchmark records",
+    "full_pytest": "600 passed in 645.78s",
+    "full_oracle_wall_seconds": 645.95,
+    "full_oracle_user_cpu_seconds": 877.40,
+    "full_oracle_system_cpu_seconds": 37.55,
+    "full_oracle_peak_rss_kib": 899752,
+    "full_oracle_log_sha256": "c17a3ffccb4d23b7b34ddfc82e5c367116e25c413db10a71c77aa1c7e38cf1d6",
+    "wrapper_limitation": "The exact child command passed; the capture wrapper returned 1 only because PowerShell pre-expanded its final shell status variable to blank after writing the evidence. The child /usr/bin/time record has Exit status 0. No rerun was performed."
+  },
+  "calibration": {
+    "root": 20261234,
+    "receipt_sha256": "ec5d3ab2417a7f0832f727f7c27f2345b8ed05eba2a3dbcd285aea5e9b0447c9",
+    "wall_seconds": 642.3526618879996,
+    "process_tree_cpu_seconds": 2507.0781890000003,
+    "cgroup_cpu_seconds": 2853.8399999999997,
+    "peak_rss_bytes": 648990720,
+    "selected_threshold": 0.1,
+    "validation_w128_rollout_cases": 32,
+    "validation_w128_rollout_exact_accuracy": 0.8125,
+    "selected_mean_iterations": 2.0,
+    "candidate_wall_seconds": 220.3517998250104,
+    "candidate_headroom_wall_seconds": 275.439749781263,
+    "expected_formal_wall_seconds": 22030.105487427452,
+    "maximum_expected_formal_wall_seconds": 21600,
+    "eta_wall_seconds": 27537.631859284316,
+    "soft_guard_wall_seconds": 34423,
+    "hard_guard_wall_seconds": 55076,
+    "failed_check": "expected_value"
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp-671-fixed-point-damping-halting/calibration/root-20261234/full_fpr/model.safetensors",
+    "metrics": "evals/results/exp-671-fixed-point-damping-halting/metrics.json",
+    "full_fpr_checkpoint_sha256": "42ad771fa373fe1581e764604c08fa951f847ca82ea1528fa30e2f9f71cf04ca",
+    "stabilization_fixed_checkpoint_sha256": "804a33485ef72140ce86a1c69ebd0ba4f2893fe8164a05aec022cbb4b77d9d6c",
+    "plain_fixed_checkpoint_sha256": "d92a998159ed530439d214e5921d2054017d54df2e09762369a622165c5d1be7",
+    "proposal_only_checkpoint_sha256": "d4eb1dc91591ef4e3e60bdee520d9762d9c9aa1e6930f275f285fb4c2d6f916f",
+    "parameters_each": 142820,
+    "trainable_parameters_each": 42996,
+    "preserved_scratch_path": ".scratch/exp-671-fixed-point-damping-halting"
+  },
+  "mlflow": {"parent_run_id": "c0896b91e32445fa9b08a721c7693746"},
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "limitations": [
+    "Calibration exactness is validation-only threshold calibration and is not a formal scientific result.",
+    "Root 20261235 W128, W256, component gates, held-out reliability, and confirmations remained unopened.",
+    "The park rejects only complete-route expected value for this exact bounded adaptation, not FPRM or ST-M027 scientifically.",
+    "No checked, independent, official/private, candidate, submission, promotion, or completion surface was opened."
+  ]
+}

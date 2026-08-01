@@ -1,0 +1,30 @@
+{
+  "calibration": null,
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "controls": {"opened": false},
+  "created_at": "2026-07-28T05:59:30Z",
+  "decision": "park-source-objective-mismatch-before-training",
+  "evaluation": {"labels_or_oracle_present": false, "not_performed": true, "reason": "The paper-faithful weight objective is constant on Candidate005's already-tied recurrent parameters."},
+  "feasibility": {
+    "formal_source_architecture": "SharedDilatedConvGRU",
+    "formal_source_parameter_count": 99824,
+    "formal_source_reload_state_dict_identity": true,
+    "formal_source_calls": {"W64": 12, "W128": 14, "W256": 16},
+    "formal_source_outputs_bit_identical": true,
+    "literal_self_cosine_distance": 1.9637069748057456e-15,
+    "literal_self_cosine_max_parameter_gradient": 2.220446049250313e-16,
+    "numerical_zero_tolerance": 1e-12
+  },
+  "formal_calls_executed": 0,
+  "limitations": [
+    "The EXP609 hash identifies the untouched comparator; EXP674 produced no challenger checkpoint.",
+    "No exact-answer accuracy, validity, alignment, intervention, calibration, W128/W256, or confirmation evidence was opened.",
+    "This topology park is not a scientific rejection of the source paper, ST-M006.b, or separately preregistered hidden-state distillation."
+  ],
+  "roots_opened": [],
+  "run_id": "exp-674-latent-thought-regularization",
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "status": "parked-topology-feasibility",
+  "training_updates": 0
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "exp-642-fresh-conditional-commutative-confirmation",
+  "created_at": "2026-07-17T09:38:42Z",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evidence_scope": "fresh-generated-width128-prime-disjoint",
+  "evaluation": {
+    "transition": {
+      "fresh_width128": {"cases": 3000, "correct": 2998, "exact_accuracy": 0.9993333333333333, "valid_residue_rate": 1.0}
+    },
+    "rollout": {
+      "original_width128": {"cases": 500, "correct": 421, "exact_accuracy": 0.842, "invalid_rate": 0.006},
+      "conditional_selected_width128": {"cases": 500, "correct": 486, "exact_accuracy": 0.972, "invalid_rate": 0.0},
+      "routed_oracle_width128": {"cases": 500, "correct": 488, "exact_accuracy": 0.976}
+    }
+  },
+  "controls": {
+    "route_fraction": 0.4,
+    "routed_cases": 200,
+    "selected_swapped": 161,
+    "recoveries": 66,
+    "losses": 1,
+    "selected_gain": 0.13,
+    "determinism": {"cases": 20, "passed": true},
+    "integrated_candidate_wall_seconds": 113.81262393620054
+  },
+  "gates": {
+    "transition": true,
+    "routed_oracle": true,
+    "selected_accuracy": true,
+    "gain": true,
+    "validity": true,
+    "runtime": true,
+    "determinism": true,
+    "passed": true
+  },
+  "runtime": {
+    "transition_wall_seconds": 10.72840497099969,
+    "original_wall_seconds": 261.31885044200317,
+    "routed_swapped_wall_seconds": 123.24426923899955,
+    "conditional_wall_seconds": 384.5631196810027,
+    "runner_wall_seconds": 438.9492145589975,
+    "runner_aggregate_cpu_seconds": 1603.6986681570002,
+    "external_wall_seconds": 433.47,
+    "external_user_cpu_seconds": 1603.74,
+    "external_system_cpu_seconds": 10.47,
+    "peak_rss_bytes": 810389504
+  },
+  "resource_budget": {"expected_total_wall_seconds": 1050, "soft_budget_wall_seconds": 1500, "hard_runaway_ceiling_wall_seconds": 2400, "fidelity_reduced": false},
+  "decision": "authorize-tier6-candidate-integration-and-wider-feasibility",
+  "limitations": [
+    "One fresh generated seed, not the required five independent full seeds.",
+    "The routed oracle is exact-answer offline coverage and is not an inference selector.",
+    "Official isolated runtime and full candidate integration remain pending."
+  ]
+}

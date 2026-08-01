@@ -1,0 +1,24 @@
+{
+  "run_id": "exp-301-width64-hard-mining",
+  "status": "completed",
+  "created_at": "2026-07-12T04:54:00Z",
+  "hypothesis": "Quotient-2 and reduction-boundary mining converts the transferred width-64 transition model into a viable autonomous rollout model.",
+  "seed": 20260712,
+  "source": {
+    "repository_commit": "af9eb356f2fd2a7fd2bb605912f5f8bc7b53b781",
+    "dirty": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runner_sha256": "b0bd797bc8b2ebd2e18b3af700e0f3be02466895098e05dad255fae414be0e88",
+    "config_sha256": "072c8aad44581374169583f5fa8ef444487a37ebf37f275beef8b5d1485bb9a6"
+  },
+  "config": "configs/exp_301_width64_hard_mining.yaml",
+  "environment": "experiments/runs/exp-301-width64-hard-mining/environment.json",
+  "mlflow": {"experiment_name": "sair-modular-arithmetic-wsl", "experiment_id": "2", "run_id": "a3215b6ac82c43eeb239e816e6a03ce4"},
+  "artifacts": {
+    "checkpoint": ".scratch/exp-301-width64-hard-mining/weights.safetensors",
+    "checkpoint_sha256": "eaec2dca9600cfdaafa907bda8e4da39da591897dfbeb027a3137ff849d97566",
+    "metrics": "evals/results/exp-301-width64-hard-mining/metrics.json"
+  },
+  "decision": "reject-width64-hard-mined-tcn",
+  "notes": ["Transition improved 11.24 points to 93.53 percent but missed both transition gates.", "Autonomous rollout reached only 2.3 percent versus the 15 percent gate.", "The fixed-width global-head width-64 formulation is closed."]
+}

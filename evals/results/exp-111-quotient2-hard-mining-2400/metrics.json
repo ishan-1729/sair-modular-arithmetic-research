@@ -1,0 +1,45 @@
+{
+  "run_id": "exp-111-quotient2-hard-mining-2400",
+  "created_at": "2026-07-12T02:24:00Z",
+  "checkpoint_sha256": "f9778b636f70d7cca56514ea98f95a22ce2fe81abcc4bd57f417274bc1e4bb94",
+  "evaluation": {
+    "transition": {
+      "width16_hard_mined_heldout_primes": {
+        "cases": 50000,
+        "correct": 49954,
+        "exact_accuracy": 0.99908,
+        "bit_accuracy": 0.9999175
+      }
+    },
+    "rollout": {
+      "width16_hard_mined_heldout_primes": {
+        "cases": 20000,
+        "correct": 19779,
+        "exact_accuracy": 0.98895
+      }
+    }
+  },
+  "controls": {
+    "valid_residue_rate": 0.99996,
+    "invalid_rollout_rate": 0.00145,
+    "all_steps_exact_accuracy": 0.9888,
+    "selected_quotient2_fraction": 0.36191162109375,
+    "selected_boundary_fraction": 0.19694742838541668
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch_threads": 4,
+    "wall_seconds": 233.80626969999867,
+    "training_seconds": 215.37349639998865,
+    "network_training_examples": 1228800,
+    "offline_candidate_examples": 4915200,
+    "peak_rss_bytes": 561352704,
+    "parameters": 85556
+  },
+  "decision": "advance-five-independent-tier3-seeds",
+  "limitations": [
+    "Heldout-prime gate; no official tier score was produced in this run.",
+    "The intervention uses a 4x offline candidate-generation pool.",
+    "No checked public expected answers were read or evaluated."
+  ]
+}

@@ -1,0 +1,36 @@
+run_id: exp-260-low-rate-continuation
+hypothesis: longer low-rate uniform continuation removes the remaining width-32 transition tail without curriculum distortion
+preregistration: knowledge/autoresearch/ablations/exp-260-low-rate-continuation.md
+seed: 20260712
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+source_checkpoint: .scratch/exp-252-replay-heavy-failure-mining/uniform-replay-control/weights.safetensors
+source_checkpoint_sha256: 33d6cc7859920b4db64dc91aeac02e27d8472dfc4ebc8322d04f52ff6cf1751f
+model:
+  width: 32
+  hidden: 48
+  blocks: 7
+training:
+  steps: 600
+  batch_size: 256
+  candidate_pool_factor: 1
+  hard_fraction: 0.0
+  learning_rate: 0.00005
+  minimum_learning_rate: 0.000005
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+evaluation:
+  prime_bits_min: 17
+  prime_bits_max: 32
+  transition_cases: 50000
+  rollout_cases: 20000
+gates:
+  minimum_rollout_gain: 0.01
+  minimum_transition: 0.9985
+  minimum_rollout: 0.94
+  maximum_invalid_rollout_rate: 0.005
+resource_cap:
+  cpu_minutes: 6

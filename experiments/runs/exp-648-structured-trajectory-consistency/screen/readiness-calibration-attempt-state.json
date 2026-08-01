@@ -1,0 +1,8 @@
+{
+  "attempt_id": "cal-2dd822120fe60e69",
+  "authorization_sha256": "2dd822120fe60e69f576f894461d333429dd568144a7ea87cadda74b607fd11b",
+  "complete": true,
+  "completion_manifest_sha256": "845c35d17475fd61320e0d82134d5b0c64804547ef7e0147b056bb3935cfa022",
+  "phase": "sealed",
+  "schema_version": "exp648-readiness-calibration-attempt-v1"
+}

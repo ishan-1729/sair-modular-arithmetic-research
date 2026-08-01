@@ -1,0 +1,150 @@
+{
+  "artifacts": [
+    {
+      "bytes": 37,
+      "path": "probe/probe-0.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "5a88d87998bd4bc645ea75d224800c77327c0731f178810b3ee4bc965a7532e0"
+    },
+    {
+      "bytes": 37,
+      "path": "probe/probe-1.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "24f48a846e3499bd82fc7bc700f2b33b54cf6c90b6602438fb2b9bfc67b85046"
+    },
+    {
+      "bytes": 37,
+      "path": "probe/probe-2.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "fb2a990db6cdfb46eff0d75b742453f36de9d6de880f29e375bfb414953f7c7b"
+    },
+    {
+      "bytes": 37,
+      "path": "probe/probe-3.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "b8357dbf42792d29f091efe40f392a8f1bea4bbba1ced31f5908cb0e896a9c73"
+    },
+    {
+      "bytes": 37,
+      "path": "probe/probe-4.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "7b715dd8e3f606197d50298116e6821f7fa6b7d744367edcdf591b81a6b0c930"
+    },
+    {
+      "bytes": 37,
+      "path": "probe/probe-5.json",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "sha256": "e2338fcff4ec262482ef0cafcd6c0aad620a630047c8c83e051c4ebf87944841"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-0.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "8a69d892b88ddcc31ae651f93a060a7be679c21a410e0221ff4f48d3e857ee20"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-1.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "17d9dfc307b0e6f7e427fd6627b76b47562c413dc1a30181a9469a7140a7627e"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-2.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "133085a745181d19e04d60056ab1f9e571f05893f2a8c9201bba8eb16f2b6159"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-3.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "eb5163f8008ab29ef815a06c6f96ff88a8d94a757a1de0e69d5f1917a7d3b1e1"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-4.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "7789826ef0bb786c72c8d2354379c64e66f55f3cd1faf4f8282b212de8b841cd"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-5.json",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "sha256": "04e4363c895b25c8051eaa47b9732c588aa2600bcc439c00f747e4b0e50133a7"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-0.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "f966bcca1fd132f080c21b6830c59f8d46b61c9a2b9bb65f54f78aab04dc45e2"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-1.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "a9f2d0869784606768080d4582d96909c75ec4deb98e0f7e13bdf0fc10f84c6a"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-2.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "4d4c274ada394579fc28af750fe732db0a1b8fae89e1a989f966e54c1c5e92cb"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-3.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "6a987925bcc5d3230ab066a140b26ffa432b0b340f48637471651ccc88459bda"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-4.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "b5993efb6026b0c8b7fdb4f8ba312d43513c07c01586bcb6baf2a3a04d478366"
+    },
+    {
+      "bytes": 39,
+      "path": "probe/probe-5.json",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "sha256": "a2cd61a3faa73261fdc7779ebaf8d2d2111b1fd4df4e1c51a20479f7056c19f4"
+    }
+  ],
+  "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+  "no_main_or_scientific_run": true,
+  "runs": [
+    {
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/a9f49728d8184a438beeb8751769e9cd/artifacts",
+      "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+      "end_time": 1784589810968,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "a9f49728d8184a438beeb8751769e9cd",
+      "run_name": "exp-648-structured-trajectory-consistency-readiness-probe-warmup",
+      "start_time": 1784589810506,
+      "status": "FINISHED",
+      "unit": "warmup"
+    },
+    {
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/2cebd8d67f6d408da76cb330fdb10108/artifacts",
+      "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+      "end_time": 1784591036063,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "2cebd8d67f6d408da76cb330fdb10108",
+      "run_name": "exp-648-structured-trajectory-consistency-readiness-probe-repeat-1",
+      "start_time": 1784591035729,
+      "status": "FINISHED",
+      "unit": "repeat-1"
+    },
+    {
+      "artifact_uri": "file:///mnt/d/Projects/SAIR_mod_challenge/.scratch/mlflow/artifacts/e14df2c4633c41449d623b0df6449a56/artifacts",
+      "authorization_sha256": "9e1f63a9fe3c6613f8c02dea523147901da2aea862a3dec58d53c0cb7a054984",
+      "end_time": 1784592244505,
+      "role": "readiness-calibration-mlflow-probe",
+      "run_id": "e14df2c4633c41449d623b0df6449a56",
+      "run_name": "exp-648-structured-trajectory-consistency-readiness-probe-repeat-2",
+      "start_time": 1784592244102,
+      "status": "FINISHED",
+      "unit": "repeat-2"
+    }
+  ],
+  "schema_version": "exp648-root20261160-mlflow-probe-inventory-v1"
+}

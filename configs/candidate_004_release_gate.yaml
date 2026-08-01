@@ -1,0 +1,42 @@
+run_id: candidate-004-tier5-cellular-hybrid
+hypothesis: the independently validated Tier-5 cellular specialist preserves Candidate 003 and advances the full official boundary through Tier 5
+preregistration: knowledge/autoresearch/ablations/candidate-004-release-gate.md
+submission:
+  directory: submission
+  model_sha256: 14b55ccb6443918d3b11000f8cc90e44ff249253bb72e0fd40ddfdbf0e0a70ea
+  manifest_sha256: fa293827cfe815a9325800b91c9ff8eac41257169af1efac0fcb73a2e4e16dcd
+  weights_sha256: fb938e208e96945b4d192b9bbddf976c8c04a077b6f39df9e9196d36e76fefa4
+  parameters: 370225
+  bytes: 1496116
+sources:
+  candidate003_weights_sha256: a991c389aec5f8c4e8153846b07d7d1207bdd0eaf192ff11ca036663f056a514
+  tier5_checkpoint_sha256: 050daf0a2d3b964ed9a58522c18d896f94a0d950722d0c34296b0718c03676f7
+  builder_sha256: 6e98c6802eb7157a314aa3944ff9dc83f3a0af9b58e8afe0d6dcb4c11f5268d7
+evaluation:
+  independent_seed_hex: c4b8ddcfd37a2b32e0b8ac6a02981bc783682ed2f09b3740c0615d7ff850ddd9
+  total_cases: 1100
+  timeout_seconds: 300
+gates:
+  minimum_overall_accuracy: 0.49
+  minimum_tier1_accuracy: 0.99
+  minimum_tier2_accuracy: 0.95
+  minimum_tier3_accuracy: 0.95
+  minimum_tier4_accuracy: 0.90
+  minimum_tier5_accuracy: 0.90
+  minimum_highest_tier_above_90: 5
+  maximum_inference_seconds: 240
+  require_static_clean: true
+  require_preprocess_isolation: true
+  require_determinism: true
+  require_weight_dependence: true
+  require_official_sandbox: true
+resource_budget:
+  limit_unit: wall_seconds
+  calibration_source: candidate003-official-sandbox-plus-exp521-tier5-inference
+  candidate003_container_wall_seconds: 34.28426174
+  exp521_tier5_inference_wall_seconds: 9.972792962
+  projected_container_wall_seconds: 44.257054702
+  soft_budget_per_full_evaluation_wall_seconds: 120
+  hard_runaway_ceiling_per_full_evaluation_wall_seconds: 300
+  torch_threads: 4
+  hard_ceiling_aggregate_cpu_minutes_upper_bound_per_evaluation: 20

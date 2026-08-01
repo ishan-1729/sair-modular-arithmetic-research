@@ -1,0 +1,77 @@
+run_id: exp-651-visit-dilation-adapters
+status: authorized-full-fidelity-rrt-analogue
+hypothesis: >-
+  Exact-initialized cycle/dilation-specific rank-8 recurrent-kernel deltas
+  produce a reproducible held-out exact-rollout gain beyond the rejected
+  EXP617 global adapter while retaining W64 behavior.
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-651-visit-dilation-adapters.md
+source_contract:
+  base_commit: d8dd029eb5a64c15c5461a473779a4baba8b77bd
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  checked_prior_independent_official_private: prohibited
+  submission_mutation: prohibited
+model: {hidden: 92, cycles: 2, max_dilation_levels: 8}
+arms:
+  shared_core_continuation: {kind: shared, learning_rate: 0.000005, minimum_learning_rate: 0.0000005}
+  global_adapter_control: {kind: global, rank: 128, alpha: 128, learning_rate: 0.001, minimum_learning_rate: 0.0001}
+  visit_dilation_adapter: {kind: visit_dilation, rank: 8, alpha: 8, learning_rate: 0.001, minimum_learning_rate: 0.0001}
+primary_arm: visit_dilation_adapter
+controls: [global_adapter_control, shared_core_continuation]
+training:
+  steps: 200
+  calibration_steps: 10
+  mode_schedule: [transition64, recovery64, recovery128, recovery128]
+  batch_size: 128
+  recovery_batch_size: 16
+  recovery_chunk_steps: 8
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  torch_threads: 4
+data:
+  prime_bit_span: 8
+  train_prime_identities: 512
+  test_prime_identities: 128
+  split_seed_offset: 651000
+  calibration: {root: 20261182, train_seed: 65173000, eval_seed: 65174000}
+  formal_roots:
+    - {root: 20261183, train_seed: 65173001, eval_seed: 65174001}
+    - {root: 20261184, train_seed: 65173002, eval_seed: 65174002}
+    - {root: 20261185, train_seed: 65173003, eval_seed: 65174003}
+evaluation:
+  widths: [64, 128, 256]
+  transition_cases: {64: 1000, 128: 1000, 256: 1000}
+  rollout_cases: {64: 200, 128: 200, 256: 200}
+  intervention_cases: 128
+  deterministic_repeat_cases: 64
+  bootstrap_resamples: 100000
+  bootstrap_seeds: {64: 65195001, 128: 65195002, 256: 65195003}
+gates:
+  minimum_mean_w128_gain_vs_global: 0.02
+  minimum_each_root_w128_gain_vs_global: 0.0
+  minimum_w128_one_sided_95_lower_bound: 0.0
+  minimum_mean_w256_gain_vs_global: 0.01
+  minimum_each_root_w256_gain_vs_global: 0.0
+  minimum_w256_one_sided_95_lower_bound: 0.0
+  minimum_each_root_w64_gain_vs_global: -0.005
+  minimum_w64_one_sided_95_lower_bound: -0.005
+  maximum_invalid_rate: 0.01
+  minimum_adapter_delta_rms: 0.0001
+  minimum_zeroing_changed_predictions: 1
+  minimum_permutation_changed_predictions: 1
+  minimum_trained_minus_randomized_w128: 0.10
+resource_budget:
+  admission_path: .scratch/exp-651-visit-dilation-adapters/admission.json
+  calibration_operational_runaway_wall_seconds: 5400
+  calibration_operational_runaway_process_cpu_seconds: 21600
+  calibration_operational_runaway_cgroup_cpu_seconds: 21600
+  expected_multiplier: 1.0
+  soft_multiplier: 1.30
+  hard_multiplier: 1.80
+  rss_multiplier: 1.30
+  variability_floor: 0.10
+  preserve_completed_checkpoints: true
+  fidelity_reduced: false

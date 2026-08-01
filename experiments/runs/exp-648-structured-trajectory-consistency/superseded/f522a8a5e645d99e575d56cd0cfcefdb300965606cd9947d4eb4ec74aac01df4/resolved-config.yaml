@@ -1,0 +1,355 @@
+run_id: exp-648-structured-trajectory-consistency
+status: selected-implemented-calibrated-awaiting-corpus-launch-judge
+hypothesis: A fixed K=8 endpoint-consistency loss on natural model-generated width-256 trajectories improves exact autonomous rollout by at least three percentage points over a matched clean-loss control without harming width-64 or width-128 retention.
+phase: matched-width256-screen-blocked-pending-corpus-launch-judge
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+preregistration: knowledge/autoresearch/ablations/exp-648-structured-trajectory-consistency.md
+source_note: knowledge/autoresearch/research/2026-07-20-structured-trajectory-consistency.md
+source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+
+source_model:
+  hidden: 92
+  cycles: 2
+  parameter_count: 99824
+  inference_architecture_changes: false
+  inference_semantics_changes: false
+  parameter_count_changes: false
+
+seed_roles:
+  calibration_root: {seed: 20261151, status: unused-unopened, role: resource-calibration-only}
+  corpus_root: {seed: 20261152, status: unused-unopened, role: generated-training-split-corpus-only}
+  screen_training_root: {seed: 20261153, status: unused-unopened, role: screen-training-order-and-arm-cloning}
+  screen_evaluation_root: {seed: 20261154, status: unused-unopened, role: screen-paired-evaluation-only}
+  confirmation_1_training_root: {seed: 20261155, status: unused-unopened, role: confirmation-1-training-order-and-arm-cloning}
+  confirmation_1_evaluation_root: {seed: 20261156, status: unused-unopened, role: confirmation-1-paired-evaluation-only}
+  confirmation_2_training_root: {seed: 20261157, status: unused-unopened, role: confirmation-2-training-order-and-arm-cloning}
+  confirmation_2_evaluation_root: {seed: 20261158, status: unused-unopened, role: confirmation-2-paired-evaluation-only}
+  scaffold_test_only_root: {seed: 648900001, status: reserved-unopened, role: scaffold-tests-only-never-experiment-evidence}
+  excluded_surfaces:
+    - checked-public benchmark inputs and answers
+    - prior independent benchmark inputs and answers
+    - official private benchmark inputs and answers
+    - EXP-649 formal root 20261149
+
+corpus:
+  width: 256
+  source_execution: frozen-source-autonomous-rollout
+  split_role: generated-training-identities-only
+  benchmark_identities_allowed: false
+  target_failure_windows: 512
+  target_success_windows: 512
+  matched_pairs: 512
+  window_length: 8
+  synthetic_state_corruption: prohibited
+  state_bit_flips_or_injections: prohibited
+  failure_window:
+    first_error_indexing: zero-based-first-wrong-transition
+    maximum_first_error_index: 248
+    start_state: exact-prefix-immediately-before-first-wrong-transition
+    eligibility: a-complete-eight-transition-window-must-fit-from-that-prefix
+  success_window:
+    start_state: exact-prefix-at-the-matched-start-index
+    eligibility: all-eight-autonomous-transitions-from-that-exact-prefix-are-exact
+  normalized_modulus_band:
+    definition: modulus / (2 ** modulus.bit_length())
+    range: "[0.5, 1.0)"
+    bins:
+      - {id: b0, lower_inclusive: 0.500, upper_exclusive: 0.625}
+      - {id: b1, lower_inclusive: 0.625, upper_exclusive: 0.750}
+      - {id: b2, lower_inclusive: 0.750, upper_exclusive: 0.875}
+      - {id: b3, lower_inclusive: 0.875, upper_exclusive: 1.000}
+  matching:
+    ratio: one-success-to-one-failure
+    exact_fields: [window_start_index, modulus_bit_length, normalized_modulus_band]
+    failure_order: corpus-root-generated-identity-and-trajectory-order
+    success_tie_order: first-unused-eligible-success-in-corpus-root-generated-order
+    fallback_or_relaxation: prohibited
+  exact_offline_teacher:
+    allowed: true
+    scope: corpus-label-generation-and-evaluation-only
+    inference_use: prohibited
+  freeze_before_training:
+    - identity_manifest_sha256
+    - trajectory_manifest_sha256
+    - source_checkpoint_sha256
+    - exact_teacher_source_sha256
+    - corpus_artifact_sha256
+  resolved_corpus_mining_ceiling:
+    evidence_core_sha256: 5fecc662d8eb7f4695e8f55c965b4de413fcd8512a3ea14779c87c0813a4e7bc
+    declared_work_unit: complete-width256-source-identity-trajectory
+    calibration_matched_pairs: 64
+    maximum_complete_repeat_identity_trajectories: 96
+    maximum_identity_trajectories_per_matched_pair: 1.5
+    required_matched_pairs: 512
+    projected_identity_trajectories: 768
+    soft_identity_trajectory_budget: 960
+    hard_identity_trajectory_ceiling: 1440
+    wall_seconds:
+      projected: 1064.7926384589991
+      explicit_measured_setup_headroom: 0.333001510000031
+      soft_budget: 1331.323799583749
+      hard_runaway_ceiling: 1996.9856993756234
+    aggregate_cpu_seconds:
+      projected: 4387.100000000003
+      explicit_measured_setup_headroom: 0.6000000000003638
+      soft_budget: 5484.475000000004
+      hard_runaway_ceiling: 8226.712500000005
+    matching_relaxation_allowed: false
+    count_reduction_allowed: false
+  shortfall_decision: corpus-construction-failure-no-weakened-matching-or-count
+
+matched_arms:
+  common_initialization:
+    method: independent-clone-from-identical-raw-source-checkpoint
+    require_identical_parameter_count: true
+    require_identical_initial_tensor_sha256: true
+  control:
+    endpoint_loss_weight: 0.0
+  challenger:
+    endpoint_loss_weight: 0.1
+  only_changed_variable: endpoint_loss_weight
+  required_equalities:
+    - source checkpoint and initial tensor hash
+    - parameter count and trainable tensors
+    - frozen windows and batch order
+    - optimizer and learning-rate schedule
+    - batch composition and update count
+    - clean teacher-forced and autonomous forward work
+    - endpoint-loss computation before weighting
+    - checkpoint, evaluation, hashing, and serialization work
+
+training:
+  screen_updates_per_arm: 200
+  confirmation_updates_per_arm: 400
+  batch_size: 16
+  failure_windows_per_batch: 8
+  matched_success_windows_per_batch: 8
+  autonomous_unroll_steps: 8
+  autonomous_state_forward: hard-thresholded-residue-bits
+  autonomous_state_backward: sigmoid-straight-through
+  clean_branch: eight-exact-teacher-forced-transitions
+  optimizer: AdamW
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  schedule: cosine
+  weight_decay: 0.00002
+  gradient_clip: 2.0
+  torch_threads: 4
+  torch_interop_threads: 1
+  deterministic_algorithms: true
+
+loss:
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  challenger_endpoint_weight: 0.10
+  clean_transition_loss_per_step: mean_bit_bce + 0.45 * worst_position_mean_bce + 0.10 * quotient_cross_entropy
+  base_clean_loss: mean of clean_transition_loss_per_step over the eight exact teacher-forced steps
+  endpoint_logits: eighth-autonomous-transition-residue-bit-logits
+  endpoint_target: exact-offline-eight-step-endpoint-residue-bits
+  endpoint_loss: mean_bit_bce + 0.45 * worst_position_mean_bce
+  endpoint_quotient_term: none
+  total_loss: base_clean_loss + endpoint_loss_weight * endpoint_loss
+  endpoint_loss_computed_for_both_arms: true
+
+screen:
+  authorization: blocked-pending-implementation-calibration-hash-freeze-and-judge
+  initialization: independent-reinitialization-of-each-arm-from-the-raw-source-checkpoint
+  updates_per_arm: 200
+  evaluation:
+    paired_identical_inputs: true
+    transition_cases: {128: 2000, 256: 2000}
+    full_rollout_cases: {64: 200, 128: 200, 256: 200}
+    exact_repeat_width: 256
+    exact_repeat_cases: 20
+    report_outcome_transitions:
+      - recovered-control-wrong-challenger-exact
+      - introduced-drift-control-exact-challenger-wrong
+  first_error:
+    definition: zero-based-first-wrong-transition
+    successful_rollout_value: 257
+    statistic: mean-clipped-first-error-index
+  gates:
+    minimum_width256_rollout_gain: 0.03
+    minimum_first_error_mean_delta: 0.0
+    minimum_width64_rollout_delta: -0.01
+    minimum_width128_rollout_delta: -0.01
+    minimum_challenger_width256_transition_accuracy: 0.995
+    maximum_challenger_invalid_rollout_rate: 0.01
+    require_exact_repeat_and_determinism: true
+    require_checkpoint_data_seed_hash_and_matched-work-integrity: true
+    all_gates_required: true
+  decision_if_any_gate_misses: reject-frozen-screen
+  interpretation_if_all_gates_pass: intermediate-evidence-requires-separate-confirmation-judge
+
+confirmation:
+  authorization: prohibited-until-screen-pass-and-separate-judge-authorization
+  pairs: 2
+  continuation_from_screen: false
+  initialization: each-pair-fresh-matched-clones-from-the-raw-source-checkpoint
+  updates_per_arm_per_pair: 400
+  evaluation_per_pair:
+    paired_identical_inputs: true
+    transition_cases: {128: 2000, 256: 2000}
+    full_rollout_cases: {64: 200, 128: 200, 256: 500}
+    exact_repeat_width: 256
+    exact_repeat_cases: 20
+  gates_per_pair:
+    minimum_width256_rollout_gain: 0.03
+    minimum_first_error_mean_delta: 0.0
+    minimum_width64_rollout_delta: -0.01
+    minimum_width128_rollout_delta: -0.01
+    minimum_challenger_width256_transition_accuracy: 0.995
+    maximum_challenger_invalid_rollout_rate: 0.01
+    require_exact_repeat_and_determinism: true
+    require_integrity: true
+  pooled_width256_paired_cases: 1000
+  pooled_exact_conditional_bound:
+    recovered_symbol: b
+    introduced_drift_symbol: c
+    denominator: 1000
+    alpha: 0.05
+    sidedness: one-sided
+    conditional_success_parameter: b / (b + c)
+    clopper_pearson_lower: "0 if b == 0; otherwise BetaQuantile(0.05, b, c + 1)"
+    net_exact_gain_lower: (2 * clopper_pearson_lower - 1) * (b + c) / 1000
+    no_discordant_cases_rule: "if b + c == 0, net_exact_gain_lower = 0"
+    gate: net_exact_gain_lower > 0
+  decision_if_any_pair_or_pooled_gate_misses: reject-frozen-confirmation
+  interpretation_if_all_gates_pass: supports-only-a-separate-candidate-and-tier7-preregistration
+  direct_candidate_promotion: prohibited
+
+resource_protocol:
+  status: complete-full-fidelity-calibration-awaiting-judge
+  binding_policy: knowledge/autoresearch/program.md#resource-budget-policy
+  measurement:
+    wall: external-monotonic-wall-seconds
+    aggregate_cpu: process-user-plus-system-seconds
+    peak_memory: peak-rss-bytes-recorded-separately
+    wall_and_cpu_are_not_interchangeable: true
+  calibration:
+    root: 20261151
+    warmups: 1
+    timed_repeats: 3
+    each_warmup_and_repeat_is_complete: true
+    representative_corpus_mining:
+      matched_pairs: 64
+      exact_same-width-source-matching-and-hashing-path: true
+    startup_and_model_loading: measured
+    k8_updates_per_arm: 20
+    checkpoint_writes_per_arm: 1
+    transition_cases_per_arm: {128: 200, 256: 200}
+    full_rollout_cases_per_arm: {64: 20, 128: 20, 256: 20}
+    hash_and_serialization_work: measured
+    torch_threads: 4
+    torch_interop_threads: 1
+    rate_selection: slower-arm-and-maximum-complete-repeat-per-component
+    initial_planning_hard_ceiling_wall_seconds: 14400
+    initial_planning_hard_ceiling_aggregate_cpu_seconds: 57600
+    planning_ceiling_basis: EXP-647-full-run-5141.6-wall-and-20465.9-aggregate-cpu-seconds
+    planning_ceiling_role: generous-runaway-protection-only-never-a-fidelity-cap
+  projections:
+    screen: measured-setup-plus-corpus-mining-1024-windows-plus-400-total-updates-plus-both-checkpoints-plus-all-screen-evaluation-hash-and-serialization-units
+    confirmation_pair: measured-setup-plus-frozen-corpus-integrity-validation-plus-800-total-updates-plus-both-checkpoints-plus-all-confirmation-evaluation-hash-and-serialization-units
+    confirmation_total: two-independently-projected-confirmation-pairs
+    component_rate: maximum-complete-repeat-rate-for-the-slower-arm
+    explicit_measured_setup_headroom: 2.0 * maximum_complete_repeat_startup_checkpoint_hash_and_serialization_component
+    soft_wall_seconds: 1.25 * projected_component_wall_seconds + explicit_measured_setup_headroom_wall_seconds
+    soft_aggregate_cpu_seconds: 1.25 * projected_component_aggregate_cpu_seconds + explicit_measured_setup_headroom_aggregate_cpu_seconds
+    hard_wall_seconds: 1.5 * soft_wall_seconds
+    hard_aggregate_cpu_seconds: 1.5 * soft_aggregate_cpu_seconds
+    resolved: complete-see-resource-protocol-resolved
+  recalibrate_if:
+    - runner hash changes
+    - config hash changes
+    - source-checkpoint hash changes
+    - environment hash changes
+    - thread configuration changes
+    - declared workload hash changes
+    - first-quarter observed throughput is more than 20 percent slower than projection
+  cache:
+    preserve_completed_unit_caches: true
+    preserve_completed_checkpoints: true
+    key_fields: [checkpoint, evaluator, dataset, config, seed, environment, runner, scientific_protocol, resource_protocol]
+  evaluation_only_overrun: preserve-checkpoint-and-record-missing-evidence-not-scientific-rejection
+  fidelity_may_be_reduced_to_fit_budget: false
+  counts_or_work_may_be_reduced_to_fit_budget: false
+  resolved:
+    lifecycle_status: implemented-calibrated-awaiting-corpus-launch-judge
+    calibration_status: complete-non-scientific-full-fidelity
+    calibration_root_lifecycle_status: opened-consumed-complete-non-scientific-calibration
+    raw_calibration_output: .scratch/exp-648-structured-trajectory-consistency/calibration.json
+    tracked_calibration_output: experiments/runs/exp-648-structured-trajectory-consistency/calibration.json
+    tracked_environment_output: experiments/runs/exp-648-structured-trajectory-consistency/environment.json
+    calibration_evidence_core_sha256: 5fecc662d8eb7f4695e8f55c965b4de413fcd8512a3ea14779c87c0813a4e7bc
+    executed_pre_resolution_config_sha256: 5a12519215deea248aa8acee6a128c4d520531e4d9e9df72a301e7b0fa133f50
+    calibration_runner_sha256: 8dee04eaf6f45de2efe2a31d1a3d22031c11a35450d9930ce609a67f241c709b
+    scientific_protocol_sha256: 0a0c7bd023df7905e924fe6268d1fcb05a61cb0ad3bc8519395dd31949c94100
+    resource_protocol_sha256: 6ee5fe16116aa3321f4edbb2e2d767aaa64165e834817cbce96ba6fd8af918c9
+    declared_workload_sha256: 7400c611dfc20055914696749590aec151059de34ac615e00a509262dd04c697
+    environment_sha256: f85b286eeea048674dc157e55ba913c3afd97788f20471ea4828061573943a6a
+    evaluator_sha256: ab3fc45f28739fb380e2fb4d5a98b8a4e4e5d32b9d7373a840677d0917b1c76e
+    calibration_dataset_spec_sha256: 7ab4fea6ec996c7d94478aa3600c2ebf859a5af5f5c4246539d21bcf8242a904
+    exact_teacher_source_sha256: ea10a1483bbabb2c9f5901b5f019ef7ad9ab77a525ae15c9307dc97630e62aef
+    fresh_complete_warmup: true
+    warmup_total:
+      wall_seconds: 373.10852867099993
+      aggregate_cpu_seconds: 1535.6599999999999
+      peak_rss_bytes: 2358317056
+    timed_repeats:
+      - {repeat: 1, wall_seconds: 371.6821255629998, aggregate_cpu_seconds: 1533.5900000000001, peak_rss_bytes: 2593312768}
+      - {repeat: 2, wall_seconds: 365.397032674, aggregate_cpu_seconds: 1501.5399999999995, peak_rss_bytes: 2576703488}
+      - {repeat: 3, wall_seconds: 365.860250578, aggregate_cpu_seconds: 1514.4800000000005, peak_rss_bytes: 2575671296}
+    reused_complete_repeats: 0
+    measured_missing_repeats: 3
+    active_plus_reused_charged_wall_seconds: 1478.023299573
+    active_plus_reused_charged_aggregate_cpu_seconds: 6085.320000000001
+    remaining_planning_wall_headroom_seconds: 12921.976700427
+    remaining_planning_aggregate_cpu_headroom_seconds: 51514.68
+    maximum_complete_repeat_slower_arm_rates:
+      wall_seconds:
+        startup_per_unit: 0.13754151500006628
+        mining_per_matched_pair: 2.0782698838593774
+        corpus_integrity_per_window: 0.0005390206718729473
+        training_per_update: 4.528130643550003
+        checkpoint_per_write: 0.05724323100002948
+        transition_per_case: {128: 0.0023101164800004882, 256: 0.005316700229998333}
+        rollout_per_case: {64: 0.0853341732500212, 128: 0.3734806186000014, 256: 1.5539203518000022}
+        hash_serialization_per_unit: 0.028959239999949205
+      aggregate_cpu_seconds:
+        startup_per_unit: 0.25
+        mining_per_matched_pair: 8.567500000000003
+        corpus_integrity_per_window: 0.0002343750000015632
+        training_per_update: 18.748499999999968
+        checkpoint_per_write: 0.049999999999272404
+        transition_per_case: {128: 0.010200000000004365, 256: 0.02349999999999909}
+        rollout_per_case: {64: 0.35349999999998544, 128: 1.5309999999999946, 256: 6.419499999999994}
+        hash_serialization_per_unit: 0.0500000000001819
+    corpus_mining_ceiling:
+      declared_work_unit: complete-width256-source-identity-trajectory
+      projected_identity_trajectories: 768
+      soft_identity_trajectory_budget: 960
+      hard_identity_trajectory_ceiling: 1440
+      wall_seconds: {projected: 1064.7926384589991, soft_budget: 1331.323799583749, hard_runaway_ceiling: 1996.9856993756234}
+      aggregate_cpu_seconds: {projected: 4387.100000000003, soft_budget: 5484.475000000004, hard_runaway_ceiling: 8226.712500000005}
+    screen:
+      wall_seconds: {projected: 3773.3655635450077, explicit_measured_setup_headroom: 0.5619744340001489, soft_budget: 4717.26892886526, hard_runaway_ceiling: 7075.90339329789}
+      aggregate_cpu_seconds: {projected: 15599.53999999999, explicit_measured_setup_headroom: 0.7999999999974534, soft_budget: 19500.224999999984, hard_runaway_ceiling: 29250.337499999976}
+    confirmation_pair:
+      wall_seconds: {projected: 5453.447808677007, explicit_measured_setup_headroom: 0.5619744340001489, soft_budget: 6817.371735280259, hard_runaway_ceiling: 10226.057602920388}
+      aggregate_cpu_seconds: {projected: 22564.319999999974, explicit_measured_setup_headroom: 0.7999999999974534, soft_budget: 28206.199999999968, hard_runaway_ceiling: 42309.29999999995}
+    confirmation_total:
+      wall_seconds: {projected: 10906.895617354014, explicit_measured_setup_headroom: 1.1239488680002978, soft_budget: 13634.743470560517, hard_runaway_ceiling: 20452.115205840775}
+      aggregate_cpu_seconds: {projected: 45128.63999999995, explicit_measured_setup_headroom: 1.5999999999949068, soft_budget: 56412.399999999936, hard_runaway_ceiling: 84618.5999999999}
+    fidelity_reduced: false
+    scientific_accuracy_reported: false
+    corpus_screen_confirmation_authorized: false
+
+authorization:
+  implementation: complete
+  calibration: complete-non-scientific-full-fidelity
+  corpus_root: unopened-and-blocked-pending-post-calibration-judge
+  screen_roots: unopened-and-blocked-until-corpus-runner-tests-config-hashes-and-measured-budgets-are-frozen-and-judge-approved
+  confirmation_roots: unopened-and-prohibited-until-screen-pass-and-separate-judge-approval
+  checked_or_independent_or_official_evaluation: prohibited
+  candidate_or_tier7_promotion: prohibited
