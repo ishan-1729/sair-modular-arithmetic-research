@@ -1,0 +1,5 @@
+--index-url https://download.pytorch.org/whl/cpu
+
+# Isolated to the official PyTorch CPU index so uv never resolves unrelated
+# packages from a lower-priority mirror or enables unsafe cross-index matching.
+torch==2.5.1+cpu

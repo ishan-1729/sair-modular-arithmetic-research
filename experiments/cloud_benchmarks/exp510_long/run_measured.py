@@ -21,7 +21,10 @@ ROOT = Path(__file__).resolve().parents[3]
 BENCHMARK_DIR = Path(__file__).resolve().parent
 RUNNER = ROOT / "experiments/exp_510_multiarchitecture_grokking_feasibility/run.py"
 CONFIG = ROOT / "configs/exp_510_multiarchitecture_grokking_feasibility.yaml"
-REQUIREMENTS = BENCHMARK_DIR / "requirements.txt"
+REQUIREMENTS = {
+    "pypi": BENCHMARK_DIR / "requirements.txt",
+    "pytorch_cpu": BENCHMARK_DIR / "requirements-torch-cpu.txt",
+}
 EXPECTED_CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
 EXPECTED_DEPENDENCIES = {
     "torch": "2.5.1+cpu",
@@ -132,7 +135,9 @@ def identity() -> dict[str, Any]:
         "git_dirty_before_run": bool(git_output("status", "--porcelain")),
         "challenge_commit": challenge_commit,
         "source_sha256": source_hashes,
-        "requirements_sha256": sha256(REQUIREMENTS),
+        "requirements_sha256": {
+            name: sha256(path) for name, path in REQUIREMENTS.items()
+        },
     }
 
 

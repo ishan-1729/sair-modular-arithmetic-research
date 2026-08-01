@@ -21,11 +21,14 @@ baseline_and_identity:
 changed_variable: >-
   Execution platform and Python patch version. The benchmark keeps the exact
   runner, config, model sources, seeds, workload, Torch, NumPy, PyG, MLflow,
-  psutil, and four-thread setting. Cloud dependencies are installed from the
-  adjacent requirements.txt by uv.
+  psutil, and four-thread setting. Cloud dependencies are installed by uv from
+  adjacent, hash-recorded requirements files that isolate the PyTorch CPU index
+  from PyPI.
 public_route: >-
-  uv environment setup -> unchanged EXP-510 runner -> six complete 8,000-step
-  arms -> generated transition and rollout evaluation -> measured receipt.
+  uv installs the pinned PyTorch CPU manifest from the official PyTorch index
+  and the remaining pinned manifest from PyPI -> unchanged EXP-510 runner ->
+  six complete 8,000-step arms -> generated transition and rollout evaluation
+  -> measured receipt.
 smallest_falsifier: >-
   One complete unchanged EXP-510 execution whose source hashes pass and whose
   result structure covers all three seeds and both architectures.
@@ -49,6 +52,7 @@ evidence_outputs:
   - .scratch/cloud-exp510-long-benchmark/summary.json
   - .scratch/cloud-exp510-long-benchmark/cloud-benchmark-receipt.json
 allowed_files:
+  - experiments/cloud_benchmarks/exp510_long/requirements-torch-cpu.txt
   - experiments/cloud_benchmarks/exp510_long/requirements.txt
   - experiments/cloud_benchmarks/exp510_long/decision-card.yaml
   - experiments/cloud_benchmarks/exp510_long/run_measured.py

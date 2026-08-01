@@ -1,7 +1,4 @@
---extra-index-url https://download.pytorch.org/whl/cpu
-
 # Performance-critical versions recorded by the historical EXP-510 receipt.
-torch==2.5.1+cpu
 torch-geometric==2.8.0
 numpy==2.5.1
 mlflow==3.14.0
