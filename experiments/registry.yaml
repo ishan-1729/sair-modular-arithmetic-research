@@ -2521,3 +2521,25 @@ runs:
       - Every arm was zero-exact on all transition and rollout denominators; interaction and all causal erasures were zero.
       - Roots20261370-76 remain unopened; no confirmation, independent, checked/private, candidate, promotion, submission, release, or tournament-winner claim exists.
       - C5 remains scientifically unresolved; no entrant is cancelled and the final seventh-member adversarial chair remains mandatory.
+  - run_id: exp-698-h92-w256-backbone-factorial
+    status: parked-calibration-semantic-incompleteness
+    approach: candidate005-h92-two-cycle-state-exposure-by-lr-schedule-factorial
+    decision: park-exp698-after-root20261386-semantic-incompleteness
+    decision_authority: T110-post-root-frozen-byte-stop-rule
+    source_base_commit: 07c9e1a566561d00a05edfef0a95e785858498ef
+    source_branch: codex/exp698-h92-w256-backbone-factorial
+    config: configs/exp_698_h92_w256_backbone_factorial.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-698-h92-w256-backbone-factorial.md
+    run_record: experiments/runs/exp-698-h92-w256-backbone-factorial/run.json
+    metrics: evals/results/exp-698-h92-w256-backbone-factorial/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261386: completed-calibration-semantic-park, 20261387: unopened-frozen-byte-stop, 20261388: unopened-frozen-byte-stop, 20261389: unopened-frozen-byte-stop, 20261390: unopened-frozen-byte-stop, 20261391: unopened-frozen-byte-stop, 20261392: unopened-frozen-byte-stop, 20261393: unopened-frozen-byte-stop, 20261394: unopened-frozen-byte-stop}
+    verification_summary: {focused: 14-passed-in-6.09s, smoke: passed-corrected-identity, validator: 232-concepts-1100-records-green, pytest: 1056-passed-in-468.32s, final_oracle_invocations: 1}
+    calibration: {wall_seconds: 307.40476322, process_cpu_seconds: 1091.907045, cgroup_cpu_seconds: 1097.332, peak_rss_bytes: 2573283328, candidate_route_wall_seconds: 245.396619666}
+    dynamic_budget: {expected_wall_seconds: 85935.11640286642, soft_guard_wall_seconds: 107418.89550358303, hard_guard_wall_seconds: 150386.45370501623, expected_artifact_bytes: 11216352}
+    training_updates: {w128_profile: 1, w256_profile: 1, formal_per_arm: 0}
+    mlflow_run_id: cb026f8b615d4f2a980a0ac80f26256f
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations: [formal-root-unopened, required-frozen-reset-randomized-and-500-case-parity-diagnostics-absent, post-root-executable-repair-forbidden, runtime-and-health-not-stop-causes]

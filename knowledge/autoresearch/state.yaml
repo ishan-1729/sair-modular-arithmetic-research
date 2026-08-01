@@ -1133,3 +1133,16 @@ completed_exp696_c7:
   run_record: experiments/runs/exp-696-qcm48-factorial/run.json
   metrics: evals/results/exp-696-qcm48-factorial/metrics.json
   limitations: [unhealthy-neither-makes-result-non-comparative, all-arms-zero-exact-on-complete-formal-denominators, positive-interaction-and-causal-gates-failed, roots-20261370-through-20261376-unopened, no-checked-private-candidate-submission-promotion-release-winner-or-goal-completion-claim, C5-unresolved-final-seven-member-chair-mandatory]
+parked_exp698_backbone_factorial:
+  run_id: exp-698-h92-w256-backbone-factorial
+  status: parked-calibration-semantic-incompleteness
+  decision_authority: T110-post-root-frozen-byte-stop-rule
+  roots: {calibration_20261386: completed-semantic-park, formal_20261387: unopened, confirmations_20261388_20261389: unopened, independent_20261390_20261394: unopened}
+  verification: {focused: 14-passed, smoke: passed, validator: green, pytest: 1056-passed-in-468.32s}
+  calibration: {wall_seconds: 307.40476322, process_cpu_seconds: 1091.907045, cgroup_cpu_seconds: 1097.332, peak_rss_bytes: 2573283328, expected_formal_wall_seconds: 85935.11640286642, soft_guard_wall_seconds: 107418.89550358303, hard_guard_wall_seconds: 150386.45370501623}
+  mlflow_run_id: cb026f8b615d4f2a980a0ac80f26256f
+  scientific_metrics: null
+  scientific_verdict: null
+  run_record: experiments/runs/exp-698-h92-w256-backbone-factorial/run.json
+  metrics: evals/results/exp-698-h92-w256-backbone-factorial/metrics.json
+  limitations: [missing-frozen-reset-randomized-and-actual500-parity-diagnostics, post-root-executable-repair-forbidden, formal-and-later-roots-unopened, no-scientific-verdict]

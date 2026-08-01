@@ -502,3 +502,10 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - The fixture preflight passes with 87 Git-LFS paths byte-identical and the clean nested challenge snapshot at exact `82510bba`. The real all-mode smoke completes in 70.4 seconds and 25 focused tests pass.
 - The exactly-once package oracle stops during project validation on six pre-existing EXP692 canonical-record/schema defects before pytest. Those files are outside T099.
 - Apply the frozen mechanical stop rule. Roots20261341-49 remain unopened, no resource/scientific/causal verdict exists, and C5-C7 remain independently required.
+
+## 2026-08-01 — EXP-698 parks after calibration on frozen-protocol incompleteness
+
+- Freeze the Candidate005 h92/two-cycle 2x2 state-exposure by LR-schedule factorial. Fourteen focused tests, smoke, project validation, and 1,056/1,056 tests pass on corrected executable bytes.
+- Root20261386 measures W128/W256 updates and evaluations, a complete 1,100-case route, 2.573 GB peak RSS, and an 85,935-second expected formal wall budget with 1.25x/1.75x ceilings. Runtime is interpretation-only and does not stop science.
+- Post-root review finds the frozen executable omits required frozen-source, reset-to-source, randomized-weight, and actual 500-case lower-tier-parity diagnostics.
+- The stop rule forbids semantic executable repair after a root opens. Park this identity before formal root20261387; roots87-94 remain unopened and no scientific verdict exists. A corrected attempt requires a fresh identity and roots.
