@@ -1073,3 +1073,21 @@ parked_exp694_c5:
   run_record: experiments/runs/exp-694-routed-antithetic-quorum/run.json
   metrics: evals/results/exp-694-routed-antithetic-quorum/metrics.json
   limitations: [consumed-calibration-root-cannot-be-reused-after-executable-repair, no-transition-rollout-or-cold-route-denominator, resource-and-scientific-verdicts-null, C5-unresolved, C6-C7-remain-required]
+parked_exp697_c5_recovery:
+  run_id: exp-697-c5-routed-antithetic-quorum-recovery
+  status: failed-package-oracle
+  source_base_commit: db7eea9539d62130c0210a3b78ac86c714f90428
+  source_branch: codex/exp697-c5-interface-recovery
+  decision_authority: T109-single-package-oracle-stop-rule
+  mechanism: immutable-exp694-hidden56-sparse-one-per-four-three-way-antithetic-quorum-with-read-only-armview-width-recovery
+  roots: {calibration_20261359: unopened-package-oracle-blocked, formal_20261360: unopened-package-oracle-blocked, confirmation_20261361_20261362: unopened-package-oracle-blocked, independent_20261363_20261367: unopened-package-oracle-blocked}
+  verification: {fixture_preflight: passed, source_ast_equivalence: passed, focused: 38-passed-in-12.92s, smoke: passed-all-modes-in-43.57s, validator: failed-2-pre-existing-exp694-schema-issues, pytest: not-started, oracle_invocations: 1}
+  training_updates: {primary: 1, random_routing_control: 1, scope: rootless-smoke-only}
+  resource_admission: null
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-697-c5-routed-antithetic-quorum-recovery/run.json
+  metrics: evals/results/exp-697-c5-routed-antithetic-quorum-recovery/metrics.json
+  limitations: [only-approved-read-only-width-getter, package-oracle-failed-on-immutable-exp694-records-before-pytest, roots-20261359-through-20261367-unopened, resource-and-scientific-verdicts-null, C6-C7-and-final-chair-remain-mandatory]

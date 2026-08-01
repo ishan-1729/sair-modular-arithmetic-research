@@ -1,0 +1,80 @@
+{
+  "schema_version": "exp697-terminal-v1",
+  "run_id": "exp-697-c5-routed-antithetic-quorum-recovery",
+  "status": "failed",
+  "decision": "park-exp697-at-pre-root-package-oracle",
+  "decision_authority": "T109-single-package-oracle-stop-rule",
+  "completion_marker": "terminal-persisted",
+  "created_at": "2026-08-01T21:06:10+05:30",
+  "seed": 20261359,
+  "hypothesis": "The frozen C5 learned survival-Q sparse antithetic quorum can be measured after the minimal evaluator-interface compatibility recovery, against its target-independent random-routing control at identical quota and work.",
+  "config": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
+  "source": {
+    "repository_commit": "db7eea9539d62130c0210a3b78ac86c714f90428",
+    "repository_base_commit": "db7eea9539d62130c0210a3b78ac86c714f90428",
+    "branch": "codex/exp697-c5-interface-recovery",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+    "parent_config_sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59",
+    "parent_runner_sha256": "6309cba7cda57ebc1849b94d58cdcbd85fb6f620581a10bb6b8903bc6cb92f66",
+    "parent_test_sha256": "72c1728b36498c8a9ed7dcc19167d6c717618318c70ff318c8585dc6024e0820",
+    "config_sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59",
+    "runner_sha256": "76e31c70fadbbb5d9daea0ba40616f2b70645738f9171fc5094ff7fb0359a05a",
+    "test_sha256": "ab5ab87fa998f1c61ab0a341507f56620ea48117cfc0e90cad222761e9824dac"
+  },
+  "environment": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.5.1+cpu",
+    "mlflow": "3.14.0",
+    "numpy": "2.5.1",
+    "pyyaml": "6.0.3",
+    "configured_torch_threads": 4,
+    "configured_interop_threads": 1,
+    "precision": "CPU FP32 deterministic algorithms"
+  },
+  "roots": {
+    "20261359": "unopened-package-oracle-blocked",
+    "20261360": "unopened-package-oracle-blocked",
+    "20261361": "unopened-package-oracle-blocked",
+    "20261362": "unopened-package-oracle-blocked",
+    "20261363": "unopened-package-oracle-blocked",
+    "20261364": "unopened-package-oracle-blocked",
+    "20261365": "unopened-package-oracle-blocked",
+    "20261366": "unopened-package-oracle-blocked",
+    "20261367": "unopened-package-oracle-blocked"
+  },
+  "verification": {
+    "fixture_preflight": "parent-hashes-green-87-lfs-hydrated-clean-challenge-82510bba-checkpoint-cbc4a1bc-roots59-67-unopened",
+    "source_equivalence": "exact-text-and-ast-equal-after-approved-successor-identity-root-normalization-and-removing-width-getter",
+    "focused": "38-passed-in-12.92s",
+    "smoke": "passed-all-modes-in-43.57s",
+    "smoke_sha256": "1e1fa075205e8cb4c1d76d7a4ccb30e3f55de059cc161ed2f7ab2148dcc6d04a",
+    "package_oracle_invocations": 1,
+    "package_oracle": "validator-failed-with-two-pre-existing-exp694-terminal-record-schema-issues-before-pytest",
+    "validator_passed": false,
+    "pytest_started": false,
+    "oracle_wall_seconds": 6.70,
+    "oracle_process_cpu_seconds": 1.14,
+    "oracle_peak_rss_kib": 29644
+  },
+  "training_updates": {"primary": 1, "random_routing_control": 1, "scope": "rootless-smoke-only"},
+  "resource_admission": null,
+  "scientific_metrics": null,
+  "scientific_verdict": null,
+  "causal_effects": null,
+  "mlflow_run_id": null,
+  "artifacts": {
+    "checkpoint": "../exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
+    "metrics": "evals/results/exp-697-c5-routed-antithetic-quorum-recovery/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-697-c5-routed-antithetic-quorum-recovery.md",
+    "smoke": ".scratch/exp-697-c5-routed-antithetic-quorum-recovery/smoke.json"
+  },
+  "notes": [
+    "The compatibility repair passed focused and rootless end-to-end evidence, but the sole package oracle failed before any scientific root was opened.",
+    "The two validation failures belong to immutable EXP694 terminal records outside T109; no repair or second oracle is authorized.",
+    "No complete deployed route or accuracy denominator executed, so resource admission and scientific verdict remain null.",
+    "C6, C7, and the final seven-member adversarial chair remain mandatory."
+  ]
+}

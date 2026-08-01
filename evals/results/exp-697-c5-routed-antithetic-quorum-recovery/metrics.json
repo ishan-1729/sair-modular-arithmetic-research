@@ -1,0 +1,42 @@
+{
+  "schema_version": "exp697-terminal-v1",
+  "run_id": "exp-697-c5-routed-antithetic-quorum-recovery",
+  "created_at": "2026-08-01T21:06:10+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "completion_marker": "terminal-persisted",
+  "decision": "park-exp697-at-pre-root-package-oracle",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The sole package oracle failed during validation before pytest and before calibration root20261359; all scientific denominators remained unopened.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "rootless_smoke_only": true,
+    "identical_initial_state": true,
+    "equal_parameter_count": true,
+    "equal_data_and_rng_streams": true,
+    "equal_one_per_four_route_quota": true,
+    "equal_proposal_work": true,
+    "width_property_read_only": true
+  },
+  "runtime": {
+    "resource_admission_performed": false,
+    "root20261359_opened": false,
+    "smoke_wall_seconds": 43.57,
+    "smoke_process_cpu_seconds": 65.05,
+    "smoke_peak_rss_kib": 549412,
+    "oracle_wall_seconds": 6.70,
+    "oracle_process_cpu_seconds": 1.14,
+    "oracle_peak_rss_kib": 29644,
+    "candidate_cold_wall_seconds": [],
+    "candidate_guarded_wall_seconds": null,
+    "calibration_peak_rss_bytes": null
+  },
+  "limitations": [
+    "No resource calibration or accuracy denominator was executed.",
+    "Smoke update losses and outputs are implementation evidence only.",
+    "The package was mechanically parked due to out-of-scope immutable EXP694 validation defects.",
+    "This is neither resource rejection nor scientific rejection of C5.",
+    "C6, C7, and the final seven-member adversarial chair remain mandatory."
+  ]
+}

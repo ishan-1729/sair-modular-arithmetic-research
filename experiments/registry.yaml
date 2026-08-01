@@ -2433,3 +2433,31 @@ runs:
       - No accuracy or complete cold-route denominator was opened, so resource and scientific verdicts are null.
       - Root20261350 is consumed and cannot be reused after executable repair; no replacement calibration root is authorized.
       - C5 remains scientifically unresolved and cannot cancel or weaken C6-C7.
+  - run_id: exp-697-c5-routed-antithetic-quorum-recovery
+    status: failed-package-oracle
+    approach: immutable-exp694-c5-successor-with-read-only-armview-width-interface-recovery
+    decision: park-exp697-at-pre-root-package-oracle
+    decision_authority: T109-single-package-oracle-stop-rule
+    source_base_commit: db7eea9539d62130c0210a3b78ac86c714f90428
+    source_branch: codex/exp697-c5-interface-recovery
+    config: configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-697-c5-routed-antithetic-quorum-recovery.md
+    run_record: experiments/runs/exp-697-c5-routed-antithetic-quorum-recovery/run.json
+    metrics: evals/results/exp-697-c5-routed-antithetic-quorum-recovery/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261359: unopened-package-oracle-blocked, 20261360: unopened-package-oracle-blocked, 20261361: unopened-package-oracle-blocked, 20261362: unopened-package-oracle-blocked, 20261363: unopened-package-oracle-blocked, 20261364: unopened-package-oracle-blocked, 20261365: unopened-package-oracle-blocked, 20261366: unopened-package-oracle-blocked, 20261367: unopened-package-oracle-blocked}
+    verification_summary: {fixture_preflight: passed, source_ast_equivalence: passed, focused: 38-passed-in-12.92s, smoke: passed-all-modes-in-43.57s, validator: failed-2-pre-existing-exp694-schema-issues, pytest: not-started, full_oracle_invocations: 1}
+    training_updates: {primary: 1, random_routing_control: 1, scope: rootless-smoke-only}
+    resource_admission: null
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - The only computation/API delta from EXP694 is the approved setter-free ArmView.width getter.
+      - The sole oracle failed before pytest on two immutable EXP694 terminal-record schema defects outside T109.
+      - Roots20261359-67 remain unopened; no resource or accuracy denominator exists.
+      - C6, C7, and the final seven-member adversarial chair remain mandatory.
