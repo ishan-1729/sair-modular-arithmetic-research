@@ -2405,3 +2405,31 @@ runs:
       - The sole package oracle failed on six pre-existing EXP692 canonical-record/schema defects outside T099.
       - The one-oracle stop rule prohibits repair, rerun, or root20261341 admission after this failure.
       - C4 is mechanically parked and cannot cancel or weaken C5-C7.
+  - run_id: exp-694-routed-antithetic-quorum
+    status: failed-calibration-lifecycle
+    approach: candidate-derived-hidden56-sparse-one-per-four-three-way-antithetic-quorum-vs-random-routing-control
+    decision: park-exp694-after-consumed-calibration-root-lifecycle-defect
+    decision_authority: T100-frozen-root-lifecycle-stop-rule
+    source_base_commit: eca3edaba5bb9d12d942ec574989cc6eeaf97ab2
+    source_branch: codex/exp694-c5-antithetic-quorum
+    config: configs/exp_694_routed_antithetic_quorum.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-694-routed-antithetic-quorum.md
+    run_record: experiments/runs/exp-694-routed-antithetic-quorum/run.json
+    metrics: evals/results/exp-694-routed-antithetic-quorum/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261350: opened-consumed-calibration-lifecycle-failure, 20261351: unopened-calibration-gate-unavailable, 20261352: unopened-formal-gate-unavailable, 20261353: unopened-formal-gate-unavailable, 20261354: unopened-confirmation-gate-unavailable, 20261355: unopened-confirmation-gate-unavailable, 20261356: unopened-confirmation-gate-unavailable, 20261357: unopened-confirmation-gate-unavailable, 20261358: unopened-confirmation-gate-unavailable}
+    verification_summary: {fixture_preflight: passed, smoke: passed-all-modes-in-36.3s, focused: 37-passed, validator: 228-concepts-1100-records-green, pytest: 949-passed-in-459.94s, oracle_invocations: 1}
+    calibration: {resource_admission_performed: false, cold_complete_routes: 0, failure: ArmView-missing-width-at-first-transition-evaluator, failure_wall_seconds: 13.37, failure_process_cpu_seconds: 36.66, failure_peak_rss_kib: 1147148}
+    training_updates: {primary: 4, random_routing_control: 4, scope: calibration-only-non-scientific}
+    formal_calls_executed: 0
+    mlflow_run_id: null
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - Both calibration arms completed identical one-per-four routed work and exact checkpoint reloads before evaluator failure.
+      - No accuracy or complete cold-route denominator was opened, so resource and scientific verdicts are null.
+      - Root20261350 is consumed and cannot be reused after executable repair; no replacement calibration root is authorized.
+      - C5 remains scientifically unresolved and cannot cancel or weaken C6-C7.

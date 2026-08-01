@@ -1,0 +1,46 @@
+{
+  "schema_version": "exp694-terminal-v1",
+  "run_id": "exp-694-routed-antithetic-quorum",
+  "created_at": "2026-08-01T20:42:50+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "completion_marker": "terminal-persisted",
+  "decision": "park-exp694-after-consumed-calibration-root-lifecycle-defect",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The consumed calibration root failed at the first transition evaluator call before any accuracy or cold-route denominator.",
+    "labels_or_oracle_present_in_deployed_route": false,
+    "transition_cases": 0,
+    "rollout_cases": 0,
+    "cold_complete_1100_routes": 0
+  },
+  "controls": {
+    "identical_initial_state": true,
+    "equal_parameter_count": true,
+    "equal_updates": true,
+    "equal_data_and_rng_streams": true,
+    "equal_eligible_examples": true,
+    "equal_routed_examples": true,
+    "equal_proposal_calls": true,
+    "exact_one_per_four_quota": true,
+    "both_reload_exact": true
+  },
+  "runtime": {
+    "resource_admission_performed": false,
+    "candidate_cold_wall_seconds": [],
+    "candidate_guarded_wall_seconds": null,
+    "peak_rss_gate_evaluated": false,
+    "calibration_failure_wall_seconds": 13.37,
+    "calibration_failure_process_cpu_seconds": 36.66,
+    "calibration_failure_peak_rss_kib": 1147148
+  },
+  "exact_answer_metrics": null,
+  "causal_interventions": null,
+  "comparison_interpretable": false,
+  "scientific_verdict": null,
+  "limitations": [
+    "Calibration training and smoke outputs are implementation evidence only and carry no scientific accuracy claim.",
+    "The complete deployed resource route was never measured, so EXP694 is neither resource-admitted nor resource-rejected.",
+    "The frozen calibration root cannot be reused after repairing executable code; the exact C5 hypothesis remains unresolved.",
+    "C6-C7 remain independently required."
+  ]
+}

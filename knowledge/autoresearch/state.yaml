@@ -1,5 +1,5 @@
 program_status: active
-updated_at: 2026-07-30T01:30:00+05:30
+updated_at: 2026-08-01T20:42:50+05:30
 success_threshold:
   metric: exact_overall_accuracy
   minimum: 0.85
@@ -1053,3 +1053,23 @@ parked_exp693_c4:
   run_record: experiments/runs/exp-693-c4-dilation-factored-adapters/run.json
   metrics: evals/results/exp-693-c4-dilation-factored-adapters/metrics.json
   limitations: [rootless-smoke-is-non-scientific, one-oracle-out-of-scope-stop-prohibits-repair-rerun-or-root-open, no-resource-science-confidence-or-causal-evidence, C5-C7-remain-required]
+parked_exp694_c5:
+  run_id: exp-694-routed-antithetic-quorum
+  status: failed-calibration-lifecycle
+  source_base_commit: eca3edaba5bb9d12d942ec574989cc6eeaf97ab2
+  source_branch: codex/exp694-c5-antithetic-quorum
+  decision_authority: T100-frozen-root-lifecycle-stop-rule
+  mechanism: hidden56-sparse-exact-one-per-four-three-way-antithetic-quorum-vs-target-independent-random-routing
+  roots: {calibration_20261350: opened-consumed-lifecycle-failure-before-evaluation, formal_20261351: unopened, confirmation_20261352_20261353: unopened, independent_20261354_20261358: unopened}
+  verification: {fixture_preflight: passed, smoke: passed-all-modes-in-36.3s, focused: 37-passed, validator: green-228-concepts-1100-records, pytest: 949-passed-in-459.94s, full_oracle_invocations: 1}
+  calibration: {resource_admission_performed: false, cold_complete_routes: 0, failure: ArmView-missing-width-at-first-transition-evaluator, failure_wall_seconds: 13.37, process_cpu_seconds: 36.66, peak_rss_kib: 1147148}
+  training_updates: {primary: 4, random_routing_control: 4, scope: calibration-only-non-scientific}
+  mechanics: {parameters_per_arm: 54551, initial_state_equal: true, exact_one_per_four_quota: true, eligible_examples_per_arm: 512, routed_examples_per_arm: 128, proposal_calls_per_arm: 768, reload_exact: true}
+  resource_admission: null
+  formal_calls_executed: 0
+  scientific_metrics: null
+  scientific_verdict: null
+  causal_effects: null
+  run_record: experiments/runs/exp-694-routed-antithetic-quorum/run.json
+  metrics: evals/results/exp-694-routed-antithetic-quorum/metrics.json
+  limitations: [consumed-calibration-root-cannot-be-reused-after-executable-repair, no-transition-rollout-or-cold-route-denominator, resource-and-scientific-verdicts-null, C5-unresolved, C6-C7-remain-required]
