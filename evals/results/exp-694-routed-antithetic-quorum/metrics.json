@@ -8,10 +8,7 @@
   "evaluation": {
     "not_performed": true,
     "reason": "The consumed calibration root failed at the first transition evaluator call before any accuracy or cold-route denominator.",
-    "labels_or_oracle_present_in_deployed_route": false,
-    "transition_cases": 0,
-    "rollout_cases": 0,
-    "cold_complete_1100_routes": 0
+    "labels_or_oracle_present": false
   },
   "controls": {
     "identical_initial_state": true,

@@ -95,6 +95,7 @@
   "causal_effects": null,
   "mlflow_run_id": null,
   "artifacts": {
+    "checkpoint": ".scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
     "metrics": "evals/results/exp-694-routed-antithetic-quorum/metrics.json",
     "preregistration": "knowledge/autoresearch/ablations/exp-694-routed-antithetic-quorum.md",
     "smoke": ".scratch/exp-694-routed-antithetic-quorum/smoke.json",

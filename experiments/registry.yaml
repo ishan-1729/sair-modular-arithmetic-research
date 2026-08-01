@@ -2461,3 +2461,32 @@ runs:
       - The sole oracle failed before pytest on two immutable EXP694 terminal-record schema defects outside T109.
       - Roots20261359-67 remain unopened; no resource or accuracy denominator exists.
       - C6, C7, and the final seven-member adversarial chair remain mandatory.
+  - run_id: exp-695-cycle-factorized-distillation
+    status: parked-calibration-resource-admission
+    approach: candidate-derived-hidden48-sixteen-visit-cycle-factorized-hidden-state-distillation-vs-zero-coefficient-control
+    decision: park-exp695-at-root20261377-resource-admission
+    decision_authority: T101-frozen-resource-admission-stop-rule
+    source_base_commit: b2c7b837ab281a08d974eee45e6404737915de45
+    source_branch: codex/exp695-c6-cycle-factorized
+    config: configs/exp_695_cycle_factorized_distillation.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-695-cycle-factorized-distillation.md
+    run_record: experiments/runs/exp-695-cycle-factorized-distillation/run.json
+    metrics: evals/results/exp-695-cycle-factorized-distillation/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261377: completed-calibration-resource-reject, 20261378: unopened-admission-blocked, 20261379: unopened-admission-blocked, 20261380: unopened-admission-blocked, 20261381: unopened-admission-blocked, 20261382: unopened-admission-blocked, 20261383: unopened-admission-blocked, 20261384: unopened-admission-blocked, 20261385: unopened-admission-blocked}
+    verification_summary: {fixture_preflight: 87-lfs-byte-identical-and-clean-challenge, smoke: passed-all-modes-in-41.6s, focused: 22-passed-in-10.63s, validator: 230-concepts-1100-records-green, pytest: 1009-passed-in-471.53s, oracle_invocations: 1}
+    calibration: {admitted: false, cold_wall_seconds: [212.90704653300008, 119.9308813780001, 129.48888186700015, 122.15805489100012, 121.82968177899988], guarded_wall_seconds: 425.81409306600017, ceiling_seconds: 285.0, wall_seconds: 1220.429311594, process_cpu_seconds: 4664.703249, cgroup_cpu_seconds: 4451.912, peak_rss_bytes: 2262302720}
+    dynamic_budget: {expected_wall_seconds: 6129.0721898788315, soft_guard_wall_seconds: 7662, hard_guard_wall_seconds: 10726}
+    training_updates: {teacher: 400, primary: 4, zero_coefficient_control: 4, scope: calibration-only-non-scientific}
+    checkpoints: {teacher_sha256: b8ecc040647333f9415b664e1c1a1b2223a7ede05e0d12ec19dbc4e17874edbe, primary_sha256: 6908f67108fb39ae2e262ada1aa71d7be5b542232e156d19c004c53dd43eb0dc, zero_coefficient_control_sha256: 67b7a2e45222281248f8089c9871bbec1db3eac9c944c374c98ac49c8cf6bfdc}
+    mlflow_run_id: 81b94aa9dd8a4d6980b3ae1d15dfe170
+    scientific_metrics: null
+    scientific_verdict: null
+    causal_effects: null
+    limitations:
+      - Complete 400-update teacher training and full cold-route calibration are implementation/resource evidence, not formal science.
+      - Guarded complete-route wall time exceeded the frozen 285-second admission ceiling; root20261378 and all later roots remain unopened.
+      - No full 2,400-update arms, formal comparison, causal intervention, confirmation, independent seed, candidate, promotion, or private-score evidence exists.
+      - C5 remains scientifically unresolved; C7 and the final seven-member adversarial chair remain mandatory.
