@@ -4,6 +4,7 @@ title: EXP692 C3 quotient/carry posterior conditioning
 description: Frozen tournament contract and terminal package-oracle park for C3.
 status: parked
 tags: [autoresearch, tournament, quotient, carry, film]
+timestamp: "2026-07-31T00:00:00+05:30"
 ---
 
 # EXP692 C3 quotient/carry posterior conditioning

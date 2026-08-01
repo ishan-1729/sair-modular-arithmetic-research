@@ -5,6 +5,12 @@
   "completion_marker": "terminal-persisted",
   "decision": "park-exp692-at-package-oracle",
   "created_at": "2026-07-31T00:00:00+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "The sole package oracle failed before pytest; frozen roots and all scientific denominators remained unopened.",
+    "labels_or_oracle_present": false
+  },
   "training": {"rootless_smoke_updates_per_arm": 1, "formal_updates_per_arm": 0},
   "transition": null,
   "rollout": null,

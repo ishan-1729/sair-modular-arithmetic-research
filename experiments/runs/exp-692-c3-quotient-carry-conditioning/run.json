@@ -1,7 +1,7 @@
 {
   "schema_version": "exp692-terminal-v1",
   "run_id": "exp-692-c3-quotient-carry-conditioning",
-  "status": "parked-package-oracle",
+  "status": "failed",
   "completion_marker": "terminal-persisted",
   "decision": "park-exp692-at-package-oracle",
   "decision_authority": "T098-single-package-oracle-stop-rule",
@@ -11,6 +11,7 @@
   "source": {
     "repository_base_commit": "d8ea29e6c3474664897efa0ecb905e78166db60d",
     "branch": "codex/exp692-c3-quotient-carry",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
     "challenge_commit_expected": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
     "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
     "config_sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c",
@@ -45,6 +46,7 @@
   "checkpoints": null,
   "mlflow_run_id": null,
   "artifacts": {
+    "checkpoint": "../exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors",
     "metrics": "evals/results/exp-692-c3-quotient-carry-conditioning/metrics.json",
     "verification": "experiments/runs/exp-692-c3-quotient-carry-conditioning/verification.json",
     "environment": "experiments/runs/exp-692-c3-quotient-carry-conditioning/environment.json",
