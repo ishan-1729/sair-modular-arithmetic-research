@@ -1,0 +1,56 @@
+hypothesis_or_requirement: >-
+  The sustained Codex Cloud CPU route materially changes the wall time of the
+  unchanged six-arm EXP-510 workload relative to its durable laptop baseline.
+measured_failure_or_need: >-
+  The earlier Candidate 005 comparison was too short for cold-start overhead
+  and sustained training throughput to be separated confidently.
+baseline_and_identity:
+  run_id: exp-510-multiarchitecture-grokking-feasibility
+  repository_commit: 48d53b45ca0229ad9eb533b151b580454d0f5514
+  config_sha256: eb1054e2f512ccd6c5f68af44076e470e20867a383ff259eb93ac36c1fd54d9b
+  runner_sha256: 909ff11d3087e8418de95b254f8173598fc1d0c50b17fa22e464c8e44cf1637f
+  tcn_sha256: 182614346a5ea9f5ab207395a351af0ac96a11ff56a0cd87ed6ea3550fb96c6e
+  graph_sha256: 8ac98e9f9de7b2e7a916d05117dea53cd1c74fccf272fb44fa73fecc59b1746c
+  local_external_wall_seconds: 4476.0
+  local_runner_wall_seconds: 4463.781010809002
+  local_runner_aggregate_cpu_seconds: 17695.677783902
+  local_external_user_cpu_seconds: 17526.93
+  local_external_system_cpu_seconds: 182.76
+  local_peak_rss_kib: 598048
+  local_torch_threads: 4
+changed_variable: >-
+  Execution platform and Python patch version. The benchmark keeps the exact
+  runner, config, model sources, seeds, workload, Torch, NumPy, PyG, MLflow,
+  psutil, and four-thread setting. Cloud dependencies are installed from the
+  adjacent requirements.txt by uv.
+public_route: >-
+  uv environment setup -> unchanged EXP-510 runner -> six complete 8,000-step
+  arms -> generated transition and rollout evaluation -> measured receipt.
+smallest_falsifier: >-
+  One complete unchanged EXP-510 execution whose source hashes pass and whose
+  result structure covers all three seeds and both architectures.
+primary_oracle: sustained runner wall time with runner aggregate CPU time
+promotion_gate: >-
+  Report the observed speed ratio only after the full route completes and its
+  generated exact-answer metrics are reconciled with the historical receipt.
+futility_or_stop_rule: >-
+  Stop only on an execution failure, a source/dependency identity mismatch, or
+  a five-hour cloud runner wall ceiling.
+retention_and_safety_gates:
+  - Do not read checked, consumed independent, official/private, or benchmark answers.
+  - Do not alter the original EXP-510 runner, config, or model sources.
+  - Do not treat checkpoint hash drift across CPU platforms as accuracy evidence.
+cost_model:
+  cloud_cpu_quota_observed: 2
+  aggregate_cpu_lower_bound_wall_seconds: 8847.838891951
+  expected_cloud_runner_wall_seconds: [8000, 14400]
+  hard_runaway_ceiling_seconds: 18000
+evidence_outputs:
+  - .scratch/cloud-exp510-long-benchmark/summary.json
+  - .scratch/cloud-exp510-long-benchmark/cloud-benchmark-receipt.json
+allowed_files:
+  - experiments/cloud_benchmarks/exp510_long/requirements.txt
+  - experiments/cloud_benchmarks/exp510_long/decision-card.yaml
+  - experiments/cloud_benchmarks/exp510_long/run_measured.py
+  - experiments/runs/cloud-exp510-long-benchmark/
+  - evals/results/cloud-exp510-long-benchmark/
