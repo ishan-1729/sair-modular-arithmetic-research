@@ -1,0 +1,30 @@
+{
+  "schema_version": "cloud-exp510-long-benchmark-run-v1",
+  "run_id": "cloud-exp510-long-benchmark",
+  "status": "failed",
+  "created_at": "2026-08-01T22:09:44.280848+00:00",
+  "hypothesis": "The sustained Codex Cloud CPU route materially changes the wall time of unchanged EXP-510 relative to its durable laptop baseline.",
+  "seed": 20260722,
+  "seeds": [20260722, 20260723, 20260724],
+  "config": "configs/exp_510_multiarchitecture_grokking_feasibility.yaml",
+  "source": {
+    "cloud_branch_commit": "460815a12e414d65254e9568abbabfa07de75405",
+    "historical_repository_commit": "48d53b45ca0229ad9eb533b151b580454d0f5514",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "semantic_identity": "passed-for-config-runner-tcn-graph-dependencies-and-completed-arm-metrics"
+  },
+  "environment": "experiments/runs/cloud-exp510-long-benchmark/failure.json",
+  "artifacts": {
+    "failure": "experiments/runs/cloud-exp510-long-benchmark/failure.json",
+    "metrics": "evals/results/cloud-exp510-long-benchmark/metrics.json",
+    "checkpoint": "",
+    "summary": ""
+  },
+  "decision": "stop-after-post-compute-invocation-contract-failure",
+  "notes": [
+    "One unchanged 8,000-update TCN arm completed before result-envelope serialization failed.",
+    "Its final heldout and rollout exact accuracies exactly match the historical local arm.",
+    "The matched arm took 1,487.281 seconds in cloud versus 400.044 seconds locally, making this cloud container 3.718 times slower for the observed CPU-heavy arm.",
+    "The six-arm speed ratio is unavailable and must not be imputed from the failed partial process."
+  ]
+}

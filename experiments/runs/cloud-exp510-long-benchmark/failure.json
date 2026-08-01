@@ -1,0 +1,108 @@
+{
+  "schema_version": "cloud-exp510-long-benchmark-failure-v1",
+  "run_id": "cloud-exp510-long-benchmark",
+  "status": "failed-after-one-complete-arm",
+  "created_at": "2026-08-01T22:09:44.280848+00:00",
+  "cloud_task": {
+    "task_id": "task_e_6a6e67e97e64832cbbc6b85537273642",
+    "url": "https://chatgpt.com/codex/tasks/task_e_6a6e67e97e64832cbbc6b85537273642",
+    "attempts": 1,
+    "prior_non_compute_tasks": [
+      "task_e_6a6e5782ee6c832cbf574288f35ac43c",
+      "task_e_6a6e5fc894e8832c8d90ddefa6ca0388"
+    ]
+  },
+  "command": [
+    "/workspace/.venvs/exp510-uv/bin/python",
+    "experiments/cloud_benchmarks/exp510_long/run_measured.py",
+    "--output",
+    "/workspace/exp510-cloud-output"
+  ],
+  "inner_command": [
+    "/workspace/.venvs/exp510-uv/bin/python",
+    "/workspace/sair-modular-arithmetic-research/experiments/exp_510_multiarchitecture_grokking_feasibility/run.py",
+    "--config",
+    "/workspace/sair-modular-arithmetic-research/configs/exp_510_multiarchitecture_grokking_feasibility.yaml",
+    "--output",
+    "/workspace/exp510-cloud-output"
+  ],
+  "exit_code": 1,
+  "failure_phase": "after-seed-20260722-shared-context-tcn-completed-before-result-envelope",
+  "exception_type": "ValueError",
+  "exception_verbatim": "ValueError: '/workspace/exp510-cloud-output/20260722/shared-context-tcn/weights.safetensors' is not in the subpath of '/workspace/sair-modular-arithmetic-research'",
+  "traceback_verbatim": [
+    "Traceback (most recent call last):",
+    "  File \"/workspace/sair-modular-arithmetic-research/experiments/exp_510_multiarchitecture_grokking_feasibility/run.py\", line 113, in <module>",
+    "    raise SystemExit(main())",
+    "  File \"/workspace/sair-modular-arithmetic-research/experiments/exp_510_multiarchitecture_grokking_feasibility/run.py\", line 106, in main",
+    "    result = train_arm(seed, architecture, constructor, train_data, heldout_data, train_primes, heldout_primes)",
+    "  File \"/workspace/sair-modular-arithmetic-research/experiments/exp_510_multiarchitecture_grokking_feasibility/run.py\", line 96, in train_arm",
+    "    checkpoint = {\"path\": str(checkpoint.relative_to(ROOT)), ...}",
+    "  File \"/root/.pyenv/versions/3.12.13/lib/python3.12/pathlib.py\", line 682, in relative_to",
+    "    raise ValueError(f\"{str(self)!r} is not in the subpath of {str(other)!r}\")",
+    "ValueError: '/workspace/exp510-cloud-output/20260722/shared-context-tcn/weights.safetensors' is not in the subpath of '/workspace/sair-modular-arithmetic-research'"
+  ],
+  "cause": "The cloud prompt supplied an output path outside the repository. The byte-identical historical runner serializes checkpoint paths with checkpoint.relative_to(ROOT), so it rejected that invocation after finishing the first arm.",
+  "summary_json_generated": false,
+  "observed_structure": {
+    "expected_seeds": [20260722, 20260723, 20260724],
+    "expected_architectures": ["shared-context-tcn", "pyg-max-mpnn"],
+    "expected_arms": 6,
+    "complete_arms": 1,
+    "retained_seed": 20260722,
+    "retained_architecture": "shared-context-tcn",
+    "curve_rows": 41,
+    "last_step": 8000,
+    "weights_file_was_written": true,
+    "checkpoint_sha256": null
+  },
+  "identity": {
+    "git_commit": "460815a12e414d65254e9568abbabfa07de75405",
+    "git_dirty_before_run": false,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "source_sha256": {
+      "config": "eb1054e2f512ccd6c5f68af44076e470e20867a383ff259eb93ac36c1fd54d9b",
+      "runner": "909ff11d3087e8418de95b254f8173598fc1d0c50b17fa22e464c8e44cf1637f",
+      "tcn": "182614346a5ea9f5ab207395a351af0ac96a11ff56a0cd87ed6ea3550fb96c6e",
+      "graph": "8ac98e9f9de7b2e7a916d05117dea53cd1c74fccf272fb44fa73fecc59b1746c"
+    },
+    "requirements_sha256": {
+      "pypi": "701c0337b8a9e9cf7e555786af8a911f74a37a61034902ebb814da76af69fbff",
+      "pytorch_cpu": "ddbb8019d4e64e61b35e758ebeb2fcfa02dc695712bbf7f36bbb08d7d2828cb6"
+    }
+  },
+  "environment": {
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.39",
+    "python": "3.12.13",
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz",
+    "os_cpu_count": 3,
+    "cgroup_cpu_max": "200000 100000",
+    "cpuset_cpus_effective": "0-2",
+    "memory_max_bytes": 17179869184,
+    "dependencies": {
+      "torch": "2.5.1+cpu",
+      "torch_geometric": "2.8.0",
+      "numpy": "2.5.1",
+      "mlflow": "3.14.0",
+      "psutil": "7.0.0",
+      "PyYAML": "6.0.3",
+      "safetensors": "0.8.0",
+      "uv": "0.11.28"
+    }
+  },
+  "partial_resource": {
+    "wrapper_wall_seconds": 1511.19315681,
+    "child_user_cpu_seconds": 2070.22213,
+    "child_system_cpu_seconds": 234.676345,
+    "child_aggregate_cpu_seconds": 2304.898475,
+    "observed_average_cpu_percent": 152.5217649784389,
+    "maximum_resident_set_kib": 512516
+  },
+  "limitations": [
+    "This is a durable invocation failure plus one complete-arm performance observation, not a completed six-arm benchmark.",
+    "The full cloud runner wall time and six-arm aggregate CPU time are unavailable because summary.json was not generated.",
+    "The cloud checkpoint was not exported from the task, so its hash is unavailable.",
+    "The failure was caused by the requested output path, not by the unchanged training kernel or dependency setup.",
+    "No local benchmark computation was rerun."
+  ]
+}

@@ -39,6 +39,21 @@ promotion_gate: >-
 futility_or_stop_rule: >-
   Stop only on an execution failure, a source/dependency identity mismatch, or
   a five-hour cloud runner wall ceiling.
+observed_outcome:
+  status: failed-after-one-complete-arm
+  cloud_task_id: task_e_6a6e67e97e64832cbbc6b85537273642
+  failure: >-
+    The prompt supplied /workspace/exp510-cloud-output, but the unchanged runner
+    requires its checkpoint path to be relative to the repository root. It
+    raised ValueError after the first arm completed and did not create
+    summary.json.
+  completed_arm: {seed: 20260722, architecture: shared-context-tcn, steps: 8000}
+  completed_arm_cloud_wall_seconds: 1487.2807874680002
+  completed_arm_local_wall_seconds: 400.04357916400113
+  cloud_over_local_wall_ratio: 3.717796922465483
+  semantic_final_metrics_match: true
+  full_six_arm_speedup_available: false
+  decision: stop-without-relaunch-under-post-compute-failure-rule
 retention_and_safety_gates:
   - Do not read checked, consumed independent, official/private, or benchmark answers.
   - Do not alter the original EXP-510 runner, config, or model sources.

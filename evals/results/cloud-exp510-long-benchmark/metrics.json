@@ -1,0 +1,105 @@
+{
+  "schema_version": "cloud-exp510-long-benchmark-metrics-v1",
+  "run_id": "cloud-exp510-long-benchmark",
+  "created_at": "2026-08-01T22:09:44.280848+00:00",
+  "status": "partial-failed",
+  "checkpoint_sha256": "efc845ed457e28a30bc02ff14cd4232a905ac531e1d72e8a77433e1e576c7557",
+  "checkpoint_identity": {
+    "scope": "historical-local-comparator",
+    "cloud_checkpoint_sha256": null,
+    "reason": "The cloud checkpoint was written but not exported after the invocation failure."
+  },
+  "comparison_scope": "seed-20260722-shared-context-tcn-8000-updates",
+  "evaluation": {
+    "transition": {
+      "cloud_seed_20260722_shared_context_tcn": {
+        "cases": 4096,
+        "correct": 3279,
+        "exact_accuracy": 0.800537109375
+      },
+      "local_seed_20260722_shared_context_tcn": {
+        "cases": 4096,
+        "correct": 3279,
+        "exact_accuracy": 0.800537109375
+      }
+    },
+    "rollout": {
+      "cloud_seed_20260722_shared_context_tcn": {
+        "cases": 500,
+        "correct": 145,
+        "exact_accuracy": 0.29,
+        "invalid_rate": 0.102
+      },
+      "local_seed_20260722_shared_context_tcn": {
+        "cases": 500,
+        "correct": 145,
+        "exact_accuracy": 0.29
+      }
+    }
+  },
+  "controls": {
+    "full_six_arm_structure_verified": false,
+    "completed_arms": 1,
+    "expected_arms": 6,
+    "matched_arm_final_metrics_equal": true
+  },
+  "semantic_identity": {
+    "source_and_dependency_hashes_passed": true,
+    "seed": 20260722,
+    "architecture": "shared-context-tcn",
+    "updates": 8000,
+    "cloud_final_transition_exact": 0.800537109375,
+    "local_final_transition_exact": 0.800537109375,
+    "cloud_final_rollout_exact": 0.29,
+    "local_final_rollout_exact": 0.29,
+    "final_metrics_match": true
+  },
+  "cloud_completed_arm": {
+    "elapsed_wall_seconds": 1487.2807874680002,
+    "train_exact": 1.0,
+    "heldout_exact": 0.800537109375,
+    "train_loss": 9.333479932600092e-10,
+    "heldout_loss": 0.8806420117927095,
+    "train_margin": 27.121578640407986,
+    "heldout_margin": 24.47513665093316,
+    "rollout_exact": 0.29,
+    "rollout_invalid": 0.102,
+    "curve_rows": 41
+  },
+  "local_completed_arm": {
+    "source": "Agentic Trace rollout-2026-07-11T22-47-57-019f522f-936f-77f1-a4b6-9ed26785b72b.jsonl line 8611",
+    "wall_seconds": 400.04357916400113,
+    "aggregate_cpu_seconds": 1579.9545441120001,
+    "peak_rss_bytes": 514629632,
+    "heldout_exact": 0.800537109375,
+    "rollout_exact": 0.29
+  },
+  "matched_arm_comparison": {
+    "cloud_over_local_wall_ratio": 3.717796922465483,
+    "local_over_cloud_throughput_ratio": 0.2689764989468126,
+    "cloud_wall_slowdown_percent": 271.7796922465483,
+    "interpretation": "For this completed, semantically identical TCN arm, Codex Cloud was 3.718 times slower than the laptop."
+  },
+  "partial_process_resource": {
+    "cloud_wrapper_wall_seconds": 1511.19315681,
+    "cloud_child_aggregate_cpu_seconds": 2304.898475,
+    "cloud_maximum_resident_set_kib": 512516,
+    "local_full_external_wall_seconds": 4476.0,
+    "local_full_runner_wall_seconds": 4463.781010809002,
+    "local_full_runner_aggregate_cpu_seconds": 17695.677783902,
+    "local_full_maximum_resident_set_kib": 598048
+  },
+  "full_benchmark_comparison": {
+    "available": false,
+    "reason": "The cloud runner failed after one of six arms because the output directory was outside the repository; summary.json was not generated.",
+    "speedup": null
+  },
+  "decision": "cloud-not-faster-on-observed-sustained-tcn-arm; no-six-arm-verdict",
+  "limitations": [
+    "The valid matched comparison covers one TCN arm, not the graph architecture or all six arms.",
+    "Cloud arm CPU seconds were not captured separately because the runner failed while constructing the arm result envelope.",
+    "The cloud wrapper resource counters include setup around the completed arm and are not used for the matched wall ratio.",
+    "No full-run speedup or naive six-arm projection is reported.",
+    "No local computation was rerun; local figures come from the durable EXP-510 record and its Agentic Trace."
+  ]
+}

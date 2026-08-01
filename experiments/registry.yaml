@@ -2490,3 +2490,22 @@ runs:
       - Guarded complete-route wall time exceeded the frozen 285-second admission ceiling; root20261378 and all later roots remain unopened.
       - No full 2,400-update arms, formal comparison, causal intervention, confirmation, independent seed, candidate, promotion, or private-score evidence exists.
       - C5 remains scientifically unresolved; C7 and the final seven-member adversarial chair remain mandatory.
+  - run_id: cloud-exp510-long-benchmark
+    status: failed-after-one-complete-arm
+    approach: codex-cloud-vs-laptop-exp510-sustained-cpu-comparison
+    decision: stop-after-post-compute-invocation-contract-failure
+    source_branch: codex/cloud-exp510-long-benchmark
+    source_base_commit: 460815a12e414d65254e9568abbabfa07de75405
+    config: configs/exp_510_multiarchitecture_grokking_feasibility.yaml
+    run_record: experiments/runs/cloud-exp510-long-benchmark/run.json
+    metrics: evals/results/cloud-exp510-long-benchmark/metrics.json
+    checkpoint: null
+    cloud_task_id: task_e_6a6e67e97e64832cbbc6b85537273642
+    completed_arms: 1
+    expected_arms: 6
+    failure: output-path-outside-repository-relative-path-contract
+    matched_arm_comparison: {cloud_wall_seconds: 1487.2807874680002, local_wall_seconds: 400.04357916400113, cloud_over_local_wall_ratio: 3.717796922465483}
+    limitations:
+      - This is a durable invocation failure plus one complete-arm performance observation, not a completed six-arm benchmark.
+      - The full cloud speed ratio is unavailable because summary.json was not generated.
+      - No local benchmark computation was rerun.
