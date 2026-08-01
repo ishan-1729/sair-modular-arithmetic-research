@@ -22,6 +22,16 @@ BENCHMARK_DIR = Path(__file__).resolve().parent
 RUNNER = ROOT / "experiments/exp_510_multiarchitecture_grokking_feasibility/run.py"
 CONFIG = ROOT / "configs/exp_510_multiarchitecture_grokking_feasibility.yaml"
 REQUIREMENTS = BENCHMARK_DIR / "requirements.txt"
+EXPECTED_CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+EXPECTED_DEPENDENCIES = {
+    "torch": "2.5.1+cpu",
+    "torch_geometric": "2.8.0",
+    "numpy": "2.5.1",
+    "mlflow": "3.14.0",
+    "psutil": "7.0.0",
+    "PyYAML": "6.0.3",
+    "safetensors": "0.8.0",
+}
 SOURCE_FILES = {
     "config": (
         CONFIG,
@@ -108,13 +118,19 @@ def identity() -> dict[str, Any]:
     }
     if mismatches:
         raise RuntimeError(f"historical source identity mismatch: {mismatches}")
+    challenge_commit = git_output(
+        "rev-parse", "HEAD:sources/github/modular-arithmetic-challenge"
+    )
+    if challenge_commit != EXPECTED_CHALLENGE_COMMIT:
+        raise RuntimeError(
+            "challenge submodule mismatch: "
+            f"expected {EXPECTED_CHALLENGE_COMMIT}, got {challenge_commit}"
+        )
     return {
         "git_commit": git_output("rev-parse", "HEAD"),
         "git_branch": git_output("branch", "--show-current"),
         "git_dirty_before_run": bool(git_output("status", "--porcelain")),
-        "challenge_commit": git_output(
-            "rev-parse", "HEAD:sources/github/modular-arithmetic-challenge"
-        ),
+        "challenge_commit": challenge_commit,
         "source_sha256": source_hashes,
         "requirements_sha256": sha256(REQUIREMENTS),
     }
@@ -122,6 +138,11 @@ def identity() -> dict[str, Any]:
 
 def environment() -> dict[str, Any]:
     memory = shutil.disk_usage(ROOT)
+    dependencies = dependency_versions()
+    if dependencies != EXPECTED_DEPENDENCIES:
+        raise RuntimeError(
+            f"dependency mismatch: expected {EXPECTED_DEPENDENCIES}, got {dependencies}"
+        )
     return {
         "captured_at": datetime.now(timezone.utc).isoformat(),
         "platform": platform.platform(),
@@ -136,7 +157,7 @@ def environment() -> dict[str, Any]:
         "memory_max": read_optional("/sys/fs/cgroup/memory.max"),
         "disk_total_bytes": memory.total,
         "disk_free_bytes": memory.free,
-        "dependencies": dependency_versions(),
+        "dependencies": dependencies,
         "thread_environment": {
             name: os.environ.get(name)
             for name in (
@@ -147,6 +168,26 @@ def environment() -> dict[str, Any]:
             )
         },
     }
+
+
+def compact_results(results: dict[str, Any] | None) -> dict[str, Any] | None:
+    if results is None:
+        return None
+    compact: dict[str, Any] = {}
+    for seed, arms in results.items():
+        compact[seed] = {}
+        for architecture, result in arms.items():
+            curve = result.get("curve") or []
+            compact[seed][architecture] = {
+                "cached": result.get("cached"),
+                "dataset_sha256": result.get("dataset_sha256"),
+                "parameters": result.get("parameters"),
+                "analysis": result.get("analysis"),
+                "runtime": result.get("runtime"),
+                "checkpoint": result.get("checkpoint"),
+                "final_curve_row": curve[-1] if curve else None,
+            }
+    return compact
 
 
 def main() -> int:
@@ -213,7 +254,7 @@ def main() -> int:
             "runtime": summary.get("runtime") if summary else None,
             "decision": summary.get("decision") if summary else None,
             "signature_counts": summary.get("signature_counts") if summary else None,
-            "results": summary.get("results") if summary else None,
+            "results": compact_results(summary.get("results")) if summary else None,
         },
         "limitations": [
             "Historical Python was 3.12.3; Codex universal currently supplies a newer 3.12 patch.",
