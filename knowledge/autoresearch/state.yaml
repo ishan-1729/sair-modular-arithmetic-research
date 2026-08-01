@@ -1113,3 +1113,23 @@ parked_exp695_c6:
   run_record: experiments/runs/exp-695-cycle-factorized-distillation/run.json
   metrics: evals/results/exp-695-cycle-factorized-distillation/metrics.json
   limitations: [calibration-denominators-non-scientific, guarded-candidate-runtime-reject, roots-20261378-through-20261385-unopened, C5-scientifically-unresolved, C7-and-final-chair-remain-mandatory]
+completed_exp696_c7:
+  run_id: exp-696-qcm48-factorial
+  status: completed-non-comparative-unhealthy-neither
+  source_base_commit: c2997696f18c809aa64ea86602f14caf8d42578c
+  source_branch: codex/exp696-c7-qcm48-factorial
+  decision_authority: T102-root20261369-complete-factorial-health-stop-rule
+  mechanism: hidden48-rank4-learned-quotient-carry-by-four-case-local-persistent-token-factorial
+  roots: {calibration_20261368: completed-admitted, formal_20261369: completed-non-comparative, confirmation_20261370_20261371: unopened-formal-gates-failed, independent_20261372_20261376: unopened-formal-gates-failed}
+  verification: {fixture_preflight: hydrated-lfs-dual-checkpoint-clean-challenge-c1-c3-hashes, smoke: passed-all-modes-in-46.4s, focused: 33-passed-in-17.12s, validator: green-232-concepts-1100-records, pytest: 1042-passed-in-522.75s, full_oracle_invocations: 1}
+  calibration: {admitted: true, cold_wall_seconds: [95.01480934999995, 90.33540124599995, 94.92149232299994], guarded_wall_seconds: 190.0296186999999, ceiling_seconds: 285.0, wall_seconds: 408.3974875120002, process_cpu_seconds: 1390.718822, cgroup_cpu_seconds: 1295.644, peak_rss_bytes: 1165512704, expected_formal_wall_seconds: 13302.006036641624, soft_guard_wall_seconds: 16628, hard_guard_wall_seconds: 23279}
+  training_updates: {neither: 2400, qc_only: 2400, token_only: 2400, both: 2400}
+  mechanics: {parameters_per_arm: 34836, initial_state_sha256: 417110c415fdaaf284b6e5975d3cc8d708e18c94492ae85e825f44b89f26d5c3, calls_per_kind_per_arm: 19200, equal_work: true, all_reload_exact: true}
+  formal_resources: {wall_seconds: 10597.650260553, process_cpu_seconds: 43408.58639, cgroup_cpu_seconds: 42462.16, peak_rss_bytes: 1676750848, outer_wall_seconds: 10968.0}
+  scientific_metrics: {neither_w128_transition: 0.0, all_arm_w128_transition: 0.0, all_arm_w256_transition: 0.0, all_arm_w128_rollout: 0.0, all_arm_w256_rollout: 0.0, both_w256_invalid_rate: 0.965, paired_gain: 0.0, wins: 0, losses: 0, ties: 600, factorial_interaction: 0.0, factorial_confidence_lower: -0.2632305805232825, factorial_confidence_upper: 0.2632305805232825}
+  auxiliary_both: {w128_quotient_accuracy: 0.5166666507720947, w256_quotient_accuracy: 0.5376666784286499, w128_carry_accuracy: 0.569085955619812, w256_carry_accuracy: 0.5629270672798157, w128_quotient_ece: 0.038915854752063744, w256_quotient_ece: 0.021953489492336907, w128_carry_ece: 0.13858760982084395, w256_carry_ece: 0.14552119993554272}
+  causal_effects: {qc_zero: 0.0, qc_permute: 0.0, qc_randomize: 0.0, token_reset: 0.0, token_freeze: 0.0, token_permute: 0.0, token_randomize: 0.0, cross_zero: 0.0, supported: false}
+  mlflow_run_id: 8ac035048fd34b59a2957d9b19fe3421
+  run_record: experiments/runs/exp-696-qcm48-factorial/run.json
+  metrics: evals/results/exp-696-qcm48-factorial/metrics.json
+  limitations: [unhealthy-neither-makes-result-non-comparative, all-arms-zero-exact-on-complete-formal-denominators, positive-interaction-and-causal-gates-failed, roots-20261370-through-20261376-unopened, no-checked-private-candidate-submission-promotion-release-winner-or-goal-completion-claim, C5-unresolved-final-seven-member-chair-mandatory]

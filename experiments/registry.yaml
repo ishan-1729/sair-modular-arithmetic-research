@@ -2490,3 +2490,34 @@ runs:
       - Guarded complete-route wall time exceeded the frozen 285-second admission ceiling; root20261378 and all later roots remain unopened.
       - No full 2,400-update arms, formal comparison, causal intervention, confirmation, independent seed, candidate, promotion, or private-score evidence exists.
       - C5 remains scientifically unresolved; C7 and the final seven-member adversarial chair remain mandatory.
+  - run_id: exp-696-qcm48-factorial
+    status: completed-non-comparative
+    approach: candidate-derived-hidden48-rank4-quotient-carry-by-four-persistent-token-factorial
+    decision: non-comparative-unhealthy-neither
+    decision_authority: T102-root20261369-complete-factorial-health-stop-rule
+    source_base_commit: c2997696f18c809aa64ea86602f14caf8d42578c
+    source_branch: codex/exp696-c7-qcm48-factorial
+    config: configs/exp_696_qcm48_factorial.yaml
+    council: knowledge/autoresearch/research/2026-07-30-candidate005-super-transformer-council.md
+    tournament_contract: knowledge/autoresearch/research/2026-07-30-seven-design-tournament-contract.md
+    preregistration: knowledge/autoresearch/ablations/exp-696-qcm48-factorial.md
+    run_record: experiments/runs/exp-696-qcm48-factorial/run.json
+    metrics: evals/results/exp-696-qcm48-factorial/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261368: completed-calibration-admitted, 20261369: completed-formal-non-comparative, 20261370: unopened-formal-gate-failed, 20261371: unopened-formal-gate-failed, 20261372: unopened-formal-gate-failed, 20261373: unopened-formal-gate-failed, 20261374: unopened-formal-gate-failed, 20261375: unopened-formal-gate-failed, 20261376: unopened-formal-gate-failed}
+    verification_summary: {fixture_preflight: hydrated-lfs-dual-checkpoint-clean-challenge-c1-c3-hashes, smoke: passed-rootless-all-modes-in-46.4s, focused: 33-passed-in-17.12s, validator: 232-concepts-1100-records-green, pytest: 1042-passed-in-522.75s, oracle_invocations: 1}
+    calibration: {admitted: true, cold_wall_seconds: [95.01480934999995, 90.33540124599995, 94.92149232299994], guarded_wall_seconds: 190.0296186999999, ceiling_seconds: 285.0, wall_seconds: 408.3974875120002, process_cpu_seconds: 1390.718822, cgroup_cpu_seconds: 1295.644, peak_rss_bytes: 1165512704}
+    dynamic_budget: {expected_wall_seconds: 13302.006036641624, soft_guard_wall_seconds: 16628, hard_guard_wall_seconds: 23279}
+    training_updates: {neither: 2400, qc_only: 2400, token_only: 2400, both: 2400}
+    mechanics: {parameters_per_arm: 34836, initial_state_sha256: 417110c415fdaaf284b6e5975d3cc8d708e18c94492ae85e825f44b89f26d5c3, calls_per_kind_per_arm: 19200, equal_initial_parameters_data_rng_optimizer_scheduler_losses_and_work: true, all_reload_exact: true}
+    checkpoints: {neither: f5580d1f940d36157b208a291ef9a5cc9fb03717d80c4cc2427d9b4c08805f2d, qc_only: a1bdf49ae8fdc4d0e706f41f8903341e59350fe7f2180055ad880199bd095b05, token_only: b98849d03f3057bbd001efe9bc30f9d94f966e14d507721e1baf92a867b3439d, both: 74233934677b607db10afe4cdbb561905653b819541e7a1d2afcbb8cece78fa9}
+    formal_resources: {wall_seconds: 10597.650260553, process_cpu_seconds: 43408.58639, cgroup_cpu_seconds: 42462.16, peak_rss_bytes: 1676750848, outer_wall_seconds: 10968.0}
+    scientific_metrics: {neither_w128_transition: 0.0, both_w256_transition: 0.0, both_w128_rollout: 0.0, both_w256_rollout: 0.0, both_w256_invalid_rate: 0.965, paired_gain: 0.0, wins: 0, losses: 0, ties: 600, factorial_interaction: 0.0}
+    scientific_verdict: non-comparative-unhealthy-neither
+    causal_effects: {qc_zero: 0.0, qc_permute: 0.0, qc_randomize: 0.0, token_reset: 0.0, token_freeze: 0.0, token_permute: 0.0, token_randomize: 0.0, cross_zero: 0.0, supported: false}
+    mlflow_run_id: 8ac035048fd34b59a2957d9b19fe3421
+    limitations:
+      - The neither control failed the frozen W128 transition health gate, so the completed result is non-comparative.
+      - Every arm was zero-exact on all transition and rollout denominators; interaction and all causal erasures were zero.
+      - Roots20261370-76 remain unopened; no confirmation, independent, checked/private, candidate, promotion, submission, release, or tournament-winner claim exists.
+      - C5 remains scientifically unresolved; no entrant is cancelled and the final seventh-member adversarial chair remains mandatory.
