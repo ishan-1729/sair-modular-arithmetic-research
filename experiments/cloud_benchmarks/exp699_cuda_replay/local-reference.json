@@ -1,0 +1,50 @@
+{
+  "schema_version": "exp699-cuda-local-reference-v1",
+  "classification": "observed-completed-cpu-arm",
+  "captured_at": "2026-08-02T06:35:00Z",
+  "source_progress": {
+    "path_at_capture": ".scratch/exp-699-h92-w256-backbone-factorial-complete/formal/root-20261396/progress.json",
+    "sha256": "64545c3ce37696770e70b5bb7962808ffe9ede77163fa5dfb2cb44ee499b5b6e",
+    "modified_at": "2026-08-02T04:32:21.206537500Z"
+  },
+  "root": 20261396,
+  "arm": "teacher_cosine",
+  "work": {
+    "updates": 4800,
+    "examples": 614400,
+    "model_calls": 38400,
+    "transition_cases_per_width": 3000,
+    "w128_rollout_cases": 300,
+    "w256_rollout_cases": 600
+  },
+  "checkpoint": {
+    "sha256": "8c5f4ac20351de014be4e929743348bb8aa7861504af91a0ed47ccd551399ca2",
+    "final_state_sha256": "60367268e659898171719ab01040fb0f0604be7549d718be20c07a491adbb4dc",
+    "bytes": 400584
+  },
+  "resource": {
+    "route_wall_seconds": 11452.156460124002,
+    "route_process_cpu_seconds": 45251.66881499999,
+    "route_cgroup_cpu_seconds": 45678.424000000006,
+    "peak_rss_bytes": 2625359872,
+    "training_wall_seconds": 9130.944144248002,
+    "w128_primary_wall_seconds": 143.27392994500042,
+    "w128_paired_wall_seconds": 124.35746304399981,
+    "w256_primary_wall_seconds": 1026.5739964549994,
+    "w256_paired_wall_seconds": 1027.006926432001
+  },
+  "evaluations": {
+    "128": {
+      "transition": {"cases": 3000, "correct": 2994, "case_sha256": "3571546478b63dbd33ffdb129904614cd7cb64bfcb31ed10f76cf0c667b7bfc4", "prediction_sha256": "431a0d5ada97c721c711f6189d9ecaf5296e2958abbac1250c3be172325f5dd3"},
+      "rollout": {"cases": 300, "correct": 260, "case_sha256": "5ac74d61c0fb6f2dfb47f31689b3464608dca63addac49811ba55b2a7183622e", "prediction_sha256": "ad3dbadb7b3624834167fd76583185891aeb4af41b9fdbcc4a14f5b83d39ad10", "target_sha256": "1e9551e8c43356d778712868c56331efbbb40796d7bf7262ac728f1152bd4f44"}
+    },
+    "256": {
+      "transition": {"cases": 3000, "correct": 2991, "case_sha256": "e8306644d012a3ebe64a6cc02295ea15a71b6826a54753100baf5a5dfeda753f", "prediction_sha256": "faca7de7fb17fdc428df3a8acc74fe142377dd7c599136fb92720cb30ff3d0e8"},
+      "rollout": {"cases": 600, "correct": 373, "case_sha256": "17fd5ef8068deb4c9e109aad28275038e33a51d478ba969b27c35bc92183ac14", "prediction_sha256": "c457f923e3e2bc04ceace3fcd3bbc1cf3ecd3041f9092ed53605eb8451307b84", "target_sha256": "9d7e647d8c29c9d12cfdcda63aee10a94c12730ecc5b3f32bde7ff51de171617"}
+    }
+  },
+  "limitations": [
+    "This is a scoped extraction of the completed teacher_cosine arm, not the terminal EXP699 formal result.",
+    "The source progress file also contained later arms; only the immutable completed teacher_cosine record and evaluations are used."
+  ]
+}

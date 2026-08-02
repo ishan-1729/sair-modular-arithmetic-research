@@ -1,0 +1,47 @@
+run_id: exp-699-cuda-hardware-replay
+classification: non-scientific-hardware-replay
+source:
+  experiment_run_id: exp-699-h92-w256-backbone-factorial-complete
+  config: configs/exp_699_h92_w256_backbone_factorial_complete.yaml
+  config_sha256: 8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6
+  runner: experiments/exp_699_h92_w256_backbone_factorial_complete/run.py
+  runner_sha256: eca1ee3787c3ac292375546d35e7518e140d5f9401285140dc9e37f67f8df344
+  checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  formal_root: 20261396
+replay:
+  arm: teacher_cosine
+  device: cuda
+  torch_threads: 4
+  updates: 4800
+  transition_cases_per_width: 3000
+  w128_rollout_cases: 300
+  w256_rollout_cases: 600
+  checkpoint_updates: [400, 800, 1200, 2400, 3600, 4800]
+  curve_every_updates: 100
+smoke:
+  updates: 1
+  transition_cases_per_width: 2
+  w128_rollout_cases: 1
+  w256_rollout_cases: 1
+guardrails:
+  maximum_wall_seconds: 7200
+  maximum_compute_usd: 5.0
+  minimum_required_speedup: 3.0
+  require_hourly_rate_for_full_replay: true
+  allow_full_cpu_replay: false
+environment:
+  python: "3.12"
+  uv: 0.11.28
+  torch_cuda: 2.5.1+cu124
+  cuda_runtime: "12.4"
+  deterministic: true
+  allow_tf32: false
+semantic_gate:
+  require_work_identity: true
+  require_case_identity: true
+  require_exact_correct_counts: true
+  require_prediction_hash_identity: false
+limitations:
+  - The replay is timing evidence only until the generated work, cases, and exact correct counts match the completed CPU arm.
+  - CUDA and CPU floating-point training are not expected to produce byte-identical checkpoints.
+  - The process deadline does not terminate the provider resource; prepaid credit and an external provider-side deletion watchdog remain mandatory.

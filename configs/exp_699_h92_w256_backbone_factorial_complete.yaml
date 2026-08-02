@@ -1,0 +1,72 @@
+run_id: exp-699-h92-w256-backbone-factorial-complete
+hypothesis: A matched h92/two-cycle continuation identifies whether autonomous state exposure and a restart schedule restore a healthy common W128/W256 backbone before mechanism overlays, with complete trained-weight and lower-tier diagnostics.
+source_checkpoint: /mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+roots:
+  calibration: 20261395
+  formal: 20261396
+  confirmations: [20261397, 20261398]
+  independent: [20261399, 20261400, 20261401, 20261402, 20261403]
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+model: {hidden: 92, cycles: 2, parameters: 99824}
+arms:
+  teacher_cosine: {state: teacher_forced, schedule: single_cosine}
+  teacher_restarts: {state: teacher_forced, schedule: warmup_restarts}
+  straight_through_cosine: {state: hard_straight_through, schedule: single_cosine}
+  straight_through_restarts: {state: hard_straight_through, schedule: warmup_restarts}
+data:
+  prime_bit_span: 8
+  train_prime_identities: 512
+  validation_prime_identities: 128
+  test_prime_identities: 128
+  split_seed_offset: 69800
+  training_seed_offset: 69900
+  test_seed_offset: 70000
+training:
+  updates: 4800
+  calibration_updates: 4
+  w128_only_updates: 1200
+  horizon: 8
+  batch_size: 16
+  learning_rate: 0.00001
+  warm_restart_peak_learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  warmup_updates: 400
+  restart_period_updates: 1100
+  restart_period_multiplier: 2
+  weight_decay: 0.00002
+  worst_bit_weight: 0.45
+  quotient_weight: 0.10
+  gradient_clip: 2.0
+  torch_threads: 4
+  curve_every_updates: 100
+  checkpoint_updates: [400, 800, 1200, 2400, 3600, 4800]
+evaluation:
+  transition_cases_per_arm_width: 3000
+  w128_rollout_cases_per_arm: 300
+  w256_rollout_cases_per_arm: 600
+  source_transition_cases_per_width: 3000
+  source_w128_rollout_cases: 300
+  source_w256_rollout_cases: 600
+  randomized_transition_cases_per_width: 300
+  randomized_w128_rollout_cases: 100
+  randomized_w256_rollout_cases: 200
+  lower_tier_parity_cases: 500
+  lower_tier_seed_hex: 1c82674f2826d26d7c5de0bf1933457ddc9ce824c30acff4a8a37578b3a566e4
+  confidence_level: 0.99
+  multiplicity_family: 8
+gates:
+  minimum_w128_transition: 0.99
+  maximum_w128_rollout_loss: 0.05
+  maximum_invalid_rate: 0.01
+  confirmation_admission_w256_rollout: 0.85
+  release_candidate_seconds: 300.0
+resource_policy:
+  soft_guard_multiplier: 1.25
+  hard_guard_multiplier: 1.75
+  maximum_peak_rss_bytes: 6871947673
+  maximum_artifact_bytes: 21474836480
+  inference_over_300_is_research_only: true
+  fidelity_reduced: false
+library_decision: Native PyTorch LinearLR, CosineAnnealingLR, SequentialLR, and CosineAnnealingWarmRestarts preserve scheduler fidelity; safetensors provides recoverable checkpoints; MLflow provides lineage; Python hashlib/json provide deterministic evidence keys without a new dependency.
+prohibited: [checked-or-private-answers, inference-answer-selection, output-repair, hand-coded-reduction, programmed-carry-or-quotient-semantics, barrett, montgomery, crt, root-reuse, post-result-retuning, persistent-tokens, trace-memory, quotient-carry-conditioning, routing, adapters, cycle-coefficients]
