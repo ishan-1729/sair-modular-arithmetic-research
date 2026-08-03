@@ -2543,3 +2543,25 @@ runs:
     scientific_verdict: null
     causal_effects: null
     limitations: [formal-root-unopened, required-frozen-reset-randomized-and-500-case-parity-diagnostics-absent, post-root-executable-repair-forbidden, runtime-and-health-not-stop-causes]
+  - run_id: exp-699-h92-w256-backbone-factorial-complete
+    status: failed-execution-interrupted-partial
+    approach: candidate005-h92-two-cycle-state-exposure-by-lr-schedule-factorial-diagnostic-complete
+    decision: execution-interrupted-partial-no-scientific-verdict
+    decision_authority: T112-preserve-consumed-root-evidence
+    source_base_commit: d332cfad6531bd562ce4eb93ccbd8bdcd38b2789
+    source_branch: codex/exp700-resumable-h92-w256-backbone
+    config: configs/exp_699_h92_w256_backbone_factorial_complete.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-699-h92-w256-backbone-factorial-complete.md
+    run_record: experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json
+    metrics: evals/results/exp-699-h92-w256-backbone-factorial-complete/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261395: completed-calibration-admitted, 20261396: execution-interrupted-partial, 20261397: unopened-interruption, 20261398: unopened-interruption, 20261399: unopened-interruption, 20261400: unopened-interruption, 20261401: unopened-interruption, 20261402: unopened-interruption, 20261403: unopened-interruption}
+    verification_summary: {pre_root: reused-frozen-byte-evidence, partial_authentication: config-runner-test-source-progress-checkpoints-paired-hashes-green, later_roots: 20261397-through-20261403-unopened}
+    calibration: {wall_seconds: 412.78453522199993, process_cpu_seconds: 1521.539285, cgroup_cpu_seconds: 1526.5720000000001, peak_rss_bytes: 603144192, candidate_route_wall_seconds: 292.869664025}
+    training_updates: {teacher_cosine: 4800, teacher_restarts: 4800, straight_through_cosine: 1200, straight_through_restarts: 0}
+    scientific_metrics: {teacher_cosine_w128_transition: 0.998, teacher_cosine_w128_rollout: 0.8666666666666667, teacher_cosine_w256_transition: 0.997, teacher_cosine_w256_rollout: 0.6216666666666667, teacher_restarts_w128_transition: 0.998, teacher_restarts_w128_rollout: 0.8566666666666667, teacher_restarts_w256_transition: 0.9963333333333333, teacher_restarts_w256_rollout: 0.57}
+    scientific_verdict: null
+    factorial_verdict: null
+    diagnostic_verdict: null
+    mlflow_run_id: c37854792da3454ca0f0b6f7c4da496f
+    limitations: [execution-interrupted-not-scientifically-rejected, only-two-teacher-arms-complete, straight-through-cosine-update1200-only, straight-through-restarts-and-all-diagnostics-unopened, no-factorial-or-confirmation-claim]

@@ -509,3 +509,16 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Root20261386 measures W128/W256 updates and evaluations, a complete 1,100-case route, 2.573 GB peak RSS, and an 85,935-second expected formal wall budget with 1.25x/1.75x ceilings. Runtime is interpretation-only and does not stop science.
 - Post-root review finds the frozen executable omits required frozen-source, reset-to-source, randomized-weight, and actual 500-case lower-tier-parity diagnostics.
 - The stop rule forbids semantic executable repair after a root opens. Park this identity before formal root20261387; roots87-94 remain unopened and no scientific verdict exists. A corrected attempt requires a fresh identity and roots.
+
+## 2026-08-04 — EXP-699 terminalizes as execution-interrupted partial evidence
+
+- Preserve calibration root `20261395` and formal root `20261396` without rerunning either.
+- Both teacher arms completed 4,800 updates and every primary denominator. Teacher-cosine
+  W128/W256 rollout exactness is 260/300 and 373/600; teacher-restarts is 257/300 and
+  342/600. Both pass the frozen W128 health rule.
+- The straight-through cosine arm reached authenticated update 1,200 only;
+  straight-through restarts and all frozen/reset/randomized/500-case diagnostics remained
+  unopened. Roots `20261397`-`20261403` remain unopened.
+- Record no factorial, diagnostic, winner, confirmation, independent, promotion, or rejection
+  verdict. The interruption exposed a lifecycle failure, so the next fresh identity changes
+  persistence and process lifecycle only while retaining the frozen scientific contract.

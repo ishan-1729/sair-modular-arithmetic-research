@@ -1146,3 +1146,18 @@ parked_exp698_backbone_factorial:
   run_record: experiments/runs/exp-698-h92-w256-backbone-factorial/run.json
   metrics: evals/results/exp-698-h92-w256-backbone-factorial/metrics.json
   limitations: [missing-frozen-reset-randomized-and-actual500-parity-diagnostics, post-root-executable-repair-forbidden, formal-and-later-roots-unopened, no-scientific-verdict]
+interrupted_exp699_backbone_factorial:
+  run_id: exp-699-h92-w256-backbone-factorial-complete
+  status: failed-execution-interrupted-partial
+  decision_authority: T112-preserve-consumed-root-evidence
+  roots: {calibration_20261395: completed-admitted, formal_20261396: interrupted-partial, confirmations_20261397_20261398: unopened, independent_20261399_20261403: unopened}
+  training_updates: {teacher_cosine: 4800, teacher_restarts: 4800, straight_through_cosine: 1200, straight_through_restarts: 0}
+  scientific_metrics: {teacher_cosine_w128_transition: 0.998, teacher_cosine_w128_rollout: 0.8666666666666667, teacher_cosine_w256_transition: 0.997, teacher_cosine_w256_rollout: 0.6216666666666667, teacher_restarts_w128_transition: 0.998, teacher_restarts_w128_rollout: 0.8566666666666667, teacher_restarts_w256_transition: 0.9963333333333333, teacher_restarts_w256_rollout: 0.57}
+  teacher_arms_healthy_w128: true
+  scientific_verdict: null
+  factorial_verdict: null
+  diagnostic_verdict: null
+  progress_sha256: 64545c3ce37696770e70b5bb7962808ffe9ede77163fa5dfb2cb44ee499b5b6e
+  run_record: experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json
+  metrics: evals/results/exp-699-h92-w256-backbone-factorial-complete/metrics.json
+  limitations: [execution-interrupted-not-scientifically-rejected, only-two-teacher-arms-complete, straight-through-cosine-update1200-only, straight-through-restarts-and-all-diagnostics-unopened, no-factorial-winner-confirmation-or-independent-claim]

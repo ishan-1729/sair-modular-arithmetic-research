@@ -1,0 +1,25 @@
+{
+  "schema_version": "exp699-partial-terminal-v1",
+  "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+  "created_at": "2026-08-04T00:00:00+05:30",
+  "checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "completion_marker": "partial-terminal-persisted",
+  "decision": "execution-interrupted-partial-no-scientific-verdict",
+  "evaluation": {
+    "transition": {
+      "teacher_cosine_w128": {"cases": 3000, "correct": 2994, "exact_accuracy": 0.998, "prediction_sha256": "431a0d5ada97c721c711f6189d9ecaf5296e2958abbac1250c3be172325f5dd3", "paired_vectors_sha256": "188d66b77af0d18b14c8b7227cddcef94835e899fd04d964b78c49d74ee6e890"},
+      "teacher_cosine_w256": {"cases": 3000, "correct": 2991, "exact_accuracy": 0.997, "prediction_sha256": "faca7de7fb17fdc428df3a8acc74fe142377dd7c599136fb92720cb30ff3d0e8", "paired_vectors_sha256": "56d15b10bcb82b3ba60b50fbcdb8120a8f097e40ea393cd728af4fec285f2ba8"},
+      "teacher_restarts_w128": {"cases": 3000, "correct": 2994, "exact_accuracy": 0.998, "prediction_sha256": "84c54f044d4bafdc9bb06604cda6e264bf7f0190da5ae5dcf8d28be82a298bc8", "paired_vectors_sha256": "8e9086d4f16a1ea71c7b0f2a79fad3312b962ef99ddfb8e0319603cfc37856c2"},
+      "teacher_restarts_w256": {"cases": 3000, "correct": 2989, "exact_accuracy": 0.9963333333333333, "prediction_sha256": "9659a6d3ce23f19a25f983ffd61b3ec86ae3c8e17905dadeaf3dbd66a2ba720c", "paired_vectors_sha256": "cbd1cf27f26079cb2c316ac6e586c3e137656ec6f8662e8886201b60fb2da06f"}
+    },
+    "rollout": {
+      "teacher_cosine_w128": {"cases": 300, "correct": 260, "exact_accuracy": 0.8666666666666667, "invalids": 2, "prediction_sha256": "ad3dbadb7b3624834167fd76583185891aeb4af41b9fdbcc4a14f5b83d39ad10", "paired_vectors_sha256": "e18c7d07ceaf2506047ac85fbca635cbf93873bd84a9e0e0a709d774b67ee5fc"},
+      "teacher_cosine_w256": {"cases": 600, "correct": 373, "exact_accuracy": 0.6216666666666667, "invalids": 6, "prediction_sha256": "c457f923e3e2bc04ceace3fcd3bbc1cf3ecd3041f9092ed53605eb8451307b84", "paired_vectors_sha256": "6f903320da9c0b538efec6e027b8581eb8f6cda8cfd1f8aeb49f0fc9254f3fd5"},
+      "teacher_restarts_w128": {"cases": 300, "correct": 257, "exact_accuracy": 0.8566666666666667, "invalids": 2, "prediction_sha256": "46ed43ba0287ffabfe0769799cb4a8f391f2097c40011df702a44e657be4a622", "paired_vectors_sha256": "85061d0faccba66efb20d344393ae7a69b4157cad3b4aa8f72e51159fecf615b"},
+      "teacher_restarts_w256": {"cases": 600, "correct": 342, "exact_accuracy": 0.57, "invalids": 6, "prediction_sha256": "b9f437e261378e78605a6e951b24e2d7c55d07ef3772cc225ca98b9989dfa6b9", "paired_vectors_sha256": "fa72cbd0b130b63a93b856f4254e627be3887e6c3e6eb41af5b9769cbf9db783"}
+    }
+  },
+  "controls": {"teacher_arms_complete": true, "teacher_arms_healthy_w128": true, "straight_through_cosine_completed": false, "straight_through_restarts_opened": false, "frozen_source_diagnostics_opened": false, "reset_to_source_diagnostics_opened": false, "randomized_weight_diagnostics_opened": false, "lower_tier_parity_opened": false, "factorial_comparison_valid": false},
+  "runtime": {"calibration_wall_seconds": 412.78453522199993, "teacher_cosine_training_wall_seconds": 9130.944144248002, "teacher_restarts_training_wall_seconds": 7176.872483672998, "peak_rss_bytes": 2646093824, "partial_artifact_bytes": 16490034},
+  "limitations": ["The interrupted result contains complete primary evidence for only two of four arms.", "The straight-through cosine checkpoint reached update 1200; its primary evaluations were never opened.", "No diagnostic denominator or lower-tier parity result exists.", "No factorial, winner, confirmation, independent-seed, checked, private, promotion, submission, or release conclusion is supported."]
+}
