@@ -156,6 +156,44 @@ def test_device_adapter_cpu_features_and_loss_match_frozen_source() -> None:
     assert actual_stats == expected_stats
 
 
+def test_rollout_cpu_matches_frozen_tensor_native_semantics() -> None:
+    class DeterministicModel(torch.nn.Module):
+        def __init__(self, width: int) -> None:
+            super().__init__()
+            self.width = width
+
+        def forward(self, features: torch.Tensor):
+            logits = (
+                0.61 * features[:, 0, :]
+                + 0.23 * features[:, 1, :]
+                - 0.17 * features[:, 2, :]
+                + 0.11 * features[:, 3, :]
+            )
+            return logits, torch.zeros((features.shape[0], 3))
+
+    width = 16
+    parent = source.base.load_exp300()
+    adapter = replay.DeviceExp300(
+        parent, torch.device("cpu"), replay.Deadline(30)
+    )
+    model = DeterministicModel(width)
+    left = [11, 173, 7]
+    right = [5, 91, 3]
+    modulus = [251, 257, 263]
+    prior_width = source.base.WIDTH
+    try:
+        source.base.WIDTH = width
+        expected = source.base.tensor_native_rollout(
+            model, left, right, modulus
+        )
+        actual = replay.rollout(adapter, model, left, right, modulus, width)
+    finally:
+        source.base.WIDTH = prior_width
+    assert actual[0] == expected[0]
+    assert torch.equal(actual[1], expected[1])
+    assert actual[2:] == expected[2:]
+
+
 def test_one_update_cpu_replay_is_byte_identical_to_frozen_route(
     tmp_path: Path,
 ) -> None:

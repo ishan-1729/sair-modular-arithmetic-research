@@ -1,0 +1,452 @@
+version: 2
+
+goal:
+  title: "CUDA-Portable Experiments"
+  slug: cuda-portable-experiments
+  kind: existing_plan
+  tranche: "Mechanically close scope, port performance-credible experiment families, package a reproducible cloud runtime, and require real GPU evidence before hardware validation."
+  status: active
+  oracle:
+    signal: "A generated inventory closes every reachable experiment and device hotspot; the committed branch passes locked fresh-environment and clean CPU regression gates; and a real GPU receipt covers every ported family before plug-and-play is claimed."
+    cadence: "after each Worker package and at final audit"
+    final_proof: "A final Judge maps the generated inventory, branch commit, single clean-clone regression run, locked bootstrap, provider billing controls, and real GPU acceptance receipt to the original request before full_outcome_complete: true."
+  intake:
+    original_request: "Create another branch where the relevant experiments part of the entire repo is ported to CUDA for plug-and-play cloud GPU use."
+    interpreted_outcome: "A separate branch is first delivered as cuda-prepared-hardware-unvalidated, then becomes plug-and-play only after the exact commit and locked environment pass a real GPU acceptance matrix."
+    input_shape: existing_plan
+    audience: "Repository owner renting a cloud GPU"
+    authority: requested
+    proof_type: test
+    completion_proof: "Mechanical scope closure, reproducible environment and CPU proof, billing-safe launch controls, plus real CUDA acceptance on the exact commit."
+    likely_misfire: "Adding a global CUDA flag or porting only EXP699 while leaving hidden CPU tensor construction and unsupported experiment families undiscovered."
+    blind_spots_considered:
+      - "Not every experiment benefits from CUDA; CPU-only orchestration and exact-label generation must remain classified rather than force-ported."
+      - "A machine without a GPU cannot prove physical CUDA execution, so the branch needs a fail-closed hardware acceptance command for the future VM."
+      - "Historical experiments have frozen hashes and provenance contracts that must not be silently invalidated."
+      - "The existing EXP699 replay has CPU parity but has never executed a CUDA step."
+      - "Per-position CPU transfers in recurrent loops may make the GPU path slower."
+      - "The existing bootstrap assumes uv and lacks a complete hashed transitive lock and driver/compute-capability gate."
+      - "Process timeouts do not terminate cloud billing, and scoped route time undercounts provider lifetime."
+      - "The prior repository validation was fragmented rather than one final clean-clone pass."
+    existing_plan_facts:
+      - "Create a new branch and isolated worktree."
+      - "Port the relevant experiments area, not immutable sources or external data."
+      - "Reuse the EXP699 CUDA replay lessons without modifying its consumed scientific root."
+      - "Provide exact requirements files and uv-based cloud bootstrap."
+      - "Do not launch long local experiments."
+      - "Do not call preparation plug-and-play; use cuda-prepared-hardware-unvalidated until real GPU acceptance passes."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  exact_human_approval_can_terminal_wait: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+
+agents:
+  scout: installed
+  worker: installed
+  judge: installed
+
+visual_board:
+  selected: local
+  local:
+    status: live
+    url: "http://goalbuddy.localhost:41737/cuda-portable-experiments/"
+    command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.2/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/cuda-portable-experiments"
+
+active_task: T004
+
+tasks:
+  - id: T001
+    type: scout
+    assignee: Scout
+    status: done
+    reasoning_hint: low
+    objective: "Generate an adversarially closed reachability and device-hotspot map, reconcile the branch base, and falsify the assumption that all experiment families should be GPU-ported."
+    inputs:
+      - experiments/
+      - configs/
+      - tests/
+      - pyproject.toml
+      - experiments/cloud_benchmarks/exp699_cuda_replay/
+    constraints:
+      - "Read-only."
+      - "Do not inspect immutable sources/ or data/external/ except to identify declared boundaries."
+      - "Classify device-agnostic, CUDA-ready, port-required, and intentionally CPU-only paths with concrete file evidence."
+      - "Start from every experiment run.py/model.py reachable from configs, registry, docs, tests, and committed CLI entry points; follow repository-local imports."
+      - "Inventory tensor factories, model/checkpoint construction, optimizer loads, .to, .cpu, .item, NumPy conversions, and recurrent transfer boundaries."
+      - "Record the existing EXP699 CUDA test gap, hot-loop transfers, incomplete dependency lock, scoped cost accounting, and fragmented validation as explicit evidence."
+      - "Do not run training or long evaluation."
+    expected_output:
+      - "Regenerable closed experiment/import/device-hotspot inventory schema and baseline"
+      - "Exact inclusion/exclusion and archived-code rules"
+      - "Device-assumption hotspots"
+      - "Performance-plausibility family grouping"
+      - "Branch-base and dirty-governance reconciliation"
+      - "Verification and smoke commands"
+      - "Recommended largest safe Worker packages"
+    receipt:
+      result: done
+      summary: "Closed baseline: 165 reachable modules, 74 tensor-factory files without explicit device boundaries, and 78 host-boundary files. c40dc7a is the authentic two-commit CUDA base, but current goal/runbook/governance bytes are uncommitted and require explicit reconciliation. Shared EXP220/EXP300 and EXP664 authorities are frozen, so adapters and performance-gated family tranches are required instead of rewriting historical runners."
+      evidence:
+        - notes/T001-cuda-scope-audit.md
+        - experiments/exp_220_width_independent_cellular/model.py
+        - experiments/exp_300_width64_bit_tensor_transfer/run.py
+        - experiments/exp_664_sprm_boundary_perturbation/run.py
+        - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+        - experiments/cloud_benchmarks/exp699_cuda_replay/bootstrap.sh
+        - experiments/registry.yaml
+      facts:
+        - "The c40dc7a worktree has 229 experiment Python files, 159 run/model roots, and 165 locally reachable modules."
+        - "The AST baseline found 158 PyTorch files, 122 tensor-factory files, 49 explicit-device files, 74 factory-without-device files, 78 host-boundary files, 107 checkpoint files, and 74 optimizer files."
+        - "c40dc7a is two commits ahead of root HEAD 07c9e1a and its EXP699 config/runner hashes exactly match the active untracked source."
+        - "EXP220 model and EXP664 runner are each imported by 24 later experiment modules."
+        - "The durable registry has 141 runs and no terminal EXP699 record."
+      contradictions:
+        - "No existing test executes a CUDA training or evaluation step."
+        - "The EXP699 rollout synchronizes through CPU inside every recurrent position."
+        - "The bootstrap assumes uv 0.11.28 and lacks a complete hashed transitive lock and hardware compatibility gate."
+        - "In-VM timeout and scoped route cost do not terminate or fully measure provider billing."
+        - "The prior final validation evidence is fragmented rather than one post-edit clean-clone full-suite pass."
+      ambiguity_requiring_judge:
+        - "Whether dirty user-owned AGENTS/program/runbook bytes remain external governing inputs or are explicitly included in the new branch."
+        - "Exact first representative adapter family and bounded allowed_files."
+        - "Which historical routes qualify as archived-frozen rather than active accelerator targets."
+      commands:
+        - "git status/worktree/ancestry snapshot"
+        - "SHA-256 comparison of active and committed EXP699 sources"
+        - "Python AST reachability and device-hotspot scan over c40dc7a experiments"
+        - "rg shared-import, CUDA, device, and provenance scans"
+        - "YAML registry status summary"
+      note_needed: true
+      note: notes/T001-cuda-scope-audit.md
+      harness: codex
+  - id: T002
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Adversarially review scope closure, choose the branch base and adapter architecture, and specify the first representative-family package without permitting false hardware-readiness claims."
+    inputs:
+      - "T001 receipt"
+      - "Existing codex/exp699-cuda-hardware-replay branch"
+      - "Active branch/worktree inventory"
+    constraints:
+      - "Read-only."
+      - "Reject force-porting CPU-only exact-label or orchestration code without a measured GPU benefit."
+      - "Protect frozen source hashes and dirty user worktrees."
+      - "Reject a scope rule that can hide difficult routes behind intentionally-cpu-only."
+      - "Reject mutation of frozen historical runners when a replay adapter can preserve provenance."
+    expected_output:
+      - "Branch base decision"
+      - "Shared CUDA runtime design"
+      - "Closed scope and intentional exclusions"
+      - "Readiness-state decision and hardware-validation boundary"
+      - "Representative families and hot-loop transfer acceptance criteria"
+      - "Exact T003 allowed_files, verify commands, and stop conditions"
+      - "Follow-on family packages"
+    receipt:
+      result: done
+      decision: approved
+      full_outcome_complete: false
+      rationale: "Approve c40dc7a as the only committed base containing authentic EXP698/EXP699 CUDA work. Preserve dirty governance bytes as external authoritative inputs; commit only the goal controls in T003. Use explicit adapters and a shared runtime, never global default-device state or frozen-source rewrites. The first package must make scope regeneration executable and turn EXP699 from a route with recurrent host synchronization into the cellular/EXP300 representative adapter while retaining exact CPU parity. Broader families remain gated on T005."
+      worker_package:
+        objective: "Create codex/cuda-portable-experiments from c40dc7a in an isolated worktree; commit the current goal control plane there; implement a deterministic closed CUDA inventory and shared explicit device/EXP300 adapter; refactor only the non-scientific EXP699 replay to use it and remove recurrent hot-loop host round-trips while preserving CPU golden behavior."
+        allowed_files:
+          - configs/cuda_portability.yaml
+          - docs/goals/cuda-portable-experiments/
+          - experiments/cuda_portability/
+          - experiments/cloud_benchmarks/exp699_cuda_replay/
+          - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+          - tests/test_cuda_portability_inventory.py
+          - tests/test_cuda_runtime.py
+          - tests/test_exp699_cuda_hardware_replay.py
+        verify:
+          - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m py_compile experiments/cuda_portability/*.py experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+          - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m experiments.cuda_portability.inventory --check"
+          - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_cuda_runtime.py tests/test_exp699_cuda_hardware_replay.py tests/test_exp_699_h92_w256_backbone_factorial_complete.py"
+          - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+          - "git diff --check"
+        stop_if:
+          - "The selected base would omit newer in-scope experiment work."
+          - "A needed file is outside Judge-approved allowed_files."
+          - "A frozen scientific identity would change without a separate hardware-replay adapter."
+          - "A recurrent hot loop retains unapproved .cpu, .item, NumPy, or host reconstruction boundaries."
+          - "The inventory can be closed by an unevidenced intentionally-cpu or archived classification."
+          - "Dirty root governance bytes would be staged or overwritten."
+          - "The no-GPU hardware smoke silently falls back to CPU."
+          - "Verification fails twice for the same cause."
+      evidence:
+        - docs/goals/cuda-portable-experiments/notes/T001-cuda-scope-audit.md
+        - "codex/exp699-cuda-hardware-replay@c40dc7a"
+        - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+        - experiments/exp_220_width_independent_cellular/model.py
+        - experiments/exp_300_width64_bit_tensor_transfer/run.py
+        - experiments/exp_664_sprm_boundary_perturbation/run.py
+      subgoal_contract: null
+      parallel_safety: "One write owner only. T003 creates and owns the isolated target worktree; no parallel Worker is safe until its branch and inventory manifest are durable."
+      blocked_tasks: []
+      missing_evidence:
+        - "No physical CUDA execution receipt exists; readiness must remain hardware-unvalidated."
+        - "Graph/PyG and independent recurrent families are not authorized in T003."
+      required_board_updates:
+        - "T003 scope and verification populated before activation."
+        - "T004 should add bounded graph/PyG plus one independent recurrent representative only after T003 passes."
+        - "T005 must reject expansion if host transfers remain in measured recurrent loops or inventory closure is gameable."
+        - "Dirty AGENTS/program/runbook files are governing inputs but not implicitly authorized branch content."
+      harness: codex
+  - id: T003
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: medium
+    objective: "Create codex/cuda-portable-experiments from c40dc7a in an isolated worktree; commit the current goal control plane there; implement a deterministic closed CUDA inventory and shared explicit device/EXP300 adapter; refactor only the non-scientific EXP699 replay to use it and remove recurrent hot-loop host round-trips while preserving CPU golden behavior."
+    allowed_files:
+      - configs/cuda_portability.yaml
+      - docs/goals/cuda-portable-experiments/
+      - experiments/cuda_portability/
+      - experiments/cloud_benchmarks/exp699_cuda_replay/
+      - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+      - tests/test_cuda_portability_inventory.py
+      - tests/test_cuda_runtime.py
+      - tests/test_exp699_cuda_hardware_replay.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m py_compile experiments/cuda_portability/*.py experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m experiments.cuda_portability.inventory --check"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_cuda_runtime.py tests/test_exp699_cuda_hardware_replay.py tests/test_exp_699_h92_w256_backbone_factorial_complete.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check"
+    stop_if:
+      - "The selected base would omit newer in-scope experiment work."
+      - "A needed file is outside Judge-approved allowed_files."
+      - "A frozen scientific identity would change without a separate hardware-replay adapter."
+      - "The Worker task is activated before Judge populates non-empty allowed_files and verify commands."
+      - "A recurrent hot loop retains unapproved .cpu, .item, NumPy, or host reconstruction boundaries."
+      - "The inventory can be closed by an unevidenced intentionally-cpu or archived classification."
+      - "The Worker would stage or overwrite dirty root AGENTS/program/runbook bytes instead of preserving them as external governing inputs."
+      - "The no-GPU hardware smoke silently falls back to CPU instead of failing closed."
+      - "Verification fails twice for the same cause."
+    receipt:
+      result: done
+      changed_files:
+        - configs/cuda_portability.yaml
+        - docs/goals/cuda-portable-experiments/
+        - experiments/cuda_portability/
+        - experiments/cloud_benchmarks/exp699_cuda_replay/
+        - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+        - tests/test_cuda_portability_inventory.py
+        - tests/test_cuda_runtime.py
+        - tests/test_exp699_cuda_hardware_replay.py
+      commands:
+        - cmd: "python -m py_compile experiments/cuda_portability/*.py experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+          status: pass
+          evidence: "All new runtime/inventory modules and the refactored replay compiled."
+        - cmd: "python -m experiments.cuda_portability.inventory --check"
+          status: pass
+          evidence: "Closed deterministic manifest: 233 Python modules, 164 run/model roots, recurrent hot-loop audit passed."
+        - cmd: "python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_cuda_runtime.py tests/test_exp699_cuda_hardware_replay.py tests/test_exp_699_h92_w256_backbone_factorial_complete.py"
+          status: pass
+          evidence: "35 passed in 58.69s after pinned submodule initialization."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "236 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1."
+        - cmd: "git diff --check"
+          status: pass
+          evidence: "No whitespace errors."
+      summary: "Created the isolated branch from c40dc7a; closed a deterministic 233-module/164-root inventory with per-file evidence; added explicit deterministic CPU/CUDA runtime and EXP300 adapter; refactored only the non-scientific EXP699 replay so recurrent training/rollout loops have zero host/device transfer calls. CPU golden and focused frozen-route gates pass 35/35; frozen EXP699 config/runner hashes remain exact. Readiness remains cuda-inventory-open."
+      deviations:
+        - "The required Worker produced no visible change in its recovery window, so the PM completed the same approved package."
+        - "Two early shell invocations used an accidentally short tool timeout; the identical commands passed with correct timeouts."
+        - "The isolated worktree submodule was initially uninitialized; initialization restored pinned commit 82510bba00a1 before rerunning tests."
+        - "The repository-wide suite is not clean-clone green because ignored historical fixtures are not reproducibly restored yet: the clean-worktree accounting was 705 passed, 350 failed, 17 errors; a temporary fixture-assisted diagnostic improved to 1054 passed and 18 historical-fixture failures. Neither result satisfies T009."
+      remaining_blockers:
+        - "174 torch-referencing modules remain adapter-required."
+        - "Graph/PyG and independent recurrent representatives remain for T004."
+        - "A transitive hashed CUDA lock, driver preflight, provider controller, and clean-clone fixture restoration remain incomplete."
+        - "No physical CUDA execution receipt exists."
+      verification_attempts: 4
+      stopped_because: null
+  - id: T004
+    type: worker
+    assignee: Worker
+    status: active
+    reasoning_hint: medium
+    objective: "Add explicit adapters for the EXP510 graph/PyG family and the independent EXP654 neural-RAM recurrent family without modifying frozen source; prove CPU semantic parity, checkpoint/device placement, batched graph movement, and zero host/device transfers inside representative recurrent model loops."
+    allowed_files:
+      - configs/cuda_portability.yaml
+      - docs/goals/cuda-portable-experiments/
+      - experiments/cuda_portability/
+      - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+      - tests/test_cuda_graph_adapter.py
+      - tests/test_cuda_recurrent_adapter.py
+      - tests/test_cuda_portability_inventory.py
+      - tests/test_cuda_runtime.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m py_compile experiments/cuda_portability/*.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m experiments.cuda_portability.inventory --write && python -m experiments.cuda_portability.inventory --check"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q tests/test_cuda_graph_adapter.py tests/test_cuda_recurrent_adapter.py tests/test_cuda_portability_inventory.py tests/test_cuda_runtime.py tests/test_exp_510_graph_net_division.py tests/test_exp_654_neural_ram_executor.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check"
+    stop_if:
+      - "The Worker task is activated before Judge populates non-empty allowed_files and verify commands."
+      - "A route requires changing immutable sources or consumed evidence."
+      - "The port merely moves tensors to CUDA while retaining recurrent host synchronization."
+      - "CPU parity fails twice for the same cause."
+      - "The graph adapter hard-codes a device instead of deriving it from the model/runtime selection."
+      - "The recurrent representative retains .cpu, .item, NumPy, .tolist, or .to calls inside its measured model loop."
+      - "The package edits frozen EXP510 or EXP654 source instead of adapting it."
+    receipt: null
+  - id: T005
+    type: judge
+    assignee: Judge
+    status: queued
+    reasoning_hint: high
+    objective: "Review representative-family correctness and acceleration plausibility before authorizing any broader migration."
+    inputs:
+      - "T001-T004 receipts"
+      - "Generated inventory diff"
+      - "CPU parity and transfer-audit evidence"
+    constraints:
+      - "Read-only."
+      - "Reject expansion if the representative routes still synchronize through the host in measured hot loops."
+      - "Reject expansion if frozen identities, CPU behavior, or clean environment setup are not preserved."
+    expected_output:
+      - "expand | revise | stop-porting-family"
+      - "Exact bounded T006 allowed_files and verify commands"
+      - "Deferred intentionally CPU-only families with evidence"
+    receipt: null
+  - id: T006
+    type: worker
+    assignee: Worker
+    status: queued
+    reasoning_hint: medium
+    objective: "Port the remaining Judge-approved performance-credible families and close the generated reachability/device inventory without mutating frozen historical routes unnecessarily."
+    allowed_files: []
+    verify: []
+    stop_if:
+      - "The Worker task is activated before Judge populates non-empty allowed_files and verify commands."
+      - "Inventory regeneration exposes an unclassified or stale reachable row."
+      - "A family lacks representative parity or transfer-structure evidence."
+      - "A frozen route would be modified rather than adapted."
+    receipt: null
+  - id: T007
+    type: worker
+    assignee: Worker
+    status: queued
+    reasoning_hint: medium
+    objective: "Deliver a self-bootstrapping, fully locked and hashed uv CUDA environment with explicit package indexes, versioned accelerator profiles, driver/compute-capability preflight, deterministic receipts, executable launchers, and a fail-closed cross-family hardware acceptance command."
+    allowed_files: []
+    verify: []
+    stop_if:
+      - "The Worker task is activated before Judge populates non-empty allowed_files and verify commands."
+      - "The bootstrap assumes uv, a compatible driver, or a supported GPU instead of verifying/installing prerequisites."
+      - "The lock omits transitive dependencies or artifact hashes."
+      - "CUDA-required execution can silently fall back to CPU."
+    receipt: null
+  - id: T008
+    type: worker
+    assignee: Worker
+    status: queued
+    reasoning_hint: medium
+    objective: "Add an external provider-control package for RunPod/Vast-style execution that enforces budget admission, keeps credentials outside experiment code, destroys resources in a finally path, and records provider-billed lifetime separately from scoped experiment time."
+    allowed_files: []
+    verify: []
+    stop_if:
+      - "The Worker task is activated before Judge populates non-empty allowed_files and verify commands."
+      - "Provider credentials would be copied into the experiment VM or committed."
+      - "A process timeout is presented as sufficient provider termination."
+      - "A destructive provider call lacks an explicit dry-run/mock verification path."
+    receipt: null
+  - id: T009
+    type: pm
+    assignee: PM
+    status: queued
+    reasoning_hint: high
+    objective: "From a clean clone/worktree and after the final source edit, run the generated inventory check, focused parity/smoke gates, project validation, and one complete pytest pass; review and commit locally as cuda-prepared-hardware-unvalidated without pushing."
+    inputs:
+      - "T003-T008 receipts"
+      - "Closed readiness inventory"
+      - "CUDA smoke manifest"
+    constraints:
+      - "No long experiment reruns."
+      - "No paid cloud launch."
+      - "Do not stage ignored checkpoints, fixtures, credentials, or unrelated user changes."
+      - "Targeted reruns cannot substitute for the final single clean-clone pytest pass."
+    expected_output:
+      - "Focused parity/smoke results"
+      - "Project validation result"
+      - "Repository-wide test accounting"
+      - "Fresh bootstrap/lock verification"
+      - "Readiness state: cuda-prepared-hardware-unvalidated"
+      - "Committed branch and commit id"
+    receipt: null
+  - id: T010
+    type: pm
+    assignee: PM
+    status: queued
+    reasoning_hint: high
+    objective: "After explicit user authorization and GPU access, run one externally controlled, budget-capped real-GPU acceptance matrix on the exact committed branch and locked environment, then persist semantic, performance, GPU-resource, and provider-billing receipts."
+    inputs:
+      - "T009 committed branch receipt"
+      - "Explicit user cloud-launch authorization"
+      - "Selected provider offer and hard budget"
+    constraints:
+      - "Do not launch, rent, purchase, or transmit provider credentials without explicit authorization."
+      - "Use the external destruction controller; never rely only on the in-VM timeout."
+      - "Run bounded smoke/acceptance routes, not a full historical 44-hour experiment, unless separately authorized."
+      - "If authorization or GPU access is absent, set the board to the exact blocked approval-wait shape and preserve cuda-prepared-hardware-unvalidated."
+    expected_output:
+      - "Real CUDA execution receipt for every ported family"
+      - "Semantic parity and failure details"
+      - "Transfer, wall-time, GPU-memory, and utilization evidence"
+      - "Provider-billed lifetime and final destruction receipt"
+      - "cuda-hardware-validated | remain-hardware-unvalidated"
+    receipt: null
+  - id: T999
+    type: judge
+    assignee: Judge
+    status: queued
+    reasoning_hint: high
+    objective: "Audit both milestones: whether the local branch is honestly CUDA-prepared and whether real hardware evidence is sufficient for the stronger plug-and-play claim."
+    inputs:
+      - "All completed task receipts"
+      - "Final branch diff and commit"
+      - "Closed readiness inventory and smoke matrix"
+      - "Final verification evidence"
+      - "T010 real-GPU and provider-destruction receipt"
+    constraints:
+      - "Read-only."
+      - "Reject completion if any relevant experiment entry point is unclassified."
+      - "Reject completion if plug-and-play still requires undocumented source edits on the VM."
+      - "Allow branch_preparation_complete: true without a paid run, but require full_outcome_complete: false and cuda-prepared-hardware-unvalidated until T010 passes."
+      - "Reject hardware validation if provider-billed lifetime or destruction proof is absent."
+    expected_output:
+      - "complete | not_complete"
+      - "full_outcome_complete: true | false"
+      - "branch_preparation_complete: true | false"
+      - "readiness_state"
+      - "Oracle-to-receipt mapping"
+      - "Missing evidence or exact next task"
+    receipt: null
+
+checks:
+  dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
+  last_verification:
+    result: unknown
+    task: null
+    commands: []

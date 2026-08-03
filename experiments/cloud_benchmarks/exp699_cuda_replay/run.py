@@ -12,7 +12,6 @@ import argparse
 import copy
 import hashlib
 import json
-import math
 import os
 import platform
 import random
@@ -32,7 +31,6 @@ import psutil
 import safetensors
 import sympy
 import torch
-import torch.nn.functional as F
 import yaml
 from safetensors.torch import load_file, save_file
 
@@ -47,6 +45,15 @@ REQUIREMENTS = {
 sys.path.insert(0, str(ROOT))
 
 from experiments.exp_699_h92_w256_backbone_factorial_complete import run as source  # noqa: E402
+from experiments.cuda_portability.exp300 import (  # noqa: E402
+    DeviceExp300,
+    unsigned_bits_ge,
+)
+from experiments.cuda_portability.runtime import (  # noqa: E402
+    configure_determinism,
+    resolve_device,
+    synchronize,
+)
 
 WIDTHS = (128, 256)
 ARM = "teacher_cosine"
@@ -104,41 +111,12 @@ class Deadline:
         return max(0.0, self.seconds - (time.monotonic() - self.started))
 
 
-def resolve_device(requested: str) -> torch.device:
-    if requested == "auto":
-        requested = "cuda" if torch.cuda.is_available() else "cpu"
-    device = torch.device(requested)
-    if device.type == "cuda":
-        if not torch.cuda.is_available():
-            raise RuntimeError("CUDA replay requested but torch.cuda.is_available() is false")
-        index = torch.cuda.current_device() if device.index is None else device.index
-        if index < 0 or index >= torch.cuda.device_count():
-            raise RuntimeError(f"CUDA device index {index} is unavailable")
-        device = torch.device("cuda", index)
-    if device.type not in {"cpu", "cuda"}:
-        raise ValueError(f"unsupported replay device: {device}")
-    return device
-
-
-def synchronize(device: torch.device) -> None:
-    if device.type == "cuda":
-        torch.cuda.synchronize(device)
-
-
 def configure_torch(config: dict[str, Any], device: torch.device) -> None:
-    torch.set_num_threads(int(config["replay"]["torch_threads"]))
-    try:
-        torch.set_num_interop_threads(1)
-    except RuntimeError:
-        pass
-    torch.use_deterministic_algorithms(True)
-    torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.allow_tf32 = False
-    torch.backends.cuda.matmul.allow_tf32 = False
-    if device.type == "cuda":
-        torch.cuda.set_device(device)
-        torch.cuda.manual_seed_all(int(config["source"]["formal_root"]) + 698)
+    configure_determinism(
+        device=device,
+        seed=int(config["source"]["formal_root"]) + 698,
+        torch_threads=int(config["replay"]["torch_threads"]),
+    )
 
 
 class DeviceTimer:
@@ -160,121 +138,6 @@ class DeviceTimer:
         return result
 
 
-class DeviceExp300:
-    """Device-aware adapter around the exact EXP300 sampler and tensor semantics."""
-
-    def __init__(self, parent: Any, device: torch.device, deadline: Deadline) -> None:
-        self.parent = parent
-        self.device = device
-        self.deadline = deadline
-        self.BigIntSampler = parent.BigIntSampler
-
-    def bits(self, values: list[int], width: int) -> torch.Tensor:
-        return self.parent.bits(values, width).to(self.device)
-
-    def features(
-        self,
-        state: list[int],
-        multiplicand: list[int],
-        modulus: list[int],
-        input_bit: list[int],
-        width: int,
-    ) -> torch.Tensor:
-        return self.parent.features(
-            state, multiplicand, modulus, input_bit, width
-        ).to(self.device)
-
-    def transition_loss(
-        self,
-        logits: torch.Tensor,
-        quotient_logits: torch.Tensor,
-        targets: list[int],
-        quotients: torch.Tensor,
-        width: int,
-        worst_weight: float,
-        quotient_weight: float,
-    ) -> tuple[torch.Tensor, dict[str, float]]:
-        target = self.bits(targets, width)
-        quotients = quotients.to(self.device)
-        per_bit = F.binary_cross_entropy_with_logits(
-            logits, target, reduction="none"
-        )
-        mean = per_bit.mean()
-        worst = per_bit.mean(0).max()
-        quotient = F.cross_entropy(quotient_logits, quotients)
-        loss = mean + worst_weight * worst + quotient_weight * quotient
-        exact = (logits.ge(0) == target.bool()).all(1).float().mean()
-        return loss, {
-            "loss": float(loss.detach()),
-            "batch_exact": float(exact),
-            "mean_bce": float(mean.detach()),
-            "worst_bit_bce": float(worst.detach()),
-            "quotient_ce": float(quotient.detach()),
-        }
-
-    @torch.inference_mode()
-    def evaluate_transitions(self, model: Any, sampler: Any, cases: int) -> dict:
-        seen = correct = valid = 0
-        while seen < cases:
-            self.deadline.check("transition-evaluation")
-            size = min(512, cases - seen)
-            state, multiplicand, modulus, input_bit, target, _ = sampler.transitions(
-                size
-            )
-            logits, _ = model(
-                self.features(state, multiplicand, modulus, input_bit, model.width)
-            )
-            predicted = logits.ge(0)
-            target_tensor = self.bits(target, model.width).bool()
-            correct += int((predicted == target_tensor).all(1).sum().item())
-            rows = predicted.cpu().tolist()
-            predicted_values = [
-                sum(int(row[position]) << position for position in range(model.width))
-                for row in rows
-            ]
-            valid += sum(
-                value < prime
-                for value, prime in zip(predicted_values, modulus, strict=True)
-            )
-            seen += size
-        return {
-            "cases": seen,
-            "correct": correct,
-            "exact_accuracy": correct / seen,
-            "valid_residue_rate": valid / seen,
-        }
-
-
-def soft_features(
-    adapter: DeviceExp300,
-    state_plane: torch.Tensor,
-    multiplicand: list[int],
-    modulus: list[int],
-    input_bit: list[int],
-    width: int,
-) -> torch.Tensor:
-    batch = len(multiplicand)
-    device = state_plane.device
-    bit_plane = torch.tensor(
-        input_bit, dtype=torch.float32, device=device
-    )[:, None].expand(batch, width)
-    lsb = torch.zeros(batch, width, device=device)
-    msb = torch.zeros(batch, width, device=device)
-    lsb[:, 0] = 1.0
-    msb[:, -1] = 1.0
-    return torch.stack(
-        (
-            state_plane,
-            adapter.bits(multiplicand, width),
-            adapter.bits(modulus, width),
-            bit_plane,
-            lsb,
-            msb,
-        ),
-        dim=1,
-    ).mul(2.0).sub(1.0)
-
-
 def train_update(
     config: dict[str, Any],
     adapter: DeviceExp300,
@@ -291,54 +154,39 @@ def train_update(
     prior_width = source.base.WIDTH
     source.base.WIDTH = width
     try:
-        teacher = source.base.teacher_prefix(left, right, modulus, starts)
-        state_plane = adapter.bits(teacher, width)
+        prepared = adapter.prepare_training_batch(
+            parent_base=source.base,
+            left=left,
+            right=right,
+            modulus=modulus,
+            starts=starts,
+            width=width,
+            horizon=horizon,
+        )
+        state_plane = prepared.teacher_features[0, :, 0, :].add(1.0).div(2.0)
         losses: list[torch.Tensor] = []
-        exact: list[float] = []
+        exact: list[torch.Tensor] = []
         optimizer.zero_grad(set_to_none=True)
         model.width = width
         for offset in range(horizon):
-            flags = [
-                (value >> (width - 1 - start - offset)) & 1
-                for value, start in zip(left, starts, strict=True)
-            ]
-            raw = [
-                2 * state + flag * other
-                for state, flag, other in zip(teacher, flags, right, strict=True)
-            ]
-            target = [
-                value % prime for value, prime in zip(raw, modulus, strict=True)
-            ]
-            quotient = torch.tensor(
-                [
-                    value // prime
-                    for value, prime in zip(raw, modulus, strict=True)
-                ],
-                dtype=torch.long,
-                device=adapter.device,
-            )
             if arm == "teacher_forced":
-                input_features = adapter.features(
-                    teacher, right, modulus, flags, width
-                )
+                input_features = prepared.teacher_features[offset]
             else:
-                input_features = soft_features(
-                    adapter, state_plane, right, modulus, flags, width
+                input_features = adapter.recurrent_features(
+                    state_plane, prepared.recurrent_static[offset]
                 )
             logits, quotient_logits = model(input_features)
-            loss, stats = adapter.transition_loss(
+            loss, stats = adapter.transition_loss_tensors(
                 logits,
                 quotient_logits,
-                target,
-                quotient,
-                width,
+                prepared.target_bits[offset],
+                prepared.quotients[offset],
                 float(config["training"]["worst_bit_weight"]),
                 float(config["training"]["quotient_weight"]),
             )
             losses.append(loss)
-            exact.append(float(stats["batch_exact"]))
+            exact.append(stats["batch_exact"])
             state_plane = source.base.hard_straight_through(logits)
-            teacher = target
         objective = torch.stack(losses).mean()
         objective.backward()
         gradient = float(
@@ -350,7 +198,7 @@ def train_update(
         return {
             "loss": float(objective.detach()),
             "gradient_norm": gradient,
-            "mean_exact": float(np.mean(exact)),
+            "mean_exact": float(np.mean(torch.stack(exact).cpu().tolist())),
         }
     finally:
         source.base.WIDTH = prior_width
@@ -366,12 +214,25 @@ def rollout(
     width: int,
 ) -> tuple[list[int], torch.Tensor, list[int | None], list[bool]]:
     batch = len(left)
-    left_bits = adapter.bits(left, width)
+    left_bits = adapter.bits(left, width).bool()
+    modulus_bits = adapter.bits(modulus, width).bool()
+    teacher = [0] * batch
+    teacher_steps: list[int] = []
+    for position in range(width):
+        flags = [(value >> (width - 1 - position)) & 1 for value in left]
+        teacher = [
+            (2 * value + flag * other) % prime
+            for value, flag, other, prime in zip(
+                teacher, flags, right, modulus, strict=True
+            )
+        ]
+        teacher_steps.extend(teacher)
+    teacher_bits = adapter.bits(teacher_steps, width).view(width, batch, width).bool()
     invariant = torch.empty(
         (batch, 6, width), dtype=torch.float32, device=adapter.device
     )
     invariant[:, 1, :] = adapter.bits(right, width).mul(2).sub(1)
-    invariant[:, 2, :] = adapter.bits(modulus, width).mul(2).sub(1)
+    invariant[:, 2, :] = modulus_bits.float().mul(2).sub(1)
     invariant[:, 4, :].fill_(-1)
     invariant[:, 4, 0] = 1
     invariant[:, 5, :].fill_(-1)
@@ -379,36 +240,37 @@ def rollout(
     state_bits = torch.zeros(
         (batch, width), dtype=torch.bool, device=adapter.device
     )
-    teacher = [0] * batch
-    margins = torch.full((batch,), math.inf)
-    first_error: list[int | None] = [None] * batch
-    invalid = [False] * batch
+    margins = torch.full((batch,), float("inf"), device=adapter.device)
+    first_error = torch.full(
+        (batch,), -1, dtype=torch.long, device=adapter.device
+    )
+    invalid = torch.zeros(batch, dtype=torch.bool, device=adapter.device)
     model.width = width
     for position in range(width):
         adapter.deadline.check(f"rollout-w{width}-position-{position}")
         invariant[:, 0, :] = state_bits.float().mul(2).sub(1)
-        invariant[:, 3, :] = left_bits[:, width - 1 - position, None].mul(2).sub(1)
+        invariant[:, 3, :] = (
+            left_bits[:, width - 1 - position, None].float().mul(2).sub(1)
+        )
         logits, _ = model(invariant)
         state_bits = logits.ge(0)
-        state = source.base.decode_boolean(state_bits.cpu())
-        flags = [
-            int(value)
-            for value in left_bits[:, width - 1 - position].cpu().tolist()
-        ]
-        teacher = [
-            (2 * value + flag * other) % prime
-            for value, flag, other, prime in zip(
-                teacher, flags, right, modulus, strict=True
-            )
-        ]
-        margins = torch.minimum(margins, logits.abs().amin(dim=1).cpu())
-        for row, (guess, truth, prime) in enumerate(
-            zip(state, teacher, modulus, strict=True)
-        ):
-            if guess != truth and first_error[row] is None:
-                first_error[row] = position
-            invalid[row] = invalid[row] or guess >= prime
-    return source.base.decode_boolean(state_bits.cpu()), margins, first_error, invalid
+        mismatch = state_bits.ne(teacher_bits[position]).any(dim=1)
+        first_error = torch.where(
+            first_error.lt(0) & mismatch,
+            torch.full_like(first_error, position),
+            first_error,
+        )
+        invalid |= unsigned_bits_ge(state_bits, modulus_bits)
+        margins = torch.minimum(margins, logits.abs().amin(dim=1))
+
+    prediction = source.base.decode_boolean(state_bits.cpu())
+    first_values = first_error.cpu().tolist()
+    return (
+        prediction,
+        margins.cpu(),
+        [None if value < 0 else int(value) for value in first_values],
+        [bool(value) for value in invalid.cpu().tolist()],
+    )
 
 
 def interval(config: dict[str, Any], correct: int, cases: int) -> dict[str, float]:

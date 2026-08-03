@@ -1,0 +1,24 @@
+schema_version: cuda-portability-config-v1
+readiness: cuda-inventory-open
+scan:
+  roots:
+    - experiments/**/run.py
+    - experiments/**/model.py
+  include:
+    - experiments/**/*.py
+  exclude:
+    - experiments/**/__pycache__/**
+  manifest: experiments/cuda_portability/inventory.json
+ported_paths:
+  - experiments/cuda_portability/__init__.py
+  - experiments/cuda_portability/exp300.py
+  - experiments/cuda_portability/inventory.py
+  - experiments/cuda_portability/runtime.py
+  - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+recurrent_hot_loops:
+  - path: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+    functions: [train_update, rollout]
+    forbidden_calls: [cpu, cuda, item, numpy, to, tolist]
+classification_policy:
+  no_torch_reason: "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately."
+  frozen_reason: "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it."
