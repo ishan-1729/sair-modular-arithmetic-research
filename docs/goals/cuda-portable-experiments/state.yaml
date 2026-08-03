@@ -5,7 +5,7 @@ goal:
   slug: cuda-portable-experiments
   kind: existing_plan
   tranche: "Mechanically close scope, port performance-credible experiment families, package a reproducible cloud runtime, and require real GPU evidence before hardware validation."
-  status: active
+  status: blocked
   oracle:
     signal: "A generated inventory closes every reachable experiment and device hotspot; the committed branch passes locked fresh-environment and clean CPU regression gates; and a real GPU receipt covers every ported family before plug-and-play is claimed."
     cadence: "after each Worker package and at final audit"
@@ -69,7 +69,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/cuda-portable-experiments/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.2/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/cuda-portable-experiments"
 
-active_task: T009
+active_task: null
 
 tasks:
   - id: T001
@@ -875,7 +875,7 @@ tasks:
   - id: T009
     type: pm
     assignee: PM
-    status: active
+    status: done
     reasoning_hint: high
     objective: "From a clean clone/worktree and after the final source edit, run the generated inventory check, focused parity/smoke gates, project validation, and one complete pytest pass; review and commit locally as cuda-prepared-hardware-unvalidated without pushing."
     inputs:
@@ -894,11 +894,106 @@ tasks:
       - "Fresh bootstrap/lock verification"
       - "Readiness state: cuda-prepared-hardware-unvalidated"
       - "Committed branch and commit id"
-    receipt: null
+    receipt:
+      result: done
+      changed_files:
+        - configs/cuda_portability.yaml
+        - configs/cuda_provider_control.yaml
+        - docs/goals/cuda-portable-experiments/
+        - environments/cuda/
+        - environments/providers/
+        - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+        - experiments/cuda_portability/
+        - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+        - "tests/test_cuda_*.py"
+        - tests/test_exp699_cuda_hardware_replay.py
+        - tests/test_external_test_fixture_restore.py
+        - tools/restore_external_test_fixtures.py
+      commands:
+        - cmd: "python -m experiments.cuda_portability.inventory --write && python -m experiments.cuda_portability.inventory --check"
+          status: pass
+          evidence: "Closed inventory: 236 Python files, 164 roots, zero adapter-required rows; tree SHA-256 8034dbc82565cb5f8d9a8cd4ff9e7daf855fe3783db2255a1ad41aa0ff4e3c22."
+        - cmd: "python environments/cuda/verify_environment.py --offline"
+          status: pass
+          evidence: "Both 124-package hashed locks and pinned uv 0.11.28 installer identity verified offline."
+        - cmd: "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py tests/test_exp_671_fixed_point_damping_halting.py::test_split_separation_and_formal_root_locks tests/test_cuda_portability_inventory.py tests/test_cuda_runtime.py tests/test_cuda_graph_adapter.py tests/test_cuda_recurrent_adapter.py tests/test_cuda_bootstrap.py tests/test_cuda_provider_control.py tests/test_external_test_fixture_restore.py"
+          status: pass
+          evidence: "45 passed in 81.11s, including the formerly contaminating EXP699-to-EXP671 order."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "236 OKF concepts, 1100 benchmark records, pinned upstream 82510bba00a1."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "1098 passed and exactly 4 authorization-gated CUDA hardware tests skipped in 869.81s."
+        - cmd: "git diff --check && git diff --cached --check"
+          status: pass
+          evidence: "No whitespace errors before staging or in the staged patch."
+        - cmd: "git commit -m 'Prepare CUDA-portable experiment runtime'"
+          status: pass
+          evidence: "Local branch commit f0d217b016a433606d09fdecdc5ba2120e2a9f24; branch was not pushed."
+      summary: "Committed codex/cuda-portable-experiments at f0d217b016a433606d09fdecdc5ba2120e2a9f24 with readiness cuda-prepared-hardware-unvalidated. The closed inventory, representative CUDA adapters, two hashed CUDA environment profiles, fail-closed hardware acceptance, external RunPod/Vast billing controller, documented clean-worktree fixture restoration, focused gates, project validator, and one complete regression pass are green. Dry-run and unit-test torch global-state contamination was removed without editing frozen scientific runners."
+      deviations:
+        - "A first complete pass produced 1097 passes, 4 expected hardware skips, and one EXP671 failure because EXP699 dry-run/parity tests mutated PyTorch's one-shot inter-op thread setting. EXP699 dry-run is now side-effect-free and the faithful one-update setup runs in a child process; the final complete pass is green."
+        - "The Git checkout alone cannot contain ignored historical research evidence. The documented restorer verified 87 external read-only fixture links and materialized 540 files across five integrity-sensitive roots from existing local evidence before the final pass."
+        - "No branch push was requested or performed."
+      remaining_blockers:
+        - "No real NVIDIA GPU has executed the four-case acceptance matrix, so no CUDA kernel, VRAM, utilization, or speedup claim is proven."
+        - "No provider request, invoice, or live deletion receipt exists, and paid GPU launch has not been explicitly authorized with the required phrase."
+        - "The stronger plug-and-play goal remains incomplete until T010 and the final Judge audit pass."
+      verification_attempts: 2
+      stopped_because: null
+  - id: T015
+    type: judge
+    assignee: Judge
+    status: done
+    reasoning_hint: high
+    objective: "Audit whether commit f0d217b016a433606d09fdecdc5ba2120e2a9f24 honestly satisfies the local cuda-prepared-hardware-unvalidated milestone, including scope closure, frozen-source preservation, dependency locks, provider controls, fixture-assisted clean-worktree proof, and the complete regression accounting."
+    inputs:
+      - "T003-T009 receipts"
+      - "Commit f0d217b016a433606d09fdecdc5ba2120e2a9f24"
+      - "Closed inventory and final test accounting"
+      - "Original goal oracle and adversarial risks"
+    constraints:
+      - "Read-only; do not modify the branch or board."
+      - "Do not treat skipped real-GPU tests as hardware validation."
+      - "Reject the local milestone if frozen scientific source changed, ignored fixtures were staged, the dependency locks are incomplete, or provider safety is only documented rather than tested."
+      - "Set full_outcome_complete false because T010 real-GPU evidence remains authorization-gated."
+    expected_output:
+      - "Approved or rejected local milestone"
+      - "Evidence-to-oracle mapping"
+      - "Residual risks and exact next task"
+      - "full_outcome_complete: false"
+    receipt:
+      result: done
+      decision: approved-local-milestone
+      full_outcome_complete: false
+      rationale: "Commit f0d217b016a433606d09fdecdc5ba2120e2a9f24 honestly satisfies cuda-prepared-hardware-unvalidated, not plug-and-play or hardware validation. The generated inventory is closed at 236 files/164 roots with zero adapter-required rows; frozen EXP401/EXP510/EXP654/EXP649/EXP220 and registry paths are unchanged; cu121/cu124 locks are complete, hashed, and offline-verified; provider lifecycle tests use fake transports; the fixture dependency is explicit and excluded from Git; and the final repository pass is 1098 passed with only the four authorization-gated hardware cases skipped."
+      evidence:
+        - "codex/cuda-portable-experiments@f0d217b016a433606d09fdecdc5ba2120e2a9f24"
+        - experiments/cuda_portability/inventory.json
+        - environments/cuda/profiles.yaml
+        - environments/cuda/requirements-cu121.txt
+        - environments/cuda/requirements-cu124.txt
+        - environments/providers/controller.py
+        - tests/test_cuda_hardware_acceptance.py
+        - tools/restore_external_test_fixtures.py
+        - .scratch/goalbuddy/T009-receipt.json
+      missing_evidence:
+        - "No supported NVIDIA GPU has executed the acceptance matrix."
+        - "No observed CUDA kernel compatibility, peak VRAM, utilization, semantic parity receipt, or speedup measurement exists."
+        - "No live provider creation, actual-rate, invoice, or confirmed-deletion receipt exists."
+        - "The complete regression pass depends on documented external ignored research fixtures and is not reproducible from Git bytes alone."
+      blocked_tasks:
+        - T010
+        - T999
+      summary: "Local branch milestone approved after PM fallback. The required read-only Judge stalled beyond its one allowed 30-second wait and was interrupted; the PM repeated the evidence audit. The original full outcome remains incomplete and must not be described as GPU-validated or plug-and-play."
+      deviations:
+        - "The required GoalBuddy Judge did not return within the mandated single wait window, so the PM used the documented fallback instead of waiting indefinitely."
+      next_action: "Obtain the exact paid-launch authorization phrase, then run T010 on the exact commit and locks under the external deletion controller; run T999 only after the real-GPU receipt exists."
   - id: T010
     type: pm
     assignee: PM
-    status: queued
+    status: blocked
     reasoning_hint: high
     objective: "After explicit user authorization and GPU access, run one externally controlled, budget-capped real-GPU acceptance matrix on the exact committed branch and locked environment, then persist semantic, performance, GPU-resource, and provider-billing receipts."
     inputs:
@@ -916,11 +1011,26 @@ tasks:
       - "Transfer, wall-time, GPU-memory, and utilization evidence"
       - "Provider-billed lifetime and final destruction receipt"
       - "cuda-hardware-validated | remain-hardware-unvalidated"
-    receipt: null
+    receipt:
+      result: blocked
+      blocked_reason: "A paid provider create request and use of configured provider credentials require exact human authorization. No live request is permitted from the prior GitHub-access confirmation or the branch-preparation request."
+      waiting_for_user_approval: true
+      required_reply: I_AUTHORIZE_PAID_GPU_LAUNCH
+      summary: "The exact commit, cu124 lock, four-case acceptance command, external create-to-delete controller, 30-minute provider-lifetime cap, 15% budget reserve, and $1.00 total cap are locally prepared. No provider endpoint was contacted and no resource or charge exists. Reply with the exact required phrase only if you want the bounded paid RunPod/Vast GPU acceptance launched; provider availability and credentials will still be checked fail-closed before creation."
+      evidence:
+        - "codex/cuda-portable-experiments@f0d217b016a433606d09fdecdc5ba2120e2a9f24"
+        - configs/cuda_provider_control.yaml
+        - environments/providers/controller.py
+        - environments/cuda/run-acceptance.sh
+        - tests/test_cuda_hardware_acceptance.py
+      remaining_blockers:
+        - "Exact paid-launch approval has not been provided."
+        - "A matching live provider offer, configured credential, and final rate admission have not been observed."
+        - "No real-GPU or confirmed-deletion receipt exists."
   - id: T999
     type: judge
     assignee: Judge
-    status: queued
+    status: blocked
     reasoning_hint: high
     objective: "Audit both milestones: whether the local branch is honestly CUDA-prepared and whether real hardware evidence is sufficient for the stronger plug-and-play claim."
     inputs:
@@ -942,8 +1052,16 @@ tasks:
       - "readiness_state"
       - "Oracle-to-receipt mapping"
       - "Missing evidence or exact next task"
-    receipt: null
-
+    receipt:
+      result: blocked
+      blocked_reason: "The final outcome audit cannot run until T010 produces a real-GPU acceptance and provider deletion receipt, or a truthful hardware failure receipt."
+      summary: "The local milestone has a separate approved T015 audit, but the original plug-and-play outcome remains incomplete. Final Judge completion is waiting behind the exact human approval gate recorded on T010."
+      evidence:
+        - .scratch/goalbuddy/T015-receipt.json
+        - .scratch/goalbuddy/T010-receipt.json
+      remaining_blockers:
+        - "T010 is blocked on exact paid-launch authorization."
+        - "full_outcome_complete cannot be true without real GPU evidence."
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
   last_verification:
