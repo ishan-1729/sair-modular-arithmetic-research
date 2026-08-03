@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -103,7 +105,13 @@ def test_cost_admission_uses_lower_wall_or_cash_ceiling() -> None:
         replay.admitted_wall_seconds(7200, 0.0, 5.0)
 
 
-def test_dry_run_persists_preflight_receipt(tmp_path: Path) -> None:
+def test_dry_run_persists_preflight_receipt(tmp_path: Path, monkeypatch) -> None:
+    def forbidden_configure(*_args, **_kwargs) -> None:
+        raise AssertionError(
+            "dry-run must not mutate the process-global torch runtime"
+        )
+
+    monkeypatch.setattr(replay, "configure_torch", forbidden_configure)
     args = argparse.Namespace(
         config=replay.REPLAY_CONFIG_PATH,
         source_checkpoint=CHECKPOINT,
@@ -194,9 +202,7 @@ def test_rollout_cpu_matches_frozen_tensor_native_semantics() -> None:
     assert actual[2:] == expected[2:]
 
 
-def test_one_update_cpu_replay_is_byte_identical_to_frozen_route(
-    tmp_path: Path,
-) -> None:
+def _assert_one_update_cpu_replay_is_byte_identical(tmp_path: Path) -> None:
     assert CHECKPOINT.is_file()
     config = copy.deepcopy(SCIENTIFIC_CONFIG)
     config["training"]["profile_width"] = 128
@@ -235,6 +241,33 @@ def test_one_update_cpu_replay_is_byte_identical_to_frozen_route(
     assert actual["training"]["data_order_sha256"] == expected["training"]["data_order_sha256"]
     assert actual["training"]["curves"] == expected["training"]["curves"]
     assert actual["reload_exact"] is True
+
+
+def test_one_update_cpu_replay_is_byte_identical_to_frozen_route(
+    tmp_path: Path,
+) -> None:
+    # The frozen route's configure_torch helper sets PyTorch's one-shot global
+    # inter-op thread count.  Keep that faithful parity setup in a child process
+    # so this test cannot change the meaning of later historical tests.
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import runpy,sys; "
+                "namespace=runpy.run_path(sys.argv[1]); "
+                "namespace['_assert_one_update_cpu_replay_is_byte_identical']"
+                "(namespace['Path'](sys.argv[2]))"
+            ),
+            str(Path(__file__).resolve()),
+            str(tmp_path),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=180,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
 
 
 def test_full_cpu_replay_requires_explicit_opt_in(tmp_path: Path) -> None:

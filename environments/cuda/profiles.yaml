@@ -1,0 +1,27 @@
+schema_version: sair-cuda-profiles-v1
+platform: x86_64-unknown-linux-gnu
+python: "3.12"
+pypi_index: https://pypi.org/simple
+uv:
+  version: 0.11.28
+  installer_url: https://astral.sh/uv/0.11.28/install.sh
+  installer_sha256: b7b3fe80cad1142a2a5794050b7db7b3291d1bac1423b0732571dd9366e8ca8b
+profiles:
+  cu121:
+    cuda_runtime: "12.1"
+    torch_version: 2.5.1+cu121
+    torch_url: https://download.pytorch.org/whl/cu121/torch-2.5.1%2Bcu121-cp312-cp312-linux_x86_64.whl
+    minimum_driver: 525.60.13
+    minimum_compute_capability: [7, 0]
+    input: environments/cuda/requirements-cu121.in
+    lock: environments/cuda/requirements-cu121.txt
+    lock_sha256: 817f01d626ed840d4a8912968229d87450ba60da7d2cb42552fccccfca9c4f70
+  cu124:
+    cuda_runtime: "12.4"
+    torch_version: 2.5.1+cu124
+    torch_url: https://download.pytorch.org/whl/cu124/torch-2.5.1%2Bcu124-cp312-cp312-linux_x86_64.whl
+    minimum_driver: 550.54.14
+    minimum_compute_capability: [7, 0]
+    input: environments/cuda/requirements-cu124.in
+    lock: environments/cuda/requirements-cu124.txt
+    lock_sha256: 2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355

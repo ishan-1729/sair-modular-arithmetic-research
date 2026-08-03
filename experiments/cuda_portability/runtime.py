@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
 
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
 import torch
+from safetensors.torch import load_file
 
 
 SUPPORTED_DEVICE_TYPES = frozenset({"cpu", "cuda"})
@@ -100,4 +102,33 @@ def runtime_receipt(device: torch.device) -> dict[str, Any]:
             "total_memory_bytes": int(properties.total_memory),
             "compute_capability": [int(properties.major), int(properties.minor)],
         }
+    return result
+
+
+def module_device(module: torch.nn.Module) -> torch.device:
+    """Return one module device and reject mixed-device parameter state."""
+
+    devices = {value.device for value in module.parameters()}
+    devices.update(value.device for value in module.buffers())
+    if not devices:
+        return torch.device("cpu")
+    if len(devices) != 1:
+        raise RuntimeError(f"mixed-device model state is unsupported: {devices}")
+    return next(iter(devices))
+
+
+def load_safetensors_on_device(
+    module: torch.nn.Module,
+    checkpoint: Path,
+    device: torch.device,
+    *,
+    strict: bool = True,
+) -> torch.nn.modules.module._IncompatibleKeys:
+    """Load a safetensors checkpoint directly onto the explicit model device."""
+
+    module.to(device)
+    state = load_file(checkpoint, device=str(device))
+    result = module.load_state_dict(state, strict=strict)
+    if module_device(module) != device:
+        raise RuntimeError("checkpoint load did not preserve requested model device")
     return result

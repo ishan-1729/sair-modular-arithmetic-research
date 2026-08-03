@@ -1,0 +1,43 @@
+schema_version: cuda-provider-control-v1
+authorization:
+  environment: SAIR_CLOUD_LAUNCH_APPROVED
+  required_value: I_AUTHORIZE_PAID_GPU_LAUNCH
+budget:
+  reserve_fraction: 0.15
+  minimum_max_total_usd: 0.10
+  include_provisioning_until_delete_confirmation: true
+lifecycle:
+  poll_seconds: 10
+  request_timeout_seconds: 30
+  destroy_timeout_seconds: 120
+  destroy_retry_seconds: 5
+  receipt_schema: cuda-provider-lifecycle-receipt-v1
+guest:
+  forbidden_fragments:
+    - RUNPOD_API_KEY
+    - VAST_API_KEY
+    - SAIR_CLOUD_LAUNCH_APPROVED
+    - "Authorization:"
+providers:
+  runpod:
+    base_url: https://rest.runpod.io/v1
+    credential_environment: RUNPOD_API_KEY
+    create_method: POST
+    create_path: /pods
+    status_method: GET
+    status_path: /pods?id={resource_id}
+    delete_method: DELETE
+    delete_path: /pods/{resource_id}
+    running_statuses: [RUNNING]
+    terminal_statuses: [EXITED, TERMINATED]
+  vast:
+    base_url: https://console.vast.ai/api/v0
+    credential_environment: VAST_API_KEY
+    create_method: PUT
+    create_path: /asks/{resource_selector}/
+    status_method: GET
+    status_path: /instances/{resource_id}/
+    delete_method: DELETE
+    delete_path: /instances/{resource_id}/
+    running_statuses: [running]
+    terminal_statuses: [exited, stopped, terminated]

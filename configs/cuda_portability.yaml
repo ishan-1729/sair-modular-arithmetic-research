@@ -1,5 +1,5 @@
 schema_version: cuda-portability-config-v1
-readiness: cuda-inventory-open
+readiness: cuda-prepared-hardware-unvalidated
 scan:
   roots:
     - experiments/**/run.py
@@ -11,14 +11,107 @@ scan:
   manifest: experiments/cuda_portability/inventory.json
 ported_paths:
   - experiments/cuda_portability/__init__.py
+  - experiments/cuda_portability/acceptance.py
   - experiments/cuda_portability/exp300.py
+  - experiments/cuda_portability/graph.py
   - experiments/cuda_portability/inventory.py
+  - experiments/cuda_portability/recurrent.py
   - experiments/cuda_portability/runtime.py
   - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+adapted_sources:
+  experiments/exp_401_pyg_graph_message_passing/model.py:
+    adapter: experiments/cuda_portability/graph.py
+    coverage: partial
+    symbols: [PyGRecurrentTypedMaxMPNN.forward]
+    consumer: experiments/exp_510_multiarchitecture_grokking_feasibility/run.py
+    smoke_command: "python -m pytest -q tests/test_cuda_graph_adapter.py"
+  experiments/exp_654_neural_ram_executor/model.py:
+    adapter: experiments/cuda_portability/recurrent.py
+    coverage: full-active-route
+    symbols: [NeuralRAMExecutor.forward, NeuralRAMExecutor.bits, NeuralRAMExecutor.static_features]
+    consumer: experiments/exp_654_neural_ram_executor/run.py
+    smoke_command: "python -m pytest -q tests/test_cuda_recurrent_adapter.py"
+  experiments/exp_699_h92_w256_backbone_factorial_complete/run.py:
+    adapter: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+    coverage: full-active-route
+    symbols: [train_arm, rollout, evaluate, evaluate_with_evidence]
+    consumer: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+    smoke_command: "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py"
+lifecycle_policy:
+  registry: experiments/registry.yaml
+  active_statuses: [planned]
+  terminal_statuses:
+    - completed
+    - completed-non-comparative
+    - completed-rejected
+    - completed-rejected-dense-layer-loop-schedule-formulation
+    - completed-rejected-full-budget-science
+    - failed
+    - failed-calibration-lifecycle
+    - failed-package-oracle
+    - failed-resource-calibration-oom
+    - parked-before-calibration-and-science-full-oracle-red
+    - parked-before-formal-verification-boundary
+    - parked-calibration-candidate-runtime-headroom
+    - parked-calibration-expected-value
+    - parked-calibration-noncollapsed-load
+    - parked-calibration-resource-admission
+    - parked-calibration-resource-guard
+    - parked-calibration-runner-failure
+    - parked-calibration-runtime-headroom
+    - parked-calibration-semantic-incompleteness
+    - parked-current-execution-formulation-after-two-repair-limit
+    - parked-final-bytes-full-oracle-unverified
+    - parked-package-oracle
+    - parked-package-verification
+    - parked-source-topology-feasibility
+    - parked-terminally-before-calibration-validator-red
+    - parked-topology-feasibility
+    - permanent-calibration-execution-park
+    - permanent-focused-verification-park
+    - permanent-package-verification-park
+    - permanent-pre-root-authentication-park
+    - permanent-pre-root-denominator-park
+    - rejected-before-L2-resource-gate
+    - root162-consumed-complete-non-scientific-awaiting-completion-audits-and-separate-screen-judge
+  exp649_cpu_boundary:
+    config: configs/exp_649_stochastic_trajectory_breadth.yaml
+    config_sha256: 408b32ef3c0a93226d3794f7adeb5620743b57778983249be8244371dcb9cf98
+    runner: experiments/exp_649_stochastic_trajectory_breadth/run.py
+    runner_sha256: 7a05d2b0a2a7f0ff249792cbf951dcfc547908efa94e6c8ff1d193d05d6aca3d
+    seed_retirement_manifest: experiments/exp_649_stochastic_trajectory_breadth/seed_retirement_manifest.json
+    seed_retirement_sha256: b00eaca8a12a397851103d570ca5b00cb94f925d4f05d96a827f77eb752b712f
+    run_record: experiments/runs/exp-649-stochastic-trajectory-breadth/run.json
+    run_record_sha256: b57c09437a518ebaf7167b478a50ca4c3e9cb9f3693e701bbdd06fe673b998a6
+    dynamic_sources:
+      - path: experiments/exp_220_width_independent_cellular/model.py
+        sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc
+        config_field: source_model
 recurrent_hot_loops:
+  - path: experiments/cuda_portability/graph.py
+    functions: [typed_max_forward_prepared]
+    forbidden_calls: [cpu, cuda, item, numpy, to, tolist]
+    forbidden_factories: [tensor, as_tensor, from_numpy]
   - path: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
     functions: [train_update, rollout]
     forbidden_calls: [cpu, cuda, item, numpy, to, tolist]
+    forbidden_factories: [tensor, as_tensor, from_numpy]
+  - path: experiments/cuda_portability/recurrent.py
+    functions: [neural_ram_forward_prepared]
+    forbidden_calls: [cpu, cuda, item, numpy, to, tolist]
+    forbidden_factories: [tensor, as_tensor, from_numpy]
+hardware_acceptance:
+  schema_version: cuda-hardware-acceptance-v1
+  profile_config: environments/cuda/profiles.yaml
+  test_file: tests/test_cuda_hardware_acceptance.py
+  required_tests:
+    - test_cuda_runtime_and_exp699_update
+    - test_cuda_exp510_typed_max_graph
+    - test_cuda_exp654_neural_ram
+    - test_cuda_checkpoint_round_trip
+  timeout_seconds: 900
+  torch_threads: 4
+  seed: 20260803
 classification_policy:
   no_torch_reason: "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately."
   frozen_reason: "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it."

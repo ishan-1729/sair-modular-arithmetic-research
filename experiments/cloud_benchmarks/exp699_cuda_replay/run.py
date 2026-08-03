@@ -952,7 +952,11 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
             "source checkpoint is unavailable; pass --source-checkpoint after "
             "copying the hash-verified EXP609 weights to the host"
         )
-    configure_torch(replay_config, device)
+    if not args.dry_run:
+        # Dry-run admission is intentionally free of PyTorch's process-global,
+        # one-shot thread/determinism mutations.  A real replay configures the
+        # runtime before any model or CUDA work begins.
+        configure_torch(replay_config, device)
     versions = validate_environment(replay_config, device, args.profile)
     identity = source_identity(replay_config, checkpoint)
     environment_payload = environment(device, versions)

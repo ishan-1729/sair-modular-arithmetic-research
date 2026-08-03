@@ -42,6 +42,25 @@ Cloud GPU."
 - Existing plan facts: use a new isolated branch/worktree; port relevant
   experiments only; reuse EXP699 CUDA replay lessons; provide requirements.txt
   manifests with uv; do not run long local experiments
+- Current inventory evidence: 236 Python modules and 164 run/model roots are
+  closed as 10 device-prepared-but-unvalidated routes, 5 intentional CPU
+  boundaries, and 221 registry-terminal archived routes; no
+  `adapter-required` row remains after the T012 gate
+- Active lifecycle exception: EXP649 remains registry-`planned`, dynamically
+  loads the shared EXP220 model, and must remain CPU-bound because its
+  hash-authenticated protocol fixes IID CPU float32 Gaussian noise, logical
+  coordinate order, generator reset points, and an exact rerun
+- Current environment evidence: cu121 and cu124 Python 3.12 profiles each have
+  a 124-package transitive uv lock with per-artifact hashes; torch uses an
+  index-isolated direct CUDA wheel URL, the PyPI index is explicit, and the
+  fresh-VM bootstrap/acceptance scripts pass offline syntax, integrity,
+  dry-run, and CPU-fail-closed tests. The four hardware tests remain skipped
+  until the explicit real-CUDA command runs.
+- Current cost-control evidence: RunPod/Vast REST lifecycle adapters, budget
+  admission, credential isolation, rate revalidation, durable resource-id
+  receipts, and retrying DELETE-in-`finally` behavior pass seven fake-transport
+  tests. No provider endpoint was contacted; client power/network failure and
+  provider-invoice reconciliation remain explicit T010 risks.
 
 ## Goal Oracle
 
@@ -84,6 +103,10 @@ the separately authorized real-GPU acceptance task passes.
   source hashes merely to make a hardware replay pass.
 - Preserve CPU execution and exact-answer semantics; use explicit device
   boundaries instead of a global default-device side effect.
+- A terminal registry status may justify `archived-frozen-route` only when the
+  exact run id, status, and at least one durable artifact hash are recorded.
+  Import consumers and declared dynamic loads take precedence over a path's own
+  historical status; never archive from a directory-name heuristic alone.
 - Do not rewrite historical frozen runners wholesale. Port active shared cores;
   use separate hardware adapters/replay wrappers for frozen or consumed routes.
 - Keep exact Python/big-integer label generation CPU-side unless tensor-native
@@ -107,6 +130,11 @@ the separately authorized real-GPU acceptance task passes.
   stay outside the experiment VM; an external controller must enforce prepaid
   or hard budget settings, disable auto-recharge when available, destroy the
   resource from a `finally` path, and record provider-billed lifetime.
+- Budget admission must require both compute and storage rates, reserve at least
+  the configured safety fraction, and meter from create request through
+  confirmed deletion. Guest exit/stop is not cost closure. The controller's
+  lifecycle duration is an upper-bound estimate; the provider invoice remains
+  separate evidence.
 - Do not push, rent, purchase, or launch a cloud resource without explicit
   user authorization.
 
@@ -139,6 +167,10 @@ and whether GPU execution is technically plausible for that family.
 
 - `cuda-inventory-open`: at least one reachable entry point or hotspot is
   unclassified.
+- `cuda-inventory-closed-gpu-unvalidated`: every inventory row has a
+  route-specific disposition and all representative CPU parity/static-loop
+  gates pass, but locked bootstrap, clean-clone regression, provider controls,
+  or physical GPU evidence is still incomplete.
 - `cuda-prepared-hardware-unvalidated`: the branch, closed inventory, locked
   bootstrap, CPU parity, clean regression pass, billing controller, and
   fail-closed hardware acceptance command are complete, but no real GPU receipt
@@ -167,9 +199,13 @@ their repository-local imports:
 Each manifest row must record path, symbol or entry point, reachability roots,
 experiment family, classification, evidence, CPU/CUDA responsibility, frozen
 identity constraints, smoke command, and exclusion reason where applicable.
-The inventory is closed only when a regeneration check produces no missing or
-stale rows. `intentionally-cpu-only` requires a concrete semantic or measured
-reason and a tested device boundary; it cannot be used as an escape hatch.
+For an archived route it must also record the exact registry run id/status and
+hash-bound durable artifacts. Static import reachability must be augmented by
+authenticated declared dynamic loads such as EXP649 -> EXP220. The inventory
+is closed only when a regeneration check produces no missing, stale, or
+`adapter-required` rows. `intentionally-cpu-boundary` requires a concrete
+semantic or measured reason and a tested device boundary; it cannot be used as
+an escape hatch.
 
 ## Adversarial Acceptance Gates
 
@@ -181,14 +217,27 @@ reason and a tested device boundary; it cannot be used as an escape hatch.
 - Porting is rejected when device transfers remain inside recurrent hot loops
   without an explicit benchmark-backed exception.
 - Direct pins without a transitive lock and hashes fail reproducibility.
+- A CUDA lock that permits PyPI to substitute a CPU torch wheel, inherits
+  ambient uv/pip indexes or config, or omits an exact uv installer identity
+  fails reproducibility even when package versions are pinned.
 - A bootstrap that assumes uv, a driver, or a compatible GPU already exists
   fails fresh-VM readiness.
 - A process timeout without external provider destruction fails cost safety.
 - Split test passes after ad hoc ignored-fixture copying do not equal a final
   clean-clone regression pass.
+- A hardware pytest exit code is insufficient by itself: the JUnit receipt must
+  contain exactly the required EXP699/EXP300, EXP510 graph, EXP654 recurrent,
+  and GPU checkpoint cases with no missing, extra, failed, errored, or skipped
+  test.
 - The branch and goal control files must be committed together or have an
   explicit cross-worktree control-plane receipt; untracked goal files do not
   count as durable work.
+- A shared model whose own experiment is terminal is not archived if a live
+  consumer loads it dynamically; declared path/hash dependencies must be folded
+  into the consumer graph.
+- Moving EXP649's noise stream to CUDA is a scientific protocol change, not a
+  mechanical port. It requires a new preregistered experiment and cannot be
+  smuggled into this branch as an optimization.
 
 ## Board Health
 
