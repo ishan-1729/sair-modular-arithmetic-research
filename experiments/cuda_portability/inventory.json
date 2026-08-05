@@ -74,6 +74,7 @@
   ],
   "modules": [
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -149,26 +150,45 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
         "direct_route_ids": [],
-        "routes": []
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "cloud_benchmarks",
       "frozen_identity_constraint": null,
       "hotspots": [],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
       "module": "experiments.cloud_benchmarks.exp699_cuda_replay",
       "path": "experiments/cloud_benchmarks/exp699_cuda_replay/__init__.py",
       "reachability_roots": [
-        "mechanical-all-experiment-python"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -176,15 +196,32 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
         "direct_route_ids": [],
-        "routes": []
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'datetime', 'datetime.datetime', 'datetime.timezone', 'experiments.cuda_portability.exp300']; hotspot_counts={'checkpoint': 7, 'host-boundary': 9, 'optimizer': 1, 'tensor-factory': 6}.",
       "exp649_cpu_boundary": null,
@@ -330,11 +367,14 @@
           "symbol": "train_arm"
         }
       ],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
       "module": "experiments.cloud_benchmarks.exp699_cuda_replay.run",
       "path": "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
       "reachability_roots": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py",
@@ -342,6 +382,65 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.recovery_transport', '.recovery_transport.atomic_json', '.recovery_transport.restore_export', '.recovery_transport.sha256', '__future__', '__future__.annotations', 'argparse', 'json']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.offpod_sync",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "af98778049301c78ef92fb982c234c56aa9bf27ce90f0cb2cb6d0d984c2ff3af",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations', 'argparse', 'hashlib', 'json', 'os', 'pathlib', 'pathlib.Path']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py"
+      ],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.recovery_transport",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "3e61d1e816156fcfaa1ade9e92350959bf0f6449ea67d70e8e39846f92acfa83",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
@@ -369,12 +468,13 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
           "exp-690-c1-persistent-memory-tokens",
           "exp-691-c2-hard-indexed-trace",
@@ -384,7 +484,10 @@
           "exp-695-cycle-factorized-distillation",
           "exp-696-qcm48-factorial",
           "exp-697-c5-routed-antithetic-quorum-recovery",
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -569,13 +672,62 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}, {'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=['__future__', '__future__.annotations', 'math']; hotspot_counts={}.",
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations', 'math']; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "council_tournament_common",
-      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "frozen_identity_constraint": null,
       "hotspots": [],
       "local_import_parents": [
         "experiments/exp_690_c1_persistent_memory_tokens/run.py",
@@ -602,14 +754,17 @@
         "experiments/exp_696_qcm48_factorial/run.py",
         "experiments/exp_697_c5_routed_antithetic_quorum_recovery/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
       "source_sha256": "b8332d53e1dd99f2469058f398418bd59385b14b19f97ab0bd93f234f4753ea5",
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
@@ -637,6 +792,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
@@ -664,15 +820,32 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
         "direct_route_ids": [],
-        "routes": []
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'torch', 'torch.nn.functional', 'typing', 'typing.Any']; hotspot_counts={'device-boundary': 2, 'host-boundary': 1, 'tensor-factory': 8}.",
       "exp649_cpu_boundary": null,
@@ -752,7 +925,8 @@
       "module": "experiments.cuda_portability.exp300",
       "path": "experiments/cuda_portability/exp300.py",
       "reachability_roots": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
@@ -760,6 +934,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
@@ -806,6 +981,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
@@ -831,10 +1007,11 @@
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
-      "source_sha256": "03861cf0747cbcc0fa68ff61f1872441d1b75936763a3d09250c14da5da1a150",
+      "source_sha256": "9436150435b0d80e30a33afe1c345efb2d196e1d42444da2f5155b2e9d19f634",
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
@@ -887,15 +1064,32 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
         "direct_route_ids": [],
-        "routes": []
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'os', 'pathlib', 'pathlib.Path', 'safetensors.torch', 'safetensors.torch.load_file', 'torch']; hotspot_counts={'checkpoint': 2, 'device-boundary': 1}.",
       "exp649_cpu_boundary": null,
@@ -926,12 +1120,14 @@
         "experiments/cuda_portability/__init__.py",
         "experiments/cuda_portability/acceptance.py",
         "experiments/cuda_portability/graph.py",
-        "experiments/cuda_portability/recurrent.py"
+        "experiments/cuda_portability/recurrent.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.cuda_portability.runtime",
       "path": "experiments/cuda_portability/runtime.py",
       "reachability_roots": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
@@ -939,6 +1135,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1020,6 +1217,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1191,6 +1389,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1260,6 +1459,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1310,6 +1510,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1385,6 +1586,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1435,6 +1637,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1540,6 +1743,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1627,6 +1831,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1677,6 +1882,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1782,6 +1988,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1845,6 +2052,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -1956,6 +2164,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
@@ -2014,7 +2223,10 @@
           "exp-695-cycle-factorized-distillation",
           "exp-696-qcm48-factorial",
           "exp-697-c5-routed-antithetic-quorum-recovery",
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-220-width-independent-cellular"
@@ -2558,6 +2770,55 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
@@ -2711,7 +2972,9 @@
         "experiments/exp_696_qcm48_factorial/run.py",
         "experiments/exp_697_c5_routed_antithetic_quorum_recovery/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "retain the EXP-649 route and shared dependencies on CPU unless a new experiment is preregistered",
       "smoke_command": null,
@@ -2719,6 +2982,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -2806,6 +3070,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -2887,6 +3152,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -2986,6 +3252,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3175,6 +3442,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3298,6 +3566,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3361,6 +3630,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3472,6 +3742,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3583,6 +3854,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3633,6 +3905,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3738,6 +4011,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3825,6 +4099,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -3912,6 +4187,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4017,6 +4293,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4134,6 +4411,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4221,6 +4499,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4296,6 +4575,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4377,6 +4657,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4470,6 +4751,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4551,6 +4833,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4601,6 +4884,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": {
         "adapter": "experiments/cuda_portability/graph.py",
         "consumer": "experiments/exp_510_multiarchitecture_grokking_feasibility/run.py",
@@ -4684,6 +4968,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4734,6 +5019,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4827,6 +5113,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4914,6 +5201,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -4989,6 +5277,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5052,6 +5341,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5139,6 +5429,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5232,6 +5523,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5325,6 +5617,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5418,6 +5711,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5517,6 +5811,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5688,6 +5983,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5738,6 +6034,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5813,6 +6110,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5912,6 +6210,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -5993,6 +6292,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6068,6 +6368,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6155,6 +6456,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6218,6 +6520,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6371,6 +6674,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6440,6 +6744,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6521,6 +6826,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6588,6 +6894,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6651,6 +6958,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6699,6 +7007,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6798,6 +7107,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6853,6 +7163,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -6922,6 +7233,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7105,6 +7417,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7153,6 +7466,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7318,6 +7632,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7403,6 +7718,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7478,6 +7794,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7625,6 +7942,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7686,6 +8004,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7755,6 +8074,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -7926,6 +8246,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8019,6 +8340,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8184,6 +8506,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8289,6 +8612,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8436,6 +8760,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8484,6 +8809,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8619,6 +8945,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8667,6 +8994,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8820,6 +9148,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8905,6 +9234,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -8992,6 +9322,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9181,6 +9512,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9244,6 +9576,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9445,6 +9778,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9520,6 +9854,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9570,6 +9905,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9633,6 +9969,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9720,6 +10057,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -9897,6 +10235,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10147,6 +10486,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10389,6 +10729,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
@@ -10556,6 +10897,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10604,6 +10946,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10682,6 +11025,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10799,6 +11143,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10847,6 +11192,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -10925,6 +11271,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11066,6 +11413,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11114,6 +11462,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11240,6 +11589,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11387,6 +11737,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": {
         "adapter": "experiments/cuda_portability/recurrent.py",
         "consumer": "experiments/exp_654_neural_ram_executor/run.py",
@@ -11496,6 +11847,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11613,6 +11965,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -11731,6 +12084,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12013,6 +12367,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12155,6 +12510,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12402,6 +12758,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12495,6 +12852,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12670,6 +13028,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12857,6 +13216,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -12923,6 +13283,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13091,6 +13452,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13229,6 +13591,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13371,6 +13734,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13515,6 +13879,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13595,6 +13960,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13643,6 +14009,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13759,6 +14126,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -13952,6 +14320,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14000,6 +14369,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14050,6 +14420,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14098,6 +14469,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14200,6 +14572,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14317,6 +14690,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14365,6 +14739,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14497,6 +14872,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14626,6 +15002,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14674,6 +15051,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14806,6 +15184,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -14995,6 +15374,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -15043,12 +15423,19 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": {
+        "reason": "EXP701 reaches this historical module only as a transitive import; it does not instantiate SPRMCell or execute its tensor route.",
+        "responsibility": "Preserve historical definitions; all active EXP701 model compute is owned by the device-aware replay route.",
+        "symbols": [
+          "module-import-only"
+        ]
+      },
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
           "exp-664-sprm-boundary-perturbation",
           "exp-665-attractor-equilibrium-family",
@@ -15073,7 +15460,10 @@
           "exp-695-cycle-factorized-distillation",
           "exp-696-qcm48-factorial",
           "exp-697-c5-routed-antithetic-quorum-recovery",
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-664-sprm-boundary-perturbation"
@@ -15540,10 +15930,59 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-664-sprm-boundary-perturbation', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_664_sprm_boundary_perturbation.yaml', 'field': 'config', 'sha256': 'e4b4f05397d899d562258bc9f56d7b0cefbfd6367fa499cbcef7b98bd979935b'}}, {'run_id': 'exp-665-attractor-equilibrium-family', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_665_attractor_equilibrium_family.yaml', 'field': 'config', 'sha256': 'c5a07c72ca9598db82ff93d279f8f90230fb511392b0ebc1c37bf7a4d48d5251'}}, {'run_id': 'exp-666-gram-posterior-prior-guidance', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_666_gram_posterior_prior_guidance.yaml', 'field': 'config', 'sha256': '1b69b73d200d3e96a77bcd298b6a47f6d0d6065a5374f125a1b111d37d069c69'}}, {'run_id': 'exp-667-rsm-shallow-train-deep-infer', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_667_rsm_shallow_train_deep_infer.yaml', 'field': 'config', 'sha256': '99583eff36d16415ea359c98afc5fd884ac287b5faf48b41b9665e97d2e0b19f'}}, {'run_id': 'exp-668-h2l3-magicnorm-credit', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_668_h2l3_magicnorm_credit.yaml', 'field': 'config', 'sha256': 'aab61af88ebcb97979e300d1caf6cb3aff54dd31fe6894eac7bc4e52c9c09746'}}, {'run_id': 'exp-669-stars-jvp-regularization', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_669_stars_jvp_regularization.yaml', 'field': 'config', 'sha256': '1aeccfa551d8bf3a1486937830633408270b1e0cd3aad7aad5775a86542d07a5'}}, {'run_id': 'exp-670-clipped-poisson-loop-curriculum', 'status': 'parked-calibration-runner-failure', 'artifact': {'path': 'configs/exp_670_clipped_poisson_loop_curriculum.yaml', 'field': 'config', 'sha256': 'ecfe3764b589a925bc497bb34e605d3f84c10ec2c540194c46d176ff8d6745fc'}}, {'run_id': 'exp-671-fixed-point-damping-halting', 'status': 'parked-calibration-expected-value', 'artifact': {'path': 'configs/exp_671_fixed_point_damping_halting.yaml', 'field': 'config', 'sha256': '194bfed69f7877220d7e4acb7284793f37246a3bff6ce08ada3297af1ffb374b'}}, {'run_id': 'exp-672-lt2-gated-hybrid-mixer', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_672_lt2_gated_hybrid_mixer.yaml', 'field': 'config', 'sha256': '68b8e77b7966b224fab7107b068c4632339a57b50f85e15e757c38401c42b497'}}, {'run_id': 'exp-683-source-complete-hrm', 'status': 'permanent-calibration-execution-park', 'artifact': {'path': 'configs/exp_683_source_complete_hrm.yaml', 'field': 'config', 'sha256': 'a726d629cd117b2706c5a84f1a51e2ad073ff02a908c51b57dbe034fd9b6b990'}}, {'run_id': 'exp-684-stars-random-depth-factorial', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_684_stars_random_depth_factorial.yaml', 'field': 'config', 'sha256': '5c64d01cae87248a39a6aa7d17ad2034054a369e25f7bc40df7e68dadd21ed10'}}, {'run_id': 'exp-685-validity-constrained-attractor', 'status': 'permanent-package-verification-park', 'artifact': {'path': 'configs/exp_685_validity_constrained_attractor.yaml', 'field': 'config', 'sha256': '7b9cb8996bd93dad6dcb4a1570e46066cf721aa6487edff27338fcb223bcff96'}}, {'run_id': 'exp-686-w256-straight-through-specialist', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_686_w256_straight_through_specialist.yaml', 'field': 'config', 'sha256': 'a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1'}}, {'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}, {'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'math', 'torch']; hotspot_counts={'checkpoint': 1, 'device-boundary': 1, 'tensor-factory': 4}.",
+      "evidence": "EXP701 reaches this historical module only as a transitive import; it does not instantiate SPRMCell or execute its tensor route. Active symbols are ['module-import-only']; imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'math', 'torch']; hotspot_counts={'checkpoint': 1, 'device-boundary': 1, 'tensor-factory': 4}.",
       "exp649_cpu_boundary": null,
       "family": "exp_664_sprm_boundary_perturbation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -15617,20 +16056,32 @@
         "experiments/exp_696_qcm48_factorial/run.py",
         "experiments/exp_697_c5_routed_antithetic_quorum_recovery/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "Preserve historical definitions; all active EXP701 model compute is owned by the device-aware replay route.",
       "smoke_command": null,
       "source_sha256": "11484b73c1eecd60ac112a29dd6e8aeba91973f35c8b8d4593ffca4270f0bb69",
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": {
+        "reason": "EXP701 uses these functions only for host resource timing, repository identity, generated exact-label split construction, and hashing.",
+        "responsibility": "Keep exact-label generation and evidence serialization on CPU; no deployed or recurrent model compute is delegated here.",
+        "symbols": [
+          "Timer",
+          "git_output",
+          "make_split",
+          "sha256"
+        ]
+      },
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
           "exp-664-sprm-boundary-perturbation",
           "exp-665-attractor-equilibrium-family",
@@ -15655,7 +16106,10 @@
           "exp-695-cycle-factorized-distillation",
           "exp-696-qcm48-factorial",
           "exp-697-c5-routed-antithetic-quorum-recovery",
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-664-sprm-boundary-perturbation"
@@ -16122,10 +16576,59 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-664-sprm-boundary-perturbation', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_664_sprm_boundary_perturbation.yaml', 'field': 'config', 'sha256': 'e4b4f05397d899d562258bc9f56d7b0cefbfd6367fa499cbcef7b98bd979935b'}}, {'run_id': 'exp-665-attractor-equilibrium-family', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_665_attractor_equilibrium_family.yaml', 'field': 'config', 'sha256': 'c5a07c72ca9598db82ff93d279f8f90230fb511392b0ebc1c37bf7a4d48d5251'}}, {'run_id': 'exp-666-gram-posterior-prior-guidance', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_666_gram_posterior_prior_guidance.yaml', 'field': 'config', 'sha256': '1b69b73d200d3e96a77bcd298b6a47f6d0d6065a5374f125a1b111d37d069c69'}}, {'run_id': 'exp-667-rsm-shallow-train-deep-infer', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_667_rsm_shallow_train_deep_infer.yaml', 'field': 'config', 'sha256': '99583eff36d16415ea359c98afc5fd884ac287b5faf48b41b9665e97d2e0b19f'}}, {'run_id': 'exp-668-h2l3-magicnorm-credit', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_668_h2l3_magicnorm_credit.yaml', 'field': 'config', 'sha256': 'aab61af88ebcb97979e300d1caf6cb3aff54dd31fe6894eac7bc4e52c9c09746'}}, {'run_id': 'exp-669-stars-jvp-regularization', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_669_stars_jvp_regularization.yaml', 'field': 'config', 'sha256': '1aeccfa551d8bf3a1486937830633408270b1e0cd3aad7aad5775a86542d07a5'}}, {'run_id': 'exp-670-clipped-poisson-loop-curriculum', 'status': 'parked-calibration-runner-failure', 'artifact': {'path': 'configs/exp_670_clipped_poisson_loop_curriculum.yaml', 'field': 'config', 'sha256': 'ecfe3764b589a925bc497bb34e605d3f84c10ec2c540194c46d176ff8d6745fc'}}, {'run_id': 'exp-671-fixed-point-damping-halting', 'status': 'parked-calibration-expected-value', 'artifact': {'path': 'configs/exp_671_fixed_point_damping_halting.yaml', 'field': 'config', 'sha256': '194bfed69f7877220d7e4acb7284793f37246a3bff6ce08ada3297af1ffb374b'}}, {'run_id': 'exp-672-lt2-gated-hybrid-mixer', 'status': 'parked-calibration-runtime-headroom', 'artifact': {'path': 'configs/exp_672_lt2_gated_hybrid_mixer.yaml', 'field': 'config', 'sha256': '68b8e77b7966b224fab7107b068c4632339a57b50f85e15e757c38401c42b497'}}, {'run_id': 'exp-683-source-complete-hrm', 'status': 'permanent-calibration-execution-park', 'artifact': {'path': 'configs/exp_683_source_complete_hrm.yaml', 'field': 'config', 'sha256': 'a726d629cd117b2706c5a84f1a51e2ad073ff02a908c51b57dbe034fd9b6b990'}}, {'run_id': 'exp-684-stars-random-depth-factorial', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_684_stars_random_depth_factorial.yaml', 'field': 'config', 'sha256': '5c64d01cae87248a39a6aa7d17ad2034054a369e25f7bc40df7e68dadd21ed10'}}, {'run_id': 'exp-685-validity-constrained-attractor', 'status': 'permanent-package-verification-park', 'artifact': {'path': 'configs/exp_685_validity_constrained_attractor.yaml', 'field': 'config', 'sha256': '7b9cb8996bd93dad6dcb4a1570e46066cf721aa6487edff27338fcb223bcff96'}}, {'run_id': 'exp-686-w256-straight-through-specialist', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_686_w256_straight_through_specialist.yaml', 'field': 'config', 'sha256': 'a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1'}}, {'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}, {'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'concurrent.futures', 'experiments.exp_664_sprm_boundary_perturbation.model', 'experiments.exp_664_sprm_boundary_perturbation.model.SPRMCell', 'hashlib', 'importlib.util']; hotspot_counts={'checkpoint': 15, 'host-boundary': 2, 'optimizer': 2, 'tensor-factory': 4}.",
+      "evidence": "EXP701 uses these functions only for host resource timing, repository identity, generated exact-label split construction, and hashing. Active symbols are ['Timer', 'git_output', 'make_split', 'sha256']; imports=['__future__', '__future__.annotations', 'argparse', 'concurrent.futures', 'experiments.exp_664_sprm_boundary_perturbation.model', 'experiments.exp_664_sprm_boundary_perturbation.model.SPRMCell', 'hashlib', 'importlib.util']; hotspot_counts={'checkpoint': 15, 'host-boundary': 2, 'optimizer': 2, 'tensor-factory': 4}.",
       "exp649_cpu_boundary": null,
       "family": "exp_664_sprm_boundary_perturbation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -16293,7 +16796,9 @@
         "experiments/exp_696_qcm48_factorial/run.py",
         "experiments/exp_697_c5_routed_antithetic_quorum_recovery/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.exp_664_sprm_boundary_perturbation.run",
       "path": "experiments/exp_664_sprm_boundary_perturbation/run.py",
@@ -16323,14 +16828,17 @@
         "experiments/exp_696_qcm48_factorial/run.py",
         "experiments/exp_697_c5_routed_antithetic_quorum_recovery/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "Keep exact-label generation and evidence serialization on CPU; no deployed or recurrent model compute is delegated here.",
       "smoke_command": null,
       "source_sha256": "bed3b8bbd67942fe38056d169f96eaf6bac867ba9b8c4add6e7aa51fb9f02330",
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -16379,6 +16887,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -16516,6 +17025,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -16727,6 +17237,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -16775,6 +17286,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -16901,6 +17413,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17090,6 +17603,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17138,6 +17652,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17322,6 +17837,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17575,6 +18091,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17623,6 +18140,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17713,6 +18231,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17854,6 +18373,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17902,6 +18422,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -17974,6 +18495,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18139,6 +18661,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18187,6 +18710,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18271,6 +18795,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18412,6 +18937,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18460,6 +18986,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18658,6 +19185,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18823,6 +19351,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18871,6 +19400,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -18961,6 +19491,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19114,6 +19645,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19162,6 +19694,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19247,6 +19780,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19295,6 +19829,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19409,6 +19944,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19538,6 +20074,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19586,6 +20123,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -19763,6 +20301,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20016,6 +20555,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20064,6 +20604,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20117,6 +20658,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20210,6 +20752,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20258,6 +20801,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20378,6 +20922,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20541,6 +21086,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20589,6 +21135,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20667,6 +21214,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20784,6 +21332,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20832,6 +21381,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -20952,6 +21502,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21075,6 +21626,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21123,6 +21675,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21195,6 +21748,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21324,6 +21878,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21372,6 +21927,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21456,6 +22012,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21525,6 +22082,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21573,6 +22131,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21663,6 +22222,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21810,6 +22370,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21858,6 +22419,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -21996,6 +22558,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -22191,6 +22754,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -22239,6 +22803,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -22353,6 +22918,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -22470,14 +23036,18 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-686-w256-straight-through-specialist"
@@ -22518,40 +23088,111 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-686-w256-straight-through-specialist', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_686_w256_straight_through_specialist.yaml', 'field': 'config', 'sha256': 'a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1'}}, {'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_686_w256_straight_through_specialist",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
       "hotspots": [],
       "local_import_parents": [
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.exp_686_w256_straight_through_specialist",
       "path": "experiments/exp_686_w256_straight_through_specialist/__init__.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
       "source_sha256": "59b1a857cd12365ae1cb93cb68926dc5b1dc9bc75d54cbd5b623accca416cd6a",
       "torch_referenced": false
     },
     {
-      "adapter": null,
-      "classification": "archived-frozen-route",
+      "active_cpu_boundary": null,
+      "adapter": {
+        "adapter": "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "consumer": "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "coverage": "full-active-route",
+        "smoke_command": "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
+        "symbols": [
+          "new_model",
+          "hard_straight_through",
+          "decode_boolean",
+          "load_exp300",
+          "candidate_runtime",
+          "train_update",
+          "tensor_native_rollout"
+        ]
+      },
+      "classification": "device-native-unvalidated",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
           "exp-686-w256-straight-through-specialist",
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-686-w256-straight-through-specialist"
@@ -22592,10 +23233,59 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-686-w256-straight-through-specialist', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_686_w256_straight_through_specialist.yaml', 'field': 'config', 'sha256': 'a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1'}}, {'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits']; hotspot_counts={'checkpoint': 10, 'host-boundary': 2, 'optimizer': 2, 'tensor-factory': 8}.",
+      "evidence": "Frozen source is covered by experiments/cloud_benchmarks/exp699_cuda_replay/run.py for symbols ['new_model', 'hard_straight_through', 'decode_boolean', 'load_exp300', 'candidate_runtime', 'train_update', 'tensor_native_rollout']; physical CUDA remains unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits']; hotspot_counts={'checkpoint': 10, 'host-boundary': 2, 'optimizer': 2, 'tensor-factory': 8}.",
       "exp649_cpu_boundary": null,
       "family": "exp_686_w256_straight_through_specialist",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -22735,7 +23425,9 @@
       ],
       "local_import_parents": [
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.exp_686_w256_straight_through_specialist.run",
       "path": "experiments/exp_686_w256_straight_through_specialist/run.py",
@@ -22743,14 +23435,17 @@
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_686_w256_straight_through_specialist/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
-      "smoke_command": null,
+      "responsibility": "frozen source stays immutable; adapter owns input/model device placement",
+      "smoke_command": "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
       "source_sha256": "d6ee23edf034a1a8270f766cbc94f0f68deeb7562ea4e9e97065179fb5147340",
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23019,6 +23714,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23482,6 +24178,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23535,6 +24232,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23663,6 +24361,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23716,6 +24415,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23892,6 +24592,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -23945,6 +24646,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24163,6 +24865,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24216,6 +24919,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24416,6 +25120,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24469,6 +25174,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24666,6 +25372,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24842,6 +25549,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -24890,6 +25598,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25079,6 +25788,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25127,6 +25837,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25328,6 +26039,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25376,6 +26088,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25583,6 +26296,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25631,6 +26345,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -25820,13 +26535,18 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
-        "consumer_route_ids": [],
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
         "direct_route_ids": [
           "exp-698-h92-w256-backbone-factorial"
         ],
@@ -25848,10 +26568,59 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_698_h92_w256_backbone_factorial",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25863,22 +26632,34 @@
       "path": "experiments/exp_698_h92_w256_backbone_factorial/__init__.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
       "source_sha256": "b1ecb72930ecd88778fa2b2fc7f0efc33bb13bbbc88b4ac1339e8539cb98786a",
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": {
+        "reason": "EXP701 transitively imports this frozen predecessor but does not call its training, evaluation, rollout, or model functions.",
+        "responsibility": "Preserve the frozen predecessor identity while the EXP701 device-aware route owns all active compute.",
+        "symbols": [
+          "module-import-only"
+        ]
+      },
       "adapter": null,
-      "classification": "archived-frozen-route",
+      "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
         "all_artifact_identities_complete": true,
-        "all_terminal": true,
+        "all_terminal": false,
         "consumer_route_ids": [
-          "exp-698-h92-w256-backbone-factorial"
+          "exp-698-h92-w256-backbone-factorial",
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
         "direct_route_ids": [
           "exp-698-h92-w256-backbone-factorial"
@@ -25901,10 +26682,59 @@
             "identity_mismatches": [],
             "run_id": "exp-698-h92-w256-backbone-factorial",
             "status": "parked-calibration-semantic-incompleteness"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-698-h92-w256-backbone-factorial', 'status': 'parked-calibration-semantic-incompleteness', 'artifact': {'path': 'configs/exp_698_h92_w256_backbone_factorial.yaml', 'field': 'config', 'sha256': '00868670b2e4ba98e5e08d65ae7fc57937f790924ddf732dddc08e9feb656d5e'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits']; hotspot_counts={'checkpoint': 9, 'host-boundary': 1, 'optimizer': 6}.",
+      "evidence": "EXP701 transitively imports this frozen predecessor but does not call its training, evaluation, rollout, or model functions. Active symbols are ['module-import-only']; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits']; hotspot_counts={'checkpoint': 9, 'host-boundary': 1, 'optimizer': 6}.",
       "exp649_cpu_boundary": null,
       "family": "exp_698_h92_w256_backbone_factorial",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26014,23 +26844,81 @@
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
-      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "responsibility": "Preserve the frozen predecessor identity while the EXP701 device-aware route owns all active compute.",
       "smoke_command": null,
       "source_sha256": "b7f55dac6f314767e688fdcc5c9119b4b0e3c99886ce3f9f59cef55d02cdf7c2",
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
-        "direct_route_ids": [],
-        "routes": []
+        "consumer_route_ids": [
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "direct_route_ids": [
+          "exp-699-h92-w256-backbone-factorial-complete"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
@@ -26038,12 +26926,16 @@
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
       "hotspots": [],
       "local_import_parents": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.exp_699_h92_w256_backbone_factorial_complete",
       "path": "experiments/exp_699_h92_w256_backbone_factorial_complete/__init__.py",
       "reachability_roots": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -26051,6 +26943,7 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": null,
       "adapter": {
         "adapter": "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "consumer": "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
@@ -26066,11 +26959,67 @@
       "classification": "device-native-unvalidated",
       "durable_lifecycle": {
         "active_consumers": [],
-        "all_artifact_identities_complete": false,
+        "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
-        "direct_route_ids": [],
-        "routes": []
+        "consumer_route_ids": [
+          "exp-699-h92-w256-backbone-factorial-complete",
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "direct_route_ids": [
+          "exp-699-h92-w256-backbone-factorial-complete"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_699_h92_w256_backbone_factorial_complete.yaml",
+                "sha256": "8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-699-h92-w256-backbone-factorial-complete/run.json",
+                "sha256": "4c4c08aa6e910b672ea7e1857e06581c62ad69bbae388313989c533974bfe4f2"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-699-h92-w256-backbone-factorial-complete",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
       },
       "evidence": "Frozen source is covered by experiments/cloud_benchmarks/exp699_cuda_replay/run.py for symbols ['train_arm', 'rollout', 'evaluate', 'evaluate_with_evidence']; physical CUDA remains unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer']; hotspot_counts={'checkpoint': 14, 'host-boundary': 3, 'optimizer': 6}.",
       "exp649_cpu_boundary": null,
@@ -26217,13 +27166,17 @@
         }
       ],
       "local_import_parents": [
-        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py"
+        "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "module": "experiments.exp_699_h92_w256_backbone_factorial_complete.run",
       "path": "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
-        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py"
+        "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
       ],
       "responsibility": "frozen source stays immutable; adapter owns input/model device placement",
       "smoke_command": "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py",
@@ -26231,6 +27184,540 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "direct_route_ids": [
+          "exp-700-resumable-h92-w256-backbone-factorial"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_700_resumable_h92_w256_backbone_factorial",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
+      "module": "experiments.exp_700_resumable_h92_w256_backbone_factorial",
+      "path": "experiments/exp_700_resumable_h92_w256_backbone_factorial/__init__.py",
+      "reachability_roots": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "c132de7a018139b681502544a95fa28a89837646e2e3beb97c8f70956bd45b48",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": {
+        "reason": "EXP701 reads only the frozen scientific-contract configuration and predecessor runner hash; no EXP700 CPU root or function is executed.",
+        "responsibility": "Authenticate unchanged science and historical provenance without importing CPU work into EXP701.",
+        "symbols": [
+          "CONFIG_PATH",
+          "__file__"
+        ]
+      },
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-700-resumable-h92-w256-backbone-factorial",
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "direct_route_ids": [
+          "exp-700-resumable-h92-w256-backbone-factorial"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json",
+                "sha256": "36a7d9ae564915598f0b4fe6d5ff6be16547f9d03610317e6591f68fcec628e6"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+            "status": "failed-execution-interrupted-partial"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
+      },
+      "evidence": "EXP701 reads only the frozen scientific-contract configuration and predecessor runner hash; no EXP700 CPU root or function is executed. Active symbols are ['CONFIG_PATH', '__file__']; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.git_output', 'experiments.exp_664_sprm_boundary_perturbation.run.make_split']; hotspot_counts={'checkpoint': 22, 'host-boundary': 1, 'optimizer': 2}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_700_resumable_h92_w256_backbone_factorial",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "host-boundary",
+          "line": 96,
+          "operation": "tensor.numpy",
+          "symbol": "object_hash.normalize"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 133,
+          "operation": "torch.save",
+          "symbol": "save_snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 164,
+          "operation": "torch.load",
+          "symbol": "load_snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 217,
+          "operation": "load_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 217,
+          "operation": "model.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "optimizer",
+          "line": 226,
+          "operation": "torch.optim.AdamW",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 235,
+          "operation": "model.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 235,
+          "operation": "optimizer.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 235,
+          "operation": "scheduler.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "optimizer",
+          "line": 247,
+          "operation": "torch.optim.AdamW",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 252,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 252,
+          "operation": "optimizer.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 252,
+          "operation": "scheduler.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 279,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 279,
+          "operation": "save_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 286,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 286,
+          "operation": "save_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 287,
+          "operation": "load_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 287,
+          "operation": "reloaded.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 288,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 288,
+          "operation": "reloaded.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 294,
+          "operation": "optimizer.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 295,
+          "operation": "scheduler.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 455,
+          "operation": "load_file",
+          "symbol": "Experiment.diagnostic_bundle"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 455,
+          "operation": "reset.load_state_dict",
+          "symbol": "Experiment.diagnostic_bundle"
+        }
+      ],
+      "local_import_parents": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
+      "module": "experiments.exp_700_resumable_h92_w256_backbone_factorial.run",
+      "path": "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+      "reachability_roots": [
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
+      "responsibility": "Authenticate unchanged science and historical provenance without importing CPU work into EXP701.",
+      "smoke_command": null,
+      "source_sha256": "f4519b37c61042777272a5f11672c8d9653b8ebff4aa4f6d6f9d879affa5dd48",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_701_cuda_resumable_h92_w256_backbone_factorial",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial",
+      "path": "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/__init__.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "c132de7a018139b681502544a95fa28a89837646e2e3beb97c8f70956bd45b48",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "device-native-unvalidated",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "direct_route_ids": [
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml",
+                "sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+            "status": "preregistered-awaiting-paid-authorization"
+          }
+        ]
+      },
+      "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.cloud_benchmarks.exp699_cuda_replay', 'experiments.cloud_benchmarks.exp699_cuda_replay.run', 'experiments.cuda_portability.runtime', 'experiments.cuda_portability.runtime.configure_determinism']; hotspot_counts={'checkpoint': 22, 'host-boundary': 1, 'optimizer': 2}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_701_cuda_resumable_h92_w256_backbone_factorial",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 95,
+          "operation": "model.state_dict",
+          "symbol": "cpu_state_dict"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 136,
+          "operation": "tensor.numpy",
+          "symbol": "object_hash.normalize"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 173,
+          "operation": "torch.save",
+          "symbol": "save_snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 204,
+          "operation": "torch.load",
+          "symbol": "load_snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 257,
+          "operation": "load_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 257,
+          "operation": "model.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "optimizer",
+          "line": 266,
+          "operation": "torch.optim.AdamW",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 275,
+          "operation": "model.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 275,
+          "operation": "optimizer.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 275,
+          "operation": "scheduler.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "optimizer",
+          "line": 291,
+          "operation": "torch.optim.AdamW",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 296,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 296,
+          "operation": "optimizer.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 296,
+          "operation": "scheduler.state_dict",
+          "symbol": "train_arm_resumable.snapshot"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 324,
+          "operation": "save_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 331,
+          "operation": "save_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 332,
+          "operation": "load_file",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 332,
+          "operation": "reloaded.load_state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 333,
+          "operation": "model.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 333,
+          "operation": "reloaded.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 340,
+          "operation": "optimizer.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 341,
+          "operation": "scheduler.state_dict",
+          "symbol": "train_arm_resumable"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 494,
+          "operation": "runtime_model.load_state_dict",
+          "symbol": "Experiment.calibration"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 513,
+          "operation": "load_file",
+          "symbol": "Experiment.diagnostic_bundle"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 513,
+          "operation": "reset.load_state_dict",
+          "symbol": "Experiment.diagnostic_bundle"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run",
+      "path": "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+      "reachability_roots": [
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+      ],
+      "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
+      "smoke_command": null,
+      "source_sha256": "f1a2628316b586d92dd4e03c4e315af2382b0ccc51bf6203b945295b2208c210",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -26340,6 +27827,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -26421,6 +27909,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -26638,6 +28127,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -26888,6 +28378,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -27138,6 +28629,7 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
@@ -27329,24 +28821,24 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4",
-    "python_file_count": 236,
+    "config_sha256": "ddfa87e969df6e8fd2d7ee8c2d98603c37ab190f252a378d8d2a3ee14dc69676",
+    "python_file_count": 242,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "0130ebd82dd7b32d28b8e29b68a39988a6584d0ff000fe97a0f2a579bf4792cb",
-    "root_count": 164,
-    "tree_sha256": "b8bd05782b81f2db5562e9baa6db5bbf98ebcde90ffe1f22c7f756a8bf6422ac"
+    "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
+    "root_count": 166,
+    "tree_sha256": "663c0ea219a958e44c9d8574bc3131a744173d5afc593db96946a4af31e71e0c"
   },
   "summary": {
     "classifications": {
-      "archived-frozen-route": 221,
-      "device-native-unvalidated": 10,
-      "intentionally-cpu-boundary": 5
+      "archived-frozen-route": 214,
+      "device-native-unvalidated": 12,
+      "intentionally-cpu-boundary": 16
     },
     "hotspots": {
-      "checkpoint": 816,
+      "checkpoint": 860,
       "device-boundary": 24,
-      "host-boundary": 110,
-      "optimizer": 183,
+      "host-boundary": 112,
+      "optimizer": 187,
       "tensor-factory": 742
     }
   }
