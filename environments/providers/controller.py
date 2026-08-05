@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import argparse
 import base64
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from decimal import Decimal, ROUND_FLOOR
 import hashlib
 import json
@@ -39,7 +39,11 @@ def sha256_text(value: str) -> str:
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def money(value: str | float | Decimal) -> Decimal:
@@ -181,6 +185,9 @@ class Provider:
                     "cloudType": "SECURE",
                     "locked": False,
                 }
+                if spec.network_volume_id:
+                    payload["networkVolumeId"] = spec.network_volume_id
+                    payload["volumeMountPath"] = spec.network_volume_mount_path
                 if spec.cuda_runtime != "any":
                     payload["allowedCudaVersions"] = [spec.cuda_runtime]
                 if spec.environment:
@@ -202,6 +209,9 @@ class Provider:
                 "env": dict(spec.environment),
                 "locked": False,
             }
+            if spec.network_volume_id:
+                payload["networkVolumeId"] = spec.network_volume_id
+                payload["volumeMountPath"] = spec.network_volume_mount_path
             if spec.cuda_runtime != "any":
                 payload["allowedCudaVersions"] = [spec.cuda_runtime]
             if spec.use_image_command:
@@ -210,6 +220,8 @@ class Provider:
             if spec.ports:
                 payload["ports"] = list(spec.ports)
             return payload
+        if spec.network_volume_id:
+            raise ValueError("network-volume attachment is currently supported only for RunPod")
         return {
             "image": spec.image,
             "label": spec.label,
@@ -232,6 +244,39 @@ class Provider:
         if raw_id is None:
             raise RuntimeError("provider create response omitted the resource id")
         return str(raw_id), response
+
+    def create_network_volume(self, spec: "LaunchSpec") -> tuple[str, dict[str, Any]]:
+        if self.name != "runpod" or not spec.network_volume_data_center_id:
+            raise ValueError("managed network-volume creation requires RunPod and a data center")
+        _, response = self.request(
+            "network_volume_create",
+            {
+                "dataCenterId": spec.network_volume_data_center_id,
+                "name": spec.network_volume_name,
+                "size": spec.network_volume_size_gb,
+            },
+        )
+        raw_id = response.get("id")
+        if raw_id is None:
+            raise RuntimeError("network-volume create response omitted the id")
+        return str(raw_id), response
+
+    def delete_network_volume(self, network_volume_id: str) -> Any:
+        _, response = self.request(
+            "network_volume_delete", network_volume_id=network_volume_id
+        )
+        return response
+
+    def network_volume_deletion_confirmed(self, network_volume_id: str) -> bool:
+        try:
+            status, _response = self.request(
+                "network_volume_status", network_volume_id=network_volume_id
+            )
+        except RuntimeError as failure:
+            if "HTTP 404" in str(failure):
+                return True
+            raise
+        return status == 404
 
     def status(self, resource_id: str) -> dict[str, Any] | None:
         _, response = self.request("status", resource_id=resource_id)
@@ -295,6 +340,12 @@ class LaunchSpec:
     environment: tuple[tuple[str, str], ...] = ()
     template_id: str | None = None
     use_image_command: bool = False
+    network_volume_id: str | None = None
+    network_volume_size_gb: int | None = None
+    network_volume_mount_path: str = "/workspace"
+    network_volume_data_center_id: str | None = None
+    network_volume_name: str = "sair-managed-network-volume"
+    offpod_receipt_path: str | None = None
 
 
 class TerminationRequested(RuntimeError):
@@ -312,6 +363,38 @@ def validate_guest(spec: LaunchSpec, config: dict[str, Any], token: str | None) 
             raise ValueError(f"guest payload contains forbidden credential marker: {fragment}")
     if token and token in rendered:
         raise ValueError("provider credential appears in guest payload")
+
+
+def verify_offpod_receipt(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        raise RuntimeError("verified off-Pod receipt is missing")
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    if receipt.get("status") != "verified":
+        raise RuntimeError("off-Pod receipt is not verified")
+    restore = receipt.get("restore_verification") or {}
+    if restore.get("status") != "verified":
+        raise RuntimeError("off-Pod receipt lacks verified restore evidence")
+    destination = Path(str(receipt.get("destination", "")))
+    archive = Path(
+        str(
+            receipt.get(
+                "archive",
+                destination / "sair-exp701-checkpoint-export.tar.gz",
+            )
+        )
+    )
+    if archive.resolve().parent != destination.resolve():
+        raise RuntimeError("off-Pod archive is outside its durable destination")
+    expected = receipt.get("archive_sha256")
+    if not archive.is_file() or sha256(archive) != expected:
+        raise RuntimeError("off-Pod archive does not match its receipt")
+    return {
+        "receipt": str(path.resolve()),
+        "archive": str(archive.resolve()),
+        "archive_sha256": expected,
+        "archive_bytes": archive.stat().st_size,
+        "restore_verification": restore,
+    }
 
 
 def redacted_plan(
@@ -340,6 +423,16 @@ def redacted_plan(
             for name, value in spec.environment
         ],
         "template_id": spec.template_id,
+        "network_volume": {
+            "id": spec.network_volume_id,
+            "size_gb": spec.network_volume_size_gb,
+            "mount_path": spec.network_volume_mount_path,
+            "attached": spec.network_volume_id is not None,
+            "managed_create": spec.network_volume_data_center_id is not None,
+            "data_center_id": spec.network_volume_data_center_id,
+            "name": spec.network_volume_name,
+        },
+        "offpod_receipt_path": spec.offpod_receipt_path,
         "credential_environment": provider_config["credential_environment"],
         "budget": asdict(budget),
         "config": str(config_path.relative_to(ROOT)),
@@ -393,7 +486,14 @@ def execute(
     running_at: float | None = None
     terminal_at: float | None = None
     destroyed_at: float | None = None
+    network_volume_id: str | None = spec.network_volume_id
+    managed_network_volume = spec.network_volume_data_center_id is not None
+    network_volume_destroyed_at: float | None = None
     lifecycle = config["lifecycle"]
+    cleanup_headroom_seconds = int(lifecycle.get("cleanup_headroom_seconds", 0))
+    if cleanup_headroom_seconds < 0 or cleanup_headroom_seconds >= budget.max_provider_seconds:
+        raise ValueError("provider cleanup headroom is outside the admitted lifetime")
+    operation_ceiling_seconds = budget.max_provider_seconds - cleanup_headroom_seconds
     receipt = Receipt(
         receipt_path,
         {
@@ -410,8 +510,19 @@ def execute(
         signal.signal(signum, termination_handler)
     failure: Exception | None = None
     try:
+        effective_spec = spec
+        if managed_network_volume:
+            receipt.event("network-volume-create-requested", monotonic() - started)
+            network_volume_id, volume_response = provider.create_network_volume(spec)
+            effective_spec = replace(spec, network_volume_id=network_volume_id)
+            receipt.value["network_volume_id"] = network_volume_id
+            receipt.event(
+                "network-volume-created",
+                monotonic() - started,
+                response_sha256=sha256_text(canonical_json(volume_response)),
+            )
         receipt.event("create-requested", monotonic() - started)
-        resource_id, create_response = provider.create(spec)
+        resource_id, create_response = provider.create(effective_spec)
         receipt.value["resource_id"] = resource_id
         receipt.event(
             "resource-created",
@@ -420,8 +531,8 @@ def execute(
         )
         while True:
             elapsed = monotonic() - started
-            if elapsed >= budget.max_provider_seconds:
-                raise TimeoutError("provider lifetime ceiling reached")
+            if elapsed >= operation_ceiling_seconds:
+                raise TimeoutError("provider operation ceiling reached; cleanup headroom opened")
             status = provider.status(resource_id)
             name = provider.status_name(status)
             observed_rate = provider.observed_hourly_rate(status)
@@ -495,17 +606,86 @@ def execute(
                         error=str(delete_error),
                     )
                 sleep(float(lifecycle["destroy_retry_seconds"]))
+        if managed_network_volume and network_volume_id is not None:
+            can_destroy_volume = resource_id is None or destroyed_at is not None
+            offpod_evidence: dict[str, Any] | None = None
+            if can_destroy_volume and resource_id is not None:
+                try:
+                    offpod_evidence = verify_offpod_receipt(
+                        Path(str(spec.offpod_receipt_path))
+                    )
+                    receipt.event(
+                        "offpod-restore-verified",
+                        monotonic() - started,
+                        **offpod_evidence,
+                    )
+                except Exception as offpod_error:
+                    can_destroy_volume = False
+                    receipt.event(
+                        "network-volume-retained",
+                        monotonic() - started,
+                        reason="offpod-restore-unverified",
+                        error_type=type(offpod_error).__name__,
+                        error=str(offpod_error),
+                    )
+                    if failure is None:
+                        failure = offpod_error
+            if can_destroy_volume:
+                destroy_started = monotonic()
+                attempts = 0
+                while monotonic() - destroy_started < float(
+                    lifecycle["destroy_timeout_seconds"]
+                ):
+                    attempts += 1
+                    try:
+                        response = provider.delete_network_volume(network_volume_id)
+                        receipt.event(
+                            "network-volume-delete-requested",
+                            monotonic() - started,
+                            attempt=attempts,
+                            response_sha256=sha256_text(canonical_json(response)),
+                        )
+                        if provider.network_volume_deletion_confirmed(network_volume_id):
+                            network_volume_destroyed_at = monotonic()
+                            receipt.event(
+                                "network-volume-delete-confirmed",
+                                network_volume_destroyed_at - started,
+                                attempt=attempts,
+                            )
+                            break
+                    except Exception as delete_error:
+                        if "HTTP 404" in str(delete_error):
+                            network_volume_destroyed_at = monotonic()
+                            receipt.event(
+                                "network-volume-delete-confirmed",
+                                network_volume_destroyed_at - started,
+                                attempt=attempts,
+                                already_absent=True,
+                            )
+                            break
+                        receipt.event(
+                            "network-volume-delete-retry",
+                            monotonic() - started,
+                            attempt=attempts,
+                            error_type=type(delete_error).__name__,
+                            error=str(delete_error),
+                        )
+                    sleep(float(lifecycle["destroy_retry_seconds"]))
         for signum, prior in prior_handlers.items():
             signal.signal(signum, prior)
 
     finished = monotonic()
-    billed_lifetime = None if resource_id is None else finished - started
+    billed_lifetime = (
+        None
+        if resource_id is None and network_volume_id is None
+        else finished - started
+    )
     guest_runtime = (
         None
         if running_at is None or terminal_at is None
         else terminal_at - running_at
     )
-    receipt.value["timing"] = {
+    timing = {
         "provider_billed_lifetime_seconds": billed_lifetime,
         "provider_billed_lifetime_source": (
             "controller-create-request-to-delete-confirmation-upper-bound"
@@ -516,6 +696,13 @@ def execute(
             None if destroyed_at is None else destroyed_at - started
         ),
     }
+    if managed_network_volume:
+        timing["network_volume_deletion_confirmed_elapsed_seconds"] = (
+            None
+            if network_volume_destroyed_at is None
+            else network_volume_destroyed_at - started
+        )
+    receipt.value["timing"] = timing
     if billed_lifetime is not None:
         combined = money(budget.hourly_rate_usd) + money(
             budget.storage_hourly_usd
@@ -529,7 +716,17 @@ def execute(
         receipt.value["status"] = "destruction-unconfirmed"
         receipt.write()
         raise RuntimeError(f"provider destruction is unconfirmed: {resource_id}")
-    receipt.value["status"] = "resource-destroyed" if resource_id else "create-failed"
+    if managed_network_volume and network_volume_destroyed_at is None:
+        receipt.value["status"] = "network-volume-destruction-unconfirmed"
+        receipt.write()
+        raise RuntimeError(
+            f"network-volume destruction is unconfirmed: {network_volume_id}"
+        )
+    receipt.value["status"] = (
+        "resource-and-network-volume-destroyed"
+        if managed_network_volume
+        else "resource-destroyed" if resource_id else "create-failed"
+    )
     receipt.write()
     if failure is not None:
         raise failure
@@ -557,6 +754,14 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("--disk-gb", type=int, default=50)
         command.add_argument("--port", action="append", default=[])
         command.add_argument("--template-id")
+        command.add_argument("--network-volume-id")
+        command.add_argument("--network-volume-size-gb", type=int)
+        command.add_argument("--network-volume-mount-path", default="/workspace")
+        command.add_argument("--network-volume-data-center-id")
+        command.add_argument(
+            "--network-volume-name", default="sair-managed-network-volume"
+        )
+        command.add_argument("--offpod-receipt", type=Path)
         command.add_argument(
             "--use-image-command",
             action="store_true",
@@ -591,6 +796,38 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("unsupported provider control schema")
     if args.disk_gb <= 0:
         raise ValueError("disk size must be positive")
+    existing_network_volume = args.network_volume_id is not None
+    managed_network_volume = args.network_volume_data_center_id is not None
+    if managed_network_volume and args.provider != "runpod":
+        raise ValueError("controller-managed network volumes require RunPod")
+    if (
+        args.mode == "run"
+        and managed_network_volume
+        and "REQUIRED_AT_LAUNCH" in args.network_volume_data_center_id
+    ):
+        raise ValueError("bind a live RunPod data center before execution")
+    if existing_network_volume and managed_network_volume:
+        raise ValueError("choose an existing or controller-managed network volume")
+    if (existing_network_volume or managed_network_volume) != (
+        args.network_volume_size_gb is not None
+    ):
+        raise ValueError("network volume mode and size must be supplied together")
+    if args.network_volume_size_gb is not None and args.network_volume_size_gb <= 0:
+        raise ValueError("network volume size must be positive")
+    if not args.network_volume_mount_path.startswith("/"):
+        raise ValueError("network volume mount path must be absolute")
+    storage_policy = config.get("storage", {})
+    if storage_policy.get("require_network_volume") and not (
+        existing_network_volume or managed_network_volume
+    ):
+        raise ValueError("this launch requires an independently persistent network volume")
+    if storage_policy.get("require_controller_managed_network_volume") and not managed_network_volume:
+        raise ValueError("this launch requires a controller-managed network volume")
+    minimum_network_gb = int(storage_policy.get("minimum_network_volume_gb", 0))
+    if args.network_volume_size_gb is not None and args.network_volume_size_gb < minimum_network_gb:
+        raise ValueError(f"network volume must be at least {minimum_network_gb} GB")
+    if storage_policy.get("require_verified_offpod_sync") and args.offpod_receipt is None:
+        raise ValueError("this launch requires a verified off-Pod receipt path")
     ports = tuple(str(value) for value in args.port)
     for value in ports:
         number, separator, protocol = value.partition("/")
@@ -648,6 +885,14 @@ def main(argv: list[str] | None = None) -> int:
         environment=tuple(environment),
         template_id=args.template_id,
         use_image_command=args.use_image_command,
+        network_volume_id=args.network_volume_id,
+        network_volume_size_gb=args.network_volume_size_gb,
+        network_volume_mount_path=args.network_volume_mount_path,
+        network_volume_data_center_id=args.network_volume_data_center_id,
+        network_volume_name=args.network_volume_name,
+        offpod_receipt_path=(
+            None if args.offpod_receipt is None else str(args.offpod_receipt.resolve())
+        ),
     )
     provider_config = config["providers"][args.provider]
     validate_guest(spec, config, None)

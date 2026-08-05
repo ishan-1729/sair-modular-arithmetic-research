@@ -448,6 +448,7 @@ def classify(
         f"imports={imports[:8]!r}; hotspot_counts={hotspot_counts!r}"
     )
     adaptation = config.get("adapted_sources", {}).get(relative)
+    cpu_boundary = config.get("active_cpu_boundaries", {}).get(relative)
     if relative in set(config["ported_paths"]):
         return (
             "device-native-unvalidated",
@@ -462,6 +463,13 @@ def classify(
             f"{adaptation['symbols']!r}; physical CUDA remains unvalidated; "
             f"{static_evidence}.",
             "frozen source stays immutable; adapter owns input/model device placement",
+        )
+    if cpu_boundary:
+        return (
+            "intentionally-cpu-boundary",
+            f"{cpu_boundary['reason']} Active symbols are "
+            f"{cpu_boundary['symbols']!r}; {static_evidence}.",
+            str(cpu_boundary["responsibility"]),
         )
     active_route_ids = {
         route["run_id"] for route in lifecycle["active_consumers"]
@@ -636,6 +644,9 @@ def generate(config_path: Path = CONFIG_PATH) -> dict[str, Any]:
                 "local_import_parents": import_parents.get(path, []),
                 "classification": classification,
                 "adapter": config.get("adapted_sources", {}).get(relative),
+                "active_cpu_boundary": config.get("active_cpu_boundaries", {}).get(
+                    relative
+                ),
                 "durable_lifecycle": lifecycle,
                 "exp649_cpu_boundary": (
                     exp649_boundary

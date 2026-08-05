@@ -13,6 +13,7 @@ from environments.providers import controller
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "configs/cuda_provider_control.yaml"
+EXP701_CONFIG_PATH = ROOT / "configs/exp_701_runpod_control.yaml"
 
 
 class FakeClock:
@@ -229,6 +230,138 @@ def test_runpod_template_launch_keeps_create_payload_small() -> None:
     assert "imageName" not in payload
     assert payload["env"] == {"SAIR_SOURCE_B64_000": "large-value"}
     assert payload["ports"] == ["8000/http"]
+
+
+def test_exp701_requires_and_attaches_independent_network_volume(capsys) -> None:
+    base = [
+        "--config", str(EXP701_CONFIG_PATH), "plan", "--provider", "runpod",
+        "--resource-selector", "NVIDIA GeForce RTX 4090",
+        "--image", "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "--hourly-rate-usd", "0.74", "--storage-hourly-usd", "0.010795",
+        "--max-total-usd", "9.00", "--max-provider-seconds", "36000",
+        "--command", "true", "--template-id", "runpod-torch-v280",
+        "--use-image-command", "--offpod-receipt",
+        str(ROOT / ".scratch/exp701-offpod/offpod-sync-receipt.json"),
+    ]
+    with pytest.raises(ValueError, match="requires an independently persistent"):
+        controller.main(base)
+    with pytest.raises(ValueError, match="controller-managed"):
+        controller.main(base + [
+            "--network-volume-id", "network-volume-test-id",
+            "--network-volume-size-gb", "50",
+            "--network-volume-mount-path", "/workspace",
+        ])
+    assert controller.main(base + [
+        "--network-volume-data-center-id", "EU-RO-1",
+        "--network-volume-name", "sair-exp701-recovery",
+        "--network-volume-size-gb", "50",
+        "--network-volume-mount-path", "/workspace",
+    ]) == 0
+    plan = json.loads(capsys.readouterr().out)
+    assert plan["network_volume"] == {
+        "id": None,
+        "size_gb": 50,
+        "mount_path": "/workspace",
+        "attached": False,
+        "managed_create": True,
+        "data_center_id": "EU-RO-1",
+        "name": "sair-exp701-recovery",
+    }
+    provider = controller.Provider(
+        "runpod", config()["providers"]["runpod"], "secret", FakeTransport([])
+    )
+    payload = provider.create_payload(controller.LaunchSpec(
+        **{
+            **spec("runpod").__dict__,
+            "template_id": "runpod-torch-v280",
+            "network_volume_id": "network-volume-test-id",
+            "network_volume_size_gb": 50,
+            "network_volume_mount_path": "/workspace",
+        }
+    ))
+    assert payload["networkVolumeId"] == "network-volume-test-id"
+    assert payload["volumeMountPath"] == "/workspace"
+
+
+def test_exp701_managed_volume_is_deleted_only_after_offpod_restore_receipt(
+    tmp_path,
+) -> None:
+    destination = tmp_path / "offpod"
+    destination.mkdir()
+    archive = destination / "sair-exp701-checkpoint-export.tar.gz"
+    archive.write_bytes(b"verified recovery export")
+    digest = controller.sha256(archive)
+    receipt = destination / "offpod-sync-receipt.json"
+    receipt.write_text(json.dumps({
+        "status": "verified",
+        "destination": str(destination),
+        "archive_sha256": digest,
+        "restore_verification": {"status": "verified", "files": 3},
+    }))
+    managed = controller.LaunchSpec(
+        **{
+            **spec("runpod").__dict__,
+            "network_volume_size_gb": 50,
+            "network_volume_data_center_id": "EU-RO-1",
+            "network_volume_name": "sair-exp701-recovery",
+            "offpod_receipt_path": str(receipt),
+        }
+    )
+    clock = FakeClock()
+    transport = FakeTransport([
+        (200, {"id": "volume-1", "dataCenterId": "EU-RO-1", "size": 50}),
+        (201, {"id": "pod-1", "adjustedCostPerHr": 0.74}),
+        (200, [{"id": "pod-1", "desiredStatus": "RUNNING", "adjustedCostPerHr": 0.74}]),
+        (200, [{"id": "pod-1", "desiredStatus": "EXITED", "adjustedCostPerHr": 0.74}]),
+        (204, {}),
+        (200, []),
+        (204, {}),
+        (404, {}),
+    ])
+    exp_config = yaml.safe_load(EXP701_CONFIG_PATH.read_text())
+    result = controller.execute(
+        config=exp_config,
+        config_path=EXP701_CONFIG_PATH,
+        spec=managed,
+        budget=controller.admit_budget(
+            hourly_rate_usd=Decimal("0.74"),
+            storage_hourly_usd=Decimal("0.010795"),
+            max_total_usd=Decimal("9.00"),
+            max_provider_seconds=36000,
+            reserve_fraction=Decimal("0.15"),
+            minimum_total_usd=Decimal("0.10"),
+        ),
+        receipt_path=tmp_path / "lifecycle.json",
+        token="runpod-secret-test-token",
+        transport=transport,
+        monotonic=clock.monotonic,
+        sleep=clock.sleep,
+    )
+    assert result["status"] == "resource-and-network-volume-destroyed"
+    assert [call["method"] for call in transport.calls] == [
+        "POST", "POST", "GET", "GET", "DELETE", "GET", "DELETE", "GET"
+    ]
+    assert transport.calls[0]["payload"] == {
+        "dataCenterId": "EU-RO-1", "name": "sair-exp701-recovery", "size": 50
+    }
+    assert transport.calls[1]["payload"]["networkVolumeId"] == "volume-1"
+    assert any(
+        event["event"] == "offpod-restore-verified" for event in result["events"]
+    )
+
+
+def test_exp701_rejects_undersized_network_volume() -> None:
+    arguments = [
+        "--config", str(EXP701_CONFIG_PATH), "plan", "--provider", "runpod",
+        "--resource-selector", "NVIDIA GeForce RTX 4090", "--image", "image",
+        "--hourly-rate-usd", "0.74", "--storage-hourly-usd", "0.010795",
+        "--max-total-usd", "9.00", "--max-provider-seconds", "36000",
+        "--command", "true", "--network-volume-data-center-id", "EU-RO-1",
+        "--network-volume-size-gb", "20", "--offpod-receipt",
+        str(ROOT / ".scratch/exp701-offpod/offpod-sync-receipt.json"),
+    ]
+    with pytest.raises(ValueError, match="at least 50 GB"):
+        controller.main(arguments)
 
 
 def test_runpod_can_preserve_official_image_startup() -> None:

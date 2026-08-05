@@ -1,0 +1,132 @@
+schema_version: exp701-runpod-preflight-v1
+decision: authorize-first-resumable-gpu-slice
+scientific_identity:
+  predecessor: exp-700-resumable-h92-w256-backbone-factorial
+  replay: exp-701-cuda-resumable-h92-w256-backbone-factorial
+  changed_variable: deterministic execution device and pinned CUDA runtime only
+  unchanged:
+    - h92/two-cycle 99,824-parameter topology
+    - four teacher/straight-through x cosine/restart arms
+    - 4,800 updates per arm, batch 16, horizon 8, optimizer and schedules
+    - all transition, rollout, diagnostic, confidence and promotion denominators
+    - source checkpoint cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  fidelity_reduced: false
+  cpu_partial_policy: preserve EXP700 roots 20261404/20261405; never resume them on CUDA
+  fresh_gpu_roots:
+    calibration: 20261413
+    formal: 20261414
+    confirmations: [20261415, 20261416]
+    independent: [20261417, 20261418, 20261419, 20261420, 20261421]
+accepted_hardware_gate:
+  run: cuda-hardware-acceptance-runpod-20260805g
+  source_commit: 02678914d6112a6ff12030b3c05be89ea12c7b5d
+  receipt_commit: 9f155b2082934471af8f38b70895e97c9fff58b2
+  provider: RunPod
+  cloud_type: SECURE
+  gpu: NVIDIA GeForce RTX 4090
+  torch: 2.5.1+cu124
+  cuda_runtime: "12.4"
+  result: four representative CUDA tests passed
+  limitation: acceptance measured compatibility, not EXP700 end-to-end throughput
+resource_preflight:
+  exact_work:
+    training_updates: 19200
+    training_examples: 2457600
+    training_model_calls: 153600
+    primary_transition_cases: 24000
+    primary_rollout_cases: 3600
+    diagnostics: full frozen/reset, randomized, lower-tier, paired vectors, confidence, reload and determinism
+  observed_cpu_evidence:
+    calibrated_full_route_expected_wall_seconds: 158945.09206710514
+    calibrated_full_route_wall_range_seconds: [143050.58286039464, 174839.60127381567]
+    calibrated_process_cpu_seconds: 635222.7498425766
+    teacher_cosine_training_wall_seconds: 17279.227519223998
+    teacher_cosine_primary_plus_paired_eval_wall_seconds: 3857.472
+    candidate_route_wall_seconds: 440.00831005700456
+    peak_rss_bytes: 2680119296
+    expected_artifact_bytes: 106342188
+  conservative_gpu_projection:
+    expected_wall_hours: [6.0, 12.0]
+    classification: planning estimate, not measured RTX4090 throughput
+    reason: the 100k-parameter recurrent convolution is GPU-eligible, but Python bigint sampling, exact offline labels, per-step host/device decoding, paired-vector hashing, MLflow and candidate-runtime measurement remain partly or wholly CPU-bound
+  cpu_bound_phases:
+    - Python big-integer sampling and exact offline target generation
+    - rollout truth/first-error bookkeeping and CPU decoding
+    - paired-vector JSON serialization and SHA-256 hashing
+    - MLflow/filesystem/checkpoint export
+    - isolated 1,100-case candidate release-runtime measurement
+provider_slice:
+  balance_last_observed_usd: 9.23
+  balance_observation_limitation: rounded console evidence after the completed smoke series; provider invoice had not posted
+  compute_usd_per_hour: 0.74
+  container_storage_usd_per_hour_upper: 0.006
+  network_volume:
+    controller_managed: true
+    size_gb: 50
+    usd_per_gb_month: 0.07
+    hourly_upper_usd: 0.004795
+    data_center: bind to a live Secure RTX4090-compatible RunPod data center before create
+    deletion_gate: verified external restore, then DELETE and absence confirmation
+  combined_storage_usd_per_hour_upper: 0.010795
+  maximum_total_cost_usd: 9.00
+  maximum_provider_lifetime_seconds: 36000
+  guest_science_slice_seconds_after_bootstrap: 32400
+  controller_operation_ceiling_seconds: 35100
+  controller_cleanup_headroom_seconds: 900
+  combined_rate_upper_usd_per_hour: 0.750795
+  lifecycle_cost_upper_usd: 7.50795
+  controller_reserve_fraction: 0.15
+  controller_budget_after_reserve_usd: 7.65
+  reserve_headroom_over_lifecycle_upper_usd: 0.14205
+  admitted: true
+  scientific_stop: false
+  incomplete_action: export authenticated recovery state, delete-confirm Pod, and resume the same GPU root only after a later authorization
+persistence_preflight:
+  status: passed-focused-stop-delete-restore-drill
+  network_volume_export:
+    path: /workspace/exp701-durable/sair-exp701-checkpoint-export.tar.gz
+    atomic: true
+    integrity: SHA-256 sidecar plus verified source-tree receipt
+  external_host_copy:
+    transport: SCP over strict-host-key-checked SSH
+    interval_seconds: 300
+    stale_watchdog_seconds: 720
+    initial_gate: science waits for a matching session-nonce acknowledgement
+    verification: archive SHA-256 and full extraction/tree restore on the external host
+    durable_destination: .scratch/exp701-offpod
+  drill:
+    test: tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py::test_external_copy_survives_pod_delete_and_resumes_same_root_exactly
+    deleted_scope: complete simulated disposable Pod and attached-mount tree
+    result: same root marker restored; resumed and uninterrupted recovery signatures exactly equal
+    corruption_falsifier: modified external archive rejected before extraction
+  official_sources:
+    billing: https://docs.runpod.io/accounts-billing/billing
+    storage_types: https://docs.runpod.io/pods/storage/types
+    create_volume_api: https://docs.runpod.io/api-reference/network-volumes/POST/networkvolumes
+    delete_volume_api: https://docs.runpod.io/api-reference/network-volumes/DELETE/networkvolumes/networkVolumeId
+launch_package:
+  source_builder: experiments/cloud_benchmarks/exp701_runpod/prepare_source.sh
+  guest_supervisor: experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
+  host_sync: experiments/cloud_benchmarks/exp701_runpod/host_sync.sh
+  recovery_transport: experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py
+  provider_config: configs/exp_701_runpod_control.yaml
+  provider_plan: .scratch/exp701-launch/provider-plan.json
+  source_archive: .scratch/exp701-launch/source.tar.gz
+  source_archive_hash: .scratch/exp701-launch/source.tar.gz.sha256
+  guest_progress: .scratch/exp-701-cuda-resumable-h92-w256-backbone-factorial
+  guest_export: /workspace/exp701-durable/sair-exp701-checkpoint-export.tar.gz
+  guest_sync_ack: /workspace/exp701-durable/offpod-sync-ack.json
+  external_copy: .scratch/exp701-offpod/sair-exp701-checkpoint-export.tar.gz
+  external_sync_receipt: .scratch/exp701-offpod/offpod-sync-receipt.json
+  durable_provider_receipt: experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle.json
+  durable_run_record: experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/run.json
+  durable_metrics: evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/metrics.json
+required_authorization:
+  environment: SAIR_CLOUD_LAUNCH_APPROVED
+  exact_value: I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10
+limitations:
+  - The first slice may need a later same-root resume because the conservative projection extends to 12 hours.
+  - No paid provider action is authorized by this preflight.
+  - No official/private answers are present in the launch payload.
+  - The network-volume data center must be bound from fresh read-only Secure RTX4090 availability before any paid create request; the dry plan uses an explicit placeholder.
+  - A network volume is not treated as indefinite protection at zero balance; the external restore-verified copy is mandatory and the controller deletion-confirms both resources.

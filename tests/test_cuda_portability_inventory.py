@@ -117,6 +117,19 @@ def test_live_and_superseded_route_dispositions_are_consumer_aware(
     assert exp699["classification"] == "device-native-unvalidated"
     assert exp699["adapter"]["coverage"] == "full-active-route"
 
+    exp701 = rows[
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+    ]
+    assert exp701["classification"] == "device-native-unvalidated"
+    exp686 = rows["experiments/exp_686_w256_straight_through_specialist/run.py"]
+    assert exp686["classification"] == "device-native-unvalidated"
+    assert exp686["adapter"]["consumer"] == exp701["path"]
+    exp700 = rows[
+        "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py"
+    ]
+    assert exp700["classification"] == "intentionally-cpu-boundary"
+    assert exp700["active_cpu_boundary"]["symbols"] == ["CONFIG_PATH", "__file__"]
+
     superseded = [
         row
         for path, row in rows.items()

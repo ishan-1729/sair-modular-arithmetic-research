@@ -18,6 +18,7 @@ ported_paths:
   - experiments/cuda_portability/recurrent.py
   - experiments/cuda_portability/runtime.py
   - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+  - experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
 adapted_sources:
   experiments/exp_401_pyg_graph_message_passing/model.py:
     adapter: experiments/cuda_portability/graph.py
@@ -37,6 +38,29 @@ adapted_sources:
     symbols: [train_arm, rollout, evaluate, evaluate_with_evidence]
     consumer: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
     smoke_command: "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py"
+  experiments/exp_686_w256_straight_through_specialist/run.py:
+    adapter: experiments/cloud_benchmarks/exp699_cuda_replay/run.py
+    coverage: full-active-route
+    symbols: [new_model, hard_straight_through, decode_boolean, load_exp300, candidate_runtime, train_update, tensor_native_rollout]
+    consumer: experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
+    smoke_command: "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
+active_cpu_boundaries:
+  experiments/exp_664_sprm_boundary_perturbation/model.py:
+    symbols: [module-import-only]
+    reason: EXP701 reaches this historical module only as a transitive import; it does not instantiate SPRMCell or execute its tensor route.
+    responsibility: Preserve historical definitions; all active EXP701 model compute is owned by the device-aware replay route.
+  experiments/exp_664_sprm_boundary_perturbation/run.py:
+    symbols: [Timer, git_output, make_split, sha256]
+    reason: EXP701 uses these functions only for host resource timing, repository identity, generated exact-label split construction, and hashing.
+    responsibility: Keep exact-label generation and evidence serialization on CPU; no deployed or recurrent model compute is delegated here.
+  experiments/exp_698_h92_w256_backbone_factorial/run.py:
+    symbols: [module-import-only]
+    reason: EXP701 transitively imports this frozen predecessor but does not call its training, evaluation, rollout, or model functions.
+    responsibility: Preserve the frozen predecessor identity while the EXP701 device-aware route owns all active compute.
+  experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py:
+    symbols: [CONFIG_PATH, __file__]
+    reason: EXP701 reads only the frozen scientific-contract configuration and predecessor runner hash; no EXP700 CPU root or function is executed.
+    responsibility: Authenticate unchanged science and historical provenance without importing CPU work into EXP701.
 lifecycle_policy:
   registry: experiments/registry.yaml
   active_statuses: [planned]

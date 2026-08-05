@@ -1,0 +1,39 @@
+{
+  "schema_version": "exp700-partial-terminal-v1",
+  "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+  "status": "failed",
+  "decision": "execution-interrupted-partial-no-factorial-verdict",
+  "created_at": "2026-08-05T00:00:00+05:30",
+  "checkpoint_sha256": "e1c77428c16effb059f7d2d6339495f11e4ff84e57d83795dc7d9b5fefe6d558",
+  "recovery_snapshot_sha256": "726947c5e99afc20e75a00edaef257cd7bb370b84a8585bad11837e8399ac16a",
+  "evaluation": {
+    "transition": {
+      "teacher_cosine_w128": {"cases": 3000, "correct": 2999, "exact_accuracy": 0.9996666666666667, "prediction_sha256": "06b43a33d4411c00deffdc00bade8c975cb3116cfd84b5af6a21f159891461b2", "paired_vectors_sha256": "350900b67350ade0590bee03607a97b3b1413f33edd73fca2b41abb96a9083f0"},
+      "teacher_cosine_w256": {"cases": 3000, "correct": 2995, "exact_accuracy": 0.9983333333333333, "prediction_sha256": "2f506148a0c84f3201fbadcba1c57f8a8a3764fe3ba7292e3420fd24cff366a3", "paired_vectors_sha256": "d7c2ad08fc50acd019d27571f05e9a2c4c2336e049f390e14dfe4df9d9efb7aa"}
+    },
+    "rollout": {
+      "teacher_cosine_w128": {"cases": 300, "correct": 274, "exact_accuracy": 0.9133333333333333, "invalids": 0, "prediction_sha256": "8120a2d7151a44e4790a7d1e0f34bda31636b6b88b68ebf3967cb32b0ae170ed", "paired_vectors_sha256": "d7f8007942f8887eb5aae90e2314ae8c37bdadd46b8a086dbd16b3f195dc3720"},
+      "teacher_cosine_w256": {"cases": 600, "correct": 377, "exact_accuracy": 0.6283333333333333, "invalids": 6, "prediction_sha256": "e468c844c4b46025524685c1a499224c8b7288cb6418d45eeeb93e6cff2ed2c1", "paired_vectors_sha256": "97b8afa69107672285ae039977989fddcd9449aa48c3ec68080bed6751763776"}
+    }
+  },
+  "runtime": {
+    "calibration_wall_seconds": 549.4798054589992,
+    "teacher_cosine_training_wall_seconds": 17279.227519223998,
+    "teacher_cosine_primary_plus_paired_evaluation_wall_seconds": 3857.472,
+    "candidate_route_wall_seconds": 440.00831005700456,
+    "peak_rss_bytes": 2680119296
+  },
+  "controls": {
+    "teacher_cosine_complete": true,
+    "teacher_restarts_completed": false,
+    "straight_through_arms_opened": false,
+    "factorial_comparison_valid": false,
+    "diagnostics_opened": false,
+    "fresh_gpu_replay_required": true
+  },
+  "limitations": [
+    "Only one of four arms completed training and primary evaluation.",
+    "Teacher-restarts stopped at update 2300 with exact recovery state; its primary evaluations were not opened.",
+    "No diagnostic, factorial, confirmation, independent-seed, checked, private, promotion, submission or release conclusion is supported."
+  ]
+}

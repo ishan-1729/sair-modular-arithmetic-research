@@ -1,0 +1,97 @@
+{
+  "schema_version": "exp700-partial-terminal-v1",
+  "run_id": "exp-700-resumable-h92-w256-backbone-factorial",
+  "status": "failed",
+  "decision": "execution-interrupted-partial-no-factorial-verdict",
+  "decision_authority": "T112-gpu-phase-reset",
+  "created_at": "2026-08-05T00:00:00+05:30",
+  "hypothesis": "Exact crash recovery and a persistent lifecycle can complete the unchanged EXP699 h92/two-cycle factorial without losing or duplicating work.",
+  "config": "configs/exp_700_resumable_h92_w256_backbone_factorial.yaml",
+  "seed": 20261405,
+  "roots": {
+    "20261404": "completed-calibration-admitted",
+    "20261405": "execution-interrupted-partial",
+    "20261406": "unopened-interruption",
+    "20261407": "unopened-interruption",
+    "20261408": "unopened-interruption",
+    "20261409": "unopened-interruption",
+    "20261410": "unopened-interruption",
+    "20261411": "unopened-interruption",
+    "20261412": "unopened-interruption"
+  },
+  "source": {
+    "branch": "codex/exp700-resumable-h92-w256-backbone",
+    "repository_commit": "4074396675239d99f1b515c1f600f0249d2a0a2d",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "f16a02a38315622219725473a01668adc1bf8416c24bbd730fb4c3b059cd5ed5",
+    "runner_sha256": "f4519b37c61042777272a5f11672c8d9653b8ebff4aa4f6d6f9d879affa5dd48",
+    "test_sha256": "1bcfe5b15fa973cb1628a6ea793967695c9732a55622bdcec6865e499d63dfd7",
+    "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "environment": {
+    "platform": "Linux-WSL2-x86_64",
+    "python": "3.12.3",
+    "torch": "2.5.1+cpu",
+    "mlflow": "3.14.0",
+    "numpy": "2.5.1",
+    "configured_torch_threads": 4,
+    "precision": "CPU FP32 deterministic algorithms"
+  },
+  "calibration": {
+    "root": 20261404,
+    "status": "completed",
+    "decision": "admit-formal",
+    "wall_seconds": 549.4798054589992,
+    "process_cpu_seconds": 1942.838198,
+    "cgroup_cpu_seconds": 3661.9919999999984,
+    "peak_rss_bytes": 1428946944,
+    "candidate_route_wall_seconds": 440.00831005700456,
+    "expected_formal_wall_seconds": 158945.09206710514,
+    "expected_formal_wall_range_seconds": [143050.58286039464, 174839.60127381567],
+    "hard_guard_wall_seconds": 278153.911117434
+  },
+  "training_updates": {
+    "teacher_cosine": 4800,
+    "teacher_restarts": 2300,
+    "straight_through_cosine": 0,
+    "straight_through_restarts": 0
+  },
+  "completed_primary_denominators": {
+    "teacher_cosine": {
+      "w128_transition": 3000,
+      "w128_rollout": 300,
+      "w256_transition": 3000,
+      "w256_rollout": 600
+    }
+  },
+  "scientific_metrics": {
+    "teacher_cosine_w128_transition": 0.9996666666666667,
+    "teacher_cosine_w128_rollout": 0.9133333333333333,
+    "teacher_cosine_w256_transition": 0.9983333333333333,
+    "teacher_cosine_w256_rollout": 0.6283333333333333
+  },
+  "scientific_verdict": null,
+  "factorial_verdict": null,
+  "diagnostic_verdict": null,
+  "mlflow_run_id": "087e69c9cc7c465badf920662f726bfb",
+  "artifacts": {
+    "calibration": ".scratch/exp-700-resumable-h92-w256-backbone-factorial/calibration.json",
+    "partial_progress": ".scratch/exp-700-resumable-h92-w256-backbone-factorial/formal/root-20261405/progress.json",
+    "checkpoint": ".scratch/exp-700-resumable-h92-w256-backbone-factorial/formal/root-20261405/arms/teacher_cosine/model.safetensors",
+    "recovery_snapshot": ".scratch/exp-700-resumable-h92-w256-backbone-factorial/formal/root-20261405/recovery/teacher_restarts/latest.pt",
+    "metrics": "evals/results/exp-700-resumable-h92-w256-backbone-factorial/metrics.json",
+    "preregistration": "knowledge/autoresearch/ablations/exp-700-resumable-h92-w256-backbone-factorial.md"
+  },
+  "artifact_hashes": {
+    "calibration_sha256": "cee449e4c7e4166afdce803b7854db89f38172427136412141546a8c2cef0126",
+    "partial_progress_sha256": "98c6e3fccea60853f429c1f09ee6c9e65ad8ee3b47d80b640f61a2f47e93f565",
+    "teacher_cosine_checkpoint_sha256": "e1c77428c16effb059f7d2d6339495f11e4ff84e57d83795dc7d9b5fefe6d558",
+    "teacher_restarts_recovery_sha256": "726947c5e99afc20e75a00edaef257cd7bb370b84a8585bad11837e8399ac16a"
+  },
+  "notes": [
+    "EXP700 is preserved as an interrupted CPU run, not a scientific rejection.",
+    "The teacher-cosine arm completed all primary denominators; teacher-restarts has an authenticated full optimizer/RNG recovery snapshot at update 2300.",
+    "Switching root 20261405 from CPU to CUDA would invalidate matched identity, so the GPU replay uses fresh EXP701 roots.",
+    "No factorial, winner, diagnostic, confirmation, independent, checked, private, promotion, submission or release claim is authorized."
+  ]
+}

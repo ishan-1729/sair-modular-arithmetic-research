@@ -2565,3 +2565,42 @@ runs:
     diagnostic_verdict: null
     mlflow_run_id: c37854792da3454ca0f0b6f7c4da496f
     limitations: [execution-interrupted-not-scientifically-rejected, only-two-teacher-arms-complete, straight-through-cosine-update1200-only, straight-through-restarts-and-all-diagnostics-unopened, no-factorial-or-confirmation-claim]
+  - run_id: exp-700-resumable-h92-w256-backbone-factorial
+    status: failed-execution-interrupted-partial
+    approach: crash-resumable-candidate005-h92-two-cycle-four-arm-backbone-factorial
+    decision: execution-interrupted-partial-no-factorial-verdict
+    decision_authority: T112-gpu-phase-reset
+    source_base_commit: 4074396675239d99f1b515c1f600f0249d2a0a2d
+    source_branch: codex/exp700-resumable-h92-w256-backbone
+    config: configs/exp_700_resumable_h92_w256_backbone_factorial.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-700-resumable-h92-w256-backbone-factorial.md
+    run_record: experiments/runs/exp-700-resumable-h92-w256-backbone-factorial/run.json
+    metrics: evals/results/exp-700-resumable-h92-w256-backbone-factorial/metrics.json
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261404: completed-calibration-admitted, 20261405: execution-interrupted-partial, 20261406: unopened-interruption, 20261407: unopened-interruption, 20261408: unopened-interruption, 20261409: unopened-interruption, 20261410: unopened-interruption, 20261411: unopened-interruption, 20261412: unopened-interruption}
+    verification_summary: {recovery_smoke: exact-interrupted-versus-uninterrupted, partial_authentication: calibration-progress-checkpoint-recovery-hashes-recorded, gpu_migration: forbidden-fresh-exp701-required}
+    calibration: {wall_seconds: 549.4798054589992, process_cpu_seconds: 1942.838198, cgroup_cpu_seconds: 3661.9919999999984, peak_rss_bytes: 1428946944, candidate_route_wall_seconds: 440.00831005700456}
+    training_updates: {teacher_cosine: 4800, teacher_restarts: 2300, straight_through_cosine: 0, straight_through_restarts: 0}
+    scientific_metrics: {teacher_cosine_w128_transition: 0.9996666666666667, teacher_cosine_w128_rollout: 0.9133333333333333, teacher_cosine_w256_transition: 0.9983333333333333, teacher_cosine_w256_rollout: 0.6283333333333333}
+    scientific_verdict: null
+    factorial_verdict: null
+    diagnostic_verdict: null
+    mlflow_run_id: 087e69c9cc7c465badf920662f726bfb
+    limitations: [historical-cpu-evidence-only, only-teacher-cosine-complete, teacher-restarts-update2300-recovery-only, no-cpu-work-may-enter-exp701, no-factorial-or-confirmation-claim]
+  - run_id: exp-701-cuda-resumable-h92-w256-backbone-factorial
+    status: preregistered-awaiting-paid-authorization
+    approach: deterministic-rtx4090-fresh-root-replay-of-exp700-full-four-arm-factorial
+    decision: authorize-first-resumable-gpu-slice
+    decision_authority: T112-exp700-to-fresh-gpu-phase-reset
+    source_base_commit: 4074396675239d99f1b515c1f600f0249d2a0a2d
+    source_branch: codex/exp701-cuda-resumable-h92-w256-backbone
+    config: configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-701-cuda-resumable-h92-w256-backbone-factorial.md
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    roots: {20261413: reserved-calibration, 20261414: reserved-formal, 20261415: reserved-conditional-confirmation, 20261416: reserved-conditional-confirmation, 20261417: reserved-conditional-independent, 20261418: reserved-conditional-independent, 20261419: reserved-conditional-independent, 20261420: reserved-conditional-independent, 20261421: reserved-conditional-independent}
+    hardware_gate: {run: cuda-hardware-acceptance-runpod-20260805g, source_commit: 02678914d6112a6ff12030b3c05be89ea12c7b5d, receipt_commit: 9f155b2082934471af8f38b70895e97c9fff58b2, gpu: NVIDIA-GeForce-RTX-4090, result: passed-four-of-four}
+    provider_slice: {max_total_usd: 9.0, max_provider_hours: 10, admitted_cost_upper_usd: 7.50795, controller_budget_after_reserve_usd: 7.65, scientific_stop: false}
+    persistence_gate: {network_volume_gb: 50, offpod_sync_seconds: 300, stop_delete_restore_drill: passed-exact-same-root-resume, network_volume_delete_requires_external_restore: true}
+    scientific_metrics: null
+    scientific_verdict: null
+    limitations: [paid-launch-not-yet-authorized, gpu-throughput-not-yet-measured, first-slice-may-require-same-root-gpu-resume, no-cpu-work-substitution, live-secure-rtx4090-data-center-binding-required-before-create]
