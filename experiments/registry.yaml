@@ -2562,3 +2562,21 @@ runs:
       - No CUDA semantic, performance, utilization, or VRAM result exists.
       - Billing records had not posted at cleanup; the recorded cost is the controller upper bound.
       - The branch remains CUDA hardware unvalidated and is not plug-and-play.
+  - run_id: cuda-hardware-acceptance-runpod-20260805g
+    status: completed
+    approach: runpod-secure-rtx4090-cuda-hardware-acceptance
+    decision: cuda-hardware-validated-acceptance-only
+    source_base_commit: 02678914d6112a6ff12030b3c05be89ea12c7b5d
+    source_branch: codex/cuda-portable-experiments
+    config: configs/cuda_portability.yaml
+    preregistration: knowledge/autoresearch/ablations/cuda-portable-experiments.md
+    run_record: experiments/runs/cuda-hardware-acceptance-runpod-20260805g/run.json
+    metrics: evals/results/cuda-hardware-acceptance-runpod-20260805g/metrics.json
+    checkpoint: null
+    configured_seed: 20260803
+    acceptance: {executed: true, required_tests: 4, observed_tests: 4, passed_tests: 4, wall_seconds: 11.163757524918765}
+    provider: {name: RunPod, cloud: SECURE, gpu: NVIDIA GeForce RTX 4090, billable_lifetime_upper_seconds: 228.5337558629999, cost_upper_usd: 0.04735727274272165, authorization_series_cost_upper_usd: 0.7932961325195431, invoice_usd: null, cleanup_confirmed: true}
+    limitations:
+      - Hardware acceptance is not a long-experiment performance benchmark.
+      - Peak VRAM and utilization were not measured across the pytest child process.
+      - The provider invoice had not posted; cost is a conservative lifecycle upper bound.

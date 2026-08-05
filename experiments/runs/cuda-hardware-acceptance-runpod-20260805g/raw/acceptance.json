@@ -1,0 +1,156 @@
+{
+  "cuda_memory": {
+    "peak_allocated_bytes": 0,
+    "peak_reserved_bytes": 0
+  },
+  "environment": {
+    "gpu": {
+      "compute_capability": "8.9",
+      "driver": "580.159.04",
+      "memory_mib": "24564",
+      "name": "NVIDIA GeForce RTX 4090",
+      "torch_compute_capability": [
+        8,
+        9
+      ],
+      "torch_name": "NVIDIA GeForce RTX 4090",
+      "torch_total_memory_bytes": 25250627584
+    },
+    "locks": {
+      "cu121": {
+        "path": "environments/cuda/requirements-cu121.txt",
+        "requirements": 124,
+        "sha256": "817f01d626ed840d4a8912968229d87450ba60da7d2cb42552fccccfca9c4f70",
+        "torch_url": "https://download.pytorch.org/whl/cu121/torch-2.5.1%2Bcu121-cp312-cp312-linux_x86_64.whl"
+      },
+      "cu124": {
+        "path": "environments/cuda/requirements-cu124.txt",
+        "requirements": 124,
+        "sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355",
+        "torch_url": "https://download.pytorch.org/whl/cu124/torch-2.5.1%2Bcu124-cp312-cp312-linux_x86_64.whl"
+      }
+    },
+    "packages": {
+      "PyYAML": "6.0.3",
+      "mlflow": "3.14.0",
+      "numpy": "2.5.1",
+      "pytest": "9.1.1",
+      "safetensors": "0.8.0",
+      "torch-geometric": "2.8.0"
+    },
+    "profile": "cu124",
+    "profile_config": "environments/cuda/profiles.yaml",
+    "profile_config_sha256": "f863b464eb5f4ccec876ae36a72325dd0eaf6178bfe3d98d100604daaf8fea7c",
+    "pypi_index": "https://pypi.org/simple",
+    "python": "3.12.13",
+    "status": "live-cuda-verified",
+    "torch": "2.5.1+cu124",
+    "torch_cuda_runtime": "12.4",
+    "uv": {
+      "installer_sha256": "b7b3fe80cad1142a2a5794050b7db7b3291d1bac1423b0732571dd9366e8ca8b",
+      "installer_url": "https://astral.sh/uv/0.11.28/install.sh",
+      "version": "0.11.28"
+    },
+    "uv_runtime": "uv 0.11.28 (x86_64-unknown-linux-gnu)"
+  },
+  "finished_unix_seconds": 1785926250.4591858,
+  "matrix": {
+    "invalid": [],
+    "missing": [],
+    "observed": [
+      {
+        "class": "tests.test_cuda_hardware_acceptance",
+        "error": false,
+        "failed": false,
+        "name": "test_cuda_runtime_and_exp699_update",
+        "seconds": 0.646,
+        "skipped": false
+      },
+      {
+        "class": "tests.test_cuda_hardware_acceptance",
+        "error": false,
+        "failed": false,
+        "name": "test_cuda_exp510_typed_max_graph",
+        "seconds": 0.12,
+        "skipped": false
+      },
+      {
+        "class": "tests.test_cuda_hardware_acceptance",
+        "error": false,
+        "failed": false,
+        "name": "test_cuda_exp654_neural_ram",
+        "seconds": 0.12,
+        "skipped": false
+      },
+      {
+        "class": "tests.test_cuda_hardware_acceptance",
+        "error": false,
+        "failed": false,
+        "name": "test_cuda_checkpoint_round_trip",
+        "seconds": 0.004,
+        "skipped": false
+      }
+    ],
+    "passed": true,
+    "required": [
+      "test_cuda_checkpoint_round_trip",
+      "test_cuda_exp510_typed_max_graph",
+      "test_cuda_exp654_neural_ram",
+      "test_cuda_runtime_and_exp699_update"
+    ]
+  },
+  "profile": {
+    "config": "environments/cuda/profiles.yaml",
+    "config_sha256": "f863b464eb5f4ccec876ae36a72325dd0eaf6178bfe3d98d100604daaf8fea7c",
+    "cuda_runtime": "12.4",
+    "expected_lock_sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355",
+    "lock": "environments/cuda/requirements-cu124.txt",
+    "lock_sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355",
+    "name": "cu124",
+    "torch_version": "2.5.1+cu124"
+  },
+  "pytest": {
+    "command": [
+      "/workspace/sair-venv-cu124/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_cuda_hardware_acceptance.py",
+      "--junitxml=/workspace/sair-output/acceptance/hardware-junit.xml"
+    ],
+    "exit_code": 0,
+    "junit": "hardware-junit.xml",
+    "stderr": "",
+    "stdout": "....                                                                     [100%]\n=============================== warnings summary ===============================\ntests/test_cuda_hardware_acceptance.py::test_cuda_exp510_typed_max_graph\n  /workspace/sair-venv-cu124/lib/python3.12/site-packages/torch_geometric/utils/_scatter.py:91: UserWarning: The usage of `scatter(reduce='max')` can be accelerated via the 'torch-scatter' package, but it was not found\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n4 passed, 1 warning in 7.92s\n"
+  },
+  "repository": {
+    "commit": "02678914d6112a6ff12030b3c05be89ea12c7b5d",
+    "dirty": false
+  },
+  "runtime": {
+    "cublas_workspace_config": ":4096:8",
+    "deterministic_algorithms": true,
+    "device": "cuda:0",
+    "gpu": {
+      "compute_capability": [
+        8,
+        9
+      ],
+      "name": "NVIDIA GeForce RTX 4090",
+      "total_memory_bytes": 25250627584
+    },
+    "tf32": false,
+    "torch": "2.5.1+cu124",
+    "torch_cuda_runtime": "12.4"
+  },
+  "schema_version": "cuda-hardware-acceptance-v1",
+  "source": {
+    "config": "configs/cuda_portability.yaml",
+    "config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4",
+    "runner_sha256": "534b580926e6c2c26dbb3f25a72231a3177b4499581ad1e610e48886a7a403d8",
+    "test_sha256": "8a4ca9ab6d84f0c8a149308461fbed886c9a59a67f820f050705558f8ea5be2f"
+  },
+  "started_unix_seconds": 1785926239.2954266,
+  "status": "passed",
+  "wall_seconds": 11.163757524918765
+}

@@ -660,7 +660,7 @@
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
-      "source_sha256": "cf4e31eb02438dc51c4d6cdd9afcf5793c2ac6545a1cdc95b30d438a9ed99cc6",
+      "source_sha256": "534b580926e6c2c26dbb3f25a72231a3177b4499581ad1e610e48886a7a403d8",
       "torch_referenced": true
     },
     {
@@ -27332,9 +27332,9 @@
     "config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4",
     "python_file_count": 236,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "d942f029429580707440b7aa42a9c8c693615a47b902cda5cc7f933861e46879",
+    "registry_sha256": "0130ebd82dd7b32d28b8e29b68a39988a6584d0ff000fe97a0f2a579bf4792cb",
     "root_count": 164,
-    "tree_sha256": "8034dbc82565cb5f8d9a8cd4ff9e7daf855fe3783db2255a1ad41aa0ff4e3c22"
+    "tree_sha256": "b8bd05782b81f2db5562e9baa6db5bbf98ebcde90ffe1f22c7f756a8bf6422ac"
   },
   "summary": {
     "classifications": {

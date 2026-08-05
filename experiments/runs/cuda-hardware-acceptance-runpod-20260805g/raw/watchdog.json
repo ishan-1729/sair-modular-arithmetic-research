@@ -1,0 +1,11 @@
+{
+  "delete_attempts": 1,
+  "delete_reason": "requested",
+  "hard_lifetime_seconds": 900,
+  "observed_rate_usd_per_hour": 0.74,
+  "pod_name": "sair-cuda-acceptance-20260805g",
+  "provider_lifetime_upper_seconds": 228.5337558629999,
+  "resource_id": "61wzi5h2xjvjuk",
+  "schema_version": "runpod-ui-watchdog-v1",
+  "status": "delete-confirmed"
+}

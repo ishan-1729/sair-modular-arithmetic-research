@@ -259,3 +259,26 @@ never installed, all four hardware tests remain unexecuted, and semantic
 parity, VRAM, utilization, and speedup remain unknown. Readiness is therefore
 `cuda-provider-startup-blocked`, a more specific hardware-unvalidated state;
 neither `cuda-hardware-validated` nor `plug-and-play` is permitted.
+
+## T011 successful RunPod hardware acceptance
+
+The corrected archive runner at commit
+`02678914d6112a6ff12030b3c05be89ea12c7b5d` completed the pinned cu124
+bootstrap on a RunPod Secure RTX 4090 and passed all four required hardware
+cases. The environment receipt observed PyTorch `2.5.1+cu124`, CUDA runtime
+12.4, driver `580.159.04`, compute capability 8.9, and 24,564 MiB of device
+memory. The four-case pytest matrix passed in 7.92 seconds and the acceptance
+receipt completed in 11.163757524918765 seconds; the exact-archive guest
+lifecycle, including first-time environment setup, was 122.194056918 seconds.
+
+The successful Pod was deleted after a provider-lifetime upper bound of
+228.5337558629999 seconds. Its cost upper bound was $0.04735727274272165;
+including every authorized diagnostic and setup attempt, the conservative
+series upper bound was $0.7932961325195431, below the $1.00 authorization.
+Final read-only inventory observed zero Pods. The durable receipt is
+`experiments/runs/cuda-hardware-acceptance-runpod-20260805g/run.json`.
+
+Readiness is now `cuda-hardware-validated-acceptance-only`: the representative
+CUDA families and checkpoint round trip are operational, but no long training
+experiment has run, so no speedup, throughput, utilization, or representative
+peak-VRAM claim is permitted yet.
