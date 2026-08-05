@@ -183,6 +183,10 @@ class Provider:
                 }
                 if spec.cuda_runtime != "any":
                     payload["allowedCudaVersions"] = [spec.cuda_runtime]
+                if spec.environment:
+                    payload["env"] = dict(spec.environment)
+                if spec.ports:
+                    payload["ports"] = list(spec.ports)
                 return payload
             payload = {
                 "name": spec.label,

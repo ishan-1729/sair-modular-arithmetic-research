@@ -22,6 +22,16 @@ python="$environment_dir/bin/python"
   echo "missing CUDA environment; run environments/cuda/bootstrap.sh first" >&2
   exit 3
 }
+uv_marker="$environment_dir/.sair-uv-bin"
+[[ -f "$uv_marker" ]] || {
+  echo "missing pinned uv marker; run environments/cuda/bootstrap.sh first" >&2
+  exit 3
+}
+export SAIR_UV_BIN="$(<"$uv_marker")"
+[[ -x "$SAIR_UV_BIN" ]] || {
+  echo "pinned uv executable is unavailable: $SAIR_UV_BIN" >&2
+  exit 3
+}
 export CUBLAS_WORKSPACE_CONFIG=":4096:8"
 export SAIR_CUDA_PROFILE="$profile"
 "$python" "$repository_root/environments/cuda/verify_environment.py" \

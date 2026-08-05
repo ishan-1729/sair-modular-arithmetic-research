@@ -68,6 +68,18 @@ def test_bootstrap_is_pinned_and_dry_run_never_probes_or_installs(tmp_path) -> N
     assert not (tmp_path / "unused").exists()
 
 
+def test_bootstrap_persists_pinned_uv_path_for_standalone_acceptance() -> None:
+    bootstrap = (CUDA_DIR / "bootstrap.sh").read_text(encoding="utf-8")
+    acceptance_script = (CUDA_DIR / "run-acceptance.sh").read_text(
+        encoding="utf-8"
+    )
+    assert '.sair-uv-bin' in bootstrap
+    assert 'printf \'%s\\n\' "$SAIR_UV_BIN"' in bootstrap
+    assert 'uv_marker="$environment_dir/.sair-uv-bin"' in acceptance_script
+    assert 'export SAIR_UV_BIN="$(<"$uv_marker")"' in acceptance_script
+    assert '[[ -x "$SAIR_UV_BIN" ]]' in acceptance_script
+
+
 def test_version_and_lock_guards_fail_closed() -> None:
     assert verify.version_tuple("550.54.14") > verify.version_tuple("525.60.13")
     profiles = verify.load_profiles()
@@ -107,8 +119,25 @@ def test_junit_matrix_rejects_skips_and_missing_cases(tmp_path) -> None:
     assert [row["name"] for row in result["invalid"]] == ["b"]
 
 
+def test_archive_acceptance_uses_explicit_source_identity(monkeypatch) -> None:
+    commit = "a" * 40
+    monkeypatch.setenv("SAIR_SOURCE_COMMIT", commit)
+    monkeypatch.setenv("SAIR_SOURCE_DIRTY", "0")
+    monkeypatch.setattr(
+        acceptance,
+        "git_output",
+        lambda *_: (_ for _ in ()).throw(AssertionError("git must not run")),
+    )
+    assert acceptance.repository_identity() == {"commit": commit, "dirty": False}
+
+
 def test_acceptance_execution_cannot_fall_back_to_cpu(monkeypatch, tmp_path) -> None:
     monkeypatch.setattr(acceptance.torch.cuda, "is_available", lambda: False)
+    monkeypatch.setattr(
+        acceptance,
+        "git_output",
+        lambda *arguments: "test-commit" if arguments[0] == "rev-parse" else "",
+    )
     try:
         acceptance.execute("cu124", tmp_path)
     except RuntimeError as error:

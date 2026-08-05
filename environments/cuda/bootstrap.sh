@@ -128,6 +128,7 @@ env -u UV_INDEX -u UV_EXTRA_INDEX_URL -u UV_INDEX_URL \
 
 export CUBLAS_WORKSPACE_CONFIG=":4096:8"
 export SAIR_UV_BIN="$uv_binary"
+printf '%s\n' "$SAIR_UV_BIN" > "$environment_dir/.sair-uv-bin"
 "$environment_dir/bin/python" "$repository_root/environments/cuda/verify_environment.py" \
   --profile "$profile" --receipt "$receipt_path"
 printf 'CUDA environment ready: %s\nReceipt: %s\n' "$environment_dir" "$receipt_path"

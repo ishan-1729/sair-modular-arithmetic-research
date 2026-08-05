@@ -226,7 +226,9 @@ def test_runpod_template_launch_keeps_create_payload_small() -> None:
     )
     payload = provider.create_payload(templated)
     assert payload["templateId"] == "template-1"
-    assert "imageName" not in payload and "env" not in payload and "ports" not in payload
+    assert "imageName" not in payload
+    assert payload["env"] == {"SAIR_SOURCE_B64_000": "large-value"}
+    assert payload["ports"] == ["8000/http"]
 
 
 def test_runpod_can_preserve_official_image_startup() -> None:

@@ -45,6 +45,23 @@ def git_output(*args: str) -> str:
     ).stdout.strip()
 
 
+def repository_identity() -> dict[str, Any]:
+    source_commit = os.environ.get("SAIR_SOURCE_COMMIT")
+    source_dirty = os.environ.get("SAIR_SOURCE_DIRTY")
+    if source_commit is None and source_dirty is None:
+        return {
+            "commit": git_output("rev-parse", "HEAD"),
+            "dirty": bool(git_output("status", "--porcelain")),
+        }
+    if source_commit is None or len(source_commit) != 40 or any(
+        character not in "0123456789abcdef" for character in source_commit
+    ):
+        raise RuntimeError("SAIR_SOURCE_COMMIT must be a 40-character lowercase SHA")
+    if source_dirty not in {"0", "1"}:
+        raise RuntimeError("SAIR_SOURCE_DIRTY must be 0 or 1")
+    return {"commit": source_commit, "dirty": source_dirty == "1"}
+
+
 def junit_receipt(path: Path, required_tests: Iterable[str]) -> dict[str, Any]:
     root = ET.parse(path).getroot()
     cases = list(root.iter("testcase"))
@@ -102,10 +119,7 @@ def execute(profile_name: str, output: Path) -> dict[str, Any]:
         "schema_version": acceptance["schema_version"],
         "status": "failed",
         "started_unix_seconds": started,
-        "repository": {
-            "commit": git_output("rev-parse", "HEAD"),
-            "dirty": bool(git_output("status", "--porcelain")),
-        },
+        "repository": repository_identity(),
         "source": {
             "config": CONFIG_PATH.relative_to(ROOT).as_posix(),
             "config_sha256": sha256(CONFIG_PATH),
