@@ -1,0 +1,133 @@
+{
+  "official_pytorch_pod_templates": [
+    {
+      "containerDiskInGb": 20,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "runpod-torch-v21",
+      "imageName": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.1",
+      "ports": [
+        "8888/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 20,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 20,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "runpod-torch-v220",
+      "imageName": "runpod/pytorch:2.2.0-py3.10-cuda12.1.1-devel-ubuntu22.04",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.2.0",
+      "ports": [
+        "8888/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 20,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 20,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "runpod-torch-v240",
+      "imageName": "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.4.0",
+      "ports": [
+        "8888/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 20,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 30,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "runpod-torch-v280",
+      "imageName": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.8.0",
+      "ports": [
+        "8888/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 50,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 50,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "9yo900pjtt",
+      "imageName": "runpod/pytorch:1.0.7-cu1281-torch280-ubuntu2404-cluster",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.8.0 for clusters",
+      "ports": [
+        "8888/http",
+        "8889/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 30,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 50,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "a9dk3g7cny",
+      "imageName": "runpod/pytorch:1.0.7-cu1300-torch291-ubuntu2404-cluster",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.9.0 for clusters",
+      "ports": [
+        "8888/http",
+        "8889/http",
+        "22/tcp",
+        "22/udp"
+      ],
+      "volumeInGb": 30,
+      "volumeMountPath": "/workspace"
+    },
+    {
+      "containerDiskInGb": 40,
+      "dockerEntrypoint": null,
+      "dockerStartCmd": null,
+      "id": "runpod-torch-v240-rocm61",
+      "imageName": "runpod/pytorch:2.4.0-py3.10-rocm6.1.0-ubuntu22.04",
+      "isRunpod": true,
+      "isServerless": null,
+      "name": "Runpod Pytorch 2.4.0 ROCm 6.1",
+      "ports": [
+        "8888/http",
+        "22/tcp"
+      ],
+      "volumeInGb": 40,
+      "volumeMountPath": "/workspace"
+    }
+  ],
+  "pods": [],
+  "rtx4090": {
+    "http_error": 400,
+    "path": "/gpuTypes"
+  },
+  "rtx4090_stock": {
+    "http_error": 403,
+    "path": "graphql"
+  }
+}

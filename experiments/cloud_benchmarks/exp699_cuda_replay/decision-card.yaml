@@ -1,0 +1,70 @@
+hypothesis_or_requirement: >-
+  A CUDA execution of the already-completed EXP699 teacher_cosine arm can
+  preserve its frozen work and generated exact-answer evidence while reducing
+  the 11,452.156460124002-second CPU route by at least 3x.
+measured_failure_or_need: >-
+  EXP699 consumes about four laptop cores and the completed teacher_cosine
+  training plus primary/paired evidence route took 3.181 hours. The original
+  runner constructs CPU tensors exclusively and therefore cannot use a rented
+  GPU without an explicit device port.
+baseline_and_identity:
+  experiment: exp-699-h92-w256-backbone-factorial-complete
+  root: 20261396
+  arm: teacher_cosine
+  source_config_sha256: 8290e327b38cc035e106a2640618223dd84eaebb2ffdc818f5bd0098c2b7a0c6
+  source_runner_sha256: eca1ee3787c3ac292375546d35e7518e140d5f9401285140dc9e37f67f8df344
+  source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  local_route_wall_seconds: 11452.156460124002
+  local_route_process_cpu_seconds: 45251.66881499999
+  local_peak_rss_bytes: 2625359872
+changed_variable: >-
+  Execution device and the intentionally corresponding PyTorch accelerator
+  build. All sampler seeds, update/data order, model topology, optimization,
+  schedules, generated evaluation cases, denominators, and evidence semantics
+  remain frozen.
+public_route: >-
+  uv 0.11.28 installs index-isolated torch 2.5.1+cu124 and pinned PyPI
+  dependencies -> hash preflight -> device-aware teacher_cosine training ->
+  complete W128/W256 primary and paired evidence -> semantic/performance/cost
+  receipt -> external provider resource deletion.
+smallest_falsifier: >-
+  The CPU one-update replay must be byte-identical to the frozen source route.
+  The cloud decision gate is one complete CUDA teacher_cosine replay; no local
+  long rerun is permitted.
+primary_oracle: >-
+  End-to-end route wall speedup after work identity, generated-case identity,
+  and exact correct-count identity pass.
+promotion_gate: >-
+  Mark CUDA eligible only when work, all four generated case identities, all
+  four exact correct counts, and at least 3x route speedup pass. Prediction and
+  checkpoint hashes are reported but are not cross-device gates.
+futility_or_stop_rule: >-
+  Stop on source/dependency mismatch, unavailable CUDA, paired-evidence
+  divergence, semantic-gate failure, less than 3x speedup, two elapsed hours, or
+  the lower runtime implied by the $5 compute ceiling.
+retention_and_safety_gates:
+  - The consumed CPU formal root is never replaced or resumed.
+  - No checked, official/private, or consumed independent answers are read.
+  - CUDA replay output remains non-scientific timing evidence.
+  - TF32 is disabled and deterministic PyTorch algorithms are mandatory.
+  - Full CPU replay is fail-closed unless explicitly overridden.
+  - Provider credentials stay outside the VM; prepaid balance and an external delete watchdog are mandatory.
+cost_model:
+  local_reference_wall_seconds: 11452.156460124002
+  maximum_cloud_wall_seconds: 7200
+  maximum_compute_usd: 5.0
+  runpod_4090_at_0_69_per_hour_ceiling_usd: 1.38
+  vast_4090_at_0_29_per_hour_ceiling_usd: 0.58
+evidence_outputs:
+  - experiments/cloud_benchmarks/exp699_cuda_replay/local-reference.json
+  - .scratch/exp-699-cuda-hardware-replay/preflight.json
+  - .scratch/exp-699-cuda-hardware-replay/receipt.json
+allowed_files:
+  - configs/exp_699_cuda_hardware_replay.yaml
+  - experiments/exp_699_h92_w256_backbone_factorial_complete/
+  - configs/exp_699_h92_w256_backbone_factorial_complete.yaml
+  - tests/test_exp_699_h92_w256_backbone_factorial_complete.py
+  - knowledge/autoresearch/ablations/exp-699-h92-w256-backbone-factorial-complete.md
+  - experiments/cloud_benchmarks/exp699_cuda_replay/
+  - tests/test_exp699_cuda_hardware_replay.py
+  - knowledge/autoresearch/ablations/exp-699-cuda-hardware-replay.md

@@ -1,0 +1,9 @@
+# Performance and evidence dependencies matched to the established SAIR environment.
+numpy==2.5.1
+mlflow==3.14.0
+psutil==7.0.0
+sympy==1.13.1
+
+# Direct runtime dependencies.
+PyYAML==6.0.3
+safetensors==0.8.0

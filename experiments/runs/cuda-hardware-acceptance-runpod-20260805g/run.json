@@ -1,0 +1,104 @@
+{
+  "schema_version": "cuda-hardware-acceptance-run-v1",
+  "run_id": "cuda-hardware-acceptance-runpod-20260805g",
+  "status": "completed",
+  "created_at": "2026-08-05T10:41:26Z",
+  "hypothesis": "A budget-capped RunPod Secure RTX 4090 can bootstrap the pinned cu124 environment from an exact source archive and pass the four-case CUDA hardware acceptance matrix.",
+  "seed": 20260803,
+  "config": "configs/cuda_portability.yaml",
+  "provider_config": "configs/cuda_provider_control.yaml",
+  "artifacts": {
+    "checkpoint": "none-generated-hardware-acceptance",
+    "checkpoint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metrics": "evals/results/cuda-hardware-acceptance-runpod-20260805g/metrics.json",
+    "raw": "experiments/runs/cuda-hardware-acceptance-runpod-20260805g/raw"
+  },
+  "decision": "cuda-hardware-validated-acceptance-only",
+  "source": {
+    "repository_commit": "02678914d6112a6ff12030b3c05be89ea12c7b5d",
+    "dirty": false,
+    "branch": "codex/cuda-portable-experiments",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "bundle_sha256": "f32d51be857d19ad01b411f0825ed5670697de731e24e4dab0284b84f34b85a3",
+    "bundle_bytes": 277906,
+    "acceptance_config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4",
+    "runner_sha256": "534b580926e6c2c26dbb3f25a72231a3177b4499581ad1e610e48886a7a403d8",
+    "test_sha256": "8a4ca9ab6d84f0c8a149308461fbed886c9a59a67f820f050705558f8ea5be2f"
+  },
+  "environment": {
+    "status": "live-cuda-verified",
+    "uv": "uv 0.11.28 (x86_64-unknown-linux-gnu)",
+    "python": "3.12.13",
+    "profile": "cu124",
+    "torch": "2.5.1+cu124",
+    "torch_cuda_runtime": "12.4",
+    "requirements": "environments/cuda/requirements-cu124.txt",
+    "requirements_sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355",
+    "driver": "580.159.04",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "compute_capability": "8.9",
+    "memory_mib": 24564
+  },
+  "acceptance": {
+    "configured_seed": 20260803,
+    "executed": true,
+    "status": "passed",
+    "required_tests": 4,
+    "observed_tests": 4,
+    "passed_tests": 4,
+    "invalid_tests": 0,
+    "missing_tests": 0,
+    "pytest_wall_seconds": 7.92,
+    "acceptance_wall_seconds": 11.163757524918765,
+    "guest_lifecycle_wall_seconds": 122.194056918,
+    "cuda_device": "cuda:0",
+    "deterministic_algorithms": true,
+    "tf32": false,
+    "peak_vram_bytes_observed_by_parent": 0,
+    "semantic_result": "representative-family-hardware-parity-passed"
+  },
+  "provider": {
+    "name": "RunPod",
+    "cloud_type": "SECURE",
+    "gpu_count": 1,
+    "api_rate_usd_per_hour": 0.74,
+    "storage_rate_upper_usd_per_hour": 0.006,
+    "successful_pod_lifetime_upper_seconds": 228.5337558629999,
+    "successful_pod_cost_upper_usd": 0.04735727274272165,
+    "authorization_series_lifetime_upper_seconds": 3827.3113633639996,
+    "authorization_series_cost_upper_usd": 0.7932961325195431,
+    "maximum_authorized_cost_usd": 1.0,
+    "console_balance_before_usd": 10.0,
+    "console_balance_after_observed_usd": 9.23,
+    "console_balance_delta_scope": "Rounded console observation, not invoice evidence.",
+    "provider_invoice_amount_usd": null,
+    "cleanup": {
+      "pod_delete_confirmed": true,
+      "delete_attempts": 1,
+      "final_pod_inventory": 0
+    }
+  },
+  "raw_artifact_sha256": {
+    "acceptance.json": "09160357dfd61338abc2e1563546eecf72b53c80d83c97b99dd05ff17cb07bdc",
+    "acceptance-environment.json": "ef778badcb5918761d46545266fff43b24e28df486b1a0ebec4f859671e99d40",
+    "bootstrap-environment.json": "ef778badcb5918761d46545266fff43b24e28df486b1a0ebec4f859671e99d40",
+    "hardware-junit.xml": "a4c182728fa3bc2ef11fd5435075013206c80b59b9646e4296c216facebc4507",
+    "lifecycle.json": "4a9b6a3224dd9b8db8f42cc8e86b98fa4c592f6d8bda254b44b5f6846986b754",
+    "watchdog.json": "c3ff97e588dca8fb043bef95f10a9b9457af138931351fae6d0899ba19474907",
+    "final-inventory.json": "17bc59eb4f5778fdb3d26314fd23ee9002def04b3fb18f50e8ebdcb80625a688"
+  },
+  "security": {
+    "provider_credential_entered_guest": false,
+    "github_credential_entered_guest": false,
+    "temporary_private_ssh_key_committed": false,
+    "temporary_private_ssh_key_destroyed_after_receipt": true,
+    "temporary_public_key_remains_in_runpod_account": true
+  },
+  "limitations": [
+    "This validates CUDA execution and representative-family parity only; it is not a long-experiment speed benchmark.",
+    "The parent acceptance process reports zero peak VRAM because GPU tests run in a pytest child process; no representative peak-VRAM claim is made.",
+    "The checkpoint test used a temporary round-trip artifact and produced no durable trained checkpoint; the standard empty-byte SHA-256 marker is recorded.",
+    "The provider invoice had not posted; cost is a conservative lifecycle upper bound and the console balance is rounded.",
+    "RunPod retained the temporary public SSH key after repeated empty-field updates; the matching private key was destroyed, so it cannot authenticate. Remove the stale public entry manually for account hygiene."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "cuda-hardware-acceptance-metrics-v1",
+  "run_id": "cuda-hardware-acceptance-runpod-20260805g",
+  "created_at": "2026-08-05T10:41:26Z",
+  "status": "passed",
+  "checkpoint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "This run performed CUDA hardware acceptance only, not a challenge transition or rollout evaluation.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "checkpoint_present": false,
+    "checkpoint_sha256_is_empty_marker": true,
+    "external_lifecycle_controller_used": true,
+    "all_created_resources_deletion_confirmed": true,
+    "final_provider_inventory_empty": true,
+    "exact_source_archive_verified": true
+  },
+  "acceptance_executed": true,
+  "required_tests": 4,
+  "observed_tests": 4,
+  "passed_tests": 4,
+  "semantic_parity": true,
+  "guest_lifecycle_wall_seconds": 122.194056918,
+  "acceptance_wall_seconds": 11.163757524918765,
+  "pytest_wall_seconds": 7.92,
+  "test_seconds": {
+    "test_cuda_runtime_and_exp699_update": 0.646,
+    "test_cuda_exp510_typed_max_graph": 0.12,
+    "test_cuda_exp654_neural_ram": 0.12,
+    "test_cuda_checkpoint_round_trip": 0.004
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "memory_mib": 24564,
+    "compute_capability": "8.9",
+    "driver": "580.159.04",
+    "torch": "2.5.1+cu124",
+    "cuda_runtime": "12.4"
+  },
+  "provider_billed_lifetime_upper_seconds": 228.5337558629999,
+  "provider_cost_upper_usd": 0.04735727274272165,
+  "authorization_series_cost_upper_usd": 0.7932961325195431,
+  "provider_invoice_amount_usd": null,
+  "peak_vram_bytes": null,
+  "gpu_utilization": null,
+  "decision": "cuda-hardware-validated-acceptance-only",
+  "limitations": [
+    "No long experiment ran, so no laptop-to-GPU speedup is claimed.",
+    "Peak VRAM and utilization are null because the parent process cannot observe child-process CUDA allocator peaks.",
+    "The empty checkpoint hash marks that no durable trained checkpoint was produced."
+  ]
+}

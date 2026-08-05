@@ -1,0 +1,4 @@
+--index-url https://download.pytorch.org/whl/cu124
+
+# Index-isolated accelerator build matching the laptop's PyTorch release.
+torch==2.5.1+cu124

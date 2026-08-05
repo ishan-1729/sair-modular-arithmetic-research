@@ -1,0 +1,2 @@
+-r requirements-common.in
+torch @ https://download.pytorch.org/whl/cu124/torch-2.5.1%2Bcu124-cp312-cp312-linux_x86_64.whl
