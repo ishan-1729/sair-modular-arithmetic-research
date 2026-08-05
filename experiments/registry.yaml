@@ -2592,7 +2592,7 @@ runs:
     approach: deterministic-rtx4090-fresh-root-replay-of-exp700-full-four-arm-factorial
     decision: authorize-first-resumable-gpu-slice
     decision_authority: T112-exp700-to-fresh-gpu-phase-reset
-    source_base_commit: 4074396675239d99f1b515c1f600f0249d2a0a2d
+    source_base_commit: 2172dc7cd7aec2ec6cfa561e96f578cd46a69bf3
     source_branch: codex/exp701-cuda-resumable-h92-w256-backbone
     config: configs/exp_701_cuda_resumable_h92_w256_backbone_factorial.yaml
     preregistration: knowledge/autoresearch/ablations/exp-701-cuda-resumable-h92-w256-backbone-factorial.md
