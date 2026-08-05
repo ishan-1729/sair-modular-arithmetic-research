@@ -27332,7 +27332,7 @@
     "config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4",
     "python_file_count": 236,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "420f78a404ac69331372cd9aee9b3deec3dd0d508e79ec64b985e39af27d373c",
+    "registry_sha256": "d942f029429580707440b7aa42a9c8c693615a47b902cda5cc7f933861e46879",
     "root_count": 164,
     "tree_sha256": "8034dbc82565cb5f8d9a8cd4ff9e7daf855fe3783db2255a1ad41aa0ff4e3c22"
   },

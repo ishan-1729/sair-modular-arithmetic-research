@@ -1,0 +1,146 @@
+{
+  "schema_version": "cuda-hardware-acceptance-run-v1",
+  "run_id": "cuda-hardware-acceptance-runpod-20260805",
+  "status": "failed",
+  "failure_status": "failed-provider-startup",
+  "created_at": "2026-08-05T06:57:08Z",
+  "hypothesis": "A budget-capped RunPod Secure RTX 4090 can bootstrap the pinned cu124 environment and execute the four-case CUDA hardware acceptance matrix.",
+  "seed": 20260803,
+  "config": "configs/cuda_provider_control.yaml",
+  "artifacts": {
+    "checkpoint": "none-generated-provider-startup-failure",
+    "metrics": "evals/results/cuda-hardware-acceptance-runpod-20260805/metrics.json"
+  },
+  "decision": "park-provider-control-plane-startup-no-compute",
+  "recorded_at": "2026-08-05T06:57:08Z",
+  "source": {
+    "repository_commit": "b65ea4b2ff38c30ed93d3e101b4ab74e3e84cbe6",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "branch": "codex/cuda-portable-experiments",
+    "commit": "b65ea4b2ff38c30ed93d3e101b4ab74e3e84cbe6",
+    "bundle_sha256": "befcb6e1e3f9e8fa53596844f7adfcd6fd0c97988c44a5d0aa1e6acdf59b0819",
+    "bundle_bytes": 178990,
+    "provider_config": "configs/cuda_provider_control.yaml",
+    "provider_config_sha256": "7acf7cfb908f76ab00dcdfa0bad46464a3ec7811acce21d07ec11142a5127690",
+    "acceptance_config": "configs/cuda_portability.yaml",
+    "acceptance_config_sha256": "09ce209a8739ade32720d7be44f5a1ffa3e7744d1775e55b889c6b369007a5d4"
+  },
+  "intended_environment": {
+    "uv_version": "0.11.28",
+    "python_version": "3.12",
+    "profile": "cu124",
+    "torch_version": "2.5.1+cu124",
+    "requirements": "environments/cuda/requirements-cu124.txt",
+    "requirements_sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355",
+    "installed": false,
+    "reason": "No container reached an accessible guest shell, so bootstrap.sh never ran."
+  },
+  "acceptance": {
+    "configured_seed": 20260803,
+    "executed": false,
+    "observed_tests": 0,
+    "required_tests": [
+      "test_cuda_runtime_and_exp699_update",
+      "test_cuda_exp510_typed_max_graph",
+      "test_cuda_exp654_neural_ram",
+      "test_cuda_checkpoint_round_trip"
+    ],
+    "cuda_device": null,
+    "driver_version": null,
+    "compute_capability": null,
+    "peak_vram_bytes": null,
+    "wall_seconds": null,
+    "semantic_result": null,
+    "checkpoint_sha256": null
+  },
+  "provider": {
+    "name": "RunPod",
+    "cloud_type": "SECURE",
+    "requested_gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "maximum_total_cost_usd": "1.00",
+    "maximum_provider_lifetime_seconds": 1800,
+    "reserve_fraction": "0.15",
+    "observed_api_rate_usd_per_hour": "0.74",
+    "console_display_rate_usd_per_hour": "0.75",
+    "storage_rate_upper_usd_per_hour": "0.006945",
+    "billable_attempts": [
+      {
+        "resource_id": "dbbzwnjttg4ryu",
+        "purpose": "live-rate verification",
+        "boot_image": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+        "provider_billed_lifetime_upper_seconds": 5.329929168999797,
+        "cost_upper_usd": "0.001032",
+        "outcome": "rate guard deleted after observed rate exceeded the admitted 0.69 USD/hour"
+      },
+      {
+        "resource_id": "ogt0l3060qox8l",
+        "purpose": "SSH-gated acceptance",
+        "boot_image": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+        "provider_billed_lifetime_upper_seconds": 549.399833299,
+        "cost_upper_usd": "0.113992",
+        "outcome": "image resolved to the expected digest but system logs stopped at start-container begin; no container logs or SSH"
+      },
+      {
+        "resource_id": "impl7u80f6ayz2",
+        "purpose": "official-image startup and SSH transfer",
+        "boot_image": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+        "provider_billed_lifetime_upper_seconds": 281.76606285100024,
+        "cost_upper_usd": "0.058462",
+        "outcome": "direct SSH rejected the ephemeral key; account key prerequisite was then configured"
+      },
+      {
+        "resource_id": "6vyzw09q13fz4w",
+        "purpose": "official-image startup after account SSH-key configuration",
+        "boot_image": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+        "provider_billed_lifetime_upper_seconds": 177.80578325900024,
+        "cost_upper_usd": "0.036892",
+        "outcome": "second host reproduced start-container begin with no guest process or logs"
+      }
+    ],
+    "provider_billed_lifetime_upper_seconds": 1014.301608578,
+    "cost_upper_at_delete_confirmation_usd": "0.210378",
+    "provider_invoice_amount_usd": null,
+    "console_balance_before_usd": "10.00",
+    "console_balance_after_usd": "9.80",
+    "console_balance_delta_usd": "0.20",
+    "console_balance_delta_scope": "rounded UI observation, not invoice evidence",
+    "billing_api_records_at_cleanup": [],
+    "cleanup_inventory": {
+      "pods": 0,
+      "templates": 0,
+      "endpoints": 0,
+      "network_volumes": 0,
+      "temporary_account_ssh_key_removed": true
+    }
+  },
+  "image_identity": {
+    "old_tag": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+    "old_digest_observed_in_runpod_system_logs": "sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8",
+    "current_tag_attempted": "runpod/pytorch:1.0.3-cu1281-torch291-ubuntu2404",
+    "current_index_digest_resolved_before_launch": "sha256:60baa36d3fb6b98fd4f4ece6b96776c83c01a8b7c540e54460ab4d496816141f",
+    "current_linux_amd64_digest_resolved_before_launch": "sha256:3e874356857adfa3e8faa3fd913b65bd127f77a0fe2e489513e7775e1c1e16b1",
+    "current_image_create_outcome": "RunPod HTTP 500 before resource creation, both with CUDA 12.8 placement and without a CUDA placement filter"
+  },
+  "nonbillable_failures": [
+    "RunPod rejected digest-form imageName and large direct Pod payloads with an internal JSON-unmarshal HTTP 500.",
+    "A small private template create/delete check succeeded, while a template containing the source payload failed with the same HTTP 500.",
+    "The current official image returned a generic provider-side HTTP 500 before resource allocation with and without the CUDA placement filter."
+  ],
+  "security": {
+    "provider_credential_entered_guest": false,
+    "github_credential_entered_guest": false,
+    "temporary_private_ssh_key_committed": false,
+    "temporary_account_ssh_key_removed": true,
+    "api_key_rotation_required": true,
+    "reason": "A local diagnostic trace echoed the temporary RunPod API key into the private task tool log; revoke it before another launch."
+  },
+  "limitations": [
+    "This is provider lifecycle and failure evidence, not CUDA execution evidence.",
+    "No dependency was installed, no acceptance test ran, and no performance or semantic comparison can be made.",
+    "RunPod desiredStatus RUNNING described allocation intent even while the guest container had not started; the UI system log was required to identify the stall.",
+    "The billing endpoint returned no records at cleanup time, so the provider invoice remains pending and the controller cost is an upper bound.",
+    "The branch remains CUDA hardware unvalidated and must not be called plug-and-play."
+  ]
+}

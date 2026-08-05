@@ -1,0 +1,36 @@
+{
+  "schema_version": "cuda-hardware-acceptance-metrics-v1",
+  "run_id": "cuda-hardware-acceptance-runpod-20260805",
+  "created_at": "2026-08-05T06:57:08Z",
+  "checkpoint_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "status": "failed-provider-startup",
+  "evaluation": {
+    "not_performed": true,
+    "reason": "RunPod never exposed an accessible guest container, so the locked environment and CUDA acceptance did not execute.",
+    "labels_or_oracle_present": false
+  },
+  "controls": {
+    "checkpoint_present": false,
+    "checkpoint_sha256_is_empty_marker": true,
+    "external_lifecycle_controller_used": true,
+    "all_created_resources_deletion_confirmed": true,
+    "final_provider_inventory_empty": true
+  },
+  "acceptance_executed": false,
+  "required_tests": 4,
+  "observed_tests": 0,
+  "passed_tests": 0,
+  "semantic_parity": null,
+  "guest_wall_seconds": null,
+  "provider_billed_lifetime_upper_seconds": 1014.301608578,
+  "provider_cost_upper_usd": 0.210378,
+  "provider_invoice_amount_usd": null,
+  "peak_vram_bytes": null,
+  "gpu_utilization": null,
+  "decision": "park-provider-control-plane-startup-no-compute",
+  "limitations": [
+    "The checkpoint SHA-256 is the standard empty-byte marker because no checkpoint was created.",
+    "No CUDA test, semantic metric, performance measurement, utilization sample, or VRAM sample exists.",
+    "Provider billing records had not posted at cleanup; provider cost is a controller upper bound."
+  ]
+}

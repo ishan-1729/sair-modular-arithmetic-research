@@ -948,7 +948,10 @@ def test_reused_complete_time_is_charged_separately_from_active_wall_and_cpu() -
     guard.add_reused(123.0, 456.0)
     wall, cpu = guard.charged()
     assert wall >= 123.0
-    assert cpu >= 456.0
+    # Long suite processes can lose one ULP when the small active-CPU delta is
+    # combined with the reused charge and then the large process baseline is
+    # subtracted. Keep the lower-bound check while tolerating only that rounding.
+    assert cpu >= 456.0 - 1e-12
     assert guard.reused_wall_seconds == 123.0
     assert guard.reused_cpu_seconds == 456.0
     too_small = module.CalibrationRunawayGuard(

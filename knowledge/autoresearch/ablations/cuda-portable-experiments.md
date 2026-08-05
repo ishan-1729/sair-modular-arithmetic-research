@@ -3,8 +3,8 @@ type: ablation
 title: CUDA-portable experiment adapters
 description: Explicit device runtime, lifecycle-closed inventory, and representative graph/recurrent replay adapters.
 status: active
-readiness: cuda-prepared-hardware-unvalidated
-timestamp: "2026-08-03T00:00:00+00:00"
+readiness: cuda-provider-startup-blocked
+timestamp: "2026-08-05T06:57:08+00:00"
 ---
 
 # CUDA-portable experiment adapters
@@ -226,3 +226,36 @@ Dry run now performs admission and evidence capture without mutating the torch
 runtime, and the one-update CPU parity test executes its faithful frozen
 thread setup in a child process. The paired EXP699-then-EXP671 regression passes
 without modifying either frozen scientific runner.
+
+## T010 authorized RunPod hardware attempt
+
+The user authorized one Secure Cloud RTX 4090 with a $1.00 total cap and a
+30-minute provider-lifetime cap. The external controller observed the live
+offer at $0.74/hour, rejected an initially admitted $0.69/hour rate, and
+confirmed deletion before readmitting the actual price. Four billable Pods
+were created sequentially, never concurrently. Every Pod was deleted and the
+final API inventory was zero Pods, templates, endpoints, and network volumes.
+The create-to-delete upper bounds total 1,014.301608578 seconds and $0.210378;
+the console balance changed from $10.00 to $9.80, while the billing API had not
+yet posted invoice records.
+
+No acceptance compute ran. On two Secure 4090 hosts the pinned old image
+resolved to the expected digest
+`sha256:2594f25beeef751aeebcc207ba4c45a382ba174655f01e15cbbfad0e2bdb5ef8`,
+but RunPod system logs stopped at `start container ...: begin` with no guest
+logs or usable shell. A temporary account SSH key was added only to diagnose
+the official entrypoint and was removed at cleanup. The current official image
+was resolved to OCI index
+`sha256:60baa36d3fb6b98fd4f4ece6b96776c83c01a8b7c540e54460ab4d496816141f`
+and linux/amd64 manifest
+`sha256:3e874356857adfa3e8faa3fd913b65bd127f77a0fe2e489513e7775e1c1e16b1`,
+but RunPod rejected both create requests before resource allocation with its
+generic HTTP 500.
+
+The durable run record is
+`experiments/runs/cuda-hardware-acceptance-runpod-20260805/run.json`. This is a
+provider-startup failure receipt, not CUDA evidence: uv and the cu124 lock were
+never installed, all four hardware tests remain unexecuted, and semantic
+parity, VRAM, utilization, and speedup remain unknown. Readiness is therefore
+`cuda-provider-startup-blocked`, a more specific hardware-unvalidated state;
+neither `cuda-hardware-validated` nor `plug-and-play` is permitted.

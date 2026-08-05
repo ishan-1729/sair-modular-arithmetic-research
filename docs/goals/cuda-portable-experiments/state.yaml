@@ -993,7 +993,7 @@ tasks:
   - id: T010
     type: pm
     assignee: PM
-    status: blocked
+    status: done
     reasoning_hint: high
     objective: "After explicit user authorization and GPU access, run one externally controlled, budget-capped real-GPU acceptance matrix on the exact committed branch and locked environment, then persist semantic, performance, GPU-resource, and provider-billing receipts."
     inputs:
@@ -1012,21 +1012,29 @@ tasks:
       - "Provider-billed lifetime and final destruction receipt"
       - "cuda-hardware-validated | remain-hardware-unvalidated"
     receipt:
-      result: blocked
-      blocked_reason: "A paid provider create request and use of configured provider credentials require exact human authorization. No live request is permitted from the prior GitHub-access confirmation or the branch-preparation request."
-      waiting_for_user_approval: true
-      required_reply: I_AUTHORIZE_PAID_GPU_LAUNCH
-      summary: "The exact commit, cu124 lock, four-case acceptance command, external create-to-delete controller, 30-minute provider-lifetime cap, 15% budget reserve, and $1.00 total cap are locally prepared. No provider endpoint was contacted and no resource or charge exists. Reply with the exact required phrase only if you want the bounded paid RunPod/Vast GPU acceptance launched; provider availability and credentials will still be checked fail-closed before creation."
+      result: failed-provider-startup
+      decision: remain-hardware-unvalidated
+      waiting_for_user_approval: false
+      authorization_received: I_AUTHORIZE_PAID_GPU_LAUNCH
+      summary: "The authorized Secure RTX 4090 lifecycle ran under the $1 and 30-minute caps. Four sequential billable Pods were each deletion-confirmed; their create-to-delete upper bounds total 1014.301608578 seconds and $0.210378. RunPod's old image reached image resolution but stalled at start-container begin on two hosts, and its current official image returned HTTP 500 before allocation. No guest shell, uv bootstrap, CUDA test, performance metric, utilization, or VRAM evidence exists."
       evidence:
-        - "codex/cuda-portable-experiments@f0d217b016a433606d09fdecdc5ba2120e2a9f24"
+        - experiments/runs/cuda-hardware-acceptance-runpod-20260805/run.json
+        - evals/results/cuda-hardware-acceptance-runpod-20260805/metrics.json
         - configs/cuda_provider_control.yaml
         - environments/providers/controller.py
         - environments/cuda/run-acceptance.sh
         - tests/test_cuda_hardware_acceptance.py
+      observed:
+        - "RunPod API rate: $0.74/hour; console rounded display: $0.75/hour."
+        - "Controller cost upper bound: $0.210378; console balance delta: $0.20; billing API records were not yet posted."
+        - "Final inventory: zero Pods, templates, endpoints, and network volumes."
+        - "Temporary account SSH key was removed."
       remaining_blockers:
-        - "Exact paid-launch approval has not been provided."
-        - "A matching live provider offer, configured credential, and final rate admission have not been observed."
-        - "No real-GPU or confirmed-deletion receipt exists."
+        - "No provider guest reached bootstrap or acceptance compute."
+        - "All four real-CUDA tests remain unexecuted."
+        - "The provider invoice has not posted."
+        - "The temporary RunPod API key must be rotated because a local diagnostic trace echoed it into the private tool log."
+      readiness_state: cuda-provider-startup-blocked
   - id: T999
     type: judge
     assignee: Judge
@@ -1054,14 +1062,14 @@ tasks:
       - "Missing evidence or exact next task"
     receipt:
       result: blocked
-      blocked_reason: "The final outcome audit cannot run until T010 produces a real-GPU acceptance and provider deletion receipt, or a truthful hardware failure receipt."
-      summary: "The local milestone has a separate approved T015 audit, but the original plug-and-play outcome remains incomplete. Final Judge completion is waiting behind the exact human approval gate recorded on T010."
+      blocked_reason: "T010 produced a truthful provider-startup failure receipt, so the original plug-and-play outcome is not complete; a later clean provider launch must execute the four-case CUDA matrix before final hardware validation."
+      summary: "The local milestone remains approved and provider cleanup is proven, but the authorized hardware attempt never reached guest compute. The goal remains blocked at cuda-provider-startup-blocked rather than approval-waiting."
       evidence:
         - .scratch/goalbuddy/T015-receipt.json
-        - .scratch/goalbuddy/T010-receipt.json
+        - experiments/runs/cuda-hardware-acceptance-runpod-20260805/run.json
       remaining_blockers:
-        - "T010 is blocked on exact paid-launch authorization."
-        - "full_outcome_complete cannot be true without real GPU evidence."
+        - "RunPod provider startup or an explicitly authorized replacement provider must become healthy."
+        - "full_outcome_complete cannot be true without passing real GPU evidence."
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
   last_verification:

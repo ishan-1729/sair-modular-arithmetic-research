@@ -8,6 +8,7 @@ and confirms DELETE from a finally path before reporting cost closure.
 from __future__ import annotations
 
 import argparse
+import base64
 from dataclasses import asdict, dataclass
 from decimal import Decimal, ROUND_FLOOR
 import hashlib
@@ -170,7 +171,20 @@ class Provider:
 
     def create_payload(self, spec: "LaunchSpec") -> dict[str, Any]:
         if self.name == "runpod":
-            return {
+            if spec.template_id:
+                payload = {
+                    "name": spec.label,
+                    "templateId": spec.template_id,
+                    "computeType": "GPU",
+                    "gpuTypeIds": [spec.resource_selector],
+                    "gpuCount": 1,
+                    "cloudType": "SECURE",
+                    "locked": False,
+                }
+                if spec.cuda_runtime != "any":
+                    payload["allowedCudaVersions"] = [spec.cuda_runtime]
+                return payload
+            payload = {
                 "name": spec.label,
                 "imageName": spec.image,
                 "computeType": "GPU",
@@ -179,12 +193,19 @@ class Provider:
                 "cloudType": "SECURE",
                 "containerDiskInGb": spec.disk_gb,
                 "volumeInGb": 0,
-                "allowedCudaVersions": [spec.cuda_runtime],
                 "dockerEntrypoint": ["bash", "-lc"],
                 "dockerStartCmd": [spec.command],
-                "env": {},
+                "env": dict(spec.environment),
                 "locked": False,
             }
+            if spec.cuda_runtime != "any":
+                payload["allowedCudaVersions"] = [spec.cuda_runtime]
+            if spec.use_image_command:
+                payload["dockerEntrypoint"] = []
+                payload["dockerStartCmd"] = []
+            if spec.ports:
+                payload["ports"] = list(spec.ports)
+            return payload
         return {
             "image": spec.image,
             "label": spec.label,
@@ -193,7 +214,7 @@ class Provider:
             "target_state": "running",
             "args": ["bash", "-lc", spec.command],
             "cancel_unavail": True,
-            "env": {},
+            "env": dict(spec.environment),
         }
 
     def create(self, spec: "LaunchSpec") -> tuple[str, dict[str, Any]]:
@@ -266,6 +287,10 @@ class LaunchSpec:
     command: str
     cuda_runtime: str
     disk_gb: int
+    ports: tuple[str, ...] = ()
+    environment: tuple[tuple[str, str], ...] = ()
+    template_id: str | None = None
+    use_image_command: bool = False
 
 
 class TerminationRequested(RuntimeError):
@@ -301,6 +326,16 @@ def redacted_plan(
         "command_sha256": sha256_text(spec.command),
         "cuda_runtime": spec.cuda_runtime,
         "disk_gb": spec.disk_gb,
+        "ports": list(spec.ports),
+        "environment": [
+            {
+                "name": name,
+                "value_chars": len(value),
+                "value_sha256": sha256_text(value),
+            }
+            for name, value in spec.environment
+        ],
+        "template_id": spec.template_id,
         "credential_environment": provider_config["credential_environment"],
         "budget": asdict(budget),
         "config": str(config_path.relative_to(ROOT)),
@@ -510,10 +545,36 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("--storage-hourly-usd", required=True)
         command.add_argument("--max-total-usd", required=True)
         command.add_argument("--max-provider-seconds", required=True, type=int)
-        command.add_argument("--command", required=True)
+        workload = command.add_mutually_exclusive_group(required=True)
+        workload.add_argument("--command")
+        workload.add_argument("--command-file", type=Path)
         command.add_argument("--label", default="sair-cuda-acceptance")
         command.add_argument("--cuda-runtime", default="12.4")
         command.add_argument("--disk-gb", type=int, default=50)
+        command.add_argument("--port", action="append", default=[])
+        command.add_argument("--template-id")
+        command.add_argument(
+            "--use-image-command",
+            action="store_true",
+            help="preserve the container image ENTRYPOINT and CMD",
+        )
+        command.add_argument(
+            "--environment-file",
+            action="append",
+            default=[],
+            metavar="PREFIX=PATH",
+            help=(
+                "base64-encode PATH into numbered 60,000-character environment "
+                "chunks named PREFIX_000, PREFIX_001, ..."
+            ),
+        )
+        command.add_argument(
+            "--environment-value-file",
+            action="append",
+            default=[],
+            metavar="NAME=PATH",
+            help="read one non-secret guest environment value from PATH",
+        )
         command.add_argument("--receipt", type=Path)
     return parser
 
@@ -526,14 +587,63 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("unsupported provider control schema")
     if args.disk_gb <= 0:
         raise ValueError("disk size must be positive")
+    ports = tuple(str(value) for value in args.port)
+    for value in ports:
+        number, separator, protocol = value.partition("/")
+        if (
+            not separator
+            or not number.isdigit()
+            or not 1 <= int(number) <= 65535
+            or protocol not in {"http", "tcp"}
+        ):
+            raise ValueError(f"invalid port declaration: {value}")
+    guest_command = (
+        args.command
+        if args.command is not None
+        else args.command_file.resolve().read_text(encoding="utf-8")
+    )
+    environment: list[tuple[str, str]] = []
+    for declaration in args.environment_file:
+        prefix, separator, raw_path = declaration.partition("=")
+        if (
+            not separator
+            or not prefix
+            or not prefix.replace("_", "A").isalnum()
+            or prefix[0].isdigit()
+        ):
+            raise ValueError(f"invalid environment file declaration: {declaration}")
+        encoded = base64.b64encode(Path(raw_path).resolve().read_bytes()).decode("ascii")
+        environment.extend(
+            (f"{prefix}_{offset // 60_000:03d}", encoded[offset : offset + 60_000])
+            for offset in range(0, len(encoded), 60_000)
+        )
+    for declaration in args.environment_value_file:
+        name, separator, raw_path = declaration.partition("=")
+        if (
+            not separator
+            or not name
+            or not name.replace("_", "A").isalnum()
+            or name[0].isdigit()
+        ):
+            raise ValueError(f"invalid environment value declaration: {declaration}")
+        environment.append(
+            (name, Path(raw_path).resolve().read_text(encoding="utf-8").strip())
+        )
+    names = [name for name, _value in environment]
+    if len(names) != len(set(names)):
+        raise ValueError("guest environment names must be unique")
     spec = LaunchSpec(
         provider=args.provider,
         resource_selector=str(args.resource_selector),
         image=args.image,
         label=args.label,
-        command=args.command,
+        command=guest_command,
         cuda_runtime=args.cuda_runtime,
         disk_gb=args.disk_gb,
+        ports=ports,
+        environment=tuple(environment),
+        template_id=args.template_id,
+        use_image_command=args.use_image_command,
     )
     provider_config = config["providers"][args.provider]
     validate_guest(spec, config, None)

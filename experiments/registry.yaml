@@ -2543,3 +2543,22 @@ runs:
     scientific_verdict: null
     causal_effects: null
     limitations: [formal-root-unopened, required-frozen-reset-randomized-and-500-case-parity-diagnostics-absent, post-root-executable-repair-forbidden, runtime-and-health-not-stop-causes]
+  - run_id: cuda-hardware-acceptance-runpod-20260805
+    status: failed-provider-startup
+    approach: runpod-secure-rtx4090-cuda-hardware-acceptance
+    decision: park-provider-control-plane-startup-no-compute
+    source_base_commit: b65ea4b2ff38c30ed93d3e101b4ab74e3e84cbe6
+    source_branch: codex/cuda-portable-experiments
+    config: configs/cuda_provider_control.yaml
+    preregistration: knowledge/autoresearch/ablations/cuda-portable-experiments.md
+    run_record: experiments/runs/cuda-hardware-acceptance-runpod-20260805/run.json
+    metrics: evals/results/cuda-hardware-acceptance-runpod-20260805/metrics.json
+    checkpoint: null
+    configured_seed: 20260803
+    acceptance: {executed: false, required_tests: 4, observed_tests: 0}
+    provider: {name: RunPod, cloud: SECURE, gpu: NVIDIA GeForce RTX 4090, billable_lifetime_upper_seconds: 1014.301608578, cost_upper_usd: 0.210378, invoice_usd: null, cleanup_confirmed: true}
+    limitations:
+      - Provider allocation and deletion were exercised, but no guest container reached acceptance compute.
+      - No CUDA semantic, performance, utilization, or VRAM result exists.
+      - Billing records had not posted at cleanup; the recorded cost is the controller upper bound.
+      - The branch remains CUDA hardware unvalidated and is not plug-and-play.

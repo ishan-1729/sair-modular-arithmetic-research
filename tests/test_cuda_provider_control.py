@@ -109,6 +109,53 @@ def test_plan_mode_is_redacted_and_never_requires_a_credential(capsys) -> None:
     assert "command" not in result and len(result["command_sha256"]) == 64
 
 
+def test_command_file_and_result_port_are_redacted(tmp_path, capsys) -> None:
+    command_path = tmp_path / "guest-command.sh"
+    command_path.write_text("echo acceptance\n", encoding="utf-8")
+    payload_path = tmp_path / "payload.bin"
+    payload_path.write_bytes(b"source archive")
+    assert controller.main(
+        [
+            "--config",
+            str(CONFIG_PATH),
+            "plan",
+            "--provider",
+            "runpod",
+            "--resource-selector",
+            "NVIDIA GeForce RTX 4090",
+            "--image",
+            "example/pytorch:cuda",
+            "--hourly-rate-usd",
+            "0.69",
+            "--storage-hourly-usd",
+            "0.006945",
+            "--max-total-usd",
+            "1.00",
+            "--max-provider-seconds",
+            "1800",
+            "--command-file",
+            str(command_path),
+            "--port",
+            "8000/http",
+            "--environment-file",
+            f"SAIR_SOURCE_B64={payload_path}",
+        ]
+    ) == 0
+    output = capsys.readouterr().out
+    result = json.loads(output)
+    assert result["ports"] == ["8000/http"]
+    assert result["command_sha256"] == controller.sha256_text("echo acceptance\n")
+    assert "command" not in result
+    assert result["environment"] == [
+        {
+            "name": "SAIR_SOURCE_B64_000",
+            "value_chars": 20,
+            "value_sha256": controller.sha256_text("c291cmNlIGFyY2hpdmU="),
+        }
+    ]
+    assert "c291cmNlIGFyY2hpdmU=" not in output
+
+
 def test_runpod_guest_exit_still_requires_confirmed_delete(tmp_path) -> None:
     clock = FakeClock()
     transport = FakeTransport(
@@ -152,6 +199,91 @@ def test_runpod_guest_exit_still_requires_confirmed_delete(tmp_path) -> None:
     assert create["computeType"] == "GPU" and create["volumeInGb"] == 0
     assert create["env"] == {}
     assert "runpod-secret-test-token" not in receipt_path.read_text(encoding="utf-8")
+
+
+def test_runpod_result_port_is_declared_only_when_requested() -> None:
+    provider = controller.Provider(
+        "runpod", config()["providers"]["runpod"], "secret", FakeTransport([])
+    )
+    assert "ports" not in provider.create_payload(spec("runpod"))
+    with_port = controller.LaunchSpec(
+        **{**spec("runpod").__dict__, "ports": ("8000/http",)}
+    )
+    assert provider.create_payload(with_port)["ports"] == ["8000/http"]
+
+
+def test_runpod_template_launch_keeps_create_payload_small() -> None:
+    provider = controller.Provider(
+        "runpod", config()["providers"]["runpod"], "secret", FakeTransport([])
+    )
+    templated = controller.LaunchSpec(
+        **{
+            **spec("runpod").__dict__,
+            "ports": ("8000/http",),
+            "environment": (("SAIR_SOURCE_B64_000", "large-value"),),
+            "template_id": "template-1",
+        }
+    )
+    payload = provider.create_payload(templated)
+    assert payload["templateId"] == "template-1"
+    assert "imageName" not in payload and "env" not in payload and "ports" not in payload
+
+
+def test_runpod_can_preserve_official_image_startup() -> None:
+    provider = controller.Provider(
+        "runpod", config()["providers"]["runpod"], "secret", FakeTransport([])
+    )
+    official = controller.LaunchSpec(
+        **{**spec("runpod").__dict__, "use_image_command": True}
+    )
+    payload = provider.create_payload(official)
+    assert payload["dockerEntrypoint"] == []
+    assert payload["dockerStartCmd"] == []
+    any_cuda = controller.LaunchSpec(
+        **{**official.__dict__, "cuda_runtime": "any"}
+    )
+    assert "allowedCudaVersions" not in provider.create_payload(any_cuda)
+
+
+def test_environment_file_is_chunked_below_linux_argument_limit(tmp_path, capsys) -> None:
+    payload_path = tmp_path / "large.bin"
+    payload_path.write_bytes(b"x" * 100_000)
+    arguments = [
+        "--config", str(CONFIG_PATH), "plan", "--provider", "runpod",
+        "--resource-selector", "NVIDIA GeForce RTX 4090",
+        "--image", "example/pytorch:cuda", "--hourly-rate-usd", "0.69",
+        "--storage-hourly-usd", "0.006945", "--max-total-usd", "1.00",
+        "--max-provider-seconds", "1800", "--command", "true",
+        "--environment-file", f"SAIR_SOURCE_B64={payload_path}",
+    ]
+    assert controller.main(arguments) == 0
+    result = json.loads(capsys.readouterr().out)
+    assert [row["name"] for row in result["environment"]] == [
+        "SAIR_SOURCE_B64_000", "SAIR_SOURCE_B64_001", "SAIR_SOURCE_B64_002"
+    ]
+    assert all(row["value_chars"] <= 60_000 for row in result["environment"])
+
+
+def test_environment_value_file_is_hashed_not_printed(tmp_path, capsys) -> None:
+    public_key = "ssh-ed25519 AAAAC3Nza-test sair-ephemeral"
+    key_path = tmp_path / "acceptance.pub"
+    key_path.write_text(public_key + "\n", encoding="utf-8")
+    arguments = [
+        "--config", str(CONFIG_PATH), "plan", "--provider", "runpod",
+        "--resource-selector", "NVIDIA GeForce RTX 4090",
+        "--image", "example/pytorch:cuda", "--hourly-rate-usd", "0.69",
+        "--storage-hourly-usd", "0.006945", "--max-total-usd", "1.00",
+        "--max-provider-seconds", "1800", "--command", "true",
+        "--environment-value-file", f"SSH_PUBLIC_KEY={key_path}",
+    ]
+    assert controller.main(arguments) == 0
+    output = capsys.readouterr().out
+    result = json.loads(output)
+    assert result["environment"] == [{
+        "name": "SSH_PUBLIC_KEY", "value_chars": len(public_key),
+        "value_sha256": controller.sha256_text(public_key),
+    }]
+    assert public_key not in output
 
 
 def test_rate_change_triggers_immediate_finally_delete(tmp_path) -> None:

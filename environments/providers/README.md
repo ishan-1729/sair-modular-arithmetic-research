@@ -29,8 +29,31 @@ python -m environments.providers.controller \
   --storage-hourly-usd 0.006945 \
   --max-total-usd 1.00 \
   --max-provider-seconds 1800 \
+  --port '8000/http' \
   --command 'git clone ... && environments/cuda/bootstrap.sh --profile cu124 && environments/cuda/run-acceptance.sh --profile cu124'
 ```
+
+For a large private-source bootstrap payload, pass `--command-file PATH`
+instead of `--command`. The controller reads the file locally, records only
+the workload hash, and sends the command to the provider without placing it in
+the host process argument list. `--port PORT/http` may be repeated for bounded
+receipt retrieval; no port is exposed by default.
+
+Use `--environment-file PREFIX=PATH` for a source archive or other large input.
+It base64-encodes the file into numbered 60,000-character environment chunks,
+keeping each value below Linux's per-string process limit. Receipts contain
+only chunk names, sizes, and hashes; the values themselves remain redacted.
+`--environment-value-file NAME=PATH` reads one small non-secret value, such as
+an ephemeral SSH public key, while likewise recording only its size and hash.
+For RunPod payloads that exceed its direct Pod-create gateway, place the same
+private configuration in a temporary template and pass `--template-id ID`.
+The Pod request then contains only scheduling fields; the caller remains
+responsible for deleting the temporary template after the Pod is destroyed.
+For official images that initialize SSH/Jupyter themselves, pass
+`--use-image-command`; this submits empty ENTRYPOINT/CMD overrides so RunPod
+preserves the image defaults while retaining the controller's lifecycle cap.
+Set `--cuda-runtime any` only when the image plus the guest's fail-closed
+environment verifier already enforce the required driver/runtime compatibility.
 
 Plan mode does not read a credential. It reserves 15% of the total cap and
 charges the remaining upper bound from the instant create is requested until

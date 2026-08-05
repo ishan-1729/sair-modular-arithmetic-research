@@ -59,8 +59,11 @@ Cloud GPU."
 - Current cost-control evidence: RunPod/Vast REST lifecycle adapters, budget
   admission, credential isolation, rate revalidation, durable resource-id
   receipts, and retrying DELETE-in-`finally` behavior pass seven fake-transport
-  tests. No provider endpoint was contacted; client power/network failure and
-  provider-invoice reconciliation remain explicit T010 risks.
+  tests. T010 then exercised live RunPod allocation at the observed $0.74/hour
+  rate: every created Pod was deletion-confirmed, the final resource inventory
+  was empty, and the $0.210378 controller upper bound stayed below the $1 cap.
+  RunPod never produced an accessible guest, so all CUDA tests remain unrun;
+  provider-invoice reconciliation and API-key rotation remain explicit risks.
 
 ## Goal Oracle
 
@@ -175,6 +178,9 @@ and whether GPU execution is technically plausible for that family.
   bootstrap, CPU parity, clean regression pass, billing controller, and
   fail-closed hardware acceptance command are complete, but no real GPU receipt
   exists.
+- `cuda-provider-startup-blocked`: an authorized provider lifecycle was run and
+  cleanup was proven, but provider startup failed before the locked environment
+  or CUDA acceptance could execute. This remains hardware-unvalidated.
 - `cuda-hardware-validated`: the exact committed branch and locked environment
   passed the real GPU acceptance matrix with semantic, resource, and provider
   billing receipts.
