@@ -61,6 +61,10 @@ S3_ENDPOINTS = {
     "EU-RO-1": "https://s3api-eu-ro-1.runpod.io/",
     "EUR-IS-1": "https://s3api-eur-is-1.runpod.io/",
 }
+REQUIRED_EXECUTABLE_ARCHIVE_PATHS = (
+    "environments/cuda/bootstrap.sh",
+    "environments/cuda/run-acceptance.sh",
+)
 
 
 def sha256(path: Path) -> str:
@@ -107,6 +111,38 @@ def source_identity(archive: Path) -> dict[str, Any]:
         return json.loads(handle.read())
 
 
+def verify_source_archive_runtime(archive: Path) -> dict[str, Any]:
+    """Reject a payload whose Git/archive modes cannot pass CUDA verification."""
+    with tarfile.open(archive, "r:gz") as bundle:
+        members = {
+            item.name[2:] if item.name.startswith("./") else item.name: item
+            for item in bundle.getmembers()
+        }
+    missing = [
+        path for path in REQUIRED_EXECUTABLE_ARCHIVE_PATHS if path not in members
+    ]
+    non_files = [
+        path
+        for path in REQUIRED_EXECUTABLE_ARCHIVE_PATHS
+        if path in members and not members[path].isfile()
+    ]
+    non_executable = [
+        path
+        for path in REQUIRED_EXECUTABLE_ARCHIVE_PATHS
+        if path in members and members[path].isfile() and not members[path].mode & 0o111
+    ]
+    if missing or non_files or non_executable:
+        raise RuntimeError(
+            "source archive violates executable launcher contract: "
+            f"missing={missing}, non_files={non_files}, "
+            f"non_executable={non_executable}"
+        )
+    return {
+        "status": "source-runtime-contract-verified",
+        "executable_paths": list(REQUIRED_EXECUTABLE_ARCHIVE_PATHS),
+    }
+
+
 def verify_preflight(path: Path, archive: Path) -> dict[str, Any]:
     receipt = json.loads(path.read_text(encoding="utf-8"))
     if (
@@ -118,6 +154,7 @@ def verify_preflight(path: Path, archive: Path) -> dict[str, Any]:
     actual_sha = sha256(archive)
     if actual_sha != frozen["sha256"] or archive.stat().st_size != frozen["bytes"]:
         raise RuntimeError("source archive no longer matches the admitted preflight")
+    verify_source_archive_runtime(archive)
     identity = source_identity(archive)
     if identity.get("repository_commit") != frozen["repository_commit"]:
         raise RuntimeError("source archive commit does not match the admitted preflight")

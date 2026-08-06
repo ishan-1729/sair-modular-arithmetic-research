@@ -1,0 +1,85 @@
+{
+  "schema_version": "exp701-launch-failure-receipt-v1",
+  "status": "failed-before-hardware-acceptance-and-science-cleaned",
+  "attempt": "I",
+  "observed_at_utc": "2026-08-06T10:22:31.626338+00:00",
+  "provider": {
+    "name": "RunPod Secure",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "pod_id": "blzbo7pmnw2maj",
+    "network_volume_id": "d8fuvurbpn",
+    "pod_delete_confirmed": true,
+    "network_volume_delete_confirmed": true,
+    "provider_billed_lifetime_seconds_upper": 388.901179789,
+    "cost_upper_usd": 0.081107,
+    "invoice_amount_usd": null,
+    "post_cleanup_inventory": {
+      "pod_count": 0,
+      "pod_ids": [],
+      "network_volume_count": 0,
+      "network_volume_ids": []
+    }
+  },
+  "source": {
+    "repository_commit": "32c9c6aec5d820a515e057546c6d4d8c263945be",
+    "archive_sha256": "18a396fdda188492cef6302865006f164010eb2a3adf5cc35909007e0c5437be",
+    "archive_bytes": 2479796
+  },
+  "diagnostic": {
+    "receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/guest-supervisor-log-s3c.json",
+    "export_sha256": "2dddc4a062fefdf53f87ad3fd379ccf7cc83aec621722cc99539b388b37a3430",
+    "restore_verified": true,
+    "root_cause": "The source archive carried environments/cuda/bootstrap.sh and run-acceptance.sh as 0644 because commit 32c9c6a tracked both as 100644. verify_environment.verify_live calls the all-profile offline verifier and failed closed before hardware acceptance."
+  },
+  "science": {
+    "environment_receipt_written": false,
+    "hardware_acceptance_started": false,
+    "focused_tests_started": false,
+    "smoke_started": false,
+    "scientific_roots_opened": [],
+    "checkpoints": 0,
+    "performance_metrics_available": false
+  },
+  "cumulative_authorized_attempts_upper": {
+    "provider_seconds": 3969.264260062,
+    "cost_usd": 0.8209116497822448,
+    "authorized_max_provider_seconds": 36000,
+    "authorized_max_cost_usd": 9.0
+  },
+  "evidence": {
+    "provider_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-s3c.json",
+    "provider_receipt_sha256": "da320fee68ac0c16320c8be9bba5844bfb708a778e86c077fe14a3ad4c3615ba",
+    "orchestrator_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-s3c.json",
+    "orchestrator_receipt_sha256": "28cd9f9a1a6f04a5d32f3147e17c262302e73338799122a67576e1f41cb0c987",
+    "guest_diagnostic_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/guest-supervisor-log-s3c.json"
+  },
+  "next_launch_policy": {
+    "old_preflight_invalidated": true,
+    "replacement_launched": false,
+    "fresh_source_archive_required": true,
+    "fresh_preflight_required": true,
+    "fresh_user_direction_required": true
+  },
+  "local_repair": {
+    "replacement_launched": false,
+    "git_modes_after_repair": {
+      "environments/cuda/bootstrap.sh": "100755",
+      "environments/cuda/run-acceptance.sh": "100755"
+    },
+    "prospective_git_archive_modes": {
+      "environments/cuda/bootstrap.sh": "0775",
+      "environments/cuda/run-acceptance.sh": "0775"
+    },
+    "fail_closed_gates": [
+      "prepare_source.sh rejects non-executable Git-derived CUDA launchers before archive creation",
+      "orchestrate.verify_preflight rejects a source archive with missing, non-file, or non-executable CUDA launchers before a provider request"
+    ],
+    "old_archive_rejected_by_new_gate": true,
+    "new_source_archive_built": false,
+    "new_preflight_admitted": false
+  },
+  "limitations": [
+    "No EXP701 scientific or GPU-performance result exists from attempt I.",
+    "Cost is the controller's create-request-to-delete-confirmation upper bound; RunPod invoice reconciliation is not available in this receipt."
+  ]
+}

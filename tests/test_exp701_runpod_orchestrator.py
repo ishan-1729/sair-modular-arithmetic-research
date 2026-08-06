@@ -48,6 +48,21 @@ class FakeS3:
         self.objects[(Bucket, Key)] = (bytes(Body), {})
 
 
+def write_source_archive(
+    archive: Path, repository_commit: str, *, launcher_mode: int = 0o755
+) -> None:
+    identity = json.dumps({"repository_commit": repository_commit}).encode()
+    with tarfile.open(archive, "w:gz") as bundle:
+        member = tarfile.TarInfo("./.sair-source.json")
+        member.size = len(identity)
+        bundle.addfile(member, io.BytesIO(identity))
+        for path in orchestrate.REQUIRED_EXECUTABLE_ARCHIVE_PATHS:
+            launcher = tarfile.TarInfo(f"./{path}")
+            launcher.mode = launcher_mode
+            launcher.size = 0
+            bundle.addfile(launcher, io.BytesIO())
+
+
 def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) -> None:
     args = arguments(tmp_path)
     ready = tmp_path / "ready.json"
@@ -178,10 +193,10 @@ def test_retained_volume_requires_pod_delete_before_volume_cleanup() -> None:
 
 
 def test_preflight_binds_archive_commit_and_authorization(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path,
 ) -> None:
     archive = tmp_path / "source.tar.gz"
-    archive.write_bytes(b"archive")
+    write_source_archive(archive, "e" * 40)
     receipt = tmp_path / "preflight.json"
     receipt.write_text(
         json.dumps(
@@ -198,14 +213,34 @@ def test_preflight_binds_archive_commit_and_authorization(
         ),
         encoding="utf-8",
     )
-    monkeypatch.setattr(
-        orchestrate, "source_identity", lambda _archive: {"repository_commit": "e" * 40}
-    )
     assert orchestrate.verify_preflight(receipt, archive)["source_archive"][
         "repository_commit"
     ] == "e" * 40
     archive.write_bytes(b"mutated")
     with pytest.raises(RuntimeError, match="no longer matches"):
+        orchestrate.verify_preflight(receipt, archive)
+
+
+def test_preflight_rejects_nonexecutable_cuda_launchers(tmp_path: Path) -> None:
+    archive = tmp_path / "source.tar.gz"
+    write_source_archive(archive, "e" * 40, launcher_mode=0o644)
+    receipt = tmp_path / "preflight.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "schema_version": "exp701-runpod-preflight-receipt-v1",
+                "status": "passed-awaiting-paid-authorization",
+                "required_authorization": orchestrate.APPROVAL,
+                "source_archive": {
+                    "sha256": orchestrate.sha256(archive),
+                    "bytes": archive.stat().st_size,
+                    "repository_commit": "e" * 40,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(RuntimeError, match="non_executable"):
         orchestrate.verify_preflight(receipt, archive)
 
 
@@ -264,11 +299,7 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     archive = tmp_path / "source.tar.gz"
-    identity = json.dumps({"repository_commit": "f" * 40}).encode()
-    with tarfile.open(archive, "w:gz") as bundle:
-        member = tarfile.TarInfo("./.sair-source.json")
-        member.size = len(identity)
-        bundle.addfile(member, io.BytesIO(identity))
+    write_source_archive(archive, "f" * 40)
     preflight = tmp_path / "preflight.json"
     preflight.write_text(
         json.dumps(

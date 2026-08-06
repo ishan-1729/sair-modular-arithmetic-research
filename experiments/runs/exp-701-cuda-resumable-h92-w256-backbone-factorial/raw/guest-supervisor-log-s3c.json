@@ -1,0 +1,75 @@
+{
+  "schema_version": "exp701-guest-diagnostic-receipt-v1",
+  "status": "failed-before-hardware-acceptance-and-science",
+  "attempt": "I",
+  "provider": "RunPod Secure",
+  "gpu_requested": "NVIDIA GeForce RTX 4090",
+  "pod_id": "blzbo7pmnw2maj",
+  "network_volume_id": "d8fuvurbpn",
+  "source_archive": {
+    "sha256": "18a396fdda188492cef6302865006f164010eb2a3adf5cc35909007e0c5437be",
+    "bytes": 2479796,
+    "repository_commit": "32c9c6aec5d820a515e057546c6d4d8c263945be"
+  },
+  "diagnostic_export": {
+    "sha256": "2dddc4a062fefdf53f87ad3fd379ccf7cc83aec621722cc99539b388b37a3430",
+    "bytes": 3240,
+    "restore_verified": true,
+    "restored_files": 2,
+    "restored_bytes": 8708,
+    "completed_phases": 0,
+    "root_markers": [],
+    "snapshots": 0,
+    "offpod_sync_receipt_sha256": "dc9d2b8bf9e302ffa6b1fd02efc8eaebcb6fc14e0c2dbf2084ed24556809a8ef"
+  },
+  "guest_log": {
+    "archive_member": "experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial/guest-supervisor.log",
+    "bytes": 8650,
+    "sha256": "49293a0f1dee97c894b933069eaa54377301a9af949f1a522cd5b2438052d2de"
+  },
+  "guest_terminal": {
+    "archive_member": "experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial/guest-terminal.json",
+    "bytes": 58,
+    "sha256": "576a979efea9f83c851f921a64adcda7ebbe4731cd427ff942c4731ac37e0c53",
+    "value": {
+      "status": "failed",
+      "resume_required": false,
+      "exit_code": 1
+    }
+  },
+  "observed_progress": {
+    "initial_external_baseline_sha256": "925914061bc65eff9c0f678f68defb7cae741032c986d26326a3d9e05594c073",
+    "initial_external_baseline_passed": true,
+    "uv_version": "0.11.28",
+    "python_version": "3.12.13",
+    "cuda_profile": "cu124",
+    "resolved_packages": 124,
+    "installed_packages": 124,
+    "torch": "2.5.1+cu124",
+    "dependency_audit_passed": true,
+    "environment_receipt_written": false,
+    "hardware_acceptance_started": false,
+    "focused_tests_started": false,
+    "smoke_started": false,
+    "scientific_roots_opened": 0
+  },
+  "observed_failure": {
+    "stage": "bootstrap live environment verification",
+    "exception_type": "ValueError",
+    "message": "CUDA launcher is missing or not executable: /workspace/sair-exp701/repository/environments/cuda/bootstrap.sh",
+    "traceback_terminal_frame": "environments/cuda/verify_environment.py:117 in verify_offline",
+    "source_archive_modes": {
+      "environments/cuda/bootstrap.sh": "0644",
+      "environments/cuda/run-acceptance.sh": "0644"
+    },
+    "source_git_modes_at_commit": {
+      "environments/cuda/bootstrap.sh": "100644",
+      "environments/cuda/run-acceptance.sh": "100644"
+    },
+    "root_cause": "The deterministic source archive correctly preserved the non-executable Git modes of both verifier-required CUDA launchers. Working-tree executability under WSL therefore did not survive git archive into the Pod payload."
+  },
+  "limitations": [
+    "This receipt proves dependency installation and the exact pre-acceptance failure only; it is not CUDA hardware, smoke, science, or performance evidence.",
+    "The complete guest log remains in the restore-verified off-Pod archive identified above; this JSON preserves its hash and the decision-relevant facts without duplicating package-manager output."
+  ]
+}

@@ -59,11 +59,16 @@ Cloud GPU."
 - Current cost-control evidence: RunPod/Vast REST lifecycle adapters, budget
   admission, credential isolation, rate revalidation, durable resource-id
   receipts, and retrying DELETE-in-`finally` behavior pass seven fake-transport
-  tests. T010 then exercised live RunPod allocation at the observed $0.74/hour
-  rate: every created Pod was deletion-confirmed, the final resource inventory
-  was empty, and the $0.210378 controller upper bound stayed below the $1 cap.
-  RunPod never produced an accessible guest, so all CUDA tests remain unrun;
-  provider-invoice reconciliation and API-key rotation remain explicit risks.
+  tests. A later real RTX 4090 acceptance run passed all four representative
+  CUDA cases on torch 2.5.1+cu124, while every controller-owned resource was
+  deletion-confirmed. The full-fidelity EXP701 science tranche remains
+  incomplete: attempt H omitted a verifier-required lock, and corrected attempt
+  I installed all 124 pinned packages but failed before hardware acceptance
+  because Git/archive modes made both CUDA launchers non-executable. Attempt I's
+  Pod and volume were deletion-confirmed after a 388.901-second provider-lifetime
+  upper bound ($0.081107 upper cost), and the post-cleanup inventory was empty.
+  Its launch admission is invalidated; a new source archive, new preflight, and
+  fresh user direction are required before any replacement.
 
 ## Goal Oracle
 

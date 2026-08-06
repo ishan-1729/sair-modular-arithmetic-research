@@ -1,6 +1,6 @@
 {
   "schema_version": "exp701-runpod-preflight-receipt-v1",
-  "status": "passed-awaiting-paid-authorization",
+  "status": "invalidated-after-attempt-i-terminal-failure",
   "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
   "generated_at": "2026-08-06",
   "provider_requests_made": true,
@@ -96,6 +96,10 @@
     "prior_authorized_attempts_cost_upper_usd": 0.7398046497822448,
     "cumulative_provider_seconds_upper": 35980.363080273,
     "cumulative_cost_upper_usd": 7.496959649782244,
+    "attempt_i_provider_seconds_upper": 388.901179789,
+    "attempt_i_cost_upper_usd": 0.081107,
+    "completed_authorized_attempts_provider_seconds_upper": 3969.264260062,
+    "completed_authorized_attempts_cost_upper_usd": 0.8209116497822448,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
     "balance_last_observed_usd": 7.449670855072327,
@@ -218,6 +222,25 @@
       "secure_gpu_usd_per_hour": 0.74,
       "posted_total_spend_usd": 2.550329144927673,
       "receipt_sha256": "a7cbbd04b2d7c29e61662cefc0b924dea0b896e4802f9681aaaee27ab1f1994c"
+    },
+    {
+      "command": "corrected attempt I restore-verified guest diagnosis and controller-owned cleanup",
+      "status": "failed-before-hardware-acceptance-and-science-and-cleaned",
+      "failure_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/launch-i-failure.json",
+      "guest_diagnostic_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/guest-supervisor-log-s3c.json",
+      "provider_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-s3c.json",
+      "orchestrator_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-s3c.json",
+      "root_cause": "source commit and archive recorded both verifier-required CUDA launchers as non-executable",
+      "dependency_installation_completed": true,
+      "installed_packages": 124,
+      "torch": "2.5.1+cu124",
+      "scientific_roots_opened": 0,
+      "provider_billed_lifetime_seconds_upper": 388.901179789,
+      "cost_upper_usd": 0.081107,
+      "pod_delete_confirmed": true,
+      "network_volume_delete_confirmed": true,
+      "post_cleanup_pods": 0,
+      "post_cleanup_network_volumes": 0
     }
   ],
   "official_runpod_sources": {
@@ -233,10 +256,11 @@
   },
   "required_authorization": "I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10",
   "limitations": [
-    "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
+    "EXP701 science has not run; the former launch admission is invalidated and cannot be reused.",
     "Retry B failed at the pre-science external-copy gate; retained-volume recovery C later restore-verified its archive and delete-confirmed both the recovery Pod and retained volume without opening science.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
-    "After launch H failed before science because the explicit payload omitted a verifier-required CUDA lock, the corrected replacement is capped at 32,400 provider seconds and $8.27. Including launch H's deletion-confirmed 647.161-second upper lifetime, all authorized attempts remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
+    "Attempt I installed the pinned cu124 environment but failed before hardware acceptance because both CUDA launchers were non-executable in the Git-derived archive. It was deletion-confirmed after a 388.901-second provider-lifetime upper bound; all completed authorized attempts remain below the user's cumulative 10-hour/$9 ceilings.",
+    "A replacement requires a newly built source archive with executable launcher modes, a new launch-admitted preflight tied to that archive and commit, and fresh user direction. No replacement was launched.",
     "The RunPod API and S3 credentials remain host-only and are not copied into the source archive, guest environment, logs, or durable receipts."
   ]
 }

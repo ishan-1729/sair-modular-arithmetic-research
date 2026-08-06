@@ -1012,7 +1012,7 @@ tasks:
       - "Provider-billed lifetime and final destruction receipt"
       - "cuda-hardware-validated | remain-hardware-unvalidated"
     receipt:
-      result: failed-provider-startup
+      result: done
       decision: remain-hardware-unvalidated
       waiting_for_user_approval: false
       authorization_received: I_AUTHORIZE_PAID_GPU_LAUNCH
@@ -1062,17 +1062,110 @@ tasks:
       - "Missing evidence or exact next task"
     receipt:
       result: blocked
-      blocked_reason: "T010 produced a truthful provider-startup failure receipt, so the original plug-and-play outcome is not complete; a later clean provider launch must execute the four-case CUDA matrix before final hardware validation."
-      summary: "The local milestone remains approved and provider cleanup is proven, but the authorized hardware attempt never reached guest compute. The goal remains blocked at cuda-provider-startup-blocked rather than approval-waiting."
+      blocked_reason: "Real CUDA acceptance later passed, but full-fidelity EXP701 attempt I failed before hardware acceptance and science because the source archive launchers were non-executable. The failure is repaired locally and cleanup is proven, but this terminal paid attempt cannot be replaced without fresh user direction."
+      waiting_for_user_approval: true
+      required_reply: "PREPARE_EXP701_RETRY_NO_PAID_LAUNCH"
+      summary: "The CUDA-portable branch has real hardware acceptance evidence, but the expanded EXP701 science outcome remains incomplete. Attempt I is durably closed and its packaging defect is locally repaired. The board is waiting only for explicit direction to prepare a new source archive and preflight; that reply does not authorize a paid launch."
       evidence:
         - .scratch/goalbuddy/T015-receipt.json
         - experiments/runs/cuda-hardware-acceptance-runpod-20260805/run.json
       remaining_blockers:
-        - "RunPod provider startup or an explicitly authorized replacement provider must become healthy."
-        - "full_outcome_complete cannot be true without passing real GPU evidence."
+        - "A fresh source archive and preflight must be produced from the repaired commit."
+        - "Any later paid launch needs a separate exact authorization tied to that new preflight and cap."
+        - "full_outcome_complete cannot be true without an EXP701 science result."
+  - id: T016
+    type: pm
+    assignee: PM
+    status: done
+    reasoning_hint: high
+    objective: "Close corrected EXP701 attempt I: preserve the restore-verified guest diagnostic and provider cleanup evidence, prevent accidental reuse of its launch admission, and repair the source-package executable-mode gate without launching another paid resource."
+    inputs:
+      - "RunPod Pod blzbo7pmnw2maj and network volume d8fuvurbpn"
+      - "Restore-verified archive SHA-256 2dddc4a062fefdf53f87ad3fd379ccf7cc83aec621722cc99539b388b37a3430"
+      - "Provider and orchestrator receipts ending s3c.json"
+      - "Source archive SHA-256 18a396fdda188492cef6302865006f164010eb2a3adf5cc35909007e0c5437be"
+    constraints:
+      - "Do not launch or resume any paid provider resource."
+      - "Preserve EXP689's unrelated untracked files."
+      - "Record observed failure separately from hypotheses."
+      - "Do not claim EXP701 science or performance evidence."
+      - "Require fresh user direction before any replacement paid attempt."
+    expected_output:
+      - "Durable attempt-I failure and cleanup receipt"
+      - "Source-package executable-mode regression guard"
+      - "Focused and project validation"
+      - "Committed and pushed branch"
+      - "Goal board returned to an honest blocked state"
+    allowed_files:
+      - docs/goals/cuda-portable-experiments/
+      - experiments/cloud_benchmarks/exp701_runpod/
+      - experiments/cuda_portability/inventory.json
+      - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/
+      - tests/test_exp701_runpod_orchestrator.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q tests/test_exp701_runpod_orchestrator.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "git diff --check"
+    stop_if:
+      - "A provider resource is still present."
+      - "The diagnostic archive is not restore-verified."
+      - "A fix would require changing scientific semantics or fidelity."
+      - "Any new paid launch would be required."
+    receipt:
+      result: done
+      changed_files:
+        - docs/goals/cuda-portable-experiments/goal.md
+        - docs/goals/cuda-portable-experiments/state.yaml
+        - environments/cuda/bootstrap.sh
+        - environments/cuda/run-acceptance.sh
+        - experiments/cloud_benchmarks/exp701_runpod/orchestrate.py
+        - experiments/cloud_benchmarks/exp701_runpod/prepare_source.sh
+        - experiments/cuda_portability/inventory.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/launch-i-failure.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/preflight.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/guest-supervisor-log-s3c.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-s3c.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-s3c.json
+        - tests/test_exp701_runpod_orchestrator.py
+      commands:
+        - cmd: "authenticated RunPod REST inventory after cleanup"
+          status: pass
+          evidence: "Observed 2026-08-06T10:22:31.626338Z: zero Pods and zero network volumes."
+        - cmd: "verify_source_archive_runtime(.scratch/exp701-launch/source-c.tar.gz)"
+          status: pass
+          evidence: "The new fail-closed gate rejected the exact attempt-I archive because both required launchers were 0644."
+        - cmd: "git archive prospective staged tree | tar -tvf -"
+          status: pass
+          evidence: "Both CUDA launchers are executable in the prospective Git archive; the index records 100755."
+        - cmd: "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
+          status: pass
+          evidence: "43 passed in 58.02s."
+        - cmd: "python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
+          status: pass
+          evidence: "19 passed in 72.60s in the isolated staged-tree worktree after restoring the exact authenticated EXP701 input checkpoint."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "238 OKF concepts, 1,100 benchmark records, pinned challenge commit 82510bba00a1 in the isolated staged-tree worktree."
+        - cmd: "python -m pytest -q"
+          status: pass
+          evidence: "Isolated staged-tree gate: 1,147 passed and 4 expected authorization-gated CUDA tests skipped in 762.89s."
+        - cmd: "git diff --check && git diff --cached --check"
+          status: pass
+          evidence: "No whitespace errors."
+      summary: "Attempt I reached the pinned cu124 dependency installation but failed before hardware acceptance, smoke, or science because the Git-derived payload made both verifier-required CUDA launchers non-executable. The restore-verified diagnostic, provider/orchestrator lifecycles, 388.901-second/$0.081107 upper bound, and zero-resource cleanup are durable. The old preflight is invalidated, both Git modes are repaired, and two independent pre-provider gates now reject this packaging defect. No replacement was launched."
+      remaining_blockers:
+        - "EXP701 has no science or performance result."
+        - "A replacement requires a fresh source archive and launch-admitted preflight tied to the new commit."
+        - "A replacement paid attempt requires fresh user direction."
+      deviations:
+        - "The shared worktree full suite had 1,164 passes, 4 expected skips, and two CUDA inventory failures caused solely by unrelated untracked EXP689 files; they were preserved untouched. The authoritative isolated staged-tree suite passed."
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
   last_verification:
-    result: unknown
-    task: null
-    commands: []
+    result: pass
+    task: T016
+    commands:
+      - "43 focused EXP701/provider tests passed"
+      - "19 focused inventory/EXP701 tests passed in isolated staged-tree worktree"
+      - "python tools/validate_project.py passed"
+      - "python -m pytest -q: 1,147 passed, 4 expected hardware skips"

@@ -89,6 +89,14 @@ cleanup() {
 }
 trap cleanup EXIT
 git -C "$repository_root" archive --format=tar HEAD "${payload_paths[@]}" | tar -x -C "$temporary"
+for launcher in \
+  environments/cuda/bootstrap.sh \
+  environments/cuda/run-acceptance.sh; do
+  if [[ ! -x "$temporary/$launcher" ]]; then
+    printf 'source payload launcher is not executable in Git: %s\n' "$launcher" >&2
+    exit 1
+  fi
+done
 mkdir -p "$temporary/sources/github/modular-arithmetic-challenge"
 git -C "$challenge" archive --format=tar HEAD src | tar -x -C "$temporary/sources/github/modular-arithmetic-challenge"
 mkdir -p "$temporary/.scratch/exp701-input"

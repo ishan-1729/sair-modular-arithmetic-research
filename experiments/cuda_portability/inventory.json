@@ -441,7 +441,7 @@
       "hotspots": [
         {
           "kind": "checkpoint",
-          "line": 150,
+          "line": 187,
           "operation": "json.load",
           "symbol": "api_get"
         }
@@ -456,7 +456,7 @@
       ],
       "responsibility": "Keep provider and S3 credentials, lifecycle cleanup, pre-Pod source upload and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "498f5b553a01a56a5bc9d04652890019597101075c8c239b83a247ea5f921b69",
+      "source_sha256": "8d645ceab5808dd52e41470abff0edd06f7c3a613a83c460422a6a792d8f7431",
       "torch_referenced": false
     },
     {
@@ -28905,7 +28905,7 @@
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "171dacba5dd066acedfdde822d7c683eb50a1e214af49bfcd366ffaeddeb1f6d"
+    "tree_sha256": "387ffd3d2389222b7e59a5e033b6cfcd3678df5e2e206db045cb74690682d245"
   },
   "summary": {
     "classifications": {
