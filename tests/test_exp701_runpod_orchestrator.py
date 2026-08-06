@@ -41,8 +41,11 @@ class FakeS3:
     def download_file(self, bucket, key, destination) -> None:
         Path(destination).write_bytes(self.objects[(bucket, key)][0])
 
-    def put_object(self, *, Bucket, Key, Body, Metadata, **_values) -> None:
-        self.objects[(Bucket, Key)] = (bytes(Body), dict(Metadata))
+    def get_object(self, *, Bucket, Key):
+        return {"Body": io.BytesIO(self.objects[(Bucket, Key)][0])}
+
+    def put_object(self, *, Bucket, Key, Body, **_values) -> None:
+        self.objects[(Bucket, Key)] = (bytes(Body), {})
 
 
 def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) -> None:
@@ -97,6 +100,7 @@ def test_s3_upload_and_offpod_sync_are_sha_bound_and_acknowledged(tmp_path: Path
     )
     assert uploaded["status"] == "verified"
     assert uploaded["sha256"] == recovery_transport.sha256(source)
+    assert uploaded["verification"] == "authenticated-download-sha256"
 
     output = tmp_path / "experiment" / orchestrate.RUN_ID
     output.mkdir(parents=True)
@@ -129,8 +133,16 @@ def test_s3_upload_and_offpod_sync_are_sha_bound_and_acknowledged(tmp_path: Path
 
 def test_s3_endpoint_is_allowlisted() -> None:
     assert orchestrate.s3_endpoint("EU-RO-1") == "https://s3api-eu-ro-1.runpod.io/"
+    assert offpod_sync.runpod_s3_region(
+        "https://s3api-eu-ro-1.runpod.io/"
+    ) == "eu-ro-1"
+    assert offpod_sync.runpod_s3_region(
+        "https://s3api-eur-is-1.runpod.io/"
+    ) == "eur-is-1"
     with pytest.raises(ValueError, match="not configured"):
         orchestrate.s3_endpoint("US-UNKNOWN-1")
+    with pytest.raises(ValueError, match="hostname"):
+        offpod_sync.runpod_s3_region("https://s3.amazonaws.com/")
 
 
 def test_retained_volume_recovery_is_short_bounded_and_never_starts_science(

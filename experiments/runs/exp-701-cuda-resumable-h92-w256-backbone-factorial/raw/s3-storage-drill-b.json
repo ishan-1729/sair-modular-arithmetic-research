@@ -1,0 +1,38 @@
+{
+  "data_center_id": "EU-RO-1",
+  "elapsed_seconds": 6.112372096000001,
+  "events": [
+    {
+      "elapsed_seconds": 0.0184229740000319,
+      "event": "drill-started"
+    },
+    {
+      "elapsed_seconds": 1.5755289150000067,
+      "event": "network-volume-created",
+      "response_sha256": "947a9427320d1c5ea7eddb2dfd3233ccd37c4814e21db0e7e64e7eaaf2328a3a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 5.083073915,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 6.102046270000017,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "failure": {
+    "message": "An error occurred (403) when calling the HeadObject operation: Forbidden",
+    "type": "ClientError"
+  },
+  "gpu_pod_created": false,
+  "network_volume_delete_confirmed": true,
+  "network_volume_gb": 50,
+  "network_volume_id": "uonpmzpbyv",
+  "schema_version": "exp701-runpod-s3-storage-drill-v1",
+  "source_bytes": 2381045,
+  "source_sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+  "status": "failed"
+}

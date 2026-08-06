@@ -1,0 +1,52 @@
+{
+  "data_center_id": "EU-RO-1",
+  "elapsed_seconds": 8.545708600000012,
+  "events": [
+    {
+      "elapsed_seconds": 0.022143319000008432,
+      "event": "drill-started"
+    },
+    {
+      "elapsed_seconds": 2.7257421500000305,
+      "event": "network-volume-created",
+      "response_sha256": "a1ff45af363fc1b3270a3acc10414b4ab11c4d0e9cfe2c76b8b531f714a4ee13"
+    },
+    {
+      "bytes": 2381045,
+      "elapsed_seconds": 5.65616798100001,
+      "event": "s3-upload-verified",
+      "key": "sair-exp701-source-drill.tar.gz",
+      "sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+      "verification": "authenticated-download-sha256"
+    },
+    {
+      "bytes": 2381045,
+      "elapsed_seconds": 6.010802619000003,
+      "event": "s3-independent-download-verified",
+      "sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df"
+    },
+    {
+      "elapsed_seconds": 6.446910472000013,
+      "event": "s3-object-delete-requested"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 7.591390192999995,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 8.535700538000015,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "gpu_pod_created": false,
+  "network_volume_delete_confirmed": true,
+  "network_volume_gb": 50,
+  "network_volume_id": "pnmva98fah",
+  "schema_version": "exp701-runpod-s3-storage-drill-v1",
+  "source_bytes": 2381045,
+  "source_sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+  "status": "passed-and-cleaned"
+}

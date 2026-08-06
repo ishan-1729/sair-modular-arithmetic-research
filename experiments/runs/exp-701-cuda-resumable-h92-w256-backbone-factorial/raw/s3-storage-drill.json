@@ -1,0 +1,38 @@
+{
+  "data_center_id": "EU-RO-1",
+  "elapsed_seconds": 5.184739530999991,
+  "events": [
+    {
+      "elapsed_seconds": 0.022090585999990253,
+      "event": "drill-started"
+    },
+    {
+      "elapsed_seconds": 1.5325755479999827,
+      "event": "network-volume-created",
+      "response_sha256": "925e43e22f741b8da8a7890e2b81822c38bf17057c063f72a7b4e4f33ad49ed9"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 4.250748439999995,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 5.173149395999985,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "failure": {
+    "message": "Failed to upload /mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-launch/source.tar.gz to gsc4s87fj3/sair-exp701-source-drill.tar.gz: An error occurred (AccessDenied) when calling the PutObject operation: the authorization header is malformed; the region 'us-east-1' is wrong; expecting 'eu-ro-1'",
+    "type": "S3UploadFailedError"
+  },
+  "gpu_pod_created": false,
+  "network_volume_delete_confirmed": true,
+  "network_volume_gb": 50,
+  "network_volume_id": "gsc4s87fj3",
+  "schema_version": "exp701-runpod-s3-storage-drill-v1",
+  "source_bytes": 2381045,
+  "source_sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+  "status": "failed"
+}

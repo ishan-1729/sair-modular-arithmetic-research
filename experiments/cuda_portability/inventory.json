@@ -409,7 +409,7 @@
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
-      "source_sha256": "76932e1d26548b8d51617286e76c18a36fc6ac1355049b0f50bb32e9de7133a2",
+      "source_sha256": "774a1d4b27c12cf58e577e35690c02ee31a8162553b105a16b07b9db7cc1bbe4",
       "torch_referenced": false
     },
     {
@@ -28905,7 +28905,7 @@
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "247a8d997b858820cf9e4792c8e561d3e6d6552a829f2d3a31bedbb8a672ddab"
+    "tree_sha256": "f180d13876e52aab125cfa2929db38bef4c2778de762069eac7fa058f94325dd"
   },
   "summary": {
     "classifications": {

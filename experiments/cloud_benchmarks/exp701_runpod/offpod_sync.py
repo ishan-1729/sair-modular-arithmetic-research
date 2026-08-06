@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -14,8 +13,20 @@ import subprocess
 import tempfile
 import time
 from typing import Any
+from urllib.parse import urlparse
 
 from .recovery_transport import atomic_json, restore_export, sha256
+
+
+def runpod_s3_region(endpoint_url: str) -> str:
+    hostname = urlparse(endpoint_url).hostname or ""
+    prefix = "s3api-"
+    if not hostname.startswith(prefix) or not hostname.endswith(".runpod.io"):
+        raise ValueError("RunPod S3 endpoint hostname is invalid")
+    region = hostname[len(prefix) : -len(".runpod.io")]
+    if not region or any(character not in "abcdefghijklmnopqrstuvwxyz0123456789-" for character in region):
+        raise ValueError("RunPod S3 endpoint region is invalid")
+    return region
 
 
 def runpod_s3_client(
@@ -38,7 +49,7 @@ def runpod_s3_client(
         endpoint_url=endpoint_url.rstrip("/"),
         aws_access_key_id=access_key_id,
         aws_secret_access_key=secret_access_key,
-        region_name="us-east-1",
+        region_name=runpod_s3_region(endpoint_url),
         config=Config(
             signature_version="s3v4",
             s3={"addressing_style": "path"},
@@ -58,26 +69,44 @@ def upload_file_verified(
 
     source = source.resolve()
     digest = sha256(source)
-    client.upload_file(
-        str(source),
-        bucket,
-        key,
-        ExtraArgs={"Metadata": {"sha256": digest}},
-    )
-    head = client.head_object(Bucket=bucket, Key=key)
-    metadata = {str(name).lower(): value for name, value in (head.get("Metadata") or {}).items()}
-    if int(head.get("ContentLength", -1)) != source.stat().st_size:
-        raise RuntimeError("RunPod S3 upload size verification failed")
-    if metadata.get("sha256") != digest:
-        raise RuntimeError("RunPod S3 upload SHA-256 metadata verification failed")
+    client.upload_file(str(source), bucket, key)
+    with tempfile.TemporaryDirectory(dir=source.parent) as temporary_raw:
+        verification_copy = Path(temporary_raw) / source.name
+        download_object(client, bucket=bucket, key=key, destination=verification_copy)
+        if verification_copy.stat().st_size != source.stat().st_size:
+            raise RuntimeError("RunPod S3 upload size verification failed")
+        if sha256(verification_copy) != digest:
+            raise RuntimeError("RunPod S3 upload SHA-256 verification failed")
     return {
         "status": "verified",
         "bucket": bucket,
         "key": key,
         "sha256": digest,
         "bytes": source.stat().st_size,
-        "etag": str(head.get("ETag", "")).strip('"') or None,
+        "verification": "authenticated-download-sha256",
     }
+
+
+def download_object(
+    client: Any,
+    *,
+    bucket: str,
+    key: str,
+    destination: Path,
+) -> None:
+    """Stream GetObject without Boto3's transfer-manager HeadObject probe."""
+
+    response = client.get_object(Bucket=bucket, Key=key)
+    body = response["Body"]
+    with destination.open("wb") as handle:
+        while True:
+            chunk = body.read(1024 * 1024)
+            if not chunk:
+                break
+            handle.write(chunk)
+    close = getattr(body, "close", None)
+    if close is not None:
+        close()
 
 
 def _declared_sha(path: Path) -> str:
@@ -287,13 +316,23 @@ def sync_s3(
     with tempfile.TemporaryDirectory(dir=destination) as temporary_raw:
         temporary = Path(temporary_raw)
         for index in (1, 2):
-            client.download_file(bucket, keys[index], str(temporary / names[index]))
+            download_object(
+                client,
+                bucket=bucket,
+                key=keys[index],
+                destination=temporary / names[index],
+            )
         declared = _declared_sha(temporary / names[1])
         retained = destination / names[0]
         if retained.is_file() and sha256(retained) == declared:
             shutil.copy2(retained, temporary / names[0])
         else:
-            client.download_file(bucket, keys[0], str(temporary / names[0]))
+            download_object(
+                client,
+                bucket=bucket,
+                key=keys[0],
+                destination=temporary / names[0],
+            )
         verified = verify_triplet(
             temporary / names[0], temporary / names[1], temporary / names[2]
         )
@@ -328,7 +367,6 @@ def sync_s3(
         Key=str(ack_key),
         Body=encoded,
         ContentType="application/json",
-        Metadata={"sha256": hashlib.sha256(encoded).hexdigest()},
     )
     return result
 

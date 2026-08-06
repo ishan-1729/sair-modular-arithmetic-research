@@ -1,6 +1,6 @@
 {
   "schema_version": "exp701-runpod-preflight-receipt-v1",
-  "status": "passed-awaiting-paid-authorization",
+  "status": "passed-authorized-awaiting-launch",
   "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
   "generated_at": "2026-08-06",
   "provider_requests_made": true,
@@ -52,14 +52,14 @@
   "persistence": {
     "network_volume_gb": 50,
     "controller_managed": true,
-    "external_transport": "RunPod S3 API with separate host-only S3 credentials and SHA-256 object metadata",
+    "external_transport": "RunPod S3 API with separate host-only S3 credentials and authenticated-download SHA-256 verification",
     "external_sync_interval_seconds": 30,
     "stale_watchdog_seconds": 720,
     "initial_external_copy_gate": true,
     "pre_science_external_copy_gate": true,
     "periodic_and_terminal_external_copy": true,
     "restore_verified_before_volume_delete": true,
-    "stop_delete_restore_drill": "local recovery drill passed; live S3 storage drill required before Pod admission",
+    "stop_delete_restore_drill": "passed live RunPod S3 source roundtrip and checkpoint-triplet restore/acknowledgement drills; both temporary network volumes were deletion-confirmed and no GPU Pod was created",
     "same_root_resume_signature": "exact model, optimizer, scheduler, RNG, curve, data-order, width-order and work-ledger equality",
     "corrupted_archive_rejected": true
   },
@@ -68,7 +68,7 @@
     "guest": "experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh",
     "offpod_sync": "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py --s3-bucket",
     "controller": "environments/providers/controller.py",
-    "source_upload": "authenticated RunPod S3 upload to the managed volume before Pod creation, verified by object size and SHA-256 metadata",
+    "source_upload": "authenticated RunPod S3 upload to the managed volume before Pod creation, verified by an authenticated download and SHA-256",
     "guest_lifecycle": "direct foreground container start command; no SSH daemon, public port, or guest credential",
     "monitoring": "provider lifecycle polling plus restore-verified S3 checkpoint synchronization",
     "provider_poll_seconds_startup": 30,
@@ -123,7 +123,7 @@
       "command": "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
       "status": "pass",
       "passed": 41,
-      "wall_seconds": 45.72
+      "wall_seconds": 62.38
     },
     {
       "command": "python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py",
@@ -157,6 +157,25 @@
       "pod_delete_confirmed": true,
       "volume_delete_confirmed": true,
       "no_science_opened": true
+    },
+    {
+      "command": "live RunPod S3 source upload, authenticated-download SHA-256 roundtrip, object deletion and network-volume cleanup drill",
+      "status": "pass",
+      "receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/s3-storage-drill-d.json",
+      "source_sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+      "source_bytes": 2381045,
+      "network_volume_delete_confirmed": true,
+      "gpu_pod_created": false
+    },
+    {
+      "command": "live RunPod S3 checkpoint-triplet upload, restore, acknowledgement roundtrip and network-volume cleanup drill",
+      "status": "pass",
+      "receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/s3-checkpoint-triplet-drill.json",
+      "archive_sha256": "8ebe7a21533fef268f7543792182cba03a93aa579577de9957304f8203fb3af8",
+      "restored_files": 1,
+      "restored_bytes": 63,
+      "network_volume_delete_confirmed": true,
+      "gpu_pod_created": false
     },
     {
       "command": "repository-local Playwright managed Chromium launch-boundary RunPod inventory, catalog and billing check",
