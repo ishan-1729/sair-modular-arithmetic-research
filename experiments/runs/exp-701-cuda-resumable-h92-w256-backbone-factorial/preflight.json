@@ -3,8 +3,9 @@
   "status": "passed-awaiting-paid-authorization",
   "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
   "generated_at": "2026-08-06",
-  "provider_requests_made": false,
-  "paid_resource_created": false,
+  "provider_requests_made": true,
+  "paid_resource_created": true,
+  "paid_resource_currently_active": false,
   "scientific_roots_opened": [],
   "scientific_fidelity": {
     "replay_of": "exp-700-resumable-h92-w256-backbone-factorial",
@@ -23,17 +24,17 @@
   },
   "source_archive": {
     "path": ".scratch/exp701-launch/source.tar.gz",
-    "sha256": "76f5ec1ac93422bf25e3902a34d79892ef49cd06964ab7c324a004e4f192ea1b",
-    "bytes": 2378209,
-    "repository_commit": "c524fd52b22b3d5c6a2c5390629b0073fcf66cea",
+    "sha256": "83df4da60143de260f8e1865816f72b8cbf9e09fcd042c21e488056e8f4e87ad",
+    "bytes": 2378377,
+    "repository_commit": "7e1fc95fb5dde0e2766f0d7466f0e8ddd8351a57",
     "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
     "payload_policy": "explicit-runtime-allowlist-v1",
     "inventoried_files": 77,
-    "inventoried_payload_bytes": 3137279,
+    "inventoried_payload_bytes": 3138013,
     "forbidden_prefixes_absent": true,
     "unsafe_archive_members_absent": true,
     "archive_verification_path": ".scratch/exp701-launch/archive-verification.json",
-    "archive_verification_sha256": "7d15cd5b8ae89d8c4b3a433532c9b69473a4bacb53b770f0f3af4caaf6ccc842"
+    "archive_verification_sha256": "0a4d7db18a3d14748264b7caf379fcbdd3d2fdfedc9400b536eb7454a1483d26"
   },
   "accepted_hardware_gate": {
     "run": "cuda-hardware-acceptance-runpod-20260805g",
@@ -51,7 +52,7 @@
   "persistence": {
     "network_volume_gb": 50,
     "controller_managed": true,
-    "external_transport": "SCP with ephemeral identity and strict known-host verification",
+    "external_transport": "SCP with ephemeral identity, IdentitiesOnly, StrictHostKeyChecking and the orchestrator-owned UserKnownHostsFile",
     "external_sync_interval_seconds": 300,
     "stale_watchdog_seconds": 720,
     "initial_external_copy_gate": true,
@@ -74,7 +75,7 @@
     "provider_poll_seconds_running": 300,
     "cleanup": "controller deletion-confirms Pod, verifies restored off-Pod receipt, then deletion-confirms the managed network volume",
     "dry_plan_path": ".scratch/exp701-launch/orchestration-plan.json",
-    "dry_plan_sha256": "6605d0d726dce01fe99f2e5ce16569d7a7c4c2953ef85a1244b97948e2086af0",
+    "dry_plan_sha256": "ab2ddedade13fc80426fc897e1c8fb789b809aca873f3ed836394c40242b3223",
     "dry_plan_data_center_is_representative_only": "EU-RO-1",
     "live_data_center_binding_required_immediately_before_create": true,
     "ssh_public_key_fingerprint": "SHA256:/ZrM2Yj3x6aaaxfpDuDZXKwLiNHoiB2etd/s3grIz+E"
@@ -99,17 +100,19 @@
   "verification": [
     {
       "command": "python -m pytest -q",
-      "worktree": "clean detached c524fd52b22b3d5c6a2c5390629b0073fcf66cea",
+      "worktree": "clean detached 7e1fc95fb5dde0e2766f0d7466f0e8ddd8351a57",
       "status": "pass",
-      "passed": 1142,
+      "passed": 1145,
       "skipped_hardware_only": 4,
-      "wall_seconds": 673.81
+      "pytest_reported_seconds": 538.13,
+      "process_wall_seconds": 522.85,
+      "max_rss_kib": 1633392
     },
     {
       "command": "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
       "status": "pass",
-      "passed": 37,
-      "wall_seconds": 47.35
+      "passed": 41,
+      "wall_seconds": 46.86
     },
     {
       "command": "python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py",
@@ -121,7 +124,8 @@
       "command": "extracted allowlisted payload focused pytest",
       "status": "pass",
       "passed": 14,
-      "wall_seconds": 45.75
+      "skipped_hardware_only": 4,
+      "wall_seconds": 41.58
     },
     {
       "command": "python tools/validate_project.py",
@@ -145,7 +149,8 @@
   },
   "required_authorization": "I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10",
   "limitations": [
-    "EXP701 has not run; this receipt proves launch readiness, not a scientific result.",
+    "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
+    "Retry B failed at the pre-science external-copy gate. Its Pod is delete-confirmed and its retained EUR-IS-1 volume must be recovered and externally restore-verified before deletion or any fresh science launch.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
     "The six-to-twelve-hour projection can exceed the first ten-hour provider slice, so status 75 is a recoverable same-root checkpoint outcome rather than a scientific stop.",
     "The RunPod API credential is host-only and was intentionally not read, copied, or stored during non-paid preflight."
