@@ -1,0 +1,29 @@
+{
+  "schema_version": "exp701-runpod-live-admission-v3",
+  "attempt": "L",
+  "session": "s3h",
+  "observed_at_utc": "2026-08-06T14:52:04.518652Z",
+  "provider": "RunPod Secure",
+  "query": {
+    "transport": "authenticated read-only GraphQL",
+    "gpu_type_id": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "secure_cloud": true,
+    "data_center_id": "EU-RO-1"
+  },
+  "result": {
+    "stock_status": "Low",
+    "data_center_availability": "AVAILABLE",
+    "support_network_volumes": true,
+    "secure_price_usd_per_hour": 0.74,
+    "uninterruptable_price_usd_per_hour": 0.74,
+    "minimum_vcpu": 16,
+    "minimum_memory_gb": 61
+  },
+  "pre_create_inventory": {
+    "pods": 0,
+    "network_volumes": 0,
+    "evidence": "s3g deletion-confirmed receipts followed by the s3h orchestrator's fail-closed empty-Pod check"
+  },
+  "decision": "Launch one fresh s3h lifecycle for the already admitted L payload; do not relaunch s3g or create a duplicate."
+}

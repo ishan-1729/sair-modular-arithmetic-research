@@ -1,0 +1,115 @@
+{
+  "schema_version": "exp701-attempt-l-slice-recovery-v1",
+  "status": "slice-checkpointed-and-cleaned",
+  "attempt": "L",
+  "lifecycle": "s3h",
+  "source": {
+    "repository_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+    "archive_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+    "resume_archive_sha256": "0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
+  },
+  "provider": {
+    "name": "RunPod Secure Cloud",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "data_center_id": "EU-RO-1",
+    "pod_id": "vl7erkqk6z29ev",
+    "network_volume_id": "q0fir47rfw",
+    "pod_hourly_rate_usd": 0.74,
+    "storage_hourly_rate_usd": 0.010795,
+    "pod_created_at": "2026-08-06T14:52:46.990000Z",
+    "cleanup_started_at": "2026-08-06T22:47:56.335205Z",
+    "cleanup_completed_at": "2026-08-06T22:48:02.922930Z"
+  },
+  "controller_loss": {
+    "host_process_chain_absent": true,
+    "provider_receipt_terminal_status": "controller-started",
+    "orchestrator_receipt_present": false,
+    "pod_observed_before_cleanup": {
+      "http_status": 200,
+      "desired_status": "RUNNING",
+      "cost_per_hour_usd": 0.74
+    },
+    "diagnosis": "The Ubuntu WSL owner and its orchestrator/controller/off-Pod-sync process chain stopped after the final host sync, before the controller finally-path could delete the provider resources. RunPod retained the Pod in desired RUNNING state after the guest slice had checkpointed."
+  },
+  "offpod_recovery": {
+    "transport": "runpod-s3",
+    "local_destination": ".scratch/exp701-offpod-s3h-final-b",
+    "archive_sha256": "0a4ea76bfb3a9f6933008badf187206eff58c11c4ad111e5ddc2121861bc0370",
+    "archive_bytes": 14041586,
+    "restore_verification": {
+      "status": "verified",
+      "bytes": 19589958,
+      "files": 74,
+      "completed_phases": 10,
+      "snapshots": 5,
+      "root_markers": [
+        "calibration/root-20261413/root-opened.json",
+        "formal/root-20261414/root-opened.json"
+      ]
+    },
+    "guest_terminal": {
+      "status": "slice-checkpointed",
+      "resume_required": true
+    }
+  },
+  "science_progress": {
+    "formal_root": 20261414,
+    "completed_arms": [
+      "teacher_cosine"
+    ],
+    "active_arm": "teacher_restarts",
+    "active_arm_update": 3000,
+    "active_arm_total_updates": 4800,
+    "active_snapshot_sha256": "e5e5337382024ff5ed1cf53765b3ac99aafbed8698832b807e7caccc4098ba15",
+    "active_identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+    "formal_training_updates_completed": 7800,
+    "formal_training_updates_total": 19200,
+    "formal_training_fraction": 0.40625,
+    "terminal_science_result_present": false
+  },
+  "cleanup": {
+    "pod_delete_http_status": 204,
+    "pod_absence_http_status": 404,
+    "pod_delete_confirmed": true,
+    "network_volume_delete_http_status": 204,
+    "network_volume_absence_http_status": 404,
+    "network_volume_delete_confirmed": true,
+    "post_cleanup_inventory": {
+      "pod_count": 0,
+      "network_volume_count": 0,
+      "target_pod_present": false,
+      "target_network_volume_present": false
+    }
+  },
+  "authorization_accounting": {
+    "prior_completed_upper_provider_seconds": 6267.559869931,
+    "prior_completed_upper_usd": 1.3002306497822448,
+    "attempt_l_pod_seconds": 28515.93292951584,
+    "attempt_l_volume_upper_seconds": 28524.688272237778,
+    "attempt_l_compute_upper_usd": 5.861608435511589,
+    "attempt_l_storage_upper_usd": 0.085534447194113,
+    "attempt_l_total_upper_usd": 5.947142882705702,
+    "cumulative_upper_provider_seconds": 34792.24814216878,
+    "cumulative_upper_usd": 7.247373532487947,
+    "authorized_provider_seconds": 36000,
+    "authorized_usd": 9.0,
+    "remaining_provider_seconds": 1207.751857831223,
+    "remaining_usd": 1.752626467512053,
+    "within_authorization": true,
+    "resume_admissible_under_existing_ceiling": false
+  },
+  "provider_billing_observation": {
+    "receipt": "runpod-billing-20260805-20260807.json",
+    "window_total_usd": 7.42388357227901,
+    "attempt_l_pod_amount_usd": 5.314653305569664,
+    "attempt_l_pod_time_billed_ms": 25612953,
+    "estimated_credit_remaining_from_ten_usd": 2.57611642772099,
+    "post_terminal_pod_cost_estimate_usd": 1.384211702035
+  },
+  "limitations": [
+    "Provider billing was queried after cleanup; the separate runpod-billing-20260805-20260807.json receipt distinguishes provider-recorded charges from controller upper bounds and calculated attribution.",
+    "The original controller did not reach its finally-path, so provider-lifecycle-s3h.json remains a truthful non-terminal controller receipt and no orchestrator-lifecycle-s3h.json exists.",
+    "The rescued archive is restore-verified outside RunPod but remains a local recovery artifact rather than a Git-tracked model checkpoint.",
+    "Only 1207.751857831223 provider seconds remain under the original cumulative ceiling, which is insufficient for a scientifically useful full-fidelity resume slice."
+  ]
+}

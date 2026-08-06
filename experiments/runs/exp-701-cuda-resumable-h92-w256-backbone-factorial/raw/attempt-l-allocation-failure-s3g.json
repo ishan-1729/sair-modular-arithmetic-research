@@ -1,0 +1,38 @@
+{
+  "schema_version": "exp701-allocation-failure-v1",
+  "attempt": "L",
+  "session": "s3g",
+  "status": "provider-capacity-failure-before-pod-creation-and-cleaned",
+  "recorded_at_utc": "2026-08-06T14:42:20Z",
+  "source": {
+    "repository_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+    "archive_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+    "resume_archive_sha256": "0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
+  },
+  "provider": {
+    "data_center_id": "EU-RO-1",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "failure": "RunPod HTTP 500: create pod: There are no instances currently available",
+    "pod_created": false,
+    "scientific_root_markers": [],
+    "network_volume_id": "szvyom07yd",
+    "network_volume_delete_confirmed": true,
+    "provider_lifetime_seconds_upper": 10.912914742,
+    "cost_usd_upper": 0.002276
+  },
+  "receipts": {
+    "provider": "provider-lifecycle-s3g.json",
+    "provider_sha256": "fcc20e4b22def8edb24b2760e4b5e8b76e0d146b9a1ec023f4a522025650246d",
+    "orchestrator": "orchestrator-lifecycle-s3g.json",
+    "orchestrator_sha256": "b22c2cebb3969fe8a9cf705e79cc4c98f8ab03d7c848d207c3aa7b5c84dadad1"
+  },
+  "cumulative_after_session": {
+    "provider_seconds_upper": 6267.559869931,
+    "cost_usd_upper": 1.3002306497822448,
+    "authorized_provider_seconds": 36000,
+    "authorized_cost_usd": 9.0,
+    "remaining_provider_seconds": 29732.440130069,
+    "remaining_cost_usd": 7.699769350217755
+  },
+  "next_action": "Retry the same admitted L payload only after a fresh capacity query; do not reuse the s3g lifecycle paths."
+}

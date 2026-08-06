@@ -5,7 +5,7 @@ goal:
   slug: cuda-portable-experiments
   kind: existing_plan
   tranche: "Mechanically close scope, port performance-credible experiment families, package a reproducible cloud runtime, and require real GPU evidence before hardware validation."
-  status: active
+  status: blocked
   oracle:
     signal: "A generated inventory closes every reachable experiment and device hotspot; the committed branch passes locked fresh-environment and clean CPU regression gates; and a real GPU receipt covers every ported family before plug-and-play is claimed."
     cadence: "after each Worker package and at final audit"
@@ -69,7 +69,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/cuda-portable-experiments/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.2/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/cuda-portable-experiments"
 
-active_task: T019
+active_task: null
 
 tasks:
   - id: T001
@@ -1227,7 +1227,7 @@ tasks:
   - id: T018
     type: pm
     assignee: PM
-    status: queued
+    status: blocked
     reasoning_hint: high
     objective: "Audit the completed EXP701 science result, cleanup, comparison, durable registration, validation, commit, and push against the user's full outcome."
     inputs:
@@ -1241,14 +1241,29 @@ tasks:
       - "full_outcome_complete: true | false"
       - "Oracle-to-receipt mapping"
       - "Final limitations and cost/performance comparison"
-    receipt: null
+    receipt:
+      result: blocked
+      decision: not_complete
+      full_outcome_complete: false
+      blocked_reason: "The full EXP701 owner outcome is not complete: attempt L ended at a valid resumable slice checkpoint rather than a terminal scientific result, and the remaining 1207.751857831223 provider seconds under the original authorization cannot admit another faithful science slice."
+      oracle_mapping:
+        - "Exact cu124 bootstrap, RTX 4090 hardware acceptance 4/4, 14 focused tests, and restored-smoke verification passed on attempt L."
+        - "Calibration root 20261413 completed and formal root 20261414 reached 7800/19200 training updates (40.625%)."
+        - "Final archive 0a4ea76bfb3a9f6933008badf187206eff58c11c4ad111e5ddc2121861bc0370 is restore-verified outside RunPod and contains teacher_restarts update 3000 plus slice-checkpointed terminal state."
+        - "Pod vl7erkqk6z29ev and volume q0fir47rfw are deletion-confirmed; authenticated provider inventory is empty."
+        - "No terminal science result, durable evaluation/registry entry, final GPU-vs-local comparison, validation, commit, or push exists yet."
+      waiting_for_user_approval: true
+      required_reply: "I_AUTHORIZE_EXP701_GPU_RESUME\nProvider: RunPod Secure Cloud\nGPU: 1x RTX 4090\nAdditional maximum total cost: $8.00\nAdditional maximum provider lifetime: 10 hours"
+      summary: "Cleanup and checkpoint preservation are complete, but the goal cannot pass final audit until a newly authorized resume restores the exact attempt-L archive and finishes the conditional full-fidelity science path."
+      harness: codex
   - id: T019
     type: pm
     assignee: PM
-    status: active
+    status: blocked
     reasoning_hint: high
     objective: "Repair the EXP701 off-Pod publication race, close attempts J/K with restore-verified cleanup evidence, repair restored-smoke idempotency, and execute one cap-safe replacement attempt L from the clean J pre-science checkpoint through full-fidelity completion."
     inputs:
+      - "Live attempt-L continuity record: docs/goals/cuda-portable-experiments/notes/T019-attempt-l-live-handoff.md"
       - "Attempt-J provider/orchestrator receipts and restore-verified archive SHA-256 0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
       - "Attempt-J upper bounds: 1,154.185193621 provider seconds and $0.240710"
       - "Cumulative upper bounds through attempt J: 5,123.449453683 provider seconds and $1.0616216497822448"
@@ -1294,14 +1309,90 @@ tasks:
       - "The admitted cumulative upper bound exceeds $9 or 36,000 provider seconds."
       - "Scientific identity or fidelity would need to change."
       - "Cleanup cannot be deletion-confirmed."
-    receipt: null
+    receipt:
+      result: blocked
+      blocked_reason: "Attempt L cleanly slice-checkpointed at teacher_restarts update 3000 and all RunPod resources are deletion-confirmed, but only 1207.751857831223 provider seconds remain under the strict cumulative 36,000-second ceiling. That is insufficient for a scientifically useful full-fidelity resume, so a new paid launch is not authorized."
+      changed_files:
+        - docs/goals/cuda-portable-experiments/notes/T019-attempt-l-live-handoff.md
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/attempt-l-slice-recovery-and-cleanup.json
+      commands:
+        - cmd: "python -m experiments.cloud_benchmarks.exp701_runpod.offpod_sync --s3-bucket q0fir47rfw --once"
+          status: pass
+          evidence: "Final archive SHA-256 0a4ea76bfb3a9f6933008badf187206eff58c11c4ad111e5ddc2121861bc0370 restore-verified outside RunPod with 74 files, 10 completed phases, 5 snapshots, and teacher_restarts update 3000."
+        - cmd: "RunPod DELETE /pods/vl7erkqk6z29ev then DELETE /networkvolumes/q0fir47rfw"
+          status: pass
+          evidence: "Both DELETE calls returned HTTP 204 and both exact-resource absence probes returned HTTP 404."
+        - cmd: "Authenticated RunPod GET /pods and GET /networkvolumes"
+          status: pass
+          evidence: "Post-cleanup inventory contained zero Pods and zero network volumes."
+      summary: "Attempt L passed the exact CUDA/bootstrap/hardware/test/smoke gates, completed calibration and teacher_cosine training plus both evaluations, and checkpointed teacher_restarts at update 3000. Formal training is 7800/19200 updates (40.625%). A stopped WSL controller left the terminal Pod billing, so the newest S3 export was rescued and verified before emergency deletion-confirming both resources. Conservative cumulative upper bounds remain inside authorization at 34792.248142169 provider seconds and $7.247373532488, but the remaining time cannot admit another science slice."
+      waiting_for_user_approval: true
+      required_reply: "I_AUTHORIZE_EXP701_GPU_RESUME\nProvider: RunPod Secure Cloud\nGPU: 1x RTX 4090\nAdditional maximum total cost: $8.00\nAdditional maximum provider lifetime: 10 hours"
+      harness: codex
+  - id: T020
+    type: pm
+    assignee: PM
+    status: done
+    reasoning_hint: high
+    objective: "Write a durable, evidence-backed RunPod EXP701 execution runbook that captures the proven workflow, cost/performance facts, attempt-J-through-L failure lessons, checkpoint/restore protocol, controller-liveness requirements, billing reconciliation, and fail-closed terminal checklist so future agents do not rediscover the control plane or waste paid compute."
+    inputs:
+      - "Attempt J/K/L provider, orchestrator, off-Pod, cleanup, and billing evidence"
+      - "experiments/cloud_benchmarks/exp701_runpod implementation and tests"
+      - "docs/goals/cuda-portable-experiments/notes/T019-attempt-l-live-handoff.md"
+      - "knowledge/runbooks/implementation-process-optimization.md"
+    constraints:
+      - "Do not launch, resume, create, or attach any paid resource."
+      - "Distinguish provider-recorded billing from calculated upper bounds and hypotheses."
+      - "Never include API keys, S3 secrets, account email, or reusable credential material."
+      - "Preserve unrelated EXP689 files."
+      - "Make cleanup and off-Pod restore verification fail-closed and operationally copyable."
+    expected_output:
+      - "A knowledge/runbooks document with valid OKF frontmatter"
+      - "Exact preflight, launch, monitoring, checkpoint, crash-recovery, deletion, and billing procedures"
+      - "Attempt-by-attempt pitfalls and prevention controls"
+      - "A future-agent handoff template and no-duplicate-resource checklist"
+      - "Validation and GoalBuddy receipt"
+    allowed_files:
+      - docs/goals/cuda-portable-experiments/
+      - knowledge/runbooks/exp701-runpod-resumable-gpu-execution.md
+      - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.3/skills/goal-prep/scripts/check-goal-state.mjs docs/goals/cuda-portable-experiments/state.yaml"
+      - "git diff --check"
+    stop_if:
+      - "The runbook would require exposing credentials or inventing unobserved facts."
+      - "A paid provider mutation would be required."
+    receipt:
+      result: done
+      changed_files:
+        - knowledge/runbooks/exp701-runpod-resumable-gpu-execution.md
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/runpod-billing-20260805-20260807.json
+        - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/attempt-l-slice-recovery-and-cleanup.json
+      commands:
+        - cmd: "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
+          status: pass
+          evidence: "45 passed in 51.84 seconds."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "239 OKF concepts, 1,100 benchmark records, pinned upstream 82510bba00a1."
+        - cmd: "python -m pytest -q (isolated staged-tree worktree with authenticated external fixtures and source checkpoint)"
+          status: pass
+          evidence: "1,149 passed and 4 expected fail-closed CUDA hardware skips in 543.15 seconds."
+        - cmd: "check-goal-state.mjs docs/goals/cuda-portable-experiments/state.yaml"
+          status: pass
+          evidence: "Version-2 board valid with no errors or warnings before terminal transition."
+        - cmd: "git diff --check"
+          status: pass
+      summary: "Created a self-contained RunPod EXP701 operations runbook covering the frozen scientific contract, host/credential setup, CRLF and export pitfalls, three cost ledgers, provider billing, measured performance, prelaunch admission, source packaging, one-owner launch, off-Pod publication, event-driven monitoring, terminal cleanup, controller-crash recovery, attempt J/K/L failure lessons, current resume boundary, and copyable handoff/checklists. Added provider-recorded billing evidence: $7.42388357227901 total usage in the queried window and an estimated $2.57611642772099 remaining from an exact $10 starting balance."
+      harness: codex
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
   last_verification:
     result: pass
-    task: T016
+    task: T020
     commands:
-      - "43 focused EXP701/provider tests passed"
-      - "19 focused inventory/EXP701 tests passed in isolated staged-tree worktree"
-      - "python tools/validate_project.py passed"
-      - "python -m pytest -q: 1,147 passed, 4 expected hardware skips"
+      - "45 focused EXP701/provider tests passed"
+      - "python tools/validate_project.py passed: 239 OKF concepts, 1,100 benchmark records, pinned upstream 82510bba00a1"
+      - "isolated staged-tree python -m pytest -q: 1,149 passed, 4 expected hardware skips"
+      - "GoalBuddy state checker and stop gate passed"

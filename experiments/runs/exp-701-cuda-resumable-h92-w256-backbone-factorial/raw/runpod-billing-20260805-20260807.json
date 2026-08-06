@@ -1,0 +1,54 @@
+{
+  "schema_version": "exp701-runpod-billing-observation-v1",
+  "status": "provider-recorded",
+  "observed_at_utc": "2026-08-06T23:00:00Z",
+  "window": {
+    "start_time": "2026-08-05T00:00:00Z",
+    "end_time": "2026-08-07T23:59:59Z",
+    "bucket_size": "hour"
+  },
+  "source": {
+    "pod_endpoint": "GET https://rest.runpod.io/v1/billing/pods",
+    "network_volume_endpoint": "GET https://rest.runpod.io/v1/billing/networkvolumes",
+    "authentication": "host-only Bearer token; token not persisted",
+    "official_documentation": "https://docs.runpod.io/api-reference/billing/GET/billing/pods"
+  },
+  "charges_usd": {
+    "pods": 7.365550236834679,
+    "network_volumes": 0.05833333544433117,
+    "total": 7.42388357227901,
+    "attempt_l_pod": 5.314653305569664,
+    "all_other_pods": 2.050896931265015
+  },
+  "attempt_l_provider_billing": {
+    "pod_id": "vl7erkqk6z29ev",
+    "time_billed_ms": 25612953,
+    "time_billed_hours": 7.114709166666667,
+    "amount_usd": 5.314653305569664,
+    "effective_pod_rate_usd_per_hour": 0.746995159053
+  },
+  "credit_estimate": {
+    "assumed_starting_credit_usd": 10.0,
+    "estimated_remaining_credit_usd": 2.57611642772099,
+    "assumptions": [
+      "The account contained exactly $10 before this billing window.",
+      "No unrelated Pod, Serverless, storage, tax, credit adjustment, or charge exists outside the queried billing records.",
+      "The REST billing records had fully posted when queried."
+    ],
+    "exact_balance_source": "RunPod Billing console or `runpodctl user`; the current REST OpenAPI exposes usage history but not clientBalance."
+  },
+  "post_terminal_waste_estimate": {
+    "basis": "Attempt-L Pod billing time minus elapsed time from Pod creation to the final terminal export timestamp.",
+    "terminal_export_at_utc": "2026-08-06T20:08:29Z",
+    "pre_terminal_elapsed_seconds": 18942.01,
+    "post_terminal_billed_seconds": 6670.943,
+    "post_terminal_billed_hours": 1.853039722225,
+    "post_terminal_pod_cost_usd": 1.384211702035,
+    "classification": "calculated estimate from provider billing, not a separately itemized RunPod charge"
+  },
+  "limitations": [
+    "The network-volume billing endpoint did not attribute every amount to an attempt in this receipt.",
+    "The current account balance was not returned by the REST API, so estimated remaining credit is not an exact ledger balance.",
+    "Post-terminal waste is an attribution calculation; RunPod reported total time and amount, not a terminal-versus-post-terminal split."
+  ]
+}
