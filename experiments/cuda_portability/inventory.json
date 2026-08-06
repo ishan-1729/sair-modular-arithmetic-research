@@ -393,12 +393,13 @@
         "direct_route_ids": [],
         "routes": []
       },
-      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.recovery_transport', '.recovery_transport.atomic_json', '.recovery_transport.restore_export', '.recovery_transport.sha256', '__future__', '__future__.annotations', 'argparse', 'json']; hotspot_counts={}.",
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.recovery_transport', '.recovery_transport.atomic_json', '.recovery_transport.restore_export', '.recovery_transport.sha256', '__future__', '__future__.annotations', 'argparse', 'boto3']; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "cloud_benchmarks",
       "frozen_identity_constraint": null,
       "hotspots": [],
       "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py",
         "experiments/cloud_benchmarks/exp701_runpod/recover_retained_volume.py"
       ],
       "module": "experiments.cloud_benchmarks.exp701_runpod.offpod_sync",
@@ -408,16 +409,17 @@
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
-      "source_sha256": "2f5f035a1d0bff57ca661f3d3e14e62478eea411b26a60ef154f3d17e93fcd3d",
+      "source_sha256": "76932e1d26548b8d51617286e76c18a36fc6ac1355049b0f50bb32e9de7133a2",
       "torch_referenced": false
     },
     {
       "active_cpu_boundary": {
         "reason": "This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation.",
-        "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
+        "responsibility": "Keep provider and S3 credentials, lifecycle cleanup, pre-Pod source upload and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
         "symbols": [
           "provider-api",
-          "ssh-scp",
+          "s3-object-storage",
+          "direct-container-start",
           "process-lifecycle",
           "offpod-sync"
         ]
@@ -432,14 +434,14 @@
         "direct_route_ids": [],
         "routes": []
       },
-      "evidence": "This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation. Active symbols are ['provider-api', 'ssh-scp', 'process-lifecycle', 'offpod-sync']; imports=['__future__', '__future__.annotations', 'argparse', 'hashlib', 'json', 'os', 'pathlib', 'pathlib.Path']; hotspot_counts={'checkpoint': 1}.",
+      "evidence": "This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation. Active symbols are ['provider-api', 's3-object-storage', 'direct-container-start', 'process-lifecycle', 'offpod-sync']; imports=['.offpod_sync', '.offpod_sync.runpod_s3_client', '.offpod_sync.upload_file_verified', '.recovery_transport', '.recovery_transport.restore_export', '__future__', '__future__.annotations', 'argparse']; hotspot_counts={'checkpoint': 1}.",
       "exp649_cpu_boundary": null,
       "family": "cloud_benchmarks",
       "frozen_identity_constraint": null,
       "hotspots": [
         {
           "kind": "checkpoint",
-          "line": 138,
+          "line": 149,
           "operation": "json.load",
           "symbol": "api_get"
         }
@@ -452,9 +454,9 @@
       "reachability_roots": [
         "mechanical-all-experiment-python"
       ],
-      "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
+      "responsibility": "Keep provider and S3 credentials, lifecycle cleanup, pre-Pod source upload and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "7fb21703d03d67bc5cd4bbce470bf22b75fb67b6c7221363189316f0aaf75413",
+      "source_sha256": "ef0dd5bf3f6008813d28919b99c63260c53de018000ea7c6e2344635c9818a94",
       "torch_referenced": false
     },
     {
@@ -503,7 +505,8 @@
       "frozen_identity_constraint": null,
       "hotspots": [],
       "local_import_parents": [
-        "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py"
+        "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py",
+        "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py"
       ],
       "module": "experiments.cloud_benchmarks.exp701_runpod.recovery_transport",
       "path": "experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py",
@@ -28897,12 +28900,12 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "284fc6c0f6e3e5dba156d43b12eee2201700216c7eff283605f4c9f9e0c8aacb",
+    "config_sha256": "e1512a713957afe1cd40ec924b2440b0a8861570d54a4773210a3eb353a4a761",
     "python_file_count": 244,
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "edbdff96e8dfd0b437eb1a3cf51b4a38fc2630f83779654a36366df182fdcc43"
+    "tree_sha256": "247a8d997b858820cf9e4792c8e561d3e6d6552a829f2d3a31bedbb8a672ddab"
   },
   "summary": {
     "classifications": {
