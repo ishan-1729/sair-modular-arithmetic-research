@@ -37,13 +37,13 @@ APPROVAL = (
     "NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED "
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
-# Completed attempts through I consumed conservative upper bounds of
-# 3,969.264260062 provider seconds and $0.8209116497822448. Attempt J remains
-# inside the original cumulative 36,000-second/$9 authorization while retaining
-# provider cleanup and off-Pod restore headroom.
-FRESH_MAX_TOTAL_USD = "8.17"
-FRESH_MAX_PROVIDER_SECONDS = 31_800
-GUEST_SLICE_SECONDS = 30_000
+# Completed attempts through J consumed conservative upper bounds of
+# 5,123.449453683 provider seconds and $1.0616216497822448. Replacement K is
+# admitted inside the original cumulative 36,000-second/$9 authorization while
+# retaining provider cleanup and off-Pod restore headroom.
+FRESH_MAX_TOTAL_USD = "7.90"
+FRESH_MAX_PROVIDER_SECONDS = 30_600
+GUEST_SLICE_SECONDS = 29_700
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
@@ -359,7 +359,19 @@ def exported_guest_terminal(receipt_path: Path) -> dict[str, Any] | None:
     try:
         return terminal_from_export(receipt)
     except RuntimeError as error:
-        if "lacks guest-terminal.json" in str(error):
+        # sync_s3 publishes the archive triplet before atomically replacing the
+        # aggregate off-Pod receipt.  A monitor can therefore observe the new
+        # archive with the previous receipt for the few seconds required to
+        # restore-verify the new generation.  Treat that exact mismatch as an
+        # in-progress publication; terminal cleanup still revalidates the
+        # settled receipt and fails closed if the mismatch persists.
+        if any(
+            fragment in str(error)
+            for fragment in (
+                "lacks guest-terminal.json",
+                "off-Pod recovery export SHA-256 mismatch",
+            )
+        ):
             return None
         raise
 

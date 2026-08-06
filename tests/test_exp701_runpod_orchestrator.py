@@ -74,8 +74,8 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
         source_sha256="a" * 64,
     )
     rendered = " ".join(command)
-    assert "--max-total-usd 8.17" in rendered
-    assert "--max-provider-seconds 31800" in rendered
+    assert "--max-total-usd 7.90" in rendered
+    assert "--max-provider-seconds 30600" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -94,7 +94,7 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "nohup" not in fresh and "guest.pid" not in fresh
     assert "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh" in fresh
     assert "SAIR_EXP701_SYNC_NONCE=" + "c" * 48 in fresh
-    assert "SAIR_EXP701_SLICE_SECONDS=30000" in fresh
+    assert "SAIR_EXP701_SLICE_SECONDS=29700" in fresh
     assert "guest-exit" in fresh
     resume = orchestrate.direct_start_command(
         "a" * 64,
@@ -295,6 +295,43 @@ def test_exported_guest_failure_is_visible_while_provider_keeps_running(
     assert terminal == {"status": "failed", "resume_required": False, "exit_code": 1}
 
 
+def test_archive_rotation_mismatch_is_transient_until_receipt_settles(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "experiment" / orchestrate.RUN_ID
+    output.mkdir(parents=True)
+    archive = tmp_path / "sair-exp701-checkpoint-export.tar.gz"
+    recovery_transport.create_export(output, archive)
+    stale_digest = recovery_transport.sha256(archive)
+    receipt_path = tmp_path / "offpod-sync-receipt.json"
+    receipt = {
+        "status": "verified",
+        "archive": str(archive),
+        "archive_sha256": stale_digest,
+        "restore_verification": {"status": "verified"},
+    }
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+
+    (output / "guest-terminal.json").write_text(
+        json.dumps({"status": "completed", "resume_required": False}),
+        encoding="utf-8",
+    )
+    recovery_transport.create_export(output, archive)
+    settled_digest = recovery_transport.sha256(archive)
+    assert settled_digest != stale_digest
+
+    # The archive is already the new generation while the aggregate receipt is
+    # still the prior generation.  The live monitor must retry, not kill the Pod.
+    assert orchestrate.exported_guest_terminal(receipt_path) is None
+
+    receipt["archive_sha256"] = settled_digest
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    assert orchestrate.exported_guest_terminal(receipt_path) == {
+        "status": "completed",
+        "resume_required": False,
+    }
+
+
 def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -338,7 +375,7 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     result = json.loads(capsys.readouterr().out)
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
-    assert result["maximum_total_usd"] == 8.17
-    assert result["maximum_provider_seconds"] == 31800
+    assert result["maximum_total_usd"] == 7.9
+    assert result["maximum_provider_seconds"] == 30600
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()

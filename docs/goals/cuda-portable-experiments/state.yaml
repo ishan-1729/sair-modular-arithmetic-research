@@ -69,7 +69,7 @@ visual_board:
     url: "http://goalbuddy.localhost:41737/cuda-portable-experiments/"
     command: "node /mnt/c/Users/Ishan/.codex/plugins/cache/goalbuddy/goalbuddy/0.4.2/skills/goal-prep/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/cuda-portable-experiments"
 
-active_task: T017
+active_task: T019
 
 tasks:
   - id: T001
@@ -1161,7 +1161,7 @@ tasks:
   - id: T017
     type: pm
     assignee: PM
-    status: active
+    status: blocked
     reasoning_hint: high
     objective: "Rebuild EXP701 from repaired commit f4705d5, admit one cap-safe attempt J, and execute/monitor the full-fidelity RTX 4090 science run through durable completion without another approval pause or duplicate resource."
     inputs:
@@ -1208,7 +1208,21 @@ tasks:
       - "Off-Pod restore verification is absent or stale."
       - "Scientific identity or fidelity would need to change."
       - "Cleanup cannot be deletion-confirmed."
-    receipt: null
+    receipt:
+      result: blocked
+      blocked_reason: "Attempt J crossed bootstrap, RTX 4090 hardware acceptance, focused tests, and the CUDA recovery smoke, but a host monitor race compared the newly published archive SHA-256 0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1 against the previous off-Pod receipt SHA-256 5f524ef3bb5631bf1db8782519b8bccf40c85f8d6baacb25f3985f786a9a2fe0. The orchestrator treated this transient publication state as corruption and terminated the controller before a scientific root opened."
+      changed_files: []
+      commands:
+        - cmd: "python -m experiments.cloud_benchmarks.exp701_runpod.offpod_sync --once (attempt-J retained volume)"
+          status: pass
+          evidence: "Archive 0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1 restore-verified with 28 files, 4 completed phases, 2 snapshots, and no scientific root markers."
+        - cmd: "RunPod DELETE /networkvolumes/temkoac4js with pre-delete empty-Pod/exact-volume checks"
+          status: pass
+          evidence: "Pod z7a1v62wljoive deletion was provider-confirmed; retained volume temkoac4js deletion was independently confirmed at 2026-08-06T12:27:31Z."
+      summary: "Attempt J proved the exact cu124 environment and RTX 4090 hardware gate, passed 14 focused tests and the exact resume smoke, and produced a valid pre-science archive. It consumed a conservative upper bound of 1,154.185193621 provider seconds and $0.240710. No scientific root opened. Both paid resources are now deletion-confirmed; T019 must fix the transient archive/receipt rotation race and resume under the remaining cumulative cap."
+      spawned_tasks:
+        - T019
+      harness: codex
   - id: T018
     type: pm
     assignee: PM
@@ -1226,6 +1240,53 @@ tasks:
       - "full_outcome_complete: true | false"
       - "Oracle-to-receipt mapping"
       - "Final limitations and cost/performance comparison"
+    receipt: null
+  - id: T019
+    type: pm
+    assignee: PM
+    status: active
+    reasoning_hint: high
+    objective: "Repair the EXP701 off-Pod publication race, close attempt J with restore-verified cleanup evidence, and execute exactly one cap-safe replacement attempt K from the preserved pre-science checkpoint through full-fidelity completion."
+    inputs:
+      - "Attempt-J provider/orchestrator receipts and restore-verified archive SHA-256 0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
+      - "Attempt-J upper bounds: 1,154.185193621 provider seconds and $0.240710"
+      - "Cumulative upper bounds through attempt J: 5,123.449453683 provider seconds and $1.0616216497822448"
+      - "User direction to continue without another approval pause under the unchanged cumulative authorization"
+    constraints:
+      - "Treat transient archive/receipt generation mismatch as an in-progress publication only; terminal cleanup must still fail closed on a persistent mismatch."
+      - "Preserve the exact restore-verified pre-science archive and resume only from it; do not reuse CPU partials or alter scientific identity."
+      - "Require empty Pod and network-volume inventories before replacement launch and keep exactly one paid Pod/volume pair active."
+      - "Do not exceed cumulative $9 or 36,000 provider seconds; replacement admission must include setup, sync, and deletion headroom."
+      - "Preserve full scientific fidelity: 4 arms, 4,800 updates per arm, 19,200 total training updates, and fresh EXP701 roots."
+      - "Keep API and S3 credentials host-only and preserve unrelated EXP689 untracked files."
+    expected_output:
+      - "Focused regression proving archive/receipt rotation cannot terminate a healthy guest"
+      - "Durable attempt-J failure, restored checkpoint, and zero-resource cleanup receipts"
+      - "Cap-safe replacement preflight and exactly one attempt-K launch"
+      - "Restore-verified phase/root/update progress and terminal science result"
+      - "Provider Pod/volume deletion confirmation"
+      - "Durable EXP701 evaluation, registry, GPU-vs-local comparison, validation, commit, and push"
+    allowed_files:
+      - configs/exp_701_runpod_control.yaml
+      - docs/goals/cuda-portable-experiments/
+      - evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/
+      - experiments/cloud_benchmarks/exp701_runpod/
+      - experiments/cuda_portability/inventory.json
+      - experiments/registry.yaml
+      - experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/
+      - knowledge/autoresearch/ablations/cuda-portable-experiments.md
+      - tests/test_exp701_runpod_orchestrator.py
+    verify:
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python tools/validate_project.py"
+      - "source /home/ishan/.venvs/sair-mod-challenge/bin/activate && python -m pytest -q"
+      - "git diff --check"
+    stop_if:
+      - "RunPod Pod or network-volume inventory is non-empty before launch."
+      - "The preserved archive or repaired resume receipt fails exact restore verification."
+      - "The admitted cumulative upper bound exceeds $9 or 36,000 provider seconds."
+      - "Scientific identity or fidelity would need to change."
+      - "Cleanup cannot be deletion-confirmed."
     receipt: null
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."

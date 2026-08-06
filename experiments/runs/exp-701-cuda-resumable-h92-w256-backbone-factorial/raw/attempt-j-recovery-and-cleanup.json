@@ -1,0 +1,50 @@
+{
+  "attempt": "J",
+  "failure": {
+    "archive_generation_observed_sha256": "0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1",
+    "message": "The host terminal monitor observed a new atomically rotated archive while offpod-sync-receipt.json still described the previous generation, treated the transient SHA-256 mismatch as terminal, and sent SIGTERM to the provider controller.",
+    "previous_receipt_sha256": "5f524ef3bb5631bf1db8782519b8bccf40c85f8d6baacb25f3985f786a9a2fe0",
+    "stage": "pre-science off-Pod publication",
+    "type": "host-control-plane-publication-race"
+  },
+  "gpu": {
+    "compute_capability": "8.9",
+    "driver": "570.172.08",
+    "memory_mib": 24564,
+    "name": "NVIDIA GeForce RTX 4090",
+    "torch": "2.5.1+cu124",
+    "torch_cuda_runtime": "12.4"
+  },
+  "provider": {
+    "cost_upper_usd": "0.240710",
+    "network_volume_delete_confirmed": true,
+    "network_volume_deleted_at": "2026-08-06T12:27:31Z",
+    "network_volume_id": "temkoac4js",
+    "pod_delete_confirmed": true,
+    "pod_id": "z7a1v62wljoive",
+    "provider_billed_lifetime_seconds_upper": 1154.185193621
+  },
+  "recovery": {
+    "archive_bytes": 3796239,
+    "archive_sha256": "0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1",
+    "completed_phases": 4,
+    "files": 28,
+    "root_markers": [],
+    "snapshots": 2,
+    "status": "restore-verified",
+    "tree_bytes": 4141192
+  },
+  "science": {
+    "focused_tests": "14 passed in 132.57s",
+    "hardware_acceptance": "passed",
+    "root_opened": false,
+    "smoke": "passed",
+    "training_updates": 0
+  },
+  "schema_version": "exp701-attempt-recovery-cleanup-v1",
+  "source": {
+    "archive_sha256": "2eac0b6fdd91d0b48766bb7916527f4b353c46de0a316253094fc9e9fbe7883a",
+    "repository_commit": "6630f4dffcaa30eb8e70387c03eeeb600714d153"
+  },
+  "status": "failed-before-science-cleaned-and-resumable"
+}
