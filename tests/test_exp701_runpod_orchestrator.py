@@ -32,6 +32,7 @@ def test_controller_command_is_exact_bounded_and_persistent(tmp_path: Path) -> N
     assert "--max-provider-seconds 36000" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
+    assert "--label sair-exp701-full-fidelity" in rendered
     assert "--offpod-receipt" in command
     assert "--use-image-command" in command
     assert f"PUBLIC_KEY={public}" in command

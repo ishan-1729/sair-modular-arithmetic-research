@@ -210,6 +210,8 @@ def controller_command(args: argparse.Namespace, public_key: Path) -> list[str]:
         "NVIDIA GeForce RTX 4090",
         "--image",
         "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+        "--label",
+        "sair-exp701-full-fidelity",
         "--hourly-rate-usd",
         "0.74",
         "--storage-hourly-usd",
