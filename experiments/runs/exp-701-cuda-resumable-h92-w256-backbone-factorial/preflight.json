@@ -1,6 +1,6 @@
 {
   "schema_version": "exp701-runpod-preflight-receipt-v1",
-  "status": "passed-authorized-awaiting-launch",
+  "status": "passed-awaiting-paid-authorization",
   "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
   "generated_at": "2026-08-06",
   "provider_requests_made": true,
