@@ -45,6 +45,10 @@ adapted_sources:
     consumer: experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
     smoke_command: "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
 active_cpu_boundaries:
+  experiments/cloud_benchmarks/exp701_runpod/orchestrate.py:
+    symbols: [provider-api, ssh-scp, process-lifecycle, offpod-sync]
+    reason: This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation.
+    responsibility: Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.
   experiments/exp_664_sprm_boundary_perturbation/model.py:
     symbols: [module-import-only]
     reason: EXP701 reaches this historical module only as a transitive import; it does not instantiate SPRMCell or execute its tensor route.
