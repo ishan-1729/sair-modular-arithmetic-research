@@ -1,0 +1,106 @@
+{
+  "budget": {
+    "admitted_upper_usd": "6.381758",
+    "budget_after_reserve_usd": "6.715000",
+    "budget_limited_seconds": 32197,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 30600,
+    "max_total_usd": "7.90",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "641dd2b440b6b8d08751cb3404dacc1e6332fd13b9a68ec87dbe5d0d6d6d8737",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "ef06ecef103229880b67706e705a23f1934ef24dca5b456b08c54d7d12c9a5e4",
+  "cost_upper_at_confirmation_usd": "0.002337",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [],
+  "events": [
+    {
+      "elapsed_seconds": 0.009708564999982627,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.5050304549999964,
+      "event": "network-volume-created",
+      "response_sha256": "73ee71d27103ce6d5fbfd394cb3a5ed2ebfa9cafbca61555fdc078955a6e6428"
+    },
+    {
+      "elapsed_seconds": 1.5159834000000956,
+      "event": "network-volume-readiness-requested",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3e/network-volume-ready.json"
+    },
+    {
+      "elapsed_seconds": 7.551648941000167,
+      "event": "network-volume-ready",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3e/network-volume-ready.json",
+      "source_bytes": 2479853,
+      "source_key": "sair-exp701-source.tar.gz",
+      "source_sha256": "2eac0b6fdd91d0b48766bb7916527f4b353c46de0a316253094fc9e9fbe7883a",
+      "upload_verification": {
+        "bucket": "7xu6vdfm1k",
+        "bytes": 2479853,
+        "key": "sair-exp701-source.tar.gz",
+        "sha256": "2eac0b6fdd91d0b48766bb7916527f4b353c46de0a316253094fc9e9fbe7883a",
+        "status": "verified",
+        "verification": "authenticated-download-sha256"
+      }
+    },
+    {
+      "elapsed_seconds": 7.561764517000029,
+      "event": "create-requested"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 10.218443745000059,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 11.193747061000067,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "failure": {
+    "message": "provider HTTP 500 for POST https://rest.runpod.io/v1/pods: {\"error\":\"create pod: This machine does not have the resources to deploy your pod. Please try a different machine\",\"status\":500}\n",
+    "type": "RuntimeError"
+  },
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EU-RO-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "ready_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3e/network-volume-ready.json",
+    "ready_source_sha256": "2eac0b6fdd91d0b48766bb7916527f4b353c46de0a316253094fc9e9fbe7883a",
+    "ready_timeout_seconds": 600,
+    "size_gb": 50
+  },
+  "network_volume_id": "7xu6vdfm1k",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3e/offpod-sync-receipt.json",
+  "ports": [],
+  "provider": "runpod",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "resource-and-network-volume-destroyed",
+  "template_id": null,
+  "timing": {
+    "deletion_confirmed_elapsed_seconds": null,
+    "guest_runtime_seconds": null,
+    "network_volume_deletion_confirmed_elapsed_seconds": 11.193747061000067,
+    "provider_billed_lifetime_seconds": 11.204312839000067,
+    "provider_billed_lifetime_source": "controller-create-request-to-delete-confirmation-upper-bound",
+    "provider_invoice_amount_usd": null
+  }
+}

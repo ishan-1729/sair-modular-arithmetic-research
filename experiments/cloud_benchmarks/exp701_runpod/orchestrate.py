@@ -37,13 +37,14 @@ APPROVAL = (
     "NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED "
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
-# Completed attempts through J consumed conservative upper bounds of
-# 5,123.449453683 provider seconds and $1.0616216497822448. Replacement K is
-# admitted inside the original cumulative 36,000-second/$9 authorization while
-# retaining provider cleanup and off-Pod restore headroom.
+# Completed attempts through K consumed conservative upper bounds of
+# 6,256.646955189 provider seconds and $1.2979546497822448. Replacement L is
+# admitted inside the original cumulative 36,000-second/$9 authorization. Its
+# guest slice is 1,200 seconds shorter than the controller operation window,
+# reserving the measured setup plus final export/acknowledgement headroom.
 FRESH_MAX_TOTAL_USD = "7.90"
-FRESH_MAX_PROVIDER_SECONDS = 30_600
-GUEST_SLICE_SECONDS = 29_700
+FRESH_MAX_PROVIDER_SECONDS = 29_400
+GUEST_SLICE_SECONDS = 27_300
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"

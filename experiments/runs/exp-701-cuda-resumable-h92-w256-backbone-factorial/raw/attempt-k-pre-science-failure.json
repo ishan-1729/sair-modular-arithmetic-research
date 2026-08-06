@@ -1,0 +1,71 @@
+{
+  "schema_version": "exp701-attempt-pre-science-failure-v1",
+  "attempt": "K",
+  "status": "failed-before-scientific-root-and-cleaned",
+  "recorded_at_utc": "2026-08-06T13:42:55Z",
+  "source": {
+    "repository_commit": "6630f4dffcaa30eb8e70387c03eeeb600714d153",
+    "archive_sha256": "2eac0b6fdd91d0b48766bb7916527f4b353c46de0a316253094fc9e9fbe7883a",
+    "resume_archive_sha256": "0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
+  },
+  "allocation_retry": {
+    "session": "s3e",
+    "status": "provider-capacity-failure-before-pod-creation",
+    "failure": "RunPod HTTP 500: This machine does not have the resources to deploy your pod. Please try a different machine.",
+    "provider_lifetime_seconds_upper": 11.204312839000067,
+    "cost_usd_upper": 0.002337,
+    "network_volume_delete_confirmed": true,
+    "provider_receipt_sha256": "446537916594e255c8760b7e371fd9fa1ea03b97fdbf1c2e120cc93edb9d2ab5",
+    "orchestrator_receipt_sha256": "bb116b1a620686e0780babecdbdd3fb79337f2ad6dd901153b4e76496c4ddc75"
+  },
+  "live_attempt": {
+    "session": "s3f",
+    "pod_id": "83b7e80oxq5up4",
+    "network_volume_id": "65e9yaybay",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "environment": "PyTorch 2.5.1+cu124 / CUDA 12.4 / driver 580.126.20",
+    "hardware_acceptance": {
+      "status": "passed",
+      "tests": 4,
+      "wall_seconds": 231.8069191193208
+    },
+    "focused_tests": {
+      "status": "passed",
+      "tests": 14,
+      "wall_seconds": 108.65
+    },
+    "failure": {
+      "phase": "restored-smoke-rerun",
+      "reason": "smoke update interruption was not raised",
+      "cause": "The restored pre-science archive already contained completed immutable smoke phases; rerunning the fresh-interruption smoke reused them and therefore could not raise the expected synthetic interruption.",
+      "scientific_root_markers": []
+    },
+    "failure_export": {
+      "archive_sha256": "b2de570b98ccb8ced4da549edb2d0fad8935e9c675ed3ebf428ec6a566f1dd31",
+      "archive_bytes": 3797635,
+      "restore_verified": true,
+      "files": 29,
+      "completed_phases": 4,
+      "snapshots": 2,
+      "scientific_root_markers": [],
+      "offpod_receipt_sha256": "d364770a4714649b401b842dfe4840a124bac5d1a1f5388cc1e5fc49046ae51c"
+    },
+    "cleanup": {
+      "pod_delete_confirmed": true,
+      "network_volume_delete_confirmed": true,
+      "provider_lifetime_seconds_upper": 1121.9931886670001,
+      "cost_usd_upper": 0.233996
+    },
+    "provider_receipt_sha256": "c5bbd8a7fb58d96134d51956242209f83b9b7a0ada2bdc559eb129eca296f6fd",
+    "orchestrator_receipt_sha256": "46fd0a272842411d203d56133771e904a2a27bd11ec82ff37c8ff9d088065919"
+  },
+  "cumulative_after_attempt": {
+    "provider_seconds_upper": 6256.646955189,
+    "cost_usd_upper": 1.2979546497822448,
+    "authorized_provider_seconds": 36000,
+    "authorized_cost_usd": 9.0,
+    "remaining_provider_seconds": 29743.353044811,
+    "remaining_cost_usd": 7.702045350217755
+  },
+  "next_action": "Reject the failure export for resume, validate and reuse the clean J smoke archive idempotently, and admit one replacement L within the unchanged cumulative authorization."
+}

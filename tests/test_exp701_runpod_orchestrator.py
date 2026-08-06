@@ -11,6 +11,7 @@ import pytest
 from experiments.cloud_benchmarks.exp701_runpod import (
     offpod_sync,
     orchestrate,
+    pre_science,
     recover_retained_volume,
     recovery_transport,
 )
@@ -75,7 +76,7 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
     )
     rendered = " ".join(command)
     assert "--max-total-usd 7.90" in rendered
-    assert "--max-provider-seconds 30600" in rendered
+    assert "--max-provider-seconds 29400" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -94,7 +95,7 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "nohup" not in fresh and "guest.pid" not in fresh
     assert "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh" in fresh
     assert "SAIR_EXP701_SYNC_NONCE=" + "c" * 48 in fresh
-    assert "SAIR_EXP701_SLICE_SECONDS=29700" in fresh
+    assert "SAIR_EXP701_SLICE_SECONDS=27300" in fresh
     assert "guest-exit" in fresh
     resume = orchestrate.direct_start_command(
         "a" * 64,
@@ -257,7 +258,59 @@ def test_guest_establishes_external_baseline_before_cuda_bootstrap() -> None:
     assert "offpod-pre-science-sync-failed" in guest
     assert "bash environments/cuda/bootstrap.sh" in guest
     assert "bash environments/cuda/run-acceptance.sh" in guest
+    assert 'if ! test -f "$smoke_output/smoke.json"' in guest
+    assert "experiments.cloud_benchmarks.exp701_runpod.pre_science" in guest
     assert 'tee -a "$output/guest-supervisor.log"' in guest
+
+
+def test_restored_smoke_is_reused_only_when_exact(tmp_path: Path) -> None:
+    smoke_output = tmp_path / "pre-root-smoke"
+    terminals = {}
+    recovery = {
+        "training_exact": True,
+        "evaluation_reused": True,
+        "diagnostic_reused": True,
+        "predictions_exact": True,
+    }
+    signature = {"updates": 3, "model_state_sha256": "a" * 64}
+    for mode in pre_science.MODES:
+        terminal = smoke_output / "smoke" / f"{mode}-terminal.json"
+        terminal.parent.mkdir(parents=True, exist_ok=True)
+        terminal.write_text(
+            json.dumps(
+                {
+                    "status": "smoke-passed",
+                    "run_id": pre_science.RUN_ID,
+                    "mode": mode,
+                    "root": None,
+                    "device": "cuda",
+                    "recovery": recovery,
+                }
+            ),
+            encoding="utf-8",
+        )
+        terminals[mode] = str(terminal)
+    (smoke_output / "smoke.json").write_text(
+        json.dumps(
+            {
+                "status": "smoke-passed",
+                "all_modes_exercised": list(pre_science.MODES),
+                "train_eval_diagnostic_recovery": True,
+                "uninterrupted_signature": signature,
+                "interrupted_resumed_signature": signature,
+                "terminals": terminals,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    verified = pre_science.verify_restored_smoke(smoke_output)
+    assert verified["status"] == "verified-restored-smoke"
+    assert verified["recovery_exact"] is True
+
+    (smoke_output / "terminal-failure.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="terminal failure"):
+        pre_science.verify_restored_smoke(smoke_output)
 
 
 def test_exported_guest_failure_is_visible_while_provider_keeps_running(
@@ -376,6 +429,6 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
     assert result["maximum_total_usd"] == 7.9
-    assert result["maximum_provider_seconds"] == 30600
+    assert result["maximum_provider_seconds"] == 29400
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()

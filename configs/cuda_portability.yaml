@@ -45,6 +45,10 @@ adapted_sources:
     consumer: experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
     smoke_command: "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
 active_cpu_boundaries:
+  experiments/cloud_benchmarks/exp701_runpod/pre_science.py:
+    symbols: [restored-smoke-json-verification, sha256-evidence-receipt]
+    reason: This guest control-plane verifier authenticates completed pre-root recovery-smoke evidence and never executes tensor or model computation.
+    responsibility: Fail closed on missing, mismatched, or terminal smoke evidence before the EXP701 CUDA runner is allowed to open a scientific root.
   experiments/cloud_benchmarks/exp701_runpod/orchestrate.py:
     symbols: [provider-api, s3-object-storage, direct-container-start, process-lifecycle, offpod-sync]
     reason: This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation.

@@ -30,6 +30,7 @@ payload_paths=(
   experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
   experiments/cloud_benchmarks/exp701_runpod/host_sync.sh
   experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py
+  experiments/cloud_benchmarks/exp701_runpod/pre_science.py
   experiments/cloud_benchmarks/exp701_runpod/prepare_source.sh
   experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py
   experiments/council_tournament_common/__init__.py

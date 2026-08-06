@@ -1187,6 +1187,7 @@ tasks:
       - "Provider Pod/volume deletion confirmation"
       - "Durable EXP701 evaluation, registry, GPU-vs-local comparison, validation, commit, and push"
     allowed_files:
+      - configs/cuda_portability.yaml
       - configs/exp_701_runpod_control.yaml
       - docs/goals/cuda-portable-experiments/
       - evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/
@@ -1246,15 +1247,19 @@ tasks:
     assignee: PM
     status: active
     reasoning_hint: high
-    objective: "Repair the EXP701 off-Pod publication race, close attempt J with restore-verified cleanup evidence, and execute exactly one cap-safe replacement attempt K from the preserved pre-science checkpoint through full-fidelity completion."
+    objective: "Repair the EXP701 off-Pod publication race, close attempts J/K with restore-verified cleanup evidence, repair restored-smoke idempotency, and execute one cap-safe replacement attempt L from the clean J pre-science checkpoint through full-fidelity completion."
     inputs:
       - "Attempt-J provider/orchestrator receipts and restore-verified archive SHA-256 0877289894ee77ab521078e2a072a31f3911e82b6ac759289c723814b570c4e1"
       - "Attempt-J upper bounds: 1,154.185193621 provider seconds and $0.240710"
       - "Cumulative upper bounds through attempt J: 5,123.449453683 provider seconds and $1.0616216497822448"
+      - "Attempt-K allocation retry plus live attempt upper bounds: 1,133.197501506 provider seconds and $0.236333; both paid resources deletion-confirmed"
+      - "Cumulative upper bounds through attempt K: 6,256.646955189 provider seconds and $1.2979546497822448"
+      - "Attempt-K failure archive SHA-256 b2de570b98ccb8ced4da549edb2d0fad8935e9c675ed3ebf428ec6a566f1dd31 is restore-verified but rejected because it contains a pre-root smoke terminal failure"
       - "User direction to continue without another approval pause under the unchanged cumulative authorization"
     constraints:
       - "Treat transient archive/receipt generation mismatch as an in-progress publication only; terminal cleanup must still fail closed on a persistent mismatch."
       - "Preserve the exact restore-verified pre-science archive and resume only from it; do not reuse CPU partials or alter scientific identity."
+      - "Reuse the clean J smoke only after exact verifier acceptance; never rerun completed immutable smoke phases and never resume from K's rejected failure export."
       - "Require empty Pod and network-volume inventories before replacement launch and keep exactly one paid Pod/volume pair active."
       - "Do not exceed cumulative $9 or 36,000 provider seconds; replacement admission must include setup, sync, and deletion headroom."
       - "Preserve full scientific fidelity: 4 arms, 4,800 updates per arm, 19,200 total training updates, and fresh EXP701 roots."
@@ -1262,11 +1267,13 @@ tasks:
     expected_output:
       - "Focused regression proving archive/receipt rotation cannot terminate a healthy guest"
       - "Durable attempt-J failure, restored checkpoint, and zero-resource cleanup receipts"
-      - "Cap-safe replacement preflight and exactly one attempt-K launch"
+      - "Durable attempt-K pre-science failure, exact clean-smoke regression, and zero-resource cleanup receipts"
+      - "Cap-safe replacement-L preflight and exactly one attempt-L launch"
       - "Restore-verified phase/root/update progress and terminal science result"
       - "Provider Pod/volume deletion confirmation"
       - "Durable EXP701 evaluation, registry, GPU-vs-local comparison, validation, commit, and push"
     allowed_files:
+      - configs/cuda_portability.yaml
       - configs/exp_701_runpod_control.yaml
       - docs/goals/cuda-portable-experiments/
       - evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/

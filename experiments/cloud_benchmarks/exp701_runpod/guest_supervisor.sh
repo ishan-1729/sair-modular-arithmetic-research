@@ -97,8 +97,14 @@ export SAIR_CUDA_PROFILE=cu124
 bash environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv-cu124" --output "$output/hardware-acceptance"
 "$python" -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py \
   --junitxml="$output/focused-junit.xml"
-"$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
-  --mode smoke --device cuda --output "$output/pre-root-smoke"
+smoke_output="$output/pre-root-smoke"
+if ! test -f "$smoke_output/smoke.json"; then
+  "$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
+    --mode smoke --device cuda --output "$smoke_output"
+fi
+"$python" -m experiments.cloud_benchmarks.exp701_runpod.pre_science \
+  --output "$smoke_output" \
+  --receipt "$output/restored-smoke-verification.json"
 
 resume_arg() {
   local mode="$1" root="$2"
