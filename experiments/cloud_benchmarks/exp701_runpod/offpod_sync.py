@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,68 @@ import time
 from typing import Any
 
 from .recovery_transport import atomic_json, restore_export, sha256
+
+
+def runpod_s3_client(
+    endpoint_url: str,
+    *,
+    access_key_id: str,
+    secret_access_key: str,
+) -> Any:
+    """Build a path-style RunPod S3 client without relying on global AWS state."""
+
+    import boto3
+    from botocore.config import Config
+
+    if not endpoint_url.startswith("https://"):
+        raise ValueError("RunPod S3 endpoint must use HTTPS")
+    if not access_key_id or not secret_access_key:
+        raise ValueError("RunPod S3 credentials are missing")
+    return boto3.client(
+        "s3",
+        endpoint_url=endpoint_url.rstrip("/"),
+        aws_access_key_id=access_key_id,
+        aws_secret_access_key=secret_access_key,
+        region_name="us-east-1",
+        config=Config(
+            signature_version="s3v4",
+            s3={"addressing_style": "path"},
+            retries={"max_attempts": 5, "mode": "standard"},
+        ),
+    )
+
+
+def upload_file_verified(
+    client: Any,
+    source: Path,
+    *,
+    bucket: str,
+    key: str,
+) -> dict[str, Any]:
+    """Upload a host artifact and bind the remote object to its local SHA-256."""
+
+    source = source.resolve()
+    digest = sha256(source)
+    client.upload_file(
+        str(source),
+        bucket,
+        key,
+        ExtraArgs={"Metadata": {"sha256": digest}},
+    )
+    head = client.head_object(Bucket=bucket, Key=key)
+    metadata = {str(name).lower(): value for name, value in (head.get("Metadata") or {}).items()}
+    if int(head.get("ContentLength", -1)) != source.stat().st_size:
+        raise RuntimeError("RunPod S3 upload size verification failed")
+    if metadata.get("sha256") != digest:
+        raise RuntimeError("RunPod S3 upload SHA-256 metadata verification failed")
+    return {
+        "status": "verified",
+        "bucket": bucket,
+        "key": key,
+        "sha256": digest,
+        "bytes": source.stat().st_size,
+        "etag": str(head.get("ETag", "")).strip('"') or None,
+    }
 
 
 def _declared_sha(path: Path) -> str:
@@ -194,6 +257,82 @@ def sync_ssh(
     return result
 
 
+def sync_s3(
+    client: Any,
+    bucket: str,
+    remote_archive: str,
+    destination: Path,
+    *,
+    remote_ack: str,
+    nonce: str,
+    endpoint_url: str,
+) -> dict[str, Any]:
+    """Copy, restore-verify, and acknowledge a network-volume export via S3."""
+
+    archive_key = PurePosixPath(remote_archive)
+    ack_key = PurePosixPath(remote_ack)
+    if archive_key.is_absolute() or ack_key.is_absolute():
+        raise ValueError("S3 object keys must be relative")
+    if ".." in archive_key.parts or ".." in ack_key.parts:
+        raise ValueError("S3 object keys may not contain parent traversal")
+    if not bucket or len(nonce) < 16:
+        raise ValueError("S3 bucket and sync nonce are required")
+    destination.mkdir(parents=True, exist_ok=True)
+    names = [
+        archive_key.name,
+        archive_key.name + ".sha256",
+        archive_key.name + ".receipt.json",
+    ]
+    keys = [str(archive_key.with_name(name)) for name in names]
+    with tempfile.TemporaryDirectory(dir=destination) as temporary_raw:
+        temporary = Path(temporary_raw)
+        for index in (1, 2):
+            client.download_file(bucket, keys[index], str(temporary / names[index]))
+        declared = _declared_sha(temporary / names[1])
+        retained = destination / names[0]
+        if retained.is_file() and sha256(retained) == declared:
+            shutil.copy2(retained, temporary / names[0])
+        else:
+            client.download_file(bucket, keys[0], str(temporary / names[0]))
+        verified = verify_triplet(
+            temporary / names[0], temporary / names[1], temporary / names[2]
+        )
+        for name in names:
+            os.replace(temporary / name, destination / name)
+    result = {
+        "schema_version": "exp701-offpod-sync-v1",
+        "status": "verified",
+        "transport": "runpod-s3",
+        "endpoint": endpoint_url.rstrip("/"),
+        "bucket": bucket,
+        "remote_archive": remote_archive,
+        "destination": str(destination.resolve()),
+        "archive": str((destination / names[0]).resolve()),
+        **verified,
+        "restore_verification": verify_restorable(
+            destination / names[0], verified["archive_sha256"], destination
+        ),
+    }
+    atomic_json(destination / "offpod-sync-receipt.json", result)
+    acknowledgement = {
+        "schema_version": "exp701-offpod-ack-v1",
+        "status": "verified-offpod-copy",
+        "nonce": nonce,
+        "archive_sha256": verified["archive_sha256"],
+        "archive_bytes": verified["archive_bytes"],
+        "verified_at_epoch": time.time(),
+    }
+    encoded = (json.dumps(acknowledgement, sort_keys=True) + "\n").encode()
+    client.put_object(
+        Bucket=bucket,
+        Key=str(ack_key),
+        Body=encoded,
+        ContentType="application/json",
+        Metadata={"sha256": hashlib.sha256(encoded).hexdigest()},
+    )
+    return result
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--destination", type=Path, required=True)
@@ -201,11 +340,13 @@ def main() -> int:
     transport = parser.add_mutually_exclusive_group(required=True)
     transport.add_argument("--local", action="store_true")
     transport.add_argument("--ssh-target")
+    transport.add_argument("--s3-bucket")
     parser.add_argument("--identity", type=Path)
     parser.add_argument("--known-hosts", type=Path)
     parser.add_argument("--port", type=int, default=22)
     parser.add_argument("--remote-ack")
     parser.add_argument("--nonce")
+    parser.add_argument("--s3-endpoint")
     parser.add_argument("--poll-seconds", type=int, default=300)
     parser.add_argument("--max-seconds", type=int, default=36000)
     parser.add_argument("--once", action="store_true")
@@ -221,18 +362,41 @@ def main() -> int:
         or not args.nonce
     ):
         parser.error("SSH sync requires identity, remote acknowledgement, and nonce")
+    if args.s3_bucket and (
+        not args.s3_endpoint or not args.remote_ack or not args.nonce
+    ):
+        parser.error("S3 sync requires endpoint, remote acknowledgement, and nonce")
+    client = None
+    if args.s3_bucket:
+        access_key = os.environ.get("RUNPOD_S3_ACCESS_KEY_ID", "")
+        secret_key = os.environ.get("RUNPOD_S3_SECRET_ACCESS_KEY", "")
+        client = runpod_s3_client(
+            args.s3_endpoint,
+            access_key_id=access_key,
+            secret_access_key=secret_key,
+        )
     started = time.monotonic()
     while True:
         try:
             if args.local:
                 result = sync_local(Path(args.remote_archive), args.destination)
-            else:
+            elif args.ssh_target:
                 result = sync_ssh(
                     args.ssh_target, args.remote_archive, args.destination,
                     identity=args.identity, known_hosts=args.known_hosts, port=args.port,
                     remote_ack=args.remote_ack, nonce=args.nonce,
                 )
-        except (OSError, RuntimeError, ValueError, subprocess.SubprocessError) as error:
+            else:
+                result = sync_s3(
+                    client,
+                    args.s3_bucket,
+                    args.remote_archive,
+                    args.destination,
+                    remote_ack=args.remote_ack,
+                    nonce=args.nonce,
+                    endpoint_url=args.s3_endpoint,
+                )
+        except Exception as error:
             print(
                 json.dumps(
                     {

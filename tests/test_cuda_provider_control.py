@@ -233,6 +233,7 @@ def test_runpod_template_launch_keeps_create_payload_small() -> None:
 
 
 def test_exp701_requires_and_attaches_independent_network_volume(capsys) -> None:
+    ready = ROOT / ".scratch/exp701-runpod-session/network-volume-ready.json"
     base = [
         "--config", str(EXP701_CONFIG_PATH), "plan", "--provider", "runpod",
         "--resource-selector", "NVIDIA GeForce RTX 4090",
@@ -256,6 +257,9 @@ def test_exp701_requires_and_attaches_independent_network_volume(capsys) -> None
         "--network-volume-name", "sair-exp701-recovery",
         "--network-volume-size-gb", "50",
         "--network-volume-mount-path", "/workspace",
+        "--network-volume-ready-receipt", str(ready),
+        "--network-volume-ready-timeout-seconds", "600",
+        "--network-volume-ready-source-sha256", "a" * 64,
     ]) == 0
     plan = json.loads(capsys.readouterr().out)
     assert plan["network_volume"] == {
@@ -266,6 +270,9 @@ def test_exp701_requires_and_attaches_independent_network_volume(capsys) -> None
         "managed_create": True,
         "data_center_id": "EU-RO-1",
         "name": "sair-exp701-recovery",
+        "ready_receipt_path": str(ready.resolve()),
+        "ready_timeout_seconds": 600,
+        "ready_source_sha256": "a" * 64,
     }
     provider = controller.Provider(
         "runpod", config()["providers"]["runpod"], "secret", FakeTransport([])
@@ -298,12 +305,23 @@ def test_exp701_managed_volume_is_deleted_only_after_offpod_restore_receipt(
         "archive_sha256": digest,
         "restore_verification": {"status": "verified", "files": 3},
     }))
+    ready = tmp_path / "network-volume-ready.json"
+    ready.write_text(json.dumps({
+        "schema_version": "exp701-network-volume-ready-v1",
+        "status": "verified",
+        "network_volume_id": "volume-1",
+        "source": {"key": "source.tar.gz", "sha256": "a" * 64, "bytes": 123},
+        "upload_verification": {"status": "verified"},
+    }))
     managed = controller.LaunchSpec(
         **{
             **spec("runpod").__dict__,
             "network_volume_size_gb": 50,
             "network_volume_data_center_id": "EU-RO-1",
             "network_volume_name": "sair-exp701-recovery",
+            "network_volume_ready_receipt_path": str(ready),
+            "network_volume_ready_timeout_seconds": 60,
+            "network_volume_ready_source_sha256": "a" * 64,
             "offpod_receipt_path": str(receipt),
         }
     )
@@ -350,6 +368,54 @@ def test_exp701_managed_volume_is_deleted_only_after_offpod_restore_receipt(
     )
 
 
+def test_exp701_preload_timeout_deletes_volume_without_creating_pod(tmp_path) -> None:
+    managed = controller.LaunchSpec(
+        **{
+            **spec("runpod").__dict__,
+            "network_volume_size_gb": 50,
+            "network_volume_data_center_id": "EU-RO-1",
+            "network_volume_name": "sair-exp701-recovery",
+            "network_volume_ready_receipt_path": str(tmp_path / "missing-ready.json"),
+            "network_volume_ready_timeout_seconds": 4,
+            "network_volume_ready_source_sha256": "a" * 64,
+            "offpod_receipt_path": str(tmp_path / "not-needed-before-pod.json"),
+        }
+    )
+    clock = FakeClock()
+    transport = FakeTransport([
+        (200, {"id": "volume-1", "dataCenterId": "EU-RO-1", "size": 50}),
+        (204, {}),
+        (404, {}),
+    ])
+    exp_config = yaml.safe_load(EXP701_CONFIG_PATH.read_text())
+    with pytest.raises(TimeoutError, match="before Pod creation"):
+        controller.execute(
+            config=exp_config,
+            config_path=EXP701_CONFIG_PATH,
+            spec=managed,
+            budget=controller.admit_budget(
+                hourly_rate_usd=Decimal("0.74"),
+                storage_hourly_usd=Decimal("0.010795"),
+                max_total_usd=Decimal("9.00"),
+                max_provider_seconds=36000,
+                reserve_fraction=Decimal("0.15"),
+                minimum_total_usd=Decimal("0.10"),
+            ),
+            receipt_path=tmp_path / "lifecycle.json",
+            token="runpod-secret-test-token",
+            transport=transport,
+            monotonic=clock.monotonic,
+            sleep=clock.sleep,
+        )
+    assert [call["method"] for call in transport.calls] == ["POST", "DELETE", "GET"]
+    receipt = json.loads((tmp_path / "lifecycle.json").read_text())
+    assert not any(event["event"] == "create-requested" for event in receipt["events"])
+    assert any(
+        event["event"] == "network-volume-delete-confirmed"
+        for event in receipt["events"]
+    )
+
+
 def test_exp701_rejects_undersized_network_volume() -> None:
     arguments = [
         "--config", str(EXP701_CONFIG_PATH), "plan", "--provider", "runpod",
@@ -359,6 +425,10 @@ def test_exp701_rejects_undersized_network_volume() -> None:
         "--command", "true", "--network-volume-data-center-id", "EU-RO-1",
         "--network-volume-size-gb", "20", "--offpod-receipt",
         str(ROOT / ".scratch/exp701-offpod/offpod-sync-receipt.json"),
+        "--network-volume-ready-receipt",
+        str(ROOT / ".scratch/exp701-runpod-session/network-volume-ready.json"),
+        "--network-volume-ready-timeout-seconds", "600",
+        "--network-volume-ready-source-sha256", "a" * 64,
     ]
     with pytest.raises(ValueError, match="at least 50 GB"):
         controller.main(arguments)

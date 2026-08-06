@@ -9,6 +9,7 @@ budget:
 storage:
   require_network_volume: true
   require_controller_managed_network_volume: true
+  require_network_volume_ready_receipt: true
   minimum_network_volume_gb: 50
   require_verified_offpod_sync: true
   offpod_sync_interval_seconds: 300
@@ -16,6 +17,7 @@ storage:
 lifecycle:
   poll_seconds: 30
   running_poll_seconds: 300
+  network_volume_ready_poll_seconds: 2
   cleanup_headroom_seconds: 900
   request_timeout_seconds: 30
   destroy_timeout_seconds: 180

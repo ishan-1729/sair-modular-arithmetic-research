@@ -345,6 +345,9 @@ class LaunchSpec:
     network_volume_mount_path: str = "/workspace"
     network_volume_data_center_id: str | None = None
     network_volume_name: str = "sair-managed-network-volume"
+    network_volume_ready_receipt_path: str | None = None
+    network_volume_ready_timeout_seconds: int = 0
+    network_volume_ready_source_sha256: str | None = None
     offpod_receipt_path: str | None = None
 
 
@@ -397,6 +400,38 @@ def verify_offpod_receipt(path: Path) -> dict[str, Any]:
     }
 
 
+def verify_network_volume_ready(
+    path: Path,
+    *,
+    network_volume_id: str,
+    source_sha256: str | None,
+) -> dict[str, Any]:
+    """Verify the host preloaded the managed volume before Pod creation."""
+
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    if receipt.get("schema_version") != "exp701-network-volume-ready-v1":
+        raise RuntimeError("network-volume readiness receipt has an invalid schema")
+    if receipt.get("status") != "verified":
+        raise RuntimeError("network-volume readiness receipt is not verified")
+    if receipt.get("network_volume_id") != network_volume_id:
+        raise RuntimeError("network-volume readiness receipt identifies another volume")
+    source = receipt.get("source") or {}
+    if source_sha256 is not None and source.get("sha256") != source_sha256:
+        raise RuntimeError("network-volume readiness source SHA-256 does not match")
+    if not source.get("key") or int(source.get("bytes", 0)) <= 0:
+        raise RuntimeError("network-volume readiness receipt lacks source evidence")
+    verification = receipt.get("upload_verification") or {}
+    if verification.get("status") != "verified":
+        raise RuntimeError("network-volume upload was not verified")
+    return {
+        "receipt": str(path.resolve()),
+        "source_key": str(source["key"]),
+        "source_sha256": str(source["sha256"]),
+        "source_bytes": int(source["bytes"]),
+        "upload_verification": verification,
+    }
+
+
 def redacted_plan(
     spec: LaunchSpec,
     budget: BudgetPlan,
@@ -431,6 +466,9 @@ def redacted_plan(
             "managed_create": spec.network_volume_data_center_id is not None,
             "data_center_id": spec.network_volume_data_center_id,
             "name": spec.network_volume_name,
+            "ready_receipt_path": spec.network_volume_ready_receipt_path,
+            "ready_timeout_seconds": spec.network_volume_ready_timeout_seconds,
+            "ready_source_sha256": spec.network_volume_ready_source_sha256,
         },
         "offpod_receipt_path": spec.offpod_receipt_path,
         "credential_environment": provider_config["credential_environment"],
@@ -521,6 +559,43 @@ def execute(
                 monotonic() - started,
                 response_sha256=sha256_text(canonical_json(volume_response)),
             )
+            if spec.network_volume_ready_receipt_path is not None:
+                readiness_path = Path(spec.network_volume_ready_receipt_path)
+                readiness_deadline = (
+                    monotonic() + spec.network_volume_ready_timeout_seconds
+                )
+                receipt.event(
+                    "network-volume-readiness-requested",
+                    monotonic() - started,
+                    receipt=str(readiness_path.resolve()),
+                )
+                while True:
+                    try:
+                        readiness = verify_network_volume_ready(
+                            readiness_path,
+                            network_volume_id=network_volume_id,
+                            source_sha256=spec.network_volume_ready_source_sha256,
+                        )
+                    except (FileNotFoundError, json.JSONDecodeError):
+                        readiness = None
+                    if readiness is not None:
+                        receipt.event(
+                            "network-volume-ready",
+                            monotonic() - started,
+                            **readiness,
+                        )
+                        break
+                    if monotonic() >= readiness_deadline:
+                        raise TimeoutError(
+                            "network-volume readiness receipt was not verified "
+                            "before Pod creation"
+                        )
+                    sleep(
+                        min(
+                            float(lifecycle.get("network_volume_ready_poll_seconds", 2)),
+                            max(0.0, readiness_deadline - monotonic()),
+                        )
+                    )
         receipt.event("create-requested", monotonic() - started)
         resource_id, create_response = provider.create(effective_spec)
         receipt.value["resource_id"] = resource_id
@@ -767,6 +842,11 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument(
             "--network-volume-name", default="sair-managed-network-volume"
         )
+        command.add_argument("--network-volume-ready-receipt", type=Path)
+        command.add_argument(
+            "--network-volume-ready-timeout-seconds", type=int, default=0
+        )
+        command.add_argument("--network-volume-ready-source-sha256")
         command.add_argument("--offpod-receipt", type=Path)
         command.add_argument(
             "--use-image-command",
@@ -820,6 +900,24 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("network volume mode and size must be supplied together")
     if args.network_volume_size_gb is not None and args.network_volume_size_gb <= 0:
         raise ValueError("network volume size must be positive")
+    if args.network_volume_ready_receipt is not None and not managed_network_volume:
+        raise ValueError("network-volume readiness requires a managed network volume")
+    if (args.network_volume_ready_receipt is None) != (
+        args.network_volume_ready_timeout_seconds == 0
+    ):
+        raise ValueError(
+            "network-volume readiness receipt and positive timeout must be supplied together"
+        )
+    if args.network_volume_ready_timeout_seconds < 0:
+        raise ValueError("network-volume readiness timeout must be non-negative")
+    if args.network_volume_ready_source_sha256 is not None and (
+        len(args.network_volume_ready_source_sha256) != 64
+        or any(
+            character not in "0123456789abcdef"
+            for character in args.network_volume_ready_source_sha256
+        )
+    ):
+        raise ValueError("network-volume readiness source SHA-256 is invalid")
     if not args.network_volume_mount_path.startswith("/"):
         raise ValueError("network volume mount path must be absolute")
     storage_policy = config.get("storage", {})
@@ -829,6 +927,13 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("this launch requires an independently persistent network volume")
     if storage_policy.get("require_controller_managed_network_volume") and not managed_network_volume:
         raise ValueError("this launch requires a controller-managed network volume")
+    if storage_policy.get("require_network_volume_ready_receipt") and (
+        args.network_volume_ready_receipt is None
+        or args.network_volume_ready_source_sha256 is None
+    ):
+        raise ValueError(
+            "this launch requires a source-bound network-volume readiness receipt"
+        )
     minimum_network_gb = int(storage_policy.get("minimum_network_volume_gb", 0))
     if args.network_volume_size_gb is not None and args.network_volume_size_gb < minimum_network_gb:
         raise ValueError(f"network volume must be at least {minimum_network_gb} GB")
@@ -896,6 +1001,13 @@ def main(argv: list[str] | None = None) -> int:
         network_volume_mount_path=args.network_volume_mount_path,
         network_volume_data_center_id=args.network_volume_data_center_id,
         network_volume_name=args.network_volume_name,
+        network_volume_ready_receipt_path=(
+            None
+            if args.network_volume_ready_receipt is None
+            else str(args.network_volume_ready_receipt.resolve())
+        ),
+        network_volume_ready_timeout_seconds=args.network_volume_ready_timeout_seconds,
+        network_volume_ready_source_sha256=args.network_volume_ready_source_sha256,
         offpod_receipt_path=(
             None if args.offpod_receipt is None else str(args.offpod_receipt.resolve())
         ),
