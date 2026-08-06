@@ -1,0 +1,43 @@
+{
+  "archive": {
+    "bytes": 2378368,
+    "sha256": "6bb8244b11158e3e4333a330a6c382230ad405336768b0b6b4ba42285eedfd4f",
+    "verification_receipt_sha256": "5f34da788a259ede9122fdeaac37a38dfd22c2c07c919f791a2ee49fb292785f"
+  },
+  "completed_at_utc": "2026-08-06T04:38:29Z",
+  "evidence": [
+    {
+      "path": ".scratch/exp701-launch/full-oracle-7b4ef62.validator.log",
+      "sha256": "52711c4ac6939e48b279a58d4f6cf6b4509277b8fb0351cc36e0823edaf34ca5"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-7b4ef62.pytest.log",
+      "sha256": "ffb2bf147b65183509550126d7ca5efe8310d1039ec4ea1f1f48e8f77bb2d91c"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-7b4ef62.pytest.time",
+      "sha256": "78b47b28545bbfb25b8f4db3ede38cf49882e531a82155c3709b284a6c51588f"
+    }
+  ],
+  "oracle": {
+    "benchmark_records": 1100,
+    "hardware_only_skipped": 4,
+    "okf_concepts": 238,
+    "passed": 1145,
+    "project_validator_exit_status": 0,
+    "pytest_exit_status": 0
+  },
+  "paid_provider_mutation_performed": false,
+  "resources": {
+    "maximum_rss_kib": 1643464,
+    "process_cpu_seconds": 924.45,
+    "pytest_reported_seconds": 536.73,
+    "pytest_wall_seconds": 520.36,
+    "system_cpu_seconds": 22.17,
+    "user_cpu_seconds": 902.28
+  },
+  "schema_version": "exp701-clean-oracle-success-v1",
+  "source_commit": "7b4ef62b92e0c4d985c139a5330f70877fdbe249",
+  "started_at_utc": "2026-08-06T04:29:43Z",
+  "status": "passed-launch-admission-oracle"
+}
