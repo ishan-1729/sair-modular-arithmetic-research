@@ -1,0 +1,129 @@
+{
+  "budget": {
+    "admitted_upper_usd": "7.186777",
+    "budget_after_reserve_usd": "7.369500",
+    "budget_limited_seconds": 35336,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 34460,
+    "max_total_usd": "8.67",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "c0d99e6d0d4fa3a9d20e3b1a059fd4c289a85f316aba88e5a8123d0281668df3",
+  "cost_upper_at_confirmation_usd": "0.023951",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [
+    {
+      "name": "PUBLIC_KEY",
+      "value_chars": 102,
+      "value_sha256": "ca4ce820a012fe895c5c903245cc195531a26bedd8d0369bae0a9ba3dfc64990"
+    }
+  ],
+  "events": [
+    {
+      "elapsed_seconds": 0.01073441399995545,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.4669643350000001,
+      "event": "network-volume-created",
+      "response_sha256": "62357b2ae3c454fb049b9b7bb5adf743d056af555774a7857a7c30ca75d3a63b"
+    },
+    {
+      "elapsed_seconds": 1.475037049999969,
+      "event": "create-requested"
+    },
+    {
+      "elapsed_seconds": 3.349774776000004,
+      "event": "resource-created",
+      "response_sha256": "ea9e9e44a9b660ae5d41229145fa94d11dde75034debf87aaa1ad495de3ba8c9"
+    },
+    {
+      "elapsed_seconds": 3.357818592000001,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 111.37352757999997,
+      "event": "delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 112.42462078999995,
+      "event": "delete-confirmed"
+    },
+    {
+      "archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-d/sair-exp701-checkpoint-export.tar.gz",
+      "archive_bytes": 261,
+      "archive_sha256": "c61d0a740b5e7ba9ccff5c1d7558782f83af8e15418bbb8ad13e48bb435f6d82",
+      "elapsed_seconds": 112.44923371499999,
+      "event": "offpod-restore-verified",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-d/offpod-sync-receipt.json",
+      "restore_verification": {
+        "bytes": 0,
+        "completed_phases": 0,
+        "files": 0,
+        "root_markers": [],
+        "snapshots": 0,
+        "status": "verified"
+      }
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 113.735163747,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 114.83462168899996,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "failure": {
+    "message": "received signal 15",
+    "type": "TerminationRequested"
+  },
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EUR-IS-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "size_gb": 50
+  },
+  "network_volume_id": "4mmx42fdpc",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-d/offpod-sync-receipt.json",
+  "ports": [
+    "22/tcp"
+  ],
+  "provider": "runpod",
+  "resource_id": "yisovsf3eral70",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "resource-and-network-volume-destroyed",
+  "template_id": "runpod-torch-v280",
+  "timing": {
+    "deletion_confirmed_elapsed_seconds": 112.42462078999995,
+    "guest_runtime_seconds": null,
+    "network_volume_deletion_confirmed_elapsed_seconds": 114.83462168899996,
+    "provider_billed_lifetime_seconds": 114.84454700200001,
+    "provider_billed_lifetime_source": "controller-create-request-to-delete-confirmation-upper-bound",
+    "provider_invoice_amount_usd": null
+  }
+}

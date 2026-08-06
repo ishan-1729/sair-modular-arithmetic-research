@@ -1,0 +1,68 @@
+{
+  "attempt": "fresh-full-gpu-d",
+  "cleanup": {
+    "network_volume_delete_confirmed": true,
+    "network_volume_id": "4mmx42fdpc",
+    "pod_delete_confirmed": true,
+    "pod_id": "yisovsf3eral70",
+    "provider_inventory_observed_at_utc": "2026-08-06T04:02:17.325Z",
+    "provider_inventory_pods": [],
+    "provider_inventory_volumes": []
+  },
+  "cost": {
+    "provider_billed_lifetime_upper_seconds": 114.84454700200001,
+    "provider_cost_upper_usd": 0.023951
+  },
+  "diagnosis": {
+    "classification": "guest-bootstrap-shell-permission",
+    "correction": "Invoke both repository-mode 100644 CUDA scripts explicitly through bash and cover those exact invocations in the guest-supervisor regression test.",
+    "evidence": "The guest reached and externally verified an empty pre-science baseline, then exited 126 exactly where guest_supervisor.sh directly executed environments/cuda/bootstrap.sh. The frozen archive records bootstrap.sh and run-acceptance.sh as non-executable 100644 files."
+  },
+  "evidence": [
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-d.json",
+      "sha256": "4d589ee86b0c64a4ecfdc7d60b1ae59a6eace25755b10810709a0438085047ba"
+    },
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-d.json",
+      "sha256": "f5dfcc09e4e7b52b4f9b65734a0489e9fb6ff5efb4ee634b5f6ee3afb925498b"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-d/controller.log",
+      "sha256": "adacac852e8ae4204c05d2eaa23b87921caa890d5538c1e5670825144e9da1c3"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-d/host-sync.log",
+      "sha256": "0169c9c1345e069b3e7ec3e7a22030ddb4ad3c431e45ea8386d9a8fa9837c3c0"
+    },
+    {
+      "path": ".scratch/exp701-launch/windows-host-d.stderr.log",
+      "sha256": "bb1e30eec6b38247861e4382c71afec84f8d41d4627496f212b858b15adcc348"
+    }
+  ],
+  "guest_exit_status": 126,
+  "next_attempt_cap": {
+    "cumulative_cost_upper_usd": 7.505811,
+    "cumulative_provider_seconds_upper": 35989.722,
+    "max_total_usd": 8.65,
+    "max_provider_seconds": 34340
+  },
+  "offpod_evidence": {
+    "archive_bytes": 261,
+    "archive_sha256": "c61d0a740b5e7ba9ccff5c1d7558782f83af8e15418bbb8ad13e48bb435f6d82",
+    "completed_phases": 0,
+    "files": 0,
+    "restore_status": "verified",
+    "root_markers": [],
+    "snapshots": 0
+  },
+  "schema_version": "exp701-launch-attempt-receipt-v1",
+  "science": {
+    "cpu_work_reused": false,
+    "root_opened": false,
+    "status": "not-started-pre-science"
+  },
+  "source_archive_sha256": "83df4da60143de260f8e1865816f72b8cbf9e09fcd042c21e488056e8f4e87ad",
+  "source_commit": "7e1fc95fb5dde0e2766f0d7466f0e8ddd8351a57",
+  "status": "failed-pre-science-cleaned"
+}

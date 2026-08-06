@@ -87,12 +87,12 @@ if ! wait_for_current_ack; then
   exit 75
 fi
 
-environments/cuda/bootstrap.sh --profile cu124 --venv "$workspace/venv-cu124" --receipt "$output/environment.json"
+bash environments/cuda/bootstrap.sh --profile cu124 --venv "$workspace/venv-cu124" --receipt "$output/environment.json"
 python="$workspace/venv-cu124/bin/python"
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 export SAIR_CUDA_PROFILE=cu124
 
-environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv-cu124" --output "$output/hardware-acceptance"
+bash environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv-cu124" --output "$output/hardware-acceptance"
 "$python" -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py \
   --junitxml="$output/focused-junit.xml"
 "$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \

@@ -32,11 +32,11 @@ APPROVAL = (
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
 # The exact approval is cumulative across paid EXP701 attempts. Attempt A,
-# Retry B and recovery C consumed a conservative 1,534.877 provider seconds
-# and $0.320110 before fresh science. Round the remaining launch allowances
+# Retry B, recovery C and failed pre-science launch D consumed a conservative
+# 1,649.722 provider seconds and $0.344061 before fresh science. Round the remaining launch allowances
 # down so the new Pod cannot push the package beyond 10 provider hours or $9.
-FRESH_MAX_TOTAL_USD = "8.67"
-FRESH_MAX_PROVIDER_SECONDS = 34_460
+FRESH_MAX_TOTAL_USD = "8.65"
+FRESH_MAX_PROVIDER_SECONDS = 34_340
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
