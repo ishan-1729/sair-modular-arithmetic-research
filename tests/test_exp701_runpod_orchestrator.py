@@ -60,7 +60,7 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
     )
     rendered = " ".join(command)
     assert "--max-total-usd 8.27" in rendered
-    assert "--max-provider-seconds 33000" in rendered
+    assert "--max-provider-seconds 32400" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -79,6 +79,7 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "nohup" not in fresh and "guest.pid" not in fresh
     assert "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh" in fresh
     assert "SAIR_EXP701_SYNC_NONCE=" + "c" * 48 in fresh
+    assert "SAIR_EXP701_SLICE_SECONDS=30600" in fresh
     assert "guest-exit" in fresh
     resume = orchestrate.direct_start_command(
         "a" * 64,
@@ -221,6 +222,42 @@ def test_guest_establishes_external_baseline_before_cuda_bootstrap() -> None:
     assert "offpod-pre-science-sync-failed" in guest
     assert "bash environments/cuda/bootstrap.sh" in guest
     assert "bash environments/cuda/run-acceptance.sh" in guest
+    assert 'tee -a "$output/guest-supervisor.log"' in guest
+
+
+def test_exported_guest_failure_is_visible_while_provider_keeps_running(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "experiment" / orchestrate.RUN_ID
+    output.mkdir(parents=True)
+    (output / "guest-terminal.json").write_text(
+        json.dumps({"status": "failed", "resume_required": False, "exit_code": 1}),
+        encoding="utf-8",
+    )
+    archive = tmp_path / "sair-exp701-checkpoint-export.tar.gz"
+    recovery_transport.create_export(output, archive)
+    receipt_path = tmp_path / "offpod-sync-receipt.json"
+    receipt_path.write_text(
+        json.dumps(
+            {
+                "status": "verified",
+                "archive": str(archive),
+                "archive_sha256": recovery_transport.sha256(archive),
+                "restore_verification": {"status": "verified"},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    class RunningController:
+        def poll(self) -> None:
+            return None
+
+    status, terminal = orchestrate.wait_for_controller_or_guest_terminal(
+        RunningController(), receipt_path, timeout=1
+    )
+    assert status is None
+    assert terminal == {"status": "failed", "resume_required": False, "exit_code": 1}
 
 
 def test_complete_dry_run_is_nonpaid_and_receipt_bound(
@@ -271,6 +308,6 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
     assert result["maximum_total_usd"] == 8.27
-    assert result["maximum_provider_seconds"] == 33000
+    assert result["maximum_provider_seconds"] == 32400
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()

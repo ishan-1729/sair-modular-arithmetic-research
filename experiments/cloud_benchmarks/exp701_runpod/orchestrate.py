@@ -40,7 +40,8 @@ APPROVAL = (
 # Attempts A-F consumed conservative upper bounds of 2,869.913 provider seconds
 # and $0.598537. This ceiling rounds the remaining provider allowance down.
 FRESH_MAX_TOTAL_USD = "8.27"
-FRESH_MAX_PROVIDER_SECONDS = 33_000
+FRESH_MAX_PROVIDER_SECONDS = 32_400
+GUEST_SLICE_SECONDS = 30_600
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
@@ -194,7 +195,7 @@ set +e
 env \\
   SAIR_EXP701_SOURCE_SHA256={shlex.quote(source_sha)} \\
   SAIR_EXP701_SYNC_NONCE={shlex.quote(nonce)} \\
-  SAIR_EXP701_SLICE_SECONDS=31800 \\
+  SAIR_EXP701_SLICE_SECONDS={GUEST_SLICE_SECONDS} \\
   bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
 status=$?
 set -e
@@ -308,6 +309,39 @@ def terminal_from_export(receipt: dict[str, Any]) -> dict[str, Any]:
         if not terminal_path.is_file():
             raise RuntimeError("recovery export lacks guest-terminal.json")
         return json.loads(terminal_path.read_text(encoding="utf-8"))
+
+
+def exported_guest_terminal(receipt_path: Path) -> dict[str, Any] | None:
+    receipt = read_json(receipt_path) or {}
+    if receipt.get("status") != "verified" or (
+        receipt.get("restore_verification") or {}
+    ).get("status") != "verified":
+        return None
+    try:
+        return terminal_from_export(receipt)
+    except RuntimeError as error:
+        if "lacks guest-terminal.json" in str(error):
+            return None
+        raise
+
+
+def wait_for_controller_or_guest_terminal(
+    controller: subprocess.Popen[Any],
+    receipt_path: Path,
+    *,
+    timeout: float,
+) -> tuple[int | None, dict[str, Any] | None]:
+    deadline = time.monotonic() + timeout
+    while True:
+        status = controller.poll()
+        if status is not None:
+            return status, None
+        terminal = exported_guest_terminal(receipt_path)
+        if terminal is not None:
+            return None, terminal
+        if time.monotonic() >= deadline:
+            raise TimeoutError("provider controller and guest terminal both exceeded timeout")
+        time.sleep(5)
 
 
 def terminate(process: subprocess.Popen[Any] | None, timeout: int) -> int | None:
@@ -498,8 +532,18 @@ def main(argv: list[str] | None = None) -> int:
                 "upload_verification": source_upload,
             },
         )
-        controller_status = controller.wait(timeout=FRESH_MAX_PROVIDER_SECONDS + 600)
-        if controller_status != 0:
+        offpod_receipt = args.offpod_destination / "offpod-sync-receipt.json"
+        controller_status, exported_terminal = wait_for_controller_or_guest_terminal(
+            controller,
+            offpod_receipt,
+            timeout=FRESH_MAX_PROVIDER_SECONDS + 600,
+        )
+        if exported_terminal is not None:
+            terminal = exported_terminal
+            if terminal.get("status") not in {"completed", "slice-checkpointed"}:
+                raise RuntimeError(f"EXP701 guest ended unsuccessfully: {terminal}")
+            controller_status = terminate(controller, 480)
+        elif controller_status != 0:
             raise RuntimeError(f"provider controller exited with status {controller_status}")
         offpod = read_json(args.offpod_destination / "offpod-sync-receipt.json") or {}
         if offpod.get("status") != "verified" or (

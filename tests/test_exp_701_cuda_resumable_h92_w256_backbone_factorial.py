@@ -167,6 +167,8 @@ def test_guest_package_is_shell_valid_and_never_imports_cpu_partial_work() -> No
     ):
         assert forbidden in builder_source
     for required in (
+        "environments/cuda/requirements-cu121.txt",
+        "environments/cuda/requirements-cu124.txt",
         "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
         "submission/model.py",
         "submission/weights.safetensors",

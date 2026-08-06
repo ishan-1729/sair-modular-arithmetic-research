@@ -15,6 +15,9 @@ export_lock="$durable_directory/export.lock"
 sync_stale_seconds="${SAIR_EXP701_SYNC_STALE_SECONDS:-720}"
 sync_initial_wait_seconds="${SAIR_EXP701_SYNC_INITIAL_WAIT_SECONDS:-900}"
 
+mkdir -p "$output" "$durable_directory"
+exec > >(tee -a "$output/guest-supervisor.log") 2>&1
+
 test "$(sha256sum "$archive" | cut -d' ' -f1)" = "$expected_sha"
 mkdir -p "$repository"
 tar -xzf "$archive" -C "$repository"
@@ -78,7 +81,6 @@ wait_for_current_ack() {
 # Establish a restore-verified external baseline before environment bootstrap.
 # If bootstrap fails, the controller can still delete both paid resources without
 # risking the loss of any scientific root.
-mkdir -p "$output" "$durable_directory"
 export_once
 if ! wait_for_current_ack; then
   printf '{"status":"offpod-initial-sync-failed","resume_required":true}\n' > \

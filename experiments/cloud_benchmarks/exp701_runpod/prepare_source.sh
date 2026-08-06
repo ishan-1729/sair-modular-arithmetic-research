@@ -20,6 +20,7 @@ payload_paths=(
   configs/exp_701_runpod_control.yaml
   environments/cuda/bootstrap.sh
   environments/cuda/profiles.yaml
+  environments/cuda/requirements-cu121.txt
   environments/cuda/requirements-cu124.txt
   environments/cuda/run-acceptance.sh
   environments/cuda/verify_environment.py

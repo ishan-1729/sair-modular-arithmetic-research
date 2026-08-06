@@ -1,0 +1,42 @@
+{
+  "schema_version": "exp701-runpod-container-log-observation-v1",
+  "observed_at_utc": "2026-08-06T09:50:00Z",
+  "provider": "RunPod Secure",
+  "pod_id": "w23d385hj99393",
+  "network_volume_id": "wnhksh05z8",
+  "source_archive_sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+  "browser_surface": "authenticated RunPod Pods console in Chrome",
+  "container_failure": {
+    "observed_at_local": "2026-08-06T15:18:52+05:30",
+    "type": "ValueError",
+    "message": "missing lock for cu121: /workspace/sair-exp701/repository/environments/cuda/requirements-cu121.txt",
+    "guest_exit_code": 1
+  },
+  "system_restart_observations_local": [
+    "2026-08-06T15:19:38+05:30",
+    "2026-08-06T15:19:54+05:30",
+    "2026-08-06T15:20:10+05:30",
+    "2026-08-06T15:20:27+05:30",
+    "2026-08-06T15:20:43+05:30",
+    "2026-08-06T15:20:59+05:30",
+    "2026-08-06T15:21:16+05:30",
+    "2026-08-06T15:21:32+05:30"
+  ],
+  "diagnosis": "The cu124 bootstrap installed its selected lock, then verify_environment.verify_offline required every declared profile lock. The explicit source allowlist included requirements-cu124.txt but omitted requirements-cu121.txt, so live verification failed before hardware acceptance, smoke, or science.",
+  "scientific_roots_opened": [],
+  "latest_restore_verified_terminal": {
+    "status": "failed",
+    "resume_required": false,
+    "exit_code": 1,
+    "archive_sha256": "70b40c51ad59ebf9b612be00549adcbfd8bf47fd262e79a824435d85b5bea624"
+  },
+  "cleanup": {
+    "provider_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-s3b.json",
+    "pod_delete_confirmed_elapsed_seconds": 644.871623891,
+    "network_volume_delete_confirmed_elapsed_seconds": 647.1460263590001,
+    "provider_billed_lifetime_seconds_upper": 647.1611329660001,
+    "cost_upper_usd": 0.134968,
+    "final_pod_inventory_count": 0,
+    "final_network_volume_inventory_count": 0
+  }
+}
