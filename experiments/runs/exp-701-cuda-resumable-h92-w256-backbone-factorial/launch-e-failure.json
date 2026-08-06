@@ -1,0 +1,68 @@
+{
+  "attempt": "fresh-full-gpu-e",
+  "cleanup": {
+    "network_volume_delete_confirmed": false,
+    "network_volume_id": "6mau20lvec",
+    "pod_delete_confirmed": true,
+    "pod_id": "hnpxflmaspjagk",
+    "playwright_inventory_observed_at_utc": "2026-08-06T05:09:56.589Z",
+    "playwright_inventory_pods": [],
+    "playwright_inventory_volumes": [
+      "6mau20lvec"
+    ]
+  },
+  "cost": {
+    "attempt_cost_upper_usd": 0.126868,
+    "attempt_provider_lifetime_upper_seconds": 608.323652874,
+    "cumulative_attempt_cost_upper_usd": 0.470929,
+    "cumulative_attempt_provider_seconds_upper": 2258.045652874
+  },
+  "diagnosis": {
+    "classification": "provider-ssh-readiness-timeout-pre-upload",
+    "evidence": "The RunPod Pod remained RUNNING but never exposed a usable SSH endpoint within the configured 600-second readiness window. Control flow failed in wait_for_ssh before source SCP, host-sync start or guest start.",
+    "next_action": "Preserve this failure, delete-confirm the retained pre-upload volume under the authorized fail-closed cleanup path, then reassess image/template/SSH readiness and the remaining cumulative budget before a fresh-root retry."
+  },
+  "evidence": [
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-e.json",
+      "sha256": "bb4de714a1ed195714b5ff6d86728782b62e1aa2a9abee3ac2bac324a8b753c2"
+    },
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-e.json",
+      "sha256": "552c414be696f5a7ae1cc2a67171d0b98a0bed3839a9c811ed2dced53bcff8ec"
+    },
+    {
+      "path": ".scratch/exp701-launch/windows-host-e.stderr.log",
+      "sha256": "25dc76c6147a107ded56354999fbd396e375fd0383258005c6d2c5995d590129"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-e/controller.log",
+      "sha256": "c1219ae014519c8c195275045af2623a5867988b32c56a6e107dc31e06b41bc6"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-e/host-sync.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".scratch/exp701-launch/runtime-inventory-e.json",
+      "sha256": "b9cf947caed8f92cb658927f5e7fd3674f66957fba6998cb9fd10c8d2c3cb3eb"
+    }
+  ],
+  "failure": "TimeoutError: RunPod SSH did not become ready within 600 seconds",
+  "offpod_evidence": {
+    "archive_exists": false,
+    "host_sync_log_bytes": 0,
+    "receipt_exists": false
+  },
+  "schema_version": "exp701-launch-attempt-receipt-v1",
+  "science": {
+    "cpu_work_reused": false,
+    "guest_started": false,
+    "root_opened": false,
+    "source_uploaded": false,
+    "status": "not-started-pre-upload"
+  },
+  "source_archive_sha256": "6bb8244b11158e3e4333a330a6c382230ad405336768b0b6b4ba42285eedfd4f",
+  "source_commit": "7b4ef62b92e0c4d985c139a5330f70877fdbe249",
+  "status": "failed-pre-upload-pod-cleaned-volume-retained"
+}
