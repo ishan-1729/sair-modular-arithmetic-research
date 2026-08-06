@@ -24,9 +24,9 @@
   },
   "source_archive": {
     "path": ".scratch/exp701-launch/source.tar.gz",
-    "sha256": "6bb8244b11158e3e4333a330a6c382230ad405336768b0b6b4ba42285eedfd4f",
-    "bytes": 2378368,
-    "repository_commit": "7b4ef62b92e0c4d985c139a5330f70877fdbe249",
+    "sha256": "3d13bc8e7f3bb28f6b323ff6d487866762f69f2ad52017044db7dc45929befa2",
+    "bytes": 2378374,
+    "repository_commit": "4bd8092746f0819401314de5bf48239f5e559b43",
     "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
     "payload_policy": "explicit-runtime-allowlist-v1",
     "inventoried_files": 77,
@@ -34,7 +34,7 @@
     "forbidden_prefixes_absent": true,
     "unsafe_archive_members_absent": true,
     "archive_verification_path": ".scratch/exp701-launch/archive-verification.json",
-    "archive_verification_sha256": "5f34da788a259ede9122fdeaac37a38dfd22c2c07c919f791a2ee49fb292785f"
+    "archive_verification_sha256": "a5de142236948c9103e0e42689010335c293cdfbd4db64a7a56311277127af67"
   },
   "accepted_hardware_gate": {
     "run": "cuda-hardware-acceptance-runpod-20260805g",
@@ -74,50 +74,50 @@
     "provider_poll_seconds_startup": 30,
     "provider_poll_seconds_running": 300,
     "cleanup": "controller deletion-confirms Pod, verifies restored off-Pod receipt, then deletion-confirms the managed network volume",
-    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan-e.json",
-    "dry_plan_sha256": "ef15d1488c76ac9c475e0389c779e9124220a620b350efb0e75da92c576b236b",
-    "dry_plan_data_center": "EUR-IS-1",
+    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan-f.json",
+    "dry_plan_sha256": "93f9d299a14aea8f5a220e1f181a3b59d8ed3a0d3250705cb376032c2a4785e3",
+    "dry_plan_data_center": "EU-RO-1",
     "live_data_center_binding_required_immediately_before_create": true,
-    "ssh_public_key_fingerprint": "SHA256:IPQmNPAieLhv/ITsjKDKycEeagMusBbXOIiRlStj2BM"
+    "ssh_public_key_fingerprint": "SHA256:QE8fWgzePsWefPSrOWrLEJvIPGVeUdgZnQtfORuyDGI"
   },
   "provider_budget": {
-    "provider_plan_path": ".scratch/exp701-launch/provider-plan-e.json",
-    "provider_plan_sha256": "26cf617f3a138e8148f39ca25e8813330ee9fd8570367d2bffac5cb48e7e5b58",
+    "provider_plan_path": ".scratch/exp701-launch/provider-plan-f.json",
+    "provider_plan_sha256": "596ab901c6feed25e88686821a03ff9710acf0f854a7c2883d51a80126ce9641",
     "compute_usd_per_hour": 0.74,
     "storage_usd_per_hour_upper": 0.010795,
     "combined_usd_per_hour_upper": 0.750795,
-    "maximum_provider_seconds": 34340,
-    "maximum_total_usd": 8.65,
+    "maximum_provider_seconds": 33700,
+    "maximum_total_usd": 8.27,
     "reserve_fraction": 0.15,
-    "budget_after_reserve_usd": 7.3525,
-    "admitted_lifecycle_upper_usd": 7.16175,
-    "reserve_headroom_usd": 0.19075,
-    "prior_authorized_attempts_provider_seconds_upper": 1649.722,
-    "prior_authorized_attempts_cost_upper_usd": 0.344061,
-    "cumulative_provider_seconds_upper": 35989.722,
-    "cumulative_cost_upper_usd": 7.505811,
+    "budget_after_reserve_usd": 7.0295,
+    "admitted_lifecycle_upper_usd": 7.028275,
+    "reserve_headroom_usd": 0.001225,
+    "prior_authorized_attempts_provider_seconds_upper": 2258.045652874,
+    "prior_authorized_attempts_cost_upper_usd": 0.470929,
+    "cumulative_provider_seconds_upper": 35958.045652874,
+    "cumulative_cost_upper_usd": 7.499204,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
-    "balance_last_observed_usd": 7.700409175013192,
+    "balance_last_observed_usd": 7.449670855072327,
     "balance_observation_limitation": "Derived from the user-provided $10 funding minus RunPod's complete posted billing total because the documented API exposes billing history but not a balance field.",
-    "posted_total_spend_usd": 2.299590824986808,
+    "posted_total_spend_usd": 2.550329144927673,
     "completed_smoke_debug_posted_baseline_usd": 0.8101331446669064,
-    "post_baseline_paid_attempts_usd": 1.4894576803199016,
-    "execution_slice_upper_with_fresh_admission_usd": 8.651207680319902,
-    "execution_slice_cap_headroom_usd": 0.3487923196800984,
-    "balance_headroom_after_admitted_lifecycle_usd": 0.538659175013192
+    "post_baseline_paid_attempts_usd": 1.7401960002607666,
+    "execution_slice_upper_with_fresh_admission_usd": 8.768471000260767,
+    "execution_slice_cap_headroom_usd": 0.231528999739233,
+    "balance_headroom_after_admitted_lifecycle_usd": 0.421395855072327
   },
   "verification": [
     {
       "command": "python -m pytest -q",
-      "worktree": "clean detached 7b4ef62b92e0c4d985c139a5330f70877fdbe249",
+      "worktree": "clean detached 4bd8092746f0819401314de5bf48239f5e559b43",
       "status": "pass",
       "passed": 1145,
       "skipped_hardware_only": 4,
-      "pytest_reported_seconds": 536.73,
-      "process_wall_seconds": 520.36,
-      "process_cpu_seconds": 924.45,
-      "max_rss_kib": 1643464
+      "pytest_reported_seconds": 584.73,
+      "process_wall_seconds": 566.53,
+      "process_cpu_seconds": 983.16,
+      "max_rss_kib": 1648280
     },
     {
       "command": "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
@@ -135,8 +135,9 @@
       "command": "extracted allowlisted payload focused pytest",
       "status": "pass",
       "passed": 14,
-      "skipped_hardware_only": 4,
-      "wall_seconds": 38.88
+      "skipped_hardware_only": 0,
+      "pytest_reported_seconds": 40.10,
+      "wall_seconds": 42.5
     },
     {
       "command": "python tools/validate_project.py",
@@ -156,6 +157,21 @@
       "pod_delete_confirmed": true,
       "volume_delete_confirmed": true,
       "no_science_opened": true
+    },
+    {
+      "command": "repository-local Playwright managed Chromium launch-boundary RunPod inventory, catalog and billing check",
+      "status": "pass",
+      "observed_at_utc": "2026-08-06T06:41:16.639Z",
+      "playwright_version": "1.61.1",
+      "chromium_version": "149.0.7827.55",
+      "pods": 0,
+      "network_volumes": 0,
+      "data_center": "EU-RO-1",
+      "rtx4090_availability": "HIGH",
+      "network_volume_type": "STANDARD",
+      "secure_gpu_usd_per_hour": 0.74,
+      "posted_total_spend_usd": 2.550329144927673,
+      "receipt_sha256": "a7cbbd04b2d7c29e61662cefc0b924dea0b896e4802f9681aaaee27ab1f1994c"
     }
   ],
   "official_runpod_sources": {
@@ -171,7 +187,7 @@
     "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
     "Retry B failed at the pre-science external-copy gate; retained-volume recovery C later restore-verified its archive and delete-confirmed both the recovery Pod and retained volume without opening science.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
-    "The fresh launch is capped at 34,340 provider seconds and $8.65 so prior authorized attempts plus this launch remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
-    "The RunPod API credential is host-only and was intentionally not read, copied, or stored during non-paid preflight."
+    "After launch E's pre-upload timeout, the next fresh launch is capped at 33,700 provider seconds and $8.27 so prior authorized attempts plus the next launch remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
+    "The RunPod API credential remains host-only and is not copied into the source archive, guest environment, logs, or durable receipts."
   ]
 }

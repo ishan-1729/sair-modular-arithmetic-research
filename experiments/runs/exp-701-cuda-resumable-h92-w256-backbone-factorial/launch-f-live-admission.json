@@ -1,0 +1,276 @@
+{
+  "schema_version": "exp701-runpod-live-admission-v2",
+  "observed_at_utc": "2026-08-06T06:41:16.639Z",
+  "browser": {
+    "playwright_version": "1.61.1",
+    "chromium_version": "149.0.7827.55",
+    "chromium_mode": "managed-regular-chromium-new-headless",
+    "request_policy": "GET/HEAD/OPTIONS only; fresh non-persistent context per endpoint"
+  },
+  "inventory": {
+    "pods": {
+      "status": 200,
+      "count": 0,
+      "ids": []
+    },
+    "network_volumes": {
+      "status": 200,
+      "count": 0,
+      "ids": []
+    }
+  },
+  "catalog": {
+    "gpus_status": 200,
+    "datacenters_status": 200,
+    "target_data_center_id": "EU-RO-1",
+    "selected_gpu": {
+      "availability": "HIGH",
+      "community": true,
+      "dataCenters": [
+        {
+          "availability": "NONE",
+          "id": "AP-IN-1",
+          "name": "AP-IN-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "AP-JP-1",
+          "name": "AP-JP-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "CA-MTL-1",
+          "name": "CA-MTL-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "CA-MTL-3",
+          "name": "CA-MTL-3"
+        },
+        {
+          "availability": "NONE",
+          "id": "CA-MTL-4",
+          "name": "CA-MTL-4"
+        },
+        {
+          "availability": "LOW",
+          "id": "EU-CZ-1",
+          "name": "EU-CZ-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "EU-FR-1",
+          "name": "EU-FR-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "EU-NL-1",
+          "name": "EU-NL-1"
+        },
+        {
+          "availability": "HIGH",
+          "id": "EU-RO-1",
+          "name": "EU-RO-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "EU-SE-1",
+          "name": "EU-SE-1"
+        },
+        {
+          "availability": "LOW",
+          "id": "EUR-IS-1",
+          "name": "EUR-IS-1"
+        },
+        {
+          "availability": "LOW",
+          "id": "EUR-IS-2",
+          "name": "EUR-IS-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "EUR-IS-3",
+          "name": "EUR-IS-3"
+        },
+        {
+          "availability": "NONE",
+          "id": "EUR-IS-4",
+          "name": "EUR-IS-4"
+        },
+        {
+          "availability": "NONE",
+          "id": "EUR-NO-1",
+          "name": "EUR-NO-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "EUR-NO-2",
+          "name": "EUR-NO-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "OC-AU-1",
+          "name": "OC-AU-1"
+        },
+        {
+          "availability": "LOW",
+          "id": "US-CA-2",
+          "name": "US-CA-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-GA-2",
+          "name": "US-GA-2"
+        },
+        {
+          "availability": "LOW",
+          "id": "US-IL-1",
+          "name": "US-IL-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-KS-2",
+          "name": "US-KS-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-MD-1",
+          "name": "US-MD-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-MO-1",
+          "name": "US-MO-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-MO-2",
+          "name": "US-MO-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-NC-1",
+          "name": "US-NC-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-NC-2",
+          "name": "US-NC-2"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-NE-1",
+          "name": "US-NE-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-TX-3",
+          "name": "US-TX-3"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-TX-4",
+          "name": "US-TX-4"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-WA-1",
+          "name": "US-WA-1"
+        },
+        {
+          "availability": "NONE",
+          "id": "US-WA-2",
+          "name": "US-WA-2"
+        }
+      ],
+      "id": "NVIDIA GeForce RTX 4090",
+      "manufacturer": "NVIDIA",
+      "maxCount": {
+        "community": 8,
+        "secure": 8
+      },
+      "memory": 24,
+      "name": "RTX 4090",
+      "pool": "ADA_24",
+      "price": {
+        "community": 0.34,
+        "secure": 0.74
+      },
+      "secure": true
+    },
+    "selected_data_center": {
+      "compliance": [
+        "GDPR",
+        "HIPAA"
+      ],
+      "globalNetwork": true,
+      "id": "EU-RO-1",
+      "name": "EU-RO-1",
+      "networkVolumeTypes": [
+        "STANDARD"
+      ],
+      "region": "EUROPE"
+    },
+    "selected_gpu_data_center": {
+      "availability": "HIGH",
+      "id": "EU-RO-1",
+      "name": "EU-RO-1"
+    }
+  },
+  "billing": {
+    "status": 200,
+    "top_level_keys": [
+      "metadata",
+      "records"
+    ],
+    "row_count": 2,
+    "numeric_field_totals": {
+      "clusterDiskAmount": 0,
+      "clusterGpuAmount": 0,
+      "clusterNetworkingAmount": 0,
+      "endpointAmount": 0,
+      "podCpuAmount": 0,
+      "podDiskAmount": 0.022685186471790075,
+      "podGpuAmount": 2.4984772907337174,
+      "recordCount": 2,
+      "serverlessCpuAmount": 0,
+      "serverlessDiskAmount": 0,
+      "serverlessFeeAmount": 0,
+      "serverlessGpuAmount": 0,
+      "storageHighPerformanceAmount": 0,
+      "storageStandardAmount": 0.029166667722165585,
+      "totalAmount": 2.550329144927673
+    }
+  },
+  "diagnostics": {
+    "pods": {
+      "pageErrors": [],
+      "requestFailures": [],
+      "httpFailures": []
+    },
+    "volumes": {
+      "pageErrors": [],
+      "requestFailures": [],
+      "httpFailures": []
+    },
+    "gpus": {
+      "pageErrors": [],
+      "requestFailures": [],
+      "httpFailures": []
+    },
+    "datacenters": {
+      "pageErrors": [],
+      "requestFailures": [],
+      "httpFailures": []
+    },
+    "billing": {
+      "pageErrors": [],
+      "requestFailures": [],
+      "httpFailures": []
+    }
+  },
+  "cleanup": {
+    "browserClosed": true,
+    "contextsClosed": 5
+  }
+}
