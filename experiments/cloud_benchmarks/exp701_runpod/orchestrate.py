@@ -31,6 +31,12 @@ APPROVAL = (
     "NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED "
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
+# The exact approval is cumulative across paid EXP701 attempts. Attempt A,
+# Retry B and recovery C consumed a conservative 1,534.877 provider seconds
+# and $0.320110 before fresh science. Round the remaining launch allowances
+# down so the new Pod cannot push the package beyond 10 provider hours or $9.
+FRESH_MAX_TOTAL_USD = "8.67"
+FRESH_MAX_PROVIDER_SECONDS = 34_460
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
@@ -217,9 +223,9 @@ def controller_command(args: argparse.Namespace, public_key: Path) -> list[str]:
         "--storage-hourly-usd",
         "0.010795",
         "--max-total-usd",
-        "9.00",
+        FRESH_MAX_TOTAL_USD,
         "--max-provider-seconds",
-        "36000",
+        str(FRESH_MAX_PROVIDER_SECONDS),
         "--cuda-runtime",
         "any",
         "--disk-gb",
@@ -453,8 +459,8 @@ def main(argv: list[str] | None = None) -> int:
         "data_center_id": args.data_center_id,
         "provider": "RunPod Secure",
         "gpu": "NVIDIA GeForce RTX 4090",
-        "maximum_total_usd": 9.0,
-        "maximum_provider_seconds": 36000,
+        "maximum_total_usd": float(FRESH_MAX_TOTAL_USD),
+        "maximum_provider_seconds": FRESH_MAX_PROVIDER_SECONDS,
         "network_volume_gb": 50,
         "offpod_destination": str(args.offpod_destination),
         "resume": resume is not None,

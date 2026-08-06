@@ -1,0 +1,35 @@
+{
+  "elapsed_seconds": 43.40905619800003,
+  "failure": null,
+  "network_volume_cleanup": {
+    "absence_http_status": 404,
+    "delete_http_status": 204,
+    "probes": 1,
+    "status": "delete-confirmed"
+  },
+  "offpod_sync": {
+    "archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-recovery-c/sair-exp701-checkpoint-export.tar.gz",
+    "archive_bytes": 360,
+    "archive_sha256": "8ebe7a21533fef268f7543792182cba03a93aa579577de9957304f8203fb3af8",
+    "destination": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-recovery-c",
+    "remote_archive": "/workspace/exp701-durable/sair-exp701-checkpoint-export.tar.gz",
+    "restore_verification": {
+      "bytes": 63,
+      "completed_phases": 0,
+      "files": 1,
+      "root_markers": [],
+      "snapshots": 0,
+      "status": "verified"
+    },
+    "schema_version": "exp701-offpod-sync-v1",
+    "status": "verified",
+    "target": "root@157.157.221.29",
+    "transport": "scp"
+  },
+  "provider_controller_status": 1,
+  "provider_pod_delete_confirmed": true,
+  "recovery_resource_id": "1x3mtpn6sbh2fu",
+  "retained_volume_id": "ikpyeaj2e3",
+  "schema_version": "exp701-retained-volume-recovery-v1",
+  "status": "recovered-and-cleaned"
+}

@@ -74,24 +74,28 @@
     "provider_poll_seconds_startup": 30,
     "provider_poll_seconds_running": 300,
     "cleanup": "controller deletion-confirms Pod, verifies restored off-Pod receipt, then deletion-confirms the managed network volume",
-    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan.json",
-    "dry_plan_sha256": "ab2ddedade13fc80426fc897e1c8fb789b809aca873f3ed836394c40242b3223",
-    "dry_plan_data_center_is_representative_only": "EU-RO-1",
+    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan-d.json",
+    "dry_plan_sha256": "5b747b7133eb46ec1ce2fde3ab5c0d4217420c3a4903dac14fabe7162c3867af",
+    "dry_plan_data_center": "EUR-IS-1",
     "live_data_center_binding_required_immediately_before_create": true,
     "ssh_public_key_fingerprint": "SHA256:/ZrM2Yj3x6aaaxfpDuDZXKwLiNHoiB2etd/s3grIz+E"
   },
   "provider_budget": {
-    "provider_plan_path": ".scratch/exp701-launch/provider-plan.json",
-    "provider_plan_sha256": "c3f93f652e5a046bf582d33350296ce525b70451a7e3ae39a7331aaf46d84162",
+    "provider_plan_path": ".scratch/exp701-launch/provider-plan-d.json",
+    "provider_plan_sha256": "1617200c1835a4298d7659d967b65236b80cad72b12b7fe877b98175c464c51c",
     "compute_usd_per_hour": 0.74,
     "storage_usd_per_hour_upper": 0.010795,
     "combined_usd_per_hour_upper": 0.750795,
-    "maximum_provider_seconds": 36000,
-    "maximum_total_usd": 9.0,
+    "maximum_provider_seconds": 34460,
+    "maximum_total_usd": 8.67,
     "reserve_fraction": 0.15,
-    "budget_after_reserve_usd": 7.65,
-    "admitted_lifecycle_upper_usd": 7.50795,
-    "reserve_headroom_usd": 0.14205,
+    "budget_after_reserve_usd": 7.3695,
+    "admitted_lifecycle_upper_usd": 7.186777,
+    "reserve_headroom_usd": 0.182723,
+    "prior_authorized_attempts_provider_seconds_upper": 1534.877,
+    "prior_authorized_attempts_cost_upper_usd": 0.32011,
+    "cumulative_provider_seconds_upper": 35994.877,
+    "cumulative_cost_upper_usd": 7.506887,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
     "balance_last_observed_usd": 9.23,
@@ -112,7 +116,7 @@
       "command": "python -m pytest -q tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
       "status": "pass",
       "passed": 41,
-      "wall_seconds": 46.86
+      "wall_seconds": 45.72
     },
     {
       "command": "python -m pytest -q tests/test_cuda_portability_inventory.py tests/test_exp701_runpod_orchestrator.py tests/test_cuda_provider_control.py",
@@ -137,6 +141,14 @@
       "command": "provider controller dry plan plus host orchestrator dry run",
       "status": "pass",
       "provider_requests_made": false
+    },
+    {
+      "command": "retained-volume recovery C archive/hash/restore and provider cleanup verification",
+      "status": "pass",
+      "recovery_status": "recovered-and-cleaned",
+      "pod_delete_confirmed": true,
+      "volume_delete_confirmed": true,
+      "no_science_opened": true
     }
   ],
   "official_runpod_sources": {
@@ -152,7 +164,7 @@
     "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
     "Retry B failed at the pre-science external-copy gate. Its Pod is delete-confirmed and its retained EUR-IS-1 volume must be recovered and externally restore-verified before deletion or any fresh science launch.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
-    "The six-to-twelve-hour projection can exceed the first ten-hour provider slice, so status 75 is a recoverable same-root checkpoint outcome rather than a scientific stop.",
+    "The fresh launch is capped at 34,460 provider seconds and $8.67 so prior authorized attempts plus this launch remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
     "The RunPod API credential is host-only and was intentionally not read, copied, or stored during non-paid preflight."
   ]
 }

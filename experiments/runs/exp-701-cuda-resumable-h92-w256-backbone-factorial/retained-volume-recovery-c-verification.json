@@ -1,0 +1,56 @@
+{
+  "archive": {
+    "bytes": 360,
+    "guest_receipt_hash_matches": true,
+    "members": [
+      {
+        "bytes": 63,
+        "path": "experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial/guest-terminal.json",
+        "sha256": "27272f440b8852af4957f848f5e9990ab45157f1ed0db1db08905b452f0d10f4"
+      }
+    ],
+    "path": ".scratch/exp701-offpod-recovery-c/sair-exp701-checkpoint-export.tar.gz",
+    "restore_verification": {
+      "bytes": 63,
+      "completed_phases": 0,
+      "files": 1,
+      "root_markers": [],
+      "snapshots": 0,
+      "status": "verified"
+    },
+    "sha256": "8ebe7a21533fef268f7543792182cba03a93aa579577de9957304f8203fb3af8",
+    "sidecar_hash_matches": true
+  },
+  "fresh_provider_inventory": {
+    "method": "repository-local Playwright 1.61.1 / managed Chromium 149.0.7827.55 / GET-only",
+    "network_volumes": [],
+    "observed_at_utc": "2026-08-06T03:39:10.616Z",
+    "pods": []
+  },
+  "limitations": [
+    "The Windows wrapper disappeared before writing its redundant exit marker; the authenticated recovery receipt, provider delete receipt, verified local archive, and fresh empty provider inventory independently establish terminal cleanup.",
+    "The recovered archive is pre-science failure evidence only and is never an EXP701 scientific checkpoint or seed."
+  ],
+  "no_science_opened": true,
+  "provider_cleanup": {
+    "pod_delete_confirmed": true,
+    "pod_id": "1x3mtpn6sbh2fu",
+    "provider_receipt_status": "resource-destroyed",
+    "volume_absence_http_status": 404,
+    "volume_delete_confirmed": true,
+    "volume_delete_http_status": 204
+  },
+  "recovered_state": {
+    "completed_phases": 0,
+    "resume_required": true,
+    "root_markers": [],
+    "snapshots": 0,
+    "status": "offpod-initial-sync-failed"
+  },
+  "recovery_resource_id": "1x3mtpn6sbh2fu",
+  "recovery_status": "recovered-and-cleaned",
+  "retained_volume_id": "ikpyeaj2e3",
+  "schema_version": "exp701-retained-volume-recovery-verification-v1",
+  "status": "passed",
+  "verified_at_utc": "2026-08-06T03:42:13.966381+00:00"
+}
