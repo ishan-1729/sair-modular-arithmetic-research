@@ -410,6 +410,50 @@
       "torch_referenced": false
     },
     {
+      "active_cpu_boundary": {
+        "reason": "This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation.",
+        "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
+        "symbols": [
+          "provider-api",
+          "ssh-scp",
+          "process-lifecycle",
+          "offpod-sync"
+        ]
+      },
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "This host-only controller companion provisions and monitors the disposable GPU worker, transfers authenticated artifacts, and never executes tensor or model computation. Active symbols are ['provider-api', 'ssh-scp', 'process-lifecycle', 'offpod-sync']; imports=['__future__', '__future__.annotations', 'argparse', 'hashlib', 'json', 'os', 'pathlib', 'pathlib.Path']; hotspot_counts={'checkpoint': 1}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 131,
+          "operation": "json.load",
+          "symbol": "api_get"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.orchestrate",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
+      "smoke_command": null,
+      "source_sha256": "a2d96b09a3639a18e502be3a6bcd718a01a6cb757f11a087298493e2de76afca",
+      "torch_referenced": false
+    },
+    {
       "active_cpu_boundary": null,
       "adapter": null,
       "classification": "intentionally-cpu-boundary",
@@ -28821,21 +28865,21 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "ddfa87e969df6e8fd2d7ee8c2d98603c37ab190f252a378d8d2a3ee14dc69676",
-    "python_file_count": 242,
+    "config_sha256": "284fc6c0f6e3e5dba156d43b12eee2201700216c7eff283605f4c9f9e0c8aacb",
+    "python_file_count": 243,
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "663c0ea219a958e44c9d8574bc3131a744173d5afc593db96946a4af31e71e0c"
+    "tree_sha256": "9a84d3904fbad3f8d56a34b2432c5bdba518c2bb53dfe249492f409b009584f0"
   },
   "summary": {
     "classifications": {
       "archived-frozen-route": 214,
       "device-native-unvalidated": 12,
-      "intentionally-cpu-boundary": 16
+      "intentionally-cpu-boundary": 17
     },
     "hotspots": {
-      "checkpoint": 860,
+      "checkpoint": 861,
       "device-boundary": 24,
       "host-boundary": 112,
       "optimizer": 187,
