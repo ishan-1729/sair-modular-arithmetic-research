@@ -1,0 +1,50 @@
+{
+  "archive": {
+    "bytes": 2381045,
+    "sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
+    "verification_receipt_sha256": "38f6d1d8d3de44d8708dcef36a16c2da6f1da568bf3fa84434308f9f6b678c72"
+  },
+  "completed_at_utc": "2026-08-06T08:07:29Z",
+  "evidence": [
+    {
+      "path": ".scratch/exp701-launch/full-oracle-e4da80a-final.validator.log",
+      "sha256": "52711c4ac6939e48b279a58d4f6cf6b4509277b8fb0351cc36e0823edaf34ca5"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-e4da80a-final.pytest.log",
+      "sha256": "849060d101197d8284f107d675977308de2a73162c306e76e3e4e646c031f264"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-e4da80a-final.pytest.time",
+      "sha256": "13a0e7af0467c35eeff94ade0926911bb62004182a1f932803cf5a0f3ce4c4dd"
+    }
+  ],
+  "extracted_payload": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "focused_tests_passed": 14,
+    "repository_commit": "bd1389311afd258a326d9e63f8ade8d24f76b9cf",
+    "status": "passed",
+    "wall_seconds": 46.15
+  },
+  "oracle": {
+    "benchmark_records": 1100,
+    "hardware_only_skipped": 4,
+    "okf_concepts": 238,
+    "passed": 1145,
+    "project_validator_exit_status": 0,
+    "pytest_exit_status": 0
+  },
+  "paid_provider_mutation_performed": false,
+  "resources": {
+    "maximum_rss_kib": 1640176,
+    "process_cpu_seconds": 1075.03,
+    "pytest_reported_seconds": 629.51,
+    "pytest_wall_seconds": 603.10,
+    "system_cpu_seconds": 26.41,
+    "user_cpu_seconds": 1048.62
+  },
+  "schema_version": "exp701-clean-oracle-success-v1",
+  "source_commit": "bd1389311afd258a326d9e63f8ade8d24f76b9cf",
+  "started_at_utc": "2026-08-06T07:57:27Z",
+  "status": "passed-launch-admission-oracle"
+}

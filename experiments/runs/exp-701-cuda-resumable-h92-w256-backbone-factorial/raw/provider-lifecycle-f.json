@@ -1,0 +1,121 @@
+{
+  "budget": {
+    "admitted_upper_usd": "7.028275",
+    "budget_after_reserve_usd": "7.029500",
+    "budget_limited_seconds": 33705,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 33700,
+    "max_total_usd": "8.27",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "c0d99e6d0d4fa3a9d20e3b1a059fd4c289a85f316aba88e5a8123d0281668df3",
+  "cost_upper_at_confirmation_usd": "0.127608",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [
+    {
+      "name": "PUBLIC_KEY",
+      "value_chars": 103,
+      "value_sha256": "7be8234708b3b9b05cc2315a20417406e83bc5b2f5ee287ebcd2aed870af343e"
+    }
+  ],
+  "events": [
+    {
+      "elapsed_seconds": 0.007809791999989102,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.6040310779999913,
+      "event": "network-volume-created",
+      "response_sha256": "ef7c6dc1ab1882236a4bab516b3312daf0af92301fc402c861505ab3a54231df"
+    },
+    {
+      "elapsed_seconds": 1.613416433999987,
+      "event": "create-requested"
+    },
+    {
+      "elapsed_seconds": 3.8085113269999624,
+      "event": "resource-created",
+      "response_sha256": "fa33d795da3ad82439c093e4ec0d2ab6bd602ae21da8866e4fe40b087659fc60"
+    },
+    {
+      "elapsed_seconds": 3.8177555909999796,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 305.18764610799997,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 606.517437151,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 610.8532557030001,
+      "event": "delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 611.847539567,
+      "event": "delete-confirmed"
+    },
+    {
+      "elapsed_seconds": 611.8600626089999,
+      "error": "verified off-Pod receipt is missing",
+      "error_type": "RuntimeError",
+      "event": "network-volume-retained",
+      "reason": "offpod-restore-unverified"
+    }
+  ],
+  "failure": {
+    "message": "received signal 15",
+    "type": "TerminationRequested"
+  },
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EU-RO-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "size_gb": 50
+  },
+  "network_volume_id": "xubrh4leyr",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-f/offpod-sync-receipt.json",
+  "ports": [
+    "22/tcp"
+  ],
+  "provider": "runpod",
+  "resource_id": "g1h1z8nipyb62r",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "network-volume-destruction-unconfirmed",
+  "template_id": "runpod-torch-v280",
+  "timing": {
+    "deletion_confirmed_elapsed_seconds": 611.847539567,
+    "guest_runtime_seconds": null,
+    "network_volume_deletion_confirmed_elapsed_seconds": null,
+    "provider_billed_lifetime_seconds": 611.867506538,
+    "provider_billed_lifetime_source": "controller-create-request-to-delete-confirmation-upper-bound",
+    "provider_invoice_amount_usd": null
+  }
+}
