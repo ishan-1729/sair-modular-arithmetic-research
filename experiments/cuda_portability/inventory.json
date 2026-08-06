@@ -398,7 +398,9 @@
       "family": "cloud_benchmarks",
       "frozen_identity_constraint": null,
       "hotspots": [],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/recover_retained_volume.py"
+      ],
       "module": "experiments.cloud_benchmarks.exp701_runpod.offpod_sync",
       "path": "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py",
       "reachability_roots": [
@@ -406,7 +408,7 @@
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
-      "source_sha256": "af98778049301c78ef92fb982c234c56aa9bf27ce90f0cb2cb6d0d984c2ff3af",
+      "source_sha256": "2f5f035a1d0bff57ca661f3d3e14e62478eea411b26a60ef154f3d17e93fcd3d",
       "torch_referenced": false
     },
     {
@@ -442,7 +444,9 @@
           "symbol": "api_get"
         }
       ],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/recover_retained_volume.py"
+      ],
       "module": "experiments.cloud_benchmarks.exp701_runpod.orchestrate",
       "path": "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py",
       "reachability_roots": [
@@ -450,7 +454,35 @@
       ],
       "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "811a4fa33bf7b8a424b4c979fee944b554e08e5f554d5f7642f90e570673c3ee",
+      "source_sha256": "5d02a071edc4a2a867a8b0b1b709c8c3513e0d4ad8ef84cbc7019aad0ad029e0",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.', '.offpod_sync', '.orchestrate', '__future__', '__future__.annotations', 'argparse', 'json', 'os']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.recover_retained_volume",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/recover_retained_volume.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "3f1cf07e6dc79e3e34bd14a5d35a489d28485e219f08416e218e253568f84f12",
       "torch_referenced": false
     },
     {
@@ -28866,17 +28898,17 @@
   "source": {
     "config": "configs/cuda_portability.yaml",
     "config_sha256": "284fc6c0f6e3e5dba156d43b12eee2201700216c7eff283605f4c9f9e0c8aacb",
-    "python_file_count": 243,
+    "python_file_count": 244,
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "f0f37d1f5dd9d4eccc811fa66d7e3abae93e953d5c3968d730d25f20c4b42361"
+    "tree_sha256": "902e6f44b0a702c1ff22b0249c7aa92f078b733f692778f9cd4a8f87cf98e23c"
   },
   "summary": {
     "classifications": {
       "archived-frozen-route": 214,
       "device-native-unvalidated": 12,
-      "intentionally-cpu-boundary": 17
+      "intentionally-cpu-boundary": 18
     },
     "hotspots": {
       "checkpoint": 861,
