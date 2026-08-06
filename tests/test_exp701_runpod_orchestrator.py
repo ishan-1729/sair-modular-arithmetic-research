@@ -32,8 +32,8 @@ def test_controller_command_is_exact_bounded_and_persistent(tmp_path: Path) -> N
     public = tmp_path / "id_ed25519.pub"
     command = orchestrate.controller_command(args, public)
     rendered = " ".join(command)
-    assert "--max-total-usd 8.65" in rendered
-    assert "--max-provider-seconds 34340" in rendered
+    assert "--max-total-usd 8.27" in rendered
+    assert "--max-provider-seconds 33700" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert "--label sair-exp701-full-fidelity" in rendered
@@ -235,7 +235,7 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     ) == 0
     result = json.loads(capsys.readouterr().out)
     assert result["status"] == "dry-run"
-    assert result["maximum_total_usd"] == 8.65
-    assert result["maximum_provider_seconds"] == 34340
+    assert result["maximum_total_usd"] == 8.27
+    assert result["maximum_provider_seconds"] == 33700
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()
