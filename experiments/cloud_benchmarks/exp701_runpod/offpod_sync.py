@@ -51,6 +51,20 @@ def verify_restorable(archive: Path, digest: str, destination: Path) -> dict[str
     }
 
 
+def ssh_options(identity: Path, known_hosts: Path) -> list[str]:
+    if not identity.is_file():
+        raise ValueError("SSH identity is missing")
+    if not known_hosts.is_file():
+        raise ValueError("session known-hosts file is missing")
+    return [
+        "-i", str(identity),
+        "-o", "BatchMode=yes",
+        "-o", "IdentitiesOnly=yes",
+        "-o", "StrictHostKeyChecking=yes",
+        "-o", f"UserKnownHostsFile={known_hosts}",
+    ]
+
+
 def sync_local(remote_archive: Path, destination: Path) -> dict[str, Any]:
     remote_archive = remote_archive.resolve()
     remote_checksum = remote_archive.with_suffix(remote_archive.suffix + ".sha256")
@@ -91,6 +105,7 @@ def sync_ssh(
     destination: Path,
     *,
     identity: Path,
+    known_hosts: Path,
     port: int,
     remote_ack: str,
     nonce: str,
@@ -105,10 +120,7 @@ def sync_ssh(
     if len(nonce) < 16:
         raise ValueError("sync nonce must contain at least 16 characters")
     names = [remote_path.name, remote_path.name + ".sha256", remote_path.name + ".receipt.json"]
-    ssh_options = [
-        "-i", str(identity), "-o", "BatchMode=yes",
-        "-o", "StrictHostKeyChecking=yes",
-    ]
+    strict_ssh_options = ssh_options(identity, known_hosts)
     with tempfile.TemporaryDirectory(dir=destination) as temporary_raw:
         temporary = Path(temporary_raw)
         # Pull the small sidecars first. If the guest rotates the triplet during
@@ -116,7 +128,7 @@ def sync_ssh(
         for name in names[1:]:
             subprocess.run(
                 [
-                    "scp", "-q", "-P", str(port), *ssh_options,
+                    "scp", "-q", "-P", str(port), *strict_ssh_options,
                     f"{target}:{remote_path.with_name(name).as_posix()}",
                     str(temporary / name),
                 ],
@@ -131,7 +143,7 @@ def sync_ssh(
         else:
             subprocess.run(
                 [
-                    "scp", "-q", "-P", str(port), *ssh_options,
+                    "scp", "-q", "-P", str(port), *strict_ssh_options,
                     f"{target}:{remote_path.as_posix()}", str(temporary / names[0]),
                 ],
                 check=True,
@@ -173,7 +185,7 @@ def sync_ssh(
         f"cat > \"$temporary\" && mv \"$temporary\" {final}"
     )
     subprocess.run(
-        ["ssh", "-p", str(port), *ssh_options, target, remote_command],
+        ["ssh", "-p", str(port), *strict_ssh_options, target, remote_command],
         input=(json.dumps(acknowledgement, sort_keys=True) + "\n").encode(),
         check=True,
         timeout=120,
@@ -190,6 +202,7 @@ def main() -> int:
     transport.add_argument("--local", action="store_true")
     transport.add_argument("--ssh-target")
     parser.add_argument("--identity", type=Path)
+    parser.add_argument("--known-hosts", type=Path)
     parser.add_argument("--port", type=int, default=22)
     parser.add_argument("--remote-ack")
     parser.add_argument("--nonce")
@@ -202,6 +215,8 @@ def main() -> int:
     if args.ssh_target and (
         args.identity is None
         or not args.identity.is_file()
+        or args.known_hosts is None
+        or not args.known_hosts.is_file()
         or not args.remote_ack
         or not args.nonce
     ):
@@ -214,7 +229,7 @@ def main() -> int:
             else:
                 result = sync_ssh(
                     args.ssh_target, args.remote_archive, args.destination,
-                    identity=args.identity, port=args.port,
+                    identity=args.identity, known_hosts=args.known_hosts, port=args.port,
                     remote_ack=args.remote_ack, nonce=args.nonce,
                 )
         except (OSError, RuntimeError, ValueError, subprocess.SubprocessError) as error:

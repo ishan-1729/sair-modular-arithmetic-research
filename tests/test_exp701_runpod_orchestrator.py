@@ -8,7 +8,11 @@ import tarfile
 
 import pytest
 
-from experiments.cloud_benchmarks.exp701_runpod import orchestrate
+from experiments.cloud_benchmarks.exp701_runpod import (
+    offpod_sync,
+    orchestrate,
+    recover_retained_volume,
+)
 
 
 def arguments(tmp_path: Path) -> argparse.Namespace:
@@ -61,6 +65,58 @@ def test_ssh_transport_is_strict_and_identity_scoped(tmp_path: Path) -> None:
     assert f"UserKnownHostsFile={known}" in rendered
     assert "IdentitiesOnly=yes" in rendered
     assert str(identity) in options
+
+
+def test_offpod_transport_uses_the_same_pinned_known_hosts(tmp_path: Path) -> None:
+    identity = tmp_path / "id"
+    known = tmp_path / "known_hosts"
+    identity.write_text("private", encoding="utf-8")
+    known.write_text("example ssh-ed25519 public", encoding="utf-8")
+    options = offpod_sync.ssh_options(identity, known)
+    rendered = " ".join(options)
+    assert "StrictHostKeyChecking=yes" in rendered
+    assert "IdentitiesOnly=yes" in rendered
+    assert f"UserKnownHostsFile={known}" in rendered
+
+    host_sync = (
+        orchestrate.ROOT
+        / "experiments/cloud_benchmarks/exp701_runpod/host_sync.sh"
+    ).read_text(encoding="utf-8")
+    orchestration = Path(orchestrate.__file__).read_text(encoding="utf-8")
+    assert "SAIR_EXP701_KNOWN_HOSTS" in host_sync
+    assert '--known-hosts "$known_hosts"' in host_sync
+    assert '"SAIR_EXP701_KNOWN_HOSTS": str(known_hosts)' in orchestration
+
+
+def test_retained_volume_recovery_is_short_bounded_and_never_starts_science(
+    tmp_path: Path,
+) -> None:
+    private = tmp_path / "id"
+    public = private.with_suffix(".pub")
+    private.write_text("private", encoding="utf-8")
+    public.write_text("ssh-ed25519 public", encoding="utf-8")
+    args = argparse.Namespace(
+        volume_id="volume-1",
+        provider_receipt=tmp_path / "provider.json",
+    )
+    command = recover_retained_volume.recovery_controller_command(args, public)
+    rendered = " ".join(command)
+    assert "--network-volume-id volume-1" in rendered
+    assert "--max-total-usd 0.50" in rendered
+    assert "--max-provider-seconds 1800" in rendered
+    assert "--label sair-exp701-recovery-export" in rendered
+    assert "exp_701_cuda_resumable" not in rendered
+    assert "RUNPOD_API_KEY" not in rendered
+    assert orchestrate.APPROVAL not in rendered
+
+
+def test_retained_volume_requires_pod_delete_before_volume_cleanup() -> None:
+    assert recover_retained_volume.pod_deletion_confirmed(
+        {"status": "resource-destroyed", "events": [{"event": "delete-confirmed"}]}
+    )
+    assert not recover_retained_volume.pod_deletion_confirmed(
+        {"status": "controller-started", "events": [{"event": "delete-requested"}]}
+    )
 
 
 def test_remote_guest_is_detached_and_resume_restores_same_output() -> None:

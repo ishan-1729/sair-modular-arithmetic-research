@@ -1,0 +1,78 @@
+{
+  "budget": {
+    "admitted_upper_usd": "7.507950",
+    "budget_after_reserve_usd": "7.650000",
+    "budget_limited_seconds": 36681,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 36000,
+    "max_total_usd": "9.00",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "c0d99e6d0d4fa3a9d20e3b1a059fd4c289a85f316aba88e5a8123d0281668df3",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [
+    {
+      "name": "PUBLIC_KEY",
+      "value_chars": 102,
+      "value_sha256": "ca4ce820a012fe895c5c903245cc195531a26bedd8d0369bae0a9ba3dfc64990"
+    }
+  ],
+  "events": [
+    {
+      "elapsed_seconds": 0.007464343000037843,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.448764763999975,
+      "event": "network-volume-created",
+      "response_sha256": "201ab7404c7c882ed261018f323904289e0662e1ab71cad77fd8cc3fe2e764fe"
+    },
+    {
+      "elapsed_seconds": 1.4569656180000266,
+      "event": "create-requested"
+    },
+    {
+      "elapsed_seconds": 3.4010272670000177,
+      "event": "resource-created",
+      "response_sha256": "fba674e703047f04c4b658665203f040b13c237edfc285c12f4f78ffac072ff6"
+    },
+    {
+      "elapsed_seconds": 3.4094687020000265,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    }
+  ],
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EUR-IS-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "size_gb": 50
+  },
+  "network_volume_id": "07bcp2tb21",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod/offpod-sync-receipt.json",
+  "ports": [
+    "22/tcp"
+  ],
+  "provider": "runpod",
+  "resource_id": "tdexauaygl2lsk",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "controller-started",
+  "template_id": "runpod-torch-v280"
+}

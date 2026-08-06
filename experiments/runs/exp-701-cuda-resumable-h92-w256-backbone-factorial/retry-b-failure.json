@@ -1,0 +1,70 @@
+{
+  "attempt": "20260806b",
+  "diagnosis": {
+    "classification": "host-offpod-transport-configuration",
+    "evidence": "The orchestrator created a session-specific known_hosts file, but the off-Pod SCP/SSH path enabled StrictHostKeyChecking without binding UserKnownHostsFile to that file. Every sync attempt therefore ended as CalledProcessError until the guest's 900-second pre-science external-baseline gate expired.",
+    "fix": "Bind the orchestrator-owned identity and known_hosts paths consistently across host_sync.sh, offpod_sync.py, and retained-volume recovery. Require IdentitiesOnly and the exact known-hosts file for every SCP/SSH operation."
+  },
+  "failure": {
+    "guest_exit_status": 75,
+    "orchestrator": "RuntimeError: guest ended without a restore-verified off-Pod receipt",
+    "provider_status": "network-volume-destruction-unconfirmed"
+  },
+  "fresh_probe": {
+    "offpod_files": [],
+    "pod_inventory": [],
+    "probed_at_utc": "2026-08-06T02:56:46.931Z",
+    "volume_inventory": [
+      {
+        "data_center_id": "EUR-IS-1",
+        "id": "ikpyeaj2e3",
+        "name": "sair-exp701-recovery",
+        "size_gb": 50
+      }
+    ],
+    "windows_owned_wsl_matches": [],
+    "wsl_matching_processes": []
+  },
+  "provider_cleanup": {
+    "network_volume_action": "retained-until-external-restore-verification",
+    "network_volume_id": "ikpyeaj2e3",
+    "pod_delete_confirmed": true,
+    "pod_id": "umvjb8uxbbbbv0"
+  },
+  "recovery_policy": {
+    "max_provider_seconds": 1800,
+    "max_total_usd": "0.50",
+    "required_outcome_before_volume_delete": "A fresh host copy and same-root restore receipt both verify, and the recovery Pod is delete-confirmed.",
+    "science_allowed": false,
+    "volume_reuse": "recovery-export-only"
+  },
+  "retry_evidence": [
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-b.json",
+      "sha256": "aa91e4d59fe92d3f2670d8c24521448c04afad8096df19ca3f64ddd3b22550f1"
+    },
+    {
+      "path": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-b.json",
+      "sha256": "a131967d57f412bd526fbbbc6970ee252e541ea227c45e07ee665ec417ce88cd"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-b/controller.log",
+      "sha256": "ba5a8e2a1ae9d85d32b5780c8db732fc328e7a944340f1e413f4cce6e8d43d10"
+    },
+    {
+      "path": ".scratch/exp701-runpod-session-b/host-sync.log",
+      "sha256": "460db0390b540ad90d304a9078a83ef2b5698e82b97828addc9c8d047e3e88ff"
+    },
+    {
+      "path": ".scratch/exp701-launch/windows-host-b.stderr.log",
+      "sha256": "3385e4e22e468c05322accdab874127ad2e37361ffae5c9f35a8cc01ccec0032"
+    }
+  ],
+  "schema_version": "exp701-launch-attempt-receipt-v1",
+  "science": {
+    "cpu_work_reused": false,
+    "root_opened": false,
+    "status": "not-started-pre-science-gate"
+  },
+  "status": "failed-pre-science-volume-retained"
+}

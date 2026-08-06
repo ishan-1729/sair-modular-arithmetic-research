@@ -522,6 +522,7 @@ def main(argv: list[str] | None = None) -> int:
             "SAIR_EXP701_SSH_TARGET": remote,
             "SAIR_EXP701_SSH_PORT": str(port),
             "SAIR_EXP701_SSH_IDENTITY": str(args.ssh_private_key),
+            "SAIR_EXP701_KNOWN_HOSTS": str(known_hosts),
             "SAIR_EXP701_SYNC_NONCE": nonce,
             "SAIR_EXP701_OFFPOD_DESTINATION": str(args.offpod_destination),
         }
