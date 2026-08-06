@@ -1,0 +1,56 @@
+{
+  "authorization": {
+    "exact_reply": "I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10",
+    "fresh_admitted_lifecycle_upper_usd": 7.16175,
+    "fresh_max_provider_seconds": 34340,
+    "fresh_max_total_usd": 8.65
+  },
+  "billing": {
+    "balance_headroom_after_admitted_lifecycle_usd": 0.538659175013192,
+    "completed_smoke_debug_posted_baseline_usd": 0.8101331446669064,
+    "derived_current_balance_usd": 7.700409175013192,
+    "derivation": "User-provided $10 funding minus the complete posted RunPod billing total; RunPod exposes posted billing history but no documented balance field.",
+    "execution_slice_cap_headroom_usd": 0.3487923196800984,
+    "execution_slice_upper_with_fresh_admission_usd": 8.651207680319902,
+    "post_baseline_paid_attempts_usd": 1.4894576803199016,
+    "posted_total_usd": 2.299590824986808
+  },
+  "browser": {
+    "chromium_mode": "managed-regular-chromium-new-headless",
+    "chromium_version": "149.0.7827.55",
+    "contexts_closed": 5,
+    "playwright_version": "1.61.1",
+    "request_policy": "GET/HEAD/OPTIONS only; fresh non-persistent context per endpoint"
+  },
+  "catalog": {
+    "cloud": "SECURE",
+    "cuda_minimum_major": 12,
+    "data_center_id": "EUR-IS-1",
+    "data_center_gpu_availability": "LOW",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_count": 1,
+    "overall_gpu_availability": "HIGH",
+    "secure_price_usd_per_hour": 0.74,
+    "standard_network_volume_supported": true
+  },
+  "cumulative_provider_seconds_upper": 35989.722,
+  "diagnostics_clean": true,
+  "inventory": {
+    "network_volume_count": 0,
+    "network_volumes_http_status": 200,
+    "pod_count": 0,
+    "pods_http_status": 200
+  },
+  "observed_at_utc": "2026-08-06T04:50:47.309Z",
+  "raw_receipt": {
+    "path": ".scratch/exp701-launch/live-admission-e.json",
+    "sha256": "b24d2b4469a2ad6edeb0a1a1f7455742a83a2cccf92a5c75d0e3aac2605e1c76"
+  },
+  "schema_version": "exp701-runpod-launch-admission-v1",
+  "source": {
+    "archive_sha256": "6bb8244b11158e3e4333a330a6c382230ad405336768b0b6b4ba42285eedfd4f",
+    "preflight_receipt_commit": "8aef702db1a37c1315be177138a66255c9d7515e",
+    "repository_commit": "7b4ef62b92e0c4d985c139a5330f70877fdbe249"
+  },
+  "status": "passed-authorized-launch-admitted"
+}

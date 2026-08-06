@@ -98,8 +98,14 @@
     "cumulative_cost_upper_usd": 7.505811,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
-    "balance_last_observed_usd": 9.23,
-    "balance_observation_limitation": "Rounded console evidence; a fresh read-only balance and live Secure RTX4090 availability check is required immediately before create."
+    "balance_last_observed_usd": 7.700409175013192,
+    "balance_observation_limitation": "Derived from the user-provided $10 funding minus RunPod's complete posted billing total because the documented API exposes billing history but not a balance field.",
+    "posted_total_spend_usd": 2.299590824986808,
+    "completed_smoke_debug_posted_baseline_usd": 0.8101331446669064,
+    "post_baseline_paid_attempts_usd": 1.4894576803199016,
+    "execution_slice_upper_with_fresh_admission_usd": 8.651207680319902,
+    "execution_slice_cap_headroom_usd": 0.3487923196800984,
+    "balance_headroom_after_admitted_lifecycle_usd": 0.538659175013192
   },
   "verification": [
     {
