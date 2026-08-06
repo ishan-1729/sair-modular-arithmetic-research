@@ -1,15 +1,17 @@
 {
   "attempt": "fresh-full-gpu-e",
   "cleanup": {
-    "network_volume_delete_confirmed": false,
+    "network_volume_delete_confirmed": true,
     "network_volume_id": "6mau20lvec",
     "pod_delete_confirmed": true,
     "pod_id": "hnpxflmaspjagk",
     "playwright_inventory_observed_at_utc": "2026-08-06T05:09:56.589Z",
     "playwright_inventory_pods": [],
-    "playwright_inventory_volumes": [
+    "playwright_inventory_volumes_before_cleanup": [
       "6mau20lvec"
-    ]
+    ],
+    "preupload_cleanup_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/launch-e-preupload-volume-cleanup.json",
+    "preupload_cleanup_receipt_sha256": "360d235361de6e82bdbd1dcb2bd202f87dbee240d2a5a321898e9b40fb31d408"
   },
   "cost": {
     "attempt_cost_upper_usd": 0.126868,
@@ -64,5 +66,5 @@
   },
   "source_archive_sha256": "6bb8244b11158e3e4333a330a6c382230ad405336768b0b6b4ba42285eedfd4f",
   "source_commit": "7b4ef62b92e0c4d985c139a5330f70877fdbe249",
-  "status": "failed-pre-upload-pod-cleaned-volume-retained"
+  "status": "failed-pre-upload-resources-delete-confirmed"
 }

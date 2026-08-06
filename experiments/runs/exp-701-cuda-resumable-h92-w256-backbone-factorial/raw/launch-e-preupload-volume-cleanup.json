@@ -1,0 +1,41 @@
+{
+  "elapsed_seconds": 2.307138468000005,
+  "events": [
+    {
+      "attempt": 1,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 2,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "evidence": {
+    "orchestrator_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-e.json",
+    "orchestrator_receipt_sha256": "552c414be696f5a7ae1cc2a67171d0b98a0bed3839a9c811ed2dced53bcff8ec",
+    "orchestrator_source_sha256": "68afeb6f77f2b9c5ea348616b08465359a95003ae81616841ef2248e87816adb",
+    "provider_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-e.json",
+    "provider_receipt_sha256": "bb4de714a1ed195714b5ff6d86728782b62e1aa2a9abee3ac2bac324a8b753c2",
+    "runtime_inventory": ".scratch/exp701-launch/runtime-inventory-e.json",
+    "runtime_inventory_sha256": "b9cf947caed8f92cb658927f5e7fd3674f66957fba6998cb9fd10c8d2c3cb3eb"
+  },
+  "network_volume_delete_confirmed": true,
+  "observed_at_utc": "2026-08-06T05:13:24.008913+00:00",
+  "pod_delete_confirmed": true,
+  "pod_id": "hnpxflmaspjagk",
+  "preupload_proof": {
+    "guest_started": false,
+    "host_sync_log_bytes": 0,
+    "host_sync_started": false,
+    "offpod_archive_exists": false,
+    "offpod_receipt_exists": false,
+    "orchestrator_failure": "TimeoutError: RunPod SSH did not become ready within 600 seconds",
+    "reason_external_restore_not_required": "The authenticated source-upload call is ordered after wait_for_ssh; wait_for_ssh timed out, so no project or scientific bytes reached the volume.",
+    "scientific_root_opened": false,
+    "source_uploaded": false
+  },
+  "schema_version": "exp701-preupload-volume-cleanup-v1",
+  "status": "preupload-volume-delete-confirmed",
+  "volume_id": "6mau20lvec"
+}
