@@ -60,7 +60,7 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
     )
     rendered = " ".join(command)
     assert "--max-total-usd 8.27" in rendered
-    assert "--max-provider-seconds 33080" in rendered
+    assert "--max-provider-seconds 33000" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -271,6 +271,6 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
     assert result["maximum_total_usd"] == 8.27
-    assert result["maximum_provider_seconds"] == 33080
+    assert result["maximum_provider_seconds"] == 33000
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()

@@ -86,16 +86,16 @@
     "compute_usd_per_hour": 0.74,
     "storage_usd_per_hour_upper": 0.010795,
     "combined_usd_per_hour_upper": 0.750795,
-    "maximum_provider_seconds": 33080,
+    "maximum_provider_seconds": 33000,
     "maximum_total_usd": 8.27,
     "reserve_fraction": 0.15,
     "budget_after_reserve_usd": 7.0295,
-    "admitted_lifecycle_upper_usd": 6.898972,
-    "reserve_headroom_usd": 0.130528,
-    "prior_authorized_attempts_provider_seconds_upper": 2869.913159412,
-    "prior_authorized_attempts_cost_upper_usd": 0.598537,
-    "cumulative_provider_seconds_upper": 35949.913159412,
-    "cumulative_cost_upper_usd": 7.497509,
+    "admitted_lifecycle_upper_usd": 6.8822875,
+    "reserve_headroom_usd": 0.1472125,
+    "prior_authorized_attempts_provider_seconds_upper": 2933.201947307,
+    "prior_authorized_attempts_cost_upper_usd": 0.6048366497822448,
+    "cumulative_provider_seconds_upper": 35933.201947307,
+    "cumulative_cost_upper_usd": 7.487124149782245,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
     "balance_last_observed_usd": 7.449670855072327,
@@ -103,8 +103,8 @@
     "posted_total_spend_usd": 2.550329144927673,
     "completed_smoke_debug_posted_baseline_usd": 0.8101331446669064,
     "post_baseline_paid_attempts_usd": 1.8678040002607666,
-    "execution_slice_upper_with_fresh_admission_usd": 8.7667758335941,
-    "execution_slice_cap_headroom_usd": 0.2332241664059,
+    "execution_slice_upper_with_fresh_admission_usd": 8.750091500260767,
+    "execution_slice_cap_headroom_usd": 0.24990849973923268,
     "balance_headroom_after_admitted_lifecycle_usd": 0.423090855072327
   },
   "verification": [
@@ -209,7 +209,7 @@
     "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
     "Retry B failed at the pre-science external-copy gate; retained-volume recovery C later restore-verified its archive and delete-confirmed both the recovery Pod and retained volume without opening science.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
-    "After launch F's pre-upload timeout, the next fresh launch is capped at 33,080 provider seconds and $8.27 so all authorized attempts remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
+    "After launch G's CRLF-tainted S3 authorization header failed before Pod creation and deletion-confirmed its temporary volume, the replacement is capped at 33,000 provider seconds and $8.27 so all authorized attempts, including the live S3 drills, remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
     "The RunPod API and S3 credentials remain host-only and are not copied into the source archive, guest environment, logs, or durable receipts."
   ]
 }

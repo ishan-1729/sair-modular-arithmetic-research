@@ -40,7 +40,7 @@ APPROVAL = (
 # Attempts A-F consumed conservative upper bounds of 2,869.913 provider seconds
 # and $0.598537. This ceiling rounds the remaining provider allowance down.
 FRESH_MAX_TOTAL_USD = "8.27"
-FRESH_MAX_PROVIDER_SECONDS = 33_080
+FRESH_MAX_PROVIDER_SECONDS = 33_000
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"

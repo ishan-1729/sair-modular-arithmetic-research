@@ -456,7 +456,7 @@
       ],
       "responsibility": "Keep provider and S3 credentials, lifecycle cleanup, pre-Pod source upload and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "ef0dd5bf3f6008813d28919b99c63260c53de018000ea7c6e2344635c9818a94",
+      "source_sha256": "935ef27a396f705e866278b61a722a50731534120f9eda90a046ea04fff5b0c3",
       "torch_referenced": false
     },
     {
@@ -28905,7 +28905,7 @@
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "f180d13876e52aab125cfa2929db38bef4c2778de762069eac7fa058f94325dd"
+    "tree_sha256": "1e3b29fba0eb5b5bd1b503307ff38d67334e53c8d206e963942b144a2844e20f"
   },
   "summary": {
     "classifications": {
