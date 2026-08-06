@@ -74,8 +74,8 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
         source_sha256="a" * 64,
     )
     rendered = " ".join(command)
-    assert "--max-total-usd 8.27" in rendered
-    assert "--max-provider-seconds 32400" in rendered
+    assert "--max-total-usd 8.17" in rendered
+    assert "--max-provider-seconds 31800" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -94,7 +94,7 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "nohup" not in fresh and "guest.pid" not in fresh
     assert "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh" in fresh
     assert "SAIR_EXP701_SYNC_NONCE=" + "c" * 48 in fresh
-    assert "SAIR_EXP701_SLICE_SECONDS=30600" in fresh
+    assert "SAIR_EXP701_SLICE_SECONDS=30000" in fresh
     assert "guest-exit" in fresh
     resume = orchestrate.direct_start_command(
         "a" * 64,
@@ -338,7 +338,7 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     result = json.loads(capsys.readouterr().out)
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
-    assert result["maximum_total_usd"] == 8.27
-    assert result["maximum_provider_seconds"] == 32400
+    assert result["maximum_total_usd"] == 8.17
+    assert result["maximum_provider_seconds"] == 31800
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()

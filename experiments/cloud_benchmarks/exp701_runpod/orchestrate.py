@@ -37,11 +37,13 @@ APPROVAL = (
     "NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED "
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
-# Attempts A-F consumed conservative upper bounds of 2,869.913 provider seconds
-# and $0.598537. This ceiling rounds the remaining provider allowance down.
-FRESH_MAX_TOTAL_USD = "8.27"
-FRESH_MAX_PROVIDER_SECONDS = 32_400
-GUEST_SLICE_SECONDS = 30_600
+# Completed attempts through I consumed conservative upper bounds of
+# 3,969.264260062 provider seconds and $0.8209116497822448. Attempt J remains
+# inside the original cumulative 36,000-second/$9 authorization while retaining
+# provider cleanup and off-Pod restore headroom.
+FRESH_MAX_TOTAL_USD = "8.17"
+FRESH_MAX_PROVIDER_SECONDS = 31_800
+GUEST_SLICE_SECONDS = 30_000
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
