@@ -23,18 +23,18 @@
     "cpu_partial_policy": "EXP700 artifacts remain untouched historical evidence and never seed, resume, or substitute any EXP701 GPU work."
   },
   "source_archive": {
-    "path": ".scratch/exp701-launch/source.tar.gz",
-    "sha256": "7a29177b8388f2bcbbe2cc0b429cb07cafc4f69fbc0966eb627fa290ee5ae5df",
-    "bytes": 2381045,
-    "repository_commit": "bd1389311afd258a326d9e63f8ade8d24f76b9cf",
+    "path": ".scratch/exp701-launch/source-c.tar.gz",
+    "sha256": "18a396fdda188492cef6302865006f164010eb2a3adf5cc35909007e0c5437be",
+    "bytes": 2479796,
+    "repository_commit": "32c9c6aec5d820a515e057546c6d4d8c263945be",
     "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
     "payload_policy": "explicit-runtime-allowlist-v1",
-    "inventoried_files": 77,
-    "inventoried_payload_bytes": 3143877,
+    "inventoried_files": 78,
+    "inventoried_payload_bytes": 3357527,
     "forbidden_prefixes_absent": true,
     "unsafe_archive_members_absent": true,
-    "archive_verification_path": ".scratch/exp701-launch/archive-verification.json",
-    "archive_verification_sha256": "38f6d1d8d3de44d8708dcef36a16c2da6f1da568bf3fa84434308f9f6b678c72"
+    "archive_verification_path": ".scratch/exp701-launch/archive-verification-c.json",
+    "archive_verification_sha256": "b81a71c8e79ca7cebf25998b779619cd9f61636a66912b380f55238ccc0e961a"
   },
   "accepted_hardware_gate": {
     "run": "cuda-hardware-acceptance-runpod-20260805g",
@@ -74,28 +74,28 @@
     "provider_poll_seconds_startup": 30,
     "provider_poll_seconds_running": 300,
     "cleanup": "controller deletion-confirms Pod, verifies restored off-Pod receipt, then deletion-confirms the managed network volume",
-    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan-s3.json",
-    "dry_plan_sha256": "a1496813ac69cbeceb07adfce4f8651cc76e8ef05a834f0afb9080c581665fc4",
+    "dry_plan_path": ".scratch/exp701-launch/orchestration-plan-s3c.json",
+    "dry_plan_sha256": "3f7b2d1ca415dba38c94f1a271f7d20d094018ff330fd32195785c9e5e90306b",
     "dry_plan_data_center": "EU-RO-1",
     "live_data_center_binding_required_immediately_before_create": true,
     "public_ingress_ports": 0
   },
   "provider_budget": {
-    "provider_plan_path": ".scratch/exp701-launch/provider-plan-s3.json",
-    "provider_plan_sha256": "1a5a8a6d7b0aa46b8425094c472e2485b1651f9e16a7a34a75f213046ae370c9",
+    "provider_plan_path": ".scratch/exp701-launch/provider-plan-s3c.json",
+    "provider_plan_sha256": "37e476f482a043ac678252fe134345aed6ce06852861c149e4466a75025c2948",
     "compute_usd_per_hour": 0.74,
     "storage_usd_per_hour_upper": 0.010795,
     "combined_usd_per_hour_upper": 0.750795,
-    "maximum_provider_seconds": 33000,
+    "maximum_provider_seconds": 32400,
     "maximum_total_usd": 8.27,
     "reserve_fraction": 0.15,
     "budget_after_reserve_usd": 7.0295,
-    "admitted_lifecycle_upper_usd": 6.8822875,
-    "reserve_headroom_usd": 0.1472125,
-    "prior_authorized_attempts_provider_seconds_upper": 2933.201947307,
-    "prior_authorized_attempts_cost_upper_usd": 0.6048366497822448,
-    "cumulative_provider_seconds_upper": 35933.201947307,
-    "cumulative_cost_upper_usd": 7.487124149782245,
+    "admitted_lifecycle_upper_usd": 6.757155,
+    "reserve_headroom_usd": 0.272345,
+    "prior_authorized_attempts_provider_seconds_upper": 3580.363080273,
+    "prior_authorized_attempts_cost_upper_usd": 0.7398046497822448,
+    "cumulative_provider_seconds_upper": 35980.363080273,
+    "cumulative_cost_upper_usd": 7.496959649782244,
     "user_funding_usd": 10.0,
     "completed_smoke_series_cumulative_upper_usd": 0.79329613,
     "balance_last_observed_usd": 7.449670855072327,
@@ -103,8 +103,10 @@
     "posted_total_spend_usd": 2.550329144927673,
     "completed_smoke_debug_posted_baseline_usd": 0.8101331446669064,
     "post_baseline_paid_attempts_usd": 1.8678040002607666,
-    "execution_slice_upper_with_fresh_admission_usd": 8.750091500260767,
-    "execution_slice_cap_headroom_usd": 0.24990849973923268,
+    "execution_slice_upper_with_fresh_admission_usd": 8.759927000260767,
+    "execution_slice_cap_headroom_usd": 0.24007299973923324,
+    "balance_console_observed_usd": 8.51,
+    "balance_console_observed_at_utc": "2026-08-06T09:49:17Z",
     "balance_headroom_after_admitted_lifecycle_usd": 0.423090855072327
   },
   "verification": [
@@ -178,6 +180,31 @@
       "gpu_pod_created": false
     },
     {
+      "command": "attempt H authenticated RunPod container/system-log diagnosis plus controller-owned cleanup",
+      "status": "failed-before-science-and-cleaned",
+      "failure_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/runpod-container-log-s3b.json",
+      "provider_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle-s3b.json",
+      "orchestrator_receipt": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/orchestrator-lifecycle-s3b.json",
+      "root_cause": "source payload omitted environments/cuda/requirements-cu121.txt required by the all-profile offline verifier",
+      "scientific_roots_opened": 0,
+      "provider_billed_lifetime_seconds_upper": 647.1611329660001,
+      "cost_upper_usd": 0.134968,
+      "pod_delete_confirmed": true,
+      "network_volume_delete_confirmed": true
+    },
+    {
+      "command": "corrected extracted source payload CUDA dependency-closure verification, cu124 bootstrap dry-run, focused and hardware-gated pytest",
+      "status": "pass",
+      "archive_sha256": "18a396fdda188492cef6302865006f164010eb2a3adf5cc35909007e0c5437be",
+      "cuda_locks_verified": [
+        "cu121",
+        "cu124"
+      ],
+      "passed": 14,
+      "skipped_hardware_only": 4,
+      "pytest_reported_seconds": 66.17
+    },
+    {
       "command": "repository-local Playwright managed Chromium launch-boundary RunPod inventory, catalog and billing check",
       "status": "pass",
       "observed_at_utc": "2026-08-06T06:41:16.639Z",
@@ -209,7 +236,7 @@
     "EXP701 science has not run; this receipt proves corrected launch-package readiness, not a scientific result.",
     "Retry B failed at the pre-science external-copy gate; retained-volume recovery C later restore-verified its archive and delete-confirmed both the recovery Pod and retained volume without opening science.",
     "RTX4090 end-to-end EXP701 throughput remains unmeasured; the first bounded slice preserves full fidelity and checkpoints rather than reducing denominators.",
-    "After launch G's CRLF-tainted S3 authorization header failed before Pod creation and deletion-confirmed its temporary volume, the replacement is capped at 33,000 provider seconds and $8.27 so all authorized attempts, including the live S3 drills, remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
+    "After launch H failed before science because the explicit payload omitted a verifier-required CUDA lock, the corrected replacement is capped at 32,400 provider seconds and $8.27. Including launch H's deletion-confirmed 647.161-second upper lifetime, all authorized attempts remain below the user's cumulative 10-hour/$9 ceilings. If science checkpoints at status 75, continuing beyond those cumulative ceilings requires fresh authorization.",
     "The RunPod API and S3 credentials remain host-only and are not copied into the source archive, guest environment, logs, or durable receipts."
   ]
 }
