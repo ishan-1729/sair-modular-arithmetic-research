@@ -1,0 +1,47 @@
+{
+  "classification": "generated-cuda-inventory-stale-after-source-line-shift",
+  "completed_at_utc": "2026-08-06T04:16:18Z",
+  "evidence": [
+    {
+      "path": ".scratch/exp701-launch/full-oracle-1ddca7b.validator.log",
+      "sha256": "52711c4ac6939e48b279a58d4f6cf6b4509277b8fb0351cc36e0823edaf34ca5"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-1ddca7b.pytest.log",
+      "sha256": "9cf625467456d026720005030152f8fe18644e3af20a8c016528a9931182a749"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-1ddca7b.pytest.time",
+      "sha256": "6ebf2e7a43c50eb34bc774a56d43bfa2fc4a75af56ee38350ad5c378b71eb1f6"
+    },
+    {
+      "path": ".scratch/exp701-launch/full-oracle-1ddca7b.pytest.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    }
+  ],
+  "failure": {
+    "expected_manifest_hotspot_line": 131,
+    "generated_manifest_hotspot_line": 137,
+    "test": "tests/test_cuda_portability_inventory.py::test_generated_inventory_is_fresh_and_closed"
+  },
+  "next_action": "Regenerate the allowed CUDA portability inventory from the corrected source, run its focused freshness test, then rerun the clean full oracle before any paid launch.",
+  "observed_resources": {
+    "maximum_rss_kib": 1704404,
+    "process_cpu_seconds": 898.16,
+    "pytest_wall_seconds": 506.32,
+    "system_cpu_seconds": 22.29,
+    "user_cpu_seconds": 875.87
+  },
+  "oracle": {
+    "hardware_only_skipped": 4,
+    "passed": 1144,
+    "project_validator_exit_status": 0,
+    "pytest_exit_status": 1
+  },
+  "paid_provider_mutation_performed": false,
+  "schema_version": "exp701-clean-oracle-failure-v1",
+  "source_archive_sha256": "6c00955706395b812695a4a1dce172443b659449b6e9523e422b076aba6a1879",
+  "source_commit": "1ddca7b0fe836366ff0250f314982202451357fd",
+  "started_at_utc": "2026-08-06T04:07:47Z",
+  "status": "failed-pre-launch-local-oracle"
+}

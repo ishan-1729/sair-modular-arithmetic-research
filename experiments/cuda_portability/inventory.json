@@ -439,7 +439,7 @@
       "hotspots": [
         {
           "kind": "checkpoint",
-          "line": 131,
+          "line": 137,
           "operation": "json.load",
           "symbol": "api_get"
         }
@@ -454,7 +454,7 @@
       ],
       "responsibility": "Keep provider credentials, SSH transport, lifecycle cleanup and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "5d02a071edc4a2a867a8b0b1b709c8c3513e0d4ad8ef84cbc7019aad0ad029e0",
+      "source_sha256": "68afeb6f77f2b9c5ea348616b08465359a95003ae81616841ef2248e87816adb",
       "torch_referenced": false
     },
     {
@@ -28902,7 +28902,7 @@
     "registry": "experiments/registry.yaml",
     "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
     "root_count": 166,
-    "tree_sha256": "902e6f44b0a702c1ff22b0249c7aa92f078b733f692778f9cd4a8f87cf98e23c"
+    "tree_sha256": "f7ce31391a5ed2a5ce114bb392c39e11d30c9783976818c0e3e36672036d7b3d"
   },
   "summary": {
     "classifications": {
