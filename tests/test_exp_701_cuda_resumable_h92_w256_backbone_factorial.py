@@ -153,6 +153,29 @@ def test_guest_package_is_shell_valid_and_never_imports_cpu_partial_work() -> No
     assert "/workspace/exp701-durable" in source
     assert "wait_for_current_ack" in source and "ack_valid no" in source
 
+    builder_source = builder.read_text()
+    assert 'git -C "$repository_root" archive HEAD |' not in builder_source
+    assert "payload_paths=(" in builder_source
+    assert 'archive --format=tar HEAD "${payload_paths[@]}"' in builder_source
+    for forbidden in (
+        '"data/"',
+        '"evals/"',
+        '"experiments/runs/"',
+        '"knowledge/"',
+        '"research/"',
+        '"sources/github/modular-arithmetic-challenge/public_benchmark/"',
+    ):
+        assert forbidden in builder_source
+    for required in (
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "submission/model.py",
+        "submission/weights.safetensors",
+        "tests/test_cuda_hardware_acceptance.py",
+    ):
+        assert required in builder_source
+    assert 'archive --format=tar HEAD src' in builder_source
+    assert "sair-exp701-payload-inventory-v1" in builder_source
+
 
 def test_external_copy_survives_pod_delete_and_resumes_same_root_exactly(
     tmp_path: Path,

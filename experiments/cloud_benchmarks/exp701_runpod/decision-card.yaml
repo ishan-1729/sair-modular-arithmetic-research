@@ -105,7 +105,11 @@ persistence_preflight:
     create_volume_api: https://docs.runpod.io/api-reference/network-volumes/POST/networkvolumes
     delete_volume_api: https://docs.runpod.io/api-reference/network-volumes/DELETE/networkvolumes/networkVolumeId
 launch_package:
+  payload_policy: explicit-runtime-allowlist-v1
   source_builder: experiments/cloud_benchmarks/exp701_runpod/prepare_source.sh
+  embedded_payload_inventory: .sair-payload-inventory.json
+  forbidden_payload_prefixes: [data/, docs/, evals/, experiments/runs/, knowledge/, research/, sources/github/modular-arithmetic-challenge/public_benchmark/]
+  required_submission_runtime: frozen model.py, manifest.json and trained weights only; needed for lower-tier parity and candidate-runtime measurement, and contains no benchmark answers
   guest_supervisor: experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
   host_sync: experiments/cloud_benchmarks/exp701_runpod/host_sync.sh
   recovery_transport: experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py
