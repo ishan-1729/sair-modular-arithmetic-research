@@ -22,19 +22,11 @@ cd "$repository"
 
 export SAIR_SOURCE_COMMIT="$(python -c 'import json; print(json.load(open(".sair-source.json"))["repository_commit"])')"
 export SAIR_CHALLENGE_COMMIT="$(python -c 'import json; print(json.load(open(".sair-source.json"))["challenge_commit"])')"
+export SAIR_SOURCE_DIRTY=0
 test "$SAIR_CHALLENGE_COMMIT" = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
 test "$(sha256sum .scratch/exp701-input/exp609-weights.safetensors | cut -d' ' -f1)" = "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
 
-environments/cuda/bootstrap.sh --profile cu124 --venv "$workspace/venv-cu124" --receipt "$output/environment.json"
-python="$workspace/venv-cu124/bin/python"
-export CUBLAS_WORKSPACE_CONFIG=:4096:8
-export SAIR_CUDA_PROFILE=cu124
-
-environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv-cu124" --output "$output/hardware-acceptance"
-"$python" -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py \
-  --junitxml="$output/focused-junit.xml"
-"$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
-  --mode smoke --device cuda --output "$output/pre-root-smoke"
+python=python3
 
 export_once() {
   mkdir -p "$durable_directory"
@@ -83,6 +75,29 @@ wait_for_current_ack() {
   done
 }
 
+# Establish a restore-verified external baseline before environment bootstrap.
+# If bootstrap fails, the controller can still delete both paid resources without
+# risking the loss of any scientific root.
+mkdir -p "$output" "$durable_directory"
+export_once
+if ! wait_for_current_ack; then
+  printf '{"status":"offpod-initial-sync-failed","resume_required":true}\n' > \
+    "$output/guest-terminal.json"
+  export_once
+  exit 75
+fi
+
+environments/cuda/bootstrap.sh --profile cu124 --venv "$workspace/venv-cu124" --receipt "$output/environment.json"
+python="$workspace/venv-cu124/bin/python"
+export CUBLAS_WORKSPACE_CONFIG=:4096:8
+export SAIR_CUDA_PROFILE=cu124
+
+environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv-cu124" --output "$output/hardware-acceptance"
+"$python" -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py \
+  --junitxml="$output/focused-junit.xml"
+"$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
+  --mode smoke --device cuda --output "$output/pre-root-smoke"
+
 resume_arg() {
   local mode="$1" root="$2"
   if test -f "$output/$mode/root-$root/root-opened.json" && \
@@ -130,7 +145,7 @@ science() {
 
 export_once
 if ! wait_for_current_ack; then
-  printf '{"status":"offpod-initial-sync-failed","resume_required":true}\n' > \
+  printf '{"status":"offpod-pre-science-sync-failed","resume_required":true}\n' > \
     "$output/guest-terminal.json"
   export_once
   exit 75

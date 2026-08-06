@@ -15,6 +15,7 @@ storage:
   delete_network_volume_only_after_offpod_restore_verification: true
 lifecycle:
   poll_seconds: 30
+  running_poll_seconds: 300
   cleanup_headroom_seconds: 900
   request_timeout_seconds: 30
   destroy_timeout_seconds: 180

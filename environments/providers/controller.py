@@ -556,7 +556,13 @@ def execute(
             if name in set(provider_config["terminal_statuses"]):
                 terminal_at = monotonic()
                 break
-            sleep(float(lifecycle["poll_seconds"]))
+            sleep(
+                float(
+                    lifecycle.get("running_poll_seconds", lifecycle["poll_seconds"])
+                    if running_at is not None
+                    else lifecycle["poll_seconds"]
+                )
+            )
         receipt.value["guest_terminal_status"] = name
     except Exception as error_value:
         failure = error_value

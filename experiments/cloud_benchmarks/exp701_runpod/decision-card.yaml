@@ -111,6 +111,7 @@ launch_package:
   forbidden_payload_prefixes: [data/, docs/, evals/, experiments/runs/, knowledge/, research/, sources/github/modular-arithmetic-challenge/public_benchmark/]
   required_submission_runtime: frozen model.py, manifest.json and trained weights only; needed for lower-tier parity and candidate-runtime measurement, and contains no benchmark answers
   guest_supervisor: experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
+  host_orchestrator: experiments/cloud_benchmarks/exp701_runpod/orchestrate.py
   host_sync: experiments/cloud_benchmarks/exp701_runpod/host_sync.sh
   recovery_transport: experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py
   provider_config: configs/exp_701_runpod_control.yaml
@@ -125,6 +126,7 @@ launch_package:
   durable_provider_receipt: experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/provider-lifecycle.json
   durable_run_record: experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/run.json
   durable_metrics: evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/metrics.json
+  lifecycle: controller creates one fresh network volume and Pod; host uploads the authenticated source over ephemeral-key SSH, starts the guest detached, maintains restore-verified off-Pod sync, blocks on one completion channel, then controller deletion-confirms both paid resources
 required_authorization:
   environment: SAIR_CLOUD_LAUNCH_APPROVED
   exact_value: I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10

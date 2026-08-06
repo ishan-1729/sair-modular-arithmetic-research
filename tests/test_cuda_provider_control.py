@@ -380,6 +380,12 @@ def test_runpod_can_preserve_official_image_startup() -> None:
     assert "allowedCudaVersions" not in provider.create_payload(any_cuda)
 
 
+def test_exp701_running_provider_poll_is_coarser_than_startup_poll() -> None:
+    selected = yaml.safe_load(EXP701_CONFIG_PATH.read_text())["lifecycle"]
+    assert selected["poll_seconds"] == 30
+    assert selected["running_poll_seconds"] == 300
+
+
 def test_environment_file_is_chunked_below_linux_argument_limit(tmp_path, capsys) -> None:
     payload_path = tmp_path / "large.bin"
     payload_path.write_bytes(b"x" * 100_000)
