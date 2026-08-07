@@ -61,6 +61,9 @@ Read these files before acting:
   records the terminal attempt-L checkpoint and cleanup.
 - [`runpod-billing-20260805-20260807.json`](../../experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/runpod-billing-20260805-20260807.json)
   separates provider-recorded charges from controller upper bounds.
+- [`resume-admission-audit-20260807.json`](../../experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/raw/resume-admission-audit-20260807.json)
+  proves why the original cumulative ceiling cannot safely admit another paid
+  science slice.
 
 `state.yaml` is GoalBuddy board truth. The files above are execution evidence;
 chat summaries and heartbeats are not authority.
@@ -576,6 +579,9 @@ This section is time-specific evidence, not a reusable default:
 - provider resources: zero Pods, zero network volumes;
 - original cumulative authorization: exhausted for useful science even though a
   small formal headroom remains;
+- exact admission arithmetic: `1,207.751857831223` provider seconds remain,
+  while the proven controller reserve is `1,200` seconds, leaving only
+  `7.751857831223` seconds of possible guest time;
 - new paid launch: forbidden until a fresh explicit authorization expands both
   dollar and provider-time ceilings.
 

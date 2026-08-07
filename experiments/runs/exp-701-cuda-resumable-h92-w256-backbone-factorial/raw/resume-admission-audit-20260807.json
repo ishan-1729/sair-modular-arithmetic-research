@@ -1,0 +1,88 @@
+{
+  "schema_version": "exp701-resume-admission-audit-v1",
+  "status": "not-admitted-under-existing-cumulative-ceiling",
+  "observed_at_utc": "2026-08-06T23:50:42Z",
+  "repository": {
+    "branch": "codex/exp701-cuda-resumable-h92-w256-backbone",
+    "head": "4fab7a18f889ccbcfe55b71fef4e85d194226c6f"
+  },
+  "provider_state": {
+    "provider": "RunPod Secure Cloud",
+    "inventory_endpoint_observation": {
+      "pod_count": 0,
+      "network_volume_count": 0,
+      "mutation_performed": false
+    },
+    "billing_window_usd": {
+      "pods": 7.365550236834679,
+      "network_volumes": 0.05833333544433117,
+      "total": 7.42388357227901,
+      "changed_from_runpod_billing_20260805_20260807_receipt": false
+    },
+    "exact_account_balance_available_from_rest_api": false
+  },
+  "recovery_state": {
+    "archive": ".scratch/exp701-offpod-s3h-final-b/sair-exp701-checkpoint-export.tar.gz",
+    "archive_bytes": 14041586,
+    "archive_sha256": "0a4ea76bfb3a9f6933008badf187206eff58c11c4ad111e5ddc2121861bc0370",
+    "fresh_restore_verification": {
+      "status": "verified",
+      "files": 74,
+      "bytes": 19589958,
+      "completed_phases": 10,
+      "snapshots": 5,
+      "active_arm": "teacher_restarts",
+      "active_update": 3000,
+      "active_snapshot_sha256": "e5e5337382024ff5ed1cf53765b3ac99aafbed8698832b807e7caccc4098ba15"
+    }
+  },
+  "authorization_admission": {
+    "cumulative_upper_provider_seconds": 34792.24814216878,
+    "authorized_provider_seconds": 36000,
+    "remaining_provider_seconds": 1207.751857831223,
+    "cumulative_upper_usd": 7.247373532487947,
+    "authorized_usd": 9.0,
+    "remaining_usd": 1.752626467512053,
+    "proven_controller_reserve_seconds": 1200,
+    "maximum_guest_slice_seconds_after_reserve": 7.751857831223,
+    "admitted": false,
+    "reason": "The unchanged controller contract reserves 1,200 seconds for allocation, setup, terminal export, acknowledgement, deletion retries, and absence confirmation. Only 7.751857831223 seconds would remain for the guest, so a paid resume cannot produce a scientifically useful authenticated checkpoint inside the original cumulative ceiling."
+  },
+  "science_projection": {
+    "formal_training_updates_completed": 7800,
+    "formal_training_updates_total": 19200,
+    "formal_training_updates_remaining": 11400,
+    "completed_teacher_cosine_training": {
+      "updates": 4800,
+      "measured_wall_seconds": 8381.821873487905,
+      "measured_seconds_per_update": 1.74621289030998
+    },
+    "remaining_training_wall_seconds_at_observed_completed_arm_rate": 19906.826949533774,
+    "remaining_training_hours_at_observed_completed_arm_rate": 5.52967415264827,
+    "excluded_from_projection": [
+      "remaining formal evaluations",
+      "confirmation roots if promoted",
+      "independent roots if promoted",
+      "new-Pod bootstrap and CUDA acceptance",
+      "off-Pod publication and provider cleanup"
+    ],
+    "classification": "empirical projection, not a lower-bound guarantee"
+  },
+  "decision": {
+    "paid_launch_performed": false,
+    "duplicate_resource_created": false,
+    "next_action": "Preserve the exact restore-verified archive. Do not launch under the original ceiling. Completion requires a fresh explicit authorization that expands both cumulative provider time and dollars; any future admission must account for formal evaluations and the conditional confirmation/independent route."
+  },
+  "evidence": [
+    "attempt-l-slice-recovery-and-cleanup.json",
+    "runpod-billing-20260805-20260807.json",
+    ".scratch/exp701-offpod-s3h-final-b/offpod-sync-receipt.json",
+    "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py",
+    "experiments/cloud_benchmarks/exp701_runpod/decision-card.yaml"
+  ],
+  "limitations": [
+    "Provider inventory and billing were read-only observations; the REST API does not return the exact account balance.",
+    "The empirical training projection assumes the remaining arms have the same average wall time per update as the completed teacher_cosine arm and deliberately excludes evaluation and conditional-root cost.",
+    "No paid provider resource was created, attached, resumed, or modified during this audit."
+  ]
+}
