@@ -1,10 +1,10 @@
 {
   "schema_version": "exp701-resume-admission-audit-v1",
   "status": "not-admitted-under-existing-cumulative-ceiling",
-  "observed_at_utc": "2026-08-06T23:50:42Z",
+  "observed_at_utc": "2026-08-07T00:06:34Z",
   "repository": {
     "branch": "codex/exp701-cuda-resumable-h92-w256-backbone",
-    "head": "4fab7a18f889ccbcfe55b71fef4e85d194226c6f"
+    "head": "a20f0969f7d3609183fbdfa7dc49cd501bfb444e"
   },
   "provider_state": {
     "provider": "RunPod Secure Cloud",
@@ -14,11 +14,14 @@
       "mutation_performed": false
     },
     "billing_window_usd": {
-      "pods": 7.365550236834679,
-      "network_volumes": 0.05833333544433117,
-      "total": 7.42388357227901,
-      "changed_from_runpod_billing_20260805_20260807_receipt": false
+      "pods": 7.966592188400682,
+      "network_volumes": 0.06319444673135877,
+      "total": 8.02978663513204,
+      "changed_from_initial_runpod_billing_observation": true,
+      "late_posting_delta_usd": 0.6059030628530306
     },
+    "all_pod_time_billed_ms": 38426887,
+    "billing_scope_note": "The billing window includes Pods from distinct earlier authorization tranches. Admission remains governed by the attempt-scoped controller ledger below, not by treating every window row as part of the later $9/10-hour tranche.",
     "exact_account_balance_available_from_rest_api": false
   },
   "recovery_state": {
@@ -82,6 +85,7 @@
   ],
   "limitations": [
     "Provider inventory and billing were read-only observations; the REST API does not return the exact account balance.",
+    "The corrected billing observation includes a final hourly bucket that posted after the earlier receipt; provider billing must be re-queried after posting latency before calling a cost total final.",
     "The empirical training projection assumes the remaining arms have the same average wall time per update as the completed teacher_cosine arm and deliberately excludes evaluation and conditional-root cost.",
     "No paid provider resource was created, attached, resumed, or modified during this audit."
   ]

@@ -1384,7 +1384,7 @@ tasks:
           evidence: "Version-2 board valid with no errors or warnings before terminal transition."
         - cmd: "git diff --check"
           status: pass
-      summary: "Created a self-contained RunPod EXP701 operations runbook covering the frozen scientific contract, host/credential setup, CRLF and export pitfalls, three cost ledgers, provider billing, measured performance, prelaunch admission, source packaging, one-owner launch, off-Pod publication, event-driven monitoring, terminal cleanup, controller-crash recovery, attempt J/K/L failure lessons, current resume boundary, and copyable handoff/checklists. Added provider-recorded billing evidence: $7.42388357227901 total usage in the queried window and an estimated $2.57611642772099 remaining from an exact $10 starting balance."
+      summary: "Created a self-contained RunPod EXP701 operations runbook covering the frozen scientific contract, host/credential setup, CRLF and export pitfalls, three cost ledgers, provider billing, measured performance, prelaunch admission, source packaging, one-owner launch, off-Pod publication, event-driven monitoring, terminal cleanup, controller-crash recovery, attempt J/K/L failure lessons, current resume boundary, and copyable handoff/checklists. Corrected provider billing after the final hourly bucket posted: $8.02978663513204 total usage in the queried window and an estimated $1.9702133648679592 remaining from an exact $10 starting balance; neither estimate substitutes for the exact account balance or the attempt-scoped authorization ledger."
       harness: codex
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."

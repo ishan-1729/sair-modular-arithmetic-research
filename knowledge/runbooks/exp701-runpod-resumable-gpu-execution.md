@@ -181,20 +181,31 @@ For the 2026-08-05 through 2026-08-07 window, RunPod reported:
 
 | Item | Provider-recorded USD |
 |---|---:|
-| All Pods | 7.3655502368 |
-| All network volumes | 0.0583333354 |
-| Total | 7.4238835723 |
-| Attempt-L Pod `vl7erkqk6z29ev` | 5.3146533056 |
+| All Pods | 7.9665921884 |
+| All network volumes | 0.0631944467 |
+| Total | 8.0297866351 |
+| Attempt-L Pod `vl7erkqk6z29ev` | 5.9156952571 |
 | Other Pods | 2.0508969313 |
 
 If the account began at exactly `$10.00` and had no unrelated usage or
-adjustments, the estimated balance is `$2.5761164277`. This is not an exact
+adjustments, the estimated balance is `$1.9702133649`. This is not an exact
 `clientBalance` reading.
 
-Attempt L was billed for `25,612.953` Pod seconds. Comparing this with the Pod
-creation-to-terminal-export interval attributes approximately `6,670.943`
-seconds and `$1.3842` of Pod cost to the period after the final science export.
-RunPod did not itemize that split; it is a calculation from provider billing.
+The first billing query was incomplete: RunPod posted another `$0.6010419516`
+Pod bucket and `$0.0048611113` volume bucket for 22:00 UTC later. Re-query after
+posting latency and compare the latest hourly bucket before calling any total
+final.
+
+Attempt L was ultimately billed for `28,511.603` Pod seconds. Comparing this
+with Pod creation through the latest rescued archive's internal 20:23:14 UTC
+terminal-export proxy attributes approximately `8,684.593` seconds and
+`$1.8019` of Pod cost to the period after the final science export. RunPod did
+not itemize that split; it is a calculation from provider billing.
+
+The all-Pod billing window spans distinct authorization tranches. Never compare
+its `38,426.887` seconds directly with the later `$9`/10-hour tranche. Admission
+uses attempt-scoped controller receipts; provider billing is the invoice-side
+cross-check.
 
 ## Performance reality
 

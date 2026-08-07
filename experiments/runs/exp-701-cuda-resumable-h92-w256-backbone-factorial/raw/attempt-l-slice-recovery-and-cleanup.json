@@ -100,14 +100,15 @@
   },
   "provider_billing_observation": {
     "receipt": "runpod-billing-20260805-20260807.json",
-    "window_total_usd": 7.42388357227901,
-    "attempt_l_pod_amount_usd": 5.314653305569664,
-    "attempt_l_pod_time_billed_ms": 25612953,
-    "estimated_credit_remaining_from_ten_usd": 2.57611642772099,
-    "post_terminal_pod_cost_estimate_usd": 1.384211702035
+    "window_total_usd": 8.02978663513204,
+    "attempt_l_pod_amount_usd": 5.915695257135667,
+    "attempt_l_pod_time_billed_ms": 28511603,
+    "estimated_credit_remaining_from_ten_usd": 1.9702133648679592,
+    "post_terminal_pod_cost_estimate_usd": 1.801912211679351,
+    "correction": "The final 22:00 hourly Pod and network-volume buckets posted after the first billing observation; the linked receipt contains both the superseded partial totals and the corrected provider totals."
   },
   "limitations": [
-    "Provider billing was queried after cleanup; the separate runpod-billing-20260805-20260807.json receipt distinguishes provider-recorded charges from controller upper bounds and calculated attribution.",
+    "Provider billing was re-queried after the final hourly buckets posted; the separate runpod-billing-20260805-20260807.json receipt distinguishes provider-recorded charges from controller upper bounds, late-posting corrections, and calculated attribution.",
     "The original controller did not reach its finally-path, so provider-lifecycle-s3h.json remains a truthful non-terminal controller receipt and no orchestrator-lifecycle-s3h.json exists.",
     "The rescued archive is restore-verified outside RunPod but remains a local recovery artifact rather than a Git-tracked model checkpoint.",
     "Only 1207.751857831223 provider seconds remain under the original cumulative ceiling, which is insufficient for a scientifically useful full-fidelity resume slice."
