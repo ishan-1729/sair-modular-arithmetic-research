@@ -1,0 +1,95 @@
+{
+  "schema_version": "exp703-run-v1",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "status": "completed",
+  "hypothesis": "The exact authenticated terminal EXP701 checkpoint can complete its two missing full-denominator evaluations on deterministic CPU without changing weights, data, seeds, evaluation semantics, or terminal policy, while recording a distinct execution identity from CUDA-preregistered EXP702.",
+  "seed": 20261414,
+  "config": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+  "decision": "complete-negative-full-denominator",
+  "decision_authority": "frozen-exp702-terminal-policy-executed-by-distinct-cpu-successor",
+  "recorded_at": "2026-08-11T21:58:44.884991+00:00",
+  "formal_root": 20261414,
+  "relationship": "cpu-terminal-evaluation-successor-not-exp701-or-exp702-completion",
+  "predecessor": {
+    "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+    "archive_sha256": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+    "identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+    "checkpoint_sha256": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab",
+    "completed_training_updates": 19200
+  },
+  "source": {
+    "repository_commit": "3c454b63fd9e93605bd21db73cc8f6b368b0e533",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "branch": "codex/exp701-cuda-resumable-h92-w256-backbone",
+    "dirty": true,
+    "config": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+    "config_sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1",
+    "runner": "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py",
+    "runner_sha256": "f91b158b0aeffb1ba41131c7f279d6545669c4cf26e17103f981146d4fe86d02",
+    "execution_identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+    "terminal_summary_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2"
+  },
+  "environment": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "cpu": "Intel(R) Core(TM) Ultra 7 155H",
+    "logical_cpu_count": 22,
+    "torch_threads": 10,
+    "interop_threads": 1,
+    "torch": "2.5.1+cpu",
+    "precision": "CPU FP32 deterministic algorithms"
+  },
+  "executed_phases": [
+    "evaluation/straight_through_restarts/128",
+    "evaluation/straight_through_restarts/256"
+  ],
+  "reused_full_denominator_evaluations": 6,
+  "executed_full_denominator_evaluations": 2,
+  "completed_full_denominator_evaluations": 8,
+  "training_executed": false,
+  "evaluation": {
+    "straight_through_restarts": {
+      "128": {
+        "transition_cases": 3000,
+        "transition_correct": 2996,
+        "transition_exact_accuracy": 0.9986666666666667,
+        "rollout_cases": 300,
+        "rollout_correct": 263,
+        "rollout_exact_accuracy": 0.8766666666666667,
+        "invalid_residue_rate": 0.0,
+        "result_sha256": "08a28da8028b5131f17a0eb7f3d26bb2c22f8de087f6691768ec81380f2ae460"
+      },
+      "256": {
+        "transition_cases": 3000,
+        "transition_correct": 2994,
+        "transition_exact_accuracy": 0.998,
+        "rollout_cases": 600,
+        "rollout_correct": 315,
+        "rollout_exact_accuracy": 0.525,
+        "invalid_residue_rate": 0.006666666666666667,
+        "result_sha256": "34c8fbc7904d5a11ba142eea630148aee33ae0c5cf0557b96e73ff7aa405a744"
+      }
+    }
+  },
+  "winner": "teacher_cosine",
+  "winner_w256_rollout_exact_accuracy": 0.6016666666666667,
+  "advancement_gate_w256_rollout": 0.85,
+  "confirmation_trigger": false,
+  "resource": {
+    "evaluation_wall_seconds": 4567.722398847,
+    "evaluation_process_cpu_seconds": 40338.75032,
+    "peak_rss_bytes": 1211617280
+  },
+  "artifacts": {
+    "checkpoint": ".scratch/exp701-offpod-s3t/sair-exp701-checkpoint-export.tar.gz#formal/root-20261414/arms/straight_through_restarts/model.safetensors",
+    "terminal_summary": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/raw/terminal-summary.json",
+    "publication_receipt": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/raw/publication-receipt.json",
+    "preflight": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/raw/preflight.json",
+    "metrics": "evals/results/exp-703-exp701-terminal-evaluation-cpu-continuation/metrics.json"
+  },
+  "limitations": [
+    "EXP703 is a CPU execution successor and is not completion of CUDA-preregistered EXP702 or repair of EXP701.",
+    "CPU and CUDA floating-point execution identities remain distinct even though weights, data, seeds, denominators, and evaluation functions are frozen.",
+    "The 85% W256 rollout advancement gate was not reached; no confirmation, independent-seed, private, promotion, or submission claim follows.",
+    "A post-evaluation publication-only KeyError was repaired from the two completed hash-verified phase artifacts without repeating scientific computation."
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "authenticated_admission_schema": {
+    "funding": {
+      "attested_balance_usd": 10.0,
+      "basis": "user-attested",
+      "minimum_required_usd": 2.9
+    },
+    "observation_count_before_create": 1,
+    "quarantined_pod": {
+      "create": "/pods",
+      "create_schema_source": "https://docs.runpod.io/api-reference/pods/POST/pods",
+      "data_center_priority": "availability",
+      "data_center_selection": "provider-selected",
+      "environment_verification": "expected-subset-provider-additions-allowed",
+      "exact_cloud_type": "COMMUNITY",
+      "exact_gpu": "NVIDIA RTX A5000",
+      "exact_gpu_count": 1,
+      "forbid_local_volume_field_when_network_volume_attached": true,
+      "gpu_type_priority": "availability",
+      "guest_hardware_gate": "exactly-one-rtx-a5000-and-cuda-acceptance-before-evaluation",
+      "interruptible": false,
+      "maximum_cost_per_hour_usd": 0.27,
+      "network_volume_mount_path": "/workspace",
+      "nullable_convenience_fields": [
+        "gpu_display_name",
+        "gpu_count",
+        "interruptible"
+      ],
+      "readiness_deadline_seconds": 720,
+      "readiness_poll_interval_seconds": 15,
+      "release_marker": "exp702/control/{owner_nonce}.release.json",
+      "rest_authoritative_fields": [
+        "id",
+        "name",
+        "owner_nonce",
+        "docker_start_cmd",
+        "secure_cloud",
+        "data_center_id",
+        "network_volume_id",
+        "cost_per_hour_usd"
+      ],
+      "verify_returned_facts": "/pods/{pod_id}?includeMachine=true&includeNetworkVolume=true"
+    },
+    "rest_inventory": {
+      "pods": "/pods?includeMachine=true",
+      "volumes": "/networkvolumes"
+    }
+  },
+  "canonical_environment_lock": {
+    "bytes": 212952,
+    "path": "environments/cuda/requirements-cu124.txt",
+    "sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355"
+  },
+  "challenge_source": {
+    "commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "relationship": "authenticated-predecessor-challenge-source"
+  },
+  "code_bindings": {
+    "canonical_cu124_lock": {
+      "bytes": 212952,
+      "path": "environments/cuda/requirements-cu124.txt",
+      "sha256": "2ef0ecd02324eb9d840d06000dfa3f11d7b6f75223796db95188edbf71278355"
+    },
+    "config": {
+      "bytes": 4630,
+      "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+      "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+    },
+    "control_config": {
+      "bytes": 3933,
+      "path": "configs/exp_702_runpod_control.yaml",
+      "sha256": "b2ff38e32bfab4f2a253f26af12479860b098cf5ffca525f153dc3152b70a594"
+    },
+    "controller": {
+      "bytes": 37704,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/controller.py",
+      "sha256": "15fbb1bf1760463a0bc4a298dca6005717b642aa7b93bd80e16336d303fe20f4"
+    },
+    "cuda_acceptance": {
+      "bytes": 1343,
+      "path": "environments/cuda/run-acceptance.sh",
+      "sha256": "a048534751b71a571c3e2c2472beb13bee6e4aa823ea8f771c7aa420daf54a8d"
+    },
+    "cuda_bootstrap": {
+      "bytes": 7418,
+      "path": "environments/cuda/bootstrap.sh",
+      "sha256": "f8770e61ce2a6f5a07d7c15e8dfe08c7675ba32989be2fe0acfdf8874dfeeaea"
+    },
+    "cuda_environment_verifier": {
+      "bytes": 8933,
+      "path": "environments/cuda/verify_environment.py",
+      "sha256": "6bbdb1939a030b1f6352bd3c2e13839d2a7754271671a4222401d3c570057731"
+    },
+    "cuda_profiles": {
+      "bytes": 1141,
+      "path": "environments/cuda/profiles.yaml",
+      "sha256": "f863b464eb5f4ccec876ae36a72325dd0eaf6178bfe3d98d100604daaf8fea7c"
+    },
+    "cuda_runtime": {
+      "bytes": 4833,
+      "path": "experiments/cuda_portability/runtime.py",
+      "sha256": "418fe92aef830490c5a7c643cd27f06cf889fbf374b1dcf89c9e69965c347d92"
+    },
+    "guest_supervisor": {
+      "bytes": 9159,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/guest_supervisor.sh",
+      "sha256": "5a111eb0b7fe586caba65f8f4fad618e5fdaa601b52b1cbda0293959b88fc3dd"
+    },
+    "orchestrator": {
+      "bytes": 35940,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py",
+      "sha256": "1eea51f172582e57c03b7c8f2fae4c1362256c9dbbc7490088074123eb2252ce"
+    },
+    "orchestrator_test": {
+      "bytes": 38750,
+      "path": "tests/test_exp702_runpod_orchestrator.py",
+      "sha256": "f708a7a23caa0991a1558d5d322a78b7fb85362f72a87410fdbdbc7e41c6e930"
+    },
+    "runner": {
+      "bytes": 20007,
+      "path": "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+      "sha256": "d9651fe79e86a555a20d7f3ce662bb9499b477cb220ed945608a7a9371c8e50b"
+    },
+    "runpod_transport": {
+      "bytes": 33332,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/runpod_transport.py",
+      "sha256": "87a0d02cb9521c17806194506bd54f9030dcf1a2ab68602be515063e722add29"
+    },
+    "source_checkpoint": {
+      "bytes": 400584,
+      "path": ".scratch/exp701-input/exp609-weights.safetensors",
+      "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+    },
+    "test": {
+      "bytes": 4596,
+      "path": "tests/test_exp_702_exp701_terminal_evaluation_continuation.py",
+      "sha256": "40d811e9282b9a1db6c277703630ef06c591ff2d83e51536ec15bb954cbc7259"
+    },
+    "torch_cu124_wheel": {
+      "bytes": 908202405,
+      "path": ".scratch/exp701-dependencies/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl",
+      "sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+    },
+    "windows_paid_launcher": {
+      "bytes": 4519,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/windows_paid_lifecycle.ps1",
+      "sha256": "a1d89d6ee616f763cd16a716e3cd69f2b35a79cf0958d66e33c856da528849bd"
+    },
+    "windows_watchdog": {
+      "bytes": 6546,
+      "path": "experiments/cloud_benchmarks/exp702_runpod/windows_deadline_watchdog.ps1",
+      "sha256": "4ff0536d66c52819e07968d7193aa485032a3d26d8d6c0f3d8fb2c06a8bc90e4"
+    }
+  },
+  "controller_entrypoint": "experiments/cloud_benchmarks/exp702_runpod/controller.py",
+  "credential_read_performed": false,
+  "guest_entrypoint": "experiments/cloud_benchmarks/exp702_runpod/guest_supervisor.sh",
+  "live_contract": {
+    "cloudType": "COMMUNITY",
+    "cpu_fallback_allowed": false,
+    "dataCenterIds": [
+      "US-IL-1"
+    ],
+    "dataCenterPriority": "availability",
+    "environment": {
+      "SAIR_EXP702_SOURCE_SHA256": "41a1f7b1b77ada6a2bfa634c2066df3bc07ac1efdec7b2e3d58e2be920a84f25",
+      "SAIR_EXP702_SYNC_SECONDS": "300"
+    },
+    "gpuCount": 1,
+    "gpuTypeIds": [
+      "NVIDIA RTX A5000"
+    ],
+    "gpuTypePriority": "availability",
+    "guest_command": [
+      "mkdir -p /workspace/sair-exp702/repository && tar -xzf /workspace/exp702/inputs/exp702-source.tar.gz -C /workspace/sair-exp702/repository && cd /workspace/sair-exp702/repository && bash experiments/cloud_benchmarks/exp702_runpod/guest_supervisor.sh"
+    ],
+    "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+    "interruptible": false,
+    "maximum_pairs": 1,
+    "networkVolumeMountPath": "/workspace",
+    "s3Endpoint": "https://s3api-us-il-1.runpod.io/",
+    "unbound_torch_download_allowed": false
+  },
+  "offpod_publisher": "experiments.cloud_benchmarks.exp702_runpod.runpod_transport:AtomicDirectoryPublisher",
+  "predecessor_archive": {
+    "bytes": 26368046,
+    "path": "exp701-terminal-predecessor.tar.gz",
+    "sha256": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc"
+  },
+  "predecessor_identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+  "provider_delete_entrypoint": "python -m experiments.cloud_benchmarks.exp702_runpod.orchestrate provider-delete",
+  "provider_mutation_performed": false,
+  "required_runtime_binding_labels": [
+    "runner",
+    "config",
+    "control_config",
+    "test",
+    "orchestrator",
+    "orchestrator_test",
+    "controller",
+    "runpod_transport",
+    "guest_supervisor",
+    "windows_watchdog",
+    "windows_paid_launcher",
+    "cuda_bootstrap",
+    "cuda_acceptance",
+    "cuda_environment_verifier",
+    "cuda_runtime",
+    "cuda_profiles",
+    "canonical_cu124_lock",
+    "source_checkpoint",
+    "torch_cu124_wheel"
+  ],
+  "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+  "schema_version": "exp702-dry-run-package-v1",
+  "source_archive": {
+    "bytes": 308941580,
+    "path": "exp702-source.tar.gz",
+    "repository_commit": "3c454b63fd9e93605bd21db73cc8f6b368b0e533",
+    "sha256": "41a1f7b1b77ada6a2bfa634c2066df3bc07ac1efdec7b2e3d58e2be920a84f25"
+  },
+  "source_checkpoint": {
+    "bytes": 400584,
+    "path": ".scratch/exp701-input/exp609-weights.safetensors",
+    "sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd"
+  },
+  "status": "packaged-no-provider-mutation",
+  "torch_wheel": {
+    "bytes": 908202405,
+    "path": "torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl",
+    "sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+  },
+  "transport_factory": "experiments.cloud_benchmarks.exp702_runpod.runpod_transport:create_transport",
+  "watchdog_entrypoint": "experiments/cloud_benchmarks/exp702_runpod/windows_deadline_watchdog.ps1",
+  "windows_launcher_entrypoint": "experiments/cloud_benchmarks/exp702_runpod/windows_paid_lifecycle.ps1"
+}

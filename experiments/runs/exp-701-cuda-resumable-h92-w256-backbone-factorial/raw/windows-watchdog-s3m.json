@@ -1,0 +1,17 @@
+﻿{
+    "schema_version":  "exp701-windows-deadline-watchdog-v1",
+    "status":  "controller-cleaned-before-deadline",
+    "observed_at_utc":  "2026-08-10T11:09:19.3909337+00:00",
+    "provider_receipt":  "D:\\Projects\\SAIR_mod_challenge\\.scratch\\exp-651-visit-dilation-adapters\\experiments\\runs\\exp-701-cuda-resumable-h92-w256-backbone-factorial\\raw\\provider-lifecycle-s3m.json",
+    "delete_at_utc":  "2026-08-10T17:55:23.2857386+00:00",
+    "stop_at_utc":  "2026-08-10T18:05:23.2857386+00:00",
+    "expected_label":  "sair-exp701-full-fidelity",
+    "expected_resource_selector":  "NVIDIA GeForce RTX 4090",
+    "pod_id":  "53u5mw1l9knps0",
+    "network_volume_id":  "nd9j6n84zi",
+    "mutating_requests_made":  0,
+    "pod_delete_confirmed":  true,
+    "network_volume_delete_confirmed":  true,
+    "failure":  "",
+    "credential_material_recorded":  false
+}

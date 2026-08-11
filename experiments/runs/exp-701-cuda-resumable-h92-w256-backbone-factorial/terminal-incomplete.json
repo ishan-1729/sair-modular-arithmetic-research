@@ -1,0 +1,33 @@
+{
+  "schema_version": "exp701-terminal-incomplete-v1",
+  "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+  "status": "terminal-incomplete",
+  "decision": "stop-frozen-identity-no-fourth-recovery",
+  "recorded_at": "2026-08-11T00:00:00+05:30",
+  "formal_root": 20261414,
+  "scientific_identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+  "source_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+  "config_sha256": "09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708",
+  "runner_sha256": "f1a2628316b586d92dd4e03c4e315af2382b0ccc51bf6203b945295b2208c210",
+  "archive_sha256": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+  "archive_bytes": 26368046,
+  "verified_tree": {"files": 112, "bytes": 41741406, "completed_phases": 17, "snapshots": 7},
+  "completed_training_updates": 19200,
+  "planned_training_updates": 19200,
+  "completed_primary_evaluations": [
+    "teacher_cosine/128", "teacher_cosine/256",
+    "teacher_restarts/128", "teacher_restarts/256",
+    "straight_through_cosine/128", "straight_through_cosine/256"
+  ],
+  "missing_primary_evaluations": ["straight_through_restarts/128", "straight_through_restarts/256"],
+  "recovery": {"maximum_recoverable_restarts": 3, "recoveries_used": 3, "next_resume_rejected": true},
+  "terminal_failure": {"reason": "recoverable restart bound exceeded", "retry_allowed": false},
+  "scientific_verdict": null,
+  "factorial_verdict": null,
+  "successor": "exp-702-exp701-terminal-evaluation-continuation",
+  "limitations": [
+    "EXP701 has no formal root summary and no integrated factorial decision.",
+    "The two missing evaluations must not be attributed back to EXP701.",
+    "No confirmation, independent-seed, promotion, submission, or private-seed claim is supported."
+  ]
+}

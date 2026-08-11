@@ -1,0 +1,12 @@
+{
+  "artifacts": {
+    "exp702/inputs/exp701-terminal-predecessor.tar.gz": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+    "exp702/inputs/exp702-source.tar.gz": "b7681d3df965d34cd16992c1e2a3ff2768f14e9f44cacd7945072c894675119a",
+    "exp702/inputs/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+  },
+  "kind": "pre-release-artifact-set",
+  "owner_nonce": "39bf1b083b5613dc49445eb6a27a9336a40eb033d66693ff80698e5ec25991c5",
+  "pod_id": "yvolai4nti7r4r",
+  "status": "restore-verified",
+  "volume_id": "i453i32g1b"
+}

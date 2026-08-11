@@ -1,0 +1,15 @@
+{
+  "schema_version": "exp702-preregistered-evaluation-v1",
+  "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+  "created_at": "2026-08-11T00:00:00+05:30",
+  "checkpoint_sha256": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab",
+  "status": "not-run-launch-review-pending",
+  "exact_answer_accuracy": null,
+  "scientific_verdict": null,
+  "paid_provider_launch_performed": false,
+  "planned_denominators": {"128": {"transitions": 3000, "rollouts": 300}, "256": {"transitions": 3000, "rollouts": 600}},
+  "evaluation": {"not_performed": true, "reason": "EXP702 has a no-paid dry-run package but has not executed either CUDA denominator.", "labels_or_oracle_present": false},
+  "controls": {"training_allowed": false, "cuda_required": true, "predecessor_mutation_allowed": false, "provider_launch_performed": false, "provider_mutation_performed": false, "all_valid_result_pairs_publish": true},
+  "dry_run": {"package": "experiments/runs/exp-702-exp701-terminal-evaluation-continuation/dry-run-package.json", "plan": "experiments/runs/exp-702-exp701-terminal-evaluation-continuation/dry-run-plan.json", "maximum_total_usd": 3.25, "maximum_provider_seconds": 14400},
+  "limitations": ["No EXP702 metric exists until both CUDA evaluations and terminal integration complete.", "The dry-run package supplies no paid authorization, physical CUDA evidence, promotion, private-seed, or submission evidence."]
+}

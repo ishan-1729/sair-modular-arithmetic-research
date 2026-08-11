@@ -1,0 +1,190 @@
+{
+  "budget": {
+    "admitted_upper_usd": "5.338987",
+    "budget_after_reserve_usd": "5.355000",
+    "budget_limited_seconds": 25676,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 25600,
+    "max_total_usd": "6.30",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "1b2f86622c597f09265a6ad2422f4eb1496e9a4f29dd50800d0753ba82d4668c",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "ef06ecef103229880b67706e705a23f1934ef24dca5b456b08c54d7d12c9a5e4",
+  "cost_upper_at_confirmation_usd": "0.491101",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [],
+  "events": [
+    {
+      "elapsed_seconds": 0.008240936000220245,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.6320210459998634,
+      "event": "network-volume-created",
+      "response_sha256": "ca145f640b7b9a4eb9922dda709142d8224b02abf1800ed533311196250d7521"
+    },
+    {
+      "elapsed_seconds": 1.6443224260001443,
+      "event": "network-volume-readiness-requested",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3n/network-volume-ready.json"
+    },
+    {
+      "elapsed_seconds": 11.661901799001498,
+      "event": "network-volume-ready",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3n/network-volume-ready.json",
+      "source_bytes": 2480425,
+      "source_key": "sair-exp701-source.tar.gz",
+      "source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+      "upload_verification": {
+        "bucket": "swcni00bq9",
+        "bytes": 2480425,
+        "key": "sair-exp701-source.tar.gz",
+        "sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+        "status": "verified",
+        "verification": "authenticated-download-sha256"
+      }
+    },
+    {
+      "elapsed_seconds": 11.668857086999196,
+      "event": "create-requested"
+    },
+    {
+      "elapsed_seconds": 14.222098977999849,
+      "event": "resource-created",
+      "response_sha256": "aa83a74ceb8023b37a52ebabfadf7cbbd57148ce1a53c27cdb5a7c579fd2fcf5"
+    },
+    {
+      "elapsed_seconds": 14.232396694002091,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 315.7221038009993,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 617.2570193909996,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 918.7911040280014,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1220.3602051590024,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1521.9105115290004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1823.4715941989998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 2125.022868909,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 2351.461957366002,
+      "event": "delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 2352.4970847440018,
+      "event": "delete-confirmed"
+    },
+    {
+      "archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3n/sair-exp701-checkpoint-export.tar.gz",
+      "archive_bytes": 16848047,
+      "archive_sha256": "d52b9bd8b4a5fbfd810f3eb0a22565d1236b7c22044b3d687015079567071258",
+      "elapsed_seconds": 2352.580692661002,
+      "event": "offpod-restore-verified",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3n/offpod-sync-receipt.json",
+      "restore_verification": {
+        "bytes": 26629371,
+        "completed_phases": 13,
+        "files": 83,
+        "root_markers": [
+          "calibration/root-20261413/root-opened.json",
+          "formal/root-20261414/root-opened.json"
+        ],
+        "snapshots": 5,
+        "status": "verified"
+      }
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 2353.8076319150023,
+      "event": "network-volume-delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 2354.7790182380013,
+      "event": "network-volume-delete-confirmed"
+    }
+  ],
+  "failure": {
+    "message": "received signal 15",
+    "type": "TerminationRequested"
+  },
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EU-RO-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "ready_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3n/network-volume-ready.json",
+    "ready_source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+    "ready_timeout_seconds": 600,
+    "size_gb": 50
+  },
+  "network_volume_id": "swcni00bq9",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3n/offpod-sync-receipt.json",
+  "ports": [],
+  "provider": "runpod",
+  "resource_id": "i5ne5i8ln79knz",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "resource-and-network-volume-destroyed",
+  "template_id": null,
+  "timing": {
+    "deletion_confirmed_elapsed_seconds": 2352.4970847440018,
+    "guest_runtime_seconds": null,
+    "network_volume_deletion_confirmed_elapsed_seconds": 2354.7790182380013,
+    "provider_billed_lifetime_seconds": 2354.7900392560005,
+    "provider_billed_lifetime_source": "controller-create-request-to-delete-confirmation-upper-bound",
+    "provider_invoice_amount_usd": null
+  }
+}

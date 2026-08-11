@@ -68,6 +68,21 @@ def test_bootstrap_is_pinned_and_dry_run_never_probes_or_installs(tmp_path) -> N
     assert not (tmp_path / "unused").exists()
 
 
+def test_preloaded_torch_wheel_keeps_canonical_lock_and_hash_enforcement() -> None:
+    script = (CUDA_DIR / "bootstrap.sh").read_text(encoding="utf-8")
+    lock = (CUDA_DIR / "requirements-cu124.txt").read_text(encoding="utf-8")
+    expected = "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+    assert "SAIR_CUDA_PRELOADED_TORCH_WHEEL" in script
+    assert "908202405" in script
+    assert expected in script
+    assert expected in lock
+    assert "Path(wheel).resolve().as_uri()" in script
+    assert '"${temporary_lock:-$lock_path}"' in script
+    assert '"$lock_path" "$temporary_lock"' in script
+    assert '"$repository_root/environments/cuda/verify_environment.py"' in script
+    assert '"canonical_lock_unchanged": True' in script
+
+
 def test_bootstrap_persists_pinned_uv_path_for_standalone_acceptance() -> None:
     bootstrap = (CUDA_DIR / "bootstrap.sh").read_text(encoding="utf-8")
     acceptance_script = (CUDA_DIR / "run-acceptance.sh").read_text(

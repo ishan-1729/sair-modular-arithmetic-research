@@ -11,6 +11,7 @@ No SSH service, public port, or provider credential enters the guest.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import os
@@ -37,14 +38,17 @@ APPROVAL = (
     "NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED "
     "MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10"
 )
-# Completed attempts through K consumed conservative upper bounds of
-# 6,256.646955189 provider seconds and $1.2979546497822448. Replacement L is
-# admitted inside the original cumulative 36,000-second/$9 authorization. Its
-# guest slice is 1,200 seconds shorter than the controller operation window,
-# reserving the measured setup plus final export/acknowledgement headroom.
-FRESH_MAX_TOTAL_USD = "7.90"
-FRESH_MAX_PROVIDER_SECONDS = 29_400
-GUEST_SLICE_SECONDS = 27_300
+# The newly funded continuation is deliberately narrower than the historical
+# $9/36,000-second tranche: one lifecycle, at most 13,200 provider seconds and
+# $2.80 admitted compute-plus-storage cost.  A 13,000-second controller cap at
+# the admitted $0.750795/hour combined rate is $2.711204.  The provider
+# controller's $3.20 input leaves $2.72 after its mandatory 15% reserve, still
+# above that rate-bound charge and below the independent $2.80 cap.  The guest
+# stops 2,400 seconds early for terminal export, acknowledgement, delete
+# retries, and exact absence confirmation.
+FRESH_MAX_TOTAL_USD = "3.20"
+FRESH_MAX_PROVIDER_SECONDS = 13_000
+GUEST_SLICE_SECONDS = 10_600
 CONTROLLER_CONFIG = ROOT / "configs/exp_701_runpod_control.yaml"
 DEFAULT_SOURCE = ROOT / ".scratch/exp701-launch/source.tar.gz"
 DEFAULT_PREFLIGHT = ROOT / "experiments/runs" / RUN_ID / "preflight.json"
@@ -58,6 +62,20 @@ DEFAULT_ORCHESTRATOR_RECEIPT = (
 )
 SOURCE_KEY = "sair-exp701-source.tar.gz"
 RESUME_KEY = "sair-exp701-resume.tar.gz"
+# RunPod's S3-compatible gateway materializes a literal '+' in an uploaded key
+# as '%2B' on the mounted filesystem. Stage the object under an encoding-safe
+# key, then copy it to the canonical wheel filename inside the guest after
+# authenticating the staged bytes.
+TORCH_WHEEL_KEY = "sair-exp701-torch-cu124.blob"
+TORCH_WHEEL_CANONICAL_NAME = (
+    "torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl"
+)
+TORCH_WHEEL_SHA256 = "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+TORCH_WHEEL_BYTES = 908_202_405
+DEFAULT_TORCH_WHEEL = (
+    ROOT
+    / ".scratch/exp701-dependencies/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl"
+)
 REMOTE_ARCHIVE_KEY = "exp701-durable/sair-exp701-checkpoint-export.tar.gz"
 REMOTE_ACK_KEY = "exp701-durable/offpod-sync-ack.json"
 S3_ENDPOINTS = {
@@ -68,6 +86,19 @@ REQUIRED_EXECUTABLE_ARCHIVE_PATHS = (
     "environments/cuda/bootstrap.sh",
     "environments/cuda/run-acceptance.sh",
 )
+BASE_GUEST_SUPERVISOR_SHA256 = (
+    "a560e517e2af3fe43c7dc56fc8dba2451af0ef8f8a29055b5e0f4b9416eddcc4"
+)
+BASE_CUDA_BOOTSTRAP_SHA256 = (
+    "15497072377d2220035a4d2da2f4212bd6e27f7ccd47b8aa4f815f508e3f3b75"
+)
+GUEST_SUPERVISOR_PATH = (
+    ROOT / "experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh"
+)
+RESUME_IDENTITY_WRAPPER_PATH = (
+    ROOT / "experiments/cloud_benchmarks/exp701_runpod/resume_identity_wrapper.py"
+)
+CUDA_BOOTSTRAP_PATH = ROOT / "environments/cuda/bootstrap.sh"
 
 
 def sha256(path: Path) -> str:
@@ -177,6 +208,24 @@ def verify_resume_receipt(path: Path) -> dict[str, Any]:
     return {**receipt, "archive": str(archive)}
 
 
+def verify_torch_wheel(path: Path) -> dict[str, Any]:
+    path = path.resolve()
+    if not path.is_file():
+        raise RuntimeError(f"preloaded PyTorch wheel is absent: {path}")
+    actual_bytes = path.stat().st_size
+    actual_sha256 = sha256(path)
+    if actual_bytes != TORCH_WHEEL_BYTES or actual_sha256 != TORCH_WHEEL_SHA256:
+        raise RuntimeError(
+            "preloaded PyTorch wheel does not match the official pinned artifact"
+        )
+    return {
+        "status": "verified",
+        "path": str(path),
+        "bytes": actual_bytes,
+        "sha256": actual_sha256,
+    }
+
+
 def api_get(token: str, path: str, query: dict[str, str] | None = None) -> Any:
     url = "https://rest.runpod.io/v1" + path
     if query:
@@ -208,6 +257,15 @@ def direct_start_command(
     restore = ""
     if resume is not None:
         digest = shlex.quote(str(resume["archive_sha256"]))
+        supervisor = GUEST_SUPERVISOR_PATH.read_bytes()
+        wrapper = RESUME_IDENTITY_WRAPPER_PATH.read_bytes()
+        bootstrap = CUDA_BOOTSTRAP_PATH.read_bytes()
+        supervisor_b64 = base64.b64encode(supervisor).decode("ascii")
+        wrapper_b64 = base64.b64encode(wrapper).decode("ascii")
+        bootstrap_b64 = base64.b64encode(bootstrap).decode("ascii")
+        supervisor_sha = hashlib.sha256(supervisor).hexdigest()
+        wrapper_sha = hashlib.sha256(wrapper).hexdigest()
+        bootstrap_sha = hashlib.sha256(bootstrap).hexdigest()
         restore = f"""
 test "$(sha256sum /workspace/{RESUME_KEY} | cut -d' ' -f1)" = {digest}
 test ! -e /workspace/sair-exp701-restore
@@ -221,10 +279,38 @@ if test -d /workspace/sair-exp701-restore/mlflow; then
   test ! -e .scratch/mlflow
   mv /workspace/sair-exp701-restore/mlflow .scratch/mlflow
 fi
+# A slice terminal describes the previous provider lifecycle, not the restored
+# scientific state.  Remove it before the new guest publishes its initial
+# external baseline so the host cannot mistake it for this lifecycle's terminal.
+rm -f .scratch/{RUN_ID}/guest-terminal.json
+test "$(sha256sum experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh | cut -d' ' -f1)" = {BASE_GUEST_SUPERVISOR_SHA256}
+test "$(sha256sum environments/cuda/bootstrap.sh | cut -d' ' -f1)" = {BASE_CUDA_BOOTSTRAP_SHA256}
+python3 - <<'PY'
+import base64
+from pathlib import Path
+
+supervisor = Path("experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh")
+supervisor.write_bytes(base64.b64decode("{supervisor_b64}"))
+supervisor.chmod(0o755)
+wrapper = Path("/workspace/sair-exp701-resume-identity-wrapper.py")
+wrapper.write_bytes(base64.b64decode("{wrapper_b64}"))
+wrapper.chmod(0o600)
+bootstrap = Path("environments/cuda/bootstrap.sh")
+bootstrap.write_bytes(base64.b64decode("{bootstrap_b64}"))
+bootstrap.chmod(0o755)
+PY
+test "$(sha256sum experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh | cut -d' ' -f1)" = {supervisor_sha}
+test "$(sha256sum /workspace/sair-exp701-resume-identity-wrapper.py | cut -d' ' -f1)" = {wrapper_sha}
+test "$(sha256sum environments/cuda/bootstrap.sh | cut -d' ' -f1)" = {bootstrap_sha}
 """
     return f"""set -euo pipefail
 umask 077
 test "$(sha256sum /workspace/{SOURCE_KEY} | cut -d' ' -f1)" = {shlex.quote(source_sha)}
+test "$(stat -c '%s' /workspace/{TORCH_WHEEL_KEY})" = {TORCH_WHEEL_BYTES}
+test "$(sha256sum /workspace/{TORCH_WHEEL_KEY} | cut -d' ' -f1)" = {TORCH_WHEEL_SHA256}
+cp -- /workspace/{TORCH_WHEEL_KEY} /workspace/{TORCH_WHEEL_CANONICAL_NAME}
+test "$(stat -c '%s' /workspace/{TORCH_WHEEL_CANONICAL_NAME})" = {TORCH_WHEEL_BYTES}
+test "$(sha256sum /workspace/{TORCH_WHEEL_CANONICAL_NAME} | cut -d' ' -f1)" = {TORCH_WHEEL_SHA256}
 test ! -e /workspace/sair-exp701/repository
 mkdir -p /workspace/sair-exp701/repository /workspace/exp701-durable
 tar -xzf /workspace/{SOURCE_KEY} -C /workspace/sair-exp701/repository
@@ -235,6 +321,8 @@ set +e
 env \\
   SAIR_EXP701_SOURCE_SHA256={shlex.quote(source_sha)} \\
   SAIR_EXP701_SYNC_NONCE={shlex.quote(nonce)} \\
+  SAIR_EXP701_RUNNER_WRAPPER=/workspace/sair-exp701-resume-identity-wrapper.py \\
+  SAIR_CUDA_PRELOADED_TORCH_WHEEL=/workspace/{TORCH_WHEEL_CANONICAL_NAME} \\
   SAIR_EXP701_SLICE_SECONDS={GUEST_SLICE_SECONDS} \\
   bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh
 status=$?
@@ -314,7 +402,7 @@ def controller_command(
         "--network-volume-ready-receipt",
         str(readiness_receipt),
         "--network-volume-ready-timeout-seconds",
-        "600",
+        "1800",
         "--network-volume-ready-source-sha256",
         source_sha256,
         "--offpod-receipt",
@@ -422,6 +510,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--orchestrator-receipt", type=Path, default=DEFAULT_ORCHESTRATOR_RECEIPT
     )
     parser.add_argument("--resume-receipt", type=Path)
+    parser.add_argument("--torch-wheel", type=Path, default=DEFAULT_TORCH_WHEEL)
     parser.add_argument("--dry-run", action="store_true")
     return parser
 
@@ -435,6 +524,7 @@ def main(argv: list[str] | None = None) -> int:
         "offpod_destination",
         "provider_receipt",
         "orchestrator_receipt",
+        "torch_wheel",
     ):
         setattr(args, name, getattr(args, name).resolve())
     if "REQUIRED_AT_LAUNCH" in args.data_center_id:
@@ -446,6 +536,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.resume_receipt is None
         else verify_resume_receipt(args.resume_receipt.resolve())
     )
+    torch_wheel = verify_torch_wheel(args.torch_wheel)
     nonce = secrets.token_hex(24)
     readiness_receipt = args.session / "network-volume-ready.json"
     guest_command = direct_start_command(
@@ -476,6 +567,7 @@ def main(argv: list[str] | None = None) -> int:
         "network_volume_gb": 50,
         "offpod_destination": str(args.offpod_destination),
         "resume": resume is not None,
+        "preloaded_torch_wheel": torch_wheel,
         "controller_command_sha256": hashlib.sha256(
             json.dumps(command, separators=(",", ":")).encode()
         ).hexdigest(),
@@ -540,6 +632,9 @@ def main(argv: list[str] | None = None) -> int:
             resume_upload = upload_file_verified(
                 client, Path(resume["archive"]), bucket=volume_id, key=RESUME_KEY
             )
+        torch_wheel_upload = upload_file_verified(
+            client, args.torch_wheel, bucket=volume_id, key=TORCH_WHEEL_KEY
+        )
         host_sync = subprocess.Popen(
             [
                 sys.executable,
@@ -581,6 +676,7 @@ def main(argv: list[str] | None = None) -> int:
                     "bytes": source_upload["bytes"],
                 },
                 "resume": resume_upload,
+                "preloaded_torch_wheel": torch_wheel_upload,
                 "upload_verification": source_upload,
             },
         )

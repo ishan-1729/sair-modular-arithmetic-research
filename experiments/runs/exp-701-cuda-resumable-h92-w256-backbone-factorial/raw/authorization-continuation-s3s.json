@@ -1,0 +1,31 @@
+{
+  "schema_version": "exp701-paid-continuation-authorization-v1",
+  "status": "authorized-with-agent-safety-cap",
+  "authorized_at_utc": "2026-08-10T20:48:14Z",
+  "provider": "RunPod Secure Cloud",
+  "resource": "1x NVIDIA GeForce RTX 4090",
+  "replacement_attempt": "s3s",
+  "user_direction": "Use the newly supplied, funded RunPod account credentials now and continue the existing EXP701 run.",
+  "user_specified_numeric_cap": false,
+  "agent_safety_narrowing": {
+    "maximum_additional_cost_usd": 2.8,
+    "maximum_provider_seconds": 13200,
+    "maximum_replacement_lifecycles": 1,
+    "controller_maximum_provider_seconds": 13000,
+    "guest_slice_seconds": 10600,
+    "reason": "The user directed immediate continuation but did not state a new numeric limit; this preserves the previously recorded bounded continuation ceiling while the funded replacement account removes the provider's $5 allocation blocker."
+  },
+  "scientific_constraints": {
+    "allow_duplicate": false,
+    "allow_fidelity_change": false,
+    "resume_archive_sha256": "c4e9d89da19e5480f3c099aeae746ae5c4c251f73e8caafa8599f4a2c7832944",
+    "source_archive_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678"
+  },
+  "continuation_preconditions": [
+    "the final s3q archive is independently restore-verified",
+    "the exact s3q Pod and network volume are deletion-confirmed",
+    "the new account authenticates and contains zero Pods and zero network volumes",
+    "one Secure RTX 4090 lifecycle fits the admitted dollar/time limits with cleanup headroom",
+    "the Windows owner and independent delete-only watchdog are established before Pod creation"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "exp703-evaluation-v1",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "created_at": "2026-08-11T21:58:44.884991+00:00",
+  "status": "completed",
+  "decision": "complete-negative-full-denominator",
+  "scientific_verdict": "advancement-gate-not-reached",
+  "factorial_winner": "teacher_cosine",
+  "winner_w256_rollout_exact_accuracy": 0.6016666666666667,
+  "advancement_gate_w256_rollout": 0.85,
+  "confirmation_trigger": false,
+  "checkpoint_sha256": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab",
+  "execution_identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+  "completed_full_denominator_arm_width_evaluations": 8,
+  "planned_full_denominator_arm_width_evaluations": 8,
+  "training_executed": false,
+  "evaluation": {
+    "transition": {
+      "straight_through_restarts_w128": {
+        "cases": 3000,
+        "correct": 2996,
+        "exact_accuracy": 0.9986666666666667,
+        "prediction_sha256": "efc50b488b77f504d2318b06b01fa4e026a78d5f3d19d33f8d4d1345b7e41ceb",
+        "paired_vectors_sha256": "6a7d6d908d24eab7f8684278e2875d4dec04fa32393f8ef75e91736ed564de1d"
+      },
+      "straight_through_restarts_w256": {
+        "cases": 3000,
+        "correct": 2994,
+        "exact_accuracy": 0.998,
+        "prediction_sha256": "584c2dd92e3959d9dfb9e8dce94ec0bb0f9a01878632e4d74786e43ffc61674d",
+        "paired_vectors_sha256": "93c5fec2886009625f9b44f5bbfbcde596519b7bec208a67e1ec599bf376cf68"
+      }
+    },
+    "rollout": {
+      "straight_through_restarts_w128": {
+        "cases": 300,
+        "correct": 263,
+        "exact_accuracy": 0.8766666666666667,
+        "invalids": 0,
+        "any_invalid_residue_rate": 0.0,
+        "prediction_sha256": "d5069a6e4fc5019a95d65ef121d38971c199d5362b5134b48f27dacc2d6fc7a9",
+        "paired_vectors_sha256": "0fe5d2ac8fe4b309df9ae39a5e42dc3b79288297e2078f9b5076713fa7e0e14d"
+      },
+      "straight_through_restarts_w256": {
+        "cases": 600,
+        "correct": 315,
+        "exact_accuracy": 0.525,
+        "invalids": 4,
+        "any_invalid_residue_rate": 0.006666666666666667,
+        "prediction_sha256": "c725a3f6659885b9212269b013fdac463246765f144950b830dc9403f3dc2c49",
+        "paired_vectors_sha256": "03e950aa49319ac8090264d6b099339c85e7455105f728532f7cdd28a6f12d4c"
+      }
+    }
+  },
+  "controls": {
+    "predecessor_archive_authenticated": true,
+    "checkpoint_authenticated": true,
+    "training_executed": false,
+    "all_eight_full_denominator_arm_width_evaluations_present": true,
+    "cpu_execution_distinct_from_cuda_exp702": true
+  },
+  "runtime": {
+    "device": "cpu",
+    "torch": "2.5.1+cpu",
+    "cpu": "Intel(R) Core(TM) Ultra 7 155H",
+    "torch_threads": 10,
+    "interop_threads": 1,
+    "deterministic_algorithms": true,
+    "evaluation_wall_seconds": 4567.722398847,
+    "evaluation_process_cpu_seconds": 40338.75032,
+    "peak_rss_bytes": 1211617280
+  },
+  "evidence": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+  "limitations": [
+    "This result has a distinct deterministic CPU execution identity and is not the CUDA-preregistered EXP702 result.",
+    "The W256 rollout gate failed, so no further conditional science is authorized from this successor.",
+    "No training, confirmation, independent seed, private evaluation, promotion, or submission evaluation was executed."
+  ]
+}

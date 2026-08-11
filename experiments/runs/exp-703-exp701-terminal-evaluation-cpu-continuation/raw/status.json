@@ -1,0 +1,10 @@
+{
+  "completed_at": "2026-08-11T21:58:44.884991+00:00",
+  "identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+  "phase": "terminal-publication",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "schema_version": "exp703-cpu-status-v1",
+  "status": "completed",
+  "terminal_summary": ".scratch/exp703-cpu-overnight/terminal-summary.json",
+  "terminal_summary_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2"
+}

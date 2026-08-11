@@ -1,0 +1,16 @@
+{
+  "schema_version": "exp701-paid-continuation-authorization-v1",
+  "observed_at_utc": "2026-08-10T21:01:24Z",
+  "user_direction": "Make upper cost $7 instead",
+  "provider": "RunPod Secure Cloud",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "maximum_continuation_cost_usd": 7.0,
+  "maximum_continuation_provider_seconds": 36000,
+  "live_lifecycle": "s3s",
+  "live_lifecycle_admitted_cost_upper_usd": 2.7112041667,
+  "live_lifecycle_max_provider_seconds": 13000,
+  "maximum_follow_on_cost_upper_usd": 4.2887958333,
+  "maximum_follow_on_provider_seconds": 23000,
+  "interpretation": "Do not restart or mutate the already admitted s3s controller. If s3s terminally checkpoints before full science completion and both exact resources are deletion-confirmed, one follow-on lifecycle may resume only its newest restore-verified archive within the remaining combined cost and time ceilings.",
+  "credential_material_recorded": false
+}

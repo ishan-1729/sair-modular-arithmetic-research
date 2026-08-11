@@ -1,0 +1,17 @@
+﻿{
+    "schema_version":  "exp701-windows-deadline-watchdog-v1",
+    "status":  "failed",
+    "observed_at_utc":  "2026-08-10T06:53:19.9587648+00:00",
+    "provider_receipt":  "D:\\Projects\\SAIR_mod_challenge\\.scratch\\exp-651-visit-dilation-adapters\\experiments\\runs\\exp-701-cuda-resumable-h92-w256-backbone-factorial\\raw\\provider-lifecycle-s3i.json",
+    "delete_at_utc":  "2026-08-10T16:43:18.8776318+00:00",
+    "stop_at_utc":  "2026-08-10T16:53:18.8862120+00:00",
+    "expected_label":  "sair-exp701-full-fidelity",
+    "expected_resource_selector":  "NVIDIA GeForce RTX 4090",
+    "pod_id":  null,
+    "network_volume_id":  null,
+    "mutating_requests_made":  0,
+    "pod_delete_confirmed":  false,
+    "network_volume_delete_confirmed":  false,
+    "failure":  "Cannot convert argument \"flags\", with value: \"-2147483581\", for \"SetThreadExecutionState\" to type \"System.UInt32\": \"Cannot convert value \"-2147483581\" to type \"System.UInt32\". Error: \"Value was either too large or too small for a UInt32.\"\"",
+    "credential_material_recorded":  false
+}

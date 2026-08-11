@@ -1,0 +1,8 @@
+{
+  "artifacts": {},
+  "kind": "empty-volume-before-pod",
+  "owner_nonce": "35dd49f4dc4f6a4639537d2c6992324f7f502916de80be0339acf52d85b33c89",
+  "pod_id": null,
+  "status": "restore-verified",
+  "volume_id": "ifub768rs4"
+}

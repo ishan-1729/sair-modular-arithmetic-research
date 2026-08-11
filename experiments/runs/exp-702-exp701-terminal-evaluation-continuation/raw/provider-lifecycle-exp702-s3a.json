@@ -1,0 +1,33 @@
+{
+  "cleanup_started_at_seconds": 0,
+  "errors": [
+    {
+      "message": "Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)",
+      "type": "JSONDecodeError"
+    }
+  ],
+  "exact_absence_confirmed": true,
+  "exports": [],
+  "final_acknowledged": false,
+  "final_export_confirmed": false,
+  "final_inventory": {
+    "pods": [],
+    "volumes": []
+  },
+  "finished_by_seconds": 2,
+  "intended_pod_name": "sair-exp702-exp702-s3a-352b6ebb83c4",
+  "intended_volume_name": "sair-exp702-exp702-s3a-352b6ebb83c4",
+  "monitor_interval_seconds": 300,
+  "owner_nonce": "352b6ebb83c45ab472a06ab7d20e206e37d39c70ffde6d1f116bdeee1361cc92",
+  "pod_delete_confirmed": true,
+  "pod_id": null,
+  "provider_mutation_performed": true,
+  "schema_version": "exp702-lifecycle-v2",
+  "status": "failed",
+  "suffix": "exp702-s3a",
+  "terminal_status_observed": false,
+  "transport": "runpod-rest-s3",
+  "volume_delete_confirmed": false,
+  "volume_delete_restore_gated": true,
+  "volume_id": null
+}

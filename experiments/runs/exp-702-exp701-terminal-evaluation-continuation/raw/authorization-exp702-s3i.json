@@ -1,0 +1,9 @@
+{
+  "approved": true,
+  "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+  "single_lifecycle_suffix": "exp702-s3i",
+  "package_sha256": "18c33695982e374b53f854c3fbcce89ec8c6780d96ca9432cc79ba9625256e7e",
+  "maximum_total_usd": "2.90",
+  "maximum_provider_seconds": 13500,
+  "cleanup_start_seconds": 12600
+}

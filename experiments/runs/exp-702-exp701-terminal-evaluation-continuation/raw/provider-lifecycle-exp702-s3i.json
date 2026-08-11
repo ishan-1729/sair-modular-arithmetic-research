@@ -1,0 +1,49 @@
+{
+  "admission": {
+    "attested_balance_usd": "10.0",
+    "funding_basis": "user-attested",
+    "observed_at_seconds": 2,
+    "pods": [],
+    "volumes": []
+  },
+  "cleanup_started_at_seconds": 4,
+  "controller_pid": 1077,
+  "controller_process_identity": "1077:37236",
+  "controller_started_utc": "2026-08-11T16:47:27.223977+00:00",
+  "errors": [
+    {
+      "message": "RunPod POST /networkvolumes failed: {\"body\":{\"error\":\"create network volume: Data center \\\"US-GA-2\\\" not found or does not support network volumes. Available data centers: AP-IN-2, AP-JP-1, CA-MTL-3, CA-MTL-4, EU-FR-1, EU-RO-1, EUR-IS-1, EUR-IS-3, EUR-NO-1, EUR-NO-2, US-CA-2, US-IL-1, US-MD-1, US-MO-2, US-NC-1, US-NE-1, US-TX-3.\",\"status\":500},\"body_bytes_observed\":302,\"body_truncated\":false,\"bounded_body_sha256\":\"d466f14e6a4a7a10ad2389a638f783d7bfced89225cd16687405733fd9034f4e\",\"http_status\":500,\"request_ids\":{\"x-request-id\":\"req_a210b6e2-a31e-47ed-b231-acac55c50f7a\"},\"schema_version\":\"exp702-sanitized-runpod-http-error-v1\"}",
+      "type": "RunPodHTTPError"
+    }
+  ],
+  "exact_absence_confirmed": true,
+  "exports": [],
+  "final_acknowledged": false,
+  "final_export_confirmed": false,
+  "final_inventory": {
+    "pods": [],
+    "volumes": []
+  },
+  "finished_by_seconds": 8,
+  "intended_pod_name": "sair-exp702-exp702-s3i-c81af50b60c5",
+  "intended_volume_name": "sair-exp702-exp702-s3i-c81af50b60c5",
+  "monitor_interval_seconds": 300,
+  "owner_nonce": "c81af50b60c5792335965a40e8579f8a48498e79a82bf450c0357b05afcfd3d5",
+  "pod_delete_confirmed": true,
+  "pod_id": null,
+  "provider_mutation_performed": true,
+  "schema_version": "exp702-lifecycle-v2",
+  "status": "failed",
+  "suffix": "exp702-s3i",
+  "terminal_status_observed": false,
+  "transport": "runpod-rest-s3",
+  "uncertain_create_reconciliation": {
+    "performed": true,
+    "pod_id_recovered": null,
+    "volume_id_recovered": null
+  },
+  "volume_delete_confirmed": false,
+  "volume_delete_restore_gated": true,
+  "volume_id": null,
+  "watchdog_ready_before_create": true
+}

@@ -1,0 +1,12 @@
+{
+    "distribution":  "Ubuntu-24.04",
+    "schema_version":  "exp703-windows-lifecycle-v1",
+    "exit_code":  2,
+    "started_at":  "2026-08-11T20:26:40.3733546+00:00",
+    "windows_pid":  13848,
+    "keep_awake":  true,
+    "elapsed_seconds":  5369.8870397,
+    "terminal_summary_exists":  false,
+    "finished_at":  "2026-08-11T21:56:10.2603943+00:00",
+    "status":  "failed"
+}

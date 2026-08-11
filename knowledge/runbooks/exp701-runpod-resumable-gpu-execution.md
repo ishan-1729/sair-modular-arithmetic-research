@@ -563,13 +563,17 @@ Persist:
 | K live | Restored immutable smoke was rerun and could not reproduce the synthetic interruption. | Hardware/focused gates and restore-valid failure export; no root opened. | Exact idempotent restored-smoke verifier; reuse completed immutable smoke; reject terminal-failure archive. |
 | L allocation (`s3g`) | No instances available after managed volume creation. | Exact allocation receipt; no Pod/root. | Delete-confirm orphan volume before retry; new lifecycle suffix. |
 | L science (`s3h`) | Science cleanly slice-checkpointed, then WSL/controller ownership vanished before cleanup; Pod remained desired RUNNING. | Calibration, complete/evaluated teacher-cosine, teacher-restarts update 3000, restore-verified terminal archive. | Independent Windows deadline watchdog, host no-sleep policy, immediate final-archive rescue and ID-bound deletion. |
+| M (`s3m`) | Root-level `--resume` was incorrectly propagated to untouched `straight_through_cosine`, so the frozen runner demanded a nonexistent arm snapshot. | Both teacher arms and their 128/256 evaluations; formal root reached 9,600/19,200 updates. | Resolve recovery per arm: resume only when that arm's authenticated snapshot exists; require an untouched arm to have no arm/recovery/result state before starting fresh. |
+| N (`s3n`) | Locked CUDA bootstrap retried the 866.1 MiB PyTorch wheel, then uv rejected it: expected SHA-256 `bf6484...e14d7`, computed `7b4b97...2472`. | Exact rollback archive, current initial external baseline, final restore-verified failure archive, and zero additional science changes. | Treat dependency installation as a paid pre-science phase. Preserve the exact expected/computed hashes, never weaken `--require-hashes`, and debug or mirror the wheel outside a paid science lifecycle before another launch. |
+| O (`s3o`) | RunPod's S3 mount exposed `+` in the wheel object key as the literal string `%2B`; the initial guest `stat` targeted the canonical `+` path, so the container restarted before bootstrap. The independent watchdog also exited early because StrictMode treated the legitimately absent partial-receipt `resource_id` as an error. | The official wheel was independently hash-verified before upload, the Pod was deletion-confirmed, the retained attempt-only volume was explicitly deletion-confirmed, and the audited 50% resume archive remained unchanged off-Pod. | Use an encoding-safe S3 object key, authenticate it, copy it to the canonical wheel filename in the guest, authenticate the copy, and make the Windows watchdog tolerate optional resource IDs while the controller is still preloading a managed volume. |
+| P (`s3p`) | The local controller admission guard rejected the proposed lifecycle because a `$5.50` cap leaves `$4.675` after its mandatory 15% reserve, slightly below the `$4.692469` rate-bound projection. | No provider request, Pod, volume, billable time, or scientific mutation occurred. | Evaluate the controller's reserved-budget calculation in the prelaunch plan; `$5.55` leaves `$4.7175` after reserve while the independent cumulative rate-bound upper remains `$7.444315`. |
 
 Do not describe these attempts collectively as GPU failure. The RTX 4090,
 CUDA environment, deterministic route, checkpoint restoration, and science
 training worked. The failures were primarily control-plane, idempotency,
 capacity, and lifecycle-ownership defects.
 
-## Current resume boundary (2026-08-07)
+## Current resume boundary (2026-08-10)
 
 This section is time-specific evidence, not a reusable default:
 
@@ -577,30 +581,87 @@ This section is time-specific evidence, not a reusable default:
 - source commit: `0027f66197a00ea9392e04cc7060c899500aa091`;
 - source archive SHA:
   `574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678`;
-- final attempt-L archive:
-  `.scratch/exp701-offpod-s3h-final-b/sair-exp701-checkpoint-export.tar.gz`;
-- final archive SHA:
-  `0a4ea76bfb3a9f6933008badf187206eff58c11c4ad111e5ddc2121861bc0370`;
+- latest scientifically useful final archive:
+  `.scratch/exp701-offpod-s3m/sair-exp701-checkpoint-export.tar.gz`;
+- latest scientifically useful archive SHA:
+  `bea6ef4c5565dfe026f9d05fbd014a4bea53c913c83cf71138a8b434dda241c1`;
+- audited marker-only rollback archive SHA:
+  `aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1`;
+- latest provider-lifecycle failure archive:
+  `.scratch/exp701-offpod-s3n/sair-exp701-checkpoint-export.tar.gz`;
+- failure archive SHA:
+  `d52b9bd8b4a5fbfd810f3eb0a22565d1236b7c22044b3d687015079567071258`;
 - formal root: `20261414`;
-- completed formal training: `7,800 / 19,200` (`40.625%`);
-- active arm: `teacher_restarts`, update `3,000 / 4,800`;
-- snapshot SHA:
-  `e5e5337382024ff5ed1cf53765b3ac99aafbed8698832b807e7caccc4098ba15`;
-- terminal: `slice-checkpointed`, `resume_required: true`;
-- provider resources: zero Pods, zero network volumes;
-- original cumulative authorization: exhausted for useful science even though a
-  small formal headroom remains;
-- exact admission arithmetic: `1,207.751857831223` provider seconds remain,
-  while the proven controller reserve is `1,200` seconds, leaving only
-  `7.751857831223` seconds of possible guest time;
-- new paid launch: forbidden until a fresh explicit authorization expands both
-  dollar and provider-time ceilings.
+- completed formal training: `9,600 / 19,200` (`50%`);
+- completed arms: `teacher_cosine`, `teacher_restarts`, including both 128/256 evaluations;
+- next untouched arm: `straight_through_cosine`, update `0 / 4,800`;
+- terminal: attempt `s3n` failed during CUDA bootstrap before current hardware/test/science gates;
+- exact bootstrap failure: pinned PyTorch wheel expected SHA-256
+  `bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7`
+  but uv computed
+  `7b4b97806a064fffb92ee008a197b77922150f62ec7ce9ebb273909dcff62472`;
+- provider resources after `s3o` cleanup: zero Pods, zero network volumes;
+- current tranche cumulative upper bounds through `s3o`:
+  `13,194.870648786` provider seconds and `$2.751846`;
+- attempt `s3o` added zero scientific updates; the verified wheel path is now
+  staged under an encoding-safe S3 key and copied to the canonical filename
+  only after exact byte/hash verification;
+- the replacement lifecycle is capped at `22,500` provider seconds with a
+  `20,100`-second guest slice, keeping cumulative admitted time below the
+  authorized `36,000` seconds and cumulative admitted cost below `$9`.
 
-Do not resume from attempt K, from the clean J pre-science archive, or from a
-CPU partial. Resume only from the final attempt-L archive after verifying its
-hash and tree again.
+Do not resume from attempt K, the clean J pre-science archive, the failed s3l
+archive, or any CPU partial. The audited `s3n` rollback is the current clean
+scientific resume candidate; verify its hash/tree and the external wrapper
+hash before use. The final `s3n` archive is failure evidence, not proof that
+current-attempt hardware/test gates passed: those files were restored from the
+prior lifecycle and the current run stopped during bootstrap.
 
 ## Future-agent handoff template
+
+## Terminal EXP701 / successor EXP702 boundary (2026-08-11)
+
+The s3t archive is the terminal EXP701 evidence, not a resume candidate. Its
+formal lifecycle has `recoveries: 3`; `terminal-failure.json` records
+`recoverable restart bound exceeded` and `retry_allowed: false`. Never delete,
+reset, decrement, replay, or bypass that ledger, and never publish later work as
+an EXP701 completion.
+
+The only permitted scientific continuation is the separately identified
+`exp-702-exp701-terminal-evaluation-continuation`. Before any provider mutation,
+run its `--verify-only` gate against archive SHA-256
+`dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc`.
+The successor must use CUDA and may execute exactly two phases:
+`evaluation/straight_through_restarts/128` and `/256`. It must write to an
+EXP702 directory and tracking identity. Training, CPU fallback, extra
+diagnostics, and predecessor writes are semantic failures. A future paid launch
+requires new explicit authorization, a fresh bounded admission record, and the
+same one-resource-at-a-time cleanup controls; T027 performed no provider launch.
+
+The durable predecessor stop is
+`experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/terminal-incomplete.json`.
+The successor preregistration is
+`experiments/runs/exp-702-exp701-terminal-evaluation-continuation/preregistration.json`.
+
+The T029 no-paid repair adds a self-authenticating source package and dry-run
+lifecycle; it does not authorize or contact RunPod. Before any future create,
+a read-only gate must authenticate `dry-run-package.json` and
+`dry-run-plan.json`, recheck the funded account and zero-resource observation,
+and bind a Windows host owner plus independent watchdog to the exact new Pod
+and volume IDs. The admitted upper bounds are `$3.25` and `14,400` seconds for
+one resource pair. The lifetime includes 1,200 seconds setup/baseline, 9,600
+seconds evaluation, 900 seconds final export, 900 seconds deletion, and 1,800
+seconds contingency; compute plus storage at `$0.750795/hour` is bounded by
+`$3.003180`.
+
+The guest exports an initial archive, refreshes it every 300 seconds, and
+publishes a final archive. The host must restore and hash-verify an off-Pod copy
+before volume deletion. Phase manifests are single-writer, hash-bound, and
+idempotent; a completed width is reused, never recomputed. Billing is not
+considered stopped until both exact Pod absence and exact volume absence are
+confirmed. A watchdog deadline without a restore-verified receipt may delete
+the Pod but must retain the volume and escalate; it must never claim complete
+cleanup or publication.
 
 Every live or terminal handoff must state all fields below. Omission means the
 next agent performs read-only reconciliation before acting.

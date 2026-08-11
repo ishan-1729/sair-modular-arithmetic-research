@@ -1,0 +1,13 @@
+{
+  "identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+  "phase_result_sha256": {
+    "128": "08a28da8028b5131f17a0eb7f3d26bb2c22f8de087f6691768ec81380f2ae460",
+    "256": "34c8fbc7904d5a11ba142eea630148aee33ae0c5cf0557b96e73ff7aa405a744"
+  },
+  "published_at": "2026-08-11T21:58:44.884991+00:00",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "schema_version": "exp703-publication-v1",
+  "status": "completed",
+  "terminal_summary": ".scratch/exp703-cpu-overnight/terminal-summary.json",
+  "terminal_summary_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2"
+}

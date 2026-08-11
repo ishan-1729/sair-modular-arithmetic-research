@@ -1,0 +1,30 @@
+{
+  "controller_command_sha256": "45ff2386c102be906de1b5ba7e48b53849152e367ee106306275e270419f576c",
+  "controller_exit_status": 1,
+  "data_center_id": "EU-RO-1",
+  "elapsed_seconds": 927.5152906470012,
+  "failure": null,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "guest_terminal": {
+    "resume_required": false,
+    "status": "completed"
+  },
+  "host_sync_exit_status": -15,
+  "maximum_provider_seconds": 35850,
+  "maximum_total_usd": 8.98,
+  "network_volume_delete_confirmed": true,
+  "network_volume_gb": 50,
+  "network_volume_id": "wivbm4k6vn",
+  "offpod_destination": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3k",
+  "provider": "RunPod Secure",
+  "provider_pod_delete_confirmed": true,
+  "required_authorization": "I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10",
+  "resume": true,
+  "s3_endpoint": "https://s3api-eu-ro-1.runpod.io/",
+  "schema_version": "exp701-runpod-orchestration-receipt-v2",
+  "source_bytes": 2480425,
+  "source_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+  "source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+  "status": "completed-and-cleaned",
+  "transport": "runpod-s3-direct-start"
+}

@@ -1,0 +1,174 @@
+{
+  "archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-resume-s3n/sair-exp701-resume.tar.gz",
+  "archive_bytes": 16846871,
+  "archive_sha256": "aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1",
+  "input_archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3m/sair-exp701-checkpoint-export.tar.gz",
+  "input_archive_sha256": "bea6ef4c5565dfe026f9d05fbd014a4bea53c913c83cf71138a8b434dda241c1",
+  "justification": "The failed arm had no snapshot, checkpoint, result, or update. Only the failed provider-lifecycle terminal and its pre-compute started marker were removed; every retained file is byte-identical.",
+  "output_archive": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-resume-s3n/sair-exp701-resume.tar.gz",
+  "output_archive_bytes": 16846871,
+  "output_archive_sha256": "aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1",
+  "removed_control_markers": {
+    "formal/root-20261414/phases/train__straight_through_cosine.manifest.json": {
+      "bytes": 204,
+      "sha256": "3391609b90d35d321ef5bd326815eaed740cdc38c677fba57e2348a71ca2aa41"
+    },
+    "formal/root-20261414/terminal-failure.json": {
+      "bytes": 281,
+      "sha256": "d5577432d424372a459772c252350d451f5852739e0d932ccc97f3212ba92f5d"
+    },
+    "guest-terminal.json": {
+      "bytes": 58,
+      "sha256": "576a979efea9f83c851f921a64adcda7ebbe4731cd427ff942c4731ac37e0c53"
+    }
+  },
+  "restore_verification": {
+    "archive_sha256": "aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1",
+    "restored_output": "/tmp/exp701-rollback-yaji56kc/verified/experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial",
+    "schema_version": "exp701-recovery-restore-v1",
+    "status": "verified",
+    "tree_verification": {
+      "bytes": 26617462,
+      "completed_phases": [
+        {
+          "manifest": "calibration/root-20261413/phases/calibration__diagnostic.manifest.json",
+          "phase_identity_sha256": "943941f8315fbcb8ecb599e4b4c9902df8a930d91b2caa1eb71d3ec3f8fb63b9",
+          "result_sha256": "1343df8d5b278283595ce9f453405e3554d001bea2d0d9161dd4d87fb50701eb"
+        },
+        {
+          "manifest": "calibration/root-20261413/phases/calibration__evaluation.manifest.json",
+          "phase_identity_sha256": "c4f482df69564d209a9e8df1f9ba5078838d59cb14a1d4ec9264641ec4bba402",
+          "result_sha256": "a65b82dd252bd9cc76b35ac94fe80859d8b8722e4280ba2fc0daf1e25292794a"
+        },
+        {
+          "manifest": "calibration/root-20261413/profile/phases/train__teacher_cosine.manifest.json",
+          "phase_identity_sha256": "9a9113e00bd1cd27cf7fef18406b8c95d60903270002aac0e297d59c41f51f99",
+          "result_sha256": "8f8d0b5f5a9263dffca2247a2e553f1d8c06f97408e7a80cd225756fc5a184a7"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/evaluation__teacher_cosine__128.manifest.json",
+          "phase_identity_sha256": "d89dec98cadbef4761371871f6efb639302e3aec63d4532b1b4eb16bc6e18b37",
+          "result_sha256": "30a4844f84486be685a2a27337cf7b9578b5d1cfdada0e29d9509e59436a8951"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/evaluation__teacher_cosine__256.manifest.json",
+          "phase_identity_sha256": "37f8d2bc1756e4e4eeea3d48014d8f3b2e6fab554a9ec3dc69b35fa5100f0c44",
+          "result_sha256": "ecea5f5fc956b0b29929f27e04c4ae1aa76c6228504c242ae4f01b39a94c21e7"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/evaluation__teacher_restarts__128.manifest.json",
+          "phase_identity_sha256": "184c16b1fa835a83e2e941ea13bbe99788620d6916ee4488290f21abfbb29394",
+          "result_sha256": "6250e0ba85ea32dc6d59473ac96fc4533aedfadf00997818b779bff3d55edfde"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/evaluation__teacher_restarts__256.manifest.json",
+          "phase_identity_sha256": "807270873e4b311bcd0bf87e99faa7440d71cf7b66614fc25ae9ec9465b6a35f",
+          "result_sha256": "6aa940f20f9adba082d9bbcf8a932beddd39db745f4248142963f6c1d1b78026"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/train__teacher_cosine.manifest.json",
+          "phase_identity_sha256": "6296d4a090ffa3918b4711e0407a0e5fcb821247205d8a0164b0d4690672e34f",
+          "result_sha256": "baadd3616b1cfed5cc16ebfa36feced5de9dea2077f204c7771b07779ca16fb5"
+        },
+        {
+          "manifest": "formal/root-20261414/phases/train__teacher_restarts.manifest.json",
+          "phase_identity_sha256": "a06b8b9a29c8107773aadec1c1f26c9f19361be1d40a12577194527c265465ef",
+          "result_sha256": "1b93fe30f0625b1a15a655aed25a527d91b92fd144d9b7271d59dcfbf169ebc1"
+        },
+        {
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/diagnostic-recovery/phases/diagnostic__frozen_source__128.manifest.json",
+          "phase_identity_sha256": "434b785c6cdb8d6afeb381f7243edbd803c5d1957d98b251fdf4547f31239958",
+          "result_sha256": "10b7a55334e2e26535bf2b676d3cbe7f4c9a0a0d4e3cdd035eea4bf1a5d38306"
+        },
+        {
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/evaluation-recovery/phases/evaluation__teacher_cosine__128.manifest.json",
+          "phase_identity_sha256": "a05de350f95ea12388f0b515c1d5a67e9743e0c0d4e8565de0446a4a6bfd1b67",
+          "result_sha256": "99af93de087a9c3d92ec52b50a6e73b354075b49abf4b914d212edc6d34e2484"
+        },
+        {
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/interrupted/phases/train__teacher_cosine.manifest.json",
+          "phase_identity_sha256": "fb22b88d592ec1095be9888a9ef64c9a671ea5f3676fc90be50612759ef19035",
+          "result_sha256": "0c875c311afb92923e31b5bcd2d1f514eca6a71055b667537cd749a0e182727d"
+        },
+        {
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/uninterrupted/phases/train__teacher_cosine.manifest.json",
+          "phase_identity_sha256": "fb22b88d592ec1095be9888a9ef64c9a671ea5f3676fc90be50612759ef19035",
+          "result_sha256": "144b4ab0f35e06b00aabeb1eedf7e754b57655f4c3a5ab33bc9fd9161946b9d5"
+        }
+      ],
+      "files": 82,
+      "output": "/tmp/exp701-rollback-yaji56kc/verified/experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial",
+      "passed": true,
+      "root_markers": [
+        "calibration/root-20261413/root-opened.json",
+        "formal/root-20261414/root-opened.json"
+      ],
+      "schema_version": "exp701-recovery-tree-verification-v1",
+      "snapshots": [
+        {
+          "arm": "teacher_cosine",
+          "identity_sha256": "f90711b10686445782cedf02044852042daba8a9b9789e79da1106bcdb124791",
+          "manifest": "calibration/root-20261413/profile/recovery/teacher_cosine/latest.json",
+          "snapshot_sha256": "036b66991b3e76448d147ad36d44d0977b69ada5ca2eb08ee55fa5f177603f52",
+          "update": 4
+        },
+        {
+          "arm": "teacher_cosine",
+          "identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+          "manifest": "formal/root-20261414/recovery/teacher_cosine/latest.json",
+          "snapshot_sha256": "a0badd6c22c1350e9023cb5bd05ae690a3d947ac6ccd3445b480f6a8ec06856f",
+          "update": 4800
+        },
+        {
+          "arm": "teacher_restarts",
+          "identity_sha256": "4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9",
+          "manifest": "formal/root-20261414/recovery/teacher_restarts/latest.json",
+          "snapshot_sha256": "983922ccaad75bb4569fa9f45d28af537db1e86088ad4a2cd70d3b48dfa60160",
+          "update": 4800
+        },
+        {
+          "arm": "teacher_cosine",
+          "identity_sha256": "7d11e2cee460716591889b158a07effd35ef74fd5c44ba88a561a329b56c8859",
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/interrupted/recovery/teacher_cosine/latest.json",
+          "snapshot_sha256": "051897227df2818e87b7adfd6a267c1c48c0cc211cb63449aa15407748c53cc9",
+          "update": 3
+        },
+        {
+          "arm": "teacher_cosine",
+          "identity_sha256": "7d11e2cee460716591889b158a07effd35ef74fd5c44ba88a561a329b56c8859",
+          "manifest": "pre-root-smoke/smoke/runs/7d11e2cee4607165/uninterrupted/recovery/teacher_cosine/latest.json",
+          "snapshot_sha256": "fcc4e5833346c51cec48f77db911d4714c928a595d9fbf77f95eb5e333a8d712",
+          "update": 3
+        }
+      ]
+    }
+  },
+  "retained_bytes": 26617462,
+  "retained_files": 82,
+  "retained_tree_exact_after_restore": true,
+  "schema_version": "exp701-control-failure-rollback-v1",
+  "scientific_state_changed": false,
+  "status": "verified",
+  "validated_failure_boundary": {
+    "guest_terminal": {
+      "exit_code": 1,
+      "resume_required": false,
+      "status": "failed"
+    },
+    "phase": {
+      "phase": "train/straight_through_cosine",
+      "phase_identity_sha256": "62cea631202fbf14c85243a32463cd792b65fddd900af6e8cd763b53a327344f",
+      "schema_version": "exp701-phase-v1",
+      "status": "started"
+    },
+    "terminal_failure": {
+      "mode": "formal",
+      "reason": "resume state missing for straight_through_cosine",
+      "retry_allowed": false,
+      "root": 20261414,
+      "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+      "schema_version": "exp701-terminal-failure-v1",
+      "status": "terminal-failure"
+    }
+  }
+}

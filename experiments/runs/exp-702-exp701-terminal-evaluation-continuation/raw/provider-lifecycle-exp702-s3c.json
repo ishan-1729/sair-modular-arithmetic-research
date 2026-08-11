@@ -1,0 +1,5 @@
+{
+  "provider_mutation_performed": false,
+  "reason": "RunPod REST/S3 credentials are absent",
+  "status": "blocked-no-provider-mutation"
+}

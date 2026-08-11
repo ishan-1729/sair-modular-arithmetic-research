@@ -282,3 +282,39 @@ Readiness is now `cuda-hardware-validated-acceptance-only`: the representative
 CUDA families and checkpoint round trip are operational, but no long training
 experiment has run, so no speedup, throughput, utilization, or representative
 peak-VRAM claim is permitted yet.
+
+## EXP701 terminal boundary and EXP702 successor (2026-08-11)
+
+EXP701 is durably terminal-incomplete. Its exact s3t archive has SHA-256
+`dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc`;
+all 19,200 planned training updates are present, but only six of eight primary
+arm/width evaluations completed. The frozen lifecycle used all three permitted
+recoveries and rejected the next resume. There is no EXP701 formal root summary,
+integrated factorial verdict, confirmation claim, or promotion evidence.
+
+EXP702 is a separately preregistered CUDA-only successor. It authenticates the
+exact archive, tree, source/config/checkpoint identities, six reused result
+hashes, terminal marker, and recovery ledger. It may execute only
+`straight_through_restarts` at widths 128 and 256 with the frozen EXP701
+evaluation function, split, root, denominators, determinism policy, and final
+checkpoint. It writes only under its own output and tracking identity; training,
+CPU fallback, predecessor mutation, and attribution of its results to EXP701
+fail closed. No paid provider launch or long local evaluation occurred in T027.
+
+T029 repairs the launch-review boundary without provider access. The successor
+now binds its runner, config, tests, no-paid orchestrator, guest supervisor,
+Windows watchdog, canonical cu124 lock, CUDA profile, official wheel, source
+checkpoint, challenge commit, and predecessor archive before packaging. Its
+runtime fails closed unless torch is exactly `2.5.1+cu124`, `torch.version.cuda`
+is `12.4`, the device name is exactly `NVIDIA GeForce RTX 4090`, deterministic
+algorithms and `CUBLAS_WORKSPACE_CONFIG=:4096:8` are active, and TF32 is off.
+
+Both possible terminal branches are now preregistered and total: a w256 winner
+below 0.85 publishes `complete-negative-full-denominator`; a winner at or above
+0.85 publishes `complete-positive-preregistered-gate-reached-no-additional-science`.
+Neither branch trains, opens confirmations, or adds diagnostics. Completed
+width phases are hash/identity-bound and retry-safe under a single-writer lock.
+The portable dry run admits the complete 14,400-second provider lifetime at a
+$3.25 ceiling, including setup, both evaluations, restore-verified export,
+deletion confirmation, and contingency. This remains preparation, not paid
+authorization or physical EXP702 CUDA evidence.

@@ -1,0 +1,192 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 504, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 486, in main
+    result = execute(args.config, archive, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py", line 423, in execute
+    terminal = exp702.integrate_result(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_702_exp701_terminal_evaluation_continuation/run.py", line 278, in integrate_result
+    "relationship": config["predecessor"]["relationship"],
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'relationship'

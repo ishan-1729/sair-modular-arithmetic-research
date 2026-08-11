@@ -1,0 +1,32 @@
+{
+  "schema_version": "sair-paid-compute-tranche-v1",
+  "observed_at_utc": "2026-08-10T21:57:34Z",
+  "user_direction": "Do not stop for further authorization; finish EXP701 first, then use any remaining balance for fast promising experiments.",
+  "provider": "RunPod Secure Cloud",
+  "funded_account_credit_usd": 10.0,
+  "aggregate_cost_upper_usd": 9.5,
+  "aggregate_provider_seconds_upper": 45000,
+  "uncommitted_balance_buffer_usd": 0.5,
+  "priority_order": [
+    "complete full-fidelity EXP701",
+    "persist, evaluate, register, validate, commit, and push EXP701",
+    "conservatively reconcile completed provider cost receipts",
+    "rank remaining CUDA-ready experiments by expected value per dollar and time",
+    "run sequential quick-win experiments only inside the verified remainder"
+  ],
+  "authorization_policy": {
+    "additional_approval_pauses_required": false,
+    "paid_resources_may_overlap": false,
+    "exact_cleanup_required_before_next_lifecycle": true,
+    "offpod_restore_verification_required_before_resume": true,
+    "scientific_fidelity_may_be_reduced": false,
+    "each_lifecycle_requires_independent_cost_time_and_cleanup_bounds": true
+  },
+  "balance_policy": {
+    "provider_balance_api_available": false,
+    "completed_spend_basis": "provider lifecycle cost upper at deletion confirmation, falling back to admitted upper only when terminal cost evidence is absent",
+    "new_lifecycle_admission": "worst-case cumulative upper must remain at or below $9.50 and 45,000 provider seconds",
+    "stop_when": "the conservative remainder cannot fund a useful bounded lifecycle with cleanup reserve"
+  },
+  "credential_material_recorded": false
+}

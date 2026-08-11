@@ -1,0 +1,28 @@
+{
+  "schema_version": "exp701-attempt-failure-v1",
+  "status": "rejected-before-provider-request",
+  "attempt": "s3p",
+  "provider_resources_created": false,
+  "paid_provider_seconds": 0,
+  "scientific_updates_added": 0,
+  "failure": {
+    "phase": "local-budget-admission",
+    "message": "Projected provider upper $4.692469 exceeded the $4.675000 budget remaining after the controller's mandatory 15% reserve under a $5.50 explicit lifecycle cap."
+  },
+  "fix": {
+    "maximum_total_usd": 5.55,
+    "maximum_provider_seconds": 22500,
+    "projected_rate_bound_upper_usd": 4.692469,
+    "budget_after_reserve_usd": 4.7175,
+    "cumulative_authorization_changed": false
+  },
+  "cleanup": {
+    "pod_inventory_empty": true,
+    "network_volume_inventory_empty": true,
+    "windows_watchdog_stopped": true
+  },
+  "evidence": [
+    "orchestrator-lifecycle-s3p.json",
+    ".scratch/exp701-runpod-session-s3p/controller.log"
+  ]
+}

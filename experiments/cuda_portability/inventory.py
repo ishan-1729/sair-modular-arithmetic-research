@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 from collections import defaultdict, deque
+from fnmatch import fnmatchcase
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -141,17 +142,41 @@ class ModuleScanner(ast.NodeVisitor):
         self.generic_visit(node)
 
 
+def scan_exclusion_patterns(config: dict[str, Any]) -> tuple[str, ...]:
+    patterns: list[str] = []
+    for exclusion in config["scan"].get("exclude", []):
+        pattern = exclusion if isinstance(exclusion, str) else exclusion["pattern"]
+        patterns.append(str(pattern))
+    return tuple(patterns)
+
+
+def scan_path_is_excluded(path: Path, config: dict[str, Any]) -> bool:
+    relative = path.relative_to(ROOT).as_posix()
+    return any(
+        fnmatchcase(relative, pattern)
+        for pattern in scan_exclusion_patterns(config)
+    )
+
+
 def discover_python(config: dict[str, Any]) -> list[Path]:
     included: set[Path] = set()
     for pattern in config["scan"]["include"]:
-        included.update(path for path in ROOT.glob(pattern) if path.is_file())
+        included.update(
+            path
+            for path in ROOT.glob(pattern)
+            if path.is_file() and not scan_path_is_excluded(path, config)
+        )
     return sorted(included, key=lambda path: path.relative_to(ROOT).as_posix())
 
 
 def discover_roots(config: dict[str, Any]) -> list[Path]:
     roots: set[Path] = set()
     for pattern in config["scan"]["roots"]:
-        roots.update(path for path in ROOT.glob(pattern) if path.is_file())
+        roots.update(
+            path
+            for path in ROOT.glob(pattern)
+            if path.is_file() and not scan_path_is_excluded(path, config)
+        )
     return sorted(roots, key=lambda path: path.relative_to(ROOT).as_posix())
 
 

@@ -1,0 +1,36 @@
+run_id: exp-703-exp701-terminal-evaluation-cpu-continuation
+hypothesis: The exact authenticated terminal EXP701 checkpoint can complete its two missing full-denominator evaluations on deterministic CPU without changing weights, data, seeds, evaluation semantics, or terminal policy, while recording a distinct execution identity from CUDA-preregistered EXP702.
+predecessor:
+  run_id: exp-701-cuda-resumable-h92-w256-backbone-factorial
+  archive: .scratch/exp701-offpod-s3t/sair-exp701-checkpoint-export.tar.gz
+  archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+  checkpoint_sha256: d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab
+  root: 20261414
+  exp702_config: configs/exp_702_exp701_terminal_evaluation_continuation.yaml
+  exp702_config_sha256: 04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a
+  exp702_runner_sha256: d9651fe79e86a555a20d7f3ce662bb9499b477cb220ed945608a7a9371c8e50b
+evaluation:
+  arm: straight_through_restarts
+  widths: [128, 256]
+  transition_cases_per_width: 3000
+  rollout_cases: {'128': 300, '256': 600}
+  function: frozen-exp701-evaluate-with-evidence
+  training_allowed: false
+cpu_execution:
+  device: cpu
+  torch: 2.5.1+cpu
+  deterministic_algorithms: true
+  torch_threads: 10
+  interop_threads: 1
+  phase_heartbeat_seconds: 60
+tracking:
+  experiment_name: sair-modular-arithmetic-wsl
+terminal_policy:
+  advancement_gate_w256_rollout: 0.85
+  if_gate_reached: complete-positive-preregistered-gate-reached-no-additional-science
+  otherwise_decision: complete-negative-full-denominator
+limitations:
+  - EXP703 is a CPU execution successor and must not be represented as completion of CUDA-preregistered EXP702 or repair of EXP701.
+  - Six results and all trained weights are reused only from the exact authenticated predecessor archive.
+  - Only the two missing full-denominator evaluations execute; training and diagnostics are forbidden.
+  - CPU and CUDA floating-point execution identities are distinct even though weights, data, seeds, denominators, and evaluation functions are frozen.

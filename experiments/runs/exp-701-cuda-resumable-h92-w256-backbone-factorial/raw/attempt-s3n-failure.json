@@ -1,0 +1,59 @@
+{
+  "schema_version": "exp701-runpod-attempt-failure-v1",
+  "status": "failed-before-science",
+  "attempt": "s3n",
+  "pod_id": "i5ne5i8ln79knz",
+  "network_volume_id": "swcni00bq9",
+  "source_archive_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+  "source_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+  "resume_archive_sha256": "aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1",
+  "final_archive": ".scratch/exp701-offpod-s3n/sair-exp701-checkpoint-export.tar.gz",
+  "final_archive_sha256": "d52b9bd8b4a5fbfd810f3eb0a22565d1236b7c22044b3d687015079567071258",
+  "final_archive_bytes": 16848047,
+  "restore_verification": {
+    "status": "verified",
+    "files": 83,
+    "bytes": 26629371,
+    "completed_phases": 13,
+    "snapshots": 5
+  },
+  "failure_phase": "cuda-bootstrap",
+  "failure": {
+    "tool": "uv 0.11.28",
+    "dependency": "torch 2.5.1+cu124 cp312 linux_x86_64",
+    "url": "https://download.pytorch.org/whl/cu124/torch-2.5.1%2Bcu124-cp312-cp312-linux_x86_64.whl",
+    "reason": "downloaded artifact SHA-256 did not match the pinned requirement",
+    "expected_sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7",
+    "computed_sha256": "7b4b97806a064fffb92ee008a197b77922150f62ec7ce9ebb273909dcff62472",
+    "exact_log_location": "final archive member experiment/exp-701-cuda-resumable-h92-w256-backbone-factorial/guest-supervisor.log"
+  },
+  "current_attempt_gates": {
+    "cuda_bootstrap": "failed",
+    "hardware_acceptance": "not_reached",
+    "focused_tests": "not_reached",
+    "restored_smoke_verification": "not_reached",
+    "science": "not_reached"
+  },
+  "restored_evidence_warning": "environment.json, hardware-acceptance, focused-junit.xml, restored-smoke-verification.json, and resume-runtime-compatibility.json in the final archive predate s3n and must not be counted as current-attempt gates.",
+  "science_progress": {
+    "formal_root": 20261414,
+    "completed_training_updates": 9600,
+    "planned_training_updates": 19200,
+    "completed_fraction": 0.5,
+    "new_updates_in_s3n": 0,
+    "completed_arms": [
+      "teacher_cosine",
+      "teacher_restarts"
+    ]
+  },
+  "lifecycle_elapsed_upper_seconds": 2354.7790182380013,
+  "cost_upper_usd": 0.491101,
+  "tranche_cumulative_elapsed_upper_seconds": 12525.517330464001,
+  "tranche_cumulative_cost_upper_usd": 2.61225,
+  "cleanup": {
+    "pod_delete_confirmed": true,
+    "network_volume_delete_confirmed": true,
+    "watchdog_status": "controller-cleaned-before-deadline"
+  },
+  "retry_launched": false
+}

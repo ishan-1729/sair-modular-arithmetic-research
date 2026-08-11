@@ -33,6 +33,66 @@ def test_generated_inventory_is_fresh_and_closed(manifest: dict) -> None:
     assert manifest["source"]["root_count"] >= 159
 
 
+def test_scan_exclude_filters_modules_and_roots_without_widening_scope(
+    tmp_path, monkeypatch
+) -> None:
+    excluded_package = (
+        tmp_path / "experiments/exp_689_hidden48_hidden_trajectory_distillation"
+    )
+    sibling_package = tmp_path / "experiments/exp_689_neighbor"
+    (excluded_package / "nested").mkdir(parents=True)
+    sibling_package.mkdir(parents=True)
+    (excluded_package / "run.py").write_text("", encoding="utf-8")
+    (excluded_package / "nested/model.py").write_text("", encoding="utf-8")
+    (sibling_package / "run.py").write_text("", encoding="utf-8")
+    monkeypatch.setattr(inventory, "ROOT", tmp_path)
+    pattern = "experiments/exp_689_hidden48_hidden_trajectory_distillation/**"
+    config = {
+        "scan": {
+            "include": ["experiments/**/*.py"],
+            "roots": ["experiments/**/run.py", "experiments/**/model.py"],
+            "exclude": [
+                {
+                    "pattern": pattern,
+                    "reason": "Untracked user-owned package outside this scope.",
+                }
+            ],
+        }
+    }
+
+    assert [
+        path.relative_to(tmp_path).as_posix()
+        for path in inventory.discover_python(config)
+    ] == ["experiments/exp_689_neighbor/run.py"]
+    assert [
+        path.relative_to(tmp_path).as_posix()
+        for path in inventory.discover_roots(config)
+    ] == ["experiments/exp_689_neighbor/run.py"]
+
+
+def test_exp689_exclusion_is_exact_and_provenance_bearing() -> None:
+    config = inventory.yaml.safe_load(
+        inventory.CONFIG_PATH.read_text(encoding="utf-8")
+    )
+    exclusions = {
+        entry["pattern"]: entry["reason"]
+        for entry in config["scan"]["exclude"]
+        if isinstance(entry, dict)
+    }
+    pattern = "experiments/exp_689_hidden48_hidden_trajectory_distillation/**"
+
+    assert pattern in exclusions
+    assert "untracked user-owned" in exclusions[pattern].lower()
+    assert all(
+        "exp_689_hidden48_hidden_trajectory_distillation" not in path.as_posix()
+        for path in inventory.discover_python(config)
+    )
+    assert all(
+        "exp_689_hidden48_hidden_trajectory_distillation" not in path.as_posix()
+        for path in inventory.discover_roots(config)
+    )
+
+
 def test_every_module_has_evidence_and_every_hotspot_inherits_classification(
     manifest: dict,
 ) -> None:

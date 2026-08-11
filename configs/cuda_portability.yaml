@@ -7,7 +7,10 @@ scan:
   include:
     - experiments/**/*.py
   exclude:
-    - experiments/**/__pycache__/**
+    - pattern: experiments/**/__pycache__/**
+      reason: Generated Python bytecode caches are not authored experiment sources.
+    - pattern: experiments/exp_689_hidden48_hidden_trajectory_distillation/**
+      reason: This complete untracked user-owned package is outside EXP702 scope and remains adapter-required if later incorporated into the CUDA inventory.
   manifest: experiments/cuda_portability/inventory.json
 ported_paths:
   - experiments/cuda_portability/__init__.py
@@ -19,6 +22,7 @@ ported_paths:
   - experiments/cuda_portability/runtime.py
   - experiments/cloud_benchmarks/exp699_cuda_replay/run.py
   - experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
+  - experiments/exp_702_exp701_terminal_evaluation_continuation/run.py
 adapted_sources:
   experiments/exp_401_pyg_graph_message_passing/model.py:
     adapter: experiments/cuda_portability/graph.py
@@ -45,6 +49,10 @@ adapted_sources:
     consumer: experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
     smoke_command: "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
 active_cpu_boundaries:
+  experiments/cloud_benchmarks/exp702_runpod/orchestrate.py:
+    symbols: [package_launch, plan_launch, build_source_archive]
+    reason: This no-paid host control plane creates an authenticated guest-portable payload and lifecycle review record without importing a provider client, reading credentials, or executing tensor computation.
+    responsibility: Keep package identity, finite budget admission, host ownership, watchdog, persistence, and exact cleanup obligations outside the CUDA scientific runner.
   experiments/cloud_benchmarks/exp701_runpod/pre_science.py:
     symbols: [restored-smoke-json-verification, sha256-evidence-receipt]
     reason: This guest control-plane verifier authenticates completed pre-root recovery-smoke evidence and never executes tensor or model computation.

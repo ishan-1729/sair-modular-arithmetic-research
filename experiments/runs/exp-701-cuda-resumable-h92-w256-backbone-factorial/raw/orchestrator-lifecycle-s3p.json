@@ -1,0 +1,33 @@
+{
+  "controller_command_sha256": "54be831449db8d230e17f10f06bc3c3f3fc016c6ddde618777565999d5abae8c",
+  "controller_exit_status": 1,
+  "data_center_id": "EU-RO-1",
+  "elapsed_seconds": 2.0091975340037607,
+  "failure": "RuntimeError: provider controller exited before volume creation",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "guest_terminal": null,
+  "host_sync_exit_status": null,
+  "maximum_provider_seconds": 22500,
+  "maximum_total_usd": 5.5,
+  "network_volume_delete_confirmed": false,
+  "network_volume_gb": 50,
+  "network_volume_id": null,
+  "offpod_destination": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3p",
+  "preloaded_torch_wheel": {
+    "bytes": 908202405,
+    "path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-dependencies/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl",
+    "sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7",
+    "status": "verified"
+  },
+  "provider": "RunPod Secure",
+  "provider_pod_delete_confirmed": false,
+  "required_authorization": "I_AUTHORIZE_PAID_GPU_LAUNCH RUNPOD_SECURE_RTX4090 NETWORK_VOLUME_GB_50 OFFPOD_SYNC_REQUIRED MAX_TOTAL_USD_9.00 MAX_PROVIDER_HOURS_10",
+  "resume": true,
+  "s3_endpoint": "https://s3api-eu-ro-1.runpod.io/",
+  "schema_version": "exp701-runpod-orchestration-receipt-v2",
+  "source_bytes": 2480425,
+  "source_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+  "source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+  "status": "failed",
+  "transport": "runpod-s3-direct-start"
+}

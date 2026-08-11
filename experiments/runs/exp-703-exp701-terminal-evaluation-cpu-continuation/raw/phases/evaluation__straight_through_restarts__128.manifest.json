@@ -1,0 +1,11 @@
+{
+  "completed_at": "2026-08-11T20:32:21.321259+00:00",
+  "identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+  "phase": "evaluation/straight_through_restarts/128",
+  "result": ".scratch/exp703-cpu-overnight/phases/evaluation__straight_through_restarts__128.json",
+  "result_bytes": 892604,
+  "result_sha256": "08a28da8028b5131f17a0eb7f3d26bb2c22f8de087f6691768ec81380f2ae460",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "schema_version": "exp703-phase-v1",
+  "status": "completed"
+}

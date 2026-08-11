@@ -1,0 +1,545 @@
+{
+  "budget": {
+    "admitted_upper_usd": "4.692469",
+    "budget_after_reserve_usd": "4.717500",
+    "budget_limited_seconds": 22620,
+    "hourly_rate_usd": "0.74",
+    "max_provider_seconds": 22500,
+    "max_total_usd": "5.55",
+    "reserve_fraction": "0.15",
+    "storage_hourly_usd": "0.010795"
+  },
+  "command_sha256": "599e75a5fc6ea73804702c3d902e240fbe1d333f0d8ba44ce4bc92c52cf3f65c",
+  "config": "configs/exp_701_runpod_control.yaml",
+  "config_sha256": "ef06ecef103229880b67706e705a23f1934ef24dca5b456b08c54d7d12c9a5e4",
+  "cost_upper_at_confirmation_usd": "4.549674",
+  "credential_environment": "RUNPOD_API_KEY",
+  "cuda_runtime": "any",
+  "disk_gb": 50,
+  "environment": [],
+  "events": [
+    {
+      "elapsed_seconds": 0.009046972001669928,
+      "event": "network-volume-create-requested"
+    },
+    {
+      "elapsed_seconds": 1.6147369969985448,
+      "event": "network-volume-created",
+      "response_sha256": "972c7be49342fe573d92f25eae4561ab191f3c4fd6cd90d1b26d21610456a53a"
+    },
+    {
+      "elapsed_seconds": 1.628718938001839,
+      "event": "network-volume-readiness-requested",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3q/network-volume-ready.json"
+    },
+    {
+      "elapsed_seconds": 392.44307809600286,
+      "event": "network-volume-ready",
+      "receipt": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3q/network-volume-ready.json",
+      "source_bytes": 2480425,
+      "source_key": "sair-exp701-source.tar.gz",
+      "source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+      "upload_verification": {
+        "bucket": "77jdi2md3s",
+        "bytes": 2480425,
+        "key": "sair-exp701-source.tar.gz",
+        "sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+        "status": "verified",
+        "verification": "authenticated-download-sha256"
+      }
+    },
+    {
+      "elapsed_seconds": 392.4579397600028,
+      "event": "create-requested"
+    },
+    {
+      "elapsed_seconds": 395.061459949,
+      "event": "resource-created",
+      "response_sha256": "eae5fd10be694e357802d0fd5bc458d3ef6454a2e40b8db81e04b0a03edf8d76"
+    },
+    {
+      "elapsed_seconds": 395.0725020210011,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 696.5518901520045,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 998.0561001360038,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1299.5826727380045,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1601.2262469199995,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 1902.7325948310026,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 2204.3189693660024,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 2505.9207194970004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 2807.4475288890026,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 3108.995650319004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 3410.5357360510025,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 3712.111303562,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 4014.7330682570027,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 4316.267787044999,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 4617.881669501003,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 4919.4618200500045,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 5221.020490736999,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 5522.6357200130005,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 5824.199152343004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 6125.741127997004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 6427.305602351,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 6728.989566903998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 7030.496106901999,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 7331.960541501998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 7633.586385900999,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 7935.1128531440045,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 8236.680131032,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 8538.252169760002,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 8839.827384930002,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 9141.431672758998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 9443.080220157004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 9744.673704817003,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 10046.416078946,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 10347.970647397,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 10649.597548709004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 10951.230564311998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 11252.801839578002,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 11554.386624787003,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 11855.896633173004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 12157.573172671,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 12460.311466921004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 12761.908953179001,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 13063.491076503,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 13365.054171018004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 13666.676338251003,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 13968.203114338,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 14269.854826617004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 14571.400123054998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 14873.011705140001,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 15174.609855338,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 15476.158356314001,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 15777.760056455998,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 16081.103913003004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 16382.754602309004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 16684.306197848004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 16986.012755293,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 17287.568269827003,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 17589.228669304,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 17890.884213537,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 18192.629703930004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 18494.214186439,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 18795.857718044004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 19097.480185364002,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 19399.15996677,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 19701.090627351005,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 20002.733603507004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 20304.330735093004,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 20606.009591702,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 20907.610472075,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 21209.353327241,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "elapsed_seconds": 21511.086100961,
+      "event": "provider-status",
+      "observed_hourly_rate_usd": "0.74",
+      "provider_status": "RUNNING"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 21814.152840813003,
+      "event": "delete-requested",
+      "response_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "attempt": 1,
+      "elapsed_seconds": 21815.170114644003,
+      "event": "delete-confirmed"
+    },
+    {
+      "elapsed_seconds": 21815.301119194002,
+      "error": "off-Pod archive does not match its receipt",
+      "error_type": "RuntimeError",
+      "event": "network-volume-retained",
+      "reason": "offpod-restore-unverified"
+    }
+  ],
+  "failure": {
+    "message": "provider operation ceiling reached; cleanup headroom opened",
+    "type": "TimeoutError"
+  },
+  "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+  "label": "sair-exp701-full-fidelity",
+  "limitations": [
+    "No provider request was made and no current offer price was verified.",
+    "Client power/network/process failure can outlive this controller; use prepaid balance and disable auto-recharge before launch.",
+    "Guest completion is not cost closure; only confirmed DELETE is cost closure."
+  ],
+  "network_volume": {
+    "attached": false,
+    "data_center_id": "EU-RO-1",
+    "id": null,
+    "managed_create": true,
+    "mount_path": "/workspace",
+    "name": "sair-exp701-recovery",
+    "ready_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-runpod-session-s3q/network-volume-ready.json",
+    "ready_source_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+    "ready_timeout_seconds": 1800,
+    "size_gb": 50
+  },
+  "network_volume_id": "77jdi2md3s",
+  "offpod_receipt_path": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/.scratch/exp701-offpod-s3q/offpod-sync-receipt.json",
+  "ports": [],
+  "provider": "runpod",
+  "resource_id": "3ta4ntjy8w75ky",
+  "resource_selector": "NVIDIA GeForce RTX 4090",
+  "schema_version": "cuda-provider-lifecycle-receipt-v1",
+  "status": "network-volume-destruction-unconfirmed",
+  "template_id": null,
+  "timing": {
+    "deletion_confirmed_elapsed_seconds": 21815.170114644003,
+    "guest_runtime_seconds": null,
+    "network_volume_deletion_confirmed_elapsed_seconds": null,
+    "provider_billed_lifetime_seconds": 21815.311579729998,
+    "provider_billed_lifetime_source": "controller-create-request-to-delete-confirmation-upper-bound",
+    "provider_invoice_amount_usd": null
+  }
+}

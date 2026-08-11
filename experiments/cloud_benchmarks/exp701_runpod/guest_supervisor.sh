@@ -6,6 +6,7 @@ expected_sha="${SAIR_EXP701_SOURCE_SHA256:?SAIR_EXP701_SOURCE_SHA256 is required
 workspace="${SAIR_EXP701_WORKSPACE:-/workspace/sair-exp701}"
 slice_seconds="${SAIR_EXP701_SLICE_SECONDS:-32400}"
 sync_nonce="${SAIR_EXP701_SYNC_NONCE:?SAIR_EXP701_SYNC_NONCE is required}"
+runner_wrapper="${SAIR_EXP701_RUNNER_WRAPPER:?SAIR_EXP701_RUNNER_WRAPPER is required}"
 repository="$workspace/repository"
 output="$repository/.scratch/exp-701-cuda-resumable-h92-w256-backbone-factorial"
 durable_directory="${SAIR_EXP701_DURABLE_DIRECTORY:-/workspace/exp701-durable}"
@@ -99,7 +100,7 @@ bash environments/cuda/run-acceptance.sh --profile cu124 --venv "$workspace/venv
   --junitxml="$output/focused-junit.xml"
 smoke_output="$output/pre-root-smoke"
 if ! test -f "$smoke_output/smoke.json"; then
-  "$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
+  "$python" "$runner_wrapper" \
     --mode smoke --device cuda --output "$smoke_output"
 fi
 "$python" -m experiments.cloud_benchmarks.exp701_runpod.pre_science \
@@ -118,11 +119,16 @@ run_root() {
   local mode="$1" root="$2" resume
   resume="$(resume_arg "$mode" "$root")"
   if test -n "$resume"; then
-    "$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
+    "$python" "$runner_wrapper" \
       --mode "$mode" --root "$root" --device cuda --output "$output" "$resume"
   elif ! test -f "$output/$mode/root-$root/root-summary.json"; then
-    "$python" -m experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run \
+    "$python" "$runner_wrapper" \
       --mode "$mode" --root "$root" --device cuda --output "$output"
+  fi
+  if ! test -f "$output/$mode/root-$root/root-summary.json"; then
+    printf 'EXP701 root returned without a terminal summary: mode=%s root=%s\n' \
+      "$mode" "$root" >&2
+    return 1
   fi
   export_once
 }

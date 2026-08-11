@@ -1,0 +1,62 @@
+run_id: exp-702-exp701-terminal-evaluation-continuation
+hypothesis: The exact terminal EXP701 formal state can be authenticated without changing predecessor bytes, and its two missing straight-through-restarts evaluations can be completed under identical frozen CUDA evaluation semantics as a separately identified successor.
+predecessor:
+  run_id: exp-701-cuda-resumable-h92-w256-backbone-factorial
+  relationship: terminal-evaluation-successor-not-exp701-completion
+  archive: .scratch/exp701-offpod-s3t/sair-exp701-checkpoint-export.tar.gz
+  archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+  archive_bytes: 26368046
+  archive_receipt_sha256: 8242896d46cbf7105c9161fd9095714b8803f0886639cea5dbe9a431af10da4f
+  tree: {files: 112, bytes: 41741406, completed_phases: 17, snapshots: 7}
+  root: 20261414
+  identity_sha256: 4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9
+  source_commit: 0027f66197a00ea9392e04cc7060c899500aa091
+  source:
+    config_sha256: 09f38f6bd486a9606e8a3471bac948f72f98dafe01506bb36368c0d7662b8708
+    runner_sha256: f1a2628316b586d92dd4e03c4e315af2382b0ccc51bf6203b945295b2208c210
+    test_sha256: 2102b839c21532fa2f79334403b79cc5f11c6f82fe5881a9d6f6733c9cd8c554
+    source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+    scientific_contract_sha256: 8217d80345125b2713cf249454a84e405c02c9ff40284eb3e8941888d10e415a
+    challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  semantics:
+    evaluate_with_evidence_sha256: 30b69044cc2d7552fc34afcc5a532d9822c4c299c8ff22cd1c831babab38719a
+    evaluate_sha256: 9ea95c0524c2a3b2083d20621375808dac91edf84722dab4fbdeb256c54bb281
+    device_exp300_sha256: 9d218b381cea3ec20e9189704407f91b0b1a29ebc2e0c9ab529b0795ecd40fc3
+    make_split_sha256: a8528bd2d38c7834c0012b6e9293301253c7e2ecff909bb9e80a29427de3186a
+  members:
+    root_opened: {path: formal/root-20261414/root-opened.json, sha256: 6165f358b8b2b537048e03b570b7918ed73898d9dafa434177b0ec7042e9d55d}
+    lifecycle: {path: formal/root-20261414/run-active.json, sha256: c99c6b97c6eea0ec645fd6fb45941f39f071531bebbb9eb3c535bcc3d3e1ab30}
+    terminal_failure: {path: formal/root-20261414/terminal-failure.json, sha256: e50146f92c54edb0bedb45512ef285615109ca821b8540861e196806bcbcb88c}
+    progress: {path: formal/root-20261414/progress.json, sha256: 5824b3c757c405f7aaf4e5ef5d2d12239e37766871f3e369fa01f5d581043278}
+    final_checkpoint: {path: formal/root-20261414/arms/straight_through_restarts/model.safetensors, sha256: d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab}
+    final_training: {path: formal/root-20261414/phases/train__straight_through_restarts.json, sha256: 9e123400d8ffda09d591165451063d185ae1f8b9a53e57cf06497ac1dedc83d2}
+    final_training_manifest: {path: formal/root-20261414/phases/train__straight_through_restarts.manifest.json, sha256: 9b691d5882da83dc9e717cfdb6610b2c0e67638576d88e2aacc91e35338cc6e6}
+    missing_128_manifest: {path: formal/root-20261414/phases/evaluation__straight_through_restarts__128.manifest.json, sha256: dff9325de08133df63eb30bf05502f38befdfe76dbd5ea37e1136706af8ebd0b}
+  reused_evaluation_result_sha256:
+    teacher_cosine: {'128': 30a4844f84486be685a2a27337cf7b9578b5d1cfdada0e29d9509e59436a8951, '256': ecea5f5fc956b0b29929f27e04c4ae1aa76c6228504c242ae4f01b39a94c21e7}
+    teacher_restarts: {'128': 6250e0ba85ea32dc6d59473ac96fc4533aedfadf00997818b779bff3d55edfde, '256': 6aa940f20f9adba082d9bbcf8a932beddd39db745f4248142963f6c1d1b78026}
+    straight_through_cosine: {'128': b95d22d3b7264a2d8fa385f4aea900080c699db1fc77320879e383183595f967, '256': 6634b49d0d87d4307b172418fc8be1bf8a0d6db8f1e87178c64ce8077e2d8888}
+evaluation:
+  arm: straight_through_restarts
+  widths: [128, 256]
+  transition_cases_per_width: 3000
+  rollout_cases: {'128': 300, '256': 600}
+  function: frozen-exp701-evaluate-with-evidence
+  training_allowed: false
+gpu_execution:
+  device: cuda
+  profile: cu124
+  torch: 2.5.1+cu124
+  cuda_runtime: '12.4'
+  deterministic_algorithms: true
+  allow_tf32: false
+  gpu: NVIDIA GeForce RTX 4090
+tracking: {experiment_name: sair-modular-arithmetic-wsl}
+terminal_policy:
+  advancement_gate_w256_rollout: 0.85
+  if_gate_reached: complete-positive-preregistered-gate-reached-no-additional-science
+  otherwise_decision: complete-negative-full-denominator
+limitations:
+  - EXP702 does not complete, resume, or repair EXP701.
+  - Six results and all trained weights are reused only from the exact authenticated predecessor archive.
+  - Only two preregistered full-denominator evaluations may execute; training and CPU fallback are forbidden.

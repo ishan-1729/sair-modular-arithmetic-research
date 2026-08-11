@@ -1,0 +1,56 @@
+{
+  "admission": {
+    "attested_balance_usd": "10.0",
+    "funding_basis": "user-attested",
+    "observed_at_seconds": 2,
+    "pods": [],
+    "volumes": []
+  },
+  "cleanup_started_at_seconds": 6,
+  "controller_pid": 83998,
+  "controller_process_identity": "83998:12375864",
+  "controller_started_utc": "2026-08-11T13:52:38.045476+00:00",
+  "errors": [
+    {
+      "message": "HTTP Error 500: Internal Server Error",
+      "type": "HTTPError"
+    }
+  ],
+  "exact_absence_confirmed": true,
+  "exports": [
+    {
+      "acknowledged": false,
+      "artifacts": {},
+      "downloaded_off_pod": true,
+      "durably_published": true,
+      "kind": "empty-volume-before-pod",
+      "owner_nonce": "35dd49f4dc4f6a4639537d2c6992324f7f502916de80be0339acf52d85b33c89",
+      "pod_id": null,
+      "status": "restore-verified",
+      "volume_id": "ifub768rs4"
+    }
+  ],
+  "final_acknowledged": false,
+  "final_export_confirmed": false,
+  "final_inventory": {
+    "pods": [],
+    "volumes": []
+  },
+  "finished_by_seconds": 11,
+  "intended_pod_name": "sair-exp702-exp702-s3e-35dd49f4dc4f",
+  "intended_volume_name": "sair-exp702-exp702-s3e-35dd49f4dc4f",
+  "monitor_interval_seconds": 300,
+  "owner_nonce": "35dd49f4dc4f6a4639537d2c6992324f7f502916de80be0339acf52d85b33c89",
+  "pod_delete_confirmed": true,
+  "pod_id": null,
+  "provider_mutation_performed": true,
+  "schema_version": "exp702-lifecycle-v2",
+  "status": "failed",
+  "suffix": "exp702-s3e",
+  "terminal_status_observed": false,
+  "transport": "runpod-rest-s3",
+  "volume_delete_confirmed": true,
+  "volume_delete_restore_gated": true,
+  "volume_id": "ifub768rs4",
+  "watchdog_ready_before_create": true
+}

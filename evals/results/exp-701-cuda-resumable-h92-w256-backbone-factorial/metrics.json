@@ -1,0 +1,17 @@
+{
+  "schema_version": "exp701-terminal-incomplete-evaluation-v1",
+  "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+  "created_at": "2026-08-11T00:00:00+05:30",
+  "checkpoint_sha256": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab",
+  "status": "terminal-incomplete",
+  "exact_answer_accuracy": null,
+  "scientific_verdict": null,
+  "factorial_verdict": null,
+  "completed_full_denominator_arm_width_evaluations": 6,
+  "planned_full_denominator_arm_width_evaluations": 8,
+  "missing": ["straight_through_restarts/128", "straight_through_restarts/256"],
+  "evaluation": {"not_performed": true, "reason": "Integrated EXP701 evaluation was not performed because two arm-width denominators remained missing when the recovery bound was exhausted.", "labels_or_oracle_present": false, "completed_arm_widths": 6, "planned_arm_widths": 8},
+  "controls": {"all_training_complete": true, "factorial_comparison_valid": false, "recovery_limit_exhausted": true, "successor_results_attributable_to_exp701": false},
+  "evidence": "experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/terminal-incomplete.json",
+  "limitations": ["Partial arm metrics cannot be promoted to an integrated EXP701 outcome.", "No exact-answer factorial verdict, confirmation, private-seed, promotion, or submission claim is supported."]
+}

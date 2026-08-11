@@ -1,0 +1,33 @@
+{
+  "agent_safety_narrowing": {
+    "maximum_additional_cost_usd": 2.8,
+    "maximum_provider_seconds": 13200,
+    "maximum_replacement_lifecycles": 1,
+    "reason": "The user explicitly authorized one continuation lifecycle but did not specify new numeric limits; this receipt narrows that authority to a bounded tranche that fits below the observed prepaid balance after reserving the active s3q tail."
+  },
+  "authorized_at_utc": "2026-08-10T19:22:47Z",
+  "balance_observation": {
+    "client_balance_usd": 3.7898838765,
+    "current_spend_per_hour_usd": 0.752,
+    "observed_before_s3q_terminal_cleanup": true
+  },
+  "continuation_preconditions": [
+    "s3q is terminal slice-checkpointed",
+    "the newest s3q archive is restore-verified off-Pod",
+    "the exact s3q Pod and network volume are deletion-confirmed",
+    "no other EXP701 Pod is active",
+    "admission proves the bounded tranche fits the then-current prepaid balance"
+  ],
+  "provider": "RunPod Secure Cloud",
+  "replacement_attempt": "s3r",
+  "resource": "1x NVIDIA GeForce RTX 4090",
+  "schema_version": "exp701-paid-continuation-authorization-v1",
+  "scientific_constraints": {
+    "allow_duplicate": false,
+    "allow_fidelity_change": false,
+    "resume_from_newest_restore_verified_s3q_archive": true
+  },
+  "status": "authorized-with-agent-safety-cap",
+  "user_direction": "Don't ask for another authorization, I'm going to sleep. You can go ahead with creating a new one if it gets deleted later.",
+  "user_specified_numeric_cap": false
+}

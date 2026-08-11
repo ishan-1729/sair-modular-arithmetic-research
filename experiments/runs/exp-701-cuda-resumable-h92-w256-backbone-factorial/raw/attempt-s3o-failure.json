@@ -1,0 +1,50 @@
+{
+  "schema_version": "exp701-attempt-failure-v1",
+  "status": "failed-before-guest-bootstrap-cleaned",
+  "attempt": "s3o",
+  "observed_at_utc": "2026-08-10T14:00:56Z",
+  "provider": "RunPod Secure Cloud",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "resource_id": "o3e3fjgn8it73s",
+  "network_volume_id": "m547dva00b",
+  "source_commit": "0027f66197a00ea9392e04cc7060c899500aa091",
+  "source_archive_sha256": "574f8523f3ac78f7ecd537dfa83cfe642d711c1c885b6edad0899d9785409678",
+  "resume_archive_sha256": "aba7776f455ffc1c9723335fb05509ad644666f6aee7c4cd68a2d8412ec549c1",
+  "preloaded_torch_wheel": {
+    "bytes": 908202405,
+    "sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+  },
+  "failure": {
+    "phase": "container-initial-command",
+    "message": "RunPod materialized the uploaded S3 key torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl as torch-2.5.1%2Bcu124-cp312-cp312-linux_x86_64.whl, so the guest's initial stat check referenced an absent path and the container restarted before bootstrap.",
+    "scientific_updates_added": 0
+  },
+  "cleanup": {
+    "pod_delete_confirmed": true,
+    "pod_delete_confirmation_source": "provider-lifecycle-s3o.json delete-confirmed event",
+    "network_volume_delete_confirmed": true,
+    "network_volume_delete_http_status": 204,
+    "network_volume_absence_http_status": 404,
+    "network_volume_absence_probes": 1,
+    "offpod_export_required": false,
+    "reason": "The guest never passed the initial wheel-path check, so no guest output or scientific state existed on the attempt-scoped volume; the unchanged resume archive was already restore-verified off-Pod."
+  },
+  "watchdog": {
+    "status": "failed-before-resource-observation",
+    "message": "StrictMode rejected the provider receipt while resource_id was still legitimately absent during managed-volume preload. The replacement watchdog reads optional lifecycle fields safely."
+  },
+  "billing_upper_bound": {
+    "provider_seconds": 669.3533183219988,
+    "usd": 0.139596,
+    "source": "provider-lifecycle-s3o.json"
+  },
+  "cumulative_upper_bound_through_s3o": {
+    "provider_seconds": 13194.870648786,
+    "usd": 2.751846
+  },
+  "evidence": {
+    "provider_receipt_sha256": "0bf54a3e86063fc7b8cb3e7d8aaaa8dfde644fa2c03c1d28572db92317bd358b",
+    "orchestrator_receipt_sha256": "bc8d30be3a96a0d6b92aa08d08937cfbd5923bf49e7d539a9a85c6ed5677bc1e",
+    "watchdog_receipt_sha256": "8406d2ba1d39288b552322ea217fb358c19d16c24ed7727cc92b555845db6f8a"
+  }
+}

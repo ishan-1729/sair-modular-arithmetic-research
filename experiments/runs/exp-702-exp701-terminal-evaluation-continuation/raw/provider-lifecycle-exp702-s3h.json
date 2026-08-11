@@ -1,0 +1,96 @@
+{
+  "admission": {
+    "attested_balance_usd": "10.0",
+    "funding_basis": "user-attested",
+    "observed_at_seconds": 3,
+    "pods": [],
+    "volumes": []
+  },
+  "cleanup_started_at_seconds": 606,
+  "controller_pid": 97690,
+  "controller_process_identity": "97690:13244591",
+  "controller_started_utc": "2026-08-11T16:17:50.503852+00:00",
+  "errors": [
+    {
+      "message": "RunPod S3 guest status object not found before the bounded readiness deadline",
+      "type": "ClientError"
+    }
+  ],
+  "exact_absence_confirmed": true,
+  "exports": [
+    {
+      "acknowledged": false,
+      "artifacts": {},
+      "downloaded_off_pod": true,
+      "durably_published": true,
+      "kind": "empty-quarantined-volume",
+      "owner_nonce": "39bf1b083b5613dc49445eb6a27a9336a40eb033d66693ff80698e5ec25991c5",
+      "pod_id": "yvolai4nti7r4r",
+      "status": "restore-verified",
+      "volume_id": "i453i32g1b"
+    },
+    {
+      "acknowledged": false,
+      "artifacts": {
+        "exp702/inputs/exp701-terminal-predecessor.tar.gz": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+        "exp702/inputs/exp702-source.tar.gz": "b7681d3df965d34cd16992c1e2a3ff2768f14e9f44cacd7945072c894675119a",
+        "exp702/inputs/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+      },
+      "downloaded_off_pod": true,
+      "durably_published": true,
+      "kind": "pre-release-artifact-set",
+      "owner_nonce": "39bf1b083b5613dc49445eb6a27a9336a40eb033d66693ff80698e5ec25991c5",
+      "pod_id": "yvolai4nti7r4r",
+      "status": "restore-verified",
+      "volume_id": "i453i32g1b"
+    }
+  ],
+  "final_acknowledged": false,
+  "final_export_confirmed": false,
+  "final_inventory": {
+    "pods": [],
+    "volumes": []
+  },
+  "finished_by_seconds": 617,
+  "intended_pod_name": "sair-exp702-exp702-s3h-39bf1b083b56",
+  "intended_volume_name": "sair-exp702-exp702-s3h-39bf1b083b56",
+  "monitor_interval_seconds": 300,
+  "owner_nonce": "39bf1b083b5613dc49445eb6a27a9336a40eb033d66693ff80698e5ec25991c5",
+  "pod_delete_confirmed": true,
+  "pod_id": "yvolai4nti7r4r",
+  "pod_released_after_verification": true,
+  "post_create_verification_passed": true,
+  "provider_mutation_performed": true,
+  "returned_pod_facts": {
+    "allocation_verified": true,
+    "cost_per_hour_usd": "0.74",
+    "data_center_id": "EU-RO-1",
+    "docker_start_cmd_exact": true,
+    "environment_subset": true,
+    "gpu_count": null,
+    "gpu_display_name": null,
+    "interruptible": null,
+    "name": "sair-exp702-exp702-s3h-39bf1b083b56",
+    "network_volume_id": "i453i32g1b",
+    "owner_nonce_matches": true,
+    "pod_id": "yvolai4nti7r4r",
+    "projection_errors": [],
+    "provider_added_environment_key_count": 1,
+    "schema_version": "exp702-sanitized-returned-pod-facts-v2",
+    "secure_cloud": true
+  },
+  "schema_version": "exp702-lifecycle-v2",
+  "status": "failed",
+  "suffix": "exp702-s3h",
+  "terminal_status_observed": false,
+  "transport": "runpod-rest-s3",
+  "uncertain_create_reconciliation": {
+    "performed": true,
+    "pod_id_recovered": "yvolai4nti7r4r",
+    "volume_id_recovered": "i453i32g1b"
+  },
+  "volume_delete_confirmed": true,
+  "volume_delete_restore_gated": true,
+  "volume_id": "i453i32g1b",
+  "watchdog_ready_before_create": true
+}

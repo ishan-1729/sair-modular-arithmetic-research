@@ -1,0 +1,93 @@
+schema_version: exp702-no-paid-launch-review-v1
+run_id: exp-702-exp701-terminal-evaluation-continuation
+provider: runpod
+provider_mutation_allowed: false
+credential_access_allowed: false
+resource:
+  gpu: NVIDIA RTX A5000
+  cloud_type: COMMUNITY
+  data_center_id: US-IL-1
+  pod_data_center_ids: [US-IL-1]
+  s3_endpoint: https://s3api-us-il-1.runpod.io/
+  maximum_pairs: 1
+  network_volume_gb: 50
+authenticated_admission_schema:
+  observation_count_before_create: 1
+  funding:
+    basis: user-attested
+    attested_balance_usd: 10.00
+    minimum_required_usd: 2.90
+  rest_inventory:
+    pods: /pods?includeMachine=true
+    volumes: /networkvolumes
+  quarantined_pod:
+    create: /pods
+    create_schema_source: https://docs.runpod.io/api-reference/pods/POST/pods
+    gpu_type_priority: availability
+    data_center_priority: availability
+    network_volume_mount_path: /workspace
+    forbid_local_volume_field_when_network_volume_attached: true
+    verify_returned_facts: /pods/{pod_id}?includeMachine=true&includeNetworkVolume=true
+    readiness_poll_interval_seconds: 15
+    readiness_deadline_seconds: 720
+    release_marker: exp702/control/{owner_nonce}.release.json
+    exact_gpu_count: 1
+    exact_gpu: NVIDIA RTX A5000
+    exact_cloud_type: COMMUNITY
+    data_center_selection: provider-selected
+    interruptible: false
+    maximum_cost_per_hour_usd: 0.27
+    rest_authoritative_fields: [id, name, owner_nonce, docker_start_cmd, secure_cloud, data_center_id, network_volume_id, cost_per_hour_usd]
+    nullable_convenience_fields: [gpu_display_name, gpu_count, interruptible]
+    environment_verification: expected-subset-provider-additions-allowed
+    guest_hardware_gate: exactly-one-rtx-a5000-and-cuda-acceptance-before-evaluation
+runtime:
+  profile: cu124
+  torch: 2.5.1+cu124
+  cuda_runtime: '12.4'
+  image: runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404
+budget:
+  maximum_total_usd: 2.90
+  maximum_provider_seconds: 7200
+  compute_usd_per_hour: 0.27
+  storage_usd_per_hour_upper: 0.010795
+  cleanup_start_seconds: 6600
+  phases_seconds:
+    setup_and_restore_baseline: 900
+    two_frozen_evaluations: 4800
+    final_restore_verified_export: 600
+    deletion_confirmation: 600
+    contingency: 300
+persistence:
+  offpod_sync_interval_seconds: 300
+  offpod_ack_stale_seconds: 720
+  require_initial_restore_verified_export: true
+  require_final_restore_verified_export: true
+  delete_volume_only_after_restore_verification: true
+lifecycle:
+  controller_owner: windows-host
+  independent_watchdog: experiments/cloud_benchmarks/exp702_runpod/windows_deadline_watchdog.ps1
+  guest_supervisor: experiments/cloud_benchmarks/exp702_runpod/guest_supervisor.sh
+  require_single_resource_lock: true
+  require_id_bound_watchdog: true
+  require_pod_delete_confirmation: true
+  require_volume_delete_confirmation: true
+  require_exact_absence_by_seconds: 7200
+  require_atomic_suffix_lock_before_create: true
+  require_fresh_zero_inventory_admission: true
+  pod_deletion_unconditional: true
+  volume_deletion_restore_gated: true
+  provider_calls_in_package_or_plan: forbidden
+  production_transport: experiments.cloud_benchmarks.exp702_runpod.runpod_transport:create_transport
+  offpod_publisher: atomic-windows-host-directory
+  credential_access_after_exact_authorization_only: true
+  watchdog_ready_handshake_before_first_resource_create: true
+  uncertain_create_reconciliation: suffix-name-owner-nonce
+  provider_rest_base_url: https://rest.runpod.io/v1
+  controller_death_takeover: exact-pid-start-ticks
+  storage_transport: runpod-datacenter-s3-path-style
+  cleanup_retry_window_seconds: [6600, 7200]
+  execute_live_entrypoint: experiments.cloud_benchmarks.exp702_runpod.orchestrate execute-live
+  provider_delete_entrypoint: experiments.cloud_benchmarks.exp702_runpod.orchestrate provider-delete
+  windows_launcher: experiments/cloud_benchmarks/exp702_runpod/windows_paid_lifecycle.ps1
+  require_exact_authorization_receipt: true

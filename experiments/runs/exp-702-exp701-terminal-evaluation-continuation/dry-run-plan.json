@@ -1,0 +1,138 @@
+{
+  "admitted_phases_seconds": {
+    "contingency": 300,
+    "deletion_confirmation": 600,
+    "final_restore_verified_export": 600,
+    "setup_and_restore_baseline": 900,
+    "two_frozen_evaluations": 4800
+  },
+  "authenticated_admission": {
+    "configuration_substitution_allowed": false,
+    "funding": {
+      "attested_balance_usd": 10.0,
+      "basis": "user-attested",
+      "minimum_required_usd": 2.9
+    },
+    "observation_count_before_create": 1,
+    "one_immediate_observation_before_create": true,
+    "post_create_rest_fact_verification_before_preload_or_release": true,
+    "quarantined_pod": {
+      "create": "/pods",
+      "create_schema_source": "https://docs.runpod.io/api-reference/pods/POST/pods",
+      "data_center_priority": "availability",
+      "data_center_selection": "provider-selected",
+      "environment_verification": "expected-subset-provider-additions-allowed",
+      "exact_cloud_type": "COMMUNITY",
+      "exact_gpu": "NVIDIA RTX A5000",
+      "exact_gpu_count": 1,
+      "forbid_local_volume_field_when_network_volume_attached": true,
+      "gpu_type_priority": "availability",
+      "guest_hardware_gate": "exactly-one-rtx-a5000-and-cuda-acceptance-before-evaluation",
+      "interruptible": false,
+      "maximum_cost_per_hour_usd": 0.27,
+      "network_volume_mount_path": "/workspace",
+      "nullable_convenience_fields": [
+        "gpu_display_name",
+        "gpu_count",
+        "interruptible"
+      ],
+      "readiness_deadline_seconds": 720,
+      "readiness_poll_interval_seconds": 15,
+      "release_marker": "exp702/control/{owner_nonce}.release.json",
+      "rest_authoritative_fields": [
+        "id",
+        "name",
+        "owner_nonce",
+        "docker_start_cmd",
+        "secure_cloud",
+        "data_center_id",
+        "network_volume_id",
+        "cost_per_hour_usd"
+      ],
+      "verify_returned_facts": "/pods/{pod_id}?includeMachine=true&includeNetworkVolume=true"
+    },
+    "rest_inventory": {
+      "pods": "/pods?includeMachine=true",
+      "volumes": "/networkvolumes"
+    }
+  },
+  "cleanup": {
+    "billing_ends_only_after_exact_absence_confirmation": true,
+    "pod_delete_confirmation_required": true,
+    "retry_window_seconds": [
+      6600,
+      7200
+    ],
+    "start_seconds": 6600,
+    "volume_delete_blocked_until_offpod_restore_verified": true,
+    "volume_delete_confirmation_required": true,
+    "volume_only_partial_create_restore_gated": true
+  },
+  "combined_hourly_rate_upper_usd": "0.280795",
+  "credential_read_performed": false,
+  "launch_contract": {
+    "artifacts": {
+      "/workspace/exp702/inputs/exp701-terminal-predecessor.tar.gz": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+      "/workspace/exp702/inputs/exp702-source.tar.gz": "41a1f7b1b77ada6a2bfa634c2066df3bc07ac1efdec7b2e3d58e2be920a84f25",
+      "/workspace/exp702/inputs/torch-2.5.1+cu124-cp312-cp312-linux_x86_64.whl": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7"
+    },
+    "cloud_type": "COMMUNITY",
+    "credential_access_after_exact_authorization_only": true,
+    "data_center_ids": [
+      "US-IL-1"
+    ],
+    "data_center_priority": "availability",
+    "environment": {
+      "SAIR_EXP702_SOURCE_SHA256": "41a1f7b1b77ada6a2bfa634c2066df3bc07ac1efdec7b2e3d58e2be920a84f25",
+      "SAIR_EXP702_SYNC_SECONDS": "300"
+    },
+    "gpu_count": 1,
+    "gpu_type_priority": "availability",
+    "guest_command": [
+      "mkdir -p /workspace/sair-exp702/repository && tar -xzf /workspace/exp702/inputs/exp702-source.tar.gz -C /workspace/sair-exp702/repository && cd /workspace/sair-exp702/repository && bash experiments/cloud_benchmarks/exp702_runpod/guest_supervisor.sh"
+    ],
+    "image": "runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404",
+    "interruptible": false,
+    "network_volume_data_center_id": "US-IL-1",
+    "network_volume_mount_path": "/workspace",
+    "offpod_publisher": "experiments.cloud_benchmarks.exp702_runpod.runpod_transport:AtomicDirectoryPublisher",
+    "provider_credential_in_guest": false,
+    "resource_selector": "NVIDIA RTX A5000",
+    "review_only": false,
+    "s3_endpoint": "https://s3api-us-il-1.runpod.io/",
+    "transport": "experiments.cloud_benchmarks.exp702_runpod.runpod_transport:create_transport"
+  },
+  "maximum_provider_seconds": 7200,
+  "maximum_total_usd": "2.90",
+  "package_audit_sha256": "788488eda7858bc051d8fd5c55abbc7122dac7868a4145c32e8cf3248229f10a",
+  "package_sha256": "77799585dd8617d1b08c90214cb38c9c4ab5d58fe7d6655c899c484e24a2ed9d",
+  "persistence": {
+    "final_restore_verified_export_required": true,
+    "initial_restore_verified_export_required": true,
+    "periodic_restore_verified_offpod_exports_required": true,
+    "publication_retry_safe": true,
+    "sync_interval_seconds": 300
+  },
+  "predecessor_archive_sha256": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+  "provider_mutation_performed": false,
+  "rate_bound_total_upper_usd": "0.561590",
+  "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+  "schema_version": "exp702-dry-run-plan-v1",
+  "single_resource_lock": {
+    "maximum_pairs": 1,
+    "owner": "windows-host-controller",
+    "required": true
+  },
+  "source_archive_sha256": "41a1f7b1b77ada6a2bfa634c2066df3bc07ac1efdec7b2e3d58e2be920a84f25",
+  "status": "executable-fake-proven-no-provider-mutation",
+  "torch_wheel_sha256": "bf6484bfe5bc4f92a4a1a1bf553041505e19a911f717065330eb061afe0e14d7",
+  "watchdog": {
+    "cleanup_start_seconds": 6600,
+    "deadline_seconds": 7200,
+    "id_bound": true,
+    "independent": true,
+    "ready_handshake_before_first_create": true,
+    "script": "experiments/cloud_benchmarks/exp702_runpod/windows_deadline_watchdog.ps1",
+    "uncertain_create_reconciliation": "suffix-name-owner-nonce"
+  }
+}

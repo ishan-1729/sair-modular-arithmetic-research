@@ -1,0 +1,33 @@
+{
+  "identity_sha256": "479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1",
+  "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+  "schema_version": "exp703-preflight-v1",
+  "source": {
+    "archive_sha256": "dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc",
+    "checkpoint_sha256": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab",
+    "config": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+    "config_sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1",
+    "exp702_config_sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a",
+    "exp702_runner_sha256": "d9651fe79e86a555a20d7f3ce662bb9499b477cb220ed945608a7a9371c8e50b",
+    "runner": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/exp-651-visit-dilation-adapters/experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py",
+    "runner_sha256": "f91b158b0aeffb1ba41131c7f279d6545669c4cf26e17103f981146d4fe86d02",
+    "runtime": {
+      "cpu": {
+        "interop_threads": 1,
+        "logical_cpu_count": 22,
+        "model": "Intel(R) Core(TM) Ultra 7 155H",
+        "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+        "torch_threads": 10
+      },
+      "cublas_workspace_config": ":4096:8",
+      "deterministic_algorithms": true,
+      "device": "cpu",
+      "tf32": false,
+      "torch": "2.5.1+cpu",
+      "torch_cuda_runtime": "None"
+    }
+  },
+  "status": "verified",
+  "training_allowed": false,
+  "verified_at": "2026-08-11T21:55:06.779832+00:00"
+}

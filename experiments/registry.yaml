@@ -2588,9 +2588,9 @@ runs:
     mlflow_run_id: 087e69c9cc7c465badf920662f726bfb
     limitations: [historical-cpu-evidence-only, only-teacher-cosine-complete, teacher-restarts-update2300-recovery-only, no-cpu-work-may-enter-exp701, no-factorial-or-confirmation-claim]
   - run_id: exp-701-cuda-resumable-h92-w256-backbone-factorial
-    status: preregistered-awaiting-paid-authorization
+    status: terminal-incomplete
     approach: deterministic-rtx4090-fresh-root-replay-of-exp700-full-four-arm-factorial
-    decision: authorize-first-resumable-gpu-slice
+    decision: stop-frozen-identity-no-fourth-recovery
     decision_authority: T112-exp700-to-fresh-gpu-phase-reset
     source_base_commit: 2172dc7cd7aec2ec6cfa561e96f578cd46a69bf3
     source_branch: codex/exp701-cuda-resumable-h92-w256-backbone
@@ -2601,6 +2601,58 @@ runs:
     hardware_gate: {run: cuda-hardware-acceptance-runpod-20260805g, source_commit: 02678914d6112a6ff12030b3c05be89ea12c7b5d, receipt_commit: 9f155b2082934471af8f38b70895e97c9fff58b2, gpu: NVIDIA-GeForce-RTX-4090, result: passed-four-of-four}
     provider_slice: {max_total_usd: 9.0, max_provider_hours: 10, admitted_cost_upper_usd: 7.50795, controller_budget_after_reserve_usd: 7.65, scientific_stop: false}
     persistence_gate: {network_volume_gb: 50, offpod_sync_seconds: 300, stop_delete_restore_drill: passed-exact-same-root-resume, network_volume_delete_requires_external_restore: true}
+    scientific_metrics: evals/results/exp-701-cuda-resumable-h92-w256-backbone-factorial/metrics.json
+    scientific_verdict: null
+    terminal_receipt: experiments/runs/exp-701-cuda-resumable-h92-w256-backbone-factorial/terminal-incomplete.json
+    terminal_archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+    completed_training_updates: 19200
+    missing_evaluations: [straight_through_restarts/128, straight_through_restarts/256]
+    successor: exp-702-exp701-terminal-evaluation-continuation
+    limitations: [recovery-bound-exhausted, no-formal-root-summary, no-integrated-factorial-verdict, successor-results-must-not-be-attributed-to-exp701, no-confirmation-private-promotion-or-submission-claim]
+  - run_id: exp-702-exp701-terminal-evaluation-continuation
+    status: preregistered-launch-review-pending
+    approach: exact-exp701-s3t-terminal-state-two-evaluation-cuda-successor
+    decision: await-read-only-launch-gate-no-provider-mutation-authorized
+    predecessor: exp-701-cuda-resumable-h92-w256-backbone-factorial
+    predecessor_relationship: terminal-evaluation-successor-not-exp701-completion
+    predecessor_archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+    predecessor_identity_sha256: 4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9
+    config: configs/exp_702_exp701_terminal_evaluation_continuation.yaml
+    preregistration: experiments/runs/exp-702-exp701-terminal-evaluation-continuation/preregistration.json
+    evaluation_record: evals/results/exp-702-exp701-terminal-evaluation-continuation/metrics.json
+    roots: {20261414: inherited-evaluation-seed-only}
+    planned_work: [straight_through_restarts/128-full-denominator, straight_through_restarts/256-full-denominator, integrated-terminal-publication]
+    training_allowed: false
+    paid_provider_launch_performed: false
+    dry_run_package: experiments/runs/exp-702-exp701-terminal-evaluation-continuation/dry-run-package.json
+    dry_run_plan: experiments/runs/exp-702-exp701-terminal-evaluation-continuation/dry-run-plan.json
+    provider_ceiling: {max_total_usd: 3.25, max_provider_seconds: 14400, maximum_resource_pairs: 1, provider_mutation_performed: false}
+    terminal_policy: {all_valid_result_pairs_publish: true, additional_diagnostics_allowed: false}
     scientific_metrics: null
     scientific_verdict: null
-    limitations: [paid-launch-not-yet-authorized, gpu-throughput-not-yet-measured, first-slice-may-require-same-root-gpu-resume, no-cpu-work-substitution, live-secure-rtx4090-data-center-binding-required-before-create]
+    limitations: [not-run, dry-run-only-no-provider-contact, cuda-only-no-cpu-fallback, exact-code-payload-runtime-predecessor-binding-required, cannot-complete-or-repair-exp701, no-added-diagnostics-confirmations-private-promotion-or-submission-claim]
+  - run_id: exp-703-exp701-terminal-evaluation-cpu-continuation
+    status: completed
+    approach: exact-exp701-terminal-state-two-evaluation-deterministic-cpu-successor
+    decision: complete-negative-full-denominator
+    decision_authority: frozen-exp702-terminal-policy-executed-by-distinct-cpu-successor
+    predecessor: exp-701-cuda-resumable-h92-w256-backbone-factorial
+    predecessor_relationship: cpu-terminal-evaluation-successor-not-exp701-or-exp702-completion
+    predecessor_archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+    predecessor_identity_sha256: 4652143d6ee35be631d8269d942900d486551fa235132f6cd502ad69e28721a9
+    checkpoint_sha256: d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab
+    execution_identity_sha256: 479b5a0c9b76f1d6254962ef9c889c9ebfbb98a6e73b38d20a0e6a19ddf96fc1
+    config: configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-703-exp701-terminal-evaluation-cpu-continuation.md
+    run_record: experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json
+    metrics: evals/results/exp-703-exp701-terminal-evaluation-cpu-continuation/metrics.json
+    roots: {20261414: inherited-evaluation-seed-only}
+    training_allowed: false
+    training_executed: false
+    completed_full_denominator_evaluations: 8
+    executed_evaluations: [straight_through_restarts/128, straight_through_restarts/256]
+    scientific_metrics: {straight_through_restarts_w128_transition: 0.9986666666666667, straight_through_restarts_w128_rollout: 0.8766666666666667, straight_through_restarts_w256_transition: 0.998, straight_through_restarts_w256_rollout: 0.525, winner: teacher_cosine, winner_w256_rollout: 0.6016666666666667}
+    scientific_verdict: advancement-gate-not-reached
+    confirmation_trigger: false
+    terminal_summary_sha256: db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2
+    limitations: [distinct-cpu-successor-not-exp701-or-exp702-completion, cpu-cuda-floating-point-identities-differ, no-confirmation-independent-private-promotion-or-submission-claim]

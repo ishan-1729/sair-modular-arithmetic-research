@@ -158,7 +158,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -173,7 +175,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -183,12 +216,16 @@
       "frozen_identity_constraint": null,
       "hotspots": [],
       "local_import_parents": [
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "module": "experiments.cloud_benchmarks.exp699_cuda_replay",
       "path": "experiments/cloud_benchmarks/exp699_cuda_replay/__init__.py",
       "reachability_roots": [
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -204,7 +241,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -219,7 +258,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -368,13 +438,17 @@
         }
       ],
       "local_import_parents": [
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "module": "experiments.cloud_benchmarks.exp699_cuda_replay.run",
       "path": "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py",
@@ -441,7 +515,7 @@
       "hotspots": [
         {
           "kind": "checkpoint",
-          "line": 190,
+          "line": 239,
           "operation": "json.load",
           "symbol": "api_get"
         }
@@ -456,7 +530,7 @@
       ],
       "responsibility": "Keep provider and S3 credentials, lifecycle cleanup, pre-Pod source upload and durable-copy coordination on the trusted host; the EXP701 runner owns all CUDA model work inside the guest.",
       "smoke_command": null,
-      "source_sha256": "6408a76528340301f2577d666d5ade89b301e835fad9240ce04e1ea7c9730729",
+      "source_sha256": "c3653c5fc3e8bbcf6f739eb4f35b110c4d330d1b6dd21710a2203641631567d4",
       "torch_referenced": false
     },
     {
@@ -506,6 +580,34 @@
         "direct_route_ids": [],
         "routes": []
       },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.', '.recovery_transport', '__future__', '__future__.annotations', 'argparse', 'json', 'pathlib', 'pathlib.Path']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.prepare_resume_rollback",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/prepare_resume_rollback.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "6185b0b1a032d760ef1683733c159fd90e250a112aba4a59adf934d6d3991edd",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
       "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.', '.offpod_sync', '.orchestrate', '__future__', '__future__.annotations', 'argparse', 'json', 'os']; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "cloud_benchmarks",
@@ -541,7 +643,8 @@
       "hotspots": [],
       "local_import_parents": [
         "experiments/cloud_benchmarks/exp701_runpod/offpod_sync.py",
-        "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py"
+        "experiments/cloud_benchmarks/exp701_runpod/orchestrate.py",
+        "experiments/cloud_benchmarks/exp701_runpod/prepare_resume_rollback.py"
       ],
       "module": "experiments.cloud_benchmarks.exp701_runpod.recovery_transport",
       "path": "experiments/cloud_benchmarks/exp701_runpod/recovery_transport.py",
@@ -551,6 +654,159 @@
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
       "source_sha256": "3e61d1e816156fcfaa1ade9e92350959bf0f6449ea67d70e8e39846f92acfa83",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations', 'copy', 'experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial', 'experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run', 'hashlib', 'json', 'pathlib']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp701_runpod.resume_identity_wrapper",
+      "path": "experiments/cloud_benchmarks/exp701_runpod/resume_identity_wrapper.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "29c63d4592fa3a8c9a1dd7e8b6b2e2dc42d11f636aa413f281bc854db24839f7",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py"
+      ],
+      "module": "experiments.cloud_benchmarks.exp702_runpod",
+      "path": "experiments/cloud_benchmarks/exp702_runpod/__init__.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "655739047b52ede70f7b033958b58f26a699ad097ae15285f83cbf2e2e06e1b5",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'dataclasses.field', 'datetime', 'datetime.datetime', 'datetime.timezone']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py",
+        "experiments/cloud_benchmarks/exp702_runpod/runpod_transport.py"
+      ],
+      "module": "experiments.cloud_benchmarks.exp702_runpod.controller",
+      "path": "experiments/cloud_benchmarks/exp702_runpod/controller.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "15fbb1bf1760463a0bc4a298dca6005717b642aa7b93bd80e16336d303fe20f4",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": {
+        "reason": "This no-paid host control plane creates an authenticated guest-portable payload and lifecycle review record without importing a provider client, reading credentials, or executing tensor computation.",
+        "responsibility": "Keep package identity, finite budget admission, host ownership, watchdog, persistence, and exact cleanup obligations outside the CUDA scientific runner.",
+        "symbols": [
+          "package_launch",
+          "plan_launch",
+          "build_source_archive"
+        ]
+      },
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "This no-paid host control plane creates an authenticated guest-portable payload and lifecycle review record without importing a provider client, reading credentials, or executing tensor computation. Active symbols are ['package_launch', 'plan_launch', 'build_source_archive']; imports=['__future__', '__future__.annotations', 'argparse', 'decimal', 'decimal.Decimal', 'experiments.cloud_benchmarks.exp702_runpod', 'experiments.cloud_benchmarks.exp702_runpod.controller', 'experiments.exp_702_exp701_terminal_evaluation_continuation']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp702_runpod.orchestrate",
+      "path": "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "Keep package identity, finite budget admission, host ownership, watchdog, persistence, and exact cleanup obligations outside the CUDA scientific runner.",
+      "smoke_command": null,
+      "source_sha256": "1eea51f172582e57c03b7c8f2fae4c1362256c9dbbc7490088074123eb2252ce",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": false,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [],
+        "routes": []
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['.controller', '.controller.AdmissionSnapshot', '.controller.LifecycleFailure', '.controller.PodFacts', '__future__', '__future__.annotations', 'boto3', 'boto3.client']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "cloud_benchmarks",
+      "frozen_identity_constraint": null,
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.cloud_benchmarks.exp702_runpod.runpod_transport",
+      "path": "experiments/cloud_benchmarks/exp702_runpod/runpod_transport.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "87a0d02cb9521c17806194506bd54f9030dcf1a2ab68602be515063e722add29",
       "torch_referenced": false
     },
     {
@@ -601,7 +857,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -834,7 +1092,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -870,7 +1159,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -942,7 +1233,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -957,7 +1250,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -1040,7 +1364,9 @@
       "path": "experiments/cuda_portability/exp300.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
@@ -1106,7 +1432,7 @@
         "direct_route_ids": [],
         "routes": []
       },
-      "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'ast', 'collections', 'collections.defaultdict', 'collections.deque', 'hashlib']; hotspot_counts={}.",
+      "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'ast', 'collections', 'collections.defaultdict', 'collections.deque', 'fnmatch']; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "cuda_portability",
       "frozen_identity_constraint": null,
@@ -1121,7 +1447,7 @@
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
-      "source_sha256": "9436150435b0d80e30a33afe1c345efb2d196e1d42444da2f5155b2e9d19f634",
+      "source_sha256": "875e6f47cd2d79d3df28123c96221bbe958137430879bab2772585911336cb55",
       "torch_referenced": false
     },
     {
@@ -1186,7 +1512,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [],
         "routes": [
@@ -1201,7 +1529,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -1235,13 +1594,17 @@
         "experiments/cuda_portability/acceptance.py",
         "experiments/cuda_portability/graph.py",
         "experiments/cuda_portability/recurrent.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "module": "experiments.cuda_portability.runtime",
       "path": "experiments/cuda_portability/runtime.py",
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
@@ -2340,7 +2703,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-220-width-independent-cellular"
@@ -2932,7 +3297,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -3088,7 +3484,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "retain the EXP-649 route and shared dependencies on CPU unless a new experiment is preregistered",
       "smoke_command": null,
@@ -15577,7 +15975,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-664-sprm-boundary-perturbation"
@@ -16092,7 +16492,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -16172,7 +16603,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "Preserve historical definitions; all active EXP701 model compute is owned by the device-aware replay route.",
       "smoke_command": null,
@@ -16223,7 +16656,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-664-sprm-boundary-perturbation"
@@ -16738,7 +17173,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -16944,7 +17410,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "Keep exact-label generation and evidence serialization on CPU; no deployed or recurrent model compute is delegated here.",
       "smoke_command": null,
@@ -23161,7 +23629,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-686-w256-straight-through-specialist"
@@ -23250,7 +23720,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -23263,7 +23764,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "module": "experiments.exp_686_w256_straight_through_specialist",
       "path": "experiments/exp_686_w256_straight_through_specialist/__init__.py",
@@ -23272,7 +23775,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -23306,7 +23811,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-686-w256-straight-through-specialist"
@@ -23395,7 +23902,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -23541,7 +24079,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "module": "experiments.exp_686_w256_straight_through_specialist.run",
       "path": "experiments/exp_686_w256_straight_through_specialist/run.py",
@@ -23551,7 +24091,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "frozen source stays immutable; adapter owns input/model device placement",
       "smoke_command": "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py",
@@ -26659,7 +27201,9 @@
         "consumer_route_ids": [
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-698-h92-w256-backbone-factorial"
@@ -26730,7 +27274,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -26748,7 +27323,9 @@
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -26773,7 +27350,9 @@
           "exp-698-h92-w256-backbone-factorial",
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-698-h92-w256-backbone-factorial"
@@ -26844,7 +27423,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -26960,7 +27570,9 @@
         "experiments/exp_698_h92_w256_backbone_factorial/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "Preserve the frozen predecessor identity while the EXP701 device-aware route owns all active compute.",
       "smoke_command": null,
@@ -26977,7 +27589,9 @@
         "all_terminal": false,
         "consumer_route_ids": [
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-699-h92-w256-backbone-factorial-complete"
@@ -27030,7 +27644,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27049,7 +27694,9 @@
       "reachability_roots": [
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -27078,7 +27725,9 @@
         "consumer_route_ids": [
           "exp-699-h92-w256-backbone-factorial-complete",
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-699-h92-w256-backbone-factorial-complete"
@@ -27131,7 +27780,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27290,7 +27970,9 @@
         "experiments/cloud_benchmarks/exp699_cuda_replay/run.py",
         "experiments/exp_699_h92_w256_backbone_factorial_complete/run.py",
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "frozen source stays immutable; adapter owns input/model device placement",
       "smoke_command": "python -m pytest -q tests/test_exp699_cuda_hardware_replay.py",
@@ -27306,7 +27988,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-700-resumable-h92-w256-backbone-factorial"
@@ -27341,7 +28025,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27356,7 +28071,9 @@
       "module": "experiments.exp_700_resumable_h92_w256_backbone_factorial",
       "path": "experiments/exp_700_resumable_h92_w256_backbone_factorial/__init__.py",
       "reachability_roots": [
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -27380,7 +28097,9 @@
         "all_terminal": false,
         "consumer_route_ids": [
           "exp-700-resumable-h92-w256-backbone-factorial",
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-700-resumable-h92-w256-backbone-factorial"
@@ -27415,7 +28134,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27582,7 +28332,9 @@
       "path": "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
       "reachability_roots": [
         "experiments/exp_700_resumable_h92_w256_backbone_factorial/run.py",
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "Authenticate unchanged science and historical provenance without importing CPU work into EXP701.",
       "smoke_command": null,
@@ -27597,7 +28349,10 @@
         "active_consumers": [],
         "all_artifact_identities_complete": true,
         "all_terminal": false,
-        "consumer_route_ids": [],
+        "consumer_route_ids": [
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
         "direct_route_ids": [
           "exp-701-cuda-resumable-h92-w256-backbone-factorial"
         ],
@@ -27613,7 +28368,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27622,11 +28408,16 @@
       "family": "exp_701_cuda_resumable_h92_w256_backbone_factorial",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
       "hotspots": [],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/resume_identity_wrapper.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
       "module": "experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial",
       "path": "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/__init__.py",
       "reachability_roots": [
-        "mechanical-all-experiment-python"
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
@@ -27642,7 +28433,9 @@
         "all_artifact_identities_complete": true,
         "all_terminal": false,
         "consumer_route_ids": [
-          "exp-701-cuda-resumable-h92-w256-backbone-factorial"
+          "exp-701-cuda-resumable-h92-w256-backbone-factorial",
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
         ],
         "direct_route_ids": [
           "exp-701-cuda-resumable-h92-w256-backbone-factorial"
@@ -27659,7 +28452,38 @@
             ],
             "identity_mismatches": [],
             "run_id": "exp-701-cuda-resumable-h92-w256-backbone-factorial",
-            "status": "preregistered-awaiting-paid-authorization"
+            "status": "terminal-incomplete"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
           }
         ]
       },
@@ -27819,15 +28643,344 @@
           "symbol": "Experiment.diagnostic_bundle"
         }
       ],
-      "local_import_parents": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp701_runpod/resume_identity_wrapper.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
       "module": "experiments.exp_701_cuda_resumable_h92_w256_backbone_factorial.run",
       "path": "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
       "reachability_roots": [
-        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py"
+        "experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py",
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
       ],
       "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
       "smoke_command": null,
       "source_sha256": "f1a2628316b586d92dd4e03c4e315af2382b0ccc51bf6203b945295b2208c210",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "direct_route_ids": [
+          "exp-702-exp701-terminal-evaluation-continuation"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_702_exp701_terminal_evaluation_continuation",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/publish_completed.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
+      "module": "experiments.exp_702_exp701_terminal_evaluation_continuation",
+      "path": "experiments/exp_702_exp701_terminal_evaluation_continuation/__init__.py",
+      "reachability_roots": [
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "18fc6a2e1ceb511e663eafd1b6b60cfe9ad3338f530e502640789f8d819cf775",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "device-native-unvalidated",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-702-exp701-terminal-evaluation-continuation",
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "direct_route_ids": [
+          "exp-702-exp701-terminal-evaluation-continuation"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_702_exp701_terminal_evaluation_continuation.yaml",
+                "sha256": "04545810b0782ffd35e6a9216b12b43ae4c1c62a873b65104eadc1dc034bb85a"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-702-exp701-terminal-evaluation-continuation",
+            "status": "preregistered-launch-review-pending"
+          },
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "Explicit device/runtime adapter is present; physical CUDA execution is still unvalidated; imports=['__future__', '__future__.annotations', 'argparse', 'contextlib', 'experiments.cloud_benchmarks.exp699_cuda_replay', 'experiments.cloud_benchmarks.exp699_cuda_replay.run', 'experiments.cuda_portability.runtime', 'experiments.cuda_portability.runtime.configure_determinism']; hotspot_counts={'checkpoint': 2}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_702_exp701_terminal_evaluation_continuation",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 318,
+          "operation": "load_file",
+          "symbol": "execute"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 318,
+          "operation": "model.load_state_dict",
+          "symbol": "execute"
+        }
+      ],
+      "local_import_parents": [
+        "experiments/cloud_benchmarks/exp702_runpod/orchestrate.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/publish_completed.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
+      "module": "experiments.exp_702_exp701_terminal_evaluation_continuation.run",
+      "path": "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+      "reachability_roots": [
+        "experiments/exp_702_exp701_terminal_evaluation_continuation/run.py",
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
+      "responsibility": "model tensors follow the selected device; exact labels and evidence serialization remain CPU boundaries",
+      "smoke_command": null,
+      "source_sha256": "d9651fe79e86a555a20d7f3ce662bb9499b477cb220ed945608a7a9371c8e50b",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-703-exp701-terminal-evaluation-cpu-continuation', 'status': 'completed', 'artifact': {'path': 'configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml', 'field': 'config', 'sha256': 'cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1'}}]; imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_703_exp701_terminal_evaluation_cpu_continuation",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/publish_completed.py"
+      ],
+      "module": "experiments.exp_703_exp701_terminal_evaluation_cpu_continuation",
+      "path": "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/__init__.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "ddfc02ecfd9c70daa5122221d87175147db1a62270c524407f9af68d0aedc21d",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-703-exp701-terminal-evaluation-cpu-continuation', 'status': 'completed', 'artifact': {'path': 'configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml', 'field': 'config', 'sha256': 'cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.exp_702_exp701_terminal_evaluation_continuation', 'experiments.exp_702_exp701_terminal_evaluation_continuation.run', 'experiments.exp_703_exp701_terminal_evaluation_cpu_continuation', 'experiments.exp_703_exp701_terminal_evaluation_cpu_continuation.run']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_703_exp701_terminal_evaluation_cpu_continuation",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.exp_703_exp701_terminal_evaluation_cpu_continuation.publish_completed",
+      "path": "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/publish_completed.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "17eea0b7e9afc0db26dc906e53970e8972b8fd9a98e8a7194061e3931686548b",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "direct_route_ids": [
+          "exp-703-exp701-terminal-evaluation-cpu-continuation"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml",
+                "sha256": "cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/run.json",
+                "sha256": "d3aa52f5f8f7854c7f8c408643485095a093f35a167f9ec629a7a8a80186a080"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-703-exp701-terminal-evaluation-cpu-continuation",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-703-exp701-terminal-evaluation-cpu-continuation', 'status': 'completed', 'artifact': {'path': 'configs/exp_703_exp701_terminal_evaluation_cpu_continuation.yaml', 'field': 'config', 'sha256': 'cf547e7f5df958686f301a691cb8a5c747ef0aba22cd8940254093f019f8d8b1'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'contextlib', 'datetime', 'datetime.datetime', 'datetime.timezone', 'experiments.cloud_benchmarks.exp699_cuda_replay']; hotspot_counts={'checkpoint': 2, 'device-boundary': 1}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_703_exp701_terminal_evaluation_cpu_continuation",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 295,
+          "operation": "load_file",
+          "symbol": "prepare_model"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 295,
+          "operation": "model.load_state_dict",
+          "symbol": "prepare_model"
+        },
+        {
+          "kind": "device-boundary",
+          "line": 296,
+          "operation": "model.to",
+          "symbol": "prepare_model"
+        }
+      ],
+      "local_import_parents": [
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/publish_completed.py"
+      ],
+      "module": "experiments.exp_703_exp701_terminal_evaluation_cpu_continuation.run",
+      "path": "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py",
+      "reachability_roots": [
+        "experiments/exp_703_exp701_terminal_evaluation_cpu_continuation/run.py"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "f91b158b0aeffb1ba41131c7f279d6545669c4cf26e17103f981146d4fe86d02",
       "torch_referenced": true
     },
     {
@@ -28935,22 +30088,22 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "663bd976bbdfed909fc06a0e7b3ba99346410a1a5ecdd88b2f74dc99dee214a4",
-    "python_file_count": 245,
+    "config_sha256": "93cd356e1e83be0e2a88c5a1f6f32aa44d300a285c187edf0136a102f8df7f3e",
+    "python_file_count": 256,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "4cc83841927e7724a3bd5bb09aeaa252c4fa243f0c9a8115fc9b6863c5611438",
-    "root_count": 166,
-    "tree_sha256": "1171626a43a318bdce5aaebff93122bd488a351bd6d7fa2852626816c7b7b8f9"
+    "registry_sha256": "69c070ff3f9e463b7ce332e19f43adee3127266749c46ab068a0f3e13282eb2a",
+    "root_count": 168,
+    "tree_sha256": "5dad540a9a01374773257c7fb3bd5f26e910dac518fa7b3e7d507881d0e0de01"
   },
   "summary": {
     "classifications": {
-      "archived-frozen-route": 214,
-      "device-native-unvalidated": 12,
-      "intentionally-cpu-boundary": 19
+      "archived-frozen-route": 217,
+      "device-native-unvalidated": 13,
+      "intentionally-cpu-boundary": 26
     },
     "hotspots": {
-      "checkpoint": 861,
-      "device-boundary": 24,
+      "checkpoint": 865,
+      "device-boundary": 25,
       "host-boundary": 112,
       "optimizer": 187,
       "tensor-factory": 742

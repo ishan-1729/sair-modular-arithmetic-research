@@ -3,7 +3,10 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tarfile
 
 import pytest
@@ -14,6 +17,8 @@ from experiments.cloud_benchmarks.exp701_runpod import (
     pre_science,
     recover_retained_volume,
     recovery_transport,
+    prepare_resume_rollback,
+    resume_identity_wrapper,
 )
 
 
@@ -75,8 +80,8 @@ def test_controller_command_is_direct_bounded_and_preload_gated(tmp_path: Path) 
         source_sha256="a" * 64,
     )
     rendered = " ".join(command)
-    assert "--max-total-usd 7.90" in rendered
-    assert "--max-provider-seconds 29400" in rendered
+    assert "--max-total-usd 3.20" in rendered
+    assert "--max-provider-seconds 13000" in rendered
     assert "--network-volume-size-gb 50" in rendered
     assert "--network-volume-data-center-id EU-RO-1" in rendered
     assert f"--network-volume-ready-receipt {ready}" in rendered
@@ -95,7 +100,16 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "nohup" not in fresh and "guest.pid" not in fresh
     assert "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh" in fresh
     assert "SAIR_EXP701_SYNC_NONCE=" + "c" * 48 in fresh
-    assert "SAIR_EXP701_SLICE_SECONDS=27300" in fresh
+    assert "SAIR_EXP701_SLICE_SECONDS=10600" in fresh
+    assert "+" not in orchestrate.TORCH_WHEEL_KEY
+    staged = f"/workspace/{orchestrate.TORCH_WHEEL_KEY}"
+    canonical = f"/workspace/{orchestrate.TORCH_WHEEL_CANONICAL_NAME}"
+    assert f"cp -- {staged} {canonical}" in fresh
+    assert f"SAIR_CUDA_PRELOADED_TORCH_WHEEL={canonical}" in fresh
+    assert fresh.index(f"sha256sum {staged}") < fresh.index(f"cp -- {staged}")
+    assert fresh.index(f"cp -- {staged}") < fresh.index(f"sha256sum {canonical}")
+    assert orchestrate.TORCH_WHEEL_SHA256 in fresh
+    assert str(orchestrate.TORCH_WHEEL_BYTES) in fresh
     assert "guest-exit" in fresh
     resume = orchestrate.direct_start_command(
         "a" * 64,
@@ -106,6 +120,15 @@ def test_direct_guest_runs_in_foreground_and_resume_restores_same_output() -> No
     assert "recovery_transport restore" in resume
     assert f".scratch/{orchestrate.RUN_ID}" in resume
     assert orchestrate.RESUME_KEY in resume
+    stale_terminal_cleanup = f"rm -f .scratch/{orchestrate.RUN_ID}/guest-terminal.json"
+    assert stale_terminal_cleanup in resume
+    assert resume.index(stale_terminal_cleanup) < resume.index(
+        "bash experiments/cloud_benchmarks/exp701_runpod/guest_supervisor.sh"
+    )
+    assert "SAIR_EXP701_RUNNER_WRAPPER=/workspace/sair-exp701-resume-identity-wrapper.py" in resume
+    assert orchestrate.BASE_GUEST_SUPERVISOR_SHA256 in resume
+    assert "EXP701 root returned without a terminal summary" not in fresh
+    assert "sair-exp701-resume-identity-wrapper.py" in resume
 
 
 def test_s3_upload_and_offpod_sync_are_sha_bound_and_acknowledged(tmp_path: Path) -> None:
@@ -386,7 +409,9 @@ def test_archive_rotation_mismatch_is_transient_until_receipt_settles(
 
 
 def test_complete_dry_run_is_nonpaid_and_receipt_bound(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     archive = tmp_path / "source.tar.gz"
     write_source_archive(archive, "f" * 40)
@@ -406,6 +431,18 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
         ),
         encoding="utf-8",
     )
+    wheel = tmp_path / "torch.whl"
+    wheel.write_bytes(b"verified wheel fixture")
+    monkeypatch.setattr(
+        orchestrate,
+        "verify_torch_wheel",
+        lambda path: {
+            "status": "verified",
+            "path": str(path),
+            "bytes": orchestrate.TORCH_WHEEL_BYTES,
+            "sha256": orchestrate.TORCH_WHEEL_SHA256,
+        },
+    )
     assert orchestrate.main(
         [
             "--data-center-id",
@@ -418,6 +455,8 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
             str(tmp_path / "session"),
             "--offpod-destination",
             str(tmp_path / "offpod"),
+            "--torch-wheel",
+            str(wheel),
             "--provider-receipt",
             str(tmp_path / "provider.json"),
             "--orchestrator-receipt",
@@ -428,7 +467,178 @@ def test_complete_dry_run_is_nonpaid_and_receipt_bound(
     result = json.loads(capsys.readouterr().out)
     assert result["status"] == "dry-run"
     assert result["transport"] == "runpod-s3-direct-start"
-    assert result["maximum_total_usd"] == 7.9
-    assert result["maximum_provider_seconds"] == 29400
+    assert result["maximum_total_usd"] == 3.20
+    assert result["maximum_provider_seconds"] == 13000
+    assert result["preloaded_torch_wheel"]["sha256"] == orchestrate.TORCH_WHEEL_SHA256
     assert result["required_authorization"] == orchestrate.APPROVAL
     assert not (tmp_path / "session").exists()
+
+
+def test_windows_watchdog_is_id_bound_deadline_bound_and_delete_only() -> None:
+    script = (
+        Path(orchestrate.__file__).with_name("windows_deadline_watchdog.ps1")
+    ).read_text(encoding="utf-8")
+    assert 'ValidateSet("GET", "DELETE")' in script
+    assert 'ValidateSet("POST"' not in script
+    assert '"/pods/" + [Uri]::EscapeDataString($script:ObservedPodId)' in script
+    assert (
+        '"/networkvolumes/" + [Uri]::EscapeDataString($script:ObservedVolumeId)'
+        in script
+    )
+    assert "$MaximumProviderSeconds = 36000" in script
+    assert "$MaximumTotalUsd = [decimal] 9.00" in script
+    assert "SetThreadExecutionState" in script
+    assert "credential_material_recorded = $false" in script
+    assert "provider receipt does not match the admitted EXP701 lifecycle" in script
+    assert 'Get-ReceiptValue -Receipt $receipt -Name "resource_id"' in script
+    assert "$receipt.resource_id" not in script
+    assert "$receipt.network_volume_id" not in script
+
+
+def test_resume_runtime_normalizes_only_small_gpu_memory_reporting_delta() -> None:
+    frozen = {
+        "device": "cuda:0",
+        "torch": "2.5.1+cu124",
+        "torch_cuda_runtime": "12.4",
+        "deterministic_algorithms": True,
+        "cublas_workspace_config": ":4096:8",
+        "tf32": False,
+        "gpu": {
+            "name": "NVIDIA GeForce RTX 4090",
+            "total_memory_bytes": 25_250_627_584,
+            "compute_capability": [8, 9],
+        },
+    }
+    current = json.loads(json.dumps(frozen))
+    current["gpu"]["total_memory_bytes"] = 25_261_047_808
+    compatible, evidence = resume_identity_wrapper.compatible_runtime(current, frozen)
+    assert compatible is True
+    assert evidence["difference_fraction"] < 0.01
+    current["gpu"]["total_memory_bytes"] = 24_000_000_000
+    compatible, _ = resume_identity_wrapper.compatible_runtime(current, frozen)
+    assert compatible is False
+
+
+def test_resume_runtime_wrapper_imports_when_installed_outside_repository(
+    tmp_path: Path,
+) -> None:
+    wrapper = tmp_path / "resume_identity_wrapper.py"
+    wrapper.write_bytes(orchestrate.RESUME_IDENTITY_WRAPPER_PATH.read_bytes())
+    completed = subprocess.run(
+        [sys.executable, str(wrapper), "--help"],
+        cwd=Path.cwd(),
+        env={key: value for key, value in os.environ.items() if key != "PYTHONPATH"},
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "usage:" in completed.stdout
+
+
+def test_resume_arm_selection_requires_snapshot_only_for_started_arm(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "root"
+    effective, evidence = resume_identity_wrapper.arm_resume_decision(
+        output, "straight_through_cosine", True
+    )
+    assert effective is False
+    assert evidence["reason"] == "unstarted-arm-starts-fresh"
+
+    snapshot, manifest = resume_identity_wrapper.exp701.snapshot_paths(
+        output, "teacher_restarts"
+    )
+    snapshot.parent.mkdir(parents=True)
+    snapshot.write_bytes(b"snapshot")
+    manifest.write_text("{}", encoding="utf-8")
+    effective, evidence = resume_identity_wrapper.arm_resume_decision(
+        output, "teacher_restarts", True
+    )
+    assert effective is True
+    assert evidence["reason"] == "existing-arm-snapshot"
+
+    (output / "arms" / "straight_through_restarts").mkdir(parents=True)
+    with pytest.raises(RuntimeError, match="unexpected state"):
+        resume_identity_wrapper.arm_resume_decision(
+            output, "straight_through_restarts", True
+        )
+
+
+def test_control_failure_rollback_removes_only_failed_preupdate_markers(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "source" / prepare_resume_rollback.RUN_ID
+    root = output / "formal" / f"root-{prepare_resume_rollback.ROOT}"
+    phases = root / "phases"
+    phases.mkdir(parents=True)
+    (output / "guest-terminal.json").write_text(
+        json.dumps({"status": "failed", "resume_required": False, "exit_code": 1}),
+        encoding="utf-8",
+    )
+    (root / "terminal-failure.json").write_text(
+        json.dumps(
+            {
+                "mode": "formal",
+                "reason": "resume state missing for straight_through_cosine",
+                "retry_allowed": False,
+                "root": 20261414,
+                "run_id": prepare_resume_rollback.RUN_ID,
+                "schema_version": "exp701-terminal-failure-v1",
+                "status": "terminal-failure",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (phases / "train__straight_through_cosine.manifest.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "exp701-phase-v1",
+                "phase": "train/straight_through_cosine",
+                "phase_identity_sha256": "a" * 64,
+                "status": "started",
+            }
+        ),
+        encoding="utf-8",
+    )
+    scientific = root / "teacher-result.json"
+    scientific.write_bytes(b"immutable scientific evidence")
+    source_archive = tmp_path / "source.tar.gz"
+    source_receipt = recovery_transport.create_export(output, source_archive)
+    result = prepare_resume_rollback.prepare(
+        source_archive,
+        tmp_path / "prepared.tar.gz",
+        tmp_path / "rollback.json",
+        expected_sha256=source_receipt["archive_sha256"],
+    )
+    assert result["status"] == "verified"
+    assert result["scientific_state_changed"] is False
+    assert set(result["removed_control_markers"]) == set(
+        prepare_resume_rollback.REMOVED_PATHS
+    )
+    restored = tmp_path / "restored"
+    recovery_transport.restore_export(
+        tmp_path / "prepared.tar.gz",
+        restored,
+        expected_sha256=result["output_archive_sha256"],
+    )
+    restored_output = restored / "experiment" / prepare_resume_rollback.RUN_ID
+    assert (restored_output / scientific.relative_to(output)).read_bytes() == scientific.read_bytes()
+    assert all(not (restored_output / path).exists() for path in prepare_resume_rollback.REMOVED_PATHS)
+
+
+def test_resume_overlay_is_hash_bound_and_guest_completion_fails_closed() -> None:
+    supervisor = orchestrate.GUEST_SUPERVISOR_PATH.read_text(encoding="utf-8")
+    assert "SAIR_EXP701_RUNNER_WRAPPER" in supervisor
+    assert "EXP701 root returned without a terminal summary" in supervisor
+    command = orchestrate.direct_start_command(
+        "a" * 64,
+        "b" * 40,
+        "c" * 48,
+        {"archive_sha256": "d" * 64},
+    )
+    assert orchestrate.sha256(orchestrate.GUEST_SUPERVISOR_PATH) in command
+    assert orchestrate.sha256(orchestrate.RESUME_IDENTITY_WRAPPER_PATH) in command
+    assert orchestrate.BASE_CUDA_BOOTSTRAP_SHA256 in command
+    assert orchestrate.sha256(orchestrate.CUDA_BOOTSTRAP_PATH) in command
+    assert "scientific_state_changed" not in command
