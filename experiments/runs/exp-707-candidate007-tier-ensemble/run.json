@@ -1,0 +1,58 @@
+{
+  "run_id": "exp-707-candidate007-tier-ensemble",
+  "status": "completed",
+  "created_at": "2026-08-12T19:53:33.835740Z",
+  "completed_at": "2026-08-12T19:53:33.835740Z",
+  "hypothesis": "A small input-only router can exploit complementary exact successes among four EXP701 Tier-7 experts while evaluating exactly one expert per case.",
+  "seed": 20260812,
+  "config": "configs/exp_707_candidate007_tier_ensemble.yaml",
+  "preregistration": "knowledge/autoresearch/ablations/exp-707-candidate007-tier-ensemble.md",
+  "source": {
+    "repository_commit": "fc650c1",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "c6f71687d851865e64b9cd0ffb6ff6706126e98eb21df918bf974eb07420aa19",
+    "preregistration_sha256": "d60999cccd8f3ad933e2563caf1942687eaf6eb6de6830a264b50f68c51a07b0",
+    "runner_sha256": "a710a5a3a98b6c9004b43408a5852521ad35062f72eb94d4140a723964f3abd4",
+    "paired_evidence_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2",
+    "expert_checkpoint_sha256": {
+      "teacher_cosine": "b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e",
+      "straight_through_cosine": "266c9b22e511f69c1a46ba4e7b7ba84489bfce6009db1033fca56bbbc0a3b52f",
+      "teacher_restarts": "f3b83e8bc23ffc58cbd8ed5b53079e84f3d3b902f5b0b86003a9ce0bf9b3b2e3",
+      "straight_through_restarts": "d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab"
+    }
+  },
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-707-candidate007-tier-ensemble/source/teacher_cosine.safetensors",
+    "metrics": "evals/results/exp-707-candidate007-tier-ensemble/metrics.json",
+    "raw_router_result": "experiments/runs/exp-707-candidate007-tier-ensemble/raw/router-result.json",
+    "candidate007": null
+  },
+  "result": {
+    "status": "completed-negative-router-gate",
+    "fit_gain_over_teacher_cosine": 21,
+    "calibration_gain_over_teacher_cosine": -5,
+    "sealed_gain_over_teacher_cosine": -9,
+    "minimum_sealed_gain": 2,
+    "router_checkpoint_written": false,
+    "candidate_artifact_built": false
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.5.1+cpu",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "device": "cpu",
+    "deterministic_algorithms": true
+  },
+  "training_executed": true,
+  "training_scope": "tier7-input-only-router-only",
+  "expert_training_executed": false,
+  "provider": "local-cpu",
+  "paid_cost_usd": 0.0,
+  "decision": "reject-candidate007-retain-candidate006",
+  "limitations": [
+    "The input-only router overfit its fit partition and lost nine exact cases against teacher_cosine on the sealed modulus-group partition.",
+    "The preregistered early gate failed, so no Candidate007 artifact, five-seed evaluation, checked-public evaluation, or official runtime evaluation was performed.",
+    "Candidate006 remains the strongest retained measured artifact but is blocked under current upstream rules by deterministic full-width operand pre-reduction."
+  ]
+}

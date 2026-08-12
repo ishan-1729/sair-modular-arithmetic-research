@@ -84,6 +84,7 @@ lifecycle_policy:
     - completed
     - completed-scientific-positive-runtime-not-promoted
     - completed-non-comparative
+    - completed-negative-router-gate
     - completed-rejected
     - completed-rejected-dense-layer-loop-schedule-formulation
     - completed-rejected-full-budget-science

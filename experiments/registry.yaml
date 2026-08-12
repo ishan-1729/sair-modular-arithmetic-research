@@ -2716,3 +2716,25 @@ runs:
     scientific_metrics: {official_sandbox_overall: 0.647, official_sandbox_tier7: 0.54, official_sandbox_inference_seconds: 281.6, checked_public_overall: 0.666, checked_public_tier7: 0.73}
     controls: {manifest_unchanged: true, weights_unchanged: true, private_seed1_tier7_prediction_parity: 100/100, checked_public_tiers0_through6_prediction_parity: 700/700, deterministic: true, static_analysis: clean}
     limitations: [pinned-official-sandbox-not-private-competition-seed, 18.4-second-slower-run-headroom-is-host-sensitive, no-85-percent-or-private-generalization-claim, upstream-99cac6-prohibits-candidate006-full-width-operand-prereduction, not-current-rule-submission-approved]
+  - run_id: exp-707-candidate007-tier-ensemble
+    status: completed-negative-router-gate
+    approach: candidate006-tiers1-through6-plus-input-only-one-of-four-exp701-tier7-router
+    decision: reject-candidate007-retain-candidate006
+    source_branch: codex/exp704-candidate005-tier7-integration
+    source_base_commit: fc650c1
+    config: configs/exp_707_candidate007_tier_ensemble.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-707-candidate007-tier-ensemble.md
+    run_record: experiments/runs/exp-707-candidate007-tier-ensemble/run.json
+    metrics: evals/results/exp-707-candidate007-tier-ensemble/metrics.json
+    paired_evidence_sha256: db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2
+    roots: {20261414: inherited-four-arm-evaluation-evidence}
+    training_executed: true
+    training_scope: tier7-input-only-router-only
+    expert_training_executed: false
+    provider: local-cpu
+    provider_cost_usd: 0.0
+    scientific_metrics: {fit_gain_over_teacher_cosine: 21, calibration_gain_over_teacher_cosine: -5, sealed_gain_over_teacher_cosine: -9, sealed_router_correct: 97, sealed_teacher_cosine_correct: 106, sealed_cases: 169}
+    gates: {minimum_sealed_gain: 2, actual_sealed_gain: -9, passed: false}
+    downstream_evaluation: {candidate_artifact_built: false, five_seed: not-run, checked_public: not-run, official_runtime: not-run}
+    best_retained_candidate: candidate006
+    limitations: [input-router-overfit-did-not-generalize-across-modulus-groups, no-candidate007-artifact, no-post-sealed-retuning, candidate006-current-upstream-prereduction-compliance-blocker-remains]

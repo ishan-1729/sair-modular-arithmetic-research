@@ -1,0 +1,88 @@
+run_id: exp-707-candidate007-tier-ensemble
+hypothesis: A small input-only router can exploit complementary exact successes among the four completed EXP701 Tier-7 experts while evaluating exactly one expert per case, preserving Candidate006's lower-tier behavior and sub-300-second runtime.
+candidate_name: candidate-007-tier-ensemble
+seed: 20260812
+source:
+  paired_evidence: experiments/runs/exp-703-exp701-terminal-evaluation-cpu-continuation/raw/terminal-summary.json
+  paired_evidence_sha256: db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2
+  width: 256
+  cases: 600
+  formal_root: 20261414
+  terminal_archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+incumbent:
+  run_id: exp-706-candidate006-exact-runtime-fusion
+  directory: experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact
+  model_sha256: 082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d
+  manifest_sha256: dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91
+  weights_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+experts:
+  order:
+    - teacher_cosine
+    - straight_through_cosine
+    - teacher_restarts
+    - straight_through_restarts
+  teacher_cosine:
+    path: experiments/runs/exp-707-candidate007-tier-ensemble/source/teacher_cosine.safetensors
+    sha256: b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e
+  straight_through_cosine:
+    path: experiments/runs/exp-707-candidate007-tier-ensemble/source/straight_through_cosine.safetensors
+    sha256: 266c9b22e511f69c1a46ba4e7b7ba84489bfce6009db1033fca56bbbc0a3b52f
+  teacher_restarts:
+    path: experiments/runs/exp-707-candidate007-tier-ensemble/source/teacher_restarts.safetensors
+    sha256: f3b83e8bc23ffc58cbd8ed5b53079e84f3d3b902f5b0b86003a9ce0bf9b3b2e3
+  straight_through_restarts:
+    path: experiments/runs/exp-707-candidate007-tier-ensemble/source/straight_through_restarts.safetensors
+    sha256: d562e6b11c771dffa0ff4cfd191798efeb2cfb1cae87369fc90134099f5e23ab
+router:
+  feature_width: 256
+  feature_planes: [multiplier, multiplicand, modulus, multiplier_xor_multiplicand, multiplier_and_multiplicand]
+  feature_chunk_bits: 16
+  input_features: 80
+  hidden: 64
+  optimizer: adamw
+  learning_rate: 0.01
+  weight_decay: 0.02
+  epochs: 300
+  loss: multilabel_binary_cross_entropy
+  split_namespace: exp707-modulus-group-v1
+  sealed_bucket: 0
+  calibration_bucket: 1
+  bucket_count: 5
+  route_margin_grid: [-0.10, 0.0, 0.05, 0.10, 0.20]
+  tie_break: largest-margin-then-teacher
+gates:
+  minimum_sealed_correct_gain_over_teacher_cosine: 2
+  minimum_five_seed_tier7_correct: 320
+  incumbent_five_seed_tier7_correct: 319
+  minimum_five_seed_mean_overall_accuracy_exclusive: 0.6528
+  maximum_official_inference_seconds: 300
+  require_one_expert_per_case: true
+  require_tiers1_through6_prediction_equivalence: true
+  require_all_outputs_valid: true
+  require_determinism: true
+  require_static_clean: true
+evaluation:
+  seeds:
+    seed1: 699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78
+    seed2: a835ab129af0192dbaeef0fddb1989997e08d6ee62831fac2506f01ce7fa6b05
+    seed3: cfcff31430bf3b5b188d316f678a73e3e6a8357753e29115b143ce10ade6706c
+    seed4: e817269c8b139c09efdb47ecc8fddcc5a58bb2ec4f7ae3f024d3d2a2b3e34a78
+    seed5: ab409f17232461e65074d82fac3cf5f290fb159ea0d05984d0f6abb6b566a9fa
+  torch_threads: 4
+  interop_threads: 1
+  official_cpus: 4
+  official_memory: 8g
+  official_timeout_seconds: 300
+ruleset_scope:
+  runtime_evaluator_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  current_upstream_commit_observed: 99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca
+  purpose: pinned-runtime-scientific-candidate
+  current_upstream_submission_compliance: blocked-deterministic-full-width-operand-prereduction
+prohibited:
+  - checked-public-or-private-answer-use-before-router-freeze
+  - target-or-expert-output-dependent-inference-routing
+  - more-than-one-tier7-expert-evaluation-per-case
+  - changing-candidate006-through-tier6
+  - changing-zero-fallback-above-tier7
+  - hand-coded-final-answer-arithmetic
+  - claiming-current-upstream-submission-compliance

@@ -1,0 +1,192 @@
+{
+  "schema_version": "exp707-router-v1",
+  "run_id": "exp-707-candidate007-tier-ensemble",
+  "status": "completed-negative-router-gate",
+  "created_at": "2026-08-12T19:53:33.835740Z",
+  "training_executed": true,
+  "training_scope": "tier7-input-only-router",
+  "expert_training_executed": false,
+  "config_sha256": "c6f71687d851865e64b9cd0ffb6ff6706126e98eb21df918bf974eb07420aa19",
+  "paired_evidence_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2",
+  "feature_sha256": "88a97384a08fbf90a8b2049910a1f5ed5ac625a69a4d321d763e4b1a80688dfb",
+  "correctness_sha256": "375d5298da6cb161de528267879691224249ae17d4bb5227de72e55c509d9b9b",
+  "arms": [
+    "teacher_cosine",
+    "straight_through_cosine",
+    "teacher_restarts",
+    "straight_through_restarts"
+  ],
+  "split_counts": {
+    "fit": 324,
+    "calibration": 107,
+    "sealed": 169
+  },
+  "development_curve": [
+    {
+      "epoch": 1.0,
+      "loss": 0.6892686486244202
+    },
+    {
+      "epoch": 76.0,
+      "loss": 0.036216456443071365
+    },
+    {
+      "epoch": 151.0,
+      "loss": 0.00378201762214303
+    },
+    {
+      "epoch": 226.0,
+      "loss": 0.0017141326097771525
+    },
+    {
+      "epoch": 300.0,
+      "loss": 0.0010549848666414618
+    }
+  ],
+  "margin_calibration": [
+    {
+      "margin": -0.1,
+      "correct": 57,
+      "routes": [
+        37,
+        33,
+        18,
+        19
+      ]
+    },
+    {
+      "margin": 0.0,
+      "correct": 57,
+      "routes": [
+        39,
+        32,
+        18,
+        18
+      ]
+    },
+    {
+      "margin": 0.05,
+      "correct": 57,
+      "routes": [
+        39,
+        32,
+        18,
+        18
+      ]
+    },
+    {
+      "margin": 0.1,
+      "correct": 58,
+      "routes": [
+        40,
+        32,
+        17,
+        18
+      ]
+    },
+    {
+      "margin": 0.2,
+      "correct": 58,
+      "routes": [
+        41,
+        31,
+        17,
+        18
+      ]
+    }
+  ],
+  "selected_margin": 0.2,
+  "splits": {
+    "fit": {
+      "name": "fit",
+      "cases": 324,
+      "router_correct": 213,
+      "router_accuracy": 0.6574074074074074,
+      "teacher_cosine_correct": 192,
+      "teacher_cosine_accuracy": 0.5925925925925926,
+      "gain_over_teacher_cosine": 21,
+      "oracle_correct": 213,
+      "oracle_accuracy": 0.6574074074074074,
+      "per_expert_correct": {
+        "teacher_cosine": 192,
+        "straight_through_cosine": 190,
+        "teacher_restarts": 182,
+        "straight_through_restarts": 175
+      },
+      "route_counts": {
+        "teacher_cosine": 112,
+        "straight_through_cosine": 92,
+        "teacher_restarts": 81,
+        "straight_through_restarts": 39
+      },
+      "moduli": 65
+    },
+    "calibration": {
+      "name": "calibration",
+      "cases": 107,
+      "router_correct": 58,
+      "router_accuracy": 0.5420560747663551,
+      "teacher_cosine_correct": 63,
+      "teacher_cosine_accuracy": 0.5887850467289719,
+      "gain_over_teacher_cosine": -5,
+      "oracle_correct": 67,
+      "oracle_accuracy": 0.6261682242990654,
+      "per_expert_correct": {
+        "teacher_cosine": 63,
+        "straight_through_cosine": 59,
+        "teacher_restarts": 51,
+        "straight_through_restarts": 51
+      },
+      "route_counts": {
+        "teacher_cosine": 41,
+        "straight_through_cosine": 31,
+        "teacher_restarts": 17,
+        "straight_through_restarts": 18
+      },
+      "moduli": 26
+    },
+    "sealed": {
+      "name": "sealed",
+      "cases": 169,
+      "router_correct": 97,
+      "router_accuracy": 0.5739644970414202,
+      "teacher_cosine_correct": 106,
+      "teacher_cosine_accuracy": 0.6272189349112426,
+      "gain_over_teacher_cosine": -9,
+      "oracle_correct": 115,
+      "oracle_accuracy": 0.6804733727810651,
+      "per_expert_correct": {
+        "teacher_cosine": 106,
+        "straight_through_cosine": 100,
+        "teacher_restarts": 96,
+        "straight_through_restarts": 89
+      },
+      "route_counts": {
+        "teacher_cosine": 67,
+        "straight_through_cosine": 54,
+        "teacher_restarts": 30,
+        "straight_through_restarts": 18
+      },
+      "moduli": 35
+    }
+  },
+  "gate": {
+    "minimum_sealed_gain": 2,
+    "actual_sealed_gain": -9,
+    "passed": false
+  },
+  "final_training_curve": [],
+  "router": null,
+  "environment": {
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "torch": "2.5.1+cpu",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "device": "cpu",
+    "deterministic_algorithms": true
+  },
+  "limitations": [
+    "The sealed gate estimates routing generalization but is not a private benchmark.",
+    "Final Candidate007 promotion still requires frozen five-seed and official runtime gates.",
+    "The incumbent pre-reduction path remains blocked by current upstream rules."
+  ]
+}

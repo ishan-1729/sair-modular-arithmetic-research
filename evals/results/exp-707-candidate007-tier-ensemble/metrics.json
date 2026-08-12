@@ -1,0 +1,95 @@
+{
+  "schema_version": "exp707-evaluation-v1",
+  "run_id": "exp-707-candidate007-tier-ensemble",
+  "created_at": "2026-08-12T19:53:33.835740Z",
+  "checkpoint_sha256": "b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e",
+  "status": "completed-negative-router-gate",
+  "decision": "reject-candidate007-retain-candidate006",
+  "training_executed": true,
+  "training_scope": "tier7-input-only-router-only",
+  "expert_training_executed": false,
+  "source": {
+    "paired_evidence_sha256": "db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2",
+    "raw_router_result_sha256": "fec6196bb5445b917d387ff9fefecb5971f2d4979a4afedfe6940b6cb1fd04c4",
+    "feature_sha256": "88a97384a08fbf90a8b2049910a1f5ed5ac625a69a4d321d763e4b1a80688dfb",
+    "correctness_sha256": "375d5298da6cb161de528267879691224249ae17d4bb5227de72e55c509d9b9b"
+  },
+  "evaluation": {
+    "transition": {
+      "router_fit": {"cases": 324, "correct": 213, "exact_accuracy": 0.6574074074074074},
+      "teacher_cosine_fit": {"cases": 324, "correct": 192, "exact_accuracy": 0.5925925925925926},
+      "router_calibration": {"cases": 107, "correct": 58, "exact_accuracy": 0.5420560747663551},
+      "teacher_cosine_calibration": {"cases": 107, "correct": 63, "exact_accuracy": 0.5887850467289719}
+    },
+    "rollout": {
+      "router_sealed": {"cases": 169, "correct": 97, "exact_accuracy": 0.5739644970414202},
+      "teacher_cosine_sealed": {"cases": 169, "correct": 106, "exact_accuracy": 0.6272189349112426}
+    }
+  },
+  "controls": {
+    "modulus_group_split_disjoint": true,
+    "targets_absent_from_router_features": true,
+    "expert_outputs_absent_from_inference_router": true,
+    "sealed_opened_after_recipe_freeze": true,
+    "post_sealed_retuning": false,
+    "candidate_artifact_built": false
+  },
+  "factorial": {
+    "cases": 600,
+    "teacher_cosine_correct": 361,
+    "straight_through_cosine_correct": 349,
+    "teacher_restarts_correct": 329,
+    "straight_through_restarts_correct": 315,
+    "four_arm_oracle_correct": 395
+  },
+  "router": {
+    "features": "five-input-only-bit-planes-pooled-into-16-bit-chunk-densities",
+    "input_features": 80,
+    "hidden": 64,
+    "epochs": 300,
+    "selected_route_margin": 0.2,
+    "fit": {
+      "cases": 324,
+      "router_correct": 213,
+      "teacher_cosine_correct": 192,
+      "gain": 21
+    },
+    "calibration": {
+      "cases": 107,
+      "router_correct": 58,
+      "teacher_cosine_correct": 63,
+      "gain": -5
+    },
+    "sealed": {
+      "cases": 169,
+      "router_correct": 97,
+      "teacher_cosine_correct": 106,
+      "gain": -9
+    }
+  },
+  "gate": {
+    "minimum_sealed_correct_gain": 2,
+    "actual_sealed_correct_gain": -9,
+    "passed": false
+  },
+  "downstream_evaluation": {
+    "candidate_artifact_built": false,
+    "five_seed_evaluation_executed": false,
+    "checked_public_evaluation_executed": false,
+    "official_runtime_evaluation_executed": false,
+    "reason": "preregistered-sealed-gate-failed"
+  },
+  "best_retained": {
+    "candidate": "Candidate006",
+    "five_seed_mean_overall_accuracy": 0.6528,
+    "five_seed_tier7_correct": 319,
+    "five_seed_tier7_cases": 500,
+    "official_sandbox_overall_accuracy": 0.647,
+    "official_sandbox_inference_seconds": 281.6
+  },
+  "limitations": [
+    "The negative sealed result rejects this router recipe; it does not prove that every possible learned router or model soup must fail.",
+    "No Candidate007 submission artifact was produced because the frozen early gate failed.",
+    "Candidate006 remains blocked under current upstream rules by deterministic full-width operand pre-reduction."
+  ]
+}
