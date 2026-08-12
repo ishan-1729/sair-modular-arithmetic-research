@@ -1,0 +1,123 @@
+schema_version: sair-cloud-experiment-v1
+
+experiment:
+  id: exp-704-candidate005-tier7-exp701-integration
+  description: Build and evaluate Candidate005 with only Tier 7 routed to EXP701 teacher_cosine.
+
+package:
+  include:
+    - configs/exp_704_candidate005_tier7_exp701_integration.yaml
+    - configs/cloud_runner/exp_704_candidate006_local.yaml
+    - experiments/exp_704_candidate005_tier7_exp701_integration/**/*.py
+    - tools/build_candidate006_tier7_artifact.py
+    - submission/*
+    - .scratch/exp704-input/teacher-cosine.safetensors
+    - sources/github/modular-arithmetic-challenge/src/modchallenge/**/*.py
+    - knowledge/autoresearch/ablations/exp-704-candidate005-tier7-exp701-integration.md
+  exclude:
+    - "**/__pycache__/**"
+    - "**/*.pyc"
+  require_clean: false
+
+execution:
+  working_directory: .
+  environment:
+    PYTHONUNBUFFERED: "1"
+    PYTHONDONTWRITEBYTECODE: "1"
+    OMP_NUM_THREADS: "4"
+    MKL_NUM_THREADS: "4"
+  canary:
+    argv:
+      - python
+      - -m
+      - experiments.exp_704_candidate005_tier7_exp701_integration.run
+      - --config
+      - configs/exp_704_candidate005_tier7_exp701_integration.yaml
+      - --output
+      - artifacts-canary
+      - --mode
+      - canary
+    timeout_seconds: 60
+    required_outputs:
+      - artifacts-canary/canary.json
+  phases:
+    - id: build-artifacts
+      argv:
+        - python
+        - -m
+        - experiments.exp_704_candidate005_tier7_exp701_integration.run
+        - --config
+        - configs/exp_704_candidate005_tier7_exp701_integration.yaml
+        - --output
+        - artifacts
+        - --mode
+        - build
+      timeout_seconds: 60
+      required_outputs:
+        - artifacts/build.json
+        - artifacts/candidate006/submission/model.py
+        - artifacts/candidate006/submission/manifest.json
+        - artifacts/candidate006/submission/weights.safetensors
+        - artifacts/randomized/submission/model.py
+        - artifacts/randomized/submission/manifest.json
+        - artifacts/randomized/submission/weights.safetensors
+      checkpoint_paths:
+        - artifacts
+      checkpoint_on_failure: true
+    - id: fresh-full-evaluation
+      argv:
+        - python
+        - -m
+        - experiments.exp_704_candidate005_tier7_exp701_integration.run
+        - --config
+        - configs/exp_704_candidate005_tier7_exp701_integration.yaml
+        - --output
+        - artifacts
+        - --mode
+        - evaluate
+      timeout_seconds: 2550
+      required_outputs:
+        - artifacts/formal.json
+      checkpoint_paths:
+        - artifacts
+      checkpoint_on_failure: true
+    - id: summarize
+      argv:
+        - python
+        - -m
+        - experiments.exp_704_candidate005_tier7_exp701_integration.run
+        - --config
+        - configs/exp_704_candidate005_tier7_exp701_integration.yaml
+        - --output
+        - artifacts
+        - --mode
+        - summarize
+      timeout_seconds: 60
+      required_outputs:
+        - artifacts/terminal-summary.json
+        - artifacts/environment.json
+      checkpoint_paths:
+        - artifacts
+      checkpoint_on_failure: true
+
+provider:
+  driver: tools.cloud_experiment.providers:LocalProvider
+  paid: false
+  options:
+    hourly_rate_usd: "0"
+    hardware:
+      accelerator: CPU
+      accelerator_count: 0
+  expected_hardware:
+    accelerator: CPU
+    accelerator_count: 0
+
+budget:
+  max_total_usd: 0.01
+  max_provider_seconds: 3600
+  cleanup_reserve_seconds: 300
+  max_idle_seconds: 420
+
+artifacts:
+  run_directory: .scratch/cloud-runner/exp-704-candidate005-tier7-exp701-integration
+  publication_directory: .scratch/cloud-runner-publications/exp-704-candidate005-tier7-exp701-integration

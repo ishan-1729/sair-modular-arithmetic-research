@@ -5,3 +5,4 @@
 - [Candidate 003: Tier-4 cellular hybrid](candidate-003-tier4-cellular-hybrid.md) - superseded three-file candidate that independently clears Tiers 1 through 4.
 - [Candidate 004: Tier-5 cellular hybrid](candidate-004-tier5-cellular-hybrid.md) - superseded three-file candidate that independently clears Tiers 1 through 5.
 - [Candidate 005: Tier-6 conditional cellular hybrid](candidate-005-tier6-conditional-cellular.md) - current three-file intermediate incumbent that independently clears Tiers 1 through 6.
+- [Candidate 006: Candidate005 plus EXP701 Tier-7 specialist](candidate-006-tier7-exp701-integration.md) - strongest observed five-seed and pinned-sandbox challenger; retained outside `submission/` because its runtime promotion gate is unproven.

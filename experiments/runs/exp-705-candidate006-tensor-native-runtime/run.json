@@ -1,0 +1,57 @@
+{
+  "run_id": "exp-705-candidate006-tensor-native-runtime",
+  "status": "completed",
+  "created_at": "2026-08-12T07:55:00Z",
+  "completed_at": "2026-08-12T08:04:41Z",
+  "hypothesis": "Cached invariant W256 feature planes and tensor-native learned state preserve Candidate006 predictions while bringing Tier-7 inference below 300 seconds.",
+  "seed": 20260812,
+  "config": "configs/exp_705_candidate006_tensor_native_runtime.yaml",
+  "preregistration": "knowledge/autoresearch/ablations/exp-705-candidate006-tensor-native-runtime.md",
+  "builder": "tools/build_candidate006_tensor_native_artifact.py",
+  "source": {
+    "repository_commit": "9aaf73eb2511e502278159d84c5813e0a332bfc6",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "d1c57d896c0bce7ac347eb7abce1c96cae7487bf48f6d6f689dd21d59377646a",
+    "builder_sha256": "4dbcb5d2454b29c86a26a9d3dcc09b5633d3475dee9e11c6a9cd5afe5614c5e1",
+    "execution_preregistration_sha256": "5e080d451f6386789adf92cfe0735b95b9e8cd57d83df74da1b9eedff8ee7d4b",
+    "canonical_preregistration_sha256": "94d867ed86c2d0e97b412da17ac4f89ae3b6796ba5b22211235767a97aae83d1"
+  },
+  "source_artifact": {
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "optimized_artifact": {
+    "model_sha256": "e318e387b6426a025bb2223ee15eac90f25b852c707dce1ecdc078252604cf70",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/candidate006/weights.safetensors",
+    "metrics": "evals/results/exp-705-candidate006-tensor-native-runtime/metrics.json",
+    "optimized_model_sha256": "e318e387b6426a025bb2223ee15eac90f25b852c707dce1ecdc078252604cf70",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "verification": {
+    "two_case_legacy_prediction_parity": true,
+    "focused_test_seconds": 39.28,
+    "tier7_probe_cases": 100,
+    "tier7_probe_completed": false,
+    "tier7_probe_timeout_seconds": 300,
+    "outer_command_elapsed_seconds": 304,
+    "full_5500_row_parity_opened": false,
+    "official_sandbox_opened": false
+  },
+  "training_executed": false,
+  "provider": "local-cpu",
+  "paid_cost_usd": 0.0,
+  "decision": "stop-cached-feature-runtime-rewrite",
+  "limitations": [
+    "The timeout is a current-machine local diagnostic, not an official sandbox result.",
+    "The 100-case probe produced no completed prediction vector, so it carries no accuracy claim.",
+    "Only the focused two-case parity check completed; full-set equivalence remains unopened.",
+    "This rejects only the cached-feature rewrite, not Candidate006 or future distillation/JIT/runtime work."
+  ]
+}

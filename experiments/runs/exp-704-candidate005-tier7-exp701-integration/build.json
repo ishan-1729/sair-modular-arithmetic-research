@@ -1,0 +1,55 @@
+{
+  "schema_version": "exp704-build-v1",
+  "run_id": "exp-704-candidate005-tier7-exp701-integration",
+  "status": "completed",
+  "created_at": "2026-08-12T06:46:26.085596Z",
+  "training_executed": false,
+  "source": {
+    "incumbent": {
+      "model_sha256": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
+      "manifest_sha256": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
+      "weights_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca"
+    },
+    "specialist_sha256": "b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e",
+    "official_files": {
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/config.py": "927ae806f0cc5eeb9ffd0a6f1f010d695eb90c0b68c2dd725f43f11840b9e6c9",
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/generator.py": "9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be",
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/evaluation/decoder.py": "b6b83926ca8d9a0e20058b3389be0c519a09f0c83a2e4330c4f65825fc1ac99f",
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/evaluation/loader.py": "d95da1f4935bf350b51fdd2e834bfe6b86f77e3886c6e3c8109951e49d27e1fb",
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/security/static_check.py": "a5ad36402661c462d3b2bec8d86366cb031a2d5b5f8fda1c166d8662698bf694",
+      "sources/github/modular-arithmetic-challenge/src/modchallenge/interface/base_model.py": "fda37a0cfa5ee969334abb125616f2d44fd655bb11fd3800a4eb6bc9bd587d3e"
+    },
+    "config_sha256": "37126f3fc0abbfebe7953619bc005618ab6f5512955455f13bd37043686b7456",
+    "runner_sha256": "5efbd336ce10721f8cf7c1cd7d9cca30d740d44bdbe8f3120481b5553abfacb0",
+    "builder_sha256": "1d4e0aa396251e72083362b2542bbe747a0a726f83769d9e99e1f041cdb8df41",
+    "cloud_manifest_sha256": "bb07a66cf1e079bde35fe169c451259fd2eb39d58c60c30a33a786d6690c9899"
+  },
+  "candidate": {
+    "directory": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/experiment-agnostic-cloud-runner/.scratch/cloud-runner/exp-704-candidate005-tier7-exp701-integration-r2/workspace/artifacts/candidate006/submission",
+    "randomized_tier7_seed": null,
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+    "parameters": 569873,
+    "bytes": 2318099,
+    "source_candidate005_weights_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+    "source_tier7_weights_sha256": "b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e",
+    "entry_class": "model.Tier2HornerModel",
+    "output_base": "p",
+    "static_analysis": "clean"
+  },
+  "randomized_control": {
+    "directory": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/experiment-agnostic-cloud-runner/.scratch/cloud-runner/exp-704-candidate005-tier7-exp701-integration-r2/workspace/artifacts/randomized/submission",
+    "randomized_tier7_seed": 5430431669808135325,
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "b317f9a3ec6abe7f3721ffbbce2b8986ee0dbe8c619d507ec55ddcb48e9bd718",
+    "parameters": 569873,
+    "bytes": 2318099,
+    "source_candidate005_weights_sha256": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+    "source_tier7_weights_sha256": "b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e",
+    "entry_class": "model.Tier2HornerModel",
+    "output_base": "p",
+    "static_analysis": "clean"
+  }
+}

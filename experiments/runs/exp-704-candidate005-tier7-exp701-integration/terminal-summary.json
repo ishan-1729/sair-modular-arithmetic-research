@@ -1,0 +1,44 @@
+{
+  "schema_version": "exp704-terminal-v1",
+  "run_id": "exp-704-candidate005-tier7-exp701-integration",
+  "status": "completed",
+  "created_at": "2026-08-12T07:38:25.516304Z",
+  "decision": "advance-to-official-sandbox",
+  "formal_sha256": "b6644b857b936d6c90bab6efdcb4ff1541d7d818c0adf263455627a289776c7f",
+  "candidate_artifact": {
+    "directory": "/mnt/d/Projects/SAIR_mod_challenge/.scratch/experiment-agnostic-cloud-runner/.scratch/cloud-runner/exp-704-candidate005-tier7-exp701-integration-r2/workspace/artifacts/candidate006/submission",
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+    "bytes": 2318099,
+    "entry_class": "model.Tier2HornerModel",
+    "output_base": "p",
+    "static_analysis": "clean"
+  },
+  "aggregate": {
+    "seeds_completed": 5,
+    "tier7_correct": 319,
+    "tier7_cases": 500,
+    "tier7_exact_accuracy": 0.638,
+    "minimum_overall_accuracy": 0.646,
+    "mean_overall_accuracy": 0.6528,
+    "minimum_matched_gain": 0.052
+  },
+  "gates": {
+    "checks": {
+      "all_five_seeds_completed": true,
+      "every_seed_matched_improvement": true,
+      "every_full_over_reference": true,
+      "lower_tier_prediction_equivalence": true,
+      "all_outputs_valid": true,
+      "aggregate_tier7_accuracy": true,
+      "randomized_weight_dependence": true,
+      "determinism": true,
+      "static_analysis": true,
+      "training_executed_false": true
+    },
+    "passed": true
+  },
+  "official_sandbox_required": true,
+  "training_executed": false
+}

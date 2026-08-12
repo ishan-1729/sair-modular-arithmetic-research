@@ -1,0 +1,43 @@
+{
+  "run_id": "exp-705-candidate006-tensor-native-runtime",
+  "created_at": "2026-08-12T08:04:41Z",
+  "status": "stopped-diagnostic-runtime-falsifier",
+  "checkpoint_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+  "evaluation": {
+    "transition": {
+      "focused_legacy_prediction_parity": {"cases": 2, "correct": 2, "exact_accuracy": 1.0}
+    },
+    "rollout": {
+      "tier7_runtime_probe_completion": {"cases": 100, "correct": 0, "exact_accuracy": 0.0, "completed": false, "accuracy_not_measured": true}
+    }
+  },
+  "controls": {
+    "weights_unchanged": true,
+    "manifest_unchanged": true,
+    "training_executed": false,
+    "paid_compute_used": false
+  },
+  "prediction_parity": {"cases": 2, "equal": 2, "passed": true},
+  "tier7_runtime_probe": {
+    "seed": "699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78",
+    "cases": 100,
+    "torch_threads": 4,
+    "completed": false,
+    "wall_seconds_lower_bound": 300,
+    "timeout_seconds": 300
+  },
+  "gates": {
+    "weights_unchanged": true,
+    "manifest_unchanged": true,
+    "focused_prediction_parity": true,
+    "runtime_under_300_seconds": false,
+    "full_prediction_parity": false,
+    "promotion_passed": false
+  },
+  "decision": "stop-cached-feature-runtime-rewrite",
+  "limitations": [
+    "The timed-out runtime probe produced no complete predictions and therefore no accuracy measurement.",
+    "This was a current-machine local diagnostic, not an official sandbox result.",
+    "Full 5,500-row parity and the official sandbox were not opened."
+  ]
+}

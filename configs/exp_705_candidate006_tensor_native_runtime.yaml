@@ -1,0 +1,29 @@
+run_id: exp-705-candidate006-tensor-native-runtime
+hypothesis: Cached invariant feature planes and tensor-native state carry can preserve Candidate006 predictions while reducing its Tier-7 runtime below the official 300-second inference envelope.
+preregistration: knowledge/autoresearch/ablations/exp-705-candidate006-tensor-native-runtime.md
+baseline:
+  run_id: exp-704-candidate005-tier7-exp701-integration
+  model_sha256: b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315
+  manifest_sha256: dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91
+  weights_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+optimization:
+  builder: tools/build_candidate006_tensor_native_artifact.py
+  changed_method: _tier7_rollout
+  training_allowed: false
+probe:
+  seed: 699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78
+  tier_id: 7
+  cases: 100
+  torch_threads: 4
+  interop_threads: 1
+  timeout_seconds: 300
+gates:
+  require_exact_prediction_parity: true
+  maximum_official_inference_seconds: 285
+  hard_official_timeout_seconds: 300
+  require_unchanged_manifest: true
+  require_unchanged_weights: true
+resource_budget:
+  provider: local-cpu
+  paid: false
+  training_allowed: false

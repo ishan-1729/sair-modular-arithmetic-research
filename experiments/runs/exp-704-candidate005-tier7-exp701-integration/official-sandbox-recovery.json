@@ -1,0 +1,48 @@
+{
+  "schema_version": "exp704-official-sandbox-recovery-v1",
+  "run_id": "exp-704-candidate005-tier7-exp701-integration",
+  "recovered_at": "2026-08-12T08:04:41Z",
+  "result": {
+    "path": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/official-sandbox-result.json",
+    "sha256": "d7076b057d6a3af54cc2c82f5686fd49305bc1a4447c5ad82301cb70edf4f68c",
+    "mtime_utc": "2026-08-12T07:53:50.447682700Z",
+    "status": "completed",
+    "overall_accuracy": 0.641,
+    "highest_tier_above_90": 6,
+    "tier7_cases": 100,
+    "tier7_correct": 54,
+    "tier7_exact_accuracy": 0.54,
+    "tiers_8_through_10_completed": false
+  },
+  "artifact": {
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "sandbox_contract": {
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "image": "modchallenge-sandbox:82510bba00a1",
+    "seed": "699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78",
+    "total": 1100,
+    "timeout_seconds": 300,
+    "memory": "8g",
+    "cpus": "4",
+    "tmpfs_size": "2g",
+    "network": "none",
+    "read_only": true
+  },
+  "wrapper": {
+    "status": "timed-out-before-metadata-publication",
+    "outer_timeout_seconds": 480,
+    "sandbox_run_json_present": false,
+    "client_process_started_at_utc": "2026-08-12T07:37:57Z",
+    "result_mtime_minus_client_start_seconds": 953.4476827,
+    "stale_client_stopped_after_result_recovery": true
+  },
+  "interpretation": {
+    "official_result_is_complete_and_hash_preserved": true,
+    "exact_inference_wall_seconds_available": false,
+    "promotion_runtime_gate_passed": false,
+    "reason": "The upstream timeout is cooperative between batches. Tier 7 completed and was scored, but the wrapper's independent outer timeout elapsed before it could publish sandbox-run.json; no <=285-second inference receipt exists."
+  }
+}

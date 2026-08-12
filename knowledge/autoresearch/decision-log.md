@@ -510,6 +510,19 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - Post-root review finds the frozen executable omits required frozen-source, reset-to-source, randomized-weight, and actual 500-case lower-tier-parity diagnostics.
 - The stop rule forbids semantic executable repair after a root opens. Park this identity before formal root20261387; roots87-94 remain unopened and no scientific verdict exists. A corrected attempt requires a fresh identity and roots.
 
+## 2026-08-12 — EXP-704 produces the strongest observed candidate but does not replace Candidate005
+
+- Build Candidate006 by preserving Candidate005 byte-for-byte through Tier 6 and routing only 129-256-bit moduli to EXP701's frozen `teacher_cosine` H92 specialist. No training or answer-dependent routing occurs.
+- All five matched full generator seeds improve: 64.7/64.6/66.1/66.1/64.9% versus 59.5/58.4/59.6/59.5/58.5%. Tier 7 aggregates to 319/500 (63.8%), all 3,000 Tier 1-6 predictions are identical, the randomized Tier-7 control is 2/100, and determinism/static/artifact gates pass.
+- Recover the late official result after the wrapper timeout: it is `status=completed`, scores 64.1% overall, and completes Tier 7 at 54/100. The official evaluator checks timeout only between batches, so Tiers 8-10 are incomplete and exact inference wall time is unavailable.
+- Retain Candidate006 as the best observed research artifact, but do not overwrite `submission/`: the frozen <=285-second promotion gate lacks a valid receipt. Candidate005 remains the release incumbent.
+
+## 2026-08-12 — EXP-705 stops the cache-only Candidate006 runtime rewrite
+
+- A focused two-case legacy-versus-tensor-native prediction check passes with unchanged manifest and weights.
+- The real 100-case Tier-7 local probe does not finish within 300 seconds at four PyTorch threads. Stop before the 5,500-row replay and official sandbox; the cache-only rewrite cannot justify another long formal run.
+- This is a runtime diagnostic only. It does not reverse EXP704's accuracy evidence and does not reject smaller distillation, graph compilation, or a different deployable Tier-7 architecture.
+
 ## 2026-08-04 — EXP-699 terminalizes as execution-interrupted partial evidence
 
 - Preserve calibration root `20261395` and formal root `20261396` without rerunning either.

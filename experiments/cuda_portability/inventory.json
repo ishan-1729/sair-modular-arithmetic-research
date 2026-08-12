@@ -28993,6 +28993,113 @@
         "all_terminal": true,
         "consumer_route_ids": [],
         "direct_route_ids": [
+          "exp-704-candidate005-tier7-exp701-integration"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_704_candidate005_tier7_exp701_integration.yaml",
+                "sha256": "c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/run.json",
+                "sha256": "ec8f59f5639d961071f39fc250462ba30ce81e4cf12ba2e0cde93a5545a2e6f1"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-704-candidate005-tier7-exp701-integration",
+            "status": "completed-scientific-positive-runtime-not-promoted"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-704-candidate005-tier7-exp701-integration', 'status': 'completed-scientific-positive-runtime-not-promoted', 'artifact': {'path': 'configs/exp_704_candidate005_tier7_exp701_integration.yaml', 'field': 'config', 'sha256': 'c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51'}}]; imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_704_candidate005_tier7_exp701_integration",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.exp_704_candidate005_tier7_exp701_integration",
+      "path": "experiments/exp_704_candidate005_tier7_exp701_integration/__init__.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "ec357ed7e51d328255d75bce1d93bb6c43137fee3060dc12c974ab19b15f7b8f",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [
+          "exp-704-candidate005-tier7-exp701-integration"
+        ],
+        "direct_route_ids": [
+          "exp-704-candidate005-tier7-exp701-integration"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_704_candidate005_tier7_exp701_integration.yaml",
+                "sha256": "c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/run.json",
+                "sha256": "ec8f59f5639d961071f39fc250462ba30ce81e4cf12ba2e0cde93a5545a2e6f1"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-704-candidate005-tier7-exp701-integration",
+            "status": "completed-scientific-positive-runtime-not-promoted"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-704-candidate005-tier7-exp701-integration', 'status': 'completed-scientific-positive-runtime-not-promoted', 'artifact': {'path': 'configs/exp_704_candidate005_tier7_exp701_integration.yaml', 'field': 'config', 'sha256': 'c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'datetime', 'datetime.datetime', 'datetime.timezone', 'hashlib']; hotspot_counts={'checkpoint': 1}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_704_candidate005_tier7_exp701_integration",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 87,
+          "operation": "model.load",
+          "symbol": "load_candidate"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.exp_704_candidate005_tier7_exp701_integration.run",
+      "path": "experiments/exp_704_candidate005_tier7_exp701_integration/run.py",
+      "reachability_roots": [
+        "experiments/exp_704_candidate005_tier7_exp701_integration/run.py"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "5efbd336ce10721f8cf7c1cd7d9cca30d740d44bdbe8f3120481b5553abfacb0",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
           "candidate-001-horner-tcn9"
         ],
         "routes": [
@@ -29903,6 +30010,298 @@
         "active_consumers": [],
         "all_artifact_identities_complete": true,
         "all_terminal": true,
+        "consumer_route_ids": [
+          "exp-704-candidate005-tier7-exp701-integration"
+        ],
+        "direct_route_ids": [
+          "exp-704-candidate005-tier7-exp701-integration"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_704_candidate005_tier7_exp701_integration.yaml",
+                "sha256": "c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/run.json",
+                "sha256": "ec8f59f5639d961071f39fc250462ba30ce81e4cf12ba2e0cde93a5545a2e6f1"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-704-candidate005-tier7-exp701-integration",
+            "status": "completed-scientific-positive-runtime-not-promoted"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-704-candidate005-tier7-exp701-integration', 'status': 'completed-scientific-positive-runtime-not-promoted', 'artifact': {'path': 'configs/exp_704_candidate005_tier7_exp701_integration.yaml', 'field': 'config', 'sha256': 'c6b906239caaa7795ae2d3d6f07ec5f20bf81ac0b6804298b43f6e4ce443ab51'}}]; imports=['__future__', '__future__.annotations', 'math', 'modchallenge.interface.base_model', 'modchallenge.interface.base_model.ModularMultiplicationModel', 'pathlib', 'pathlib.Path', 'safetensors.torch']; hotspot_counts={'checkpoint': 7, 'host-boundary': 4, 'tensor-factory': 29}.",
+      "exp649_cpu_boundary": null,
+      "family": "runs",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "tensor-factory",
+          "line": 28,
+          "operation": "torch.arange",
+          "symbol": "_ints_to_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 41,
+          "operation": "torch.zeros",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 42,
+          "operation": "torch.zeros_like",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 60,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 78,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 81,
+          "operation": "torch.zeros",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 82,
+          "operation": "torch.zeros_like",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 123,
+          "operation": "torch.zeros",
+          "symbol": "_HornerTCN9.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 147,
+          "operation": "torch.zeros",
+          "symbol": "_SharedContextHornerTCN16.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 176,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 177,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 178,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 179,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 249,
+          "operation": "load_file",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 251,
+          "operation": "network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 257,
+          "operation": "tier3_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 263,
+          "operation": "tier4_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 273,
+          "operation": "tier5_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 283,
+          "operation": "tier6_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 293,
+          "operation": "tier7_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 325,
+          "operation": "torch.full",
+          "symbol": "Tier2HornerModel._tier6_rollout"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 337,
+          "operation": "minimum_margin.tolist",
+          "symbol": "Tier2HornerModel._tier6_rollout"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 401,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 405,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 406,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 407,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 408,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 417,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 422,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 423,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 424,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 425,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 426,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 433,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 437,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 440,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 443,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 446,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 447,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 456,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.runs.exp-704-candidate005-tier7-exp701-integration.candidate006.model",
+      "path": "experiments/runs/exp-704-candidate005-tier7-exp701-integration/candidate006/model.py",
+      "reachability_roots": [
+        "experiments/runs/exp-704-candidate005-tier7-exp701-integration/candidate006/model.py"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
         "consumer_route_ids": [],
         "direct_route_ids": [
           "poc-001-horner-tcn-smoke"
@@ -30088,25 +30487,25 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "93cd356e1e83be0e2a88c5a1f6f32aa44d300a285c187edf0136a102f8df7f3e",
-    "python_file_count": 256,
+    "config_sha256": "94641b36ed0509e09bda62c2916ec236b0dc301e01a12acc44163d985b07af88",
+    "python_file_count": 259,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "69c070ff3f9e463b7ce332e19f43adee3127266749c46ab068a0f3e13282eb2a",
-    "root_count": 168,
-    "tree_sha256": "5dad540a9a01374773257c7fb3bd5f26e910dac518fa7b3e7d507881d0e0de01"
+    "registry_sha256": "10e1179047357d3f5f6aa1b5abb8204946a5ab3fd1c343fd9881ef919193fcff",
+    "root_count": 170,
+    "tree_sha256": "5618c16d131c94b3616c7f59d56f28a7ef1a6e618574bb4faeaaf7dd12b62aad"
   },
   "summary": {
     "classifications": {
-      "archived-frozen-route": 217,
+      "archived-frozen-route": 220,
       "device-native-unvalidated": 13,
       "intentionally-cpu-boundary": 26
     },
     "hotspots": {
-      "checkpoint": 865,
+      "checkpoint": 873,
       "device-boundary": 25,
-      "host-boundary": 112,
+      "host-boundary": 116,
       "optimizer": 187,
-      "tensor-factory": 742
+      "tensor-factory": 771
     }
   }
 }

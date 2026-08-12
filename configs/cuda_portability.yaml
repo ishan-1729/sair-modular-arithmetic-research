@@ -82,6 +82,7 @@ lifecycle_policy:
   active_statuses: [planned]
   terminal_statuses:
     - completed
+    - completed-scientific-positive-runtime-not-promoted
     - completed-non-comparative
     - completed-rejected
     - completed-rejected-dense-layer-loop-schedule-formulation
@@ -114,6 +115,7 @@ lifecycle_policy:
     - permanent-pre-root-denominator-park
     - rejected-before-L2-resource-gate
     - root162-consumed-complete-non-scientific-awaiting-completion-audits-and-separate-screen-judge
+    - stopped-diagnostic-runtime-falsifier
   exp649_cpu_boundary:
     config: configs/exp_649_stochastic_trajectory_breadth.yaml
     config_sha256: 408b32ef3c0a93226d3794f7adeb5620743b57778983249be8244371dcb9cf98

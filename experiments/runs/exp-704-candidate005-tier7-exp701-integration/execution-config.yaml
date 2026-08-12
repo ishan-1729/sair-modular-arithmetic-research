@@ -1,0 +1,83 @@
+run_id: exp-704-candidate005-tier7-exp701-integration
+hypothesis: Candidate005 can retain exact behavior through Tier 6 while the frozen EXP701 teacher_cosine H92/W256 checkpoint raises Tier-7 exact accuracy and full-candidate score within the official runtime limit.
+preregistration: knowledge/autoresearch/ablations/exp-704-candidate005-tier7-exp701-integration.md
+candidate_name: candidate-006-tier7-exp701-integration
+seed: 20260812
+incumbent:
+  directory: submission
+  model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
+  manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
+  weights_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
+specialist:
+  arm: teacher_cosine
+  path: .scratch/exp704-input/teacher-cosine.safetensors
+  sha256: b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e
+  parameters: 99824
+  formal_root: 20261414
+  scientific_source_commit: 0027f66197a00ea9392e04cc7060c899500aa091
+  terminal_archive_sha256: dcd500925e9c57ce7daf4af78e068747c91fc71c84df04a795d1e50e456a42fc
+source_contract:
+  challenge_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  official_files:
+    sources/github/modular-arithmetic-challenge/src/modchallenge/config.py: 927ae806f0cc5eeb9ffd0a6f1f010d695eb90c0b68c2dd725f43f11840b9e6c9
+    sources/github/modular-arithmetic-challenge/src/modchallenge/testgen/generator.py: 9ea4469e5bd06b09c403e2e0ed1d92a5ab24b71accc61479b66dd7c274e904be
+    sources/github/modular-arithmetic-challenge/src/modchallenge/evaluation/decoder.py: b6b83926ca8d9a0e20058b3389be0c519a09f0c83a2e4330c4f65825fc1ac99f
+    sources/github/modular-arithmetic-challenge/src/modchallenge/evaluation/loader.py: d95da1f4935bf350b51fdd2e834bfe6b86f77e3886c6e3c8109951e49d27e1fb
+    sources/github/modular-arithmetic-challenge/src/modchallenge/security/static_check.py: a5ad36402661c462d3b2bec8d86366cb031a2d5b5f8fda1c166d8662698bf694
+    sources/github/modular-arithmetic-challenge/src/modchallenge/interface/base_model.py: fda37a0cfa5ee969334abb125616f2d44fd655bb11fd3800a4eb6bc9bd587d3e
+seeds:
+  seed1: 699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78
+  seed2: a835ab129af0192dbaeef0fddb1989997e08d6ee62831fac2506f01ce7fa6b05
+  seed3: cfcff31430bf3b5b188d316f678a73e3e6a8357753e29115b143ce10ade6706c
+  seed4: e817269c8b139c09efdb47ecc8fddcc5a58bb2ec4f7ae3f024d3d2a2b3e34a78
+  seed5: ab409f17232461e65074d82fac3cf5f290fb159ea0d05984d0f6abb6b566a9fa
+randomized_control:
+  seed: 5430431669808135325
+  evaluation_seed_id: seed1
+evaluation:
+  full_total_cases: 1100
+  scored_tiers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  parity_tiers: [1, 2, 3, 4, 5, 6]
+  tier7_cases: 100
+  determinism_cases: 20
+  torch_threads: 4
+  interop_threads: 1
+  max_artifact_bytes: 21474836480
+gates:
+  incumbent_reference_overall_accuracy: 0.593
+  minimum_every_full_overall_accuracy: 0.593
+  minimum_aggregate_tier7_accuracy: 0.50
+  minimum_first_seed_tier7_accuracy: 0.50
+  minimum_tier7_gain_over_randomized: 0.40
+  maximum_isolated_inference_wall_seconds: 285.0
+  hard_isolated_timeout_seconds: 300
+  require_every_seed_matched_improvement: true
+  require_lower_tier_prediction_equivalence: true
+  require_all_outputs_valid: true
+  require_determinism: true
+  require_static_clean: true
+  require_three_file_artifact: true
+resource_budget:
+  provider: local-cpu
+  training_allowed: false
+  expected_direct_evaluation_wall_seconds: 2400
+  hard_lifecycle_wall_seconds: 3600
+  cleanup_reserve_seconds: 300
+  max_idle_seconds: 420
+  official_sandbox_timeout_seconds: 300
+  fidelity_reduced: false
+prohibited:
+  - checked-or-private-answers-before-freeze
+  - training-or-retuning
+  - answer-dependent-routing
+  - output-repair
+  - hand-coded-modular-multiplication-or-reduction
+  - changing-candidate005-through-tier6
+  - changing-zero-fallback-above-tier7
+evidence_reuse:
+  path: .scratch/cloud-runner/exp-704-candidate005-tier7-exp701-integration-r1/workspace/artifacts/formal.json
+  sha256: d71509b1213d5d2dc38938c64713e1f3e522444da3b4e7b7e663867efa486276
+  seed_id: seed1
+  prior_manifest_sha256: 54394cd9cf23a10af2a7ee0c6c850fb055e39a0ca9265be558fa080336012e5a
+  prior_package_sha256: 6430d36beccea114d528921e5eb43d9b08b077f52ba2e045330d2e9aab802d36
+  correction: remove-non-ranking-tier0-from-retention-only

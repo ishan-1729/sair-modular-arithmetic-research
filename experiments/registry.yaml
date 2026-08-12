@@ -2656,3 +2656,42 @@ runs:
     confirmation_trigger: false
     terminal_summary_sha256: db2abc2653c98a7ef57861720e2f4ca7f4ac8189bce20727805f10513b4e14c2
     limitations: [distinct-cpu-successor-not-exp701-or-exp702-completion, cpu-cuda-floating-point-identities-differ, no-confirmation-independent-private-promotion-or-submission-claim]
+  - run_id: exp-704-candidate005-tier7-exp701-integration
+    status: completed-scientific-positive-runtime-not-promoted
+    approach: candidate005-frozen-through-tier6-plus-exp701-teacher-cosine-tier7-specialist
+    decision: retain-best-observed-candidate006-do-not-promote-runtime-gate
+    source_branch: codex/exp704-candidate005-tier7-integration
+    source_base_commit: 9aaf73eb2511e502278159d84c5813e0a332bfc6
+    config: configs/exp_704_candidate005_tier7_exp701_integration.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-704-candidate005-tier7-exp701-integration.md
+    run_record: experiments/runs/exp-704-candidate005-tier7-exp701-integration/run.json
+    metrics: evals/results/exp-704-candidate005-tier7-exp701-integration/metrics.json
+    formal_evidence: experiments/runs/exp-704-candidate005-tier7-exp701-integration/formal.json
+    candidate_artifact: experiments/runs/exp-704-candidate005-tier7-exp701-integration/candidate006
+    candidate_weights_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+    specialist_checkpoint_sha256: b2ef6691ce98195a857401692cbf94335ebeebd22d0e4077a2ee30d6669f715e
+    training_allowed: false
+    training_executed: false
+    provider: local-cpu
+    provider_cost_usd: 0.0
+    scientific_metrics: {five_seed_mean_overall: 0.6528, five_seed_minimum_overall: 0.646, minimum_matched_gain: 0.052, tier7_five_seed: 0.638, official_sandbox_overall: 0.641, official_sandbox_tier7: 0.54}
+    controls: {candidate005_tiers1_through6_prediction_equivalence: 3000/3000, randomized_tier7: 2/100, determinism: passed, static_analysis: clean}
+    lifecycle: {manifest_sha256: bb07a66cf1e079bde35fe169c451259fd2eb39d58c60c30a33a786d6690c9899, package_sha256: e72e84ed18b7361e14e7c790713db7ef0a3395733f58daf9e906ddcc6bdaa325, provider_elapsed_seconds: 3138, exact_cleanup_confirmed: true}
+    limitations: [official-private-unavailable, exact-official-inference-wall-unavailable, frozen-285-second-promotion-gate-not-proven, submission-remains-candidate005]
+  - run_id: exp-705-candidate006-tensor-native-runtime
+    status: stopped-diagnostic-runtime-falsifier
+    approach: cached-invariant-tensor-native-tier7-rollout
+    decision: stop-cached-feature-runtime-rewrite
+    source_branch: codex/exp704-candidate005-tier7-integration
+    source_base_commit: 9aaf73eb2511e502278159d84c5813e0a332bfc6
+    config: configs/exp_705_candidate006_tensor_native_runtime.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-705-candidate006-tensor-native-runtime.md
+    run_record: experiments/runs/exp-705-candidate006-tensor-native-runtime/run.json
+    metrics: evals/results/exp-705-candidate006-tensor-native-runtime/metrics.json
+    source_checkpoint_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+    training_allowed: false
+    training_executed: false
+    provider: local-cpu
+    provider_cost_usd: 0.0
+    diagnostic_metrics: {focused_parity: 2/2, tier7_probe_cases: 100, tier7_probe_completed: false, wall_seconds_lower_bound: 300}
+    limitations: [local-diagnostic-not-official-sandbox, no-completed-100-case-predictions, full-5500-row-parity-unopened, no-candidate-promotion-claim]
