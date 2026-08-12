@@ -2,7 +2,7 @@
 type: Model Card
 title: Candidate 005 Tier-6 Conditional Cellular Hybrid
 description: Submission-ready Tier-2/3 TCN and Tier-4/5/6 cellular ensemble with target-free conditional commutative Tier-6 inference.
-status: incumbent-intermediate
+status: superseded-preserved
 tags: [submission, candidate, Tier-6, cellular, conditional-compute, trained-model]
 timestamp: "2026-07-18T05:30:00+05:30"
 ---
@@ -26,6 +26,6 @@ Across the five preregistered Tier-6 seeds, exact accuracy is 98%/96%/95%/99%/99
 
 The pinned official isolated container passes manifest/static checks, preprocessing isolation, determinism, and the 300-second constraint. It completes full inference in 156.0 seconds and the whole container run in 178.41 seconds on four CPUs with 8 GiB RAM, below the preregistered 285-second promotion ceiling. See the [complete evaluation record](../evals/candidate-005-results.md).
 
-The adapter uses challenge-sanctioned pairwise operand reduction and Python big integers only to encode legal input bit planes. Trained recurrent weights produce every candidate residue; learned margins only control target-free routing and selection. There is no hand-coded modular multiplication, long division, exact reduction, CRT, benchmark lookup, compiled solver, or output repair.
+Under the repository-pinned 2026-07-05 rules, the adapter used pairwise operand reduction and Python big integers only to encode input bit planes; trained recurrent weights produced every candidate residue and learned margins controlled target-free routing and selection. Current upstream commit `99cac6e` now explicitly prohibits this deterministic full-width operand pre-reduction, so the preserved artifact is not current-rule submission-approved.
 
-This is an intermediate ranking promotion, not program completion. Tiers 7–10 retain the deterministic fallback, checked and independent overall accuracy remain about 59%, five complete independent sets therefore cannot meet 85%, and no legitimate private-official result is available. The active research frontier is Tier 7 at width 256.
+This was an intermediate historical promotion and is now preserved as Candidate006's lower-tier source and a reproducible baseline. Tiers 7–10 retain the deterministic fallback, checked and independent overall accuracy remain about 59%, five complete independent sets therefore cannot meet 85%, and no legitimate private-official result is available. Candidate006/EXP706 supersedes it scientifically, but both share the current-rule pre-reduction blocker.

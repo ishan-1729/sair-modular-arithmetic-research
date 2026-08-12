@@ -12,7 +12,10 @@ from safetensors.torch import load_file, save_file
 
 
 ROOT = Path(__file__).resolve().parents[1]
-INCUMBENT = ROOT / "submission"
+INCUMBENT = (
+    ROOT
+    / "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact"
+)
 TIER7_SOURCE = (
     ROOT
     / "experiments/runs/exp-704-candidate005-tier7-exp701-integration/source/teacher-cosine.safetensors"

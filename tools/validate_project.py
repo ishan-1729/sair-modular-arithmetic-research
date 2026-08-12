@@ -19,9 +19,9 @@ ROOT = Path(__file__).resolve().parents[1]
 KNOWLEDGE = ROOT / "knowledge"
 CHALLENGE_COMMIT = "82510bba00a1126649bd76dd1a451f14d0b3eb60"
 CANDIDATE_SHA256 = {
-    "manifest.json": "ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83",
-    "model.py": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
-    "weights.safetensors": "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca",
+    "manifest.json": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "model.py": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
+    "weights.safetensors": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
 }
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 ARXIV_PATTERNS = (
@@ -446,10 +446,10 @@ def validate_submission_artifact() -> list[str]:
     for name, expected_hash in CANDIDATE_SHA256.items():
         path = submission / name
         if path.is_file() and sha256(path) != expected_hash:
-            errors.append(f"submission/{name}: candidate hash mismatch")
+            errors.append(f"submission/{name}: staged research-candidate hash mismatch")
     clean_bytes = sum((submission / name).stat().st_size for name in required if (submission / name).is_file())
-    if clean_bytes != 1_915_885:
-        errors.append(f"submission: clean artifact is {clean_bytes} bytes, expected 1915885")
+    if clean_bytes != 2_323_261:
+        errors.append(f"submission: clean staged research artifact is {clean_bytes} bytes, expected 2323261")
     return errors
 
 

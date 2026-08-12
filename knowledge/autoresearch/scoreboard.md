@@ -15,10 +15,10 @@ timestamp: "2026-07-12T02:20:00+05:30"
 | `candidate-002-tier3-hybrid` | promoted | 31.0% | 100% | 97% | 99% | 3 | 170,577 | 1.8 s official sandbox | superseded |
 | `candidate-003-tier4-cellular-hybrid` | promoted | 40.4% | 100% | 98% | 99% (Tier 4: 95%) | 4 | 270,401 | 7.9 s official sandbox | superseded |
 | `candidate-004-tier5-cellular-hybrid` | promoted | 49.5% | 100% | 96% | 99% (Tier 4: 95%; Tier 5: 95%) | 5 | 370,225 | 36.9 s official sandbox | superseded |
-| `candidate-005-tier6-conditional-commutative-integration` | promoted | 59.3% | 100% | 99% | 97% (Tier 4: 97%; Tier 5: 94%; Tier 6: 98%) | 6 | 470,049 | 156.0 s official sandbox | incumbent |
-| `candidate-006-tier7-exp701-integration` | research challenger | 64.1% recovered sandbox; 65.28% five-seed mean | 100% | 100% | 98% (Tier 4: 96%; Tier 5: 96%; Tier 6: 97%; Tier 7: 54%) | 6 | 569,873 | exact sandbox inference unavailable; local Tier-7 probe >300 s | best observed; not promoted |
+| `candidate-005-tier6-conditional-commutative-integration` | historical promotion | 59.3% | 100% | 99% | 97% (Tier 4: 97%; Tier 5: 94%; Tier 6: 98%) | 6 | 470,049 | 156.0 s official sandbox | preserved; current-rule pre-reduction blocker |
+| `candidate-006-tier7-exp701-integration` / EXP706 | runtime-qualified on pinned rules | 64.7% official sandbox; 65.28% five-seed mean | 100% | 100% | 98% (Tier 4: 96%; Tier 5: 96%; Tier 6: 97%; Tier 7: 54%) | 6 | 569,873 | 281.6 s durable official sandbox; 270.86 s checked public | strongest observed; current-rule pre-reduction blocker |
 
-Candidate 005 remains the release incumbent because Candidate006 did not prove its frozen 285-second promotion ceiling. Candidate006 nevertheless wins every matched fresh full seed by 5.2-6.6 points, reaches 319/500 (63.8%) on Tier 7, preserves all 3,000 Tier 1-6 predictions, and produces a valid recovered pinned-sandbox score of 64.1%. Candidate comparisons must report all scored tiers and preserve prior rows after promotion.
+Candidate006 is the strongest observed artifact and EXP706 clears the pinned official 300-second runtime gate twice without changing its manifest or trained tensors. The durable official run takes 281.6 inference seconds and scores 64.7%; modeled Tiers 1-7 retain the prior accuracy vector, while completing Tiers 8-10 adds six zero-edge-case answers. The historical 285-second value was an internal 15-second headroom target, not the competition rule. Current upstream commit `99cac6e` now explicitly prohibits the full-width operand pre-reduction used by Candidate005/006, so neither artifact is current-rule submission-approved; the runtime result remains valid evidence, not a compliance waiver.
 
 ## Research gates
 

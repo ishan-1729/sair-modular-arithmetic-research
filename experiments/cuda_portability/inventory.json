@@ -869,7 +869,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -892,7 +892,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -915,7 +915,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -938,7 +938,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -961,7 +961,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -979,7 +979,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -997,7 +997,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -1015,7 +1015,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -3010,7 +3010,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_686_w256_straight_through_specialist.yaml",
-                "sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1"
+                "sha256": "cebd469e4710178210fa5295c60ade61ef1fae3397ebd64afd985ea5b899637e"
               },
               {
                 "field": "run_record",
@@ -3028,7 +3028,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_687_compact_distilled_w256_specialist.yaml",
-                "sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f"
+                "sha256": "bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286"
               },
               {
                 "field": "environment",
@@ -3051,7 +3051,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -3074,7 +3074,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -3097,7 +3097,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -3120,7 +3120,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -3143,7 +3143,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -3166,7 +3166,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -3184,7 +3184,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -3202,7 +3202,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -3220,7 +3220,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -13290,7 +13290,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_656_tensor_native_rollout_route.yaml",
-                "sha256": "7e72514f1dd6b633443d0138bb874d1d161ca29139a0ed14574cd8f2d7dbd36a"
+                "sha256": "4fad71926beb17dfff60be8873d7cb76118a038bc8f4db82656555b14e72e7f2"
               },
               {
                 "field": "run_record",
@@ -13304,7 +13304,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-656-tensor-native-rollout-route', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_656_tensor_native_rollout_route.yaml', 'field': 'config', 'sha256': '7e72514f1dd6b633443d0138bb874d1d161ca29139a0ed14574cd8f2d7dbd36a'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'datetime', 'datetime.datetime', 'datetime.timezone', 'gc', 'hashlib']; hotspot_counts={'checkpoint': 1, 'device-boundary': 1, 'host-boundary': 1, 'tensor-factory': 4}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-656-tensor-native-rollout-route', 'status': 'completed-rejected', 'artifact': {'path': 'configs/exp_656_tensor_native_rollout_route.yaml', 'field': 'config', 'sha256': '4fad71926beb17dfff60be8873d7cb76118a038bc8f4db82656555b14e72e7f2'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'datetime', 'datetime.datetime', 'datetime.timezone', 'gc', 'hashlib']; hotspot_counts={'checkpoint': 1, 'device-boundary': 1, 'host-boundary': 1, 'tensor-factory': 4}.",
       "exp649_cpu_boundary": null,
       "family": "exp_656_tensor_native_rollout_route",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -13746,7 +13746,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -13775,7 +13775,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}]; imports=['.model', '.model.JointQuotientCarryTransducer', '.model.TransducerOutput']; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}]; imports=['.model', '.model.JointQuotientCarryTransducer', '.model.TransducerOutput']; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -13813,7 +13813,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -13842,7 +13842,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}]; imports=['.', '.data', '.model', '.run', '__future__', '__future__.annotations', 'argparse', 'data']; hotspot_counts={'checkpoint': 14, 'host-boundary': 1, 'optimizer': 2}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}]; imports=['.', '.data', '.model', '.run', '__future__', '__future__.annotations', 'argparse', 'data']; hotspot_counts={'checkpoint': 14, 'host-boundary': 1, 'optimizer': 2}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -13985,7 +13985,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -14018,7 +14018,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -14041,7 +14041,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -14055,7 +14055,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}]; imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'functools', 'functools.lru_cache', 'random', 'torch']; hotspot_counts={'tensor-factory': 4}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': 'f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': '98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f'}}]; imports=['__future__', '__future__.annotations', 'dataclasses', 'dataclasses.dataclass', 'functools', 'functools.lru_cache', 'random', 'torch']; hotspot_counts={'tensor-factory': 4}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -14121,7 +14121,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -14150,7 +14150,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}]; imports=['.', '.calibration', '.data', '.model', '__future__', '__future__.annotations', 'argparse', 'collections']; hotspot_counts={'checkpoint': 6, 'tensor-factory': 7}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}]; imports=['.', '.calibration', '.data', '.model', '__future__', '__future__.annotations', 'argparse', 'collections']; hotspot_counts={'checkpoint': 6, 'tensor-factory': 7}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -14266,7 +14266,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -14295,7 +14295,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}]; imports=['__future__', '__future__.annotations', 'math', 'pathlib', 'pathlib.Path', 'safetensors.torch', 'safetensors.torch.load_file', 'torch']; hotspot_counts={'checkpoint': 2, 'tensor-factory': 10}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}]; imports=['__future__', '__future__.annotations', 'math', 'pathlib', 'pathlib.Path', 'safetensors.torch', 'safetensors.torch.load_file', 'torch']; hotspot_counts={'checkpoint': 2, 'tensor-factory': 10}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -14411,7 +14411,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_658_joint_quotient_carry_transducer.yaml",
-                "sha256": "59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177"
+                "sha256": "4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c"
               },
               {
                 "field": "evaluation_decision",
@@ -14440,7 +14440,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '59c04839d7041000b8b2211f4bb5da99a03dfac8804c4e79d663c0a6eeefc177'}}]; imports=['.model', '.model.JointQuotientCarryTransducer', '__future__', '__future__.annotations', 'argparse', 'hashlib', 'model', 'model.JointQuotientCarryTransducer']; hotspot_counts={'checkpoint': 2}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-658-joint-quotient-carry-transducer', 'status': 'parked-current-execution-formulation-after-two-repair-limit', 'artifact': {'path': 'configs/exp_658_joint_quotient_carry_transducer.yaml', 'field': 'config', 'sha256': '4b04ecd063de2aa6f74b37219be092dd08d9fc6d971d63b98eaf3a04db07ce8c'}}]; imports=['.model', '.model.JointQuotientCarryTransducer', '__future__', '__future__.annotations', 'argparse', 'hashlib', 'model', 'model.JointQuotientCarryTransducer']; hotspot_counts={'checkpoint': 2}.",
       "exp649_cpu_boundary": null,
       "family": "exp_658_joint_quotient_carry_transducer",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -16205,7 +16205,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_686_w256_straight_through_specialist.yaml",
-                "sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1"
+                "sha256": "cebd469e4710178210fa5295c60ade61ef1fae3397ebd64afd985ea5b899637e"
               },
               {
                 "field": "run_record",
@@ -16223,7 +16223,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_687_compact_distilled_w256_specialist.yaml",
-                "sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f"
+                "sha256": "bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286"
               },
               {
                 "field": "environment",
@@ -16246,7 +16246,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -16269,7 +16269,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -16292,7 +16292,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -16315,7 +16315,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -16338,7 +16338,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -16361,7 +16361,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -16379,7 +16379,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -16397,7 +16397,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -16415,7 +16415,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -16886,7 +16886,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_686_w256_straight_through_specialist.yaml",
-                "sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1"
+                "sha256": "cebd469e4710178210fa5295c60ade61ef1fae3397ebd64afd985ea5b899637e"
               },
               {
                 "field": "run_record",
@@ -16904,7 +16904,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_687_compact_distilled_w256_specialist.yaml",
-                "sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f"
+                "sha256": "bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286"
               },
               {
                 "field": "environment",
@@ -16927,7 +16927,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -16950,7 +16950,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -16973,7 +16973,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -16996,7 +16996,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -17019,7 +17019,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -17042,7 +17042,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -17060,7 +17060,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -17078,7 +17078,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -17096,7 +17096,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -23643,7 +23643,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_686_w256_straight_through_specialist.yaml",
-                "sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1"
+                "sha256": "cebd469e4710178210fa5295c60ade61ef1fae3397ebd64afd985ea5b899637e"
               },
               {
                 "field": "run_record",
@@ -23825,7 +23825,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_686_w256_straight_through_specialist.yaml",
-                "sha256": "a254170ce5cb33ad0935619dc41d2e91d91ab69666801d55048fe1ad06581cb1"
+                "sha256": "cebd469e4710178210fa5295c60ade61ef1fae3397ebd64afd985ea5b899637e"
               },
               {
                 "field": "run_record",
@@ -24129,7 +24129,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_687_compact_distilled_w256_specialist.yaml",
-                "sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f"
+                "sha256": "bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286"
               },
               {
                 "field": "environment",
@@ -24152,7 +24152,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -24175,7 +24175,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -24198,7 +24198,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -24221,7 +24221,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -24244,7 +24244,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -24267,7 +24267,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -24285,7 +24285,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -24303,7 +24303,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -24321,7 +24321,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -24335,7 +24335,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': '4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': 'f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': 'a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': '98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': 'add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_687_compact_distilled_w256_specialist",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -24399,7 +24399,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_687_compact_distilled_w256_specialist.yaml",
-                "sha256": "b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f"
+                "sha256": "bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286"
               },
               {
                 "field": "environment",
@@ -24422,7 +24422,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -24445,7 +24445,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -24468,7 +24468,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -24491,7 +24491,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -24514,7 +24514,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -24537,7 +24537,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -24555,7 +24555,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -24573,7 +24573,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -24591,7 +24591,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -24605,7 +24605,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'b90b8cd1dd6e482446661f8fde5adb947f6bb79fa6941a0ee850d94727545b8f'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer']; hotspot_counts={'checkpoint': 15, 'host-boundary': 5, 'optimizer': 2, 'tensor-factory': 10}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-687-compact-distilled-w256-specialist', 'status': 'parked-package-verification', 'artifact': {'path': 'configs/exp_687_compact_distilled_w256_specialist.yaml', 'field': 'config', 'sha256': 'bcf08a5b63a6a15a36e79f88a3f56812e64ea0dc990c73452961ca0d15a60286'}}, {'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': '4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3'}}, {'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a'}}, {'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683'}}, {'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': 'f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7'}}, {'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647'}}, {'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f'}}, {'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': 'a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c'}}, {'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': '98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f'}}, {'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': 'add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer']; hotspot_counts={'checkpoint': 15, 'host-boundary': 5, 'optimizer': 2, 'tensor-factory': 10}.",
       "exp649_cpu_boundary": null,
       "family": "exp_687_compact_distilled_w256_specialist",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -24852,7 +24852,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -24871,7 +24871,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': '4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_688_compact_hidden_trajectory_distillation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -24908,7 +24908,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_688_compact_hidden_trajectory_distillation.yaml",
-                "sha256": "fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409"
+                "sha256": "4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3"
               },
               {
                 "field": "environment",
@@ -24927,7 +24927,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': 'fc1abb380b5bf53a794a779eb56d4e979af69330b763f0032958aaccce6e9409'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits', 'experiments.exp_664_sprm_boundary_perturbation.run.git_output', 'experiments.exp_664_sprm_boundary_perturbation.run.make_split']; hotspot_counts={'checkpoint': 9, 'optimizer': 2, 'tensor-factory': 1}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-688-compact-hidden-trajectory-distillation', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_688_compact_hidden_trajectory_distillation.yaml', 'field': 'config', 'sha256': '4f9006a744004e11a7e767c2533b0c39e63ae70e1dc10b31f0cbbaea9f9f30a3'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.exp_664_sprm_boundary_perturbation.run', 'experiments.exp_664_sprm_boundary_perturbation.run.Timer', 'experiments.exp_664_sprm_boundary_perturbation.run.bits', 'experiments.exp_664_sprm_boundary_perturbation.run.git_output', 'experiments.exp_664_sprm_boundary_perturbation.run.make_split']; hotspot_counts={'checkpoint': 9, 'optimizer': 2, 'tensor-factory': 1}.",
       "exp649_cpu_boundary": null,
       "family": "exp_688_compact_hidden_trajectory_distillation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25035,7 +25035,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -25054,7 +25054,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_690_c1_persistent_memory_tokens",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25091,7 +25091,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_690_c1_persistent_memory_tokens.yaml",
-                "sha256": "4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f"
+                "sha256": "732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a"
               },
               {
                 "field": "environment",
@@ -25110,7 +25110,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 6}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-690-c1-persistent-memory-tokens', 'status': 'parked-calibration-candidate-runtime-headroom', 'artifact': {'path': 'configs/exp_690_c1_persistent_memory_tokens.yaml', 'field': 'config', 'sha256': '732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 6}.",
       "exp649_cpu_boundary": null,
       "family": "exp_690_c1_persistent_memory_tokens",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25266,7 +25266,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -25285,7 +25285,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_691_c2_hard_indexed_trace",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25322,7 +25322,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_691_c2_hard_indexed_trace.yaml",
-                "sha256": "01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9"
+                "sha256": "1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683"
               },
               {
                 "field": "environment",
@@ -25341,7 +25341,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '01ea3a8593df403290543cb0aba22e4de4dce59598825a323db76d8a6c5870c9'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 13}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-691-c2-hard-indexed-trace', 'status': 'completed-rejected-full-budget-science', 'artifact': {'path': 'configs/exp_691_c2_hard_indexed_trace.yaml', 'field': 'config', 'sha256': '1be91a5acc6d038dc035676b6d38a63d89c53996683c8469097ed6e3daf30683'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 13}.",
       "exp649_cpu_boundary": null,
       "family": "exp_691_c2_hard_indexed_trace",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25539,7 +25539,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -25558,7 +25558,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': 'f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_692_c3_quotient_carry_conditioning",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25595,7 +25595,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_692_c3_quotient_carry_conditioning.yaml",
-                "sha256": "79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c"
+                "sha256": "f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7"
               },
               {
                 "field": "environment",
@@ -25614,7 +25614,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': '79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 10}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-692-c3-quotient-carry-conditioning', 'status': 'parked-package-oracle', 'artifact': {'path': 'configs/exp_692_c3_quotient_carry_conditioning.yaml', 'field': 'config', 'sha256': 'f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 10}.",
       "exp649_cpu_boundary": null,
       "family": "exp_692_c3_quotient_carry_conditioning",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25794,7 +25794,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -25813,7 +25813,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_693_c4_dilation_factored_adapters",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -25850,7 +25850,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -25869,7 +25869,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}]; imports=['__future__', '__future__.annotations', 'collections.abc', 'collections.abc.Sequence', 'copy', 'torch', 'torch.Tensor', 'torch.nn']; hotspot_counts={'device-boundary': 2, 'tensor-factory': 21}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647'}}]; imports=['__future__', '__future__.annotations', 'collections.abc', 'collections.abc.Sequence', 'copy', 'torch', 'torch.Tensor', 'torch.nn']; hotspot_counts={'device-boundary': 2, 'tensor-factory': 21}.",
       "exp649_cpu_boundary": null,
       "family": "exp_693_c4_dilation_factored_adapters",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26048,7 +26048,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_693_c4_dilation_factored_adapters.yaml",
-                "sha256": "f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b"
+                "sha256": "b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647"
               },
               {
                 "field": "environment",
@@ -26067,7 +26067,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'f83e05e3b222466158a03301db29e5bba305e9c9e081d7af39cca37d2b5b212b'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 12, 'host-boundary': 1, 'optimizer': 3, 'tensor-factory': 4}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-693-c4-dilation-factored-adapters', 'status': 'failed', 'artifact': {'path': 'configs/exp_693_c4_dilation_factored_adapters.yaml', 'field': 'config', 'sha256': 'b45d3de695bf5223a8fa981754131edd4fb833879f359339715d21cec0e17647'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 12, 'host-boundary': 1, 'optimizer': 3, 'tensor-factory': 4}.",
       "exp649_cpu_boundary": null,
       "family": "exp_693_c4_dilation_factored_adapters",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26223,7 +26223,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -26237,7 +26237,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_694_routed_antithetic_quorum",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26274,7 +26274,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_694_routed_antithetic_quorum.yaml",
-                "sha256": "695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59"
+                "sha256": "0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f"
               },
               {
                 "field": "run_record",
@@ -26288,7 +26288,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '695137a542df10a6328b97ae4968640cf736b2da71db0928eb825218b7564d59'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'device-boundary': 1, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 8}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-694-routed-antithetic-quorum', 'status': 'failed-calibration-lifecycle', 'artifact': {'path': 'configs/exp_694_routed_antithetic_quorum.yaml', 'field': 'config', 'sha256': '0abbbd551e0149fb256f70186aadc66d28fcf6e107f26aef59aaa411bac7ac9f'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'device-boundary': 1, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 8}.",
       "exp649_cpu_boundary": null,
       "family": "exp_694_routed_antithetic_quorum",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26462,7 +26462,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -26476,7 +26476,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': 'a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_695_cycle_factorized_distillation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26513,7 +26513,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_695_cycle_factorized_distillation.yaml",
-                "sha256": "7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd"
+                "sha256": "a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c"
               },
               {
                 "field": "run_record",
@@ -26527,7 +26527,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': '7169744b2230e8faf92402a43e70c689a5aac0ba67184935d5f8fa1d48d496cd'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model']; hotspot_counts={'checkpoint': 13, 'host-boundary': 1, 'optimizer': 3, 'tensor-factory': 8}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-695-cycle-factorized-distillation', 'status': 'parked-calibration-resource-admission', 'artifact': {'path': 'configs/exp_695_cycle_factorized_distillation.yaml', 'field': 'config', 'sha256': 'a93287f8d51291ed62ea6dabbb17c516a01ba4b905aa11699f7f2c720eb9de5c'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'copy', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model']; hotspot_counts={'checkpoint': 13, 'host-boundary': 1, 'optimizer': 3, 'tensor-factory': 8}.",
       "exp649_cpu_boundary": null,
       "family": "exp_695_cycle_factorized_distillation",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26713,7 +26713,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -26727,7 +26727,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': '98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_696_qcm48_factorial",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26764,7 +26764,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_696_qcm48_factorial.yaml",
-                "sha256": "cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2"
+                "sha256": "98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f"
               },
               {
                 "field": "run_record",
@@ -26778,7 +26778,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': 'cef8b79c353b917939662f63d629ac9aeac6946d9bf7f7bcea671d1936b3bbe2'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 12}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-696-qcm48-factorial', 'status': 'completed-non-comparative', 'artifact': {'path': 'configs/exp_696_qcm48_factorial.yaml', 'field': 'config', 'sha256': '98a09b23866f54143384b4ef7e1b75c5451d4f794513002590ba1d8fefc1216f'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 12}.",
       "exp649_cpu_boundary": null,
       "family": "exp_696_qcm48_factorial",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -26970,7 +26970,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -26984,7 +26984,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}]; imports=[]; hotspot_counts={}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': 'add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223'}}]; imports=[]; hotspot_counts={}.",
       "exp649_cpu_boundary": null,
       "family": "exp_697_c5_routed_antithetic_quorum_recovery",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -27021,7 +27021,7 @@
               {
                 "field": "config",
                 "path": "configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml",
-                "sha256": "4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59"
+                "sha256": "add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223"
               },
               {
                 "field": "run_record",
@@ -27035,7 +27035,7 @@
           }
         ]
       },
-      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': '4f990467029a6993e16e33f4acf3f157162d29a3b13466ac8f76fd841b1efd59'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'device-boundary': 1, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 8}.",
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-697-c5-routed-antithetic-quorum-recovery', 'status': 'failed-package-oracle', 'artifact': {'path': 'configs/exp_697_c5_routed_antithetic_quorum_recovery.yaml', 'field': 'config', 'sha256': 'add61ec14abcca8abf1333478984018470d4ba26381ef727cabae4dcf287b223'}}]; imports=['__future__', '__future__.annotations', 'argparse', 'experiments.council_tournament_common.statistics', 'experiments.council_tournament_common.statistics.anytime_hoeffding_interval', 'experiments.council_tournament_common.statistics.paired_counts', 'experiments.exp_220_width_independent_cellular.model', 'experiments.exp_220_width_independent_cellular.model.SharedDilatedConvGRU']; hotspot_counts={'checkpoint': 11, 'device-boundary': 1, 'host-boundary': 1, 'optimizer': 2, 'tensor-factory': 8}.",
       "exp649_cpu_boundary": null,
       "family": "exp_697_c5_routed_antithetic_quorum_recovery",
       "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
@@ -29029,7 +29029,7 @@
       ],
       "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
       "smoke_command": null,
-      "source_sha256": "ec357ed7e51d328255d75bce1d93bb6c43137fee3060dc12c974ab19b15f7b8f",
+      "source_sha256": "1afb494ef4032419004538325c4bd2abc8c64b27de7280db2327bf8ff6892a8b",
       "torch_referenced": false
     },
     {
@@ -29088,6 +29088,284 @@
       "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
       "smoke_command": null,
       "source_sha256": "5efbd336ce10721f8cf7c1cd7d9cca30d740d44bdbe8f3120481b5553abfacb0",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-706-candidate006-exact-runtime-fusion"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_706_candidate006_exact_runtime_fusion.yaml",
+                "sha256": "4cd8cf6dd9c198d3942bb321739488f60ad80b38dc1d29cda5c08c4b752e651d"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/run.json",
+                "sha256": "fe0623e4670bf046bd5e4513a958a2fe1991d6f082c59f79cc3ea76454ab20d0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-706-candidate006-exact-runtime-fusion",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-706-candidate006-exact-runtime-fusion', 'status': 'completed', 'artifact': {'path': 'configs/exp_706_candidate006_exact_runtime_fusion.yaml', 'field': 'config', 'sha256': '4cd8cf6dd9c198d3942bb321739488f60ad80b38dc1d29cda5c08c4b752e651d'}}]; imports=['__future__', '__future__.annotations', 'concurrent.futures', 'concurrent.futures.ThreadPoolExecutor', 'math', 'modchallenge.interface.base_model', 'modchallenge.interface.base_model.ModularMultiplicationModel', 'pathlib']; hotspot_counts={'checkpoint': 7, 'host-boundary': 4, 'tensor-factory': 27}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_706_candidate006_exact_runtime_fusion",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "tensor-factory",
+          "line": 29,
+          "operation": "torch.arange",
+          "symbol": "_ints_to_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 42,
+          "operation": "torch.zeros",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 43,
+          "operation": "torch.zeros_like",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 61,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 79,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 82,
+          "operation": "torch.zeros",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 83,
+          "operation": "torch.zeros_like",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 124,
+          "operation": "torch.zeros",
+          "symbol": "_HornerTCN9.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 148,
+          "operation": "torch.zeros",
+          "symbol": "_SharedContextHornerTCN16.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 177,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 178,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 179,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 180,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 293,
+          "operation": "load_file",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 295,
+          "operation": "network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 301,
+          "operation": "tier3_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 307,
+          "operation": "tier4_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 317,
+          "operation": "tier5_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 327,
+          "operation": "tier6_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 337,
+          "operation": "tier7_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 368,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 369,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 370,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 371,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 372,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 381,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 390,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 391,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 392,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 393,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 394,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 403,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 453,
+          "operation": "torch.empty",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 460,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 461,
+          "operation": "torch.full",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 475,
+          "operation": "state_bits.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 477,
+          "operation": "minimum_margin.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 584,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.exp_706_candidate006_exact_runtime_fusion.optimized_model",
+      "path": "experiments/exp_706_candidate006_exact_runtime_fusion/optimized_model.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
       "torch_referenced": true
     },
     {
@@ -29498,6 +29776,292 @@
       "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
       "smoke_command": null,
       "source_sha256": "951b3d7545f0ffcbc9d34d353f59b51dcd2ba47db8cd6b1807b42d7b06b0e72a",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
+        "consumer_route_ids": [
+          "candidate-005-tier6-conditional-commutative-integration"
+        ],
+        "direct_route_ids": [
+          "candidate-005-tier6-conditional-commutative-integration"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/candidate_005_tier6_conditional_integration.yaml",
+                "sha256": "825e71aecf36de264e8b02eae5ea7a24ebf29c49689f3bba9744e080e4d7def8"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/run.json",
+                "sha256": "ea6f0ef4aa3e9ec7e858b6097a64fd9284a3eeec9a895a4cb09ad423f34f5d00"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "candidate-005-tier6-conditional-commutative-integration",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'candidate-005-tier6-conditional-commutative-integration', 'status': 'completed', 'artifact': {'path': 'configs/candidate_005_tier6_conditional_integration.yaml', 'field': 'config', 'sha256': '825e71aecf36de264e8b02eae5ea7a24ebf29c49689f3bba9744e080e4d7def8'}}]; imports=['__future__', '__future__.annotations', 'math', 'modchallenge.interface.base_model', 'modchallenge.interface.base_model.ModularMultiplicationModel', 'pathlib', 'pathlib.Path', 'safetensors.torch']; hotspot_counts={'checkpoint': 6, 'host-boundary': 4, 'tensor-factory': 29}.",
+      "exp649_cpu_boundary": null,
+      "family": "runs",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "tensor-factory",
+          "line": 27,
+          "operation": "torch.arange",
+          "symbol": "_ints_to_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 40,
+          "operation": "torch.zeros",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 41,
+          "operation": "torch.zeros_like",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 59,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 77,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 80,
+          "operation": "torch.zeros",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 81,
+          "operation": "torch.zeros_like",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 122,
+          "operation": "torch.zeros",
+          "symbol": "_HornerTCN9.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 146,
+          "operation": "torch.zeros",
+          "symbol": "_SharedContextHornerTCN16.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 175,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 176,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 177,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 178,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 247,
+          "operation": "load_file",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 249,
+          "operation": "network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 255,
+          "operation": "tier3_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 261,
+          "operation": "tier4_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 271,
+          "operation": "tier5_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 281,
+          "operation": "tier6_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 313,
+          "operation": "torch.full",
+          "symbol": "Tier2HornerModel._tier6_rollout"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 325,
+          "operation": "minimum_margin.tolist",
+          "symbol": "Tier2HornerModel._tier6_rollout"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 366,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 370,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 371,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 372,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 373,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 382,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 387,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 388,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 389,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 390,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 391,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 398,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 402,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 405,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 408,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 411,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 412,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 421,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.runs.candidate-005-tier6-conditional-commutative-integration.artifact.model",
+      "path": "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py",
+      "reachability_roots": [
+        "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477",
       "torch_referenced": true
     },
     {
@@ -30302,6 +30866,286 @@
         "active_consumers": [],
         "all_artifact_identities_complete": true,
         "all_terminal": true,
+        "consumer_route_ids": [
+          "exp-706-candidate006-exact-runtime-fusion"
+        ],
+        "direct_route_ids": [
+          "exp-706-candidate006-exact-runtime-fusion"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_706_candidate006_exact_runtime_fusion.yaml",
+                "sha256": "4cd8cf6dd9c198d3942bb321739488f60ad80b38dc1d29cda5c08c4b752e651d"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/run.json",
+                "sha256": "fe0623e4670bf046bd5e4513a958a2fe1991d6f082c59f79cc3ea76454ab20d0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-706-candidate006-exact-runtime-fusion",
+            "status": "completed"
+          }
+        ]
+      },
+      "evidence": "All exact registry routes consuming this source are terminal and have authenticated durable run records: [{'run_id': 'exp-706-candidate006-exact-runtime-fusion', 'status': 'completed', 'artifact': {'path': 'configs/exp_706_candidate006_exact_runtime_fusion.yaml', 'field': 'config', 'sha256': '4cd8cf6dd9c198d3942bb321739488f60ad80b38dc1d29cda5c08c4b752e651d'}}]; imports=['__future__', '__future__.annotations', 'concurrent.futures', 'concurrent.futures.ThreadPoolExecutor', 'math', 'modchallenge.interface.base_model', 'modchallenge.interface.base_model.ModularMultiplicationModel', 'pathlib']; hotspot_counts={'checkpoint': 7, 'host-boundary': 4, 'tensor-factory': 27}.",
+      "exp649_cpu_boundary": null,
+      "family": "runs",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "tensor-factory",
+          "line": 29,
+          "operation": "torch.arange",
+          "symbol": "_ints_to_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 42,
+          "operation": "torch.zeros",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 43,
+          "operation": "torch.zeros_like",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 61,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 79,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 82,
+          "operation": "torch.zeros",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 83,
+          "operation": "torch.zeros_like",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 124,
+          "operation": "torch.zeros",
+          "symbol": "_HornerTCN9.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 148,
+          "operation": "torch.zeros",
+          "symbol": "_SharedContextHornerTCN16.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 177,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 178,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 179,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 180,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 293,
+          "operation": "load_file",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 295,
+          "operation": "network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 301,
+          "operation": "tier3_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 307,
+          "operation": "tier4_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 317,
+          "operation": "tier5_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 327,
+          "operation": "tier6_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 337,
+          "operation": "tier7_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 368,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 369,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 370,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 371,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 372,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 381,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 390,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 391,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 392,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 393,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 394,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 403,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 453,
+          "operation": "torch.empty",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 460,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 461,
+          "operation": "torch.full",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 475,
+          "operation": "state_bits.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 477,
+          "operation": "minimum_margin.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 584,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel.predict_digits_batch"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.runs.exp-706-candidate006-exact-runtime-fusion.artifact.model",
+      "path": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact/model.py",
+      "reachability_roots": [
+        "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact/model.py"
+      ],
+      "responsibility": "preserve historical source and use its durable result; do not port or rerun it as part of the active CUDA route",
+      "smoke_command": null,
+      "source_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "archived-frozen-route",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": true,
         "consumer_route_ids": [],
         "direct_route_ids": [
           "poc-001-horner-tcn-smoke"
@@ -30488,24 +31332,24 @@
   "source": {
     "config": "configs/cuda_portability.yaml",
     "config_sha256": "94641b36ed0509e09bda62c2916ec236b0dc301e01a12acc44163d985b07af88",
-    "python_file_count": 259,
+    "python_file_count": 262,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "10e1179047357d3f5f6aa1b5abb8204946a5ab3fd1c343fd9881ef919193fcff",
-    "root_count": 170,
-    "tree_sha256": "5618c16d131c94b3616c7f59d56f28a7ef1a6e618574bb4faeaaf7dd12b62aad"
+    "registry_sha256": "507ef8ff17972ecfe2a129275d722dad5a53ffca033eee0752490e3f4d6e42f4",
+    "root_count": 172,
+    "tree_sha256": "0237eebcc16efa1e296390b503e03b5310b85c5d2ab9af03708cd3e135fd1389"
   },
   "summary": {
     "classifications": {
-      "archived-frozen-route": 220,
+      "archived-frozen-route": 223,
       "device-native-unvalidated": 13,
       "intentionally-cpu-boundary": 26
     },
     "hotspots": {
-      "checkpoint": 873,
+      "checkpoint": 893,
       "device-boundary": 25,
-      "host-boundary": 116,
+      "host-boundary": 128,
       "optimizer": 187,
-      "tensor-factory": 771
+      "tensor-factory": 854
     }
   }
 }

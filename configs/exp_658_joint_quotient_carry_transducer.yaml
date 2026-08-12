@@ -308,9 +308,9 @@ L1:
         path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json
         sha256: bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa
       path_backed_artifacts:
-        submission_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
-        submission_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
-        submission_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+        submission_weights: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+        submission_manifest: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+        submission_model: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
         sandbox_record: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/sandbox-run.json, sha256: bcf82f8bf3135a6857b0e30f01a60fbec62beeaa1e45e1f029aee39c9041a6fa}
         sandbox_runner: {path: tools/run_official_sandbox.py, sha256: fc3e3794eed5f90030980e983f69d95c36275f5bbfe0ae7219ad7027a43d0493}
         dockerfile: {path: .scratch/exp-658-joint-quotient-carry-transducer/pinned_sources/Dockerfile, sha256: 1e04249cf1b8410336f11b9509e918aaf8e9dbf5117d0a972ddd5e16d68d0b41}

@@ -1,0 +1,93 @@
+{
+  "run_id": "exp-706-candidate006-exact-runtime-fusion",
+  "status": "completed",
+  "created_at": "2026-08-12T12:19:48Z",
+  "checkpoint_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+  "training_executed": false,
+  "evaluation": {
+    "transition": {
+      "frozen_artifact_load": {
+        "cases": 1,
+        "correct": 1,
+        "exact_accuracy": 1.0
+      }
+    },
+    "rollout": {
+      "official_sandbox": {
+        "cases": 1100,
+        "correct": 647,
+        "exact_accuracy": 0.647,
+        "all_tiers_completed": true
+      },
+      "checked_public": {
+        "cases": 1100,
+        "correct": 666,
+        "exact_accuracy": 0.666,
+        "all_tiers_completed": true
+      }
+    }
+  },
+  "controls": {
+    "manifest_bytes_unchanged": true,
+    "weights_bytes_unchanged": true,
+    "private_seed1_tier7_prediction_hash_equal": true,
+    "checked_public_tiers0_through6_prediction_hash_equal": true,
+    "deterministic": true,
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "training_executed": false
+  },
+  "official_sandbox": {
+    "seed": "699033186f6a205c27e2ef809fc354a7346c4116defa60c3da38b5d0c7cefe78",
+    "inference_seconds": 281.6,
+    "timeout_seconds": 300,
+    "headroom_seconds": 18.4,
+    "all_tiers_completed": true,
+    "overall_accuracy": 0.647,
+    "highest_tier_above_90": 6,
+    "tier7_exact_accuracy": 0.54,
+    "tier7_correct": 54,
+    "tier7_cases": 100,
+    "deterministic": true,
+    "baseline_overall_accuracy": 0.641,
+    "baseline_tier7_exact_accuracy": 0.54,
+    "modeled_tiers1_through7_accuracy_unchanged": true,
+    "score_gain": 0.006,
+    "score_gain_source": "Tiers 8-10 completed and each scored two zero edge cases instead of being timeout-incomplete."
+  },
+  "checked_public": {
+    "inference_seconds": 270.85922451700026,
+    "timeout_seconds": 300,
+    "all_tiers_completed": true,
+    "overall_accuracy": 0.666,
+    "tier7_exact_accuracy": 0.73,
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true
+  },
+  "parity": {
+    "manifest_bytes_unchanged": true,
+    "weights_bytes_unchanged": true,
+    "private_seed1_tier7_cases": 100,
+    "private_seed1_tier7_prediction_hash_equal": true,
+    "private_seed1_tier7_prediction_sha256": "d7678ff8a32f58b4417cceb829a3cac47834999ec85fdffa7532a4cd49029f9f",
+    "checked_public_tiers0_through6_prediction_hash_equal": true
+  },
+  "gates": {
+    "inference_under_300_seconds": true,
+    "no_accuracy_sacrifice": true,
+    "weights_unchanged": true,
+    "manifest_unchanged": true,
+    "no_training": true,
+    "pinned_rules_runtime_gate_passed": true,
+    "current_upstream_compliance_passed": false,
+    "promotion_passed": false
+  },
+  "decision": "retain-runtime-qualified-research-artifact-current-upstream-compliance-blocked",
+  "limitations": [
+    "Runtime has 18.4 seconds of headroom in the slower durable official-container run and should be treated as host-sensitive.",
+    "No private competition seed was available.",
+    "The current checked-public and retained-seed results do not imply 85% accuracy or private-seed generalization.",
+    "The current upstream rules prohibit the deterministic full-width operand pre-reduction used by Candidate006, so this runtime result is not current-rule submission approval."
+  ]
+}

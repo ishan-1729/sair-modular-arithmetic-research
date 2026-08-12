@@ -1,0 +1,20 @@
+{
+  "run_id": "exp-706-candidate006-exact-runtime-fusion",
+  "captured_at": "2026-08-12T12:19:48Z",
+  "host_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "host_cpu": "Intel(R) Core(TM) Ultra 7 155H",
+  "host_logical_cpus": 22,
+  "host_visible_memory_bytes": 8118767616,
+  "python": "3.12.3",
+  "torch": "2.5.1+cpu",
+  "sandbox": {
+    "engine": "Podman 4.9.3",
+    "image": "modchallenge-sandbox:82510bba00a1",
+    "image_id": "0ff410bfb61c61d6a07b17b11337694a69910874cb59ab109b1128b3224a8423",
+    "cpus": 4,
+    "memory": "8g",
+    "network": "none",
+    "read_only": true,
+    "tmpfs": "2g"
+  }
+}

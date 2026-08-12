@@ -1,0 +1,84 @@
+{
+  "run_id": "exp-706-candidate006-exact-runtime-fusion",
+  "status": "completed",
+  "created_at": "2026-08-12T12:19:48Z",
+  "completed_at": "2026-08-12T12:19:48Z",
+  "hypothesis": "Inference-only kernel/layout fusion and four-core case sharding can put Candidate006 below the written 300-second limit without reducing accuracy.",
+  "seed": 20260812,
+  "config": "configs/exp_706_candidate006_exact_runtime_fusion.yaml",
+  "preregistration": "knowledge/autoresearch/ablations/exp-706-candidate006-exact-runtime-fusion.md",
+  "builder": "tools/build_candidate006_exact_runtime_artifact.py",
+  "source": {
+    "repository_commit": "f9cf28fdaac9bb1b25af8d517548c2ed30173c3f",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "config_sha256": "4cd8cf6dd9c198d3942bb321739488f60ad80b38dc1d29cda5c08c4b752e651d",
+    "preregistration_sha256": "3ab33d37f4ba0e6818350d1ab33977dfe84fb74fcd33dd2f8436b307756691a1",
+    "builder_sha256": "e2339075aaf7bbfa1ba45cf421fcc79418180570200a7bf49366169f395e2382",
+    "optimized_model_source_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d"
+  },
+  "source_artifact": {
+    "model_sha256": "b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "optimized_artifact": {
+    "directory": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact",
+    "model_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+    "bytes": 2323261,
+    "parameters": 569873
+  },
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact/weights.safetensors",
+    "candidate_directory": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact",
+    "model_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
+    "manifest_sha256": "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+    "checked_evaluation": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/checked-evaluation.json",
+    "official_sandbox_result": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/result.json",
+    "official_sandbox_metadata": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/sandbox-run.json",
+    "official_sandbox_log": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/container.stderr.log",
+    "current_rules_compliance": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/current-rules-compliance.json",
+    "metrics": "evals/results/exp-706-candidate006-exact-runtime-fusion/metrics.json"
+  },
+  "evidence": {
+    "checked_evaluation": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/checked-evaluation.json",
+    "checked_evaluation_sha256": "7036926ccbba2f3e1da9a70204a94772f14ccc628e445d25ddea809773152bca",
+    "official_sandbox_result": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/result.json",
+    "official_sandbox_result_sha256": "98a2ada0136e3e79df84dc8880d40f61b14e9e11846cd4a0403f8af3262d678a",
+    "official_sandbox_metadata": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/sandbox-run.json",
+    "official_sandbox_metadata_sha256": "a36ecda7db51e7bcea38644ecb157ff184bd180111fa35a6160dba6714c04490",
+    "official_sandbox_log": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/official-sandbox/container.stderr.log",
+    "official_sandbox_log_sha256": "35511dc46bfa3b9808c714f49d350ccf84a62056d8c21d7cf0595dbf6818ce6d",
+    "current_rules_compliance": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/current-rules-compliance.json",
+    "current_rules_compliance_sha256": "7346d76d2d2dafc3829d83235428ef8d5b823b83bc9b2311e2513ea6044eead1"
+  },
+  "verification": {
+    "weights_unchanged": true,
+    "manifest_unchanged": true,
+    "training_executed": false,
+    "private_seed1_tier7_prediction_sha256": "d7678ff8a32f58b4417cceb829a3cac47834999ec85fdffa7532a4cd49029f9f",
+    "private_seed1_tier7_prediction_parity": true,
+    "checked_public_tiers0_through6_prediction_parity": true,
+    "official_container_all_tiers_completed": true,
+    "official_container_inference_seconds": 281.6,
+    "official_container_timeout_seconds": 300,
+    "official_container_headroom_seconds": 18.4,
+    "pinned_rules_runtime_gate_passed": true,
+    "current_upstream_submission_compliance_passed": false
+  },
+  "training_executed": false,
+  "provider": "local-official-podman-sandbox",
+  "paid_cost_usd": 0.0,
+  "decision": "retain-runtime-qualified-research-artifact-current-upstream-compliance-blocked",
+  "limitations": [
+    "The durable official sandbox uses the repository-pinned challenge commit 82510bba00a1.",
+    "The slower of two successful official-container observations was 281.6 seconds; runtime still depends on host contention.",
+    "No private competition seed was available; claims are limited to retained generated seeds and official/public sandbox evidence.",
+    "The historical 285-second internal headroom target is not an official eligibility rule.",
+    "Current upstream commit 99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca explicitly prohibits deterministic full-width operand pre-reduction.",
+    "Candidate006 performs int(a_enc) % p and int(b_enc) % p, so the artifact is not approved for submission under the current upstream rules without a compliant learned replacement."
+  ]
+}

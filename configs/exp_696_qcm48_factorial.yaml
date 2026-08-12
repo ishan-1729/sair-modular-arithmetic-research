@@ -4,15 +4,15 @@ source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight
 source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
 source_contract:
   c1_runner: {path: experiments/exp_690_c1_persistent_memory_tokens/run.py, sha256: aeaed1afc32e02e076185343b0a2ca6c33ce13c52ce5845181fbd08ab72316a8}
-  c1_config: {path: configs/exp_690_c1_persistent_memory_tokens.yaml, sha256: 4fa2e75b6603035274e7fa3aaf56e9c742c1079dc2951ba07663dd45f6008f7f}
+  c1_config: {path: configs/exp_690_c1_persistent_memory_tokens.yaml, sha256: 732866e0a54b6c5f802457e769f9079f4d097990cedb671730de294b3697336a}
   c3_runner: {path: experiments/exp_692_c3_quotient_carry_conditioning/run.py, sha256: cedcabc2545e50822466c7eb363a623340af55a771c35fc44616350b282cf6fe}
-  c3_config: {path: configs/exp_692_c3_quotient_carry_conditioning.yaml, sha256: 79bca271e84b144e7244a7217ce2641e89bf64255e512f3339899b8149719f4c}
+  c3_config: {path: configs/exp_692_c3_quotient_carry_conditioning.yaml, sha256: f0e5c69642d8188c4186a77598d309b76b5cde10c24b7ae378b8df8b2568d0e7}
   exp220_model: {path: experiments/exp_220_width_independent_cellular/model.py, sha256: 9b271fd13084011e1631125040e4080ea4397a0356dab1f1ce81bfee3f799edc}
   exp300_runner: {path: experiments/exp_300_width64_bit_tensor_transfer/run.py, sha256: 9725303f4151554cb1f877cd92a2db6df911726f27f93fe5798c6d6e9706506f}
   exp687_runner: {path: experiments/exp_687_compact_distilled_w256_specialist/run.py, sha256: 3644bbdc9c25f77daa96ca3322fa024831603886dd9dbf8612a4bb6ba2bfd3ff}
-  candidate_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
-  candidate_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
-  candidate_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+  candidate_model: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+  candidate_manifest: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+  candidate_weights: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
 roots:
   calibration: 20261368
   formal: 20261369

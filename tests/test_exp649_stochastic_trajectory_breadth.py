@@ -22,6 +22,10 @@ SEED_RETIREMENT_MANIFEST = (
     ROOT / "experiments/exp_649_stochastic_trajectory_breadth/seed_retirement_manifest.json"
 )
 TEST_ONLY_PARITY_ROOT_SEED = 649_900_001
+CANDIDATE005 = (
+    ROOT
+    / "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact"
+)
 
 
 def load_runner():
@@ -84,9 +88,9 @@ def test_frozen_k_mapping_and_correct_tier0_width256_geometry() -> None:
         128,
     )
     assert (tier7["count"], tier7["operand_bits"]) == (100, 512)
-    assert module.sha256(ROOT / config["candidate_model"]) == config["candidate_model_sha256"]
-    assert module.sha256(ROOT / config["candidate_manifest"]) == config["candidate_manifest_sha256"]
-    assert module.sha256(ROOT / config["candidate_artifact"]) == config["candidate_artifact_sha256"]
+    assert module.sha256(CANDIDATE005 / "model.py") == config["candidate_model_sha256"]
+    assert module.sha256(CANDIDATE005 / "manifest.json") == config["candidate_manifest_sha256"]
+    assert module.sha256(CANDIDATE005 / "weights.safetensors") == config["candidate_artifact_sha256"]
     assert module.sha256(ROOT / config["source_model"]) == config["source_model_sha256"]
     portable_fixture = (
         ROOT

@@ -8,9 +8,9 @@ source_contract:
   exp647_runner: {path: experiments/exp_647_operand_swap_consistency/run.py, sha256: 308248442faf5066cb5a8572fb80d88d7cedd77af035d1eb7322041c1987e326}
   exp656_runner: {path: experiments/exp_656_tensor_native_rollout_route/run.py, sha256: 6ac666f408f3e53645d612b37945c55dec01dd4bb58b6b84c843f529c51b5005}
   exp648_runner: {path: experiments/exp_648_structured_trajectory_consistency/run.py, sha256: f8cdc278b67013c6ca920833bc26473ad938e15749eb85811fc00016b6bb5672}
-  candidate_model: {path: submission/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
-  candidate_manifest: {path: submission/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
-  candidate_weights: {path: submission/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
+  candidate_model: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py, sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477}
+  candidate_manifest: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/manifest.json, sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83}
+  candidate_weights: {path: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/weights.safetensors, sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca}
 roots:
   calibration: 20261294
   formal: 20261295

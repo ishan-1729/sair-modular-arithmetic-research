@@ -1,0 +1,23 @@
+2026-08-12 12:11:40,637 INFO Validating submission at /sandbox/submission
+2026-08-12 12:11:40,647 INFO Manifest OK: entry_class=model.Tier2HornerModel output_base='p'
+2026-08-12 12:11:40,671 INFO Artifact size: 0.00 GB
+2026-08-12 12:11:40,707 INFO Static check passed
+2026-08-12 12:11:40,708 INFO Generating test set: 1100 problems
+2026-08-12 12:12:28,742 INFO Loading model...
+2026-08-12 12:12:30,792 INFO Model loaded in 2.0s
+2026-08-12 12:12:30,886 INFO Preprocess isolation check in 0.1s
+2026-08-12 12:12:33,837 INFO Determinism check in 3.0s
+2026-08-12 12:12:33,838 INFO Running inference (300.0s budget)...
+2026-08-12 12:13:24,768 INFO Tier 0 complete: 100 predictions in 50.9s
+2026-08-12 12:13:25,185 INFO Tier 1 complete: 100 predictions in 51.3s
+2026-08-12 12:13:25,546 INFO Tier 2 complete: 100 predictions in 51.7s
+2026-08-12 12:13:26,356 INFO Tier 3 complete: 100 predictions in 52.5s
+2026-08-12 12:13:29,086 INFO Tier 4 complete: 100 predictions in 55.2s
+2026-08-12 12:13:37,348 INFO Tier 5 complete: 100 predictions in 63.5s
+2026-08-12 12:14:26,649 INFO Tier 6 complete: 100 predictions in 112.8s
+2026-08-12 12:17:15,412 INFO Tier 7 complete: 100 predictions in 281.6s
+2026-08-12 12:17:15,413 INFO Tier 8 complete: 100 predictions in 281.6s
+2026-08-12 12:17:15,414 INFO Tier 9 complete: 100 predictions in 281.6s
+2026-08-12 12:17:15,416 INFO Tier 10 complete: 100 predictions in 281.6s
+2026-08-12 12:17:15,417 INFO Evaluation complete: overall_accuracy=64.70%
+2026-08-12 12:17:15,426 INFO evaluation complete: overall_accuracy=0.6470, highest_tier_above_90=6

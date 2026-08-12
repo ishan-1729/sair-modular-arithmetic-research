@@ -1,0 +1,22 @@
+{
+  "run_id": "exp-706-candidate006-exact-runtime-fusion",
+  "observed_at": "2026-08-12T14:09:23Z",
+  "status": "blocked",
+  "runtime_ruleset": {
+    "repository_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "runtime_result_valid": true
+  },
+  "current_upstream_ruleset": {
+    "repository_commit": "99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca",
+    "rules_url": "https://github.com/SAIRcompetition/modular-arithmetic-challenge/blob/main/rules/evaluation.md",
+    "rule": "Deterministically pre-reducing full-width operands against the actual modulus is prohibited."
+  },
+  "artifact_observation": {
+    "model_sha256": "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d",
+    "path": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact/model.py",
+    "multiplier_expression": "int(a_enc) % modulus_value",
+    "multiplicand_expression": "int(b_enc) % modulus_value"
+  },
+  "decision": "retain-runtime-qualified-research-artifact-do-not-claim-current-rule-submission-compliance",
+  "training_required_for_compliant_replacement": true
+}

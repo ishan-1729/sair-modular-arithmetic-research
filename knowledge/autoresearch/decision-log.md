@@ -523,6 +523,15 @@ there is no scientific FPRM/ST-M027 verdict and no candidate or benchmark change
 - The real 100-case Tier-7 local probe does not finish within 300 seconds at four PyTorch threads. Stop before the 5,500-row replay and official sandbox; the cache-only rewrite cannot justify another long formal run.
 - This is a runtime diagnostic only. It does not reverse EXP704's accuracy evidence and does not reject smaller distillation, graph compilation, or a different deployable Tier-7 architecture.
 
+## 2026-08-12 — EXP-706 runtime-qualifies Candidate006 under the pinned 300-second evaluator
+
+- Preserve Candidate006's manifest and every one of its 569,873 trained parameters byte-for-byte. Change inference execution only: cache feature planes, carry state tensor-native, use equivalent height-one channels-last convolutions, shard independent cases across four CPU workers, and omit the unused training-only quotient head.
+- The checked 1,100-case evaluator completes in 270.859 seconds at 66.6% overall and 73% Tier 7. The retained private seed-1 Tier-7 prediction hash is exactly unchanged, and checked-public Tiers 0-6 reproduce their baseline prediction hashes.
+- The durable official 4-CPU/8-GiB/no-network/read-only container completes all tiers in 281.6 inference seconds, below the written 300-second limit. Tiers 1-7 retain the baseline accuracy vector exactly. Tiers 8-10 now execute and contribute two zero edge cases each, raising the same-seed overall score from 64.1% to 64.7%.
+- Copy the EXP706 artifact to `submission/` as the strongest runtime-qualified research candidate. Supersede Candidate005 scientifically but preserve its exact artifact under its canonical run directory.
+- Clarify policy: 285 seconds was a repository-internal 15-second reliability margin first frozen by EXP622, not an official competition limit. Historical 285-second experiment decisions remain historical; new eligibility statements bind to 300 seconds and must retain exact timing evidence.
+- A same-day current-upstream audit at commit `99cac6e` finds an explicit prohibition on deterministic full-width operand pre-reduction. Candidate005/006 both reduce `a` and `b` modulo `p` before their learned networks run. Retain the exact runtime result, but block current-rule submission promotion until a compliant raw-operand learned model exists or organizers explicitly resolve the ruleset conflict.
+
 ## 2026-08-04 — EXP-699 terminalizes as execution-interrupted partial evidence
 
 - Preserve calibration root `20261395` and formal root `20261396` without rerunning either.

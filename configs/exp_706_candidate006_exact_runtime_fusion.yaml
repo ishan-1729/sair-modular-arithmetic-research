@@ -1,0 +1,40 @@
+run_id: exp-706-candidate006-exact-runtime-fusion
+hypothesis: Prediction-equivalent feature caching, tensor-native state carry, channels-last convolution, four-core case sharding, and unused-head elision can preserve Candidate006 accuracy while completing the full current 1,100-case inference workload in less than the official 300-second limit.
+preregistration: knowledge/autoresearch/ablations/exp-706-candidate006-exact-runtime-fusion.md
+source:
+  run_id: exp-704-candidate005-tier7-exp701-integration
+  directory: experiments/runs/exp-704-candidate005-tier7-exp701-integration/candidate006
+  model_sha256: b7c255af7b619e6f689a84e5307ce445432e4285af0cdd9f514d982ebc8c0315
+  manifest_sha256: dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91
+  weights_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+optimization:
+  source: experiments/exp_706_candidate006_exact_runtime_fusion/optimized_model.py
+  source_sha256: 082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d
+  builder: tools/build_candidate006_exact_runtime_artifact.py
+  training_allowed: false
+evaluation:
+  benchmark: data/external/public_benchmark
+  cases: 1100
+  cases_per_tier: 100
+  timeout_seconds: 300
+  cpus: 4
+  memory: 8g
+  seed1_private_tier7_prediction_sha256: d7678ff8a32f58b4417cceb829a3cac47834999ec85fdffa7532a4cd49029f9f
+gates:
+  maximum_inference_seconds: 300
+  require_completed_tiers_through: 7
+  require_overall_accuracy: 0.641
+  require_tier7_accuracy: 0.54
+  require_unchanged_weights: true
+  require_unchanged_manifest: true
+  require_no_training: true
+  require_private_seed1_tier7_prediction_parity: true
+resource_budget:
+  provider: local-cpu
+  paid: false
+  training_allowed: false
+ruleset_scope:
+  runtime_evaluator_commit: 82510bba00a1126649bd76dd1a451f14d0b3eb60
+  current_upstream_commit_observed: 99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca
+  purpose: pinned-runtime-equivalence-only
+  current_upstream_submission_compliance: blocked-deterministic-full-width-operand-prereduction

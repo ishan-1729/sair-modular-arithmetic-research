@@ -12,7 +12,9 @@ from safetensors.torch import load_file
 
 ROOT = Path(__file__).resolve().parents[1]
 SUBMISSION = ROOT / "submission"
-WEIGHTS_SHA256 = "2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca"
+MODEL_SHA256 = "082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d"
+MANIFEST_SHA256 = "dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91"
+WEIGHTS_SHA256 = "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
 
 
 @pytest.fixture(scope="module")
@@ -28,8 +30,21 @@ def test_submission_is_the_clean_three_file_artifact() -> None:
         "weights.safetensors",
     }
     weights = SUBMISSION / "weights.safetensors"
+    assert hashlib.sha256((SUBMISSION / "model.py").read_bytes()).hexdigest() == MODEL_SHA256
+    assert hashlib.sha256((SUBMISSION / "manifest.json").read_bytes()).hexdigest() == MANIFEST_SHA256
     assert hashlib.sha256(weights.read_bytes()).hexdigest() == WEIGHTS_SHA256
-    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 470_049
+    assert sum(tensor.numel() for tensor in load_file(str(weights)).values()) == 569_873
+
+
+def test_staged_artifact_is_not_claimed_current_rules_compliant() -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "experiments/runs/exp-706-candidate006-exact-runtime-fusion/current-rules-compliance.json"
+        ).read_text()
+    )
+    assert receipt["status"] == "blocked"
+    assert "do-not-claim-current-rule-submission-compliance" in receipt["decision"]
 
 
 def test_submission_passes_official_manifest_and_static_checks(candidate) -> None:

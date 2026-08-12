@@ -5,11 +5,11 @@ tracking:
   experiment_name: sair-modular-arithmetic-wsl
 preregistration: knowledge/autoresearch/ablations/exp-656-tensor-native-rollout-route.md
 source:
-  candidate_model: submission/model.py
+  candidate_model: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/model.py
   candidate_model_sha256: e3d4aa9ff3e22dde516d261b099826622fa37d0688fae47c07ff95fe876e9477
-  candidate_manifest: submission/manifest.json
+  candidate_manifest: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/manifest.json
   candidate_manifest_sha256: ee49f91b8a1a4aa2cde418ebec59ea1890d93fda6dc72338989c0aa3308e7c83
-  checkpoint: submission/weights.safetensors
+  checkpoint: experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact/weights.safetensors
   checkpoint_sha256: 2f6ac3199d0fd9e16afae165c2d4a16919e6c8bf4545363a6f12d077279d27ca
 benchmark:
   widths: [128, 256]
@@ -29,4 +29,3 @@ resource_budget:
 outputs:
   run_dir: experiments/runs/exp-656-tensor-native-rollout-route
   metrics: evals/results/exp-656-tensor-native-rollout-route/metrics.json
-

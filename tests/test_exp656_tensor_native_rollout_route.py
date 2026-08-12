@@ -11,6 +11,10 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "experiments/exp_656_tensor_native_rollout_route/run.py"
 CONFIG = ROOT / "configs/exp_656_tensor_native_rollout_route.yaml"
+CANDIDATE005 = (
+    ROOT
+    / "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact"
+)
 
 
 def load_module(name: str, path: Path):
@@ -34,7 +38,19 @@ def test_config_is_input_only_and_source_pinned() -> None:
         "route_order": "alternating-legacy-first-then-tensor-first",
     }
     assert config["gates"]["maximum_width256_tensor_to_legacy_wall_ratio"] == 0.8
-    assert module.validate_source(config) == {
+    preserved_config = {**config, "source": dict(config["source"])}
+    preserved_config["source"].update(
+        {
+            "candidate_model": str(CANDIDATE005.relative_to(ROOT) / "model.py"),
+            "candidate_manifest": str(
+                CANDIDATE005.relative_to(ROOT) / "manifest.json"
+            ),
+            "checkpoint": str(
+                CANDIDATE005.relative_to(ROOT) / "weights.safetensors"
+            ),
+        }
+    )
+    assert module.validate_source(preserved_config) == {
         "candidate_model_sha256": config["source"]["candidate_model_sha256"],
         "candidate_manifest_sha256": config["source"]["candidate_manifest_sha256"],
         "checkpoint_sha256": config["source"]["checkpoint_sha256"],
@@ -55,7 +71,7 @@ class RecordingNetwork:
 
 def test_cached_route_reproduces_every_legacy_feature_plane() -> None:
     module = load_module("exp656_feature_test", RUNNER)
-    candidate = load_module("candidate005_for_exp656_feature_test", ROOT / "submission/model.py")
+    candidate = load_module("candidate005_for_exp656_feature_test", CANDIDATE005 / "model.py")
     multiplier = [173, 91]
     multiplicand = [149, 77]
     modulus = [251, 239]
@@ -80,10 +96,10 @@ def test_cached_route_reproduces_every_legacy_feature_plane() -> None:
 def test_cached_route_is_exact_on_frozen_candidate_cell() -> None:
     module = load_module("exp656_frozen_test", RUNNER)
     candidate_module = load_module(
-        "candidate005_for_exp656_frozen_test", ROOT / "submission/model.py"
+        "candidate005_for_exp656_frozen_test", CANDIDATE005 / "model.py"
     )
     candidate = candidate_module.Tier2HornerModel()
-    candidate.load(str(ROOT / "submission"))
+    candidate.load(str(CANDIDATE005))
     assert candidate.tier6_network is not None
     cases = module.make_cases(width=16, batch_size=2, seed=20260721)
     legacy = module.legacy_rollout(

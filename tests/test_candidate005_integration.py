@@ -7,10 +7,14 @@ import torch
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CANDIDATE005 = (
+    ROOT
+    / "experiments/runs/candidate-005-tier6-conditional-commutative-integration/artifact"
+)
 
 
 def candidate_module():
-    source = (ROOT / "submission/model.py").read_text(encoding="utf-8")
+    source = (CANDIDATE005 / "model.py").read_text(encoding="utf-8")
     module = types.ModuleType("candidate005_test_model")
     exec(compile(source, "candidate005_test_model.py", "exec"), module.__dict__)
     return module

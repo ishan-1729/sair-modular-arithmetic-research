@@ -2695,3 +2695,24 @@ runs:
     provider_cost_usd: 0.0
     diagnostic_metrics: {focused_parity: 2/2, tier7_probe_cases: 100, tier7_probe_completed: false, wall_seconds_lower_bound: 300}
     limitations: [local-diagnostic-not-official-sandbox, no-completed-100-case-predictions, full-5500-row-parity-unopened, no-candidate-promotion-claim]
+  - run_id: exp-706-candidate006-exact-runtime-fusion
+    status: completed
+    approach: candidate006-inference-only-cached-tensor-native-channels-last-four-core-sharding
+    decision: retain-runtime-qualified-research-artifact-current-upstream-compliance-blocked
+    source_branch: codex/exp704-candidate005-tier7-integration
+    source_base_commit: f9cf28fdaac9bb1b25af8d517548c2ed30173c3f
+    config: configs/exp_706_candidate006_exact_runtime_fusion.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-706-candidate006-exact-runtime-fusion.md
+    run_record: experiments/runs/exp-706-candidate006-exact-runtime-fusion/run.json
+    metrics: evals/results/exp-706-candidate006-exact-runtime-fusion/metrics.json
+    artifact: experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact
+    model_sha256: 082ca41d86c758254dd0e75841c1b1d8df94bbf3280d539389782deaf4857d9d
+    manifest_sha256: dbeb95ed3b085aa2b338ec57041d343ec924ca72f4b3c7fd3094d6cd215a0c91
+    checkpoint_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+    training_allowed: false
+    training_executed: false
+    provider: local-official-podman-sandbox
+    provider_cost_usd: 0.0
+    scientific_metrics: {official_sandbox_overall: 0.647, official_sandbox_tier7: 0.54, official_sandbox_inference_seconds: 281.6, checked_public_overall: 0.666, checked_public_tier7: 0.73}
+    controls: {manifest_unchanged: true, weights_unchanged: true, private_seed1_tier7_prediction_parity: 100/100, checked_public_tiers0_through6_prediction_parity: 700/700, deterministic: true, static_analysis: clean}
+    limitations: [pinned-official-sandbox-not-private-competition-seed, 18.4-second-slower-run-headroom-is-host-sensitive, no-85-percent-or-private-generalization-claim, upstream-99cac6-prohibits-candidate006-full-width-operand-prereduction, not-current-rule-submission-approved]

@@ -2,6 +2,6 @@
   "entry_class": "model.Tier2HornerModel",
   "output_base": "p",
   "framework": "pytorch",
-  "model_description": "Learned Horner ensemble with width-9 and width-16 TCN specialists for Tiers 2-3 and separate 99,824-parameter width-independent cellular specialists through Tiers 4-6. Tier 6 executes the original orientation for every row, conditionally executes the commuted orientation for the lowest-margin 40%, and selects the higher learned-logit-margin result. Inputs above the learned 128-bit boundary receive a deterministic zero fallback.",
-  "training_description": "Candidate 004's frozen Tier-2 through Tier-5 specialists are unchanged. The Tier-6 cellular specialist is the frozen EXP-609 straight-through continuation endpoint; the target-free 40% commutative route was frozen by EXP-641 and confirmed at 486/500 exact on fresh width-128 cases in EXP-642. Checked answers were not used for Candidate 005 integration or selection."
+  "model_description": "Candidate005's frozen learned ensemble handles Tiers 1-6 unchanged. Moduli from 129 through 256 bits route to the frozen EXP701 teacher-cosine H92 two-cycle width-independent cellular specialist. Inputs above the learned 256-bit boundary retain the deterministic zero fallback.",
+  "training_description": "Candidate005 is byte-frozen through Tier 6. The added Tier-7 checkpoint is EXP701 teacher_cosine from formal root 20261414 (4,800 updates), selected by the preregistered four-arm full-denominator factorial completed by EXP703. Candidate006 integration performs no additional training or answer-based tuning."
 }

@@ -24,9 +24,9 @@ def load_module(name: str, path: Path):
 
 
 def test_candidate_model_adds_only_frozen_tier7_route() -> None:
-    incumbent = (ROOT / "submission/model.py").read_text(encoding="utf-8")
+    incumbent = (builder.INCUMBENT / "model.py").read_text(encoding="utf-8")
     candidate = builder.candidate_model(incumbent)
-    assert incumbent == (ROOT / "submission/model.py").read_text(encoding="utf-8")
+    assert incumbent == (builder.INCUMBENT / "model.py").read_text(encoding="utf-8")
     assert "TIER7_WIDTH = 256" in candidate
     assert "self.tier7_network" in candidate
     assert "if modulus_value > (1 << TIER7_WIDTH) - 1" in candidate
@@ -36,7 +36,7 @@ def test_candidate_model_adds_only_frozen_tier7_route() -> None:
 def test_builder_preserves_candidate005_tensors_and_prefixes_specialist(tmp_path: Path) -> None:
     output = tmp_path / "candidate"
     receipt = builder.build(output)
-    incumbent = load_file(str(ROOT / "submission/weights.safetensors"))
+    incumbent = load_file(str(builder.INCUMBENT / "weights.safetensors"))
     specialist = load_file(str(builder.TIER7_SOURCE))
     built = load_file(str(output / "weights.safetensors"))
     assert receipt["parameters"] == 569873
@@ -63,7 +63,7 @@ def test_loading_candidate_does_not_pollute_three_file_artifact(tmp_path: Path) 
 def test_randomized_control_changes_only_tier7_float_tensors(tmp_path: Path) -> None:
     output = tmp_path / "randomized"
     builder.build(output, 5430431669808135325)
-    incumbent = load_file(str(ROOT / "submission/weights.safetensors"))
+    incumbent = load_file(str(builder.INCUMBENT / "weights.safetensors"))
     specialist = load_file(str(builder.TIER7_SOURCE))
     built = load_file(str(output / "weights.safetensors"))
     assert all(torch.equal(built[key], value) for key, value in incumbent.items())
