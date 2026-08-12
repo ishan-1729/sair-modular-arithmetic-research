@@ -1,0 +1,59 @@
+schema_version: sair-cloud-experiment-v1
+
+experiment:
+  id: example-cloud-lifecycle
+  description: Minimal provider-neutral lifecycle example.
+
+package:
+  include:
+    - tools/cloud_experiment/**/*.py
+    - configs/cloud_runner/manifest.example.yaml
+  exclude:
+    - "**/__pycache__/**"
+    - ".scratch/**"
+  require_clean: false
+
+execution:
+  working_directory: .
+  environment:
+    PYTHONUNBUFFERED: "1"
+  canary:
+    argv:
+      - python
+      - -c
+      - "import platform; print(platform.platform())"
+    timeout_seconds: 30
+  phases:
+    - id: example
+      argv:
+        - python
+        - -c
+        - "from pathlib import Path; p=Path('artifacts'); p.mkdir(exist_ok=True); (p/'result.json').write_text('{\"status\":\"ok\"}'+chr(10), encoding='utf-8')"
+      timeout_seconds: 60
+      required_outputs:
+        - artifacts/result.json
+      checkpoint_paths:
+        - artifacts
+      checkpoint_on_failure: true
+
+provider:
+  driver: tools.cloud_experiment.providers:LocalProvider
+  paid: false
+  options:
+    hourly_rate_usd: "0"
+    hardware:
+      accelerator: CPU
+      accelerator_count: 0
+  expected_hardware:
+    accelerator: CPU
+    accelerator_count: 0
+
+budget:
+  max_total_usd: 0.01
+  max_provider_seconds: 300
+  cleanup_reserve_seconds: 60
+  max_idle_seconds: 60
+
+artifacts:
+  run_directory: .scratch/cloud-runner/example-cloud-lifecycle
+  publication_directory: .scratch/cloud-runner/example-cloud-lifecycle-publication

@@ -1,0 +1,182 @@
+version: 2
+
+goal:
+  title: "Experiment-Agnostic Cloud Runner"
+  slug: "experiment-agnostic-cloud-runner"
+  kind: specific
+  tranche: "Build and prove one generic local lifecycle vertical slice plus a thin Codex skill; no paid launch."
+  status: done
+  oracle:
+    signal: "The public generic CLI completes and resumes a synthetic experiment with fail-closed budget, identity, ownership, and cleanup behavior; the personal skill validates."
+    cadence: "after the implementation package and at final audit"
+    final_proof: "Focused lifecycle tests, skill validation, project validation, full pytest, diff check, and a PM audit mapped to the user's experiment-agnostic requirement."
+  intake:
+    original_request: "Create it, but make it experiment agnostic rather than for EXP701."
+    interpreted_outcome: "Future agents can run any conforming experiment through one deterministic cloud lifecycle without rebuilding provider control around that experiment."
+    input_shape: specific
+    audience: "future Codex agents and SAIR experiment operators"
+    authority: approved
+    proof_type: test
+    completion_proof: "A generic synthetic lifecycle and interruption/resume route pass through the public CLI, and the installed skill validates."
+    likely_misfire: "Rename EXP701 orchestration without removing its scientific assumptions."
+    blind_spots_considered:
+      - "provider API drift and incomplete runtime facts"
+      - "secret leakage"
+      - "duplicate resources and orphan cleanup"
+      - "mutable or incompatible checkpoints"
+      - "budget overrun"
+      - "experiment-specific evaluation contracts leaking into the control plane"
+    existing_plan_facts:
+      - "Keep the Codex skill thin and provider logic in deterministic tested repository code."
+      - "Use immutable manifests, receipts, checkpoints, hard budgets, and idempotent cleanup."
+      - "Use EXP701 only as historical motivation, never as a core dependency or fixture."
+      - "Perform no paid provider launch in this implementation tranche."
+
+rules:
+  pm_owns_state: true
+  one_active_task: true
+  max_write_workers: 1
+  no_implementation_without_worker_or_pm_task: true
+  no_completion_without_judge_or_pm_audit: true
+  planning_is_not_completion: true
+  queued_required_worker_blocks_completion: true
+  continuous_until_full_outcome: true
+  missing_input_or_credentials_do_not_stop_goal: true
+  exact_human_approval_can_terminal_wait: true
+  preserve_and_validate_existing_plan: true
+  intake_misfire_must_be_audited: true
+  goal_pressure_requires_oracle: true
+  no_completion_on_weak_proof: true
+  slice_policy:
+    max_consecutive_tiny_tasks: 2
+    prefer_vertical_slices: true
+    judge_picks_largest_safe_slice: true
+    worker_completes_whole_slice: true
+
+agents:
+  scout: bundled_not_installed
+  worker: bundled_not_installed
+  judge: bundled_not_installed
+
+visual_board:
+  selected: none
+  local:
+    status: not_requested
+    url: null
+    command: "node <skill-path>/surfaces/local-goal-board/scripts/local-goal-board.mjs --goal docs/goals/experiment-agnostic-cloud-runner"
+
+active_task: null
+
+tasks:
+  - id: T001
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Implement and prove the complete experiment-agnostic cloud lifecycle vertical slice and thin personal Codex skill."
+    inputs:
+      - "AGENTS.md"
+      - "knowledge/runbooks/implementation-process-optimization.md"
+      - "Existing cloud orchestration code as read-only lessons, not a dependency contract"
+      - "skill-creator instructions"
+    constraints:
+      - "One coherent package; do not micro-slice implementation, tests, docs, and skill creation."
+      - "Do not read credentials, call a provider, create paid resources, or run a live cloud test."
+      - "Do not edit experiment-specific EXP701/EXP702/EXP703 implementation or evidence."
+      - "Do not embed experiment IDs, model families, seeds, arms, update counts, or evaluation denominators in the generic core."
+      - "Preserve unrelated files and immutable source/data snapshots."
+    allowed_files:
+      - "tools/cloud_experiment/**"
+      - "configs/cloud_runner/**"
+      - "tests/test_cloud_experiment_runner.py"
+      - "knowledge/runbooks/experiment-agnostic-cloud-runner.md"
+      - "docs/goals/experiment-agnostic-cloud-runner/**"
+      - ".scratch/** (ignored verification fixtures and generated lifecycle evidence only)"
+      - "/mnt/c/Users/Ishan/.codex/skills/run-cloud-experiment/**"
+    verify:
+      - "python -m pytest -q tests/test_cloud_experiment_runner.py"
+      - "python -m tools.cloud_experiment --help"
+      - "python /mnt/c/Users/Ishan/.codex/skills/.system/skill-creator/scripts/quick_validate.py /mnt/c/Users/Ishan/.codex/skills/run-cloud-experiment"
+      - "python tools/validate_project.py"
+      - "python -m pytest"
+      - "git diff --check"
+    stop_if:
+      - "A live provider or credential is required to prove the local lifecycle contract."
+      - "Implementation needs files outside allowed_files."
+      - "The generic contract would weaken scientific fidelity or the trained-parameters boundary."
+      - "Final verification fails twice for a task-owned cause."
+    receipt:
+      result: done
+      changed_files:
+        - tools/cloud_experiment/
+        - configs/cloud_runner/manifest.example.yaml
+        - tests/test_cloud_experiment_runner.py
+        - knowledge/runbooks/experiment-agnostic-cloud-runner.md
+        - docs/goals/experiment-agnostic-cloud-runner/
+        - /mnt/c/Users/Ishan/.codex/skills/run-cloud-experiment/
+      commands:
+        - cmd: "python -m pytest -q tests/test_cloud_experiment_runner.py"
+          status: pass
+          evidence: "17 passed; generic package/canary/failure/checkpoint/resume/finalize, cost, ownership, hardware, idle, corruption, and authorization gates."
+        - cmd: "python -m pytest"
+          status: pass
+          evidence: "1228 passed, 4 intentionally skipped in 1456.80 seconds on final implementation bytes."
+        - cmd: "python tools/validate_project.py"
+          status: pass
+          evidence: "241 OKF concepts, 1,100 benchmark records, pinned upstream 82510bba00a1."
+        - cmd: "python skill-creator/scripts/quick_validate.py $CODEX_HOME/skills/run-cloud-experiment"
+          status: pass
+          evidence: "Skill is valid; wrapper successfully invoked the repository CLI."
+        - cmd: "python -m tools.cloud_experiment --help; git diff --check; generic-name scan"
+          status: pass
+          evidence: "Public command surface present; diff clean; no EXP701/702/703 identity or scientific token in core, example, test, runbook, or skill."
+      summary: "Built one manifest-driven provider-neutral lifecycle with deterministic packages, exact paid authorization, finite budget admission, owner locking, hardware canary, immutable checkpoint generations, clean-workspace resume, completed-phase reuse, heartbeat/timeout enforcement, uncertain-create cleanup, durable attempt history, final output publication, a 17-test adversarial oracle, a reusable runbook, and a thin auto-discovered personal skill. No credentials, network provider call, or paid resource was used."
+      deviations:
+        - "The first broad suite exposed only missing ignored historical fixtures at 99%; the exact 20-test failing cone passed after materializing the pinned fixtures, followed by one clean full-suite pass."
+        - "A stale full-suite child survived its tool-cell termination; its exact PID was stopped before the authoritative final-byte suite continued."
+      remaining_blockers: []
+      verification_attempts: 2
+  - id: T999
+    type: pm
+    assignee: PM
+    status: done
+    reasoning_hint: high
+    objective: "Audit the final bytes against the experiment-agnostic oracle and the user's request."
+    inputs:
+      - "T001 receipt"
+      - "Final diff"
+      - "Focused and full verification receipts"
+      - "Installed skill validation"
+    constraints:
+      - "Do not implement new behavior during the audit."
+      - "Reject completion if the core contains EXP701-specific assumptions or the public lifecycle is only scaffolded."
+      - "Require full_outcome_complete: true before closing."
+    expected_output:
+      - "complete | not_complete"
+      - "full_outcome_complete: true | false"
+      - "evidence mapped to the original request"
+    receipt:
+      result: done
+      decision: complete
+      full_outcome_complete: true
+      rationale: "The public control plane contains no experiment identity or scientific assumptions; arbitrary commands, outputs, phases, checkpoints, provider driver, hardware, and budgets come only from the validated manifest. A synthetic interrupted experiment proves the full public route, safety failures fail closed, the thin skill delegates to the tested CLI, and focused/project/full verification passes."
+      evidence:
+        - "tools/cloud_experiment/"
+        - "tests/test_cloud_experiment_runner.py: 17 passed"
+        - "full project suite: 1228 passed, 4 intentional skips"
+        - "knowledge/runbooks/experiment-agnostic-cloud-runner.md"
+        - "/mnt/c/Users/Ishan/.codex/skills/run-cloud-experiment/: valid"
+      missing_evidence: []
+      worker_package: null
+
+checks:
+  dirty_fingerprint: "final implementation diff on codex/experiment-agnostic-cloud-runner from cf0dd4cd2f9931a291d06749ddbdbc0a9394da60"
+  last_verification:
+    result: passed
+    task: T001
+    commands:
+      - "python -m pytest -q tests/test_cloud_experiment_runner.py: 17 passed"
+      - "python -m pytest: 1228 passed, 4 skipped"
+      - "python tools/validate_project.py: passed"
+      - "quick_validate.py run-cloud-experiment: passed"
+      - "git diff --check: passed"
