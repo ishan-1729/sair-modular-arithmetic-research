@@ -5380,6 +5380,47 @@ tasks:
         - cmd: "Full pytest cone plus exact post-repair regression (1,240 passed/4 expected skips; all eight stale-inventory/frozen-cache failures then passed on final bytes)"
           status: pass
       summary: "Candidate007 replaces Candidate006's prohibited deterministic operand reductions with learned raw-bit streaming reduction through 64-bit moduli and the explicitly allowed constant fallback above that boundary. The current checker and manual inference-path audit pass. Checked and isolated sandbox evaluations complete all tiers at 48.2% overall with Tier 5 at 91%; checked inference is 153.483 seconds and the conservative full sandbox lifecycle is 226.671 seconds. The exact three-file artifact is promoted to submission/. Candidate006 remains the stronger historical but current-rule-invalid result. The experiment-agnostic CUDA inventory was regenerated and closed after classifying the rejected CPU reducer diagnostic and immutable CPU submission artifact."
+  - id: T088
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Publish Candidate007 as a public Hugging Face model repository, lock an immutable commit, and verify anonymous organizer-style loading without changing the measured artifact."
+    constraints:
+      - "Upload only manifest.json, model.py, and weights.safetensors; tolerate only Hugging Face's automatic .gitattributes metadata."
+      - "Require the public repo payload to match the locally measured Candidate007 artifact byte-for-byte."
+      - "Do not submit the competition form; record the repo ID and immutable commit for the user."
+      - "Do not expose or commit Hugging Face credentials."
+    receipt:
+      result: done
+      repo_id: "ishan1729/modular-arithmetic-candidate007"
+      revision: "f4d69a7fdd56da6422dace816d7995de7236f119"
+      visibility: public
+      changed_files:
+        - experiments/runs/exp-708-candidate007-current-rules/huggingface-evaluation.json
+        - experiments/runs/exp-708-candidate007-current-rules/huggingface-release.json
+        - experiments/runs/exp-708-candidate007-current-rules/run.json
+        - knowledge/submissions/candidate-007-current-rules.md
+        - README.md
+        - experiments/registry.yaml
+        - experiments/cuda_portability/inventory.json
+        - docs/goals/cuda-portable-experiments/state.yaml
+      commands:
+        - cmd: "Anonymous Hugging Face repo-info and exact-revision snapshot download"
+          status: pass
+        - cmd: "Remote-to-local SHA-256 and byte comparison for all three payload files"
+          status: pass
+        - cmd: "Current upstream modchallenge static check on anonymously downloaded payload"
+          status: pass
+        - cmd: "Official evaluate-hf at immutable revision, 11-tier loader smoke"
+          status: pass
+        - cmd: "Official evaluate-hf at immutable revision, full 1,100-case independent-seed evaluation"
+          status: pass
+        - cmd: "Focused submission, EXP708, project-contract, and CUDA-inventory tests"
+          status: pass
+        - cmd: "Closed CUDA inventory, project validator, JSON validation, and git diff check"
+          status: pass
+      summary: "Created the public model repository with the exact three measured Candidate007 files. Anonymous access and immutable revision resolution pass; the three remote payload hashes match locally; current static analysis is clean; the official evaluate-hf path is deterministic and completes all 1,100 cases at 48.5% overall with Tier 5 highest. The competition form remains intentionally unsubmitted."
 
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."

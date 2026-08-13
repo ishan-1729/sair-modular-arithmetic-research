@@ -1,0 +1,21 @@
+{
+  "overall_accuracy": 0.485,
+  "highest_tier_above_90": 5,
+  "deterministic": true,
+  "tiers": [
+    {"tier_id": 0, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+    {"tier_id": 1, "total": 100, "correct": 100, "accuracy": 1.0, "completed": true},
+    {"tier_id": 2, "total": 100, "correct": 99, "accuracy": 0.99, "completed": true},
+    {"tier_id": 3, "total": 100, "correct": 94, "accuracy": 0.94, "completed": true},
+    {"tier_id": 4, "total": 100, "correct": 92, "accuracy": 0.92, "completed": true},
+    {"tier_id": 5, "total": 100, "correct": 90, "accuracy": 0.9, "completed": true},
+    {"tier_id": 6, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+    {"tier_id": 7, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+    {"tier_id": 8, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+    {"tier_id": 9, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true},
+    {"tier_id": 10, "total": 100, "correct": 2, "accuracy": 0.02, "completed": true}
+  ],
+  "repo_id": "ishan1729/modular-arithmetic-candidate007",
+  "revision": "f4d69a7fdd56da6422dace816d7995de7236f119",
+  "eval_period": ""
+}

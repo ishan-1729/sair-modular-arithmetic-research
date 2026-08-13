@@ -1,0 +1,50 @@
+{
+  "schema_version": "sair-huggingface-release-v1",
+  "status": "published-public-verified",
+  "published_at": "2026-08-13T09:55:16Z",
+  "verified_at": "2026-08-13T10:00:44Z",
+  "repo_id": "ishan1729/modular-arithmetic-candidate007",
+  "repo_url": "https://huggingface.co/ishan1729/modular-arithmetic-candidate007",
+  "owner": "ishan1729",
+  "repo_type": "model",
+  "visibility": "public",
+  "revision": "f4d69a7fdd56da6422dace816d7995de7236f119",
+  "commit_url": "https://huggingface.co/ishan1729/modular-arithmetic-candidate007/commit/f4d69a7fdd56da6422dace816d7995de7236f119",
+  "payload_files": {
+    "manifest.json": "95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8",
+    "model.py": "bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833",
+    "weights.safetensors": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "repository_files": [
+    ".gitattributes",
+    "manifest.json",
+    "model.py",
+    "weights.safetensors"
+  ],
+  "verification": {
+    "anonymous_repo_info": "passed",
+    "anonymous_snapshot_download": "passed",
+    "remote_payload_byte_identity": "passed",
+    "current_static_analysis": "clean",
+    "official_evaluate_hf_loader": "passed",
+    "deterministic": true,
+    "all_tiers_completed": true,
+    "remote_full_evaluation_cases": 1100,
+    "remote_full_evaluation_accuracy": 0.485,
+    "remote_full_evaluation_highest_tier_above_90": 5,
+    "remote_full_evaluation_sha256": "f338e6e9c5c5499dcf8e42d847a08ff09c25460d947daaa6abf11a1a2548a6fa",
+    "durable_full_evaluation_path": "experiments/runs/exp-708-candidate007-current-rules/huggingface-evaluation.json",
+    "durable_full_evaluation_sha256": "2ec0b0b37a39473a45e450a5973a2b1542c73690357fc3260ead847660930fb6"
+  },
+  "official_submission": {
+    "competition_form_submitted": false,
+    "required_repo_id": "ishan1729/modular-arithmetic-candidate007",
+    "required_commit_hash": "f4d69a7fdd56da6422dace816d7995de7236f119",
+    "team_identity_requirement": "The owner account must be one of the Hugging Face identities declared for the registered SAIR team."
+  },
+  "limitations": [
+    "Publication does not itself submit the model to the competition form.",
+    "Official ranking uses an organizer-secret seed and sandbox; the remote verification is public/local evidence only.",
+    "The independent remote seed scored 48.5%, while the canonical checked public and isolated sandbox evidence remains 48.2%."
+  ]
+}

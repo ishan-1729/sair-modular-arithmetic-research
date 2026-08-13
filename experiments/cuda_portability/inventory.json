@@ -29559,7 +29559,7 @@
               {
                 "field": "run_record",
                 "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
-                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+                "sha256": "4a43a6c6704277d997405d308b265e5bef41d403e9e675ee09eef350cf907c7a"
               }
             ],
             "identity_mismatches": [],
@@ -29581,7 +29581,7 @@
       ],
       "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
       "smoke_command": null,
-      "source_sha256": "549f3602042862fc251ef09a8836005b81a24d7779655df72beadd6fcc305739",
+      "source_sha256": "f9b068d6676bba3fe9ab24f372877c811585f47b5e314bffae97da70619a3a3b",
       "torch_referenced": false
     },
     {
@@ -29608,7 +29608,7 @@
               {
                 "field": "run_record",
                 "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
-                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+                "sha256": "4a43a6c6704277d997405d308b265e5bef41d403e9e675ee09eef350cf907c7a"
               }
             ],
             "identity_mismatches": [],
@@ -29657,7 +29657,7 @@
               {
                 "field": "run_record",
                 "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
-                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+                "sha256": "4a43a6c6704277d997405d308b265e5bef41d403e9e675ee09eef350cf907c7a"
               }
             ],
             "identity_mismatches": [],
@@ -29719,7 +29719,7 @@
               {
                 "field": "run_record",
                 "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
-                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+                "sha256": "4a43a6c6704277d997405d308b265e5bef41d403e9e675ee09eef350cf907c7a"
               }
             ],
             "identity_mismatches": [],
@@ -31608,7 +31608,7 @@
               {
                 "field": "run_record",
                 "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
-                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+                "sha256": "4a43a6c6704277d997405d308b265e5bef41d403e9e675ee09eef350cf907c7a"
               }
             ],
             "identity_mismatches": [],
@@ -32076,9 +32076,9 @@
     "config_sha256": "6956b930cdc679508eb4e0444c1f143787f86959337cc02f248d30fdfcfc6571",
     "python_file_count": 269,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "61038624f33cac685027f2ffe8b6d4f065b2c2a226ccb5368c9c4c47f6fc3082",
+    "registry_sha256": "2db8ade301990aab1837be2b780cf3a8f54a6c930683a95a462a7ac5167954e6",
     "root_count": 174,
-    "tree_sha256": "0373edbded44d8c243fe8cacbc72a5c49e1bdbcf8c498cefd5a2625cce31dfa8"
+    "tree_sha256": "90c6dd92c09ce41e03e3c692af9fe9a624560e1d583e765f7b52bdc43480df8a"
   },
   "summary": {
     "classifications": {

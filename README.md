@@ -2,7 +2,7 @@
 
 Private research workspace for the [SAIR Modular Arithmetic Challenge](https://competition.sair.foundation/competitions/modular-arithmetic-challenge/overview). The competition asks a trained model to emit exact digits for `(a * b) mod p` while forbidding a hand-coded arithmetic solver in the inference path.
 
-The repository contains a submission-ready 470,049-parameter learned TCN/cellular ensemble with target-free conditional commutative inference at Tier 6. On a complete independent official-generator 1,100-case set it scores **59.3% overall**, with **Tiers 1–6 at 100%/99%/97%/97%/94%/98%**, advancing `highest_tier_above_90` to 6. The checked post-selection regression scores 59.5%, randomized Tier-6 weights collapse to 2%, and the pinned official container reproduces the independent score with 156.0-second inference. This is an intermediate incumbent: it remains far below the binding 85% completion threshold.
+The current public release is Candidate007, a 569,873-parameter learned-reduction adapter that consumes raw operands and passes the current static and manual rule checks. Its canonical checked and isolated-sandbox evaluations score **48.2% overall**, with Tier 5 at **91%**; all 11 tiers complete inside the 300-second sandbox limit. Candidate005 remains a stronger historical result, but Candidate007 is the strongest artifact in this repository with demonstrated current-rule compliance.
 
 ## Start here
 
@@ -11,7 +11,8 @@ The repository contains a submission-ready 470,049-parameter learned TCN/cellula
 - [Approach portfolio](knowledge/research/approach-portfolio.md) — ranked technical options and evidence.
 - [Research paper library](knowledge/research/paper-library.md) — core reading order, complete PDF inventory, provenance, and verification.
 - [Execution roadmap](knowledge/planning/roadmap.md) — work plan through the submission freeze.
-- [Submission candidate](knowledge/submissions/candidate-005-tier6-conditional-cellular.md) — current model card, compliance rationale, release state, and hashes.
+- [Submission candidate](knowledge/submissions/candidate-007-current-rules.md) — current model card, compliance rationale, public release, and hashes.
+- [Public Hugging Face release](https://huggingface.co/ishan1729/modular-arithmetic-candidate007) — organizer-loadable model repository; use the immutable revision recorded in the model card.
 - [Full-set evaluation](knowledge/evals/candidate-005-results.md) — independent, checked, pinned-runtime, five-seed, and perturbation results.
 - [Current POC](knowledge/pocs/learned-horner-tcn.md) — model card, evidence, and limitations.
 - [Candidate evaluation runbook](knowledge/runbooks/evaluate-candidate.md) — exact official-contract and sandbox commands.
@@ -45,7 +46,7 @@ This is intentionally a hybrid rather than an attempt to encode every file as OK
 
 ## Two publication targets
 
-This private GitHub repository is the development and research workspace. It is not the ranked submission target. The clean [`submission/`](submission/) artifact has passed local and sandbox gates and is ready to copy, but ranked entry still requires a **public Hugging Face repository** identified by repository ID and immutable 40-character commit hash. That external publication and final submission have not been performed.
+This private GitHub repository is the development and research workspace. It is not the ranked submission target. The byte-identical clean [`submission/`](submission/) artifact is published in the public Hugging Face repository [`ishan1729/modular-arithmetic-candidate007`](https://huggingface.co/ishan1729/modular-arithmetic-candidate007) at immutable revision `f4d69a7fdd56da6422dace816d7995de7236f119`. The competition form has not been submitted; ranked entry still requires entering that repository ID and full revision, and the owner must be a Hugging Face identity declared for the registered team.
 
 ## Source snapshot
 

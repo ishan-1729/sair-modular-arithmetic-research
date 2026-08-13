@@ -49,6 +49,8 @@
     "finalization": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/finalized.json",
     "terminal_summary": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/terminal-summary.json",
     "package_receipt": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/package.json",
+    "huggingface_release": "experiments/runs/exp-708-candidate007-current-rules/huggingface-release.json",
+    "huggingface_evaluation": "experiments/runs/exp-708-candidate007-current-rules/huggingface-evaluation.json",
     "submission_directory": "submission"
   },
   "evidence": {
@@ -60,7 +62,9 @@
     "finalization_sha256": "697edbd6deb357cbf02844928056ac63c9e4f045836406cc9816a3292bb4ff5f",
     "terminal_summary_sha256": "ad251376b16af68107f751146f8562e36a1f0918a232ead0bf6922b8a8f8b639",
     "package_receipt_sha256": "9b8746e1b4a912ea937414ed2e20376618c6787f3a54b7deeb98dbe841685b42",
-    "source_package_sha256": "4f89beb980f1b3109a655a1b3c65b7b9474ca852af432a786d43e7ccfe4dca97"
+    "source_package_sha256": "4f89beb980f1b3109a655a1b3c65b7b9474ca852af432a786d43e7ccfe4dca97",
+    "huggingface_release_sha256": "1fbd438666f67a4c0d7ea9514a08f490897a3039a4793c58f5f86e7684e081da",
+    "huggingface_evaluation_sha256": "2ec0b0b37a39473a45e450a5973a2b1542c73690357fc3260ead847660930fb6"
   },
   "verification": {
     "current_static_analysis": "clean",
@@ -98,6 +102,10 @@
     "provider_cost_usd": 0.0
   },
   "submission_promoted": true,
+  "huggingface_published": true,
+  "huggingface_repo_id": "ishan1729/modular-arithmetic-candidate007",
+  "huggingface_revision": "f4d69a7fdd56da6422dace816d7995de7236f119",
+  "competition_form_submitted": false,
   "decision": "promote-candidate007-current-rule-submission-artifact",
   "limitations": [
     "Candidate007 is current-rule eligible but weaker than Candidate006: checked accuracy falls from 66.6% to 48.2% and the ranking tier falls from 6 to 5.",

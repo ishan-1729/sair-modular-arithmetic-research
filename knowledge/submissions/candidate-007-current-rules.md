@@ -2,7 +2,7 @@
 type: submission-candidate
 title: Candidate 007 current-rules learned-reduction adapter
 description: Candidate006-derived Tier-5 artifact that consumes raw operands and passes the current rules and isolated runtime envelope.
-status: submission-ready-current-rules
+status: published-public-current-rules
 date: 2026-08-13
 timestamp: "2026-08-13T06:40:01Z"
 tags: [candidate007, compliance, learned-reduction, runtime-validated]
@@ -38,6 +38,18 @@ The exact three-file upload artifact is
 Its manifest and model SHA-256 values are
 `95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8`
 and `bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833`.
+
+## Public Hugging Face release
+
+- Repository: [`ishan1729/modular-arithmetic-candidate007`](https://huggingface.co/ishan1729/modular-arithmetic-candidate007)
+- Immutable commit: [`f4d69a7fdd56da6422dace816d7995de7236f119`](https://huggingface.co/ishan1729/modular-arithmetic-candidate007/commit/f4d69a7fdd56da6422dace816d7995de7236f119)
+- Anonymous access, remote payload byte identity, and the current static checker pass.
+- The official `evaluate-hf` path completed all 1,100 cases at this exact commit on
+  an independent fixed seed: 48.5% overall, Tier 5 highest, deterministic.
+
+The competition form itself has not been submitted. The required values are the
+repository ID and immutable commit above, and the `ishan1729` owner must be one
+of the Hugging Face identities declared for the registered SAIR team.
 
 ## Limitation
 
