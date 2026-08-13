@@ -29538,6 +29538,276 @@
     {
       "active_cpu_boundary": null,
       "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_708_candidate007_current_rules.yaml",
+                "sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
+                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-708-candidate007-current-rules",
+            "status": "completed-current-rule-submission-candidate"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=[]; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_708_candidate007_current_rules",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.exp_708_candidate007_current_rules",
+      "path": "experiments/exp_708_candidate007_current_rules/__init__.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "549f3602042862fc251ef09a8836005b81a24d7779655df72beadd6fcc305739",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_708_candidate007_current_rules.yaml",
+                "sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
+                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-708-candidate007-current-rules",
+            "status": "completed-current-rule-submission-candidate"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations']; hotspot_counts={}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_708_candidate007_current_rules",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [],
+      "local_import_parents": [],
+      "module": "experiments.exp_708_candidate007_current_rules.compliant_patch",
+      "path": "experiments/exp_708_candidate007_current_rules/compliant_patch.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "1ad5f4c610a859a0ee75e2e9c2d2987d5f0714826a341b743be1c4c5e763ecf8",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_708_candidate007_current_rules.yaml",
+                "sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
+                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-708-candidate007-current-rules",
+            "status": "completed-current-rule-submission-candidate"
+          }
+        ]
+      },
+      "evidence": "Static AST scan contains no torch symbol; this module is orchestration, exact-label, serialization, or evidence code, while imported model compute is inventoried separately. imports=['__future__', '__future__.annotations', 'argparse', 'hashlib', 'importlib.util', 'json', 'modchallenge.security.static_check', 'modchallenge.security.static_check.check_submission']; hotspot_counts={'checkpoint': 1}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_708_candidate007_current_rules",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 41,
+          "operation": "model.load",
+          "symbol": "load_model"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.exp_708_candidate007_current_rules.finalize",
+      "path": "experiments/exp_708_candidate007_current_rules/finalize.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "CPU orchestration/exact-label/evidence responsibility only",
+      "smoke_command": null,
+      "source_sha256": "2a212c9cb324f590a0a109cffbf8d9c78e0516a36315a2171fb9692376044f7a",
+      "torch_referenced": false
+    },
+    {
+      "active_cpu_boundary": {
+        "reason": "This bounded Tier-6 reducer continuation is a completed, rejected CPU diagnostic retained only as EXP708 provenance; Candidate007 does not load its checkpoint or execute this trainer.",
+        "responsibility": "Preserve the rejected diagnostic exactly and keep it outside every active Candidate007 inference or cloud-compute route.",
+        "symbols": [
+          "main"
+        ]
+      },
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [],
+        "direct_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_708_candidate007_current_rules.yaml",
+                "sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
+                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-708-candidate007-current-rules",
+            "status": "completed-current-rule-submission-candidate"
+          }
+        ]
+      },
+      "evidence": "This bounded Tier-6 reducer continuation is a completed, rejected CPU diagnostic retained only as EXP708 provenance; Candidate007 does not load its checkpoint or execute this trainer. Active symbols are ['main']; imports=['__future__', '__future__.annotations', 'argparse', 'hashlib', 'importlib.util', 'json', 'mlflow', 'pathlib']; hotspot_counts={'checkpoint': 4, 'optimizer': 2, 'tensor-factory': 4}.",
+      "exp649_cpu_boundary": null,
+      "family": "exp_708_candidate007_current_rules",
+      "frozen_identity_constraint": "Historical experiment source is provenance-sensitive; use an explicit adapter or replay instead of rewriting it.",
+      "hotspots": [
+        {
+          "kind": "checkpoint",
+          "line": 91,
+          "operation": "load_file",
+          "symbol": "main"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 91,
+          "operation": "model.load_state_dict",
+          "symbol": "main"
+        },
+        {
+          "kind": "optimizer",
+          "line": 92,
+          "operation": "torch.optim.AdamW",
+          "symbol": "main"
+        },
+        {
+          "kind": "optimizer",
+          "line": 97,
+          "operation": "torch.optim.lr_scheduler.CosineAnnealingLR",
+          "symbol": "main"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 108,
+          "operation": "torch.tensor",
+          "symbol": "main.soft_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 111,
+          "operation": "torch.zeros",
+          "symbol": "main.soft_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 112,
+          "operation": "torch.zeros",
+          "symbol": "main.soft_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 187,
+          "operation": "torch.tensor",
+          "symbol": "main"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 237,
+          "operation": "save_file",
+          "symbol": "main"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 240,
+          "operation": "model.state_dict",
+          "symbol": "main"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.exp_708_candidate007_current_rules.train_reducer",
+      "path": "experiments/exp_708_candidate007_current_rules/train_reducer.py",
+      "reachability_roots": [
+        "mechanical-all-experiment-python"
+      ],
+      "responsibility": "Preserve the rejected diagnostic exactly and keep it outside every active Candidate007 inference or cloud-compute route.",
+      "smoke_command": null,
+      "source_sha256": "1aedb11c172c4f3827e90baa186cfaf62fadfd1af9bb0acd8b515e7129b963cc",
+      "torch_referenced": true
+    },
+    {
+      "active_cpu_boundary": null,
+      "adapter": null,
       "classification": "archived-frozen-route",
       "durable_lifecycle": {
         "active_consumers": [],
@@ -31306,6 +31576,311 @@
       "torch_referenced": true
     },
     {
+      "active_cpu_boundary": {
+        "reason": "This is the immutable official CPU submission artifact authenticated by EXP708; the competition sandbox is CPU-only and the artifact must remain byte-identical to the checked and timed submission.",
+        "responsibility": "Execute only inside the official CPU submission boundary; CUDA experiments must consume authored experiment modules rather than mutate this durable artifact copy.",
+        "symbols": [
+          "Tier2HornerModel.load",
+          "Tier2HornerModel.forward"
+        ]
+      },
+      "adapter": null,
+      "classification": "intentionally-cpu-boundary",
+      "durable_lifecycle": {
+        "active_consumers": [],
+        "all_artifact_identities_complete": true,
+        "all_terminal": false,
+        "consumer_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "direct_route_ids": [
+          "exp-708-candidate007-current-rules"
+        ],
+        "routes": [
+          {
+            "artifact_identity_complete": true,
+            "durable_artifacts": [
+              {
+                "field": "config",
+                "path": "configs/exp_708_candidate007_current_rules.yaml",
+                "sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c"
+              },
+              {
+                "field": "run_record",
+                "path": "experiments/runs/exp-708-candidate007-current-rules/run.json",
+                "sha256": "364cca274ab273578d9889330a6fd537581794d683ccc173db685495c798bbb0"
+              }
+            ],
+            "identity_mismatches": [],
+            "run_id": "exp-708-candidate007-current-rules",
+            "status": "completed-current-rule-submission-candidate"
+          }
+        ]
+      },
+      "evidence": "This is the immutable official CPU submission artifact authenticated by EXP708; the competition sandbox is CPU-only and the artifact must remain byte-identical to the checked and timed submission. Active symbols are ['Tier2HornerModel.load', 'Tier2HornerModel.forward']; imports=['__future__', '__future__.annotations', 'concurrent.futures', 'concurrent.futures.ThreadPoolExecutor', 'math', 'modchallenge.interface.base_model', 'modchallenge.interface.base_model.ModularMultiplicationModel', 'pathlib']; hotspot_counts={'checkpoint': 7, 'host-boundary': 5, 'tensor-factory': 29}.",
+      "exp649_cpu_boundary": null,
+      "family": "runs",
+      "frozen_identity_constraint": null,
+      "hotspots": [
+        {
+          "kind": "tensor-factory",
+          "line": 30,
+          "operation": "torch.arange",
+          "symbol": "_ints_to_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 43,
+          "operation": "torch.zeros",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 44,
+          "operation": "torch.zeros_like",
+          "symbol": "_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 62,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_bits"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 80,
+          "operation": "torch.tensor",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 83,
+          "operation": "torch.zeros",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 84,
+          "operation": "torch.zeros_like",
+          "symbol": "_bigint_features"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 125,
+          "operation": "torch.zeros",
+          "symbol": "_HornerTCN9.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 149,
+          "operation": "torch.zeros",
+          "symbol": "_SharedContextHornerTCN16.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 178,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 179,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 180,
+          "operation": "torch.empty",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 181,
+          "operation": "torch.zeros",
+          "symbol": "_SharedDilatedConvGRU32.__init__"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 301,
+          "operation": "load_file",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 303,
+          "operation": "network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 309,
+          "operation": "tier3_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 315,
+          "operation": "tier4_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 325,
+          "operation": "tier5_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 335,
+          "operation": "tier6_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "checkpoint",
+          "line": 345,
+          "operation": "tier7_network.load_state_dict",
+          "symbol": "Tier2HornerModel.load"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 376,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 377,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 378,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 379,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 380,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 389,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier2_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 398,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 399,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 400,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 401,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 402,
+          "operation": "torch.arange",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 411,
+          "operation": "state.tolist",
+          "symbol": "Tier2HornerModel._tier3_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 461,
+          "operation": "torch.empty",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 468,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 469,
+          "operation": "torch.full",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 483,
+          "operation": "state_bits.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 485,
+          "operation": "minimum_margin.tolist",
+          "symbol": "Tier2HornerModel._wide_rollout_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 547,
+          "operation": "torch.tensor",
+          "symbol": "Tier2HornerModel._narrow_reduce_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 613,
+          "operation": "torch.empty",
+          "symbol": "Tier2HornerModel._wide_reduce_shard"
+        },
+        {
+          "kind": "tensor-factory",
+          "line": 620,
+          "operation": "torch.zeros",
+          "symbol": "Tier2HornerModel._wide_reduce_shard"
+        },
+        {
+          "kind": "host-boundary",
+          "line": 628,
+          "operation": "state_bits.tolist",
+          "symbol": "Tier2HornerModel._wide_reduce_shard"
+        }
+      ],
+      "local_import_parents": [],
+      "module": "experiments.runs.exp-708-candidate007-current-rules.artifact.model",
+      "path": "experiments/runs/exp-708-candidate007-current-rules/artifact/model.py",
+      "reachability_roots": [
+        "experiments/runs/exp-708-candidate007-current-rules/artifact/model.py"
+      ],
+      "responsibility": "Execute only inside the official CPU submission boundary; CUDA experiments must consume authored experiment modules rather than mutate this durable artifact copy.",
+      "smoke_command": null,
+      "source_sha256": "bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833",
+      "torch_referenced": true
+    },
+    {
       "active_cpu_boundary": null,
       "adapter": null,
       "classification": "archived-frozen-route",
@@ -31498,25 +32073,25 @@
   "schema_version": "cuda-portability-inventory-v1",
   "source": {
     "config": "configs/cuda_portability.yaml",
-    "config_sha256": "bc85975520bb49c669d6579e2f23bc42dcd76c9a2a6eae5369080fbfb08ca50e",
-    "python_file_count": 264,
+    "config_sha256": "6956b930cdc679508eb4e0444c1f143787f86959337cc02f248d30fdfcfc6571",
+    "python_file_count": 269,
     "registry": "experiments/registry.yaml",
-    "registry_sha256": "a6c1467bcab2bb42fa5281429aebc0c23f706f86b2216f7f65d9812bc015b28c",
-    "root_count": 173,
-    "tree_sha256": "a84c424e6203ea15b976d98296d8bd7dc0d297cd2311072995732e4a33bd5979"
+    "registry_sha256": "61038624f33cac685027f2ffe8b6d4f065b2c2a226ccb5368c9c4c47f6fc3082",
+    "root_count": 174,
+    "tree_sha256": "0373edbded44d8c243fe8cacbc72a5c49e1bdbcf8c498cefd5a2625cce31dfa8"
   },
   "summary": {
     "classifications": {
       "archived-frozen-route": 225,
       "device-native-unvalidated": 13,
-      "intentionally-cpu-boundary": 26
+      "intentionally-cpu-boundary": 31
     },
     "hotspots": {
-      "checkpoint": 896,
+      "checkpoint": 908,
       "device-boundary": 25,
-      "host-boundary": 130,
-      "optimizer": 188,
-      "tensor-factory": 859
+      "host-boundary": 135,
+      "optimizer": 190,
+      "tensor-factory": 892
     }
   }
 }

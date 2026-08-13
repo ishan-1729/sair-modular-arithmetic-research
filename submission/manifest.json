@@ -2,6 +2,6 @@
   "entry_class": "model.Tier2HornerModel",
   "output_base": "p",
   "framework": "pytorch",
-  "model_description": "Candidate005's frozen learned ensemble handles Tiers 1-6 unchanged. Moduli from 129 through 256 bits route to the frozen EXP701 teacher-cosine H92 two-cycle width-independent cellular specialist. Inputs above the learned 256-bit boundary retain the deterministic zero fallback.",
-  "training_description": "Candidate005 is byte-frozen through Tier 6. The added Tier-7 checkpoint is EXP701 teacher_cosine from formal root 20261414 (4,800 updates), selected by the preregistered four-arm full-denominator factorial completed by EXP703. Candidate006 integration performs no additional training or answer-based tuning."
+  "model_description": "Candidate007 retains Candidate006's frozen learned experts through 64-bit moduli. Raw operand bits are fed MSB-first on a fixed feedback-free schedule; the trained transitions learn both reductions and the product. Unsupported inputs use a constant fallback.",
+  "training_description": "No parameters were changed. Candidate006's experts are copied byte-for-byte. A separately evaluated 25-update reducer continuation was rejected on runtime and is not included in this artifact."
 }

@@ -1,0 +1,36 @@
+{
+  "status": "submission-valid",
+  "artifact_sha256": {
+    "manifest.json": "95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8",
+    "model.py": "bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833",
+    "weights.safetensors": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e"
+  },
+  "result_sha256": "3724f8b21b4ac2e2f22ab517273c4fabe09f8daac59cfefdabf724f9482c0169",
+  "sandbox_result_sha256": "94902f92549327a0df1e5031915decf201195ee746719e7198e9cccc1176806f",
+  "sandbox_run_sha256": "1eb2fa04b5a84b6f8624758b007d0092c4325e62add4f63c59d2e824f601ab89",
+  "current_rules_commit": "99cac6e",
+  "checks": {
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true
+  },
+  "inference_seconds": 153.48269198199705,
+  "overall_accuracy": 0.482,
+  "highest_tier_above_90": 5,
+  "tier_accuracy": {
+    "0": 0.04,
+    "1": 1.0,
+    "2": 0.99,
+    "3": 0.96,
+    "4": 0.86,
+    "5": 0.91,
+    "6": 0.02,
+    "7": 0.02,
+    "8": 0.02,
+    "9": 0.02,
+    "10": 0.02
+  },
+  "sandbox_container_wall_seconds": 226.670829622999,
+  "sandbox_overall_accuracy": 0.482,
+  "sandbox_highest_tier_above_90": 5
+}

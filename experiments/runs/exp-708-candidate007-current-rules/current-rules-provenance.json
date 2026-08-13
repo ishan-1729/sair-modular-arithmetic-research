@@ -1,0 +1,25 @@
+{
+  "status": "verified",
+  "canonical_rules_commit": "99cac6e",
+  "canonical_rules_subject": "Examples: remove every non-learned branch from the inference path",
+  "canonical_rule_added_by_commit": "45eb406",
+  "rule": "raw operands required; deterministic full-width operand pre-reduction forbidden",
+  "evaluation_pythonpath": ".scratch/upstream-current-rules/src",
+  "static_check_command": "PYTHONPATH=.scratch/upstream-current-rules/src python -m modchallenge.cli check experiments/runs/exp-708-candidate007-current-rules/artifact",
+  "static_check_result": "clean",
+  "metadata_caveat": "tools/evaluate_checked_benchmark.py retains a stale pinned challenge_commit label even when its imports are explicitly supplied by the current-rules PYTHONPATH; this receipt binds the actual evaluator source used.",
+  "artifact_manifest_sha256": "95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8",
+  "artifact_model_sha256": "bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833",
+  "artifact_weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+  "checked_result_sha256": "3724f8b21b4ac2e2f22ab517273c4fabe09f8daac59cfefdabf724f9482c0169",
+  "sandbox_result_sha256": "94902f92549327a0df1e5031915decf201195ee746719e7198e9cccc1176806f",
+  "sandbox_run_sha256": "1eb2fa04b5a84b6f8624758b007d0092c4325e62add4f63c59d2e824f601ab89",
+  "manual_rule_audit": {
+    "raw_operand_preprocessing": "identity",
+    "operand_token_schedule": "fixed-msb-first-no-model-feedback",
+    "learned_reduction": true,
+    "deterministic_full_width_prereduction": false,
+    "output_repair": false,
+    "unsupported_route": "constant-zero-fallback-above-64-modulus-bits"
+  }
+}

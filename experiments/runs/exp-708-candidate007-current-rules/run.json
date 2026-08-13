@@ -1,0 +1,108 @@
+{
+  "run_id": "exp-708-candidate007-current-rules",
+  "status": "completed",
+  "created_at": "2026-08-13T00:00:00Z",
+  "completed_at": "2026-08-13T06:40:01Z",
+  "hypothesis": "Candidate006's frozen transitions can replace deterministic operand pre-reduction with learned raw-bit reduction and retain a ranked result under the current rules and CPU limit.",
+  "seed": 20260813,
+  "config": "configs/exp_708_candidate007_current_rules.yaml",
+  "preregistration": "knowledge/autoresearch/ablations/exp-708-candidate007-current-rules.md",
+  "builder": "tools/build_candidate007_current_rules_artifact.py",
+  "source": {
+    "repository_commit": "6ef01d7d00fc9f4712180608ba1811de0944ee62",
+    "dirty": true,
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60",
+    "current_rules_commit": "99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca",
+    "rule_introducing_commit": "45eb406",
+    "config_sha256": "4475355a82d610737deb6f4f8b97a1eac9ac9df80c6433dc6d7b76abc4e97f5c",
+    "preregistration_sha256": "bac7232bf724d0a10cb108e3908d213f7107e61bc632cd479ce42cd273274f1f",
+    "builder_sha256": "e0ad2b4dbe346c051b6cf9574b09ae891d3237a23be390f573d2378e923e3604",
+    "compliant_patch_sha256": "1ad5f4c610a859a0ee75e2e9c2d2987d5f0714826a341b743be1c4c5e763ecf8"
+  },
+  "source_candidate": {
+    "name": "Candidate006",
+    "run_id": "exp-706-candidate006-exact-runtime-fusion",
+    "artifact": "experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact",
+    "checked_overall_accuracy": 0.666,
+    "current_rule_eligible": false,
+    "blocker": "deterministic-full-width-operand-prereduction"
+  },
+  "artifact": {
+    "directory": "experiments/runs/exp-708-candidate007-current-rules/artifact",
+    "manifest_sha256": "95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8",
+    "model_sha256": "bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833",
+    "weights_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+    "bytes": 2329729,
+    "parameters": 569873,
+    "weights_unchanged_from_candidate006": true,
+    "retained_modulus_bits": 64
+  },
+  "artifacts": {
+    "checkpoint": "experiments/runs/exp-708-candidate007-current-rules/artifact/weights.safetensors",
+    "checked_evaluation": "experiments/runs/exp-708-candidate007-current-rules/checked-public-current-rules.json",
+    "official_sandbox_result": "experiments/runs/exp-708-candidate007-current-rules/official-sandbox/result.json",
+    "official_sandbox_metadata": "experiments/runs/exp-708-candidate007-current-rules/official-sandbox/sandbox-run.json",
+    "current_rules_provenance": "experiments/runs/exp-708-candidate007-current-rules/current-rules-provenance.json",
+    "rejected_continuation": "experiments/runs/exp-708-candidate007-current-rules/continuation-runtime-failure.json",
+    "metrics": "evals/results/exp-708-candidate007-current-rules/metrics.json",
+    "lifecycle": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/lifecycle.json",
+    "finalization": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/finalized.json",
+    "terminal_summary": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/terminal-summary.json",
+    "package_receipt": "experiments/runs/exp-708-candidate007-current-rules/lifecycle/package.json",
+    "submission_directory": "submission"
+  },
+  "evidence": {
+    "checked_evaluation_sha256": "3724f8b21b4ac2e2f22ab517273c4fabe09f8daac59cfefdabf724f9482c0169",
+    "official_sandbox_result_sha256": "94902f92549327a0df1e5031915decf201195ee746719e7198e9cccc1176806f",
+    "official_sandbox_metadata_sha256": "1eb2fa04b5a84b6f8624758b007d0092c4325e62add4f63c59d2e824f601ab89",
+    "current_rules_provenance_sha256": "aa945158bea362a49524b9b0738b6b42b53f4055d966359d914ba55e78b6569b",
+    "lifecycle_sha256": "3ad24e1ce66e11a3b1550485561f0e5a1acf369474365e03123d15422a9f18de",
+    "finalization_sha256": "697edbd6deb357cbf02844928056ac63c9e4f045836406cc9816a3292bb4ff5f",
+    "terminal_summary_sha256": "ad251376b16af68107f751146f8562e36a1f0918a232ead0bf6922b8a8f8b639",
+    "package_receipt_sha256": "9b8746e1b4a912ea937414ed2e20376618c6787f3a54b7deeb98dbe841685b42",
+    "source_package_sha256": "4f89beb980f1b3109a655a1b3c65b7b9474ca852af432a786d43e7ccfe4dca97"
+  },
+  "verification": {
+    "current_static_analysis": "clean",
+    "manual_current_rule_audit": "passed",
+    "preprocess_isolated": true,
+    "deterministic": true,
+    "all_tiers_completed": true,
+    "checked_inference_seconds": 153.48269198199705,
+    "sandbox_full_container_wall_seconds": 226.670829622999,
+    "sandbox_timeout_seconds": 300,
+    "sandbox_cpus": 4,
+    "sandbox_memory": "8g",
+    "highest_tier_above_90": 5,
+    "overall_accuracy": 0.482
+  },
+  "training_executed": false,
+  "diagnostic_training": {
+    "executed": true,
+    "included_in_final_artifact": false,
+    "updates": 25,
+    "checkpoint_sha256": "167fc860f989189f83b20fbba6c801e3fb0b69cd673e6285502ff32576910e86",
+    "decision": "reject-runtime-overrun"
+  },
+  "provider": "local-official-podman-sandbox",
+  "paid_cost_usd": 0.0,
+  "lifecycle": {
+    "run_id": "exp-708-candidate007-current-rules-finalization-r3",
+    "manifest_sha256": "a157caf0da4874272b665280a78eadf419c4e6b7ff39fce9f6210d95c91dbce8",
+    "package_sha256": "4f89beb980f1b3109a655a1b3c65b7b9474ca852af432a786d43e7ccfe4dca97",
+    "canary": "passed",
+    "phase": "completed",
+    "checkpoint_sha256": "8926c31e5ab48f70ecfea8a85020b52fd53ca67ed96c62143e3b67466e0dc45f",
+    "exact_cleanup_confirmed": true,
+    "provider_elapsed_seconds": 11,
+    "provider_cost_usd": 0.0
+  },
+  "submission_promoted": true,
+  "decision": "promote-candidate007-current-rule-submission-artifact",
+  "limitations": [
+    "Candidate007 is current-rule eligible but weaker than Candidate006: checked accuracy falls from 66.6% to 48.2% and the ranking tier falls from 6 to 5.",
+    "The final artifact deliberately uses the explicitly allowed constant fallback above 64-bit moduli because learned raw reduction at width 128 exceeds the CPU budget.",
+    "The sandbox image is the repository-pinned official image at commit 82510bba00a1; current-rule compliance is separately bound to current upstream commit 99cac6e and its checker plus a manual inference-path audit.",
+    "No private benchmark or private-seed generalization evidence is available."
+  ]
+}

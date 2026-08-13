@@ -1,0 +1,129 @@
+{
+  "status": "completed",
+  "benchmark": {
+    "kind": "checked-public-jsonl",
+    "directory": "sources/github/modular-arithmetic-challenge/public_benchmark",
+    "cases": 1100,
+    "sha256": {
+      "tier_0.jsonl": "e43ac6187c589b6fa0ef7980dd24ac1d339867e0890a65468344b52a857e575f",
+      "tier_1.jsonl": "dce147df65ad5a39bbb8bd64b28da74e046a307edb4224d57f9a9b23a97a88b4",
+      "tier_2.jsonl": "86b7933afa30d20ab184bbeecd42e50b39dcc56b04379f54fe5224b6b07e2b40",
+      "tier_3.jsonl": "60f6cc495db7f1042270901f104f86677c273c1abf021c096010ed10c2f7a5ae",
+      "tier_4.jsonl": "730cd44cd6c9976138945bd2d564678cfad9197f3f7aeb1303a1220b9c49fc14",
+      "tier_5.jsonl": "c4938d781f009ecb3ea2b5a52e4b736a473b0a8754a460da93cc3c59ef594092",
+      "tier_6.jsonl": "db4c4c3c23a2ec65bda8fbd691be358fb054d66f1065a9745be4259c0f1f73c8",
+      "tier_7.jsonl": "b5ef51b1798b9ec93c90edc2090cefca40dcbba4c47bc9b368ba5ff74d03ecd1",
+      "tier_8.jsonl": "6af19f4d6bf1bff460bda67feca598a1840e67f169b4840d7b471e660ee86b55",
+      "tier_9.jsonl": "debfb0931a85ee02dfd1a1df1b9166c828bcee040b1fca616560c462135afd71",
+      "tier_10.jsonl": "0babbf5d2e5b3bc97a3dd54e86416ddb1246c486058807c01c5e0cf43fd6b04a"
+    }
+  },
+  "evaluator": {
+    "implementation": "pinned-official-pipeline-with-checked-jsonl-adapter",
+    "challenge_commit": "82510bba00a1126649bd76dd1a451f14d0b3eb60"
+  },
+  "submission": {
+    "directory": "experiments/runs/exp-708-candidate007-current-rules/artifact",
+    "entry_class": "model.Tier2HornerModel",
+    "output_base": "p",
+    "artifact_bytes": 2329729
+  },
+  "checks": {
+    "static_analysis": "clean",
+    "preprocess_isolated": true,
+    "deterministic": true
+  },
+  "timing_seconds": {
+    "load": 6.3658165499946335,
+    "preprocess_isolation": 0.0006514409978990443,
+    "determinism": 33.592760802996054,
+    "inference": 153.48269198199705
+  },
+  "result": {
+    "overall_accuracy": 0.482,
+    "highest_tier_above_90": 5,
+    "deterministic": true,
+    "tiers": [
+      {
+        "tier_id": 0,
+        "total": 100,
+        "correct": 4,
+        "accuracy": 0.04,
+        "completed": true
+      },
+      {
+        "tier_id": 1,
+        "total": 100,
+        "correct": 100,
+        "accuracy": 1.0,
+        "completed": true
+      },
+      {
+        "tier_id": 2,
+        "total": 100,
+        "correct": 99,
+        "accuracy": 0.99,
+        "completed": true
+      },
+      {
+        "tier_id": 3,
+        "total": 100,
+        "correct": 96,
+        "accuracy": 0.96,
+        "completed": true
+      },
+      {
+        "tier_id": 4,
+        "total": 100,
+        "correct": 86,
+        "accuracy": 0.86,
+        "completed": true
+      },
+      {
+        "tier_id": 5,
+        "total": 100,
+        "correct": 91,
+        "accuracy": 0.91,
+        "completed": true
+      },
+      {
+        "tier_id": 6,
+        "total": 100,
+        "correct": 2,
+        "accuracy": 0.02,
+        "completed": true
+      },
+      {
+        "tier_id": 7,
+        "total": 100,
+        "correct": 2,
+        "accuracy": 0.02,
+        "completed": true
+      },
+      {
+        "tier_id": 8,
+        "total": 100,
+        "correct": 2,
+        "accuracy": 0.02,
+        "completed": true
+      },
+      {
+        "tier_id": 9,
+        "total": 100,
+        "correct": 2,
+        "accuracy": 0.02,
+        "completed": true
+      },
+      {
+        "tier_id": 10,
+        "total": 100,
+        "correct": 2,
+        "accuracy": 0.02,
+        "completed": true
+      }
+    ],
+    "repo_id": "",
+    "revision": "",
+    "eval_period": ""
+  }
+}

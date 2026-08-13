@@ -1,0 +1,7 @@
+{
+  "entry_class": "model.Tier2HornerModel",
+  "output_base": "p",
+  "framework": "pytorch",
+  "model_description": "Candidate007 retains Candidate006's frozen learned experts through 64-bit moduli. Raw operand bits are fed MSB-first on a fixed feedback-free schedule; the trained transitions learn both reductions and the product. Unsupported inputs use a constant fallback.",
+  "training_description": "No parameters were changed. Candidate006's experts are copied byte-for-byte. A separately evaluated 25-update reducer continuation was rejected on runtime and is not included in this artifact."
+}

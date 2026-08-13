@@ -1,0 +1,45 @@
+run_id: exp-708-candidate007-current-rules
+hypothesis: Candidate006's frozen transition experts can learn full-width operand reduction from a fixed raw-bit stream and retain a ranked result under the current SAIR rules and 300-second cap.
+seed: 20260813
+source:
+  candidate: Candidate006
+  artifact: experiments/runs/exp-706-candidate006-exact-runtime-fusion/artifact
+  weights_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+rules:
+  upstream_commit: 99cac6e
+  require_raw_operands: true
+  deterministic_prereduction: forbidden
+  feedback_free_token_schedule: allowed
+  unsupported_constant_fallback: allowed
+evaluation:
+  benchmark: current-official-public-1100
+  timeout_seconds: 300
+  runtime_environment: pinned-official-4cpu-8gib-sandbox-plus-current-rule-checker
+  retained_modulus_bits: 64
+training:
+  component: tier6_learned_reducer
+  source_checkpoint: .scratch/exp-609-tier6-straight-through-confirmation/straight_through_continuation/weights.safetensors
+  source_checkpoint_sha256: cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd
+  steps: 25
+  batch_size: 16
+  unroll_steps: 8
+  learning_rate: 0.000005
+  minimum_learning_rate: 0.0000005
+  width: 128
+  raw_operand_bits: 256
+  seed: 20260813
+  calibration:
+    initial_update_wall_seconds: 15.783920089997991
+    projected_200_update_wall_seconds: 3156.784017999598
+    deadline_bounded_updates: 25
+gates:
+  static_check: pass
+  preprocessing_isolation: pass
+  determinism: pass
+  maximum_inference_seconds: 300
+  minimum_highest_tier_above_90: 5
+  minimum_overall_accuracy: 0.48
+stop_if:
+  - any deterministic full-width operand reduction remains in artifact code
+  - highest_tier_above_90 is below 5
+  - inference exceeds 300 seconds

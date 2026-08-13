@@ -2738,3 +2738,27 @@ runs:
     downstream_evaluation: {candidate_artifact_built: false, five_seed: not-run, checked_public: not-run, official_runtime: not-run}
     best_retained_candidate: candidate006
     limitations: [input-router-overfit-did-not-generalize-across-modulus-groups, no-candidate007-artifact, no-post-sealed-retuning, candidate006-current-upstream-prereduction-compliance-blocker-remains]
+  - run_id: exp-708-candidate007-current-rules
+    status: completed-current-rule-submission-candidate
+    approach: candidate006-frozen-experts-with-learned-raw-operand-reduction-through-64-bit-moduli
+    decision: promote-candidate007-current-rule-submission-artifact
+    source_branch: codex/candidate007-current-rule-compliant
+    source_base_commit: 6ef01d7d00fc9f4712180608ba1811de0944ee62
+    current_rules_commit: 99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca
+    config: configs/exp_708_candidate007_current_rules.yaml
+    preregistration: knowledge/autoresearch/ablations/exp-708-candidate007-current-rules.md
+    run_record: experiments/runs/exp-708-candidate007-current-rules/run.json
+    metrics: evals/results/exp-708-candidate007-current-rules/metrics.json
+    artifact: experiments/runs/exp-708-candidate007-current-rules/artifact
+    submission: submission
+    model_sha256: bf4bdbdda90ef148ebc9e0b4db3c5c73d7b73e2156c868ce0c05b5c1471d8833
+    manifest_sha256: 95707215a920ab2cab09fd16ad1347d5b8055626776999af71e54cc2867364d8
+    checkpoint_sha256: a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e
+    training_executed: false
+    diagnostic_training: {updates: 25, included_in_artifact: false, decision: rejected-runtime-overrun}
+    provider: local-official-podman-sandbox
+    provider_cost_usd: 0.0
+    scientific_metrics: {checked_overall: 0.482, official_sandbox_overall: 0.482, highest_tier_above_90: 5, tier5: 0.91, checked_inference_seconds: 153.48269198199705, full_container_wall_seconds: 226.670829622999}
+    controls: {current_static_analysis: clean, manual_current_rule_audit: passed, preprocess_isolated: true, deterministic: true, all_tiers_completed: true, weights_unchanged: true, constant_fallback_above_modulus_bits: 64}
+    lifecycle: {manifest_sha256: a157caf0da4874272b665280a78eadf419c4e6b7ff39fce9f6210d95c91dbce8, package_sha256: 4f89beb980f1b3109a655a1b3c65b7b9474ca852af432a786d43e7ccfe4dca97, provider_elapsed_seconds: 11, exact_cleanup_confirmed: true}
+    limitations: [weaker-than-candidate006-which-is-current-rule-invalid, constant-fallback-above-64-bit-moduli, pinned-sandbox-image-predates-current-rule-checker, no-private-seed-generalization-claim]

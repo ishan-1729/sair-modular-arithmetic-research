@@ -49,6 +49,14 @@ adapted_sources:
     consumer: experiments/exp_701_cuda_resumable_h92_w256_backbone_factorial/run.py
     smoke_command: "python -m pytest -q tests/test_exp_701_cuda_resumable_h92_w256_backbone_factorial.py"
 active_cpu_boundaries:
+  experiments/exp_708_candidate007_current_rules/train_reducer.py:
+    symbols: [main]
+    reason: This bounded Tier-6 reducer continuation is a completed, rejected CPU diagnostic retained only as EXP708 provenance; Candidate007 does not load its checkpoint or execute this trainer.
+    responsibility: Preserve the rejected diagnostic exactly and keep it outside every active Candidate007 inference or cloud-compute route.
+  experiments/runs/exp-708-candidate007-current-rules/artifact/model.py:
+    symbols: [Tier2HornerModel.load, Tier2HornerModel.forward]
+    reason: This is the immutable official CPU submission artifact authenticated by EXP708; the competition sandbox is CPU-only and the artifact must remain byte-identical to the checked and timed submission.
+    responsibility: Execute only inside the official CPU submission boundary; CUDA experiments must consume authored experiment modules rather than mutate this durable artifact copy.
   experiments/cloud_benchmarks/exp702_runpod/orchestrate.py:
     symbols: [package_launch, plan_launch, build_source_archive]
     reason: This no-paid host control plane creates an authenticated guest-portable payload and lifecycle review record without importing a provider client, reading credentials, or executing tensor computation.

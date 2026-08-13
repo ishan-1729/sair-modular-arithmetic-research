@@ -1,0 +1,36 @@
+{
+  "run_id": "exp-708-candidate007-current-rules",
+  "status": "completed",
+  "component": "tier6-learned-reducer",
+  "source_checkpoint_sha256": "cbc4a1bca276cd8027b0c546892f47746d8416fedd623e504701e313b206d4bd",
+  "checkpoint_sha256": "167fc860f989189f83b20fbba6c801e3fb0b69cd673e6285502ff32576910e86",
+  "checkpoint_bytes": 400584,
+  "split_sha256": "a2f1396d2b0745dde6b9b9179d36fd646053e245b704726fee8b78829adbd018",
+  "history": [
+    {
+      "step": 1,
+      "loss": 0.0020953973289579153,
+      "batch_step_exact": 1.0,
+      "gradient_norm": 0.1557883471250534,
+      "wall_seconds": 13.055634650001593
+    },
+    {
+      "step": 25,
+      "loss": 0.001356898108497262,
+      "batch_step_exact": 1.0,
+      "gradient_norm": 0.060466885566711426,
+      "wall_seconds": 155.39412210199953
+    }
+  ],
+  "runtime_seconds": 155.81026440500136,
+  "mlflow": {
+    "tracking_uri": "sqlite:////mnt/d/Projects/SAIR_mod_challenge/.scratch/experiment-agnostic-cloud-runner/.scratch/mlflow/mlflow.db",
+    "experiment_name": "sair-modular-arithmetic-wsl",
+    "experiment_id": "2",
+    "run_id": "0b445e62f0344c9b9359822a581a2c7d"
+  },
+  "limitations": [
+    "Generated training identities only; benchmark rows are not training data.",
+    "Exact bigint operations occur only in offline supervision."
+  ]
+}

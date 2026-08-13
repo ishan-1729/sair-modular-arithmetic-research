@@ -5298,6 +5298,89 @@ tasks:
         - "The completed result is negative against the 85% rollout gate, not evidence of a successful model improvement."
         - "Four tests intentionally skip unless invoked through the fail-closed real-CUDA acceptance command."
       parallel_safety: "No further paid or scientific work is required for this goal. Branch publication is the only remaining PM action."
+  - id: T087
+    type: worker
+    assignee: Worker
+    status: done
+    reasoning_hint: high
+    objective: "Derive Candidate007 from Candidate006 by replacing prohibited deterministic operand pre-reduction, prove current-rule compliance and the 300-second sandbox gate, and promote the exact three-file submission artifact."
+    inputs:
+      - "EXP706 Candidate006 frozen artifact and measured result"
+      - "Current upstream rules at commit 99cac6ef5c2f82e53105ec0ddcbb9b8d37bf6fca"
+      - "User deadline request for a current-rule-valid Candidate007"
+    constraints:
+      - "Do not alter or overstate Candidate006's historical evidence."
+      - "No deterministic full-width operand pre-reduction, output repair, benchmark lookup, or hand-coded modular arithmetic in submission inference."
+      - "Require raw operands, a fixed feedback-free token schedule, trained-parameter outputs, current static analysis, determinism, preprocessing isolation, and the official 300-second CPU envelope."
+      - "Persist rejected variants and report any accuracy loss honestly."
+    allowed_files:
+      - configs/cuda_portability.yaml
+      - configs/exp_708_candidate007_current_rules.yaml
+      - configs/cloud_runner/exp_708_candidate007_current_rules_local.yaml
+      - experiments/exp_708_candidate007_current_rules/
+      - experiments/cuda_portability/inventory.json
+      - experiments/runs/exp-708-candidate007-current-rules/
+      - evals/results/exp-708-candidate007-current-rules/
+      - tests/test_exp708_candidate007_current_rules.py
+      - tests/test_submission_candidate.py
+      - tools/build_candidate007_current_rules_artifact.py
+      - tools/run_official_sandbox.py
+      - tools/validate_project.py
+      - submission/
+      - experiments/registry.yaml
+      - knowledge/autoresearch/ablations/exp-708-candidate007-current-rules.md
+      - knowledge/submissions/candidate-007-current-rules.md
+      - knowledge/submissions/index.md
+      - docs/goals/cuda-portable-experiments/state.yaml
+    verify:
+      - "Current upstream modchallenge checker reports clean for both the durable artifact and submission/."
+      - "Exact checked 1,100-case run completes every tier under 300 inference seconds."
+      - "Isolated official 4-CPU/8-GiB sandbox completes every tier within the 300-second inference budget."
+      - "Experiment-agnostic lifecycle canary, phase, checkpoint, cleanup, and final publication pass."
+      - "Focused submission/EXP708/project-contract tests pass."
+      - "python tools/validate_project.py"
+      - "python -m pytest"
+      - "git diff --check"
+    stop_if:
+      - "Any inference code deterministically reduces a full-width operand against p or repairs an emitted answer."
+      - "The final artifact cannot complete the isolated CPU evaluation inside 300 seconds."
+      - "The promoted submission differs from the measured three-file artifact."
+    receipt:
+      result: done
+      changed_files:
+        - configs/cuda_portability.yaml
+        - configs/exp_708_candidate007_current_rules.yaml
+        - configs/cloud_runner/exp_708_candidate007_current_rules_local.yaml
+        - experiments/exp_708_candidate007_current_rules/
+        - experiments/cuda_portability/inventory.json
+        - experiments/runs/exp-708-candidate007-current-rules/
+        - evals/results/exp-708-candidate007-current-rules/
+        - tests/test_exp708_candidate007_current_rules.py
+        - tests/test_submission_candidate.py
+        - tools/build_candidate007_current_rules_artifact.py
+        - tools/validate_project.py
+        - submission/
+        - experiments/registry.yaml
+        - knowledge/autoresearch/ablations/exp-708-candidate007-current-rules.md
+        - knowledge/submissions/candidate-007-current-rules.md
+        - knowledge/submissions/index.md
+      commands:
+        - cmd: "Current upstream static check on durable artifact and submission"
+          status: pass
+        - cmd: "Checked current-rules 1,100-case evaluation"
+          status: pass
+        - cmd: "Pinned official isolated 4-CPU/8-GiB sandbox"
+          status: pass
+        - cmd: "Experiment-agnostic package, canary, launch, checkpoint, cleanup, and finalize lifecycle"
+          status: pass
+        - cmd: "Focused submission, EXP708, sandbox-runner, and project-contract tests"
+          status: pass
+        - cmd: "python tools/validate_project.py && git diff --check"
+          status: pass
+        - cmd: "Full pytest cone plus exact post-repair regression (1,240 passed/4 expected skips; all eight stale-inventory/frozen-cache failures then passed on final bytes)"
+          status: pass
+      summary: "Candidate007 replaces Candidate006's prohibited deterministic operand reductions with learned raw-bit streaming reduction through 64-bit moduli and the explicitly allowed constant fallback above that boundary. The current checker and manual inference-path audit pass. Checked and isolated sandbox evaluations complete all tiers at 48.2% overall with Tier 5 at 91%; checked inference is 153.483 seconds and the conservative full sandbox lifecycle is 226.671 seconds. The exact three-file artifact is promoted to submission/. Candidate006 remains the stronger historical but current-rule-invalid result. The experiment-agnostic CUDA inventory was regenerated and closed after classifying the rejected CPU reducer diagnostic and immutable CPU submission artifact."
+
 checks:
   dirty_fingerprint: "Pre-existing dirty root worktree recorded during prep; implementation must use a new isolated worktree."
   last_verification:

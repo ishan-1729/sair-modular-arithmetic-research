@@ -1,0 +1,85 @@
+{
+  "run_id": "exp-708-candidate007-current-rules",
+  "status": "completed-current-rule-submission-candidate",
+  "created_at": "2026-08-13T06:40:01Z",
+  "checkpoint_sha256": "a7d25ee4eed49c5f625bc8369447be9f51ff1be54766631d8b96ab725860553e",
+  "training_executed": false,
+  "evaluation": {
+    "transition": {
+      "frozen_artifact_load": {
+        "cases": 1,
+        "correct": 1,
+        "exact_accuracy": 1.0
+      }
+    },
+    "rollout": {
+      "checked_current_rules": {
+        "cases": 1000,
+        "correct": 482,
+        "exact_accuracy": 0.482,
+        "scored_cases": 1000,
+        "overall_accuracy": 0.482,
+        "highest_tier_above_90": 5,
+        "inference_seconds": 153.48269198199705,
+        "all_tiers_completed": true
+      },
+      "official_sandbox": {
+        "cases": 1000,
+        "correct": 482,
+        "exact_accuracy": 0.482,
+        "scored_cases": 1000,
+        "overall_accuracy": 0.482,
+        "highest_tier_above_90": 5,
+        "full_container_wall_seconds": 226.670829622999,
+        "timeout_seconds": 300,
+        "all_tiers_completed": true
+      }
+    }
+  },
+  "tier_accuracy": {
+    "0": 0.04,
+    "1": 1.0,
+    "2": 0.99,
+    "3": 0.96,
+    "4": 0.86,
+    "5": 0.91,
+    "6": 0.02,
+    "7": 0.02,
+    "8": 0.02,
+    "9": 0.02,
+    "10": 0.02
+  },
+  "controls": {
+    "current_static_analysis": "clean",
+    "manual_raw_operand_audit": true,
+    "preprocess_isolated": true,
+    "deterministic": true,
+    "deterministic_full_width_operand_prereduction": false,
+    "output_repair": false,
+    "weights_unchanged_from_candidate006": true,
+    "constant_fallback_above_modulus_bits": 64
+  },
+  "gates": {
+    "inference_under_300_seconds": true,
+    "full_sandbox_wall_under_300_seconds": true,
+    "all_tiers_completed": true,
+    "highest_tier_at_least_5": true,
+    "overall_accuracy_at_least_48_percent": true,
+    "current_upstream_compliance_passed": true,
+    "promotion_passed": true
+  },
+  "comparison": {
+    "candidate006_checked_overall_accuracy": 0.666,
+    "candidate007_checked_overall_accuracy": 0.482,
+    "absolute_accuracy_change": -0.184,
+    "candidate006_highest_tier_above_90": 6,
+    "candidate007_highest_tier_above_90": 5,
+    "reason": "Candidate006's higher result used deterministic full-width operand pre-reduction prohibited by current upstream rules."
+  },
+  "decision": "promote-candidate007-current-rule-submission-artifact",
+  "limitations": [
+    "Public benchmark evidence does not imply private-seed generalization.",
+    "Candidate007 intentionally falls back above 64-bit moduli to preserve the current-rule and runtime gates.",
+    "Current compliance and isolated runtime are evidenced separately because the repository-pinned sandbox image predates the current rule text."
+  ]
+}

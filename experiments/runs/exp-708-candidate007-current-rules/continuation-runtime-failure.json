@@ -1,0 +1,10 @@
+{
+  "status": "stopped-runtime-overrun",
+  "component": "tier6-learned-reducer-25-update-continuation",
+  "checkpoint_sha256": "167fc860f989189f83b20fbba6c801e3fb0b69cd673e6285502ff32576910e86",
+  "training_seconds": 155.81026440500136,
+  "inference_cap_seconds": 300,
+  "observation": "The complete evaluator crossed the 300-second inference boundary while its Tier-6 batch was still running and was manually terminated; no score was promoted.",
+  "included_in_candidate007": false,
+  "decision": "reject-continuation-retain-frozen-compliant-adapter"
+}

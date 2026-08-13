@@ -1,0 +1,79 @@
+schema_version: sair-cloud-experiment-v1
+
+experiment:
+  id: exp-708-candidate007-current-rules-finalization-r3
+  description: Package, canary, and finalize the measured current-rule Candidate007 artifact.
+
+package:
+  include:
+    - configs/exp_708_candidate007_current_rules.yaml
+    - configs/cloud_runner/exp_708_candidate007_current_rules_local.yaml
+    - experiments/exp_708_candidate007_current_rules/finalize.py
+    - experiments/runs/exp-708-candidate007-current-rules/artifact/*
+    - experiments/runs/exp-708-candidate007-current-rules/checked-public-current-rules.json
+    - experiments/runs/exp-708-candidate007-current-rules/official-sandbox/result.json
+    - experiments/runs/exp-708-candidate007-current-rules/official-sandbox/sandbox-run.json
+    - sources/github/modular-arithmetic-challenge/src/modchallenge/**/*.py
+  exclude:
+    - "**/__pycache__/**"
+    - "**/*.pyc"
+  require_clean: false
+
+execution:
+  working_directory: .
+  environment:
+    PYTHONUNBUFFERED: "1"
+    PYTHONDONTWRITEBYTECODE: "1"
+    PYTHONPATH: sources/github/modular-arithmetic-challenge/src
+    OMP_NUM_THREADS: "4"
+    MKL_NUM_THREADS: "4"
+  canary:
+    argv:
+      - python
+      - -m
+      - experiments.exp_708_candidate007_current_rules.finalize
+      - --mode
+      - canary
+      - --output
+      - artifacts-canary
+    timeout_seconds: 120
+    required_outputs:
+      - artifacts-canary/canary.json
+  phases:
+    - id: verify-and-finalize
+      argv:
+        - python
+        - -m
+        - experiments.exp_708_candidate007_current_rules.finalize
+        - --mode
+        - finalize
+        - --output
+        - artifacts
+      timeout_seconds: 30
+      required_outputs:
+        - artifacts/terminal-summary.json
+      checkpoint_paths:
+        - artifacts
+      checkpoint_on_failure: true
+
+provider:
+  driver: tools.cloud_experiment.providers:LocalProvider
+  paid: false
+  options:
+    hourly_rate_usd: "0"
+    hardware:
+      accelerator: CPU
+      accelerator_count: 0
+  expected_hardware:
+    accelerator: CPU
+    accelerator_count: 0
+
+budget:
+  max_total_usd: 0.01
+  max_provider_seconds: 300
+  cleanup_reserve_seconds: 30
+  max_idle_seconds: 150
+
+artifacts:
+  run_directory: .scratch/cloud-runner/exp-708-candidate007-current-rules-finalization-r3
+  publication_directory: .scratch/cloud-runner-publications/exp-708-candidate007-current-rules-finalization-r3
